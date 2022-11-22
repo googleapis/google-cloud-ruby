@@ -1,5 +1,5 @@
 --no-private
---title=Serverless VPC Access API
+--title="Serverless VPC Access API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

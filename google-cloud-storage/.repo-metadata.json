@@ -1,7 +1,13 @@
 {
-    "name": "storage",
-    "language": "ruby",
+    "api_id": "storage.googleapis.com",
+    "api_shortname": "storage",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-storage/latest",
     "distribution_name": "google-cloud-storage",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-storage/latest",
+    "language": "ruby",
+    "name": "storage",
+    "name_pretty": "Cloud Storage API",
+    "product_documentation": "https://cloud.google.com/storage",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-ruby",
     "library_type": "GAPIC_MANUAL"
 }

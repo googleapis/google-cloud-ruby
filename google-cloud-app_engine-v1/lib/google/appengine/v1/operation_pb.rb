@@ -3,9 +3,8 @@
 
 require 'google/protobuf'
 
-require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/appengine/v1/operation.proto", :syntax => :proto3) do
     add_message "google.appengine.v1.OperationMetadataV1" do

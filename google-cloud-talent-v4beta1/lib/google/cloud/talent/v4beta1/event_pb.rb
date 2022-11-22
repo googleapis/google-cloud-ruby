@@ -5,7 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/talent/v4beta1/event.proto", :syntax => :proto3) do
     add_message "google.cloud.talent.v4beta1.ClientEvent" do
@@ -15,7 +15,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :event_notes, :string, 9
       oneof :event do
         optional :job_event, :message, 5, "google.cloud.talent.v4beta1.JobEvent"
-        optional :profile_event, :message, 6, "google.cloud.talent.v4beta1.ProfileEvent"
       end
     end
     add_message "google.cloud.talent.v4beta1.JobEvent" do
@@ -41,17 +40,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SENT_CV, 14
       value :INTERVIEW_GRANTED, 15
     end
-    add_message "google.cloud.talent.v4beta1.ProfileEvent" do
-      optional :type, :enum, 1, "google.cloud.talent.v4beta1.ProfileEvent.ProfileEventType"
-      repeated :profiles, :string, 2
-      repeated :jobs, :string, 6
-    end
-    add_enum "google.cloud.talent.v4beta1.ProfileEvent.ProfileEventType" do
-      value :PROFILE_EVENT_TYPE_UNSPECIFIED, 0
-      value :IMPRESSION, 1
-      value :VIEW, 2
-      value :BOOKMARK, 3
-    end
   end
 end
 
@@ -62,8 +50,6 @@ module Google
         ClientEvent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ClientEvent").msgclass
         JobEvent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobEvent").msgclass
         JobEvent::JobEventType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobEvent.JobEventType").enummodule
-        ProfileEvent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ProfileEvent").msgclass
-        ProfileEvent::ProfileEventType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ProfileEvent.ProfileEventType").enummodule
       end
     end
   end

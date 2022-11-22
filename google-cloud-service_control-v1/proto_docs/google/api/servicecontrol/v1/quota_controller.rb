@@ -63,6 +63,7 @@ module Google
         #     (1) the quota operation is performed on non-API resources.
         #     (2) quota_metrics is set because the caller is doing quota override.
         #
+        #
         #     Example of an RPC method name:
         #         google.example.library.v1.LibraryService.CreateShelf
         # @!attribute [rw] consumer_id
@@ -137,14 +138,14 @@ module Google
             # Unimplemented. When used in AllocateQuotaRequest, this returns the
             # effective quota limit(s) in the response, and no quota check will be
             # performed. Not supported for other requests, and even for
-            # AllocateQuotaRequest, this is currently supported only for whitelisted
+            # AllocateQuotaRequest, this is currently supported only for allowlisted
             # services.
             QUERY_ONLY = 4
 
             # The operation allocates quota for the amount specified in the service
             # configuration or specified using the quota metrics. If the requested
             # amount is higher than the available quota, request does not fail and
-            # remaining quota would become negative (going over the limit)
+            # remaining quota would become negative (going over the limit).
             # Not supported for Rate Quota.
             ADJUST_ONLY = 5
           end
@@ -190,6 +191,10 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     Free-form text that provides details on the cause of the error.
+        # @!attribute [rw] status
+        #   @return [::Google::Rpc::Status]
+        #     Contains additional information about the quota error.
+        #     If available, `status.code` will be non zero.
         class QuotaError
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

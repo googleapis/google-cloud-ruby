@@ -414,7 +414,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigtable::Instance#cluster" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
-      mocked_instances.expect :get_cluster, cluster_resp, [name: "projects/my-project/instances/my-instance/clusters/my-instance-cluster"]
+      mocked_instances.expect :get_cluster, cluster_resp, [name: "projects/my-project/instances/my-instance/clusters/my-cluster"]
     end
   end
 
@@ -920,7 +920,7 @@ def app_profile_create single_cluster_routing = false
     Google::Cloud::Bigtable::Admin::V2::AppProfile.new(
       description: "App profile for user data instance",
       single_cluster_routing: Google::Cloud::Bigtable::Admin::V2::AppProfile::SingleClusterRouting.new(
-        cluster_id: "my-instance-cluster-1",
+        cluster_id: "my-cluster",
         allow_transactional_writes: true
       )
     )

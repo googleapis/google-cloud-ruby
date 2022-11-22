@@ -8,8 +8,8 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
-require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/shell/v1/cloudshell.proto", :syntax => :proto3) do
     add_message "google.cloud.shell.v1.Environment" do
@@ -91,6 +91,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CLOUD_SHELL_DISABLED, 2
       value :TOS_VIOLATION, 4
       value :QUOTA_EXCEEDED, 5
+      value :ENVIRONMENT_UNAVAILABLE, 6
     end
   end
 end

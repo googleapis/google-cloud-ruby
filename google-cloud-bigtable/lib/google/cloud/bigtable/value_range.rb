@@ -34,7 +34,7 @@ module Google
       #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
-      #   table = bigtable.table("my-instance", "my-table")
+      #   table = bigtable.table "my-instance", "my-table"
       #
       #   # Range that includes all row keys including "value-001" to "value-005" excluding.
       #   table.new_value_range.from("value-001").to("value-005")
@@ -43,19 +43,19 @@ module Google
       #   table.new_value_range.from("value-001").to("value-010", inclusive: true)
       #
       #   # Range that includes all row keys including "value-001" up until end of the row keys.
-      #   table.new_value_range.from("value-001")
+      #   table.new_value_range.from "value-001"
       #
       #   # Range that includes all row keys exclusive "value-001" up until end of the row keys.
-      #   table.new_value_range.from("value-001", inclusive: false)
+      #   table.new_value_range.from "value-001", inclusive: false
       #
       #   # Range with unbounded from and the exclusive end "value-100".
-      #   table.new_value_range.to("value-100")
+      #   table.new_value_range.to "value-100"
       #
       #   # Range that includes all row keys including from and end row keys "value-001", "value-100".
-      #   table.new_value_range.between("value-001", "value-100")
+      #   table.new_value_range.between "value-001", "value-100"
       #
       #   # Range that includes all row keys including "value-001" up until "value-100".
-      #   table.new_value_range.of("value-001", "value-100")
+      #   table.new_value_range.of "value-001", "value-100"
       #
       class ValueRange
         # @private
@@ -78,17 +78,17 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   range = table.new_value_range.from("value-001")
+        #   range = table.new_value_range.from "value-001"
         #
         # @example Exclusive lower bound.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   range = table.new_value_range.from("value-001", inclusive: false)
+        #   range = table.new_value_range.from "value-001", inclusive: false
         #
         def from value, inclusive: true
           # If value is integer, covert it to a 64-bit signed big-endian integer.
@@ -115,17 +115,17 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   range = table.new_value_range.to("value-010", inclusive: true)
+        #   range = table.new_value_range.to "value-010", inclusive: true
         #
         # @example Exclusive upper bound.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   range = table.new_value_range.to("value-010")
+        #   range = table.new_value_range.to "value-010"
         #
         def to value, inclusive: false
           # If value is integer, covert it to a 64-bit signed big-endian integer.
@@ -154,9 +154,9 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   range = table.new_value_range.between("value-001", "value-010")
+        #   range = table.new_value_range.between "value-001", "value-010"
         #
         def between from_value, to_value
           from(from_value).to(to_value, inclusive: true)
@@ -178,9 +178,9 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   range = table.new_value_range.of("value-001", "value-010")
+        #   range = table.new_value_range.of "value-001", "value-010"
         #
         def of from_value, to_value
           from(from_value).to(to_value)

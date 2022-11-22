@@ -1,5 +1,79 @@
 # Release History
 
+### 0.13.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.12.4 (2022-05-12)
+
+#### Documentation
+
+* Various updates to reference documentation
+
+### 0.12.3 (2022-05-03)
+
+#### Documentation
+
+* Document the latest_long and latest_short recognition models
+
+### 0.12.2 (2022-04-20)
+
+#### Documentation
+
+* Fix broken links in reference documentation
+
+### 0.12.1 / 2022-01-11
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.12.0 / 2021-12-07
+
+#### Features
+
+* Speech recognition results include the end time relative to the start of the audio clip
+
+### 0.11.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.11.0 / 2021-08-23
+
+#### Features
+
+* Support for transcript normalization
+
+### 0.10.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.10.0 / 2021-07-29
+
+#### Features
+
+* Provide information on how much billed time an operation consumed
+
+### 0.9.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.9.1 / 2021-06-17
 
 #### Bug Fixes

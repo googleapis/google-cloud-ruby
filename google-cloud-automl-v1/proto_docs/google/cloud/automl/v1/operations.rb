@@ -141,7 +141,6 @@ module Google
 
           # Further describes this batch predict's output.
           # Supplements
-          #
           # {::Google::Cloud::AutoML::V1::BatchPredictOutputConfig BatchPredictOutputConfig}.
           # @!attribute [rw] gcs_output_directory
           #   @return [::String]

@@ -60,6 +60,11 @@
                 "create_backup"
               ]
             },
+            "CopyBackup": {
+              "methods": [
+                "copy_backup"
+              ]
+            },
             "GetBackup": {
               "methods": [
                 "get_backup"
@@ -93,6 +98,11 @@
             "ListBackupOperations": {
               "methods": [
                 "list_backup_operations"
+              ]
+            },
+            "ListDatabaseRoles": {
+              "methods": [
+                "list_database_roles"
               ]
             }
           }

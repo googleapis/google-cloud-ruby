@@ -23,7 +23,7 @@ describe Google::Cloud::Bigquery::Dataset, :model, :mock_bigquery do
     found_model_id = "found_model"
 
     mock = Minitest::Mock.new
-    mock.expect :get_model, random_model_full_hash(dataset.dataset_id, found_model_id).to_json, [project, dataset.dataset_id, found_model_id, options: { skip_deserialization: true }]
+    mock.expect :get_model, random_model_full_hash(dataset.dataset_id, found_model_id).to_json, [project, dataset.dataset_id, found_model_id], options: { skip_deserialization: true }
     dataset.service.mocked_service = mock
 
     model = dataset.model found_model_id

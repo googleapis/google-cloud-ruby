@@ -51,6 +51,33 @@ module Google
             rpc :UpdateConversationProfile, ::Google::Cloud::Dialogflow::V2::UpdateConversationProfileRequest, ::Google::Cloud::Dialogflow::V2::ConversationProfile
             # Deletes the specified conversation profile.
             rpc :DeleteConversationProfile, ::Google::Cloud::Dialogflow::V2::DeleteConversationProfileRequest, ::Google::Protobuf::Empty
+            # Adds or updates a suggestion feature in a conversation profile.
+            # If the conversation profile contains the type of suggestion feature for
+            # the participant role, it will update it. Otherwise it will insert the
+            # suggestion feature.
+            #
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: [SetSuggestionFeatureConfigOperationMetadata][google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata]
+            # - `response`: [ConversationProfile][google.cloud.dialogflow.v2.ConversationProfile]
+            #
+            # If a long running operation to add or update suggestion feature
+            # config for the same conversation profile, participant role and suggestion
+            # feature type exists, please cancel the existing long running operation
+            # before sending such request, otherwise the request will be rejected.
+            rpc :SetSuggestionFeatureConfig, ::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest, ::Google::Longrunning::Operation
+            # Clears a suggestion feature from a conversation profile for the given
+            # participant role.
+            #
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: [ClearSuggestionFeatureConfigOperationMetadata][google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata]
+            # - `response`: [ConversationProfile][google.cloud.dialogflow.v2.ConversationProfile]
+            rpc :ClearSuggestionFeatureConfig, ::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

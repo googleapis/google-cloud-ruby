@@ -8,6 +8,7 @@ AllCops:
     - "proto_docs/**/*"
     - "test/**/*"
     - "acceptance/**/*"
+    - "samples/acceptance/**/*"
     - "Rakefile"
 
 Layout/LineLength:
@@ -24,6 +25,9 @@ Metrics/ModuleLength:
   Enabled: false
 Metrics/PerceivedComplexity:
   Enabled: false
+Naming/AccessorMethodName:
+  Exclude:
+    - "snippets/**/*.rb"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-functions-v1.rb"

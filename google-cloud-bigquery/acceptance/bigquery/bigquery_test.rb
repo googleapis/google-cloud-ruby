@@ -119,11 +119,12 @@ describe Google::Cloud::Bigquery, :bigquery do
     _(rows.count).must_equal 100
   end
 
-  it "should run a query job with job id" do
+  it "should run a query job with job id and delete the job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     job = bigquery.query_job publicdata_query, job_id: job_id
     _(job).must_be_kind_of Google::Cloud::Bigquery::Job
     _(job.job_id).must_equal job_id
+    _(job.transaction_id).must_be :nil?
     _(job.user_email).wont_be_nil
 
     _(job.range_partitioning?).must_equal false
@@ -153,6 +154,10 @@ describe Google::Cloud::Bigquery, :bigquery do
     _(job.ddl_operation_performed).must_be :nil?
     _(job.ddl_target_table).must_be :nil?
     _(job.ddl_target_routine).must_be :nil?
+
+    job.delete
+    job = bigquery.job job.job_id, location: job.location
+    _(job).must_be :nil?
   end
 
   it "should run a query job with dryrun flag" do

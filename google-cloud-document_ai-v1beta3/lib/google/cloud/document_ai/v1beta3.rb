@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/document_ai/v1beta3"
       #     client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
       #

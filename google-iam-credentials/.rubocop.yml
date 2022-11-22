@@ -33,3 +33,7 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-iam-credentials.rb"
+
+Style/BlockDelimiters:
+  Exclude:
+    - "samples/**/acceptance/*.rb"

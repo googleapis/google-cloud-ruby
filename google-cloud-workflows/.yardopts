@@ -1,5 +1,5 @@
 --no-private
---title=Workflows API
+--title="Workflows API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

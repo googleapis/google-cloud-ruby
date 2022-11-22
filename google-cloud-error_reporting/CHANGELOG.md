@@ -1,5 +1,17 @@
 # Release History
 
+### 0.42.2 / 2021-10-21
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+
+### 0.42.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 0.42.0 / 2021-03-10
 
 #### Features

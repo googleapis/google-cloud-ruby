@@ -34,7 +34,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #   job = instance.create_cluster(
         #     "my-new-cluster",
         #     "us-east-1b",
@@ -67,7 +67,7 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   instance = bigtable.instance("my-instance")
+          #   instance = bigtable.instance "my-instance"
           #   job = instance.create_cluster(
           #     "my-new-cluster",
           #     "us-east-1b",

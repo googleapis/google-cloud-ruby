@@ -37,12 +37,12 @@ module Google
             # location/BigQuery table. For Cloud Storage location destinations, the
             # output format is newline-delimited JSON. Each line represents a
             # [google.cloud.asset.v1.Asset][google.cloud.asset.v1.Asset] in the JSON format; for BigQuery table
-            # destinations, the output table stores the fields in asset proto as columns.
-            # This API implements the [google.longrunning.Operation][google.longrunning.Operation] API
-            # , which allows you to keep track of the export. We recommend intervals of
-            # at least 2 seconds with exponential retry to poll the export operation
-            # result. For regular-size resource parent, the export operation usually
-            # finishes within 5 minutes.
+            # destinations, the output table stores the fields in asset Protobuf as
+            # columns. This API implements the [google.longrunning.Operation][google.longrunning.Operation] API,
+            # which allows you to keep track of the export. We recommend intervals of at
+            # least 2 seconds with exponential retry to poll the export operation result.
+            # For regular-size resource parent, the export operation usually finishes
+            # within 5 minutes.
             rpc :ExportAssets, ::Google::Cloud::Asset::V1::ExportAssetsRequest, ::Google::Longrunning::Operation
             # Lists assets with time and resource types and returns paged results in
             # response.
@@ -87,8 +87,41 @@ module Google
             # [google.longrunning.Operation][google.longrunning.Operation], which allows you to track the operation
             # status. We recommend intervals of at least 2 seconds with exponential
             # backoff retry to poll the operation result. The metadata contains the
-            # request to help callers to map responses to requests.
+            # metadata for the long-running operation.
             rpc :AnalyzeIamPolicyLongrunning, ::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest, ::Google::Longrunning::Operation
+            # Analyze moving a resource to a specified destination without kicking off
+            # the actual move. The analysis is best effort depending on the user's
+            # permissions of viewing different hierarchical policies and configurations.
+            # The policies and configuration are subject to change before the actual
+            # resource migration takes place.
+            rpc :AnalyzeMove, ::Google::Cloud::Asset::V1::AnalyzeMoveRequest, ::Google::Cloud::Asset::V1::AnalyzeMoveResponse
+            # Issue a job that queries assets using a SQL statement compatible with
+            # [BigQuery Standard
+            # SQL](http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
+            #
+            # If the query execution finishes within timeout and there's no pagination,
+            # the full query results will be returned in the `QueryAssetsResponse`.
+            #
+            # Otherwise, full query results can be obtained by issuing extra requests
+            # with the `job_reference` from the a previous `QueryAssets` call.
+            #
+            # Note, the query result has approximately 10 GB limitation enforced by
+            # BigQuery
+            # https://cloud.google.com/bigquery/docs/best-practices-performance-output,
+            # queries return larger results will result in errors.
+            rpc :QueryAssets, ::Google::Cloud::Asset::V1::QueryAssetsRequest, ::Google::Cloud::Asset::V1::QueryAssetsResponse
+            # Creates a saved query in a parent project/folder/organization.
+            rpc :CreateSavedQuery, ::Google::Cloud::Asset::V1::CreateSavedQueryRequest, ::Google::Cloud::Asset::V1::SavedQuery
+            # Gets details about a saved query.
+            rpc :GetSavedQuery, ::Google::Cloud::Asset::V1::GetSavedQueryRequest, ::Google::Cloud::Asset::V1::SavedQuery
+            # Lists all saved queries in a parent project/folder/organization.
+            rpc :ListSavedQueries, ::Google::Cloud::Asset::V1::ListSavedQueriesRequest, ::Google::Cloud::Asset::V1::ListSavedQueriesResponse
+            # Updates a saved query.
+            rpc :UpdateSavedQuery, ::Google::Cloud::Asset::V1::UpdateSavedQueryRequest, ::Google::Cloud::Asset::V1::SavedQuery
+            # Deletes a saved query.
+            rpc :DeleteSavedQuery, ::Google::Cloud::Asset::V1::DeleteSavedQueryRequest, ::Google::Protobuf::Empty
+            # Gets effective IAM policies for a batch of resources.
+            rpc :BatchGetEffectiveIamPolicies, ::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest, ::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse
           end
 
           Stub = Service.rpc_stub_class

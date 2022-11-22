@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
   let(:bucket_name) { "found-bucket" }
-  let(:bucket_hash) { random_bucket_hash bucket_name }
+  let(:bucket_hash) { random_bucket_hash name: bucket_name }
   let(:bucket_json) { bucket_hash.to_json }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
@@ -33,7 +33,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
   it "creates a notification" do
     mock = Minitest::Mock.new
     mock.expect :insert_notification, random_notification_gapi(id: notification_id, topic: topic_name_full_path),
-                [bucket.name, random_notification_gapi(id: nil, topic: topic_name_full_path), { user_project: nil }]
+                [bucket.name, random_notification_gapi(id: nil, topic: topic_name_full_path)], user_project: nil, options: {retries: 0}
 
     bucket.service.mocked_service = mock
 
@@ -57,7 +57,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
   it "creates a notification with a boolean payload" do
     mock = Minitest::Mock.new
     mock.expect :insert_notification, random_notification_gapi(id: notification_id, payload: "JSON_API_V1"),
-                [bucket.name, random_notification_gapi(id: nil, payload: "JSON_API_V1"), { user_project: nil }]
+                [bucket.name, random_notification_gapi(id: nil, payload: "JSON_API_V1")], user_project: nil, options: {retries: 0}
 
     bucket.service.mocked_service = mock
 
@@ -74,7 +74,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
   it "creates a notification with a array of symbols event type" do
     mock = Minitest::Mock.new
     mock.expect :insert_notification, random_notification_gapi(id: notification_id),
-                [bucket.name, random_notification_gapi(id: nil), { user_project: nil }]
+                [bucket.name, random_notification_gapi(id: nil)], user_project: nil, options: {retries: 0}
 
     bucket.service.mocked_service = mock
 
@@ -91,7 +91,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
   it "creates a notification with a single symbol event type" do
     mock = Minitest::Mock.new
     mock.expect :insert_notification, random_notification_gapi(id: notification_id),
-                [bucket.name, random_notification_gapi(id: nil), { user_project: nil }]
+                [bucket.name, random_notification_gapi(id: nil)], user_project: nil, options: {retries: 0}
 
     bucket.service.mocked_service = mock
 
@@ -108,7 +108,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
   it "creates a notification with new_notification alias" do
     mock = Minitest::Mock.new
     mock.expect :insert_notification, minimal_notification_gapi,
-                [bucket.name, minimal_notification_gapi, { user_project: nil }]
+                [bucket.name, minimal_notification_gapi], user_project: nil, options: {retries: 0}
 
     bucket.service.mocked_service = mock
 
@@ -120,7 +120,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
   it "creates a notification with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :insert_notification, minimal_notification_gapi,
-                [bucket_user_project.name, minimal_notification_gapi, { user_project: "test" }]
+                [bucket_user_project.name, minimal_notification_gapi], user_project: "test", options: {retries: 0}
 
     bucket_user_project.service.mocked_service = mock
 
@@ -136,7 +136,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :list_notifications, list_notifications_gapi(num_notifications),
-                [bucket.name, user_project: nil]
+                [bucket.name], user_project: nil, options: {}
 
     bucket.service.mocked_service = mock
 
@@ -153,7 +153,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
   it "lists notifications with find_notifications alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_notifications, list_notifications_gapi, [bucket.name, { user_project: nil }]
+    mock.expect :list_notifications, list_notifications_gapi, [bucket.name], user_project: nil, options: {}
 
     bucket.service.mocked_service = mock
 
@@ -167,7 +167,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :list_notifications, list_notifications_gapi(num_notifications),
-                [bucket_user_project.name, { user_project: "test" }]
+                [bucket_user_project.name], user_project: "test", options: {}
 
     bucket_user_project.service.mocked_service = mock
 
@@ -187,7 +187,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_notification, random_notification_gapi(id: notification_id),
-      [bucket.name, notification_id, { user_project: nil }]
+      [bucket.name, notification_id], user_project: nil, options: {}
 
     bucket.service.mocked_service = mock
 
@@ -209,7 +209,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_notification, random_notification_gapi(id: notification_id),
-      [bucket.name, notification_id, { user_project: nil }]
+      [bucket.name, notification_id], user_project: nil, options: {}
 
     bucket.service.mocked_service = mock
 
@@ -223,7 +223,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_notification, random_notification_gapi(id: notification_id),
-      [bucket_user_project.name, notification_id, { user_project: "test" }]
+      [bucket_user_project.name, notification_id], user_project: "test", options: {}
 
     bucket_user_project.service.mocked_service = mock
 

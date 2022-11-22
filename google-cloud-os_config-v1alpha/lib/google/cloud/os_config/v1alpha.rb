@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/os_config/v1alpha"
       #     client = ::Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
       #

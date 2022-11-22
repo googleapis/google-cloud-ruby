@@ -108,11 +108,12 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
   end
 
   it "deletes itself and knows it no longer exists" do
-    _(dataset.exists?).must_equal true
-    dataset.tables.all(&:delete)
-    _(dataset.delete).must_equal true
-    _(dataset.exists?).must_equal false
-    _(dataset.exists?(force: true)).must_equal false
+    dataset_2_id = "#{prefix}_dataset_delete"
+    dataset_2 = bigquery.create_dataset dataset_2_id
+    _(dataset_2.exists?).must_equal true
+    _(dataset_2.delete).must_equal true
+    _(dataset_2.exists?).must_equal false
+    _(dataset_2.exists?(force: true)).must_equal false
   end
 
   it "should set & get metadata" do
@@ -217,6 +218,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
     query_job = dataset.query_job query, job_id: job_id
     _(query_job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
     _(query_job.job_id).must_equal job_id
+    _(query_job.session_id).must_be :nil?
     query_job.wait_until_done!
     _(query_job.done?).must_equal true
     _(query_job.data.total).wont_be_nil

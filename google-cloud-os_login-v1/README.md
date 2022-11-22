@@ -33,11 +33,11 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/os_login/v1"
 
 client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new
-request = my_create_request
-response = client.delete_posix_account request
+request = ::Google::Cloud::OsLogin::V1::CreateSshPublicKeyRequest.new # (request fields as keyword arguments...)
+response = client.create_ssh_public_key request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-os_login-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-os_login-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/compute/docs/oslogin)
@@ -69,16 +69,21 @@ module GRPC
 end
 ```
 
+
+## Google Cloud Samples
+
+To browse ready to use code samples check [Google Cloud Samples](https://cloud.google.com/docs/samples).
+
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.5+.
+This library is supported on Ruby 2.6+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.5
-and later. Older versions of Ruby _may_ still work, but are unsupported and not
-recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
-about the Ruby support schedule.
+in security maintenance, and not end of life. Older versions of Ruby _may_
+still work, but are unsupported and not recommended. See
+https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
+support schedule.
 
 ## Which client should I use?
 

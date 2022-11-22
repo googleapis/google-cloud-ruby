@@ -49,8 +49,8 @@ module Google
         # Create a new client object for TranscoderService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client](https://googleapis.dev/ruby/google-cloud-video-transcoder-v1beta1/latest/Google/Cloud/Video/Transcoder/V1beta1/TranscoderService/Client.html)
-        # for version V1beta1 of the API.
+        # [Google::Cloud::Video::Transcoder::V1::TranscoderService::Client](https://googleapis.dev/ruby/google-cloud-video-transcoder-v1/latest/Google/Cloud/Video/Transcoder/V1/TranscoderService/Client.html)
+        # for version V1 of the API.
         # However, you can specify specify a different API version by passing it in the
         # `version` parameter. If the TranscoderService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -66,10 +66,10 @@ module Google
         # concatenation, and digital ad-stitch ready content generation.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta1`.
+        #   Defaults to `:v1`.
         # @return [TranscoderService::Client] A client object for the specified version.
         #
-        def self.transcoder_service version: :v1beta1, &block
+        def self.transcoder_service version: :v1, &block
           require "google/cloud/video/transcoder/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Video::Transcoder

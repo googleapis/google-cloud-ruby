@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/private_catalog/v1beta1"
       #     client = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client.new
       #

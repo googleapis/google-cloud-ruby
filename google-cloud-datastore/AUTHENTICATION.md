@@ -96,7 +96,8 @@ client = Google::Cloud::Datastore.new
 
 ### Configuration
 
-The **Project ID** and **Credentials JSON** can be configured instead of placing them in environment variables or providing them as arguments.
+The **Project ID** and the path to the **Credentials JSON** file can be configured
+instead of placing them in environment variables or providing them as arguments.
 
 ```ruby
 require "google/cloud/datastore"

@@ -1,5 +1,62 @@
 # Release History
 
+### 0.7.0 (2022-10-03)
+
+#### Features
+
+* add new analysis status and cvss version fields ([#19238](https://github.com/googleapis/google-cloud-ruby/issues/19238)) 
+
+### 0.6.1 (2022-07-27)
+
+* No significant updates
+
+### 0.6.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.5.0 (2022-06-14)
+
+#### Features
+
+* Added a number of fields, including package type, CPE URI, and architecture, to the PackageNoteand PackageOccurrence data structures
+* Added benchmark document name field to ComplianceVersion
+* Added file location field to the PackageIssue data structure
+* Added support for SLSA provenance version 0.2
+#### Bug Fixes
+
+* Deprecated the CPE URI from the Location data structure
+
+### 0.4.0 / 2022-01-13
+
+#### Features
+
+* BREAKING CHANGE: Changed the type of VulnerabilityOccurrence#cvssv3 to a generalized CVSS Score data type that can cover multiple CVSS versions.
+* Added DiscoveryOccurrence#archive_time, providing the time when occurrences were archived.
+
+### 0.3.1 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+
+### 0.3.0 / 2021-11-08
+
+#### Features
+
+* Support compliance and in-toto attestation
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.2.2 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
 ### 0.2.1 / 2021-06-17
 
 #### Bug Fixes

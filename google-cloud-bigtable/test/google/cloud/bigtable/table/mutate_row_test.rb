@@ -37,12 +37,11 @@ describe Google::Cloud::Bigtable::Table, :mutate_row, :mock_bigtable do
     mutations = Google::Cloud::Bigtable::V2::Mutation.new(set_cell: {
       family_name: "cf1", column_qualifier: "field1", value: "XYZ"
     })
-    mock.expect :mutate_row, res, [
+    mock.expect :mutate_row, res,
       table_name: table_path(instance_id, table_id),
       row_key: row_key,
       mutations: [mutations],
       app_profile_id: app_profile_id
-    ]
 
     _(table.mutate_row(entry)).must_equal true
     mock.verify

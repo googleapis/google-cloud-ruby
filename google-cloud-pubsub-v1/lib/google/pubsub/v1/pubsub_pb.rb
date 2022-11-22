@@ -12,6 +12,7 @@ require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/pubsub/v1/schema_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/pubsub/v1/pubsub.proto", :syntax => :proto3) do
     add_message "google.pubsub.v1.MessageStoragePolicy" do
@@ -28,6 +29,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :kms_key_name, :string, 5
       optional :schema_settings, :message, 6, "google.pubsub.v1.SchemaSettings"
       optional :satisfies_pzs, :bool, 7
+      optional :message_retention_duration, :message, 8, "google.protobuf.Duration"
     end
     add_message "google.pubsub.v1.PubsubMessage" do
       optional :data, :bytes, 1
@@ -89,6 +91,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :topic, :string, 2
       optional :push_config, :message, 4, "google.pubsub.v1.PushConfig"
+      optional :bigquery_config, :message, 18, "google.pubsub.v1.BigQueryConfig"
       optional :ack_deadline_seconds, :int32, 5
       optional :retain_acked_messages, :bool, 7
       optional :message_retention_duration, :message, 8, "google.protobuf.Duration"
@@ -99,6 +102,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :dead_letter_policy, :message, 13, "google.pubsub.v1.DeadLetterPolicy"
       optional :retry_policy, :message, 14, "google.pubsub.v1.RetryPolicy"
       optional :detached, :bool, 15
+      optional :enable_exactly_once_delivery, :bool, 16
+      optional :topic_message_retention_duration, :message, 17, "google.protobuf.Duration"
+      optional :state, :enum, 19, "google.pubsub.v1.Subscription.State"
+    end
+    add_enum "google.pubsub.v1.Subscription.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :ACTIVE, 1
+      value :RESOURCE_ERROR, 2
     end
     add_message "google.pubsub.v1.RetryPolicy" do
       optional :minimum_backoff, :message, 1, "google.protobuf.Duration"
@@ -121,6 +132,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.pubsub.v1.PushConfig.OidcToken" do
       optional :service_account_email, :string, 1
       optional :audience, :string, 2
+    end
+    add_message "google.pubsub.v1.BigQueryConfig" do
+      optional :table, :string, 1
+      optional :use_topic_schema, :bool, 2
+      optional :write_metadata, :bool, 3
+      optional :drop_unknown_fields, :bool, 4
+      optional :state, :enum, 5, "google.pubsub.v1.BigQueryConfig.State"
+    end
+    add_enum "google.pubsub.v1.BigQueryConfig.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :ACTIVE, 1
+      value :PERMISSION_DENIED, 2
+      value :NOT_FOUND, 3
+      value :SCHEMA_MISMATCH, 4
     end
     add_message "google.pubsub.v1.ReceivedMessage" do
       optional :ack_id, :string, 1
@@ -179,6 +204,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.pubsub.v1.StreamingPullResponse" do
       repeated :received_messages, :message, 1, "google.pubsub.v1.ReceivedMessage"
+      optional :acknowledge_confirmation, :message, 5, "google.pubsub.v1.StreamingPullResponse.AcknowledgeConfirmation"
+      optional :modify_ack_deadline_confirmation, :message, 3, "google.pubsub.v1.StreamingPullResponse.ModifyAckDeadlineConfirmation"
+      optional :subscription_properties, :message, 4, "google.pubsub.v1.StreamingPullResponse.SubscriptionProperties"
+    end
+    add_message "google.pubsub.v1.StreamingPullResponse.AcknowledgeConfirmation" do
+      repeated :ack_ids, :string, 1
+      repeated :invalid_ack_ids, :string, 2
+      repeated :unordered_ack_ids, :string, 3
+    end
+    add_message "google.pubsub.v1.StreamingPullResponse.ModifyAckDeadlineConfirmation" do
+      repeated :ack_ids, :string, 1
+      repeated :invalid_ack_ids, :string, 2
+    end
+    add_message "google.pubsub.v1.StreamingPullResponse.SubscriptionProperties" do
+      optional :exactly_once_delivery_enabled, :bool, 1
+      optional :message_ordering_enabled, :bool, 2
     end
     add_message "google.pubsub.v1.CreateSnapshotRequest" do
       optional :name, :string, 1
@@ -244,11 +285,14 @@ module Google
         DetachSubscriptionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DetachSubscriptionRequest").msgclass
         DetachSubscriptionResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DetachSubscriptionResponse").msgclass
         Subscription = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Subscription").msgclass
+        Subscription::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Subscription.State").enummodule
         RetryPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.RetryPolicy").msgclass
         DeadLetterPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeadLetterPolicy").msgclass
         ExpirationPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ExpirationPolicy").msgclass
         PushConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PushConfig").msgclass
         PushConfig::OidcToken = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PushConfig.OidcToken").msgclass
+        BigQueryConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.BigQueryConfig").msgclass
+        BigQueryConfig::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.BigQueryConfig.State").enummodule
         ReceivedMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ReceivedMessage").msgclass
         GetSubscriptionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetSubscriptionRequest").msgclass
         UpdateSubscriptionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateSubscriptionRequest").msgclass
@@ -262,6 +306,9 @@ module Google
         AcknowledgeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.AcknowledgeRequest").msgclass
         StreamingPullRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullRequest").msgclass
         StreamingPullResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullResponse").msgclass
+        StreamingPullResponse::AcknowledgeConfirmation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullResponse.AcknowledgeConfirmation").msgclass
+        StreamingPullResponse::ModifyAckDeadlineConfirmation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullResponse.ModifyAckDeadlineConfirmation").msgclass
+        StreamingPullResponse::SubscriptionProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullResponse.SubscriptionProperties").msgclass
         CreateSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.CreateSnapshotRequest").msgclass
         UpdateSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateSnapshotRequest").msgclass
         Snapshot = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Snapshot").msgclass

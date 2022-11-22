@@ -181,7 +181,8 @@ module Google
         #     Instructs the speech recognizer how to process the speech audio.
         # @!attribute [rw] text
         #   @return [::Google::Cloud::Dialogflow::V2::TextInput]
-        #     The natural language text to be processed.
+        #     The natural language text to be processed. Text length must not exceed
+        #     256 character for virtual agent interactions.
         # @!attribute [rw] event
         #   @return [::Google::Cloud::Dialogflow::V2::EventInput]
         #     The event to be processed.
@@ -251,7 +252,8 @@ module Google
         # @!attribute [rw] cancels_slot_filling
         #   @return [::Boolean]
         #     Indicates whether the conversational query triggers a cancellation for slot
-        #     filling.
+        #     filling. For more information, see the [cancel slot filling
+        #     documentation](https://cloud.google.com/dialogflow/es/docs/intents-actions-parameters#cancel).
         # @!attribute [rw] fulfillment_text
         #   @return [::String]
         #     The text to be pronounced to the user or shown on the screen.
@@ -406,10 +408,11 @@ module Google
         #
         # Multiple response messages can be returned in order:
         #
-        # 1.  If the input was set to streaming audio, the first one or more messages
-        #     contain `recognition_result`. Each `recognition_result` represents a more
-        #     complete transcript of what the user said. The last `recognition_result`
-        #     has `is_final` set to `true`.
+        # 1.  If the `StreamingDetectIntentRequest.input_audio` field was
+        #     set, the `recognition_result` field is populated for one
+        #     or more messages.
+        #     See the {::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult} message for details
+        #     about the result message sequence.
         #
         # 2.  The next message contains `response_id`, `query_result`
         #     and optionally `webhook_status` if a WebHook was called.
@@ -450,35 +453,39 @@ module Google
         # that is currently being processed or an indication that this is the end
         # of the single requested utterance.
         #
-        # Example:
+        # While end-user audio is being processed, Dialogflow sends a series of
+        # results. Each result may contain a `transcript` value. A transcript
+        # represents a portion of the utterance. While the recognizer is processing
+        # audio, transcript values may be interim values or finalized values.
+        # Once a transcript is finalized, the `is_final` value is set to true and
+        # processing continues for the next transcript.
         #
-        # 1.  transcript: "tube"
+        # If `StreamingDetectIntentRequest.query_input.audio_config.single_utterance`
+        # was true, and the recognizer has completed processing audio,
+        # the `message_type` value is set to `END_OF_SINGLE_UTTERANCE and the
+        # following (last) result contains the last finalized transcript.
         #
-        # 2.  transcript: "to be a"
+        # The complete end-user utterance is determined by concatenating the
+        # finalized transcript values received for the series of results.
         #
-        # 3.  transcript: "to be"
+        # In the following example, single utterance is enabled. In the case where
+        # single utterance is not enabled, result 7 would not occur.
         #
-        # 4.  transcript: "to be or not to be"
-        #     is_final: true
+        # ```
+        # Num | transcript              | message_type            | is_final
+        # --- | ----------------------- | ----------------------- | --------
+        # 1   | "tube"                  | TRANSCRIPT              | false
+        # 2   | "to be a"               | TRANSCRIPT              | false
+        # 3   | "to be"                 | TRANSCRIPT              | false
+        # 4   | "to be or not to be"    | TRANSCRIPT              | true
+        # 5   | "that's"                | TRANSCRIPT              | false
+        # 6   | "that is                | TRANSCRIPT              | false
+        # 7   | unset                   | END_OF_SINGLE_UTTERANCE | unset
+        # 8   | " that is the question" | TRANSCRIPT              | true
+        # ```
         #
-        # 5.  transcript: " that's"
-        #
-        # 6.  transcript: " that is"
-        #
-        # 7.  message_type: `END_OF_SINGLE_UTTERANCE`
-        #
-        # 8.  transcript: " that is the question"
-        #     is_final: true
-        #
-        # Only two of the responses contain final results (#4 and #8 indicated by
-        # `is_final: true`). Concatenating these generates the full transcript: "to be
-        # or not to be that is the question".
-        #
-        # In each response we populate:
-        #
-        # *  for `TRANSCRIPT`: `transcript` and possibly `is_final`.
-        #
-        # *  for `END_OF_SINGLE_UTTERANCE`: only `message_type`.
+        # Concatenating the finalized transcripts with `is_final` set to true,
+        # the complete utterance becomes "to be or not to be that is the question".
         # @!attribute [rw] message_type
         #   @return [::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType]
         #     Type of the result message.
@@ -510,6 +517,9 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     Time offset of the end of this Speech recognition result relative to the
         #     beginning of the audio. Only populated for `message_type` = `TRANSCRIPT`.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     Detected language code for the transcript.
         class StreamingRecognitionResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -533,11 +543,14 @@ module Google
           end
         end
 
+        # ============================================================================
+        # Auxiliary proto messages.
+        #
         # Represents the natural language text to be processed.
         # @!attribute [rw] text
         #   @return [::String]
         #     Required. The UTF-8 encoded natural language text to be processed.
-        #     Text length must not exceed 256 characters.
+        #     Text length must not exceed 256 characters for virtual agent interactions.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Required. The language of this conversational query. See [Language
@@ -581,6 +594,11 @@ module Google
         #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes. Note that queries in
         #     the same session do not necessarily need to specify the same language.
+        #
+        #     This field is ignored when used in the context of a
+        #     {::Google::Cloud::Dialogflow::V2::WebhookResponse#followup_event_input WebhookResponse.followup_event_input} field,
+        #     because the language was already defined in the originating detect
+        #     intent request.
         class EventInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -605,7 +623,7 @@ module Google
         # [Participants.StreamingDetectIntent][], it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params StreamingDetectIntentRequest.query_params}.
         # And for {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent} and
-        # [Participants.StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent], it needs to be configured in
+        # {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}, it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::ConversationProfile#human_agent_assistant_config ConversationProfile.human_agent_assistant_config}
         # @!attribute [rw] query_text_sentiment
         #   @return [::Google::Cloud::Dialogflow::V2::Sentiment]

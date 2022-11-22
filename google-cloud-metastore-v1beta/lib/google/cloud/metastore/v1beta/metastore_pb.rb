@@ -12,6 +12,7 @@ require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/type/dayofweek_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/metastore/v1beta/metastore.proto", :syntax => :proto3) do
     add_message "google.cloud.metastore.v1beta.Service" do

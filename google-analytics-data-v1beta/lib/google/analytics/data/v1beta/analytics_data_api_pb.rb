@@ -8,8 +8,21 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/analytics/data/v1beta/analytics_data_api.proto", :syntax => :proto3) do
+    add_message "google.analytics.data.v1beta.CheckCompatibilityRequest" do
+      optional :property, :string, 1
+      repeated :dimensions, :message, 2, "google.analytics.data.v1beta.Dimension"
+      repeated :metrics, :message, 3, "google.analytics.data.v1beta.Metric"
+      optional :dimension_filter, :message, 4, "google.analytics.data.v1beta.FilterExpression"
+      optional :metric_filter, :message, 5, "google.analytics.data.v1beta.FilterExpression"
+      optional :compatibility_filter, :enum, 6, "google.analytics.data.v1beta.Compatibility"
+    end
+    add_message "google.analytics.data.v1beta.CheckCompatibilityResponse" do
+      repeated :dimension_compatibilities, :message, 1, "google.analytics.data.v1beta.DimensionCompatibility"
+      repeated :metric_compatibilities, :message, 2, "google.analytics.data.v1beta.MetricCompatibility"
+    end
     add_message "google.analytics.data.v1beta.Metadata" do
       optional :name, :string, 3
       repeated :dimensions, :message, 1, "google.analytics.data.v1beta.DimensionMetadata"
@@ -95,6 +108,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :metric_aggregations, :enum, 7, "google.analytics.data.v1beta.MetricAggregation"
       repeated :order_bys, :message, 8, "google.analytics.data.v1beta.OrderBy"
       optional :return_property_quota, :bool, 9
+      repeated :minute_ranges, :message, 10, "google.analytics.data.v1beta.MinuteRange"
     end
     add_message "google.analytics.data.v1beta.RunRealtimeReportResponse" do
       repeated :dimension_headers, :message, 1, "google.analytics.data.v1beta.DimensionHeader"
@@ -114,6 +128,8 @@ module Google
   module Analytics
     module Data
       module V1beta
+        CheckCompatibilityRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.CheckCompatibilityRequest").msgclass
+        CheckCompatibilityResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.CheckCompatibilityResponse").msgclass
         Metadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.Metadata").msgclass
         RunReportRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.RunReportRequest").msgclass
         RunReportResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.RunReportResponse").msgclass

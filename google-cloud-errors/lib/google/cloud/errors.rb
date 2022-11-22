@@ -23,6 +23,8 @@ module Google
       ##
       # Construct a new Google::Cloud::Error object, optionally passing in a
       # message.
+      #
+      # @param msg [String, nil] an error message
       def initialize msg = nil
         super
       end
@@ -116,6 +118,68 @@ module Google
       def status_details
         return nil unless cause.respond_to? :status_details
         cause.status_details
+      end
+
+      ##
+      # Returns the `::Google::Rpc::ErrorInfo` object present in the `status_details`
+      # or `details` array, given that the following is true:
+      #   * either `status_details` or `details` exists and is an array
+      #   * there is exactly one `::Google::Rpc::ErrorInfo` object in that array.
+      # Looks in `status_details` first, then in `details`.
+      #
+      # @return [::Google::Rpc::ErrorInfo, nil]
+      def error_info
+        @error_info ||= begin
+          check_property = lambda do |prop|
+            if prop.is_a? Array
+              error_infos = prop.find_all { |status| status.is_a?(::Google::Rpc::ErrorInfo) }
+              if error_infos.length == 1
+                error_infos[0]
+              end
+            end
+          end
+
+          check_property.call(status_details) || check_property.call(details)
+        end
+      end
+
+      ##
+      # Returns the value of `domain` from the `::Google::Rpc::ErrorInfo`
+      # object, if it exists in the `status_details` array.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over gRPC.
+      #
+      # @return [Object, nil]
+      def domain
+        return nil unless error_info.respond_to? :domain
+        error_info.domain
+      end
+
+      ##
+      # Returns the value of `reason` from the `::Google::Rpc::ErrorInfo`
+      # object, if it exists in the `status_details` array.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over gRPC.
+      #
+      # @return [Object, nil]
+      def reason
+        return nil unless error_info.respond_to? :reason
+        error_info.reason
+      end
+
+      ##
+      # Returns the value of `metadata` from the `::Google::Rpc::ErrorInfo`
+      # object, if it exists in the `status_details` array.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over gRPC.
+      #
+      # @return [Hash, nil]
+      def error_metadata
+        return nil unless error_info.respond_to? :metadata
+        error_info.metadata.to_h
       end
 
       # @private Create a new error object from a client error
@@ -218,12 +282,6 @@ module Google
     end
 
     ##
-    # Unauthenticated indicates the request does not have valid
-    # authentication credentials for the operation.
-    class UnauthenticatedError < Error
-    end
-
-    ##
     # ResourceExhausted indicates some resource has been exhausted, perhaps
     # a per-user quota, or perhaps the entire file system is out of space.
     class ResourceExhaustedError < Error
@@ -307,6 +365,12 @@ module Google
     ##
     # DataLoss indicates unrecoverable data loss or corruption.
     class DataLossError < Error
+    end
+
+    ##
+    # Unauthenticated indicates the request does not have valid
+    # authentication credentials for the operation.
+    class UnauthenticatedError < Error
     end
   end
 end

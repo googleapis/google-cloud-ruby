@@ -12,12 +12,14 @@ require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/secretmanager/v1/service.proto", :syntax => :proto3) do
     add_message "google.cloud.secretmanager.v1.ListSecretsRequest" do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      optional :filter, :string, 4
     end
     add_message "google.cloud.secretmanager.v1.ListSecretsResponse" do
       repeated :secrets, :message, 1, "google.cloud.secretmanager.v1.Secret"
@@ -40,6 +42,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      optional :filter, :string, 4
     end
     add_message "google.cloud.secretmanager.v1.ListSecretVersionsResponse" do
       repeated :versions, :message, 1, "google.cloud.secretmanager.v1.SecretVersion"

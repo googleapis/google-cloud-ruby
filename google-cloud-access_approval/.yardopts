@@ -1,5 +1,5 @@
 --no-private
---title=Access Approval API
+--title="Access Approval API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

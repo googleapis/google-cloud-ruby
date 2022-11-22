@@ -193,8 +193,8 @@ module Google
         #
         #     The step id is used as prefix for job id, as job
         #     `goog-dataproc-workflow-step-id` label, and in
-        #     {::Google::Cloud::Dataproc::V1::OrderedJob#prerequisite_step_ids prerequisiteStepIds}
-        #     field from other steps.
+        #     {::Google::Cloud::Dataproc::V1::OrderedJob#prerequisite_step_ids prerequisiteStepIds} field from other
+        #     steps.
         #
         #     The id must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). Cannot begin or end with underscore
@@ -280,10 +280,10 @@ module Google
         #     A field is allowed to appear in at most one parameter's list of field
         #     paths.
         #
-        #     A field path is similar in syntax to a
-        #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}. For example, a
-        #     field path that references the zone field of a workflow template's cluster
-        #     selector would be specified as `placement.clusterSelector.zone`.
+        #     A field path is similar in syntax to a {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+        #     For example, a field path that references the zone field of a workflow
+        #     template's cluster selector would be specified as
+        #     `placement.clusterSelector.zone`.
         #
         #     Also, field paths can reference fields using the following syntax:
         #
@@ -410,19 +410,16 @@ module Google
         #     Output only. The UUID of target cluster.
         # @!attribute [r] dag_timeout
         #   @return [::Google::Protobuf::Duration]
-        #     Output only. The timeout duration for the DAG of jobs, expressed in seconds
-        #     (see [JSON representation of
+        #     Output only. The timeout duration for the DAG of jobs, expressed in seconds (see
+        #     [JSON representation of
         #     duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         # @!attribute [r] dag_start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. DAG start time, only set for workflows with
-        #     {::Google::Cloud::Dataproc::V1::WorkflowMetadata#dag_timeout dag_timeout} when
-        #     DAG begins.
+        #     Output only. DAG start time, only set for workflows with {::Google::Cloud::Dataproc::V1::WorkflowMetadata#dag_timeout dag_timeout} when DAG
+        #     begins.
         # @!attribute [r] dag_end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. DAG end time, only set for workflows with
-        #     {::Google::Cloud::Dataproc::V1::WorkflowMetadata#dag_timeout dag_timeout} when
-        #     DAG ends.
+        #     Output only. DAG end time, only set for workflows with {::Google::Cloud::Dataproc::V1::WorkflowMetadata#dag_timeout dag_timeout} when DAG ends.
         class WorkflowMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -525,7 +522,7 @@ module Google
         #     Required. The resource name of the region or location, as described
         #     in https://cloud.google.com/apis/design/resource_names.
         #
-        #     * For `projects.regions.workflowTemplates,create`, the resource name of the
+        #     * For `projects.regions.workflowTemplates.create`, the resource name of the
         #       region has the following format:
         #       `projects/{project_id}/regions/{region}`
         #

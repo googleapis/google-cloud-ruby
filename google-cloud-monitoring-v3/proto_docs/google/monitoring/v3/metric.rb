@@ -52,7 +52,9 @@ module Google
         # @!attribute [rw] resource
         #   @return [::Google::Api::MonitoredResource]
         #     The associated monitored resource.  Custom metrics can use only certain
-        #     monitored resource types in their time series data.
+        #     monitored resource types in their time series data. For more information,
+        #     see [Monitored resources for custom
+        #     metrics](https://cloud.google.com/monitoring/custom-metrics/creating-metrics#custom-metric-resources).
         # @!attribute [rw] metadata
         #   @return [::Google::Api::MonitoredResourceMetadata]
         #     Output only. The associated monitored resource metadata. When reading a

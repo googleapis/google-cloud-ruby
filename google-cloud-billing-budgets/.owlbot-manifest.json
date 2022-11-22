@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-billing-budgets.gemspec",
+    "lib/google-cloud-billing-budgets.rb",
+    "lib/google/cloud/billing/budgets.rb",
+    "lib/google/cloud/billing/budgets/version.rb",
+    "test/google/cloud/billing/budgets/client_test.rb",
+    "test/google/cloud/billing/budgets/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

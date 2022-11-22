@@ -1,5 +1,5 @@
 --no-private
---title=Natural Language V1beta2 API
+--title="Natural Language V1beta2 API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

@@ -5,7 +5,9 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/api/servicecontrol/v1/metric_value_pb'
+require 'google/rpc/status_pb'
 require 'google/api/client_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/api/servicecontrol/v1/quota_controller.proto", :syntax => :proto3) do
     add_message "google.api.servicecontrol.v1.AllocateQuotaRequest" do
@@ -39,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :code, :enum, 1, "google.api.servicecontrol.v1.QuotaError.Code"
       optional :subject, :string, 2
       optional :description, :string, 3
+      optional :status, :message, 4, "google.rpc.Status"
     end
     add_enum "google.api.servicecontrol.v1.QuotaError.Code" do
       value :UNSPECIFIED, 0

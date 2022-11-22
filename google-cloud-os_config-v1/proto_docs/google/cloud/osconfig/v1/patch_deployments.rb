@@ -68,9 +68,25 @@ module Google
         # @!attribute [rw] rollout
         #   @return [::Google::Cloud::OsConfig::V1::PatchRollout]
         #     Optional. Rollout strategy of the patch job.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::OsConfig::V1::PatchDeployment::State]
+        #     Output only. Current state of the patch deployment.
         class PatchDeployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents state of patch peployment.
+          module State
+            # The default value. This value is used if the state is omitted.
+            STATE_UNSPECIFIED = 0
+
+            # Active value means that patch deployment generates Patch Jobs.
+            ACTIVE = 1
+
+            # Paused value means that patch deployment does not generate
+            # Patch jobs. Requires user action to move in and out from this state.
+            PAUSED = 2
+          end
         end
 
         # Sets the time for a one time patch deployment. Timestamp is in
@@ -123,13 +139,17 @@ module Google
             # Invalid. A frequency must be specified.
             FREQUENCY_UNSPECIFIED = 0
 
-            # Indicates that the frequency should be expressed in terms of
-            # weeks.
+            # Indicates that the frequency of recurrence should be expressed in terms
+            # of weeks.
             WEEKLY = 1
 
-            # Indicates that the frequency should be expressed in terms of
-            # months.
+            # Indicates that the frequency of recurrence should be expressed in terms
+            # of months.
             MONTHLY = 2
+
+            # Indicates that the frequency of recurrence should be expressed in terms
+            # of days.
+            DAILY = 3
           end
         end
 
@@ -166,6 +186,15 @@ module Google
         # @!attribute [rw] day_of_week
         #   @return [::Google::Type::DayOfWeek]
         #     Required. A day of the week.
+        # @!attribute [rw] day_offset
+        #   @return [::Integer]
+        #     Optional. Represents the number of days before or after the given week day
+        #     of month that the patch deployment is scheduled for. For example if
+        #     `week_ordinal` and `day_of_week` values point to the second day of the
+        #     month and this `day_offset` value is set to `3`, the patch deployment takes
+        #     place three days after the second Tuesday of the month. If this value is
+        #     negative, for example -5, the patches are deployed five days before before
+        #     the second Tuesday of the month. Allowed values are in range [-30, 30].
         class WeekDayOfMonth
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -240,6 +269,39 @@ module Google
         #     Required. The resource name of the patch deployment in the form
         #     `projects/*/patchDeployments/*`.
         class DeletePatchDeploymentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for updating a patch deployment.
+        # @!attribute [rw] patch_deployment
+        #   @return [::Google::Cloud::OsConfig::V1::PatchDeployment]
+        #     Required. The patch deployment to Update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask that controls which fields of the patch deployment
+        #     should be updated.
+        class UpdatePatchDeploymentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for pausing a patch deployment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the patch deployment in the form
+        #     `projects/*/patchDeployments/*`.
+        class PausePatchDeploymentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for resuming a patch deployment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the patch deployment in the form
+        #     `projects/*/patchDeployments/*`.
+        class ResumePatchDeploymentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

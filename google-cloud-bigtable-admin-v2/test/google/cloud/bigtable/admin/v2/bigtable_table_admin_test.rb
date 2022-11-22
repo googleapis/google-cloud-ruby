@@ -307,6 +307,71 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     end
   end
 
+  def test_update_table
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    table = {}
+    update_mask = {}
+
+    update_table_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_table, name
+      assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::Admin::V2::Table), request["table"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_table_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_table({ table: table, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_table table: table, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_table ::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest.new(table: table, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_table({ table: table, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_table(::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest.new(table: table, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_table_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_table
     # Create GRPC objects.
     grpc_response = ::Google::Protobuf::Empty.new
@@ -362,6 +427,69 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
 
       # Verify method calls
       assert_equal 5, delete_table_client_stub.call_rpc_count
+    end
+  end
+
+  def test_undelete_table
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    undelete_table_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :undelete_table, name
+      assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::UndeleteTableRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, undelete_table_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.undelete_table({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.undelete_table name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.undelete_table ::Google::Cloud::Bigtable::Admin::V2::UndeleteTableRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.undelete_table({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.undelete_table(::Google::Cloud::Bigtable::Admin::V2::UndeleteTableRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, undelete_table_client_stub.call_rpc_count
     end
   end
 
@@ -1310,12 +1438,14 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     # Create request parameters for a unary method.
     resource = "hello world"
     policy = {}
+    update_mask = {}
 
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
       assert_equal "hello world", request["resource"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1326,31 +1456,31 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy }) do |response, operation|
+      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy do |response, operation|
+      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy) do |response, operation|
+      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy }, grpc_options) do |response, operation|
+      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -20,8 +20,14 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   let(:table_id) { "examples_table" }
   let(:table) { @table }
 
-  let(:string_numeric) { "0.123456789" }
-  let(:string_bignumeric) { "0.12345678901234567890123456789012345678" }
+  let(:string_numeric) { "1.123456789" }
+  let(:string_bignumeric) { "1.1234567890123456789012345678901234567" }
+  let(:max_length_string) { 50 }
+  let(:max_length_bytes) { 2048 }
+  let(:precision_numeric) { 10 }
+  let(:precision_bignumeric) { 38 }
+  let(:scale_numeric) { 9 }
+  let(:scale_bignumeric) { 37 }
 
   before do
     @table = get_or_create_example_table dataset, table_id
@@ -61,6 +67,25 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     _(rows[0]).must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Flying",   spells_properties_power: 1.0 })
     _(rows[1]).must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Creature", spells_properties_power: 1.0 })
     _(rows[2]).must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Explodey", spells_properties_power: 11.0 })
+  end
+
+  it "queries in session mode" do
+    job = bigquery.query_job "CREATE TEMPORARY TABLE temptable AS SELECT 17 as foo", dataset: dataset, create_session: true
+    job.wait_until_done!
+    _(job).wont_be :failed?
+    _(job.session_id).wont_be :nil?
+
+    job_2 = bigquery.query_job "SELECT * FROM temptable", dataset: dataset, session_id: job.session_id
+    job_2.wait_until_done!
+    _(job_2).wont_be :failed?
+    _(job_2.session_id).wont_be :nil?
+    _(job_2.session_id).must_equal job.session_id
+    _(job_2.data.first).wont_be :nil?
+    _(job_2.data.first[:foo]).must_equal 17
+
+    data = bigquery.query "SELECT * FROM temptable", dataset: dataset, session_id: job.session_id
+    _(data.first).wont_be :nil?
+    _(data.first[:foo]).must_equal 17
   end
 
   it "modifies a nested schema via field" do
@@ -112,10 +137,11 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     assert_equal -Float::INFINITY, row[:negative_infinity]
   end
 
-  it "executes SQL with multiple statements and creates child jobs with script_statistics" do
+  it "executes SQL with multiple statements in a transaction and creates child jobs with script_statistics and transaction_info" do
     multi_statement_sql = <<~SQL
       -- Declare a variable to hold names as an array.
       DECLARE top_names ARRAY<STRING>;
+      BEGIN TRANSACTION;
       -- Build an array of the top 100 names from the year 2017.
       SET top_names = (
       SELECT ARRAY_AGG(name ORDER BY number DESC LIMIT 100)
@@ -130,6 +156,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
       SELECT word
       FROM `bigquery-public-data.samples.shakespeare`
       );
+      COMMIT TRANSACTION;
     SQL
 
     job = bigquery.query_job multi_statement_sql
@@ -137,39 +164,71 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
     job.wait_until_done!
     _(job).wont_be :failed?
-    _(job.num_child_jobs).must_equal 2
+    _(job.num_child_jobs).must_equal 4
     _(job.parent_job_id).must_be :nil?
 
     _(job.script_statistics).must_be :nil?
 
     child_jobs = bigquery.jobs parent_job: job
-    _(child_jobs.count).must_equal 2
+    _(child_jobs.count).must_equal 4
 
     _(child_jobs[0].parent_job_id).must_equal job.job_id
+    transaction_id = child_jobs[0].transaction_id
+    _(transaction_id).must_be_instance_of String
+    _(transaction_id).wont_be :empty?
     _(child_jobs[0].script_statistics).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
     _(child_jobs[0].script_statistics.evaluation_kind).must_equal "STATEMENT"
     _(child_jobs[0].script_statistics.stack_frames).wont_be :nil?
     _(child_jobs[0].script_statistics.stack_frames).must_be_kind_of Array
     _(child_jobs[0].script_statistics.stack_frames.count).must_equal 1
     _(child_jobs[0].script_statistics.stack_frames[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
-    _(child_jobs[0].script_statistics.stack_frames[0].start_line).must_equal 10
+    _(child_jobs[0].script_statistics.stack_frames[0].start_line).must_equal 18
     _(child_jobs[0].script_statistics.stack_frames[0].start_column).must_equal 1
-    _(child_jobs[0].script_statistics.stack_frames[0].end_line).must_equal 16
-    _(child_jobs[0].script_statistics.stack_frames[0].end_column).must_equal 2
-    _(child_jobs[0].script_statistics.stack_frames[0].text.length).must_be :>, 0
+    _(child_jobs[0].script_statistics.stack_frames[0].end_line).must_equal 18
+    _(child_jobs[0].script_statistics.stack_frames[0].end_column).must_equal 19
+    _(child_jobs[0].script_statistics.stack_frames[0].text).wont_be :empty?
 
     _(child_jobs[1].parent_job_id).must_equal job.job_id
+    _(child_jobs[1].transaction_id).must_equal transaction_id
     _(child_jobs[1].script_statistics).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
-    _(child_jobs[1].script_statistics.evaluation_kind).must_equal "EXPRESSION"
+    _(child_jobs[1].script_statistics.evaluation_kind).must_equal "STATEMENT"
     _(child_jobs[1].script_statistics.stack_frames).wont_be :nil?
     _(child_jobs[1].script_statistics.stack_frames).must_be_kind_of Array
     _(child_jobs[1].script_statistics.stack_frames.count).must_equal 1
     _(child_jobs[1].script_statistics.stack_frames[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
-    _(child_jobs[1].script_statistics.stack_frames[0].start_line).must_equal 4
-    _(child_jobs[1].script_statistics.stack_frames[0].start_column).must_equal 17
-    _(child_jobs[1].script_statistics.stack_frames[0].end_line).must_equal 8
+    _(child_jobs[1].script_statistics.stack_frames[0].start_line).must_equal 11
+    _(child_jobs[1].script_statistics.stack_frames[0].start_column).must_equal 1
+    _(child_jobs[1].script_statistics.stack_frames[0].end_line).must_equal 17
     _(child_jobs[1].script_statistics.stack_frames[0].end_column).must_equal 2
-    _(child_jobs[1].script_statistics.stack_frames[0].text.length).must_be :>, 0
+    _(child_jobs[1].script_statistics.stack_frames[0].text).wont_be :empty?
+
+    _(child_jobs[2].parent_job_id).must_equal job.job_id
+    _(child_jobs[2].transaction_id).must_equal transaction_id
+    _(child_jobs[2].script_statistics).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
+    _(child_jobs[2].script_statistics.evaluation_kind).must_equal "EXPRESSION"
+    _(child_jobs[2].script_statistics.stack_frames).wont_be :nil?
+    _(child_jobs[2].script_statistics.stack_frames).must_be_kind_of Array
+    _(child_jobs[2].script_statistics.stack_frames.count).must_equal 1
+    _(child_jobs[2].script_statistics.stack_frames[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
+    _(child_jobs[2].script_statistics.stack_frames[0].start_line).must_equal 5
+    _(child_jobs[2].script_statistics.stack_frames[0].start_column).must_equal 17
+    _(child_jobs[2].script_statistics.stack_frames[0].end_line).must_equal 9
+    _(child_jobs[2].script_statistics.stack_frames[0].end_column).must_equal 2
+    _(child_jobs[2].script_statistics.stack_frames[0].text).wont_be :empty?
+
+    _(child_jobs[3].parent_job_id).must_equal job.job_id
+    _(child_jobs[3].transaction_id).must_equal transaction_id
+    _(child_jobs[3].script_statistics).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
+    _(child_jobs[3].script_statistics.evaluation_kind).must_equal "STATEMENT"
+    _(child_jobs[3].script_statistics.stack_frames).wont_be :nil?
+    _(child_jobs[3].script_statistics.stack_frames).must_be_kind_of Array
+    _(child_jobs[3].script_statistics.stack_frames.count).must_equal 1
+    _(child_jobs[3].script_statistics.stack_frames[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
+    _(child_jobs[3].script_statistics.stack_frames[0].start_line).must_equal 3
+    _(child_jobs[3].script_statistics.stack_frames[0].start_column).must_equal 1
+    _(child_jobs[3].script_statistics.stack_frames[0].end_line).must_equal 3
+    _(child_jobs[3].script_statistics.stack_frames[0].end_column).must_equal 18
+    _(child_jobs[3].script_statistics.stack_frames[0].text).wont_be :empty?
   end
 
   it "queries max scale numeric and bignumeric values" do
@@ -181,6 +240,27 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
 
     _(rows[0][:my_bignumeric]).must_be_kind_of BigDecimal
     _(rows[0][:my_bignumeric]).must_equal BigDecimal(string_bignumeric)
+  end
+
+  it "knows its schema max_length for string and bytes fields" do
+    _(table.schema.field("age").max_length).must_be :nil?
+    _(table.schema.field("name").max_length).must_equal max_length_string
+    _(table.schema.field("spells").field("icon").max_length).must_equal max_length_bytes
+  end
+
+  it "knows its schema precision and scale for numeric and bignumeric fields" do
+    _(table.schema.field("age").precision).must_be :nil?
+    _(table.schema.field("age").scale).must_be :nil?
+
+    _(table.schema.field("my_numeric").precision).must_equal precision_numeric
+    _(table.schema.field("my_numeric").scale).must_equal scale_numeric
+    _(table.schema.field("my_bignumeric").precision).must_equal precision_bignumeric
+    _(table.schema.field("my_bignumeric").scale).must_equal scale_bignumeric
+
+    _(table.schema.field("spells").field("my_nested_numeric").precision).must_equal precision_numeric
+    _(table.schema.field("spells").field("my_nested_numeric").scale).must_equal scale_numeric
+    _(table.schema.field("spells").field("my_nested_bignumeric").precision).must_equal precision_bignumeric
+    _(table.schema.field("spells").field("my_nested_bignumeric").scale).must_equal scale_bignumeric
   end
 
   def assert_rows_equal returned_row, example_row
@@ -208,11 +288,11 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     if t.nil?
       t = dataset.create_table table_id do |schema|
         schema.integer "id", mode: :nullable
-        schema.string "name", mode: :nullable
+        schema.string "name", mode: :nullable, max_length: max_length_string
         schema.integer "age", mode: :nullable
         schema.float "weight", mode: :nullable
-        schema.numeric "my_numeric", mode: :nullable
-        schema.bignumeric "my_bignumeric", mode: :nullable
+        schema.numeric "my_numeric", mode: :nullable, precision: precision_numeric, scale: scale_numeric
+        schema.bignumeric "my_bignumeric", mode: :nullable, precision: precision_bignumeric, scale: scale_bignumeric
         schema.boolean "is_magic", mode: :nullable
         schema.float "scores", mode: :repeated
         schema.record "spells", mode: :repeated do |spells|
@@ -222,21 +302,25 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
             properties.string "name", mode: :nullable
             properties.float "power", mode: :nullable
           end
-          spells.bytes "icon", mode: :nullable
+          spells.bytes "icon", mode: :nullable, max_length: max_length_bytes
           spells.timestamp "last_used", mode: :nullable
+          spells.numeric "my_nested_numeric", mode: :nullable, precision: precision_numeric, scale: scale_numeric
+          spells.bignumeric "my_nested_bignumeric", mode: :nullable, precision: precision_bignumeric, scale: scale_bignumeric
         end
         schema.time "tea_time", mode: :nullable
         schema.date "next_vacation", mode: :nullable
         schema.datetime "favorite_time", mode: :nullable
       end
-      t.insert example_table_rows
+      insert_resp = t.insert example_table_rows
+      raise "insert errors: #{insert_resp.insert_errors.inspect}" unless insert_resp.success?
     end
     t
   end
 
   def example_table_rows
     [
-      { id: 1,
+      {
+        id: 1,
         name: "Bilbo",
         age: 111,
         weight: 67.2,
@@ -264,7 +348,9 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
               { name: "Explodey", power: 11.0 }
             ],
             icon: File.open("acceptance/data/kitten-test-data.json", "rb"),
-            last_used: Time.parse("2015-10-31 23:59:56 UTC")
+            last_used: Time.parse("2015-10-31 23:59:56 UTC"),
+            my_nested_numeric: BigDecimal(string_numeric),
+            my_nested_bignumeric: string_bignumeric, # BigDecimal would be rounded, use String instead!
           }
         ],
         tea_time: Google::Cloud::Bigquery::Time.new("15:00:00"),

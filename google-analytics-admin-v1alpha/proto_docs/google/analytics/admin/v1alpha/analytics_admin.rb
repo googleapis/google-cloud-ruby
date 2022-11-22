@@ -21,6 +21,115 @@ module Google
   module Analytics
     module Admin
       module V1alpha
+        # The request for a Data Access Record Report.
+        # @!attribute [rw] entity
+        #   @return [::String]
+        #     The Data Access Report is requested for this property.
+        #     For example if "123" is your GA4 property ID, then entity should be
+        #     "properties/123".
+        # @!attribute [rw] dimensions
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessDimension>]
+        #     The dimensions requested and displayed in the response. Requests are
+        #     allowed up to 9 dimensions.
+        # @!attribute [rw] metrics
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessMetric>]
+        #     The metrics requested and displayed in the response. Requests are allowed
+        #     up to 10 metrics.
+        # @!attribute [rw] date_ranges
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessDateRange>]
+        #     Date ranges of access records to read. If multiple date ranges are
+        #     requested, each response row will contain a zero based date range index. If
+        #     two date ranges overlap, the access records for the overlapping days is
+        #     included in the response rows for both date ranges. Requests are allowed up
+        #     to 2 date ranges.
+        # @!attribute [rw] dimension_filter
+        #   @return [::Google::Analytics::Admin::V1alpha::AccessFilterExpression]
+        #     Dimension filters allow you to restrict report response to specific
+        #     dimension values which match the filter. For example, filtering on access
+        #     records of a single user. To learn more, see [Fundamentals of Dimension
+        #     Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
+        #     for examples. Metrics cannot be used in this filter.
+        # @!attribute [rw] metric_filter
+        #   @return [::Google::Analytics::Admin::V1alpha::AccessFilterExpression]
+        #     Metric filters allow you to restrict report response to specific metric
+        #     values which match the filter. Metric filters are applied after aggregating
+        #     the report's rows, similar to SQL having-clause. Dimensions cannot be used
+        #     in this filter.
+        # @!attribute [rw] offset
+        #   @return [::Integer]
+        #     The row count of the start row. The first row is counted as row 0. If
+        #     offset is unspecified, it is treated as 0. If offset is zero, then this
+        #     method will return the first page of results with `limit` entries.
+        #
+        #     To learn more about this pagination parameter, see
+        #     [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+        # @!attribute [rw] limit
+        #   @return [::Integer]
+        #     The number of rows to return. If unspecified, 10,000 rows are returned. The
+        #     API returns a maximum of 100,000 rows per request, no matter how many you
+        #     ask for. `limit` must be positive.
+        #
+        #     The API may return fewer rows than the requested `limit`, if there aren't
+        #     as many remaining rows as the `limit`. For instance, there are fewer than
+        #     300 possible values for the dimension `country`, so when reporting on only
+        #     `country`, you can't get more than 300 rows, even if you set `limit` to a
+        #     higher value.
+        #
+        #     To learn more about this pagination parameter, see
+        #     [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     This request's time zone if specified. If unspecified, the property's time
+        #     zone is used. The request's time zone is used to interpret the start & end
+        #     dates of the report.
+        #
+        #     Formatted as strings from the IANA Time Zone database
+        #     (https://www.iana.org/time-zones); for example "America/New_York" or
+        #     "Asia/Tokyo".
+        # @!attribute [rw] order_bys
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessOrderBy>]
+        #     Specifies how rows are ordered in the response.
+        # @!attribute [rw] return_entity_quota
+        #   @return [::Boolean]
+        #     Toggles whether to return the current state of this Analytics Property's
+        #     quota. Quota is returned in [AccessQuota](#AccessQuota).
+        class RunAccessReportRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The customized Data Access Record Report response.
+        # @!attribute [rw] dimension_headers
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessDimensionHeader>]
+        #     The header for a column in the report that corresponds to a specific
+        #     dimension. The number of DimensionHeaders and ordering of DimensionHeaders
+        #     matches the dimensions present in rows.
+        # @!attribute [rw] metric_headers
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessMetricHeader>]
+        #     The header for a column in the report that corresponds to a specific
+        #     metric. The number of MetricHeaders and ordering of MetricHeaders matches
+        #     the metrics present in rows.
+        # @!attribute [rw] rows
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessRow>]
+        #     Rows of dimension value combinations and metric values in the report.
+        # @!attribute [rw] row_count
+        #   @return [::Integer]
+        #     The total number of rows in the query result. `rowCount` is independent of
+        #     the number of rows returned in the response, the `limit` request
+        #     parameter, and the `offset` request parameter. For example if a query
+        #     returns 175 rows and includes `limit` of 50 in the API request, the
+        #     response will contain `rowCount` of 175 but only 50 rows.
+        #
+        #     To learn more about this pagination parameter, see
+        #     [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+        # @!attribute [rw] quota
+        #   @return [::Google::Analytics::Admin::V1alpha::AccessQuota]
+        #     The quota state for this Analytics property including this request.
+        class RunAccessReportResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for GetAccount RPC.
         # @!attribute [rw] name
         #   @return [::String]
@@ -132,14 +241,17 @@ module Google
         #   @return [::String]
         #     Required. An expression for filtering the results of the request.
         #     Fields eligible for filtering are:
-        #     `parent:`(The resource name of the parent account) or
+        #     `parent:`(The resource name of the parent account/property) or
+        #     `ancestor:`(The resource name of the parent account) or
         #     `firebase_project:`(The id or number of the linked firebase project).
         #     Some examples of filters:
         #
         #     ```
         #     | Filter                      | Description                               |
         #     |-----------------------------|-------------------------------------------|
-        #     | parent:accounts/123         | The account with account id: 123.         |
+        #     | parent:accounts/123         | The account with account id: 123.       |
+        #     | parent:properties/123       | The property with property id: 123.       |
+        #     | ancestor:accounts/123       | The account with account id: 123.         |
         #     | firebase_project:project-id | The firebase project with id: project-id. |
         #     | firebase_project:123        | The firebase project with number: 123.    |
         #     ```
@@ -431,264 +543,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for GetWebDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the web data stream to lookup.
-        #     Format: properties/\\{property_id}/webDataStreams/\\{stream_id}
-        #     Example: "properties/123/webDataStreams/456"
-        class GetWebDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for DeleteWebDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the web data stream to delete.
-        #     Format: properties/\\{property_id}/webDataStreams/\\{stream_id}
-        #     Example: "properties/123/webDataStreams/456"
-        class DeleteWebDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for UpdateWebDataStream RPC.
-        # @!attribute [rw] web_data_stream
-        #   @return [::Google::Analytics::Admin::V1alpha::WebDataStream]
-        #     Required. The web stream to update.
-        #     The `name` field is used to identify the web stream to be updated.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
-        class UpdateWebDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for CreateWebDataStream RPC.
-        # @!attribute [rw] web_data_stream
-        #   @return [::Google::Analytics::Admin::V1alpha::WebDataStream]
-        #     Required. The web stream to create.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The parent resource where this web data stream will be created.
-        #     Format: properties/123
-        class CreateWebDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListWebDataStreams RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The name of the parent property.
-        #     For example, to list results of web streams under the property with Id
-        #     123: "properties/123"
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     The maximum number of resources to return.
-        #     If unspecified, at most 50 resources will be returned.
-        #     The maximum value is 200; (higher values will be coerced to the maximum)
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     A page token, received from a previous `ListWebDataStreams` call.
-        #     Provide this to retrieve the subsequent page.
-        #     When paginating, all other parameters provided to `ListWebDataStreams` must
-        #     match the call that provided the page token.
-        class ListWebDataStreamsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListWebDataStreams RPC.
-        # @!attribute [rw] web_data_streams
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::WebDataStream>]
-        #     Results that matched the filter criteria and were accessible to the caller.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
-        class ListWebDataStreamsResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for GetIosAppDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the iOS app data stream to lookup.
-        #     Format: properties/\\{property_id}/iosAppDataStreams/\\{stream_id}
-        #     Example: "properties/123/iosAppDataStreams/456"
-        class GetIosAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for DeleteIosAppDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the iOS app data stream to delete.
-        #     Format: properties/\\{property_id}/iosAppDataStreams/\\{stream_id}
-        #     Example: "properties/123/iosAppDataStreams/456"
-        class DeleteIosAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for UpdateIosAppDataStream RPC.
-        # @!attribute [rw] ios_app_data_stream
-        #   @return [::Google::Analytics::Admin::V1alpha::IosAppDataStream]
-        #     Required. The iOS app stream to update.
-        #     The `name` field is used to identify the iOS app stream to be updated.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
-        class UpdateIosAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListIosAppDataStreams RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The name of the parent property.
-        #     For example, to list results of app streams under the property with Id
-        #     123: "properties/123"
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     The maximum number of resources to return.
-        #     If unspecified, at most 50 resources will be returned.
-        #     The maximum value is 200; (higher values will be coerced to the maximum)
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     A page token, received from a previous `ListIosAppDataStreams`
-        #     call. Provide this to retrieve the subsequent page.
-        #     When paginating, all other parameters provided to `ListIosAppDataStreams`
-        #     must match the call that provided the page token.
-        class ListIosAppDataStreamsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListIosAppDataStreams RPC.
-        # @!attribute [rw] ios_app_data_streams
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::IosAppDataStream>]
-        #     Results that matched the filter criteria and were accessible to the caller.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
-        class ListIosAppDataStreamsResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for GetAndroidAppDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the android app data stream to lookup.
-        #     Format: properties/\\{property_id}/androidAppDataStreams/\\{stream_id}
-        #     Example: "properties/123/androidAppDataStreams/456"
-        class GetAndroidAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for DeleteAndroidAppDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the android app data stream to delete.
-        #     Format: properties/\\{property_id}/androidAppDataStreams/\\{stream_id}
-        #     Example: "properties/123/androidAppDataStreams/456"
-        class DeleteAndroidAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for UpdateAndroidAppDataStream RPC.
-        # @!attribute [rw] android_app_data_stream
-        #   @return [::Google::Analytics::Admin::V1alpha::AndroidAppDataStream]
-        #     Required. The android app stream to update.
-        #     The `name` field is used to identify the android app stream to be updated.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
-        class UpdateAndroidAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListAndroidAppDataStreams RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The name of the parent property.
-        #     For example, to limit results to app streams under the property with Id
-        #     123: "properties/123"
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     The maximum number of resources to return.
-        #
-        #     If unspecified, at most 50 resources will be returned.
-        #     The maximum value is 200; (higher values will be coerced to the maximum)
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     A page token, received from a previous call. Provide this to
-        #     retrieve the subsequent page.
-        #     When paginating, all other parameters provided to
-        #     `ListAndroidAppDataStreams` must match the call that provided the page
-        #     token.
-        class ListAndroidAppDataStreamsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListAndroidDataStreams RPC.
-        # @!attribute [rw] android_app_data_streams
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AndroidAppDataStream>]
-        #     Results that matched the filter criteria and were accessible to the caller.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
-        class ListAndroidAppDataStreamsResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for GetEnhancedMeasurementSettings RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the settings to lookup.
-        #     Format:
-        #     properties/\\{property_id}/webDataStreams/\\{stream_id}/enhancedMeasurementSettings
-        #     Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
-        class GetEnhancedMeasurementSettingsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for UpdateEnhancedMeasurementSettings RPC.
-        # @!attribute [rw] enhanced_measurement_settings
-        #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
-        #     Required. The settings to update.
-        #     The `name` field is used to identify the settings to be updated.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
-        class UpdateEnhancedMeasurementSettingsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Request message for CreateFirebaseLink RPC
         # @!attribute [rw] parent
         #   @return [::String]
@@ -698,20 +552,6 @@ module Google
         #   @return [::Google::Analytics::Admin::V1alpha::FirebaseLink]
         #     Required. The Firebase link to create.
         class CreateFirebaseLinkRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for UpdateFirebaseLink RPC
-        # @!attribute [rw] firebase_link
-        #   @return [::Google::Analytics::Admin::V1alpha::FirebaseLink]
-        #     Required. The Firebase link to update.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
-        class UpdateFirebaseLinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -768,8 +608,8 @@ module Google
         #   @return [::String]
         #     Required. The name of the site tag to lookup.
         #     Note that site tags are singletons and do not have unique IDs.
-        #     Format: properties/\\{property_id}/webDataStreams/\\{stream_id}/globalSiteTag
-        #     Example: "properties/123/webDataStreams/456/globalSiteTag"
+        #     Format: properties/\\{property_id}/dataStreams/\\{stream_id}/globalSiteTag
+        #     Example: "properties/123/dataStreams/456/globalSiteTag"
         class GetGlobalSiteTagRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -886,6 +726,31 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for AcknowledgeUserDataCollection RPC.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     Required. The property for which to acknowledge user data collection.
+        # @!attribute [rw] acknowledgement
+        #   @return [::String]
+        #     Required. An acknowledgement that the caller of this method understands the terms
+        #     of user data collection.
+        #
+        #     This field must contain the exact value:
+        #     "I acknowledge that I have the necessary privacy disclosures and rights
+        #     from my end users for the collection and processing of their data,
+        #     including the association of such data with the visitation information
+        #     Google Analytics collects from my site and/or app property."
+        class AcknowledgeUserDataCollectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for AcknowledgeUserDataCollection RPC.
+        class AcknowledgeUserDataCollectionResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for SearchChangeHistoryEvents RPC.
         # @!attribute [rw] account
         #   @return [::String]
@@ -946,9 +811,7 @@ module Google
         #   @return [::String]
         #     Required. The name of the measurement protocol secret to lookup.
         #     Format:
-        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
-        #     Note: Any type of stream (WebDataStream, IosAppDataStream,
-        #     AndroidAppDataStream) may be a parent.
+        #     properties/\\{property}/dataStreams/\\{dataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
         class GetMeasurementProtocolSecretRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -958,9 +821,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource where this secret will be created.
-        #     Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream)
-        #     may be a parent.
-        #     Format: properties/\\{property}/webDataStreams/\\{webDataStream}
+        #     Format: properties/\\{property}/dataStreams/\\{dataStream}
         # @!attribute [rw] measurement_protocol_secret
         #   @return [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret]
         #     Required. The measurement protocol secret to create.
@@ -974,9 +835,7 @@ module Google
         #   @return [::String]
         #     Required. The name of the MeasurementProtocolSecret to delete.
         #     Format:
-        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
-        #     Note: Any type of stream (WebDataStream, IosAppDataStream,
-        #     AndroidAppDataStream) may be a parent.
+        #     properties/\\{property}/dataStreams/\\{dataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
         class DeleteMeasurementProtocolSecretRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -998,10 +857,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the parent stream.
-        #     Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream)
-        #     may be a parent.
         #     Format:
-        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets
+        #     properties/\\{property}/dataStreams/\\{dataStream}/measurementProtocolSecrets
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of resources to return.
@@ -1121,6 +978,185 @@ module Google
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListConversionEventsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetDisplayVideo360AdvertiserLink RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLink to get.
+        #     Example format: properties/1234/displayVideo360AdvertiserLink/5678
+        class GetDisplayVideo360AdvertiserLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListDisplayVideo360AdvertiserLinks RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListDisplayVideo360AdvertiserLinks`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListDisplayVideo360AdvertiserLinks` must match the call that provided the
+        #     page token.
+        class ListDisplayVideo360AdvertiserLinksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListDisplayVideo360AdvertiserLinks RPC.
+        # @!attribute [rw] display_video_360_advertiser_links
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink>]
+        #     List of DisplayVideo360AdvertiserLinks.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListDisplayVideo360AdvertiserLinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateDisplayVideo360AdvertiserLink RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] display_video_360_advertiser_link
+        #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+        #     Required. The DisplayVideo360AdvertiserLink to create.
+        class CreateDisplayVideo360AdvertiserLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteDisplayVideo360AdvertiserLink RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLink to delete.
+        #     Example format: properties/1234/displayVideo360AdvertiserLinks/5678
+        class DeleteDisplayVideo360AdvertiserLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateDisplayVideo360AdvertiserLink RPC.
+        # @!attribute [rw] display_video_360_advertiser_link
+        #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+        #     The DisplayVideo360AdvertiserLink to update
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
+        class UpdateDisplayVideo360AdvertiserLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to get.
+        #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+        class GetDisplayVideo360AdvertiserLinkProposalRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListDisplayVideo360AdvertiserLinkProposals RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous
+        #     `ListDisplayVideo360AdvertiserLinkProposals` call. Provide this to retrieve
+        #     the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListDisplayVideo360AdvertiserLinkProposals` must match the call that
+        #     provided the page token.
+        class ListDisplayVideo360AdvertiserLinkProposalsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListDisplayVideo360AdvertiserLinkProposals RPC.
+        # @!attribute [rw] display_video_360_advertiser_link_proposals
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal>]
+        #     List of DisplayVideo360AdvertiserLinkProposals.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListDisplayVideo360AdvertiserLinkProposalsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] display_video_360_advertiser_link_proposal
+        #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
+        #     Required. The DisplayVideo360AdvertiserLinkProposal to create.
+        class CreateDisplayVideo360AdvertiserLinkProposalRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to delete.
+        #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+        class DeleteDisplayVideo360AdvertiserLinkProposalRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to approve.
+        #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+        class ApproveDisplayVideo360AdvertiserLinkProposalRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] display_video_360_advertiser_link
+        #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+        #     The DisplayVideo360AdvertiserLink created as a result of approving the
+        #     proposal.
+        class ApproveDisplayVideo360AdvertiserLinkProposalResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CancelDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to cancel.
+        #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+        class CancelDisplayVideo360AdvertiserLinkProposalRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1281,6 +1317,218 @@ module Google
         #     Required. The name of the CustomMetric to get.
         #     Example format: properties/1234/customMetrics/5678
         class GetCustomMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetDataRetentionSettings RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the settings to lookup.
+        #     Format:
+        #     properties/\\{property}/dataRetentionSettings
+        #     Example: "properties/1000/dataRetentionSettings"
+        class GetDataRetentionSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateDataRetentionSettings RPC.
+        # @!attribute [rw] data_retention_settings
+        #   @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
+        #     Required. The settings to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
+        class UpdateDataRetentionSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateDataStream RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] data_stream
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream]
+        #     Required. The DataStream to create.
+        class CreateDataStreamRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteDataStream RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DataStream to delete.
+        #     Example format: properties/1234/dataStreams/5678
+        class DeleteDataStreamRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateDataStream RPC.
+        # @!attribute [rw] data_stream
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream]
+        #     The DataStream to update
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
+        class UpdateDataStreamRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListDataStreams RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListDataStreams` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListDataStreams` must
+        #     match the call that provided the page token.
+        class ListDataStreamsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListDataStreams RPC.
+        # @!attribute [rw] data_streams
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::DataStream>]
+        #     List of DataStreams.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListDataStreamsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetDataStream RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DataStream to get.
+        #     Example format: properties/1234/dataStreams/5678
+        class GetDataStreamRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetAudience RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Audience to get.
+        #     Example format: properties/1234/audiences/5678
+        class GetAudienceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListAudiences RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListAudiences` call. Provide this
+        #     to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListAudiences` must
+        #     match the call that provided the page token.
+        class ListAudiencesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListAudiences RPC.
+        # @!attribute [rw] audiences
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::Audience>]
+        #     List of Audiences.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListAudiencesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateAudience RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] audience
+        #   @return [::Google::Analytics::Admin::V1alpha::Audience]
+        #     Required. The audience to create.
+        class CreateAudienceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateAudience RPC.
+        # @!attribute [rw] audience
+        #   @return [::Google::Analytics::Admin::V1alpha::Audience]
+        #     Required. The audience to update.
+        #     The audience's `name` field is used to identify the audience to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
+        class UpdateAudienceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ArchiveAudience RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Example format: properties/1234/audiences/5678
+        class ArchiveAudienceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetAttributionSettings RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the attribution settings to retrieve.
+        #     Format: properties/\\{property}/attributionSettings
+        class GetAttributionSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateAttributionSettings RPC
+        # @!attribute [rw] attribution_settings
+        #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings]
+        #     Required. The attribution settings to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
+        class UpdateAttributionSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

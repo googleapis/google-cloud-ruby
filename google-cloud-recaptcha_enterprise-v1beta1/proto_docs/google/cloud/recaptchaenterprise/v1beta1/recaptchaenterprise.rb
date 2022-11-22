@@ -41,12 +41,24 @@ module Google
         #     "projects/\\{project_number}/assessments/\\{assessment_id}".
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
-        #     Required. The annotation that will be assigned to the Event.
+        #     Optional. The annotation that will be assigned to the Event. This field can be left
+        #     empty to provide reasons that apply to an event without concluding whether
+        #     the event is legitimate or fraudulent.
+        # @!attribute [rw] reasons
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Reason>]
+        #     Optional. Optional reasons for the annotation that will be assigned to the Event.
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     Optional. Optional unique stable hashed user identifier to apply to the assessment.
+        #     This is an alternative to setting the hashed_account_id in
+        #     CreateAssessment, for example when the account identifier is not yet known
+        #     in the initial request. It is recommended that the identifier is hashed
+        #     using hmac-sha256 with stable secret.
         class AnnotateAssessmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Enum that reprensents the types of annotations.
+          # Enum that represents the types of annotations.
           module Annotation
             # Default unspecified type.
             ANNOTATION_UNSPECIFIED = 0
@@ -56,11 +68,83 @@ module Google
 
             # Provides information that the event turned out to be fraudulent.
             FRAUDULENT = 2
+
+            # Provides information that the event was related to a login event in which
+            # the user typed the correct password. Deprecated, prefer indicating
+            # CORRECT_PASSWORD through the reasons field instead.
+            PASSWORD_CORRECT = 3
+
+            # Provides information that the event was related to a login event in which
+            # the user typed the incorrect password. Deprecated, prefer indicating
+            # INCORRECT_PASSWORD through the reasons field instead.
+            PASSWORD_INCORRECT = 4
+          end
+
+          # Enum that represents potential reasons for annotating an assessment.
+          module Reason
+            # Default unspecified reason.
+            REASON_UNSPECIFIED = 0
+
+            # Indicates a chargeback issued for the transaction with no other details.
+            # When possible, specify the type by using CHARGEBACK_FRAUD or
+            # CHARGEBACK_DISPUTE instead.
+            CHARGEBACK = 1
+
+            # Indicates a chargeback related to an alleged unauthorized transaction
+            # from the cardholder's perspective (for example, the card number was
+            # stolen).
+            CHARGEBACK_FRAUD = 8
+
+            # Indicates a chargeback related to the cardholder having provided their
+            # card details but allegedly not being satisfied with the purchase
+            # (for example, misrepresentation, attempted cancellation).
+            CHARGEBACK_DISPUTE = 9
+
+            # Indicates the transaction associated with the assessment is suspected of
+            # being fraudulent based on the payment method, billing details, shipping
+            # address or other transaction information.
+            PAYMENT_HEURISTICS = 2
+
+            # Indicates that the user was served a 2FA challenge. An old assessment
+            # with `ENUM_VALUES.INITIATED_TWO_FACTOR` reason that has not been
+            # overwritten with `PASSED_TWO_FACTOR` is treated as an abandoned 2FA flow.
+            # This is equivalent to `FAILED_TWO_FACTOR`.
+            INITIATED_TWO_FACTOR = 7
+
+            # Indicates that the user passed a 2FA challenge.
+            PASSED_TWO_FACTOR = 3
+
+            # Indicates that the user failed a 2FA challenge.
+            FAILED_TWO_FACTOR = 4
+
+            # Indicates the user provided the correct password.
+            CORRECT_PASSWORD = 5
+
+            # Indicates the user provided an incorrect password.
+            INCORRECT_PASSWORD = 6
           end
         end
 
         # Empty response for AnnotateAssessment.
         class AnnotateAssessmentResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Password leak verification info.
+        # @!attribute [rw] hashed_user_credentials
+        #   @return [::String]
+        #     Optional. Scrypt hash of the username+password that the customer wants to verify
+        #     against a known password leak.
+        # @!attribute [r] credentials_leaked
+        #   @return [::Boolean]
+        #     Output only. Whether or not the user's credentials are present in a known leak.
+        # @!attribute [rw] canonicalized_username
+        #   @return [::String]
+        #     Optional. The username part of the user credentials for which we want to trigger a
+        #     leak check in canonicalized form. This is the same data used to create the
+        #     hashed_user_credentials on the customer side.
+        class PasswordLeakVerification
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -84,11 +168,20 @@ module Google
         # @!attribute [r] reasons
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment::ClassificationReason>]
         #     Output only. Reasons contributing to the risk analysis verdict.
+        # @!attribute [rw] password_leak_verification
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::PasswordLeakVerification]
+        #     Information about the user's credentials used to check for leaks.
+        #     This feature is part of the Early Access Program (EAP). Exercise caution,
+        #     and do not deploy integrations based on this feature in a production
+        #     environment.
+        # @!attribute [rw] account_defender_assessment
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::AccountDefenderAssessment]
+        #     Assessment returned by Account Defender when a hashed_account_id is
+        #     provided.
         class Assessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # LINT.IfChange(classification_reason)
           # Reasons contributing to the risk analysis verdict.
           module ClassificationReason
             # Default unspecified type.
@@ -133,6 +226,10 @@ module Google
         #     Optional. The expected action for this type of event. This should be the same action
         #     provided at token generation time on client-side platforms already
         #     integrated with recaptcha enterprise.
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     Optional. Optional unique stable hashed user identifier for the request. The
+        #     identifier should ideally be hashed using sha256 with stable secret.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -140,7 +237,11 @@ module Google
 
         # @!attribute [rw] valid
         #   @return [::Boolean]
-        #     Whether the provided user response token is valid.
+        #     Whether the provided user response token is valid. When valid = false, the
+        #     reason could be specified in invalid_reason or it could also be due to
+        #     a user failing to solve a challenge or a sitekey mismatch (i.e the sitekey
+        #     used to generate the token was different than the one specified in the
+        #     assessment).
         # @!attribute [rw] invalid_reason
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::TokenProperties::InvalidReason]
         #     Reason associated with the response when valid = false.
@@ -157,7 +258,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # LINT.IfChange
           # Enum that represents the types of invalid token reasons.
           module InvalidReason
             # Default unspecified type.
@@ -183,189 +283,42 @@ module Google
 
             # The user verification token was not present.  It is a required input.
             MISSING = 6
+
+            # A retriable error (such as network failure) occurred on the browser.
+            # Could easily be simulated by an attacker.
+            BROWSER_ERROR = 7
           end
         end
 
-        # The create key request message.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The name of the project in which the key will be created, in the
-        #     format "projects/\\{project_number}".
-        # @!attribute [rw] key
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
-        #     Required. Information to create a reCAPTCHA Enterprise key.
-        class CreateKeyRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The list keys request message.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The name of the project that contains the keys that will be
-        #     listed, in the format "projects/\\{project_number}".
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     Optional. The maximum number of keys to return. Default is 10. Max limit is
-        #     1000.
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     Optional. The next_page_token value returned from a previous.
-        #     ListKeysRequest, if any.
-        class ListKeysRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response to request to list keys in a project.
-        # @!attribute [rw] keys
-        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::Key>]
-        #     Key details.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     Token to retrieve the next page of results. It is set to empty if no keys
-        #     remain in results.
-        class ListKeysResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The get key request message.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the requested key, in the format
-        #     "projects/\\{project_number}/keys/\\{key_id}".
-        class GetKeyRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The update key request message.
-        # @!attribute [rw] key
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
-        #     Required. The key to update.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. The mask to control which field of the key get updated. If the mask is not
-        #     present, all fields will be updated.
-        class UpdateKeyRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The delete key request message.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the key to be deleted, in the format
-        #     "projects/\\{project_number}/keys/\\{key_id}".
-        class DeleteKeyRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A key used to identify and configure applications (web and/or mobile) that
-        # use reCAPTCHA Enterprise.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     The resource name for the Key in the format
-        #     "projects/\\{project_number}/keys/\\{key_id}".
-        # @!attribute [rw] display_name
-        #   @return [::String]
-        #     Human-readable display name of this key. Modifiable by user.
-        # @!attribute [rw] web_settings
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::WebKeySettings]
-        #     Settings for keys that can be used by websites.
-        # @!attribute [rw] android_settings
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::AndroidKeySettings]
-        #     Settings for keys that can be used by Android apps.
-        # @!attribute [rw] ios_settings
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::IOSKeySettings]
-        #     Settings for keys that can be used by iOS apps.
-        class Key
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Settings specific to keys that can be used by websites.
-        # @!attribute [rw] enforce_allowed_domains
-        #   @return [::Boolean]
-        #     Whether allowed_domains is enforced or not.
-        # @!attribute [rw] allowed_domains
-        #   @return [::Array<::String>]
-        #     Domains or subdomains of websites allowed to use the key. All subdomains
-        #     of an allowed domain are automatically allowed. A valid domain requires a
-        #     host and must not include any path, port, query or fragment.
-        #     Examples: 'example.com' or 'subdomain.example.com'
-        # @!attribute [rw] allow_amp_traffic
-        #   @return [::Boolean]
-        #     Whether this key can be used on AMP (Accelerated Mobile Pages) websites.
-        # @!attribute [rw] integration_type
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::WebKeySettings::IntegrationType]
-        #     Required. Describes how this key is integrated with the website.
-        # @!attribute [rw] challenge_security_preference
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::WebKeySettings::ChallengeSecurityPreference]
-        #     Settings for the frequency and difficulty at which this key triggers
-        #     captcha challenges. This should only be specified for IntegrationTypes
-        #     CHECKBOX_CHALLENGE and INVISIBLE_CHALLENGE.
-        class WebKeySettings
+        # Account Defender risk assessment.
+        # @!attribute [rw] labels
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::AccountDefenderAssessment::AccountDefenderLabel>]
+        #     Labels for this request.
+        class AccountDefenderAssessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Enum that represents the integration types for web keys.
-          module IntegrationType
-            # Default type that indicates this enum hasn't been specified. This is not
-            # a valid IntegrationType, one of the other types must be specified
-            # instead.
-            INTEGRATION_TYPE_UNSPECIFIED = 0
+          # Labels returned by Account Defender for this request.
+          module AccountDefenderLabel
+            # Default unspecified type.
+            ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = 0
 
-            # Only used to produce scores. It doesn't display the "I'm not a robot"
-            # checkbox and never shows captcha challenges.
-            SCORE_ONLY = 1
+            # The request matches a known good profile for the user.
+            PROFILE_MATCH = 1
 
-            # Displays the "I'm not a robot" checkbox and may show captcha challenges
-            # after it is checked.
-            CHECKBOX_CHALLENGE = 2
+            # The request is potentially a suspicious login event and should be further
+            # verified either via multi-factor authentication or another system.
+            SUSPICIOUS_LOGIN_ACTIVITY = 2
 
-            # Doesn't display the "I'm not a robot" checkbox, but may show captcha
-            # challenges after risk analysis.
-            INVISIBLE_CHALLENGE = 3
+            # The request matched a profile that previously had suspicious account
+            # creation behavior. This could mean this is a fake account.
+            SUSPICIOUS_ACCOUNT_CREATION = 3
+
+            # The account in the request has a high number of related accounts. It does
+            # not necessarily imply that the account is bad but could require
+            # investigating.
+            RELATED_ACCOUNTS_NUMBER_HIGH = 4
           end
-
-          # Enum that represents the possible challenge frequency and difficulty
-          # configurations for a web key.
-          module ChallengeSecurityPreference
-            # Default type that indicates this enum hasn't been specified.
-            CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED = 0
-
-            # Key tends to show fewer and easier challenges.
-            USABILITY = 1
-
-            # Key tends to show balanced (in amount and difficulty) challenges.
-            BALANCED = 2
-
-            # Key tends to show more and harder challenges.
-            SECURITY = 3
-          end
-        end
-
-        # Settings specific to keys that can be used by Android apps.
-        # @!attribute [rw] allowed_package_names
-        #   @return [::Array<::String>]
-        #     Android package names of apps allowed to use the key.
-        #     Example: 'com.companyname.appname'
-        class AndroidKeySettings
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Settings specific to keys that can be used by iOS apps.
-        # @!attribute [rw] allowed_bundle_ids
-        #   @return [::Array<::String>]
-        #     iOS bundle ids of apps allowed to use the key.
-        #     Example: 'com.companyname.productname.appname'
-        class IOSKeySettings
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

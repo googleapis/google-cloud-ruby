@@ -1,5 +1,72 @@
 # Release History
 
+### 0.9.0 (2022-11-01)
+
+#### Features
+
+* Added support for PromQL queries ([#19343](https://github.com/googleapis/google-cloud-ruby/issues/19343)) 
+
+### 0.8.0 (2022-07-05)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.7.0 (2022-04-14)
+
+#### Features
+
+* Support for dashboard filters
+* Support for dashboard labels
+* Support for time series table widgets
+* Support for collapsible group widgets
+* Support for logs panel widgets
+* Support for target axis when plotting a threshold
+* Support for a second Y axis when plotting data sets
+
+### 0.6.6 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.6.5 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.6.4 / 2021-08-30
+
+#### Documentation
+
+* Fix the links to the corresponding main client library
+
+### 0.6.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.6.2 / 2021-07-21
+
+#### Documentation
+
+* Fix a few broken links in the client class documentation
+
+### 0.6.1 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.6.0 / 2021-07-08
+
+#### Features
+
+* Support for validate-only mode in create_dashboard and update_dashboard; support for alert chart widgets
+
 ### 0.5.1 / 2021-06-17
 
 #### Bug Fixes

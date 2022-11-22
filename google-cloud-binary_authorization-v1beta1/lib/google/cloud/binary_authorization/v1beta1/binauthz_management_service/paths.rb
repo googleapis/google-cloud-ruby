@@ -44,15 +44,34 @@ module Google
             ##
             # Create a fully-qualified Policy resource string.
             #
-            # The resource will be in the following format:
+            # @overload policy_path(project:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/policy`
+            #   `projects/{project}/policy`
             #
-            # @param project [String]
+            #   @param project [String]
+            #
+            # @overload policy_path(location:)
+            #   The resource will be in the following format:
+            #
+            #   `locations/{location}/policy`
+            #
+            #   @param location [String]
             #
             # @return [::String]
-            def policy_path project:
-              "projects/#{project}/policy"
+            def policy_path **args
+              resources = {
+                "project" => (proc do |project:|
+                  "projects/#{project}/policy"
+                end),
+                "location" => (proc do |location:|
+                  "locations/#{location}/policy"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##

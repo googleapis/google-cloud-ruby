@@ -82,7 +82,7 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
   it "can acknowledge" do
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id]]
+    mock.expect :acknowledge, ack_res, subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id]
     subscription.service.mocked_subscriber = mock
 
     rec_message.acknowledge!
@@ -93,10 +93,23 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
   it "can ack" do
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id]]
+    mock.expect :acknowledge, ack_res, subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id]
     subscription.service.mocked_subscriber = mock
 
     rec_message.ack!
+
+    mock.verify
+  end
+
+  it "can ack with block and returns success" do
+    ack_res = nil
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id]
+    subscription.service.mocked_subscriber = mock
+
+    rec_message.ack! do |result|
+      assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::SUCCESS, Proc.new { raise "Staus did not match!" }
+    end
 
     mock.verify
   end
@@ -105,7 +118,7 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
     new_deadline = 42
     mad_res = nil
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: new_deadline
     subscription.service.mocked_subscriber = mock
 
     rec_message.modify_ack_deadline! new_deadline
@@ -113,9 +126,23 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
     mock.verify
   end
 
+  it "can modify_ack_deadline with block and returns success" do
+    new_deadline = 42
+    mad_res = nil
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: new_deadline
+    subscription.service.mocked_subscriber = mock
+
+    rec_message.modify_ack_deadline! new_deadline do |result|
+      assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::SUCCESS, Proc.new { raise "Staus did not match!" }
+    end
+
+    mock.verify
+  end
+
   it "can reject" do
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, nil, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: 0]
+    mock.expect :modify_ack_deadline, nil, subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: 0
     subscription.service.mocked_subscriber = mock
 
     rec_message.reject!
@@ -125,7 +152,7 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
 
   it "can nack" do
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, nil, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: 0]
+    mock.expect :modify_ack_deadline, nil, subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: 0
     subscription.service.mocked_subscriber = mock
 
     rec_message.nack!
@@ -135,7 +162,7 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
 
   it "can ignore" do
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, nil, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: 0]
+    mock.expect :modify_ack_deadline, nil, subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: 0
     subscription.service.mocked_subscriber = mock
 
     rec_message.ignore!

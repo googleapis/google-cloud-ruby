@@ -28,6 +28,9 @@ module Google
         # @!attribute [rw] state_message
         #   @return [::String]
         #     A message providing more details about the current state of processing.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     A related resource to this operation.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The creation time of the operation.

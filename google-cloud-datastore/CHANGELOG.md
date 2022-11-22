@@ -1,5 +1,35 @@
 # Release History
 
+### 2.3.0 (2022-06-28)
+
+#### Features
+
+* Add support for operators "!=", "in" and "not_in" in datastore ([#18401](https://github.com/googleapis/google-cloud-ruby/issues/18401)) 
+
+### 2.2.4 / 2022-01-11
+
+#### Documentation
+
+* Update contributing docs
+
+### 2.2.3 / 2021-10-21
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+
+### 2.2.2 / 2021-09-21
+
+#### Documentation
+
+* Fix typo in Emulator guide links
+
+### 2.2.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 2.2.0 / 2021-03-10
 
 #### Features

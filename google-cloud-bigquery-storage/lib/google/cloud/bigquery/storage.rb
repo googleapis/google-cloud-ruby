@@ -78,6 +78,41 @@ module Google
         end
 
         ##
+        # Create a new client object for BigQueryWrite.
+        #
+        # By default, this returns an instance of
+        # [Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client](https://googleapis.dev/ruby/google-cloud-bigquery-storage-v1/latest/Google/Cloud/Bigquery/Storage/V1/BigQueryWrite/Client.html)
+        # for version V1 of the API.
+        # However, you can specify specify a different API version by passing it in the
+        # `version` parameter. If the BigQueryWrite service is
+        # supported by that API version, and the corresponding gem is available, the
+        # appropriate versioned client will be returned.
+        #
+        # ## About BigQueryWrite
+        #
+        # BigQuery Write API.
+        #
+        # The Write API can be used to write data to BigQuery.
+        #
+        # For supplementary information about the Write API, see:
+        # https://cloud.google.com/bigquery/docs/write-api
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1`.
+        # @return [BigQueryWrite::Client] A client object for the specified version.
+        #
+        def self.big_query_write version: :v1, &block
+          require "google/cloud/bigquery/storage/#{version.to_s.downcase}"
+
+          package_name = Google::Cloud::Bigquery::Storage
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          package_module = Google::Cloud::Bigquery::Storage.const_get package_name
+          package_module.const_get(:BigQueryWrite).const_get(:Client).new(&block)
+        end
+
+        ##
         # Configure the google-cloud-bigquery-storage library.
         #
         # The following configuration parameters are supported:

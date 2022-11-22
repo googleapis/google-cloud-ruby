@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/videointelligence/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-video_intelligence/$1

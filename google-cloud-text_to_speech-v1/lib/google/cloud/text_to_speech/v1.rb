@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/text_to_speech/v1"
       #     client = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new
       #

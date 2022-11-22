@@ -8,7 +8,7 @@ require 'google/cloud/automl/v1/image_pb'
 require 'google/cloud/automl/v1/text_pb'
 require 'google/cloud/automl/v1/translation_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/automl/v1/dataset.proto", :syntax => :proto3) do
     add_message "google.cloud.automl.v1.Dataset" do

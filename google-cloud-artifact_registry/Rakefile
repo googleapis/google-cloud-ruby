@@ -85,8 +85,8 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or ARTIFACT_REGISTRY_TEST_PROJECT=test123 ARTIFACT_REGISTRY_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/cloud/artifact_registry/v1beta2/artifact_registry/credentials"
-  ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Credentials.env_vars.each do |path|
+  require "google/cloud/artifact_registry/v1/artifact_registry/credentials"
+  ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["ARTIFACT_REGISTRY_PROJECT"] = project
@@ -157,11 +157,6 @@ end
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-artifact_registry gem does not have doctest tests."
-end
-
-task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-artifact_registry"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
 end
 
 desc "Run the CI build"

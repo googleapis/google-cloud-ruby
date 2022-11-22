@@ -3,19 +3,20 @@
 
 require 'google/protobuf'
 
+require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/appengine/v1/application_pb'
 require 'google/appengine/v1/certificate_pb'
 require 'google/appengine/v1/domain_pb'
 require 'google/appengine/v1/domain_mapping_pb'
 require 'google/appengine/v1/firewall_pb'
 require 'google/appengine/v1/instance_pb'
-require 'google/appengine/v1/version_pb'
 require 'google/appengine/v1/service_pb'
-require 'google/api/annotations_pb'
+require 'google/appengine/v1/version_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/api/client_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/appengine/v1/appengine.proto", :syntax => :proto3) do
     add_message "google.appengine.v1.GetApplicationRequest" do

@@ -899,6 +899,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Cli
     name = "hello world"
     request_id = "hello world"
     ignore_active_certificates = true
+    skip_grace_period = true
 
     delete_certificate_authority_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_certificate_authority, name
@@ -906,6 +907,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Cli
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["request_id"]
       assert_equal true, request["ignore_active_certificates"]
+      assert_equal true, request["skip_grace_period"]
       refute_nil options
     end
 
@@ -916,35 +918,35 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Cli
       end
 
       # Use hash object
-      client.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates }) do |response, operation|
+      client.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_certificate_authority name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates do |response, operation|
+      client.delete_certificate_authority name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates) do |response, operation|
+      client.delete_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates }, grpc_options) do |response, operation|
+      client.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates), grpc_options) do |response, operation|
+      client.delete_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

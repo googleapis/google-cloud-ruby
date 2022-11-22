@@ -49,13 +49,12 @@ module Google
             # See {::Google::Cloud::Dlp::V2::DlpService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all DlpService clients:
-            #
-            #     ::Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all DlpService clients
+            #   ::Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -75,42 +74,27 @@ module Google
 
                 default_config.rpcs.inspect_content.timeout = 300.0
                 default_config.rpcs.inspect_content.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.redact_image.timeout = 300.0
                 default_config.rpcs.redact_image.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.deidentify_content.timeout = 300.0
                 default_config.rpcs.deidentify_content.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.reidentify_content.timeout = 300.0
                 default_config.rpcs.reidentify_content.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_info_types.timeout = 300.0
                 default_config.rpcs.list_info_types.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_inspect_template.timeout = 300.0
@@ -119,26 +103,17 @@ module Google
 
                 default_config.rpcs.get_inspect_template.timeout = 300.0
                 default_config.rpcs.get_inspect_template.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_inspect_templates.timeout = 300.0
                 default_config.rpcs.list_inspect_templates.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_inspect_template.timeout = 300.0
                 default_config.rpcs.delete_inspect_template.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_deidentify_template.timeout = 300.0
@@ -147,26 +122,17 @@ module Google
 
                 default_config.rpcs.get_deidentify_template.timeout = 300.0
                 default_config.rpcs.get_deidentify_template.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_deidentify_templates.timeout = 300.0
                 default_config.rpcs.list_deidentify_templates.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_deidentify_template.timeout = 300.0
                 default_config.rpcs.delete_deidentify_template.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_job_trigger.timeout = 300.0
@@ -177,26 +143,17 @@ module Google
 
                 default_config.rpcs.get_job_trigger.timeout = 300.0
                 default_config.rpcs.get_job_trigger.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_job_triggers.timeout = 300.0
                 default_config.rpcs.list_job_triggers.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_job_trigger.timeout = 300.0
                 default_config.rpcs.delete_job_trigger.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.activate_job_trigger.timeout = 300.0
@@ -205,26 +162,17 @@ module Google
 
                 default_config.rpcs.list_dlp_jobs.timeout = 300.0
                 default_config.rpcs.list_dlp_jobs.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_dlp_job.timeout = 300.0
                 default_config.rpcs.get_dlp_job.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_dlp_job.timeout = 300.0
                 default_config.rpcs.delete_dlp_job.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.cancel_dlp_job.timeout = 300.0
@@ -235,26 +183,17 @@ module Google
 
                 default_config.rpcs.get_stored_info_type.timeout = 300.0
                 default_config.rpcs.get_stored_info_type.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_stored_info_types.timeout = 300.0
                 default_config.rpcs.list_stored_info_types.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_stored_info_type.timeout = 300.0
                 default_config.rpcs.delete_stored_info_type.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.hybrid_inspect_dlp_job.timeout = 300.0
@@ -290,19 +229,15 @@ module Google
             ##
             # Create a new DlpService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new DlpService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dlp::V2::DlpService::Client.new
             #
-            #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new
-            #
-            # To create a new DlpService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the DlpService client.
             # @yieldparam config [Client::Configuration]
@@ -322,14 +257,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -411,6 +345,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::InspectContentRequest.new
+            #
+            #   # Call the inspect_content method.
+            #   result = client.inspect_content request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::InspectContentResponse.
+            #   p result
+            #
             def inspect_content request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -428,16 +377,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.inspect_content.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.inspect_content.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :inspect_content, request, options: options do |response, operation|
@@ -510,6 +463,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::RedactImageRequest.new
+            #
+            #   # Call the redact_image method.
+            #   result = client.redact_image request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::RedactImageResponse.
+            #   p result
+            #
             def redact_image request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -527,16 +495,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.redact_image.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.redact_image.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :redact_image, request, options: options do |response, operation|
@@ -599,6 +571,13 @@ module Google
             #     inspect_template_name argument.
             #   @param item [::Google::Cloud::Dlp::V2::ContentItem, ::Hash]
             #     The item to de-identify. Will be treated as text.
+            #
+            #     This value must be of type
+            #     {::Google::Cloud::Dlp::V2::Table Table} if your
+            #     {::Google::Cloud::Dlp::V2::DeidentifyContentRequest#deidentify_config deidentify_config}
+            #     is a
+            #     {::Google::Cloud::Dlp::V2::RecordTransformations RecordTransformations}
+            #     object.
             #   @param inspect_template_name [::String]
             #     Template to use. Any configuration directly specified in
             #     inspect_config will override those set in the template. Singular fields
@@ -622,6 +601,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeidentifyContentRequest.new
+            #
+            #   # Call the deidentify_content method.
+            #   result = client.deidentify_content request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyContentResponse.
+            #   p result
+            #
             def deidentify_content request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -639,16 +633,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.deidentify_content.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.deidentify_content.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :deidentify_content, request, options: options do |response, operation|
@@ -737,6 +735,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ReidentifyContentRequest.new
+            #
+            #   # Call the reidentify_content method.
+            #   result = client.reidentify_content request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::ReidentifyContentResponse.
+            #   p result
+            #
             def reidentify_content request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -754,16 +767,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.reidentify_content.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.reidentify_content.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :reidentify_content, request, options: options do |response, operation|
@@ -775,7 +792,7 @@ module Google
             end
 
             ##
-            # Returns a list of the sensitive information types that the DLP API
+            # Returns a list of the sensitive information types that DLP API
             # supports. See https://cloud.google.com/dlp/docs/infotypes-reference to
             # learn more.
             #
@@ -818,6 +835,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListInfoTypesRequest.new
+            #
+            #   # Call the list_info_types method.
+            #   result = client.list_info_types request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::ListInfoTypesResponse.
+            #   p result
+            #
             def list_info_types request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -838,7 +870,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_info_types.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_info_types.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_info_types, request, options: options do |response, operation|
@@ -850,7 +884,7 @@ module Google
             end
 
             ##
-            # Creates an InspectTemplate for re-using frequently used configuration
+            # Creates an InspectTemplate for reusing frequently used configuration
             # for inspecting content, images, and storage.
             # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
             #
@@ -908,6 +942,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CreateInspectTemplateRequest.new
+            #
+            #   # Call the create_inspect_template method.
+            #   result = client.create_inspect_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::InspectTemplate.
+            #   p result
+            #
             def create_inspect_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -925,16 +974,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_inspect_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_inspect_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :create_inspect_template, request, options: options do |response, operation|
@@ -981,6 +1034,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest.new
+            #
+            #   # Call the update_inspect_template method.
+            #   result = client.update_inspect_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::InspectTemplate.
+            #   p result
+            #
             def update_inspect_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -998,16 +1066,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_inspect_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_inspect_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :update_inspect_template, request, options: options do |response, operation|
@@ -1050,6 +1122,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetInspectTemplateRequest.new
+            #
+            #   # Call the get_inspect_template method.
+            #   result = client.get_inspect_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::InspectTemplate.
+            #   p result
+            #
             def get_inspect_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1067,16 +1154,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_inspect_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_inspect_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :get_inspect_template, request, options: options do |response, operation|
@@ -1131,7 +1222,7 @@ module Google
             #     Page token to continue retrieval. Comes from previous call
             #     to `ListInspectTemplates`.
             #   @param page_size [::Integer]
-            #     Size of the page, can be limited by server. If zero server returns
+            #     Size of the page, can be limited by the server. If zero server returns
             #     a page of max size 100.
             #   @param order_by [::String]
             #     Comma separated list of fields to order by,
@@ -1143,10 +1234,10 @@ module Google
             #
             #     Supported fields are:
             #
-            #     - `create_time`: corresponds to time the template was created.
-            #     - `update_time`: corresponds to time the template was last updated.
-            #     - `name`: corresponds to template's name.
-            #     - `display_name`: corresponds to template's display name.
+            #     - `create_time`: corresponds to the time the template was created.
+            #     - `update_time`: corresponds to the time the template was last updated.
+            #     - `name`: corresponds to the template's name.
+            #     - `display_name`: corresponds to the template's display name.
             #   @param location_id [::String]
             #     Deprecated. This field has no effect.
             #
@@ -1157,6 +1248,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::InspectTemplate>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListInspectTemplatesRequest.new
+            #
+            #   # Call the list_inspect_templates method.
+            #   result = client.list_inspect_templates request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::InspectTemplate.
+            #     p response
+            #   end
             #
             def list_inspect_templates request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1175,16 +1287,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_inspect_templates.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_inspect_templates.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_inspect_templates, request, options: options do |response, operation|
@@ -1228,6 +1344,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest.new
+            #
+            #   # Call the delete_inspect_template method.
+            #   result = client.delete_inspect_template request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_inspect_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1245,16 +1376,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_inspect_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_inspect_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :delete_inspect_template, request, options: options do |response, operation|
@@ -1266,7 +1401,7 @@ module Google
             end
 
             ##
-            # Creates a DeidentifyTemplate for re-using frequently used configuration
+            # Creates a DeidentifyTemplate for reusing frequently used configuration
             # for de-identifying content, images, and storage.
             # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
             # more.
@@ -1325,6 +1460,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest.new
+            #
+            #   # Call the create_deidentify_template method.
+            #   result = client.create_deidentify_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyTemplate.
+            #   p result
+            #
             def create_deidentify_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1342,16 +1492,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_deidentify_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_deidentify_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :create_deidentify_template, request, options: options do |response, operation|
@@ -1399,6 +1553,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest.new
+            #
+            #   # Call the update_deidentify_template method.
+            #   result = client.update_deidentify_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyTemplate.
+            #   p result
+            #
             def update_deidentify_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1416,16 +1585,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_deidentify_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_deidentify_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :update_deidentify_template, request, options: options do |response, operation|
@@ -1469,6 +1642,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest.new
+            #
+            #   # Call the get_deidentify_template method.
+            #   result = client.get_deidentify_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyTemplate.
+            #   p result
+            #
             def get_deidentify_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1486,16 +1674,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_deidentify_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_deidentify_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :get_deidentify_template, request, options: options do |response, operation|
@@ -1551,7 +1743,7 @@ module Google
             #     Page token to continue retrieval. Comes from previous call
             #     to `ListDeidentifyTemplates`.
             #   @param page_size [::Integer]
-            #     Size of the page, can be limited by server. If zero server returns
+            #     Size of the page, can be limited by the server. If zero server returns
             #     a page of max size 100.
             #   @param order_by [::String]
             #     Comma separated list of fields to order by,
@@ -1563,10 +1755,10 @@ module Google
             #
             #     Supported fields are:
             #
-            #     - `create_time`: corresponds to time the template was created.
-            #     - `update_time`: corresponds to time the template was last updated.
-            #     - `name`: corresponds to template's name.
-            #     - `display_name`: corresponds to template's display name.
+            #     - `create_time`: corresponds to the time the template was created.
+            #     - `update_time`: corresponds to the time the template was last updated.
+            #     - `name`: corresponds to the template's name.
+            #     - `display_name`: corresponds to the template's display name.
             #   @param location_id [::String]
             #     Deprecated. This field has no effect.
             #
@@ -1577,6 +1769,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::DeidentifyTemplate>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest.new
+            #
+            #   # Call the list_deidentify_templates method.
+            #   result = client.list_deidentify_templates request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::DeidentifyTemplate.
+            #     p response
+            #   end
             #
             def list_deidentify_templates request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1595,16 +1808,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_deidentify_templates.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_deidentify_templates.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_deidentify_templates, request, options: options do |response, operation|
@@ -1649,6 +1866,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest.new
+            #
+            #   # Call the delete_deidentify_template method.
+            #   result = client.delete_deidentify_template request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_deidentify_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1666,16 +1898,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_deidentify_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_deidentify_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :delete_deidentify_template, request, options: options do |response, operation|
@@ -1741,6 +1977,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CreateJobTriggerRequest.new
+            #
+            #   # Call the create_job_trigger method.
+            #   result = client.create_job_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::JobTrigger.
+            #   p result
+            #
             def create_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1758,16 +2009,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :create_job_trigger, request, options: options do |response, operation|
@@ -1813,6 +2068,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::UpdateJobTriggerRequest.new
+            #
+            #   # Call the update_job_trigger method.
+            #   result = client.update_job_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::JobTrigger.
+            #   p result
+            #
             def update_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1830,16 +2100,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :update_job_trigger, request, options: options do |response, operation|
@@ -1854,9 +2128,6 @@ module Google
             # Inspect hybrid content and store findings to a trigger. The inspection
             # will be processed asynchronously. To review the findings monitor the
             # jobs within the trigger.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             #
             # @overload hybrid_inspect_job_trigger(request, options = nil)
             #   Pass arguments to `hybrid_inspect_job_trigger` via a request object, either of type
@@ -1887,6 +2158,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest.new
+            #
+            #   # Call the hybrid_inspect_job_trigger method.
+            #   result = client.hybrid_inspect_job_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::HybridInspectResponse.
+            #   p result
+            #
             def hybrid_inspect_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1904,16 +2190,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.hybrid_inspect_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.hybrid_inspect_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :hybrid_inspect_job_trigger, request, options: options do |response, operation|
@@ -1955,6 +2245,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetJobTriggerRequest.new
+            #
+            #   # Call the get_job_trigger method.
+            #   result = client.get_job_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::JobTrigger.
+            #   p result
+            #
             def get_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1972,16 +2277,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :get_job_trigger, request, options: options do |response, operation|
@@ -2006,7 +2315,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_job_triggers(parent: nil, page_token: nil, page_size: nil, order_by: nil, filter: nil, location_id: nil)
+            # @overload list_job_triggers(parent: nil, page_token: nil, page_size: nil, order_by: nil, filter: nil, type: nil, location_id: nil)
             #   Pass arguments to `list_job_triggers` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2044,11 +2353,11 @@ module Google
             #
             #     Supported fields are:
             #
-            #     - `create_time`: corresponds to time the JobTrigger was created.
-            #     - `update_time`: corresponds to time the JobTrigger was last updated.
+            #     - `create_time`: corresponds to the time the JobTrigger was created.
+            #     - `update_time`: corresponds to the time the JobTrigger was last updated.
             #     - `last_run_time`: corresponds to the last time the JobTrigger ran.
-            #     - `name`: corresponds to JobTrigger's name.
-            #     - `display_name`: corresponds to JobTrigger's display name.
+            #     - `name`: corresponds to the JobTrigger's name.
+            #     - `display_name`: corresponds to the JobTrigger's display name.
             #     - `status`: corresponds to JobTrigger's status.
             #   @param filter [::String]
             #     Allows filtering.
@@ -2059,7 +2368,7 @@ module Google
             #     * Restrictions can be combined by `AND` or `OR` logical operators. A
             #     sequence of restrictions implicitly uses `AND`.
             #     * A restriction has the form of `{field} {operator} {value}`.
-            #     * Supported fields/values for inspect jobs:
+            #     * Supported fields/values for inspect triggers:
             #         - `status` - HEALTHY|PAUSED|CANCELLED
             #         - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
             #         - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
@@ -2075,6 +2384,8 @@ module Google
             #     * last_run_time > \"2017-12-12T00:00:00+00:00\"
             #
             #     The length of this field should be no more than 500 characters.
+            #   @param type [::Google::Cloud::Dlp::V2::DlpJobType]
+            #     The type of jobs. Will use `DlpJobType.INSPECT` if not set.
             #   @param location_id [::String]
             #     Deprecated. This field has no effect.
             #
@@ -2085,6 +2396,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::JobTrigger>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListJobTriggersRequest.new
+            #
+            #   # Call the list_job_triggers method.
+            #   result = client.list_job_triggers request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::JobTrigger.
+            #     p response
+            #   end
             #
             def list_job_triggers request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2103,16 +2435,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_job_triggers.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_job_triggers.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_job_triggers, request, options: options do |response, operation|
@@ -2155,6 +2491,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeleteJobTriggerRequest.new
+            #
+            #   # Call the delete_job_trigger method.
+            #   result = client.delete_job_trigger request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2172,16 +2523,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :delete_job_trigger, request, options: options do |response, operation|
@@ -2223,6 +2578,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ActivateJobTriggerRequest.new
+            #
+            #   # Call the activate_job_trigger method.
+            #   result = client.activate_job_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DlpJob.
+            #   p result
+            #
             def activate_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2240,16 +2610,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.activate_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.activate_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :activate_job_trigger, request, options: options do |response, operation|
@@ -2302,9 +2676,10 @@ module Google
             #
             #         parent=projects/example-project/locations/europe-west3
             #   @param inspect_job [::Google::Cloud::Dlp::V2::InspectJobConfig, ::Hash]
-            #     Set to control what and how to inspect.
+            #     An inspection job scans a storage repository for InfoTypes.
             #   @param risk_job [::Google::Cloud::Dlp::V2::RiskAnalysisJobConfig, ::Hash]
-            #     Set to choose what metric to calculate.
+            #     A risk analysis job calculates re-identification risk metrics for a
+            #     BigQuery table.
             #   @param job_id [::String]
             #     The job id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
@@ -2320,6 +2695,21 @@ module Google
             # @return [::Google::Cloud::Dlp::V2::DlpJob]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CreateDlpJobRequest.new
+            #
+            #   # Call the create_dlp_job method.
+            #   result = client.create_dlp_job request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DlpJob.
+            #   p result
             #
             def create_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2338,16 +2728,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :create_dlp_job, request, options: options do |response, operation|
@@ -2407,13 +2801,13 @@ module Google
             #     * Supported fields/values for inspect jobs:
             #         - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
             #         - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
-            #         - `trigger_name` - The resource name of the trigger that created job.
-            #         - 'end_time` - Corresponds to time the job finished.
-            #         - 'start_time` - Corresponds to time the job finished.
+            #         - `trigger_name` - The name of the trigger that created the job.
+            #         - 'end_time` - Corresponds to the time the job finished.
+            #         - 'start_time` - Corresponds to the time the job finished.
             #     * Supported fields for risk analysis jobs:
             #         - `state` - RUNNING|CANCELED|FINISHED|FAILED
-            #         - 'end_time` - Corresponds to time the job finished.
-            #         - 'start_time` - Corresponds to time the job finished.
+            #         - 'end_time` - Corresponds to the time the job finished.
+            #         - 'start_time` - Corresponds to the time the job finished.
             #     * The operator must be `=` or `!=`.
             #
             #     Examples:
@@ -2440,9 +2834,9 @@ module Google
             #
             #     Supported fields are:
             #
-            #     - `create_time`: corresponds to time the job was created.
-            #     - `end_time`: corresponds to time the job ended.
-            #     - `name`: corresponds to job's name.
+            #     - `create_time`: corresponds to the time the job was created.
+            #     - `end_time`: corresponds to the time the job ended.
+            #     - `name`: corresponds to the job's name.
             #     - `state`: corresponds to `state`
             #   @param location_id [::String]
             #     Deprecated. This field has no effect.
@@ -2454,6 +2848,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::DlpJob>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListDlpJobsRequest.new
+            #
+            #   # Call the list_dlp_jobs method.
+            #   result = client.list_dlp_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::DlpJob.
+            #     p response
+            #   end
             #
             def list_dlp_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2472,16 +2887,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_dlp_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_dlp_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_dlp_jobs, request, options: options do |response, operation|
@@ -2524,6 +2943,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetDlpJobRequest.new
+            #
+            #   # Call the get_dlp_job method.
+            #   result = client.get_dlp_job request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DlpJob.
+            #   p result
+            #
             def get_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2541,16 +2975,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :get_dlp_job, request, options: options do |response, operation|
@@ -2563,7 +3001,7 @@ module Google
 
             ##
             # Deletes a long-running DlpJob. This method indicates that the client is
-            # no longer interested in the DlpJob result. The job will be cancelled if
+            # no longer interested in the DlpJob result. The job will be canceled if
             # possible.
             # See https://cloud.google.com/dlp/docs/inspecting-storage and
             # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
@@ -2594,6 +3032,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeleteDlpJobRequest.new
+            #
+            #   # Call the delete_dlp_job method.
+            #   result = client.delete_dlp_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2611,16 +3064,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :delete_dlp_job, request, options: options do |response, operation|
@@ -2664,6 +3121,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CancelDlpJobRequest.new
+            #
+            #   # Call the cancel_dlp_job method.
+            #   result = client.cancel_dlp_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def cancel_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2681,16 +3153,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.cancel_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.cancel_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :cancel_dlp_job, request, options: options do |response, operation|
@@ -2760,6 +3236,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest.new
+            #
+            #   # Call the create_stored_info_type method.
+            #   result = client.create_stored_info_type request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::StoredInfoType.
+            #   p result
+            #
             def create_stored_info_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2777,16 +3268,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_stored_info_type.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_stored_info_type.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :create_stored_info_type, request, options: options do |response, operation|
@@ -2837,6 +3332,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest.new
+            #
+            #   # Call the update_stored_info_type method.
+            #   result = client.update_stored_info_type request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::StoredInfoType.
+            #   p result
+            #
             def update_stored_info_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2854,16 +3364,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_stored_info_type.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_stored_info_type.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :update_stored_info_type, request, options: options do |response, operation|
@@ -2907,6 +3421,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest.new
+            #
+            #   # Call the get_stored_info_type method.
+            #   result = client.get_stored_info_type request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::StoredInfoType.
+            #   p result
+            #
             def get_stored_info_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2924,16 +3453,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_stored_info_type.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_stored_info_type.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :get_stored_info_type, request, options: options do |response, operation|
@@ -2975,10 +3508,6 @@ module Google
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
             #     + Projects scope, no location specified (defaults to global):<br/>
             #       `projects/`<var>PROJECT_ID</var>
-            #     + Organizations scope, location specified:<br/>
-            #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-            #     + Organizations scope, no location specified (defaults to global):<br/>
-            #       `organizations/`<var>ORG_ID</var>
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -2989,7 +3518,7 @@ module Google
             #     Page token to continue retrieval. Comes from previous call
             #     to `ListStoredInfoTypes`.
             #   @param page_size [::Integer]
-            #     Size of the page, can be limited by server. If zero server returns
+            #     Size of the page, can be limited by the server. If zero server returns
             #     a page of max size 100.
             #   @param order_by [::String]
             #     Comma separated list of fields to order by,
@@ -3001,7 +3530,7 @@ module Google
             #
             #     Supported fields are:
             #
-            #     - `create_time`: corresponds to time the most recent version of the
+            #     - `create_time`: corresponds to the time the most recent version of the
             #     resource was created.
             #     - `state`: corresponds to the state of the resource.
             #     - `name`: corresponds to resource name.
@@ -3016,6 +3545,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::StoredInfoType>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest.new
+            #
+            #   # Call the list_stored_info_types method.
+            #   result = client.list_stored_info_types request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::StoredInfoType.
+            #     p response
+            #   end
             #
             def list_stored_info_types request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -3034,16 +3584,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_stored_info_types.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_stored_info_types.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_stored_info_types, request, options: options do |response, operation|
@@ -3088,6 +3642,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest.new
+            #
+            #   # Call the delete_stored_info_type method.
+            #   result = client.delete_stored_info_type request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_stored_info_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3105,16 +3674,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_stored_info_type.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_stored_info_type.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :delete_stored_info_type, request, options: options do |response, operation|
@@ -3127,11 +3700,8 @@ module Google
 
             ##
             # Inspect hybrid content and store findings to a job.
-            # To review the findings inspect the job. Inspection will occur
+            # To review the findings, inspect the job. Inspection will occur
             # asynchronously.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             #
             # @overload hybrid_inspect_dlp_job(request, options = nil)
             #   Pass arguments to `hybrid_inspect_dlp_job` via a request object, either of type
@@ -3162,6 +3732,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest.new
+            #
+            #   # Call the hybrid_inspect_dlp_job method.
+            #   result = client.hybrid_inspect_dlp_job request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::HybridInspectResponse.
+            #   p result
+            #
             def hybrid_inspect_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3179,16 +3764,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.hybrid_inspect_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.hybrid_inspect_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :hybrid_inspect_dlp_job, request, options: options do |response, operation|
@@ -3202,9 +3791,6 @@ module Google
             ##
             # Finish a running hybrid DlpJob. Triggers the finalization steps and running
             # of any enabled actions that have not yet run.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             #
             # @overload finish_dlp_job(request, options = nil)
             #   Pass arguments to `finish_dlp_job` via a request object, either of type
@@ -3232,6 +3818,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::FinishDlpJobRequest.new
+            #
+            #   # Call the finish_dlp_job method.
+            #   result = client.finish_dlp_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def finish_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3249,16 +3850,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.finish_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.finish_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :finish_dlp_job, request, options: options do |response, operation|
@@ -3282,22 +3887,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for inspect_content
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # inspect_content to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.inspect_content.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.inspect_content.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.inspect_content.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.inspect_content.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

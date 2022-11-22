@@ -12,7 +12,7 @@ require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/iot/v1/device_manager.proto", :syntax => :proto3) do
     add_message "google.cloud.iot.v1.CreateDeviceRegistryRequest" do

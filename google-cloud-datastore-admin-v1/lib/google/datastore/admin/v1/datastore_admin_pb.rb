@@ -7,8 +7,10 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/datastore/admin/v1/index_pb'
+require 'google/datastore/admin/v1/migration_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/datastore/admin/v1/datastore_admin.proto", :syntax => :proto3) do
     add_message "google.datastore.admin.v1.CommonMetadata" do
@@ -92,6 +94,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :progress_entities, :message, 2, "google.datastore.admin.v1.Progress"
       optional :index_id, :string, 3
     end
+    add_message "google.datastore.admin.v1.DatastoreFirestoreMigrationMetadata" do
+      optional :migration_state, :enum, 1, "google.datastore.admin.v1.MigrationState"
+      optional :migration_step, :enum, 2, "google.datastore.admin.v1.MigrationStep"
+    end
     add_enum "google.datastore.admin.v1.OperationType" do
       value :OPERATION_TYPE_UNSPECIFIED, 0
       value :EXPORT_ENTITIES, 1
@@ -122,6 +128,7 @@ module Google
           ListIndexesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.ListIndexesRequest").msgclass
           ListIndexesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.ListIndexesResponse").msgclass
           IndexOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.IndexOperationMetadata").msgclass
+          DatastoreFirestoreMigrationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.DatastoreFirestoreMigrationMetadata").msgclass
           OperationType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.OperationType").enummodule
         end
       end

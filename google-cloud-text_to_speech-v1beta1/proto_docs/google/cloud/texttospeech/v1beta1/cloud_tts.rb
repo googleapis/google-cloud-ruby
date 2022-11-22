@@ -28,11 +28,10 @@ module Google
         #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
         #     If not specified, the API will return all supported voices.
         #     If specified, the ListVoices call will only return voices that can be used
-        #     to synthesize this language_code. E.g. when specifying "en-NZ", you will
-        #     get supported "en-NZ" voices; when specifying "no", you will get supported
-        #     "no-\*" (Norwegian) and "nb-\*" (Norwegian Bokmal) voices; specifying "zh"
-        #     will also get supported "cmn-\*" voices; specifying "zh-hk" will also get
-        #     supported "yue-hk" voices.
+        #     to synthesize this language_code. For example, if you specify `"en-NZ"`,
+        #     all `"en-NZ"` voices will be returned. If you specify `"no"`, both
+        #     `"no-\*"` (Norwegian) and `"nb-\*"` (Norwegian Bokmal) voices will be
+        #     returned.
         class ListVoicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -137,6 +136,11 @@ module Google
         #     name. Note that this is only a preference, not requirement; if a
         #     voice of the appropriate gender is not available, the synthesizer should
         #     substitute a voice with a different gender rather than failing the request.
+        # @!attribute [rw] custom_voice
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::CustomVoiceParams]
+        #     The configuration for a custom voice. If [CustomVoiceParams.model] is set,
+        #     the service will choose the custom voice matching the specified
+        #     configuration.
         class VoiceSelectionParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -187,6 +191,35 @@ module Google
         class AudioConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Description of the custom voice to be synthesized.
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Required. The name of the AutoML model that synthesizes the custom voice.
+        # @!attribute [rw] reported_usage
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::CustomVoiceParams::ReportedUsage]
+        #     Optional. The usage of the synthesized audio to be reported.
+        class CustomVoiceParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The usage of the synthesized audio. You must report your honest and
+          # correct usage of the service as it's regulated by contract and will cause
+          # significant difference in billing.
+          module ReportedUsage
+            # Request with reported usage unspecified will be rejected.
+            REPORTED_USAGE_UNSPECIFIED = 0
+
+            # For scenarios where the synthesized audio is not downloadable and can
+            # only be used once. For example, real-time request in IVR system.
+            REALTIME = 1
+
+            # For scenarios where the synthesized audio is downloadable and can be
+            # reused. For example, the synthesized audio is downloaded, stored in
+            # customer service system and played repeatedly.
+            OFFLINE = 2
+          end
         end
 
         # The message returned to the client by the `SynthesizeSpeech` method.

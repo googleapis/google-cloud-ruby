@@ -59,6 +59,114 @@ module Google
                 rpc :ListInstanceConfigs, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse
                 # Gets information about a particular instance configuration.
                 rpc :GetInstanceConfig, ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig
+                # Creates an instance config and begins preparing it to be used. The
+                # returned [long-running operation][google.longrunning.Operation]
+                # can be used to track the progress of preparing the new
+                # instance config. The instance config name is assigned by the caller. If the
+                # named instance config already exists, `CreateInstanceConfig` returns
+                # `ALREADY_EXISTS`.
+                #
+                # Immediately after the request returns:
+                #
+                #   * The instance config is readable via the API, with all requested
+                #     attributes. The instance config's
+                #     [reconciling][google.spanner.admin.instance.v1.InstanceConfig.reconciling]
+                #     field is set to true. Its state is `CREATING`.
+                #
+                # While the operation is pending:
+                #
+                #   * Cancelling the operation renders the instance config immediately
+                #     unreadable via the API.
+                #   * Except for deleting the creating resource, all other attempts to modify
+                #     the instance config are rejected.
+                #
+                # Upon completion of the returned operation:
+                #
+                #   * Instances can be created using the instance configuration.
+                #   * The instance config's
+                #   [reconciling][google.spanner.admin.instance.v1.InstanceConfig.reconciling]
+                #   field becomes false. Its state becomes `READY`.
+                #
+                # The returned [long-running operation][google.longrunning.Operation] will
+                # have a name of the format
+                # `<instance_config_name>/operations/<operation_id>` and can be used to track
+                # creation of the instance config. The
+                # [metadata][google.longrunning.Operation.metadata] field type is
+                # [CreateInstanceConfigMetadata][google.spanner.admin.instance.v1.CreateInstanceConfigMetadata].
+                # The [response][google.longrunning.Operation.response] field type is
+                # [InstanceConfig][google.spanner.admin.instance.v1.InstanceConfig], if
+                # successful.
+                #
+                # Authorization requires `spanner.instanceConfigs.create` permission on
+                # the resource
+                # [parent][google.spanner.admin.instance.v1.CreateInstanceConfigRequest.parent].
+                rpc :CreateInstanceConfig, ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest, ::Google::Longrunning::Operation
+                # Updates an instance config. The returned
+                # [long-running operation][google.longrunning.Operation] can be used to track
+                # the progress of updating the instance. If the named instance config does
+                # not exist, returns `NOT_FOUND`.
+                #
+                # Only user managed configurations can be updated.
+                #
+                # Immediately after the request returns:
+                #
+                #   * The instance config's
+                #     [reconciling][google.spanner.admin.instance.v1.InstanceConfig.reconciling]
+                #     field is set to true.
+                #
+                # While the operation is pending:
+                #
+                #   * Cancelling the operation sets its metadata's
+                #     [cancel_time][google.spanner.admin.instance.v1.UpdateInstanceConfigMetadata.cancel_time].
+                #     The operation is guaranteed to succeed at undoing all changes, after
+                #     which point it terminates with a `CANCELLED` status.
+                #   * All other attempts to modify the instance config are rejected.
+                #   * Reading the instance config via the API continues to give the
+                #     pre-request values.
+                #
+                # Upon completion of the returned operation:
+                #
+                #   * Creating instances using the instance configuration uses the new
+                #     values.
+                #   * The instance config's new values are readable via the API.
+                #   * The instance config's
+                #   [reconciling][google.spanner.admin.instance.v1.InstanceConfig.reconciling]
+                #   field becomes false.
+                #
+                # The returned [long-running operation][google.longrunning.Operation] will
+                # have a name of the format
+                # `<instance_config_name>/operations/<operation_id>` and can be used to track
+                # the instance config modification.  The
+                # [metadata][google.longrunning.Operation.metadata] field type is
+                # [UpdateInstanceConfigMetadata][google.spanner.admin.instance.v1.UpdateInstanceConfigMetadata].
+                # The [response][google.longrunning.Operation.response] field type is
+                # [InstanceConfig][google.spanner.admin.instance.v1.InstanceConfig], if
+                # successful.
+                #
+                # Authorization requires `spanner.instanceConfigs.update` permission on
+                # the resource [name][google.spanner.admin.instance.v1.InstanceConfig.name].
+                rpc :UpdateInstanceConfig, ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest, ::Google::Longrunning::Operation
+                # Deletes the instance config. Deletion is only allowed when no
+                # instances are using the configuration. If any instances are using
+                # the config, returns `FAILED_PRECONDITION`.
+                #
+                # Only user managed configurations can be deleted.
+                #
+                # Authorization requires `spanner.instanceConfigs.delete` permission on
+                # the resource [name][google.spanner.admin.instance.v1.InstanceConfig.name].
+                rpc :DeleteInstanceConfig, ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest, ::Google::Protobuf::Empty
+                # Lists the user-managed instance config [long-running
+                # operations][google.longrunning.Operation] in the given project. An instance
+                # config operation has a name of the form
+                # `projects/<project>/instanceConfigs/<instance_config>/operations/<operation>`.
+                # The long-running operation
+                # [metadata][google.longrunning.Operation.metadata] field type
+                # `metadata.type_url` describes the type of the metadata. Operations returned
+                # include those that have completed/failed/canceled within the last 7 days,
+                # and pending operations. Operations returned are ordered by
+                # `operation.metadata.value.start_time` in descending order starting
+                # from the most recently started operation.
+                rpc :ListInstanceConfigOperations, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsResponse
                 # Lists all instances in the given project.
                 rpc :ListInstances, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse
                 # Gets information about a particular instance.
@@ -112,9 +220,9 @@ module Google
                 # Until completion of the returned operation:
                 #
                 #   * Cancelling the operation sets its metadata's
-                #     [cancel_time][google.spanner.admin.instance.v1.UpdateInstanceMetadata.cancel_time], and begins
-                #     restoring resources to their pre-request values. The operation
-                #     is guaranteed to succeed at undoing all resource changes,
+                #     [cancel_time][google.spanner.admin.instance.v1.UpdateInstanceMetadata.cancel_time],
+                #     and begins restoring resources to their pre-request values. The
+                #     operation is guaranteed to succeed at undoing all resource changes,
                 #     after which point it terminates with a `CANCELLED` status.
                 #   * All other attempts to modify the instance are rejected.
                 #   * Reading the instance via the API continues to give the pre-request
@@ -137,7 +245,7 @@ module Google
                 # [Instance][google.spanner.admin.instance.v1.Instance], if successful.
                 #
                 # Authorization requires `spanner.instances.update` permission on
-                # resource [name][google.spanner.admin.instance.v1.Instance.name].
+                # the resource [name][google.spanner.admin.instance.v1.Instance.name].
                 rpc :UpdateInstance, ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest, ::Google::Longrunning::Operation
                 # Deletes an instance.
                 #

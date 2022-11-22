@@ -38,10 +38,10 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   instance = bigtable.instance("my-instance")
+      #   instance = bigtable.instance "my-instance"
       #
       #   routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
-      #     "my-instance-cluster-1",
+      #     "my-cluster",
       #     allow_transactional_writes: true
       #   )
       #
@@ -57,7 +57,7 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   instance = bigtable.instance("my-instance")
+      #   instance = bigtable.instance "my-instance"
       #
       #   routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
       #
@@ -85,7 +85,7 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   instance = bigtable.instance("my-instance")
+      #   instance = bigtable.instance "my-instance"
       #
       #   routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
       #
@@ -116,10 +116,10 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   instance = bigtable.instance("my-instance")
+      #   instance = bigtable.instance "my-instance"
       #
       #   routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
-      #     "my-instance-cluster-1",
+      #     "my-cluster",
       #     allow_transactional_writes: true
       #   )
       #

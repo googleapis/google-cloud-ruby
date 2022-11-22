@@ -49,8 +49,8 @@ module Google
         # Create a new client object for BudgetService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client](https://googleapis.dev/ruby/google-cloud-billing-budgets-v1beta1/latest/Google/Cloud/Billing/Budgets/V1beta1/BudgetService/Client.html)
-        # for version V1beta1 of the API.
+        # [Google::Cloud::Billing::Budgets::V1::BudgetService::Client](https://googleapis.dev/ruby/google-cloud-billing-budgets-v1/latest/Google/Cloud/Billing/Budgets/V1/BudgetService/Client.html)
+        # for version V1 of the API.
         # However, you can specify specify a different API version by passing it in the
         # `version` parameter. If the BudgetService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -62,10 +62,10 @@ module Google
         # budget plan and rules to execute as we track spend against that plan.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta1`.
+        #   Defaults to `:v1`.
         # @return [BudgetService::Client] A client object for the specified version.
         #
-        def self.budget_service version: :v1beta1, &block
+        def self.budget_service version: :v1, &block
           require "google/cloud/billing/budgets/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Billing::Budgets

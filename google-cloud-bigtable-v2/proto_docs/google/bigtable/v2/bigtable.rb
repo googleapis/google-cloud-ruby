@@ -29,22 +29,42 @@ module Google
         #     `projects/<project>/instances/<instance>/tables/<table>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
-        #     This value specifies routing for replication. If not specified, the
-        #     "default" application profile will be used.
+        #     This value specifies routing for replication. This API only accepts the
+        #     empty value of app_profile_id.
         # @!attribute [rw] rows
         #   @return [::Google::Cloud::Bigtable::V2::RowSet]
-        #     The row keys and/or ranges to read. If not specified, reads from all rows.
+        #     The row keys and/or ranges to read sequentially. If not specified, reads
+        #     from all rows.
         # @!attribute [rw] filter
         #   @return [::Google::Cloud::Bigtable::V2::RowFilter]
         #     The filter to apply to the contents of the specified row(s). If unset,
         #     reads the entirety of each row.
         # @!attribute [rw] rows_limit
         #   @return [::Integer]
-        #     The read will terminate after committing to N rows' worth of results. The
+        #     The read will stop after committing to N rows' worth of results. The
         #     default (zero) is to return all results.
+        # @!attribute [rw] request_stats_view
+        #   @return [::Google::Cloud::Bigtable::V2::ReadRowsRequest::RequestStatsView]
+        #     The view into RequestStats, as described above.
         class ReadRowsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The desired view into RequestStats that should be returned in the response.
+          #
+          # See also: RequestStats message.
+          module RequestStatsView
+            # The default / unset value. The API will default to the NONE option below.
+            REQUEST_STATS_VIEW_UNSPECIFIED = 0
+
+            # Do not include any RequestStats in the response. This will leave the
+            # RequestStats embedded message unset in the response.
+            REQUEST_STATS_NONE = 1
+
+            # Include the full set of available RequestStats in the response,
+            # applicable to this read.
+            REQUEST_STATS_FULL = 2
+          end
         end
 
         # Response message for Bigtable.ReadRows.
@@ -60,6 +80,27 @@ module Google
         #     This is primarily useful for cases where the server has read a
         #     lot of data that was filtered out since the last committed row
         #     key, allowing the client to skip that work on a retry.
+        # @!attribute [rw] request_stats
+        #   @return [::Google::Cloud::Bigtable::V2::RequestStats]
+        #     If requested, provide enhanced query performance statistics. The semantics
+        #     dictate:
+        #       * request_stats is empty on every (streamed) response, except
+        #       * request_stats has non-empty information after all chunks have been
+        #         streamed, where the ReadRowsResponse message only contains
+        #         request_stats.
+        #           * For example, if a read request would have returned an empty
+        #             response instead a single ReadRowsResponse is streamed with empty
+        #             chunks and request_stats filled.
+        #
+        #     Visually, response messages will stream as follows:
+        #        ... -> \\{chunks: [...]} -> \\{chunks: [], request_stats: \\{...}}
+        #       \______________________/  \________________________________/
+        #           Primary response         Trailer of RequestStats info
+        #
+        #     Or if the read did not return any values:
+        #       \\{chunks: [], request_stats: \\{...}}
+        #       \________________________________/
+        #          Trailer of RequestStats info
         class ReadRowsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -299,6 +340,26 @@ module Google
         #     Whether or not the request's `predicate_filter` yielded any results for
         #     the specified row.
         class CheckAndMutateRowResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for client connection keep-alive and warming.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The unique name of the instance to check permissions for as well as
+        #     respond. Values are of the form `projects/<project>/instances/<instance>`.
+        # @!attribute [rw] app_profile_id
+        #   @return [::String]
+        #     This value specifies routing for replication. If not specified, the
+        #     "default" application profile will be used.
+        class PingAndWarmRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for Bigtable.PingAndWarm connection keepalive and warming.
+        class PingAndWarmResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

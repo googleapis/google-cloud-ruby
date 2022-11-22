@@ -485,6 +485,59 @@ module Google
               "projects/#{project}"
             end
 
+            ##
+            # Create a fully-qualified Settings resource string.
+            #
+            # @overload settings_path(project:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/settings`
+            #
+            #   @param project [String]
+            #
+            # @overload settings_path(organization:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/settings`
+            #
+            #   @param organization [String]
+            #
+            # @overload settings_path(folder:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/settings`
+            #
+            #   @param folder [String]
+            #
+            # @overload settings_path(billing_account:)
+            #   The resource will be in the following format:
+            #
+            #   `billingAccounts/{billing_account}/settings`
+            #
+            #   @param billing_account [String]
+            #
+            # @return [::String]
+            def settings_path **args
+              resources = {
+                "project" => (proc do |project:|
+                  "projects/#{project}/settings"
+                end),
+                "organization" => (proc do |organization:|
+                  "organizations/#{organization}/settings"
+                end),
+                "folder" => (proc do |folder:|
+                  "folders/#{folder}/settings"
+                end),
+                "billing_account" => (proc do |billing_account:|
+                  "billingAccounts/#{billing_account}/settings"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
             extend self
           end
         end

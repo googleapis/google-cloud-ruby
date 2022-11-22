@@ -19,31 +19,6 @@
               "methods": [
                 "annotate_assessment"
               ]
-            },
-            "CreateKey": {
-              "methods": [
-                "create_key"
-              ]
-            },
-            "ListKeys": {
-              "methods": [
-                "list_keys"
-              ]
-            },
-            "GetKey": {
-              "methods": [
-                "get_key"
-              ]
-            },
-            "UpdateKey": {
-              "methods": [
-                "update_key"
-              ]
-            },
-            "DeleteKey": {
-              "methods": [
-                "delete_key"
-              ]
             }
           }
         }

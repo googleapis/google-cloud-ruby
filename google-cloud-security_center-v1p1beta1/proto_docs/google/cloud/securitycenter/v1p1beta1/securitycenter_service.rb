@@ -1007,7 +1007,7 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     The FieldMask to use when updating the settings resource.
         #
-        #      If empty all mutable fields will be updated.
+        #     If empty all mutable fields will be updated.
         class UpdateOrganizationSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

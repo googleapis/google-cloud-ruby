@@ -1,0 +1,26 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-language.gemspec",
+    "lib/google-cloud-language.rb",
+    "lib/google/cloud/language.rb",
+    "lib/google/cloud/language/version.rb",
+    "test/google/cloud/language/client_test.rb",
+    "test/google/cloud/language/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "acceptance/google/cloud/language/v1/language_service_smoke_test.rb"
+  ]
+}

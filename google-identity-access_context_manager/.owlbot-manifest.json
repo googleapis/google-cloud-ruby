@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-identity-access_context_manager.gemspec",
+    "lib/google-identity-access_context_manager.rb",
+    "lib/google/identity/access_context_manager.rb",
+    "lib/google/identity/access_context_manager/version.rb",
+    "test/google/identity/access_context_manager/client_test.rb",
+    "test/google/identity/access_context_manager/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

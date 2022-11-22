@@ -1,5 +1,93 @@
 # Release History
 
+### 0.13.0 (2022-11-08)
+
+#### Features
+
+* support enabling private nodes 
+* support enabling private nodes 
+* support GatewayAPIConfig 
+
+### 0.12.0 (2022-10-18)
+
+#### Features
+
+* support workload vulnerability mode 
+
+### 0.11.0 (2022-09-16)
+
+#### Features
+
+* Support for high throughput logging config ([#19177](https://github.com/googleapis/google-cloud-ruby/issues/19177)) 
+
+### 0.10.1 (2022-08-04)
+
+#### Documentation
+
+* BinaryAuthorization.enabled field is marked as deprecated ([#18956](https://github.com/googleapis/google-cloud-ruby/issues/18956)) 
+
+### 0.10.0 (2022-07-02)
+
+#### Features
+
+* Support for ignoring the pod disruption budget when rolling back node pool upgrades 
+* Support for the complete_node_pool_upgrade call ([#18458](https://github.com/googleapis/google-cloud-ruby/issues/18458)) 
+* Support network config and conventional nodes during node pool updates 
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.9.0 / 2022-02-16
+
+#### Features
+
+* Support for additional node configs, including GCFS, Spot VMs, and placement policy
+
+### 0.8.3 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.8.2 / 2021-12-07
+
+#### Documentation
+
+* Formatting fixes in the reference docs
+
+### 0.8.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.8.0 / 2021-09-21
+
+#### Features
+
+* Support for updating tags, taints, labels, and gvnic on node pools
+
+### 0.7.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.7.0 / 2021-07-12
+
+#### Features
+
+* Support for updating a cluster's authenticator_groups_config
+  * changes without context
+  * chore(ruby): Use latest microgenerator for Bazel GAPIC generation
+  * chore(ruby): Use latest microgenerator for Bazel GAPIC generation
+  * chore(ruby): Switch Bazel jobs to use the Ruby gapic-generator 0.9.0
+  * feat: add new FieldBehavior NON_EMPTY_DEFAULT
+  * feat: allow updating security group on existing clusters
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.6.0 / 2021-06-17
 
 #### Features

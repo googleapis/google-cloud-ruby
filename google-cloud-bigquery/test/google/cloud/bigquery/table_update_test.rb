@@ -34,7 +34,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table_hash = random_table_hash dataset_id, table_id, new_table_name, description
     request_table_gapi = Google::Apis::BigqueryV2::Table.new friendly_name: "My Updated Table", etag: etag
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
 
     table.service.mocked_service = mock
@@ -69,7 +69,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table_hash = random_table_hash dataset_id, table_id, table_name, new_description
     request_table_gapi = Google::Apis::BigqueryV2::Table.new description: "This is my updated table", etag: etag
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -105,7 +105,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     partitioning = Google::Apis::BigqueryV2::TimePartitioning.new type: type
     request_table_gapi = Google::Apis::BigqueryV2::Table.new time_partitioning: partitioning, etag: etag
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -140,7 +140,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     partitioning = Google::Apis::BigqueryV2::TimePartitioning.new field: field
     request_table_gapi = Google::Apis::BigqueryV2::Table.new time_partitioning: partitioning, etag: etag
     mock.expect :patch_table, return_table(table_hash),
-                [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+                [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -177,7 +177,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     partitioning = Google::Apis::BigqueryV2::TimePartitioning.new expiration_ms: expiration_ms
     request_table_gapi = Google::Apis::BigqueryV2::Table.new time_partitioning: partitioning, etag: etag
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -211,7 +211,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     partitioning = Google::Apis::BigqueryV2::TimePartitioning.new expiration_ms: nil
     request_table_gapi = Google::Apis::BigqueryV2::Table.new time_partitioning: partitioning, etag: etag
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -228,7 +228,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table_hash["requirePartitionFilter"] = false
     request_table_gapi = Google::Apis::BigqueryV2::Table.new require_partition_filter: false, etag: etag
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -264,7 +264,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     clustering = Google::Apis::BigqueryV2::Clustering.new fields: clustering_fields
     request_table_gapi = Google::Apis::BigqueryV2::Table.new clustering: clustering, etag: etag
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -295,7 +295,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     clustering = Google::Apis::BigqueryV2::Clustering.new fields: new_clustering_fields
     request_table_gapi = Google::Apis::BigqueryV2::Table.new clustering: clustering, etag: etag
     mock.expect :patch_table, return_table(table_hash_clustering_2),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash_clustering_2), [project, dataset_id, table_id]
     table_clustering.service.mocked_service = mock
 
@@ -322,7 +322,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
 
     request_table_gapi = Google::Apis::BigqueryV2::Table.new clustering: nil, etag: etag
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table_clustering.service.mocked_service = mock
 
@@ -344,7 +344,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table_hash["labels"] = new_labels
     request_table_gapi = Google::Apis::BigqueryV2::Table.new labels: new_labels, etag: etag
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -365,7 +365,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table_hash["encryptionConfiguration"] = { kmsKeyName: kms_key }
     request_table_gapi = Google::Apis::BigqueryV2::Table.new encryption_configuration: Google::Apis::BigqueryV2::EncryptionConfiguration.new(kms_key_name: kms_key), etag: etag
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 

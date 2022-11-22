@@ -8,6 +8,7 @@ require 'google/logging/type/log_severity_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/api/servicecontrol/v1/log_entry.proto", :syntax => :proto3) do
     add_message "google.api.servicecontrol.v1.LogEntry" do

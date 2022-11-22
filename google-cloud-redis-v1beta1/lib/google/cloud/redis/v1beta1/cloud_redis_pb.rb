@@ -8,10 +8,18 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/type/dayofweek_pb'
+require 'google/type/timeofday_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/redis/v1beta1/cloud_redis.proto", :syntax => :proto3) do
+    add_message "google.cloud.redis.v1beta1.NodeInfo" do
+      optional :id, :string, 1
+      optional :zone, :string, 2
+    end
     add_message "google.cloud.redis.v1beta1.Instance" do
       optional :name, :string, 1
       optional :display_name, :string, 2
@@ -20,6 +28,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :alternative_location_id, :string, 5
       optional :redis_version, :string, 7
       optional :reserved_ip_range, :string, 9
+      optional :secondary_ip_range, :string, 30
       optional :host, :string, 10
       optional :port, :int32, 11
       optional :current_location_id, :string, 12
@@ -32,6 +41,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :authorized_network, :string, 20
       optional :persistence_iam_identity, :string, 21
       optional :connect_mode, :enum, 22, "google.cloud.redis.v1beta1.Instance.ConnectMode"
+      optional :auth_enabled, :bool, 23
+      repeated :server_ca_certs, :message, 25, "google.cloud.redis.v1beta1.TlsCertificate"
+      optional :transit_encryption_mode, :enum, 26, "google.cloud.redis.v1beta1.Instance.TransitEncryptionMode"
+      optional :maintenance_policy, :message, 27, "google.cloud.redis.v1beta1.MaintenancePolicy"
+      optional :maintenance_schedule, :message, 28, "google.cloud.redis.v1beta1.MaintenanceSchedule"
+      optional :replica_count, :int32, 31
+      repeated :nodes, :message, 32, "google.cloud.redis.v1beta1.NodeInfo"
+      optional :read_endpoint, :string, 33
+      optional :read_endpoint_port, :int32, 34
+      optional :read_replicas_mode, :enum, 35, "google.cloud.redis.v1beta1.Instance.ReadReplicasMode"
+      optional :persistence_config, :message, 37, "google.cloud.redis.v1beta1.PersistenceConfig"
     end
     add_enum "google.cloud.redis.v1beta1.Instance.State" do
       value :STATE_UNSPECIFIED, 0
@@ -54,6 +74,62 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DIRECT_PEERING, 1
       value :PRIVATE_SERVICE_ACCESS, 2
     end
+    add_enum "google.cloud.redis.v1beta1.Instance.TransitEncryptionMode" do
+      value :TRANSIT_ENCRYPTION_MODE_UNSPECIFIED, 0
+      value :SERVER_AUTHENTICATION, 1
+      value :DISABLED, 2
+    end
+    add_enum "google.cloud.redis.v1beta1.Instance.ReadReplicasMode" do
+      value :READ_REPLICAS_MODE_UNSPECIFIED, 0
+      value :READ_REPLICAS_DISABLED, 1
+      value :READ_REPLICAS_ENABLED, 2
+    end
+    add_message "google.cloud.redis.v1beta1.PersistenceConfig" do
+      optional :persistence_mode, :enum, 1, "google.cloud.redis.v1beta1.PersistenceConfig.PersistenceMode"
+      optional :rdb_snapshot_period, :enum, 2, "google.cloud.redis.v1beta1.PersistenceConfig.SnapshotPeriod"
+      optional :rdb_next_snapshot_time, :message, 4, "google.protobuf.Timestamp"
+      optional :rdb_snapshot_start_time, :message, 5, "google.protobuf.Timestamp"
+    end
+    add_enum "google.cloud.redis.v1beta1.PersistenceConfig.PersistenceMode" do
+      value :PERSISTENCE_MODE_UNSPECIFIED, 0
+      value :DISABLED, 1
+      value :RDB, 2
+    end
+    add_enum "google.cloud.redis.v1beta1.PersistenceConfig.SnapshotPeriod" do
+      value :SNAPSHOT_PERIOD_UNSPECIFIED, 0
+      value :ONE_HOUR, 3
+      value :SIX_HOURS, 4
+      value :TWELVE_HOURS, 5
+      value :TWENTY_FOUR_HOURS, 6
+    end
+    add_message "google.cloud.redis.v1beta1.RescheduleMaintenanceRequest" do
+      optional :name, :string, 1
+      optional :reschedule_type, :enum, 2, "google.cloud.redis.v1beta1.RescheduleMaintenanceRequest.RescheduleType"
+      optional :schedule_time, :message, 3, "google.protobuf.Timestamp"
+    end
+    add_enum "google.cloud.redis.v1beta1.RescheduleMaintenanceRequest.RescheduleType" do
+      value :RESCHEDULE_TYPE_UNSPECIFIED, 0
+      value :IMMEDIATE, 1
+      value :NEXT_AVAILABLE_WINDOW, 2
+      value :SPECIFIC_TIME, 3
+    end
+    add_message "google.cloud.redis.v1beta1.MaintenancePolicy" do
+      optional :create_time, :message, 1, "google.protobuf.Timestamp"
+      optional :update_time, :message, 2, "google.protobuf.Timestamp"
+      optional :description, :string, 3
+      repeated :weekly_maintenance_window, :message, 4, "google.cloud.redis.v1beta1.WeeklyMaintenanceWindow"
+    end
+    add_message "google.cloud.redis.v1beta1.WeeklyMaintenanceWindow" do
+      optional :day, :enum, 1, "google.type.DayOfWeek"
+      optional :start_time, :message, 2, "google.type.TimeOfDay"
+      optional :duration, :message, 3, "google.protobuf.Duration"
+    end
+    add_message "google.cloud.redis.v1beta1.MaintenanceSchedule" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      optional :can_reschedule, :bool, 3
+      optional :schedule_deadline_time, :message, 5, "google.protobuf.Timestamp"
+    end
     add_message "google.cloud.redis.v1beta1.ListInstancesRequest" do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
@@ -66,6 +142,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.redis.v1beta1.GetInstanceRequest" do
       optional :name, :string, 1
+    end
+    add_message "google.cloud.redis.v1beta1.GetInstanceAuthStringRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.redis.v1beta1.InstanceAuthString" do
+      optional :auth_string, :string, 1
     end
     add_message "google.cloud.redis.v1beta1.CreateInstanceRequest" do
       optional :parent, :string, 1
@@ -121,6 +203,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.redis.v1beta1.ZoneMetadata" do
     end
+    add_message "google.cloud.redis.v1beta1.TlsCertificate" do
+      optional :serial_number, :string, 1
+      optional :cert, :string, 2
+      optional :create_time, :message, 3, "google.protobuf.Timestamp"
+      optional :expire_time, :message, 4, "google.protobuf.Timestamp"
+      optional :sha1_fingerprint, :string, 5
+    end
   end
 end
 
@@ -128,13 +217,26 @@ module Google
   module Cloud
     module Redis
       module V1beta1
+        NodeInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.NodeInfo").msgclass
         Instance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.Instance").msgclass
         Instance::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.Instance.State").enummodule
         Instance::Tier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.Instance.Tier").enummodule
         Instance::ConnectMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.Instance.ConnectMode").enummodule
+        Instance::TransitEncryptionMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.Instance.TransitEncryptionMode").enummodule
+        Instance::ReadReplicasMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.Instance.ReadReplicasMode").enummodule
+        PersistenceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.PersistenceConfig").msgclass
+        PersistenceConfig::PersistenceMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.PersistenceConfig.PersistenceMode").enummodule
+        PersistenceConfig::SnapshotPeriod = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.PersistenceConfig.SnapshotPeriod").enummodule
+        RescheduleMaintenanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.RescheduleMaintenanceRequest").msgclass
+        RescheduleMaintenanceRequest::RescheduleType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.RescheduleMaintenanceRequest.RescheduleType").enummodule
+        MaintenancePolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.MaintenancePolicy").msgclass
+        WeeklyMaintenanceWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.WeeklyMaintenanceWindow").msgclass
+        MaintenanceSchedule = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.MaintenanceSchedule").msgclass
         ListInstancesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.ListInstancesRequest").msgclass
         ListInstancesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.ListInstancesResponse").msgclass
         GetInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.GetInstanceRequest").msgclass
+        GetInstanceAuthStringRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.GetInstanceAuthStringRequest").msgclass
+        InstanceAuthString = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.InstanceAuthString").msgclass
         CreateInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.CreateInstanceRequest").msgclass
         UpdateInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.UpdateInstanceRequest").msgclass
         UpgradeInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.UpgradeInstanceRequest").msgclass
@@ -149,6 +251,7 @@ module Google
         FailoverInstanceRequest::DataProtectionMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.FailoverInstanceRequest.DataProtectionMode").enummodule
         LocationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.LocationMetadata").msgclass
         ZoneMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.ZoneMetadata").msgclass
+        TlsCertificate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.TlsCertificate").msgclass
       end
     end
   end

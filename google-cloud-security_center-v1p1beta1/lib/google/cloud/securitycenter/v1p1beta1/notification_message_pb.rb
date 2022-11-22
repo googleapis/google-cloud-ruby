@@ -5,7 +5,7 @@ require 'google/protobuf'
 
 require 'google/cloud/securitycenter/v1p1beta1/finding_pb'
 require 'google/cloud/securitycenter/v1p1beta1/resource_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/securitycenter/v1p1beta1/notification_message.proto", :syntax => :proto3) do
     add_message "google.cloud.securitycenter.v1p1beta1.NotificationMessage" do

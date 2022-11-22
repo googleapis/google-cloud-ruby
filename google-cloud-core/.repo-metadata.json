@@ -2,6 +2,7 @@
     "name": "core",
     "language": "ruby",
     "distribution_name": "google-cloud-core",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-core/latest",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-core/latest",
+    "release_level": "stable",
     "library_type": "CORE"
 }

@@ -21,7 +21,7 @@ module Google
   module Cloud
     module DataCatalog
       module V1
-        # Represents a schema (e.g. BigQuery, GoogleSQL, Avro schema).
+        # Represents a schema, for example, a BigQuery, GoogleSQL, or Avro schema.
         # @!attribute [rw] columns
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::ColumnSchema>]
         #     The unified GoogleSQL-like schema of columns.
@@ -33,7 +33,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Representation of a column within a schema. Columns could be nested inside
+        # A column within a schema. Columns can be nested inside
         # other columns.
         # @!attribute [rw] column
         #   @return [::String]
@@ -54,7 +54,7 @@ module Google
         #     bytes.
         # @!attribute [rw] mode
         #   @return [::String]
-        #     Optional. A column's mode indicates if values in this column are required,
+        #     Optional. A column's mode indicates whether values in this column are required,
         #     nullable, or repeated.
         #
         #     Only `NULLABLE`, `REQUIRED`, and `REPEATED` values are supported.

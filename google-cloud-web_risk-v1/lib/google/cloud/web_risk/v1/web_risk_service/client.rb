@@ -42,13 +42,12 @@ module Google
             # See {::Google::Cloud::WebRisk::V1::WebRiskService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all WebRiskService clients:
-            #
-            #     ::Google::Cloud::WebRisk::V1::WebRiskService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all WebRiskService clients
+            #   ::Google::Cloud::WebRisk::V1::WebRiskService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -68,29 +67,20 @@ module Google
 
                 default_config.rpcs.compute_threat_list_diff.timeout = 600.0
                 default_config.rpcs.compute_threat_list_diff.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_uris.timeout = 600.0
                 default_config.rpcs.search_uris.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_hashes.timeout = 600.0
                 default_config.rpcs.search_hashes.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.create_submission.timeout = 60.0
+                default_config.rpcs.create_submission.timeout = 600.0
 
                 default_config
               end
@@ -121,19 +111,15 @@ module Google
             ##
             # Create a new WebRiskService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new WebRiskService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new
             #
-            #     client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new
-            #
-            # To create a new WebRiskService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the WebRiskService client.
             # @yieldparam config [Client::Configuration]
@@ -153,14 +139,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -201,7 +186,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param threat_type [::Google::Cloud::WebRisk::V1::ThreatType]
-            #     Required. The threat list to update. Only a single ThreatType should be specified.
+            #     Required. The threat list to update. Only a single ThreatType should be specified
+            #     per request. If you want to handle multiple ThreatTypes, you must make one
+            #     request per ThreatType.
             #   @param version_token [::String]
             #     The current version token of the client for the requested list (the
             #     client version that was received from the last successful diff).
@@ -218,6 +205,21 @@ module Google
             # @return [::Google::Cloud::WebRisk::V1::ComputeThreatListDiffResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/web_risk/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebRisk::V1::WebRiskService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest.new
+            #
+            #   # Call the compute_threat_list_diff method.
+            #   result = client.compute_threat_list_diff request
+            #
+            #   # The returned object is of type Google::Cloud::WebRisk::V1::ComputeThreatListDiffResponse.
+            #   p result
             #
             def compute_threat_list_diff request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -239,7 +241,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.compute_threat_list_diff.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.compute_threat_list_diff.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_risk_service_stub.call_rpc :compute_threat_list_diff, request, options: options do |response, operation|
@@ -285,6 +289,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_risk/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebRisk::V1::WebRiskService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebRisk::V1::SearchUrisRequest.new
+            #
+            #   # Call the search_uris method.
+            #   result = client.search_uris request
+            #
+            #   # The returned object is of type Google::Cloud::WebRisk::V1::SearchUrisResponse.
+            #   p result
+            #
             def search_uris request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -305,7 +324,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.search_uris.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_uris.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_risk_service_stub.call_rpc :search_uris, request, options: options do |response, operation|
@@ -341,6 +362,8 @@ module Google
             #   @param hash_prefix [::String]
             #     A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
             #     hash. For JSON requests, this field is base64-encoded.
+            #     Note that if this parameter is provided by a URI, it must be encoded using
+            #     the web safe base64 variant (RFC 4648).
             #   @param threat_types [::Array<::Google::Cloud::WebRisk::V1::ThreatType>]
             #     Required. The ThreatLists to search in. Multiple ThreatLists may be specified.
             #
@@ -351,6 +374,21 @@ module Google
             # @return [::Google::Cloud::WebRisk::V1::SearchHashesResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/web_risk/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebRisk::V1::WebRiskService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebRisk::V1::SearchHashesRequest.new
+            #
+            #   # Call the search_hashes method.
+            #   result = client.search_hashes request
+            #
+            #   # The returned object is of type Google::Cloud::WebRisk::V1::SearchHashesResponse.
+            #   p result
             #
             def search_hashes request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -372,7 +410,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.search_hashes.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_hashes.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_risk_service_stub.call_rpc :search_hashes, request, options: options do |response, operation|
@@ -389,7 +429,8 @@ module Google
             # content, the site will be added to the [Google's Social Engineering
             # lists](https://support.google.com/webmasters/answer/6350487/) in order to
             # protect users that could get exposed to this threat in the future. Only
-            # projects with CREATE_SUBMISSION_USERS visibility can use this method.
+            # allowlisted projects can use this method during Early Access. Please reach
+            # out to Sales or your customer engineer to obtain access.
             #
             # @overload create_submission(request, options = nil)
             #   Pass arguments to `create_submission` via a request object, either of type
@@ -420,6 +461,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_risk/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebRisk::V1::WebRiskService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebRisk::V1::CreateSubmissionRequest.new
+            #
+            #   # Call the create_submission method.
+            #   result = client.create_submission request
+            #
+            #   # The returned object is of type Google::Cloud::WebRisk::V1::Submission.
+            #   p result
+            #
             def create_submission request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -437,16 +493,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebRisk::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_submission.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_submission.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_risk_service_stub.call_rpc :create_submission, request, options: options do |response, operation|
@@ -470,22 +530,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for compute_threat_list_diff
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # compute_threat_list_diff to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::WebRisk::V1::WebRiskService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.compute_threat_list_diff.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::WebRisk::V1::WebRiskService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.compute_threat_list_diff.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.compute_threat_list_diff.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.compute_threat_list_diff.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

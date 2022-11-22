@@ -15,13 +15,10 @@
 require "rake/testtask"
 
 Rake::TestTask.new "test" do |t|
-  project ||= ENV["FIRESTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
-  keyfile ||= ENV["FIRESTORE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
-  if keyfile
-    keyfile = File.read keyfile
-  else
-    keyfile ||= ENV["FIRESTORE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
-  end
+  project = ENV["FIRESTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = ENV["FIRESTORE_TEST_KEYFILE"] || ENV["FIRESTORE_TEST_KEYFILE_JSON"] ||
+            ENV["GCLOUD_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  keyfile = File.read keyfile if keyfile && !keyfile.strip.start_with?("{")
   if project.nil? || keyfile.nil?
     raise "You must provide a project and keyfile. " \
           "e.g. FIRESTORE_TEST_PROJECT=test123 FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json rake test"

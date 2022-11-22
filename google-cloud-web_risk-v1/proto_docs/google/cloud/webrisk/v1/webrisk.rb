@@ -24,7 +24,9 @@ module Google
         # Describes an API diff request.
         # @!attribute [rw] threat_type
         #   @return [::Google::Cloud::WebRisk::V1::ThreatType]
-        #     Required. The threat list to update. Only a single ThreatType should be specified.
+        #     Required. The threat list to update. Only a single ThreatType should be specified
+        #     per request. If you want to handle multiple ThreatTypes, you must make one
+        #     request per ThreatType.
         # @!attribute [rw] version_token
         #   @return [::String]
         #     The current version token of the client for the requested list (the
@@ -130,7 +132,7 @@ module Google
 
         # @!attribute [rw] threat
         #   @return [::Google::Cloud::WebRisk::V1::SearchUrisResponse::ThreatUri]
-        #     The threat list matches. This may be empty if the URI is on no list.
+        #     The threat list matches. This might be empty if the URI is on no list.
         class SearchUrisResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -154,6 +156,8 @@ module Google
         #   @return [::String]
         #     A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
         #     hash. For JSON requests, this field is base64-encoded.
+        #     Note that if this parameter is provided by a URI, it must be encoded using
+        #     the web safe base64 variant (RFC 4648).
         # @!attribute [rw] threat_types
         #   @return [::Array<::Google::Cloud::WebRisk::V1::ThreatType>]
         #     Required. The ThreatLists to search in. Multiple ThreatLists may be specified.
@@ -280,10 +284,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Wraps a URI that might be displaying phishing content.
+        # Wraps a URI that might be displaying malicious content.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     Required. The URI that is being reported for phishing content to be analyzed.
+        #     Required. The URI that is being reported for malicious content to be analyzed.
         class Submission
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -302,10 +306,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The type of threat. This maps dirrectly to the threat list a threat may
+        # The type of threat. This maps directly to the threat list a threat may
         # belong to.
         module ThreatType
-          # Unknown.
+          # No entries should match this threat type. This threat type is unused.
           THREAT_TYPE_UNSPECIFIED = 0
 
           # Malware targeting any platform.
@@ -316,6 +320,10 @@ module Google
 
           # Unwanted software targeting any platform.
           UNWANTED_SOFTWARE = 3
+
+          # A list of extended coverage social engineering URIs targeting any
+          # platform.
+          SOCIAL_ENGINEERING_EXTENDED_COVERAGE = 4
         end
 
         # The ways in which threat entry sets can be compressed.

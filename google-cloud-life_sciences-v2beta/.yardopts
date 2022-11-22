@@ -1,5 +1,5 @@
 --no-private
---title=Cloud Life Sciences V2beta API
+--title="Cloud Life Sciences V2beta API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

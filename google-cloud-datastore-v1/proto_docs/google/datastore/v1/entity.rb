@@ -39,11 +39,14 @@ module Google
         #
         # Foreign partition IDs (in which the project ID does
         # not match the context project ID ) are discouraged.
-        # Reads and writes of foreign partition IDs may fail if the project is not in
-        # an active state.
+        # Reads and writes of foreign partition IDs may fail if the project is not in an active state.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     The ID of the project to which the entities belong.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     If not empty, the ID of the database to which the entities
+        #     belong.
         # @!attribute [rw] namespace_id
         #   @return [::String]
         #     If not empty, the ID of the namespace to which the entities belong.
@@ -90,20 +93,31 @@ module Google
           # @!attribute [rw] kind
           #   @return [::String]
           #     The kind of the entity.
+          #
           #     A kind matching regex `__.*__` is reserved/read-only.
           #     A kind must not contain more than 1500 bytes when UTF-8 encoded.
           #     Cannot be `""`.
+          #
+          #     Must be valid UTF-8 bytes. Legacy values that are not valid UTF-8 are
+          #     encoded as `__bytes<X>__` where `<X>` is the base-64 encoding of the
+          #     bytes.
           # @!attribute [rw] id
           #   @return [::Integer]
           #     The auto-allocated ID of the entity.
+          #
           #     Never equal to zero. Values less than zero are discouraged and may not
           #     be supported in the future.
           # @!attribute [rw] name
           #   @return [::String]
           #     The name of the entity.
+          #
           #     A name matching regex `__.*__` is reserved/read-only.
           #     A name must not be more than 1500 bytes when UTF-8 encoded.
           #     Cannot be `""`.
+          #
+          #     Must be valid UTF-8 bytes. Legacy values that are not valid UTF-8 are
+          #     encoded as `__bytes<X>__` where `<X>` is the base-64 encoding of the
+          #     bytes.
           class PathElement
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -146,8 +160,8 @@ module Google
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A UTF-8 encoded string value.
-        #     When `exclude_from_indexes` is false (it is indexed), may have at most
-        #     1500 bytes. Otherwise, may be set to at most 1,000,000 bytes.
+        #     When `exclude_from_indexes` is false (it is indexed) , may have at most 1500 bytes.
+        #     Otherwise, may be set to at most 1,000,000 bytes.
         # @!attribute [rw] blob_value
         #   @return [::String]
         #     A blob value.

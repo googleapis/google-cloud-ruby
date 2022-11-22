@@ -5,11 +5,13 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/cloud/securitycenter/v1/folder_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/securitycenter/v1/resource.proto", :syntax => :proto3) do
     add_message "google.cloud.securitycenter.v1.Resource" do
       optional :name, :string, 1
+      optional :display_name, :string, 8
+      optional :type, :string, 6
       optional :project, :string, 2
       optional :project_display_name, :string, 3
       optional :parent, :string, 4

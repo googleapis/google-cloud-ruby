@@ -11,6 +11,7 @@ require 'google/cloud/retail/v2/import_config_pb'
 require 'google/cloud/retail/v2/purge_config_pb'
 require 'google/cloud/retail/v2/user_event_pb'
 require 'google/longrunning/operations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/retail/v2/user_event_service.proto", :syntax => :proto3) do
     add_message "google.cloud.retail.v2.WriteUserEventRequest" do

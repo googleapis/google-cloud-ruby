@@ -6,7 +6,7 @@ require 'google/protobuf'
 require 'google/firestore/v1/common_pb'
 require 'google/firestore/v1/document_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/firestore/v1/write.proto", :syntax => :proto3) do
     add_message "google.firestore.v1.Write" do

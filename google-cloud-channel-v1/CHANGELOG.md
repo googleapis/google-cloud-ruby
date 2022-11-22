@@ -1,5 +1,99 @@
 # Release History
 
+### 0.14.0 (2022-11-10)
+
+#### Features
+
+* Added Offer#deal_code field ([#19400](https://github.com/googleapis/google-cloud-ruby/issues/19400)) 
+
+### 0.13.0 (2022-10-19)
+
+#### Features
+
+* Support for CloudChannelReportsService operations, including run_report_job, fetch_report_results, and list_reports ([#19296](https://github.com/googleapis/google-cloud-ruby/issues/19296)) 
+
+### 0.12.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.11.0 (2022-04-28)
+
+#### Features
+
+* Support for repricing
+
+### 0.10.0 (2022-04-22)
+
+#### Features
+
+* add support for filters in ListCustomersRequest
+
+### 0.9.5 / 2022-02-15
+
+#### Documentation
+
+* Clarification of the provisioning_id description
+* Minor updates to reference documentation
+
+### 0.9.4 / 2022-01-20
+
+#### Documentation
+
+* Updating reference documentation.
+
+### 0.9.3 / 2022-01-11
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.9.2 / 2021-12-07
+
+#### Documentation
+
+* Minor clarifications in the documentation
+
+### 0.9.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+* Clarifications in the documentation for entitlement parameters
+
+### 0.9.0 / 2021-11-02
+
+#### Features
+
+* Add a path helper for partner link resources
+
+### 0.8.0 / 2021-09-08
+
+#### Features
+
+* Support for import_customer RPC
+
+### 0.7.2 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.7.1 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.7.0 / 2021-06-17
 
 #### Features

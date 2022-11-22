@@ -8,7 +8,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/tasks/v2beta3/target_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/tasks/v2beta3/queue.proto", :syntax => :proto3) do
     add_message "google.cloud.tasks.v2beta3.Queue" do

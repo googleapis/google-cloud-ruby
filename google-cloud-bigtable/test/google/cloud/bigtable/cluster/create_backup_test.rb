@@ -57,7 +57,7 @@ describe Google::Cloud::Bigtable::Cluster, :create_backup, :mock_bigtable do
 
   it "creates a backup with table as string ID" do
     mock = Minitest::Mock.new
-    mock.expect :create_backup, operation_grpc(job_grpc, mock), [parent: cluster_path(instance_id, cluster_id), backup_id: backup_id, backup: backup_grpc]
+    mock.expect :create_backup, operation_grpc(job_grpc, mock), parent: cluster_path(instance_id, cluster_id), backup_id: backup_id, backup: backup_grpc
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_tables = mock
 
@@ -80,7 +80,7 @@ describe Google::Cloud::Bigtable::Cluster, :create_backup, :mock_bigtable do
 
   it "creates a backup with table object" do
     mock = Minitest::Mock.new
-    mock.expect :create_backup, operation_grpc(job_grpc, mock), [parent: cluster_path(instance_id, cluster_id), backup_id: backup_id, backup: backup_grpc]
+    mock.expect :create_backup, operation_grpc(job_grpc, mock), parent: cluster_path(instance_id, cluster_id), backup_id: backup_id, backup: backup_grpc
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_tables = mock
 

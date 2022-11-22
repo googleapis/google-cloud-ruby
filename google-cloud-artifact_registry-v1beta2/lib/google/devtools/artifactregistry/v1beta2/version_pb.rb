@@ -3,9 +3,12 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/devtools/artifactregistry/v1beta2/tag_pb'
+require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/artifactregistry/v1beta2/version.proto", :syntax => :proto3) do
     add_message "google.devtools.artifactregistry.v1beta2.Version" do
@@ -14,12 +17,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 5, "google.protobuf.Timestamp"
       optional :update_time, :message, 6, "google.protobuf.Timestamp"
       repeated :related_tags, :message, 7, "google.devtools.artifactregistry.v1beta2.Tag"
+      optional :metadata, :message, 8, "google.protobuf.Struct"
     end
     add_message "google.devtools.artifactregistry.v1beta2.ListVersionsRequest" do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
       optional :view, :enum, 4, "google.devtools.artifactregistry.v1beta2.VersionView"
+      optional :order_by, :string, 5
     end
     add_message "google.devtools.artifactregistry.v1beta2.ListVersionsResponse" do
       repeated :versions, :message, 1, "google.devtools.artifactregistry.v1beta2.Version"

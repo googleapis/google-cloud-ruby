@@ -3,12 +3,11 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
-require 'google/api/resource_pb'
 require 'google/cloud/datalabeling/v1beta1/dataset_pb'
 require 'google/cloud/datalabeling/v1beta1/human_annotation_config_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/datalabeling/v1beta1/operations.proto", :syntax => :proto3) do
     add_message "google.cloud.datalabeling.v1beta1.ImportDataOperationResponse" do

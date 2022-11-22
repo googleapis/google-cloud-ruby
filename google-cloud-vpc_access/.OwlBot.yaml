@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/vpcaccess/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-vpc_access/$1

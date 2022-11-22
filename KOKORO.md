@@ -16,7 +16,7 @@
 
 #### Continuous
 
-- Run when a PR is merged to master. They run all unit tests. They run acceptance tests for a gem if the commit on master which triggered the build contains changes to that gem.
+- Run when a PR is merged to main. They run all unit tests. They run acceptance tests for a gem if the commit on main which triggered the build contains changes to that gem.
 
 #### Nightly
 
@@ -40,11 +40,11 @@
 
 ##### Continuous
 
-- Run when a PR is merged to master.
+- Run when a PR is merged to main.
 
 - Runs all tests for every sample.
 
-- Installs gems from master branch.
+- Installs gems from main branch.
 
 ##### Nightly
 
@@ -88,7 +88,7 @@
 
 ### Updating ruby versions
 
-1. Update the `RUBY_VERSIONS` in the [testing-infra-docker](https://github.com/googleapis/testing-infra-docker) ruby/multi/Dockerfile. When your PR is merged, the images will rebuild automatically. (Note: The windows image is not rebuilt automatically and needs to be handled manually.) This update must be in master to proceed.
+1. Update the `RUBY_VERSIONS` in the [testing-infra-docker](https://github.com/googleapis/testing-infra-docker) ruby/multi/Dockerfile. When your PR is merged, the images will rebuild automatically. (Note: The windows image is not rebuilt automatically and needs to be handled manually.) This update must be in main to proceed.
 1. Run `bundle exec rake kokoro:build` which will update .kokoro/osx.sh to use the ruby versions set above.
 1. Open a PR.
 1. Create the internal configs by following the steps [outlined here](https://docs.google.com/document/d/17Wg3ar8wlFTtut2CcAV9Geg8K9x28MK_UtUsYoyEx2s/edit#heading=h.o8nsr6d5n4va)

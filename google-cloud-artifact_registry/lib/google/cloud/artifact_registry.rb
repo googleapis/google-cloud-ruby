@@ -48,8 +48,8 @@ module Google
       # Create a new client object for ArtifactRegistry.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client](https://googleapis.dev/ruby/google-cloud-artifact_registry-v1beta2/latest/Google/Cloud/ArtifactRegistry/V1beta2/ArtifactRegistry/Client.html)
-      # for version V1beta2 of the API.
+      # [Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client](https://googleapis.dev/ruby/google-cloud-artifact_registry-v1/latest/Google/Cloud/ArtifactRegistry/V1/ArtifactRegistry/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the ArtifactRegistry service is
       # supported by that API version, and the corresponding gem is available, the
@@ -72,10 +72,10 @@ module Google
       #   or Version.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1beta2`.
+      #   Defaults to `:v1`.
       # @return [ArtifactRegistry::Client] A client object for the specified version.
       #
-      def self.artifact_registry version: :v1beta2, &block
+      def self.artifact_registry version: :v1, &block
         require "google/cloud/artifact_registry/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ArtifactRegistry

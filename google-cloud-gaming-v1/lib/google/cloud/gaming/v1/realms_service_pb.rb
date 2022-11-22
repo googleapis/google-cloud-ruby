@@ -7,6 +7,7 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/cloud/gaming/v1/realms_pb'
 require 'google/longrunning/operations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/gaming/v1/realms_service.proto", :syntax => :proto3) do
   end

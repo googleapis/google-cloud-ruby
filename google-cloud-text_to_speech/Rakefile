@@ -159,11 +159,6 @@ task :doctest do
   puts "The google-cloud-text_to_speech gem does not have doctest tests."
 end
 
-task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-text_to_speech"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
-end
-
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-text_to_speech"

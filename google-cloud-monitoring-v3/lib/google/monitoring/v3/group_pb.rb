@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/resource_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/monitoring/v3/group.proto", :syntax => :proto3) do
     add_message "google.monitoring.v3.Group" do

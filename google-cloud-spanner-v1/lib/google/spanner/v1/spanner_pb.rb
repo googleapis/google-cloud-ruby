@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/spanner/v1/commit_response_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
@@ -12,11 +11,13 @@ require 'google/protobuf/empty_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
+require 'google/spanner/v1/commit_response_pb'
 require 'google/spanner/v1/keys_pb'
 require 'google/spanner/v1/mutation_pb'
 require 'google/spanner/v1/result_set_pb'
 require 'google/spanner/v1/transaction_pb'
 require 'google/spanner/v1/type_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/v1/spanner.proto", :syntax => :proto3) do
     add_message "google.spanner.v1.CreateSessionRequest" do
@@ -36,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 2
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :approximate_last_use_time, :message, 4, "google.protobuf.Timestamp"
+      optional :creator_role, :string, 5
     end
     add_message "google.spanner.v1.GetSessionRequest" do
       optional :name, :string, 1

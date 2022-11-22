@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/privacy/dlp/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-dlp/$1

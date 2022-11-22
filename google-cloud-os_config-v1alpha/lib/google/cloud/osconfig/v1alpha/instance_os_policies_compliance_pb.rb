@@ -7,6 +7,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/osconfig/v1alpha/config_common_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/osconfig/v1alpha/instance_os_policies_compliance.proto", :syntax => :proto3) do
     add_message "google.cloud.osconfig.v1alpha.InstanceOSPoliciesCompliance" do

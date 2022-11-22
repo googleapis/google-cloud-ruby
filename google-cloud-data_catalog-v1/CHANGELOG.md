@@ -1,5 +1,76 @@
 # Release History
 
+### 0.12.1 (2022-11-09)
+
+#### Documentation
+
+* update documentation 
+
+### 0.12.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.11.0 (2022-04-14)
+
+#### Features
+
+* Support for integrating with Dataplex
+* Support for update masks when setting IAM policies
+* Support for DataCatalog entry name
+* Support for detailed storage properties
+* Update grpc-google-iam-v1 dependency to 1.1
+
+### 0.10.0 / 2022-02-16
+
+#### Features
+
+* Support for modifications to business context and starring.
+
+### 0.9.1 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.9.0 / 2021-11-11
+
+#### Features
+
+* Return the latest BigQuery shard resource in a table, and the display name and description for search catalog results
+
+### 0.8.3 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.8.2 / 2021-08-23
+
+#### Documentation
+
+* Fix links to the search syntax reference
+
+### 0.8.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.8.0 / 2021-07-29
+
+#### Features
+
+* Support for the replace_taxonomy call
+
+### 0.7.3 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.7.2 / 2021-06-17
 
 #### Bug Fixes

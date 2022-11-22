@@ -7,6 +7,7 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/apigeeconnect/v1/connection.proto", :syntax => :proto3) do
     add_message "google.cloud.apigeeconnect.v1.ListConnectionsRequest" do

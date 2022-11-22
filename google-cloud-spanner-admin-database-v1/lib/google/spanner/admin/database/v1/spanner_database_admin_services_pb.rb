@@ -28,10 +28,11 @@ module Google
             module DatabaseAdmin
               # Cloud Spanner Database Admin API
               #
-              # The Cloud Spanner Database Admin API can be used to create, drop, and
-              # list databases. It also enables updating the schema of pre-existing
-              # databases. It can be also used to create, delete and list backups for a
-              # database and to restore from an existing backup.
+              # The Cloud Spanner Database Admin API can be used to:
+              #   * create, drop, and list databases
+              #   * update the schema of pre-existing databases
+              #   * create, delete and list backups for a database
+              #   * restore a database from an existing backup
               class Service
 
                 include ::GRPC::GenericService
@@ -64,6 +65,8 @@ module Google
                 # Drops (aka deletes) a Cloud Spanner database.
                 # Completed backups for the database will be retained according to their
                 # `expire_time`.
+                # Note: Cloud Spanner might continue to accept requests for a few seconds
+                # after the database has been deleted.
                 rpc :DropDatabase, ::Google::Cloud::Spanner::Admin::Database::V1::DropDatabaseRequest, ::Google::Protobuf::Empty
                 # Returns the schema of a Cloud Spanner database as a list of formatted
                 # DDL statements. This method does not show pending schema updates, those may
@@ -110,6 +113,19 @@ module Google
                 # There can be only one pending backup creation per database. Backup creation
                 # of different databases can run concurrently.
                 rpc :CreateBackup, ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest, ::Google::Longrunning::Operation
+                # Starts copying a Cloud Spanner Backup.
+                # The returned backup [long-running operation][google.longrunning.Operation]
+                # will have a name of the format
+                # `projects/<project>/instances/<instance>/backups/<backup>/operations/<operation_id>`
+                # and can be used to track copying of the backup. The operation is associated
+                # with the destination backup.
+                # The [metadata][google.longrunning.Operation.metadata] field type is
+                # [CopyBackupMetadata][google.spanner.admin.database.v1.CopyBackupMetadata].
+                # The [response][google.longrunning.Operation.response] field type is
+                # [Backup][google.spanner.admin.database.v1.Backup], if successful. Cancelling the returned operation will stop the
+                # copying and delete the backup.
+                # Concurrent CopyBackup requests can run on the same source backup.
+                rpc :CopyBackup, ::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest, ::Google::Longrunning::Operation
                 # Gets metadata on a pending or completed [Backup][google.spanner.admin.database.v1.Backup].
                 rpc :GetBackup, ::Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest, ::Google::Cloud::Spanner::Admin::Database::V1::Backup
                 # Updates a pending or completed [Backup][google.spanner.admin.database.v1.Backup].
@@ -158,6 +174,8 @@ module Google
                 # `operation.metadata.value.progress.start_time` in descending order starting
                 # from the most recently started operation.
                 rpc :ListBackupOperations, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse
+                # Lists Cloud Spanner database roles.
+                rpc :ListDatabaseRoles, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse
               end
 
               Stub = Service.rpc_stub_class

@@ -21,11 +21,10 @@ module Google
   module Cloud
     module DocumentAI
       module V1
-        # Document represents the canonical document resource in Document Understanding
-        # AI.
-        # It is an interchange format that provides insights into documents and allows
-        # for collaboration between users and Document Understanding AI to iterate and
-        # optimize for quality.
+        # Document represents the canonical document resource in Document AI. It is an
+        # interchange format that provides insights into documents and allows for
+        # collaboration between users and Document AI to iterate and optimize for
+        # quality.
         # @!attribute [rw] uri
         #   @return [::String]
         #     Optional. Currently supports Google Cloud Storage URI of the form
@@ -48,7 +47,7 @@ module Google
         #     Optional. UTF-8 encoded text in reading order from the document.
         # @!attribute [rw] text_styles
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Style>]
-        #     Styles for the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
+        #     Placeholder.  Styles for the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
         # @!attribute [rw] pages
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page>]
         #     Visual page layout for the {::Google::Cloud::DocumentAI::V1::Document Document}.
@@ -58,12 +57,12 @@ module Google
         #     entities in this list may cross shard boundaries.
         # @!attribute [rw] entity_relations
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::EntityRelation>]
-        #     Relationship among {::Google::Cloud::DocumentAI::V1::Document#entities Document.entities}.
+        #     Placeholder.  Relationship among {::Google::Cloud::DocumentAI::V1::Document#entities Document.entities}.
         # @!attribute [rw] text_changes
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::TextChange>]
-        #     A list of text corrections made to [Document.text].  This is usually
-        #     used for annotating corrections to OCR mistakes.  Text changes for a given
-        #     revision may not overlap with each other.
+        #     Placeholder.  A list of text corrections made to {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.  This
+        #     is usually used for annotating corrections to OCR mistakes.  Text changes
+        #     for a given revision may not overlap with each other.
         # @!attribute [rw] shard_info
         #   @return [::Google::Cloud::DocumentAI::V1::Document::ShardInfo]
         #     Information about the sharding if this document is sharded part of a larger
@@ -73,7 +72,7 @@ module Google
         #     Any error that occurred while processing this document.
         # @!attribute [rw] revisions
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Revision>]
-        #     Revision history of this document.
+        #     Placeholder. Revision history of this document.
         class Document
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -123,6 +122,10 @@ module Google
           # @!attribute [rw] font_size
           #   @return [::Google::Cloud::DocumentAI::V1::Document::Style::FontSize]
           #     Font size.
+          # @!attribute [rw] font_family
+          #   @return [::String]
+          #     Font family such as `Arial`, `Times New Roman`.
+          #     https://www.w3schools.com/cssref/pr_font_font-family.asp
           class Style
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -190,6 +193,15 @@ module Google
           # @!attribute [rw] form_fields
           #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::FormField>]
           #     A list of visually detected form fields on the page.
+          # @!attribute [rw] symbols
+          #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::Symbol>]
+          #     A list of visually detected symbols on the page.
+          # @!attribute [rw] detected_barcodes
+          #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::DetectedBarcode>]
+          #     A list of detected barcodes.
+          # @!attribute [rw] image_quality_scores
+          #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::ImageQualityScores]
+          #     Image Quality Scores.
           # @!attribute [rw] provenance
           #   @return [::Google::Cloud::DocumentAI::V1::Document::Provenance]
           #     The history of this page.
@@ -260,7 +272,7 @@ module Google
             #   @return [::Float]
             #     Confidence of the current {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} within context of the object this
             #     layout is for. e.g. confidence can be for a single token, a table,
-            #     a visual element, etc. depending on context. Range [0, 1].
+            #     a visual element, etc. depending on context. Range `[0, 1]`.
             # @!attribute [rw] bounding_poly
             #   @return [::Google::Cloud::DocumentAI::V1::BoundingPoly]
             #     The bounding polygon for the {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout}.
@@ -352,7 +364,7 @@ module Google
             #     A list of detected languages together with confidence.
             # @!attribute [rw] provenance
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Provenance]
-            #     The  history of this annotation.
+            #     The history of this annotation.
             class Token
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -380,6 +392,18 @@ module Google
                   HYPHEN = 3
                 end
               end
+            end
+
+            # A detected symbol.
+            # @!attribute [rw] layout
+            #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for {::Google::Cloud::DocumentAI::V1::Document::Page::Symbol Symbol}.
+            # @!attribute [rw] detected_languages
+            #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::DetectedLanguage>]
+            #     A list of detected languages together with confidence.
+            class Symbol
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # Detected non-text visual elements e.g. checkbox, signature etc. on the
@@ -411,6 +435,9 @@ module Google
             # @!attribute [rw] detected_languages
             #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::DetectedLanguage>]
             #     A list of detected languages together with confidence.
+            # @!attribute [rw] provenance
+            #   @return [::Google::Cloud::DocumentAI::V1::Document::Provenance]
+            #     The history of this table.
             class Table
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -464,6 +491,16 @@ module Google
             #     - blank (this indicates the field_value is normal text)
             #     - "unfilled_checkbox"
             #     - "filled_checkbox"
+            # @!attribute [rw] corrected_key_text
+            #   @return [::String]
+            #     Created for Labeling UI to export key text.
+            #     If corrections were made to the text identified by the
+            #     `field_name.text_anchor`, this field will contain the correction.
+            # @!attribute [rw] corrected_value_text
+            #   @return [::String]
+            #     Created for Labeling UI to export value text.
+            #     If corrections were made to the text identified by the
+            #     `field_value.text_anchor`, this field will contain the correction.
             # @!attribute [rw] provenance
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Provenance]
             #     The history of this annotation.
@@ -472,39 +509,86 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
+            # A detected barcode.
+            # @!attribute [rw] layout
+            #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
+            #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for {::Google::Cloud::DocumentAI::V1::Document::Page::DetectedBarcode DetectedBarcode}.
+            # @!attribute [rw] barcode
+            #   @return [::Google::Cloud::DocumentAI::V1::Barcode]
+            #     Detailed barcode information of the {::Google::Cloud::DocumentAI::V1::Document::Page::DetectedBarcode DetectedBarcode}.
+            class DetectedBarcode
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # Detected language for a structural component.
             # @!attribute [rw] language_code
             #   @return [::String]
-            #     The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+            #     The BCP-47 language code, such as `en-US` or `sr-Latn`. For more
             #     information, see
-            #     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+            #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
             # @!attribute [rw] confidence
             #   @return [::Float]
-            #     Confidence of detected language. Range [0, 1].
+            #     Confidence of detected language. Range `[0, 1]`.
             class DetectedLanguage
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+
+            # Image Quality Scores for the page image
+            # @!attribute [rw] quality_score
+            #   @return [::Float]
+            #     The overall quality score. Range `[0, 1]` where 1 is perfect quality.
+            # @!attribute [rw] detected_defects
+            #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::ImageQualityScores::DetectedDefect>]
+            #     A list of detected defects.
+            class ImageQualityScores
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Image Quality Defects
+              # @!attribute [rw] type
+              #   @return [::String]
+              #     Name of the defect type. Supported values are:
+              #
+              #     - `quality/defect_blurry`
+              #     - `quality/defect_noisy`
+              #     - `quality/defect_dark`
+              #     - `quality/defect_faint`
+              #     - `quality/defect_text_too_small`
+              #     - `quality/defect_document_cutoff`
+              #     - `quality/defect_text_cutoff`
+              #     - `quality/defect_glare`
+              # @!attribute [rw] confidence
+              #   @return [::Float]
+              #     Confidence of detected defect. Range `[0, 1]` where 1 indicates
+              #     strong confidence of that the defect exists.
+              class DetectedDefect
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
           end
 
-          # A phrase in the text that is a known entity type, such as a person, an
-          # organization, or location.
+          # An entity that could be a phrase in the text or a property that belongs to
+          # the document. It is a known entity type, such as a person, an organization,
+          # or location.
           # @!attribute [rw] text_anchor
           #   @return [::Google::Cloud::DocumentAI::V1::Document::TextAnchor]
           #     Optional. Provenance of the entity.
           #     Text anchor indexing into the {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
           # @!attribute [rw] type
           #   @return [::String]
-          #     Entity type from a schema e.g. `Address`.
+          #     Required. Entity type from a schema e.g. `Address`.
           # @!attribute [rw] mention_text
           #   @return [::String]
-          #     Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`.
+          #     Optional. Text value of the entity e.g. `1600 Amphitheatre Pkwy`.
           # @!attribute [rw] mention_id
           #   @return [::String]
           #     Optional. Deprecated.  Use `id` field instead.
           # @!attribute [rw] confidence
           #   @return [::Float]
-          #     Optional. Confidence of detected Schema entity. Range [0, 1].
+          #     Optional. Confidence of detected Schema entity. Range `[0, 1]`.
           # @!attribute [rw] page_anchor
           #   @return [::Google::Cloud::DocumentAI::V1::Document::PageAnchor]
           #     Optional. Represents the provenance of this entity wrt. the location on the
@@ -554,11 +638,21 @@ module Google
             #   @return [::Boolean]
             #     Boolean value. Can be used for entities with binary values, or for
             #     checkboxes.
+            # @!attribute [rw] integer_value
+            #   @return [::Integer]
+            #     Integer value.
+            # @!attribute [rw] float_value
+            #   @return [::Float]
+            #     Float value.
             # @!attribute [rw] text
             #   @return [::String]
-            #     Required. Normalized entity value stored as a string. This field is populated for
-            #     supported document type (e.g. Invoice). For some entity types, one of
-            #     respective 'structured_value' fields may also be populated.
+            #     Optional. An optional field to store a normalized string.
+            #     For some entity types, one of respective `structured_value` fields may
+            #     also be populated. Also not all the types of `structured_value` will be
+            #     normalized. For example, some processors may not generate float
+            #     or int normalized text by default.
+            #
+            #     Below are sample formats mapped to structured values.
             #
             #     - Money/Currency type (`money_value`) is in the ISO 4217 text format.
             #     - Date type (`date_value`) is in the ISO 8601 text format.
@@ -591,7 +685,8 @@ module Google
           # @!attribute [rw] content
           #   @return [::String]
           #     Contains the content of the text span so that users do
-          #     not have to look it up in the text_segments.
+          #     not have to look it up in the text_segments.  It is always
+          #     populated for formFields.
           class TextAnchor
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -640,7 +735,7 @@ module Google
             #     Optional. Identifies the bounding polygon of a layout element on the page.
             # @!attribute [rw] confidence
             #   @return [::Float]
-            #     Optional. Confidence of detected page element, if applicable. Range [0, 1].
+            #     Optional. Confidence of detected page element, if applicable. Range `[0, 1]`.
             class PageRef
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -693,16 +788,15 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Structure for referencing parent provenances.  When an element replaces
-            # one of more other elements parent references identify the elements that
-            # are replaced.
+            # The parent element the current element is based on. Used for
+            # referencing/aligning, removal and replacement operations.
             # @!attribute [rw] revision
             #   @return [::Integer]
-            #     The index of the [Document.revisions] identifying the parent revision.
+            #     The index of the index into current revision's parent_ids list.
             # @!attribute [rw] index
             #   @return [::Integer]
-            #     The index of the parent revisions corresponding collection of items
-            #     (eg. list of entities, properties within entities, etc.)
+            #     The index of the parent item in the corresponding item list (eg. list
+            #     of entities, properties within entities, etc.) in the parent revision.
             # @!attribute [rw] id
             #   @return [::Integer]
             #     The id of the parent provenance.
@@ -713,19 +807,20 @@ module Google
 
             # If a processor or agent does an explicit operation on existing elements.
             module OperationType
-              # Operation type unspecified.
+              # Operation type unspecified. If no operation is specified a provenance
+              # entry is simply used to match against a `parent`.
               OPERATION_TYPE_UNSPECIFIED = 0
 
-              # Add an element.  Implicit if no `parents` are set for the provenance.
+              # Add an element.
               ADD = 1
 
-              # The element is removed.  No `parents` should be set.
+              # Remove an element identified by `parent`.
               REMOVE = 2
 
-              # Explicitly replaces the element(s) identified by `parents`.
+              # Replace an element identified by `parent`.
               REPLACE = 3
 
-              # Element is requested for human review.
+              # Request human review for the element identified by `parent`.
               EVAL_REQUESTED = 4
 
               # Element is reviewed and approved at human review, confidence will be
@@ -754,6 +849,11 @@ module Google
           #     The revisions that this revision is based on.  This can include one or
           #     more parent (when documents are merged.)  This field represents the
           #     index into the `revisions` field.
+          # @!attribute [rw] parent_ids
+          #   @return [::Array<::String>]
+          #     The revisions that this revision is based on. Must include all the ids
+          #     that have anything to do with this revision - eg. there are
+          #     `provenance.parent.revision` fields that index into this field.
           # @!attribute [rw] create_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The time that the revision was created.

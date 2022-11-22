@@ -31,8 +31,8 @@ module Google
     module DataCatalog
       module V1
         ##
-        # Data Catalog API service allows clients to discover, understand, and manage
-        # their data.
+        # Data Catalog API service allows you to discover, understand, and manage
+        # your data.
         #
         # To load this service and instantiate a client:
         #

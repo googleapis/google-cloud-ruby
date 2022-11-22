@@ -1,5 +1,5 @@
 --no-private
---title=Cloud Speech-to-Text V1p1beta1 API
+--title="Cloud Speech-to-Text V1p1beta1 API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

@@ -67,32 +67,6 @@ end
 # Acceptance tests
 desc "Run the grafeas acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
-  project = args[:project]
-  project ||=
-    ENV["GRAFEAS_TEST_PROJECT"] ||
-    ENV["GCLOUD_TEST_PROJECT"]
-  keyfile = args[:keyfile]
-  keyfile ||=
-    ENV["GRAFEAS_TEST_KEYFILE"] ||
-    ENV["GCLOUD_TEST_KEYFILE"]
-  if keyfile
-    keyfile = File.read keyfile
-  else
-    keyfile ||=
-      ENV["GRAFEAS_TEST_KEYFILE_JSON"] ||
-      ENV["GCLOUD_TEST_KEYFILE_JSON"]
-  end
-  if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or GRAFEAS_TEST_PROJECT=test123 GRAFEAS_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
-  end
-  require "grafeas/v1/grafeas/credentials"
-  ::Grafeas::V1::Grafeas::Credentials.env_vars.each do |path|
-    ENV[path] = nil
-  end
-  ENV["GRAFEAS_PROJECT"] = project
-  ENV["GRAFEAS_TEST_PROJECT"] = project
-  ENV["GRAFEAS_KEYFILE_JSON"] = keyfile
-
   Rake::Task["acceptance:run"].invoke
 end
 
@@ -157,11 +131,6 @@ end
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The grafeas gem does not have doctest tests."
-end
-
-task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "grafeas"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
 end
 
 desc "Run the CI build"

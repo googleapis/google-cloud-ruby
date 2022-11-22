@@ -68,18 +68,42 @@ module Google
             ##
             # Create a fully-qualified BuildTrigger resource string.
             #
-            # The resource will be in the following format:
+            # @overload build_trigger_path(project:, trigger:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/triggers/{trigger}`
+            #   `projects/{project}/triggers/{trigger}`
             #
-            # @param project [String]
-            # @param trigger [String]
+            #   @param project [String]
+            #   @param trigger [String]
+            #
+            # @overload build_trigger_path(project:, location:, trigger:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/triggers/{trigger}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param trigger [String]
             #
             # @return [::String]
-            def build_trigger_path project:, trigger:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+            def build_trigger_path **args
+              resources = {
+                "project:trigger" => (proc do |project:, trigger:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
-              "projects/#{project}/triggers/#{trigger}"
+                  "projects/#{project}/triggers/#{trigger}"
+                end),
+                "location:project:trigger" => (proc do |project:, location:, trigger:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/triggers/#{trigger}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
@@ -118,6 +142,23 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
+            end
+
+            ##
+            # Create a fully-qualified Network resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/global/networks/{network}`
+            #
+            # @param project [String]
+            # @param network [String]
+            #
+            # @return [::String]
+            def network_path project:, network:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/global/networks/#{network}"
             end
 
             ##
@@ -202,6 +243,25 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/topics/#{topic}"
+            end
+
+            ##
+            # Create a fully-qualified WorkerPool resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/workerPools/{worker_pool}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param worker_pool [String]
+            #
+            # @return [::String]
+            def worker_pool_path project:, location:, worker_pool:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/workerPools/#{worker_pool}"
             end
 
             extend self

@@ -29,7 +29,7 @@ module Google
       class AsyncErrorReporterError < Google::Cloud::Error
         # @!attribute [r] error_event
         #   @return [Array<Google::Cloud::ErrorReporting::ErrorEvent>] The
-        #   individual error event that was not reported to Stackdriver Error
+        #   individual error event that was not reported to Error
         #   Reporting service.
         attr_reader :error_event
 
@@ -48,7 +48,7 @@ module Google
       class ErrorReporterError < Google::Cloud::Error
         # @!attribute [r] error_event
         #   @return [Array<Google::Cloud::ErrorReporting::ErrorEvent>] The
-        #   individual error event that was not reported to Stackdriver Error
+        #   individual error event that was not reported to Error
         #   Reporting service.
         attr_reader :error_event
 
@@ -63,7 +63,7 @@ module Google
       #
       # @private Used by {Google::Cloud::ErrorReporting} and
       # {Google::Cloud::ErrorReporting::Middleware} to asynchronously submit
-      # error events to Stackdriver Error Reporting service when used in
+      # error events to Error Reporting service when used in
       # Ruby applications.
       class AsyncErrorReporter
         ##

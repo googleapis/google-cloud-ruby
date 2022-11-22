@@ -1,5 +1,5 @@
 --no-private
---title=Data Catalog API
+--title="Data Catalog API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

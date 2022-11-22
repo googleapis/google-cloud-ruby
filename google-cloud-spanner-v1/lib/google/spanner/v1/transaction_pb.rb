@@ -5,7 +5,7 @@ require 'google/protobuf'
 
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/v1/transaction.proto", :syntax => :proto3) do
     add_message "google.spanner.v1.TransactionOptions" do
@@ -16,6 +16,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       end
     end
     add_message "google.spanner.v1.TransactionOptions.ReadWrite" do
+      optional :read_lock_mode, :enum, 1, "google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode"
+    end
+    add_enum "google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode" do
+      value :READ_LOCK_MODE_UNSPECIFIED, 0
+      value :PESSIMISTIC, 1
+      value :OPTIMISTIC, 2
     end
     add_message "google.spanner.v1.TransactionOptions.PartitionedDml" do
     end
@@ -49,6 +55,7 @@ module Google
       module V1
         TransactionOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions").msgclass
         TransactionOptions::ReadWrite = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.ReadWrite").msgclass
+        TransactionOptions::ReadWrite::ReadLockMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode").enummodule
         TransactionOptions::PartitionedDml = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.PartitionedDml").msgclass
         TransactionOptions::ReadOnly = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.ReadOnly").msgclass
         Transaction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Transaction").msgclass

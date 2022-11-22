@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/api/monitored_resource_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/monitoring/v3/uptime.proto", :syntax => :proto3) do
     add_message "google.monitoring.v3.InternalChecker" do

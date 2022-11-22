@@ -27,6 +27,10 @@ describe Google::Cloud::Storage::File, :storage do
     { logo: { path: "acceptance/data/CloudPlatform_128px_Retina.png" },
       big:  { path: "acceptance/data/three-mb-file.tif" } }
   end
+  let(:files_big_md5) { Google::Cloud::Storage::File::Verifier.md5_for File.new(files[:big][:path]) }
+  let(:files_big_crc32c) { Google::Cloud::Storage::File::Verifier.crc32c_for File.new(files[:big][:path]) }
+  let(:io_md5) { Google::Cloud::Storage::File::Verifier.md5_for StringIO.new("Hello world!") }
+  let(:io_crc32c) { Google::Cloud::Storage::File::Verifier.crc32c_for StringIO.new("Hello world!") }
   let(:custom_time) { DateTime.new 2020, 2, 3, 4, 5, 6 }
 
   before do
@@ -141,6 +145,78 @@ describe Google::Cloud::Storage::File, :storage do
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       downloaded = uploaded.download tmpfile, verify: :all
+
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
+
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
+    end
+    uploaded.delete
+  end
+
+  it "should upload and download a larger file with checksum: :md5" do
+    original = File.new files[:big][:path]
+    uploaded = bucket.create_file original, "BigLogo.png", checksum: :md5
+
+    _(uploaded.md5).must_equal files_big_md5
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = uploaded.download tmpfile, verify: :md5
+
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
+
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
+    end
+    uploaded.delete
+  end
+
+  it "should upload and download a larger file with checksum: :crc32c" do
+    original = File.new files[:big][:path]
+    uploaded = bucket.create_file original, "BigLogo.png", checksum: :crc32c
+
+    _(uploaded.crc32c).must_equal files_big_crc32c
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = uploaded.download tmpfile, verify: :crc32c
+
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
+
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
+    end
+    uploaded.delete
+  end
+
+  it "should upload and download a larger file with md5" do
+    original = File.new files[:big][:path]
+    uploaded = bucket.create_file original, "BigLogo.png", md5: files_big_md5
+
+    _(uploaded.md5).must_equal files_big_md5
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = uploaded.download tmpfile, verify: :md5
+
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
+
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
+    end
+    uploaded.delete
+  end
+
+  it "should upload and download a larger file with crc32c" do
+    original = File.new files[:big][:path]
+    uploaded = bucket.create_file original, "BigLogo.png", crc32c: files_big_crc32c
+
+    _(uploaded.crc32c).must_equal files_big_crc32c
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = uploaded.download tmpfile, verify: :crc32c
 
       _(downloaded.size).must_equal original.size
       _(downloaded.size).must_equal uploaded.size
@@ -303,6 +379,7 @@ describe Google::Cloud::Storage::File, :storage do
     inmemory = StringIO.new "Hello world!"
     uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.txt"
     _(uploaded.name).must_equal "uploaded/with/inmemory.txt"
+    _(uploaded.md5).must_equal io_md5
 
     downloadio = StringIO.new()
     downloaded = uploaded.download downloadio
@@ -315,6 +392,22 @@ describe Google::Cloud::Storage::File, :storage do
 
     _(downloaded.read).must_equal inmemory.read
     _(downloaded.read.encoding).must_equal inmemory.read.encoding
+
+    uploaded.delete
+  end
+
+  it "should upload text using IO and checksum: :md5" do
+    inmemory = StringIO.new "Hello world!"
+    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.txt", checksum: :md5
+    _(uploaded.md5).must_equal io_md5
+
+    uploaded.delete
+  end
+
+  it "should upload text using IO and checksum: :crc32c" do
+    inmemory = StringIO.new "Hello world!"
+    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.txt", checksum: :crc32c
+    _(uploaded.crc32c).must_equal io_crc32c
 
     uploaded.delete
   end
@@ -397,7 +490,7 @@ describe Google::Cloud::Storage::File, :storage do
 
     Tempfile.open ["hello_world", ".txt"] do |tmpfile|
       tmpfile.binmode
-      downloaded = file.download tmpfile,  verify: :crc32c
+      downloaded = file.download tmpfile, verify: :crc32c
 
       _(File.read(downloaded.path, mode: "rb")).must_equal "hello world" # decompressed file data
     end

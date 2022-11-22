@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/webrisk/v1/webrisk.proto", :syntax => :proto3) do
     add_message "google.cloud.webrisk.v1.ComputeThreatListDiffRequest" do
@@ -93,6 +94,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MALWARE, 1
       value :SOCIAL_ENGINEERING, 2
       value :UNWANTED_SOFTWARE, 3
+      value :SOCIAL_ENGINEERING_EXTENDED_COVERAGE, 4
     end
     add_enum "google.cloud.webrisk.v1.CompressionType" do
       value :COMPRESSION_TYPE_UNSPECIFIED, 0

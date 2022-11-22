@@ -57,8 +57,8 @@ module Google
       #
       # ## About DataCatalog
       #
-      # Data Catalog API service allows clients to discover, understand, and manage
-      # their data.
+      # Data Catalog API service allows you to discover, understand, and manage
+      # your data.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -88,7 +88,7 @@ module Google
       #
       # ## About PolicyTagManager
       #
-      # Policy Tag Manager API service allows clients to manage their policy tags and
+      # Policy Tag Manager API service allows you to manage your policy tags and
       # taxonomies.
       #
       # Policy tags are used to tag BigQuery columns and apply additional access
@@ -123,9 +123,10 @@ module Google
       #
       # ## About PolicyTagManagerSerialization
       #
-      # Policy Tag Manager serialization API service allows clients to manipulate
-      # their policy tags and taxonomies in serialized format, where taxonomy is a
-      # hierarchical group of policy tags.
+      # Policy Tag Manager Serialization API service allows you to manipulate
+      # your policy tags and taxonomies in a serialized format.
+      #
+      # Taxonomy is a hierarchical group of policy tags.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.

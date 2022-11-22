@@ -75,6 +75,36 @@ module Google
       end
 
       ##
+      # Create a new client object for Adaptation.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Speech::V1::Adaptation::Client](https://googleapis.dev/ruby/google-cloud-speech-v1/latest/Google/Cloud/Speech/V1/Adaptation/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the Adaptation service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About Adaptation
+      #
+      # Service that implements Google Cloud Speech Adaptation API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [Adaptation::Client] A client object for the specified version.
+      #
+      def self.adaptation version: :v1, &block
+        require "google/cloud/speech/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Speech
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Speech.const_get package_name
+        package_module.const_get(:Adaptation).const_get(:Client).new(&block)
+      end
+
+      ##
       # Configure the google-cloud-speech library.
       #
       # The following configuration parameters are supported:

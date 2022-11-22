@@ -43,13 +43,12 @@ module Google
             # See {::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ServiceUsage clients:
-            #
-            #     ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ServiceUsage clients
+            #   ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -98,19 +97,15 @@ module Google
             ##
             # Create a new ServiceUsage client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ServiceUsage client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
             #
-            #     client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
-            #
-            # To create a new ServiceUsage client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ServiceUsage client.
             # @yieldparam config [Client::Configuration]
@@ -130,14 +125,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -145,6 +139,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -205,6 +200,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_usage/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new
+            #
+            #   # Call the enable_service method.
+            #   result = client.enable_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def enable_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -222,16 +239,20 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceUsage::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.enable_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.enable_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_usage_stub.call_rpc :enable_service, request, options: options do |response, operation|
@@ -292,6 +313,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_usage/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceUsage::V1::DisableServiceRequest.new
+            #
+            #   # Call the disable_service method.
+            #   result = client.disable_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def disable_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -309,16 +352,20 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceUsage::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.disable_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.disable_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_usage_stub.call_rpc :disable_service, request, options: options do |response, operation|
@@ -363,6 +410,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_usage/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceUsage::V1::GetServiceRequest.new
+            #
+            #   # Call the get_service method.
+            #   result = client.get_service request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceUsage::V1::Service.
+            #   p result
+            #
             def get_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -380,16 +442,20 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceUsage::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_usage_stub.call_rpc :get_service, request, options: options do |response, operation|
@@ -438,7 +504,7 @@ module Google
             #   @param page_size [::Integer]
             #     Requested size of the next page of data.
             #     Requested page size cannot exceed 200.
-            #      If not set, the default page size is 50.
+            #     If not set, the default page size is 50.
             #   @param page_token [::String]
             #     Token identifying which result to start with, which is returned by a
             #     previous list call.
@@ -453,6 +519,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::ServiceUsage::V1::Service>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_usage/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceUsage::V1::ListServicesRequest.new
+            #
+            #   # Call the list_services method.
+            #   result = client.list_services request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ServiceUsage::V1::Service.
+            #     p response
+            #   end
             #
             def list_services request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -471,16 +558,20 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceUsage::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_services.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_services.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_usage_stub.call_rpc :list_services, request, options: options do |response, operation|
@@ -540,6 +631,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_usage/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceUsage::V1::BatchEnableServicesRequest.new
+            #
+            #   # Call the batch_enable_services method.
+            #   result = client.batch_enable_services request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_enable_services request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -557,16 +670,20 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceUsage::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_enable_services.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_enable_services.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_usage_stub.call_rpc :batch_enable_services, request, options: options do |response, operation|
@@ -619,6 +736,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_usage/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest.new
+            #
+            #   # Call the batch_get_services method.
+            #   result = client.batch_get_services request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceUsage::V1::BatchGetServicesResponse.
+            #   p result
+            #
             def batch_get_services request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -636,16 +768,20 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceUsage::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_get_services.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_get_services.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_usage_stub.call_rpc :batch_get_services, request, options: options do |response, operation|
@@ -669,22 +805,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for enable_service
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # enable_service to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.enable_service.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.enable_service.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.enable_service.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.enable_service.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

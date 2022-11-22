@@ -39,6 +39,35 @@
         }
       }
     },
+    "BatchController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::BatchController::Client",
+          "rpcs": {
+            "CreateBatch": {
+              "methods": [
+                "create_batch"
+              ]
+            },
+            "GetBatch": {
+              "methods": [
+                "get_batch"
+              ]
+            },
+            "ListBatches": {
+              "methods": [
+                "list_batches"
+              ]
+            },
+            "DeleteBatch": {
+              "methods": [
+                "delete_batch"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ClusterController": {
       "clients": {
         "grpc": {

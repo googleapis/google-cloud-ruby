@@ -1,5 +1,77 @@
 # Release History
 
+### 0.13.0 (2022-09-28)
+
+#### Features
+
+* Support for dataproc metric configuration ([#19209](https://github.com/googleapis/google-cloud-ruby/issues/19209)) 
+
+### 0.12.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.11.0 (2022-06-30)
+
+#### Features
+
+* support OLM Prefix/Suffix ([#18190](https://github.com/googleapis/google-cloud-ruby/issues/18190)) 
+
+### 0.10.0 (2022-05-12)
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Remove unused VirtualClusterConfig#temp_bucket field
+
+### 0.9.0 / 2022-02-17
+
+#### Features
+
+* **BREAKING CHANGE:** Replaced the temporary gke_cluster_config field with the permanent virtual_cluster_config
+
+### 0.8.0 / 2022-01-11
+
+#### Features
+
+* Additional fields for DiskConfig and RuntimeInfo
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.7.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.7.0 / 2021-10-21
+
+#### Features
+
+* Add support for batch workloads
+
+### 0.6.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.6.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.6.1 / 2021-06-17
 
 #### Bug Fixes

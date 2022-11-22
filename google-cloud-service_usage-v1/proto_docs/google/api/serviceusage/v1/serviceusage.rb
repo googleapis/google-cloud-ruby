@@ -126,7 +126,7 @@ module Google
         #   @return [::Integer]
         #     Requested size of the next page of data.
         #     Requested page size cannot exceed 200.
-        #      If not set, the default page size is 50.
+        #     If not set, the default page size is 50.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Token identifying which result to start with, which is returned by a

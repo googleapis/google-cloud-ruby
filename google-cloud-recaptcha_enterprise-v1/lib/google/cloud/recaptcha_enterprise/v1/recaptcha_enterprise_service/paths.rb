@@ -59,6 +59,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Metrics resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/keys/{key}/metrics`
+            #
+            # @param project [String]
+            # @param key [String]
+            #
+            # @return [::String]
+            def metrics_path project:, key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/keys/#{key}/metrics"
+            end
+
+            ##
             # Create a fully-qualified Project resource string.
             #
             # The resource will be in the following format:
@@ -70,6 +87,23 @@ module Google
             # @return [::String]
             def project_path project:
               "projects/#{project}"
+            end
+
+            ##
+            # Create a fully-qualified RelatedAccountGroup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`
+            #
+            # @param project [String]
+            # @param relatedaccountgroup [String]
+            #
+            # @return [::String]
+            def related_account_group_path project:, relatedaccountgroup:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/relatedaccountgroups/#{relatedaccountgroup}"
             end
 
             extend self

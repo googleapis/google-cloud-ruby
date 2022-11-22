@@ -44,13 +44,12 @@ module Google
             # See {::Google::Cloud::Spanner::V1::Spanner::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Spanner clients:
-            #
-            #     ::Google::Cloud::Spanner::V1::Spanner::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Spanner clients
+            #   ::Google::Cloud::Spanner::V1::Spanner::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -70,110 +69,71 @@ module Google
 
                 default_config.rpcs.create_session.timeout = 30.0
                 default_config.rpcs.create_session.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.batch_create_sessions.timeout = 60.0
                 default_config.rpcs.batch_create_sessions.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_session.timeout = 30.0
                 default_config.rpcs.get_session.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_sessions.timeout = 3600.0
                 default_config.rpcs.list_sessions.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_session.timeout = 30.0
                 default_config.rpcs.delete_session.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.execute_sql.timeout = 30.0
                 default_config.rpcs.execute_sql.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.execute_streaming_sql.timeout = 3600.0
 
                 default_config.rpcs.execute_batch_dml.timeout = 30.0
                 default_config.rpcs.execute_batch_dml.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.read.timeout = 30.0
                 default_config.rpcs.read.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.streaming_read.timeout = 3600.0
 
                 default_config.rpcs.begin_transaction.timeout = 30.0
                 default_config.rpcs.begin_transaction.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.commit.timeout = 3600.0
                 default_config.rpcs.commit.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.rollback.timeout = 30.0
                 default_config.rpcs.rollback.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.partition_query.timeout = 30.0
                 default_config.rpcs.partition_query.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.partition_read.timeout = 30.0
                 default_config.rpcs.partition_read.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -205,19 +165,15 @@ module Google
             ##
             # Create a new Spanner client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Spanner client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Spanner::V1::Spanner::Client.new
             #
-            #     client = ::Google::Cloud::Spanner::V1::Spanner::Client.new
-            #
-            # To create a new Spanner client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Spanner::V1::Spanner::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Spanner::V1::Spanner::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Spanner client.
             # @yieldparam config [Client::Configuration]
@@ -237,14 +193,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -300,7 +255,7 @@ module Google
             #   @param database [::String]
             #     Required. The database in which the new session is created.
             #   @param session [::Google::Cloud::Spanner::V1::Session, ::Hash]
-            #     The session to create.
+            #     Required. The session to create.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::Session]
@@ -309,6 +264,21 @@ module Google
             # @return [::Google::Cloud::Spanner::V1::Session]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::CreateSessionRequest.new
+            #
+            #   # Call the create_session method.
+            #   result = client.create_session request
+            #
+            #   # The returned object is of type Google::Cloud::Spanner::V1::Session.
+            #   p result
             #
             def create_session request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -327,16 +297,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_session.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_session.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :create_session, request, options: options do |response, operation|
@@ -387,6 +361,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::BatchCreateSessionsRequest.new
+            #
+            #   # Call the batch_create_sessions method.
+            #   result = client.batch_create_sessions request
+            #
+            #   # The returned object is of type Google::Cloud::Spanner::V1::BatchCreateSessionsResponse.
+            #   p result
+            #
             def batch_create_sessions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -404,16 +393,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_create_sessions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_create_sessions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :batch_create_sessions, request, options: options do |response, operation|
@@ -455,6 +448,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::GetSessionRequest.new
+            #
+            #   # Call the get_session method.
+            #   result = client.get_session request
+            #
+            #   # The returned object is of type Google::Cloud::Spanner::V1::Session.
+            #   p result
+            #
             def get_session request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -472,16 +480,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_session.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_session.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :get_session, request, options: options do |response, operation|
@@ -539,6 +551,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::ListSessionsRequest.new
+            #
+            #   # Call the list_sessions method.
+            #   result = client.list_sessions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Spanner::V1::Session.
+            #     p response
+            #   end
+            #
             def list_sessions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -556,16 +589,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_sessions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_sessions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :list_sessions, request, options: options do |response, operation|
@@ -608,6 +645,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::DeleteSessionRequest.new
+            #
+            #   # Call the delete_session method.
+            #   result = client.delete_session request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_session request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -625,16 +677,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_session.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_session.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :delete_session, request, options: options do |response, operation|
@@ -751,6 +807,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::ExecuteSqlRequest.new
+            #
+            #   # Call the execute_sql method.
+            #   result = client.execute_sql request
+            #
+            #   # The returned object is of type Google::Cloud::Spanner::V1::ResultSet.
+            #   p result
+            #
             def execute_sql request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -768,16 +839,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.execute_sql.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.execute_sql.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :execute_sql, request, options: options do |response, operation|
@@ -888,6 +963,24 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::ExecuteSqlRequest.new
+            #
+            #   # Call the execute_streaming_sql method.
+            #   result = client.execute_streaming_sql request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Spanner::V1::PartialResultSet.
+            #   result.each do |response|
+            #     p response
+            #   end
+            #
             def execute_streaming_sql request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -905,16 +998,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.execute_streaming_sql.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.execute_streaming_sql.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :execute_streaming_sql, request, options: options do |response, operation|
@@ -988,6 +1085,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest.new
+            #
+            #   # Call the execute_batch_dml method.
+            #   result = client.execute_batch_dml request
+            #
+            #   # The returned object is of type Google::Cloud::Spanner::V1::ExecuteBatchDmlResponse.
+            #   p result
+            #
             def execute_batch_dml request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1005,16 +1117,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.execute_batch_dml.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.execute_batch_dml.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :execute_batch_dml, request, options: options do |response, operation|
@@ -1109,6 +1225,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::ReadRequest.new
+            #
+            #   # Call the read method.
+            #   result = client.read request
+            #
+            #   # The returned object is of type Google::Cloud::Spanner::V1::ResultSet.
+            #   p result
+            #
             def read request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1126,16 +1257,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.read.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.read.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :read, request, options: options do |response, operation|
@@ -1222,6 +1357,24 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::ReadRequest.new
+            #
+            #   # Call the streaming_read method.
+            #   result = client.streaming_read request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Spanner::V1::PartialResultSet.
+            #   result.each do |response|
+            #     p response
+            #   end
+            #
             def streaming_read request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1239,16 +1392,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.streaming_read.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.streaming_read.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :streaming_read, request, options: options do |response, operation|
@@ -1299,6 +1456,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::BeginTransactionRequest.new
+            #
+            #   # Call the begin_transaction method.
+            #   result = client.begin_transaction request
+            #
+            #   # The returned object is of type Google::Cloud::Spanner::V1::Transaction.
+            #   p result
+            #
             def begin_transaction request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1316,16 +1488,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.begin_transaction.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.begin_transaction.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :begin_transaction, request, options: options do |response, operation|
@@ -1400,6 +1576,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::CommitRequest.new
+            #
+            #   # Call the commit method.
+            #   result = client.commit request
+            #
+            #   # The returned object is of type Google::Cloud::Spanner::V1::CommitResponse.
+            #   p result
+            #
             def commit request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1417,16 +1608,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.commit.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.commit.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :commit, request, options: options do |response, operation|
@@ -1475,6 +1670,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::RollbackRequest.new
+            #
+            #   # Call the rollback method.
+            #   result = client.rollback request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def rollback request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1492,16 +1702,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.rollback.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.rollback.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :rollback, request, options: options do |response, operation|
@@ -1589,6 +1803,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::PartitionQueryRequest.new
+            #
+            #   # Call the partition_query method.
+            #   result = client.partition_query request
+            #
+            #   # The returned object is of type Google::Cloud::Spanner::V1::PartitionResponse.
+            #   p result
+            #
             def partition_query request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1606,16 +1835,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.partition_query.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.partition_query.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :partition_query, request, options: options do |response, operation|
@@ -1689,6 +1922,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/spanner/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Spanner::V1::Spanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Spanner::V1::PartitionReadRequest.new
+            #
+            #   # Call the partition_read method.
+            #   result = client.partition_read request
+            #
+            #   # The returned object is of type Google::Cloud::Spanner::V1::PartitionResponse.
+            #   p result
+            #
             def partition_read request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1706,16 +1954,20 @@ module Google
                 gapic_version: ::Google::Cloud::Spanner::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.partition_read.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.partition_read.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :partition_read, request, options: options do |response, operation|
@@ -1739,22 +1991,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_session
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_session to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Spanner::V1::Spanner::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_session.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Spanner::V1::Spanner::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_session.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Spanner::V1::Spanner::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_session.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Spanner::V1::Spanner::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_session.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

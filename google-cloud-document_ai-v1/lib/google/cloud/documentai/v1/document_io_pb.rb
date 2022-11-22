@@ -3,7 +3,8 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
+require 'google/protobuf/field_mask_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/documentai/v1/document_io.proto", :syntax => :proto3) do
     add_message "google.cloud.documentai.v1.RawDocument" do
@@ -33,6 +34,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.documentai.v1.DocumentOutputConfig.GcsOutputConfig" do
       optional :gcs_uri, :string, 1
+      optional :field_mask, :message, 2, "google.protobuf.FieldMask"
     end
   end
 end

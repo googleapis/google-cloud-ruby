@@ -48,7 +48,7 @@ module Google
               config.endpoint = host if host
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::Firestore::VERSION
-              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
+              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/(default)" }
             end
         end
 
@@ -189,7 +189,7 @@ module Google
         def document_mask mask
           return nil if mask.nil?
 
-          mask = Array(mask).map(&:to_s).reject(&:nil?).reject(&:empty?)
+          mask = Array(mask).map(&:to_s).reject(&:empty?)
           return nil if mask.empty?
 
           Google::Cloud::Firestore::V1::DocumentMask.new field_paths: mask

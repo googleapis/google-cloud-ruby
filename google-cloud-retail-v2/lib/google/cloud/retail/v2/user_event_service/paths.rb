@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the UserEventService API.
           module Paths
             ##
+            # Create a fully-qualified Catalog resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/catalogs/{catalog}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param catalog [String]
+            #
+            # @return [::String]
+            def catalog_path project:, location:, catalog:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/catalogs/#{catalog}"
+            end
+
+            ##
             # Create a fully-qualified Product resource string.
             #
             # The resource will be in the following format:

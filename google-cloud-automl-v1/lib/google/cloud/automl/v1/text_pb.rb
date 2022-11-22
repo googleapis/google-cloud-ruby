@@ -4,7 +4,7 @@
 require 'google/protobuf'
 
 require 'google/cloud/automl/v1/classification_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/automl/v1/text.proto", :syntax => :proto3) do
     add_message "google.cloud.automl.v1.TextClassificationDatasetMetadata" do

@@ -8,8 +8,8 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/dialogflow/v2/participant_pb'
-require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/v2/conversation.proto", :syntax => :proto3) do
     add_message "google.cloud.dialogflow.v2.Conversation" do

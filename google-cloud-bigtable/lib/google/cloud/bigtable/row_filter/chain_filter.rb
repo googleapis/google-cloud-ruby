@@ -35,7 +35,7 @@ module Google
         #
         #   chain = Google::Cloud::Bigtable::RowFilter.chain
         #   # Add filters to chain filter
-        #   chain.key("user-*").label("users")
+        #   chain.key("user-*").label "users"
         #
         class ChainFilter
           # @private
@@ -65,13 +65,13 @@ module Google
           #   chain_1 = Google::Cloud::Bigtable::RowFilter.chain
           #
           #   # Add filters to chain filter
-          #   chain_1.key("user-*").cells_per_row(5)
+          #   chain_1.key("user-*").cells_per_row 5
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain
-          #   filter.chain(chain_1)
+          #   filter.chain chain_1
           #
           #   # OR
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.chain(chain_1)
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.chain chain_1
           #
           def chain filter
             raise RowFilterError, "Filter type must be ChainFilter" unless filter.instance_of? ChainFilter
@@ -124,7 +124,7 @@ module Google
           #   # Add filters to interleave filter
           #   interleave.key("user-*").cells_per_column(3)
           #
-          #   chain = Google::Cloud::Bigtable::RowFilter.chain.interleave(interleave)
+          #   chain = Google::Cloud::Bigtable::RowFilter.chain.interleave interleave
           #
           def interleave filter
             raise RowFilterError, "Filter type must be InterleaveFilter" unless filter.instance_of? InterleaveFilter
@@ -151,15 +151,16 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
+          #   predicate = Google::Cloud::Bigtable::RowFilter.key "user-*"
           #
-          #   label = Google::Cloud::Bigtable::RowFilter.label("user")
+          #   label = Google::Cloud::Bigtable::RowFilter.label "user"
           #   strip_value = Google::Cloud::Bigtable::RowFilter.strip_value
           #
-          #   condition_filter = Google::Cloud::Bigtable::RowFilter.
-          #     condition(predicate).on_match(label).otherwise(strip_value)
+          #   condition_filter = Google::Cloud::Bigtable::RowFilter.condition(predicate)
+          #                                                        .on_match(label)
+          #                                                        .otherwise(strip_value)
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.condition(condition_filter)
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.condition condition_filter
           #
           def condition filter
             raise RowFilterError, "Filter type must be ConditionFilter" unless filter.instance_of? ConditionFilter
@@ -257,7 +258,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.key("user-*")
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.key "user-*"
           #
           def key regex
             add RowFilter.key(regex)
@@ -277,7 +278,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.sample(0.5)
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.sample 0.5
           #
           def sample probability
             add RowFilter.sample(probability)
@@ -303,7 +304,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.family("cf-*")
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.family "cf-*"
           #
           def family regex
             add RowFilter.family(regex)
@@ -329,7 +330,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.qualifier("user-name*")
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.qualifier "user-name*"
           #
           def qualifier regex
             add RowFilter.qualifier(regex)
@@ -354,7 +355,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.value("abc*")
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.value "abc*"
           #
           def value regex
             add RowFilter.value(regex)
@@ -383,7 +384,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.label("user-detail")
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.label "user-detail"
           #
           def label value
             add RowFilter.label(value)
@@ -403,7 +404,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.cells_per_row_offset(3)
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.cells_per_row_offset 3
           #
           def cells_per_row_offset offset
             add RowFilter.cells_per_row_offset(offset)
@@ -423,7 +424,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.cells_per_row(5)
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.cells_per_row 5
           #
           def cells_per_row limit
             add RowFilter.cells_per_row(limit)
@@ -446,7 +447,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.cells_per_column(5)
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.cells_per_column 5
           #
           def cells_per_column limit
             add RowFilter.cells_per_column(limit)
@@ -468,11 +469,11 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
-          #   from = timestamp_micros - 300000000
+          #   timestamp_micros = (Time.now.to_f * 1_000_000).round(-3)
+          #   from = timestamp_micros - 300_000_000
           #   to = timestamp_micros
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.timestamp_range(from: from, to: to)
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.timestamp_range from: from, to: to
           #
           def timestamp_range from: nil, to: nil
             add RowFilter.timestamp_range(from: from, to: to)
@@ -498,19 +499,19 @@ module Google
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new
-          #   table = bigtable.table("my-instance", "my-table")
+          #   table = bigtable.table "my-instance", "my-table"
           #
           #   range = table.new_value_range.from("value-001").to("value-005")
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.value_range(range)
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.value_range range
           #
           # @example Start exclusive to infinite end range.
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new
-          #   table = bigtable.table("my-instance", "my-table")
+          #   table = bigtable.table "my-instance", "my-table"
           #
-          #   range = table.new_value_range.from("value-001", inclusive: false)
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.value_range(range)
+          #   range = table.new_value_range.from "value-001", inclusive: false
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.value_range range
           #
           def value_range range
             add RowFilter.value_range(range)
@@ -528,9 +529,9 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   range = Google::Cloud::Bigtable::ColumnRange.new("cf").from("field0").to('field5')
+          #   range = Google::Cloud::Bigtable::ColumnRange.new("cf").from("field0").to("field5")
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.chain.column_range(range)
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.column_range range
           #
           def column_range range
             add RowFilter.column_range(range)

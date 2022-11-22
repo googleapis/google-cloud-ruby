@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-life_sciences.gemspec",
+    "lib/google-cloud-life_sciences.rb",
+    "lib/google/cloud/life_sciences.rb",
+    "lib/google/cloud/life_sciences/version.rb",
+    "test/google/cloud/life_sciences/client_test.rb",
+    "test/google/cloud/life_sciences/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

@@ -58,10 +58,7 @@ module Google
         #
         # ## About DataTransferService
         #
-        # The Google BigQuery Data Transfer Service API enables BigQuery users to
-        # configure the transfer of their data from other Google Products into
-        # BigQuery. This service contains methods that are end user exposed. It backs
-        # up the frontend.
+        # This API allows users to manage their data transfers into BigQuery.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1`.

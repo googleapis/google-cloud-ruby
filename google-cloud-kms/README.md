@@ -11,7 +11,7 @@ verisoned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-kms/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-kms/latest)
 for this library, google-cloud-kms, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
@@ -70,14 +70,14 @@ end
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.5+.
+This library is supported on Ruby 2.6+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.5
-and later. Older versions of Ruby _may_ still work, but are unsupported and not
-recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
-about the Ruby support schedule.
+in security maintenance, and not end of life. Older versions of Ruby _may_
+still work, but are unsupported and not recommended. See
+https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
+support schedule.
 
 ## Which client should I use?
 

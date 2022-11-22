@@ -319,7 +319,9 @@ module Google
         #     A structured query.
         # @!attribute [rw] transaction
         #   @return [::String]
-        #     Reads documents in a transaction.
+        #     Run the query within an already active transaction.
+        #
+        #     The value here is the opaque transaction ID to execute the query in.
         # @!attribute [rw] new_transaction
         #   @return [::Google::Cloud::Firestore::V1::TransactionOptions]
         #     Starts a new transaction and reads the documents.
@@ -344,8 +346,7 @@ module Google
         #     If set, no other fields will be set in this response.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Firestore::V1::Document]
-        #     A query result.
-        #     Not set when reporting partial progress.
+        #     A query result, not set when reporting partial progress.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the document was read. This may be monotonically
@@ -359,7 +360,66 @@ module Google
         #   @return [::Integer]
         #     The number of results that have been skipped due to an offset between
         #     the last response and the current response.
+        # @!attribute [rw] done
+        #   @return [::Boolean]
+        #     If present, Firestore has completely finished the request and no more
+        #     documents will be returned.
         class RunQueryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query Firestore.RunAggregationQuery}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource name. In the format:
+        #     `projects/{project_id}/databases/{database_id}/documents` or
+        #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+        #     For example:
+        #     `projects/my-project/databases/my-database/documents` or
+        #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+        # @!attribute [rw] structured_aggregation_query
+        #   @return [::Google::Cloud::Firestore::V1::StructuredAggregationQuery]
+        #     An aggregation query.
+        # @!attribute [rw] transaction
+        #   @return [::String]
+        #     Run the aggregation within an already active transaction.
+        #
+        #     The value here is the opaque transaction ID to execute the query in.
+        # @!attribute [rw] new_transaction
+        #   @return [::Google::Cloud::Firestore::V1::TransactionOptions]
+        #     Starts a new transaction as part of the query, defaulting to read-only.
+        #
+        #     The new transaction ID will be returned as the first response in the
+        #     stream.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Executes the query at the given timestamp.
+        #
+        #     Requires:
+        #
+        #     * Cannot be more than 270 seconds in the past.
+        class RunAggregationQueryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for {::Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query Firestore.RunAggregationQuery}.
+        # @!attribute [rw] result
+        #   @return [::Google::Cloud::Firestore::V1::AggregationResult]
+        #     A single aggregation result.
+        #
+        #     Not present when reporting partial progress.
+        # @!attribute [rw] transaction
+        #   @return [::String]
+        #     The transaction that was started as part of this request.
+        #
+        #     Only present on the first response when the request requested to start
+        #     a new transaction.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time at which the aggregate value is valid for.
+        class RunAggregationQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -411,6 +471,10 @@ module Google
         #     to PartitionQuery will return up to 8 partitions and a `next_page_token`
         #     if more results exist. A second call to PartitionQuery will return up to
         #     2 partitions, to complete the total of 10 specified in `partition_count`.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Reads documents as they were at the given time.
+        #     This may not be older than 270 seconds.
         class PartitionQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -725,6 +789,10 @@ module Google
         #   @return [::String]
         #     A page token. Must be a value from
         #     {::Google::Cloud::Firestore::V1::ListCollectionIdsResponse ListCollectionIdsResponse}.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Reads documents as they were at the given time.
+        #     This may not be older than 270 seconds.
         class ListCollectionIdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

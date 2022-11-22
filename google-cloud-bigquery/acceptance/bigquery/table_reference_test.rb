@@ -95,10 +95,12 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
   end
 
   it "deletes itself and knows it no longer exists" do
-    _(table.exists?).must_equal true
-    _(table.delete).must_equal true
-    _(table.exists?).must_equal false
-    _(table.exists?(force: true)).must_equal false
+    table_2_id = "kittens_reference_delete"
+    table_2 = dataset.create_table table_2_id
+    _(table_2.exists?).must_equal true
+    _(table_2.delete).must_equal true
+    _(table_2.exists?).must_equal false
+    _(table_2.exists?(force: true)).must_equal false
   end
 
   it "gets and sets metadata" do

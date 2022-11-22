@@ -48,8 +48,9 @@ module Google
         # Response message for the Check method.
         # @!attribute [rw] operation_id
         #   @return [::String]
-        #     The same operation_id value used in the {::Google::Cloud::ServiceControl::V1::CheckRequest CheckRequest}.
-        #     Used for logging and diagnostics purposes.
+        #     The same operation_id value used in the
+        #     {::Google::Cloud::ServiceControl::V1::CheckRequest CheckRequest}. Used for logging
+        #     and diagnostics purposes.
         # @!attribute [rw] check_errors
         #   @return [::Array<::Google::Cloud::ServiceControl::V1::CheckError>]
         #     Indicate the decision of the check.
@@ -148,7 +149,8 @@ module Google
         #
         #     There is no limit on the number of operations in the same ReportRequest,
         #     however the ReportRequest size should be no larger than 1MB. See
-        #     {::Google::Cloud::ServiceControl::V1::ReportResponse#report_errors ReportResponse.report_errors} for partial failure behavior.
+        #     {::Google::Cloud::ServiceControl::V1::ReportResponse#report_errors ReportResponse.report_errors}
+        #     for partial failure behavior.
         # @!attribute [rw] service_config_id
         #   @return [::String]
         #     Specifies which version of service config should be used to process the
@@ -188,13 +190,17 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Represents the processing error of one {::Google::Cloud::ServiceControl::V1::Operation Operation} in the request.
+          # Represents the processing error of one
+          # {::Google::Cloud::ServiceControl::V1::Operation Operation} in the request.
           # @!attribute [rw] operation_id
           #   @return [::String]
-          #     The {::Google::Cloud::ServiceControl::V1::Operation#operation_id Operation.operation_id} value from the request.
+          #     The
+          #     {::Google::Cloud::ServiceControl::V1::Operation#operation_id Operation.operation_id}
+          #     value from the request.
           # @!attribute [rw] status
           #   @return [::Google::Rpc::Status]
-          #     Details of the error when processing the {::Google::Cloud::ServiceControl::V1::Operation Operation}.
+          #     Details of the error when processing the
+          #     {::Google::Cloud::ServiceControl::V1::Operation Operation}.
           class ReportError
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

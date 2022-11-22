@@ -113,8 +113,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::Intent::Message::Platform>]
         #     Optional. The list of platforms for which the first responses will be
         #     copied from the messages in PLATFORM_UNSPECIFIED (i.e. default platform).
-        # @!attribute [rw] root_followup_intent_name
+        # @!attribute [r] root_followup_intent_name
         #   @return [::String]
+        #     Output only.
         #     Read-only. The unique identifier of the root intent in the chain of
         #     followup intents. It identifies the correct followup intents chain for
         #     this intent. We populate this field only in the output.
@@ -130,9 +131,9 @@ module Google
         #
         #     It identifies the parent followup intent.
         #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
-        # @!attribute [rw] followup_intent_info
+        # @!attribute [r] followup_intent_info
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo>]
-        #     Read-only. Information about all followup intents that have this intent as
+        #     Output only. Read-only. Information about all followup intents that have this intent as
         #     a direct or indirect parent. We populate this field only in the output.
         class Intent
           include ::Google::Protobuf::MessageExts

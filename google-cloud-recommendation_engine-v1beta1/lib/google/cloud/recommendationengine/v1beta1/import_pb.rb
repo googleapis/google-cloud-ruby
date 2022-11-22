@@ -10,7 +10,7 @@ require 'google/cloud/recommendationengine/v1beta1/user_event_pb'
 require 'google/cloud/recommendationengine/v1beta1/recommendationengine_resources_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/recommendationengine/v1beta1/import.proto", :syntax => :proto3) do
     add_message "google.cloud.recommendationengine.v1beta1.GcsSource" do

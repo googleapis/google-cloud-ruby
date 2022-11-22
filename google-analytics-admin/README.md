@@ -2,7 +2,7 @@
 
 API Client library for the Google Analytics Admin API
 
-The Analytics Admin API allows for programmatic access to the Google Analytics App+Web configuration data. You can use the Google Analytics Admin API to manage accounts and App+Web properties. Note that google-analytics-admin-v1alpha is a version-specific client library. For most uses, we recommend installing the main client library google-analytics-admin instead. See the readme for more details.
+The Analytics Admin API allows for programmatic access to the Google Analytics App+Web configuration data. You can use the Google Analytics Admin API to manage accounts and App+Web properties.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-analytics-admin-v*`.
@@ -59,14 +59,14 @@ end
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.5+.
+This library is supported on Ruby 2.6+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.5
-and later. Older versions of Ruby _may_ still work, but are unsupported and not
-recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
-about the Ruby support schedule.
+in security maintenance, and not end of life. Older versions of Ruby _may_
+still work, but are unsupported and not recommended. See
+https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
+support schedule.
 
 ## Which client should I use?
 

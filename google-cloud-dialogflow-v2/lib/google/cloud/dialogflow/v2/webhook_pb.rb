@@ -8,7 +8,7 @@ require 'google/cloud/dialogflow/v2/intent_pb'
 require 'google/cloud/dialogflow/v2/session_pb'
 require 'google/cloud/dialogflow/v2/session_entity_type_pb'
 require 'google/protobuf/struct_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/v2/webhook.proto", :syntax => :proto3) do
     add_message "google.cloud.dialogflow.v2.WebhookRequest" do

@@ -63,6 +63,19 @@ module Google
             rpc :Rollback, ::Google::Cloud::Firestore::V1::RollbackRequest, ::Google::Protobuf::Empty
             # Runs a query.
             rpc :RunQuery, ::Google::Cloud::Firestore::V1::RunQueryRequest, stream(::Google::Cloud::Firestore::V1::RunQueryResponse)
+            # Runs an aggregation query.
+            #
+            # Rather than producing [Document][google.firestore.v1.Document] results like [Firestore.RunQuery][google.firestore.v1.Firestore.RunQuery],
+            # this API allows running an aggregation to produce a series of
+            # [AggregationResult][google.firestore.v1.AggregationResult] server-side.
+            #
+            # High-Level Example:
+            #
+            # ```
+            # -- Return the number of documents in table given a filter.
+            # SELECT COUNT(*) FROM ( SELECT * FROM k where a = true );
+            # ```
+            rpc :RunAggregationQuery, ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest, stream(::Google::Cloud::Firestore::V1::RunAggregationQueryResponse)
             # Partitions a query by returning partition cursors that can be used to run
             # the query in parallel. The returned partition cursors are split points that
             # can be used by RunQuery as starting/end points for the query results.

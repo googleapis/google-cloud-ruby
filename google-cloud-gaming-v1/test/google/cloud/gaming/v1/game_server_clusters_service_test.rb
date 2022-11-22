@@ -60,6 +60,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
     page_token = "hello world"
     filter = "hello world"
     order_by = "hello world"
+    view = :GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED
 
     list_game_server_clusters_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_game_server_clusters, name
@@ -69,6 +70,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
       assert_equal "hello world", request["order_by"]
+      assert_equal :GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -79,35 +81,35 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       end
 
       # Use hash object
-      client.list_game_server_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      client.list_game_server_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_game_server_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      client.list_game_server_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_game_server_clusters ::Google::Cloud::Gaming::V1::ListGameServerClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      client.list_game_server_clusters ::Google::Cloud::Gaming::V1::ListGameServerClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_game_server_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      client.list_game_server_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_game_server_clusters(::Google::Cloud::Gaming::V1::ListGameServerClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      client.list_game_server_clusters(::Google::Cloud::Gaming::V1::ListGameServerClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -127,11 +129,13 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
 
     # Create request parameters for a unary method.
     name = "hello world"
+    view = :GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED
 
     get_game_server_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_game_server_cluster, name
       assert_kind_of ::Google::Cloud::Gaming::V1::GetGameServerClusterRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal :GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -142,31 +146,31 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       end
 
       # Use hash object
-      client.get_game_server_cluster({ name: name }) do |response, operation|
+      client.get_game_server_cluster({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_game_server_cluster name: name do |response, operation|
+      client.get_game_server_cluster name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_game_server_cluster ::Google::Cloud::Gaming::V1::GetGameServerClusterRequest.new(name: name) do |response, operation|
+      client.get_game_server_cluster ::Google::Cloud::Gaming::V1::GetGameServerClusterRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_game_server_cluster({ name: name }, grpc_options) do |response, operation|
+      client.get_game_server_cluster({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_game_server_cluster(::Google::Cloud::Gaming::V1::GetGameServerClusterRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_game_server_cluster(::Google::Cloud::Gaming::V1::GetGameServerClusterRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -255,6 +259,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
     game_server_cluster_id = "hello world"
     game_server_cluster = {}
     preview_time = {}
+    view = :GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED
 
     preview_create_game_server_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :preview_create_game_server_cluster, name
@@ -263,6 +268,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       assert_equal "hello world", request["game_server_cluster_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerCluster), request["game_server_cluster"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["preview_time"]
+      assert_equal :GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -273,31 +279,31 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       end
 
       # Use hash object
-      client.preview_create_game_server_cluster({ parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time }) do |response, operation|
+      client.preview_create_game_server_cluster({ parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.preview_create_game_server_cluster parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time do |response, operation|
+      client.preview_create_game_server_cluster parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.preview_create_game_server_cluster ::Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterRequest.new(parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time) do |response, operation|
+      client.preview_create_game_server_cluster ::Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterRequest.new(parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.preview_create_game_server_cluster({ parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time }, grpc_options) do |response, operation|
+      client.preview_create_game_server_cluster({ parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.preview_create_game_server_cluster(::Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterRequest.new(parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time), grpc_options) do |response, operation|
+      client.preview_create_game_server_cluster(::Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterRequest.new(parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

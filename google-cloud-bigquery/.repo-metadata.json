@@ -1,7 +1,13 @@
 {
-    "name": "bigquery",
-    "language": "ruby",
+    "api_id": "bigquery.googleapis.com",
+    "api_shortname": "bigquery",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery/latest",
     "distribution_name": "google-cloud-bigquery",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery/latest",
+    "language": "ruby",
+    "name": "bigquery",
+    "name_pretty": "BigQuery API",
+    "product_documentation": "https://cloud.google.com/bigquery",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-ruby",
     "library_type": "GAPIC_MANUAL"
 }

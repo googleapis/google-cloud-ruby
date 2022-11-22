@@ -235,6 +235,9 @@ module Google
         # @!attribute [r] metadata_exports
         #   @return [::Array<::Google::Cloud::Metastore::V1::MetadataExport>]
         #     Output only. The latest metadata exports of the metastore service.
+        # @!attribute [r] restores
+        #   @return [::Array<::Google::Cloud::Metastore::V1::Restore>]
+        #     Output only. The latest restores of the metastore service.
         class MetadataManagementActivity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -254,10 +257,13 @@ module Google
         #     The description of the metadata import.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time when the metadata import was created.
+        #     Output only. The time when the metadata import was started.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the metadata import was last updated.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the metadata import finished.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Metastore::V1::MetadataImport::State]
         #     Output only. The current state of the metadata import.
@@ -349,6 +355,114 @@ module Google
 
             # The metadata export is cancelled.
             CANCELLED = 4
+          end
+        end
+
+        # The details of a backup resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Immutable. The relative resource name of the backup, in the following form:
+        #
+        #     `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the backup was started.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the backup finished creating.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Metastore::V1::Backup::State]
+        #     Output only. The current state of the backup.
+        # @!attribute [r] service_revision
+        #   @return [::Google::Cloud::Metastore::V1::Service]
+        #     Output only. The revision of the service at the time of backup.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     The description of the backup.
+        # @!attribute [r] restoring_services
+        #   @return [::Array<::String>]
+        #     Output only. Services that are restoring from the backup.
+        class Backup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The current state of the backup.
+          module State
+            # The state of the backup is unknown.
+            STATE_UNSPECIFIED = 0
+
+            # The backup is being created.
+            CREATING = 1
+
+            # The backup is being deleted.
+            DELETING = 2
+
+            # The backup is active and ready to use.
+            ACTIVE = 3
+
+            # The backup failed.
+            FAILED = 4
+
+            # The backup is being restored.
+            RESTORING = 5
+          end
+        end
+
+        # The details of a metadata restore operation.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the restore started.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the restore ended.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Metastore::V1::Restore::State]
+        #     Output only. The current state of the restore.
+        # @!attribute [r] backup
+        #   @return [::String]
+        #     Output only. The relative resource name of the metastore service backup to restore
+        #     from, in the following form:
+        #
+        #     `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+        # @!attribute [r] type
+        #   @return [::Google::Cloud::Metastore::V1::Restore::RestoreType]
+        #     Output only. The type of restore.
+        # @!attribute [r] details
+        #   @return [::String]
+        #     Output only. The restore details containing the revision of the service to be restored
+        #     to, in format of JSON.
+        class Restore
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The current state of the restore.
+          module State
+            # The state of the metadata restore is unknown.
+            STATE_UNSPECIFIED = 0
+
+            # The metadata restore is running.
+            RUNNING = 1
+
+            # The metadata restore completed successfully.
+            SUCCEEDED = 2
+
+            # The metadata restore failed.
+            FAILED = 3
+
+            # The metadata restore is cancelled.
+            CANCELLED = 4
+          end
+
+          # The type of restore. If unspecified, defaults to `METADATA_ONLY`.
+          module RestoreType
+            # The restore type is unknown.
+            RESTORE_TYPE_UNSPECIFIED = 0
+
+            # The service's metadata and configuration are restored.
+            FULL = 1
+
+            # Only the service's metadata is restored.
+            METADATA_ONLY = 2
           end
         end
 
@@ -648,6 +762,133 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The relative resource name of the service whose backups to
+        #     list, in the following form:
+        #
+        #     `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of backups to return. The response may contain less
+        #     than the maximum number. If unspecified, no more than 500 backups are
+        #     returned. The maximum value is 1000; values above 1000 are changed to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}
+        #     call. Provide this token to retrieve the subsequent page.
+        #
+        #     To retrieve the first page, supply an empty page token.
+        #
+        #     When paginating, other parameters provided to
+        #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups} must match the call that provided the
+        #     page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The filter to apply to list results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Specify the ordering of results as described in [Sorting
+        #     Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+        #     If not specified, the results will be sorted in the default order.
+        class ListBackupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}.
+        # @!attribute [rw] backups
+        #   @return [::Array<::Google::Cloud::Metastore::V1::Backup>]
+        #     The backups of the specified service.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that can be sent as `page_token` to retrieve the next page. If this
+        #     field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListBackupsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#get_backup DataprocMetastore.GetBackup}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The relative resource name of the backup to retrieve, in the
+        #     following form:
+        #
+        #     `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+        class GetBackupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#create_backup DataprocMetastore.CreateBackup}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The relative resource name of the service in which to create a backup
+        #     of the following form:
+        #
+        #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
+        # @!attribute [rw] backup_id
+        #   @return [::String]
+        #     Required. The ID of the backup, which is used as the final component of the
+        #     backup's name.
+        #
+        #     This value must be between 1 and 64 characters long, begin with a letter,
+        #     end with a letter or number, and consist of alpha-numeric ASCII characters
+        #     or hyphens.
+        # @!attribute [rw] backup
+        #   @return [::Google::Cloud::Metastore::V1::Backup]
+        #     Required. The backup to create. The `name` field is ignored. The ID of the created
+        #     backup must be provided in the request's `backup_id` field.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
+        #     request if it has completed. The server will ignore subsequent requests
+        #     that provide a duplicate request ID for at least 60 minutes after the first
+        #     request.
+        #
+        #     For example, if an initial request times out, followed by another request
+        #     with the same request ID, the server ignores the second request to prevent
+        #     the creation of duplicate commitments.
+        #
+        #     The request ID must be a valid
+        #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+        #     A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+        class CreateBackupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#delete_backup DataprocMetastore.DeleteBackup}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The relative resource name of the backup to delete, in the
+        #     following form:
+        #
+        #     `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
+        #     request if it has completed. The server will ignore subsequent requests
+        #     that provide a duplicate request ID for at least 60 minutes after the first
+        #     request.
+        #
+        #     For example, if an initial request times out, followed by another request
+        #     with the same request ID, the server ignores the second request to prevent
+        #     the creation of duplicate commitments.
+        #
+        #     The request ID must be a valid
+        #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+        #     A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+        class DeleteBackupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#export_metadata DataprocMetastore.ExportMetadata}.
         # @!attribute [rw] destination_gcs_folder
         #   @return [::String]
@@ -678,6 +919,41 @@ module Google
         #   @return [::Google::Cloud::Metastore::V1::DatabaseDumpSpec::Type]
         #     Optional. The type of the database dump. If unspecified, defaults to `MYSQL`.
         class ExportMetadataRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [DataprocMetastore.Restore][].
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Required. The relative resource name of the metastore service to run restore, in the
+        #     following form:
+        #
+        #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+        # @!attribute [rw] backup
+        #   @return [::String]
+        #     Required. The relative resource name of the metastore service backup to restore
+        #     from, in the following form:
+        #
+        #     `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+        # @!attribute [rw] restore_type
+        #   @return [::Google::Cloud::Metastore::V1::Restore::RestoreType]
+        #     Optional. The type of restore. If unspecified, defaults to `METADATA_ONLY`.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
+        #     request if it has completed. The server will ignore subsequent requests
+        #     that provide a duplicate request ID for at least 60 minutes after the first
+        #     request.
+        #
+        #     For example, if an initial request times out, followed by another request
+        #     with the same request ID, the server ignores the second request to prevent
+        #     the creation of duplicate commitments.
+        #
+        #     The request ID must be a valid
+        #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
+        #     A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+        class RestoreServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -748,6 +1024,9 @@ module Google
 
             # Database dump is a MySQL dump file.
             MYSQL = 1
+
+            # Database dump contains Avro files.
+            AVRO = 2
           end
         end
       end

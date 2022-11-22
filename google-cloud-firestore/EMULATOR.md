@@ -2,19 +2,21 @@
 
 To develop and test your application locally, you can use the [Google Cloud
 Firestore
-Emulator](https://cloud.google.com/firestore/docs/security/test-rules-emulator#install_the_emulator),
-which provides local emulation of the production Google Cloud Firestore
-environment. You can start the Google Cloud Firestore emulator using the
-[`firebase` command-line tool](https://firebase.google.com/docs/cli/).
+Emulator](https://cloud.google.com/sdk/gcloud/reference/beta/emulators/firestore/),
+which provides local emulation of the production Google Cloud Firestore 
+environment. You can start the Google Cloud Firestore emulator using 
+the `gcloud` command-line tool.
+
+`gcloud beta emulators firestore start --host-port=0.0.0.0:8080`
 
 When you run the Cloud Firestore emulator you will see a message similar to the
 following printed:
 
 ```
-$ firebase serve --only firestore
-API endpoint: http://[::1]:8080
-API endpoint: http://127.0.0.1:8080
-Dev App Server is now running.
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST
+environment variable, run:
+
+  export FIRESTORE_EMULATOR_HOST=localhost:8080
 ```
 
 Now you can connect to the emulator using the `FIRESTORE_EMULATOR_HOST`

@@ -8,8 +8,12 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/type/dayofweek_pb'
+require 'google/type/timeofday_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/memcache/v1beta2/cloud_memcache.proto", :syntax => :proto3) do
     add_message "google.cloud.memcache.v1beta2.Instance" do
@@ -30,6 +34,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :instance_messages, :message, 19, "google.cloud.memcache.v1beta2.Instance.InstanceMessage"
       optional :discovery_endpoint, :string, 20
       optional :update_available, :bool, 21
+      optional :maintenance_policy, :message, 22, "google.cloud.memcache.v1beta2.MaintenancePolicy"
+      optional :maintenance_schedule, :message, 23, "google.cloud.memcache.v1beta2.MaintenanceSchedule"
     end
     add_message "google.cloud.memcache.v1beta2.Instance.NodeConfig" do
       optional :cpu_count, :int32, 1
@@ -63,8 +69,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :STATE_UNSPECIFIED, 0
       value :CREATING, 1
       value :READY, 2
+      value :UPDATING, 3
       value :DELETING, 4
       value :PERFORMING_MAINTENANCE, 5
+    end
+    add_message "google.cloud.memcache.v1beta2.MaintenancePolicy" do
+      optional :create_time, :message, 1, "google.protobuf.Timestamp"
+      optional :update_time, :message, 2, "google.protobuf.Timestamp"
+      optional :description, :string, 3
+      repeated :weekly_maintenance_window, :message, 4, "google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow"
+    end
+    add_message "google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow" do
+      optional :day, :enum, 1, "google.type.DayOfWeek"
+      optional :start_time, :message, 2, "google.type.TimeOfDay"
+      optional :duration, :message, 3, "google.protobuf.Duration"
+    end
+    add_message "google.cloud.memcache.v1beta2.MaintenanceSchedule" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      optional :schedule_deadline_time, :message, 4, "google.protobuf.Timestamp"
     end
     add_message "google.cloud.memcache.v1beta2.ListInstancesRequest" do
       optional :parent, :string, 1
@@ -92,6 +115,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.memcache.v1beta2.DeleteInstanceRequest" do
       optional :name, :string, 1
+    end
+    add_message "google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest" do
+      optional :instance, :string, 1
+      optional :reschedule_type, :enum, 2, "google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType"
+      optional :schedule_time, :message, 3, "google.protobuf.Timestamp"
+    end
+    add_enum "google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType" do
+      value :RESCHEDULE_TYPE_UNSPECIFIED, 0
+      value :IMMEDIATE, 1
+      value :NEXT_AVAILABLE_WINDOW, 2
+      value :SPECIFIC_TIME, 3
     end
     add_message "google.cloud.memcache.v1beta2.ApplyParametersRequest" do
       optional :name, :string, 1
@@ -144,12 +178,17 @@ module Google
         Instance::InstanceMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.Instance.InstanceMessage").msgclass
         Instance::InstanceMessage::Code = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.Instance.InstanceMessage.Code").enummodule
         Instance::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.Instance.State").enummodule
+        MaintenancePolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.MaintenancePolicy").msgclass
+        WeeklyMaintenanceWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow").msgclass
+        MaintenanceSchedule = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.MaintenanceSchedule").msgclass
         ListInstancesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.ListInstancesRequest").msgclass
         ListInstancesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.ListInstancesResponse").msgclass
         GetInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.GetInstanceRequest").msgclass
         CreateInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.CreateInstanceRequest").msgclass
         UpdateInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.UpdateInstanceRequest").msgclass
         DeleteInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.DeleteInstanceRequest").msgclass
+        RescheduleMaintenanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest").msgclass
+        RescheduleMaintenanceRequest::RescheduleType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType").enummodule
         ApplyParametersRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.ApplyParametersRequest").msgclass
         UpdateParametersRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.UpdateParametersRequest").msgclass
         ApplySoftwareUpdateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest").msgclass

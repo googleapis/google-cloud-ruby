@@ -48,13 +48,12 @@ module Google
             # See {::Google::Cloud::AppEngine::V1::Firewall::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Firewall clients:
-            #
-            #     ::Google::Cloud::AppEngine::V1::Firewall::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Firewall clients
+            #   ::Google::Cloud::AppEngine::V1::Firewall::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -101,19 +100,15 @@ module Google
             ##
             # Create a new Firewall client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Firewall client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new
             #
-            #     client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new
-            #
-            # To create a new Firewall client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Firewall client.
             # @yieldparam config [Client::Configuration]
@@ -133,14 +128,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -195,6 +189,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::ListIngressRulesRequest.new
+            #
+            #   # Call the list_ingress_rules method.
+            #   result = client.list_ingress_rules request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AppEngine::V1::FirewallRule.
+            #     p response
+            #   end
+            #
             def list_ingress_rules request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -212,16 +227,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_ingress_rules.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_ingress_rules.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firewall_stub.call_rpc :list_ingress_rules, request, options: options do |response, operation|
@@ -269,6 +288,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::BatchUpdateIngressRulesRequest.new
+            #
+            #   # Call the batch_update_ingress_rules method.
+            #   result = client.batch_update_ingress_rules request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::BatchUpdateIngressRulesResponse.
+            #   p result
+            #
             def batch_update_ingress_rules request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -286,16 +320,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_update_ingress_rules.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_update_ingress_rules.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firewall_stub.call_rpc :batch_update_ingress_rules, request, options: options do |response, operation|
@@ -347,6 +385,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::CreateIngressRuleRequest.new
+            #
+            #   # Call the create_ingress_rule method.
+            #   result = client.create_ingress_rule request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::FirewallRule.
+            #   p result
+            #
             def create_ingress_rule request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -364,16 +417,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_ingress_rule.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_ingress_rule.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firewall_stub.call_rpc :create_ingress_rule, request, options: options do |response, operation|
@@ -414,6 +471,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::GetIngressRuleRequest.new
+            #
+            #   # Call the get_ingress_rule method.
+            #   result = client.get_ingress_rule request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::FirewallRule.
+            #   p result
+            #
             def get_ingress_rule request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -431,16 +503,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_ingress_rule.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_ingress_rule.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firewall_stub.call_rpc :get_ingress_rule, request, options: options do |response, operation|
@@ -485,6 +561,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::UpdateIngressRuleRequest.new
+            #
+            #   # Call the update_ingress_rule method.
+            #   result = client.update_ingress_rule request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::FirewallRule.
+            #   p result
+            #
             def update_ingress_rule request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -502,16 +593,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_ingress_rule.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_ingress_rule.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firewall_stub.call_rpc :update_ingress_rule, request, options: options do |response, operation|
@@ -552,6 +647,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::DeleteIngressRuleRequest.new
+            #
+            #   # Call the delete_ingress_rule method.
+            #   result = client.delete_ingress_rule request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_ingress_rule request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -569,16 +679,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_ingress_rule.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_ingress_rule.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firewall_stub.call_rpc :delete_ingress_rule, request, options: options do |response, operation|
@@ -602,22 +716,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_ingress_rules
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_ingress_rules to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::AppEngine::V1::Firewall::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_ingress_rules.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::AppEngine::V1::Firewall::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_ingress_rules.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_ingress_rules.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_ingress_rules.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

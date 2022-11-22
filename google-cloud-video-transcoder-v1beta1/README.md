@@ -33,11 +33,11 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/video/transcoder/v1beta1"
 
 client = ::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Video::Transcoder::V1beta1::CreateJobRequest.new # (request fields as keyword arguments...)
 response = client.create_job request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-video-transcoder-v1beta1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-video-transcoder-v1beta1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/transcoder/)

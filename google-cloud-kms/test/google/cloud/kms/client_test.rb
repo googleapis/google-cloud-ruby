@@ -22,6 +22,16 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Kms::ClientConstructionMinitest < Minitest::Test
+  def test_ekm_service
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Kms.ekm_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Kms::V1::EkmService::Client, client
+    end
+  end
+
   def test_key_management_service
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure

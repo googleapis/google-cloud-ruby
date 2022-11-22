@@ -3,11 +3,11 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/datalabeling/v1beta1/annotation_pb'
 require 'google/cloud/datalabeling/v1beta1/annotation_spec_set_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/datalabeling/v1beta1/evaluation.proto", :syntax => :proto3) do
     add_message "google.cloud.datalabeling.v1beta1.Evaluation" do

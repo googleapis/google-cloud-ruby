@@ -31,7 +31,8 @@ module Google
     module Billing
       module V1
         ##
-        # Retrieves GCP Console billing accounts and associates them with projects.
+        # Retrieves the Google Cloud Console billing accounts and associates them with
+        # projects.
         #
         # To load this service and instantiate a client:
         #

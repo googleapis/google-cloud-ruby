@@ -1,5 +1,5 @@
 --no-private
---title=BigQuery Data Transfer Service API
+--title="BigQuery Data Transfer Service API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

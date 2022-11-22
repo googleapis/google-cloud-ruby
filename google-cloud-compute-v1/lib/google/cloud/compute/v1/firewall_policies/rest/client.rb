@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
+require "google/cloud/compute/v1/firewall_policies/rest/service_stub"
+require "google/cloud/compute/v1/global_organization_operations/rest"
 
 module Google
   module Cloud
@@ -31,8 +33,6 @@ module Google
             # The FirewallPolicies API.
             #
             class Client
-              include GrpcTranscoding
-
               # @private
               attr_reader :firewall_policies_stub
 
@@ -42,13 +42,12 @@ module Google
               # See {::Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all FirewallPolicies clients:
-              #
-              #     ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all FirewallPolicies clients
+              #   ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -65,6 +64,60 @@ module Google
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
+
+                  default_config.rpcs.add_association.timeout = 600.0
+
+                  default_config.rpcs.add_rule.timeout = 600.0
+
+                  default_config.rpcs.clone_rules.timeout = 600.0
+
+                  default_config.rpcs.delete.timeout = 600.0
+
+                  default_config.rpcs.get.timeout = 600.0
+                  default_config.rpcs.get.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.get_association.timeout = 600.0
+                  default_config.rpcs.get_association.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.get_iam_policy.timeout = 600.0
+                  default_config.rpcs.get_iam_policy.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.get_rule.timeout = 600.0
+                  default_config.rpcs.get_rule.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.insert.timeout = 600.0
+
+                  default_config.rpcs.list.timeout = 600.0
+                  default_config.rpcs.list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.list_associations.timeout = 600.0
+                  default_config.rpcs.list_associations.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.move.timeout = 600.0
+
+                  default_config.rpcs.patch.timeout = 600.0
+
+                  default_config.rpcs.patch_rule.timeout = 600.0
+
+                  default_config.rpcs.remove_association.timeout = 600.0
+
+                  default_config.rpcs.remove_rule.timeout = 600.0
+
+                  default_config.rpcs.set_iam_policy.timeout = 600.0
+
+                  default_config.rpcs.test_iam_permissions.timeout = 600.0
 
                   default_config
                 end
@@ -95,28 +148,20 @@ module Google
               ##
               # Create a new FirewallPolicies REST client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new FirewallPolicies REST client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
               #
-              #     client = ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new
-              #
-              # To create a new FirewallPolicies REST client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the FirewallPolicies client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
-                # These require statements are intentionally placed here to initialize
-                # the REST modules only when it's required.
-                require "gapic/rest"
-
                 # Create the configuration object
                 @config = Configuration.new Client.configure
 
@@ -126,12 +171,24 @@ module Google
                 # Create credentials
                 credentials = @config.credentials
                 credentials ||= Credentials.default scope: @config.scope
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
-                @client_stub = ::Gapic::Rest::ClientStub.new endpoint: @config.endpoint, credentials: credentials
+                @global_organization_operations = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.endpoint = @config.endpoint
+                end
+
+                @firewall_policies_stub = ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for long-running operations via GlobalOrganizationOperations.
+              #
+              # @return [::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client]
+              #
+              attr_reader :global_organization_operations
 
               # Service calls
 
@@ -162,16 +219,12 @@ module Google
               #   @param replace_existing_association [::Boolean]
               #     Indicates whether or not to replace it if an association of the attachment already exists. This is false by default, in which case an error will be returned if an association already exists.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_association request, options = nil
@@ -183,29 +236,36 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.add_association.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.add_association.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_add_association request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.add_association request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -233,16 +293,12 @@ module Google
               #   @param firewall_policy_rule_resource [::Google::Cloud::Compute::V1::FirewallPolicyRule, ::Hash]
               #     The body resource for this request
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_rule request, options = nil
@@ -254,29 +310,36 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.add_rule.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.add_rule.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_add_rule request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.add_rule request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -302,18 +365,14 @@ module Google
               #   @param firewall_policy [::String]
               #     Name of the firewall policy to update.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param source_firewall_policy [::String]
               #     The firewall policy from which to copy rules.
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def clone_rules request, options = nil
@@ -325,29 +384,36 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.clone_rules.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.clone_rules.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_clone_rules request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.clone_rules request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -373,16 +439,12 @@ module Google
               #   @param firewall_policy [::String]
               #     Name of the firewall policy to delete.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -394,29 +456,36 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.delete.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.delete.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_delete request
-                response = @client_stub.make_delete_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.delete request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -441,7 +510,7 @@ module Google
               #
               #   @param firewall_policy [::String]
               #     Name of the firewall policy to get.
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::FirewallPolicy]
               # @yieldparam response [::Faraday::Response]
               #
@@ -457,28 +526,30 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.get.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.get.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, _query_string_params = transcode_get request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::FirewallPolicy.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.get request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -505,7 +576,7 @@ module Google
               #     Name of the firewall policy to which the queried rule belongs.
               #   @param name [::String]
               #     The name of the association to get from the firewall policy.
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::FirewallPolicyAssociation]
               # @yieldparam response [::Faraday::Response]
               #
@@ -521,29 +592,30 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.get_association.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.get_association.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_get_association request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::FirewallPolicyAssociation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.get_association request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -570,7 +642,7 @@ module Google
               #     Requested IAM Policy version.
               #   @param resource [::String]
               #     Name or id of the resource for this request.
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
               # @yieldparam response [::Faraday::Response]
               #
@@ -586,29 +658,30 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_get_iam_policy request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Policy.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.get_iam_policy request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -635,7 +708,7 @@ module Google
               #     Name of the firewall policy to which the queried rule belongs.
               #   @param priority [::Integer]
               #     The priority of the rule to get from the firewall policy.
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::FirewallPolicyRule]
               # @yieldparam response [::Faraday::Response]
               #
@@ -651,29 +724,30 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.get_rule.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.get_rule.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_get_rule request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::FirewallPolicyRule.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.get_rule request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -701,16 +775,12 @@ module Google
               #   @param parent_id [::String]
               #     Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -722,33 +792,42 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.insert.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.insert.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_insert request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.insert request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {
+                      "parent_id" => request.parent_id
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
-              # Lists all the policies that have been configured for the specified project.
+              # Lists all the policies that have been configured for the specified folder or organization.
               #
               # @overload list(request, options = nil)
               #   Pass arguments to `list` via a request object, either of type
@@ -768,32 +847,22 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-              #
-              #     For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-              #
-              #     You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-              #
-              #     To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
               #   @param max_results [::Integer]
               #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-              #
-              #     You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-              #
-              #     Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
               #   @param page_token [::String]
               #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
               #   @param parent_id [::String]
               #     Parent ID for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::FirewallPolicyList]
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::FirewallPolicy>]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::FirewallPolicyList]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::FirewallPolicy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def list request, options = nil
@@ -805,29 +874,31 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.list.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.list.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_list request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::FirewallPolicyList.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.list request, options do |result, response|
+                  result = ::Gapic::Rest::PagedEnumerable.new @firewall_policies_stub, :list, "items", request, result, options
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -852,7 +923,7 @@ module Google
               #
               #   @param target_resource [::String]
               #     The target resource to list associations. It is an organization, or a folder.
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::FirewallPoliciesListAssociationsResponse]
               # @yieldparam response [::Faraday::Response]
               #
@@ -868,29 +939,30 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.list_associations.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.list_associations.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_list_associations request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::FirewallPoliciesListAssociationsResponse.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.list_associations request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -918,16 +990,12 @@ module Google
               #   @param parent_id [::String]
               #     The new parent of the firewall policy.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def move request, options = nil
@@ -939,29 +1007,38 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.move.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.move.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_move request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.move request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {
+                      "parent_id" => request.parent_id
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -989,16 +1066,12 @@ module Google
               #   @param firewall_policy_resource [::Google::Cloud::Compute::V1::FirewallPolicy, ::Hash]
               #     The body resource for this request
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def patch request, options = nil
@@ -1010,29 +1083,36 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.patch.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.patch.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_patch request
-                response = @client_stub.make_patch_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.patch request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -1062,16 +1142,12 @@ module Google
               #   @param priority [::Integer]
               #     The priority of the rule to patch.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def patch_rule request, options = nil
@@ -1083,29 +1159,36 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.patch_rule.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.patch_rule.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_patch_rule request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.patch_rule request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -1133,16 +1216,12 @@ module Google
               #   @param name [::String]
               #     Name for the attachment that will be removed.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_association request, options = nil
@@ -1154,29 +1233,36 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.remove_association.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.remove_association.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_remove_association request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.remove_association request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -1204,16 +1290,12 @@ module Google
               #   @param priority [::Integer]
               #     The priority of the rule to remove from the firewall policy.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_rule request, options = nil
@@ -1225,29 +1307,36 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.remove_rule.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.remove_rule.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_remove_rule request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.remove_rule request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -1274,7 +1363,7 @@ module Google
               #     The body resource for this request
               #   @param resource [::String]
               #     Name or id of the resource for this request.
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
               # @yieldparam response [::Faraday::Response]
               #
@@ -1290,29 +1379,30 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_set_iam_policy request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Policy.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.set_iam_policy request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -1339,7 +1429,7 @@ module Google
               #     Name or id of the resource for this request.
               #   @param test_permissions_request_resource [::Google::Cloud::Compute::V1::TestPermissionsRequest, ::Hash]
               #     The body resource for this request
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
               # @yieldparam response [::Faraday::Response]
               #
@@ -1355,29 +1445,30 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_test_iam_permissions request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::TestPermissionsResponse.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @firewall_policies_stub.test_iam_permissions request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -1429,6 +1520,9 @@ module Google
               # @!attribute [rw] timeout
               #   The call timeout in seconds.
               #   @return [::Numeric]
+              # @!attribute [rw] metadata
+              #   Additional REST headers to be sent with the call.
+              #   @return [::Hash{::Symbol=>::String}]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -1442,12 +1536,172 @@ module Google
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
                 config_attr :timeout,       nil, ::Numeric, nil
+                config_attr :metadata,      nil, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil
                   @parent_config = parent_config unless parent_config.nil?
 
                   yield self if block_given?
+                end
+
+                ##
+                # Configurations for individual RPCs
+                # @return [Rpcs]
+                #
+                def rpcs
+                  @rpcs ||= begin
+                    parent_rpcs = nil
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
+                    Rpcs.new parent_rpcs
+                  end
+                end
+
+                ##
+                # Configuration RPC class for the FirewallPolicies API.
+                #
+                # Includes fields providing the configuration for each RPC in this service.
+                # Each configuration object is of type `Gapic::Config::Method` and includes
+                # the following configuration fields:
+                #
+                #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
+                #
+                # there is one other field (`retry_policy`) that can be set
+                # but is currently not supported for REST Gapic libraries.
+                #
+                class Rpcs
+                  ##
+                  # RPC-specific configuration for `add_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_association
+                  ##
+                  # RPC-specific configuration for `add_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_rule
+                  ##
+                  # RPC-specific configuration for `clone_rules`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :clone_rules
+                  ##
+                  # RPC-specific configuration for `delete`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete
+                  ##
+                  # RPC-specific configuration for `get`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get
+                  ##
+                  # RPC-specific configuration for `get_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_association
+                  ##
+                  # RPC-specific configuration for `get_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_iam_policy
+                  ##
+                  # RPC-specific configuration for `get_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_rule
+                  ##
+                  # RPC-specific configuration for `insert`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :insert
+                  ##
+                  # RPC-specific configuration for `list`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list
+                  ##
+                  # RPC-specific configuration for `list_associations`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_associations
+                  ##
+                  # RPC-specific configuration for `move`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :move
+                  ##
+                  # RPC-specific configuration for `patch`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :patch
+                  ##
+                  # RPC-specific configuration for `patch_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :patch_rule
+                  ##
+                  # RPC-specific configuration for `remove_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :remove_association
+                  ##
+                  # RPC-specific configuration for `remove_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :remove_rule
+                  ##
+                  # RPC-specific configuration for `set_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_iam_policy
+                  ##
+                  # RPC-specific configuration for `test_iam_permissions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :test_iam_permissions
+
+                  # @private
+                  def initialize parent_rpcs = nil
+                    add_association_config = parent_rpcs.add_association if parent_rpcs.respond_to? :add_association
+                    @add_association = ::Gapic::Config::Method.new add_association_config
+                    add_rule_config = parent_rpcs.add_rule if parent_rpcs.respond_to? :add_rule
+                    @add_rule = ::Gapic::Config::Method.new add_rule_config
+                    clone_rules_config = parent_rpcs.clone_rules if parent_rpcs.respond_to? :clone_rules
+                    @clone_rules = ::Gapic::Config::Method.new clone_rules_config
+                    delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
+                    @delete = ::Gapic::Config::Method.new delete_config
+                    get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
+                    @get = ::Gapic::Config::Method.new get_config
+                    get_association_config = parent_rpcs.get_association if parent_rpcs.respond_to? :get_association
+                    @get_association = ::Gapic::Config::Method.new get_association_config
+                    get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                    @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                    get_rule_config = parent_rpcs.get_rule if parent_rpcs.respond_to? :get_rule
+                    @get_rule = ::Gapic::Config::Method.new get_rule_config
+                    insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
+                    @insert = ::Gapic::Config::Method.new insert_config
+                    list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
+                    @list = ::Gapic::Config::Method.new list_config
+                    list_associations_config = parent_rpcs.list_associations if parent_rpcs.respond_to? :list_associations
+                    @list_associations = ::Gapic::Config::Method.new list_associations_config
+                    move_config = parent_rpcs.move if parent_rpcs.respond_to? :move
+                    @move = ::Gapic::Config::Method.new move_config
+                    patch_config = parent_rpcs.patch if parent_rpcs.respond_to? :patch
+                    @patch = ::Gapic::Config::Method.new patch_config
+                    patch_rule_config = parent_rpcs.patch_rule if parent_rpcs.respond_to? :patch_rule
+                    @patch_rule = ::Gapic::Config::Method.new patch_rule_config
+                    remove_association_config = parent_rpcs.remove_association if parent_rpcs.respond_to? :remove_association
+                    @remove_association = ::Gapic::Config::Method.new remove_association_config
+                    remove_rule_config = parent_rpcs.remove_rule if parent_rpcs.respond_to? :remove_rule
+                    @remove_rule = ::Gapic::Config::Method.new remove_rule_config
+                    set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                    @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                    @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+
+                    yield self if block_given?
+                  end
                 end
               end
             end

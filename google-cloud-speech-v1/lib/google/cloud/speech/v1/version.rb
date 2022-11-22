@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Speech
       module V1
-        VERSION = "0.4.1"
+        VERSION = "0.9.0"
       end
     end
   end

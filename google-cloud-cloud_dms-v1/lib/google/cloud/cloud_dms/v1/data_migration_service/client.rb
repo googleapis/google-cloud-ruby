@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::CloudDMS::V1::DataMigrationService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all DataMigrationService clients:
-            #
-            #     ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all DataMigrationService clients
+            #   ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,10 +66,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 10.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_migration_jobs.timeout = 60.0
@@ -136,19 +132,15 @@ module Google
             ##
             # Create a new DataMigrationService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new DataMigrationService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
             #
-            #     client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
-            #
-            # To create a new DataMigrationService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the DataMigrationService client.
             # @yieldparam config [Client::Configuration]
@@ -168,14 +160,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -183,6 +174,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -257,6 +249,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::ListMigrationJobsRequest.new
+            #
+            #   # Call the list_migration_jobs method.
+            #   result = client.list_migration_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::CloudDMS::V1::MigrationJob.
+            #     p response
+            #   end
+            #
             def list_migration_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -274,16 +287,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_migration_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_migration_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :list_migration_jobs, request, options: options do |response, operation|
@@ -324,6 +341,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::GetMigrationJobRequest.new
+            #
+            #   # Call the get_migration_job method.
+            #   result = client.get_migration_job request
+            #
+            #   # The returned object is of type Google::Cloud::CloudDMS::V1::MigrationJob.
+            #   p result
+            #
             def get_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -341,16 +373,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :get_migration_job, request, options: options do |response, operation|
@@ -404,6 +440,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::CreateMigrationJobRequest.new
+            #
+            #   # Call the create_migration_job method.
+            #   result = client.create_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -421,16 +479,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :create_migration_job, request, options: options do |response, operation|
@@ -482,6 +544,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::UpdateMigrationJobRequest.new
+            #
+            #   # Call the update_migration_job method.
+            #   result = client.update_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -499,16 +583,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "migration_job.name" => request.migration_job.name
-              }
+              header_params = {}
+              if request.migration_job&.name
+                header_params["migration_job.name"] = request.migration_job.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :update_migration_job, request, options: options do |response, operation|
@@ -561,6 +649,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::DeleteMigrationJobRequest.new
+            #
+            #   # Call the delete_migration_job method.
+            #   result = client.delete_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -578,16 +688,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :delete_migration_job, request, options: options do |response, operation|
@@ -628,6 +742,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::StartMigrationJobRequest.new
+            #
+            #   # Call the start_migration_job method.
+            #   result = client.start_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def start_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -645,16 +781,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.start_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.start_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :start_migration_job, request, options: options do |response, operation|
@@ -695,6 +835,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::StopMigrationJobRequest.new
+            #
+            #   # Call the stop_migration_job method.
+            #   result = client.stop_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def stop_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -712,16 +874,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.stop_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.stop_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :stop_migration_job, request, options: options do |response, operation|
@@ -763,6 +929,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::ResumeMigrationJobRequest.new
+            #
+            #   # Call the resume_migration_job method.
+            #   result = client.resume_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def resume_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -780,16 +968,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.resume_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.resume_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :resume_migration_job, request, options: options do |response, operation|
@@ -831,6 +1023,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::PromoteMigrationJobRequest.new
+            #
+            #   # Call the promote_migration_job method.
+            #   result = client.promote_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def promote_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -848,16 +1062,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.promote_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.promote_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :promote_migration_job, request, options: options do |response, operation|
@@ -899,6 +1117,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::VerifyMigrationJobRequest.new
+            #
+            #   # Call the verify_migration_job method.
+            #   result = client.verify_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def verify_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -916,16 +1156,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.verify_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.verify_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :verify_migration_job, request, options: options do |response, operation|
@@ -968,6 +1212,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::RestartMigrationJobRequest.new
+            #
+            #   # Call the restart_migration_job method.
+            #   result = client.restart_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def restart_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -985,16 +1251,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.restart_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.restart_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :restart_migration_job, request, options: options do |response, operation|
@@ -1044,6 +1314,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::GenerateSshScriptRequest.new
+            #
+            #   # Call the generate_ssh_script method.
+            #   result = client.generate_ssh_script request
+            #
+            #   # The returned object is of type Google::Cloud::CloudDMS::V1::SshScript.
+            #   p result
+            #
             def generate_ssh_script request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1061,16 +1346,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "migration_job" => request.migration_job
-              }
+              header_params = {}
+              if request.migration_job
+                header_params["migration_job"] = request.migration_job
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.generate_ssh_script.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_ssh_script.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :generate_ssh_script, request, options: options do |response, operation|
@@ -1133,6 +1422,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::ListConnectionProfilesRequest.new
+            #
+            #   # Call the list_connection_profiles method.
+            #   result = client.list_connection_profiles request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::CloudDMS::V1::ConnectionProfile.
+            #     p response
+            #   end
+            #
             def list_connection_profiles request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1150,16 +1460,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_connection_profiles.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_connection_profiles.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :list_connection_profiles, request, options: options do |response, operation|
@@ -1200,6 +1514,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::GetConnectionProfileRequest.new
+            #
+            #   # Call the get_connection_profile method.
+            #   result = client.get_connection_profile request
+            #
+            #   # The returned object is of type Google::Cloud::CloudDMS::V1::ConnectionProfile.
+            #   p result
+            #
             def get_connection_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1217,16 +1546,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_connection_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_connection_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :get_connection_profile, request, options: options do |response, operation|
@@ -1278,6 +1611,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::CreateConnectionProfileRequest.new
+            #
+            #   # Call the create_connection_profile method.
+            #   result = client.create_connection_profile request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_connection_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1295,16 +1650,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_connection_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_connection_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :create_connection_profile, request, options: options do |response, operation|
@@ -1356,6 +1715,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::UpdateConnectionProfileRequest.new
+            #
+            #   # Call the update_connection_profile method.
+            #   result = client.update_connection_profile request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_connection_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1373,16 +1754,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "connection_profile.name" => request.connection_profile.name
-              }
+              header_params = {}
+              if request.connection_profile&.name
+                header_params["connection_profile.name"] = request.connection_profile.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_connection_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_connection_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :update_connection_profile, request, options: options do |response, operation|
@@ -1436,6 +1821,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::DeleteConnectionProfileRequest.new
+            #
+            #   # Call the delete_connection_profile method.
+            #   result = client.delete_connection_profile request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_connection_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1453,16 +1860,20 @@ module Google
                 gapic_version: ::Google::Cloud::CloudDMS::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_connection_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_connection_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :delete_connection_profile, request, options: options do |response, operation|
@@ -1487,22 +1898,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_migration_jobs
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_migration_jobs to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_migration_jobs.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_migration_jobs.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_migration_jobs.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_migration_jobs.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

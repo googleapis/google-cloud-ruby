@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Asset::V1::AssetService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all AssetService clients:
-            #
-            #     ::Google::Cloud::Asset::V1::AssetService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all AssetService clients
+            #   ::Google::Cloud::Asset::V1::AssetService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -69,73 +68,78 @@ module Google
 
                 default_config.rpcs.list_assets.timeout = 60.0
                 default_config.rpcs.list_assets.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.batch_get_assets_history.timeout = 60.0
                 default_config.rpcs.batch_get_assets_history.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_feed.timeout = 60.0
 
                 default_config.rpcs.get_feed.timeout = 60.0
                 default_config.rpcs.get_feed.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_feeds.timeout = 60.0
                 default_config.rpcs.list_feeds.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_feed.timeout = 60.0
 
                 default_config.rpcs.delete_feed.timeout = 60.0
                 default_config.rpcs.delete_feed.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.search_all_resources.timeout = 15.0
+                default_config.rpcs.search_all_resources.timeout = 30.0
                 default_config.rpcs.search_all_resources.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.search_all_iam_policies.timeout = 15.0
+                default_config.rpcs.search_all_iam_policies.timeout = 30.0
                 default_config.rpcs.search_all_iam_policies.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.analyze_iam_policy.timeout = 300.0
                 default_config.rpcs.analyze_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.analyze_iam_policy_longrunning.timeout = 60.0
+
+                default_config.rpcs.query_assets.timeout = 200.0
+                default_config.rpcs.query_assets.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.create_saved_query.timeout = 60.0
+
+                default_config.rpcs.get_saved_query.timeout = 60.0
+                default_config.rpcs.get_saved_query.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
+                default_config.rpcs.list_saved_queries.timeout = 60.0
+                default_config.rpcs.list_saved_queries.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
+                default_config.rpcs.update_saved_query.timeout = 60.0
+
+                default_config.rpcs.delete_saved_query.timeout = 60.0
+                default_config.rpcs.delete_saved_query.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
+                default_config.rpcs.batch_get_effective_iam_policies.timeout = 300.0
+                default_config.rpcs.batch_get_effective_iam_policies.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
 
                 default_config
               end
@@ -166,19 +170,15 @@ module Google
             ##
             # Create a new AssetService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new AssetService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Asset::V1::AssetService::Client.new
             #
-            #     client = ::Google::Cloud::Asset::V1::AssetService::Client.new
-            #
-            # To create a new AssetService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the AssetService client.
             # @yieldparam config [Client::Configuration]
@@ -198,14 +198,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -213,6 +212,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -239,12 +239,12 @@ module Google
             # location/BigQuery table. For Cloud Storage location destinations, the
             # output format is newline-delimited JSON. Each line represents a
             # {::Google::Cloud::Asset::V1::Asset google.cloud.asset.v1.Asset} in the JSON format; for BigQuery table
-            # destinations, the output table stores the fields in asset proto as columns.
-            # This API implements the {::Google::Longrunning::Operation google.longrunning.Operation} API
-            # , which allows you to keep track of the export. We recommend intervals of
-            # at least 2 seconds with exponential retry to poll the export operation
-            # result. For regular-size resource parent, the export operation usually
-            # finishes within 5 minutes.
+            # destinations, the output table stores the fields in asset Protobuf as
+            # columns. This API implements the {::Google::Longrunning::Operation google.longrunning.Operation} API,
+            # which allows you to keep track of the export. We recommend intervals of at
+            # least 2 seconds with exponential retry to poll the export operation result.
+            # For regular-size resource parent, the export operation usually finishes
+            # within 5 minutes.
             #
             # @overload export_assets(request, options = nil)
             #   Pass arguments to `export_assets` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload export_assets(parent: nil, read_time: nil, asset_types: nil, content_type: nil, output_config: nil)
+            # @overload export_assets(parent: nil, read_time: nil, asset_types: nil, content_type: nil, output_config: nil, relationship_types: nil)
             #   Pass arguments to `export_assets` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -296,6 +296,22 @@ module Google
             #     returned.
             #   @param output_config [::Google::Cloud::Asset::V1::OutputConfig, ::Hash]
             #     Required. Output configuration indicating where the results will be output to.
+            #   @param relationship_types [::Array<::String>]
+            #     A list of relationship types to export, for example:
+            #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+            #     content_type=RELATIONSHIP.
+            #     * If specified:
+            #     it snapshots specified relationships. It returns an error if
+            #     any of the [relationship_types] doesn't belong to the supported
+            #     relationship types of the [asset_types] or if any of the [asset_types]
+            #     doesn't belong to the source types of the [relationship_types].
+            #     * Otherwise:
+            #     it snapshots the supported relationships for all [asset_types] or returns
+            #     an error if any of the [asset_types] has no relationship support.
+            #     An unspecified asset types field means all supported asset_types.
+            #     See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+            #     supported asset types and relationship types.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -304,6 +320,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::ExportAssetsRequest.new
+            #
+            #   # Call the export_assets method.
+            #   result = client.export_assets request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def export_assets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -322,16 +360,20 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.export_assets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.export_assets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :export_assets, request, options: options do |response, operation|
@@ -357,16 +399,17 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_assets(parent: nil, read_time: nil, asset_types: nil, content_type: nil, page_size: nil, page_token: nil)
+            # @overload list_assets(parent: nil, read_time: nil, asset_types: nil, content_type: nil, page_size: nil, page_token: nil, relationship_types: nil)
             #   Pass arguments to `list_assets` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Name of the organization or project the assets belong to. Format:
+            #     Required. Name of the organization, folder, or project the assets belong to. Format:
             #     "organizations/[organization-number]" (such as "organizations/123"),
-            #     "projects/[project-id]" (such as "projects/my-project-id"), or
-            #     "projects/[project-number]" (such as "projects/12345").
+            #     "projects/[project-id]" (such as "projects/my-project-id"),
+            #     "projects/[project-number]" (such as "projects/12345"), or
+            #     "folders/[folder-number]" (such as "folders/12345").
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Timestamp to take an asset snapshot. This can only be set to a timestamp
             #     between the current time and the current time minus 35 days (inclusive).
@@ -402,6 +445,22 @@ module Google
             #     The `next_page_token` returned from the previous `ListAssetsResponse`, or
             #     unspecified for the first `ListAssetsRequest`. It is a continuation of a
             #     prior `ListAssets` call, and the API should return the next page of assets.
+            #   @param relationship_types [::Array<::String>]
+            #     A list of relationship types to output, for example:
+            #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+            #     content_type=RELATIONSHIP.
+            #     * If specified:
+            #     it snapshots specified relationships. It returns an error if
+            #     any of the [relationship_types] doesn't belong to the supported
+            #     relationship types of the [asset_types] or if any of the [asset_types]
+            #     doesn't belong to the source types of the [relationship_types].
+            #     * Otherwise:
+            #     it snapshots the supported relationships for all [asset_types] or returns
+            #     an error if any of the [asset_types] has no relationship support.
+            #     An unspecified asset types field means all supported asset_types.
+            #     See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+            #     for all supported asset types and relationship types.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::Asset>]
@@ -410,6 +469,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::Asset>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::ListAssetsRequest.new
+            #
+            #   # Call the list_assets method.
+            #   result = client.list_assets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Asset::V1::Asset.
+            #     p response
+            #   end
             #
             def list_assets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -428,16 +508,20 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_assets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_assets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :list_assets, request, options: options do |response, operation|
@@ -468,7 +552,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_get_assets_history(parent: nil, asset_names: nil, content_type: nil, read_time_window: nil)
+            # @overload batch_get_assets_history(parent: nil, asset_names: nil, content_type: nil, read_time_window: nil, relationship_types: nil)
             #   Pass arguments to `batch_get_assets_history` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -495,6 +579,23 @@ module Google
             #     If start_time is not set, the snapshot of the assets at end_time will be
             #     returned. The returned results contain all temporal assets whose time
             #     window overlap with read_time_window.
+            #   @param relationship_types [::Array<::String>]
+            #     Optional. A list of relationship types to output, for example:
+            #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+            #     content_type=RELATIONSHIP.
+            #     * If specified:
+            #     it outputs specified relationships' history on the [asset_names]. It
+            #     returns an error if any of the [relationship_types] doesn't belong to the
+            #     supported relationship types of the [asset_names] or if any of the
+            #     [asset_names]'s types doesn't belong to the source types of the
+            #     [relationship_types].
+            #     * Otherwise:
+            #     it outputs the supported relationships' history on the [asset_names] or
+            #     returns an error if any of the [asset_names]'s types has no relationship
+            #     support.
+            #     See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+            #     supported asset types and relationship types.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse]
@@ -503,6 +604,21 @@ module Google
             # @return [::Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new
+            #
+            #   # Call the batch_get_assets_history method.
+            #   result = client.batch_get_assets_history request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse.
+            #   p result
             #
             def batch_get_assets_history request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -521,16 +637,20 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_get_assets_history.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_get_assets_history.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :batch_get_assets_history, request, options: options do |response, operation|
@@ -584,6 +704,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::CreateFeedRequest.new
+            #
+            #   # Call the create_feed method.
+            #   result = client.create_feed request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::Feed.
+            #   p result
+            #
             def create_feed request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -601,16 +736,20 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_feed.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_feed.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :create_feed, request, options: options do |response, operation|
@@ -653,6 +792,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::GetFeedRequest.new
+            #
+            #   # Call the get_feed method.
+            #   result = client.get_feed request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::Feed.
+            #   p result
+            #
             def get_feed request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -670,16 +824,20 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_feed.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_feed.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :get_feed, request, options: options do |response, operation|
@@ -721,6 +879,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::ListFeedsRequest.new
+            #
+            #   # Call the list_feeds method.
+            #   result = client.list_feeds request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::ListFeedsResponse.
+            #   p result
+            #
             def list_feeds request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -738,16 +911,20 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_feeds.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_feeds.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :list_feeds, request, options: options do |response, operation|
@@ -795,6 +972,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::UpdateFeedRequest.new
+            #
+            #   # Call the update_feed method.
+            #   result = client.update_feed request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::Feed.
+            #   p result
+            #
             def update_feed request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -812,16 +1004,20 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "feed.name" => request.feed.name
-              }
+              header_params = {}
+              if request.feed&.name
+                header_params["feed.name"] = request.feed.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_feed.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_feed.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :update_feed, request, options: options do |response, operation|
@@ -864,6 +1060,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::DeleteFeedRequest.new
+            #
+            #   # Call the delete_feed method.
+            #   result = client.delete_feed request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_feed request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -881,16 +1092,20 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_feed.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_feed.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :delete_feed, request, options: options do |response, operation|
@@ -917,7 +1132,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_all_resources(scope: nil, query: nil, asset_types: nil, page_size: nil, page_token: nil, order_by: nil)
+            # @overload search_all_resources(scope: nil, query: nil, asset_types: nil, page_size: nil, page_token: nil, order_by: nil, read_mask: nil)
             #   Pass arguments to `search_all_resources` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -956,11 +1171,23 @@ module Google
             #       and its value is "prod".
             #     * `labels.env:*` to find Cloud resources that have a label "env".
             #     * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
-            #       encryption key whose name contains the word "key".
+            #       encryption key whose name contains "key" as a word. This field is
+            #       deprecated. Please use the `kmsKeys` field to retrieve KMS key
+            #       information.
+            #     * `kmsKeys:key` to find Cloud resources encrypted with customer-managed
+            #       encryption keys whose name contains the word "key".
+            #     * `relationships:instance-group-1` to find Cloud resources that have
+            #       relationships with "instance-group-1" in the related resource name.
+            #     * `relationships:INSTANCE_TO_INSTANCEGROUP` to find compute instances that
+            #       have relationships of type "INSTANCE_TO_INSTANCEGROUP".
+            #     * `relationships.INSTANCE_TO_INSTANCEGROUP:instance-group-1` to find
+            #       compute instances that have relationships with "instance-group-1" in the
+            #       compute instance group resource name, for relationship type
+            #       "INSTANCE_TO_INSTANCEGROUP".
             #     * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
             #       word.
-            #     * `NOT state:ACTIVE` to find \\{\\{gcp_name}} resources whose state
-            #       doesn't contain "ACTIVE" as a word.
+            #     * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
+            #       "ACTIVE" as a word.
             #     * `createTime<1609459200` to find Cloud resources that were created before
             #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
             #       "2021-01-01 00:00:00 UTC" in seconds.
@@ -1006,21 +1233,56 @@ module Google
             #     to indicate descending order. Redundant space characters are ignored.
             #     Example: "location DESC, name".
             #     Only singular primitive fields in the response are sortable:
+            #
             #       * name
             #       * assetType
             #       * project
             #       * displayName
             #       * description
             #       * location
-            #       * kmsKey
             #       * createTime
             #       * updateTime
             #       * state
             #       * parentFullResourceName
             #       * parentAssetType
-            #     All the other fields such as repeated fields (e.g., `networkTags`), map
-            #     fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
-            #     are not supported.
+            #
+            #     All the other fields such as repeated fields (e.g., `networkTags`,
+            #     `kmsKeys`), map fields (e.g., `labels`) and struct fields (e.g.,
+            #     `additionalAttributes`) are not supported.
+            #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. A comma-separated list of fields specifying which fields to be returned in
+            #     ResourceSearchResult. Only '*' or combination of top level fields can be
+            #     specified. Field names of both snake_case and camelCase are supported.
+            #     Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
+            #
+            #     The read_mask paths must be valid field paths listed but not limited to
+            #     (both snake_case and camelCase are supported):
+            #
+            #       * name
+            #       * assetType
+            #       * project
+            #       * displayName
+            #       * description
+            #       * location
+            #       * tagKeys
+            #       * tagValues
+            #       * tagValueIds
+            #       * labels
+            #       * networkTags
+            #       * kmsKey (This field is deprecated. Please use the `kmsKeys` field to
+            #         retrieve KMS key information.)
+            #       * kmsKeys
+            #       * createTime
+            #       * updateTime
+            #       * state
+            #       * additionalAttributes
+            #       * versionedResources
+            #
+            #     If read_mask is not specified, all fields except versionedResources will
+            #     be returned.
+            #     If only '*' is specified, all fields including versionedResources will be
+            #     returned.
+            #     Any invalid field path will trigger INVALID_ARGUMENT error.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::ResourceSearchResult>]
@@ -1029,6 +1291,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::ResourceSearchResult>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::SearchAllResourcesRequest.new
+            #
+            #   # Call the search_all_resources method.
+            #   result = client.search_all_resources request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Asset::V1::ResourceSearchResult.
+            #     p response
+            #   end
             #
             def search_all_resources request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1047,16 +1330,20 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "scope" => request.scope
-              }
+              header_params = {}
+              if request.scope
+                header_params["scope"] = request.scope
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.search_all_resources.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_all_resources.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :search_all_resources, request, options: options do |response, operation|
@@ -1084,7 +1371,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_all_iam_policies(scope: nil, query: nil, page_size: nil, page_token: nil)
+            # @overload search_all_iam_policies(scope: nil, query: nil, page_size: nil, page_token: nil, asset_types: nil, order_by: nil)
             #   Pass arguments to `search_all_iam_policies` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1107,11 +1394,11 @@ module Google
             #     query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
             #     for more information. If not specified or empty, it will search all the
             #     IAM policies within the specified `scope`. Note that the query string is
-            #     compared against each Cloud IAM policy binding, including its members,
+            #     compared against each Cloud IAM policy binding, including its principals,
             #     roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
             #     contain the bindings that match your query. To learn more about the IAM
-            #     policy structure, see [IAM policy
-            #     doc](https://cloud.google.com/iam/docs/policies#structure).
+            #     policy structure, see the [IAM policy
+            #     documentation](https://cloud.google.com/iam/help/allow-policies/structure).
             #
             #     Examples:
             #
@@ -1141,6 +1428,10 @@ module Google
             #     * `resource:(instance1 OR instance2) policy:amy` to find
             #       IAM policy bindings that are set on resources "instance1" or
             #       "instance2" and also specify user "amy".
+            #     * `roles:roles/compute.admin` to find IAM policy bindings that specify the
+            #       Compute Admin role.
+            #     * `memberTypes:user` to find IAM policy bindings that contain the
+            #       principal type "user".
             #   @param page_size [::Integer]
             #     Optional. The page size for search result pagination. Page size is capped at 500 even
             #     if a larger value is given. If set to zero, server will pick an appropriate
@@ -1151,6 +1442,34 @@ module Google
             #     this method. `page_token` must be the value of `next_page_token` from the
             #     previous response. The values of all other method parameters must be
             #     identical to those in the previous call.
+            #   @param asset_types [::Array<::String>]
+            #     Optional. A list of asset types that the IAM policies are attached to. If empty, it
+            #     will search the IAM policies that are attached to all the [searchable asset
+            #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+            #
+            #     Regular expressions are also supported. For example:
+            #
+            #     * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
+            #     starts with "compute.googleapis.com".
+            #     * ".*Instance" snapshots IAM policies attached to asset type ends with
+            #     "Instance".
+            #     * ".*Instance.*" snapshots IAM policies attached to asset type contains
+            #     "Instance".
+            #
+            #     See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+            #     regular expression syntax. If the regular expression does not match any
+            #     supported asset type, an INVALID_ARGUMENT error will be returned.
+            #   @param order_by [::String]
+            #     Optional. A comma-separated list of fields specifying the sorting order of the
+            #     results. The default order is ascending. Add " DESC" after the field name
+            #     to indicate descending order. Redundant space characters are ignored.
+            #     Example: "assetType DESC, resource".
+            #     Only singular primitive fields in the response are sortable:
+            #       * resource
+            #       * assetType
+            #       * project
+            #     All the other fields such as repeated fields (e.g., `folders`) and
+            #     non-primitive fields (e.g., `policy`) are not supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::IamPolicySearchResult>]
@@ -1159,6 +1478,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::IamPolicySearchResult>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new
+            #
+            #   # Call the search_all_iam_policies method.
+            #   result = client.search_all_iam_policies request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Asset::V1::IamPolicySearchResult.
+            #     p response
+            #   end
             #
             def search_all_iam_policies request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1177,16 +1517,20 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "scope" => request.scope
-              }
+              header_params = {}
+              if request.scope
+                header_params["scope"] = request.scope
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.search_all_iam_policies.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_all_iam_policies.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :search_all_iam_policies, request, options: options do |response, operation|
@@ -1212,13 +1556,30 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload analyze_iam_policy(analysis_query: nil, execution_timeout: nil)
+            # @overload analyze_iam_policy(analysis_query: nil, saved_analysis_query: nil, execution_timeout: nil)
             #   Pass arguments to `analyze_iam_policy` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param analysis_query [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery, ::Hash]
             #     Required. The request query.
+            #   @param saved_analysis_query [::String]
+            #     Optional. The name of a saved query, which must be in the format of:
+            #
+            #     * projects/project_number/savedQueries/saved_query_id
+            #     * folders/folder_number/savedQueries/saved_query_id
+            #     * organizations/organization_number/savedQueries/saved_query_id
+            #
+            #     If both `analysis_query` and `saved_analysis_query` are provided, they
+            #     will be merged together with the `saved_analysis_query` as base and
+            #     the `analysis_query` as overrides. For more details of the merge behavior,
+            #     please refer to the
+            #     [MergeFrom](https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details)
+            #     page.
+            #
+            #     Note that you cannot override primitive fields with default value, such as
+            #     0 or empty string, etc., because we use proto3, which doesn't support field
+            #     presence yet.
             #   @param execution_timeout [::Google::Protobuf::Duration, ::Hash]
             #     Optional. Amount of time executable has to complete.  See JSON representation of
             #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
@@ -1239,6 +1600,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new
+            #
+            #   # Call the analyze_iam_policy method.
+            #   result = client.analyze_iam_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse.
+            #   p result
+            #
             def analyze_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1256,16 +1632,20 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "analysis_query.scope" => request.analysis_query.scope
-              }
+              header_params = {}
+              if request.analysis_query&.scope
+                header_params["analysis_query.scope"] = request.analysis_query.scope
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.analyze_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.analyze_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :analyze_iam_policy, request, options: options do |response, operation|
@@ -1285,7 +1665,7 @@ module Google
             # {::Google::Longrunning::Operation google.longrunning.Operation}, which allows you to track the operation
             # status. We recommend intervals of at least 2 seconds with exponential
             # backoff retry to poll the operation result. The metadata contains the
-            # request to help callers to map responses to requests.
+            # metadata for the long-running operation.
             #
             # @overload analyze_iam_policy_longrunning(request, options = nil)
             #   Pass arguments to `analyze_iam_policy_longrunning` via a request object, either of type
@@ -1297,13 +1677,30 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload analyze_iam_policy_longrunning(analysis_query: nil, output_config: nil)
+            # @overload analyze_iam_policy_longrunning(analysis_query: nil, saved_analysis_query: nil, output_config: nil)
             #   Pass arguments to `analyze_iam_policy_longrunning` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param analysis_query [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery, ::Hash]
             #     Required. The request query.
+            #   @param saved_analysis_query [::String]
+            #     Optional. The name of a saved query, which must be in the format of:
+            #
+            #     * projects/project_number/savedQueries/saved_query_id
+            #     * folders/folder_number/savedQueries/saved_query_id
+            #     * organizations/organization_number/savedQueries/saved_query_id
+            #
+            #     If both `analysis_query` and `saved_analysis_query` are provided, they
+            #     will be merged together with the `saved_analysis_query` as base and
+            #     the `analysis_query` as overrides. For more details of the merge behavior,
+            #     please refer to the
+            #     [MergeFrom](https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details)
+            #     doc.
+            #
+            #     Note that you cannot override primitive fields with default value, such as
+            #     0 or empty string, etc., because we use proto3, which doesn't support field
+            #     presence yet.
             #   @param output_config [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig, ::Hash]
             #     Required. Output configuration indicating where the results will be output to.
             #
@@ -1314,6 +1711,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new
+            #
+            #   # Call the analyze_iam_policy_longrunning method.
+            #   result = client.analyze_iam_policy_longrunning request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def analyze_iam_policy_longrunning request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1332,20 +1751,862 @@ module Google
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "analysis_query.scope" => request.analysis_query.scope
-              }
+              header_params = {}
+              if request.analysis_query&.scope
+                header_params["analysis_query.scope"] = request.analysis_query.scope
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.analyze_iam_policy_longrunning.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.analyze_iam_policy_longrunning.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :analyze_iam_policy_longrunning, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Analyze moving a resource to a specified destination without kicking off
+            # the actual move. The analysis is best effort depending on the user's
+            # permissions of viewing different hierarchical policies and configurations.
+            # The policies and configuration are subject to change before the actual
+            # resource migration takes place.
+            #
+            # @overload analyze_move(request, options = nil)
+            #   Pass arguments to `analyze_move` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::AnalyzeMoveRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::AnalyzeMoveRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload analyze_move(resource: nil, destination_parent: nil, view: nil)
+            #   Pass arguments to `analyze_move` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param resource [::String]
+            #     Required. Name of the resource to perform the analysis against.
+            #     Only GCP Project are supported as of today. Hence, this can only be Project
+            #     ID (such as "projects/my-project-id") or a Project Number (such as
+            #     "projects/12345").
+            #   @param destination_parent [::String]
+            #     Required. Name of the GCP Folder or Organization to reparent the target
+            #     resource. The analysis will be performed against hypothetically moving the
+            #     resource to this specified desitination parent. This can only be a Folder
+            #     number (such as "folders/123") or an Organization number (such as
+            #     "organizations/123").
+            #   @param view [::Google::Cloud::Asset::V1::AnalyzeMoveRequest::AnalysisView]
+            #     Analysis view indicating what information should be included in the
+            #     analysis response. If unspecified, the default view is FULL.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Asset::V1::AnalyzeMoveResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Asset::V1::AnalyzeMoveResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::AnalyzeMoveRequest.new
+            #
+            #   # Call the analyze_move method.
+            #   result = client.analyze_move request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::AnalyzeMoveResponse.
+            #   p result
+            #
+            def analyze_move request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::AnalyzeMoveRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.analyze_move.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.analyze_move.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.analyze_move.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :analyze_move, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Issue a job that queries assets using a SQL statement compatible with
+            # [BigQuery Standard
+            # SQL](http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
+            #
+            # If the query execution finishes within timeout and there's no pagination,
+            # the full query results will be returned in the `QueryAssetsResponse`.
+            #
+            # Otherwise, full query results can be obtained by issuing extra requests
+            # with the `job_reference` from the a previous `QueryAssets` call.
+            #
+            # Note, the query result has approximately 10 GB limitation enforced by
+            # BigQuery
+            # https://cloud.google.com/bigquery/docs/best-practices-performance-output,
+            # queries return larger results will result in errors.
+            #
+            # @overload query_assets(request, options = nil)
+            #   Pass arguments to `query_assets` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::QueryAssetsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::QueryAssetsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload query_assets(parent: nil, statement: nil, job_reference: nil, page_size: nil, page_token: nil, timeout: nil, read_time_window: nil, read_time: nil, output_config: nil)
+            #   Pass arguments to `query_assets` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The relative name of the root asset. This can only be an
+            #     organization number (such as "organizations/123"), a project ID (such as
+            #     "projects/my-project-id"), or a project number (such as "projects/12345"),
+            #     or a folder number (such as "folders/123").
+            #
+            #     Only assets belonging to the `parent` will be returned.
+            #   @param statement [::String]
+            #     Optional. A SQL statement that's compatible with [BigQuery Standard
+            #     SQL](http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
+            #   @param job_reference [::String]
+            #     Optional. Reference to the query job, which is from the `QueryAssetsResponse` of
+            #     previous `QueryAssets` call.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of rows to return in the results. Responses are limited
+            #     to 10 MB and 1000 rows.
+            #
+            #     By default, the maximum row count is 1000. When the byte or row count limit
+            #     is reached, the rest of the query results will be paginated.
+            #
+            #     The field will be ignored when [output_config] is specified.
+            #   @param page_token [::String]
+            #     Optional. A page token received from previous `QueryAssets`.
+            #
+            #     The field will be ignored when [output_config] is specified.
+            #   @param timeout [::Google::Protobuf::Duration, ::Hash]
+            #     Optional. Specifies the maximum amount of time that the client is willing to wait
+            #     for the query to complete. By default, this limit is 5 min for the first
+            #     query, and 1 minute for the following queries. If the query is complete,
+            #     the `done` field in the `QueryAssetsResponse` is true, otherwise false.
+            #
+            #     Like BigQuery [jobs.query
+            #     API](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest)
+            #     The call is not guaranteed to wait for the specified timeout; it typically
+            #     returns after around 200 seconds (200,000 milliseconds), even if the query
+            #     is not complete.
+            #
+            #     The field will be ignored when [output_config] is specified.
+            #   @param read_time_window [::Google::Cloud::Asset::V1::TimeWindow, ::Hash]
+            #     Optional. [start_time] is required. [start_time] must be less than [end_time]
+            #     Defaults [end_time] to now if [start_time] is set and [end_time] isn't.
+            #     Maximum permitted time range is 7 days.
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Optional. Queries cloud assets as they appeared at the specified point in time.
+            #   @param output_config [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig, ::Hash]
+            #     Optional. Destination where the query results will be saved.
+            #
+            #     When this field is specified, the query results won't be saved in the
+            #     [QueryAssetsResponse.query_result]. Instead
+            #     [QueryAssetsResponse.output_config] will be set.
+            #
+            #     Meanwhile, [QueryAssetsResponse.job_reference] will be set and can be used
+            #     to check the status of the query job when passed to a following
+            #     [QueryAssets] API call.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Asset::V1::QueryAssetsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Asset::V1::QueryAssetsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::QueryAssetsRequest.new
+            #
+            #   # Call the query_assets method.
+            #   result = client.query_assets request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::QueryAssetsResponse.
+            #   p result
+            #
+            def query_assets request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::QueryAssetsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.query_assets.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.query_assets.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.query_assets.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :query_assets, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a saved query in a parent project/folder/organization.
+            #
+            # @overload create_saved_query(request, options = nil)
+            #   Pass arguments to `create_saved_query` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::CreateSavedQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::CreateSavedQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_saved_query(parent: nil, saved_query: nil, saved_query_id: nil)
+            #   Pass arguments to `create_saved_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the project/folder/organization where this saved_query
+            #     should be created in. It can only be an organization number (such as
+            #     "organizations/123"), a folder number (such as "folders/123"), a project ID
+            #     (such as "projects/my-project-id")", or a project number (such as
+            #     "projects/12345").
+            #   @param saved_query [::Google::Cloud::Asset::V1::SavedQuery, ::Hash]
+            #     Required. The saved_query details. The `name` field must be empty as it will be
+            #     generated based on the parent and saved_query_id.
+            #   @param saved_query_id [::String]
+            #     Required. The ID to use for the saved query, which must be unique in the specified
+            #     parent. It will become the final component of the saved query's resource
+            #     name.
+            #
+            #     This value should be 4-63 characters, and valid characters
+            #     are /[a-z][0-9]-/.
+            #
+            #     Notice that this field is required in the saved query creation, and the
+            #     `name` field of the `saved_query` will be ignored.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Asset::V1::SavedQuery]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Asset::V1::SavedQuery]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::CreateSavedQueryRequest.new
+            #
+            #   # Call the create_saved_query method.
+            #   result = client.create_saved_query request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::SavedQuery.
+            #   p result
+            #
+            def create_saved_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::CreateSavedQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_saved_query.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_saved_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_saved_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :create_saved_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details about a saved query.
+            #
+            # @overload get_saved_query(request, options = nil)
+            #   Pass arguments to `get_saved_query` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::GetSavedQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::GetSavedQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_saved_query(name: nil)
+            #   Pass arguments to `get_saved_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the saved query and it must be in the format of:
+            #
+            #     * projects/project_number/savedQueries/saved_query_id
+            #     * folders/folder_number/savedQueries/saved_query_id
+            #     * organizations/organization_number/savedQueries/saved_query_id
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Asset::V1::SavedQuery]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Asset::V1::SavedQuery]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::GetSavedQueryRequest.new
+            #
+            #   # Call the get_saved_query method.
+            #   result = client.get_saved_query request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::SavedQuery.
+            #   p result
+            #
+            def get_saved_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::GetSavedQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_saved_query.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_saved_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_saved_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :get_saved_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists all saved queries in a parent project/folder/organization.
+            #
+            # @overload list_saved_queries(request, options = nil)
+            #   Pass arguments to `list_saved_queries` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::ListSavedQueriesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::ListSavedQueriesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_saved_queries(parent: nil, filter: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_saved_queries` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent project/folder/organization whose savedQueries are to be
+            #     listed. It can only be using project/folder/organization number (such as
+            #     "folders/12345")", or a project ID (such as "projects/my-project-id").
+            #   @param filter [::String]
+            #     Optional. The expression to filter resources.
+            #     The expression is a list of zero or more restrictions combined via logical
+            #     operators `AND` and `OR`. When `AND` and `OR` are both used in the
+            #     expression, parentheses must be appropriately used to group the
+            #     combinations. The expression may also contain regular expressions.
+            #
+            #     See https://google.aip.dev/160 for more information on the grammar.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of saved queries to return per page. The service may
+            #     return fewer than this value. If unspecified, at most 50 will be returned.
+            #      The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous `ListSavedQueries` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListSavedQueries` must
+            #     match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::SavedQuery>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::SavedQuery>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::ListSavedQueriesRequest.new
+            #
+            #   # Call the list_saved_queries method.
+            #   result = client.list_saved_queries request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Asset::V1::SavedQuery.
+            #     p response
+            #   end
+            #
+            def list_saved_queries request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::ListSavedQueriesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_saved_queries.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_saved_queries.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_saved_queries.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :list_saved_queries, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @asset_service_stub, :list_saved_queries, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a saved query.
+            #
+            # @overload update_saved_query(request, options = nil)
+            #   Pass arguments to `update_saved_query` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::UpdateSavedQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::UpdateSavedQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_saved_query(saved_query: nil, update_mask: nil)
+            #   Pass arguments to `update_saved_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param saved_query [::Google::Cloud::Asset::V1::SavedQuery, ::Hash]
+            #     Required. The saved query to update.
+            #
+            #     The saved query's `name` field is used to identify the one to update,
+            #     which has format as below:
+            #
+            #     * projects/project_number/savedQueries/saved_query_id
+            #     * folders/folder_number/savedQueries/saved_query_id
+            #     * organizations/organization_number/savedQueries/saved_query_id
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The list of fields to update.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Asset::V1::SavedQuery]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Asset::V1::SavedQuery]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::UpdateSavedQueryRequest.new
+            #
+            #   # Call the update_saved_query method.
+            #   result = client.update_saved_query request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::SavedQuery.
+            #   p result
+            #
+            def update_saved_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::UpdateSavedQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_saved_query.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.saved_query&.name
+                header_params["saved_query.name"] = request.saved_query.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_saved_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_saved_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :update_saved_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a saved query.
+            #
+            # @overload delete_saved_query(request, options = nil)
+            #   Pass arguments to `delete_saved_query` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::DeleteSavedQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::DeleteSavedQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_saved_query(name: nil)
+            #   Pass arguments to `delete_saved_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the saved query to delete. It must be in the format of:
+            #
+            #     * projects/project_number/savedQueries/saved_query_id
+            #     * folders/folder_number/savedQueries/saved_query_id
+            #     * organizations/organization_number/savedQueries/saved_query_id
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::DeleteSavedQueryRequest.new
+            #
+            #   # Call the delete_saved_query method.
+            #   result = client.delete_saved_query request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_saved_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::DeleteSavedQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_saved_query.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_saved_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_saved_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :delete_saved_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets effective IAM policies for a batch of resources.
+            #
+            # @overload batch_get_effective_iam_policies(request, options = nil)
+            #   Pass arguments to `batch_get_effective_iam_policies` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_get_effective_iam_policies(scope: nil, names: nil)
+            #   Pass arguments to `batch_get_effective_iam_policies` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param scope [::String]
+            #     Required. Only IAM policies on or below the scope will be returned.
+            #
+            #     This can only be an organization number (such as "organizations/123"), a
+            #     folder number (such as "folders/123"), a project ID (such as
+            #     "projects/my-project-id"), or a project number (such as "projects/12345").
+            #
+            #     To know how to get organization id, visit [here
+            #     ](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
+            #
+            #     To know how to get folder or project id, visit [here
+            #     ](https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects).
+            #   @param names [::Array<::String>]
+            #     Required. The names refer to the [full_resource_names]
+            #     (https://cloud.google.com/asset-inventory/docs/resource-name-format)
+            #     of [searchable asset
+            #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+            #     A maximum of 20 resources' effective policies can be retrieved in a batch.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest.new
+            #
+            #   # Call the batch_get_effective_iam_policies method.
+            #   result = client.batch_get_effective_iam_policies request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse.
+            #   p result
+            #
+            def batch_get_effective_iam_policies request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_get_effective_iam_policies.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.scope
+                header_params["scope"] = request.scope
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_get_effective_iam_policies.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_get_effective_iam_policies.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :batch_get_effective_iam_policies, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1366,22 +2627,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for export_assets
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # export_assets to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Asset::V1::AssetService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.export_assets.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Asset::V1::AssetService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.export_assets.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.export_assets.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.export_assets.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -1549,6 +2809,46 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :analyze_iam_policy_longrunning
+                ##
+                # RPC-specific configuration for `analyze_move`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :analyze_move
+                ##
+                # RPC-specific configuration for `query_assets`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :query_assets
+                ##
+                # RPC-specific configuration for `create_saved_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_saved_query
+                ##
+                # RPC-specific configuration for `get_saved_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_saved_query
+                ##
+                # RPC-specific configuration for `list_saved_queries`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_saved_queries
+                ##
+                # RPC-specific configuration for `update_saved_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_saved_query
+                ##
+                # RPC-specific configuration for `delete_saved_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_saved_query
+                ##
+                # RPC-specific configuration for `batch_get_effective_iam_policies`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_get_effective_iam_policies
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1576,6 +2876,22 @@ module Google
                   @analyze_iam_policy = ::Gapic::Config::Method.new analyze_iam_policy_config
                   analyze_iam_policy_longrunning_config = parent_rpcs.analyze_iam_policy_longrunning if parent_rpcs.respond_to? :analyze_iam_policy_longrunning
                   @analyze_iam_policy_longrunning = ::Gapic::Config::Method.new analyze_iam_policy_longrunning_config
+                  analyze_move_config = parent_rpcs.analyze_move if parent_rpcs.respond_to? :analyze_move
+                  @analyze_move = ::Gapic::Config::Method.new analyze_move_config
+                  query_assets_config = parent_rpcs.query_assets if parent_rpcs.respond_to? :query_assets
+                  @query_assets = ::Gapic::Config::Method.new query_assets_config
+                  create_saved_query_config = parent_rpcs.create_saved_query if parent_rpcs.respond_to? :create_saved_query
+                  @create_saved_query = ::Gapic::Config::Method.new create_saved_query_config
+                  get_saved_query_config = parent_rpcs.get_saved_query if parent_rpcs.respond_to? :get_saved_query
+                  @get_saved_query = ::Gapic::Config::Method.new get_saved_query_config
+                  list_saved_queries_config = parent_rpcs.list_saved_queries if parent_rpcs.respond_to? :list_saved_queries
+                  @list_saved_queries = ::Gapic::Config::Method.new list_saved_queries_config
+                  update_saved_query_config = parent_rpcs.update_saved_query if parent_rpcs.respond_to? :update_saved_query
+                  @update_saved_query = ::Gapic::Config::Method.new update_saved_query_config
+                  delete_saved_query_config = parent_rpcs.delete_saved_query if parent_rpcs.respond_to? :delete_saved_query
+                  @delete_saved_query = ::Gapic::Config::Method.new delete_saved_query_config
+                  batch_get_effective_iam_policies_config = parent_rpcs.batch_get_effective_iam_policies if parent_rpcs.respond_to? :batch_get_effective_iam_policies
+                  @batch_get_effective_iam_policies = ::Gapic::Config::Method.new batch_get_effective_iam_policies_config
 
                   yield self if block_given?
                 end

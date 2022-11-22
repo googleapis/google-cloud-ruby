@@ -1,5 +1,5 @@
 --no-private
---title=Certificate Authority Service API
+--title="Certificate Authority Service API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

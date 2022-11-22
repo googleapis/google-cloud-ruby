@@ -25,6 +25,122 @@ module Google
           # Path helper methods for the SecurityCenter API.
           module Paths
             ##
+            # Create a fully-qualified BigQueryExport resource string.
+            #
+            # @overload big_query_export_path(organization:, export:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/bigQueryExports/{export}`
+            #
+            #   @param organization [String]
+            #   @param export [String]
+            #
+            # @overload big_query_export_path(folder:, export:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/bigQueryExports/{export}`
+            #
+            #   @param folder [String]
+            #   @param export [String]
+            #
+            # @overload big_query_export_path(project:, export:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/bigQueryExports/{export}`
+            #
+            #   @param project [String]
+            #   @param export [String]
+            #
+            # @return [::String]
+            def big_query_export_path **args
+              resources = {
+                "export:organization" => (proc do |organization:, export:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/bigQueryExports/#{export}"
+                end),
+                "export:folder" => (proc do |folder:, export:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/bigQueryExports/#{export}"
+                end),
+                "export:project" => (proc do |project:, export:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/bigQueryExports/#{export}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified ExternalSystem resource string.
+            #
+            # @overload external_system_path(organization:, source:, finding:, externalsystem:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}`
+            #
+            #   @param organization [String]
+            #   @param source [String]
+            #   @param finding [String]
+            #   @param externalsystem [String]
+            #
+            # @overload external_system_path(folder:, source:, finding:, externalsystem:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}`
+            #
+            #   @param folder [String]
+            #   @param source [String]
+            #   @param finding [String]
+            #   @param externalsystem [String]
+            #
+            # @overload external_system_path(project:, source:, finding:, externalsystem:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}`
+            #
+            #   @param project [String]
+            #   @param source [String]
+            #   @param finding [String]
+            #   @param externalsystem [String]
+            #
+            # @return [::String]
+            def external_system_path **args
+              resources = {
+                "externalsystem:finding:organization:source" => (proc do |organization:, source:, finding:, externalsystem:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "source cannot contain /" if source.to_s.include? "/"
+                  raise ::ArgumentError, "finding cannot contain /" if finding.to_s.include? "/"
+
+                  "organizations/#{organization}/sources/#{source}/findings/#{finding}/externalSystems/#{externalsystem}"
+                end),
+                "externalsystem:finding:folder:source" => (proc do |folder:, source:, finding:, externalsystem:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "source cannot contain /" if source.to_s.include? "/"
+                  raise ::ArgumentError, "finding cannot contain /" if finding.to_s.include? "/"
+
+                  "folders/#{folder}/sources/#{source}/findings/#{finding}/externalSystems/#{externalsystem}"
+                end),
+                "externalsystem:finding:project:source" => (proc do |project:, source:, finding:, externalsystem:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "source cannot contain /" if source.to_s.include? "/"
+                  raise ::ArgumentError, "finding cannot contain /" if finding.to_s.include? "/"
+
+                  "projects/#{project}/sources/#{source}/findings/#{finding}/externalSystems/#{externalsystem}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Finding resource string.
             #
             # @overload finding_path(organization:, source:, finding:)
@@ -97,20 +213,107 @@ module Google
             end
 
             ##
-            # Create a fully-qualified NotificationConfig resource string.
+            # Create a fully-qualified MuteConfig resource string.
             #
-            # The resource will be in the following format:
+            # @overload mute_config_path(organization:, mute_config:)
+            #   The resource will be in the following format:
             #
-            # `organizations/{organization}/notificationConfigs/{notification_config}`
+            #   `organizations/{organization}/muteConfigs/{mute_config}`
             #
-            # @param organization [String]
-            # @param notification_config [String]
+            #   @param organization [String]
+            #   @param mute_config [String]
+            #
+            # @overload mute_config_path(folder:, mute_config:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/muteConfigs/{mute_config}`
+            #
+            #   @param folder [String]
+            #   @param mute_config [String]
+            #
+            # @overload mute_config_path(project:, mute_config:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/muteConfigs/{mute_config}`
+            #
+            #   @param project [String]
+            #   @param mute_config [String]
             #
             # @return [::String]
-            def notification_config_path organization:, notification_config:
-              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+            def mute_config_path **args
+              resources = {
+                "mute_config:organization" => (proc do |organization:, mute_config:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
-              "organizations/#{organization}/notificationConfigs/#{notification_config}"
+                  "organizations/#{organization}/muteConfigs/#{mute_config}"
+                end),
+                "folder:mute_config" => (proc do |folder:, mute_config:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/muteConfigs/#{mute_config}"
+                end),
+                "mute_config:project" => (proc do |project:, mute_config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/muteConfigs/#{mute_config}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified NotificationConfig resource string.
+            #
+            # @overload notification_config_path(organization:, notification_config:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/notificationConfigs/{notification_config}`
+            #
+            #   @param organization [String]
+            #   @param notification_config [String]
+            #
+            # @overload notification_config_path(folder:, notification_config:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/notificationConfigs/{notification_config}`
+            #
+            #   @param folder [String]
+            #   @param notification_config [String]
+            #
+            # @overload notification_config_path(project:, notification_config:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/notificationConfigs/{notification_config}`
+            #
+            #   @param project [String]
+            #   @param notification_config [String]
+            #
+            # @return [::String]
+            def notification_config_path **args
+              resources = {
+                "notification_config:organization" => (proc do |organization:, notification_config:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/notificationConfigs/#{notification_config}"
+                end),
+                "folder:notification_config" => (proc do |folder:, notification_config:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/notificationConfigs/#{notification_config}"
+                end),
+                "notification_config:project" => (proc do |project:, notification_config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/notificationConfigs/#{notification_config}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##

@@ -21,6 +21,60 @@ module Google
   module Analytics
     module Data
       module V1beta
+        # The request for compatibility information for a report's dimensions and
+        # metrics. Check compatibility provides a preview of the compatibility of a
+        # report; fields shared with the `runReport` request should be the same values
+        # as in your `runReport` request.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     A Google Analytics GA4 property identifier whose events are tracked. To
+        #     learn more, see [where to find your Property
+        #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+        #     `property` should be the same value as in your `runReport` request.
+        #
+        #     Example: properties/1234
+        #
+        #     Set the Property ID to 0 for compatibility checking on dimensions and
+        #     metrics common to all properties. In this special mode, this method will
+        #     not return custom dimensions and metrics.
+        # @!attribute [rw] dimensions
+        #   @return [::Array<::Google::Analytics::Data::V1beta::Dimension>]
+        #     The dimensions in this report. `dimensions` should be the same value as in
+        #     your `runReport` request.
+        # @!attribute [rw] metrics
+        #   @return [::Array<::Google::Analytics::Data::V1beta::Metric>]
+        #     The metrics in this report. `metrics` should be the same value as in your
+        #     `runReport` request.
+        # @!attribute [rw] dimension_filter
+        #   @return [::Google::Analytics::Data::V1beta::FilterExpression]
+        #     The filter clause of dimensions. `dimensionFilter` should be the same value
+        #     as in your `runReport` request.
+        # @!attribute [rw] metric_filter
+        #   @return [::Google::Analytics::Data::V1beta::FilterExpression]
+        #     The filter clause of metrics. `metricFilter` should be the same value as in
+        #     your `runReport` request
+        # @!attribute [rw] compatibility_filter
+        #   @return [::Google::Analytics::Data::V1beta::Compatibility]
+        #     Filters the dimensions and metrics in the response to just this
+        #     compatibility. Commonly used as `”compatibilityFilter”: “COMPATIBLE”`
+        #     to only return compatible dimensions & metrics.
+        class CheckCompatibilityRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The compatibility response with the compatibility of each dimension & metric.
+        # @!attribute [rw] dimension_compatibilities
+        #   @return [::Array<::Google::Analytics::Data::V1beta::DimensionCompatibility>]
+        #     The compatibility of each dimension.
+        # @!attribute [rw] metric_compatibilities
+        #   @return [::Array<::Google::Analytics::Data::V1beta::MetricCompatibility>]
+        #     The compatibility of each metric.
+        class CheckCompatibilityResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The dimensions and metrics currently accepted in reporting methods.
         # @!attribute [rw] name
         #   @return [::String]
@@ -62,13 +116,14 @@ module Google
         #     must be unspecified.
         # @!attribute [rw] dimension_filter
         #   @return [::Google::Analytics::Data::V1beta::FilterExpression]
-        #     The filter clause of dimensions. Dimensions must be requested to be used in
-        #     this filter. Metrics cannot be used in this filter.
+        #     Dimension filters allow you to ask for only specific dimension values in
+        #     the report. To learn more, see [Fundamentals of Dimension
+        #     Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
+        #     for examples. Metrics cannot be used in this filter.
         # @!attribute [rw] metric_filter
         #   @return [::Google::Analytics::Data::V1beta::FilterExpression]
-        #     The filter clause of metrics. Applied at post aggregation phase, similar to
-        #     SQL having-clause. Metrics must be requested to be used in this filter.
-        #     Dimensions cannot be used in this filter.
+        #     The filter clause of metrics. Applied after aggregating the report's rows,
+        #     similar to SQL having-clause. Dimensions cannot be used in this filter.
         # @!attribute [rw] offset
         #   @return [::Integer]
         #     The row count of the start row. The first row is counted as row 0.
@@ -412,13 +467,11 @@ module Google
         #     The metrics requested and displayed.
         # @!attribute [rw] dimension_filter
         #   @return [::Google::Analytics::Data::V1beta::FilterExpression]
-        #     The filter clause of dimensions. Dimensions must be requested to be used in
-        #     this filter. Metrics cannot be used in this filter.
+        #     The filter clause of dimensions. Metrics cannot be used in this filter.
         # @!attribute [rw] metric_filter
         #   @return [::Google::Analytics::Data::V1beta::FilterExpression]
         #     The filter clause of metrics. Applied at post aggregation phase, similar to
-        #     SQL having-clause. Metrics must be requested to be used in this filter.
-        #     Dimensions cannot be used in this filter.
+        #     SQL having-clause. Dimensions cannot be used in this filter.
         # @!attribute [rw] limit
         #   @return [::Integer]
         #     The number of rows to return. If unspecified, 10,000 rows are returned. The
@@ -441,6 +494,13 @@ module Google
         #   @return [::Boolean]
         #     Toggles whether to return the current state of this Analytics Property's
         #     Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+        # @!attribute [rw] minute_ranges
+        #   @return [::Array<::Google::Analytics::Data::V1beta::MinuteRange>]
+        #     The minute ranges of event data to read. If unspecified, one minute range
+        #     for the last 30 minutes will be used. If multiple minute ranges are
+        #     requested, each response row will contain a zero based minute range index.
+        #     If two minute ranges overlap, the event data for the overlapping minutes is
+        #     included in the response rows for both minute ranges.
         class RunRealtimeReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,5 +1,30 @@
 # Release History
 
+### 0.42.1 (2022-07-28)
+
+#### Documentation
+
+* Fix example in FaradayMiddleware ([#18850](https://github.com/googleapis/google-cloud-ruby/issues/18850)) 
+
+### 0.42.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18455](https://github.com/googleapis/google-cloud-ruby/issues/18455)) 
+
+### 0.41.4 (2022-05-27)
+
+#### Bug Fixes
+
+* normalize span time based on rails version
+* wrap patched methods into class to ignore yard parsing
+
+### 0.41.3 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 0.41.2 / 2021-06-22
 
 #### Bug Fixes

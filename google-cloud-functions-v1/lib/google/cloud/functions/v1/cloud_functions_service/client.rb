@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Functions::V1::CloudFunctionsService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all CloudFunctionsService clients:
-            #
-            #     ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all CloudFunctionsService clients
+            #   ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,36 +66,24 @@ module Google
 
                 default_config.rpcs.list_functions.timeout = 600.0
                 default_config.rpcs.list_functions.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_function.timeout = 600.0
                 default_config.rpcs.get_function.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_function.timeout = 600.0
 
                 default_config.rpcs.update_function.timeout = 600.0
                 default_config.rpcs.update_function.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_function.timeout = 600.0
                 default_config.rpcs.delete_function.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.call_function.timeout = 600.0
@@ -130,19 +117,15 @@ module Google
             ##
             # Create a new CloudFunctionsService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new CloudFunctionsService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
             #
-            #     client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
-            #
-            # To create a new CloudFunctionsService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the CloudFunctionsService client.
             # @yieldparam config [Client::Configuration]
@@ -162,14 +145,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -177,6 +159,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -239,6 +222,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/functions/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Functions::V1::ListFunctionsRequest.new
+            #
+            #   # Call the list_functions method.
+            #   result = client.list_functions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Functions::V1::CloudFunction.
+            #     p response
+            #   end
+            #
             def list_functions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -256,16 +260,20 @@ module Google
                 gapic_version: ::Google::Cloud::Functions::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_functions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_functions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_functions_service_stub.call_rpc :list_functions, request, options: options do |response, operation|
@@ -306,6 +314,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/functions/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Functions::V1::GetFunctionRequest.new
+            #
+            #   # Call the get_function method.
+            #   result = client.get_function request
+            #
+            #   # The returned object is of type Google::Cloud::Functions::V1::CloudFunction.
+            #   p result
+            #
             def get_function request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -323,16 +346,20 @@ module Google
                 gapic_version: ::Google::Cloud::Functions::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_function.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_function.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_functions_service_stub.call_rpc :get_function, request, options: options do |response, operation|
@@ -377,6 +404,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/functions/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Functions::V1::CreateFunctionRequest.new
+            #
+            #   # Call the create_function method.
+            #   result = client.create_function request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_function request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -394,16 +443,20 @@ module Google
                 gapic_version: ::Google::Cloud::Functions::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "location" => request.location
-              }
+              header_params = {}
+              if request.location
+                header_params["location"] = request.location
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_function.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_function.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_functions_service_stub.call_rpc :create_function, request, options: options do |response, operation|
@@ -436,7 +489,7 @@ module Google
             #   @param function [::Google::Cloud::Functions::V1::CloudFunction, ::Hash]
             #     Required. New version of the function.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required list of fields to be updated in this request.
+            #     Required. The list of fields in `CloudFunction` that have to be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -445,6 +498,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/functions/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Functions::V1::UpdateFunctionRequest.new
+            #
+            #   # Call the update_function method.
+            #   result = client.update_function request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def update_function request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -463,16 +538,20 @@ module Google
                 gapic_version: ::Google::Cloud::Functions::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "function.name" => request.function.name
-              }
+              header_params = {}
+              if request.function&.name
+                header_params["function.name"] = request.function.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_function.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_function.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_functions_service_stub.call_rpc :update_function, request, options: options do |response, operation|
@@ -515,6 +594,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/functions/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Functions::V1::DeleteFunctionRequest.new
+            #
+            #   # Call the delete_function method.
+            #   result = client.delete_function request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_function request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -532,16 +633,20 @@ module Google
                 gapic_version: ::Google::Cloud::Functions::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_function.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_function.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_functions_service_stub.call_rpc :delete_function, request, options: options do |response, operation|
@@ -587,6 +692,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/functions/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Functions::V1::CallFunctionRequest.new
+            #
+            #   # Call the call_function method.
+            #   result = client.call_function request
+            #
+            #   # The returned object is of type Google::Cloud::Functions::V1::CallFunctionResponse.
+            #   p result
+            #
             def call_function request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -604,16 +724,20 @@ module Google
                 gapic_version: ::Google::Cloud::Functions::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.call_function.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.call_function.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_functions_service_stub.call_rpc :call_function, request, options: options do |response, operation|
@@ -661,7 +785,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_upload_url(parent: nil)
+            # @overload generate_upload_url(parent: nil, kms_key_name: nil)
             #   Pass arguments to `generate_upload_url` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -669,6 +793,24 @@ module Google
             #   @param parent [::String]
             #     The project and location in which the Google Cloud Storage signed URL
             #     should be generated, specified in the format `projects/*/locations/*`.
+            #   @param kms_key_name [::String]
+            #     Resource name of a KMS crypto key (managed by the user) used to
+            #     encrypt/decrypt function source code objects in staging Cloud Storage
+            #     buckets. When you generate an upload url and upload your source code, it
+            #     gets copied to a staging Cloud Storage bucket in an internal regional
+            #     project. The source code is then copied to a versioned directory in the
+            #     sources bucket in the consumer project during the function deployment.
+            #
+            #     It must match the pattern
+            #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+            #
+            #     The Google Cloud Functions service account
+            #     (service-\\{project_number}@gcf-admin-robot.iam.gserviceaccount.com) must be
+            #     granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
+            #     (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
+            #     Key/KeyRing/Project/Organization (least access preferred). GCF will
+            #     delegate access to the Google Storage service account in the internal
+            #     project.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Functions::V1::GenerateUploadUrlResponse]
@@ -677,6 +819,21 @@ module Google
             # @return [::Google::Cloud::Functions::V1::GenerateUploadUrlResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/functions/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Functions::V1::GenerateUploadUrlRequest.new
+            #
+            #   # Call the generate_upload_url method.
+            #   result = client.generate_upload_url request
+            #
+            #   # The returned object is of type Google::Cloud::Functions::V1::GenerateUploadUrlResponse.
+            #   p result
             #
             def generate_upload_url request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -695,16 +852,20 @@ module Google
                 gapic_version: ::Google::Cloud::Functions::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.generate_upload_url.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_upload_url.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_functions_service_stub.call_rpc :generate_upload_url, request, options: options do |response, operation|
@@ -752,6 +913,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/functions/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Functions::V1::GenerateDownloadUrlRequest.new
+            #
+            #   # Call the generate_download_url method.
+            #   result = client.generate_download_url request
+            #
+            #   # The returned object is of type Google::Cloud::Functions::V1::GenerateDownloadUrlResponse.
+            #   p result
+            #
             def generate_download_url request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -769,16 +945,20 @@ module Google
                 gapic_version: ::Google::Cloud::Functions::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.generate_download_url.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_download_url.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_functions_service_stub.call_rpc :generate_download_url, request, options: options do |response, operation|
@@ -803,7 +983,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload set_iam_policy(resource: nil, policy: nil)
+            # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
             #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -816,6 +996,12 @@ module Google
             #     the policy is limited to a few 10s of KB. An empty policy is a
             #     valid policy but certain Cloud Platform services (such as Projects)
             #     might reject them.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+            #     the fields in the mask will be modified. If no mask is provided, the
+            #     following default mask is used:
+            #
+            #     `paths: "bindings, etag"`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Iam::V1::Policy]
@@ -824,6 +1010,21 @@ module Google
             # @return [::Google::Iam::V1::Policy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/functions/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::SetIamPolicyRequest.new
+            #
+            #   # Call the set_iam_policy method.
+            #   result = client.set_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
             #
             def set_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -842,16 +1043,20 @@ module Google
                 gapic_version: ::Google::Cloud::Functions::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_functions_service_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
@@ -887,7 +1092,7 @@ module Google
             #     See the operation documentation for the appropriate value for this field.
             #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
             #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
-            #     `GetIamPolicy`. This field is only used by Cloud IAM.
+            #     `GetIamPolicy`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Iam::V1::Policy]
@@ -896,6 +1101,21 @@ module Google
             # @return [::Google::Iam::V1::Policy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/functions/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::GetIamPolicyRequest.new
+            #
+            #   # Call the get_iam_policy method.
+            #   result = client.get_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
             #
             def get_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -914,16 +1134,20 @@ module Google
                 gapic_version: ::Google::Cloud::Functions::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_functions_service_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
@@ -972,6 +1196,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/functions/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+            #
+            #   # Call the test_iam_permissions method.
+            #   result = client.test_iam_permissions request
+            #
+            #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+            #   p result
+            #
             def test_iam_permissions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -989,16 +1228,20 @@ module Google
                 gapic_version: ::Google::Cloud::Functions::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.test_iam_permissions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_functions_service_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
@@ -1022,22 +1265,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_functions
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_functions to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_functions.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_functions.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_functions.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_functions.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

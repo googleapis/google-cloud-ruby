@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-network_security.gemspec",
+    "lib/google-cloud-network_security.rb",
+    "lib/google/cloud/network_security.rb",
+    "lib/google/cloud/network_security/version.rb",
+    "test/google/cloud/network_security/client_test.rb",
+    "test/google/cloud/network_security/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

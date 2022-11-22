@@ -43,7 +43,8 @@ module Google
         #     Secondary contact email. You need to provide an alternate email to create
         #     different domains if a primary contact email already exists. Users will
         #     receive a notification with credentials when you create an admin.google.com
-        #     account. Secondary emails are also recovery email addresses.
+        #     account. Secondary emails are also recovery email addresses. Alternate
+        #     emails are optional when you create Team customers.
         # @!attribute [rw] domain
         #   @return [::String]
         #     Required. The customer's primary domain. Must match the primary contact
@@ -79,10 +80,10 @@ module Google
         # Contact information for a customer account.
         # @!attribute [rw] first_name
         #   @return [::String]
-        #     The customer account contact's first name.
+        #     The customer account contact's first name. Optional for Team customers.
         # @!attribute [rw] last_name
         #   @return [::String]
-        #     The customer account contact's last name.
+        #     The customer account contact's last name. Optional for Team customers.
         # @!attribute [r] display_name
         #   @return [::String]
         #     Output only. The customer account contact's display name, formatted as a
@@ -91,7 +92,7 @@ module Google
         #   @return [::String]
         #     The customer account's contact email. Required for entitlements that create
         #     admin.google.com accounts, and serves as the customer's username for those
-        #     accounts.
+        #     accounts. Use this email to invite Team customers.
         # @!attribute [rw] title
         #   @return [::String]
         #     Optional. The customer account contact's job title.

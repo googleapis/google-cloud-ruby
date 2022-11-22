@@ -28,10 +28,42 @@ module Google
         #     creating a CustomInfoType, or one of the names listed
         #     at https://cloud.google.com/dlp/docs/infotypes-reference when specifying
         #     a built-in type.  When sending Cloud DLP results to Data Catalog, infoType
-        #     names should conform to the pattern `[A-Za-z0-9$-_]{1,64}`.
+        #     names should conform to the pattern `[A-Za-z0-9$_-]{1,64}`.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Optional version name for this InfoType.
         class InfoType
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Score is a summary of all elements in the data profile.
+        # A higher number means more sensitive.
+        # @!attribute [rw] score
+        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore::SensitivityScoreLevel]
+        #     The score applied to the resource.
+        class SensitivityScore
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Various score levels for resources.
+          module SensitivityScoreLevel
+            # Unused.
+            SENSITIVITY_SCORE_UNSPECIFIED = 0
+
+            # No sensitive information detected. Limited access.
+            SENSITIVITY_LOW = 10
+
+            # Medium risk - PII, potentially sensitive data, or fields with free-text
+            # data that are at higher risk of having intermittent sensitive data.
+            # Consider limiting access.
+            SENSITIVITY_MODERATE = 20
+
+            # High risk – SPII may be present. Exfiltration of data may lead to user
+            # data loss. Re-identification of users may be possible. Consider limiting
+            # usage and or removing SPII.
+            SENSITIVITY_HIGH = 30
+          end
         end
 
         # A reference to a StoredInfoType to use with scanning.
@@ -180,7 +212,11 @@ module Google
             # rule.
             # @!attribute [rw] window_before
             #   @return [::Integer]
-            #     Number of characters before the finding to consider.
+            #     Number of characters before the finding to consider. For tabular data,
+            #     if you want to modify the likelihood of an entire column of findngs,
+            #     set this to 1. For more information, see
+            #     [Hotword example: Set the match likelihood of a table column]
+            #     (https://cloud.google.com/dlp/docs/creating-custom-infotypes-likelihood#match-column-values).
             # @!attribute [rw] window_after
             #   @return [::Integer]
             #     Number of characters after the finding to consider.
@@ -216,14 +252,19 @@ module Google
             #     Regular expression pattern defining what qualifies as a hotword.
             # @!attribute [rw] proximity
             #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
-            #     Proximity of the finding within which the entire hotword must reside.
-            #     The total length of the window cannot exceed 1000 characters. Note that
-            #     the finding itself will be included in the window, so that hotwords may
-            #     be used to match substrings of the finding itself. For example, the
-            #     certainty of a phone number regex "\(\d\\{3}\) \d\\{3}-\d\\{4}" could be
-            #     adjusted upwards if the area code is known to be the local area code of
-            #     a company office using the hotword regex "\(xxx\)", where "xxx"
-            #     is the area code in question.
+            #     Range of characters within which the entire hotword must reside.
+            #     The total length of the window cannot exceed 1000 characters.
+            #     The finding itself will be included in the window, so that hotwords can
+            #     be used to match substrings of the finding itself. Suppose you
+            #     want Cloud DLP to promote the likelihood of the phone number
+            #     regex "\(\d\\{3}\) \d\\{3}-\d\\{4}" if the area code is known to be the
+            #     area code of a company's office. In this case, use the hotword regex
+            #     "\(xxx\)", where "xxx" is the area code in question.
+            #
+            #     For tabular data, if you want to modify the likelihood of an entire
+            #     column of findngs, see
+            #     [Hotword example: Set the match likelihood of a table column]
+            #     (https://cloud.google.com/dlp/docs/creating-custom-infotypes-likelihood#match-column-values).
             # @!attribute [rw] likelihood_adjustment
             #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
             #     Likelihood adjustment to apply to all matching findings.
@@ -351,7 +392,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Options defining a file or a set of files within a Google Cloud Storage
+        # Options defining a file or a set of files within a Cloud Storage
         # bucket.
         # @!attribute [rw] file_set
         #   @return [::Google::Cloud::Dlp::V2::CloudStorageOptions::FileSet]
@@ -361,12 +402,14 @@ module Google
         #     Max number of bytes to scan from a file. If a scanned file's size is bigger
         #     than this value then the rest of the bytes are omitted. Only one
         #     of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
+        #     Cannot be set if de-identification is requested.
         # @!attribute [rw] bytes_limit_per_file_percent
         #   @return [::Integer]
         #     Max percentage of bytes to scan from a file. The rest are omitted. The
         #     number of bytes scanned is rounded down. Must be between 0 and 100,
         #     inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one
         #     of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
+        #     Cannot be set if de-identification is requested.
         # @!attribute [rw] file_types
         #   @return [::Array<::Google::Cloud::Dlp::V2::FileType>]
         #     List of file type groups to include in the scan.
@@ -474,6 +517,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     References to fields excluded from scanning. This allows you to skip
         #     inspection of entire columns which you know have no findings.
+        # @!attribute [rw] included_fields
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
+        #     Limit scanning only to these fields.
         class BigQueryOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -500,16 +546,13 @@ module Google
         #     Google Cloud Datastore options.
         # @!attribute [rw] cloud_storage_options
         #   @return [::Google::Cloud::Dlp::V2::CloudStorageOptions]
-        #     Google Cloud Storage options.
+        #     Cloud Storage options.
         # @!attribute [rw] big_query_options
         #   @return [::Google::Cloud::Dlp::V2::BigQueryOptions]
         #     BigQuery options.
         # @!attribute [rw] hybrid_options
         #   @return [::Google::Cloud::Dlp::V2::HybridOptions]
         #     Hybrid inspection options.
-        #     Early access feature is in a pre-release state and might change or have
-        #     limited support. For more information, see
-        #     https://cloud.google.com/products#product-launch-stages.
         # @!attribute [rw] timespan_config
         #   @return [::Google::Cloud::Dlp::V2::StorageConfig::TimespanConfig]
         class StorageConfig
@@ -517,7 +560,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Configuration of the timespan of the items to include in scanning.
-          # Currently only supported when inspecting Google Cloud Storage and BigQuery.
+          # Currently only supported when inspecting Cloud Storage and BigQuery.
           # @!attribute [rw] start_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Exclude files, tables, or rows older than this value.
@@ -531,7 +574,8 @@ module Google
           #     Specification of the field containing the timestamp of scanned items.
           #     Used for data sources like Datastore and BigQuery.
           #
-          #     For BigQuery:
+          #     <b>For BigQuery</b>
+          #
           #     If this value is not specified and the table was modified between the
           #     given start and end times, the entire table will be scanned. If this
           #     value is specified, then rows are filtered based on the given start and
@@ -540,17 +584,34 @@ module Google
           #     Valid data types of the provided BigQuery column are: `INTEGER`, `DATE`,
           #     `TIMESTAMP`, and `DATETIME`.
           #
-          #     For Datastore:
+          #     If your BigQuery table is [partitioned at ingestion
+          #     time](https://cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time),
+          #     you can use any of the following pseudo-columns as your timestamp field.
+          #     When used with Cloud DLP, these pseudo-column names are case sensitive.
+          #
+          #     <ul>
+          #     <li><code>_PARTITIONTIME</code></li>
+          #     <li><code>_PARTITIONDATE</code></li>
+          #     <li><code>_PARTITION_LOAD_TIME</code></li>
+          #     </ul>
+          #
+          #     <b>For Datastore</b>
+          #
           #     If this value is specified, then entities are filtered based on the given
           #     start and end times. If an entity does not contain the provided timestamp
           #     property or contains empty or invalid values, then it is included.
           #     Valid data types of the provided timestamp property are: `TIMESTAMP`.
+          #
+          #     See the
+          #     [known issue](https://cloud.google.com/dlp/docs/known-issues#bq-timespan)
+          #     related to this operation.
           # @!attribute [rw] enable_auto_population_of_timespan_config
           #   @return [::Boolean]
           #     When the job is started by a JobTrigger we will automatically figure out
           #     a valid start_time to avoid scanning files that have not been modified
           #     since the last time the JobTrigger executed. This will be based on the
-          #     time of the execution of the last run of the JobTrigger.
+          #     time of the execution of the last run of the JobTrigger or the timespan
+          #     end_time used in the last run of the JobTrigger.
           class TimespanConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -787,11 +848,12 @@ module Google
           BINARY_FILE = 1
 
           # Included file extensions:
-          #   asc, brf, c, cc, cpp, csv, cxx, c++, cs, css, dart, eml, go, h, hh, hpp,
-          #   hxx, h++, hs, html, htm, shtml, shtm, xhtml, lhs, ini, java, js, json,
-          #   ocaml, md, mkd, markdown, m, ml, mli, pl, pm, php, phtml, pht, py, pyw,
-          #   rb, rbw, rs, rc, scala, sh, sql, tex, txt, text, tsv, vcard, vcs, wml,
-          #   xml, xsl, xsd, yml, yaml.
+          #   asc,asp, aspx, brf, c, cc,cfm, cgi, cpp, csv, cxx, c++, cs, css, dart,
+          #   dat, dot, eml,, epbub, ged, go, h, hh, hpp, hxx, h++, hs, html, htm,
+          #   mkd, markdown, m, ml, mli, perl, pl, plist, pm, php, phtml, pht,
+          #   properties, py, pyw, rb, rbw, rs, rss,  rc, scala, sh, sql, swift, tex,
+          #   shtml, shtm, xhtml, lhs, ics, ini, java, js, json, kix, kml, ocaml, md,
+          #   txt, text, tsv, vb, vcard, vcs, wml, xcodeproj, xml, xsl, xsd, yml, yaml.
           TEXT_FILE = 2
 
           # Included file extensions:
@@ -821,6 +883,16 @@ module Google
           # Included file extensions:
           #   tsv
           TSV = 9
+
+          # Powerpoint files >30 MB will be scanned as binary files.
+          # Included file extensions:
+          #   pptx, pptm, potx, potm, pot
+          POWERPOINT = 11
+
+          # Excel files >30 MB will be scanned as binary files.
+          # Included file extensions:
+          #   xlsx, xlsm, xltx, xltm
+          EXCEL = 12
         end
       end
     end

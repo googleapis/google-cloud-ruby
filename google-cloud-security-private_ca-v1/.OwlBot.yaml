@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/security/privateca/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-security-private_ca-v1/$1

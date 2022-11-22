@@ -15,3 +15,12 @@
 # limitations under the License.
 
 expand :clean, paths: :gitignore
+
+if ENV["RUBY_COMMON_TOOLS"]
+  common_tools_dir = File.expand_path ENV["RUBY_COMMON_TOOLS"]
+  load File.join(common_tools_dir, "toys", "yoshi")
+else
+  load_git remote: "https://github.com/googleapis/ruby-common-tools.git",
+           path: "toys/yoshi",
+           update: true
+end

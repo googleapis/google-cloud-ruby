@@ -1,7 +1,17 @@
 {
-    "name": "bigtable",
-    "language": "ruby",
+    "api_id": "bigtable.googleapis.com",
+    "api_shortname": "bigtable",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-bigtable/latest",
     "distribution_name": "google-cloud-bigtable",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigtable/latest",
+    "language": "ruby",
+    "name": "bigtable",
+    "name_pretty": "Cloud Bigtable API",
+    "product_documentation": "https://cloud.google.com/bigtable",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Cloud Bigtable is a fully managed, scalable NoSQL database service for large analytical and operational workloads. Note that google-cloud-bigtable-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigtable instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "BIGTABLE",
+    "ruby-cloud-product-url": "https://cloud.google.com/bigtable",
     "library_type": "GAPIC_MANUAL"
 }

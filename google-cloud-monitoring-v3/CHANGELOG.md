@@ -1,5 +1,68 @@
 # Release History
 
+### 0.9.0 (2022-08-09)
+
+#### Features
+
+* Added support for evaluating missing data in AlertPolicy ([#18990](https://github.com/googleapis/google-cloud-ruby/issues/18990)) 
+
+### 0.8.0 (2022-07-05)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.7.1 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.7.0 / 2021-12-07
+
+#### Features
+
+* Support for auto-closing incidents
+
+### 0.6.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.6.0 / 2021-10-18
+
+#### Features
+
+* Support create_service_time_series RPC
+
+#### Documentation
+
+* Fix several broken links
+
+### 0.5.0 / 2021-08-30
+
+#### Features
+
+* Support for controlling how notification channels are notified when an alert fires
+* Support for log match conditions
+* Support for user label annotations on a service
+* Removed obsolete service tier field
+* Updated RPC retry and timeout settings
+
+### 0.4.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.4.2 / 2021-07-12
+
+#### Bug Fixes
+
+* Add project_path helper
+
 ### 0.4.1 / 2021-06-17
 
 #### Bug Fixes

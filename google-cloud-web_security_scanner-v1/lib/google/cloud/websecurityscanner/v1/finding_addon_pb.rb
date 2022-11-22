@@ -53,6 +53,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SAME_ORIGIN, 14
       value :USER_CONTROLLABLE_URL, 15
     end
+    add_message "google.cloud.websecurityscanner.v1.Xxe" do
+      optional :payload_value, :string, 1
+      optional :payload_location, :enum, 2, "google.cloud.websecurityscanner.v1.Xxe.Location"
+    end
+    add_enum "google.cloud.websecurityscanner.v1.Xxe.Location" do
+      value :LOCATION_UNSPECIFIED, 0
+      value :COMPLETE_REQUEST_BODY, 1
+    end
   end
 end
 
@@ -68,6 +76,8 @@ module Google
         VulnerableHeaders::Header = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.websecurityscanner.v1.VulnerableHeaders.Header").msgclass
         Xss = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.websecurityscanner.v1.Xss").msgclass
         Xss::AttackVector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.websecurityscanner.v1.Xss.AttackVector").enummodule
+        Xxe = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.websecurityscanner.v1.Xxe").msgclass
+        Xxe::Location = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.websecurityscanner.v1.Xxe.Location").enummodule
       end
     end
   end

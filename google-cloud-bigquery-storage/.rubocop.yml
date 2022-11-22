@@ -33,3 +33,7 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigquery-storage.rb"
+
+Style/BlockDelimiters:
+  Exclude:
+    - "samples/**/acceptance/*.rb"

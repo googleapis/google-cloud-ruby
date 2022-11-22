@@ -172,7 +172,7 @@ module Google
         #   schema.param_types
         #
         def param_types
-          Hash[fields.map { |field| [field.name.to_sym, field.param_type] }]
+          fields.to_h { |field| [field.name.to_sym, field.param_type] }
         end
 
         ##
@@ -287,48 +287,67 @@ module Google
         # Adds a string field to the schema.
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
+        # @param [Integer] max_length The maximum UTF-8 length of strings
+        #   allowed in the field.
         #
-        def string name, description: nil, mode: :nullable
-          add_field name, :string, description: description, mode: mode
+        def string name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
+          add_field name,
+                    :string,
+                    description: description,
+                    mode: mode,
+                    policy_tags: policy_tags,
+                    max_length: max_length
         end
 
         ##
         # Adds an integer field to the schema.
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
         #
-        def integer name, description: nil, mode: :nullable
-          add_field name, :integer, description: description, mode: mode
+        def integer name, description: nil, mode: :nullable, policy_tags: nil
+          add_field name, :integer, description: description, mode: mode, policy_tags: policy_tags
         end
 
         ##
         # Adds a floating-point number field to the schema.
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
         #
-        def float name, description: nil, mode: :nullable
-          add_field name, :float, description: description, mode: mode
+        def float name, description: nil, mode: :nullable, policy_tags: nil
+          add_field name, :float, description: description, mode: mode, policy_tags: policy_tags
         end
 
         ##
@@ -346,16 +365,36 @@ module Google
         # for financial calculations.
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
+        # @param [Integer] precision The precision (maximum number of total
+        #   digits) for the field. Acceptable values for precision must be:
+        #   `1 ≤ (precision - scale) ≤ 29`. Values for scale must be:
+        #   `0 ≤ scale ≤ 9`. If the scale value is set, the precision value
+        #   must be set as well.
+        # @param [Integer] scale The scale (maximum number of digits in the
+        #   fractional part) for the field. Acceptable values for precision
+        #   must be: `1 ≤ (precision - scale) ≤ 29`. Values for scale must
+        #   be: `0 ≤ scale ≤ 9`. If the scale value is set, the precision
+        #   value must be set as well.
         #
-        def numeric name, description: nil, mode: :nullable
-          add_field name, :numeric, description: description, mode: mode
+        def numeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
+          add_field name,
+                    :numeric,
+                    description: description,
+                    mode: mode,
+                    policy_tags: policy_tags,
+                    precision: precision,
+                    scale: scale
         end
 
         ##
@@ -373,111 +412,180 @@ module Google
         # for financial calculations.
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
+        # @param [Integer] precision The precision (maximum number of total
+        #   digits) for the field. Acceptable values for precision must be:
+        #   `1 ≤ (precision - scale) ≤ 38`. Values for scale must be:
+        #   `0 ≤ scale ≤ 38`. If the scale value is set, the precision value
+        #   must be set as well.
+        # @param [Integer] scale The scale (maximum number of digits in the
+        #   fractional part) for the field. Acceptable values for precision
+        #   must be: `1 ≤ (precision - scale) ≤ 38`. Values for scale must
+        #   be: `0 ≤ scale ≤ 38`. If the scale value is set, the precision
+        #   value must be set as well.
         #
-        def bignumeric name, description: nil, mode: :nullable
-          add_field name, :bignumeric, description: description, mode: mode
+        def bignumeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
+          add_field name,
+                    :bignumeric,
+                    description: description,
+                    mode: mode,
+                    policy_tags: policy_tags,
+                    precision: precision,
+                    scale: scale
         end
 
         ##
         # Adds a boolean field to the schema.
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
         #
-        def boolean name, description: nil, mode: :nullable
-          add_field name, :boolean, description: description, mode: mode
+        def boolean name, description: nil, mode: :nullable, policy_tags: nil
+          add_field name, :boolean, description: description, mode: mode, policy_tags: policy_tags
         end
 
         ##
         # Adds a bytes field to the schema.
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
+        # @param [Integer] max_length The maximum the maximum number of
+        #   bytes in the field.
         #
-        def bytes name, description: nil, mode: :nullable
-          add_field name, :bytes, description: description, mode: mode
+        def bytes name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
+          add_field name, :bytes, description: description, mode: mode, policy_tags: policy_tags, max_length: max_length
         end
 
         ##
         # Adds a timestamp field to the schema.
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
-        def timestamp name, description: nil, mode: :nullable
-          add_field name, :timestamp, description: description, mode: mode
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
+        #
+        def timestamp name, description: nil, mode: :nullable, policy_tags: nil
+          add_field name, :timestamp, description: description, mode: mode, policy_tags: policy_tags
         end
 
         ##
         # Adds a time field to the schema.
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
         #
-        def time name, description: nil, mode: :nullable
-          add_field name, :time, description: description, mode: mode
+        def time name, description: nil, mode: :nullable, policy_tags: nil
+          add_field name, :time, description: description, mode: mode, policy_tags: policy_tags
         end
 
         ##
         # Adds a datetime field to the schema.
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
         #
-        def datetime name, description: nil, mode: :nullable
-          add_field name, :datetime, description: description, mode: mode
+        def datetime name, description: nil, mode: :nullable, policy_tags: nil
+          add_field name, :datetime, description: description, mode: mode, policy_tags: policy_tags
         end
 
         ##
         # Adds a date field to the schema.
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
         #
-        def date name, description: nil, mode: :nullable
-          add_field name, :date, description: description, mode: mode
+        def date name, description: nil, mode: :nullable, policy_tags: nil
+          add_field name, :date, description: description, mode: mode, policy_tags: policy_tags
+        end
+
+        ##
+        # Adds a geography field to the schema.
+        #
+        # @see https://cloud.google.com/bigquery/docs/gis-data Working with BigQuery GIS data
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        # @param [Array<String>, String] policy_tags The policy tag list or
+        #   single policy tag for the field. Policy tag identifiers are of
+        #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+        #   At most 1 policy tag is currently allowed.
+        #
+        def geography name, description: nil, mode: :nullable, policy_tags: nil
+          add_field name, :geography, description: description, mode: mode, policy_tags: policy_tags
         end
 
         ##
@@ -488,7 +596,7 @@ module Google
         # ](https://cloud.google.com/bigquery/docs/loading-data#loading_denormalized_nested_and_repeated_data).
         #
         # @param [String] name The field name. The name must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
         #   start with a letter or underscore. The maximum length is 128
         #   characters.
         # @param [String] description A description of the field.
@@ -560,7 +668,14 @@ module Google
           raise ArgumentError, "Cannot modify a frozen schema"
         end
 
-        def add_field name, type, description: nil, mode: :nullable
+        def add_field name,
+                      type,
+                      description: nil,
+                      mode: :nullable,
+                      policy_tags: nil,
+                      max_length: nil,
+                      precision: nil,
+                      scale: nil
           frozen_check!
 
           new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
@@ -570,7 +685,13 @@ module Google
             mode:        verify_mode(mode),
             fields:      []
           )
-
+          if policy_tags
+            policy_tags = Array(policy_tags)
+            new_gapi.policy_tags = Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags
+          end
+          new_gapi.max_length = max_length if max_length
+          new_gapi.precision = precision if precision
+          new_gapi.scale = scale if scale
           # Remove any existing field of this name
           @gapi.fields ||= []
           @gapi.fields.reject! { |f| f.name == new_gapi.name }

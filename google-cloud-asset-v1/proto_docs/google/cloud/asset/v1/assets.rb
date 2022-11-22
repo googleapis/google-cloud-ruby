@@ -115,8 +115,8 @@ module Google
         #     effectively policy is the union of both the policy set on this resource
         #     and each policy set on all of the resource's ancestry resource levels in
         #     the hierarchy. See
-        #     [this topic](https://cloud.google.com/iam/docs/policies#inheritance) for
-        #     more information.
+        #     [this topic](https://cloud.google.com/iam/help/allow-policies/inheritance)
+        #     for more information.
         # @!attribute [rw] org_policy
         #   @return [::Array<::Google::Cloud::OrgPolicy::V1::Policy>]
         #     A representation of an [organization
@@ -140,6 +140,16 @@ module Google
         #     A representation of runtime OS Inventory information. See [this
         #     topic](https://cloud.google.com/compute/docs/instances/os-inventory-management)
         #     for more information.
+        # @!attribute [rw] related_assets
+        #   @return [::Google::Cloud::Asset::V1::RelatedAssets]
+        #     DEPRECATED. This field only presents for the purpose of
+        #     backward-compatibility. The server will never generate responses with this
+        #     field.
+        #     The related assets of the asset of one relationship type. One asset
+        #     only represents one type of relationship.
+        # @!attribute [rw] related_asset
+        #   @return [::Google::Cloud::Asset::V1::RelatedAsset]
+        #     One related asset of the current asset.
         # @!attribute [rw] ancestors
         #   @return [::Array<::String>]
         #     The ancestry path of an asset in Google Cloud [resource
@@ -208,7 +218,86 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # DEPRECATED. This message only presents for the purpose of
+        # backward-compatibility. The server will never populate this message in
+        # responses.
+        # The detailed related assets with the `relationship_type`.
+        # @!attribute [rw] relationship_attributes
+        #   @return [::Google::Cloud::Asset::V1::RelationshipAttributes]
+        #     The detailed relationship attributes.
+        # @!attribute [rw] assets
+        #   @return [::Array<::Google::Cloud::Asset::V1::RelatedAsset>]
+        #     The peer resources of the relationship.
+        class RelatedAssets
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # DEPRECATED. This message only presents for the purpose of
+        # backward-compatibility. The server will never populate this message in
+        # responses.
+        # The relationship attributes which include  `type`, `source_resource_type`,
+        # `target_resource_type` and `action`.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     The unique identifier of the relationship type. Example:
+        #     `INSTANCE_TO_INSTANCEGROUP`
+        # @!attribute [rw] source_resource_type
+        #   @return [::String]
+        #     The source asset type. Example: `compute.googleapis.com/Instance`
+        # @!attribute [rw] target_resource_type
+        #   @return [::String]
+        #     The target asset type. Example: `compute.googleapis.com/Disk`
+        # @!attribute [rw] action
+        #   @return [::String]
+        #     The detail of the relationship, e.g. `contains`, `attaches`
+        class RelationshipAttributes
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An asset identifier in Google Cloud which contains its name, type and
+        # ancestors. An asset can be any resource in the Google Cloud [resource
+        # hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
+        # a resource outside the Google Cloud resource hierarchy (such as Google
+        # Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy).
+        # See [Supported asset
+        # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+        # for more information.
+        # @!attribute [rw] asset
+        #   @return [::String]
+        #     The full name of the asset. Example:
+        #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`
+        #
+        #     See [Resource
+        #     names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+        #     for more information.
+        # @!attribute [rw] asset_type
+        #   @return [::String]
+        #     The type of the asset. Example: `compute.googleapis.com/Disk`
+        #
+        #     See [Supported asset
+        #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+        #     for more information.
+        # @!attribute [rw] ancestors
+        #   @return [::Array<::String>]
+        #     The ancestors of an asset in Google Cloud [resource
+        #     hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
+        #     represented as a list of relative resource names. An ancestry path starts
+        #     with the closest ancestor in the hierarchy and ends at root.
+        #
+        #     Example: `["projects/123456789", "folders/5432", "organizations/1234"]`
+        # @!attribute [rw] relationship_type
+        #   @return [::String]
+        #     The unique identifier of the relationship type. Example:
+        #     `INSTANCE_TO_INSTANCEGROUP`
+        class RelatedAsset
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A result of Resource Search, containing information of a cloud resource.
+        # Next ID: 31
         # @!attribute [rw] name
         #   @return [::String]
         #     The full resource name of this resource. Example:
@@ -219,15 +308,15 @@ module Google
         #
         #     To search against the `name`:
         #
-        #     * use a field query. Example: `name:instance1`
-        #     * use a free text query. Example: `instance1`
+        #     * Use a field query. Example: `name:instance1`
+        #     * Use a free text query. Example: `instance1`
         # @!attribute [rw] asset_type
         #   @return [::String]
         #     The type of this resource. Example: `compute.googleapis.com/Disk`.
         #
         #     To search against the `asset_type`:
         #
-        #     * specify the `asset_type` field in your search request.
+        #     * Specify the `asset_type` field in your search request.
         # @!attribute [rw] project
         #   @return [::String]
         #     The project that this resource belongs to, in the form of
@@ -236,9 +325,9 @@ module Google
         #
         #     To search against `project`:
         #
-        #     * use a field query. Example: `project:12345`
-        #     * use a free text query. Example: `12345`
-        #     * specify the `scope` field as this project in your search request.
+        #     * Use a field query. Example: `project:12345`
+        #     * Use a free text query. Example: `12345`
+        #     * Specify the `scope` field as this project in your search request.
         # @!attribute [rw] folders
         #   @return [::Array<::String>]
         #     The folder(s) that this resource belongs to, in the form of
@@ -247,9 +336,9 @@ module Google
         #
         #     To search against `folders`:
         #
-        #     * use a field query. Example: `folders:(123 OR 456)`
-        #     * use a free text query. Example: `123`
-        #     * specify the `scope` field as this folder in your search request.
+        #     * Use a field query. Example: `folders:(123 OR 456)`
+        #     * Use a free text query. Example: `123`
+        #     * Specify the `scope` field as this folder in your search request.
         # @!attribute [rw] organization
         #   @return [::String]
         #     The organization that this resource belongs to, in the form of
@@ -258,85 +347,105 @@ module Google
         #
         #     To search against `organization`:
         #
-        #     * use a field query. Example: `organization:123`
-        #     * use a free text query. Example: `123`
-        #     * specify the `scope` field as this organization in your search request.
+        #     * Use a field query. Example: `organization:123`
+        #     * Use a free text query. Example: `123`
+        #     * Specify the `scope` field as this organization in your search request.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name of this resource. This field is available only when the
-        #     resource's proto contains it.
+        #     resource's Protobuf contains it.
         #
         #     To search against the `display_name`:
         #
-        #     * use a field query. Example: `displayName:"My Instance"`
-        #     * use a free text query. Example: `"My Instance"`
+        #     * Use a field query. Example: `displayName:"My Instance"`
+        #     * Use a free text query. Example: `"My Instance"`
         # @!attribute [rw] description
         #   @return [::String]
         #     One or more paragraphs of text description of this resource. Maximum length
         #     could be up to 1M bytes. This field is available only when the resource's
-        #     proto contains it.
+        #     Protobuf contains it.
         #
         #     To search against the `description`:
         #
-        #     * use a field query. Example: `description:"important instance"`
-        #     * use a free text query. Example: `"important instance"`
+        #     * Use a field query. Example: `description:"important instance"`
+        #     * Use a free text query. Example: `"important instance"`
         # @!attribute [rw] location
         #   @return [::String]
         #     Location can be `global`, regional like `us-east1`, or zonal like
-        #     `us-west1-b`. This field is available only when the resource's proto
+        #     `us-west1-b`. This field is available only when the resource's Protobuf
         #     contains it.
         #
         #     To search against the `location`:
         #
-        #     * use a field query. Example: `location:us-west*`
-        #     * use a free text query. Example: `us-west*`
+        #     * Use a field query. Example: `location:us-west*`
+        #     * Use a free text query. Example: `us-west*`
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels associated with this resource. See [Labelling and grouping GCP
         #     resources](https://cloud.google.com/blog/products/gcp/labelling-and-grouping-your-google-cloud-platform-resources)
         #     for more information. This field is available only when the resource's
-        #     proto contains it.
+        #     Protobuf contains it.
         #
         #     To search against the `labels`:
         #
-        #     * use a field query:
+        #     * Use a field query:
         #         - query on any label's key or value. Example: `labels:prod`
         #         - query by a given label. Example: `labels.env:prod`
         #         - query by a given label's existence. Example: `labels.env:*`
-        #     * use a free text query. Example: `prod`
+        #     * Use a free text query. Example: `prod`
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
         #     Network tags associated with this resource. Like labels, network tags are a
         #     type of annotations used to group GCP resources. See [Labelling GCP
         #     resources](https://cloud.google.com/blog/products/gcp/labelling-and-grouping-your-google-cloud-platform-resources)
         #     for more information. This field is available only when the resource's
-        #     proto contains it.
+        #     Protobuf contains it.
         #
         #     To search against the `network_tags`:
         #
-        #     * use a field query. Example: `networkTags:internal`
-        #     * use a free text query. Example: `internal`
+        #     * Use a field query. Example: `networkTags:internal`
+        #     * Use a free text query. Example: `internal`
         # @!attribute [rw] kms_key
         #   @return [::String]
         #     The Cloud KMS
-        #     [CryptoKey](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys?hl=en)
+        #     [CryptoKey](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys)
         #     name or
-        #     [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions?hl=en)
-        #     name. This field is available only when the resource's proto contains it.
+        #     [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions)
+        #     name.
+        #
+        #     This field only presents for the purpose of backward compatibility. Please
+        #     use the `kms_keys` field to retrieve KMS key information. This field is
+        #     available only when the resource's Protobuf contains it and will only be
+        #     populated for [these resource
+        #     types](https://cloud.google.com/asset-inventory/docs/legacy-field-names#resource_types_with_the_to_be_deprecated_kmskey_field)
+        #     for backward compatible purposes.
         #
         #     To search against the `kms_key`:
         #
-        #     * use a field query. Example: `kmsKey:key`
-        #     * use a free text query. Example: `key`
+        #     * Use a field query. Example: `kmsKey:key`
+        #     * Use a free text query. Example: `key`
+        # @!attribute [rw] kms_keys
+        #   @return [::Array<::String>]
+        #     The Cloud KMS
+        #     [CryptoKey](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys)
+        #     names or
+        #     [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions)
+        #     names. This field is available only when the resource's Protobuf contains
+        #     it.
+        #
+        #     To search against the `kms_keys`:
+        #
+        #     * Use a field query. Example: `kmsKeys:key`
+        #     * Use a free text query. Example: `key`
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The create timestamp of this resource, at which the resource was created.
         #     The granularity is in seconds. Timestamp.nanos will always be 0. This field
-        #     is available only when the resource's proto contains it.
+        #     is available only when the resource's Protobuf contains it.
         #
         #     To search against `create_time`:
         #
-        #     * use a field query.
+        #     * Use a field query.
         #         - value in seconds since unix epoch. Example: `createTime > 1609459200`
         #         - value in date string. Example: `createTime > 2021-01-01`
         #         - value in date-time string (must be quoted). Example: `createTime >
@@ -345,12 +454,12 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     The last update timestamp of this resource, at which the resource was last
         #     modified or deleted. The granularity is in seconds. Timestamp.nanos will
-        #     always be 0. This field is available only when the resource's proto
+        #     always be 0. This field is available only when the resource's Protobuf
         #     contains it.
         #
         #     To search against `update_time`:
         #
-        #     * use a field query.
+        #     * Use a field query.
         #         - value in seconds since unix epoch. Example: `updateTime < 1609459200`
         #         - value in date string. Example: `updateTime < 2021-01-01`
         #         - value in date-time string (must be quoted). Example: `updateTime <
@@ -359,7 +468,8 @@ module Google
         #   @return [::String]
         #     The state of this resource. Different resources types have different state
         #     definitions that are mapped from various fields of different resource
-        #     types. This field is available only when the resource's proto contains it.
+        #     types. This field is available only when the resource's Protobuf contains
+        #     it.
         #
         #     Example:
         #     If the resource is an instance provided by Compute Engine,
@@ -374,8 +484,8 @@ module Google
         #
         #     To search against the `state`:
         #
-        #     * use a field query. Example: `state:RUNNING`
-        #     * use a free text query. Example: `RUNNING`
+        #     * Use a field query. Example: `state:RUNNING`
+        #     * Use a free text query. Example: `RUNNING`
         # @!attribute [rw] additional_attributes
         #   @return [::Google::Protobuf::Struct]
         #     The additional searchable attributes of this resource. The attributes may
@@ -394,7 +504,7 @@ module Google
         #
         #     To search against the `additional_attributes`:
         #
-        #     * use a free text query to match the attributes values. Example: to search
+        #     * Use a free text query to match the attributes values. Example: to search
         #       `additional_attributes = { dnsName: "foobar" }`, you can issue a query
         #       `foobar`.
         # @!attribute [rw] parent_full_resource_name
@@ -402,19 +512,82 @@ module Google
         #     The full resource name of this resource's parent, if it has one.
         #     To search against the `parent_full_resource_name`:
         #
-        #     * use a field query. Example:
+        #     * Use a field query. Example:
         #     `parentFullResourceName:"project-name"`
-        #     * use a free text query. Example:
+        #     * Use a free text query. Example:
         #     `project-name`
+        # @!attribute [rw] versioned_resources
+        #   @return [::Array<::Google::Cloud::Asset::V1::VersionedResource>]
+        #     Versioned resource representations of this resource. This is repeated
+        #     because there could be multiple versions of resource representations during
+        #     version migration.
+        #
+        #     This `versioned_resources` field is not searchable. Some attributes of the
+        #     resource representations are exposed in `additional_attributes` field, so
+        #     as to allow users to search on them.
+        # @!attribute [rw] attached_resources
+        #   @return [::Array<::Google::Cloud::Asset::V1::AttachedResource>]
+        #     Attached resources of this resource. For example, an OSConfig
+        #     Inventory is an attached resource of a Compute Instance. This field is
+        #     repeated because a resource could have multiple attached resources.
+        #
+        #     This `attached_resources` field is not searchable. Some attributes
+        #     of the attached resources are exposed in `additional_attributes` field, so
+        #     as to allow users to search on them.
+        # @!attribute [rw] relationships
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Asset::V1::RelatedResources}]
+        #     A map of related resources of this resource, keyed by the
+        #     relationship type. A relationship type is in the format of
+        #     \\{SourceType}_\\{ACTION}_\\{DestType}. Example: `DISK_TO_INSTANCE`,
+        #     `DISK_TO_NETWORK`, `INSTANCE_TO_INSTANCEGROUP`.
+        #     See [supported relationship
+        #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#supported_relationship_types).
+        # @!attribute [rw] tag_keys
+        #   @return [::Array<::String>]
+        #     TagKey namespaced names, in the format of \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}.
+        #     To search against the `tagKeys`:
+        #
+        #     * Use a field query. Example:
+        #         - `tagKeys:"123456789/env*"`
+        #         - `tagKeys="123456789/env"`
+        #         - `tagKeys:"env"`
+        #
+        #     * Use a free text query. Example:
+        #         - `env`
+        # @!attribute [rw] tag_values
+        #   @return [::Array<::String>]
+        #     TagValue namespaced names, in the format of
+        #     \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}/\\{TAG_VALUE_SHORT_NAME}.
+        #     To search against the `tagValues`:
+        #
+        #     * Use a field query. Example:
+        #         - `tagValues:"env"`
+        #         - `tagValues:"env/prod"`
+        #         - `tagValues:"123456789/env/prod*"`
+        #         - `tagValues="123456789/env/prod"`
+        #
+        #     * Use a free text query. Example:
+        #         - `prod`
+        # @!attribute [rw] tag_value_ids
+        #   @return [::Array<::String>]
+        #     TagValue IDs, in the format of tagValues/\\{TAG_VALUE_ID}.
+        #     To search against the `tagValueIds`:
+        #
+        #     * Use a field query. Example:
+        #         - `tagValueIds:"456"`
+        #         - `tagValueIds="tagValues/456"`
+        #
+        #     * Use a free text query. Example:
+        #         - `456`
         # @!attribute [rw] parent_asset_type
         #   @return [::String]
         #     The type of this resource's immediate parent, if there is one.
         #
         #     To search against the `parent_asset_type`:
         #
-        #     * use a field query. Example:
+        #     * Use a field query. Example:
         #     `parentAssetType:"cloudresourcemanager.googleapis.com/Project"`
-        #     * use a free text query. Example:
+        #     * Use a free text query. Example:
         #     `cloudresourcemanager.googleapis.com/Project`
         class ResourceSearchResult
           include ::Google::Protobuf::MessageExts
@@ -428,6 +601,87 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Asset::V1::RelatedResources]
+          class RelationshipsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Resource representation as defined by the corresponding service providing the
+        # resource for a given API version.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     API version of the resource.
+        #
+        #     Example:
+        #     If the resource is an instance provided by Compute Engine v1 API as defined
+        #     in `https://cloud.google.com/compute/docs/reference/rest/v1/instances`,
+        #     version will be "v1".
+        # @!attribute [rw] resource
+        #   @return [::Google::Protobuf::Struct]
+        #     JSON representation of the resource as defined by the corresponding
+        #     service providing this resource.
+        #
+        #     Example:
+        #     If the resource is an instance provided by Compute Engine, this field will
+        #     contain the JSON representation of the instance as defined by Compute
+        #     Engine:
+        #     `https://cloud.google.com/compute/docs/reference/rest/v1/instances`.
+        #
+        #     You can find the resource definition for each supported resource type in
+        #     this table:
+        #     `https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types`
+        class VersionedResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Attached resource representation, which is defined by the corresponding
+        # service provider. It represents an attached resource's payload.
+        # @!attribute [rw] asset_type
+        #   @return [::String]
+        #     The type of this attached resource.
+        #
+        #     Example: `osconfig.googleapis.com/Inventory`
+        #
+        #     You can find the supported attached asset types of each resource in this
+        #     table:
+        #     `https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types`
+        # @!attribute [rw] versioned_resources
+        #   @return [::Array<::Google::Cloud::Asset::V1::VersionedResource>]
+        #     Versioned resource representations of this attached resource. This is
+        #     repeated because there could be multiple versions of the attached resource
+        #     representations during version migration.
+        class AttachedResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The related resources of the primary resource.
+        # @!attribute [rw] related_resources
+        #   @return [::Array<::Google::Cloud::Asset::V1::RelatedResource>]
+        #     The detailed related resources of the primary resource.
+        class RelatedResources
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The detailed related resource.
+        # @!attribute [rw] asset_type
+        #   @return [::String]
+        #     The type of the asset. Example: `compute.googleapis.com/Instance`
+        # @!attribute [rw] full_resource_name
+        #   @return [::String]
+        #     The full resource name of the related resource. Example:
+        #     `//compute.googleapis.com/projects/my_proj_123/zones/instance/instance123`
+        class RelatedResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A result of IAM Policy search, containing information of an IAM policy.
@@ -443,6 +697,14 @@ module Google
         #     To search against the `resource`:
         #
         #     * use a field query. Example: `resource:organizations/123`
+        # @!attribute [rw] asset_type
+        #   @return [::String]
+        #     The type of the resource associated with this IAM policy. Example:
+        #     `compute.googleapis.com/Disk`.
+        #
+        #     To search against the `asset_type`:
+        #
+        #     * specify the `asset_types` field in your search request.
         # @!attribute [rw] project
         #   @return [::String]
         #     The project that the associated GCP resource belongs to, in the form of
@@ -454,6 +716,28 @@ module Google
         #     To search against the `project`:
         #
         #     * specify the `scope` field as this project in your search request.
+        # @!attribute [rw] folders
+        #   @return [::Array<::String>]
+        #     The folder(s) that the IAM policy belongs to, in the form of
+        #     folders/\\{FOLDER_NUMBER}. This field is available when the IAM policy
+        #     belongs to one or more folders.
+        #
+        #     To search against `folders`:
+        #
+        #     * use a field query. Example: `folders:(123 OR 456)`
+        #     * use a free text query. Example: `123`
+        #     * specify the `scope` field as this folder in your search request.
+        # @!attribute [rw] organization
+        #   @return [::String]
+        #     The organization that the IAM policy belongs to, in the form
+        #     of organizations/\\{ORGANIZATION_NUMBER}. This field is available when the
+        #     IAM policy belongs to an organization.
+        #
+        #     To search against `organization`:
+        #
+        #     * use a field query. Example: `organization:123`
+        #     * use a free text query. Example: `123`
+        #     * specify the `scope` field as this organization in your search request.
         # @!attribute [rw] policy
         #   @return [::Google::Iam::V1::Policy]
         #     The IAM policy directly set on the given resource. Note that the original

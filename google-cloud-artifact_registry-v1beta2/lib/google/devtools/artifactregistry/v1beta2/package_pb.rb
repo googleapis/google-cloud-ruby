@@ -4,7 +4,7 @@
 require 'google/protobuf'
 
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/artifactregistry/v1beta2/package.proto", :syntax => :proto3) do
     add_message "google.devtools.artifactregistry.v1beta2.Package" do

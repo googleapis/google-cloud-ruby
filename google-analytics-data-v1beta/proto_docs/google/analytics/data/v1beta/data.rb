@@ -46,10 +46,44 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A contiguous set of minutes: startMinutesAgo, startMinutesAgo + 1, ...,
+        # endMinutesAgo. Requests are allowed up to 2 minute ranges.
+        # @!attribute [rw] start_minutes_ago
+        #   @return [::Integer]
+        #     The inclusive start minute for the query as a number of minutes before now.
+        #     For example, `"startMinutesAgo": 29` specifies the report should include
+        #     event data from 29 minutes ago and after. Cannot be after `endMinutesAgo`.
+        #
+        #     If unspecified, `startMinutesAgo` is defaulted to 29. Standard Analytics
+        #     properties can request up to the last 30 minutes of event data
+        #     (`startMinutesAgo <= 29`), and 360 Analytics properties can request up to
+        #     the last 60 minutes of event data (`startMinutesAgo <= 59`).
+        # @!attribute [rw] end_minutes_ago
+        #   @return [::Integer]
+        #     The inclusive end minute for the query as a number of minutes before now.
+        #     Cannot be before `startMinutesAgo`. For example, `"endMinutesAgo": 15`
+        #     specifies the report should include event data from prior to 15 minutes
+        #     ago.
+        #
+        #     If unspecified, `endMinutesAgo` is defaulted to 0. Standard Analytics
+        #     properties can request any minute in the last 30 minutes of event data
+        #     (`endMinutesAgo <= 29`), and 360 Analytics properties can request any
+        #     minute in the last 60 minutes of event data (`endMinutesAgo <= 59`).
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Assigns a name to this minute range. The dimension `dateRange` is valued to
+        #     this name in a report response. If set, cannot begin with `date_range_` or
+        #     `RESERVED_`. If not set, minute ranges are named by their zero based index
+        #     in the request: `date_range_0`, `date_range_1`, etc.
+        class MinuteRange
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Dimensions are attributes of your data. For example, the dimension city
         # indicates the city from which an event originates. Dimension values in report
-        # responses are strings; for example, city could be "Paris" or "New York".
-        # Requests are allowed up to 8 dimensions.
+        # responses are strings; for example, the city could be "Paris" or "New York".
+        # Requests are allowed up to 9 dimensions.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the dimension. See the [API
@@ -60,7 +94,7 @@ module Google
         #     would like within the allowed character set. For example if a
         #     `dimensionExpression` concatenates `country` and `city`, you could call
         #     that dimension `countryAndCity`. Dimension names that you choose must match
-        #     the regular expression "^[a-zA-Z0-9_]$".
+        #     the regular expression `^[a-zA-Z0-9_]$`.
         #
         #     Dimensions are referenced by `name` in `dimensionFilter`, `orderBys`,
         #     `dimensionExpression`, and `pivots`.
@@ -134,7 +168,7 @@ module Google
         #     within the allowed character set. For example if `expression` is
         #     `screenPageViews/sessions`, you could call that metric's name =
         #     `viewsPerSession`. Metric names that you choose must match the regular
-        #     expression "^[a-zA-Z0-9_]$".
+        #     expression `^[a-zA-Z0-9_]$`.
         #
         #     Metrics are referenced by `name` in `metricFilter`, `orderBys`, and metric
         #     `expression`.
@@ -152,9 +186,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # To express dimension or metric filters.
-        # The fields in the same FilterExpression need to be either all dimensions or
-        # all metrics.
+        # To express dimension or metric filters. The fields in the same
+        # FilterExpression need to be either all dimensions or all metrics.
         # @!attribute [rw] and_group
         #   @return [::Google::Analytics::Data::V1beta::FilterExpressionList]
         #     The FilterExpressions in and_group have an AND relationship.
@@ -166,9 +199,8 @@ module Google
         #     The FilterExpression is NOT of not_expression.
         # @!attribute [rw] filter
         #   @return [::Google::Analytics::Data::V1beta::Filter]
-        #     A primitive filter.
-        #     All fields in filter in same FilterExpression needs to be either all
-        #     dimensions or metrics.
+        #     A primitive filter. In the same FilterExpression, all of the filter's
+        #     field names need to be either all dimensions or all metrics.
         class FilterExpression
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -186,8 +218,12 @@ module Google
         # An expression to filter dimension or metric values.
         # @!attribute [rw] field_name
         #   @return [::String]
-        #     The dimension name or metric name. Must be a name defined in dimensions
-        #     or metrics.
+        #     The dimension name or metric name.
+        #
+        #     In most methods, dimensions & metrics can be used for the first time in
+        #     this field. However in a RunPivotReportRequest, this field must be
+        #     additionally specified by name in the RunPivotReportRequest's dimensions or
+        #     metrics.
         # @!attribute [rw] string_filter
         #   @return [::Google::Analytics::Data::V1beta::Filter::StringFilter]
         #     Strings related filter.
@@ -235,10 +271,10 @@ module Google
               # Contains the string value.
               CONTAINS = 4
 
-              # Full regular expression match with the string value.
+              # Full match for the regular expression with the string value.
               FULL_REGEXP = 5
 
-              # Partial regular expression match with the string value.
+              # Partial match for the regular expression with the string value.
               PARTIAL_REGEXP = 6
             end
           end
@@ -302,7 +338,9 @@ module Google
           end
         end
 
-        # The sort options.
+        # Order bys define how rows will be sorted in the response. For example,
+        # ordering rows by descending event count is one ordering, and ordering rows by
+        # the event name string is a different ordering.
         # @!attribute [rw] metric
         #   @return [::Google::Analytics::Data::V1beta::OrderBy::MetricOrderBy]
         #     Sorts results by a metric's values.
@@ -584,9 +622,71 @@ module Google
         #   @return [::Boolean]
         #     If true, indicates some buckets of dimension combinations are rolled into
         #     "(other)" row. This can happen for high cardinality reports.
+        # @!attribute [rw] schema_restriction_response
+        #   @return [::Google::Analytics::Data::V1beta::ResponseMetaData::SchemaRestrictionResponse]
+        #     Describes the schema restrictions actively enforced in creating this
+        #     report. To learn more, see [Access and data-restriction
+        #     management](https://support.google.com/analytics/answer/10851388).
+        # @!attribute [rw] currency_code
+        #   @return [::String]
+        #     The currency code used in this report. Intended to be used in formatting
+        #     currency metrics like `purchaseRevenue` for visualization. If currency_code
+        #     was specified in the request, this response parameter will echo the request
+        #     parameter; otherwise, this response parameter is the property's current
+        #     currency_code.
+        #
+        #     Currency codes are string encodings of currency types from the ISO 4217
+        #     standard (https://en.wikipedia.org/wiki/ISO_4217); for example "USD",
+        #     "EUR", "JPY". To learn more, see
+        #     https://support.google.com/analytics/answer/9796179.
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     The property's current timezone. Intended to be used to interpret
+        #     time-based dimensions like `hour` and `minute`. Formatted as strings from
+        #     the IANA Time Zone database (https://www.iana.org/time-zones); for example
+        #     "America/New_York" or "Asia/Tokyo".
+        # @!attribute [rw] empty_reason
+        #   @return [::String]
+        #     If empty reason is specified, the report is empty for this reason.
+        # @!attribute [rw] subject_to_thresholding
+        #   @return [::Boolean]
+        #     If `subjectToThresholding` is true, this report is subject to thresholding
+        #     and only returns data that meets the minimum aggregation thresholds. It is
+        #     possible for a request to be subject to thresholding thresholding and no
+        #     data is absent from the report, and this happens when all data is above the
+        #     thresholds. To learn more, see [Data
+        #     thresholds](https://support.google.com/analytics/answer/9383630) and [About
+        #     Demographics and
+        #     Interests](https://support.google.com/analytics/answer/2799357).
         class ResponseMetaData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The schema restrictions actively enforced in creating this report. To learn
+          # more, see [Access and data-restriction
+          # management](https://support.google.com/analytics/answer/10851388).
+          # @!attribute [rw] active_metric_restrictions
+          #   @return [::Array<::Google::Analytics::Data::V1beta::ResponseMetaData::SchemaRestrictionResponse::ActiveMetricRestriction>]
+          #     All restrictions actively enforced in creating the report. For example,
+          #     `purchaseRevenue` always has the restriction type `REVENUE_DATA`.
+          #     However, this active response restriction is only populated if the user's
+          #     custom role disallows access to `REVENUE_DATA`.
+          class SchemaRestrictionResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # A metric actively restricted in creating the report.
+            # @!attribute [rw] metric_name
+            #   @return [::String]
+            #     The name of the restricted metric.
+            # @!attribute [rw] restricted_metric_types
+            #   @return [::Array<::Google::Analytics::Data::V1beta::RestrictedMetricType>]
+            #     The reason for this metric's restriction.
+            class ActiveMetricRestriction
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
 
         # Describes a dimension column in the report. Dimensions requested in a report
@@ -731,8 +831,8 @@ module Google
         #   @return [::Google::Analytics::Data::V1beta::QuotaStatus]
         #     Standard Analytics Properties can use up to 5,000 tokens per hour;
         #     Analytics 360 Properties can use 50,000 tokens per hour. An API request
-        #     consumes a single number of tokens, and that number is deducted from both
-        #     the hourly and daily quotas.
+        #     consumes a single number of tokens, and that number is deducted from all of
+        #     the hourly, daily, and per project hourly quotas.
         # @!attribute [rw] concurrent_requests
         #   @return [::Google::Analytics::Data::V1beta::QuotaStatus]
         #     Standard Analytics Properties can send up to 10 concurrent requests;
@@ -748,6 +848,14 @@ module Google
         #     thresholded dimensions per hour. In a batch request, each report request
         #     is individually counted for this quota if the request contains potentially
         #     thresholded dimensions.
+        # @!attribute [rw] tokens_per_project_per_hour
+        #   @return [::Google::Analytics::Data::V1beta::QuotaStatus]
+        #     Analytics Properties can use up to 25% of their tokens per project per
+        #     hour. This amounts to standard Analytics Properties can use up to 1,250
+        #     tokens per project per hour, and Analytics 360 Properties can use 12,500
+        #     tokens per project per hour. An API request consumes a single number of
+        #     tokens, and that number is deducted from all of the hourly, daily, and per
+        #     project hourly quotas.
         class PropertyQuota
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -786,6 +894,10 @@ module Google
         # @!attribute [rw] custom_definition
         #   @return [::Boolean]
         #     True if the dimension is a custom dimension for this property.
+        # @!attribute [rw] category
+        #   @return [::String]
+        #     The display name of the category that this dimension belongs to. Similar
+        #     dimensions and metrics are categorized together.
         class DimensionMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -820,7 +932,65 @@ module Google
         # @!attribute [rw] custom_definition
         #   @return [::Boolean]
         #     True if the metric is a custom metric for this property.
+        # @!attribute [rw] blocked_reasons
+        #   @return [::Array<::Google::Analytics::Data::V1beta::MetricMetadata::BlockedReason>]
+        #     If reasons are specified, your access is blocked to this metric for this
+        #     property. API requests from you to this property for this metric will
+        #     succeed; however, the report will contain only zeros for this metric. API
+        #     requests with metric filters on blocked metrics will fail. If reasons are
+        #     empty, you have access to this metric.
+        #
+        #     To learn more, see [Access and data-restriction
+        #     management](https://support.google.com/analytics/answer/10851388).
+        # @!attribute [rw] category
+        #   @return [::String]
+        #     The display name of the category that this metrics belongs to. Similar
+        #     dimensions and metrics are categorized together.
         class MetricMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Justifications for why this metric is blocked.
+          module BlockedReason
+            # Will never be specified in API response.
+            BLOCKED_REASON_UNSPECIFIED = 0
+
+            # If present, your access is blocked to revenue related metrics for this
+            # property, and this metric is revenue related.
+            NO_REVENUE_METRICS = 1
+
+            # If present, your access is blocked to cost related metrics for this
+            # property, and this metric is cost related.
+            NO_COST_METRICS = 2
+          end
+        end
+
+        # The compatibility for a single dimension.
+        # @!attribute [rw] dimension_metadata
+        #   @return [::Google::Analytics::Data::V1beta::DimensionMetadata]
+        #     The dimension metadata contains the API name for this compatibility
+        #     information. The dimension metadata also contains other helpful information
+        #     like the UI name and description.
+        # @!attribute [rw] compatibility
+        #   @return [::Google::Analytics::Data::V1beta::Compatibility]
+        #     The compatibility of this dimension. If the compatibility is COMPATIBLE,
+        #     this dimension can be successfully added to the report.
+        class DimensionCompatibility
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The compatibility for a single metric.
+        # @!attribute [rw] metric_metadata
+        #   @return [::Google::Analytics::Data::V1beta::MetricMetadata]
+        #     The metric metadata contains the API name for this compatibility
+        #     information. The metric metadata also contains other helpful information
+        #     like the UI name and description.
+        # @!attribute [rw] compatibility
+        #   @return [::Google::Analytics::Data::V1beta::Compatibility]
+        #     The compatibility of this metric. If the compatibility is COMPATIBLE,
+        #     this metric can be successfully added to the report.
+        class MetricCompatibility
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -883,6 +1053,33 @@ module Google
 
           # A length in kilometers; a special floating point type.
           TYPE_KILOMETERS = 13
+        end
+
+        # Categories of data that you may be restricted from viewing on certain GA4
+        # properties.
+        module RestrictedMetricType
+          # Unspecified type.
+          RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0
+
+          # Cost metrics such as `adCost`.
+          COST_DATA = 1
+
+          # Revenue metrics such as `purchaseRevenue`.
+          REVENUE_DATA = 2
+        end
+
+        # The compatibility types for a single dimension or metric.
+        module Compatibility
+          # Unspecified compatibility.
+          COMPATIBILITY_UNSPECIFIED = 0
+
+          # The dimension or metric is compatible. This dimension or metric can be
+          # successfully added to a report.
+          COMPATIBLE = 1
+
+          # The dimension or metric is incompatible. This dimension or metric cannot be
+          # successfully added to a report.
+          INCOMPATIBLE = 2
         end
       end
     end

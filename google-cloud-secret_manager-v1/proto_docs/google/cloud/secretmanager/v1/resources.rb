@@ -68,6 +68,19 @@ module Google
         #   @return [::Google::Cloud::SecretManager::V1::Rotation]
         #     Optional. Rotation policy attached to the {::Google::Cloud::SecretManager::V1::Secret Secret}. May be excluded if there is no
         #     rotation policy.
+        # @!attribute [rw] version_aliases
+        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
+        #     Optional. Mapping from version alias to version name.
+        #
+        #     A version alias is a string with a maximum length of 63 characters and can
+        #     contain uppercase and lowercase letters, numerals, and the hyphen (`-`)
+        #     and underscore ('_') characters. An alias string must start with a
+        #     letter and cannot be the string 'latest' or 'NEW'.
+        #     No more than 50 aliases can be assigned to a given secret.
+        #
+        #     Version-Alias pairs will be viewable via GetSecret and modifiable via
+        #     UpdateSecret. At launch access by alias will only be supported on
+        #     GetSecretVersion and AccessSecretVersion.
         class Secret
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -77,6 +90,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Integer]
+          class VersionAliasesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -107,6 +129,11 @@ module Google
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. Etag of the currently stored {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+        # @!attribute [r] client_specified_payload_checksum
+        #   @return [::Boolean]
+        #     Output only. True if payload checksum specified in {::Google::Cloud::SecretManager::V1::SecretPayload SecretPayload} object has been
+        #     received by {::Google::Cloud::SecretManager::V1::SecretManagerService::Client SecretManagerService} on
+        #     {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#add_secret_version SecretManagerService.AddSecretVersion}.
         class SecretVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -319,6 +346,18 @@ module Google
         # @!attribute [rw] data
         #   @return [::String]
         #     The secret data. Must be no larger than 64KiB.
+        # @!attribute [rw] data_crc32c
+        #   @return [::Integer]
+        #     Optional. If specified, {::Google::Cloud::SecretManager::V1::SecretManagerService::Client SecretManagerService} will verify the integrity of the
+        #     received {::Google::Cloud::SecretManager::V1::SecretPayload#data data} on {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#add_secret_version SecretManagerService.AddSecretVersion} calls using
+        #     the crc32c checksum and store it to include in future
+        #     {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#access_secret_version SecretManagerService.AccessSecretVersion} responses. If a checksum is
+        #     not provided in the {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#add_secret_version SecretManagerService.AddSecretVersion} request, the
+        #     {::Google::Cloud::SecretManager::V1::SecretManagerService::Client SecretManagerService} will generate and store one for you.
+        #
+        #     The CRC32C value is encoded as a Int64 for compatibility, and can be
+        #     safely downconverted to uint32 in languages that support this type.
+        #     https://cloud.google.com/apis/design/design_patterns#integer_types
         class SecretPayload
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

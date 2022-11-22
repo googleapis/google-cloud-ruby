@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/vpcaccess/v1/vpc_access.proto", :syntax => :proto3) do
     add_message "google.cloud.vpcaccess.v1.Connector" do
@@ -20,6 +21,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :max_throughput, :int32, 6
       repeated :connected_projects, :string, 7
       optional :subnet, :message, 8, "google.cloud.vpcaccess.v1.Connector.Subnet"
+      optional :machine_type, :string, 10
+      optional :min_instances, :int32, 11
+      optional :max_instances, :int32, 12
     end
     add_message "google.cloud.vpcaccess.v1.Connector.Subnet" do
       optional :name, :string, 1

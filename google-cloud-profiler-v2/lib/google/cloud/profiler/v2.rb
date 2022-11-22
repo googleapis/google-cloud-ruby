@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/profiler/v2"
       #     client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new
       #

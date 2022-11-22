@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/domains/v1beta1"
       #     client = ::Google::Cloud::Domains::V1beta1::Domains::Client.new
       #

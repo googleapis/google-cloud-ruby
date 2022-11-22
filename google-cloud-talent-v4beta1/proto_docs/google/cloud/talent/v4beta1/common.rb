@@ -240,8 +240,16 @@ module Google
         #     Currently at most 1 {::Google::Cloud::Talent::V4beta1::CustomAttribute#long_values long_values} is supported.
         # @!attribute [rw] filterable
         #   @return [::Boolean]
-        #     If the `filterable` flag is true, custom field values are searchable.
-        #     If false, values are not searchable.
+        #     If the `filterable` flag is true, the custom field values may be used for
+        #     custom attribute filters {::Google::Cloud::Talent::V4beta1::JobQuery#custom_attribute_filter JobQuery.custom_attribute_filter}.
+        #     If false, these values may not be used for custom attribute filters.
+        #
+        #     Default is false.
+        # @!attribute [rw] keyword_searchable
+        #   @return [::Boolean]
+        #     If the `keyword_searchable` flag is true, the keywords in custom fields are
+        #     searchable by keyword match.
+        #     If false, the values are not searchable by keyword match.
         #
         #     Default is false.
         class CustomAttribute
@@ -431,95 +439,6 @@ module Google
             # Other compensation units.
             OTHER_COMPENSATION_UNIT = 7
           end
-        end
-
-        # Resource that represents a license or certification.
-        # @!attribute [rw] display_name
-        #   @return [::String]
-        #     Name of license or certification.
-        #
-        #     Number of characters allowed is 100.
-        # @!attribute [rw] acquire_date
-        #   @return [::Google::Type::Date]
-        #     Acquisition date or effective date of license or certification.
-        # @!attribute [rw] expire_date
-        #   @return [::Google::Type::Date]
-        #     Expiration date of license of certification.
-        # @!attribute [rw] authority
-        #   @return [::String]
-        #     Authority of license, such as government.
-        #
-        #     Number of characters allowed is 100.
-        # @!attribute [rw] description
-        #   @return [::String]
-        #     Description of license or certification.
-        #
-        #     Number of characters allowed is 100,000.
-        class Certification
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Resource that represents a skill of a candidate.
-        # @!attribute [rw] display_name
-        #   @return [::String]
-        #     Skill display name.
-        #
-        #     For example, "Java", "Python".
-        #
-        #     Number of characters allowed is 100.
-        # @!attribute [rw] last_used_date
-        #   @return [::Google::Type::Date]
-        #     The last time this skill was used.
-        # @!attribute [rw] level
-        #   @return [::Google::Cloud::Talent::V4beta1::SkillProficiencyLevel]
-        #     Skill proficiency level which indicates how proficient the candidate is at
-        #     this skill.
-        # @!attribute [rw] context
-        #   @return [::String]
-        #     A paragraph describes context of this skill.
-        #
-        #     Number of characters allowed is 100,000.
-        # @!attribute [r] skill_name_snippet
-        #   @return [::String]
-        #     Output only. Skill name snippet shows how the {::Google::Cloud::Talent::V4beta1::Skill#display_name display_name} is related to a search
-        #     query. It's empty if the {::Google::Cloud::Talent::V4beta1::Skill#display_name display_name} isn't related to the search
-        #     query.
-        class Skill
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Details of an interview.
-        # @!attribute [rw] rating
-        #   @return [::Google::Cloud::Talent::V4beta1::Rating]
-        #     The rating on this interview.
-        # @!attribute [rw] outcome
-        #   @return [::Google::Cloud::Talent::V4beta1::Outcome]
-        #     Required. The overall decision resulting from this interview (positive, negative,
-        #     nuetral).
-        class Interview
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The details of the score received for an assessment or interview.
-        # @!attribute [rw] overall
-        #   @return [::Float]
-        #     Overall score.
-        # @!attribute [rw] min
-        #   @return [::Float]
-        #     The minimum value for the score.
-        # @!attribute [rw] max
-        #   @return [::Float]
-        #     The maximum value for the score.
-        # @!attribute [rw] interval
-        #   @return [::Float]
-        #     The steps within the score (for example, interval = 1 max = 5
-        #     min = 1 indicates that the score can be 1, 2, 3, 4, or 5)
-        class Rating
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Metadata used for long running operations returned by CTS batch APIs.
@@ -931,21 +850,6 @@ module Google
           SHARED_WITH_PUBLIC = 3
         end
 
-        # Enum that represents the usage of the contact information.
-        module ContactInfoUsage
-          # Default value.
-          CONTACT_INFO_USAGE_UNSPECIFIED = 0
-
-          # Personal use.
-          PERSONAL = 1
-
-          # Work use.
-          WORK = 2
-
-          # School use.
-          SCHOOL = 3
-        end
-
         # Option for HTML content sanitization on user input fields, for example, job
         # description. By setting this option, user can determine whether and how
         # sanitization is performed on these fields.
@@ -978,127 +882,6 @@ module Google
 
           # Commute time is calculated based on biking time.
           CYCLING = 4
-        end
-
-        # Enum that represents the skill proficiency level.
-        module SkillProficiencyLevel
-          # Default value.
-          SKILL_PROFICIENCY_LEVEL_UNSPECIFIED = 0
-
-          # Lacks any proficiency in this skill.
-          UNSKILLED = 6
-
-          # Have a common knowledge or an understanding of basic techniques and
-          # concepts.
-          FUNDAMENTAL_AWARENESS = 1
-
-          # Have the level of experience gained in a classroom and/or experimental
-          # scenarios or as a trainee on-the-job.
-          NOVICE = 2
-
-          # Be able to successfully complete tasks in this skill as requested. Help
-          # from an expert may be required from time to time, but can usually perform
-          # skill independently.
-          INTERMEDIATE = 3
-
-          # Can perform the actions associated with this skill without assistance.
-          ADVANCED = 4
-
-          # Known as an expert in this area.
-          EXPERT = 5
-        end
-
-        # The overall outcome /decision / result indicator.
-        module Outcome
-          # Default value.
-          OUTCOME_UNSPECIFIED = 0
-
-          # A positive outcome / passing indicator (for example, candidate was
-          # recommended for hiring or to be moved forward in the hiring process,
-          # candidate passed a test).
-          POSITIVE = 1
-
-          # A neutral outcome / no clear indicator (for example, no strong
-          # reccommendation either to move forward / not move forward, neutral score).
-          NEUTRAL = 2
-
-          # A negative outcome / failing indicator (for example, candidate was
-          # recommended to NOT move forward in the hiring process, failed a test).
-          NEGATIVE = 3
-
-          # The assessment outcome is not available or otherwise unknown (for example,
-          # candidate did not complete assessment).
-          OUTCOME_NOT_AVAILABLE = 4
-        end
-
-        # The type of candidate availability signal.
-        module AvailabilitySignalType
-          # Default value.
-          AVAILABILITY_SIGNAL_TYPE_UNSPECIFIED = 0
-
-          # Job application signal.
-          #
-          # In the context of {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
-          # to the candidate's most recent application.
-          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
-          # calculated from max({::Google::Cloud::Talent::V4beta1::Application#create_time Application.create_time}) from all {::Google::Cloud::Talent::V4beta1::Application Application}
-          # records where [Application.source][google.cloud.talent.v4beta1.Application.source] is any of the following:
-          #  [APPLY_DIRECT_WEB][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_WEB]
-          #  [APPLY_DIRECT_MOBILE_WEB][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_MOBILE_WEB]
-          #  [APPLY_DIRECT_MOBILE_APP][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_MOBILE_APP]
-          #  [APPLY_DIRECT_IN_PERSON][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_IN_PERSON]
-          #  [APPLY_INDIRECT][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_INDIRECT]
-          #
-          # In the context of {::Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
-          # {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
-          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is JOB_APPLICATION.
-          JOB_APPLICATION = 1
-
-          # Resume update signal.
-          #
-          # In the context of {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
-          # to the candidate's most recent update to their resume.
-          # For a {::Google::Cloud::Talent::V4beta1::SummarizedProfile#summary SummarizedProfile.summary},
-          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
-          # calculated from max({::Google::Cloud::Talent::V4beta1::Profile#resume_update_time Profile.resume_update_time}) from all
-          # {::Google::Cloud::Talent::V4beta1::SummarizedProfile#profiles SummarizedProfile.profiles}.
-          #
-          # In the context of {::Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
-          # {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
-          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is RESUME_UPDATE.
-          RESUME_UPDATE = 2
-
-          # Candidate update signal.
-          #
-          # In the context of {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
-          # to the candidate's most recent update to their profile.
-          # For a {::Google::Cloud::Talent::V4beta1::SummarizedProfile#summary SummarizedProfile.summary},
-          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
-          # calculated from max({::Google::Cloud::Talent::V4beta1::Profile#candidate_update_time Profile.candidate_update_time}) from all
-          # {::Google::Cloud::Talent::V4beta1::SummarizedProfile#profiles SummarizedProfile.profiles}.
-          #
-          # In the context of {::Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
-          # {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
-          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is CANDIDATE_UPDATE.
-          CANDIDATE_UPDATE = 3
-
-          # Client submission signal.
-          #
-          # In the context of {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
-          # to the candidate's most recent submission.
-          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
-          # calculated from max({::Google::Cloud::Talent::V4beta1::Application#create_time Application.create_time}) from all {::Google::Cloud::Talent::V4beta1::Application Application}
-          # records where {::Google::Cloud::Talent::V4beta1::Application#stage Application.stage} is any of the following:
-          #  {::Google::Cloud::Talent::V4beta1::Application::ApplicationStage::HIRING_MANAGER_REVIEW HIRING_MANAGER_REVIEW}
-          #  {::Google::Cloud::Talent::V4beta1::Application::ApplicationStage::INTERVIEW INTERVIEW}
-          #  {::Google::Cloud::Talent::V4beta1::Application::ApplicationStage::OFFER_EXTENDED OFFER_EXTENDED}
-          #  {::Google::Cloud::Talent::V4beta1::Application::ApplicationStage::OFFER_ACCEPTED OFFER_ACCEPTED}
-          #  {::Google::Cloud::Talent::V4beta1::Application::ApplicationStage::STARTED STARTED}
-          #
-          # In the context of {::Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
-          # {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
-          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is CLIENT_SUBMISSION.
-          CLIENT_SUBMISSION = 4
         end
       end
     end

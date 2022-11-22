@@ -35,16 +35,18 @@ module Google
           attr_reader :bytesize
           attr_reader :extension
           attr_reader :max_duration_per_lease_extension
+          attr_accessor :min_duration_per_lease_extension
           attr_reader :use_legacy_flow_control
 
           def initialize stream, limit:, bytesize:, extension:, max_duration_per_lease_extension:,
-                         use_legacy_flow_control:
+                         min_duration_per_lease_extension:, use_legacy_flow_control:
             super()
             @stream = stream
             @limit = limit
             @bytesize = bytesize
             @extension = extension
             @max_duration_per_lease_extension = max_duration_per_lease_extension
+            @min_duration_per_lease_extension = min_duration_per_lease_extension
             @use_legacy_flow_control = use_legacy_flow_control
             @inventory = {}
             @wait_cond = new_cond
@@ -162,6 +164,8 @@ module Google
           def calc_delay
             delay = (stream.subscriber.deadline - 3) * rand(0.8..0.9)
             delay = [delay, max_duration_per_lease_extension].min if max_duration_per_lease_extension.positive?
+            delay = [delay, min_duration_per_lease_extension].max if min_duration_per_lease_extension.positive? &&
+                                                                     stream.exactly_once_delivery_enabled
             delay
           end
         end

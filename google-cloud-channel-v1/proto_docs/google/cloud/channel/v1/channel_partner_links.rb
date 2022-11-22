@@ -70,7 +70,7 @@ module Google
 
         # ChannelPartnerLinkState represents state of a channel partner link.
         module ChannelPartnerLinkState
-          # The state is not specified.
+          # Not used.
           CHANNEL_PARTNER_LINK_STATE_UNSPECIFIED = 0
 
           # An invitation has been sent to the reseller to create a channel partner

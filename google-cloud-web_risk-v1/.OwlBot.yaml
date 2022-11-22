@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/webrisk/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-web_risk-v1/$1

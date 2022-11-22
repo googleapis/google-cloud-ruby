@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/money_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/billing/v1/cloud_catalog.proto", :syntax => :proto3) do
     add_message "google.cloud.billing.v1.Service" do
@@ -25,6 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :service_regions, :string, 5
       repeated :pricing_info, :message, 6, "google.cloud.billing.v1.PricingInfo"
       optional :service_provider_name, :string, 7
+      optional :geo_taxonomy, :message, 8, "google.cloud.billing.v1.GeoTaxonomy"
     end
     add_message "google.cloud.billing.v1.Category" do
       optional :service_display_name, :string, 1
@@ -41,12 +43,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.billing.v1.PricingExpression" do
       optional :usage_unit, :string, 1
+      optional :display_quantity, :double, 2
+      repeated :tiered_rates, :message, 3, "google.cloud.billing.v1.PricingExpression.TierRate"
       optional :usage_unit_description, :string, 4
       optional :base_unit, :string, 5
       optional :base_unit_description, :string, 6
       optional :base_unit_conversion_factor, :double, 7
-      optional :display_quantity, :double, 2
-      repeated :tiered_rates, :message, 3, "google.cloud.billing.v1.PricingExpression.TierRate"
     end
     add_message "google.cloud.billing.v1.PricingExpression.TierRate" do
       optional :start_usage_amount, :double, 1
@@ -66,6 +68,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :AGGREGATION_INTERVAL_UNSPECIFIED, 0
       value :DAILY, 1
       value :MONTHLY, 2
+    end
+    add_message "google.cloud.billing.v1.GeoTaxonomy" do
+      optional :type, :enum, 1, "google.cloud.billing.v1.GeoTaxonomy.Type"
+      repeated :regions, :string, 2
+    end
+    add_enum "google.cloud.billing.v1.GeoTaxonomy.Type" do
+      value :TYPE_UNSPECIFIED, 0
+      value :GLOBAL, 1
+      value :REGIONAL, 2
+      value :MULTI_REGIONAL, 3
     end
     add_message "google.cloud.billing.v1.ListServicesRequest" do
       optional :page_size, :int32, 1
@@ -103,6 +115,8 @@ module Google
         AggregationInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.AggregationInfo").msgclass
         AggregationInfo::AggregationLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.AggregationInfo.AggregationLevel").enummodule
         AggregationInfo::AggregationInterval = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.AggregationInfo.AggregationInterval").enummodule
+        GeoTaxonomy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.GeoTaxonomy").msgclass
+        GeoTaxonomy::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.GeoTaxonomy.Type").enummodule
         ListServicesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListServicesRequest").msgclass
         ListServicesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListServicesResponse").msgclass
         ListSkusRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListSkusRequest").msgclass

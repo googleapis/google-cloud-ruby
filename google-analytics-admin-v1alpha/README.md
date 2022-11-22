@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/analytics/admin/v1alpha"
 
 client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
-request = my_create_request
+request = ::Google::Analytics::Admin::V1alpha::GetAccountRequest.new # (request fields as keyword arguments...)
 response = client.get_account request
 ```
 
@@ -66,16 +66,21 @@ module GRPC
 end
 ```
 
+
+## Google Cloud Samples
+
+To browse ready to use code samples check [Google Cloud Samples](https://cloud.google.com/docs/samples).
+
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.5+.
+This library is supported on Ruby 2.6+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.5
-and later. Older versions of Ruby _may_ still work, but are unsupported and not
-recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
-about the Ruby support schedule.
+in security maintenance, and not end of life. Older versions of Ruby _may_
+still work, but are unsupported and not recommended. See
+https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
+support schedule.
 
 ## Which client should I use?
 

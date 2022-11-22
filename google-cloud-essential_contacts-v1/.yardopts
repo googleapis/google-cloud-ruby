@@ -1,5 +1,5 @@
 --no-private
---title=Essential Contacts V1 API
+--title="Essential Contacts V1 API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

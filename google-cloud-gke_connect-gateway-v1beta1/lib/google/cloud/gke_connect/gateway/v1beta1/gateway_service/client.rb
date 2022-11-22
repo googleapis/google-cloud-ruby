@@ -44,13 +44,12 @@ module Google
               # See {::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all GatewayService clients:
-              #
-              #     ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all GatewayService clients
+              #   ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -97,19 +96,15 @@ module Google
               ##
               # Create a new GatewayService client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new GatewayService client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
               #
-              #     client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
-              #
-              # To create a new GatewayService client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the GatewayService client.
               # @yieldparam config [Client::Configuration]
@@ -129,14 +124,13 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                # Use self-signed JWT if the scope and endpoint are unchanged from default,
+                # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                         @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
                 @quota_project_id = @config.quota_project
@@ -187,6 +181,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/gke_connect/gateway/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Api::HttpBody.new
+              #
+              #   # Call the get_resource method.
+              #   result = client.get_resource request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
+              #
               def get_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -207,7 +216,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_resource.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_resource.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @gateway_service_stub.call_rpc :get_resource, request, options: options do |response, operation|
@@ -252,6 +263,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/gke_connect/gateway/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Api::HttpBody.new
+              #
+              #   # Call the post_resource method.
+              #   result = client.post_resource request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
+              #
               def post_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -272,7 +298,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.post_resource.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.post_resource.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @gateway_service_stub.call_rpc :post_resource, request, options: options do |response, operation|
@@ -317,6 +345,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/gke_connect/gateway/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Api::HttpBody.new
+              #
+              #   # Call the delete_resource method.
+              #   result = client.delete_resource request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
+              #
               def delete_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -337,7 +380,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.delete_resource.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_resource.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @gateway_service_stub.call_rpc :delete_resource, request, options: options do |response, operation|
@@ -382,6 +427,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/gke_connect/gateway/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Api::HttpBody.new
+              #
+              #   # Call the put_resource method.
+              #   result = client.put_resource request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
+              #
               def put_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -402,7 +462,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.put_resource.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.put_resource.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @gateway_service_stub.call_rpc :put_resource, request, options: options do |response, operation|
@@ -447,6 +509,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/gke_connect/gateway/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Api::HttpBody.new
+              #
+              #   # Call the patch_resource method.
+              #   result = client.patch_resource request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
+              #
               def patch_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -467,7 +544,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.patch_resource.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.patch_resource.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @gateway_service_stub.call_rpc :patch_resource, request, options: options do |response, operation|
@@ -491,22 +570,21 @@ module Google
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for get_resource
-              # to 20 seconds, and all remaining timeouts to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # get_resource to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.get_resource.timeout = 20.0
+              #   end
               #
-              #     ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.get_resource.timeout = 20.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.get_resource.timeout = 20.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.get_resource.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.

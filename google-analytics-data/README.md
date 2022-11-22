@@ -2,7 +2,7 @@
 
 API Client library for the Google Analytics Data API
 
-The Google Analytics Data API provides programmatic methods to access report data in Google Analytics 4 (GA4) properties. Google Analytics 4 helps you understand how people use your web, iOS, or Android app. Note that google-analytics-data-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-analytics-data instead. See the readme for more details.
+The Google Analytics Data API provides programmatic methods to access report data in Google Analytics 4 (GA4) properties. Google Analytics 4 helps you understand how people use your web, iOS, or Android app.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-analytics-data-v*`.
@@ -16,7 +16,6 @@ for this library, google-analytics-data, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-analytics-data-v1alpha](https://googleapis.dev/ruby/google-analytics-data-v1alpha/latest),
 [google-analytics-data-v1beta](https://googleapis.dev/ruby/google-analytics-data-v1beta/latest).
 
 See also the [Product Documentation](https://developers.google.com/analytics/devguides/reporting/data/v1)
@@ -63,21 +62,21 @@ end
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.5+.
+This library is supported on Ruby 2.6+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.5
-and later. Older versions of Ruby _may_ still work, but are unsupported and not
-recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
-about the Ruby support schedule.
+in security maintenance, and not end of life. Older versions of Ruby _may_
+still work, but are unsupported and not recommended. See
+https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
+support schedule.
 
 ## Which client should I use?
 
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
 client library with a name such as `google-analytics-data`,
 and lower-level _versioned_ client libraries with names such as
-`google-analytics-data-v1alpha`.
+`google-analytics-data-v1beta`.
 _In most cases, you should install the main client._
 
 ### What's the difference between the main client and a versioned client?
@@ -115,7 +114,7 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-analytics-data-v1alpha`.
+is part of the name, e.g. `google-analytics-data-v1beta`.
 
 ### What about the google-apis-<name> clients?
 

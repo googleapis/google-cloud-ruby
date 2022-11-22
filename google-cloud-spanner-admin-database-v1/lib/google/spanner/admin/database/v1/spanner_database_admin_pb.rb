@@ -14,6 +14,7 @@ require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/spanner/admin/database/v1/backup_pb'
 require 'google/spanner/admin/database/v1/common_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/admin/database/v1/spanner_database_admin.proto", :syntax => :proto3) do
     add_message "google.spanner.admin.database.v1.RestoreInfo" do
@@ -31,6 +32,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :encryption_info, :message, 8, "google.spanner.admin.database.v1.EncryptionInfo"
       optional :version_retention_period, :string, 6
       optional :earliest_version_time, :message, 7, "google.protobuf.Timestamp"
+      optional :default_leader, :string, 9
+      optional :database_dialect, :enum, 10, "google.spanner.admin.database.v1.DatabaseDialect"
     end
     add_enum "google.spanner.admin.database.v1.Database.State" do
       value :STATE_UNSPECIFIED, 0
@@ -52,6 +55,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_statement, :string, 2
       repeated :extra_statements, :string, 3
       optional :encryption_config, :message, 4, "google.spanner.admin.database.v1.EncryptionConfig"
+      optional :database_dialect, :enum, 5, "google.spanner.admin.database.v1.DatabaseDialect"
     end
     add_message "google.spanner.admin.database.v1.CreateDatabaseMetadata" do
       optional :database, :string, 1
@@ -122,6 +126,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :progress, :message, 2, "google.spanner.admin.database.v1.OperationProgress"
     end
+    add_message "google.spanner.admin.database.v1.DatabaseRole" do
+      optional :name, :string, 1
+    end
+    add_message "google.spanner.admin.database.v1.ListDatabaseRolesRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.spanner.admin.database.v1.ListDatabaseRolesResponse" do
+      repeated :database_roles, :message, 1, "google.spanner.admin.database.v1.DatabaseRole"
+      optional :next_page_token, :string, 2
+    end
     add_enum "google.spanner.admin.database.v1.RestoreSourceType" do
       value :TYPE_UNSPECIFIED, 0
       value :BACKUP, 1
@@ -155,6 +171,9 @@ module Google
             RestoreDatabaseEncryptionConfig::EncryptionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseEncryptionConfig.EncryptionType").enummodule
             RestoreDatabaseMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseMetadata").msgclass
             OptimizeRestoredDatabaseMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.OptimizeRestoredDatabaseMetadata").msgclass
+            DatabaseRole = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.DatabaseRole").msgclass
+            ListDatabaseRolesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabaseRolesRequest").msgclass
+            ListDatabaseRolesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabaseRolesResponse").msgclass
             RestoreSourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreSourceType").enummodule
           end
         end

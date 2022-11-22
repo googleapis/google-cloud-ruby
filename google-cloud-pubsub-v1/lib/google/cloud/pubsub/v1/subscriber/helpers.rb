@@ -20,4 +20,6 @@ Google::Cloud::PubSub::V1::Subscriber::Client.configure do |config|
   config.channel_args["grpc.max_send_message_length"] = -1
   config.channel_args["grpc.max_receive_message_length"] = -1
   config.channel_args["grpc.keepalive_time_ms"] = 300_000
+  # Set max metadata size to 4 MB.
+  config.channel_args["grpc.max_metadata_size"] = 4 * 1024 * 1024
 end

@@ -92,8 +92,8 @@ module Google
               truncate_stack: REMOVE_NOTIFICATION_FRAMEWORK
           end
           cur_span.create_span event.name,
-                               start_time: event.time,
-                               end_time: event.end,
+                               start_time: normalize_time(event.time),
+                               end_time: normalize_time(event.end),
                                labels: labels
         end
 
@@ -108,6 +108,19 @@ module Google
             end
           end
           labels
+        end
+
+        ##
+        # @private
+        #
+        # active support event's time is:
+        #
+        # - rails >= 7: timestamp in milliseconds
+        # - rails <  7: time
+        def self.normalize_time time_or_float
+          return time_or_float if Rails::VERSION::MAJOR < 7
+
+          Time.at time_or_float / 1000
         end
       end
     end

@@ -46,6 +46,15 @@ module Google
         #     currently supported languages for each API method. If the language (either
         #     specified by the caller or automatically detected) is not supported by the
         #     called API method, an `INVALID_ARGUMENT` error is returned.
+        # @!attribute [rw] reference_web_uri
+        #   @return [::String]
+        #     The web URI where the document comes from. This URI is not used for
+        #     fetching the content, but as a hint for analyzing the document.
+        # @!attribute [rw] boilerplate_handling
+        #   @return [::Google::Cloud::Language::V1beta2::Document::BoilerplateHandling]
+        #     Indicates how detected boilerplate(e.g. advertisements, copyright
+        #     declarations, banners) should be handled for this document. If not
+        #     specified, boilerplate will be treated the same as content.
         class Document
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -60,6 +69,19 @@ module Google
 
             # HTML
             HTML = 2
+          end
+
+          # Ways of handling boilerplate detected in the document
+          module BoilerplateHandling
+            # The boilerplate handling is not specified.
+            BOILERPLATE_HANDLING_UNSPECIFIED = 0
+
+            # Do not analyze detected boilerplate. Reference web URI is required for
+            # detecting boilerplate.
+            SKIP_BOILERPLATE = 1
+
+            # Treat boilerplate the same as content.
+            KEEP_BOILERPLATE = 2
           end
         end
 
@@ -896,6 +918,49 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Model options available for classification requests.
+        # @!attribute [rw] v1_model
+        #   @return [::Google::Cloud::Language::V1beta2::ClassificationModelOptions::V1Model]
+        #     Setting this field will use the V1 model and V1 content categories
+        #     version. The V1 model is a legacy model; support for this will be
+        #     discontinued in the future.
+        # @!attribute [rw] v2_model
+        #   @return [::Google::Cloud::Language::V1beta2::ClassificationModelOptions::V2Model]
+        #     Setting this field will use the V2 model with the appropriate content
+        #     categories version. The V2 model is a better performing model.
+        class ClassificationModelOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Options for the V1 model.
+          class V1Model
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Options for the V2 model.
+          # @!attribute [rw] content_categories_version
+          #   @return [::Google::Cloud::Language::V1beta2::ClassificationModelOptions::V2Model::ContentCategoriesVersion]
+          #     The content categories used for classification.
+          class V2Model
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The content categories used for classification.
+            module ContentCategoriesVersion
+              # If `ContentCategoriesVersion` is not specified, this option will
+              # default to `V1`.
+              CONTENT_CATEGORIES_VERSION_UNSPECIFIED = 0
+
+              # Legacy content categories of our initial launch in 2017.
+              V1 = 1
+
+              # Updated content categories in 2022.
+              V2 = 2
+            end
+          end
+        end
+
         # The sentiment analysis request message.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Language::V1beta2::Document]
@@ -1011,6 +1076,10 @@ module Google
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Language::V1beta2::Document]
         #     Required. Input document.
+        # @!attribute [rw] classification_model_options
+        #   @return [::Google::Cloud::Language::V1beta2::ClassificationModelOptions]
+        #     Model options to use for classification. Defaults to v1 options if not
+        #     specified.
         class ClassifyTextRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1042,7 +1111,7 @@ module Google
 
           # All available features for sentiment, syntax, and semantic analysis.
           # Setting each one to true will enable that specific analysis for the input.
-          # Next ID: 10
+          # Next ID: 11
           # @!attribute [rw] extract_syntax
           #   @return [::Boolean]
           #     Extract syntax information.
@@ -1061,6 +1130,10 @@ module Google
           #     the API will use the default model which classifies into a
           #     [predefined
           #     taxonomy](https://cloud.google.com/natural-language/docs/categories).
+          # @!attribute [rw] classification_model_options
+          #   @return [::Google::Cloud::Language::V1beta2::ClassificationModelOptions]
+          #     The model options to use for classification. Defaults to v1 options
+          #     if not specified. Only used if `classify_text` is set to true.
           class Features
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

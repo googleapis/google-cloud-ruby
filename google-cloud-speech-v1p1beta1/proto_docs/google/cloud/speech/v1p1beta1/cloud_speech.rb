@@ -201,10 +201,16 @@ module Google
         # @!attribute [rw] adaptation
         #   @return [::Google::Cloud::Speech::V1p1beta1::SpeechAdaptation]
         #     Speech adaptation configuration improves the accuracy of speech
-        #     recognition. When speech adaptation is set it supersedes the
-        #     `speech_contexts` field. For more information, see the [speech
+        #     recognition. For more information, see the [speech
         #     adaptation](https://cloud.google.com/speech-to-text/docs/adaptation)
         #     documentation.
+        #     When speech adaptation is set it supersedes the `speech_contexts` field.
+        # @!attribute [rw] transcript_normalization
+        #   @return [::Google::Cloud::Speech::V1p1beta1::TranscriptNormalization]
+        #     Use transcription normalization to automatically replace parts of the
+        #     transcript with phrases of your choosing. For StreamingRecognize, this
+        #     normalization only applies to stable partial transcripts (stability > 0.8)
+        #     and final transcripts.
         # @!attribute [rw] speech_contexts
         #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::SpeechContext>]
         #     Array of {::Google::Cloud::Speech::V1p1beta1::SpeechContext SpeechContext}.
@@ -281,6 +287,15 @@ module Google
         #         <td><b>Description</b></td>
         #       </tr>
         #       <tr>
+        #         <td><code>latest_long</code></td>
+        #         <td>Best for long form content like media or conversation.</td>
+        #       </tr>
+        #       <tr>
+        #         <td><code>latest_short</code></td>
+        #         <td>Best for short form content like commands or single shot directed
+        #         speech.</td>
+        #       </tr>
+        #       <tr>
         #         <td><code>command_and_search</code></td>
         #         <td>Best for short queries such as voice commands or voice search.</td>
         #       </tr>
@@ -301,6 +316,16 @@ module Google
         #         <td>Best for audio that is not one of the specific audio models.
         #             For example, long-form audio. Ideally the audio is high-fidelity,
         #             recorded at a 16khz or greater sampling rate.</td>
+        #       </tr>
+        #       <tr>
+        #         <td><code>medical_conversation</code></td>
+        #         <td>Best for audio that originated from a conversation between a
+        #             medical provider and patient.</td>
+        #       </tr>
+        #       <tr>
+        #         <td><code>medical_dictation</code></td>
+        #         <td>Best for audio that originated from dictation notes by a medical
+        #             provider.</td>
         #       </tr>
         #     </table>
         # @!attribute [rw] use_enhanced
@@ -327,7 +352,8 @@ module Google
           # a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
           # recognition can be reduced if lossy codecs are used to capture or transmit
           # audio, particularly if background noise is present. Lossy codecs include
-          # `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, `SPEEX_WITH_HEADER_BYTE`, `MP3`.
+          # `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, `SPEEX_WITH_HEADER_BYTE`, `MP3`,
+          # and `WEBM_OPUS`.
           #
           # The `FLAC` and `WAV` audio file formats include a header that describes the
           # included audio content. You can request recognition for `WAV` files that
@@ -390,9 +416,8 @@ module Google
             MP3 = 8
 
             # Opus encoded audio frames in WebM container
-            # ([OggOpus](https://wiki.xiph.org/OggOpus)). This is a Beta features and
-            # only available in v1p1beta1. `sample_rate_hertz` must be one of 8000,
-            # 12000, 16000, 24000, or 48000.
+            # ([OggOpus](https://wiki.xiph.org/OggOpus)). `sample_rate_hertz` must be
+            # one of 8000, 12000, 16000, 24000, or 48000.
             WEBM_OPUS = 9
           end
         end
@@ -616,6 +641,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::SpeechRecognitionResult>]
         #     Sequential list of transcription results corresponding to
         #     sequential portions of audio.
+        # @!attribute [rw] total_billed_time
+        #   @return [::Google::Protobuf::Duration]
+        #     When available, billed audio seconds for the corresponding request.
         class RecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -630,6 +658,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::SpeechRecognitionResult>]
         #     Sequential list of transcription results corresponding to
         #     sequential portions of audio.
+        # @!attribute [rw] total_billed_time
+        #   @return [::Google::Protobuf::Duration]
+        #     When available, billed audio seconds for the corresponding request.
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Speech::V1p1beta1::TranscriptOutputConfig]
         #     Original output config if present in the request.
@@ -728,6 +759,10 @@ module Google
         # @!attribute [rw] speech_event_type
         #   @return [::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse::SpeechEventType]
         #     Indicates the type of speech event.
+        # @!attribute [rw] total_billed_time
+        #   @return [::Google::Protobuf::Duration]
+        #     When available, billed audio seconds for the stream.
+        #     Set only if this is the last response in the stream.
         class StreamingRecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -801,6 +836,10 @@ module Google
         #     For multi-channel audio, this is the channel number corresponding to the
         #     recognized result for the audio from that channel.
         #     For audio_channel_count = N, its output values can range from '1' to 'N'.
+        # @!attribute [rw] result_end_time
+        #   @return [::Google::Protobuf::Duration]
+        #     Time offset of the end of this result relative to the
+        #     beginning of the audio.
         # @!attribute [r] language_code
         #   @return [::String]
         #     Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag
@@ -815,6 +854,9 @@ module Google
         # @!attribute [rw] transcript
         #   @return [::String]
         #     Transcript text representing the words that the user spoke.
+        #     In languages that use spaces to separate words, the transcript might have a
+        #     leading space if it isn't the first result. You can concatenate each result
+        #     to obtain the full transcript without using a separator.
         # @!attribute [rw] confidence
         #   @return [::Float]
         #     The confidence estimate between 0.0 and 1.0. A higher number

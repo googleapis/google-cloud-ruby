@@ -7,9 +7,12 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/api/routing_pb'
 require 'google/bigtable/v2/data_pb'
+require 'google/bigtable/v2/request_stats_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/bigtable/v2/bigtable.proto", :syntax => :proto3) do
     add_message "google.bigtable.v2.ReadRowsRequest" do
@@ -18,10 +21,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :rows, :message, 2, "google.bigtable.v2.RowSet"
       optional :filter, :message, 3, "google.bigtable.v2.RowFilter"
       optional :rows_limit, :int64, 4
+      optional :request_stats_view, :enum, 6, "google.bigtable.v2.ReadRowsRequest.RequestStatsView"
+    end
+    add_enum "google.bigtable.v2.ReadRowsRequest.RequestStatsView" do
+      value :REQUEST_STATS_VIEW_UNSPECIFIED, 0
+      value :REQUEST_STATS_NONE, 1
+      value :REQUEST_STATS_FULL, 2
     end
     add_message "google.bigtable.v2.ReadRowsResponse" do
       repeated :chunks, :message, 1, "google.bigtable.v2.ReadRowsResponse.CellChunk"
       optional :last_scanned_row_key, :bytes, 2
+      optional :request_stats, :message, 3, "google.bigtable.v2.RequestStats"
     end
     add_message "google.bigtable.v2.ReadRowsResponse.CellChunk" do
       optional :row_key, :bytes, 1
@@ -79,6 +89,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.bigtable.v2.CheckAndMutateRowResponse" do
       optional :predicate_matched, :bool, 1
     end
+    add_message "google.bigtable.v2.PingAndWarmRequest" do
+      optional :name, :string, 1
+      optional :app_profile_id, :string, 2
+    end
+    add_message "google.bigtable.v2.PingAndWarmResponse" do
+    end
     add_message "google.bigtable.v2.ReadModifyWriteRowRequest" do
       optional :table_name, :string, 1
       optional :app_profile_id, :string, 4
@@ -96,6 +112,7 @@ module Google
     module Bigtable
       module V2
         ReadRowsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsRequest").msgclass
+        ReadRowsRequest::RequestStatsView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsRequest.RequestStatsView").enummodule
         ReadRowsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsResponse").msgclass
         ReadRowsResponse::CellChunk = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsResponse.CellChunk").msgclass
         SampleRowKeysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.SampleRowKeysRequest").msgclass
@@ -108,6 +125,8 @@ module Google
         MutateRowsResponse::Entry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsResponse.Entry").msgclass
         CheckAndMutateRowRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.CheckAndMutateRowRequest").msgclass
         CheckAndMutateRowResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.CheckAndMutateRowResponse").msgclass
+        PingAndWarmRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.PingAndWarmRequest").msgclass
+        PingAndWarmResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.PingAndWarmResponse").msgclass
         ReadModifyWriteRowRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRowRequest").msgclass
         ReadModifyWriteRowResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRowResponse").msgclass
       end

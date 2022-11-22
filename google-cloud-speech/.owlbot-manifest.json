@@ -1,0 +1,28 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-speech.gemspec",
+    "lib/google-cloud-speech.rb",
+    "lib/google/cloud/speech.rb",
+    "lib/google/cloud/speech/version.rb",
+    "test/google/cloud/speech/client_test.rb",
+    "test/google/cloud/speech/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "acceptance/data",
+    "acceptance/google/cloud/speech/speech_smoke_test.rb",
+    "samples/speech_samples.rb"
+  ]
+}

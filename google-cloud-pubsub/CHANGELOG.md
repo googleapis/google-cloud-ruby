@@ -1,5 +1,97 @@
 # Release History
 
+### 2.13.0 (2022-10-18)
+
+#### Features
+
+* Added support for bigquery subscription ([#19221](https://github.com/googleapis/google-cloud-ruby/issues/19221)) 
+
+### 2.12.1 (2022-08-21)
+
+#### Bug Fixes
+
+* update non EOS ack to return Success always ([#19023](https://github.com/googleapis/google-cloud-ruby/issues/19023)) 
+
+### 2.12.0 (2022-08-09)
+
+#### Features
+
+* bump the minimum required version of pubsub v1 ([#18983](https://github.com/googleapis/google-cloud-ruby/issues/18983)) 
+#### Bug Fixes
+
+* honour async options of topic ([#18953](https://github.com/googleapis/google-cloud-ruby/issues/18953)) 
+
+### 2.11.0 (2022-08-01)
+
+#### Features
+
+* create exactly once delivery enabled subscription ([#18824](https://github.com/googleapis/google-cloud-ruby/issues/18824)) 
+* Let user register callback and get acknowledgement result ([#18702](https://github.com/googleapis/google-cloud-ruby/issues/18702)) 
+* retry transient failures in ack/modack in timed unary buffer ([#18395](https://github.com/googleapis/google-cloud-ruby/issues/18395)) 
+
+### 2.10.0 (2022-06-14)
+
+#### Features
+
+* introduce min_duration_per_lease_extension
+
+### 2.9.2 (2022-04-28)
+
+#### Bug Fixes
+
+* ignore grpc errors on ack/modack   
+
+### 2.9.1 / 2022-01-11
+
+#### Documentation
+
+* Update contributing docs
+* Add section on gRPC interceptors to the logging docs
+
+### 2.9.0 / 2021-10-28
+
+#### Features
+
+* Expand timeout type from Integer to Numeric
+  * feat: Expand timeout type from Integer to Numeric. This is backwards-compatible.
+    * Change timeout from Integer to Numeric in Google::Cloud.pubsub
+    * Change timeout from Integer to Numeric in Google::Cloud#pubsub
+    * Change timeout from Integer to Numeric in Google::Cloud::PubSub.configure
+    * Change timeout from Integer to Numeric in Google::Cloud::PubSub.new
+  * fix: Propagate timeout to client RPC configs.
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+* Fix documentation for PubSub.configure
+  * Remove retries property that does not exist in code.
+
+### 2.8.1 / 2021-09-22
+
+#### Bug Fixes
+
+* Change IAM and Schema client metadata hash keys to symbols
+
+#### Documentation
+
+* Fix typo in Emulator guide links
+
+### 2.8.0 / 2021-08-30
+
+#### Features
+
+* Add Pub/Sub topic retention fields
+  * Add retention to Project#create_topic
+  * Add Topic#retention
+  * Add Topic#retention=
+  * Add Subscription#topic_retention
+
+### 2.7.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 2.7.0 / 2021-06-15
 
 #### Features

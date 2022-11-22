@@ -17,7 +17,16 @@ require "json"
 require "uri"
 
 describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
-  let(:job_gapi) { query_job_gapi target_routine: true, target_table: true, statement_type: "CREATE_TABLE", num_dml_affected_rows: 50, ddl_operation_performed: "CREATE" }
+  let(:job_gapi) do
+    query_job_gapi target_routine: true,
+                   target_table: true,
+                   statement_type: "CREATE_TABLE",
+                   num_dml_affected_rows: 50,
+                   ddl_operation_performed: "CREATE",
+                   deleted_row_count: 5,
+                   inserted_row_count: 15,
+                   updated_row_count: 30
+  end
   let(:job) { Google::Cloud::Bigquery::Job.from_gapi job_gapi,
                                               bigquery.service }
   let(:job_id) { job.job_id }
@@ -61,6 +70,9 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     _(job.ddl_target_table.dataset_id).must_equal "target_dataset_id"
     _(job.ddl_target_table.table_id).must_equal "target_table_id"
     _(job.num_dml_affected_rows).must_equal 50
+    _(job.deleted_row_count).must_equal 5
+    _(job.inserted_row_count).must_equal 15
+    _(job.updated_row_count).must_equal 30
     _(job.statement_type).must_equal "CREATE_TABLE"
     _(job.ddl?).must_equal true
     _(job.dml?).must_equal false
@@ -117,14 +129,136 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     _(job.udfs.last).must_equal "gs://my-bucket/my-lib.js"
   end
 
-  def query_job_gapi target_routine: false, target_table: false, statement_type: nil, num_dml_affected_rows: nil, ddl_operation_performed: nil
+  def query_job_gapi target_routine: false,
+                     target_table: false,
+                     statement_type: nil,
+                     num_dml_affected_rows: nil,
+                     ddl_operation_performed: nil,
+                     deleted_row_count: nil,
+                     inserted_row_count: nil,
+                     updated_row_count: nil
     gapi = Google::Apis::BigqueryV2::Job.from_json query_job_hash.to_json
     gapi.statistics.query = statistics_query_gapi target_routine: target_routine,
                                                   target_table: target_table,
                                                   statement_type: statement_type,
                                                   num_dml_affected_rows: num_dml_affected_rows,
-                                                  ddl_operation_performed: ddl_operation_performed
+                                                  ddl_operation_performed: ddl_operation_performed,
+                                                  deleted_row_count: deleted_row_count,
+                                                  inserted_row_count: inserted_row_count,
+                                                  updated_row_count: updated_row_count
     gapi
+  end
+
+  describe "statement_type" do
+    let(:data_hash) { { totalRows: nil, rows: [] } }
+
+    it "knows its DDL ALTER_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "ALTER_TABLE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "ALTER_TABLE"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_MODEL statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_MODEL"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "CREATE_MODEL"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_TABLE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "CREATE_TABLE"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_TABLE_AS_SELECT statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_TABLE_AS_SELECT"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "CREATE_TABLE_AS_SELECT"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_VIEW statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_VIEW"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "CREATE_VIEW"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_MODEL statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_MODEL"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "DROP_MODEL"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_TABLE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "DROP_TABLE"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_VIEW statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_VIEW"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "DROP_VIEW"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DML INSERT statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "INSERT"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "INSERT"
+      _(job.ddl?).must_equal false
+      _(job.dml?).must_equal true
+    end
+
+    it "knows its DML UPDATE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "UPDATE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "UPDATE"
+      _(job.ddl?).must_equal false
+      _(job.dml?).must_equal true
+    end
+
+    it "knows its DML MERGE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "MERGE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "MERGE"
+      _(job.ddl?).must_equal false
+      _(job.dml?).must_equal true
+    end
+
+    it "knows its DML DELETE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DELETE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "DELETE"
+      _(job.ddl?).must_equal false
+      _(job.dml?).must_equal true
+    end
   end
 
   def query_job_hash

@@ -20,9 +20,9 @@ require "google/cloud/automl"
 
 describe "AutoML V1beta1 smoke test" do
   it "runs one smoke test with list_datasets" do
-    client = Google::Cloud::AutoML::AutoML.new
-    parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path(ENV["AUTOML_PROJECT"], "us-central1")
-    results = client.list_datasets(parent, page_size: 2)
+    client = Google::Cloud::AutoML.auto_ml
+    parent = client.location_path project: ENV["AUTOML_PROJECT"], location: "us-central1"
+    results = client.list_datasets parent: parent, page_size: 2
     page = results.page
     assert(page.to_a.size > 0)
   end

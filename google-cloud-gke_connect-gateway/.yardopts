@@ -1,5 +1,5 @@
 --no-private
---title=Connect Gateway API
+--title="Connect Gateway API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

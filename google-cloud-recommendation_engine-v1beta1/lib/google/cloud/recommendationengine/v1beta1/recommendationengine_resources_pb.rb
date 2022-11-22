@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/resource_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/recommendationengine/v1beta1/recommendationengine_resources.proto", :syntax => :proto3) do
   end

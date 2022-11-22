@@ -120,6 +120,11 @@
                 "delete_node_pool"
               ]
             },
+            "CompleteNodePoolUpgrade": {
+              "methods": [
+                "complete_node_pool_upgrade"
+              ]
+            },
             "RollbackNodePoolUpgrade": {
               "methods": [
                 "rollback_node_pool_upgrade"

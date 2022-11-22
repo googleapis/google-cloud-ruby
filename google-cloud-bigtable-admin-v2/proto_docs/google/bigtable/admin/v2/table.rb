@@ -42,7 +42,7 @@ module Google
           #     The unique name of the table. Values are of the form
           #     `projects/{project}/instances/{instance}/tables/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
           #     Views: `NAME_ONLY`, `SCHEMA_VIEW`, `REPLICATION_VIEW`, `FULL`
-          # @!attribute [rw] cluster_states
+          # @!attribute [r] cluster_states
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigtable::Admin::V2::Table::ClusterState}]
           #     Output only. Map from cluster ID to per-cluster table state.
           #     If it could not be determined whether or not the table has data in a
@@ -51,26 +51,32 @@ module Google
           #     Views: `REPLICATION_VIEW`, `ENCRYPTION_VIEW`, `FULL`
           # @!attribute [rw] column_families
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigtable::Admin::V2::ColumnFamily}]
-          #     (`CreationOnly`)
           #     The column families configured for this table, mapped by column family ID.
           #     Views: `SCHEMA_VIEW`, `FULL`
           # @!attribute [rw] granularity
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Table::TimestampGranularity]
-          #     (`CreationOnly`)
-          #     The granularity (i.e. `MILLIS`) at which timestamps are stored in
-          #     this table. Timestamps not matching the granularity will be rejected.
+          #     Immutable. The granularity (i.e. `MILLIS`) at which timestamps are stored in this
+          #     table. Timestamps not matching the granularity will be rejected.
           #     If unspecified at creation time, the value will be set to `MILLIS`.
           #     Views: `SCHEMA_VIEW`, `FULL`.
-          # @!attribute [rw] restore_info
+          # @!attribute [r] restore_info
           #   @return [::Google::Cloud::Bigtable::Admin::V2::RestoreInfo]
-          #     Output only. If this table was restored from another data source (e.g. a
-          #     backup), this field will be populated with information about the restore.
+          #     Output only. If this table was restored from another data source (e.g. a backup), this
+          #     field will be populated with information about the restore.
+          # @!attribute [rw] deletion_protection
+          #   @return [::Boolean]
+          #     Set to true to make the table protected against data loss. i.e. deleting
+          #     the following resources through Admin APIs are prohibited:
+          #       - The table.
+          #       - The column families in the table.
+          #       - The instance containing the table.
+          #     Note one can still delete the data stored in the table through Data APIs.
           class Table
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # The state of a table's data in a particular cluster.
-            # @!attribute [rw] replication_state
+            # @!attribute [r] replication_state
             #   @return [::Google::Cloud::Bigtable::Admin::V2::Table::ClusterState::ReplicationState]
             #     Output only. The state of replication for the table in this cluster.
             # @!attribute [r] encryption_info
@@ -158,7 +164,7 @@ module Google
               # state.
               REPLICATION_VIEW = 3
 
-              # Only populates 'name' and fields related to the table's encryption state.
+              # Only populates `name` and fields related to the table's encryption state.
               ENCRYPTION_VIEW = 5
 
               # Populates all fields.
@@ -227,13 +233,12 @@ module Google
           #     Output only. The type of encryption used to protect this resource.
           # @!attribute [r] encryption_status
           #   @return [::Google::Rpc::Status]
-          #     Output only. The status of encrypt/decrypt calls on underlying data for
-          #     this resource. Regardless of status, the existing data is always encrypted
-          #     at rest.
+          #     Output only. The status of encrypt/decrypt calls on underlying data for this resource.
+          #     Regardless of status, the existing data is always encrypted at rest.
           # @!attribute [r] kms_key_version
           #   @return [::String]
-          #     Output only. The version of the Cloud KMS key specified in the parent
-          #     cluster that is in use for the data underlying this table.
+          #     Output only. The version of the Cloud KMS key specified in the parent cluster that is
+          #     in use for the data underlying this table.
           class EncryptionInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -314,9 +319,9 @@ module Google
           end
 
           # A backup of a Cloud Bigtable table.
-          # @!attribute [r] name
+          # @!attribute [rw] name
           #   @return [::String]
-          #     Output only. A globally unique identifier for the backup which cannot be
+          #     A globally unique identifier for the backup which cannot be
           #     changed. Values are of the form
           #     `projects/{project}/instances/{instance}/clusters/{cluster}/
           #        backups/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
@@ -328,8 +333,8 @@ module Google
           #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
           # @!attribute [rw] source_table
           #   @return [::String]
-          #     Required. Immutable. Name of the table from which this backup was created.
-          #     This needs to be in the same instance as the backup. Values are of the form
+          #     Required. Immutable. Name of the table from which this backup was created. This needs
+          #     to be in the same instance as the backup. Values are of the form
           #     `projects/{project}/instances/{instance}/tables/{source_table}`.
           # @!attribute [rw] expire_time
           #   @return [::Google::Protobuf::Timestamp]
@@ -342,9 +347,8 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. `start_time` is the time that the backup was started
           #     (i.e. approximately the time the
-          #     {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_backup CreateBackup}
-          #     request is received).  The row data in this backup will be no older than
-          #     this timestamp.
+          #     {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_backup CreateBackup} request is received).  The
+          #     row data in this backup will be no older than this timestamp.
           # @!attribute [r] end_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. `end_time` is the time that the backup was finished. The row

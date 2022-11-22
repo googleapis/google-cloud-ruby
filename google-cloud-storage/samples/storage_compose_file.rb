@@ -29,7 +29,7 @@ def compose_file bucket_name:, first_file_name:, second_file_name:, destination_
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
+  bucket = storage.bucket bucket_name, skip_lookup: true
 
   destination = bucket.compose [first_file_name, second_file_name], destination_file_name do |f|
     f.content_type = "text/plain"

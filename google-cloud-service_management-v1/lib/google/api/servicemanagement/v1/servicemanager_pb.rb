@@ -10,8 +10,7 @@ require 'google/api/service_pb'
 require 'google/api/servicemanagement/v1/resources_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/any_pb'
-require 'google/protobuf/field_mask_pb'
-require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/api/servicemanagement/v1/servicemanager.proto", :syntax => :proto3) do
     add_message "google.api.servicemanagement.v1.ListServicesRequest" do
@@ -87,18 +86,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :service_name, :string, 1
       optional :rollout_id, :string, 2
     end
-    add_message "google.api.servicemanagement.v1.EnableServiceRequest" do
-      optional :service_name, :string, 1
-      optional :consumer_id, :string, 2
-    end
-    add_message "google.api.servicemanagement.v1.EnableServiceResponse" do
-    end
-    add_message "google.api.servicemanagement.v1.DisableServiceRequest" do
-      optional :service_name, :string, 1
-      optional :consumer_id, :string, 2
-    end
-    add_message "google.api.servicemanagement.v1.DisableServiceResponse" do
-    end
     add_message "google.api.servicemanagement.v1.GenerateConfigReportRequest" do
       optional :new_config, :message, 1, "google.protobuf.Any"
       optional :old_config, :message, 2, "google.protobuf.Any"
@@ -134,10 +121,6 @@ module Google
         ListServiceRolloutsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.api.servicemanagement.v1.ListServiceRolloutsRequest").msgclass
         ListServiceRolloutsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.api.servicemanagement.v1.ListServiceRolloutsResponse").msgclass
         GetServiceRolloutRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.api.servicemanagement.v1.GetServiceRolloutRequest").msgclass
-        EnableServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.api.servicemanagement.v1.EnableServiceRequest").msgclass
-        EnableServiceResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.api.servicemanagement.v1.EnableServiceResponse").msgclass
-        DisableServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.api.servicemanagement.v1.DisableServiceRequest").msgclass
-        DisableServiceResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.api.servicemanagement.v1.DisableServiceResponse").msgclass
         GenerateConfigReportRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.api.servicemanagement.v1.GenerateConfigReportRequest").msgclass
         GenerateConfigReportResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.api.servicemanagement.v1.GenerateConfigReportResponse").msgclass
       end

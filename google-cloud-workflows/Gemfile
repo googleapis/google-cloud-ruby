@@ -4,4 +4,5 @@ gemspec
 
 gem "google-cloud-workflows-v1", path: "../google-cloud-workflows-v1"
 gem "google-cloud-workflows-v1beta", path: "../google-cloud-workflows-v1beta"
+gem "google-cloud-workflows-executions-v1", path: "../google-cloud-workflows-executions-v1"
 gem "google-cloud-workflows-executions-v1beta", path: "../google-cloud-workflows-executions-v1beta"

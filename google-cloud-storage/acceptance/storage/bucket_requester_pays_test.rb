@@ -36,8 +36,8 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
   end
   # The bucket used in tests is retrieved by the main project, with user_project set to bill to the main project.
   let(:bucket) { storage.bucket bucket_name, user_project: true }
-  let(:user_val) { "user-blowmage@gmail.com" }
-  let(:group_val) { "user-blowmage@gmail.com" }
+  let(:user_val) { "user-test@example.com" }
+  let(:group_val) { "user-test@example.com" }
 
   let(:file_path) { "acceptance/data/CloudPlatform_128px_Retina.png" }
 

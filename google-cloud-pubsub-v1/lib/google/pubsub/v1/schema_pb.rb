@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/empty_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/pubsub/v1/schema.proto", :syntax => :proto3) do
     add_message "google.pubsub.v1.Schema" do

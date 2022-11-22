@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,9 +42,49 @@ module Google
           #
           #     An event with step set to `START` indicates that the migration
           #     has been reverted back to the initial pre-migration state.
+          # @!attribute [rw] prepare_step_details
+          #   @return [::Google::Cloud::Datastore::Admin::V1::MigrationProgressEvent::PrepareStepDetails]
+          #     Details for the `PREPARE` step.
+          # @!attribute [rw] redirect_writes_step_details
+          #   @return [::Google::Cloud::Datastore::Admin::V1::MigrationProgressEvent::RedirectWritesStepDetails]
+          #     Details for the `REDIRECT_WRITES` step.
           class MigrationProgressEvent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Details for the `PREPARE` step.
+            # @!attribute [rw] concurrency_mode
+            #   @return [::Google::Cloud::Datastore::Admin::V1::MigrationProgressEvent::ConcurrencyMode]
+            #     The concurrency mode this database will use when it reaches the
+            #     `REDIRECT_WRITES` step.
+            class PrepareStepDetails
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Details for the `REDIRECT_WRITES` step.
+            # @!attribute [rw] concurrency_mode
+            #   @return [::Google::Cloud::Datastore::Admin::V1::MigrationProgressEvent::ConcurrencyMode]
+            #     Ths concurrency mode for this database.
+            class RedirectWritesStepDetails
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Concurrency modes for transactions in Cloud Firestore.
+            module ConcurrencyMode
+              # Unspecified.
+              CONCURRENCY_MODE_UNSPECIFIED = 0
+
+              # Pessimistic concurrency.
+              PESSIMISTIC = 1
+
+              # Optimistic concurrency.
+              OPTIMISTIC = 2
+
+              # Optimistic concurrency with entity groups.
+              OPTIMISTIC_WITH_ENTITY_GROUPS = 3
+            end
           end
 
           # States for a migration.
@@ -67,8 +107,14 @@ module Google
             # Unspecified.
             MIGRATION_STEP_UNSPECIFIED = 0
 
+            # Pre-migration: the database is prepared for migration.
+            PREPARE = 6
+
             # Start of migration.
             START = 1
+
+            # Writes are applied synchronously to at least one replica.
+            APPLY_WRITES_SYNCHRONOUSLY = 7
 
             # Data is copied to Cloud Firestore and then verified to match the data in
             # Cloud Datastore.

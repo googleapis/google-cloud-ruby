@@ -59,6 +59,10 @@ module Google
             rpc :ListInstances, ::Google::Cloud::Redis::V1::ListInstancesRequest, ::Google::Cloud::Redis::V1::ListInstancesResponse
             # Gets the details of a specific Redis instance.
             rpc :GetInstance, ::Google::Cloud::Redis::V1::GetInstanceRequest, ::Google::Cloud::Redis::V1::Instance
+            # Gets the AUTH string for a Redis instance. If AUTH is not enabled for the
+            # instance the response will be empty. This information is not included in
+            # the details returned to GetInstance.
+            rpc :GetInstanceAuthString, ::Google::Cloud::Redis::V1::GetInstanceAuthStringRequest, ::Google::Cloud::Redis::V1::InstanceAuthString
             # Creates a Redis instance based on the specified tier and memory size.
             #
             # By default, the instance is accessible from the project's
@@ -97,12 +101,15 @@ module Google
             # The returned operation is automatically deleted after a few hours, so
             # there is no need to call DeleteOperation.
             rpc :ExportInstance, ::Google::Cloud::Redis::V1::ExportInstanceRequest, ::Google::Longrunning::Operation
-            # Initiates a failover of the master node to current replica node for a
+            # Initiates a failover of the primary node to current replica node for a
             # specific STANDARD tier Cloud Memorystore for Redis instance.
             rpc :FailoverInstance, ::Google::Cloud::Redis::V1::FailoverInstanceRequest, ::Google::Longrunning::Operation
             # Deletes a specific Redis instance.  Instance stops serving and data is
             # deleted.
             rpc :DeleteInstance, ::Google::Cloud::Redis::V1::DeleteInstanceRequest, ::Google::Longrunning::Operation
+            # Reschedule maintenance for a given instance in a given project and
+            # location.
+            rpc :RescheduleMaintenance, ::Google::Cloud::Redis::V1::RescheduleMaintenanceRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

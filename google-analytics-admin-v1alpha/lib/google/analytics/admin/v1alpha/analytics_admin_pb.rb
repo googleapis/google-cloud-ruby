@@ -3,6 +3,8 @@
 
 require 'google/protobuf'
 
+require 'google/analytics/admin/v1alpha/access_report_pb'
+require 'google/analytics/admin/v1alpha/audience_pb'
 require 'google/analytics/admin/v1alpha/resources_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
@@ -11,8 +13,29 @@ require 'google/api/resource_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/analytics/admin/v1alpha/analytics_admin.proto", :syntax => :proto3) do
+    add_message "google.analytics.admin.v1alpha.RunAccessReportRequest" do
+      optional :entity, :string, 1
+      repeated :dimensions, :message, 2, "google.analytics.admin.v1alpha.AccessDimension"
+      repeated :metrics, :message, 3, "google.analytics.admin.v1alpha.AccessMetric"
+      repeated :date_ranges, :message, 4, "google.analytics.admin.v1alpha.AccessDateRange"
+      optional :dimension_filter, :message, 5, "google.analytics.admin.v1alpha.AccessFilterExpression"
+      optional :metric_filter, :message, 6, "google.analytics.admin.v1alpha.AccessFilterExpression"
+      optional :offset, :int64, 7
+      optional :limit, :int64, 8
+      optional :time_zone, :string, 9
+      repeated :order_bys, :message, 10, "google.analytics.admin.v1alpha.AccessOrderBy"
+      optional :return_entity_quota, :bool, 11
+    end
+    add_message "google.analytics.admin.v1alpha.RunAccessReportResponse" do
+      repeated :dimension_headers, :message, 1, "google.analytics.admin.v1alpha.AccessDimensionHeader"
+      repeated :metric_headers, :message, 2, "google.analytics.admin.v1alpha.AccessMetricHeader"
+      repeated :rows, :message, 3, "google.analytics.admin.v1alpha.AccessRow"
+      optional :row_count, :int32, 4
+      optional :quota, :message, 5, "google.analytics.admin.v1alpha.AccessQuota"
+    end
     add_message "google.analytics.admin.v1alpha.GetAccountRequest" do
       optional :name, :string, 1
     end
@@ -120,81 +143,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       repeated :requests, :message, 2, "google.analytics.admin.v1alpha.DeleteUserLinkRequest"
     end
-    add_message "google.analytics.admin.v1alpha.GetWebDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.DeleteWebDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.UpdateWebDataStreamRequest" do
-      optional :web_data_stream, :message, 1, "google.analytics.admin.v1alpha.WebDataStream"
-      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
-    end
-    add_message "google.analytics.admin.v1alpha.CreateWebDataStreamRequest" do
-      optional :web_data_stream, :message, 1, "google.analytics.admin.v1alpha.WebDataStream"
-      optional :parent, :string, 2
-    end
-    add_message "google.analytics.admin.v1alpha.ListWebDataStreamsRequest" do
-      optional :parent, :string, 1
-      optional :page_size, :int32, 2
-      optional :page_token, :string, 3
-    end
-    add_message "google.analytics.admin.v1alpha.ListWebDataStreamsResponse" do
-      repeated :web_data_streams, :message, 1, "google.analytics.admin.v1alpha.WebDataStream"
-      optional :next_page_token, :string, 2
-    end
-    add_message "google.analytics.admin.v1alpha.GetIosAppDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.DeleteIosAppDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.UpdateIosAppDataStreamRequest" do
-      optional :ios_app_data_stream, :message, 1, "google.analytics.admin.v1alpha.IosAppDataStream"
-      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
-    end
-    add_message "google.analytics.admin.v1alpha.ListIosAppDataStreamsRequest" do
-      optional :parent, :string, 1
-      optional :page_size, :int32, 2
-      optional :page_token, :string, 3
-    end
-    add_message "google.analytics.admin.v1alpha.ListIosAppDataStreamsResponse" do
-      repeated :ios_app_data_streams, :message, 1, "google.analytics.admin.v1alpha.IosAppDataStream"
-      optional :next_page_token, :string, 2
-    end
-    add_message "google.analytics.admin.v1alpha.GetAndroidAppDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.DeleteAndroidAppDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.UpdateAndroidAppDataStreamRequest" do
-      optional :android_app_data_stream, :message, 1, "google.analytics.admin.v1alpha.AndroidAppDataStream"
-      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
-    end
-    add_message "google.analytics.admin.v1alpha.ListAndroidAppDataStreamsRequest" do
-      optional :parent, :string, 1
-      optional :page_size, :int32, 2
-      optional :page_token, :string, 3
-    end
-    add_message "google.analytics.admin.v1alpha.ListAndroidAppDataStreamsResponse" do
-      repeated :android_app_data_streams, :message, 1, "google.analytics.admin.v1alpha.AndroidAppDataStream"
-      optional :next_page_token, :string, 2
-    end
-    add_message "google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest" do
-      optional :enhanced_measurement_settings, :message, 1, "google.analytics.admin.v1alpha.EnhancedMeasurementSettings"
-      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
-    end
     add_message "google.analytics.admin.v1alpha.CreateFirebaseLinkRequest" do
       optional :parent, :string, 1
       optional :firebase_link, :message, 2, "google.analytics.admin.v1alpha.FirebaseLink"
-    end
-    add_message "google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest" do
-      optional :firebase_link, :message, 1, "google.analytics.admin.v1alpha.FirebaseLink"
-      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
     add_message "google.analytics.admin.v1alpha.DeleteFirebaseLinkRequest" do
       optional :name, :string, 1
@@ -241,6 +192,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.admin.v1alpha.ListAccountSummariesResponse" do
       repeated :account_summaries, :message, 1, "google.analytics.admin.v1alpha.AccountSummary"
       optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest" do
+      optional :property, :string, 1
+      optional :acknowledgement, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse" do
     end
     add_message "google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest" do
       optional :account, :string, 1
@@ -306,6 +263,57 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :conversion_events, :message, 1, "google.analytics.admin.v1alpha.ConversionEvent"
       optional :next_page_token, :string, 2
     end
+    add_message "google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse" do
+      repeated :display_video_360_advertiser_links, :message, 1, "google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest" do
+      optional :parent, :string, 1
+      optional :display_video_360_advertiser_link, :message, 2, "google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest" do
+      optional :display_video_360_advertiser_link, :message, 1, "google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse" do
+      repeated :display_video_360_advertiser_link_proposals, :message, 1, "google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest" do
+      optional :parent, :string, 1
+      optional :display_video_360_advertiser_link_proposal, :message, 2, "google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse" do
+      optional :display_video_360_advertiser_link, :message, 1, "google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink"
+    end
+    add_message "google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest" do
+      optional :name, :string, 1
+    end
     add_message "google.analytics.admin.v1alpha.CreateCustomDimensionRequest" do
       optional :parent, :string, 1
       optional :custom_dimension, :message, 2, "google.analytics.admin.v1alpha.CustomDimension"
@@ -352,6 +360,66 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.admin.v1alpha.GetCustomMetricRequest" do
       optional :name, :string, 1
     end
+    add_message "google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest" do
+      optional :data_retention_settings, :message, 1, "google.analytics.admin.v1alpha.DataRetentionSettings"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.CreateDataStreamRequest" do
+      optional :parent, :string, 1
+      optional :data_stream, :message, 2, "google.analytics.admin.v1alpha.DataStream"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteDataStreamRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateDataStreamRequest" do
+      optional :data_stream, :message, 1, "google.analytics.admin.v1alpha.DataStream"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.ListDataStreamsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListDataStreamsResponse" do
+      repeated :data_streams, :message, 1, "google.analytics.admin.v1alpha.DataStream"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.GetDataStreamRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.GetAudienceRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListAudiencesRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListAudiencesResponse" do
+      repeated :audiences, :message, 1, "google.analytics.admin.v1alpha.Audience"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.CreateAudienceRequest" do
+      optional :parent, :string, 1
+      optional :audience, :message, 2, "google.analytics.admin.v1alpha.Audience"
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateAudienceRequest" do
+      optional :audience, :message, 1, "google.analytics.admin.v1alpha.Audience"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.ArchiveAudienceRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.GetAttributionSettingsRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest" do
+      optional :attribution_settings, :message, 1, "google.analytics.admin.v1alpha.AttributionSettings"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
   end
 end
 
@@ -359,6 +427,8 @@ module Google
   module Analytics
     module Admin
       module V1alpha
+        RunAccessReportRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.RunAccessReportRequest").msgclass
+        RunAccessReportResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.RunAccessReportResponse").msgclass
         GetAccountRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAccountRequest").msgclass
         ListAccountsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountsRequest").msgclass
         ListAccountsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountsResponse").msgclass
@@ -387,26 +457,7 @@ module Google
         BatchUpdateUserLinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BatchUpdateUserLinksResponse").msgclass
         DeleteUserLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteUserLinkRequest").msgclass
         BatchDeleteUserLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BatchDeleteUserLinksRequest").msgclass
-        GetWebDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetWebDataStreamRequest").msgclass
-        DeleteWebDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteWebDataStreamRequest").msgclass
-        UpdateWebDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateWebDataStreamRequest").msgclass
-        CreateWebDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateWebDataStreamRequest").msgclass
-        ListWebDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListWebDataStreamsRequest").msgclass
-        ListWebDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListWebDataStreamsResponse").msgclass
-        GetIosAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetIosAppDataStreamRequest").msgclass
-        DeleteIosAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteIosAppDataStreamRequest").msgclass
-        UpdateIosAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateIosAppDataStreamRequest").msgclass
-        ListIosAppDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListIosAppDataStreamsRequest").msgclass
-        ListIosAppDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListIosAppDataStreamsResponse").msgclass
-        GetAndroidAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAndroidAppDataStreamRequest").msgclass
-        DeleteAndroidAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteAndroidAppDataStreamRequest").msgclass
-        UpdateAndroidAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateAndroidAppDataStreamRequest").msgclass
-        ListAndroidAppDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAndroidAppDataStreamsRequest").msgclass
-        ListAndroidAppDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAndroidAppDataStreamsResponse").msgclass
-        GetEnhancedMeasurementSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest").msgclass
-        UpdateEnhancedMeasurementSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest").msgclass
         CreateFirebaseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateFirebaseLinkRequest").msgclass
-        UpdateFirebaseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest").msgclass
         DeleteFirebaseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteFirebaseLinkRequest").msgclass
         ListFirebaseLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListFirebaseLinksRequest").msgclass
         ListFirebaseLinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListFirebaseLinksResponse").msgclass
@@ -419,6 +470,8 @@ module Google
         GetDataSharingSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetDataSharingSettingsRequest").msgclass
         ListAccountSummariesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountSummariesRequest").msgclass
         ListAccountSummariesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountSummariesResponse").msgclass
+        AcknowledgeUserDataCollectionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest").msgclass
+        AcknowledgeUserDataCollectionResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse").msgclass
         SearchChangeHistoryEventsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest").msgclass
         SearchChangeHistoryEventsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse").msgclass
         GetMeasurementProtocolSecretRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest").msgclass
@@ -434,6 +487,20 @@ module Google
         DeleteConversionEventRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteConversionEventRequest").msgclass
         ListConversionEventsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConversionEventsRequest").msgclass
         ListConversionEventsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConversionEventsResponse").msgclass
+        GetDisplayVideo360AdvertiserLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest").msgclass
+        ListDisplayVideo360AdvertiserLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest").msgclass
+        ListDisplayVideo360AdvertiserLinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse").msgclass
+        CreateDisplayVideo360AdvertiserLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest").msgclass
+        DeleteDisplayVideo360AdvertiserLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest").msgclass
+        UpdateDisplayVideo360AdvertiserLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest").msgclass
+        GetDisplayVideo360AdvertiserLinkProposalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest").msgclass
+        ListDisplayVideo360AdvertiserLinkProposalsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest").msgclass
+        ListDisplayVideo360AdvertiserLinkProposalsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse").msgclass
+        CreateDisplayVideo360AdvertiserLinkProposalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest").msgclass
+        DeleteDisplayVideo360AdvertiserLinkProposalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest").msgclass
+        ApproveDisplayVideo360AdvertiserLinkProposalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest").msgclass
+        ApproveDisplayVideo360AdvertiserLinkProposalResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse").msgclass
+        CancelDisplayVideo360AdvertiserLinkProposalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest").msgclass
         CreateCustomDimensionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateCustomDimensionRequest").msgclass
         UpdateCustomDimensionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateCustomDimensionRequest").msgclass
         ListCustomDimensionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListCustomDimensionsRequest").msgclass
@@ -446,6 +513,22 @@ module Google
         ListCustomMetricsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListCustomMetricsResponse").msgclass
         ArchiveCustomMetricRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ArchiveCustomMetricRequest").msgclass
         GetCustomMetricRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetCustomMetricRequest").msgclass
+        GetDataRetentionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest").msgclass
+        UpdateDataRetentionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest").msgclass
+        CreateDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateDataStreamRequest").msgclass
+        DeleteDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteDataStreamRequest").msgclass
+        UpdateDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateDataStreamRequest").msgclass
+        ListDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListDataStreamsRequest").msgclass
+        ListDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListDataStreamsResponse").msgclass
+        GetDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetDataStreamRequest").msgclass
+        GetAudienceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAudienceRequest").msgclass
+        ListAudiencesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAudiencesRequest").msgclass
+        ListAudiencesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAudiencesResponse").msgclass
+        CreateAudienceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateAudienceRequest").msgclass
+        UpdateAudienceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateAudienceRequest").msgclass
+        ArchiveAudienceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ArchiveAudienceRequest").msgclass
+        GetAttributionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAttributionSettingsRequest").msgclass
+        UpdateAttributionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest").msgclass
       end
     end
   end

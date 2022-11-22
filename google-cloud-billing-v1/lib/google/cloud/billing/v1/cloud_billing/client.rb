@@ -27,7 +27,8 @@ module Google
           ##
           # Client for the CloudBilling service.
           #
-          # Retrieves GCP Console billing accounts and associates them with projects.
+          # Retrieves the Google Cloud Console billing accounts and associates them with
+          # projects.
           #
           class Client
             include Paths
@@ -41,13 +42,12 @@ module Google
             # See {::Google::Cloud::Billing::V1::CloudBilling::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all CloudBilling clients:
-            #
-            #     ::Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all CloudBilling clients
+            #   ::Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,76 +67,49 @@ module Google
 
                 default_config.rpcs.get_billing_account.timeout = 60.0
                 default_config.rpcs.get_billing_account.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_billing_accounts.timeout = 60.0
                 default_config.rpcs.list_billing_accounts.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_billing_account.timeout = 60.0
                 default_config.rpcs.update_billing_account.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_billing_account.timeout = 60.0
 
                 default_config.rpcs.list_project_billing_info.timeout = 60.0
                 default_config.rpcs.list_project_billing_info.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_project_billing_info.timeout = 60.0
                 default_config.rpcs.get_project_billing_info.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_project_billing_info.timeout = 60.0
                 default_config.rpcs.update_project_billing_info.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_iam_policy.timeout = 60.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.set_iam_policy.timeout = 60.0
                 default_config.rpcs.set_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.test_iam_permissions.timeout = 60.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -168,19 +141,15 @@ module Google
             ##
             # Create a new CloudBilling client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new CloudBilling client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new
             #
-            #     client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new
-            #
-            # To create a new CloudBilling client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the CloudBilling client.
             # @yieldparam config [Client::Configuration]
@@ -200,14 +169,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -256,6 +224,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::GetBillingAccountRequest.new
+            #
+            #   # Call the get_billing_account method.
+            #   result = client.get_billing_account request
+            #
+            #   # The returned object is of type Google::Cloud::Billing::V1::BillingAccount.
+            #   p result
+            #
             def get_billing_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -273,16 +256,20 @@ module Google
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_billing_account.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_billing_account.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :get_billing_account, request, options: options do |response, operation|
@@ -336,6 +323,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::ListBillingAccountsRequest.new
+            #
+            #   # Call the list_billing_accounts method.
+            #   result = client.list_billing_accounts request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Billing::V1::BillingAccount.
+            #     p response
+            #   end
+            #
             def list_billing_accounts request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -356,7 +364,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_billing_accounts.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_billing_accounts.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :list_billing_accounts, request, options: options do |response, operation|
@@ -407,6 +417,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::UpdateBillingAccountRequest.new
+            #
+            #   # Call the update_billing_account method.
+            #   result = client.update_billing_account request
+            #
+            #   # The returned object is of type Google::Cloud::Billing::V1::BillingAccount.
+            #   p result
+            #
             def update_billing_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -424,16 +449,20 @@ module Google
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_billing_account.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_billing_account.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :update_billing_account, request, options: options do |response, operation|
@@ -445,15 +474,20 @@ module Google
             end
 
             ##
-            # Creates a billing account.
-            # This method can only be used to create
-            # [billing subaccounts](https://cloud.google.com/billing/docs/concepts)
-            # by GCP resellers.
+            # This method creates [billing
+            # subaccounts](https://cloud.google.com/billing/docs/concepts#subaccounts).
+            #
+            # Google Cloud resellers should use the
+            # Channel Services APIs,
+            # [accounts.customers.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers/create)
+            # and
+            # [accounts.customers.entitlements.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers.entitlements/create).
+            #
             # When creating a subaccount, the current authenticated user must have the
-            # `billing.accounts.update` IAM permission on the master account, which is
+            # `billing.accounts.update` IAM permission on the parent account, which is
             # typically given to billing account
             # [administrators](https://cloud.google.com/billing/docs/how-to/billing-access).
-            # This method will return an error if the master account has not been
+            # This method will return an error if the parent account has not been
             # provisioned as a reseller account.
             #
             # @overload create_billing_account(request, options = nil)
@@ -474,7 +508,7 @@ module Google
             #   @param billing_account [::Google::Cloud::Billing::V1::BillingAccount, ::Hash]
             #     Required. The billing account resource to create.
             #     Currently CreateBillingAccount only supports subaccount creation, so
-            #     any created billing accounts must be under a provided master billing
+            #     any created billing accounts must be under a provided parent billing
             #     account.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -484,6 +518,21 @@ module Google
             # @return [::Google::Cloud::Billing::V1::BillingAccount]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::CreateBillingAccountRequest.new
+            #
+            #   # Call the create_billing_account method.
+            #   result = client.create_billing_account request
+            #
+            #   # The returned object is of type Google::Cloud::Billing::V1::BillingAccount.
+            #   p result
             #
             def create_billing_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -505,7 +554,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_billing_account.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_billing_account.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :create_billing_account, request, options: options do |response, operation|
@@ -556,6 +607,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::ListProjectBillingInfoRequest.new
+            #
+            #   # Call the list_project_billing_info method.
+            #   result = client.list_project_billing_info request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Billing::V1::ProjectBillingInfo.
+            #     p response
+            #   end
+            #
             def list_project_billing_info request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -573,16 +645,20 @@ module Google
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_project_billing_info.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_project_billing_info.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :list_project_billing_info, request, options: options do |response, operation|
@@ -596,9 +672,10 @@ module Google
 
             ##
             # Gets the billing information for a project. The current authenticated user
-            # must have [permission to view the
-            # project](https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo
-            # ).
+            # must have the `resourcemanager.projects.get` permission for the project,
+            # which can be granted by assigning the [Project
+            # Viewer](https://cloud.google.com/iam/docs/understanding-roles#predefined_roles)
+            # role.
             #
             # @overload get_project_billing_info(request, options = nil)
             #   Pass arguments to `get_project_billing_info` via a request object, either of type
@@ -627,6 +704,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::GetProjectBillingInfoRequest.new
+            #
+            #   # Call the get_project_billing_info method.
+            #   result = client.get_project_billing_info request
+            #
+            #   # The returned object is of type Google::Cloud::Billing::V1::ProjectBillingInfo.
+            #   p result
+            #
             def get_project_billing_info request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -644,16 +736,20 @@ module Google
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_project_billing_info.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_project_billing_info.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :get_project_billing_info, request, options: options do |response, operation|
@@ -674,7 +770,7 @@ module Google
             # usage charges.
             #
             # *Note:* Incurred charges that have not yet been reported in the transaction
-            # history of the GCP Console might be billed to the new billing
+            # history of the Google Cloud Console might be billed to the new billing
             # account, even if the charge occurred before the new billing account was
             # assigned to the project.
             #
@@ -727,6 +823,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest.new
+            #
+            #   # Call the update_project_billing_info method.
+            #   result = client.update_project_billing_info request
+            #
+            #   # The returned object is of type Google::Cloud::Billing::V1::ProjectBillingInfo.
+            #   p result
+            #
             def update_project_billing_info request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -744,16 +855,20 @@ module Google
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_project_billing_info.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_project_billing_info.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :update_project_billing_info, request, options: options do |response, operation|
@@ -790,7 +905,7 @@ module Google
             #     See the operation documentation for the appropriate value for this field.
             #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
             #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
-            #     `GetIamPolicy`. This field is only used by Cloud IAM.
+            #     `GetIamPolicy`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Iam::V1::Policy]
@@ -799,6 +914,21 @@ module Google
             # @return [::Google::Iam::V1::Policy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::GetIamPolicyRequest.new
+            #
+            #   # Call the get_iam_policy method.
+            #   result = client.get_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
             #
             def get_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -817,16 +947,20 @@ module Google
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
@@ -854,7 +988,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload set_iam_policy(resource: nil, policy: nil)
+            # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
             #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -867,6 +1001,12 @@ module Google
             #     the policy is limited to a few 10s of KB. An empty policy is a
             #     valid policy but certain Cloud Platform services (such as Projects)
             #     might reject them.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+            #     the fields in the mask will be modified. If no mask is provided, the
+            #     following default mask is used:
+            #
+            #     `paths: "bindings, etag"`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Iam::V1::Policy]
@@ -875,6 +1015,21 @@ module Google
             # @return [::Google::Iam::V1::Policy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::SetIamPolicyRequest.new
+            #
+            #   # Call the set_iam_policy method.
+            #   result = client.set_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
             #
             def set_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -893,16 +1048,20 @@ module Google
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
@@ -950,6 +1109,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+            #
+            #   # Call the test_iam_permissions method.
+            #   result = client.test_iam_permissions request
+            #
+            #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+            #   p result
+            #
             def test_iam_permissions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -967,16 +1141,20 @@ module Google
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.test_iam_permissions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
@@ -1000,22 +1178,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for get_billing_account
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # get_billing_account to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_billing_account.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_billing_account.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_billing_account.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_billing_account.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

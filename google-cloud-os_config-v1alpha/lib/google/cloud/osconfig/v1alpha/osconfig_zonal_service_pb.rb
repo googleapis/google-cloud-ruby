@@ -8,9 +8,11 @@ require 'google/api/client_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/osconfig/v1alpha/instance_os_policies_compliance_pb'
 require 'google/cloud/osconfig/v1alpha/inventory_pb'
+require 'google/cloud/osconfig/v1alpha/os_policy_assignment_reports_pb'
 require 'google/cloud/osconfig/v1alpha/os_policy_assignments_pb'
 require 'google/cloud/osconfig/v1alpha/vulnerability_pb'
 require 'google/longrunning/operations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/osconfig/v1alpha/osconfig_zonal_service.proto", :syntax => :proto3) do
   end

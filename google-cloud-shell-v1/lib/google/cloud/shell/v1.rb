@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/shell/v1"
       #     client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new
       #

@@ -18,6 +18,9 @@ def initialize_firestore_client project_id:
   # [START firestore_setup_client_create]
   require "google/cloud/firestore"
 
+  # The `project_id` parameter is optional and represents which project the
+  # client will act on behalf of. If not supplied, the client falls back to the
+  # default project inferred from the environment.
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
   puts "Created Cloud Firestore client with given project ID."

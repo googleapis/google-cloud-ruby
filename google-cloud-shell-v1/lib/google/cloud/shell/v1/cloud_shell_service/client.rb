@@ -47,13 +47,12 @@ module Google
             # See {::Google::Cloud::Shell::V1::CloudShellService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all CloudShellService clients:
-            #
-            #     ::Google::Cloud::Shell::V1::CloudShellService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all CloudShellService clients
+            #   ::Google::Cloud::Shell::V1::CloudShellService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -73,10 +72,7 @@ module Google
 
                 default_config.rpcs.get_environment.timeout = 60.0
                 default_config.rpcs.get_environment.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 2]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
                 }
 
                 default_config.rpcs.start_environment.timeout = 60.0
@@ -116,19 +112,15 @@ module Google
             ##
             # Create a new CloudShellService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new CloudShellService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new
             #
-            #     client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new
-            #
-            # To create a new CloudShellService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the CloudShellService client.
             # @yieldparam config [Client::Configuration]
@@ -148,14 +140,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -163,6 +154,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -214,6 +206,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/shell/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Shell::V1::CloudShellService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Shell::V1::GetEnvironmentRequest.new
+            #
+            #   # Call the get_environment method.
+            #   result = client.get_environment request
+            #
+            #   # The returned object is of type Google::Cloud::Shell::V1::Environment.
+            #   p result
+            #
             def get_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -231,16 +238,20 @@ module Google
                 gapic_version: ::Google::Cloud::Shell::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_shell_service_stub.call_rpc :get_environment, request, options: options do |response, operation|
@@ -294,6 +305,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/shell/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Shell::V1::CloudShellService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Shell::V1::StartEnvironmentRequest.new
+            #
+            #   # Call the start_environment method.
+            #   result = client.start_environment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def start_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -311,16 +344,20 @@ module Google
                 gapic_version: ::Google::Cloud::Shell::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.start_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.start_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_shell_service_stub.call_rpc :start_environment, request, options: options do |response, operation|
@@ -373,6 +410,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/shell/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Shell::V1::CloudShellService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Shell::V1::AuthorizeEnvironmentRequest.new
+            #
+            #   # Call the authorize_environment method.
+            #   result = client.authorize_environment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def authorize_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -390,16 +449,20 @@ module Google
                 gapic_version: ::Google::Cloud::Shell::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.authorize_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.authorize_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_shell_service_stub.call_rpc :authorize_environment, request, options: options do |response, operation|
@@ -450,6 +513,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/shell/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Shell::V1::CloudShellService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Shell::V1::AddPublicKeyRequest.new
+            #
+            #   # Call the add_public_key method.
+            #   result = client.add_public_key request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def add_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -467,16 +552,20 @@ module Google
                 gapic_version: ::Google::Cloud::Shell::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "environment" => request.environment
-              }
+              header_params = {}
+              if request.environment
+                header_params["environment"] = request.environment
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.add_public_key.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.add_public_key.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_shell_service_stub.call_rpc :add_public_key, request, options: options do |response, operation|
@@ -523,6 +612,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/shell/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Shell::V1::CloudShellService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Shell::V1::RemovePublicKeyRequest.new
+            #
+            #   # Call the remove_public_key method.
+            #   result = client.remove_public_key request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def remove_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -540,16 +651,20 @@ module Google
                 gapic_version: ::Google::Cloud::Shell::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "environment" => request.environment
-              }
+              header_params = {}
+              if request.environment
+                header_params["environment"] = request.environment
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.remove_public_key.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.remove_public_key.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_shell_service_stub.call_rpc :remove_public_key, request, options: options do |response, operation|
@@ -574,22 +689,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for get_environment
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # get_environment to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Shell::V1::CloudShellService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_environment.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Shell::V1::CloudShellService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_environment.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_environment.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_environment.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

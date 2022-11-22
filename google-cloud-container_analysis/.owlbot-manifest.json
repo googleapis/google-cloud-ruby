@@ -1,0 +1,32 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-container_analysis.gemspec",
+    "lib/google-cloud-container_analysis.rb",
+    "lib/google/cloud/container_analysis.rb",
+    "lib/google/cloud/container_analysis/version.rb",
+    "test/google/cloud/container_analysis/client_test.rb",
+    "test/google/cloud/container_analysis/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "acceptance/google/cloud/container_analysis/v1/grafeas_service_smoke_test.rb",
+    "samples/.rubocop.yml",
+    "samples/Gemfile",
+    "samples/Rakefile",
+    "samples/acceptance/helper.rb",
+    "samples/acceptance/sample_test.rb",
+    "samples/sample.rb"
+  ]
+}

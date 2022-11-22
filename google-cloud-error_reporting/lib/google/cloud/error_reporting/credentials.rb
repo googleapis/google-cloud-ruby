@@ -22,7 +22,7 @@ module Google
       # # Credentials
       #
       # Represents the authentication and authorization used to connect to the
-      # Stackdriver Error Reporting service.
+      # Error Reporting service.
       #
       # @example
       #   require "google/cloud/error_reporting"

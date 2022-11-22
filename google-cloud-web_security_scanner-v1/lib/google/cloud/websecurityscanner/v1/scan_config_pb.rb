@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/websecurityscanner/v1/scan_config.proto", :syntax => :proto3) do
     add_message "google.cloud.websecurityscanner.v1.ScanConfig" do
@@ -20,6 +21,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :risk_level, :enum, 12, "google.cloud.websecurityscanner.v1.ScanConfig.RiskLevel"
       optional :managed_scan, :bool, 13
       optional :static_ip_scan, :bool, 14
+      optional :ignore_http_status_errors, :bool, 15
     end
     add_message "google.cloud.websecurityscanner.v1.ScanConfig.Authentication" do
       oneof :authentication do

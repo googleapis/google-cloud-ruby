@@ -33,3 +33,7 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-web_security_scanner.rb"
+
+Style/BlockDelimiters:
+  Exclude:
+    - "samples/**/acceptance/*.rb"

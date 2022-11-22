@@ -111,7 +111,7 @@ module Google
         #     attributes that are not covered by the provided structured fields.
         #
         #     The keys of the map are strings up to 64 bytes and must match the
-        #     pattern: [a-zA-Z][a-zA-Z0-9_]*. For example, key0LikeThis or
+        #     pattern: `[a-zA-Z][a-zA-Z0-9_]*`. For example, key0LikeThis or
         #     KEY_1_LIKE_THIS.
         #
         #     At most 100 filterable and at most 100 unfilterable keys are supported.
@@ -241,7 +241,7 @@ module Google
         #     not be updated. And when creating a job with past timestamp, the
         #     {::Google::Cloud::Talent::V4beta1::Job#posting_publish_time posting_publish_time} must be set before
         #     {::Google::Cloud::Talent::V4beta1::Job#posting_expire_time posting_expire_time}. The purpose of this feature is
-        #     to allow other objects, such as {::Google::Cloud::Talent::V4beta1::Application Application}, to refer a job
+        #     to allow other objects, such as [Application][google.cloud.talent.v4beta1.Application], to refer a job
         #     that didn't exist in the system prior to becoming expired. If you
         #     want to modify a job that was expired on creation,
         #     delete it and create a new one.

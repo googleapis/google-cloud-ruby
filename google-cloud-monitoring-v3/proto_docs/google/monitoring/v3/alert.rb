@@ -32,8 +32,8 @@ module Google
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
         #
-        #     `[ALERT_POLICY_ID]` is assigned by Stackdriver Monitoring when the policy
-        #     is created.  When calling the
+        #     `[ALERT_POLICY_ID]` is assigned by Cloud Monitoring when the policy
+        #     is created. When calling the
         #     {::Google::Cloud::Monitoring::V3::AlertPolicyService::Client#create_alert_policy alertPolicies.create}
         #     method, do not include the `name` field in the alerting policy passed as
         #     part of the request.
@@ -104,6 +104,9 @@ module Google
         #   @return [::Google::Cloud::Monitoring::V3::MutationRecord]
         #     A read-only record of the most recent change to the alerting policy. If
         #     provided in a call to create or update, this field will be ignored.
+        # @!attribute [rw] alert_strategy
+        #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::AlertStrategy]
+        #     Control over how this alert policy's notification channels are notified.
         class AlertPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -115,7 +118,8 @@ module Google
           #     The text of the documentation, interpreted according to `mime_type`.
           #     The content may not exceed 8,192 Unicode characters and may not exceed
           #     more than 10,240 bytes when encoded in UTF-8 format, whichever is
-          #     smaller.
+          #     smaller. This text can be [templatized by using
+          #     variables](https://cloud.google.com/monitoring/alerts/doc-variables).
           # @!attribute [rw] mime_type
           #   @return [::String]
           #     The format of the `content` field. Presently, only the value
@@ -136,13 +140,13 @@ module Google
           #
           #         projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
           #
-          #     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
+          #     `[CONDITION_ID]` is assigned by Cloud Monitoring when the
           #     condition is created as part of a new or updated alerting policy.
           #
           #     When calling the
           #     {::Google::Cloud::Monitoring::V3::AlertPolicyService::Client#create_alert_policy alertPolicies.create}
           #     method, do not include the `name` field in the conditions of the
-          #     requested alerting policy. Stackdriver Monitoring creates the
+          #     requested alerting policy. Cloud Monitoring creates the
           #     condition identifiers and includes them in the new policy.
           #
           #     When calling the
@@ -168,6 +172,10 @@ module Google
           #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::MetricAbsence]
           #     A condition that checks that a time series continues to
           #     receive new data points.
+          # @!attribute [rw] condition_matched_log
+          #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::LogMatch]
+          #     A condition that checks for log messages matching given constraints. If
+          #     set, no other conditions can be present.
           # @!attribute [rw] condition_monitoring_query_language
           #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::MonitoringQueryLanguageCondition]
           #     A condition that uses the Monitoring Query Language to define
@@ -211,7 +219,7 @@ module Google
             #     well as how to combine the retrieved time series together (such as
             #     when aggregating multiple streams on each resource to a single
             #     stream for each resource or when aggregating streams across all
-            #     members of a group of resrouces). Multiple aggregations
+            #     members of a group of resources). Multiple aggregations
             #     are applied in the order specified.
             #
             #     This field is similar to the one in the [`ListTimeSeries`
@@ -272,6 +280,10 @@ module Google
             #     time series that have been identified by `filter` and `aggregations`,
             #     or by the ratio, if `denominator_filter` and `denominator_aggregations`
             #     are specified.
+            # @!attribute [rw] evaluation_missing_data
+            #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::EvaluationMissingData]
+            #     A condition control that determines how metric-threshold conditions
+            #     are evaluated when data stops arriving.
             class MetricThreshold
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -300,7 +312,7 @@ module Google
             #     well as how to combine the retrieved time series together (such as
             #     when aggregating multiple streams on each resource to a single
             #     stream for each resource or when aggregating streams across all
-            #     members of a group of resrouces). Multiple aggregations
+            #     members of a group of resources). Multiple aggregations
             #     are applied in the order specified.
             #
             #     This field is similar to the one in the [`ListTimeSeries`
@@ -325,6 +337,42 @@ module Google
             class MetricAbsence
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # A condition type that checks whether a log message in the [scoping
+            # project](https://cloud.google.com/monitoring/api/v3#project_name)
+            # satisfies the given filter. Logs from other projects in the metrics
+            # scope are not evaluated.
+            # @!attribute [rw] filter
+            #   @return [::String]
+            #     Required. A logs-based filter. See [Advanced Logs
+            #     Queries](https://cloud.google.com/logging/docs/view/advanced-queries)
+            #     for how this filter should be constructed.
+            # @!attribute [rw] label_extractors
+            #   @return [::Google::Protobuf::Map{::String => ::String}]
+            #     Optional. A map from a label key to an extractor expression, which is
+            #     used to extract the value for this label key. Each entry in this map is
+            #     a specification for how data should be extracted from log entries that
+            #     match `filter`. Each combination of extracted values is treated as a
+            #     separate rule for the purposes of triggering notifications. Label keys
+            #     and corresponding values can be used in notifications generated by this
+            #     condition.
+            #
+            #     Please see [the documentation on logs-based metric
+            #     `valueExtractor`s](https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.metrics#LogMetric.FIELDS.value_extractor)
+            #     for syntax and examples.
+            class LogMatch
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::String]
+              class LabelExtractorsEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
 
             # A condition type that allows alert policies to be defined using
@@ -353,7 +401,57 @@ module Google
             #     time series that have been identified by `filter` and `aggregations`,
             #     or by the ratio, if `denominator_filter` and `denominator_aggregations`
             #     are specified.
+            # @!attribute [rw] evaluation_missing_data
+            #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::EvaluationMissingData]
+            #     A condition control that determines how metric-threshold conditions
+            #     are evaluated when data stops arriving.
             class MonitoringQueryLanguageCondition
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # A condition control that determines how metric-threshold conditions
+            # are evaluated when data stops arriving.
+            # This control doesn't affect metric-absence policies.
+            module EvaluationMissingData
+              # An unspecified evaluation missing data option.  Equivalent to
+              # EVALUATION_MISSING_DATA_NO_OP.
+              EVALUATION_MISSING_DATA_UNSPECIFIED = 0
+
+              # If there is no data to evaluate the condition, then evaluate the
+              # condition as false.
+              EVALUATION_MISSING_DATA_INACTIVE = 1
+
+              # If there is no data to evaluate the condition, then evaluate the
+              # condition as true.
+              EVALUATION_MISSING_DATA_ACTIVE = 2
+
+              # Do not evaluate the condition to any value if there is no data.
+              EVALUATION_MISSING_DATA_NO_OP = 3
+            end
+          end
+
+          # Control over how the notification channels in `notification_channels`
+          # are notified when this alert fires.
+          # @!attribute [rw] notification_rate_limit
+          #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::AlertStrategy::NotificationRateLimit]
+          #     Required for alert policies with a `LogMatch` condition.
+          #
+          #     This limit is not implemented for alert policies that are not log-based.
+          # @!attribute [rw] auto_close
+          #   @return [::Google::Protobuf::Duration]
+          #     If an alert policy that was active has no data for this long, any open
+          #     incidents will close
+          class AlertStrategy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Control over the rate of notifications sent to this alert policy's
+            # notification channels.
+            # @!attribute [rw] period
+            #   @return [::Google::Protobuf::Duration]
+            #     Not more than one notification per `period`.
+            class NotificationRateLimit
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

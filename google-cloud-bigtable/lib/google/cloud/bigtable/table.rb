@@ -37,7 +37,7 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   table = bigtable.table("my-instance", "my-table")
+      #   table = bigtable.table "my-instance", "my-table"
       #
       #   if table.exists?
       #     p "Table exists."
@@ -158,7 +158,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", view: :FULL, perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", view: :FULL, perform_lookup: true
         #
         #   table.cluster_states.each do |cs|
         #     puts cs.cluster_name
@@ -207,7 +207,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
         #
         #   table.column_families.each do |name, cf|
         #     puts name
@@ -222,15 +222,15 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
         #
         #   table.column_families do |cfm|
         #     cfm.add "cf4", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
         #     cfm.add "cf5", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
         #
-        #     rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
-        #     rule_2 = Google::Cloud::Bigtable::GcRule.max_age(600)
-        #     rule_union = Google::Cloud::Bigtable::GcRule.union(rule_1, rule_2)
+        #     rule_1 = Google::Cloud::Bigtable::GcRule.max_versions 3
+        #     rule_2 = Google::Cloud::Bigtable::GcRule.max_age 600
+        #     rule_union = Google::Cloud::Bigtable::GcRule.union rule_1, rule_2
         #     cfm.update "cf2", gc_rule: rule_union
         #
         #     cfm.delete "cf3"
@@ -296,7 +296,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
         #   policy = table.policy
         #
         # @example Update the policy by passing a block.
@@ -304,10 +304,10 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
         #
         #   table.policy do |p|
-        #     p.add("roles/owner", "user:owner@example.com")
+        #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
         #
         def policy
@@ -338,11 +338,11 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
         #
         #   policy = table.policy
-        #   policy.add("roles/owner", "user:owner@example.com")
-        #   updated_policy = table.update_policy(policy)
+        #   policy.add "roles/owner", "user:owner@example.com"
+        #   updated_policy = table.update_policy policy
         #
         #   puts updated_policy.roles
         #
@@ -372,7 +372,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
         #
         #   permissions = table.test_iam_permissions(
         #     "bigtable.tables.delete",
@@ -397,7 +397,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #   table.delete
         #
         def delete
@@ -416,7 +416,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   if table.exists?
         #     p "Table exists."
@@ -429,8 +429,8 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
-        #   table = instance.table("my-table")
+        #   instance = bigtable.instance "my-instance"
+        #   table = instance.table "my-table"
         #
         #   if table.exists?
         #     p "Table exists."
@@ -489,8 +489,8 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
-        #   table = instance.table("my-table")
+        #   instance = bigtable.instance "my-instance"
+        #   table = instance.table "my-table"
         #
         #   table.generate_consistency_token # "l947XelENinaxJQP0nnrZJjHnAF7YrwW8HCJLotwrF"
         #
@@ -512,12 +512,12 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
-        #   table = instance.table("my-table")
+        #   instance = bigtable.instance "my-instance"
+        #   table = instance.table "my-table"
         #
         #   token = "l947XelENinaxJQP0nnrZJjHnAF7YrwW8HCJLotwrF"
         #
-        #   if table.check_consistency(token)
+        #   if table.check_consistency token
         #     puts "Replication is consistent"
         #   end
         #
@@ -546,14 +546,14 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
         #
         #   if table.wait_for_replication
         #     puts "Replication done"
         #   end
         #
         #   # With custom timeout and interval
-        #   if table.wait_for_replication(timeout: 300, check_interval: 10)
+        #   if table.wait_for_replication timeout: 300, check_interval: 10
         #     puts "Replication done"
         #   end
         #
@@ -585,12 +585,12 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
-        #   table = instance.table("my-table")
+        #   instance = bigtable.instance "my-instance"
+        #   table = instance.table "my-table"
         #   table.delete_all_rows
         #
         #   # With timeout
-        #   table.delete_all_rows(timeout: 120) # 120 seconds.
+        #   table.delete_all_rows timeout: 120 # 120 seconds.
         #
         def delete_all_rows timeout: nil
           drop_row_range delete_all_data: true, timeout: timeout
@@ -607,12 +607,12 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   table.delete_rows_by_prefix("user-100")
+        #   table.delete_rows_by_prefix "user-100"
         #
         #   # With timeout
-        #   table.delete_rows_by_prefix("user-1", timeout: 120) # 120 seconds.
+        #   table.delete_rows_by_prefix "user-1", timeout: 120 # 120 seconds.
         #
         def delete_rows_by_prefix prefix, timeout: nil
           drop_row_range row_key_prefix: prefix, timeout: timeout
@@ -631,13 +631,13 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   # Delete rows using row key prefix.
-        #   table.drop_row_range(row_key_prefix: "user-100")
+        #   table.drop_row_range row_key_prefix: "user-100"
         #
         #   # Delete all data With timeout
-        #   table.drop_row_range(delete_all_data: true, timeout: 120) # 120 seconds.
+        #   table.drop_row_range delete_all_data: true, timeout: 120 # 120 seconds.
         #
         def drop_row_range row_key_prefix: nil, delete_all_data: nil, timeout: nil
           ensure_service!

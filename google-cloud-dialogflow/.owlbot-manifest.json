@@ -1,0 +1,27 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-dialogflow.gemspec",
+    "lib/google-cloud-dialogflow.rb",
+    "lib/google/cloud/dialogflow.rb",
+    "lib/google/cloud/dialogflow/version.rb",
+    "test/google/cloud/dialogflow/client_test.rb",
+    "test/google/cloud/dialogflow/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "acceptance/dialogflow_smoke_test.rb",
+    "acceptance/helper.rb"
+  ]
+}

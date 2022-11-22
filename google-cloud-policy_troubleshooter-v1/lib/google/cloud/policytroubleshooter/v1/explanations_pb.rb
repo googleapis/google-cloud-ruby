@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/type/expr_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/policytroubleshooter/v1/explanations.proto", :syntax => :proto3) do
     add_message "google.cloud.policytroubleshooter.v1.AccessTuple" do

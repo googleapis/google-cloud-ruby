@@ -28,6 +28,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/gaming/v1"
       #     client = ::Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
       #

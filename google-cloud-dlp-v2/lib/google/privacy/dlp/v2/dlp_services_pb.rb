@@ -74,11 +74,11 @@ module Google
             # https://cloud.google.com/dlp/docs/pseudonymization#re-identification_in_free_text_code_example
             # to learn more.
             rpc :ReidentifyContent, ::Google::Cloud::Dlp::V2::ReidentifyContentRequest, ::Google::Cloud::Dlp::V2::ReidentifyContentResponse
-            # Returns a list of the sensitive information types that the DLP API
+            # Returns a list of the sensitive information types that DLP API
             # supports. See https://cloud.google.com/dlp/docs/infotypes-reference to
             # learn more.
             rpc :ListInfoTypes, ::Google::Cloud::Dlp::V2::ListInfoTypesRequest, ::Google::Cloud::Dlp::V2::ListInfoTypesResponse
-            # Creates an InspectTemplate for re-using frequently used configuration
+            # Creates an InspectTemplate for reusing frequently used configuration
             # for inspecting content, images, and storage.
             # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
             rpc :CreateInspectTemplate, ::Google::Cloud::Dlp::V2::CreateInspectTemplateRequest, ::Google::Cloud::Dlp::V2::InspectTemplate
@@ -94,7 +94,7 @@ module Google
             # Deletes an InspectTemplate.
             # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
             rpc :DeleteInspectTemplate, ::Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest, ::Google::Protobuf::Empty
-            # Creates a DeidentifyTemplate for re-using frequently used configuration
+            # Creates a DeidentifyTemplate for reusing frequently used configuration
             # for de-identifying content, images, and storage.
             # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
             # more.
@@ -125,9 +125,6 @@ module Google
             # Inspect hybrid content and store findings to a trigger. The inspection
             # will be processed asynchronously. To review the findings monitor the
             # jobs within the trigger.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             rpc :HybridInspectJobTrigger, ::Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest, ::Google::Cloud::Dlp::V2::HybridInspectResponse
             # Gets a job trigger.
             # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
@@ -158,7 +155,7 @@ module Google
             # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
             rpc :GetDlpJob, ::Google::Cloud::Dlp::V2::GetDlpJobRequest, ::Google::Cloud::Dlp::V2::DlpJob
             # Deletes a long-running DlpJob. This method indicates that the client is
-            # no longer interested in the DlpJob result. The job will be cancelled if
+            # no longer interested in the DlpJob result. The job will be canceled if
             # possible.
             # See https://cloud.google.com/dlp/docs/inspecting-storage and
             # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
@@ -191,17 +188,11 @@ module Google
             # learn more.
             rpc :DeleteStoredInfoType, ::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest, ::Google::Protobuf::Empty
             # Inspect hybrid content and store findings to a job.
-            # To review the findings inspect the job. Inspection will occur
+            # To review the findings, inspect the job. Inspection will occur
             # asynchronously.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             rpc :HybridInspectDlpJob, ::Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest, ::Google::Cloud::Dlp::V2::HybridInspectResponse
             # Finish a running hybrid DlpJob. Triggers the finalization steps and running
             # of any enabled actions that have not yet run.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             rpc :FinishDlpJob, ::Google::Cloud::Dlp::V2::FinishDlpJobRequest, ::Google::Protobuf::Empty
           end
 

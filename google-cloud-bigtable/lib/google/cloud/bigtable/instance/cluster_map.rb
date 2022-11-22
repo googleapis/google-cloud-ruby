@@ -30,8 +30,8 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   job = bigtable.create_instance("my-instance") do |clusters|
-        #     clusters.add("test-cluster", "us-east1-b", nodes: 3, storage_type: :SSD)
+        #   job = bigtable.create_instance "my-instance" do |clusters|
+        #     clusters.add "test-cluster", "us-east1-b", nodes: 3, storage_type: :SSD
         #   end
         #
         #   job.wait_until_done!
@@ -74,8 +74,8 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   job = bigtable.create_instance("my-instance") do |clusters|
-          #     clusters.add("test-cluster", "us-east1-b", nodes: 3, storage_type: :SSD)
+          #   job = bigtable.create_instance "my-instance" do |clusters|
+          #     clusters.add "test-cluster", "us-east1-b", nodes: 3, storage_type: :SSD
           #   end
           #
           #   job.wait_until_done!
@@ -86,8 +86,8 @@ module Google
           #   bigtable = Google::Cloud::Bigtable.new
           #
           #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
-          #   job = bigtable.create_instance("my-instance") do |clusters|
-          #     clusters.add("test-cluster", "us-east1-b", kms_key: kms_key_name)
+          #   job = bigtable.create_instance "my-instance" do |clusters|
+          #     clusters.add "test-cluster", "us-east1-b", kms_key: kms_key_name
           #   end
           #
           #   job.wait_until_done!

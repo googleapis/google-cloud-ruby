@@ -25,6 +25,8 @@ require "google/cloud/dialogflow/v2/sessions"
 require "google/cloud/dialogflow/v2/participants"
 require "google/cloud/dialogflow/v2/answer_records"
 require "google/cloud/dialogflow/v2/conversations"
+require "google/cloud/dialogflow/v2/conversation_datasets"
+require "google/cloud/dialogflow/v2/conversation_models"
 require "google/cloud/dialogflow/v2/conversation_profiles"
 require "google/cloud/dialogflow/v2/documents"
 require "google/cloud/dialogflow/v2/fulfillments"
@@ -38,6 +40,8 @@ module Google
     module Dialogflow
       ##
       # To load this package, including all its services, and instantiate a client:
+      #
+      # @example
       #
       #     require "google/cloud/dialogflow/v2"
       #     client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new

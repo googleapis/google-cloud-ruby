@@ -43,11 +43,11 @@ module Google
           #     already been completed. The server will guarantee that for at least 60
           #     minutes since the first request.
           #
-          #     For example, consider a situation where you make an initial request and t
-          #     he request times out. If you make the request again with the same request
-          #     ID, the server can check if original operation with the same request ID
-          #     was received, and if so, will ignore the second request. This prevents
-          #     clients from accidentally creating duplicate commitments.
+          #     For example, consider a situation where you make an initial request and the
+          #     request times out. If you make the request again with the same request ID,
+          #     the server can check if original operation with the same request ID was
+          #     received, and if so, will ignore the second request. This prevents clients
+          #     from accidentally creating duplicate commitments.
           #
           #     The request ID must be a valid UUID with the exception that zero UUID is
           #     not supported (00000000-0000-0000-0000-000000000000).
@@ -441,6 +441,11 @@ module Google
           #   @return [::Boolean]
           #     Optional. This field allows the CA to be deleted even if the CA has
           #     active certs. Active certs include both unrevoked and unexpired certs.
+          # @!attribute [rw] skip_grace_period
+          #   @return [::Boolean]
+          #     Optional. If this flag is set, the Certificate Authority will be deleted as soon as
+          #     possible without a 30-day grace period where undeletion would have been
+          #     allowed. If you proceed, there will be no way to recover this CA.
           class DeleteCertificateAuthorityRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

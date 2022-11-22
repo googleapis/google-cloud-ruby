@@ -23,7 +23,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
     d
   end
-  let(:table_id) { "kittens" }
+  let(:table_id) { "kittens_table" }
   let(:table) do
     t = dataset.table table_id
     if t.nil?
@@ -96,6 +96,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   let(:target_table_2_id) { "kittens_copy_2" }
   let(:target_table_3_id) { "kittens_copy_3" }
   let(:target_table_4_id) { "kittens_copy_4" }
+  let(:target_snapshot_table) { "kittens_copy_5" }
+  let(:target_clone_table) { "kittens_copy_6" }
   let(:labels) { { "foo" => "bar" } }
 
   it "has the attributes of a table" do
@@ -810,7 +812,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     gs_url = "gs://#{file2.bucket}/#{file2.name}"
 
     # Test both by file object and URL as string
-    result = table.load [file1, gs_url]
+    result = safe_gcs_execute { table.load [file1, gs_url] }
     _(result).must_equal true
   end
 
@@ -932,9 +934,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     Tempfile.open "empty_extract_file.json" do |tmp|
       dest_file_name = random_file_destination_name
       extract_url = "gs://#{bucket.name}/#{dest_file_name}"
-      extract_job = table.extract_job extract_url do |j|
-        j.labels = labels
-      end
+      extract_job = safe_gcs_execute do
+                      table.extract_job extract_url do |j|
+                        j.labels = labels
+                      end
+                    end
 
       _(extract_job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
       _(extract_job.labels).must_equal labels
@@ -966,7 +970,9 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       extract_file = bucket.create_file tmp, dest_file_name
       job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
-      extract_job = table.extract_job extract_file, job_id: job_id
+      extract_job = safe_gcs_execute do 
+                      table.extract_job extract_file, job_id: job_id
+                    end
       _(extract_job.job_id).must_equal job_id
       extract_job.wait_until_done!
       _(extract_job).wont_be :failed?
@@ -985,7 +991,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     Tempfile.open "empty_extract_file.json" do |tmp|
       dest_file_name = random_file_destination_name
       extract_url = "gs://#{bucket.name}/#{dest_file_name}"
-      result = table.extract extract_url
+      result = safe_gcs_execute { table.extract extract_url } 
       _(result).must_equal true
 
       extract_file = bucket.file dest_file_name
@@ -1003,12 +1009,45 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       dest_file_name = random_file_destination_name
       extract_file = bucket.create_file tmp, dest_file_name
 
-      result = table.extract extract_file
+      result = safe_gcs_execute { table.extract extract_file } 
       _(result).must_equal true
       # Refresh to get the latest file data
       extract_file = bucket.file dest_file_name
       downloaded_file = extract_file.download tmp.path
       _(downloaded_file.size).must_be :>, 0
+    end
+  end
+
+  it "creates snapshot of a table" do
+    begin
+      result = table.snapshot target_snapshot_table
+      _(result).must_equal true
+      table_snapshot = dataset.table target_snapshot_table
+      _(table_snapshot.snapshot?).must_equal true
+    ensure
+      table_snapshot.delete  
+    end
+  end
+
+  it "creates clone of a table" do
+    begin
+      result = table.clone target_clone_table
+      _(result).must_equal true
+      table_clone = dataset.table target_clone_table
+      _(table_clone.clone?).must_equal true
+    ensure
+      table_clone.delete  
+    end
+  end
+
+  it "restores snapshot into a table" do
+    begin
+      result = table.clone target_clone_table
+      _(result).must_equal true
+      restored_table = dataset.table target_clone_table
+      _(restored_table.table?).must_equal true
+    ensure
+      restored_table.delete  
     end
   end
 end

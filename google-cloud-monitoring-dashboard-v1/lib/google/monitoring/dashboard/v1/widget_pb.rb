@@ -4,10 +4,15 @@
 require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
+require 'google/monitoring/dashboard/v1/alertchart_pb'
+require 'google/monitoring/dashboard/v1/collapsible_group_pb'
+require 'google/monitoring/dashboard/v1/logs_panel_pb'
 require 'google/monitoring/dashboard/v1/scorecard_pb'
+require 'google/monitoring/dashboard/v1/table_pb'
 require 'google/monitoring/dashboard/v1/text_pb'
 require 'google/monitoring/dashboard/v1/xychart_pb'
 require 'google/protobuf/empty_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/monitoring/dashboard/v1/widget.proto", :syntax => :proto3) do
     add_message "google.monitoring.dashboard.v1.Widget" do
@@ -17,6 +22,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :scorecard, :message, 3, "google.monitoring.dashboard.v1.Scorecard"
         optional :text, :message, 4, "google.monitoring.dashboard.v1.Text"
         optional :blank, :message, 5, "google.protobuf.Empty"
+        optional :alert_chart, :message, 7, "google.monitoring.dashboard.v1.AlertChart"
+        optional :time_series_table, :message, 8, "google.monitoring.dashboard.v1.TimeSeriesTable"
+        optional :collapsible_group, :message, 9, "google.monitoring.dashboard.v1.CollapsibleGroup"
+        optional :logs_panel, :message, 10, "google.monitoring.dashboard.v1.LogsPanel"
       end
     end
   end

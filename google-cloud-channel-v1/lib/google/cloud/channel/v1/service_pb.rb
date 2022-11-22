@@ -13,9 +13,11 @@ require 'google/cloud/channel/v1/customers_pb'
 require 'google/cloud/channel/v1/entitlements_pb'
 require 'google/cloud/channel/v1/offers_pb'
 require 'google/cloud/channel/v1/products_pb'
+require 'google/cloud/channel/v1/repricing_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/channel/v1/service.proto", :syntax => :proto3) do
     add_message "google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest" do
@@ -35,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      optional :filter, :string, 4
     end
     add_message "google.cloud.channel.v1.ListCustomersResponse" do
       repeated :customers, :message, 1, "google.cloud.channel.v1.Customer"
@@ -53,6 +56,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.channel.v1.DeleteCustomerRequest" do
       optional :name, :string, 1
+    end
+    add_message "google.cloud.channel.v1.ImportCustomerRequest" do
+      optional :parent, :string, 1
+      optional :auth_token, :string, 4
+      optional :overwrite_if_exists, :bool, 5
+      optional :channel_partner_id, :string, 6
+      optional :customer, :string, 7
+      oneof :customer_identity do
+        optional :domain, :string, 2
+        optional :cloud_identity_id, :string, 3
+      end
     end
     add_message "google.cloud.channel.v1.ProvisionCloudIdentityRequest" do
       optional :customer, :string, 1
@@ -127,6 +141,52 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :channel_partner_link, :message, 2, "google.cloud.channel.v1.ChannelPartnerLink"
       optional :update_mask, :message, 3, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.channel.v1.GetCustomerRepricingConfigRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.channel.v1.ListCustomerRepricingConfigsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+      optional :filter, :string, 4
+    end
+    add_message "google.cloud.channel.v1.ListCustomerRepricingConfigsResponse" do
+      repeated :customer_repricing_configs, :message, 1, "google.cloud.channel.v1.CustomerRepricingConfig"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.channel.v1.CreateCustomerRepricingConfigRequest" do
+      optional :parent, :string, 1
+      optional :customer_repricing_config, :message, 2, "google.cloud.channel.v1.CustomerRepricingConfig"
+    end
+    add_message "google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest" do
+      optional :customer_repricing_config, :message, 1, "google.cloud.channel.v1.CustomerRepricingConfig"
+    end
+    add_message "google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+      optional :filter, :string, 4
+    end
+    add_message "google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse" do
+      repeated :channel_partner_repricing_configs, :message, 1, "google.cloud.channel.v1.ChannelPartnerRepricingConfig"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest" do
+      optional :parent, :string, 1
+      optional :channel_partner_repricing_config, :message, 2, "google.cloud.channel.v1.ChannelPartnerRepricingConfig"
+    end
+    add_message "google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest" do
+      optional :channel_partner_repricing_config, :message, 1, "google.cloud.channel.v1.ChannelPartnerRepricingConfig"
+    end
+    add_message "google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest" do
+      optional :name, :string, 1
     end
     add_message "google.cloud.channel.v1.CreateEntitlementRequest" do
       optional :parent, :string, 1
@@ -309,6 +369,7 @@ module Google
         CreateCustomerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.CreateCustomerRequest").msgclass
         UpdateCustomerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.UpdateCustomerRequest").msgclass
         DeleteCustomerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.DeleteCustomerRequest").msgclass
+        ImportCustomerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ImportCustomerRequest").msgclass
         ProvisionCloudIdentityRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ProvisionCloudIdentityRequest").msgclass
         ListEntitlementsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListEntitlementsRequest").msgclass
         ListEntitlementsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListEntitlementsResponse").msgclass
@@ -323,6 +384,18 @@ module Google
         GetChannelPartnerLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.GetChannelPartnerLinkRequest").msgclass
         CreateChannelPartnerLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.CreateChannelPartnerLinkRequest").msgclass
         UpdateChannelPartnerLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.UpdateChannelPartnerLinkRequest").msgclass
+        GetCustomerRepricingConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.GetCustomerRepricingConfigRequest").msgclass
+        ListCustomerRepricingConfigsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListCustomerRepricingConfigsRequest").msgclass
+        ListCustomerRepricingConfigsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListCustomerRepricingConfigsResponse").msgclass
+        CreateCustomerRepricingConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.CreateCustomerRepricingConfigRequest").msgclass
+        UpdateCustomerRepricingConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest").msgclass
+        DeleteCustomerRepricingConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest").msgclass
+        GetChannelPartnerRepricingConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest").msgclass
+        ListChannelPartnerRepricingConfigsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest").msgclass
+        ListChannelPartnerRepricingConfigsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse").msgclass
+        CreateChannelPartnerRepricingConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest").msgclass
+        UpdateChannelPartnerRepricingConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest").msgclass
+        DeleteChannelPartnerRepricingConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest").msgclass
         CreateEntitlementRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.CreateEntitlementRequest").msgclass
         TransferEntitlementsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.TransferEntitlementsRequest").msgclass
         TransferEntitlementsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.TransferEntitlementsResponse").msgclass

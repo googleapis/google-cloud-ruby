@@ -4,7 +4,7 @@
 require 'google/protobuf'
 
 require 'google/appengine/v1/appengine_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/appengine/v1/audit_data.proto", :syntax => :proto3) do
     add_message "google.appengine.v1.AuditData" do

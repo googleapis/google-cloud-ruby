@@ -45,6 +45,40 @@ module Google
   module Cloud
     module Kms
       ##
+      # Create a new client object for EkmService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Kms::V1::EkmService::Client](https://googleapis.dev/ruby/google-cloud-kms-v1/latest/Google/Cloud/Kms/V1/EkmService/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the EkmService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About EkmService
+      #
+      # Google Cloud Key Management EKM Service
+      #
+      # Manages external cryptographic keys and operations using those keys.
+      # Implements a REST model with the following objects:
+      # * EkmConnection
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [EkmService::Client] A client object for the specified version.
+      #
+      def self.ekm_service version: :v1, &block
+        require "google/cloud/kms/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Kms
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Kms.const_get package_name
+        package_module.const_get(:EkmService).const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for KeyManagementService.
       #
       # By default, this returns an instance of

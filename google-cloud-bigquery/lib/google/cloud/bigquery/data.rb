@@ -232,6 +232,8 @@ module Google
         # The type of query statement, if valid. Possible values (new values
         # might be added in the future):
         #
+        # * "ALTER_TABLE": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
         # * "CREATE_MODEL": DDL statement, see [Using Data Definition Language
         #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
         # * "CREATE_TABLE": DDL statement, see [Using Data Definition Language
@@ -276,8 +278,16 @@ module Google
         #   data.ddl? #=> true
         #
         def ddl?
-          ["CREATE_MODEL", "CREATE_TABLE", "CREATE_TABLE_AS_SELECT", "CREATE_VIEW", "\n", "DROP_MODEL", "DROP_TABLE",
-           "DROP_VIEW"].include? statement_type
+          [
+            "ALTER_TABLE",
+            "CREATE_MODEL",
+            "CREATE_TABLE",
+            "CREATE_TABLE_AS_SELECT",
+            "CREATE_VIEW",
+            "DROP_MODEL",
+            "DROP_TABLE",
+            "DROP_VIEW"
+          ].include? statement_type
         end
 
         ##
@@ -300,7 +310,12 @@ module Google
         #   data.dml? #=> true
         #
         def dml?
-          ["INSERT", "UPDATE", "MERGE", "DELETE"].include? statement_type
+          [
+            "INSERT",
+            "UPDATE",
+            "MERGE",
+            "DELETE"
+          ].include? statement_type
         end
 
         ##
@@ -361,6 +376,39 @@ module Google
         #
         def num_dml_affected_rows
           job_gapi&.statistics&.query&.num_dml_affected_rows
+        end
+
+        ##
+        # The number of deleted rows. Present only for DML statements `DELETE`,
+        # `MERGE` and `TRUNCATE`. (See {#statement_type}.)
+        #
+        # @return [Integer, nil] The number of deleted rows, or `nil` if not
+        #   applicable.
+        #
+        def deleted_row_count
+          job_gapi&.statistics&.query&.dml_stats&.deleted_row_count
+        end
+
+        ##
+        # The number of inserted rows. Present only for DML statements `INSERT`
+        # and `MERGE`. (See {#statement_type}.)
+        #
+        # @return [Integer, nil] The number of inserted rows, or `nil` if not
+        #   applicable.
+        #
+        def inserted_row_count
+          job_gapi&.statistics&.query&.dml_stats&.inserted_row_count
+        end
+
+        ##
+        # The number of updated rows. Present only for DML statements `UPDATE`
+        # and `MERGE`. (See {#statement_type}.)
+        #
+        # @return [Integer, nil] The number of updated rows, or `nil` if not
+        #   applicable.
+        #
+        def updated_row_count
+          job_gapi&.statistics&.query&.dml_stats&.updated_row_count
         end
 
         ##

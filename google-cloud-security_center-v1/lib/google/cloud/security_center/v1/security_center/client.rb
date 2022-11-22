@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all SecurityCenter clients:
-            #
-            #     ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all SecurityCenter clients
+            #   ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -75,82 +74,52 @@ module Google
 
                 default_config.rpcs.get_iam_policy.timeout = 60.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_notification_config.timeout = 60.0
                 default_config.rpcs.get_notification_config.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_organization_settings.timeout = 60.0
                 default_config.rpcs.get_organization_settings.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_source.timeout = 60.0
                 default_config.rpcs.get_source.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.group_assets.timeout = 480.0
                 default_config.rpcs.group_assets.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.group_findings.timeout = 480.0
                 default_config.rpcs.group_findings.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_assets.timeout = 480.0
                 default_config.rpcs.list_assets.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_findings.timeout = 480.0
                 default_config.rpcs.list_findings.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_notification_configs.timeout = 60.0
                 default_config.rpcs.list_notification_configs.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_sources.timeout = 60.0
                 default_config.rpcs.list_sources.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.run_asset_discovery.timeout = 60.0
@@ -161,10 +130,7 @@ module Google
 
                 default_config.rpcs.test_iam_permissions.timeout = 60.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_finding.timeout = 60.0
@@ -206,19 +172,15 @@ module Google
             ##
             # Create a new SecurityCenter client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new SecurityCenter client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
             #
-            #     client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
-            #
-            # To create a new SecurityCenter client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the SecurityCenter client.
             # @yieldparam config [Client::Configuration]
@@ -238,14 +200,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -253,6 +214,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -273,6 +235,127 @@ module Google
             attr_reader :operations_client
 
             # Service calls
+
+            ##
+            # Kicks off an LRO to bulk mute findings for a parent based on a filter. The
+            # parent can be either an organization, folder or project. The findings
+            # matched by the filter will be muted after the LRO is done.
+            #
+            # @overload bulk_mute_findings(request, options = nil)
+            #   Pass arguments to `bulk_mute_findings` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload bulk_mute_findings(parent: nil, filter: nil, mute_annotation: nil)
+            #   Pass arguments to `bulk_mute_findings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent, at which bulk action needs to be applied. Its format
+            #     is "organizations/[organization_id]", "folders/[folder_id]",
+            #     "projects/[project_id]".
+            #   @param filter [::String]
+            #     Expression that identifies findings that should be updated.
+            #     The expression is a list of zero or more restrictions combined
+            #     via logical operators `AND` and `OR`. Parentheses are supported, and `OR`
+            #     has higher precedence than `AND`.
+            #
+            #     Restrictions have the form `<field> <operator> <value>` and may have a
+            #     `-` character in front of them to indicate negation. The fields map to
+            #     those defined in the corresponding resource.
+            #
+            #     The supported operators are:
+            #
+            #     * `=` for all value types.
+            #     * `>`, `<`, `>=`, `<=` for integer values.
+            #     * `:`, meaning substring matching, for strings.
+            #
+            #     The supported value types are:
+            #
+            #     * string literals in quotes.
+            #     * integer literals without quotes.
+            #     * boolean literals `true` and `false` without quotes.
+            #   @param mute_annotation [::String]
+            #     This can be a mute configuration name or any identifier for mute/unmute
+            #     of findings based on the filter.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest.new
+            #
+            #   # Call the bulk_mute_findings method.
+            #   result = client.bulk_mute_findings request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def bulk_mute_findings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.bulk_mute_findings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.bulk_mute_findings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.bulk_mute_findings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :bulk_mute_findings, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
 
             ##
             # Creates a source.
@@ -307,6 +390,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new
+            #
+            #   # Call the create_source method.
+            #   result = client.create_source request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::Source.
+            #   p result
+            #
             def create_source request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -324,16 +422,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_source.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_source.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :create_source, request, options: options do |response, operation|
@@ -382,6 +484,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new
+            #
+            #   # Call the create_finding method.
+            #   result = client.create_finding request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::Finding.
+            #   p result
+            #
             def create_finding request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -399,19 +516,117 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_finding.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_finding.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :create_finding, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a mute config.
+            #
+            # @overload create_mute_config(request, options = nil)
+            #   Pass arguments to `create_mute_config` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_mute_config(parent: nil, mute_config: nil, mute_config_id: nil)
+            #   Pass arguments to `create_mute_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Resource name of the new mute configs's parent. Its format is
+            #     "organizations/[organization_id]", "folders/[folder_id]", or
+            #     "projects/[project_id]".
+            #   @param mute_config [::Google::Cloud::SecurityCenter::V1::MuteConfig, ::Hash]
+            #     Required. The mute config being created.
+            #   @param mute_config_id [::String]
+            #     Required. Unique identifier provided by the client within the parent scope.
+            #     It must consist of lower case letters, numbers, and hyphen, with the first
+            #     character a letter, the last a letter or a number, and a 63 character
+            #     maximum.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::MuteConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::MuteConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest.new
+            #
+            #   # Call the create_mute_config method.
+            #   result = client.create_mute_config request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::MuteConfig.
+            #   p result
+            #
+            def create_mute_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_mute_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_mute_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_mute_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :create_mute_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -439,7 +654,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Resource name of the new notification config's parent. Its format
-            #     is "organizations/[organization_id]".
+            #     is "organizations/[organization_id]", "folders/[folder_id]", or
+            #     "projects/[project_id]".
             #   @param config_id [::String]
             #     Required.
             #     Unique identifier provided by the client within the parent scope.
@@ -458,6 +674,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest.new
+            #
+            #   # Call the create_notification_config method.
+            #   result = client.create_notification_config request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::NotificationConfig.
+            #   p result
+            #
             def create_notification_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -475,19 +706,111 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_notification_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_notification_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :create_notification_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes an existing mute config.
+            #
+            # @overload delete_mute_config(request, options = nil)
+            #   Pass arguments to `delete_mute_config` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_mute_config(name: nil)
+            #   Pass arguments to `delete_mute_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the mute config to delete. Its format is
+            #     organizations/\\{organization}/muteConfigs/\\{config_id},
+            #     folders/\\{folder}/muteConfigs/\\{config_id}, or
+            #     projects/\\{project}/muteConfigs/\\{config_id}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest.new
+            #
+            #   # Call the delete_mute_config method.
+            #   result = client.delete_mute_config request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_mute_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_mute_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_mute_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_mute_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :delete_mute_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -525,6 +848,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest.new
+            #
+            #   # Call the delete_notification_config method.
+            #   result = client.delete_notification_config request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_notification_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -542,19 +880,111 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_notification_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_notification_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :delete_notification_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a big query export.
+            #
+            # @overload get_big_query_export(request, options = nil)
+            #   Pass arguments to `get_big_query_export` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_big_query_export(name: nil)
+            #   Pass arguments to `get_big_query_export` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the big query export to retrieve. Its format is
+            #     organizations/\\{organization}/bigQueryExports/\\{export_id},
+            #     folders/\\{folder}/bigQueryExports/\\{export_id}, or
+            #     projects/\\{project}/bigQueryExports/\\{export_id}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest.new
+            #
+            #   # Call the get_big_query_export method.
+            #   result = client.get_big_query_export request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::BigQueryExport.
+            #   p result
+            #
+            def get_big_query_export request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_big_query_export.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_big_query_export.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_big_query_export.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :get_big_query_export, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -585,7 +1015,7 @@ module Google
             #     See the operation documentation for the appropriate value for this field.
             #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
             #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
-            #     `GetIamPolicy`. This field is only used by Cloud IAM.
+            #     `GetIamPolicy`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Iam::V1::Policy]
@@ -594,6 +1024,21 @@ module Google
             # @return [::Google::Iam::V1::Policy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::GetIamPolicyRequest.new
+            #
+            #   # Call the get_iam_policy method.
+            #   result = client.get_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
             #
             def get_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -612,19 +1057,111 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a mute config.
+            #
+            # @overload get_mute_config(request, options = nil)
+            #   Pass arguments to `get_mute_config` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_mute_config(name: nil)
+            #   Pass arguments to `get_mute_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the mute config to retrieve. Its format is
+            #     organizations/\\{organization}/muteConfigs/\\{config_id},
+            #     folders/\\{folder}/muteConfigs/\\{config_id}, or
+            #     projects/\\{project}/muteConfigs/\\{config_id}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::MuteConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::MuteConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest.new
+            #
+            #   # Call the get_mute_config method.
+            #   result = client.get_mute_config request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::MuteConfig.
+            #   p result
+            #
+            def get_mute_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_mute_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_mute_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_mute_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :get_mute_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -662,6 +1199,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest.new
+            #
+            #   # Call the get_notification_config method.
+            #   result = client.get_notification_config request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::NotificationConfig.
+            #   p result
+            #
             def get_notification_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -679,16 +1231,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_notification_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_notification_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :get_notification_config, request, options: options do |response, operation|
@@ -729,6 +1285,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest.new
+            #
+            #   # Call the get_organization_settings method.
+            #   result = client.get_organization_settings request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::OrganizationSettings.
+            #   p result
+            #
             def get_organization_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -746,16 +1317,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_organization_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_organization_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :get_organization_settings, request, options: options do |response, operation|
@@ -796,6 +1371,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::GetSourceRequest.new
+            #
+            #   # Call the get_source method.
+            #   result = client.get_source request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::Source.
+            #   p result
+            #
             def get_source request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -813,16 +1403,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_source.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_source.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :get_source, request, options: options do |response, operation|
@@ -987,6 +1581,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::GroupAssetsRequest.new
+            #
+            #   # Call the group_assets method.
+            #   result = client.group_assets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::SecurityCenter::V1::GroupResult.
+            #     p response
+            #   end
+            #
             def group_assets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1004,16 +1619,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.group_assets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.group_assets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :group_assets, request, options: options do |response, operation|
@@ -1187,6 +1806,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new
+            #
+            #   # Call the group_findings method.
+            #   result = client.group_findings request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::SecurityCenter::V1::GroupResult.
+            #     p response
+            #   end
+            #
             def group_findings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1204,16 +1844,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.group_findings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.group_findings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :group_findings, request, options: options do |response, operation|
@@ -1382,6 +2026,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::ListAssetsRequest.new
+            #
+            #   # Call the list_assets method.
+            #   result = client.list_assets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::SecurityCenter::V1::ListAssetsResponse::ListAssetsResult.
+            #     p response
+            #   end
+            #
             def list_assets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1399,16 +2064,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_assets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_assets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_assets, request, options: options do |response, operation|
@@ -1510,6 +2179,7 @@ module Google
             #       * resource.project_display_name: `=`, `:`
             #       * resource.type: `=`, `:`
             #       * resource.folders.resource_folder: `=`, `:`
+            #       * resource.display_name: `=`, `:`
             #   @param order_by [::String]
             #     Expression that defines what fields and order to use for sorting. The
             #     string value should follow SQL syntax: comma separated list of fields. For
@@ -1584,6 +2254,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::ListFindingsRequest.new
+            #
+            #   # Call the list_findings method.
+            #   result = client.list_findings request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::SecurityCenter::V1::ListFindingsResponse::ListFindingsResult.
+            #     p response
+            #   end
+            #
             def list_findings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1601,20 +2292,129 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_findings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_findings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_findings, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_findings, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists mute configs.
+            #
+            # @overload list_mute_configs(request, options = nil)
+            #   Pass arguments to `list_mute_configs` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_mute_configs(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_mute_configs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent, which owns the collection of mute configs. Its format
+            #     is "organizations/[organization_id]", "folders/[folder_id]",
+            #     "projects/[project_id]".
+            #   @param page_size [::Integer]
+            #     The maximum number of configs to return. The service may return fewer than
+            #     this value.
+            #     If unspecified, at most 10 configs will be returned.
+            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListMuteConfigs` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListMuteConfigs` must
+            #     match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1::MuteConfig>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1::MuteConfig>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest.new
+            #
+            #   # Call the list_mute_configs method.
+            #   result = client.list_mute_configs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::SecurityCenter::V1::MuteConfig.
+            #     p response
+            #   end
+            #
+            def list_mute_configs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_mute_configs.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_mute_configs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_mute_configs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :list_mute_configs, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_mute_configs, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -1641,8 +2441,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Name of the organization to list notification configs.
-            #     Its format is "organizations/[organization_id]".
+            #     Required. Name of the organization to list notification configs. Its format
+            #     is "organizations/[organization_id]", "folders/[folder_id]", or
+            #     "projects/[project_id]".
             #   @param page_token [::String]
             #     The value returned by the last `ListNotificationConfigsResponse`; indicates
             #     that this is a continuation of a prior `ListNotificationConfigs` call, and
@@ -1658,6 +2459,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1::NotificationConfig>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest.new
+            #
+            #   # Call the list_notification_configs method.
+            #   result = client.list_notification_configs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::SecurityCenter::V1::NotificationConfig.
+            #     p response
+            #   end
             #
             def list_notification_configs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1676,16 +2498,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_notification_configs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_notification_configs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_notification_configs, request, options: options do |response, operation|
@@ -1735,6 +2561,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::ListSourcesRequest.new
+            #
+            #   # Call the list_sources method.
+            #   result = client.list_sources request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::SecurityCenter::V1::Source.
+            #     p response
+            #   end
+            #
             def list_sources request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1752,16 +2599,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_sources.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_sources.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_sources, request, options: options do |response, operation|
@@ -1808,6 +2659,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest.new
+            #
+            #   # Call the run_asset_discovery method.
+            #   result = client.run_asset_discovery request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def run_asset_discovery request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1825,16 +2698,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_asset_discovery.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.run_asset_discovery.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :run_asset_discovery, request, options: options do |response, operation|
@@ -1868,7 +2745,7 @@ module Google
             #     Required. The relative resource name of the finding. See:
             #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
             #     Example:
-            #     "organizations/\\{organization_id}/sources/\\{source_id}/finding/\\{finding_id}".
+            #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}".
             #   @param state [::Google::Cloud::SecurityCenter::V1::Finding::State]
             #     Required. The desired State of the finding.
             #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
@@ -1881,6 +2758,21 @@ module Google
             # @return [::Google::Cloud::SecurityCenter::V1::Finding]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::SetFindingStateRequest.new
+            #
+            #   # Call the set_finding_state method.
+            #   result = client.set_finding_state request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::Finding.
+            #   p result
             #
             def set_finding_state request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1899,19 +2791,115 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_finding_state.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_finding_state.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :set_finding_state, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the mute state of a finding.
+            #
+            # @overload set_mute(request, options = nil)
+            #   Pass arguments to `set_mute` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::SetMuteRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::SetMuteRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload set_mute(name: nil, mute: nil)
+            #   Pass arguments to `set_mute` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The relative resource name of the finding. See:
+            #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            #     Example:
+            #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}",
+            #     "folders/\\{folder_id}/sources/\\{source_id}/findings/\\{finding_id}",
+            #     "projects/\\{project_id}/sources/\\{source_id}/findings/\\{finding_id}".
+            #   @param mute [::Google::Cloud::SecurityCenter::V1::Finding::Mute]
+            #     Required. The desired state of the Mute.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::Finding]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::Finding]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::SetMuteRequest.new
+            #
+            #   # Call the set_mute method.
+            #   result = client.set_mute request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::Finding.
+            #   p result
+            #
+            def set_mute request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::SetMuteRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.set_mute.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.set_mute.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.set_mute.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :set_mute, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1932,7 +2920,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload set_iam_policy(resource: nil, policy: nil)
+            # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
             #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1945,6 +2933,12 @@ module Google
             #     the policy is limited to a few 10s of KB. An empty policy is a
             #     valid policy but certain Cloud Platform services (such as Projects)
             #     might reject them.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+            #     the fields in the mask will be modified. If no mask is provided, the
+            #     following default mask is used:
+            #
+            #     `paths: "bindings, etag"`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Iam::V1::Policy]
@@ -1953,6 +2947,21 @@ module Google
             # @return [::Google::Iam::V1::Policy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::SetIamPolicyRequest.new
+            #
+            #   # Call the set_iam_policy method.
+            #   result = client.set_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
             #
             def set_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1971,16 +2980,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
@@ -2026,6 +3039,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+            #
+            #   # Call the test_iam_permissions method.
+            #   result = client.test_iam_permissions request
+            #
+            #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+            #   p result
+            #
             def test_iam_permissions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2043,19 +3071,112 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.test_iam_permissions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates external system. This is for a given finding.
+            #
+            # @overload update_external_system(request, options = nil)
+            #   Pass arguments to `update_external_system` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_external_system(external_system: nil, update_mask: nil)
+            #   Pass arguments to `update_external_system` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param external_system [::Google::Cloud::SecurityCenter::V1::ExternalSystem, ::Hash]
+            #     Required. The external system resource to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The FieldMask to use when updating the external system resource.
+            #
+            #     If empty all mutable fields will be updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::ExternalSystem]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::ExternalSystem]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest.new
+            #
+            #   # Call the update_external_system method.
+            #   result = client.update_external_system request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::ExternalSystem.
+            #   p result
+            #
+            def update_external_system request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_external_system.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.external_system&.name
+                header_params["external_system.name"] = request.external_system.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_external_system.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_external_system.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :update_external_system, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -2106,6 +3227,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::UpdateFindingRequest.new
+            #
+            #   # Call the update_finding method.
+            #   result = client.update_finding request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::Finding.
+            #   p result
+            #
             def update_finding request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2123,19 +3259,111 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "finding.name" => request.finding.name
-              }
+              header_params = {}
+              if request.finding&.name
+                header_params["finding.name"] = request.finding.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_finding.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_finding.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :update_finding, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a mute config.
+            #
+            # @overload update_mute_config(request, options = nil)
+            #   Pass arguments to `update_mute_config` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_mute_config(mute_config: nil, update_mask: nil)
+            #   Pass arguments to `update_mute_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param mute_config [::Google::Cloud::SecurityCenter::V1::MuteConfig, ::Hash]
+            #     Required. The mute config being updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The list of fields to be updated.
+            #     If empty all mutable fields will be updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::MuteConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::MuteConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest.new
+            #
+            #   # Call the update_mute_config method.
+            #   result = client.update_mute_config request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::MuteConfig.
+            #   p result
+            #
+            def update_mute_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_mute_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.mute_config&.name
+                header_params["mute_config.name"] = request.mute_config.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_mute_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_mute_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :update_mute_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -2177,6 +3405,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new
+            #
+            #   # Call the update_notification_config method.
+            #   result = client.update_notification_config request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::NotificationConfig.
+            #   p result
+            #
             def update_notification_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2194,16 +3437,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "notification_config.name" => request.notification_config.name
-              }
+              header_params = {}
+              if request.notification_config&.name
+                header_params["notification_config.name"] = request.notification_config.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_notification_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_notification_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :update_notification_config, request, options: options do |response, operation|
@@ -2247,6 +3494,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest.new
+            #
+            #   # Call the update_organization_settings method.
+            #   result = client.update_organization_settings request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::OrganizationSettings.
+            #   p result
+            #
             def update_organization_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2264,16 +3526,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "organization_settings.name" => request.organization_settings.name
-              }
+              header_params = {}
+              if request.organization_settings&.name
+                header_params["organization_settings.name"] = request.organization_settings.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_organization_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_organization_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :update_organization_settings, request, options: options do |response, operation|
@@ -2317,6 +3583,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::UpdateSourceRequest.new
+            #
+            #   # Call the update_source method.
+            #   result = client.update_source request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::Source.
+            #   p result
+            #
             def update_source request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2334,16 +3615,20 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "source.name" => request.source.name
-              }
+              header_params = {}
+              if request.source&.name
+                header_params["source.name"] = request.source.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_source.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_source.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :update_source, request, options: options do |response, operation|
@@ -2383,7 +3668,8 @@ module Google
             #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
             #     The time at which the updated SecurityMarks take effect.
             #     If not set uses current server time.  Updates will be applied to the
-            #     SecurityMarks that are active immediately preceding this time.
+            #     SecurityMarks that are active immediately preceding this time. Must be
+            #     earlier or equal to the server time.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::SecurityMarks]
@@ -2392,6 +3678,21 @@ module Google
             # @return [::Google::Cloud::SecurityCenter::V1::SecurityMarks]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new
+            #
+            #   # Call the update_security_marks method.
+            #   result = client.update_security_marks request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::SecurityMarks.
+            #   p result
             #
             def update_security_marks request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2410,19 +3711,401 @@ module Google
                 gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "security_marks.name" => request.security_marks.name
-              }
+              header_params = {}
+              if request.security_marks&.name
+                header_params["security_marks.name"] = request.security_marks.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_security_marks.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_security_marks.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :update_security_marks, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a big query export.
+            #
+            # @overload create_big_query_export(request, options = nil)
+            #   Pass arguments to `create_big_query_export` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_big_query_export(parent: nil, big_query_export: nil, big_query_export_id: nil)
+            #   Pass arguments to `create_big_query_export` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Resource name of the new big query export's parent. Its format is
+            #     "organizations/[organization_id]", "folders/[folder_id]", or
+            #     "projects/[project_id]".
+            #   @param big_query_export [::Google::Cloud::SecurityCenter::V1::BigQueryExport, ::Hash]
+            #     Required. The big query export being created.
+            #   @param big_query_export_id [::String]
+            #     Required. Unique identifier provided by the client within the parent scope.
+            #     It must consist of lower case letters, numbers, and hyphen, with the first
+            #     character a letter, the last a letter or a number, and a 63 character
+            #     maximum.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest.new
+            #
+            #   # Call the create_big_query_export method.
+            #   result = client.create_big_query_export request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::BigQueryExport.
+            #   p result
+            #
+            def create_big_query_export request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_big_query_export.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_big_query_export.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_big_query_export.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :create_big_query_export, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes an existing big query export.
+            #
+            # @overload delete_big_query_export(request, options = nil)
+            #   Pass arguments to `delete_big_query_export` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_big_query_export(name: nil)
+            #   Pass arguments to `delete_big_query_export` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the big query export to delete. Its format is
+            #     organizations/\\{organization}/bigQueryExports/\\{export_id},
+            #     folders/\\{folder}/bigQueryExports/\\{export_id}, or
+            #     projects/\\{project}/bigQueryExports/\\{export_id}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest.new
+            #
+            #   # Call the delete_big_query_export method.
+            #   result = client.delete_big_query_export request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_big_query_export request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_big_query_export.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_big_query_export.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_big_query_export.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :delete_big_query_export, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a BigQuery export.
+            #
+            # @overload update_big_query_export(request, options = nil)
+            #   Pass arguments to `update_big_query_export` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_big_query_export(big_query_export: nil, update_mask: nil)
+            #   Pass arguments to `update_big_query_export` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param big_query_export [::Google::Cloud::SecurityCenter::V1::BigQueryExport, ::Hash]
+            #     Required. The BigQuery export being updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The list of fields to be updated.
+            #     If empty all mutable fields will be updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest.new
+            #
+            #   # Call the update_big_query_export method.
+            #   result = client.update_big_query_export request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::BigQueryExport.
+            #   p result
+            #
+            def update_big_query_export request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_big_query_export.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.big_query_export&.name
+                header_params["big_query_export.name"] = request.big_query_export.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_big_query_export.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_big_query_export.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :update_big_query_export, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists BigQuery exports. Note that when requesting BigQuery exports at a
+            # given level all exports under that level are also returned e.g. if
+            # requesting BigQuery exports under a folder, then all BigQuery exports
+            # immediately under the folder plus the ones created under the projects
+            # within the folder are returned.
+            #
+            # @overload list_big_query_exports(request, options = nil)
+            #   Pass arguments to `list_big_query_exports` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_big_query_exports(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_big_query_exports` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent, which owns the collection of BigQuery exports. Its
+            #     format is "organizations/[organization_id]", "folders/[folder_id]",
+            #     "projects/[project_id]".
+            #   @param page_size [::Integer]
+            #     The maximum number of configs to return. The service may return fewer than
+            #     this value.
+            #     If unspecified, at most 10 configs will be returned.
+            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListBigQueryExports` call.
+            #     Provide this to retrieve the subsequent page.
+            #     When paginating, all other parameters provided to `ListBigQueryExports`
+            #     must match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1::BigQueryExport>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1::BigQueryExport>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest.new
+            #
+            #   # Call the list_big_query_exports method.
+            #   result = client.list_big_query_exports request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::SecurityCenter::V1::BigQueryExport.
+            #     p response
+            #   end
+            #
+            def list_big_query_exports request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_big_query_exports.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_big_query_exports.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_big_query_exports.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :list_big_query_exports, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_big_query_exports, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -2443,22 +4126,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_source
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # bulk_mute_findings to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.bulk_mute_findings.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_source.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_source.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.bulk_mute_findings.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -2567,6 +4249,11 @@ module Google
               #
               class Rpcs
                 ##
+                # RPC-specific configuration for `bulk_mute_findings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :bulk_mute_findings
+                ##
                 # RPC-specific configuration for `create_source`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2577,20 +4264,40 @@ module Google
                 #
                 attr_reader :create_finding
                 ##
+                # RPC-specific configuration for `create_mute_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_mute_config
+                ##
                 # RPC-specific configuration for `create_notification_config`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_notification_config
+                ##
+                # RPC-specific configuration for `delete_mute_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_mute_config
                 ##
                 # RPC-specific configuration for `delete_notification_config`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_notification_config
                 ##
+                # RPC-specific configuration for `get_big_query_export`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_big_query_export
+                ##
                 # RPC-specific configuration for `get_iam_policy`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_iam_policy
+                ##
+                # RPC-specific configuration for `get_mute_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_mute_config
                 ##
                 # RPC-specific configuration for `get_notification_config`
                 # @return [::Gapic::Config::Method]
@@ -2627,6 +4334,11 @@ module Google
                 #
                 attr_reader :list_findings
                 ##
+                # RPC-specific configuration for `list_mute_configs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_mute_configs
+                ##
                 # RPC-specific configuration for `list_notification_configs`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2647,6 +4359,11 @@ module Google
                 #
                 attr_reader :set_finding_state
                 ##
+                # RPC-specific configuration for `set_mute`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :set_mute
+                ##
                 # RPC-specific configuration for `set_iam_policy`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2657,10 +4374,20 @@ module Google
                 #
                 attr_reader :test_iam_permissions
                 ##
+                # RPC-specific configuration for `update_external_system`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_external_system
+                ##
                 # RPC-specific configuration for `update_finding`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_finding
+                ##
+                # RPC-specific configuration for `update_mute_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_mute_config
                 ##
                 # RPC-specific configuration for `update_notification_config`
                 # @return [::Gapic::Config::Method]
@@ -2681,19 +4408,49 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_security_marks
+                ##
+                # RPC-specific configuration for `create_big_query_export`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_big_query_export
+                ##
+                # RPC-specific configuration for `delete_big_query_export`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_big_query_export
+                ##
+                # RPC-specific configuration for `update_big_query_export`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_big_query_export
+                ##
+                # RPC-specific configuration for `list_big_query_exports`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_big_query_exports
 
                 # @private
                 def initialize parent_rpcs = nil
+                  bulk_mute_findings_config = parent_rpcs.bulk_mute_findings if parent_rpcs.respond_to? :bulk_mute_findings
+                  @bulk_mute_findings = ::Gapic::Config::Method.new bulk_mute_findings_config
                   create_source_config = parent_rpcs.create_source if parent_rpcs.respond_to? :create_source
                   @create_source = ::Gapic::Config::Method.new create_source_config
                   create_finding_config = parent_rpcs.create_finding if parent_rpcs.respond_to? :create_finding
                   @create_finding = ::Gapic::Config::Method.new create_finding_config
+                  create_mute_config_config = parent_rpcs.create_mute_config if parent_rpcs.respond_to? :create_mute_config
+                  @create_mute_config = ::Gapic::Config::Method.new create_mute_config_config
                   create_notification_config_config = parent_rpcs.create_notification_config if parent_rpcs.respond_to? :create_notification_config
                   @create_notification_config = ::Gapic::Config::Method.new create_notification_config_config
+                  delete_mute_config_config = parent_rpcs.delete_mute_config if parent_rpcs.respond_to? :delete_mute_config
+                  @delete_mute_config = ::Gapic::Config::Method.new delete_mute_config_config
                   delete_notification_config_config = parent_rpcs.delete_notification_config if parent_rpcs.respond_to? :delete_notification_config
                   @delete_notification_config = ::Gapic::Config::Method.new delete_notification_config_config
+                  get_big_query_export_config = parent_rpcs.get_big_query_export if parent_rpcs.respond_to? :get_big_query_export
+                  @get_big_query_export = ::Gapic::Config::Method.new get_big_query_export_config
                   get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                  get_mute_config_config = parent_rpcs.get_mute_config if parent_rpcs.respond_to? :get_mute_config
+                  @get_mute_config = ::Gapic::Config::Method.new get_mute_config_config
                   get_notification_config_config = parent_rpcs.get_notification_config if parent_rpcs.respond_to? :get_notification_config
                   @get_notification_config = ::Gapic::Config::Method.new get_notification_config_config
                   get_organization_settings_config = parent_rpcs.get_organization_settings if parent_rpcs.respond_to? :get_organization_settings
@@ -2708,6 +4465,8 @@ module Google
                   @list_assets = ::Gapic::Config::Method.new list_assets_config
                   list_findings_config = parent_rpcs.list_findings if parent_rpcs.respond_to? :list_findings
                   @list_findings = ::Gapic::Config::Method.new list_findings_config
+                  list_mute_configs_config = parent_rpcs.list_mute_configs if parent_rpcs.respond_to? :list_mute_configs
+                  @list_mute_configs = ::Gapic::Config::Method.new list_mute_configs_config
                   list_notification_configs_config = parent_rpcs.list_notification_configs if parent_rpcs.respond_to? :list_notification_configs
                   @list_notification_configs = ::Gapic::Config::Method.new list_notification_configs_config
                   list_sources_config = parent_rpcs.list_sources if parent_rpcs.respond_to? :list_sources
@@ -2716,12 +4475,18 @@ module Google
                   @run_asset_discovery = ::Gapic::Config::Method.new run_asset_discovery_config
                   set_finding_state_config = parent_rpcs.set_finding_state if parent_rpcs.respond_to? :set_finding_state
                   @set_finding_state = ::Gapic::Config::Method.new set_finding_state_config
+                  set_mute_config = parent_rpcs.set_mute if parent_rpcs.respond_to? :set_mute
+                  @set_mute = ::Gapic::Config::Method.new set_mute_config
                   set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                   @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                   test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                  update_external_system_config = parent_rpcs.update_external_system if parent_rpcs.respond_to? :update_external_system
+                  @update_external_system = ::Gapic::Config::Method.new update_external_system_config
                   update_finding_config = parent_rpcs.update_finding if parent_rpcs.respond_to? :update_finding
                   @update_finding = ::Gapic::Config::Method.new update_finding_config
+                  update_mute_config_config = parent_rpcs.update_mute_config if parent_rpcs.respond_to? :update_mute_config
+                  @update_mute_config = ::Gapic::Config::Method.new update_mute_config_config
                   update_notification_config_config = parent_rpcs.update_notification_config if parent_rpcs.respond_to? :update_notification_config
                   @update_notification_config = ::Gapic::Config::Method.new update_notification_config_config
                   update_organization_settings_config = parent_rpcs.update_organization_settings if parent_rpcs.respond_to? :update_organization_settings
@@ -2730,6 +4495,14 @@ module Google
                   @update_source = ::Gapic::Config::Method.new update_source_config
                   update_security_marks_config = parent_rpcs.update_security_marks if parent_rpcs.respond_to? :update_security_marks
                   @update_security_marks = ::Gapic::Config::Method.new update_security_marks_config
+                  create_big_query_export_config = parent_rpcs.create_big_query_export if parent_rpcs.respond_to? :create_big_query_export
+                  @create_big_query_export = ::Gapic::Config::Method.new create_big_query_export_config
+                  delete_big_query_export_config = parent_rpcs.delete_big_query_export if parent_rpcs.respond_to? :delete_big_query_export
+                  @delete_big_query_export = ::Gapic::Config::Method.new delete_big_query_export_config
+                  update_big_query_export_config = parent_rpcs.update_big_query_export if parent_rpcs.respond_to? :update_big_query_export
+                  @update_big_query_export = ::Gapic::Config::Method.new update_big_query_export_config
+                  list_big_query_exports_config = parent_rpcs.list_big_query_exports if parent_rpcs.respond_to? :list_big_query_exports
+                  @list_big_query_exports = ::Gapic::Config::Method.new list_big_query_exports_config
 
                   yield self if block_given?
                 end

@@ -32,6 +32,26 @@ class Google::Cloud::Retail::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_completion_service
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.completion_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::CompletionService::Client, client
+    end
+  end
+
+  def test_control_service
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.control_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ControlService::Client, client
+    end
+  end
+
   def test_prediction_service
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
@@ -49,6 +69,26 @@ class Google::Cloud::Retail::ClientConstructionMinitest < Minitest::Test
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Retail::V2::ProductService::Client, client
+    end
+  end
+
+  def test_search_service
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.search_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::SearchService::Client, client
+    end
+  end
+
+  def test_serving_config_service
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.serving_config_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ServingConfigService::Client, client
     end
   end
 

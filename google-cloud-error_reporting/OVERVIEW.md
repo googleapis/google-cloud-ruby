@@ -1,11 +1,10 @@
 # Error Reporting
 
-Stackdriver Error Reporting counts, analyzes and aggregates the crashes in your
-running cloud services. The Stackdriver Error Reporting Instrumentation client
+Error Reporting counts, analyzes and aggregates the crashes in your
+running cloud services. The Error Reporting Instrumentation client
 provides a simple way to report errors from your application.
 
-For general information about Stackdriver Error Reporting, read [Stackdriver
-Error Reporting Documentation](https://cloud.google.com/error-reporting/docs/).
+For general information about Error Reporting, read [Error Reporting Documentation](https://cloud.google.com/error-reporting/docs/).
 
 The goal of google-cloud is to provide an API that is comfortable to Rubyists.
 Your authentication credentials are detected automatically in Google Cloud
@@ -17,13 +16,13 @@ connecting in the [Authentication Guide](AUTHENTICATION.md).
 
 ## How to report errors
 
-You can easily report exceptions from your applications to Stackdriver Error
+You can easily report exceptions from your applications to Error
 Reporting service:
 
 ```ruby
 require "google/cloud/error_reporting"
 
-# Configure Stackdriver ErrorReporting instrumentation
+# Configure Error Reporting instrumentation
 Google::Cloud::ErrorReporting.configure do |config|
   config.project_id = "my-project"
   config.keyfile = "/path/to/keyfile.json"
@@ -44,4 +43,4 @@ See the [Instrumentation Guide](INSTRUMENTATION.md) for more examples.
 
 ## Additional information
 
-Stackdriver Error Reporting can be configured to use gRPC's logging. To learn more, see the[Logging guide](LOGGING.md).
+Error Reporting can be configured to use gRPC's logging. To learn more, see the[Logging guide](LOGGING.md).

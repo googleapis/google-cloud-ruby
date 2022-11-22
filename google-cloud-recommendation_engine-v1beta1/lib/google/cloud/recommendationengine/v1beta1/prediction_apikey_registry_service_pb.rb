@@ -9,6 +9,7 @@ require 'google/api/resource_pb'
 require 'google/protobuf/empty_pb'
 require 'google/api/client_pb'
 require 'google/cloud/recommendationengine/v1beta1/recommendationengine_resources_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/recommendationengine/v1beta1/prediction_apikey_registry_service.proto", :syntax => :proto3) do
     add_message "google.cloud.recommendationengine.v1beta1.PredictionApiKeyRegistration" do

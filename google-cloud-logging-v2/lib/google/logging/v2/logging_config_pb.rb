@@ -3,14 +3,15 @@
 
 require 'google/protobuf'
 
+require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
-require 'google/protobuf/duration_pb'
+require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/logging/v2/logging_config.proto", :syntax => :proto3) do
     add_message "google.logging.v2.LogBucket" do
@@ -21,6 +22,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :retention_days, :int32, 11
       optional :locked, :bool, 9
       optional :lifecycle_state, :enum, 12, "google.logging.v2.LifecycleState"
+      repeated :restricted_fields, :string, 15
+      optional :cmek_settings, :message, 19, "google.logging.v2.CmekSettings"
     end
     add_message "google.logging.v2.LogView" do
       optional :name, :string, 1
@@ -178,10 +181,51 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :kms_key_name, :string, 2
       optional :service_account_id, :string, 3
     end
+    add_message "google.logging.v2.GetSettingsRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.logging.v2.UpdateSettingsRequest" do
+      optional :name, :string, 1
+      optional :settings, :message, 2, "google.logging.v2.Settings"
+      optional :update_mask, :message, 3, "google.protobuf.FieldMask"
+    end
+    add_message "google.logging.v2.Settings" do
+      optional :name, :string, 1
+      optional :kms_key_name, :string, 2
+      optional :kms_service_account_id, :string, 3
+      optional :storage_location, :string, 4
+      optional :disable_default_sink, :bool, 5
+    end
+    add_message "google.logging.v2.CopyLogEntriesRequest" do
+      optional :name, :string, 1
+      optional :filter, :string, 3
+      optional :destination, :string, 4
+    end
+    add_message "google.logging.v2.CopyLogEntriesMetadata" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      optional :state, :enum, 3, "google.logging.v2.OperationState"
+      optional :cancellation_requested, :bool, 4
+      optional :request, :message, 5, "google.logging.v2.CopyLogEntriesRequest"
+      optional :progress, :int32, 6
+      optional :writer_identity, :string, 7
+    end
+    add_message "google.logging.v2.CopyLogEntriesResponse" do
+      optional :log_entries_copied_count, :int64, 1
+    end
     add_enum "google.logging.v2.LifecycleState" do
       value :LIFECYCLE_STATE_UNSPECIFIED, 0
       value :ACTIVE, 1
       value :DELETE_REQUESTED, 2
+    end
+    add_enum "google.logging.v2.OperationState" do
+      value :OPERATION_STATE_UNSPECIFIED, 0
+      value :OPERATION_STATE_SCHEDULED, 1
+      value :OPERATION_STATE_WAITING_FOR_PERMISSIONS, 2
+      value :OPERATION_STATE_RUNNING, 3
+      value :OPERATION_STATE_SUCCEEDED, 4
+      value :OPERATION_STATE_FAILED, 5
+      value :OPERATION_STATE_CANCELLED, 6
     end
   end
 end
@@ -224,7 +268,14 @@ module Google
         GetCmekSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetCmekSettingsRequest").msgclass
         UpdateCmekSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateCmekSettingsRequest").msgclass
         CmekSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CmekSettings").msgclass
+        GetSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetSettingsRequest").msgclass
+        UpdateSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateSettingsRequest").msgclass
+        Settings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.Settings").msgclass
+        CopyLogEntriesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CopyLogEntriesRequest").msgclass
+        CopyLogEntriesMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CopyLogEntriesMetadata").msgclass
+        CopyLogEntriesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CopyLogEntriesResponse").msgclass
         LifecycleState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LifecycleState").enummodule
+        OperationState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.OperationState").enummodule
       end
     end
   end

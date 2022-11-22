@@ -48,12 +48,31 @@ module Google
             # sent to virtual agents. See [Versions and
             # environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
             rpc :AnalyzeContent, ::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest, ::Google::Cloud::Dialogflow::V2::AnalyzeContentResponse
+            # Adds a text (chat, for example), or audio (phone recording, for example)
+            # message from a participant into the conversation.
+            # Note: This method is only available through the gRPC API (not REST).
+            #
+            # The top-level message sent to the client by the server is
+            # `StreamingAnalyzeContentResponse`. Multiple response messages can be
+            # returned in order. The first one or more messages contain the
+            # `recognition_result` field. Each result represents a more complete
+            # transcript of what the user said. The next message contains the
+            # `reply_text` field and potentially the `reply_audio` field. The message can
+            # also contain the `automated_agent_reply` field.
+            #
+            # Note: Always use agent versions for production traffic
+            # sent to virtual agents. See [Versions and
+            # environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
+            rpc :StreamingAnalyzeContent, stream(::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest), stream(::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse)
             # Gets suggested articles for a participant based on specific historical
             # messages.
             rpc :SuggestArticles, ::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest, ::Google::Cloud::Dialogflow::V2::SuggestArticlesResponse
             # Gets suggested faq answers for a participant based on specific historical
             # messages.
             rpc :SuggestFaqAnswers, ::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest, ::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersResponse
+            # Gets smart replies for a participant based on specific historical
+            # messages.
+            rpc :SuggestSmartReplies, ::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest, ::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -26,6 +26,8 @@ module Google
         ##
         # To load this package, including all its services, and instantiate a client:
         #
+        # @example
+        #
         #     require "google/cloud/datastore/admin/v1"
         #     client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new
         #

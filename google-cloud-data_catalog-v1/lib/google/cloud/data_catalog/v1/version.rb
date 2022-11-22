@@ -21,7 +21,7 @@ module Google
   module Cloud
     module DataCatalog
       module V1
-        VERSION = "0.7.2"
+        VERSION = "0.12.1"
       end
     end
   end

@@ -22,7 +22,7 @@ module Google
     module Datastore
       module Admin
         module V1
-          VERSION = "0.4.1"
+          VERSION = "0.7.0"
         end
       end
     end

@@ -57,13 +57,12 @@ module Google
             # See {::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all DataprocMetastore clients:
-            #
-            #     ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all DataprocMetastore clients
+            #   ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -83,10 +82,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                max_delay: 10.0,
-                multiplier: 1.3,
-                retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_service.timeout = 60.0
@@ -136,19 +132,15 @@ module Google
             ##
             # Create a new DataprocMetastore client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new DataprocMetastore client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
             #
-            #     client = ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
-            #
-            # To create a new DataprocMetastore client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the DataprocMetastore client.
             # @yieldparam config [Client::Configuration]
@@ -168,14 +160,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -183,6 +174,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -257,6 +249,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::ListServicesRequest.new
+            #
+            #   # Call the list_services method.
+            #   result = client.list_services request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Metastore::V1beta::Service.
+            #     p response
+            #   end
+            #
             def list_services request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -274,16 +287,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_services.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_services.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :list_services, request, options: options do |response, operation|
@@ -327,6 +344,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::GetServiceRequest.new
+            #
+            #   # Call the get_service method.
+            #   result = client.get_service request
+            #
+            #   # The returned object is of type Google::Cloud::Metastore::V1beta::Service.
+            #   p result
+            #
             def get_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -344,16 +376,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :get_service, request, options: options do |response, operation|
@@ -420,6 +456,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::CreateServiceRequest.new
+            #
+            #   # Call the create_service method.
+            #   result = client.create_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -437,16 +495,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :create_service, request, options: options do |response, operation|
@@ -509,6 +571,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::UpdateServiceRequest.new
+            #
+            #   # Call the update_service method.
+            #   result = client.update_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -526,16 +610,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service.name" => request.service.name
-              }
+              header_params = {}
+              if request.service&.name
+                header_params["service.name"] = request.service.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :update_service, request, options: options do |response, operation|
@@ -592,6 +680,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::DeleteServiceRequest.new
+            #
+            #   # Call the delete_service method.
+            #   result = client.delete_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -609,16 +719,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :delete_service, request, options: options do |response, operation|
@@ -682,6 +796,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::ListMetadataImportsRequest.new
+            #
+            #   # Call the list_metadata_imports method.
+            #   result = client.list_metadata_imports request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Metastore::V1beta::MetadataImport.
+            #     p response
+            #   end
+            #
             def list_metadata_imports request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -699,16 +834,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_metadata_imports.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_metadata_imports.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :list_metadata_imports, request, options: options do |response, operation|
@@ -752,6 +891,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::GetMetadataImportRequest.new
+            #
+            #   # Call the get_metadata_import method.
+            #   result = client.get_metadata_import request
+            #
+            #   # The returned object is of type Google::Cloud::Metastore::V1beta::MetadataImport.
+            #   p result
+            #
             def get_metadata_import request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -769,16 +923,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_metadata_import.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_metadata_import.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :get_metadata_import, request, options: options do |response, operation|
@@ -845,6 +1003,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::CreateMetadataImportRequest.new
+            #
+            #   # Call the create_metadata_import method.
+            #   result = client.create_metadata_import request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_metadata_import request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -862,16 +1042,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_metadata_import.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_metadata_import.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :create_metadata_import, request, options: options do |response, operation|
@@ -935,6 +1119,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::UpdateMetadataImportRequest.new
+            #
+            #   # Call the update_metadata_import method.
+            #   result = client.update_metadata_import request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_metadata_import request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -952,16 +1158,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "metadata_import.name" => request.metadata_import.name
-              }
+              header_params = {}
+              if request.metadata_import&.name
+                header_params["metadata_import.name"] = request.metadata_import.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_metadata_import.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_metadata_import.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :update_metadata_import, request, options: options do |response, operation|
@@ -1025,6 +1235,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::ExportMetadataRequest.new
+            #
+            #   # Call the export_metadata method.
+            #   result = client.export_metadata request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def export_metadata request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1042,16 +1274,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service" => request.service
-              }
+              header_params = {}
+              if request.service
+                header_params["service"] = request.service
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.export_metadata.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.export_metadata.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :export_metadata, request, options: options do |response, operation|
@@ -1115,6 +1351,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::RestoreServiceRequest.new
+            #
+            #   # Call the restore_service method.
+            #   result = client.restore_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def restore_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1132,16 +1390,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service" => request.service
-              }
+              header_params = {}
+              if request.service
+                header_params["service"] = request.service
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.restore_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.restore_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :restore_service, request, options: options do |response, operation|
@@ -1205,6 +1467,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::ListBackupsRequest.new
+            #
+            #   # Call the list_backups method.
+            #   result = client.list_backups request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Metastore::V1beta::Backup.
+            #     p response
+            #   end
+            #
             def list_backups request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1222,16 +1505,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_backups.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_backups.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :list_backups, request, options: options do |response, operation|
@@ -1275,6 +1562,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::GetBackupRequest.new
+            #
+            #   # Call the get_backup method.
+            #   result = client.get_backup request
+            #
+            #   # The returned object is of type Google::Cloud::Metastore::V1beta::Backup.
+            #   p result
+            #
             def get_backup request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1292,16 +1594,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_backup.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_backup.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :get_backup, request, options: options do |response, operation|
@@ -1367,6 +1673,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::CreateBackupRequest.new
+            #
+            #   # Call the create_backup method.
+            #   result = client.create_backup request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_backup request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1384,16 +1712,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_backup.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_backup.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :create_backup, request, options: options do |response, operation|
@@ -1450,6 +1782,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1beta::DeleteBackupRequest.new
+            #
+            #   # Call the delete_backup method.
+            #   result = client.delete_backup request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_backup request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1467,16 +1821,20 @@ module Google
                 gapic_version: ::Google::Cloud::Metastore::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_backup.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_backup.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dataproc_metastore_stub.call_rpc :delete_backup, request, options: options do |response, operation|
@@ -1501,22 +1859,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_services
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_services to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_services.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_services.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_services.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_services.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

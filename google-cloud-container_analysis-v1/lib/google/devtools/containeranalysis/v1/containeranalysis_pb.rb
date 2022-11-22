@@ -9,8 +9,8 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
-require 'google/protobuf/timestamp_pb'
-require 'grafeas/v1/vulnerability_pb'
+require 'grafeas/v1/severity_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/containeranalysis/v1/containeranalysis.proto", :syntax => :proto3) do
     add_message "google.devtools.containeranalysis.v1.GetVulnerabilityOccurrencesSummaryRequest" do

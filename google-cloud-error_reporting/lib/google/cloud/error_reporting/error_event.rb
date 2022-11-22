@@ -19,13 +19,13 @@ module Google
       ##
       # # ErrorEvent
       #
-      # An individual error event to report to Stackdriver Error Reporting
+      # An individual error event to report to Error Reporting
       # service.
       #
       # Google::Cloud::ErrorReporting::ErrorEvent is able to be transformed
       # into the `Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent`
       # gRPC structure. Once an error event is reported, the GCP
-      # Stackdriver ErrorReporting service is able to parse the message and
+      # Error Reporting service is able to parse the message and
       # backtrace, then group the error events by content.
       #
       # @see https://cloud.google.com/error-reporting/reference/rest/v1beta1/projects.events

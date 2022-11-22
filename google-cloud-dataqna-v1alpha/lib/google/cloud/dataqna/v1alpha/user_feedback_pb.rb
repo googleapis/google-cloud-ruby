@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dataqna/v1alpha/user_feedback.proto", :syntax => :proto3) do
     add_message "google.cloud.dataqna.v1alpha.UserFeedback" do

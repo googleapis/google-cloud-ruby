@@ -6,10 +6,9 @@ require 'google/protobuf'
 require 'google/cloud/automl/v1beta1/io_pb'
 require 'google/cloud/automl/v1beta1/model_pb'
 require 'google/cloud/automl/v1beta1/model_evaluation_pb'
-require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/automl/v1beta1/operations.proto", :syntax => :proto3) do
     add_message "google.cloud.automl.v1beta1.OperationMetadata" do

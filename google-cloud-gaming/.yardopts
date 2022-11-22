@@ -1,5 +1,5 @@
 --no-private
---title=Cloud Gaming API
+--title="Cloud Gaming API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

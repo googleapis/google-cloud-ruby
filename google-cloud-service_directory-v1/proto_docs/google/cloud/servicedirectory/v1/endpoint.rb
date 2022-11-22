@@ -27,7 +27,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The resource name for the endpoint in the format
-        #     'projects/*/locations/*/namespaces/*/services/*/endpoints/*'.
+        #     `projects/*/locations/*/namespaces/*/services/*/endpoints/*`.
         # @!attribute [rw] address
         #   @return [::String]
         #     Optional. An IPv4 or IPv6 address. Service Directory will reject bad

@@ -41,12 +41,24 @@ module Google
         #     "projects/\\{project}/assessments/\\{assessment}".
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-        #     Required. The annotation that will be assigned to the Event.
+        #     Optional. The annotation that will be assigned to the Event. This field can be left
+        #     empty to provide reasons that apply to an event without concluding whether
+        #     the event is legitimate or fraudulent.
+        # @!attribute [rw] reasons
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
+        #     Optional. Optional reasons for the annotation that will be assigned to the Event.
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     Optional. Unique stable hashed user identifier to apply to the assessment.
+        #     This is an alternative to setting the hashed_account_id in
+        #     CreateAssessment, for example when the account identifier is not yet known
+        #     in the initial request. It is recommended that the identifier is hashed
+        #     using hmac-sha256 with stable secret.
         class AnnotateAssessmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Enum that reprensents the types of annotations.
+          # Enum that represents the types of annotations.
           module Annotation
             # Default unspecified type.
             ANNOTATION_UNSPECIFIED = 0
@@ -58,17 +70,109 @@ module Google
             FRAUDULENT = 2
 
             # Provides information that the event was related to a login event in which
-            # the user typed the correct password.
+            # the user typed the correct password. Deprecated, prefer indicating
+            # CORRECT_PASSWORD through the reasons field instead.
             PASSWORD_CORRECT = 3
 
             # Provides information that the event was related to a login event in which
-            # the user typed the incorrect password.
+            # the user typed the incorrect password. Deprecated, prefer indicating
+            # INCORRECT_PASSWORD through the reasons field instead.
             PASSWORD_INCORRECT = 4
+          end
+
+          # Enum that represents potential reasons for annotating an assessment.
+          module Reason
+            # Default unspecified reason.
+            REASON_UNSPECIFIED = 0
+
+            # Indicates that the transaction had a chargeback issued with no other
+            # details. When possible, specify the type by using CHARGEBACK_FRAUD or
+            # CHARGEBACK_DISPUTE instead.
+            CHARGEBACK = 1
+
+            # Indicates that the transaction had a chargeback issued related to an
+            # alleged unauthorized transaction from the cardholder's perspective (for
+            # example, the card number was stolen).
+            CHARGEBACK_FRAUD = 8
+
+            # Indicates that the transaction had a chargeback issued related to the
+            # cardholder having provided their card details but allegedly not being
+            # satisfied with the purchase (for example, misrepresentation, attempted
+            # cancellation).
+            CHARGEBACK_DISPUTE = 9
+
+            # Indicates that the completed payment transaction was refunded by the
+            # seller.
+            REFUND = 10
+
+            # Indicates that the completed payment transaction was determined to be
+            # fraudulent by the seller, and was cancelled and refunded as a result.
+            REFUND_FRAUD = 11
+
+            # Indicates that the payment transaction was accepted, and the user was
+            # charged.
+            TRANSACTION_ACCEPTED = 12
+
+            # Indicates that the payment transaction was declined, for example due to
+            # invalid card details.
+            TRANSACTION_DECLINED = 13
+
+            # Indicates the transaction associated with the assessment is suspected of
+            # being fraudulent based on the payment method, billing details, shipping
+            # address or other transaction information.
+            PAYMENT_HEURISTICS = 2
+
+            # Indicates that the user was served a 2FA challenge. An old assessment
+            # with `ENUM_VALUES.INITIATED_TWO_FACTOR` reason that has not been
+            # overwritten with `PASSED_TWO_FACTOR` is treated as an abandoned 2FA flow.
+            # This is equivalent to `FAILED_TWO_FACTOR`.
+            INITIATED_TWO_FACTOR = 7
+
+            # Indicates that the user passed a 2FA challenge.
+            PASSED_TWO_FACTOR = 3
+
+            # Indicates that the user failed a 2FA challenge.
+            FAILED_TWO_FACTOR = 4
+
+            # Indicates the user provided the correct password.
+            CORRECT_PASSWORD = 5
+
+            # Indicates the user provided an incorrect password.
+            INCORRECT_PASSWORD = 6
+
+            # Indicates that the user sent unwanted and abusive messages to other users
+            # of the platform, such as spam, scams, phishing, or social engineering.
+            SOCIAL_SPAM = 14
           end
         end
 
         # Empty response for AnnotateAssessment.
         class AnnotateAssessmentResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Private password leak verification info.
+        # @!attribute [rw] lookup_hash_prefix
+        #   @return [::String]
+        #     Optional. Exactly 26-bit prefix of the SHA-256 hash of the canonicalized username. It
+        #     is used to look up password leaks associated with that hash prefix.
+        # @!attribute [rw] encrypted_user_credentials_hash
+        #   @return [::String]
+        #     Optional. Encrypted Scrypt hash of the canonicalized username+password. It is
+        #     re-encrypted by the server and returned through
+        #     `reencrypted_user_credentials_hash`.
+        # @!attribute [r] encrypted_leak_match_prefixes
+        #   @return [::Array<::String>]
+        #     Output only. List of prefixes of the encrypted potential password leaks that matched the
+        #     given parameters. They must be compared with the client-side decryption
+        #     prefix of `reencrypted_user_credentials_hash`
+        # @!attribute [r] reencrypted_user_credentials_hash
+        #   @return [::String]
+        #     Output only. Corresponds to the re-encryption of the `encrypted_user_credentials_hash`
+        #     field. It is used to match potential password leaks within
+        #     `encrypted_leak_match_prefixes`.
+        class PrivatePasswordLeakVerification
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -87,6 +191,14 @@ module Google
         # @!attribute [r] token_properties
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TokenProperties]
         #     Output only. Properties of the provided event token.
+        # @!attribute [rw] account_defender_assessment
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment]
+        #     Assessment returned by account defender when a hashed_account_id is
+        #     provided.
+        # @!attribute [rw] private_password_leak_verification
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::PrivatePasswordLeakVerification]
+        #     The private password leak verification field contains the parameters that
+        #     are used to to check for leaks privately without sharing user credentials.
         class Assessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -112,6 +224,10 @@ module Google
         #     Optional. The expected action for this type of event. This should be the same action
         #     provided at token generation time on client-side platforms already
         #     integrated with recaptcha enterprise.
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     Optional. Unique stable hashed user identifier for the request. The identifier must
+        #     be hashed using hmac-sha256 with stable secret.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -130,7 +246,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # LINT.IfChange(classification_reason)
           # Reasons contributing to the risk analysis verdict.
           module ClassificationReason
             # Default unspecified type.
@@ -170,7 +285,7 @@ module Google
         #     The timestamp corresponding to the generation of the token.
         # @!attribute [rw] hostname
         #   @return [::String]
-        #     The hostname of the page on which the token was generated.
+        #     The hostname of the page on which the token was generated (Web keys only).
         # @!attribute [rw] action
         #   @return [::String]
         #     Action name provided at token generation.
@@ -178,7 +293,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # LINT.IfChange
           # Enum that represents the types of invalid token reasons.
           module InvalidReason
             # Default unspecified type.
@@ -198,6 +312,41 @@ module Google
 
             # The user verification token was not present.
             MISSING = 5
+
+            # A retriable error (such as network failure) occurred on the browser.
+            # Could easily be simulated by an attacker.
+            BROWSER_ERROR = 6
+          end
+        end
+
+        # Account defender risk assessment.
+        # @!attribute [rw] labels
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment::AccountDefenderLabel>]
+        #     Labels for this request.
+        class AccountDefenderAssessment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Labels returned by account defender for this request.
+          module AccountDefenderLabel
+            # Default unspecified type.
+            ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = 0
+
+            # The request matches a known good profile for the user.
+            PROFILE_MATCH = 1
+
+            # The request is potentially a suspicious login event and must be further
+            # verified either through multi-factor authentication or another system.
+            SUSPICIOUS_LOGIN_ACTIVITY = 2
+
+            # The request matched a profile that previously had suspicious account
+            # creation behavior. This can mean that this is a fake account.
+            SUSPICIOUS_ACCOUNT_CREATION = 3
+
+            # The account in the request has a high number of related accounts. It does
+            # not necessarily imply that the account is bad but can require further
+            # investigation.
+            RELATED_ACCOUNTS_NUMBER_HIGH = 4
           end
         end
 
@@ -245,6 +394,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The retrieve legacy secret key request message.
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     Required. The public key name linked to the requested secret key in the format
+        #     "projects/\\{project}/keys/\\{key}".
+        class RetrieveLegacySecretKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The get key request message.
         # @!attribute [rw] name
         #   @return [::String]
@@ -261,7 +420,7 @@ module Google
         #     Required. The key to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. The mask to control which field of the key get updated. If the mask is not
+        #     Optional. The mask to control which fields of the key get updated. If the mask is not
         #     present, all fields will be updated.
         class UpdateKeyRequest
           include ::Google::Protobuf::MessageExts
@@ -274,6 +433,61 @@ module Google
         #     Required. The name of the key to be deleted, in the format
         #     "projects/\\{project}/keys/\\{key}".
         class DeleteKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The migrate key request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the key to be migrated, in the format
+        #     "projects/\\{project}/keys/\\{key}".
+        class MigrateKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The get metrics request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the requested metrics, in the format
+        #     "projects/\\{project}/keys/\\{key}/metrics".
+        class GetMetricsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metrics for a single Key.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The name of the metrics, in the format
+        #     "projects/\\{project}/keys/\\{key}/metrics".
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Inclusive start time aligned to a day (UTC).
+        # @!attribute [rw] score_metrics
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::ScoreMetrics>]
+        #     Metrics will be continuous and in order by dates, and in the granularity
+        #     of day. All Key types should have score-based data.
+        # @!attribute [rw] challenge_metrics
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::ChallengeMetrics>]
+        #     Metrics will be continuous and in order by dates, and in the granularity
+        #     of day. Only challenge-based keys (CHECKBOX, INVISIBLE), will have
+        #     challenge-based data.
+        class Metrics
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Secret key is used only in legacy reCAPTCHA. It must be used in a 3rd party
+        # integration with legacy reCAPTCHA.
+        # @!attribute [rw] legacy_secret_key
+        #   @return [::String]
+        #     The secret key (also known as shared secret) authorizes communication
+        #     between your application backend and the reCAPTCHA Enterprise server to
+        #     create an assessment.
+        #     The secret key needs to be kept safe for security purposes.
+        class RetrieveLegacySecretKeyResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -298,11 +512,17 @@ module Google
         #     Settings for keys that can be used by iOS apps.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. See <a href="https://cloud.google.com/recaptcha-enterprise/docs/labels">
+        #     See <a href="https://cloud.google.com/recaptcha-enterprise/docs/labels">
         #     Creating and managing labels</a>.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The timestamp corresponding to the creation of this Key.
+        # @!attribute [rw] testing_options
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TestingOptions]
+        #     Options for user acceptance testing.
+        # @!attribute [rw] waf_settings
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WafSettings]
+        #     Settings for WAF
         class Key
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -314,6 +534,37 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Options for user acceptance testing.
+        # @!attribute [rw] testing_score
+        #   @return [::Float]
+        #     All assessments for this Key will return this score. Must be between 0
+        #     (likely not legitimate) and 1 (likely legitimate) inclusive.
+        # @!attribute [rw] testing_challenge
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TestingOptions::TestingChallenge]
+        #     For challenge-based keys only (CHECKBOX, INVISIBLE), all challenge requests
+        #     for this site will return nocaptcha if NOCAPTCHA, or an unsolvable
+        #     challenge if CHALLENGE.
+        class TestingOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum that represents the challenge option for challenge-based (CHECKBOX,
+          # INVISIBLE) testing keys.
+          module TestingChallenge
+            # Perform the normal risk analysis and return either nocaptcha or a
+            # challenge depending on risk and trust factors.
+            TESTING_CHALLENGE_UNSPECIFIED = 0
+
+            # Challenge requests for this key always return a nocaptcha, which
+            # does not require a solution.
+            NOCAPTCHA = 1
+
+            # Challenge requests for this key always return an unsolvable
+            # challenge.
+            UNSOLVABLE_CHALLENGE = 2
           end
         end
 
@@ -329,7 +580,8 @@ module Google
         #     Examples: 'example.com' or 'subdomain.example.com'
         # @!attribute [rw] allow_amp_traffic
         #   @return [::Boolean]
-        #     Required. Whether this key can be used on AMP (Accelerated Mobile Pages) websites.
+        #     If set to true, the key can be used on AMP (Accelerated Mobile Pages)
+        #     websites. This is supported only for the SCORE integration type.
         # @!attribute [rw] integration_type
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::IntegrationType]
         #     Required. Describes how this key is integrated with the website.
@@ -380,6 +632,9 @@ module Google
         end
 
         # Settings specific to keys that can be used by Android apps.
+        # @!attribute [rw] allow_all_package_names
+        #   @return [::Boolean]
+        #     If set to true, allowed_package_names are not enforced.
         # @!attribute [rw] allowed_package_names
         #   @return [::Array<::String>]
         #     Android package names of apps allowed to use the key.
@@ -390,6 +645,9 @@ module Google
         end
 
         # Settings specific to keys that can be used by iOS apps.
+        # @!attribute [rw] allow_all_bundle_ids
+        #   @return [::Boolean]
+        #     If set to true, allowed_bundle_ids are not enforced.
         # @!attribute [rw] allowed_bundle_ids
         #   @return [::Array<::String>]
         #     iOS bundle ids of apps allowed to use the key.
@@ -397,6 +655,252 @@ module Google
         class IOSKeySettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Score distribution.
+        # @!attribute [rw] score_buckets
+        #   @return [::Google::Protobuf::Map{::Integer => ::Integer}]
+        #     Map key is score value multiplied by 100. The scores are discrete values
+        #     between [0, 1]. The maximum number of buckets is on order of a few dozen,
+        #     but typically much lower (ie. 10).
+        class ScoreDistribution
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::Integer]
+          # @!attribute [rw] value
+          #   @return [::Integer]
+          class ScoreBucketsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Metrics related to scoring.
+        # @!attribute [rw] overall_metrics
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ScoreDistribution]
+        #     Aggregated score metrics for all traffic.
+        # @!attribute [rw] action_metrics
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::RecaptchaEnterprise::V1::ScoreDistribution}]
+        #     Action-based metrics. The map key is the action name which specified by the
+        #     site owners at time of the "execute" client-side call.
+        #     Populated only for SCORE keys.
+        class ScoreMetrics
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ScoreDistribution]
+          class ActionMetricsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Metrics related to challenges.
+        # @!attribute [rw] pageload_count
+        #   @return [::Integer]
+        #     Count of reCAPTCHA checkboxes or badges rendered. This is mostly equivalent
+        #     to a count of pageloads for pages that include reCAPTCHA.
+        # @!attribute [rw] nocaptcha_count
+        #   @return [::Integer]
+        #     Count of nocaptchas (successful verification without a challenge) issued.
+        # @!attribute [rw] failed_count
+        #   @return [::Integer]
+        #     Count of submitted challenge solutions that were incorrect or otherwise
+        #     deemed suspicious such that a subsequent challenge was triggered.
+        # @!attribute [rw] passed_count
+        #   @return [::Integer]
+        #     Count of nocaptchas (successful verification without a challenge) plus
+        #     submitted challenge solutions that were correct and resulted in
+        #     verification.
+        class ChallengeMetrics
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message to list memberships in a related account group.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name for the related account group in the format
+        #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of accounts to return. The service might return fewer
+        #     than this value.
+        #     If unspecified, at most 50 accounts are returned.
+        #     The maximum value is 1000; values above 1000 are coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
+        #     call.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListRelatedAccountGroupMemberships` must match the call that provided the
+        #     page token.
+        class ListRelatedAccountGroupMembershipsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to a `ListRelatedAccountGroupMemberships` call.
+        # @!attribute [rw] related_account_group_memberships
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership>]
+        #     The memberships listed by the query.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListRelatedAccountGroupMembershipsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message to list related account groups.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the project to list related account groups from, in the format
+        #     "projects/\\{project}".
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of groups to return. The service might return fewer than
+        #     this value.
+        #     If unspecified, at most 50 groups are returned.
+        #     The maximum value is 1000; values above 1000 are coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListRelatedAccountGroups` must match the call that provided the page
+        #     token.
+        class ListRelatedAccountGroupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to a `ListRelatedAccountGroups` call.
+        # @!attribute [rw] related_account_groups
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroup>]
+        #     The groups of related accounts listed by the query.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListRelatedAccountGroupsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message to search related account group memberships.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. The name of the project to search related account group memberships from.
+        #     Specify the project name in the following format: "projects/\\{project}".
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     Optional. The unique stable hashed user identifier we should search connections to.
+        #     The identifier should correspond to a `hashed_account_id` provided in a
+        #     previous `CreateAssessment` or `AnnotateAssessment` call.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of groups to return. The service might return fewer than
+        #     this value.
+        #     If unspecified, at most 50 groups are returned.
+        #     The maximum value is 1000; values above 1000 are coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous
+        #     `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
+        #     subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `SearchRelatedAccountGroupMemberships` must match the call that provided
+        #     the page token.
+        class SearchRelatedAccountGroupMembershipsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to a `SearchRelatedAccountGroupMemberships` call.
+        # @!attribute [rw] related_account_group_memberships
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership>]
+        #     The queried memberships.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class SearchRelatedAccountGroupMembershipsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A membership in a group of related accounts.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name for this membership in the format
+        #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}`.
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     The unique stable hashed user identifier of the member. The identifier
+        #     corresponds to a `hashed_account_id` provided in a previous
+        #     `CreateAssessment` or `AnnotateAssessment` call.
+        class RelatedAccountGroupMembership
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A group of related accounts.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name for the related account group in the format
+        #     `projects/{project}/relatedaccountgroups/{related_account_group}`.
+        class RelatedAccountGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Settings specific to keys that can be used for WAF (Web Application
+        # Firewall).
+        # @!attribute [rw] waf_service
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WafSettings::WafService]
+        #     Required. The WAF service that uses this key.
+        # @!attribute [rw] waf_feature
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WafSettings::WafFeature]
+        #     Required. The WAF feature for which this key is enabled.
+        class WafSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Supported WAF features. For more information, see
+          # https://cloud.google.com/recaptcha-enterprise/docs/usecase#comparison_of_features.
+          module WafFeature
+            # Undefined feature.
+            WAF_FEATURE_UNSPECIFIED = 0
+
+            # Redirects suspicious traffic to reCAPTCHA.
+            CHALLENGE_PAGE = 1
+
+            # Use reCAPTCHA session-tokens to protect the whole user session on the
+            # site's domain.
+            SESSION_TOKEN = 2
+
+            # Use reCAPTCHA action-tokens to protect user actions.
+            ACTION_TOKEN = 3
+          end
+
+          # Web Application Firewalls supported by reCAPTCHA Enterprise.
+          module WafService
+            # Undefined WAF
+            WAF_SERVICE_UNSPECIFIED = 0
+
+            # Cloud Armor
+            CA = 1
+          end
         end
       end
     end

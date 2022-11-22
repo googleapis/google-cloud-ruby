@@ -11,11 +11,12 @@ verisoned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-assured_workloads/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-assured_workloads/latest)
 for this library, google-cloud-assured_workloads, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
+[google-cloud-assured_workloads-v1](https://googleapis.dev/ruby/google-cloud-assured_workloads-v1/latest),
 [google-cloud-assured_workloads-v1beta1](https://googleapis.dev/ruby/google-cloud-assured_workloads-v1beta1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/assured-workloads/)
@@ -62,21 +63,21 @@ end
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.5+.
+This library is supported on Ruby 2.6+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.5
-and later. Older versions of Ruby _may_ still work, but are unsupported and not
-recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
-about the Ruby support schedule.
+in security maintenance, and not end of life. Older versions of Ruby _may_
+still work, but are unsupported and not recommended. See
+https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
+support schedule.
 
 ## Which client should I use?
 
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
 client library with a name such as `google-cloud-assured_workloads`,
 and lower-level _versioned_ client libraries with names such as
-`google-cloud-assured_workloads-v1beta1`.
+`google-cloud-assured_workloads-v1`.
 _In most cases, you should install the main client._
 
 ### What's the difference between the main client and a versioned client?
@@ -114,7 +115,7 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-cloud-assured_workloads-v1beta1`.
+is part of the name, e.g. `google-cloud-assured_workloads-v1`.
 
 ### What about the google-apis-<name> clients?
 

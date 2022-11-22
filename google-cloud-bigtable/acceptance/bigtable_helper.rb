@@ -160,6 +160,12 @@ def clean_up_bigtable_objects instance_id, table_ids = []
     table_ids.each do |table_id|
       $bigtable.delete_table(instance_id, table_id)
     end
+
+    instance = $bigtable.instance instance_id
+    instance.tables.each do |table|
+      table.id.starts_with("test-table")
+      table.delete
+    end
   rescue StandardError => e
     puts "Error while cleaning up #{instance_id} instance tables.\n\n#{e}"
   end
@@ -189,7 +195,7 @@ def bigtable_cluster_id
 end
 
 def bigtable_cluster_id_2
-  "#{$bigtable_instance_id}-clstr2"
+  "#{bigtable_instance_id}-clstr2"
 end
 
 def bigtable_kms_key

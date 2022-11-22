@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/api/servicecontrol/v1/check_error.proto", :syntax => :proto3) do
     add_message "google.api.servicecontrol.v1.CheckError" do

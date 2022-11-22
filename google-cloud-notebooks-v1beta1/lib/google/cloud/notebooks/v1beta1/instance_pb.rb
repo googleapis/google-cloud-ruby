@@ -7,9 +7,20 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/notebooks/v1beta1/environment_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/notebooks/v1beta1/instance.proto", :syntax => :proto3) do
+    add_message "google.cloud.notebooks.v1beta1.ReservationAffinity" do
+      optional :consume_reservation_type, :enum, 1, "google.cloud.notebooks.v1beta1.ReservationAffinity.Type"
+      optional :key, :string, 2
+      repeated :values, :string, 3
+    end
+    add_enum "google.cloud.notebooks.v1beta1.ReservationAffinity.Type" do
+      value :TYPE_UNSPECIFIED, 0
+      value :NO_RESERVATION, 1
+      value :ANY_RESERVATION, 2
+      value :SPECIFIC_RESERVATION, 3
+    end
     add_message "google.cloud.notebooks.v1beta1.Instance" do
       optional :name, :string, 1
       optional :post_startup_script, :string, 4
@@ -34,6 +45,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :subnet, :string, 20
       map :labels, :string, :string, 21
       map :metadata, :string, :string, 22
+      optional :nic_type, :enum, 28, "google.cloud.notebooks.v1beta1.Instance.NicType"
+      optional :reservation_affinity, :message, 29, "google.cloud.notebooks.v1beta1.ReservationAffinity"
+      optional :can_ip_forward, :bool, 31
       optional :create_time, :message, 23, "google.protobuf.Timestamp"
       optional :update_time, :message, 24, "google.protobuf.Timestamp"
       oneof :environment do
@@ -69,6 +83,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :UPGRADING, 7
       value :INITIALIZING, 8
       value :REGISTERING, 9
+      value :SUSPENDING, 10
+      value :SUSPENDED, 11
     end
     add_enum "google.cloud.notebooks.v1beta1.Instance.DiskType" do
       value :DISK_TYPE_UNSPECIFIED, 0
@@ -81,6 +97,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :GMEK, 1
       value :CMEK, 2
     end
+    add_enum "google.cloud.notebooks.v1beta1.Instance.NicType" do
+      value :UNSPECIFIED_NIC_TYPE, 0
+      value :VIRTIO_NET, 1
+      value :GVNIC, 2
+    end
   end
 end
 
@@ -88,12 +109,15 @@ module Google
   module Cloud
     module Notebooks
       module V1beta1
+        ReservationAffinity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1beta1.ReservationAffinity").msgclass
+        ReservationAffinity::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1beta1.ReservationAffinity.Type").enummodule
         Instance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1beta1.Instance").msgclass
         Instance::AcceleratorConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1beta1.Instance.AcceleratorConfig").msgclass
         Instance::AcceleratorType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1beta1.Instance.AcceleratorType").enummodule
         Instance::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1beta1.Instance.State").enummodule
         Instance::DiskType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1beta1.Instance.DiskType").enummodule
         Instance::DiskEncryption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1beta1.Instance.DiskEncryption").enummodule
+        Instance::NicType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1beta1.Instance.NicType").enummodule
       end
     end
   end

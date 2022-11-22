@@ -31,7 +31,7 @@ module Google
 
           # RPCs that return a Long Running Operation.
           module OperationType
-            # Default value. This state doesn't show unless an error occurs.
+            # Not used.
             OPERATION_TYPE_UNSPECIFIED = 0
 
             # Long Running Operation was triggered by CreateEntitlement.

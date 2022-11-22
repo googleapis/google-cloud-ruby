@@ -32,7 +32,7 @@ module Google
         #     User-provided description of a function.
         # @!attribute [rw] source_archive_url
         #   @return [::String]
-        #     The Google Cloud Storage URL, starting with gs://, pointing to the zip
+        #     The Google Cloud Storage URL, starting with `gs://`, pointing to the zip
         #     archive which contains the function.
         # @!attribute [rw] source_repository
         #   @return [::Google::Cloud::Functions::V1::SourceRepository]
@@ -42,7 +42,11 @@ module Google
         # @!attribute [rw] source_upload_url
         #   @return [::String]
         #     The Google Cloud Storage signed URL used for source uploading, generated
-        #     by [google.cloud.functions.v1.GenerateUploadUrl][]
+        #     by calling [google.cloud.functions.v1.GenerateUploadUrl].
+        #
+        #     The signature is validated on write methods (Create, Update)
+        #     The signature is stripped from the Function object on read methods (Get,
+        #     List)
         # @!attribute [rw] https_trigger
         #   @return [::Google::Cloud::Functions::V1::HttpsTrigger]
         #     An HTTPS endpoint type of source that can be triggered via URL.
@@ -66,7 +70,7 @@ module Google
         #     function, optional when updating an existing function. For a complete
         #     list of possible choices, see the
         #     [`gcloud` command
-        #     reference](/sdk/gcloud/reference/functions/deploy#--runtime).
+        #     reference](https://cloud.google.com/sdk/gcloud/reference/functions/deploy#--runtime).
         # @!attribute [rw] timeout
         #   @return [::Google::Protobuf::Duration]
         #     The function execution timeout. Execution is considered failed and
@@ -93,6 +97,9 @@ module Google
         # @!attribute [rw] environment_variables
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Environment variables that shall be available during function execution.
+        # @!attribute [rw] build_environment_variables
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Build environment variables that shall be available during build time.
         # @!attribute [rw] network
         #   @return [::String]
         #     The VPC Network that this cloud function can connect to. It can be
@@ -101,8 +108,8 @@ module Google
         #     project. Otherwise, it must belong to a project within the same
         #     organization. The format of this field is either
         #     `projects/{project}/global/networks/{network}` or `{network}`, where
-        #     \\{project} is a project id where the network is defined, and \\{network} is
-        #     the short name of the network.
+        #     `{project}` is a project id where the network is defined, and `{network}`
+        #     is the short name of the network.
         #
         #     This field is mutually exclusive with `vpc_connector` and will be replaced
         #     by it.
@@ -112,6 +119,20 @@ module Google
         # @!attribute [rw] max_instances
         #   @return [::Integer]
         #     The limit on the maximum number of function instances that may coexist at a
+        #     given time.
+        #
+        #     In some cases, such as rapid traffic surges, Cloud Functions may, for a
+        #     short period of time, create more instances than the specified max
+        #     instances limit. If your function cannot tolerate this temporary behavior,
+        #     you may want to factor in a safety margin and set a lower max instances
+        #     value than your function can tolerate.
+        #
+        #     See the [Max
+        #     Instances](https://cloud.google.com/functions/docs/max-instances) Guide for
+        #     more details.
+        # @!attribute [rw] min_instances
+        #   @return [::Integer]
+        #     A lower bound for the number function instances that may coexist at a
         #     given time.
         # @!attribute [rw] vpc_connector
         #   @return [::String]
@@ -133,10 +154,92 @@ module Google
         #   @return [::Google::Cloud::Functions::V1::CloudFunction::IngressSettings]
         #     The ingress settings for the function, controlling what traffic can reach
         #     it.
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     Resource name of a KMS crypto key (managed by the user) used to
+        #     encrypt/decrypt function resources.
+        #
+        #     It must match the pattern
+        #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+        #
+        #     If specified, you must also provide an artifact registry repository using
+        #     the `docker_repository` field that was created with the same KMS crypto
+        #     key.
+        #
+        #     The following service accounts need to be granted the role 'Cloud KMS
+        #     CryptoKey Encrypter/Decrypter (roles/cloudkms.cryptoKeyEncrypterDecrypter)'
+        #     on the Key/KeyRing/Project/Organization (least access preferred).
+        #
+        #     1. Google Cloud Functions service account
+        #        (service-\\{project_number}@gcf-admin-robot.iam.gserviceaccount.com) -
+        #        Required to protect the function's image.
+        #     2. Google Storage service account
+        #        (service-\\{project_number}@gs-project-accounts.iam.gserviceaccount.com) -
+        #        Required to protect the function's source code.
+        #        If this service account does not exist, deploying a function without a
+        #        KMS key or retrieving the service agent name provisions it. For more
+        #        information, see
+        #        https://cloud.google.com/storage/docs/projects#service-agents and
+        #        https://cloud.google.com/storage/docs/getting-service-agent#gsutil.
+        #
+        #     Google Cloud Functions delegates access to service agents to protect
+        #     function resources in internal projects that are not accessible by the
+        #     end user.
+        # @!attribute [rw] build_worker_pool
+        #   @return [::String]
+        #     Name of the Cloud Build Custom Worker Pool that should be used to build the
+        #     function. The format of this field is
+        #     `projects/{project}/locations/{region}/workerPools/{workerPool}` where
+        #     `{project}` and `{region}` are the project id and region respectively where
+        #     the worker pool is defined and `{workerPool}` is the short name of the
+        #     worker pool.
+        #
+        #     If the project id is not the same as the function, then the Cloud
+        #     Functions Service Agent
+        #     (`service-<project_number>@gcf-admin-robot.iam.gserviceaccount.com`) must
+        #     be granted the role Cloud Build Custom Workers Builder
+        #     (`roles/cloudbuild.customworkers.builder`) in the project.
         # @!attribute [r] build_id
         #   @return [::String]
         #     Output only. The Cloud Build ID of the latest successful deployment of the
         #     function.
+        # @!attribute [r] build_name
+        #   @return [::String]
+        #     Output only. The Cloud Build Name of the function deployment.
+        #     `projects/<project-number>/locations/<region>/builds/<build-id>`.
+        # @!attribute [rw] secret_environment_variables
+        #   @return [::Array<::Google::Cloud::Functions::V1::SecretEnvVar>]
+        #     Secret environment variables configuration.
+        # @!attribute [rw] secret_volumes
+        #   @return [::Array<::Google::Cloud::Functions::V1::SecretVolume>]
+        #     Secret volumes configuration.
+        # @!attribute [rw] source_token
+        #   @return [::String]
+        #     Input only. An identifier for Firebase function sources. Disclaimer: This field is only
+        #     supported for Firebase function deployments.
+        # @!attribute [rw] docker_repository
+        #   @return [::String]
+        #     User managed repository created in Artifact Registry optionally with a
+        #     customer managed encryption key. If specified, deployments will use
+        #     Artifact Registry. If unspecified and the deployment is eligible to use
+        #     Artifact Registry, GCF will create and use a repository named
+        #     'gcf-artifacts' for every deployed region. This is the repository to which
+        #     the function docker image will be pushed after it is built by Cloud Build.
+        #
+        #     It must match the pattern
+        #     `projects/{project}/locations/{location}/repositories/{repository}`.
+        #
+        #     Cross-project repositories are not supported.
+        #     Cross-location repositories are not supported.
+        #     Repository format must be 'DOCKER'.
+        # @!attribute [rw] docker_registry
+        #   @return [::Google::Cloud::Functions::V1::CloudFunction::DockerRegistry]
+        #     Docker Registry to use for this deployment.
+        #
+        #     If `docker_repository` field is specified, this field will be automatically
+        #     set as `ARTIFACT_REGISTRY`.
+        #     If unspecified, it currently defaults to `CONTAINER_REGISTRY`.
+        #     This field may be overridden by the backend for eligible deployments.
         class CloudFunction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -155,6 +258,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class EnvironmentVariablesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class BuildEnvironmentVariablesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -193,6 +305,23 @@ module Google
             # Allow HTTP traffic from private VPC sources and through GCLB.
             ALLOW_INTERNAL_AND_GCLB = 3
           end
+
+          # Docker Registry to use for storing function Docker images.
+          module DockerRegistry
+            # Unspecified.
+            DOCKER_REGISTRY_UNSPECIFIED = 0
+
+            # Docker images will be stored in multi-regional Container Registry
+            # repositories named `gcf`.
+            CONTAINER_REGISTRY = 1
+
+            # Docker images will be stored in regional Artifact Registry repositories.
+            # By default, GCF will create and use repositories named `gcf-artifacts`
+            # in every region in which a function is deployed. But the repository to
+            # use can also be specified by the user using the `docker_repository`
+            # field.
+            ARTIFACT_REGISTRY = 2
+          end
         end
 
         # Describes SourceRepository, used to represent parameters related to
@@ -226,9 +355,32 @@ module Google
         # @!attribute [r] url
         #   @return [::String]
         #     Output only. The deployed url for the function.
+        # @!attribute [rw] security_level
+        #   @return [::Google::Cloud::Functions::V1::HttpsTrigger::SecurityLevel]
+        #     The security level for the function.
         class HttpsTrigger
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Available security level settings.
+          #
+          # This controls the methods to enforce security (HTTPS) on a URL.
+          #
+          # If unspecified, SECURE_OPTIONAL will be used.
+          module SecurityLevel
+            # Unspecified.
+            SECURITY_LEVEL_UNSPECIFIED = 0
+
+            # Requests for a URL that match this handler that do not use HTTPS are
+            # automatically redirected to the HTTPS URL with the same path. Query
+            # parameters are reserved for the redirect.
+            SECURE_ALWAYS = 1
+
+            # Both HTTP and HTTPS requests with URLs that match the handler succeed
+            # without redirects. The application can examine the request to determine
+            # which protocol was used and respond accordingly.
+            SECURE_OPTIONAL = 2
+          end
         end
 
         # Describes EventTrigger, used to request events be sent from another
@@ -305,6 +457,81 @@ module Google
           end
         end
 
+        # Configuration for a secret environment variable. It has the information
+        # necessary to fetch the secret value from secret manager and expose it as an
+        # environment variable.
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     Name of the environment variable.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Project identifier (preferrably project number but can also be the project
+        #     ID) of the project that contains the secret. If not set, it will be
+        #     populated with the function's project assuming that the secret exists in
+        #     the same project as of the function.
+        # @!attribute [rw] secret
+        #   @return [::String]
+        #     Name of the secret in secret manager (not the full resource name).
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Version of the secret (version number or the string 'latest'). It is
+        #     recommended to use a numeric version for secret environment variables as
+        #     any updates to the secret value is not reflected until new instances start.
+        class SecretEnvVar
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for a secret volume. It has the information necessary to fetch
+        # the secret value from secret manager and make it available as files mounted
+        # at the requested paths within the application container. Secret value is not
+        # a part of the configuration. Every filesystem read operation performs a
+        # lookup in secret manager to retrieve the secret value.
+        # @!attribute [rw] mount_path
+        #   @return [::String]
+        #     The path within the container to mount the secret volume. For example,
+        #     setting the mount_path as `/etc/secrets` would mount the secret value files
+        #     under the `/etc/secrets` directory. This directory will also be completely
+        #     shadowed and unavailable to mount any other secrets.
+        #
+        #     Recommended mount paths: /etc/secrets
+        #     Restricted mount paths: /cloudsql, /dev/log, /pod, /proc, /var/log
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Project identifier (preferrably project number but can also be the project
+        #     ID) of the project that contains the secret. If not set, it will be
+        #     populated with the function's project assuming that the secret exists in
+        #     the same project as of the function.
+        # @!attribute [rw] secret
+        #   @return [::String]
+        #     Name of the secret in secret manager (not the full resource name).
+        # @!attribute [rw] versions
+        #   @return [::Array<::Google::Cloud::Functions::V1::SecretVolume::SecretVersion>]
+        #     List of secret versions to mount for this secret. If empty, the `latest`
+        #     version of the secret will be made available in a file named after the
+        #     secret under the mount point.
+        class SecretVolume
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for a single version.
+          # @!attribute [rw] version
+          #   @return [::String]
+          #     Version of the secret (version number or the string 'latest'). It is
+          #     preferrable to use `latest` version with secret volumes as secret value
+          #     changes are reflected immediately.
+          # @!attribute [rw] path
+          #   @return [::String]
+          #     Relative path of the file under the mount path where the secret value for
+          #     this version will be fetched and made available. For example, setting the
+          #     mount_path as '/etc/secrets' and path as `/secret_foo` would mount the
+          #     secret value file at `/etc/secrets/secret_foo`.
+          class SecretVersion
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Request for the `CreateFunction` method.
         # @!attribute [rw] location
         #   @return [::String]
@@ -324,7 +551,7 @@ module Google
         #     Required. New version of the function.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required list of fields to be updated in this request.
+        #     Required. The list of fields in `CloudFunction` that have to be updated.
         class UpdateFunctionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -424,6 +651,25 @@ module Google
         #   @return [::String]
         #     The project and location in which the Google Cloud Storage signed URL
         #     should be generated, specified in the format `projects/*/locations/*`.
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     Resource name of a KMS crypto key (managed by the user) used to
+        #     encrypt/decrypt function source code objects in staging Cloud Storage
+        #     buckets. When you generate an upload url and upload your source code, it
+        #     gets copied to a staging Cloud Storage bucket in an internal regional
+        #     project. The source code is then copied to a versioned directory in the
+        #     sources bucket in the consumer project during the function deployment.
+        #
+        #     It must match the pattern
+        #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+        #
+        #     The Google Cloud Functions service account
+        #     (service-\\{project_number}@gcf-admin-robot.iam.gserviceaccount.com) must be
+        #     granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
+        #     (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
+        #     Key/KeyRing/Project/Organization (least access preferred). GCF will
+        #     delegate access to the Google Storage service account in the internal
+        #     project.
         class GenerateUploadUrlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

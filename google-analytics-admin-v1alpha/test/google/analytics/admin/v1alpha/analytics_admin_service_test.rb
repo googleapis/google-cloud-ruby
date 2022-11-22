@@ -1330,913 +1330,6 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     end
   end
 
-  def test_get_web_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::WebDataStream.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_web_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_web_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetWebDataStreamRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, get_web_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.get_web_data_stream({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.get_web_data_stream name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.get_web_data_stream ::Google::Analytics::Admin::V1alpha::GetWebDataStreamRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.get_web_data_stream({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.get_web_data_stream(::Google::Analytics::Admin::V1alpha::GetWebDataStreamRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, get_web_data_stream_client_stub.call_rpc_count
-    end
-  end
-
-  def test_delete_web_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    delete_web_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :delete_web_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteWebDataStreamRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, delete_web_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.delete_web_data_stream({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.delete_web_data_stream name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.delete_web_data_stream ::Google::Analytics::Admin::V1alpha::DeleteWebDataStreamRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.delete_web_data_stream({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.delete_web_data_stream(::Google::Analytics::Admin::V1alpha::DeleteWebDataStreamRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, delete_web_data_stream_client_stub.call_rpc_count
-    end
-  end
-
-  def test_update_web_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::WebDataStream.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    web_data_stream = {}
-    update_mask = {}
-
-    update_web_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :update_web_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateWebDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::WebDataStream), request["web_data_stream"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, update_web_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.update_web_data_stream({ web_data_stream: web_data_stream, update_mask: update_mask }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.update_web_data_stream web_data_stream: web_data_stream, update_mask: update_mask do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.update_web_data_stream ::Google::Analytics::Admin::V1alpha::UpdateWebDataStreamRequest.new(web_data_stream: web_data_stream, update_mask: update_mask) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.update_web_data_stream({ web_data_stream: web_data_stream, update_mask: update_mask }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.update_web_data_stream(::Google::Analytics::Admin::V1alpha::UpdateWebDataStreamRequest.new(web_data_stream: web_data_stream, update_mask: update_mask), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, update_web_data_stream_client_stub.call_rpc_count
-    end
-  end
-
-  def test_create_web_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::WebDataStream.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    web_data_stream = {}
-    parent = "hello world"
-
-    create_web_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :create_web_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateWebDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::WebDataStream), request["web_data_stream"]
-      assert_equal "hello world", request["parent"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, create_web_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.create_web_data_stream({ web_data_stream: web_data_stream, parent: parent }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.create_web_data_stream web_data_stream: web_data_stream, parent: parent do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.create_web_data_stream ::Google::Analytics::Admin::V1alpha::CreateWebDataStreamRequest.new(web_data_stream: web_data_stream, parent: parent) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.create_web_data_stream({ web_data_stream: web_data_stream, parent: parent }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.create_web_data_stream(::Google::Analytics::Admin::V1alpha::CreateWebDataStreamRequest.new(web_data_stream: web_data_stream, parent: parent), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, create_web_data_stream_client_stub.call_rpc_count
-    end
-  end
-
-  def test_list_web_data_streams
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::ListWebDataStreamsResponse.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    page_size = 42
-    page_token = "hello world"
-
-    list_web_data_streams_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :list_web_data_streams, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListWebDataStreamsRequest, request
-      assert_equal "hello world", request["parent"]
-      assert_equal 42, request["page_size"]
-      assert_equal "hello world", request["page_token"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, list_web_data_streams_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.list_web_data_streams({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.list_web_data_streams parent: parent, page_size: page_size, page_token: page_token do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.list_web_data_streams ::Google::Analytics::Admin::V1alpha::ListWebDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.list_web_data_streams({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.list_web_data_streams(::Google::Analytics::Admin::V1alpha::ListWebDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, list_web_data_streams_client_stub.call_rpc_count
-    end
-  end
-
-  def test_get_ios_app_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::IosAppDataStream.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_ios_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_ios_app_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetIosAppDataStreamRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, get_ios_app_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.get_ios_app_data_stream({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.get_ios_app_data_stream name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.get_ios_app_data_stream ::Google::Analytics::Admin::V1alpha::GetIosAppDataStreamRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.get_ios_app_data_stream({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.get_ios_app_data_stream(::Google::Analytics::Admin::V1alpha::GetIosAppDataStreamRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, get_ios_app_data_stream_client_stub.call_rpc_count
-    end
-  end
-
-  def test_delete_ios_app_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    delete_ios_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :delete_ios_app_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteIosAppDataStreamRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, delete_ios_app_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.delete_ios_app_data_stream({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.delete_ios_app_data_stream name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.delete_ios_app_data_stream ::Google::Analytics::Admin::V1alpha::DeleteIosAppDataStreamRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.delete_ios_app_data_stream({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.delete_ios_app_data_stream(::Google::Analytics::Admin::V1alpha::DeleteIosAppDataStreamRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, delete_ios_app_data_stream_client_stub.call_rpc_count
-    end
-  end
-
-  def test_update_ios_app_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::IosAppDataStream.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    ios_app_data_stream = {}
-    update_mask = {}
-
-    update_ios_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :update_ios_app_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateIosAppDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::IosAppDataStream), request["ios_app_data_stream"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, update_ios_app_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.update_ios_app_data_stream({ ios_app_data_stream: ios_app_data_stream, update_mask: update_mask }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.update_ios_app_data_stream ios_app_data_stream: ios_app_data_stream, update_mask: update_mask do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.update_ios_app_data_stream ::Google::Analytics::Admin::V1alpha::UpdateIosAppDataStreamRequest.new(ios_app_data_stream: ios_app_data_stream, update_mask: update_mask) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.update_ios_app_data_stream({ ios_app_data_stream: ios_app_data_stream, update_mask: update_mask }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.update_ios_app_data_stream(::Google::Analytics::Admin::V1alpha::UpdateIosAppDataStreamRequest.new(ios_app_data_stream: ios_app_data_stream, update_mask: update_mask), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, update_ios_app_data_stream_client_stub.call_rpc_count
-    end
-  end
-
-  def test_list_ios_app_data_streams
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsResponse.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    page_size = 42
-    page_token = "hello world"
-
-    list_ios_app_data_streams_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :list_ios_app_data_streams, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsRequest, request
-      assert_equal "hello world", request["parent"]
-      assert_equal 42, request["page_size"]
-      assert_equal "hello world", request["page_token"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, list_ios_app_data_streams_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.list_ios_app_data_streams({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.list_ios_app_data_streams parent: parent, page_size: page_size, page_token: page_token do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.list_ios_app_data_streams ::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.list_ios_app_data_streams({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.list_ios_app_data_streams(::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, list_ios_app_data_streams_client_stub.call_rpc_count
-    end
-  end
-
-  def test_get_android_app_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_android_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_android_app_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetAndroidAppDataStreamRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, get_android_app_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.get_android_app_data_stream({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.get_android_app_data_stream name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.get_android_app_data_stream ::Google::Analytics::Admin::V1alpha::GetAndroidAppDataStreamRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.get_android_app_data_stream({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.get_android_app_data_stream(::Google::Analytics::Admin::V1alpha::GetAndroidAppDataStreamRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, get_android_app_data_stream_client_stub.call_rpc_count
-    end
-  end
-
-  def test_delete_android_app_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    delete_android_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :delete_android_app_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteAndroidAppDataStreamRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, delete_android_app_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.delete_android_app_data_stream({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.delete_android_app_data_stream name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.delete_android_app_data_stream ::Google::Analytics::Admin::V1alpha::DeleteAndroidAppDataStreamRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.delete_android_app_data_stream({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.delete_android_app_data_stream(::Google::Analytics::Admin::V1alpha::DeleteAndroidAppDataStreamRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, delete_android_app_data_stream_client_stub.call_rpc_count
-    end
-  end
-
-  def test_update_android_app_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    android_app_data_stream = {}
-    update_mask = {}
-
-    update_android_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :update_android_app_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateAndroidAppDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream), request["android_app_data_stream"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, update_android_app_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.update_android_app_data_stream({ android_app_data_stream: android_app_data_stream, update_mask: update_mask }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.update_android_app_data_stream android_app_data_stream: android_app_data_stream, update_mask: update_mask do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.update_android_app_data_stream ::Google::Analytics::Admin::V1alpha::UpdateAndroidAppDataStreamRequest.new(android_app_data_stream: android_app_data_stream, update_mask: update_mask) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.update_android_app_data_stream({ android_app_data_stream: android_app_data_stream, update_mask: update_mask }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.update_android_app_data_stream(::Google::Analytics::Admin::V1alpha::UpdateAndroidAppDataStreamRequest.new(android_app_data_stream: android_app_data_stream, update_mask: update_mask), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, update_android_app_data_stream_client_stub.call_rpc_count
-    end
-  end
-
-  def test_list_android_app_data_streams
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsResponse.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    page_size = 42
-    page_token = "hello world"
-
-    list_android_app_data_streams_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :list_android_app_data_streams, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsRequest, request
-      assert_equal "hello world", request["parent"]
-      assert_equal 42, request["page_size"]
-      assert_equal "hello world", request["page_token"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, list_android_app_data_streams_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.list_android_app_data_streams({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.list_android_app_data_streams parent: parent, page_size: page_size, page_token: page_token do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.list_android_app_data_streams ::Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.list_android_app_data_streams({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.list_android_app_data_streams(::Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, list_android_app_data_streams_client_stub.call_rpc_count
-    end
-  end
-
-  def test_get_enhanced_measurement_settings
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_enhanced_measurement_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_enhanced_measurement_settings, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, get_enhanced_measurement_settings_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.get_enhanced_measurement_settings({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.get_enhanced_measurement_settings name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.get_enhanced_measurement_settings ::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.get_enhanced_measurement_settings({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.get_enhanced_measurement_settings(::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, get_enhanced_measurement_settings_client_stub.call_rpc_count
-    end
-  end
-
-  def test_update_enhanced_measurement_settings
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    enhanced_measurement_settings = {}
-    update_mask = {}
-
-    update_enhanced_measurement_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :update_enhanced_measurement_settings, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings), request["enhanced_measurement_settings"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, update_enhanced_measurement_settings_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.update_enhanced_measurement_settings({ enhanced_measurement_settings: enhanced_measurement_settings, update_mask: update_mask }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.update_enhanced_measurement_settings enhanced_measurement_settings: enhanced_measurement_settings, update_mask: update_mask do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.update_enhanced_measurement_settings ::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest.new(enhanced_measurement_settings: enhanced_measurement_settings, update_mask: update_mask) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.update_enhanced_measurement_settings({ enhanced_measurement_settings: enhanced_measurement_settings, update_mask: update_mask }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.update_enhanced_measurement_settings(::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest.new(enhanced_measurement_settings: enhanced_measurement_settings, update_mask: update_mask), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, update_enhanced_measurement_settings_client_stub.call_rpc_count
-    end
-  end
-
   def test_create_firebase_link
     # Create GRPC objects.
     grpc_response = ::Google::Analytics::Admin::V1alpha::FirebaseLink.new
@@ -2294,66 +1387,6 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
 
       # Verify method calls
       assert_equal 5, create_firebase_link_client_stub.call_rpc_count
-    end
-  end
-
-  def test_update_firebase_link
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::FirebaseLink.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    firebase_link = {}
-    update_mask = {}
-
-    update_firebase_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :update_firebase_link, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateFirebaseLinkRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::FirebaseLink), request["firebase_link"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, update_firebase_link_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.update_firebase_link({ firebase_link: firebase_link, update_mask: update_mask }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.update_firebase_link firebase_link: firebase_link, update_mask: update_mask do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.update_firebase_link ::Google::Analytics::Admin::V1alpha::UpdateFirebaseLinkRequest.new(firebase_link: firebase_link, update_mask: update_mask) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.update_firebase_link({ firebase_link: firebase_link, update_mask: update_mask }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.update_firebase_link(::Google::Analytics::Admin::V1alpha::UpdateFirebaseLinkRequest.new(firebase_link: firebase_link, update_mask: update_mask), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, update_firebase_link_client_stub.call_rpc_count
     end
   end
 
@@ -3146,6 +2179,66 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     end
   end
 
+  def test_acknowledge_user_data_collection
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    property = "hello world"
+    acknowledgement = "hello world"
+
+    acknowledge_user_data_collection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :acknowledge_user_data_collection, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionRequest, request
+      assert_equal "hello world", request["property"]
+      assert_equal "hello world", request["acknowledgement"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, acknowledge_user_data_collection_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.acknowledge_user_data_collection({ property: property, acknowledgement: acknowledgement }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.acknowledge_user_data_collection property: property, acknowledgement: acknowledgement do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.acknowledge_user_data_collection ::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionRequest.new(property: property, acknowledgement: acknowledgement) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.acknowledge_user_data_collection({ property: property, acknowledgement: acknowledgement }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.acknowledge_user_data_collection(::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionRequest.new(property: property, acknowledgement: acknowledgement), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, acknowledge_user_data_collection_client_stub.call_rpc_count
+    end
+  end
+
   def test_search_change_history_events
     # Create GRPC objects.
     grpc_response = ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsResponse.new
@@ -3583,6 +2676,668 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
 
       # Verify method calls
       assert_equal 5, list_conversion_events_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_display_video360_advertiser_link
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_display_video360_advertiser_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_display_video360_advertiser_link, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_display_video360_advertiser_link_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_display_video360_advertiser_link({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_display_video360_advertiser_link name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_display_video360_advertiser_link ::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_display_video360_advertiser_link({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_display_video360_advertiser_link(::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_display_video360_advertiser_link_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_display_video360_advertiser_links
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinksResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_display_video360_advertiser_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_display_video360_advertiser_links, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinksRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_display_video360_advertiser_links_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_display_video360_advertiser_links({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_display_video360_advertiser_links parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_display_video360_advertiser_links ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_display_video360_advertiser_links({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_display_video360_advertiser_links(::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_display_video360_advertiser_links_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_display_video360_advertiser_link
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    display_video_360_advertiser_link = {}
+
+    create_display_video360_advertiser_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_display_video360_advertiser_link, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink), request["display_video_360_advertiser_link"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_display_video360_advertiser_link_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_display_video360_advertiser_link({ parent: parent, display_video_360_advertiser_link: display_video_360_advertiser_link }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_display_video360_advertiser_link parent: parent, display_video_360_advertiser_link: display_video_360_advertiser_link do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_display_video360_advertiser_link ::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkRequest.new(parent: parent, display_video_360_advertiser_link: display_video_360_advertiser_link) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_display_video360_advertiser_link({ parent: parent, display_video_360_advertiser_link: display_video_360_advertiser_link }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_display_video360_advertiser_link(::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkRequest.new(parent: parent, display_video_360_advertiser_link: display_video_360_advertiser_link), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_display_video360_advertiser_link_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_display_video360_advertiser_link
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_display_video360_advertiser_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_display_video360_advertiser_link, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_display_video360_advertiser_link_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_display_video360_advertiser_link({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_display_video360_advertiser_link name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_display_video360_advertiser_link ::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_display_video360_advertiser_link({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_display_video360_advertiser_link(::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_display_video360_advertiser_link_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_display_video360_advertiser_link
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    display_video_360_advertiser_link = {}
+    update_mask = {}
+
+    update_display_video360_advertiser_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_display_video360_advertiser_link, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateDisplayVideo360AdvertiserLinkRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink), request["display_video_360_advertiser_link"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_display_video360_advertiser_link_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_display_video360_advertiser_link({ display_video_360_advertiser_link: display_video_360_advertiser_link, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_display_video360_advertiser_link display_video_360_advertiser_link: display_video_360_advertiser_link, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_display_video360_advertiser_link ::Google::Analytics::Admin::V1alpha::UpdateDisplayVideo360AdvertiserLinkRequest.new(display_video_360_advertiser_link: display_video_360_advertiser_link, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_display_video360_advertiser_link({ display_video_360_advertiser_link: display_video_360_advertiser_link, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_display_video360_advertiser_link(::Google::Analytics::Admin::V1alpha::UpdateDisplayVideo360AdvertiserLinkRequest.new(display_video_360_advertiser_link: display_video_360_advertiser_link, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_display_video360_advertiser_link_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_display_video360_advertiser_link_proposal
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_display_video360_advertiser_link_proposal_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_display_video360_advertiser_link_proposal, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkProposalRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_display_video360_advertiser_link_proposal_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_display_video360_advertiser_link_proposal({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_display_video360_advertiser_link_proposal name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_display_video360_advertiser_link_proposal ::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkProposalRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_display_video360_advertiser_link_proposal({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_display_video360_advertiser_link_proposal(::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkProposalRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_display_video360_advertiser_link_proposal_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_display_video360_advertiser_link_proposals
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinkProposalsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_display_video360_advertiser_link_proposals_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_display_video360_advertiser_link_proposals, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinkProposalsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_display_video360_advertiser_link_proposals_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_display_video360_advertiser_link_proposals({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_display_video360_advertiser_link_proposals parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_display_video360_advertiser_link_proposals ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinkProposalsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_display_video360_advertiser_link_proposals({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_display_video360_advertiser_link_proposals(::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinkProposalsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_display_video360_advertiser_link_proposals_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_display_video360_advertiser_link_proposal
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    display_video_360_advertiser_link_proposal = {}
+
+    create_display_video360_advertiser_link_proposal_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_display_video360_advertiser_link_proposal, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkProposalRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal), request["display_video_360_advertiser_link_proposal"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_display_video360_advertiser_link_proposal_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_display_video360_advertiser_link_proposal({ parent: parent, display_video_360_advertiser_link_proposal: display_video_360_advertiser_link_proposal }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_display_video360_advertiser_link_proposal parent: parent, display_video_360_advertiser_link_proposal: display_video_360_advertiser_link_proposal do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_display_video360_advertiser_link_proposal ::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkProposalRequest.new(parent: parent, display_video_360_advertiser_link_proposal: display_video_360_advertiser_link_proposal) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_display_video360_advertiser_link_proposal({ parent: parent, display_video_360_advertiser_link_proposal: display_video_360_advertiser_link_proposal }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_display_video360_advertiser_link_proposal(::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkProposalRequest.new(parent: parent, display_video_360_advertiser_link_proposal: display_video_360_advertiser_link_proposal), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_display_video360_advertiser_link_proposal_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_display_video360_advertiser_link_proposal
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_display_video360_advertiser_link_proposal_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_display_video360_advertiser_link_proposal, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkProposalRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_display_video360_advertiser_link_proposal_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_display_video360_advertiser_link_proposal({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_display_video360_advertiser_link_proposal name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_display_video360_advertiser_link_proposal ::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkProposalRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_display_video360_advertiser_link_proposal({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_display_video360_advertiser_link_proposal(::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkProposalRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_display_video360_advertiser_link_proposal_client_stub.call_rpc_count
+    end
+  end
+
+  def test_approve_display_video360_advertiser_link_proposal
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    approve_display_video360_advertiser_link_proposal_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :approve_display_video360_advertiser_link_proposal, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, approve_display_video360_advertiser_link_proposal_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.approve_display_video360_advertiser_link_proposal({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.approve_display_video360_advertiser_link_proposal name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.approve_display_video360_advertiser_link_proposal ::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.approve_display_video360_advertiser_link_proposal({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.approve_display_video360_advertiser_link_proposal(::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, approve_display_video360_advertiser_link_proposal_client_stub.call_rpc_count
+    end
+  end
+
+  def test_cancel_display_video360_advertiser_link_proposal
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    cancel_display_video360_advertiser_link_proposal_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :cancel_display_video360_advertiser_link_proposal, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::CancelDisplayVideo360AdvertiserLinkProposalRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, cancel_display_video360_advertiser_link_proposal_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.cancel_display_video360_advertiser_link_proposal({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.cancel_display_video360_advertiser_link_proposal name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.cancel_display_video360_advertiser_link_proposal ::Google::Analytics::Admin::V1alpha::CancelDisplayVideo360AdvertiserLinkProposalRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.cancel_display_video360_advertiser_link_proposal({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.cancel_display_video360_advertiser_link_proposal(::Google::Analytics::Admin::V1alpha::CancelDisplayVideo360AdvertiserLinkProposalRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, cancel_display_video360_advertiser_link_proposal_client_stub.call_rpc_count
     end
   end
 
@@ -4189,6 +3944,926 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
 
       # Verify method calls
       assert_equal 5, get_custom_metric_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_data_retention_settings
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::DataRetentionSettings.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_data_retention_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_data_retention_settings, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetDataRetentionSettingsRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_data_retention_settings_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_data_retention_settings({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_data_retention_settings name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_data_retention_settings ::Google::Analytics::Admin::V1alpha::GetDataRetentionSettingsRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_data_retention_settings({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_data_retention_settings(::Google::Analytics::Admin::V1alpha::GetDataRetentionSettingsRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_data_retention_settings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_data_retention_settings
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::DataRetentionSettings.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    data_retention_settings = {}
+    update_mask = {}
+
+    update_data_retention_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_data_retention_settings, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::DataRetentionSettings), request["data_retention_settings"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_data_retention_settings_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_data_retention_settings({ data_retention_settings: data_retention_settings, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_data_retention_settings data_retention_settings: data_retention_settings, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_data_retention_settings ::Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest.new(data_retention_settings: data_retention_settings, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_data_retention_settings({ data_retention_settings: data_retention_settings, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_data_retention_settings(::Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest.new(data_retention_settings: data_retention_settings, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_data_retention_settings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_data_stream
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::DataStream.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    data_stream = {}
+
+    create_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_data_stream, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateDataStreamRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::DataStream), request["data_stream"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_data_stream_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_data_stream({ parent: parent, data_stream: data_stream }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_data_stream parent: parent, data_stream: data_stream do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_data_stream ::Google::Analytics::Admin::V1alpha::CreateDataStreamRequest.new(parent: parent, data_stream: data_stream) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_data_stream({ parent: parent, data_stream: data_stream }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_data_stream(::Google::Analytics::Admin::V1alpha::CreateDataStreamRequest.new(parent: parent, data_stream: data_stream), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_data_stream_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_data_stream
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_data_stream, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteDataStreamRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_data_stream_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_data_stream({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_data_stream name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_data_stream ::Google::Analytics::Admin::V1alpha::DeleteDataStreamRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_data_stream({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_data_stream(::Google::Analytics::Admin::V1alpha::DeleteDataStreamRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_data_stream_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_data_stream
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::DataStream.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    data_stream = {}
+    update_mask = {}
+
+    update_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_data_stream, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateDataStreamRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::DataStream), request["data_stream"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_data_stream_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_data_stream({ data_stream: data_stream, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_data_stream data_stream: data_stream, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_data_stream ::Google::Analytics::Admin::V1alpha::UpdateDataStreamRequest.new(data_stream: data_stream, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_data_stream({ data_stream: data_stream, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_data_stream(::Google::Analytics::Admin::V1alpha::UpdateDataStreamRequest.new(data_stream: data_stream, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_data_stream_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_data_streams
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ListDataStreamsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_data_streams_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_data_streams, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListDataStreamsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_data_streams_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_data_streams({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_data_streams parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_data_streams ::Google::Analytics::Admin::V1alpha::ListDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_data_streams({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_data_streams(::Google::Analytics::Admin::V1alpha::ListDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_data_streams_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_data_stream
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::DataStream.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_data_stream, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetDataStreamRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_data_stream_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_data_stream({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_data_stream name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_data_stream ::Google::Analytics::Admin::V1alpha::GetDataStreamRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_data_stream({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_data_stream(::Google::Analytics::Admin::V1alpha::GetDataStreamRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_data_stream_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_audience
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::Audience.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_audience_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_audience, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetAudienceRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_audience_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_audience({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_audience name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_audience ::Google::Analytics::Admin::V1alpha::GetAudienceRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_audience({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_audience(::Google::Analytics::Admin::V1alpha::GetAudienceRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_audience_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_audiences
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ListAudiencesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_audiences_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_audiences, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListAudiencesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_audiences_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_audiences({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_audiences parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_audiences ::Google::Analytics::Admin::V1alpha::ListAudiencesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_audiences({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_audiences(::Google::Analytics::Admin::V1alpha::ListAudiencesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_audiences_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_audience
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::Audience.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    audience = {}
+
+    create_audience_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_audience, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateAudienceRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::Audience), request["audience"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_audience_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_audience({ parent: parent, audience: audience }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_audience parent: parent, audience: audience do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_audience ::Google::Analytics::Admin::V1alpha::CreateAudienceRequest.new(parent: parent, audience: audience) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_audience({ parent: parent, audience: audience }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_audience(::Google::Analytics::Admin::V1alpha::CreateAudienceRequest.new(parent: parent, audience: audience), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_audience_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_audience
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::Audience.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    audience = {}
+    update_mask = {}
+
+    update_audience_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_audience, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateAudienceRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::Audience), request["audience"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_audience_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_audience({ audience: audience, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_audience audience: audience, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_audience ::Google::Analytics::Admin::V1alpha::UpdateAudienceRequest.new(audience: audience, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_audience({ audience: audience, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_audience(::Google::Analytics::Admin::V1alpha::UpdateAudienceRequest.new(audience: audience, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_audience_client_stub.call_rpc_count
+    end
+  end
+
+  def test_archive_audience
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    archive_audience_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :archive_audience, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ArchiveAudienceRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, archive_audience_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.archive_audience({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.archive_audience name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.archive_audience ::Google::Analytics::Admin::V1alpha::ArchiveAudienceRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.archive_audience({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.archive_audience(::Google::Analytics::Admin::V1alpha::ArchiveAudienceRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, archive_audience_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_attribution_settings
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::AttributionSettings.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_attribution_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_attribution_settings, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetAttributionSettingsRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_attribution_settings_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_attribution_settings({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_attribution_settings name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_attribution_settings ::Google::Analytics::Admin::V1alpha::GetAttributionSettingsRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_attribution_settings({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_attribution_settings(::Google::Analytics::Admin::V1alpha::GetAttributionSettingsRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_attribution_settings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_attribution_settings
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::AttributionSettings.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    attribution_settings = {}
+    update_mask = {}
+
+    update_attribution_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_attribution_settings, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateAttributionSettingsRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::AttributionSettings), request["attribution_settings"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_attribution_settings_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_attribution_settings({ attribution_settings: attribution_settings, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_attribution_settings attribution_settings: attribution_settings, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_attribution_settings ::Google::Analytics::Admin::V1alpha::UpdateAttributionSettingsRequest.new(attribution_settings: attribution_settings, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_attribution_settings({ attribution_settings: attribution_settings, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_attribution_settings(::Google::Analytics::Admin::V1alpha::UpdateAttributionSettingsRequest.new(attribution_settings: attribution_settings, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_attribution_settings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_run_access_report
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::RunAccessReportResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    entity = "hello world"
+    dimensions = [{}]
+    metrics = [{}]
+    date_ranges = [{}]
+    dimension_filter = {}
+    metric_filter = {}
+    offset = 42
+    limit = 42
+    time_zone = "hello world"
+    order_bys = [{}]
+    return_entity_quota = true
+
+    run_access_report_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :run_access_report, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::RunAccessReportRequest, request
+      assert_equal "hello world", request["entity"]
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::AccessDimension, request["dimensions"].first
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::AccessMetric, request["metrics"].first
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::AccessDateRange, request["date_ranges"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::AccessFilterExpression), request["dimension_filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::AccessFilterExpression), request["metric_filter"]
+      assert_equal 42, request["offset"]
+      assert_equal 42, request["limit"]
+      assert_equal "hello world", request["time_zone"]
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::AccessOrderBy, request["order_bys"].first
+      assert_equal true, request["return_entity_quota"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, run_access_report_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.run_access_report({ entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.run_access_report entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.run_access_report ::Google::Analytics::Admin::V1alpha::RunAccessReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.run_access_report({ entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.run_access_report(::Google::Analytics::Admin::V1alpha::RunAccessReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, run_access_report_client_stub.call_rpc_count
     end
   end
 

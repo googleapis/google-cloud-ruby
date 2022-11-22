@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/api/servicemanagement/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-service_management-v1/$1

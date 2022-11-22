@@ -42,7 +42,7 @@ module Google
 
           # Output only.
           # Defines an error reason code.
-          # Next id: 7
+          # Next id: 8
           module Code
             # Default value is never used.
             CODE_UNSPECIFIED = 0

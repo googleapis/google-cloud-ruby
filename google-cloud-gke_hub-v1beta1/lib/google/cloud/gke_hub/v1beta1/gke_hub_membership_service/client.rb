@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/gkehub/v1beta1/membership_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -27,8 +29,14 @@ module Google
           ##
           # Client for the GkeHubMembershipService service.
           #
-          # GKE Hub CRUD API for the Membership resource.
-          # The Membership service is currently only available in the global location.
+          # The GKE Hub MembershipService handles the registration of many Kubernetes
+          # clusters to Google Cloud, represented with the {::Google::Cloud::GkeHub::V1beta1::Membership Membership} resource.
+          #
+          # GKE Hub is currently only available in the global region.
+          #
+          # **Membership management may be non-trivial:** it is recommended to use one
+          # of the Google-provided client libraries or tools where possible when working
+          # with Membership resources.
           #
           class Client
             include Paths
@@ -42,13 +50,12 @@ module Google
             # See {::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all GkeHubMembershipService clients:
-            #
-            #     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all GkeHubMembershipService clients
+            #   ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -68,10 +75,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                max_delay: 10.0,
-                multiplier: 1.3,
-                retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -103,19 +107,15 @@ module Google
             ##
             # Create a new GkeHubMembershipService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new GkeHubMembershipService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
             #
-            #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
-            #
-            # To create a new GkeHubMembershipService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the GkeHubMembershipService client.
             # @yieldparam config [Client::Configuration]
@@ -135,14 +135,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -150,6 +149,19 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -168,6 +180,20 @@ module Google
             # @return [::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -233,6 +259,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gke_hub/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeHub::V1beta1::ListMembershipsRequest.new
+            #
+            #   # Call the list_memberships method.
+            #   result = client.list_memberships request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::GkeHub::V1beta1::Membership.
+            #     p response
+            #   end
+            #
             def list_memberships request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -250,16 +297,20 @@ module Google
                 gapic_version: ::Google::Cloud::GkeHub::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_memberships.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_memberships.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :list_memberships, request, options: options do |response, operation|
@@ -301,6 +352,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gke_hub/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeHub::V1beta1::GetMembershipRequest.new
+            #
+            #   # Call the get_membership method.
+            #   result = client.get_membership request
+            #
+            #   # The returned object is of type Google::Cloud::GkeHub::V1beta1::Membership.
+            #   p result
+            #
             def get_membership request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -318,16 +384,20 @@ module Google
                 gapic_version: ::Google::Cloud::GkeHub::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_membership.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_membership.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :get_membership, request, options: options do |response, operation|
@@ -339,7 +409,11 @@ module Google
             end
 
             ##
-            # Adds a new Membership.
+            # Creates a new Membership.
+            #
+            # **This is currently only supported for GKE clusters on Google Cloud**.
+            # To register other clusters, follow the instructions at
+            # https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.
             #
             # @overload create_membership(request, options = nil)
             #   Pass arguments to `create_membership` via a request object, either of type
@@ -351,7 +425,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_membership(parent: nil, membership_id: nil, resource: nil)
+            # @overload create_membership(parent: nil, membership_id: nil, resource: nil, request_id: nil)
             #   Pass arguments to `create_membership` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -371,6 +445,20 @@ module Google
             #     with a maximum length of 63 characters.
             #   @param resource [::Google::Cloud::GkeHub::V1beta1::Membership, ::Hash]
             #     Required. The membership to create.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -379,6 +467,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gke_hub/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest.new
+            #
+            #   # Call the create_membership method.
+            #   result = client.create_membership request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def create_membership request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -397,16 +507,20 @@ module Google
                 gapic_version: ::Google::Cloud::GkeHub::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_membership.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_membership.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :create_membership, request, options: options do |response, operation|
@@ -421,6 +535,10 @@ module Google
             ##
             # Removes a Membership.
             #
+            # **This is currently only supported for GKE clusters on Google Cloud**.
+            # To unregister other clusters, follow the instructions at
+            # https://cloud.google.com/anthos/multicluster-management/connect/unregistering-a-cluster.
+            #
             # @overload delete_membership(request, options = nil)
             #   Pass arguments to `delete_membership` via a request object, either of type
             #   {::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest} or an equivalent Hash.
@@ -431,7 +549,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_membership(name: nil)
+            # @overload delete_membership(name: nil, request_id: nil)
             #   Pass arguments to `delete_membership` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -439,6 +557,20 @@ module Google
             #   @param name [::String]
             #     Required. The Membership resource name in the format
             #     `projects/*/locations/*/memberships/*`.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -447,6 +579,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gke_hub/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new
+            #
+            #   # Call the delete_membership method.
+            #   result = client.delete_membership request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_membership request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -465,16 +619,20 @@ module Google
                 gapic_version: ::Google::Cloud::GkeHub::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_membership.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_membership.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :delete_membership, request, options: options do |response, operation|
@@ -499,7 +657,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_membership(name: nil, update_mask: nil, resource: nil)
+            # @overload update_membership(name: nil, update_mask: nil, resource: nil, request_id: nil)
             #   Pass arguments to `update_membership` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -517,6 +675,22 @@ module Google
             #     If you are updating a map field, set the value of a key to null or empty
             #     string to delete the key from the map. It's not possible to update a key's
             #     value to the empty string.
+            #     If you specify the update_mask to be a special path "*", fully replaces all
+            #     user-modifiable fields to match `resource`.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -525,6 +699,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gke_hub/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeHub::V1beta1::UpdateMembershipRequest.new
+            #
+            #   # Call the update_membership method.
+            #   result = client.update_membership request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def update_membership request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -543,16 +739,20 @@ module Google
                 gapic_version: ::Google::Cloud::GkeHub::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_membership.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_membership.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :update_membership, request, options: options do |response, operation|
@@ -566,6 +766,9 @@ module Google
 
             ##
             # Generates the manifest for deployment of the GKE connect agent.
+            #
+            # **This method is used internally by Google-provided libraries.**
+            # Most clients should not need to call this method directly.
             #
             # @overload generate_connect_manifest(request, options = nil)
             #   Pass arguments to `generate_connect_manifest` via a request object, either of type
@@ -606,6 +809,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gke_hub/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestRequest.new
+            #
+            #   # Call the generate_connect_manifest method.
+            #   result = client.generate_connect_manifest request
+            #
+            #   # The returned object is of type Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestResponse.
+            #   p result
+            #
             def generate_connect_manifest request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -623,16 +841,20 @@ module Google
                 gapic_version: ::Google::Cloud::GkeHub::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.generate_connect_manifest.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_connect_manifest.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :generate_connect_manifest, request, options: options do |response, operation|
@@ -680,6 +902,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gke_hub/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeHub::V1beta1::ValidateExclusivityRequest.new
+            #
+            #   # Call the validate_exclusivity method.
+            #   result = client.validate_exclusivity request
+            #
+            #   # The returned object is of type Google::Cloud::GkeHub::V1beta1::ValidateExclusivityResponse.
+            #   p result
+            #
             def validate_exclusivity request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -697,16 +934,20 @@ module Google
                 gapic_version: ::Google::Cloud::GkeHub::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.validate_exclusivity.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.validate_exclusivity.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :validate_exclusivity, request, options: options do |response, operation|
@@ -766,6 +1007,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gke_hub/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestRequest.new
+            #
+            #   # Call the generate_exclusivity_manifest method.
+            #   result = client.generate_exclusivity_manifest request
+            #
+            #   # The returned object is of type Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestResponse.
+            #   p result
+            #
             def generate_exclusivity_manifest request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -783,16 +1039,20 @@ module Google
                 gapic_version: ::Google::Cloud::GkeHub::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.generate_exclusivity_manifest.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_exclusivity_manifest.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :generate_exclusivity_manifest, request, options: options do |response, operation|
@@ -816,22 +1076,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_memberships
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_memberships to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_memberships.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_memberships.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_memberships.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_memberships.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

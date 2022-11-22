@@ -18,9 +18,7 @@ if ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
   gem "google-cloud-bigquery-data_transfer", path: "../../google-cloud-bigquery-data_transfer"
   gem "google-cloud-bigquery-data_transfer-v1", path: "../../google-cloud-bigquery-data_transfer-v1"
 else
-  # rubocop:disable Bundler/DuplicatedGem
   gem "google-cloud-bigquery-data_transfer"
-  # rubocop:enable Bundler/DuplicatedGem
 end
 
 group :test do

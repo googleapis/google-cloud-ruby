@@ -4,11 +4,11 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/datacatalog/v1/policytagmanager_pb'
-require 'google/iam/v1/policy_pb'
-require 'google/api/client_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/datacatalog/v1/policytagmanagerserialization.proto", :syntax => :proto3) do
     add_message "google.cloud.datacatalog.v1.SerializedTaxonomy" do
@@ -22,6 +22,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :display_name, :string, 2
       optional :description, :string, 3
       repeated :child_policy_tags, :message, 4, "google.cloud.datacatalog.v1.SerializedPolicyTag"
+    end
+    add_message "google.cloud.datacatalog.v1.ReplaceTaxonomyRequest" do
+      optional :name, :string, 1
+      optional :serialized_taxonomy, :message, 2, "google.cloud.datacatalog.v1.SerializedTaxonomy"
     end
     add_message "google.cloud.datacatalog.v1.ImportTaxonomiesRequest" do
       optional :parent, :string, 1
@@ -58,6 +62,7 @@ module Google
       module V1
         SerializedTaxonomy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.SerializedTaxonomy").msgclass
         SerializedPolicyTag = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.SerializedPolicyTag").msgclass
+        ReplaceTaxonomyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ReplaceTaxonomyRequest").msgclass
         ImportTaxonomiesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ImportTaxonomiesRequest").msgclass
         InlineSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.InlineSource").msgclass
         CrossRegionalSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.CrossRegionalSource").msgclass

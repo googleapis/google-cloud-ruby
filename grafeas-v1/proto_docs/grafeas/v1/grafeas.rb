@@ -72,6 +72,15 @@ module Grafeas
     # @!attribute [rw] upgrade
     #   @return [::Grafeas::V1::UpgradeOccurrence]
     #     Describes an available package upgrade on the linked resource.
+    # @!attribute [rw] compliance
+    #   @return [::Grafeas::V1::ComplianceOccurrence]
+    #     Describes a compliance violation on a linked resource.
+    # @!attribute [rw] dsse_attestation
+    #   @return [::Grafeas::V1::DSSEAttestationOccurrence]
+    #     Describes an attestation of an artifact using dsse.
+    # @!attribute [rw] envelope
+    #   @return [::Grafeas::V1::Envelope]
+    #     https://github.com/secure-systems-lab/dsse
     class Occurrence
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -133,6 +142,12 @@ module Grafeas
     # @!attribute [rw] upgrade
     #   @return [::Grafeas::V1::UpgradeNote]
     #     A note describing available package upgrades.
+    # @!attribute [rw] compliance
+    #   @return [::Grafeas::V1::ComplianceNote]
+    #     A note describing a compliance check.
+    # @!attribute [rw] dsse_attestation
+    #   @return [::Grafeas::V1::DSSEAttestationNote]
+    #     A note describing a dsse attestation note.
     class Note
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

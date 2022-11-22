@@ -26,6 +26,23 @@ module Google
             # Path helper methods for the DashboardsService API.
             module Paths
               ##
+              # Create a fully-qualified AlertPolicy resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/alertPolicies/{alert_policy}`
+              #
+              # @param project [String]
+              # @param alert_policy [String]
+              #
+              # @return [::String]
+              def alert_policy_path project:, alert_policy:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                "projects/#{project}/alertPolicies/#{alert_policy}"
+              end
+
+              ##
               # Create a fully-qualified Dashboard resource string.
               #
               # The resource will be in the following format:

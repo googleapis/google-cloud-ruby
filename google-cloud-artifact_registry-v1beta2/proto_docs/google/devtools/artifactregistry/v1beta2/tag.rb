@@ -27,10 +27,15 @@ module Google
         #   @return [::String]
         #     The name of the tag, for example:
         #     "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/tags/tag1".
+        #     If the package part contains slashes, the slashes are escaped.
+        #     The tag part can only have characters in [a-zA-Z0-9\-._~:@], anything else
+        #     must be URL encoded.
         # @!attribute [rw] version
         #   @return [::String]
         #     The name of the version the tag refers to, for example:
         #     "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/sha256:5243811"
+        #     If the package or version ID parts contain slashes, the slashes are
+        #     escaped.
         class Tag
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -53,8 +58,7 @@ module Google
         #       --> Tags that are applied to the version `1.0` in package `pkg1`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of tags to return.
-        #     Maximum page size is 10,000.
+        #     The maximum number of tags to return. Maximum page size is 10,000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The next_page_token value returned from a previous list request, if any.

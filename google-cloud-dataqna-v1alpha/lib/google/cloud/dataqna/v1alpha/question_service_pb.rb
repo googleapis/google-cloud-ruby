@@ -10,6 +10,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/dataqna/v1alpha/question_pb'
 require 'google/cloud/dataqna/v1alpha/user_feedback_pb'
 require 'google/protobuf/field_mask_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dataqna/v1alpha/question_service.proto", :syntax => :proto3) do
     add_message "google.cloud.dataqna.v1alpha.GetQuestionRequest" do

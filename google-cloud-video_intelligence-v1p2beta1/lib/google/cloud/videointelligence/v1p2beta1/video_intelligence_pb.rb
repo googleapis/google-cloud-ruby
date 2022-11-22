@@ -10,6 +10,7 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/videointelligence/v1p2beta1/video_intelligence.proto", :syntax => :proto3) do
     add_message "google.cloud.videointelligence.v1p2beta1.AnnotateVideoRequest" do
@@ -128,7 +129,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :entity, :message, 1, "google.cloud.videointelligence.v1p2beta1.Entity"
       optional :confidence, :float, 4
       repeated :frames, :message, 2, "google.cloud.videointelligence.v1p2beta1.ObjectTrackingFrame"
-      optional :segment, :message, 3, "google.cloud.videointelligence.v1p2beta1.VideoSegment"
+      oneof :track_info do
+        optional :segment, :message, 3, "google.cloud.videointelligence.v1p2beta1.VideoSegment"
+        optional :track_id, :int64, 5
+      end
     end
     add_enum "google.cloud.videointelligence.v1p2beta1.Feature" do
       value :FEATURE_UNSPECIFIED, 0

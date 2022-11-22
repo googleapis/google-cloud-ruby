@@ -1,5 +1,79 @@
 # Release History
 
+### 0.8.1 (2022-11-09)
+
+#### Documentation
+
+* mark company_size and keyword_searchable_job_custom_attributes deprecated 
+
+### 0.8.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.7.0 (2022-05-26)
+
+#### Features
+
+* update TelecommutePreference filter to add TELECOMMUTE_JOBS_EXCLUDED filter option
+
+### 0.6.4 / 2022-03-30
+
+#### Documentation
+
+* Document fuzzy matching in company_display_names
+
+### 0.6.3 / 2022-01-11
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.6.2 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.6.1 / 2021-11-02
+
+#### Documentation
+
+* Formatting fixes in the reference documentation
+
+### 0.6.0 / 2021-09-21
+
+#### Features
+
+* Replaced disable_keyword_match with keyword_match_mode in the search_jobs call
+
+### 0.5.0 / 2021-08-19
+
+#### Features
+
+* Support for additional commute methods
+
+### 0.4.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.4.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.4.1 / 2021-06-17
 
 #### Bug Fixes

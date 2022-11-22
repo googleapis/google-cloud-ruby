@@ -26,12 +26,18 @@ module Google
         #   @return [::String]
         #     The full resource name of the resource. See:
         #     https://cloud.google.com/apis/design/resource_names#full_resource_name
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The human readable name of the resource.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     The full resource type of the resource.
         # @!attribute [rw] project
         #   @return [::String]
         #     The full resource name of project that the resource belongs to.
         # @!attribute [rw] project_display_name
         #   @return [::String]
-        #     The human readable name of project that the resource belongs to.
+        #     The project ID that the resource belongs to.
         # @!attribute [rw] parent
         #   @return [::String]
         #     The full resource name of resource's parent.

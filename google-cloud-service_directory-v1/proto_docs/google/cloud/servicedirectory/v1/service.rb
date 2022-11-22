@@ -28,7 +28,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The resource name for the service in the format
-        #     'projects/*/locations/*/namespaces/*/services/*'.
+        #     `projects/*/locations/*/namespaces/*/services/*`.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Annotations for the service. This data can be consumed by service

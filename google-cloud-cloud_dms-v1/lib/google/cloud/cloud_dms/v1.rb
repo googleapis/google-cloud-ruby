@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/cloud_dms/v1"
       #     client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
       #

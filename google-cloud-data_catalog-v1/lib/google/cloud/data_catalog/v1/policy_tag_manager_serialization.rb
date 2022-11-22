@@ -31,9 +31,10 @@ module Google
     module DataCatalog
       module V1
         ##
-        # Policy Tag Manager serialization API service allows clients to manipulate
-        # their policy tags and taxonomies in serialized format, where taxonomy is a
-        # hierarchical group of policy tags.
+        # Policy Tag Manager Serialization API service allows you to manipulate
+        # your policy tags and taxonomies in a serialized format.
+        #
+        # Taxonomy is a hierarchical group of policy tags.
         #
         # To load this service and instantiate a client:
         #

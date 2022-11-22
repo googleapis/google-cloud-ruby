@@ -10,6 +10,7 @@ require 'google/cloud/osconfig/v1alpha/osconfig_common_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/osconfig/v1alpha/os_policy_assignments.proto", :syntax => :proto3) do
     add_message "google.cloud.osconfig.v1alpha.OSPolicyAssignment" do
@@ -20,6 +21,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :rollout, :message, 5, "google.cloud.osconfig.v1alpha.OSPolicyAssignment.Rollout"
       optional :revision_id, :string, 6
       optional :revision_create_time, :message, 7, "google.protobuf.Timestamp"
+      optional :etag, :string, 8
       optional :rollout_state, :enum, 9, "google.cloud.osconfig.v1alpha.OSPolicyAssignment.RolloutState"
       optional :baseline, :bool, 10
       optional :deleted, :bool, 11
@@ -34,6 +36,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :os_short_names, :string, 2
       repeated :inclusion_labels, :message, 3, "google.cloud.osconfig.v1alpha.OSPolicyAssignment.LabelSet"
       repeated :exclusion_labels, :message, 4, "google.cloud.osconfig.v1alpha.OSPolicyAssignment.LabelSet"
+      repeated :inventories, :message, 5, "google.cloud.osconfig.v1alpha.OSPolicyAssignment.InstanceFilter.Inventory"
+    end
+    add_message "google.cloud.osconfig.v1alpha.OSPolicyAssignment.InstanceFilter.Inventory" do
+      optional :os_short_name, :string, 1
+      optional :os_version, :string, 2
     end
     add_message "google.cloud.osconfig.v1alpha.OSPolicyAssignment.Rollout" do
       optional :disruption_budget, :message, 1, "google.cloud.osconfig.v1alpha.FixedOrPercent"
@@ -109,6 +116,7 @@ module Google
         OSPolicyAssignment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicyAssignment").msgclass
         OSPolicyAssignment::LabelSet = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicyAssignment.LabelSet").msgclass
         OSPolicyAssignment::InstanceFilter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicyAssignment.InstanceFilter").msgclass
+        OSPolicyAssignment::InstanceFilter::Inventory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicyAssignment.InstanceFilter.Inventory").msgclass
         OSPolicyAssignment::Rollout = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicyAssignment.Rollout").msgclass
         OSPolicyAssignment::RolloutState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicyAssignment.RolloutState").enummodule
         OSPolicyAssignmentOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicyAssignmentOperationMetadata").msgclass

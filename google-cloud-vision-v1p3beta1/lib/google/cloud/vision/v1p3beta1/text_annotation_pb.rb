@@ -3,8 +3,8 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/cloud/vision/v1p3beta1/geometry_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/vision/v1p3beta1/text_annotation.proto", :syntax => :proto3) do
     add_message "google.cloud.vision.v1p3beta1.TextAnnotation" do

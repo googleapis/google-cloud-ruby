@@ -7,6 +7,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/websecurityscanner/v1beta/scan_run_error_trace_pb'
 require 'google/cloud/websecurityscanner/v1beta/scan_run_warning_trace_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/websecurityscanner/v1beta/scan_run.proto", :syntax => :proto3) do
     add_message "google.cloud.websecurityscanner.v1beta.ScanRun" do

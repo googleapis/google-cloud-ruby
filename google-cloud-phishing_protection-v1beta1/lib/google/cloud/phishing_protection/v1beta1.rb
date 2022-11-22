@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/phishing_protection/v1beta1"
       #     client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new
       #

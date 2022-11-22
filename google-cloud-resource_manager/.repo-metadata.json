@@ -2,6 +2,7 @@
     "name": "resourcemanager",
     "language": "ruby",
     "distribution_name": "google-cloud-resource_manager",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-resource_manager/latest",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-resource_manager/latest",
+    "release_level": "preview",
     "library_type": "GAPIC_MANUAL"
 }

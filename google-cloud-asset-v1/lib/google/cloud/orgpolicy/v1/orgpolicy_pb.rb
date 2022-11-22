@@ -3,9 +3,8 @@
 
 require 'google/protobuf'
 
-require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/orgpolicy/v1/orgpolicy.proto", :syntax => :proto3) do
     add_message "google.cloud.orgpolicy.v1.Policy" do

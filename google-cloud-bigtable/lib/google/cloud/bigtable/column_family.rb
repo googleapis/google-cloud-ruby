@@ -30,8 +30,8 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   instance = bigtable.instance("my-instance")
-      #   table = instance.table("my-table")
+      #   instance = bigtable.instance "my-instance"
+      #   table = instance.table "my-table"
       #
       #   column_family = table.column_families["cf2"]
       #   puts column_family.gc_rule

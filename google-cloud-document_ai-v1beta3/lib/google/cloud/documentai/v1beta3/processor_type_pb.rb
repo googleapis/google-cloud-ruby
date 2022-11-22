@@ -3,8 +3,9 @@
 
 require 'google/protobuf'
 
+require 'google/api/launch_stage_pb'
 require 'google/api/resource_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/documentai/v1beta3/processor_type.proto", :syntax => :proto3) do
     add_message "google.cloud.documentai.v1beta3.ProcessorType" do
@@ -13,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :category, :string, 3
       repeated :available_locations, :message, 4, "google.cloud.documentai.v1beta3.ProcessorType.LocationInfo"
       optional :allow_creation, :bool, 6
+      optional :launch_stage, :enum, 8, "google.api.LaunchStage"
     end
     add_message "google.cloud.documentai.v1beta3.ProcessorType.LocationInfo" do
       optional :location_id, :string, 1

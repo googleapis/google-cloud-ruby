@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-eventarc.gemspec",
+    "lib/google-cloud-eventarc.rb",
+    "lib/google/cloud/eventarc.rb",
+    "lib/google/cloud/eventarc/version.rb",
+    "test/google/cloud/eventarc/client_test.rb",
+    "test/google/cloud/eventarc/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

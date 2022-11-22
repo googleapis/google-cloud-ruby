@@ -172,6 +172,9 @@ module Google
           # @!attribute [rw] cos_package
           #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::VersionedPackage]
           #     Details of a COS package.
+          # @!attribute [rw] windows_application
+          #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::WindowsApplication]
+          #     Details of Windows Application.
           class SoftwarePackage
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -284,6 +287,31 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Contains information about a Windows application that is retrieved from the
+          # Windows Registry. For more information about these fields, see:
+          # https://docs.microsoft.com/en-us/windows/win32/msi/uninstall-registry-key
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     The name of the application or product.
+          # @!attribute [rw] display_version
+          #   @return [::String]
+          #     The version of the product or application in string format.
+          # @!attribute [rw] publisher
+          #   @return [::String]
+          #     The name of the manufacturer for the product or application.
+          # @!attribute [rw] install_date
+          #   @return [::Google::Type::Date]
+          #     The last time this product received service. The value of this property
+          #     is replaced each time a patch is applied or removed from the product or
+          #     the command-line option is used to repair the product.
+          # @!attribute [rw] help_link
+          #   @return [::String]
+          #     The internet address for technical support.
+          class WindowsApplication
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -320,11 +348,9 @@ module Google
         #   @return [::String]
         #     Required. The parent resource name.
         #
-        #     Format: `projects/{project}/locations/{location}/instances/{instance}`
+        #     Format: `projects/{project}/locations/{location}/instances/-`
         #
-        #     For `{project}`, either `project-number` or `project-id` can be
-        #     provided. For `{instance}`, only hyphen or dash character is supported to
-        #     list inventories across VMs.
+        #     For `{project}`, either `project-number` or `project-id` can be provided.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::OsConfig::V1alpha::InventoryView]
         #     Inventory view indicating what information should be included in the

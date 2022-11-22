@@ -39,13 +39,12 @@ module Google
             # See {::Google::Cloud::AppEngine::V1::DomainMappings::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all DomainMappings clients:
-            #
-            #     ::Google::Cloud::AppEngine::V1::DomainMappings::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all DomainMappings clients
+            #   ::Google::Cloud::AppEngine::V1::DomainMappings::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -92,19 +91,15 @@ module Google
             ##
             # Create a new DomainMappings client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new DomainMappings client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::AppEngine::V1::DomainMappings::Client.new
             #
-            #     client = ::Google::Cloud::AppEngine::V1::DomainMappings::Client.new
-            #
-            # To create a new DomainMappings client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::AppEngine::V1::DomainMappings::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::AppEngine::V1::DomainMappings::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the DomainMappings client.
             # @yieldparam config [Client::Configuration]
@@ -124,14 +119,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -139,6 +133,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -193,6 +188,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::DomainMappings::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::ListDomainMappingsRequest.new
+            #
+            #   # Call the list_domain_mappings method.
+            #   result = client.list_domain_mappings request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AppEngine::V1::DomainMapping.
+            #     p response
+            #   end
+            #
             def list_domain_mappings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -210,16 +226,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_domain_mappings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_domain_mappings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domain_mappings_stub.call_rpc :list_domain_mappings, request, options: options do |response, operation|
@@ -261,6 +281,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::DomainMappings::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::GetDomainMappingRequest.new
+            #
+            #   # Call the get_domain_mapping method.
+            #   result = client.get_domain_mapping request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::DomainMapping.
+            #   p result
+            #
             def get_domain_mapping request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -278,16 +313,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_domain_mapping.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_domain_mapping.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domain_mappings_stub.call_rpc :get_domain_mapping, request, options: options do |response, operation|
@@ -334,6 +373,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::DomainMappings::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::CreateDomainMappingRequest.new
+            #
+            #   # Call the create_domain_mapping method.
+            #   result = client.create_domain_mapping request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_domain_mapping request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -351,16 +412,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_domain_mapping.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_domain_mapping.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domain_mappings_stub.call_rpc :create_domain_mapping, request, options: options do |response, operation|
@@ -400,7 +465,7 @@ module Google
             #     A domain mapping containing the updated resource. Only fields set
             #     in the field mask will be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Standard field mask for the set of fields to be updated.
+            #     Required. Standard field mask for the set of fields to be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -409,6 +474,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::DomainMappings::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::UpdateDomainMappingRequest.new
+            #
+            #   # Call the update_domain_mapping method.
+            #   result = client.update_domain_mapping request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def update_domain_mapping request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -427,16 +514,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_domain_mapping.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_domain_mapping.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domain_mappings_stub.call_rpc :update_domain_mapping, request, options: options do |response, operation|
@@ -480,6 +571,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::DomainMappings::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::DeleteDomainMappingRequest.new
+            #
+            #   # Call the delete_domain_mapping method.
+            #   result = client.delete_domain_mapping request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_domain_mapping request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -497,16 +610,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_domain_mapping.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_domain_mapping.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domain_mappings_stub.call_rpc :delete_domain_mapping, request, options: options do |response, operation|
@@ -531,22 +648,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_domain_mappings
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_domain_mappings to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::AppEngine::V1::DomainMappings::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_domain_mappings.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::AppEngine::V1::DomainMappings::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_domain_mappings.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::AppEngine::V1::DomainMappings::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_domain_mappings.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::AppEngine::V1::DomainMappings::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_domain_mappings.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

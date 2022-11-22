@@ -41,13 +41,12 @@ module Google
             # See {::Google::Analytics::Data::V1alpha::AnalyticsData::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all AnalyticsData clients:
-            #
-            #     ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all AnalyticsData clients
+            #   ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,10 +66,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [2]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [2]
                 }
 
                 default_config.rpcs.run_report.timeout = 60.0
@@ -110,19 +106,15 @@ module Google
             ##
             # Create a new AnalyticsData client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new AnalyticsData client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.new
             #
-            #     client = ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.new
-            #
-            # To create a new AnalyticsData client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the AnalyticsData client.
             # @yieldparam config [Client::Configuration]
@@ -142,14 +134,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -268,7 +259,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.run_report.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.run_report.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_data_stub.call_rpc :run_report, request, options: options do |response, operation|
@@ -371,7 +364,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.run_pivot_report.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.run_pivot_report.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_data_stub.call_rpc :run_pivot_report, request, options: options do |response, operation|
@@ -437,7 +432,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_run_reports.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_run_reports.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_data_stub.call_rpc :batch_run_reports, request, options: options do |response, operation|
@@ -503,7 +500,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_run_pivot_reports.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_run_pivot_reports.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_data_stub.call_rpc :batch_run_pivot_reports, request, options: options do |response, operation|
@@ -588,7 +587,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_metadata.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_metadata.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_data_stub.call_rpc :get_metadata, request, options: options do |response, operation|
@@ -683,7 +684,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.run_realtime_report.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.run_realtime_report.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_data_stub.call_rpc :run_realtime_report, request, options: options do |response, operation|
@@ -707,22 +710,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for run_report
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # run_report to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.run_report.timeout = 20.0
+            #   end
             #
-            #     ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.run_report.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.run_report.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.run_report.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

@@ -1,5 +1,17 @@
 # Release History
 
+### 0.8.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.8.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
 ### 0.8.1 / 2021-06-17
 
 #### Bug Fixes

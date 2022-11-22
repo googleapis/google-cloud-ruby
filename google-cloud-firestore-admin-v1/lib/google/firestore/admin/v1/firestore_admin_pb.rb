@@ -7,13 +7,30 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/firestore/admin/v1/database_pb'
 require 'google/firestore/admin/v1/field_pb'
 require 'google/firestore/admin/v1/index_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/firestore/admin/v1/firestore_admin.proto", :syntax => :proto3) do
+    add_message "google.firestore.admin.v1.ListDatabasesRequest" do
+      optional :parent, :string, 1
+    end
+    add_message "google.firestore.admin.v1.ListDatabasesResponse" do
+      repeated :databases, :message, 1, "google.firestore.admin.v1.Database"
+    end
+    add_message "google.firestore.admin.v1.GetDatabaseRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.firestore.admin.v1.UpdateDatabaseRequest" do
+      optional :database, :message, 1, "google.firestore.admin.v1.Database"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.firestore.admin.v1.UpdateDatabaseMetadata" do
+    end
     add_message "google.firestore.admin.v1.CreateIndexRequest" do
       optional :parent, :string, 1
       optional :index, :message, 2, "google.firestore.admin.v1.Index"
@@ -69,6 +86,11 @@ module Google
     module Firestore
       module Admin
         module V1
+          ListDatabasesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListDatabasesRequest").msgclass
+          ListDatabasesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListDatabasesResponse").msgclass
+          GetDatabaseRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.GetDatabaseRequest").msgclass
+          UpdateDatabaseRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.UpdateDatabaseRequest").msgclass
+          UpdateDatabaseMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.UpdateDatabaseMetadata").msgclass
           CreateIndexRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.CreateIndexRequest").msgclass
           ListIndexesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListIndexesRequest").msgclass
           ListIndexesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListIndexesResponse").msgclass

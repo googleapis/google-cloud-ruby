@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/access_approval/v1"
       #     client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
       #

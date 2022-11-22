@@ -37,7 +37,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   avro_url = "gs://bucket/path/to/data.avro"
+        #   avro_url = "gs://bucket/path/to/*.avro"
         #   avro_table = bigquery.external avro_url do |avro|
         #     avro.autodetect = true
         #   end
@@ -174,7 +174,7 @@ module Google
           #
           #   bigquery = Google::Cloud::Bigquery.new
           #
-          #   avro_url = "gs://bucket/path/to/data.avro"
+          #   avro_url = "gs://bucket/path/to/*.avro"
           #   avro_table = bigquery.external avro_url
           #
           #   avro_table.format #=> "AVRO"

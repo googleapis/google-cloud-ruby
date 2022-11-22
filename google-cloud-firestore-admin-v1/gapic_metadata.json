@@ -54,6 +54,21 @@
               "methods": [
                 "import_documents"
               ]
+            },
+            "GetDatabase": {
+              "methods": [
+                "get_database"
+              ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "list_databases"
+              ]
+            },
+            "UpdateDatabase": {
+              "methods": [
+                "update_database"
+              ]
             }
           }
         }

@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ApiGatewayService clients:
-            #
-            #     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ApiGatewayService clients
+            #   ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,74 +66,47 @@ module Google
 
                 default_config.rpcs.create_gateway.timeout = 60.0
                 default_config.rpcs.create_gateway.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 60.0,
-              multiplier: 2,
-              retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.update_gateway.timeout = 60.0
                 default_config.rpcs.update_gateway.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 60.0,
-              multiplier: 2,
-              retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.delete_gateway.timeout = 60.0
                 default_config.rpcs.delete_gateway.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 60.0,
-              multiplier: 2,
-              retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.create_api.timeout = 60.0
                 default_config.rpcs.create_api.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 60.0,
-              multiplier: 2,
-              retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.update_api.timeout = 60.0
                 default_config.rpcs.update_api.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 60.0,
-              multiplier: 2,
-              retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.delete_api.timeout = 60.0
                 default_config.rpcs.delete_api.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 60.0,
-              multiplier: 2,
-              retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.create_api_config.timeout = 60.0
                 default_config.rpcs.create_api_config.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 60.0,
-              multiplier: 2,
-              retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.update_api_config.timeout = 60.0
                 default_config.rpcs.update_api_config.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 60.0,
-              multiplier: 2,
-              retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.delete_api_config.timeout = 60.0
                 default_config.rpcs.delete_api_config.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 60.0,
-              multiplier: 2,
-              retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config
@@ -166,19 +138,15 @@ module Google
             ##
             # Create a new ApiGatewayService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ApiGatewayService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
             #
-            #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
-            #
-            # To create a new ApiGatewayService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ApiGatewayService client.
             # @yieldparam config [Client::Configuration]
@@ -198,14 +166,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -213,6 +180,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -272,6 +240,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new
+            #
+            #   # Call the list_gateways method.
+            #   result = client.list_gateways request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ApiGateway::V1::Gateway.
+            #     p response
+            #   end
+            #
             def list_gateways request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -289,16 +278,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_gateways.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_gateways.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :list_gateways, request, options: options do |response, operation|
@@ -340,6 +333,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::GetGatewayRequest.new
+            #
+            #   # Call the get_gateway method.
+            #   result = client.get_gateway request
+            #
+            #   # The returned object is of type Google::Cloud::ApiGateway::V1::Gateway.
+            #   p result
+            #
             def get_gateway request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -357,16 +365,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_gateway.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_gateway.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :get_gateway, request, options: options do |response, operation|
@@ -412,6 +424,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::CreateGatewayRequest.new
+            #
+            #   # Call the create_gateway method.
+            #   result = client.create_gateway request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_gateway request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -429,16 +463,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_gateway.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_gateway.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :create_gateway, request, options: options do |response, operation|
@@ -485,6 +523,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::UpdateGatewayRequest.new
+            #
+            #   # Call the update_gateway method.
+            #   result = client.update_gateway request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_gateway request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -502,16 +562,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "gateway.name" => request.gateway.name
-              }
+              header_params = {}
+              if request.gateway&.name
+                header_params["gateway.name"] = request.gateway.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_gateway.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_gateway.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :update_gateway, request, options: options do |response, operation|
@@ -553,6 +617,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::DeleteGatewayRequest.new
+            #
+            #   # Call the delete_gateway method.
+            #   result = client.delete_gateway request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_gateway request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -570,16 +656,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_gateway.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_gateway.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :delete_gateway, request, options: options do |response, operation|
@@ -629,6 +719,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::ListApisRequest.new
+            #
+            #   # Call the list_apis method.
+            #   result = client.list_apis request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ApiGateway::V1::Api.
+            #     p response
+            #   end
+            #
             def list_apis request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -646,16 +757,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_apis.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_apis.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :list_apis, request, options: options do |response, operation|
@@ -697,6 +812,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::GetApiRequest.new
+            #
+            #   # Call the get_api method.
+            #   result = client.get_api request
+            #
+            #   # The returned object is of type Google::Cloud::ApiGateway::V1::Api.
+            #   p result
+            #
             def get_api request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -714,16 +844,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_api.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_api.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :get_api, request, options: options do |response, operation|
@@ -769,6 +903,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::CreateApiRequest.new
+            #
+            #   # Call the create_api method.
+            #   result = client.create_api request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_api request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -786,16 +942,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_api.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_api.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :create_api, request, options: options do |response, operation|
@@ -842,6 +1002,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::UpdateApiRequest.new
+            #
+            #   # Call the update_api method.
+            #   result = client.update_api request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_api request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -859,16 +1041,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "api.name" => request.api.name
-              }
+              header_params = {}
+              if request.api&.name
+                header_params["api.name"] = request.api.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_api.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_api.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :update_api, request, options: options do |response, operation|
@@ -910,6 +1096,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::DeleteApiRequest.new
+            #
+            #   # Call the delete_api method.
+            #   result = client.delete_api request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_api request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -927,16 +1135,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_api.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_api.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :delete_api, request, options: options do |response, operation|
@@ -986,6 +1198,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::ListApiConfigsRequest.new
+            #
+            #   # Call the list_api_configs method.
+            #   result = client.list_api_configs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ApiGateway::V1::ApiConfig.
+            #     p response
+            #   end
+            #
             def list_api_configs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1003,16 +1236,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_api_configs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_api_configs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :list_api_configs, request, options: options do |response, operation|
@@ -1057,6 +1294,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::GetApiConfigRequest.new
+            #
+            #   # Call the get_api_config method.
+            #   result = client.get_api_config request
+            #
+            #   # The returned object is of type Google::Cloud::ApiGateway::V1::ApiConfig.
+            #   p result
+            #
             def get_api_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1074,16 +1326,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_api_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_api_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :get_api_config, request, options: options do |response, operation|
@@ -1129,6 +1385,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::CreateApiConfigRequest.new
+            #
+            #   # Call the create_api_config method.
+            #   result = client.create_api_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_api_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1146,16 +1424,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_api_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_api_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :create_api_config, request, options: options do |response, operation|
@@ -1202,6 +1484,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest.new
+            #
+            #   # Call the update_api_config method.
+            #   result = client.update_api_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_api_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1219,16 +1523,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "api_config.name" => request.api_config.name
-              }
+              header_params = {}
+              if request.api_config&.name
+                header_params["api_config.name"] = request.api_config.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_api_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_api_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :update_api_config, request, options: options do |response, operation|
@@ -1270,6 +1578,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/api_gateway/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest.new
+            #
+            #   # Call the delete_api_config method.
+            #   result = client.delete_api_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_api_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1287,16 +1617,20 @@ module Google
                 gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_api_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_api_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @api_gateway_service_stub.call_rpc :delete_api_config, request, options: options do |response, operation|
@@ -1321,22 +1655,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_gateways
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_gateways to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_gateways.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_gateways.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_gateways.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_gateways.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

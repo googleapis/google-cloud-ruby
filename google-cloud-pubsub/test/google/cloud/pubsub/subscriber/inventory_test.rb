@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "helper"
+require "ostruct"
 
 describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
@@ -165,9 +166,32 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
     _(mod_ack_hash[60].sort).must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
   end
 
+  it "calculates delay considering min_duration_per_lease_extension" do
+    subscriber_mock = Minitest::Mock.new
+    subscriber_mock.expect :subscriber, OpenStruct.new({:deadline => 60})
+    subscriber_mock.expect :exactly_once_delivery_enabled, true
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, 
+                                                                 limit: 2, 
+                                                                 bytesize: 100_000, 
+                                                                 extension: 3600, 
+                                                                 max_duration_per_lease_extension: 0, 
+                                                                 min_duration_per_lease_extension: 61,
+                                                                 use_legacy_flow_control: false
+
+    inventory.add rec_msg1_grpc
+    delay = inventory.send :calc_delay
+    assert_equal 61, delay
+  end
+
   it "knows its count limit" do
     subscriber_mock = Minitest::Mock.new
-    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 2, bytesize: 100_000, extension: 3600, max_duration_per_lease_extension: 0, use_legacy_flow_control: false
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, 
+                                                                 limit: 2, 
+                                                                 bytesize: 100_000, 
+                                                                 extension: 3600, 
+                                                                 max_duration_per_lease_extension: 0, 
+                                                                 min_duration_per_lease_extension: 0,
+                                                                 use_legacy_flow_control: false
 
     inventory.add rec_msg1_grpc
     _(inventory).wont_be :full?
@@ -179,7 +203,13 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
   it "knows its bytesize limit" do
     subscriber_mock = Minitest::Mock.new
-    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100, extension: 3600, max_duration_per_lease_extension: 0, use_legacy_flow_control: false
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, 
+                                                                 limit: 1000, 
+                                                                 bytesize: 100, 
+                                                                 extension: 3600, 
+                                                                 max_duration_per_lease_extension: 0, 
+                                                                 min_duration_per_lease_extension: 0,
+                                                                 use_legacy_flow_control: false
 
     inventory.add rec_msg1_grpc
     _(inventory).wont_be :full?
@@ -191,7 +221,13 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
   it "removes expired items" do
     subscriber_mock = Minitest::Mock.new
-    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100_000, extension: 3600, max_duration_per_lease_extension: 0, use_legacy_flow_control: false
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, 
+                                                                 limit: 1000, 
+                                                                 bytesize: 100_000, 
+                                                                 extension: 3600, 
+                                                                 max_duration_per_lease_extension: 0,
+                                                                 min_duration_per_lease_extension: 0,
+                                                                 use_legacy_flow_control: false
 
     expired_time = Time.now - 7200
 
@@ -209,8 +245,27 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
   it "knows its max_duration_per_lease_extension limit" do
     subscriber_mock = Minitest::Mock.new
-    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100, extension: 3600, max_duration_per_lease_extension: 10, use_legacy_flow_control: false
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, 
+                                                                 limit: 1000,
+                                                                 bytesize: 100, 
+                                                                 extension: 3600, 
+                                                                 max_duration_per_lease_extension: 10, 
+                                                                 min_duration_per_lease_extension: 0,
+                                                                 use_legacy_flow_control: false
 
     _(inventory.max_duration_per_lease_extension).must_equal 10
+  end
+
+  it "knows its min_duration_per_lease_extension limit" do
+    subscriber_mock = Minitest::Mock.new
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, 
+                                                                 limit: 1000, 
+                                                                 bytesize: 100, 
+                                                                 extension: 3600, 
+                                                                 max_duration_per_lease_extension: 0, 
+                                                                 min_duration_per_lease_extension: 10, 
+                                                                 use_legacy_flow_control: false
+
+    _(inventory.min_duration_per_lease_extension).must_equal 10
   end
 end

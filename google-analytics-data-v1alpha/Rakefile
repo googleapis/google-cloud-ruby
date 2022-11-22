@@ -69,29 +69,29 @@ desc "Run the google-analytics-data-v1alpha acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||=
-    ENV["ANALYTICS_TEST_PROJECT"] ||
+    ENV["ANALYTICS_DATA_TEST_PROJECT"] ||
     ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
   keyfile ||=
-    ENV["ANALYTICS_TEST_KEYFILE"] ||
+    ENV["ANALYTICS_DATA_TEST_KEYFILE"] ||
     ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
     keyfile ||=
-      ENV["ANALYTICS_TEST_KEYFILE_JSON"] ||
+      ENV["ANALYTICS_DATA_TEST_KEYFILE_JSON"] ||
       ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or ANALYTICS_TEST_PROJECT=test123 ANALYTICS_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or ANALYTICS_DATA_TEST_PROJECT=test123 ANALYTICS_DATA_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/analytics/data/v1alpha/analytics_data/credentials"
   ::Google::Analytics::Data::V1alpha::AnalyticsData::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
-  ENV["ANALYTICS_PROJECT"] = project
-  ENV["ANALYTICS_TEST_PROJECT"] = project
-  ENV["ANALYTICS_KEYFILE_JSON"] = keyfile
+  ENV["ANALYTICS_DATA_PROJECT"] = project
+  ENV["ANALYTICS_DATA_TEST_PROJECT"] = project
+  ENV["ANALYTICS_DATA_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end

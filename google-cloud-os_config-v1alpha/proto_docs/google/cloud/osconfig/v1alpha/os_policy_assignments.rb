@@ -68,6 +68,10 @@ module Google
         # @!attribute [r] revision_create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp that the revision was created.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     The etag for this OS policy assignment.
+        #     If this is provided on update, it must match the server's etag.
         # @!attribute [r] rollout_state
         #   @return [::Google::Cloud::OsConfig::V1alpha::OSPolicyAssignment::RolloutState]
         #     Output only. OS policy assignment rollout state
@@ -122,14 +126,18 @@ module Google
             end
           end
 
-          # Message to represent the filters to select VMs for an assignment
+          # Filters to select target VMs for an assignment.
+          #
+          # If more than one filter criteria is specified below, a VM will be selected
+          # if and only if it satisfies all of them.
           # @!attribute [rw] all
           #   @return [::Boolean]
           #     Target all VMs in the project. If true, no other criteria is
           #     permitted.
           # @!attribute [rw] os_short_names
           #   @return [::Array<::String>]
-          #     A VM is included if it's OS short name matches with any of the
+          #     Deprecated. Use the `inventories` field instead.
+          #     A VM is selected if it's OS short name matches with any of the
           #     values provided in this list.
           # @!attribute [rw] inclusion_labels
           #   @return [::Array<::Google::Cloud::OsConfig::V1alpha::OSPolicyAssignment::LabelSet>]
@@ -143,13 +151,33 @@ module Google
           #
           #     If the list has more than one label set, the VM is excluded if any
           #     of the label sets are applicable for the VM.
+          # @!attribute [rw] inventories
+          #   @return [::Array<::Google::Cloud::OsConfig::V1alpha::OSPolicyAssignment::InstanceFilter::Inventory>]
+          #     List of inventories to select VMs.
           #
-          #     This filter is applied last in the filtering chain and therefore a
-          #     VM is guaranteed to be excluded if it satisfies one of the below
-          #     label sets.
+          #     A VM is selected if its inventory data matches at least one of the
+          #     following inventories.
           class InstanceFilter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # VM inventory details.
+            # @!attribute [rw] os_short_name
+            #   @return [::String]
+            #     Required. The OS short name
+            # @!attribute [rw] os_version
+            #   @return [::String]
+            #     The OS version
+            #
+            #     Prefix matches are supported if asterisk(*) is provided as the
+            #     last character. For example, to match all versions with a major
+            #     version of `7`, specify the following value for this field `7.*`
+            #
+            #     An empty string matches all OS versions.
+            class Inventory
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Message to configure the rollout at the zonal level for the OS policy

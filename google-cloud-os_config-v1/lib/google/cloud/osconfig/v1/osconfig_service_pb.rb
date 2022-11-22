@@ -3,12 +3,13 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/osconfig/v1/patch_deployments_pb'
 require 'google/cloud/osconfig/v1/patch_jobs_pb'
 require 'google/protobuf/empty_pb'
+require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/osconfig/v1/osconfig_service.proto", :syntax => :proto3) do
   end

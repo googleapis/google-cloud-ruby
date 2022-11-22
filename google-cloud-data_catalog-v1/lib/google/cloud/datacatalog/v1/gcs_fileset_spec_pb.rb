@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/cloud/datacatalog/v1/timestamps_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/datacatalog/v1/gcs_fileset_spec.proto", :syntax => :proto3) do
     add_message "google.cloud.datacatalog.v1.GcsFilesetSpec" do

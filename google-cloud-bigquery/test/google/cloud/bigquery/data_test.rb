@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
 
     data = table.data
     mock.verify
@@ -47,6 +47,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     _(data[0][:duration]).must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
     _(data[0][:target_end]).must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
     _(data[0][:birthday]).must_equal Date.parse("1968-10-20")
+    _(data[0][:home]).must_equal "POINT(-122.335503 47.625536)"
 
     _(data[1]).must_be_kind_of Hash
     _(data[1][:name]).must_equal "Aaron"
@@ -78,7 +79,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
 
     data = table.data
     mock.verify
@@ -103,7 +104,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
 
     data = table.data
     mock.verify
@@ -111,8 +112,8 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     _(data.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
     _(data.schema).must_be :frozen?
     _(data.fields).must_equal data.schema.fields
-    _(data.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    _(data.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(data.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday, :home]
+    _(data.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE, home: :GEOGRAPHY })
   end
 
   it "handles missing rows and fields" do
@@ -120,7 +121,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 nil_table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
 
     nil_data = table.data
     mock.verify
@@ -160,7 +161,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 nested_table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
 
     nested_data = nested_table.data
     mock.verify
@@ -205,7 +206,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 nested_table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
 
     nested_data = nested_table.data
     mock.verify
@@ -221,10 +222,10 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data1 = table.data
 
@@ -241,10 +242,10 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi(token: nil).to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data1 = table.data
 
@@ -263,10 +264,10 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi(token: nil).to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data = table.data.all.to_a
 
@@ -280,10 +281,10 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi(token: nil).to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data = table.data
 
@@ -296,10 +297,10 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data = table.data.all.take(5)
 
@@ -313,10 +314,10 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data = table.data.all(request_limit: 1).to_a
 
@@ -330,7 +331,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: 3, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: 3, page_token: nil, start_index: nil, options: {skip_deserialization: true}
 
     data = table.data max: 3
     _(data.class).must_equal Google::Cloud::Bigquery::Data
@@ -341,11 +342,123 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: 25, options: {skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: 25, options: {skip_deserialization: true}
 
     data = table.data start: 25
     mock.verify
 
     _(data.class).must_equal Google::Cloud::Bigquery::Data
+  end
+
+  describe "statement_type" do
+    let(:data_hash) { { totalRows: nil, rows: [] } }
+
+    it "knows its DDL ALTER_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "ALTER_TABLE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "ALTER_TABLE"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_MODEL statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_MODEL"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "CREATE_MODEL"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_TABLE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "CREATE_TABLE"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_TABLE_AS_SELECT statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_TABLE_AS_SELECT"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "CREATE_TABLE_AS_SELECT"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_VIEW statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_VIEW"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "CREATE_VIEW"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_MODEL statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_MODEL"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "DROP_MODEL"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_TABLE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "DROP_TABLE"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_VIEW statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_VIEW"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "DROP_VIEW"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DML INSERT statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "INSERT"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "INSERT"
+      _(data.ddl?).must_equal false
+      _(data.dml?).must_equal true
+    end
+
+    it "knows its DML UPDATE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "UPDATE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "UPDATE"
+      _(data.ddl?).must_equal false
+      _(data.dml?).must_equal true
+    end
+
+    it "knows its DML MERGE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "MERGE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "MERGE"
+      _(data.ddl?).must_equal false
+      _(data.dml?).must_equal true
+    end
+
+    it "knows its DML DELETE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DELETE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "DELETE"
+      _(data.ddl?).must_equal false
+      _(data.dml?).must_equal true
+    end
   end
 end

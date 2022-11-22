@@ -8,6 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/servicedirectory/v1beta1/service_pb'
 require 'google/api/client_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/servicedirectory/v1beta1/lookup_service.proto", :syntax => :proto3) do
     add_message "google.cloud.servicedirectory.v1beta1.ResolveServiceRequest" do

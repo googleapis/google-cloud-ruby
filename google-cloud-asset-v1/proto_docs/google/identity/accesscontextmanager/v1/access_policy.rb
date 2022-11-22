@@ -29,7 +29,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Output only. Resource name of the `AccessPolicy`. Format:
-        #     `accessPolicies/{policy_id}`
+        #     `accessPolicies/{access_policy}`
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent of this `AccessPolicy` in the Cloud Resource
@@ -38,6 +38,22 @@ module Google
         # @!attribute [rw] title
         #   @return [::String]
         #     Required. Human readable title. Does not affect behavior.
+        # @!attribute [rw] scopes
+        #   @return [::Array<::String>]
+        #     The scopes of a policy define which resources an ACM policy can restrict,
+        #     and where ACM resources can be referenced.
+        #     For example, a policy with scopes=["folders/123"] has the following
+        #     behavior:
+        #     - vpcsc perimeters can only restrict projects within folders/123
+        #     - access levels can only be referenced by resources within folders/123.
+        #     If empty, there are no limitations on which resources can be restricted by
+        #     an ACM policy, and there are no limitations on where ACM resources can be
+        #     referenced.
+        #     Only one policy can include a given scope (attempting to create a second
+        #     policy which includes "folders/123" will result in an error).
+        #     Currently, scopes cannot be modified after a policy is created.
+        #     Currently, policies can only have a single scope.
+        #     Format: list of `folders/{folder_number}` or `projects/{project_number}`
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time the `AccessPolicy` was created in UTC.

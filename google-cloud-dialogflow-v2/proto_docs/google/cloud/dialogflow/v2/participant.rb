@@ -36,9 +36,66 @@ module Google
         #     Optional. Label applied to streams representing this participant in SIPREC
         #     XML metadata and SDP. This is used to assign transcriptions from that
         #     media stream to this participant. This field can be updated.
+        # @!attribute [rw] obfuscated_external_user_id
+        #   @return [::String]
+        #     Optional. Obfuscated user id that should be associated with the created participant.
+        #
+        #     You can specify a user id as follows:
+        #
+        #     1. If you set this field in
+        #        {::Google::Cloud::Dialogflow::V2::CreateParticipantRequest#participant CreateParticipantRequest} or
+        #        {::Google::Cloud::Dialogflow::V2::UpdateParticipantRequest#participant UpdateParticipantRequest},
+        #        Dialogflow adds the obfuscated user id with the participant.
+        #
+        #     2. If you set this field in
+        #        [AnalyzeContent][google.cloud.dialogflow.v2.AnalyzeContentRequest.obfuscated_external_user_id] or
+        #        [StreamingAnalyzeContent][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.obfuscated_external_user_id],
+        #        Dialogflow will update {::Google::Cloud::Dialogflow::V2::Participant#obfuscated_external_user_id Participant.obfuscated_external_user_id}.
+        #
+        #     Dialogflow returns an error if you try to add a user id for a
+        #     non-{::Google::Cloud::Dialogflow::V2::Participant::Role::END_USER END_USER} participant.
+        #
+        #     Dialogflow uses this user id for billing and measurement purposes. For
+        #     example, Dialogflow determines whether a user in one conversation returned
+        #     in a later conversation.
+        #
+        #     Note:
+        #
+        #     * Please never pass raw user ids to Dialogflow. Always obfuscate your user
+        #       id first.
+        #     * Dialogflow only accepts a UTF-8 encoded string, e.g., a hex digest of a
+        #       hash function like SHA-512.
+        #     * The length of the user id must be <= 256 characters.
+        # @!attribute [rw] documents_metadata_filters
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Key-value filters on the metadata of documents returned by article
+        #     suggestion. If specified, article suggestion only returns suggested
+        #     documents that match all filters in their {::Google::Cloud::Dialogflow::V2::Document#metadata Document.metadata}. Multiple
+        #     values for a metadata key should be concatenated by comma. For example,
+        #     filters to match all documents that have 'US' or 'CA' in their market
+        #     metadata values and 'agent' in their user metadata values will be
+        #     ```
+        #     documents_metadata_filters {
+        #       key: "market"
+        #       value: "US,CA"
+        #     }
+        #     documents_metadata_filters {
+        #       key: "user"
+        #       value: "agent"
+        #     }
+        #     ```
         class Participant
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class DocumentsMetadataFiltersEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Enumeration of the roles a participant can play in a conversation.
           module Role
@@ -60,7 +117,7 @@ module Google
         # Represents a message posted into a conversation.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The unique identifier of the message.
+        #     Optional. The unique identifier of the message.
         #     Format: `projects/<Project ID>/locations/<Location
         #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
         # @!attribute [rw] content
@@ -79,10 +136,16 @@ module Google
         #     Output only. The role of the participant.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time when the message was created.
+        #     Output only. The time when the message was created in Contact Center AI.
+        # @!attribute [rw] send_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The time when the message was sent.
         # @!attribute [r] message_annotation
         #   @return [::Google::Cloud::Dialogflow::V2::MessageAnnotation]
         #     Output only. The annotation for the message.
+        # @!attribute [r] sentiment_analysis
+        #   @return [::Google::Cloud::Dialogflow::V2::SentimentAnalysisResult]
+        #     Output only. The sentiment analysis result for the message.
         class Message
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -179,6 +242,17 @@ module Google
         # @!attribute [rw] query_params
         #   @return [::Google::Cloud::Dialogflow::V2::QueryParameters]
         #     Parameters for a Dialogflow virtual-agent query.
+        # @!attribute [rw] assist_query_params
+        #   @return [::Google::Cloud::Dialogflow::V2::AssistQueryParameters]
+        #     Parameters for a human assist query.
+        # @!attribute [rw] cx_parameters
+        #   @return [::Google::Protobuf::Struct]
+        #     Additional parameters to be put into Dialogflow CX session parameters. To
+        #     remove a parameter from the session, clients should explicitly set the
+        #     parameter value to null.
+        #
+        #     Note: this field should only be used if you are connecting to a Dialogflow
+        #     CX agent.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     A unique identifier for this request. Restricted to 36 ASCII characters.
@@ -231,6 +305,176 @@ module Google
         #     The suggestions for most recent human agent. The order is the same as
         #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionConfig#feature_configs HumanAgentAssistantConfig.SuggestionConfig.feature_configs} of
         #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig#human_agent_suggestion_config HumanAgentAssistantConfig.human_agent_suggestion_config}.
+        #
+        #     Note that any failure of Agent Assist features will not lead to the overall
+        #     failure of an AnalyzeContent API call. Instead, the features will
+        #     fail silently with the error field set in the corresponding
+        #     SuggestionResult.
+        # @!attribute [rw] end_user_suggestion_results
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::SuggestionResult>]
+        #     The suggestions for end user. The order is the same as
+        #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionConfig#feature_configs HumanAgentAssistantConfig.SuggestionConfig.feature_configs} of
+        #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig#end_user_suggestion_config HumanAgentAssistantConfig.end_user_suggestion_config}.
+        #
+        #     Same as human_agent_suggestion_results, any failure of Agent Assist
+        #     features will not lead to the overall failure of an AnalyzeContent API
+        #     call. Instead, the features will fail silently with the error field set in
+        #     the corresponding SuggestionResult.
+        # @!attribute [rw] dtmf_parameters
+        #   @return [::Google::Cloud::Dialogflow::V2::DtmfParameters]
+        #     Indicates the parameters of DTMF.
+        class AnalyzeContentResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The top-level message sent by the client to the
+        # {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent} method.
+        #
+        # Multiple request messages should be sent in order:
+        #
+        # 1.  The first message must contain
+        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#participant participant},
+        #     [config][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.config] and optionally
+        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#query_params query_params}. If you want
+        #     to receive an audio response, it should also contain
+        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#reply_audio_config reply_audio_config}.
+        #     The message must not contain
+        #     [input][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.input].
+        #
+        # 2.  If [config][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.config] in the first message
+        #     was set to {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#audio_config audio_config},
+        #     all subsequent messages must contain
+        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#input_audio input_audio} to continue
+        #     with Speech recognition.
+        #     However, note that:
+        #
+        #     * Dialogflow will bill you for the audio so far.
+        #     * Dialogflow discards all Speech recognition results in favor of the
+        #       text input.
+        #
+        #  3. If [StreamingAnalyzeContentRequest.config][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.config] in the first message was set
+        #    to {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#text_config StreamingAnalyzeContentRequest.text_config}, then the second message
+        #    must contain only {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#input_text input_text}.
+        #    Moreover, you must not send more than two messages.
+        #
+        #  After you sent all input, you must half-close or abort the request stream.
+        # @!attribute [rw] participant
+        #   @return [::String]
+        #     Required. The name of the participant this text comes from.
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
+        # @!attribute [rw] audio_config
+        #   @return [::Google::Cloud::Dialogflow::V2::InputAudioConfig]
+        #     Instructs the speech recognizer how to process the speech audio.
+        # @!attribute [rw] text_config
+        #   @return [::Google::Cloud::Dialogflow::V2::InputTextConfig]
+        #     The natural language text to be processed.
+        # @!attribute [rw] reply_audio_config
+        #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
+        #     Speech synthesis configuration.
+        #     The speech synthesis settings for a virtual agent that may be configured
+        #     for the associated conversation profile are not used when calling
+        #     StreamingAnalyzeContent. If this configuration is not supplied, speech
+        #     synthesis is disabled.
+        # @!attribute [rw] input_audio
+        #   @return [::String]
+        #     The input audio content to be recognized. Must be sent if `audio_config`
+        #     is set in the first message. The complete audio over all streaming
+        #     messages must not exceed 1 minute.
+        # @!attribute [rw] input_text
+        #   @return [::String]
+        #     The UTF-8 encoded natural language text to be processed. Must be sent if
+        #     `text_config` is set in the first message. Text length must not exceed
+        #     256 bytes for virtual agent interactions. The `input_text` field can be
+        #     only sent once.
+        # @!attribute [rw] input_dtmf
+        #   @return [::Google::Cloud::Dialogflow::V2::TelephonyDtmfEvents]
+        #     The DTMF digits used to invoke intent and fill in parameter value.
+        #
+        #     This input is ignored if the previous response indicated that DTMF input
+        #     is not accepted.
+        # @!attribute [rw] query_params
+        #   @return [::Google::Cloud::Dialogflow::V2::QueryParameters]
+        #     Parameters for a Dialogflow virtual-agent query.
+        # @!attribute [rw] assist_query_params
+        #   @return [::Google::Cloud::Dialogflow::V2::AssistQueryParameters]
+        #     Parameters for a human assist query.
+        # @!attribute [rw] cx_parameters
+        #   @return [::Google::Protobuf::Struct]
+        #     Additional parameters to be put into Dialogflow CX session parameters. To
+        #     remove a parameter from the session, clients should explicitly set the
+        #     parameter value to null.
+        #
+        #     Note: this field should only be used if you are connecting to a Dialogflow
+        #     CX agent.
+        # @!attribute [rw] enable_partial_automated_agent_reply
+        #   @return [::Boolean]
+        #     Enable partial virtual agent responses. If this flag is not enabled,
+        #     response stream still contains only one final response even if some
+        #     `Fulfillment`s in Dialogflow virtual agent have been configured to return
+        #     partial responses.
+        class StreamingAnalyzeContentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The top-level message returned from the `StreamingAnalyzeContent` method.
+        #
+        # Multiple response messages can be returned in order:
+        #
+        # 1.  If the input was set to streaming audio, the first one or more messages
+        #     contain `recognition_result`. Each `recognition_result` represents a more
+        #     complete transcript of what the user said. The last `recognition_result`
+        #     has `is_final` set to `true`.
+        #
+        # 2.  In virtual agent stage: if `enable_partial_automated_agent_reply` is
+        #     true, the following N (currently 1 <= N <= 4) messages
+        #     contain `automated_agent_reply` and optionally `reply_audio`
+        #     returned by the virtual agent. The first (N-1)
+        #     `automated_agent_reply`s will have `automated_agent_reply_type` set to
+        #     `PARTIAL`. The last `automated_agent_reply` has
+        #     `automated_agent_reply_type` set to `FINAL`.
+        #     If `enable_partial_automated_agent_reply` is not enabled, response stream
+        #     only contains the final reply.
+        #
+        #     In human assist stage: the following N (N >= 1) messages contain
+        #     `human_agent_suggestion_results`, `end_user_suggestion_results` or
+        #     `message`.
+        # @!attribute [rw] recognition_result
+        #   @return [::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult]
+        #     The result of speech recognition.
+        # @!attribute [rw] reply_text
+        #   @return [::String]
+        #     The output text content.
+        #     This field is set if an automated agent responded with a text for the user.
+        # @!attribute [rw] reply_audio
+        #   @return [::Google::Cloud::Dialogflow::V2::OutputAudio]
+        #     The audio data bytes encoded as specified in the request.
+        #     This field is set if:
+        #
+        #      - The `reply_audio_config` field is specified in the request.
+        #      - The automated agent, which this output comes from, responded with audio.
+        #        In such case, the `reply_audio.config` field contains settings used to
+        #        synthesize the speech.
+        #
+        #     In some scenarios, multiple output audio fields may be present in the
+        #     response structure. In these cases, only the top-most-level audio output
+        #     has content.
+        # @!attribute [rw] automated_agent_reply
+        #   @return [::Google::Cloud::Dialogflow::V2::AutomatedAgentReply]
+        #     Only set if a Dialogflow automated agent has responded.
+        #     Note that: [AutomatedAgentReply.detect_intent_response.output_audio][]
+        #     and [AutomatedAgentReply.detect_intent_response.output_audio_config][]
+        #     are always empty, use {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse#reply_audio reply_audio} instead.
+        # @!attribute [rw] message
+        #   @return [::Google::Cloud::Dialogflow::V2::Message]
+        #     Message analyzed by CCAI.
+        # @!attribute [rw] human_agent_suggestion_results
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::SuggestionResult>]
+        #     The suggestions for most recent human agent. The order is the same as
+        #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionConfig#feature_configs HumanAgentAssistantConfig.SuggestionConfig.feature_configs} of
+        #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig#human_agent_suggestion_config HumanAgentAssistantConfig.human_agent_suggestion_config}.
         # @!attribute [rw] end_user_suggestion_results
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::SuggestionResult>]
         #     The suggestions for end user. The order is the same as
@@ -239,7 +483,7 @@ module Google
         # @!attribute [rw] dtmf_parameters
         #   @return [::Google::Cloud::Dialogflow::V2::DtmfParameters]
         #     Indicates the parameters of DTMF.
-        class AnalyzeContentResponse
+        class StreamingAnalyzeContentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -252,16 +496,19 @@ module Google
         #     ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
         # @!attribute [rw] latest_message
         #   @return [::String]
-        #     The name of the latest conversation message to compile suggestion
+        #     Optional. The name of the latest conversation message to compile suggestion
         #     for. If empty, it will be the latest message of the conversation.
         #
         #     Format: `projects/<Project ID>/locations/<Location
         #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
         # @!attribute [rw] context_size
         #   @return [::Integer]
-        #     Max number of messages prior to and including
+        #     Optional. Max number of messages prior to and including
         #     {::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest#latest_message latest_message} to use as context
         #     when compiling the suggestion. By default 20 and at most 50.
+        # @!attribute [rw] assist_query_params
+        #   @return [::Google::Cloud::Dialogflow::V2::AssistQueryParameters]
+        #     Parameters for a human assist query.
         class SuggestArticlesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -298,16 +545,19 @@ module Google
         #     ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
         # @!attribute [rw] latest_message
         #   @return [::String]
-        #     The name of the latest conversation message to compile suggestion
+        #     Optional. The name of the latest conversation message to compile suggestion
         #     for. If empty, it will be the latest message of the conversation.
         #
         #     Format: `projects/<Project ID>/locations/<Location
         #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
         # @!attribute [rw] context_size
         #   @return [::Integer]
-        #     Max number of messages prior to and including
+        #     Optional. Max number of messages prior to and including
         #     [latest_message] to use as context when compiling the
         #     suggestion. By default 20 and at most 50.
+        # @!attribute [rw] assist_query_params
+        #   @return [::Google::Cloud::Dialogflow::V2::AssistQueryParameters]
+        #     Parameters for a human assist query.
         class SuggestFaqAnswersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -332,6 +582,59 @@ module Google
         #     {::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest#context_size SuggestFaqAnswersRequest.context_size} field in the request if there
         #     aren't that many messages in the conversation.
         class SuggestFaqAnswersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for {::Google::Cloud::Dialogflow::V2::Participants::Client#suggest_smart_replies Participants.SuggestSmartReplies}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the participant to fetch suggestion for.
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
+        # @!attribute [rw] current_text_input
+        #   @return [::Google::Cloud::Dialogflow::V2::TextInput]
+        #     The current natural language text segment to compile suggestion
+        #     for. This provides a way for user to get follow up smart reply suggestion
+        #     after a smart reply selection, without sending a text message.
+        # @!attribute [rw] latest_message
+        #   @return [::String]
+        #     The name of the latest conversation message to compile suggestion
+        #     for. If empty, it will be the latest message of the conversation.
+        #
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+        # @!attribute [rw] context_size
+        #   @return [::Integer]
+        #     Max number of messages prior to and including
+        #     [latest_message] to use as context when compiling the
+        #     suggestion. By default 20 and at most 50.
+        class SuggestSmartRepliesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for {::Google::Cloud::Dialogflow::V2::Participants::Client#suggest_smart_replies Participants.SuggestSmartReplies}.
+        # @!attribute [r] smart_reply_answers
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::SmartReplyAnswer>]
+        #     Output only. Multiple reply options provided by smart reply service. The
+        #     order is based on the rank of the model prediction.
+        #     The maximum number of the returned replies is set in SmartReplyConfig.
+        # @!attribute [rw] latest_message
+        #   @return [::String]
+        #     The name of the latest conversation message used to compile
+        #     suggestion for.
+        #
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+        # @!attribute [rw] context_size
+        #   @return [::Integer]
+        #     Number of messages prior to and including
+        #     {::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse#latest_message latest_message} to compile the
+        #     suggestion. It may be smaller than the
+        #     {::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest#context_size SuggestSmartRepliesRequest.context_size} field in the request if there
+        #     aren't that many messages in the conversation.
+        class SuggestSmartRepliesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -460,6 +763,26 @@ module Google
           end
         end
 
+        # Represents a smart reply answer.
+        # @!attribute [rw] reply
+        #   @return [::String]
+        #     The content of the reply.
+        # @!attribute [rw] confidence
+        #   @return [::Float]
+        #     Smart reply confidence.
+        #     The system's confidence score that this reply is a good match for
+        #     this conversation, as a value from 0.0 (completely uncertain) to 1.0
+        #     (completely certain).
+        # @!attribute [rw] answer_record
+        #   @return [::String]
+        #     The name of answer record, in the format of
+        #     "projects/<Project ID>/locations/<Location ID>/answerRecords/<Answer Record
+        #     ID>"
+        class SmartReplyAnswer
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # One response of different type of suggestion response which is used in
         # the response of {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent} and
         # {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent}, as well as {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantEvent HumanAgentAssistantEvent}.
@@ -472,7 +795,21 @@ module Google
         # @!attribute [rw] suggest_faq_answers_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersResponse]
         #     SuggestFaqAnswersResponse if request is for FAQ_ANSWER.
+        # @!attribute [rw] suggest_smart_replies_response
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse]
+        #     SuggestSmartRepliesResponse if request is for SMART_REPLY.
         class SuggestionResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines the language used in the input text.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     Required. The language of this conversational query. See [Language
+        #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
+        #     for a list of the currently supported language codes.
+        class InputTextConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -518,6 +855,39 @@ module Google
         class MessageAnnotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the parameters of human assist query.
+        # @!attribute [rw] documents_metadata_filters
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Key-value filters on the metadata of documents returned by article
+        #     suggestion. If specified, article suggestion only returns suggested
+        #     documents that match all filters in their {::Google::Cloud::Dialogflow::V2::Document#metadata Document.metadata}. Multiple
+        #     values for a metadata key should be concatenated by comma. For example,
+        #     filters to match all documents that have 'US' or 'CA' in their market
+        #     metadata values and 'agent' in their user metadata values will be
+        #     ```
+        #     documents_metadata_filters {
+        #       key: "market"
+        #       value: "US,CA"
+        #     }
+        #     documents_metadata_filters {
+        #       key: "user"
+        #       value: "agent"
+        #     }
+        #     ```
+        class AssistQueryParameters
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class DocumentsMetadataFiltersEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

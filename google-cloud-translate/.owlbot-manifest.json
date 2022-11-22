@@ -1,0 +1,32 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-translate.gemspec",
+    "lib/google-cloud-translate.rb",
+    "lib/google/cloud/translate.rb",
+    "lib/google/cloud/translate/version.rb",
+    "test/google/cloud/translate/client_test.rb",
+    "test/google/cloud/translate/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "OVERVIEW.md",
+    "acceptance/translate_v2_helper.rb",
+    "acceptance/translate_v2_smoke_test.rb",
+    "acceptance/translate_v3_helper.rb",
+    "acceptance/translate_v3_smoke_test.rb",
+    "lib/google/cloud/translate/helpers.rb",
+    "test/google/cloud/translate/helpers_test.rb"
+  ]
+}

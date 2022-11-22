@@ -50,7 +50,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   table.sample_row_keys.each do |sample_row_key|
         #     p sample_row_key.key # user00116
@@ -90,7 +90,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   table.read_rows(limit: 10).each do |row|
         #     puts row
@@ -100,7 +100,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   table.read_rows(keys: ["user-1", "user-2"]).each do |row|
         #     puts row
@@ -110,9 +110,9 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   range = table.new_row_range.between("user-1", "user-100")
+        #   range = table.new_row_range.between "user-1", "user-100"
         #
         #   table.read_rows(ranges: range).each do |row|
         #     puts row
@@ -122,11 +122,11 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   filter = table.filter.key("user-*")
+        #   filter = table.filter.key "user-*"
         #   # OR
-        #   # filter = Google::Cloud::Bigtable::RowFilter.key("user-*")
+        #   # filter = Google::Cloud::Bigtable::RowFilter.key "user-*"
         #
         #   table.read_rows(filter: filter).each do |row|
         #     puts row
@@ -136,11 +136,11 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   filter = table.filter.key("user-*")
+        #   filter = table.filter.key "user-*"
         #   # OR
-        #   # filter = Google::Cloud::Bigtable::RowFilter.key("user-*")
+        #   # filter = Google::Cloud::Bigtable::RowFilter.key "user-*"
         #
         #   table.read_rows(filter: filter, limit: 10).each do |row|
         #     puts row
@@ -176,19 +176,19 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   row = table.read_row("user-1")
+        #   row = table.read_row "user-1"
         #
         # @example Read row with filter.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_row(3)
+        #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_row 3
         #
-        #   row = table.read_row("user-1", filter: filter)
+        #   row = table.read_row "user-1", filter: filter
         #
         def read_row key, filter: nil
           read_rows(keys: [key], filter: filter).first
@@ -203,11 +203,11 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   range = table.new_value_range
-        #   range.from("abc")
-        #   range.to("xyz")
+        #   range.from "abc"
+        #   range.to "xyz"
         #
         #   # OR
         #   range = table.new_value_range.from("abc").to("xyz")
@@ -216,7 +216,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   range = table.new_value_range.from("abc", inclusive: false).to("xyz")
         #
@@ -234,11 +234,11 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   range = table.new_column_range("test-family")
-        #   range.from("abc")
-        #   range.to("xyz")
+        #   range = table.new_column_range "test-family"
+        #   range.from "abc"
+        #   range.to "xyz"
         #
         #   # OR
         #   range = table.new_column_range("test-family").from("key-1").to("key-5")
@@ -247,7 +247,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   range = table.new_column_range("test-family").from("key-1", inclusive: false).to("key-5")
         #
@@ -264,11 +264,11 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   range = table.new_row_range
-        #   range.from("abc")
-        #   range.to("xyz")
+        #   range.from "abc"
+        #   range.to "xyz"
         #
         #   # OR
         #   range = table.new_row_range.from("key-1").to("key-5")
@@ -277,7 +277,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   range = table.new_row_range.from("key-1", inclusive: false).to("key-5")
         #
@@ -294,9 +294,9 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   filter = table.filter.key("user-*")
+        #   filter = table.filter.key "user-*"
         #
         def filter
           Google::Cloud::Bigtable::RowFilter

@@ -28,7 +28,7 @@ module Google
           # collections in the database with the same id.
           # @!attribute [rw] name
           #   @return [::String]
-          #     A field name of the form
+          #     Required. A field name of the form
           #     `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/fields/{field_path}`
           #
           #     A field path may be a simple field name, e.g. `address` or a path to fields
@@ -60,6 +60,11 @@ module Google
           #     revert to the configuration defined by the `ancestor_field`. To
           #     explicitly remove all indexes for this field, specify an index config
           #     with an empty list of indexes.
+          # @!attribute [rw] ttl_config
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Field::TtlConfig]
+          #     The TTL configuration for this `Field`.
+          #     Setting or unsetting this will enable or disable the TTL for
+          #     documents that have this `Field`.
           class Field
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -89,6 +94,41 @@ module Google
             class IndexConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The TTL (time-to-live) configuration for documents that have this `Field`
+            # set.
+            # Storing a timestamp value into a TTL-enabled field will be treated as
+            # the document's absolute expiration time. Using any other data type or
+            # leaving the field absent will disable the TTL for the individual document.
+            # @!attribute [r] state
+            #   @return [::Google::Cloud::Firestore::Admin::V1::Field::TtlConfig::State]
+            #     Output only. The state of the TTL configuration.
+            class TtlConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The state of applying the TTL configuration to all documents.
+              module State
+                # The state is unspecified or unknown.
+                STATE_UNSPECIFIED = 0
+
+                # The TTL is being applied. There is an active long-running operation to
+                # track the change. Newly written documents will have TTLs applied as
+                # requested. Requested TTLs on existing documents are still being
+                # processed. When TTLs on all existing documents have been processed, the
+                # state will move to 'ACTIVE'.
+                CREATING = 1
+
+                # The TTL is active for all documents.
+                ACTIVE = 2
+
+                # The TTL configuration could not be enabled for all existing documents.
+                # Newly written documents will continue to have their TTL applied.
+                # The LRO returned when last attempting to enable TTL for this `Field`
+                # has failed, and may have more details.
+                NEEDS_REPAIR = 3
+              end
             end
           end
         end

@@ -1,0 +1,147 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require "simplecov"
+require "minitest/autorun"
+
+require "google/cloud/vision/v1p4beta1"
+
+class HelperMockImageAnnotatorCredentials < Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Credentials
+  def initialize method_name
+    @method_name = method_name
+  end
+
+  def updater_proc
+    proc do
+      raise "The method `#{@method_name}` was trying to make a grpc request. This should not " \
+          "happen since the grpc layer is being mocked."
+    end
+  end
+end
+
+class ImageAnnotatorClientHelpersTest < Minitest::Test
+  def image_uri
+    "http://example.com/face.jpg"
+  end
+
+  def gcs_image_uri
+    "gs://gapic-toolkit/President_Barack_Obama.jpg"
+  end
+
+  def mock_credentials
+    HelperMockImageAnnotatorCredentials.new("batch_annotate_images")
+  end
+
+  def my_bucket
+    "gs://my_bucket"
+  end
+
+  def mime_type
+    "application/pdf"
+  end
+
+  def image_object image
+    return { content: image.binmode.read } if image.respond_to? :binmode
+    return { content: File.binread(image) } if File.file? image
+    return { source: { image_uri: image_uri } } if image == image_uri
+    { source: { gcs_image_uri: gcs_image_uri } }
+  end
+
+  def batch_annotate_stub image, feature_type
+    feature = {
+      type: feature_type,
+      max_results: 10
+    }
+    expected_requests =
+      if image.is_a? Array
+        (0...image.size).map do |n|
+          { image: image_object(image[n]), features: [feature] }
+        end
+      else
+        [{ image: image_object(image), features: [feature] }]
+      end
+    proc do |arg|
+      assert_equal({ requests: expected_requests }, arg)
+    end
+  end
+
+  def async_annotate_stub image, feature_type, destination
+    feature = {
+      type: feature_type,
+      max_results: 10
+    }
+    input_config = {
+      gcs_source: {
+        uri: image_object(image)[:source][:gcs_image_uri]
+      }
+    }
+    input_config[:mime_type] = mime_type
+    expected_requests = [
+      {
+        input_config: input_config,
+        features: [feature],
+        output_config: {
+          gcs_destination: {
+            uri: destination
+          },
+          batch_size: 10
+        }
+      }
+    ]
+    proc do |arg|
+      assert_equal({ requests: expected_requests }, arg)
+    end
+  end
+<%
+  descriptions = {
+    "single_image_file"      => 'File.new("acceptance/data/face.jpg", "r")',
+    "list_of_image_files"    => '(0..1).map { File.new("acceptance/data/face.jpg", "r") }',
+    "single_io_object"       => 'IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")',
+    "list_of_io_objects"     => '(0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }',
+    "single_image_path"      => '"acceptance/data/face.jpg"',
+    "list_of_image_paths"    => '(0..1).map { "acceptance/data/face.jpg" }',
+    "single_image_uri"       => '"http://example.com/face.jpg"',
+    "list_of_image_uris"     => '(0..1).map { "http://example.com/face.jpg" }',
+    "single_gcs_image_uri"   => '"gs://gapic-toolkit/President_Barack_Obama.jpg"',
+    "list_of_gcs_image_uris" => '(0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }'
+  }.sort
+  @helper_methods.each do |method_name, feature_type|
+    descriptions.each do |description, image|
+      images_key = description.start_with?("list_of") ? "images" : "image"
+%>
+  def test_<%= method_name %>_<%= description%>
+    Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Credentials.stub :default, mock_credentials do
+      client = Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client.new
+      stub = batch_annotate_stub <%= image %>, <%= feature_type.inspect %>
+      client.stub :batch_annotate_images, stub do
+        client.<%= method_name %> <%=images_key %>: <%= image %>
+      end
+    end
+  end
+<% end %>
+  def test_<%= method_name %>_async
+    Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Credentials.stub :default, mock_credentials do
+      client = Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client.new
+      stub = async_annotate_stub gcs_image_uri, <%= feature_type.inspect %>, my_bucket
+      client.stub :async_batch_annotate_files, stub do
+        client.<%= method_name %> \
+          image: gcs_image_uri,
+          destination: my_bucket,
+          async: true,
+          mime_type: mime_type
+      end
+    end
+  end
+<% end %>
+end

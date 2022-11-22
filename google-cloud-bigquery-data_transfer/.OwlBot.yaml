@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/bigquery/datatransfer/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-bigquery-data_transfer/$1

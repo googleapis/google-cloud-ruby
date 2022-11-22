@@ -187,6 +187,7 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::ClientTest < Mi
     parent = "hello world"
     membership_id = "hello world"
     resource = {}
+    request_id = "hello world"
 
     create_membership_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_membership, name
@@ -194,6 +195,7 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::ClientTest < Mi
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["membership_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1beta1::Membership), request["resource"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -204,35 +206,35 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::ClientTest < Mi
       end
 
       # Use hash object
-      client.create_membership({ parent: parent, membership_id: membership_id, resource: resource }) do |response, operation|
+      client.create_membership({ parent: parent, membership_id: membership_id, resource: resource, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_membership parent: parent, membership_id: membership_id, resource: resource do |response, operation|
+      client.create_membership parent: parent, membership_id: membership_id, resource: resource, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_membership ::Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest.new(parent: parent, membership_id: membership_id, resource: resource) do |response, operation|
+      client.create_membership ::Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest.new(parent: parent, membership_id: membership_id, resource: resource, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_membership({ parent: parent, membership_id: membership_id, resource: resource }, grpc_options) do |response, operation|
+      client.create_membership({ parent: parent, membership_id: membership_id, resource: resource, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_membership(::Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest.new(parent: parent, membership_id: membership_id, resource: resource), grpc_options) do |response, operation|
+      client.create_membership(::Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest.new(parent: parent, membership_id: membership_id, resource: resource, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -252,11 +254,13 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::ClientTest < Mi
 
     # Create request parameters for a unary method.
     name = "hello world"
+    request_id = "hello world"
 
     delete_membership_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_membership, name
       assert_kind_of ::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -267,35 +271,35 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::ClientTest < Mi
       end
 
       # Use hash object
-      client.delete_membership({ name: name }) do |response, operation|
+      client.delete_membership({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_membership name: name do |response, operation|
+      client.delete_membership name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_membership ::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name) do |response, operation|
+      client.delete_membership ::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_membership({ name: name }, grpc_options) do |response, operation|
+      client.delete_membership({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_membership(::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_membership(::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -317,6 +321,7 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::ClientTest < Mi
     name = "hello world"
     update_mask = {}
     resource = {}
+    request_id = "hello world"
 
     update_membership_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_membership, name
@@ -324,6 +329,7 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::ClientTest < Mi
       assert_equal "hello world", request["name"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1beta1::Membership), request["resource"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -334,35 +340,35 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::ClientTest < Mi
       end
 
       # Use hash object
-      client.update_membership({ name: name, update_mask: update_mask, resource: resource }) do |response, operation|
+      client.update_membership({ name: name, update_mask: update_mask, resource: resource, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_membership name: name, update_mask: update_mask, resource: resource do |response, operation|
+      client.update_membership name: name, update_mask: update_mask, resource: resource, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_membership ::Google::Cloud::GkeHub::V1beta1::UpdateMembershipRequest.new(name: name, update_mask: update_mask, resource: resource) do |response, operation|
+      client.update_membership ::Google::Cloud::GkeHub::V1beta1::UpdateMembershipRequest.new(name: name, update_mask: update_mask, resource: resource, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_membership({ name: name, update_mask: update_mask, resource: resource }, grpc_options) do |response, operation|
+      client.update_membership({ name: name, update_mask: update_mask, resource: resource, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_membership(::Google::Cloud::GkeHub::V1beta1::UpdateMembershipRequest.new(name: name, update_mask: update_mask, resource: resource), grpc_options) do |response, operation|
+      client.update_membership(::Google::Cloud::GkeHub::V1beta1::UpdateMembershipRequest.new(name: name, update_mask: update_mask, resource: resource, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

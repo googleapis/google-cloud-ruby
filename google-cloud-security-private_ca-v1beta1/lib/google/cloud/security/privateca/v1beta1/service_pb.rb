@@ -9,9 +9,9 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/security/privateca/v1beta1/resources_pb'
 require 'google/longrunning/operations_pb'
-require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/security/privateca/v1beta1/service.proto", :syntax => :proto3) do
     add_message "google.cloud.security.privateca.v1beta1.CreateCertificateRequest" do

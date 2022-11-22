@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /grafeas/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/grafeas-v1/$1

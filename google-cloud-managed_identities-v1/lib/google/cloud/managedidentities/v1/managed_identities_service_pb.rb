@@ -11,6 +11,7 @@ require 'google/cloud/managedidentities/v1/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/managedidentities/v1/managed_identities_service.proto", :syntax => :proto3) do
     add_message "google.cloud.managedidentities.v1.OpMetadata" do

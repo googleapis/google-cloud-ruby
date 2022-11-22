@@ -129,10 +129,13 @@ module Google
         #
         #     The fields eligible for filtering are:
         #
-        #     * `companyName` (Required)
+        #     * `companyName`
         #     * `requisitionId`
         #     * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
         #     OPEN if no value is specified.
+        #
+        #     At least one of `companyName` and `requisitionId` must present or an
+        #     INVALID_ARGUMENT error is thrown.
         #
         #     Sample Query:
         #
@@ -141,6 +144,8 @@ module Google
         #     requisitionId = "req-1"
         #     * companyName = "projects/foo/tenants/bar/companies/baz" AND
         #     status = "EXPIRED"
+        #     * requisitionId = "req-1"
+        #     * requisitionId = "req-1" AND status = "EXPIRED"
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The starting point of a query result.
@@ -211,15 +216,7 @@ module Google
         #     Defaults to false.
         # @!attribute [rw] require_precise_result_size
         #   @return [::Boolean]
-        #     Controls if the search job request requires the return of a precise
-        #     count of the first 300 results. Setting this to `true` ensures
-        #     consistency in the number of results per page. Best practice is to set this
-        #     value to true if a client allows users to jump directly to a
-        #     non-sequential search results page.
-        #
-        #     Enabling this flag may adversely impact performance.
-        #
-        #     Defaults to false.
+        #     This field is deprecated.
         # @!attribute [rw] histogram_queries
         #   @return [::Array<::Google::Cloud::Talent::V4beta1::HistogramQuery>]
         #     An expression specifies a histogram request against matching jobs.
@@ -233,9 +230,11 @@ module Google
         #     * `count(numeric_histogram_facet, list of buckets)`: Count the number of
         #     matching entities within each bucket.
         #
+        #     A maximum of 200 histogram buckets are supported.
+        #
         #     Data types:
         #
-        #     * Histogram facet: facet names with format [a-zA-Z][a-zA-Z0-9_]+.
+        #     * Histogram facet: facet names with format `[a-zA-Z][a-zA-Z0-9_]+`.
         #     * String: string like "any string with backslash escape for quote(\")."
         #     * Number: whole number and floating point number like 10, -1 and -0.01.
         #     * List: list of elements with comma(,) separator surrounded by square
@@ -257,8 +256,11 @@ module Google
         #     * company_display_name: histogram by {::Google::Cloud::Talent::V4beta1::Job#company_display_name Job.company_display_name}.
         #     * employment_type: histogram by {::Google::Cloud::Talent::V4beta1::Job#employment_types Job.employment_types}, for example,
         #       "FULL_TIME", "PART_TIME".
-        #     * company_size: histogram by {::Google::Cloud::Talent::V4beta1::CompanySize CompanySize}, for example, "SMALL",
-        #     "MEDIUM", "BIG".
+        #     * company_size (DEPRECATED): histogram by {::Google::Cloud::Talent::V4beta1::CompanySize CompanySize}, for example,
+        #     "SMALL", "MEDIUM", "BIG".
+        #     * publish_time_in_day: histogram by the {::Google::Cloud::Talent::V4beta1::Job#posting_publish_time Job.posting_publish_time}
+        #       in days.
+        #       Must specify list of numeric buckets in spec.
         #     * publish_time_in_month: histogram by the {::Google::Cloud::Talent::V4beta1::Job#posting_publish_time Job.posting_publish_time}
         #       in months.
         #       Must specify list of numeric buckets in spec.
@@ -312,7 +314,7 @@ module Google
         #     bucket(100000, MAX)])`
         #     * `count(string_custom_attribute["some-string-custom-attribute"])`
         #     * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-        #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+        #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
         # @!attribute [rw] job_view
         #   @return [::Google::Cloud::Talent::V4beta1::JobView]
         #     The desired job attributes returned for jobs in the search response.
@@ -408,6 +410,14 @@ module Google
         #     score (determined by API algorithm).
         # @!attribute [rw] disable_keyword_match
         #   @return [::Boolean]
+        #     This field is deprecated. Please use
+        #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} going forward.
+        #
+        #     To migrate, disable_keyword_match set to false maps to
+        #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+        #     true maps to {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_DISABLED KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+        #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+        #
         #     Controls whether to disable exact keyword match on {::Google::Cloud::Talent::V4beta1::Job#title Job.title},
         #     {::Google::Cloud::Talent::V4beta1::Job#description Job.description}, {::Google::Cloud::Talent::V4beta1::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4beta1::Job#addresses Job.addresses},
         #     {::Google::Cloud::Talent::V4beta1::Job#qualifications Job.qualifications}. When disable keyword match is turned off, a
@@ -427,6 +437,12 @@ module Google
         #     requests.
         #
         #     Defaults to false.
+        # @!attribute [rw] keyword_match_mode
+        #   @return [::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode]
+        #     Controls what keyword match options to use.
+        #
+        #     Defaults to {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+        #     is specified.
         class SearchJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -453,7 +469,7 @@ module Google
           #     integer/double value or an expression that can be evaluated to a number.
           #
           #     Parenthesis are supported to adjust calculation precedence. The
-          #     expression must be < 100 characters in length.
+          #     expression must be < 200 characters in length.
           #
           #     The expression is considered invalid for a job if the expression
           #     references custom attributes that are not populated on the job or if the
@@ -545,6 +561,40 @@ module Google
             # results are returned.
             SIMPLE = 2
           end
+
+          # Controls what keyword matching behavior the search has. When keyword
+          # matching is enabled, a keyword match returns jobs that may not match given
+          # category filters when there are matching keywords. For example, for the
+          # query "program manager" with KeywordMatchMode set to KEYWORD_MATCH_ALL, a
+          # job posting with the title "software developer," which doesn't fall into
+          # "program manager" ontology, and "program manager" appearing in its
+          # description will be surfaced.
+          #
+          # For queries like "cloud" that don't contain title or
+          # location specific ontology, jobs with "cloud" keyword matches are returned
+          # regardless of this enum's value.
+          #
+          # Use {::Google::Cloud::Talent::V4beta1::Company#keyword_searchable_job_custom_attributes Company.keyword_searchable_job_custom_attributes} if
+          # company-specific globally matched custom field/attribute string values are
+          # needed. Enabling keyword match improves recall of subsequent search
+          # requests.
+          module KeywordMatchMode
+            # The keyword match option isn't specified. Defaults to
+            # {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} behavior.
+            KEYWORD_MATCH_MODE_UNSPECIFIED = 0
+
+            # Disables keyword matching.
+            KEYWORD_MATCH_DISABLED = 1
+
+            # Enable keyword matching over {::Google::Cloud::Talent::V4beta1::Job#title Job.title},
+            # {::Google::Cloud::Talent::V4beta1::Job#description Job.description}, {::Google::Cloud::Talent::V4beta1::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4beta1::Job#addresses Job.addresses},
+            # {::Google::Cloud::Talent::V4beta1::Job#qualifications Job.qualifications}, and keyword searchable {::Google::Cloud::Talent::V4beta1::Job#custom_attributes Job.custom_attributes}
+            # fields.
+            KEYWORD_MATCH_ALL = 2
+
+            # Only enable keyword matching over {::Google::Cloud::Talent::V4beta1::Job#title Job.title}.
+            KEYWORD_MATCH_TITLE_ONLY = 3
+          end
         end
 
         # Response for SearchJob method.
@@ -569,12 +619,10 @@ module Google
         #     An estimation of the number of jobs that match the specified query.
         #
         #     This number isn't guaranteed to be accurate. For accurate results,
-        #     see {::Google::Cloud::Talent::V4beta1::SearchJobsRequest#require_precise_result_size SearchJobsRequest.require_precise_result_size}.
+        #     see {::Google::Cloud::Talent::V4beta1::SearchJobsResponse#total_size SearchJobsResponse.total_size}.
         # @!attribute [rw] total_size
         #   @return [::Integer]
-        #     The precise result count, which is available only if the client set
-        #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest#require_precise_result_size SearchJobsRequest.require_precise_result_size} to `true`, or if the
-        #     response is the last page of results. Otherwise, the value is `-1`.
+        #     The precise result count with limit 100,000.
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::Talent::V4beta1::ResponseMetadata]
         #     Additional information for the API invocation, such as the request

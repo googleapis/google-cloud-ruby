@@ -26,6 +26,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/dataqna/v1alpha"
       #     client = ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client.new
       #

@@ -56,6 +56,14 @@ module Google
             rpc :ListPatchDeployments, ::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest, ::Google::Cloud::OsConfig::V1::ListPatchDeploymentsResponse
             # Delete an OS Config patch deployment.
             rpc :DeletePatchDeployment, ::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest, ::Google::Protobuf::Empty
+            # Update an OS Config patch deployment.
+            rpc :UpdatePatchDeployment, ::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest, ::Google::Cloud::OsConfig::V1::PatchDeployment
+            # Change state of patch deployment to "PAUSED".
+            # Patch deployment in paused state doesn't generate patch jobs.
+            rpc :PausePatchDeployment, ::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest, ::Google::Cloud::OsConfig::V1::PatchDeployment
+            # Change state of patch deployment back to "ACTIVE".
+            # Patch deployment in active state continues to generate patch jobs.
+            rpc :ResumePatchDeployment, ::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest, ::Google::Cloud::OsConfig::V1::PatchDeployment
           end
 
           Stub = Service.rpc_stub_class

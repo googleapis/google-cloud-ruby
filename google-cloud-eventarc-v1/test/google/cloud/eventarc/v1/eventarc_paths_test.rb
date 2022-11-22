@@ -23,6 +23,66 @@ require "gapic/grpc/service_stub"
 require "google/cloud/eventarc/v1/eventarc"
 
 class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
+  def test_channel_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.channel_path project: "value0", location: "value1", channel: "value2"
+      assert_equal "projects/value0/locations/value1/channels/value2", path
+    end
+  end
+
+  def test_channel_connection_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.channel_connection_path project: "value0", location: "value1", channel_connection: "value2"
+      assert_equal "projects/value0/locations/value1/channelConnections/value2", path
+    end
+  end
+
+  def test_cloud_function_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.cloud_function_path project: "value0", location: "value1", function: "value2"
+      assert_equal "projects/value0/locations/value1/functions/value2", path
+    end
+  end
+
+  def test_crypto_key_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.crypto_key_path project: "value0", location: "value1", key_ring: "value2", crypto_key: "value3"
+      assert_equal "projects/value0/locations/value1/keyRings/value2/cryptoKeys/value3", path
+    end
+  end
+
+  def test_google_channel_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.google_channel_config_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1/googleChannelConfig", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -32,6 +92,18 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
       path = client.location_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
+  def test_provider_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.provider_path project: "value0", location: "value1", provider: "value2"
+      assert_equal "projects/value0/locations/value1/providers/value2", path
     end
   end
 
@@ -65,6 +137,18 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
       path = client.trigger_path project: "value0", location: "value1", trigger: "value2"
       assert_equal "projects/value0/locations/value1/triggers/value2", path
+    end
+  end
+
+  def test_workflow_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.workflow_path project: "value0", location: "value1", workflow: "value2"
+      assert_equal "projects/value0/locations/value1/workflows/value2", path
     end
   end
 end

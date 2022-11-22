@@ -58,8 +58,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The `OSFilter` is used to specify the OS filtering criteria for the
-          # resource group.
+          # Filtering criteria to select VMs based on OS details.
           # @!attribute [rw] os_short_name
           #   @return [::String]
           #     This should match OS short name emitted by the OS inventory agent.
@@ -72,6 +71,24 @@ module Google
           #     last character. For example, to match all versions with a major
           #     version of `7`, specify the following value for this field `7.*`
           class OSFilter
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Filtering criteria to select VMs based on inventory details.
+          # @!attribute [rw] os_short_name
+          #   @return [::String]
+          #     Required. The OS short name
+          # @!attribute [rw] os_version
+          #   @return [::String]
+          #     The OS version
+          #
+          #     Prefix matches are supported if asterisk(*) is provided as the
+          #     last character. For example, to match all versions with a major
+          #     version of `7`, specify the following value for this field `7.*`
+          #
+          #     An empty string matches all OS versions.
+          class InventoryFilter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -473,21 +490,21 @@ module Google
 
                 # The interpreter to use.
                 module Interpreter
-                  # Defaults to NONE.
+                  # Invalid value, the request will return validation error.
                   INTERPRETER_UNSPECIFIED = 0
 
-                  # If no interpreter is specified the
-                  # source will be executed directly, which will likely only
-                  # succeed for executables and scripts with shebang lines.
-                  # [Wikipedia
-                  # shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)).
+                  # If an interpreter is not specified, the
+                  # source is executed directly. This execution, without an
+                  # interpreter, only succeeds for executables and scripts that have <a
+                  # href="https://en.wikipedia.org/wiki/Shebang_(Unix)"
+                  # class="external">shebang lines</a>.
                   NONE = 1
 
-                  # Indicates that the script will be run with /bin/sh on Linux and
-                  # cmd.exe on windows.
+                  # Indicates that the script runs with `/bin/sh` on Linux and
+                  # `cmd.exe` on Windows.
                   SHELL = 2
 
-                  # Indicates that the script will be run with powershell.
+                  # Indicates that the script runs with PowerShell.
                   POWERSHELL = 3
                 end
               end
@@ -554,7 +571,23 @@ module Google
           # within the resource group.
           # @!attribute [rw] os_filter
           #   @return [::Google::Cloud::OsConfig::V1alpha::OSPolicy::OSFilter]
+          #     Deprecated. Use the `inventory_filters` field instead.
           #     Used to specify the OS filter for a resource group
+          # @!attribute [rw] inventory_filters
+          #   @return [::Array<::Google::Cloud::OsConfig::V1alpha::OSPolicy::InventoryFilter>]
+          #     List of inventory filters for the resource group.
+          #
+          #     The resources in this resource group are applied to the target VM if it
+          #     satisfies at least one of the following inventory filters.
+          #
+          #     For example, to apply this resource group to VMs running either `RHEL` or
+          #     `CentOS` operating systems, specify 2 items for the list with following
+          #     values:
+          #     inventory_filters[0].os_short_name='rhel' and
+          #     inventory_filters[1].os_short_name='centos'
+          #
+          #     If the list is empty, this resource group will be applied to the target
+          #     VM unconditionally.
           # @!attribute [rw] resources
           #   @return [::Array<::Google::Cloud::OsConfig::V1alpha::OSPolicy::Resource>]
           #     Required. List of resources configured for this resource group.

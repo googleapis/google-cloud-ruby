@@ -11,6 +11,7 @@ require 'google/cloud/orgpolicy/v2/constraint_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/expr_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/orgpolicy/v2/orgpolicy.proto", :syntax => :proto3) do
     add_message "google.cloud.orgpolicy.v2.Policy" do

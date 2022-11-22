@@ -240,6 +240,43 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_table UpdateTable}.
+          # @!attribute [rw] table
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Table]
+          #     Required. The table to update.
+          #     The table's `name` field is used to identify the table to update.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. The list of fields to update.
+          #     A mask specifying which fields (e.g. `deletion_protection`) in the `table`
+          #     field should be updated. This mask is relative to the `table` field, not to
+          #     the request message. The wildcard (*) path is currently not supported.
+          #     Currently UpdateTable is only supported for the following field:
+          #      * `deletion_protection`
+          #     If `column_families` is set in `update_mask`, it will return an
+          #     UNIMPLEMENTED error.
+          class UpdateTableRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata type for the operation returned by
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_table UpdateTable}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The name of the table being updated.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which this operation started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     If set, the time at which this operation finished or was canceled.
+          class UpdateTableMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request message for
           # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_table google.bigtable.admin.v2.BigtableTableAdmin.DeleteTable}
           # @!attribute [rw] name
@@ -248,6 +285,34 @@ module Google
           #     Values are of the form
           #     `projects/{project}/instances/{instance}/tables/{table}`.
           class DeleteTableRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#undelete_table google.bigtable.admin.v2.BigtableTableAdmin.UndeleteTable}
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The unique name of the table to be restored.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}`.
+          class UndeleteTableRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata type for the operation returned by
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#undelete_table google.bigtable.admin.v2.BigtableTableAdmin.UndeleteTable}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The name of the table being restored.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which this operation started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     If set, the time at which this operation finished or was cancelled.
+          class UndeleteTableMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

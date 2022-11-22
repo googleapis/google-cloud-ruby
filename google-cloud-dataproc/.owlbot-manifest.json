@@ -1,0 +1,26 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-dataproc.gemspec",
+    "lib/google-cloud-dataproc.rb",
+    "lib/google/cloud/dataproc.rb",
+    "lib/google/cloud/dataproc/version.rb",
+    "test/google/cloud/dataproc/client_test.rb",
+    "test/google/cloud/dataproc/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "acceptance/google/cloud/dataproc/cluster_controller_smoke_test.rb"
+  ]
+}

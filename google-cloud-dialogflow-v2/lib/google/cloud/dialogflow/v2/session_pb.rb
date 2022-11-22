@@ -16,6 +16,7 @@ require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/struct_pb'
 require 'google/rpc/status_pb'
 require 'google/type/latlng_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/v2/session.proto", :syntax => :proto3) do
     add_message "google.cloud.dialogflow.v2.DetectIntentRequest" do
@@ -92,6 +93,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :confidence, :float, 4
       repeated :speech_word_info, :message, 7, "google.cloud.dialogflow.v2.SpeechWordInfo"
       optional :speech_end_offset, :message, 8, "google.protobuf.Duration"
+      optional :language_code, :string, 10
     end
     add_enum "google.cloud.dialogflow.v2.StreamingRecognitionResult.MessageType" do
       value :MESSAGE_TYPE_UNSPECIFIED, 0

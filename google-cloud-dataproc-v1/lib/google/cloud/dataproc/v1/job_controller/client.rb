@@ -39,13 +39,12 @@ module Google
             # See {::Google::Cloud::Dataproc::V1::JobController::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all JobController clients:
-            #
-            #     ::Google::Cloud::Dataproc::V1::JobController::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all JobController clients
+            #   ::Google::Cloud::Dataproc::V1::JobController::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -65,58 +64,37 @@ module Google
 
                 default_config.rpcs.submit_job.timeout = 900.0
                 default_config.rpcs.submit_job.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.submit_job_as_operation.timeout = 900.0
                 default_config.rpcs.submit_job_as_operation.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_job.timeout = 900.0
                 default_config.rpcs.get_job.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_jobs.timeout = 900.0
                 default_config.rpcs.list_jobs.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.update_job.timeout = 900.0
                 default_config.rpcs.update_job.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.cancel_job.timeout = 900.0
                 default_config.rpcs.cancel_job.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.delete_job.timeout = 900.0
                 default_config.rpcs.delete_job.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -148,19 +126,15 @@ module Google
             ##
             # Create a new JobController client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new JobController client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dataproc::V1::JobController::Client.new
             #
-            #     client = ::Google::Cloud::Dataproc::V1::JobController::Client.new
-            #
-            # To create a new JobController client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dataproc::V1::JobController::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dataproc::V1::JobController::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the JobController client.
             # @yieldparam config [Client::Configuration]
@@ -180,14 +154,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -195,6 +168,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -263,6 +237,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::JobController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::SubmitJobRequest.new
+            #
+            #   # Call the submit_job method.
+            #   result = client.submit_job request
+            #
+            #   # The returned object is of type Google::Cloud::Dataproc::V1::Job.
+            #   p result
+            #
             def submit_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -280,17 +269,23 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.submit_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.submit_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :submit_job, request, options: options do |response, operation|
@@ -348,6 +343,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::JobController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::SubmitJobRequest.new
+            #
+            #   # Call the submit_job_as_operation method.
+            #   result = client.submit_job_as_operation request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def submit_job_as_operation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -365,17 +382,23 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.submit_job_as_operation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.submit_job_as_operation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :submit_job_as_operation, request, options: options do |response, operation|
@@ -421,6 +444,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::JobController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::GetJobRequest.new
+            #
+            #   # Call the get_job method.
+            #   result = client.get_job request
+            #
+            #   # The returned object is of type Google::Cloud::Dataproc::V1::Job.
+            #   p result
+            #
             def get_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -438,18 +476,26 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "job_id" => request.job_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.job_id
+                header_params["job_id"] = request.job_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :get_job, request, options: options do |response, operation|
@@ -520,6 +566,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::JobController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::ListJobsRequest.new
+            #
+            #   # Call the list_jobs method.
+            #   result = client.list_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dataproc::V1::Job.
+            #     p response
+            #   end
+            #
             def list_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -537,17 +604,23 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :list_jobs, request, options: options do |response, operation|
@@ -602,6 +675,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::JobController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::UpdateJobRequest.new
+            #
+            #   # Call the update_job method.
+            #   result = client.update_job request
+            #
+            #   # The returned object is of type Google::Cloud::Dataproc::V1::Job.
+            #   p result
+            #
             def update_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -619,18 +707,26 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "job_id" => request.job_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.job_id
+                header_params["job_id"] = request.job_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :update_job, request, options: options do |response, operation|
@@ -679,6 +775,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::JobController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::CancelJobRequest.new
+            #
+            #   # Call the cancel_job method.
+            #   result = client.cancel_job request
+            #
+            #   # The returned object is of type Google::Cloud::Dataproc::V1::Job.
+            #   p result
+            #
             def cancel_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -696,18 +807,26 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "job_id" => request.job_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.job_id
+                header_params["job_id"] = request.job_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.cancel_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.cancel_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :cancel_job, request, options: options do |response, operation|
@@ -753,6 +872,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::JobController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::DeleteJobRequest.new
+            #
+            #   # Call the delete_job method.
+            #   result = client.delete_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -770,18 +904,26 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "job_id" => request.job_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.job_id
+                header_params["job_id"] = request.job_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :delete_job, request, options: options do |response, operation|
@@ -805,22 +947,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for submit_job
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # submit_job to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dataproc::V1::JobController::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.submit_job.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dataproc::V1::JobController::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.submit_job.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dataproc::V1::JobController::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.submit_job.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dataproc::V1::JobController::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.submit_job.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

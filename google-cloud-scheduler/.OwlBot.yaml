@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/scheduler/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-scheduler/$1

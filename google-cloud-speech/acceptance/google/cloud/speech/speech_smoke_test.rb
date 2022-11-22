@@ -34,4 +34,25 @@ class SpeechSmokeTest < Minitest::Test
     response = speech_client.recognize config: config, audio: audio
     refute_equal 0, response.results.size
   end
+
+  def test_long_running_recognize
+    speech_client = Google::Cloud::Speech.speech
+    config = {
+      language_code: "en-US",
+      sample_rate_hertz: 44100,
+      encoding: :FLAC
+    }
+    audio = {
+      uri: "gs://cloud-samples-data/speech/brooklyn_bridge.flac"
+    }
+    op = speech_client.long_running_recognize config: config, audio: audio
+    # use the operations_client
+    ops = speech_client.operations_client.list_operations(::Google::Longrunning::ListOperationsRequest.new)
+    assert ops.count > 0
+    op = speech_client.operations_client.get_operation name: op.name
+    retry_config = ::Gapic::Operation::RetryPolicy.new initial_delay: 1, multiplier: 2, max_delay: 2, timeout: 10
+    op.wait_until_done! retry_policy: retry_config
+    assert op.response?
+    refute_equal 0, op.response.results.size
+  end
 end

@@ -6,6 +6,8 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/texttospeech/v1/cloud_tts.proto", :syntax => :proto3) do
     add_message "google.cloud.texttospeech.v1.ListVoicesRequest" do
@@ -35,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :language_code, :string, 1
       optional :name, :string, 2
       optional :ssml_gender, :enum, 3, "google.cloud.texttospeech.v1.SsmlVoiceGender"
+      optional :custom_voice, :message, 4, "google.cloud.texttospeech.v1.CustomVoiceParams"
     end
     add_message "google.cloud.texttospeech.v1.AudioConfig" do
       optional :audio_encoding, :enum, 1, "google.cloud.texttospeech.v1.AudioEncoding"
@@ -43,6 +46,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :volume_gain_db, :double, 4
       optional :sample_rate_hertz, :int32, 5
       repeated :effects_profile_id, :string, 6
+    end
+    add_message "google.cloud.texttospeech.v1.CustomVoiceParams" do
+      optional :model, :string, 1
+      optional :reported_usage, :enum, 3, "google.cloud.texttospeech.v1.CustomVoiceParams.ReportedUsage"
+    end
+    add_enum "google.cloud.texttospeech.v1.CustomVoiceParams.ReportedUsage" do
+      value :REPORTED_USAGE_UNSPECIFIED, 0
+      value :REALTIME, 1
+      value :OFFLINE, 2
     end
     add_message "google.cloud.texttospeech.v1.SynthesizeSpeechResponse" do
       optional :audio_content, :bytes, 1
@@ -58,6 +70,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :LINEAR16, 1
       value :MP3, 2
       value :OGG_OPUS, 3
+      value :MULAW, 5
+      value :ALAW, 6
     end
   end
 end
@@ -73,6 +87,8 @@ module Google
         SynthesisInput = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1.SynthesisInput").msgclass
         VoiceSelectionParams = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1.VoiceSelectionParams").msgclass
         AudioConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1.AudioConfig").msgclass
+        CustomVoiceParams = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1.CustomVoiceParams").msgclass
+        CustomVoiceParams::ReportedUsage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1.CustomVoiceParams.ReportedUsage").enummodule
         SynthesizeSpeechResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1.SynthesizeSpeechResponse").msgclass
         SsmlVoiceGender = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1.SsmlVoiceGender").enummodule
         AudioEncoding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1.AudioEncoding").enummodule

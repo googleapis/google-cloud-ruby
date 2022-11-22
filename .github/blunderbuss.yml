@@ -2,4 +2,4 @@ assign_issues_by:
   - labels:
     - 'api: spanner'
     to:
-    - hengfengli
+    - shivgautam

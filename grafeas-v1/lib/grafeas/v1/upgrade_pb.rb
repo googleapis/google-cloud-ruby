@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/protobuf/timestamp_pb'
 require 'grafeas/v1/package_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("grafeas/v1/upgrade.proto", :syntax => :proto3) do
     add_message "grafeas.v1.UpgradeNote" do

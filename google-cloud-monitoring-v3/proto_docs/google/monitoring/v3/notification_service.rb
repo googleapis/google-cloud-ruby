@@ -29,8 +29,10 @@ module Google
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         #
-        #     Note that this names the parent container in which to look for the
-        #     descriptors; to retrieve a single descriptor by name, use the
+        #     Note that this
+        #     [names](https://cloud.google.com/monitoring/api/v3#project_name) the parent
+        #     container in which to look for the descriptors; to retrieve a single
+        #     descriptor by name, use the
         #     {::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_descriptor GetNotificationChannelDescriptor}
         #     operation, instead.
         # @!attribute [rw] page_size
@@ -78,7 +80,8 @@ module Google
         # The `CreateNotificationChannel` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The project on which to execute the request. The format is:
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+        #     which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         #
@@ -97,7 +100,8 @@ module Google
         # The `ListNotificationChannels` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The project on which to execute the request. The format is:
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+        #     which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         #

@@ -85,8 +85,8 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or GKE_HUB_TEST_PROJECT=test123 GKE_HUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/credentials"
-  ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Credentials.env_vars.each do |path|
+  require "google/cloud/gke_hub/v1/gke_hub/credentials"
+  ::Google::Cloud::GkeHub::V1::GkeHub::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["GKE_HUB_PROJECT"] = project
@@ -157,11 +157,6 @@ end
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-gke_hub gem does not have doctest tests."
-end
-
-task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-gke_hub"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
 end
 
 desc "Run the CI build"

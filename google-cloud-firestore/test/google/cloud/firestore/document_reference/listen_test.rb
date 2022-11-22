@@ -271,7 +271,7 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :watch_firestore 
         errors_2 << error
       end
 
-      wait_until { doc_snapshots.count == 1 }
+      wait_until { doc_snapshots.count == 1 && errors_1.count == 1 && errors_2.count == 1 }
 
       listener.stop
     end

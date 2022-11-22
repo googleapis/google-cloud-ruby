@@ -171,6 +171,11 @@ class MockBigquery < Minitest::Spec
           "name" => "birthday",
           "type" => "DATE",
           "mode" => "NULLABLE"
+        },
+        {
+          "name" => "home",
+          "type" => "GEOGRAPHY",
+          "mode" => "NULLABLE"
         }
       ]
     }
@@ -190,7 +195,8 @@ class MockBigquery < Minitest::Spec
           { "v" => "1482670800.0" },
           { "v" => "04:00:00" },
           { "v" => "2017-01-01 00:00:00" },
-          { "v" => "1968-10-20" }
+          { "v" => "1968-10-20" },
+          { "v" => "POINT(-122.335503 47.625536)" }
         ]
       },
       {
@@ -205,12 +211,14 @@ class MockBigquery < Minitest::Spec
           { "v" => nil },
           { "v" => "04:32:10.555555" },
           { "v" => nil },
+          { "v" => nil },
           { "v" => nil }
         ]
       },
       {
         "f" => [
           { "v" => "Sally" },
+          { "v" => nil },
           { "v" => nil },
           { "v" => nil },
           { "v" => nil },
@@ -333,13 +341,66 @@ class MockBigquery < Minitest::Spec
             "tableId" => target.table_id
           },
           "createDisposition" => nil,
-          "writeDisposition" => nil
+          "writeDisposition" => nil,
+          "operationType" => nil
         },
         "dryRun" => nil
       }
     }
     hash["jobReference"]["location"] = location if location
     hash.to_json
+  end
+
+  def random_snapshot_gapi dataset, id = nil, name = nil, description = nil
+    json = random_snapshot_hash(dataset, id, name, description).to_json
+    Google::Apis::BigqueryV2::Table.from_json json
+  end
+
+  def random_snapshot_hash dataset, id = nil, name = nil, description = nil
+    id ||= "my_snapshot"
+    name ||= "Snapshot Name"
+
+    base = random_table_partial_hash dataset, id, name, type: "SNAPSHOT"
+    base.merge({
+      "etag" => "etag123456789",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
+      "description" => description,
+      "schema" => random_schema_hash,
+      "creationTime" => time_millis,
+      "expirationTime" => time_millis,
+      "lastModifiedTime" => time_millis,
+      "snapshotDefinition" => {
+        "snapshotTime" => DateTime.now,
+        "baseTableReference" => Google::Apis::BigqueryV2::TableReference.new
+      },
+      "location" => "US"
+    })
+  end
+
+  def random_clone_gapi dataset, id = nil, name = nil, description = nil
+    json = random_clone_hash(dataset, id, name, description).to_json
+    Google::Apis::BigqueryV2::Table.from_json json
+  end
+
+  def random_clone_hash dataset, id = nil, name = nil, description = nil
+    id ||= "my_clone"
+    name ||= "Clone Name"
+
+    base = random_table_partial_hash dataset, id, name, type: "TABLE"
+    base.merge({
+      "etag" => "etag123456789",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
+      "description" => description,
+      "schema" => random_schema_hash,
+      "creationTime" => time_millis,
+      "expirationTime" => time_millis,
+      "lastModifiedTime" => time_millis,
+      "cloneDefinition" => {
+        "cloneTime" => DateTime.now,
+        "baseTableReference" => Google::Apis::BigqueryV2::TableReference.new
+      },
+      "location" => "US"
+    })
   end
 
   def random_view_gapi dataset, id = nil, name = nil, description = nil
@@ -573,7 +634,7 @@ class MockBigquery < Minitest::Spec
     Google::Apis::BigqueryV2::Routine.from_json json
   end
 
-  def random_job_hash id = "job_9876543210", state = "running", location: "US"
+  def random_job_hash id = "job_9876543210", state = "running", location: "US", transaction_id: nil, session_id: nil
     hash = {
       "kind" => "bigquery#job",
       "etag" => "etag",
@@ -619,6 +680,8 @@ class MockBigquery < Minitest::Spec
       "user_email" => "user@example.com"
     }
     hash["jobReference"]["location"] = location if location
+    hash["statistics"]["transactionInfo"] = { "transactionId": transaction_id } if transaction_id
+    hash["statistics"]["sessionInfo"] = { "sessionId": session_id } if session_id
     hash
   end
 
@@ -659,13 +722,30 @@ class MockBigquery < Minitest::Spec
     job_ref
   end
 
-  def query_job_resp_gapi query, job_id: nil, target_routine: false, target_table: false, statement_type: "SELECT", num_dml_affected_rows: nil, ddl_operation_performed: nil
-    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_resp_json query, job_id: job_id
-    gapi.statistics.query = statistics_query_gapi target_routine: target_routine, target_table: target_table, statement_type: statement_type, num_dml_affected_rows: num_dml_affected_rows, ddl_operation_performed: ddl_operation_performed
+  def query_job_resp_gapi query,
+                          job_id: nil,
+                          target_routine: false,
+                          target_table: false,
+                          statement_type: "SELECT",
+                          num_dml_affected_rows: nil,
+                          ddl_operation_performed: nil,
+                          deleted_row_count: nil,
+                          inserted_row_count: nil,
+                          updated_row_count: nil,
+                          session_id: nil
+    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_resp_json(query, job_id: job_id, session_id: session_id)
+    gapi.statistics.query = statistics_query_gapi target_routine: target_routine,
+                                                  target_table: target_table,
+                                                  statement_type: statement_type,
+                                                  num_dml_affected_rows: num_dml_affected_rows,
+                                                  ddl_operation_performed: ddl_operation_performed,
+                                                  deleted_row_count: deleted_row_count,
+                                                  inserted_row_count: inserted_row_count,
+                                                  updated_row_count: updated_row_count
     gapi
   end
 
-  def query_job_resp_json query, job_id: "job_9876543210", location: "US"
+  def query_job_resp_json query, job_id: "job_9876543210", location: "US", session_id: nil
     hash = random_job_hash job_id, "done", location: location
     hash["configuration"]["query"] = {
       "query" => query,
@@ -689,10 +769,18 @@ class MockBigquery < Minitest::Spec
       "maximumBillingTier" => nil,
       "maximumBytesBilled" => nil
     }
+    hash["statistics"]["sessionInfo"] = { "sessionId": session_id } if session_id
     hash.to_json
   end
 
-  def statistics_query_gapi target_routine: false, target_table: false, statement_type: nil, num_dml_affected_rows: nil, ddl_operation_performed: nil
+  def statistics_query_gapi target_routine: false,
+                            target_table: false,
+                            statement_type: nil,
+                            num_dml_affected_rows: nil,
+                            ddl_operation_performed: nil,
+                            deleted_row_count: nil,
+                            inserted_row_count: nil,
+                            updated_row_count: nil
     ddl_target_routine = if target_routine
       Google::Apis::BigqueryV2::RoutineReference.new(
         project_id: "target_project_id",
@@ -707,12 +795,20 @@ class MockBigquery < Minitest::Spec
         table_id: "target_table_id"
       )
     end
+    dml_stats = if deleted_row_count || inserted_row_count || updated_row_count
+      Google::Apis::BigqueryV2::DmlStatistics.new(
+        deleted_row_count: deleted_row_count,
+        inserted_row_count: inserted_row_count,
+        updated_row_count: updated_row_count
+      )
+    end
     Google::Apis::BigqueryV2::JobStatistics2.new(
       billing_tier: 1,
       cache_hit: true,
       ddl_operation_performed: ddl_operation_performed,
       ddl_target_routine: ddl_target_routine,
       ddl_target_table: ddl_target_table,
+      dml_stats: dml_stats,
       num_dml_affected_rows: num_dml_affected_rows,
       query_plan: [
         Google::Apis::BigqueryV2::ExplainQueryStage.new(
@@ -772,8 +868,8 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def query_job_gapi query, parameter_mode: nil, dataset: nil, job_id: "job_9876543210", location: "US", dry_run: nil
-    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query, job_id: job_id, location: location, dry_run: dry_run)
+  def query_job_gapi query, parameter_mode: nil, dataset: nil, job_id: "job_9876543210", location: "US", dry_run: nil, create_session: nil, session_id: nil
+    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query, job_id: job_id, location: location, dry_run: dry_run, create_session: create_session, session_id: session_id)
     gapi.configuration.query.parameter_mode = parameter_mode if parameter_mode
     gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
       dataset_id: dataset, project_id: project
@@ -781,7 +877,7 @@ class MockBigquery < Minitest::Spec
     gapi
   end
 
-  def query_job_json query, job_id: "job_9876543210", location: "US", dry_run: nil
+  def query_job_json query, job_id: "job_9876543210", location: "US", dry_run: nil, create_session: nil, session_id: nil
     hash = {
       "jobReference" => {
         "projectId" => project,
@@ -793,6 +889,7 @@ class MockBigquery < Minitest::Spec
           "defaultDataset" => nil,
           "destinationTable" => nil,
           "createDisposition" => nil,
+          "createSession" => create_session,
           "writeDisposition" => nil,
           "priority" => "INTERACTIVE",
           "allowLargeResults" => nil,
@@ -807,6 +904,7 @@ class MockBigquery < Minitest::Spec
       }
     }
     hash["jobReference"]["location"] = location if location
+    hash["configuration"]["query"]["connectionProperties"] = [{key: "session_id", value: session_id}] if session_id
     hash.to_json
   end
 

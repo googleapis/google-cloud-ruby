@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/lifesciences/v2beta/workflows_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -40,13 +41,12 @@ module Google
             # See {::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all WorkflowsService clients:
-            #
-            #     ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all WorkflowsService clients
+            #   ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -95,19 +95,15 @@ module Google
             ##
             # Create a new WorkflowsService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new WorkflowsService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new
             #
-            #     client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new
-            #
-            # To create a new WorkflowsService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the WorkflowsService client.
             # @yieldparam config [Client::Configuration]
@@ -127,14 +123,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -142,6 +137,13 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -160,6 +162,13 @@ module Google
             # @return [::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -222,6 +231,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/life_sciences/v2beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new
+            #
+            #   # Call the run_pipeline method.
+            #   result = client.run_pipeline request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def run_pipeline request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -239,16 +270,20 @@ module Google
                 gapic_version: ::Google::Cloud::LifeSciences::V2beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_pipeline.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.run_pipeline.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @workflows_service_stub.call_rpc :run_pipeline, request, options: options do |response, operation|
@@ -273,22 +308,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for run_pipeline
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # run_pipeline to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.run_pipeline.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.run_pipeline.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.run_pipeline.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.run_pipeline.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

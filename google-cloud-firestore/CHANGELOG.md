@@ -1,5 +1,63 @@
 # Release History
 
+### 2.7.2 (2022-08-24)
+
+#### Documentation
+
+* fix firestore emulator guide ([#19045](https://github.com/googleapis/google-cloud-ruby/issues/19045)) 
+
+### 2.7.1 (2022-07-15)
+
+#### Bug Fixes
+
+* Fix a regression in fields conversion ([#18833](https://github.com/googleapis/google-cloud-ruby/issues/18833)) 
+#### Documentation
+
+* Fix typo in data model reference ([#18835](https://github.com/googleapis/google-cloud-ruby/issues/18835)) 
+
+### 2.7.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18446](https://github.com/googleapis/google-cloud-ruby/issues/18446)) 
+
+### 2.6.6 / 2022-01-11
+
+#### Documentation
+
+* Fix samples/CONTRIBUTING.md
+* Update version managers list in CONTRIBUTING.md
+
+### 2.6.5 / 2021-10-25
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+
+### 2.6.4 / 2021-08-26
+
+#### Bug Fixes
+
+* Fix google-cloud-resource-prefix header
+
+### 2.6.3 / 2021-08-24
+
+#### Bug Fixes
+
+* Fix transaction retry behavior
+
+### 2.6.2 / 2021-07-26
+
+#### Bug Fixes
+
+* Update FieldPath#formatted_string to correctly escape non-simple characters
+
+### 2.6.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 2.6.0 / 2021-06-15
 
 #### Features

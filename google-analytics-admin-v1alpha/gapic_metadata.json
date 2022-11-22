@@ -115,89 +115,9 @@
                 "batch_delete_user_links"
               ]
             },
-            "GetWebDataStream": {
-              "methods": [
-                "get_web_data_stream"
-              ]
-            },
-            "DeleteWebDataStream": {
-              "methods": [
-                "delete_web_data_stream"
-              ]
-            },
-            "UpdateWebDataStream": {
-              "methods": [
-                "update_web_data_stream"
-              ]
-            },
-            "CreateWebDataStream": {
-              "methods": [
-                "create_web_data_stream"
-              ]
-            },
-            "ListWebDataStreams": {
-              "methods": [
-                "list_web_data_streams"
-              ]
-            },
-            "GetIosAppDataStream": {
-              "methods": [
-                "get_ios_app_data_stream"
-              ]
-            },
-            "DeleteIosAppDataStream": {
-              "methods": [
-                "delete_ios_app_data_stream"
-              ]
-            },
-            "UpdateIosAppDataStream": {
-              "methods": [
-                "update_ios_app_data_stream"
-              ]
-            },
-            "ListIosAppDataStreams": {
-              "methods": [
-                "list_ios_app_data_streams"
-              ]
-            },
-            "GetAndroidAppDataStream": {
-              "methods": [
-                "get_android_app_data_stream"
-              ]
-            },
-            "DeleteAndroidAppDataStream": {
-              "methods": [
-                "delete_android_app_data_stream"
-              ]
-            },
-            "UpdateAndroidAppDataStream": {
-              "methods": [
-                "update_android_app_data_stream"
-              ]
-            },
-            "ListAndroidAppDataStreams": {
-              "methods": [
-                "list_android_app_data_streams"
-              ]
-            },
-            "GetEnhancedMeasurementSettings": {
-              "methods": [
-                "get_enhanced_measurement_settings"
-              ]
-            },
-            "UpdateEnhancedMeasurementSettings": {
-              "methods": [
-                "update_enhanced_measurement_settings"
-              ]
-            },
             "CreateFirebaseLink": {
               "methods": [
                 "create_firebase_link"
-              ]
-            },
-            "UpdateFirebaseLink": {
-              "methods": [
-                "update_firebase_link"
               ]
             },
             "DeleteFirebaseLink": {
@@ -265,6 +185,11 @@
                 "update_measurement_protocol_secret"
               ]
             },
+            "AcknowledgeUserDataCollection": {
+              "methods": [
+                "acknowledge_user_data_collection"
+              ]
+            },
             "SearchChangeHistoryEvents": {
               "methods": [
                 "search_change_history_events"
@@ -298,6 +223,61 @@
             "ListConversionEvents": {
               "methods": [
                 "list_conversion_events"
+              ]
+            },
+            "GetDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "get_display_video360_advertiser_link"
+              ]
+            },
+            "ListDisplayVideo360AdvertiserLinks": {
+              "methods": [
+                "list_display_video360_advertiser_links"
+              ]
+            },
+            "CreateDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "create_display_video360_advertiser_link"
+              ]
+            },
+            "DeleteDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "delete_display_video360_advertiser_link"
+              ]
+            },
+            "UpdateDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "update_display_video360_advertiser_link"
+              ]
+            },
+            "GetDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "get_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "ListDisplayVideo360AdvertiserLinkProposals": {
+              "methods": [
+                "list_display_video360_advertiser_link_proposals"
+              ]
+            },
+            "CreateDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "create_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "DeleteDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "delete_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "ApproveDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "approve_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "CancelDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "cancel_display_video360_advertiser_link_proposal"
               ]
             },
             "CreateCustomDimension": {
@@ -348,6 +328,81 @@
             "GetCustomMetric": {
               "methods": [
                 "get_custom_metric"
+              ]
+            },
+            "GetDataRetentionSettings": {
+              "methods": [
+                "get_data_retention_settings"
+              ]
+            },
+            "UpdateDataRetentionSettings": {
+              "methods": [
+                "update_data_retention_settings"
+              ]
+            },
+            "CreateDataStream": {
+              "methods": [
+                "create_data_stream"
+              ]
+            },
+            "DeleteDataStream": {
+              "methods": [
+                "delete_data_stream"
+              ]
+            },
+            "UpdateDataStream": {
+              "methods": [
+                "update_data_stream"
+              ]
+            },
+            "ListDataStreams": {
+              "methods": [
+                "list_data_streams"
+              ]
+            },
+            "GetDataStream": {
+              "methods": [
+                "get_data_stream"
+              ]
+            },
+            "GetAudience": {
+              "methods": [
+                "get_audience"
+              ]
+            },
+            "ListAudiences": {
+              "methods": [
+                "list_audiences"
+              ]
+            },
+            "CreateAudience": {
+              "methods": [
+                "create_audience"
+              ]
+            },
+            "UpdateAudience": {
+              "methods": [
+                "update_audience"
+              ]
+            },
+            "ArchiveAudience": {
+              "methods": [
+                "archive_audience"
+              ]
+            },
+            "GetAttributionSettings": {
+              "methods": [
+                "get_attribution_settings"
+              ]
+            },
+            "UpdateAttributionSettings": {
+              "methods": [
+                "update_attribution_settings"
+              ]
+            },
+            "RunAccessReport": {
+              "methods": [
+                "run_access_report"
               ]
             }
           }

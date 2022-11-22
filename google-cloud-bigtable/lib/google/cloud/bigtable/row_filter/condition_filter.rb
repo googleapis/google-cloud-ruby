@@ -34,9 +34,9 @@ module Google
         # evaluated on the input row. Otherwise, `false_filter` will be evaluated.
         #
         # @example
-        #   predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
+        #   predicate = Google::Cloud::Bigtable::RowFilter.key "user-*"
         #
-        #   label = Google::Cloud::Bigtable::RowFilter.label("user")
+        #   label = Google::Cloud::Bigtable::RowFilter.label "user"
         #   strip_value = Google::Cloud::Bigtable::RowFilter.strip_value
         #
         #   Google::Cloud::Bigtable::RowFilter.condition(predicate).on_match(label).otherwise(strip_value)
@@ -63,9 +63,9 @@ module Google
           #
           # @example
           #   require "google/cloud/bigtable"
-          #   predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
+          #   predicate = Google::Cloud::Bigtable::RowFilter.key "user-*"
           #
-          #   label = Google::Cloud::Bigtable::RowFilter.label("user")
+          #   label = Google::Cloud::Bigtable::RowFilter.label "user"
           #   strip_value = Google::Cloud::Bigtable::RowFilter.strip_value
           #
           #   Google::Cloud::Bigtable::RowFilter.condition(predicate).on_match(label).otherwise(strip_value)
@@ -88,9 +88,9 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
+          #   predicate = Google::Cloud::Bigtable::RowFilter.key "user-*"
           #
-          #   label = Google::Cloud::Bigtable::RowFilter.label("user")
+          #   label = Google::Cloud::Bigtable::RowFilter.label "user"
           #   strip_value = Google::Cloud::Bigtable::RowFilter.strip_value
           #
           #   Google::Cloud::Bigtable::RowFilter.condition(predicate).on_match(label).otherwise(strip_value)

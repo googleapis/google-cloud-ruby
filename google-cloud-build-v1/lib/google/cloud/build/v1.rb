@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/build/v1"
       #     client = ::Google::Cloud::Build::V1::CloudBuild::Client.new
       #

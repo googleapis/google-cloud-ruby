@@ -65,11 +65,10 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       }]
     )
 
-    mock.expect :mutate_rows, [res], [
+    mock.expect :mutate_rows, [res],
       table_name: table_path(instance_id, table_id),
       entries: [mutation_entry_grpc],
       app_profile_id: app_profile_id
-    ]
 
     entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
     entry.set_cell(family, qualifier, cell_value, timestamp: timestamp)
@@ -101,7 +100,7 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       }]
     )
     mock = Minitest::Mock.new
-    mock.expect :mutate_rows, [res], [table_name: table_path(instance_id, table_id), entries: [entry], app_profile_id: app_profile_id]
+    mock.expect :mutate_rows, [res], table_name: table_path(instance_id, table_id), entries: [entry], app_profile_id: app_profile_id
 
     bigtable.service.mocked_client = mock
 

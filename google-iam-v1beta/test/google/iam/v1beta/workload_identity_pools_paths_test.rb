@@ -23,6 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/iam/v1beta/workload_identity_pools"
 
 class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientPathsTest < Minitest::Test
+  def test_project_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.project_path project: "value0"
+      assert_equal "projects/value0", path
+    end
+  end
+
   def test_workload_identity_pool_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

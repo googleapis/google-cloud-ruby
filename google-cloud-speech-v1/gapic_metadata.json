@@ -28,6 +28,65 @@
           }
         }
       }
+    },
+    "Adaptation": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Speech::V1::Adaptation::Client",
+          "rpcs": {
+            "CreatePhraseSet": {
+              "methods": [
+                "create_phrase_set"
+              ]
+            },
+            "GetPhraseSet": {
+              "methods": [
+                "get_phrase_set"
+              ]
+            },
+            "ListPhraseSet": {
+              "methods": [
+                "list_phrase_set"
+              ]
+            },
+            "UpdatePhraseSet": {
+              "methods": [
+                "update_phrase_set"
+              ]
+            },
+            "DeletePhraseSet": {
+              "methods": [
+                "delete_phrase_set"
+              ]
+            },
+            "CreateCustomClass": {
+              "methods": [
+                "create_custom_class"
+              ]
+            },
+            "GetCustomClass": {
+              "methods": [
+                "get_custom_class"
+              ]
+            },
+            "ListCustomClasses": {
+              "methods": [
+                "list_custom_classes"
+              ]
+            },
+            "UpdateCustomClass": {
+              "methods": [
+                "update_custom_class"
+              ]
+            },
+            "DeleteCustomClass": {
+              "methods": [
+                "delete_custom_class"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

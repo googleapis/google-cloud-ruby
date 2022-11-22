@@ -38,17 +38,21 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials,
-                       retries: nil, timeout: nil, host: nil, quota_project: nil
+        # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+        def initialize project, credentials, retries: nil,
+                       timeout: nil, open_timeout: nil, read_timeout: nil,
+                       send_timeout: nil, host: nil, quota_project: nil,
+                       max_elapsed_time: nil, base_interval: nil, max_interval: nil,
+                       multiplier: nil
           @project = project
           @credentials = credentials
           @service = API::StorageService.new
           @service.client_options.application_name    = "gcloud-ruby"
           @service.client_options.application_version = \
             Google::Cloud::Storage::VERSION
-          @service.client_options.open_timeout_sec = timeout
-          @service.client_options.read_timeout_sec = timeout
-          @service.client_options.send_timeout_sec = timeout
+          @service.client_options.open_timeout_sec = (open_timeout || timeout)
+          @service.client_options.read_timeout_sec = (read_timeout || timeout)
+          @service.client_options.send_timeout_sec = (send_timeout || timeout)
           @service.client_options.transparent_gzip_decompression = false
           @service.request_options.retries = retries || 3
           @service.request_options.header ||= {}
@@ -56,9 +60,15 @@ module Google
             "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Storage::VERSION}"
           @service.request_options.header["Accept-Encoding"] = "gzip"
           @service.request_options.quota_project = quota_project if quota_project
+          @service.request_options.max_elapsed_time = max_elapsed_time if max_elapsed_time
+          @service.request_options.base_interval = base_interval if base_interval
+          @service.request_options.max_interval = max_interval if max_interval
+          @service.request_options.multiplier = multiplier if multiplier
+          @service.request_options.add_invocation_id_header = true
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
         end
+        # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
         def service
           return mocked_service if mocked_service
@@ -72,11 +82,11 @@ module Google
 
         ##
         # Retrieves a list of buckets for the given project.
-        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil
+        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil, options: {}
           execute do
             service.list_buckets \
               @project, prefix: prefix, page_token: token, max_results: max,
-                        user_project: user_project(user_project)
+                        user_project: user_project(user_project), options: options
           end
         end
 
@@ -86,12 +96,14 @@ module Google
         def get_bucket bucket_name,
                        if_metageneration_match: nil,
                        if_metageneration_not_match: nil,
-                       user_project: nil
+                       user_project: nil,
+                       options: {}
           execute do
             service.get_bucket bucket_name,
                                if_metageneration_match: if_metageneration_match,
                                if_metageneration_not_match: if_metageneration_not_match,
-                               user_project: user_project(user_project)
+                               user_project: user_project(user_project),
+                               options: options
           end
         end
 
@@ -99,13 +111,14 @@ module Google
         # Creates a new bucket.
         # Returns Google::Apis::StorageV1::Bucket.
         def insert_bucket bucket_gapi, acl: nil, default_acl: nil,
-                          user_project: nil
+                          user_project: nil, options: {}
           execute do
             service.insert_bucket \
               @project, bucket_gapi,
               predefined_acl: acl,
               predefined_default_object_acl: default_acl,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
@@ -117,10 +130,16 @@ module Google
                          predefined_default_acl: nil,
                          if_metageneration_match: nil,
                          if_metageneration_not_match: nil,
-                         user_project: nil
+                         user_project: nil,
+                         options: {}
           bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
           bucket_gapi.acl = [] if predefined_acl
           bucket_gapi.default_object_acl = [] if predefined_default_acl
+
+          if options[:retries].nil?
+            is_idempotent = retry? if_metageneration_match: if_metageneration_match
+            options = is_idempotent ? {} : { retries: 0 }
+          end
 
           execute do
             service.patch_bucket bucket_name,
@@ -129,7 +148,8 @@ module Google
                                  predefined_default_object_acl: predefined_default_acl,
                                  if_metageneration_match: if_metageneration_match,
                                  if_metageneration_not_match: if_metageneration_not_match,
-                                 user_project: user_project(user_project)
+                                 user_project: user_project(user_project),
+                                 options: options
           end
         end
 
@@ -138,119 +158,144 @@ module Google
         def delete_bucket bucket_name,
                           if_metageneration_match: nil,
                           if_metageneration_not_match: nil,
-                          user_project: nil
+                          user_project: nil,
+                          options: {}
           execute do
             service.delete_bucket bucket_name,
                                   if_metageneration_match: if_metageneration_match,
                                   if_metageneration_not_match: if_metageneration_not_match,
-                                  user_project: user_project(user_project)
+                                  user_project: user_project(user_project),
+                                  options: options
           end
         end
 
         ##
         # Locks retention policy on a bucket.
         def lock_bucket_retention_policy bucket_name, metageneration,
-                                         user_project: nil
+                                         user_project: nil,
+                                         options: {}
           execute do
             service.lock_bucket_retention_policy \
               bucket_name, metageneration,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Retrieves a list of ACLs for the given bucket.
-        def list_bucket_acls bucket_name, user_project: nil
+        def list_bucket_acls bucket_name, user_project: nil, options: {}
           execute do
             service.list_bucket_access_controls \
-              bucket_name, user_project: user_project(user_project)
+              bucket_name, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Creates a new bucket ACL.
-        def insert_bucket_acl bucket_name, entity, role, user_project: nil
+        def insert_bucket_acl bucket_name, entity, role, user_project: nil, options: {}
           params = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::BucketAccessControl.new(**params)
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.insert_bucket_access_control \
-              bucket_name, new_acl, user_project: user_project(user_project)
+              bucket_name, new_acl, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Permanently deletes a bucket ACL.
-        def delete_bucket_acl bucket_name, entity, user_project: nil
+        def delete_bucket_acl bucket_name, entity, user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.delete_bucket_access_control \
-              bucket_name, entity, user_project: user_project(user_project)
+              bucket_name, entity, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Retrieves a list of default ACLs for the given bucket.
-        def list_default_acls bucket_name, user_project: nil
+        def list_default_acls bucket_name, user_project: nil, options: {}
           execute do
             service.list_default_object_access_controls \
-              bucket_name, user_project: user_project(user_project)
+              bucket_name, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Creates a new default ACL.
-        def insert_default_acl bucket_name, entity, role, user_project: nil
+        def insert_default_acl bucket_name, entity, role, user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           param = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(**param)
           execute do
             service.insert_default_object_access_control \
-              bucket_name, new_acl, user_project: user_project(user_project)
+              bucket_name, new_acl, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Permanently deletes a default ACL.
-        def delete_default_acl bucket_name, entity, user_project: nil
+        def delete_default_acl bucket_name, entity, user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.delete_default_object_access_control \
-              bucket_name, entity, user_project: user_project(user_project)
+              bucket_name, entity, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Returns Google::Apis::StorageV1::Policy
-        def get_bucket_policy bucket_name, requested_policy_version: nil, user_project: nil
+        def get_bucket_policy bucket_name, requested_policy_version: nil, user_project: nil,
+                              options: {}
           # get_bucket_iam_policy(bucket, fields: nil, quota_user: nil,
           #                               user_ip: nil, options: nil)
           execute do
             service.get_bucket_iam_policy bucket_name, options_requested_policy_version: requested_policy_version,
-                                                       user_project: user_project(user_project)
+                                                       user_project: user_project(user_project), options: options
           end
         end
 
         ##
         # Returns Google::Apis::StorageV1::Policy
-        def set_bucket_policy bucket_name, new_policy, user_project: nil
+        def set_bucket_policy bucket_name, new_policy, user_project: nil, options: {}
           execute do
             service.set_bucket_iam_policy \
-              bucket_name, new_policy, user_project: user_project(user_project)
+              bucket_name, new_policy, user_project: user_project(user_project), options: options
           end
         end
 
         ##
         # Returns Google::Apis::StorageV1::TestIamPermissionsResponse
-        def test_bucket_permissions bucket_name, permissions, user_project: nil
+        def test_bucket_permissions bucket_name, permissions, user_project: nil, options: {}
           execute do
             service.test_bucket_iam_permissions \
-              bucket_name, permissions, user_project: user_project(user_project)
+              bucket_name, permissions, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Retrieves a list of Pub/Sub notification subscriptions for a bucket.
-        def list_notifications bucket_name, user_project: nil
+        def list_notifications bucket_name, user_project: nil, options: {}
           execute do
             service.list_notifications bucket_name,
-                                       user_project: user_project(user_project)
+                                       user_project: user_project(user_project),
+                                       options: options
           end
         end
 
@@ -258,7 +303,7 @@ module Google
         # Creates a new Pub/Sub notification subscription for a bucket.
         def insert_notification bucket_name, topic_name, custom_attrs: nil,
                                 event_types: nil, prefix: nil, payload: nil,
-                                user_project: nil
+                                user_project: nil, options: {}
           params =
             { custom_attributes: custom_attrs,
               event_types: event_types(event_types),
@@ -267,41 +312,50 @@ module Google
               topic: topic_path(topic_name) }.delete_if { |_k, v| v.nil? }
           new_notification = Google::Apis::StorageV1::Notification.new(**params)
 
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
+
           execute do
             service.insert_notification \
               bucket_name, new_notification,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Retrieves a Pub/Sub notification subscription for a bucket.
-        def get_notification bucket_name, notification_id, user_project: nil
+        def get_notification bucket_name, notification_id, user_project: nil, options: {}
           execute do
             service.get_notification bucket_name, notification_id,
-                                     user_project: user_project(user_project)
+                                     user_project: user_project(user_project),
+                                     options: options
           end
         end
 
         ##
         # Deletes a new Pub/Sub notification subscription for a bucket.
-        def delete_notification bucket_name, notification_id, user_project: nil
+        def delete_notification bucket_name, notification_id, user_project: nil, options: {}
           execute do
             service.delete_notification bucket_name, notification_id,
-                                        user_project: user_project(user_project)
+                                        user_project: user_project(user_project),
+                                        options: options
           end
         end
 
         ##
         # Retrieves a list of files matching the criteria.
         def list_files bucket_name, delimiter: nil, max: nil, token: nil,
-                       prefix: nil, versions: nil, user_project: nil
+                       prefix: nil, versions: nil, user_project: nil,
+                       options: {}
           execute do
             service.list_objects \
               bucket_name, delimiter: delimiter, max_results: max,
                            page_token: token, prefix: prefix,
                            versions: versions,
-                           user_project: user_project(user_project)
+                           user_project: user_project(user_project),
+                           options: options
           end
         end
 
@@ -329,7 +383,8 @@ module Google
                         if_generation_not_match: nil,
                         if_metageneration_match: nil,
                         if_metageneration_not_match: nil,
-                        user_project: nil
+                        user_project: nil,
+                        options: {}
           params = {
             cache_control: cache_control,
             content_type: content_type,
@@ -347,6 +402,13 @@ module Google
           file_obj = Google::Apis::StorageV1::Object.new(**params)
           content_type ||= mime_type_for(path || Pathname(source).to_path)
 
+          if options[:retries].nil?
+            is_idempotent = retry? if_generation_match: if_generation_match
+            options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
+          else
+            options = key_options(key).merge options
+          end
+
           execute do
             service.insert_object bucket_name,
                                   file_obj,
@@ -361,7 +423,7 @@ module Google
                                   if_metageneration_not_match: if_metageneration_not_match,
                                   kms_key_name: kms_key,
                                   user_project: user_project(user_project),
-                                  options: key_options(key)
+                                  options: options
           end
         end
 
@@ -375,7 +437,8 @@ module Google
                      if_metageneration_match: nil,
                      if_metageneration_not_match: nil,
                      key: nil,
-                     user_project: nil
+                     user_project: nil,
+                     options: {}
           execute do
             service.get_object \
               bucket_name, file_path,
@@ -385,7 +448,7 @@ module Google
               if_metageneration_match: if_metageneration_match,
               if_metageneration_not_match: if_metageneration_not_match,
               user_project: user_project(user_project),
-              options: key_options(key)
+              options: key_options(key).merge(options)
           end
         end
 
@@ -410,8 +473,17 @@ module Google
                          if_source_metageneration_match: nil,
                          if_source_metageneration_not_match: nil,
                          token: nil,
-                         user_project: nil
+                         user_project: nil,
+                         options: {}
           key_options = rewrite_key_options source_key, destination_key
+
+          if options[:retries].nil?
+            is_idempotent = retry? if_generation_match: if_generation_match
+            options = is_idempotent ? key_options : key_options.merge(retries: 0)
+          else
+            options = key_options.merge options
+          end
+
           execute do
             service.rewrite_object source_bucket_name,
                                    source_file_path,
@@ -431,7 +503,7 @@ module Google
                                    if_source_metageneration_not_match: if_source_metageneration_not_match,
                                    rewrite_token: token,
                                    user_project: user_project(user_project),
-                                   options: key_options
+                                   options: options
           end
         end
 
@@ -446,11 +518,19 @@ module Google
                          if_source_generation_match: nil,
                          if_generation_match: nil,
                          if_metageneration_match: nil,
-                         user_project: nil
+                         user_project: nil,
+                         options: {}
 
           source_objects = compose_file_source_objects source_files, if_source_generation_match
           compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
                                                                     destination: destination_gapi
+
+          if options[:retries].nil?
+            is_idempotent = retry? if_generation_match: if_generation_match
+            options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
+          else
+            options = key_options.merge options
+          end
 
           execute do
             service.compose_object bucket_name,
@@ -460,7 +540,7 @@ module Google
                                    if_generation_match: if_generation_match,
                                    if_metageneration_match: if_metageneration_match,
                                    user_project: user_project(user_project),
-                                   options: key_options(key)
+                                   options: options
           end
         end
 
@@ -474,12 +554,12 @@ module Google
         #     Apis::StorageV1::StorageService and Apis::Core::DownloadCommand at
         #     the end of this file.
         def download_file bucket_name, file_path, target_path, generation: nil,
-                          key: nil, range: nil, user_project: nil
-          options = key_options key
+                          key: nil, range: nil, user_project: nil, options: {}
+          options = key_options(key).merge(options)
           options = range_header options, range
 
           execute do
-            service.get_object_with_response \
+            service.get_object \
               bucket_name, file_path,
               download_dest: target_path, generation: generation,
               user_project: user_project(user_project),
@@ -498,8 +578,15 @@ module Google
                        if_metageneration_match: nil,
                        if_metageneration_not_match: nil,
                        predefined_acl: nil,
-                       user_project: nil
+                       user_project: nil,
+                       options: {}
           file_gapi ||= Google::Apis::StorageV1::Object.new
+
+          if options[:retries].nil?
+            is_idempotent = retry? if_metageneration_match: if_metageneration_match
+            options = is_idempotent ? {} : { retries: 0 }
+          end
+
           execute do
             service.patch_object bucket_name,
                                  file_path,
@@ -510,7 +597,8 @@ module Google
                                  if_metageneration_match: if_metageneration_match,
                                  if_metageneration_not_match: if_metageneration_not_match,
                                  predefined_acl: predefined_acl,
-                                 user_project: user_project(user_project)
+                                 user_project: user_project(user_project),
+                                 options: options
           end
         end
 
@@ -523,7 +611,14 @@ module Google
                         if_generation_not_match: nil,
                         if_metageneration_match: nil,
                         if_metageneration_not_match: nil,
-                        user_project: nil
+                        user_project: nil,
+                        options: {}
+
+          if options[:retries].nil?
+            is_idempotent = retry? generation: generation, if_generation_match: if_generation_match
+            options = is_idempotent ? {} : { retries: 0 }
+          end
+
           execute do
             service.delete_object bucket_name, file_path,
                                   generation: generation,
@@ -531,40 +626,51 @@ module Google
                                   if_generation_not_match: if_generation_not_match,
                                   if_metageneration_match: if_metageneration_match,
                                   if_metageneration_not_match: if_metageneration_not_match,
-                                  user_project: user_project(user_project)
+                                  user_project: user_project(user_project),
+                                  options: options
           end
         end
 
         ##
         # Retrieves a list of ACLs for the given file.
-        def list_file_acls bucket_name, file_name, user_project: nil
+        def list_file_acls bucket_name, file_name, user_project: nil, options: {}
           execute do
             service.list_object_access_controls \
-              bucket_name, file_name, user_project: user_project(user_project)
+              bucket_name, file_name, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Creates a new file ACL.
         def insert_file_acl bucket_name, file_name, entity, role,
-                            generation: nil, user_project: nil
+                            generation: nil, user_project: nil,
+                            options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           params = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(**params)
           execute do
             service.insert_object_access_control \
               bucket_name, file_name, new_acl,
-              generation: generation, user_project: user_project(user_project)
+              generation: generation, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Permanently deletes a file ACL.
         def delete_file_acl bucket_name, file_name, entity, generation: nil,
-                            user_project: nil
+                            user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.delete_object_access_control \
               bucket_name, file_name, entity,
-              generation: generation, user_project: user_project(user_project)
+              generation: generation, user_project: user_project(user_project),
+              options: options
           end
         end
 
@@ -572,32 +678,42 @@ module Google
         # Creates a new HMAC key for the specified service account.
         # Returns Google::Apis::StorageV1::HmacKey.
         def create_hmac_key service_account_email, project_id: nil,
-                            user_project: nil
+                            user_project: nil, options: {}
+
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
+
           execute do
             service.create_project_hmac_key \
               (project_id || @project), service_account_email,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Deletes an HMAC key. Key must be in the INACTIVE state.
-        def delete_hmac_key access_id, project_id: nil, user_project: nil
+        def delete_hmac_key access_id, project_id: nil, user_project: nil,
+                            options: {}
           execute do
             service.delete_project_hmac_key \
               (project_id || @project), access_id,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Retrieves an HMAC key's metadata.
         # Returns Google::Apis::StorageV1::HmacKeyMetadata.
-        def get_hmac_key access_id, project_id: nil, user_project: nil
+        def get_hmac_key access_id, project_id: nil, user_project: nil,
+                         options: {}
           execute do
             service.get_project_hmac_key \
               (project_id || @project), access_id,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
@@ -606,14 +722,15 @@ module Google
         # Returns Google::Apis::StorageV1::HmacKeysMetadata.
         def list_hmac_keys max: nil, token: nil, service_account_email: nil,
                            project_id: nil, show_deleted_keys: nil,
-                           user_project: nil
+                           user_project: nil, options: {}
           execute do
             service.list_project_hmac_keys \
               (project_id || @project),
               max_results: max, page_token: token,
               service_account_email: service_account_email,
               show_deleted_keys: show_deleted_keys,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
@@ -622,11 +739,44 @@ module Google
         # for valid states.
         # Returns Google::Apis::StorageV1::HmacKeyMetadata.
         def update_hmac_key access_id, hmac_key_metadata_object,
-                            project_id: nil, user_project: nil
+                            project_id: nil, user_project: nil,
+                            options: {}
           execute do
             service.update_project_hmac_key \
               (project_id || @project), access_id, hmac_key_metadata_object,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
+          end
+        end
+
+        ##
+        # Updates a bucket, including its ACL metadata.
+        def update_bucket bucket_name,
+                          bucket_gapi = nil,
+                          predefined_acl: nil,
+                          predefined_default_acl: nil,
+                          if_metageneration_match: nil,
+                          if_metageneration_not_match: nil,
+                          user_project: nil,
+                          options: {}
+          bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
+          bucket_gapi.acl = [] if predefined_acl
+          bucket_gapi.default_object_acl = [] if predefined_default_acl
+
+          if options[:retries].nil?
+            is_idempotent = retry? if_metageneration_match: if_metageneration_match
+            options = is_idempotent ? {} : { retries: 0 }
+          end
+
+          execute do
+            service.update_bucket bucket_name,
+                                  bucket_gapi,
+                                  predefined_acl: predefined_acl,
+                                  predefined_default_object_acl: predefined_default_acl,
+                                  if_metageneration_match: if_metageneration_match,
+                                  if_metageneration_not_match: if_metageneration_not_match,
+                                  user_project: user_project(user_project),
+                                  options: options
           end
         end
 
@@ -762,163 +912,11 @@ module Google
         rescue Google::Apis::Error => e
           raise Google::Cloud::Error.from_error(e)
         end
-      end
-    end
-  end
 
-  # rubocop:disable all
-
-  # @private
-  #
-  # IMPORTANT: These monkey-patches of Apis::StorageV1::StorageService and
-  # Apis::Core::DownloadCommand must be verified and updated (if needed) for
-  # every upgrade of google-api-client.
-  #
-  # The purpose of these modifications is to provide access to response headers
-  # (in particular, the Content-Encoding header) for the #download_file method,
-  # above. If google-api-client is modified to expose response headers to its
-  # clients, this code should be removed, and #download_file updated to use that
-  # solution instead.
-  #
-  module Apis
-    # @private
-    module StorageV1
-      # @private
-      class StorageService
-        # Returns a two-element array containing:
-        #   * The `result` that is the usual return type of #get_object.
-        #   * The `http_resp` from DownloadCommand#execute_once.
-        def get_object_with_response(bucket, object, generation: nil, if_generation_match: nil, if_generation_not_match: nil, if_metageneration_match: nil, if_metageneration_not_match: nil, projection: nil, user_project: nil, fields: nil, quota_user: nil, user_ip: nil, download_dest: nil, options: nil, &block)
-          if download_dest.nil?
-            command =  make_simple_command(:get, 'b/{bucket}/o/{object}', options)
-          else
-            command = make_download_command(:get, 'b/{bucket}/o/{object}', options)
-            command.download_dest = download_dest
-          end
-          command.response_representation = Google::Apis::StorageV1::Object::Representation
-          command.response_class = Google::Apis::StorageV1::Object
-          command.params['bucket'] = bucket unless bucket.nil?
-          command.params['object'] = object unless object.nil?
-          command.query['generation'] = generation unless generation.nil?
-          command.query['ifGenerationMatch'] = if_generation_match unless if_generation_match.nil?
-          command.query['ifGenerationNotMatch'] = if_generation_not_match unless if_generation_not_match.nil?
-          command.query['ifMetagenerationMatch'] = if_metageneration_match unless if_metageneration_match.nil?
-          command.query['ifMetagenerationNotMatch'] = if_metageneration_not_match unless if_metageneration_not_match.nil?
-          command.query['projection'] = projection unless projection.nil?
-          command.query['userProject'] = user_project unless user_project.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command_with_response(command, &block)
-        end
-
-        # Returns a two-element array containing:
-        #   * The `result` that is the usual return type of #execute_or_queue_command.
-        #   * The `http_resp` from DownloadCommand#execute_once.
-        def execute_or_queue_command_with_response(command, &callback)
-          batch_command = current_batch
-          if batch_command
-            raise "Can not combine services in a batch" if Thread.current[:google_api_batch_service] != self
-            batch_command.add(command, &callback)
-            nil
-          else
-            command.execute_with_response(client, &callback)
-          end
-        end
-      end
-    end
-    # @private
-    module Core
-      # @private
-      # Streaming/resumable media download support
-      class DownloadCommand < ApiCommand
-        # Returns a two-element array containing:
-        #   * The `result` that is the usual return type of #execute.
-        #   * The `http_resp` from #execute_once.
-        def execute_with_response(client)
-          prepare!
-          begin
-            Retriable.retriable tries: options.retries + 1,
-                                base_interval: 1,
-                                multiplier: 2,
-                                on: RETRIABLE_ERRORS do |try|
-              # This 2nd level retriable only catches auth errors, and supports 1 retry, which allows
-              # auth to be re-attempted without having to retry all sorts of other failures like
-              # NotFound, etc
-              auth_tries = (try == 1 && authorization_refreshable? ? 2 : 1)
-              Retriable.retriable tries: auth_tries,
-                                  on: [Google::Apis::AuthorizationError, Signet::AuthorizationError],
-                                  on_retry: proc { |*| refresh_authorization } do
-                execute_once_with_response(client).tap do |result|
-                  if block_given?
-                    yield result, nil
-                  end
-                end
-              end
-            end
-          rescue => e
-            if block_given?
-              yield nil, e
-            else
-              raise e
-            end
-          end
-        ensure
-          release!
-        end
-
-        # Returns a two-element array containing:
-        #   * The `result` that is the usual return type of #execute_once.
-        #   * The `http_resp`.
-        def execute_once_with_response(client, &block)
-          request_header = header.dup
-          apply_request_options(request_header)
-          download_offset = nil
-
-          if @offset > 0
-            logger.debug { sprintf('Resuming download from offset %d', @offset) }
-            request_header[RANGE_HEADER] = sprintf('bytes=%d-', @offset)
-          end
-
-          http_res = client.get(url.to_s,
-                     query: query,
-                     header: request_header,
-                     follow_redirect: true) do |res, chunk|
-            status = res.http_header.status_code.to_i
-            next unless OK_STATUS.include?(status)
-
-            download_offset ||= (status == 206 ? @offset : 0)
-            download_offset  += chunk.bytesize
-
-            if download_offset - chunk.bytesize == @offset
-              next_chunk = chunk
-            else
-              # Oh no! Requested a chunk, but received the entire content
-              chunk_index = @offset - (download_offset - chunk.bytesize)
-              next_chunk = chunk.byteslice(chunk_index..-1)
-              next if next_chunk.nil?
-            end
-            # logger.debug { sprintf('Writing chunk (%d bytes, %d total)', chunk.length, bytes_read) }
-            @download_io.write(next_chunk)
-
-            @offset += next_chunk.bytesize
-          end
-
-          @download_io.flush
-
-          if @close_io_on_finish
-            result = nil
-          else
-            result = @download_io
-          end
-          check_status(http_res.status.to_i, http_res.header, http_res.body)
-          success([result, http_res], &block)
-        rescue => e
-          @download_io.flush
-          error(e, rethrow: true, &block)
+        def retry? query_params
+          query_params.any? { |_key, val| !val.nil? }
         end
       end
     end
   end
-  # rubocop:enable all
 end

@@ -42,7 +42,7 @@ module Google
           end
 
           # The Log4j level for job execution. When running an
-          # [Apache Hive](http://hive.apache.org/) job, Cloud
+          # [Apache Hive](https://hive.apache.org/) job, Cloud
           # Dataproc configures the Hive client to an equivalent verbosity level.
           module Level
             # Level is unspecified. Use default level for log4j.
@@ -507,8 +507,7 @@ module Google
         #     the job is submitted.
         # @!attribute [rw] cluster_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. Cluster labels to identify a cluster where the job will be
-        #     submitted.
+        #     Optional. Cluster labels to identify a cluster where the job will be submitted.
         class JobPlacement
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -609,8 +608,8 @@ module Google
         # Encapsulates the full scoping used to reference a job.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     Optional. The ID of the Google Cloud Platform project that the job belongs
-        #     to. If specified, must match the request project ID.
+        #     Optional. The ID of the Google Cloud Platform project that the job belongs to. If
+        #     specified, must match the request project ID.
         # @!attribute [rw] job_id
         #   @return [::String]
         #     Optional. The job ID, which must be unique within the project.
@@ -757,8 +756,8 @@ module Google
         #     may be reused over time.
         # @!attribute [r] done
         #   @return [::Boolean]
-        #     Output only. Indicates whether the job is completed. If the value is
-        #     `false`, the job is still in progress. If `true`, the job is completed, and
+        #     Output only. Indicates whether the job is completed. If the value is `false`,
+        #     the job is still in progress. If `true`, the job is completed, and
         #     `status.state` field will indicate if it was successful, failed,
         #     or cancelled.
         class Job
@@ -786,11 +785,23 @@ module Google
         #     4 times within 10 minute window.
         #
         #     Maximum value is 10.
+        #
+        #     **Note:** Currently, this restartable job option is
+        #     not supported in Dataproc
+        #     [workflow
+        #     template](https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template)
+        #     jobs.
         # @!attribute [rw] max_failures_total
         #   @return [::Integer]
-        #     Optional. Maximum number of times in total a driver may be restarted as a
-        #     result of driver exiting with non-zero code before job is reported failed.
+        #     Optional. Maximum number of times in total a driver may be restarted as a result of
+        #     driver exiting with non-zero code before job is reported failed.
         #     Maximum value is 240.
+        #
+        #     **Note:** Currently, this restartable job option is
+        #     not supported in Dataproc
+        #     [workflow
+        #     template](https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template)
+        #     jobs.
         class JobScheduling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

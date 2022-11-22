@@ -27,6 +27,8 @@ module Google
           ##
           # To load this package, including all its services, and instantiate a client:
           #
+          # @example
+          #
           #     require "google/cloud/spanner/admin/database/v1"
           #     client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
           #

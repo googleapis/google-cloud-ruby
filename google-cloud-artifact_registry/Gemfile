@@ -2,4 +2,5 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "google-cloud-artifact_registry-v1", path: "../google-cloud-artifact_registry-v1"
 gem "google-cloud-artifact_registry-v1beta2", path: "../google-cloud-artifact_registry-v1beta2"

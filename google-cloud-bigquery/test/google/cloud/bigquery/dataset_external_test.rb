@@ -39,7 +39,7 @@ describe Google::Cloud::Bigquery::Dataset, :external, :mock_bigquery do
       ext.hive_partitioning_source_uri_prefix = source_uri_prefix
     end
 
-    _(external_data).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    _(external_data).must_be_instance_of Google::Cloud::Bigquery::External::ParquetSource
     _(external_data.format).must_equal "PARQUET"
     _(external_data.parquet?).must_equal true
     _(external_data.hive_partitioning_mode).must_equal "AUTO"
@@ -263,24 +263,24 @@ describe Google::Cloud::Bigquery::Dataset, :external, :mock_bigquery do
 
   describe "AVRO" do
     it "determines AVRO from one URL" do
-      external = dataset.external "gs://my-bucket/path/to/file.avro"
-      _(external).must_be_instance_of Google::Cloud::Bigquery::External::DataSource
-      _(external.urls).must_equal ["gs://my-bucket/path/to/file.avro"]
+      external = dataset.external "gs://my-bucket/path/to/*.avro"
+      _(external).must_be_instance_of Google::Cloud::Bigquery::External::AvroSource
+      _(external.urls).must_equal ["gs://my-bucket/path/to/*.avro"]
       _(external).must_be :avro?
       _(external.format).must_equal "AVRO"
     end
 
     it "determines AVRO from multiple URL" do
-      external = dataset.external ["some url", "gs://my-bucket/path/to/file.avro"]
-      _(external).must_be_instance_of Google::Cloud::Bigquery::External::DataSource
-      _(external.urls).must_equal ["some url", "gs://my-bucket/path/to/file.avro"]
+      external = dataset.external ["some url", "gs://my-bucket/path/to/*.avro"]
+      _(external).must_be_instance_of Google::Cloud::Bigquery::External::AvroSource
+      _(external.urls).must_equal ["some url", "gs://my-bucket/path/to/*.avro"]
       _(external).must_be :avro?
       _(external.format).must_equal "AVRO"
     end
 
     it "determines AVRO from the format (:avro)" do
       external = dataset.external "some url", format: :avro
-      _(external).must_be_instance_of Google::Cloud::Bigquery::External::DataSource
+      _(external).must_be_instance_of Google::Cloud::Bigquery::External::AvroSource
       _(external.urls).must_equal ["some url"]
       _(external).must_be :avro?
       _(external.format).must_equal "AVRO"
@@ -288,7 +288,7 @@ describe Google::Cloud::Bigquery::Dataset, :external, :mock_bigquery do
 
     it "determines AVRO from the format (avro)" do
       external = dataset.external "some url", format: "avro"
-      _(external).must_be_instance_of Google::Cloud::Bigquery::External::DataSource
+      _(external).must_be_instance_of Google::Cloud::Bigquery::External::AvroSource
       _(external.urls).must_equal ["some url"]
       _(external).must_be :avro?
       _(external.format).must_equal "AVRO"
@@ -296,7 +296,7 @@ describe Google::Cloud::Bigquery::Dataset, :external, :mock_bigquery do
 
     it "determines AVRO from the format (:AVRO)" do
       external = dataset.external "some url", format: :AVRO
-      _(external).must_be_instance_of Google::Cloud::Bigquery::External::DataSource
+      _(external).must_be_instance_of Google::Cloud::Bigquery::External::AvroSource
       _(external.urls).must_equal ["some url"]
       _(external).must_be :avro?
       _(external.format).must_equal "AVRO"
@@ -304,7 +304,7 @@ describe Google::Cloud::Bigquery::Dataset, :external, :mock_bigquery do
 
     it "determines AVRO from the format (AVRO)" do
       external = dataset.external "some url", format: "AVRO"
-      _(external).must_be_instance_of Google::Cloud::Bigquery::External::DataSource
+      _(external).must_be_instance_of Google::Cloud::Bigquery::External::AvroSource
       _(external.urls).must_equal ["some url"]
       _(external).must_be :avro?
       _(external.format).must_equal "AVRO"

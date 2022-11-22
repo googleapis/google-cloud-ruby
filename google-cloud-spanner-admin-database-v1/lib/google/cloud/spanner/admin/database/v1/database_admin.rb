@@ -36,10 +36,11 @@ module Google
             ##
             # Cloud Spanner Database Admin API
             #
-            # The Cloud Spanner Database Admin API can be used to create, drop, and
-            # list databases. It also enables updating the schema of pre-existing
-            # databases. It can be also used to create, delete and list backups for a
-            # database and to restore from an existing backup.
+            # The Cloud Spanner Database Admin API can be used to:
+            #   * create, drop, and list databases
+            #   * update the schema of pre-existing databases
+            #   * create, delete and list backups for a database
+            #   * restore a database from an existing backup
             #
             # To load this service and instantiate a client:
             #

@@ -36,7 +36,7 @@ module Google
               self.service_name = 'google.cloud.billing.budgets.v1beta1.BudgetService'
 
               # Creates a new budget. See
-              # <a href="https://cloud.google.com/billing/quotas">Quotas and limits</a>
+              # [Quotas and limits](https://cloud.google.com/billing/quotas)
               # for more information on the limits of the number of budgets you can create.
               rpc :CreateBudget, ::Google::Cloud::Billing::Budgets::V1beta1::CreateBudgetRequest, ::Google::Cloud::Billing::Budgets::V1beta1::Budget
               # Updates a budget and returns the updated budget.

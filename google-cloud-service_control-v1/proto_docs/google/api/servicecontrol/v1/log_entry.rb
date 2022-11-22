@@ -31,7 +31,7 @@ module Google
         #     The time the event described by the log entry occurred. If
         #     omitted, defaults to operation start time.
         # @!attribute [rw] severity
-        #   @return [::Google::Logging::Type::LogSeverity]
+        #   @return [::Google::Cloud::Logging::Type::LogSeverity]
         #     The severity of the log entry. The default value is
         #     `LogSeverity.DEFAULT`.
         # @!attribute [rw] http_request

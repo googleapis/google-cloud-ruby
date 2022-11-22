@@ -57,7 +57,7 @@ module Google
         #   interleave = Google::Cloud::Bigtable::RowFilter.interleave
         #
         #   # Add filters to interleave filter
-        #   interleave.key("user-*")
+        #   interleave.key "user-*"
         #   interleave.sink
         #
         #   # OR
@@ -104,7 +104,7 @@ module Google
           #   # Add filters to chain filter
           #   chain.key("user-*").cells_per_row(5)
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.chain(chain)
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.chain chain
           #
           def chain filter
             raise RowFilterError, "Filter type must be ChainFilter" unless filter.instance_of? ChainFilter
@@ -155,7 +155,7 @@ module Google
           #   # Add filters to an interleave filter.
           #   interleave.key("user-*").cells_per_column(3)
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.interleave(interleave)
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.interleave interleave
           #
           def interleave filter
             raise RowFilterError, "Filter type must be InterleaveFilter" unless filter.instance_of? InterleaveFilter
@@ -182,15 +182,16 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
+          #   predicate = Google::Cloud::Bigtable::RowFilter.key "user-*"
           #
-          #   label = Google::Cloud::Bigtable::RowFilter.label("user")
+          #   label = Google::Cloud::Bigtable::RowFilter.label "user"
           #   strip_value = Google::Cloud::Bigtable::RowFilter.strip_value
           #
-          #   condition_filter = Google::Cloud::Bigtable::RowFilter.
-          #     condition(predicate).on_match(label).otherwise(strip_value)
+          #   condition_filter = Google::Cloud::Bigtable::RowFilter.condition(predicate)
+          #                                                        .on_match(label)
+          #                                                        .otherwise(strip_value)
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.condition(condition_filter)
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.condition condition_filter
           #
           def condition filter
             raise RowFilterError, "Filter type must be ConditionFilter" unless filter.instance_of? ConditionFilter
@@ -288,7 +289,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.key("user-*")
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.key "user-*"
           #
           def key regex
             add RowFilter.key(regex)
@@ -308,7 +309,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.sample(0.5)
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.sample 0.5
           #
           def sample probability
             add RowFilter.sample(probability)
@@ -334,7 +335,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.family("cf-*")
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.family "cf-*"
           #
           def family regex
             add RowFilter.family(regex)
@@ -360,7 +361,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.qualifier("user-name*")
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.qualifier "user-name*"
           #
           def qualifier regex
             add RowFilter.qualifier(regex)
@@ -385,7 +386,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.value("abc*")
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.value "abc*"
           #
           def value regex
             add RowFilter.value(regex)
@@ -414,7 +415,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.label("user-detail")
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.label "user-detail"
           #
           def label value
             add RowFilter.label(value)
@@ -434,7 +435,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.cells_per_row_offset(3)
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.cells_per_row_offset 3
           #
           def cells_per_row_offset offset
             add RowFilter.cells_per_row_offset(offset)
@@ -454,7 +455,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.cells_per_row(5)
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.cells_per_row 5
           #
           def cells_per_row limit
             add RowFilter.cells_per_row(limit)
@@ -477,7 +478,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.cells_per_column(5)
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.cells_per_column 5
           #
           def cells_per_column limit
             add RowFilter.cells_per_column(limit)
@@ -499,11 +500,11 @@ module Google
           # @example
           #   require "google/cloud/bigtable"
           #
-          #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
-          #   from = timestamp_micros - 300000000
+          #   timestamp_micros = (Time.now.to_f * 1_000_000).round(-3)
+          #   from = timestamp_micros - 300_000_000
           #   to = timestamp_micros
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.timestamp_range(from: from, to: to)
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.timestamp_range from: from, to: to
           #
           def timestamp_range from: nil, to: nil
             add RowFilter.timestamp_range(from: from, to: to)
@@ -529,19 +530,19 @@ module Google
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new
-          #   table = bigtable.table("my-instance", "my-table")
+          #   table = bigtable.table "my-instance", "my-table"
           #
           #   range = table.new_value_range.from("value-001").to("value-005")
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.value_range(range)
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.value_range range
           #
           # @example Start exlusive to infinite end range.
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new
-          #   table = bigtable.table("my-instance", "my-table")
+          #   table = bigtable.table "my-instance", "my-table"
           #
-          #   range = table.new_value_range.from("value-001", inclusive: false)
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.value_range(range)
+          #   range = table.new_value_range.from "value-001", inclusive: false
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.value_range range
           #
           def value_range range
             add RowFilter.value_range(range)
@@ -561,7 +562,7 @@ module Google
           #
           #   range = Google::Cloud::Bigtable::ColumnRange.new("cf").from("field0").to("field5")
           #
-          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.column_range(range)
+          #   filter = Google::Cloud::Bigtable::RowFilter.interleave.column_range range
           #
           def column_range range
             add RowFilter.column_range(range)

@@ -25,6 +25,23 @@ module Google
           # Path helper methods for the Bigtable API.
           module Paths
             ##
+            # Create a fully-qualified Instance resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/instances/{instance}`
+            #
+            # @param project [String]
+            # @param instance [String]
+            #
+            # @return [::String]
+            def instance_path project:, instance:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/instances/#{instance}"
+            end
+
+            ##
             # Create a fully-qualified Table resource string.
             #
             # The resource will be in the following format:

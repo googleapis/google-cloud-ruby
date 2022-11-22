@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
   let(:bucket_name) { "found-bucket" }
-  let(:bucket_hash) { random_bucket_hash bucket_name }
+  let(:bucket_hash) { random_bucket_hash name: bucket_name }
   let(:bucket_json) { bucket_hash.to_json }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
@@ -68,7 +68,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "gets the policy" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: nil, user_project: nil]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name], options_requested_policy_version: nil, user_project: nil, options: {}
 
       storage.service.mocked_service = mock
       policy = bucket.policy
@@ -86,7 +86,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "gets the policy with requested_policy_version: 1" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 1, user_project: nil]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name], options_requested_policy_version: 1, user_project: nil, options: {}
 
       storage.service.mocked_service = mock
       policy = bucket.policy requested_policy_version: 1
@@ -104,7 +104,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "gets the policy with user_project set to true" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: nil, user_project: "test"]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name], options_requested_policy_version: nil, user_project: "test", options: {}
 
       storage.service.mocked_service = mock
       policy = bucket_user_project.policy
@@ -122,7 +122,8 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "sets the policy" do
       mock = Minitest::Mock.new
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: nil]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi], user_project: nil,
+        options: {}
 
       storage.service.mocked_service = mock
       policy = bucket.update_policy updated_policy
@@ -141,7 +142,8 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "sets the policy with user_project set to true" do
       mock = Minitest::Mock.new
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: "test"]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi], user_project: "test",
+        options: {}
 
       storage.service.mocked_service = mock
       policy = bucket_user_project.update_policy updated_policy
@@ -160,9 +162,10 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "sets the policy in a block" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: nil, user_project: nil]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name], options_requested_policy_version: nil, user_project: nil, options: {}
 
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: nil]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi], user_project: nil,
+        options: {}
 
       storage.service.mocked_service = mock
       policy = bucket.policy do |p|
@@ -183,9 +186,10 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "sets the policy in a block with user_project set to true" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: nil, user_project: "test"]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name], options_requested_policy_version: nil, user_project: "test", options: {}
 
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: "test"]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi], user_project: "test",
+        options: {}
 
       storage.service.mocked_service = mock
       policy = bucket_user_project.policy do |p|
@@ -274,7 +278,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "gets the policy" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 3, user_project: nil]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name], options_requested_policy_version: 3, user_project: nil, options: {}
 
       storage.service.mocked_service = mock
       policy = bucket.policy requested_policy_version: 3
@@ -293,7 +297,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "gets the policy with user_project set to true" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 3, user_project: "test"]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name], options_requested_policy_version: 3, user_project: "test", options: {}
 
       storage.service.mocked_service = mock
       policy = bucket_user_project.policy requested_policy_version: 3
@@ -312,7 +316,8 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "sets the policy" do
       mock = Minitest::Mock.new
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: nil]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi], user_project: nil,
+        options: {}
 
       storage.service.mocked_service = mock
       policy = bucket.update_policy updated_policy
@@ -338,7 +343,8 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "sets the policy with user_project set to true" do
       mock = Minitest::Mock.new
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: "test"]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi], user_project: "test",
+        options: {}
 
       storage.service.mocked_service = mock
       policy = bucket_user_project.update_policy updated_policy
@@ -364,9 +370,10 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "sets the policy in a block" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 3, user_project: nil]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name], options_requested_policy_version: 3, user_project: nil, options: {}
 
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: nil]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi], user_project: nil,
+        options: {}
 
       storage.service.mocked_service = mock
       policy = bucket.policy requested_policy_version: 3 do |p|
@@ -403,9 +410,10 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     it "sets the policy in a block with user_project set to true" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 3, user_project: "test"]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name], options_requested_policy_version: 3, user_project: "test", options: {}
 
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: "test"]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi], user_project: "test",
+        options: {}
 
       storage.service.mocked_service = mock
       policy = bucket_user_project.policy requested_policy_version: 3 do |p|
@@ -444,7 +452,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
   it "tests the permissions available" do
     mock = Minitest::Mock.new
     update_policy_response = Google::Apis::StorageV1::TestIamPermissionsResponse.new permissions: ["storage.buckets.get"]
-    mock.expect :test_bucket_iam_permissions, update_policy_response, [bucket_name, ["storage.buckets.get", "storage.buckets.delete"], user_project: nil]
+    mock.expect :test_bucket_iam_permissions, update_policy_response, [bucket_name, ["storage.buckets.get", "storage.buckets.delete"]], user_project: nil, options: {}
 
     storage.service.mocked_service = mock
     permissions = bucket.test_permissions "storage.buckets.get",
@@ -457,7 +465,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
   it "tests the permissions available with user_project set to true" do
     mock = Minitest::Mock.new
     update_policy_response = Google::Apis::StorageV1::TestIamPermissionsResponse.new permissions: ["storage.buckets.get"]
-    mock.expect :test_bucket_iam_permissions, update_policy_response, [bucket_name, ["storage.buckets.get", "storage.buckets.delete"], user_project: "test"]
+    mock.expect :test_bucket_iam_permissions, update_policy_response, [bucket_name, ["storage.buckets.get", "storage.buckets.delete"]], user_project: "test", options: {}
 
     storage.service.mocked_service = mock
     permissions = bucket_user_project.test_permissions "storage.buckets.get",

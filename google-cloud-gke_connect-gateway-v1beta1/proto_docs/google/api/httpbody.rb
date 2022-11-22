@@ -39,12 +39,15 @@ module Google
     #
     #       // The raw HTTP body is bound to this field.
     #       google.api.HttpBody http_body = 2;
+    #
     #     }
     #
     #     service ResourceService {
-    #       rpc GetResource(GetResourceRequest) returns (google.api.HttpBody);
-    #       rpc UpdateResource(google.api.HttpBody) returns
-    #       (google.protobuf.Empty);
+    #       rpc GetResource(GetResourceRequest)
+    #         returns (google.api.HttpBody);
+    #       rpc UpdateResource(google.api.HttpBody)
+    #         returns (google.protobuf.Empty);
+    #
     #     }
     #
     # Example with streaming methods:
@@ -54,6 +57,7 @@ module Google
     #         returns (stream google.api.HttpBody);
     #       rpc UpdateCalendar(stream google.api.HttpBody)
     #         returns (stream google.api.HttpBody);
+    #
     #     }
     #
     # Use of this type only changes how the request and response bodies are

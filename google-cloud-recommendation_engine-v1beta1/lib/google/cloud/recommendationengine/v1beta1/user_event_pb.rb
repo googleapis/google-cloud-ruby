@@ -7,7 +7,7 @@ require 'google/api/field_behavior_pb'
 require 'google/cloud/recommendationengine/v1beta1/catalog_pb'
 require 'google/cloud/recommendationengine/v1beta1/common_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/recommendationengine/v1beta1/user_event.proto", :syntax => :proto3) do
     add_message "google.cloud.recommendationengine.v1beta1.UserEvent" do

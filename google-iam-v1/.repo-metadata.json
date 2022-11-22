@@ -1,0 +1,13 @@
+{
+    "api_shortname": "unknown",
+    "client_documentation": "https://googleapis.dev/ruby/google-iam-v1/latest",
+    "distribution_name": "google-iam-v1",
+    "is_cloud": false,
+    "language": "ruby",
+    "name_pretty": "IAM API",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "An add-on interface used by some Google API clients to provide IAM Policy calls. Note that google-iam-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-iam instead. See the readme for more details.",
+    "library_type": "GAPIC_AUTO"
+}

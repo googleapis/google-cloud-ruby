@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/analytics/data/v1beta"
       #     client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new
       #

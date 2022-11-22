@@ -47,6 +47,10 @@ module Google
           attr_reader :sequencer
 
           ##
+          # @private exactly_once_delivery_enabled.
+          attr_reader :exactly_once_delivery_enabled
+
+          ##
           # @private Create an empty Subscriber::Stream object.
           def initialize subscriber
             super() # to init MonitorMixin
@@ -57,6 +61,7 @@ module Google
             @stopped = nil
             @paused  = nil
             @pause_cond = new_cond
+            @exactly_once_delivery_enabled = false
 
             @inventory = Inventory.new self, **@subscriber.stream_inventory
 
@@ -129,13 +134,13 @@ module Google
 
           ##
           # @private
-          def acknowledge *messages
+          def acknowledge *messages, &callback
             ack_ids = coerce_ack_ids messages
             return true if ack_ids.empty?
 
             synchronize do
               @inventory.remove ack_ids
-              @subscriber.buffer.acknowledge ack_ids
+              @subscriber.buffer.acknowledge ack_ids, callback
             end
 
             true
@@ -143,13 +148,13 @@ module Google
 
           ##
           # @private
-          def modify_ack_deadline deadline, *messages
+          def modify_ack_deadline deadline, *messages, &callback
             mod_ack_ids = coerce_ack_ids messages
             return true if mod_ack_ids.empty?
 
             synchronize do
               @inventory.remove mod_ack_ids
-              @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids
+              @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids, callback
             end
 
             true
@@ -242,9 +247,14 @@ module Google
               begin
                 # Cannot syncronize the enumerator, causes deadlock
                 response = enum.next
+                new_exactly_once_delivery_enabled = response&.subscription_properties&.exactly_once_delivery_enabled
 
-                # Use synchronize so both changes happen atomically
+                # Use synchronize so changes happen atomically
                 synchronize do
+                  update_min_duration_per_lease_extension new_exactly_once_delivery_enabled
+                  @exactly_once_delivery_enabled = new_exactly_once_delivery_enabled unless new_exactly_once_delivery_enabled.nil? 
+                  @subscriber.exactly_once_delivery_enabled = @exactly_once_delivery_enabled
+
                   # Create receipt of received messages reception
                   @subscriber.buffer.modify_ack_deadline @subscriber.deadline, response.received_messages.map(&:ack_id)
 
@@ -284,6 +294,14 @@ module Google
           end
 
           # rubocop:enable all
+
+          # Updates min_duration_per_lease_extension to 60 when exactly_once_delivery_enabled
+          # and reverts back to default 0 when disabled.
+          # Skips if exactly_once_enabled is not modified.
+          def update_min_duration_per_lease_extension new_exactly_once_delivery_enabled
+            return if new_exactly_once_delivery_enabled == @exactly_once_delivery_enabled
+            @inventory.min_duration_per_lease_extension = new_exactly_once_delivery_enabled ? 60 : 0
+          end
 
           def register_callback rec_msg
             if @sequencer

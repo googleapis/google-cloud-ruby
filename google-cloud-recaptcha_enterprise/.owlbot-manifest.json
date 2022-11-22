@@ -1,0 +1,40 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-recaptcha_enterprise.gemspec",
+    "lib/google-cloud-recaptcha_enterprise.rb",
+    "lib/google/cloud/recaptcha_enterprise.rb",
+    "lib/google/cloud/recaptcha_enterprise/version.rb",
+    "test/google/cloud/recaptcha_enterprise/client_test.rb",
+    "test/google/cloud/recaptcha_enterprise/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "samples/.rubocop.yml",
+    "samples/Gemfile",
+    "samples/README.md",
+    "samples/Rakefile",
+    "samples/acceptance/create_assessment_test.rb",
+    "samples/acceptance/data/test_template.html",
+    "samples/acceptance/site_key_test.rb",
+    "samples/recaptcha_enterprise_create_assessment.rb",
+    "samples/recaptcha_enterprise_create_site_key.rb",
+    "samples/recaptcha_enterprise_delete_site_key.rb",
+    "samples/recaptcha_enterprise_get_metrics_site_key.rb",
+    "samples/recaptcha_enterprise_get_site_key.rb",
+    "samples/recaptcha_enterprise_list_site_keys.rb",
+    "samples/recaptcha_enterprise_migrate_site_key.rb",
+    "samples/recaptcha_enterprise_update_site_key.rb"
+  ]
+}

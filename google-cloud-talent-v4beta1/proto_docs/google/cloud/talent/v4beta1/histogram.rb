@@ -28,7 +28,7 @@ module Google
         #     (for example, jobs, profiles) for searches.
         #
         #     See {::Google::Cloud::Talent::V4beta1::SearchJobsRequest#histogram_queries SearchJobsRequest.histogram_queries} and
-        #     {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#histogram_queries SearchProfilesRequest.histogram_queries} for details about syntax.
+        #     [SearchProfilesRequest.histogram_queries][google.cloud.talent.v4beta1.SearchProfilesRequest.histogram_queries] for details about syntax.
         class HistogramQuery
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

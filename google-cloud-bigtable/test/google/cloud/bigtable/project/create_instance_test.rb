@@ -55,12 +55,11 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
 
     mock = Minitest::Mock.new
 
-    mock.expect :create_instance, operation_grpc(job_grpc, mock), [
-      parent:      project_path,
-      instance_id: instance_id,
-      instance:    instance,
-      clusters:    clusters_map
-    ]
+    mock.expect :create_instance, operation_grpc(job_grpc, mock),
+                parent:      project_path,
+                instance_id: instance_id,
+                instance:    instance,
+                clusters:    clusters_map
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 
@@ -101,12 +100,11 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
 
     mock = Minitest::Mock.new
 
-    mock.expect :create_instance, operation_grpc(job_grpc, mock), [
-      parent:      project_path,
-      instance_id: instance_id,
-      instance:    instance,
-      clusters:    clusters_map
-    ]
+    mock.expect :create_instance, operation_grpc(job_grpc, mock),
+                parent:      project_path,
+                instance_id: instance_id,
+                instance:    instance,
+                clusters:    clusters_map
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 

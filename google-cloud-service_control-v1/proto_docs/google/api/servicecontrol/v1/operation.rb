@@ -56,8 +56,10 @@ module Google
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     End time of the operation.
-        #     Required when the operation is used in {::Google::Cloud::ServiceControl::V1::ServiceController::Client#report ServiceController.Report},
-        #     but optional when the operation is used in {::Google::Cloud::ServiceControl::V1::ServiceController::Client#check ServiceController.Check}.
+        #     Required when the operation is used in
+        #     {::Google::Cloud::ServiceControl::V1::ServiceController::Client#report ServiceController.Report},
+        #     but optional when the operation is used in
+        #     {::Google::Cloud::ServiceControl::V1::ServiceController::Client#check ServiceController.Check}.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels describing the operation. Only the following labels are allowed:
@@ -112,13 +114,13 @@ module Google
 
           # Defines the importance of the data contained in the operation.
           module Importance
-            # The API implementation may cache and aggregate the data.
-            # The data may be lost when rare and unexpected system failures occur.
+            # Allows data caching, batching, and aggregation. It provides
+            # higher performance with higher data loss risk.
             LOW = 0
 
-            # The API implementation doesn't cache and aggregate the data.
-            # If the method returns successfully, it's guaranteed that the data has
-            # been persisted in durable storage.
+            # Disables data aggregation to minimize data loss. It is for operations
+            # that contains significant monetary value or audit trail. This feature
+            # only applies to the client libraries.
             HIGH = 1
           end
         end

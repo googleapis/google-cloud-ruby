@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Retail::V2::UserEventService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all UserEventService clients:
-            #
-            #     ::Google::Cloud::Retail::V2::UserEventService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all UserEventService clients
+            #   ::Google::Cloud::Retail::V2::UserEventService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -65,12 +64,19 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 60.0
+                default_config.timeout = 5.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 5.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.purge_user_events.timeout = 30.0
+                default_config.rpcs.purge_user_events.retry_policy = {
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.import_user_events.timeout = 600.0
+                default_config.rpcs.import_user_events.retry_policy = {
+                  initial_delay: 0.1, max_delay: 300.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -102,19 +108,15 @@ module Google
             ##
             # Create a new UserEventService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new UserEventService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Retail::V2::UserEventService::Client.new
             #
-            #     client = ::Google::Cloud::Retail::V2::UserEventService::Client.new
-            #
-            # To create a new UserEventService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Retail::V2::UserEventService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Retail::V2::UserEventService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the UserEventService client.
             # @yieldparam config [Client::Configuration]
@@ -134,14 +136,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -149,6 +150,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -202,6 +204,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::WriteUserEventRequest.new
+            #
+            #   # Call the write_user_event method.
+            #   result = client.write_user_event request
+            #
+            #   # The returned object is of type Google::Cloud::Retail::V2::UserEvent.
+            #   p result
+            #
             def write_user_event request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -219,16 +236,20 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.write_user_event.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.write_user_event.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @user_event_service_stub.call_rpc :write_user_event, request, options: options do |response, operation|
@@ -285,6 +306,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::CollectUserEventRequest.new
+            #
+            #   # Call the collect_user_event method.
+            #   result = client.collect_user_event request
+            #
+            #   # The returned object is of type Google::Api::HttpBody.
+            #   p result
+            #
             def collect_user_event request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -302,16 +338,20 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.collect_user_event.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.collect_user_event.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @user_event_service_stub.call_rpc :collect_user_event, request, options: options do |response, operation|
@@ -346,7 +386,7 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the catalog under which the events are
             #     created. The format is
-            #     "projects/$\\{projectId}/locations/global/catalogs/$\\{catalogId}"
+            #     `projects/${projectId}/locations/global/catalogs/${catalogId}`
             #   @param filter [::String]
             #     Required. The filter string to specify the events to be deleted with a
             #     length limit of 5,000 characters. Empty string filter is not allowed. The
@@ -384,6 +424,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::PurgeUserEventsRequest.new
+            #
+            #   # Call the purge_user_events method.
+            #   result = client.purge_user_events request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def purge_user_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -401,16 +463,20 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.purge_user_events.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.purge_user_events.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @user_event_service_stub.call_rpc :purge_user_events, request, options: options do |response, operation|
@@ -427,9 +493,9 @@ module Google
             # synchronous. Events that already exist are skipped.
             # Use this method for backfilling historical user events.
             #
-            # Operation.response is of type ImportResponse. Note that it is
+            # `Operation.response` is of type `ImportResponse`. Note that it is
             # possible for a subset of the items to be successfully inserted.
-            # Operation.metadata is of type ImportMetadata.
+            # `Operation.metadata` is of type `ImportMetadata`.
             #
             # @overload import_user_events(request, options = nil)
             #   Pass arguments to `import_user_events` via a request object, either of type
@@ -462,6 +528,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::ImportUserEventsRequest.new
+            #
+            #   # Call the import_user_events method.
+            #   result = client.import_user_events request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def import_user_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -479,16 +567,20 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.import_user_events.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.import_user_events.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @user_event_service_stub.call_rpc :import_user_events, request, options: options do |response, operation|
@@ -501,13 +593,14 @@ module Google
             end
 
             ##
-            # Triggers a user event rejoin operation with latest product catalog. Events
+            # Starts a user event rejoin operation with latest product catalog. Events
             # will not be annotated with detailed product information if product is
             # missing from the catalog at the time the user event is ingested, and these
             # events are stored as unjoined events with a limited usage on training and
-            # serving. This API can be used to trigger a 'join' operation on specified
+            # serving. This method can be used to start a join operation on specified
             # events with latest version of product catalog. It can also be used to
-            # correct events joined with wrong product catalog.
+            # correct events joined with the wrong product catalog. A rejoin operation
+            # can take hours or days to complete.
             #
             # @overload rejoin_user_events(request, options = nil)
             #   Pass arguments to `rejoin_user_events` via a request object, either of type
@@ -541,6 +634,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::RejoinUserEventsRequest.new
+            #
+            #   # Call the rejoin_user_events method.
+            #   result = client.rejoin_user_events request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def rejoin_user_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -558,16 +673,20 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.rejoin_user_events.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.rejoin_user_events.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @user_event_service_stub.call_rpc :rejoin_user_events, request, options: options do |response, operation|
@@ -592,22 +711,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for write_user_event
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # write_user_event to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Retail::V2::UserEventService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.write_user_event.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Retail::V2::UserEventService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.write_user_event.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Retail::V2::UserEventService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.write_user_event.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Retail::V2::UserEventService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.write_user_event.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

@@ -1,5 +1,5 @@
 --no-private
---title=Cloud Profiler API
+--title="Cloud Profiler API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

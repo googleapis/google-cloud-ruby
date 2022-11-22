@@ -37,12 +37,13 @@ module Google
         #
         #     `[LOG_ID]` must be URL-encoded within `log_name`. Example:
         #     `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
+        #
         #     `[LOG_ID]` must be less than 512 characters long and can only include the
         #     following characters: upper and lower case alphanumeric characters,
         #     forward-slash, underscore, hyphen, and period.
         #
         #     For backward compatibility, if `log_name` begins with a forward-slash, such
-        #     as `/projects/...`, then the log entry is ingested as usual but the
+        #     as `/projects/...`, then the log entry is ingested as usual, but the
         #     forward-slash is removed. Listing the log entry will not show the leading
         #     slash and filtering for a log name with a leading slash will never return
         #     any results.
@@ -98,7 +99,7 @@ module Google
         #     de-duplication in the export of logs.
         #
         #     If the `insert_id` is omitted when writing a log entry, the Logging API
-        #      assigns its own unique identifier in this field.
+        #     assigns its own unique identifier in this field.
         #
         #     In queries, the `insert_id` is also used to order log entries that have
         #     the same `log_name` and `timestamp` values.
@@ -108,8 +109,20 @@ module Google
         #     applicable.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. A set of user-defined (key, value) data that provides additional
-        #     information about the log entry.
+        #     Optional. A map of key, value pairs that provides additional information about the
+        #     log entry. The labels can be user-defined or system-defined.
+        #
+        #     User-defined labels are arbitrary key, value pairs that you can use to
+        #     classify logs.
+        #
+        #     System-defined labels are defined by GCP services for platform logs.
+        #     They have two components - a service namespace component and the
+        #     attribute name. For example: `compute.googleapis.com/resource_name`.
+        #
+        #     Cloud Logging truncates label keys that exceed 512 B and label
+        #     values that exceed 64 KB upon their associated log entry being
+        #     written. The truncation is indicated by an ellipsis at the
+        #     end of the character string.
         # @!attribute [rw] operation
         #   @return [::Google::Cloud::Logging::V2::LogEntryOperation]
         #     Optional. Information about an operation associated with the log entry, if
@@ -139,6 +152,10 @@ module Google
         # @!attribute [rw] source_location
         #   @return [::Google::Cloud::Logging::V2::LogEntrySourceLocation]
         #     Optional. Source code location information associated with the log entry, if any.
+        # @!attribute [rw] split
+        #   @return [::Google::Cloud::Logging::V2::LogSplit]
+        #     Optional. Information indicating this LogEntry is part of a sequence of multiple log
+        #     entries split from a single LogEntry.
         class LogEntry
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -194,6 +211,27 @@ module Google
         #     `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
         #     (Python).
         class LogEntrySourceLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Additional information used to correlate multiple log entries. Used when a
+        # single LogEntry would exceed the Google Cloud Logging size limit and is
+        # split across multiple log entries.
+        # @!attribute [rw] uid
+        #   @return [::String]
+        #     A globally unique identifier for all log entries in a sequence of split log
+        #     entries. All log entries with the same |LogSplit.uid| are assumed to be
+        #     part of the same sequence of split log entries.
+        # @!attribute [rw] index
+        #   @return [::Integer]
+        #     The index of this LogEntry in the sequence of split log entries. Log
+        #     entries are given |index| values 0, 1, ..., n-1 for a sequence of n log
+        #     entries.
+        # @!attribute [rw] total_splits
+        #   @return [::Integer]
+        #     The total number of log entries that the original LogEntry was split into.
+        class LogSplit
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

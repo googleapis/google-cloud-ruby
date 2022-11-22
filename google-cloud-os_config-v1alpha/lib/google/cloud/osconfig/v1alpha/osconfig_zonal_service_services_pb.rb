@@ -30,7 +30,7 @@ module Google
           # manage package installations and patch jobs for Compute Engine VM instances.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode
@@ -87,6 +87,12 @@ module Google
             # List OS policies compliance data for all Compute Engine VM instances in the
             # specified zone.
             rpc :ListInstanceOSPoliciesCompliances, ::Google::Cloud::OsConfig::V1alpha::ListInstanceOSPoliciesCompliancesRequest, ::Google::Cloud::OsConfig::V1alpha::ListInstanceOSPoliciesCompliancesResponse
+            # Get the OS policy asssignment report for the specified Compute Engine VM
+            # instance.
+            rpc :GetOSPolicyAssignmentReport, ::Google::Cloud::OsConfig::V1alpha::GetOSPolicyAssignmentReportRequest, ::Google::Cloud::OsConfig::V1alpha::OSPolicyAssignmentReport
+            # List OS policy asssignment reports for all Compute Engine VM instances in
+            # the specified zone.
+            rpc :ListOSPolicyAssignmentReports, ::Google::Cloud::OsConfig::V1alpha::ListOSPolicyAssignmentReportsRequest, ::Google::Cloud::OsConfig::V1alpha::ListOSPolicyAssignmentReportsResponse
             # Get inventory data for the specified VM instance. If the VM has no
             # associated inventory, the message `NOT_FOUND` is returned.
             rpc :GetInventory, ::Google::Cloud::OsConfig::V1alpha::GetInventoryRequest, ::Google::Cloud::OsConfig::V1alpha::Inventory

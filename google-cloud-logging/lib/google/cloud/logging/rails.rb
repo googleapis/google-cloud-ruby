@@ -205,15 +205,15 @@ module Google
             end
           rescue Exception => e # rubocop:disable Lint/RescueException
             $stdout.puts "Note: Google::Cloud::Logging is disabled because " \
-              "it failed to authorize with the service. (#{e.message}) " \
-              "Falling back to the default Rails logger."
+                         "it failed to authorize with the service. (#{e.message}) " \
+                         "Falling back to the default Rails logger."
             return false
           end
 
           if project_id.to_s.empty?
             $stdout.puts "Note: Google::Cloud::Logging is disabled because " \
-              "the project ID could not be determined. " \
-              "Falling back to the default Rails logger."
+                         "the project ID could not be determined. " \
+                         "Falling back to the default Rails logger."
             return false
           end
 

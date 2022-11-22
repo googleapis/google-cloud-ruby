@@ -1,5 +1,5 @@
 --no-private
---title=IAM Service Account Credentials API
+--title="IAM Service Account Credentials API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

@@ -110,6 +110,7 @@ module Google
           # | `BIGNUMERIC` | `String`                             | Pass as `String` to avoid rounding to scale 9.     |
           # | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
           # | `DATE`       | `Date`                               |                                                    |
+          # | `GEOGRAPHY`  | `String`                             |                                                    |
           # | `TIMESTAMP`  | `Time`                               |                                                    |
           # | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
           # | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |

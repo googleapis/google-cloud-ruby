@@ -227,7 +227,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "lists datasets" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3),
-      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
+      [project], all: nil, filter: nil, max_results: nil, page_token: nil
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets
@@ -247,7 +247,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with all set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: true, filter: nil, max_results: nil, page_token: nil]
+      [project], all: true, filter: nil, max_results: nil, page_token: nil
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets all: true
@@ -263,7 +263,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with filter set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, filter: filter, max_results: nil, page_token: nil]
+      [project], all: nil, filter: filter, max_results: nil, page_token: nil
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets filter: filter
@@ -279,7 +279,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, filter: nil, max_results: 3, page_token: nil]
+      [project], all: nil, filter: nil, max_results: 3, page_token: nil
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets max: 3
@@ -295,9 +295,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
+      [project], all: nil, filter: nil, max_results: nil, page_token: nil
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, filter: nil, max_results: nil, page_token: "next_page_token"]
+      [project], all: nil, filter: nil, max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets
@@ -318,9 +318,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with next? and next" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
+      [project], all: nil, filter: nil, max_results: nil, page_token: nil
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, filter: nil, max_results: nil, page_token: "next_page_token"]
+      [project], all: nil, filter: nil, max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets
@@ -340,9 +340,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with next? and next with all/hidden set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: true, filter: nil, max_results: nil, page_token: nil]
+      [project], all: true, filter: nil, max_results: nil, page_token: nil
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: true, filter: nil, max_results: nil, page_token: "next_page_token"]
+      [project], all: true, filter: nil, max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets all: true
@@ -362,9 +362,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with next? and next with filter set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, filter: filter, max_results: nil, page_token: nil]
+      [project], all: nil, filter: filter, max_results: nil, page_token: nil
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, filter: filter, max_results: nil, page_token: "next_page_token"]
+      [project], all: nil, filter: filter, max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets filter: filter
@@ -384,9 +384,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with next? and next with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, filter: nil, max_results: 3, page_token: nil]
+      [project], all: nil, filter: nil, max_results: 3, page_token: nil
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, filter: nil, max_results: 3, page_token: "next_page_token"]
+      [project], all: nil, filter: nil, max_results: 3, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets max: 3
@@ -406,9 +406,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with all" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
+      [project], all: nil, filter: nil, max_results: nil, page_token: nil
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, filter: nil, max_results: nil, page_token: "next_page_token"]
+      [project], all: nil, filter: nil, max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets.all.to_a
@@ -422,9 +422,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with all with all/hidden set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: true, filter: nil, max_results: nil, page_token: nil]
+      [project], all: true, filter: nil, max_results: nil, page_token: nil
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: true, filter: nil, max_results: nil, page_token: "next_page_token"]
+      [project], all: true, filter: nil, max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets(all: true).all.to_a
@@ -438,9 +438,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with all with filter set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, filter: filter, max_results: nil, page_token: nil]
+      [project], all: nil, filter: filter, max_results: nil, page_token: nil
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, filter: filter, max_results: nil, page_token: "next_page_token"]
+      [project], all: nil, filter: filter, max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets(filter: filter).all.to_a
@@ -454,9 +454,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with all with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, filter: nil, max_results: 3, page_token: nil]
+      [project], all: nil, filter: nil, max_results: 3, page_token: nil
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, filter: nil, max_results: 3, page_token: "next_page_token"]
+      [project], all: nil, filter: nil, max_results: 3, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets(max: 3).all.to_a
@@ -470,9 +470,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "iterates datasets with all using Enumerator" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
+      [project], all: nil, filter: nil, max_results: nil, page_token: nil
     mock.expect :list_datasets, list_datasets_gapi(3, "second_page_token"),
-      [project, all: nil, filter: nil, max_results: nil, page_token: "next_page_token"]
+      [project], all: nil, filter: nil, max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets.all.take(5)
@@ -486,9 +486,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "iterates datasets with all with request_limit set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
+      [project], all: nil, filter: nil, max_results: nil, page_token: nil
     mock.expect :list_datasets, list_datasets_gapi(3, "second_page_token"),
-      [project, all: nil, filter: nil, max_results: nil, page_token: "next_page_token"]
+      [project], all: nil, filter: nil, max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets.all(request_limit: 1).to_a
@@ -602,7 +602,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     job_id = "9876543210"
     mock = Minitest::Mock.new
     mock.expect :get_job, find_job_gapi(job_id),
-      [project, job_id, {location: nil}]
+      [project, job_id], location: nil
     bigquery.service.mocked_service = mock
 
     job = bigquery.job job_id
@@ -618,7 +618,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     region = "EU"
     mock = Minitest::Mock.new
     mock.expect :get_job, find_job_gapi(job_id, location: region),
-                [project, job_id, {location: region}]
+                [project, job_id], location: region
     bigquery.service.mocked_service = mock
 
     job = bigquery.job job_id, location: region
@@ -633,7 +633,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "lists projects" do
     mock = Minitest::Mock.new
     mock.expect :list_projects, list_projects_gapi(3),
-      [max_results: nil, page_token: nil]
+      max_results: nil, page_token: nil
     bigquery.service.mocked_service = mock
 
     projects = bigquery.projects
@@ -652,7 +652,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "lists projects with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
-      [max_results: 3, page_token: nil]
+      max_results: 3, page_token: nil
     bigquery.service.mocked_service = mock
 
     projects = bigquery.projects max: 3
@@ -668,9 +668,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates projects" do
     mock = Minitest::Mock.new
     mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
-      [max_results: nil, page_token: nil]
+      max_results: nil, page_token: nil
     mock.expect :list_projects, list_projects_gapi(2),
-      [max_results: nil, page_token: "next_page_token"]
+      max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     first_projects = bigquery.projects
@@ -691,9 +691,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates projects using next? and next" do
     mock = Minitest::Mock.new
     mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
-      [max_results: nil, page_token: nil]
+      max_results: nil, page_token: nil
     mock.expect :list_projects, list_projects_gapi(2),
-      [max_results: nil, page_token: "next_page_token"]
+      max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     first_projects = bigquery.projects
@@ -713,9 +713,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates projects with all" do
     mock = Minitest::Mock.new
     mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
-      [max_results: nil, page_token: nil]
+      max_results: nil, page_token: nil
     mock.expect :list_projects, list_projects_gapi(2),
-      [max_results: nil, page_token: "next_page_token"]
+      max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     projects = bigquery.projects.all.to_a
@@ -729,9 +729,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "iterates projects with all using Enumerator" do
     mock = Minitest::Mock.new
     mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
-      [max_results: nil, page_token: nil]
+      max_results: nil, page_token: nil
     mock.expect :list_projects, list_projects_gapi(3, "second_page_token"),
-      [max_results: nil, page_token: "next_page_token"]
+      max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     projects = bigquery.projects.all.take(5)
@@ -745,9 +745,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "iterates projects with all with request_limit set" do
     mock = Minitest::Mock.new
     mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
-      [max_results: nil, page_token: nil]
+      max_results: nil, page_token: nil
     mock.expect :list_projects, list_projects_gapi(3, "second_page_token"),
-      [max_results: nil, page_token: "next_page_token"]
+      max_results: nil, page_token: "next_page_token"
     bigquery.service.mocked_service = mock
 
     projects = bigquery.projects.all(request_limit: 1).to_a

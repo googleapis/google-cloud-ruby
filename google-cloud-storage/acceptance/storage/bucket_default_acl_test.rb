@@ -20,15 +20,15 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
     storage.bucket(bucket_name) ||
     safe_gcs_execute { storage.create_bucket(bucket_name) }
   end
-  let(:user_val) { "user-blowmage@gmail.com" }
+  let(:user_val) { "user-test@example.com" }
 
   before do
     # always reset the bucket permissions
-    bucket.default_acl.private!
+    safe_gcs_execute { bucket.default_acl.private! }
   end
 
   it "adds a reader" do
-    user_val = "user-blowmage@gmail.com"
+    user_val = "user-test@example.com"
     _(bucket.default_acl.readers).wont_include user_val
     bucket.default_acl.add_reader user_val
     _(bucket.default_acl.readers).must_include user_val
@@ -39,7 +39,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
   end
 
   it "adds an owner" do
-    user_val = "user-blowmage@gmail.com"
+    user_val = "user-test@example.com"
     _(bucket.default_acl.owners).wont_include user_val
     bucket.default_acl.add_owner user_val
     _(bucket.default_acl.owners).must_include user_val
@@ -106,20 +106,20 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
   end
 
   it "sets predefined ACL rules" do
-    bucket.default_acl.authenticatedRead!
-    bucket.default_acl.auth!
-    bucket.default_acl.auth_read!
-    bucket.default_acl.authenticated!
-    bucket.default_acl.authenticated_read!
-    bucket.default_acl.bucketOwnerFullControl!
-    bucket.default_acl.owner_full!
-    bucket.default_acl.bucketOwnerRead!
-    bucket.default_acl.owner_read!
-    bucket.default_acl.private!
-    bucket.default_acl.projectPrivate!
-    bucket.default_acl.project_private!
-    bucket.default_acl.publicRead!
-    bucket.default_acl.public!
-    bucket.default_acl.public_read!
+    safe_gcs_execute { bucket.default_acl.authenticatedRead! }
+    safe_gcs_execute { bucket.default_acl.auth! }
+    safe_gcs_execute { bucket.default_acl.auth_read! }
+    safe_gcs_execute { bucket.default_acl.authenticated! }
+    safe_gcs_execute { bucket.default_acl.authenticated_read! }
+    safe_gcs_execute { bucket.default_acl.bucketOwnerFullControl! }
+    safe_gcs_execute { bucket.default_acl.owner_full! }
+    safe_gcs_execute { bucket.default_acl.bucketOwnerRead! }
+    safe_gcs_execute { bucket.default_acl.owner_read! }
+    safe_gcs_execute { bucket.default_acl.private! }
+    safe_gcs_execute { bucket.default_acl.projectPrivate! }
+    safe_gcs_execute { bucket.default_acl.project_private! }
+    safe_gcs_execute { bucket.default_acl.publicRead! }
+    safe_gcs_execute { bucket.default_acl.public! }
+    safe_gcs_execute { bucket.default_acl.public_read! }
   end
 end

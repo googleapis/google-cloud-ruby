@@ -38,11 +38,11 @@ module Google
         #     `_-.,+!*',()%/`. The forward-slash character (`/`) denotes a hierarchy of
         #     name pieces, and it cannot be the first character of the name.
         #
-        #     The metric identifier in this field must not be
-        #     [URL-encoded](https://en.wikipedia.org/wiki/Percent-encoding).
-        #     However, when the metric identifier appears as the `[METRIC_ID]` part of a
-        #     `metric_name` API parameter, then the metric identifier must be
-        #     URL-encoded. Example: `"projects/my-project/metrics/nginx%2Frequests"`.
+        #     This field is the `[METRIC_ID]` part of a metric resource name in the
+        #     format "projects/[PROJECT_ID]/metrics/[METRIC_ID]". Example: If the
+        #     resource name of a metric is
+        #     `"projects/my-project/metrics/nginx%2Frequests"`, this field's value is
+        #     `"nginx/requests"`.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. A description of this metric, which is used in documentation.
@@ -56,6 +56,10 @@ module Google
         #         "resource.type=gae_app AND severity>=ERROR"
         #
         #     The maximum length of the filter is 20000 characters.
+        # @!attribute [rw] disabled
+        #   @return [::Boolean]
+        #     Optional. If set to True, then this metric is disabled and it does not
+        #     generate any points.
         # @!attribute [rw] metric_descriptor
         #   @return [::Google::Api::MetricDescriptor]
         #     Optional. The metric descriptor associated with the logs-based metric.

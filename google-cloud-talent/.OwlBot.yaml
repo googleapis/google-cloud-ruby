@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/talent/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-talent/$1

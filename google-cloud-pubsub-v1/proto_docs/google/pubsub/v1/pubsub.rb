@@ -80,6 +80,16 @@ module Google
         #   @return [::Boolean]
         #     Reserved for future use. This field is set only in responses from the
         #     server; it is ignored if it is set in any requests.
+        # @!attribute [rw] message_retention_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Indicates the minimum duration to retain a message after it is published to
+        #     the topic. If this field is set, messages published to the topic in the
+        #     last `message_retention_duration` are always available to subscribers. For
+        #     instance, it allows any attached subscription to [seek to a
+        #     timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
+        #     that is up to `message_retention_duration` in the past. If this field is
+        #     not set, message retention is controlled by settings on individual
+        #     subscriptions. Cannot be more than 7 days or less than 10 minutes.
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -333,8 +343,15 @@ module Google
         # @!attribute [rw] push_config
         #   @return [::Google::Cloud::PubSub::V1::PushConfig]
         #     If push delivery is used with this subscription, this field is
-        #     used to configure it. An empty `pushConfig` signifies that the subscriber
-        #     will pull and ack messages using API methods.
+        #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
+        #     but not both. If both are empty, then the subscriber will pull and ack
+        #     messages using API methods.
+        # @!attribute [rw] bigquery_config
+        #   @return [::Google::Cloud::PubSub::V1::BigQueryConfig]
+        #     If delivery to BigQuery is used with this subscription, this field is
+        #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
+        #     but not both. If both are empty, then the subscriber will pull and ack
+        #     messages using API methods.
         # @!attribute [rw] ack_deadline_seconds
         #   @return [::Integer]
         #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
@@ -362,8 +379,9 @@ module Google
         #     Indicates whether to retain acknowledged messages. If true, then
         #     messages are not expunged from the subscription's backlog, even if they are
         #     acknowledged, until they fall out of the `message_retention_duration`
-        #     window. This must be true if you would like to [Seek to a timestamp]
-        #     (https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time).
+        #     window. This must be true if you would like to [`Seek` to a timestamp]
+        #     (https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time) in
+        #     the past to replay previously-acknowledged messages.
         # @!attribute [rw] message_retention_duration
         #   @return [::Google::Protobuf::Duration]
         #     How long to retain unacknowledged messages in the subscription's backlog,
@@ -423,6 +441,31 @@ module Google
         #     backlog. `Pull` and `StreamingPull` requests will return
         #     FAILED_PRECONDITION. If the subscription is a push subscription, pushes to
         #     the endpoint will not be made.
+        # @!attribute [rw] enable_exactly_once_delivery
+        #   @return [::Boolean]
+        #     If true, Pub/Sub provides the following guarantees for the delivery of
+        #     a message with a given value of `message_id` on this subscription:
+        #
+        #     * The message sent to a subscriber is guaranteed not to be resent
+        #     before the message's acknowledgement deadline expires.
+        #     * An acknowledged message will not be resent to a subscriber.
+        #
+        #     Note that subscribers may still receive multiple copies of a message
+        #     when `enable_exactly_once_delivery` is true if the message was published
+        #     multiple times by a publisher client. These copies are  considered distinct
+        #     by Pub/Sub and have distinct `message_id` values.
+        # @!attribute [r] topic_message_retention_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. Indicates the minimum duration for which a message is retained
+        #     after it is published to the subscription's topic. If this field is set,
+        #     messages published to the subscription's topic in the last
+        #     `topic_message_retention_duration` are always available to subscribers. See
+        #     the `message_retention_duration` field in `Topic`. This field is set only
+        #     in responses from the server; it is ignored if it is set in any requests.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::PubSub::V1::Subscription::State]
+        #     Output only. An output-only field indicating whether or not the subscription can receive
+        #     messages.
         class Subscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -434,6 +477,20 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible states for a subscription.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # The subscription can actively receive messages
+            ACTIVE = 1
+
+            # The subscription cannot receive messages because of an error with the
+            # resource to which it pushes messages. See the more detailed error state
+            # in the corresponding configuration.
+            RESOURCE_ERROR = 2
           end
         end
 
@@ -578,6 +635,56 @@ module Google
           class AttributesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Configuration for a BigQuery subscription.
+        # @!attribute [rw] table
+        #   @return [::String]
+        #     The name of the table to which to write data, of the form
+        #     \\{projectId}:\\{datasetId}.\\{tableId}
+        # @!attribute [rw] use_topic_schema
+        #   @return [::Boolean]
+        #     When true, use the topic's schema as the columns to write to in BigQuery,
+        #     if it exists.
+        # @!attribute [rw] write_metadata
+        #   @return [::Boolean]
+        #     When true, write the subscription name, message_id, publish_time,
+        #     attributes, and ordering_key to additional columns in the table. The
+        #     subscription name, message_id, and publish_time fields are put in their own
+        #     columns while all other message properties (other than data) are written to
+        #     a JSON object in the attributes column.
+        # @!attribute [rw] drop_unknown_fields
+        #   @return [::Boolean]
+        #     When true and use_topic_schema is true, any fields that are a part of the
+        #     topic schema that are not part of the BigQuery table schema are dropped
+        #     when writing to BigQuery. Otherwise, the schemas must be kept in sync and
+        #     any messages with extra fields are not written and remain in the
+        #     subscription's backlog.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::PubSub::V1::BigQueryConfig::State]
+        #     Output only. An output-only field that indicates whether or not the subscription can
+        #     receive messages.
+        class BigQueryConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible states for a BigQuery subscription.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # The subscription can actively send messages to BigQuery
+            ACTIVE = 1
+
+            # Cannot write to the BigQuery table because of permission denied errors.
+            PERMISSION_DENIED = 2
+
+            # Cannot write to the BigQuery table because it does not exist.
+            NOT_FOUND = 3
+
+            # Cannot write to the BigQuery table due to a schema mismatch.
+            SCHEMA_MISMATCH = 4
           end
         end
 
@@ -850,9 +957,63 @@ module Google
         # @!attribute [rw] received_messages
         #   @return [::Array<::Google::Cloud::PubSub::V1::ReceivedMessage>]
         #     Received Pub/Sub messages. This will not be empty.
+        # @!attribute [rw] acknowledge_confirmation
+        #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::AcknowledgeConfirmation]
+        #     This field will only be set if `enable_exactly_once_delivery` is set to
+        #     `true`.
+        # @!attribute [rw] modify_ack_deadline_confirmation
+        #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::ModifyAckDeadlineConfirmation]
+        #     This field will only be set if `enable_exactly_once_delivery` is set to
+        #     `true`.
+        # @!attribute [rw] subscription_properties
+        #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::SubscriptionProperties]
+        #     Properties associated with this subscription.
         class StreamingPullResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Acknowledgement IDs sent in one or more previous requests to acknowledge a
+          # previously received message.
+          # @!attribute [rw] ack_ids
+          #   @return [::Array<::String>]
+          #     Successfully processed acknowledgement IDs.
+          # @!attribute [rw] invalid_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that were malformed or whose acknowledgement
+          #     deadline has expired.
+          # @!attribute [rw] unordered_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that were out of order.
+          class AcknowledgeConfirmation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Acknowledgement IDs sent in one or more previous requests to modify the
+          # deadline for a specific message.
+          # @!attribute [rw] ack_ids
+          #   @return [::Array<::String>]
+          #     Successfully processed acknowledgement IDs.
+          # @!attribute [rw] invalid_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that were malformed or whose acknowledgement
+          #     deadline has expired.
+          class ModifyAckDeadlineConfirmation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Subscription properties sent as part of the response.
+          # @!attribute [rw] exactly_once_delivery_enabled
+          #   @return [::Boolean]
+          #     True iff exactly once delivery is enabled for this subscription.
+          # @!attribute [rw] message_ordering_enabled
+          #   @return [::Boolean]
+          #     True iff message ordering is enabled for this subscription.
+          class SubscriptionProperties
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Request for the `CreateSnapshot` method.

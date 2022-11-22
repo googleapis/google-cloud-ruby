@@ -83,7 +83,7 @@ module Google
                 # Create credentials
                 credentials = @config.credentials
                 credentials ||= Credentials.default scope: @config.scope
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
                 @quota_project_id = @config.quota_project
@@ -96,6 +96,9 @@ module Google
                   channel_args: @config.channel_args,
                   interceptors: @config.interceptors
                 )
+
+                # Used by an LRO wrapper for some methods of this service
+                @operations_client = self
               end
 
               # Service calls
@@ -144,6 +147,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/longrunning"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Longrunning::Operations::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Longrunning::ListOperationsRequest.new
+              #
+              #   # Call the list_operations method.
+              #   result = client.list_operations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Longrunning::Operation.
+              #     p response
+              #   end
+              #
               def list_operations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -161,16 +185,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.list_operations.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_operations.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @operations_stub.call_rpc :list_operations, request, options: options do |response, operation|
@@ -214,6 +242,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/longrunning"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Longrunning::Operations::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Longrunning::GetOperationRequest.new
+              #
+              #   # Call the get_operation method.
+              #   result = client.get_operation request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def get_operation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -231,16 +281,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.get_operation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_operation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @operations_stub.call_rpc :get_operation, request, options: options do |response, operation|
@@ -284,6 +338,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/longrunning"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Longrunning::Operations::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Longrunning::DeleteOperationRequest.new
+              #
+              #   # Call the delete_operation method.
+              #   result = client.delete_operation request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_operation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -301,16 +370,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.delete_operation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_operation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @operations_stub.call_rpc :delete_operation, request, options: options do |response, operation|
@@ -359,6 +432,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/longrunning"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Longrunning::Operations::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Longrunning::CancelOperationRequest.new
+              #
+              #   # Call the cancel_operation method.
+              #   result = client.cancel_operation request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def cancel_operation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -376,16 +464,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.cancel_operation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.cancel_operation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @operations_stub.call_rpc :cancel_operation, request, options: options do |response, operation|
@@ -437,6 +529,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/longrunning"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Longrunning::Operations::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Longrunning::WaitOperationRequest.new
+              #
+              #   # Call the wait_operation method.
+              #   result = client.wait_operation request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def wait_operation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -457,7 +571,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.wait_operation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.wait_operation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @operations_stub.call_rpc :wait_operation, request, options: options do |response, operation|
@@ -482,22 +598,21 @@ module Google
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for list_operations
-              # to 20 seconds, and all remaining timeouts to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # list_operations to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Longrunning::Operations::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.list_operations.timeout = 20.0
+              #   end
               #
-              #     ::Google::Longrunning::Operations::Client.configure do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.list_operations.timeout = 20.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Longrunning::Operations::Client.new do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.list_operations.timeout = 20.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Longrunning::Operations::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.list_operations.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.

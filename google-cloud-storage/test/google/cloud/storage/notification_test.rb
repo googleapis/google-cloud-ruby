@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Storage::Notification, :mock_storage do
   let(:bucket_name) { "my-bucket" }
-  let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(bucket_name).to_json }
+  let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: bucket_name).to_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
 
   let(:topic_name) { "my-topic" }
@@ -36,7 +36,7 @@ describe Google::Cloud::Storage::Notification, :mock_storage do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_notification, nil, [bucket.name, notification.id, { user_project: nil }]
+    mock.expect :delete_notification, nil, [bucket.name, notification.id], user_project: nil, options: {}
 
     notification.service.mocked_service = mock
 
@@ -47,7 +47,7 @@ describe Google::Cloud::Storage::Notification, :mock_storage do
 
   it "can delete itself with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_notification, nil, [bucket.name, notification_user_project.id, { user_project: "test" }]
+    mock.expect :delete_notification, nil, [bucket.name, notification_user_project.id], user_project: "test", options: {}
 
     notification_user_project.service.mocked_service = mock
 

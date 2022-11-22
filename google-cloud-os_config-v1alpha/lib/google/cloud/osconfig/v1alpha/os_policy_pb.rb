@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/osconfig/v1alpha/os_policy.proto", :syntax => :proto3) do
     add_message "google.cloud.osconfig.v1alpha.OSPolicy" do
@@ -14,6 +15,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :allow_no_resource_group_match, :bool, 5
     end
     add_message "google.cloud.osconfig.v1alpha.OSPolicy.OSFilter" do
+      optional :os_short_name, :string, 1
+      optional :os_version, :string, 2
+    end
+    add_message "google.cloud.osconfig.v1alpha.OSPolicy.InventoryFilter" do
       optional :os_short_name, :string, 1
       optional :os_version, :string, 2
     end
@@ -156,6 +161,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.osconfig.v1alpha.OSPolicy.ResourceGroup" do
       optional :os_filter, :message, 1, "google.cloud.osconfig.v1alpha.OSPolicy.OSFilter"
+      repeated :inventory_filters, :message, 3, "google.cloud.osconfig.v1alpha.OSPolicy.InventoryFilter"
       repeated :resources, :message, 2, "google.cloud.osconfig.v1alpha.OSPolicy.Resource"
     end
     add_enum "google.cloud.osconfig.v1alpha.OSPolicy.Mode" do
@@ -172,6 +178,7 @@ module Google
       module V1alpha
         OSPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicy").msgclass
         OSPolicy::OSFilter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicy.OSFilter").msgclass
+        OSPolicy::InventoryFilter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicy.InventoryFilter").msgclass
         OSPolicy::Resource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicy.Resource").msgclass
         OSPolicy::Resource::File = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicy.Resource.File").msgclass
         OSPolicy::Resource::File::Remote = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.OSPolicy.Resource.File.Remote").msgclass

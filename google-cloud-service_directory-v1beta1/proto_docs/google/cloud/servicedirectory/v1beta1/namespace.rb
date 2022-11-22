@@ -27,12 +27,18 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The resource name for the namespace in the format
-        #     'projects/*/locations/*/namespaces/*'.
+        #     `projects/*/locations/*/namespaces/*`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. Resource labels associated with this Namespace.
-        #     No more than 64 user labels can be associated with a given resource.  Label
+        #     Optional. Resource labels associated with this namespace.
+        #     No more than 64 user labels can be associated with a given resource. Label
         #     keys and values can be no longer than 63 characters.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the namespace was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the namespace was last updated.
         class Namespace
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

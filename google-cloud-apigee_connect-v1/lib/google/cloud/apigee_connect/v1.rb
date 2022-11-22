@@ -26,6 +26,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/apigee_connect/v1"
       #     client = ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Client.new
       #

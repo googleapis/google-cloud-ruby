@@ -1,0 +1,26 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-automl.gemspec",
+    "lib/google-cloud-automl.rb",
+    "lib/google/cloud/automl.rb",
+    "lib/google/cloud/automl/version.rb",
+    "test/google/cloud/automl/client_test.rb",
+    "test/google/cloud/automl/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "acceptance/google/cloud/automl/v1beta1/automl_service_smoke_test.rb"
+  ]
+}

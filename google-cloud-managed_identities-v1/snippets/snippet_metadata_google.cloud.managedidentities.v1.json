@@ -1,0 +1,415 @@
+{
+  "client_library": {
+    "name": "google-cloud-managed_identities-v1",
+    "version": "0.4.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.managedidentities.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_CreateMicrosoftAdDomain_sync",
+      "title": "Snippet for create_microsoft_ad_domain in ManagedIdentitiesService",
+      "description": "Basic snippet for create_microsoft_ad_domain in ManagedIdentitiesService",
+      "file": "managed_identities_service/create_microsoft_ad_domain.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_microsoft_ad_domain",
+        "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#create_microsoft_ad_domain",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedIdentities::V1::CreateMicrosoftAdDomainRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedIdentitiesService::Client",
+          "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client"
+        },
+        "method": {
+          "short_name": "CreateMicrosoftAdDomain",
+          "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService.CreateMicrosoftAdDomain",
+          "service": {
+            "short_name": "ManagedIdentitiesService",
+            "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_ResetAdminPassword_sync",
+      "title": "Snippet for reset_admin_password in ManagedIdentitiesService",
+      "description": "Basic snippet for reset_admin_password in ManagedIdentitiesService",
+      "file": "managed_identities_service/reset_admin_password.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reset_admin_password",
+        "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#reset_admin_password",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordResponse",
+        "client": {
+          "short_name": "ManagedIdentitiesService::Client",
+          "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client"
+        },
+        "method": {
+          "short_name": "ResetAdminPassword",
+          "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService.ResetAdminPassword",
+          "service": {
+            "short_name": "ManagedIdentitiesService",
+            "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_ListDomains_sync",
+      "title": "Snippet for list_domains in ManagedIdentitiesService",
+      "description": "Basic snippet for list_domains in ManagedIdentitiesService",
+      "file": "managed_identities_service/list_domains.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_domains",
+        "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#list_domains",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedIdentities::V1::ListDomainsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedIdentities::V1::ListDomainsResponse",
+        "client": {
+          "short_name": "ManagedIdentitiesService::Client",
+          "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client"
+        },
+        "method": {
+          "short_name": "ListDomains",
+          "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService.ListDomains",
+          "service": {
+            "short_name": "ManagedIdentitiesService",
+            "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_GetDomain_sync",
+      "title": "Snippet for get_domain in ManagedIdentitiesService",
+      "description": "Basic snippet for get_domain in ManagedIdentitiesService",
+      "file": "managed_identities_service/get_domain.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_domain",
+        "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#get_domain",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedIdentities::V1::GetDomainRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedIdentities::V1::Domain",
+        "client": {
+          "short_name": "ManagedIdentitiesService::Client",
+          "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client"
+        },
+        "method": {
+          "short_name": "GetDomain",
+          "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService.GetDomain",
+          "service": {
+            "short_name": "ManagedIdentitiesService",
+            "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_UpdateDomain_sync",
+      "title": "Snippet for update_domain in ManagedIdentitiesService",
+      "description": "Basic snippet for update_domain in ManagedIdentitiesService",
+      "file": "managed_identities_service/update_domain.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_domain",
+        "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#update_domain",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedIdentities::V1::UpdateDomainRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedIdentitiesService::Client",
+          "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDomain",
+          "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService.UpdateDomain",
+          "service": {
+            "short_name": "ManagedIdentitiesService",
+            "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_DeleteDomain_sync",
+      "title": "Snippet for delete_domain in ManagedIdentitiesService",
+      "description": "Basic snippet for delete_domain in ManagedIdentitiesService",
+      "file": "managed_identities_service/delete_domain.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_domain",
+        "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#delete_domain",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedIdentities::V1::DeleteDomainRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedIdentitiesService::Client",
+          "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDomain",
+          "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService.DeleteDomain",
+          "service": {
+            "short_name": "ManagedIdentitiesService",
+            "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_AttachTrust_sync",
+      "title": "Snippet for attach_trust in ManagedIdentitiesService",
+      "description": "Basic snippet for attach_trust in ManagedIdentitiesService",
+      "file": "managed_identities_service/attach_trust.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "attach_trust",
+        "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#attach_trust",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedIdentities::V1::AttachTrustRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedIdentitiesService::Client",
+          "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client"
+        },
+        "method": {
+          "short_name": "AttachTrust",
+          "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService.AttachTrust",
+          "service": {
+            "short_name": "ManagedIdentitiesService",
+            "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_ReconfigureTrust_sync",
+      "title": "Snippet for reconfigure_trust in ManagedIdentitiesService",
+      "description": "Basic snippet for reconfigure_trust in ManagedIdentitiesService",
+      "file": "managed_identities_service/reconfigure_trust.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reconfigure_trust",
+        "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#reconfigure_trust",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedIdentities::V1::ReconfigureTrustRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedIdentitiesService::Client",
+          "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client"
+        },
+        "method": {
+          "short_name": "ReconfigureTrust",
+          "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService.ReconfigureTrust",
+          "service": {
+            "short_name": "ManagedIdentitiesService",
+            "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_DetachTrust_sync",
+      "title": "Snippet for detach_trust in ManagedIdentitiesService",
+      "description": "Basic snippet for detach_trust in ManagedIdentitiesService",
+      "file": "managed_identities_service/detach_trust.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "detach_trust",
+        "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#detach_trust",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedIdentities::V1::DetachTrustRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedIdentitiesService::Client",
+          "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client"
+        },
+        "method": {
+          "short_name": "DetachTrust",
+          "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService.DetachTrust",
+          "service": {
+            "short_name": "ManagedIdentitiesService",
+            "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedidentities_v1_generated_ManagedIdentitiesService_ValidateTrust_sync",
+      "title": "Snippet for validate_trust in ManagedIdentitiesService",
+      "description": "Basic snippet for validate_trust in ManagedIdentitiesService",
+      "file": "managed_identities_service/validate_trust.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "validate_trust",
+        "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#validate_trust",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedIdentities::V1::ValidateTrustRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedIdentitiesService::Client",
+          "full_name": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client"
+        },
+        "method": {
+          "short_name": "ValidateTrust",
+          "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService.ValidateTrust",
+          "service": {
+            "short_name": "ManagedIdentitiesService",
+            "full_name": "google.cloud.managedidentities.v1.ManagedIdentitiesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

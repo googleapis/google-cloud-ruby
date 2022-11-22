@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/httpbody_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/gkeconnect/gateway/v1beta1/gateway.proto", :syntax => :proto3) do
   end

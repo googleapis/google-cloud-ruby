@@ -52,13 +52,12 @@ module Google
             # See {::Google::Cloud::Monitoring::V3::GroupService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all GroupService clients:
-            #
-            #     ::Google::Cloud::Monitoring::V3::GroupService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all GroupService clients
+            #   ::Google::Cloud::Monitoring::V3::GroupService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -78,44 +77,29 @@ module Google
 
                 default_config.rpcs.list_groups.timeout = 30.0
                 default_config.rpcs.list_groups.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_group.timeout = 30.0
                 default_config.rpcs.get_group.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_group.timeout = 30.0
 
-                default_config.rpcs.update_group.timeout = 30.0
+                default_config.rpcs.update_group.timeout = 180.0
                 default_config.rpcs.update_group.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_group.timeout = 30.0
                 default_config.rpcs.delete_group.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_group_members.timeout = 30.0
                 default_config.rpcs.list_group_members.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -147,19 +131,15 @@ module Google
             ##
             # Create a new GroupService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new GroupService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new
             #
-            #     client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new
-            #
-            # To create a new GroupService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the GroupService client.
             # @yieldparam config [Client::Configuration]
@@ -179,14 +159,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -222,7 +201,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project whose groups are to be listed. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name)
+            #     whose groups are to be listed. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param children_of_group [::String]
@@ -264,6 +244,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListGroupsRequest.new
+            #
+            #   # Call the list_groups method.
+            #   result = client.list_groups request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::Group.
+            #     p response
+            #   end
+            #
             def list_groups request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -281,16 +282,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_groups.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_groups.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @group_service_stub.call_rpc :list_groups, request, options: options do |response, operation|
@@ -333,6 +338,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetGroupRequest.new
+            #
+            #   # Call the get_group method.
+            #   result = client.get_group request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Group.
+            #   p result
+            #
             def get_group request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -350,16 +370,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_group.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_group.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @group_service_stub.call_rpc :get_group, request, options: options do |response, operation|
@@ -389,7 +413,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project in which to create the group. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) in
+            #     which to create the group. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param group [::Google::Cloud::Monitoring::V3::Group, ::Hash]
@@ -405,6 +430,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::Group]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateGroupRequest.new
+            #
+            #   # Call the create_group method.
+            #   result = client.create_group request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Group.
+            #   p result
             #
             def create_group request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -423,16 +463,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_group.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_group.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @group_service_stub.call_rpc :create_group, request, options: options do |response, operation|
@@ -476,6 +520,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::UpdateGroupRequest.new
+            #
+            #   # Call the update_group method.
+            #   result = client.update_group request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Group.
+            #   p result
+            #
             def update_group request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -493,16 +552,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "group.name" => request.group.name
-              }
+              header_params = {}
+              if request.group&.name
+                header_params["group.name"] = request.group.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_group.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_group.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @group_service_stub.call_rpc :update_group, request, options: options do |response, operation|
@@ -548,6 +611,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::DeleteGroupRequest.new
+            #
+            #   # Call the delete_group method.
+            #   result = client.delete_group request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_group request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -565,16 +643,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_group.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_group.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @group_service_stub.call_rpc :delete_group, request, options: options do |response, operation|
@@ -636,6 +718,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListGroupMembersRequest.new
+            #
+            #   # Call the list_group_members method.
+            #   result = client.list_group_members request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Api::MonitoredResource.
+            #     p response
+            #   end
+            #
             def list_group_members request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -653,16 +756,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_group_members.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_group_members.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @group_service_stub.call_rpc :list_group_members, request, options: options do |response, operation|
@@ -687,22 +794,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_groups
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_groups to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Monitoring::V3::GroupService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_groups.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Monitoring::V3::GroupService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_groups.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_groups.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_groups.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

@@ -25,9 +25,49 @@
                 "fetch_processor_types"
               ]
             },
+            "ListProcessorTypes": {
+              "methods": [
+                "list_processor_types"
+              ]
+            },
             "ListProcessors": {
               "methods": [
                 "list_processors"
+              ]
+            },
+            "GetProcessor": {
+              "methods": [
+                "get_processor"
+              ]
+            },
+            "TrainProcessorVersion": {
+              "methods": [
+                "train_processor_version"
+              ]
+            },
+            "GetProcessorVersion": {
+              "methods": [
+                "get_processor_version"
+              ]
+            },
+            "ListProcessorVersions": {
+              "methods": [
+                "list_processor_versions"
+              ]
+            },
+            "DeleteProcessorVersion": {
+              "methods": [
+                "delete_processor_version"
+              ]
+            },
+            "DeployProcessorVersion": {
+              "methods": [
+                "deploy_processor_version"
+              ]
+            },
+            "UndeployProcessorVersion": {
+              "methods": [
+                "undeploy_processor_version"
               ]
             },
             "CreateProcessor": {
@@ -50,9 +90,29 @@
                 "disable_processor"
               ]
             },
+            "SetDefaultProcessorVersion": {
+              "methods": [
+                "set_default_processor_version"
+              ]
+            },
             "ReviewDocument": {
               "methods": [
                 "review_document"
+              ]
+            },
+            "EvaluateProcessorVersion": {
+              "methods": [
+                "evaluate_processor_version"
+              ]
+            },
+            "GetEvaluation": {
+              "methods": [
+                "get_evaluation"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "list_evaluations"
               ]
             }
           }

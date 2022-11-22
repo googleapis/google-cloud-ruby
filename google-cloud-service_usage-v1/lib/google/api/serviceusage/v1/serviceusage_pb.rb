@@ -7,6 +7,7 @@ require 'google/api/annotations_pb'
 require 'google/api/serviceusage/v1/resources_pb'
 require 'google/longrunning/operations_pb'
 require 'google/api/client_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/api/serviceusage/v1/serviceusage.proto", :syntax => :proto3) do
     add_message "google.api.serviceusage.v1.EnableServiceRequest" do

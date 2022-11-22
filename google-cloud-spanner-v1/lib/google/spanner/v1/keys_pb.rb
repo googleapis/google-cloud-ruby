@@ -4,7 +4,7 @@
 require 'google/protobuf'
 
 require 'google/protobuf/struct_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/v1/keys.proto", :syntax => :proto3) do
     add_message "google.spanner.v1.KeyRange" do

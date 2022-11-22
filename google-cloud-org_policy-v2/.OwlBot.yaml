@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/orgpolicy/v2/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-org_policy-v2/$1

@@ -33,11 +33,13 @@ module Google
         #     The start of the time period over which this metric value's measurement
         #     applies. The time period has different semantics for different metric
         #     types (cumulative, delta, and gauge). See the metric definition
-        #     documentation in the service configuration for details.
+        #     documentation in the service configuration for details. If not specified,
+        #     {::Google::Cloud::ServiceControl::V1::Operation#start_time google.api.servicecontrol.v1.Operation.start_time} will be used.
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The end of the time period over which this metric value's measurement
-        #     applies.
+        #     applies.  If not specified,
+        #     {::Google::Cloud::ServiceControl::V1::Operation#end_time google.api.servicecontrol.v1.Operation.end_time} will be used.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     A boolean value.

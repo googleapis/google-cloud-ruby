@@ -24,7 +24,8 @@ module Google
         # The `ListMonitoredResourceDescriptors` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The project on which to execute the request. The format is:
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+        #     which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] filter
@@ -80,7 +81,8 @@ module Google
         # The `ListMetricDescriptors` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The project on which to execute the request. The format is:
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+        #     which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] filter
@@ -138,8 +140,9 @@ module Google
         # The `CreateMetricDescriptor` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The project on which to execute the request. The format is:
-        #
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+        #     which to execute the request. The format is:
+        #     4
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] metric_descriptor
         #   @return [::Google::Api::MetricDescriptor]
@@ -167,8 +170,8 @@ module Google
         # The `ListTimeSeries` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The project, organization or folder on which to execute the request. The
-        #     format is:
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name),
+        #     organization or folder on which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         #         organizations/[ORGANIZATION_ID]
@@ -262,7 +265,8 @@ module Google
         # The `CreateTimeSeries` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The project on which to execute the request. The format is:
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+        #     which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] time_series
@@ -321,7 +325,8 @@ module Google
         # The `QueryTimeSeries` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The project on which to execute the request. The format is:
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+        #     which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] query

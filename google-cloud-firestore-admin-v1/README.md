@@ -9,7 +9,7 @@ https://github.com/googleapis/google-cloud-ruby
 This gem is a _versioned_ client. It provides basic client classes for a
 specific version of the Cloud Firestore Admin V1 API. Most users should consider using
 the main client gem,
-[google-cloud-firestore-admin](https://rubygems.org/gems/google-cloud-firestore-admin).
+[google-cloud-firestore](https://rubygems.org/gems/google-cloud-firestore).
 See the section below titled *Which client should I use?* for more information.
 
 ## Installation
@@ -33,11 +33,11 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/firestore/admin/v1"
 
 client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
-request = my_create_request
+request = ::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new # (request fields as keyword arguments...)
 response = client.create_index request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-firestore-admin-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-firestore-admin-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/firestore)
@@ -69,21 +69,26 @@ module GRPC
 end
 ```
 
+
+## Google Cloud Samples
+
+To browse ready to use code samples check [Google Cloud Samples](https://cloud.google.com/docs/samples).
+
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.5+.
+This library is supported on Ruby 2.6+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.5
-and later. Older versions of Ruby _may_ still work, but are unsupported and not
-recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
-about the Ruby support schedule.
+in security maintenance, and not end of life. Older versions of Ruby _may_
+still work, but are unsupported and not recommended. See
+https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
+support schedule.
 
 ## Which client should I use?
 
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
-client library with a name such as `google-cloud-firestore-admin`,
+client library with a name such as `google-cloud-firestore`,
 and lower-level _versioned_ client libraries with names such as
 `google-cloud-firestore-admin-v1`.
 _In most cases, you should install the main client._
@@ -110,7 +115,7 @@ service version.
 
 We recommend that most users install the main client gem for a service. You can
 identify this gem as the one _without_ a version in its name, e.g.
-`google-cloud-firestore-admin`.
+`google-cloud-firestore`.
 The main client is recommended because it will embody the best practices for
 accessing the service, and may also provide more convenient interfaces or
 tighter integration into frameworks and third-party libraries. In addition, the

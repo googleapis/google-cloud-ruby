@@ -43,7 +43,7 @@ module Google
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     When set, the target document must exist and have been last updated at
-        #     that time.
+        #     that time. Timestamp must be microsecond aligned.
         class Precondition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

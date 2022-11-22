@@ -2,5 +2,6 @@
     "name": "stackdriver",
     "language": "ruby",
     "distribution_name": "stackdriver",
-    "client_documentation": "https://googleapis.dev/ruby/stackdriver/latest"
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/stackdriver/latest",
+    "release_level": "preview"
 }

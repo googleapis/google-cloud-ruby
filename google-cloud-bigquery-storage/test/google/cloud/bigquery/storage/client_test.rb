@@ -31,4 +31,14 @@ class Google::Cloud::Bigquery::Storage::ClientConstructionMinitest < Minitest::T
       assert_kind_of Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client, client
     end
   end
+
+  def test_big_query_write
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Bigquery::Storage.big_query_write do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client, client
+    end
+  end
 end

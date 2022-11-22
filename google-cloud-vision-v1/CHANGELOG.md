@@ -1,5 +1,57 @@
 # Release History
 
+### 0.9.0 (2022-08-09)
+
+#### Features
+
+* Added advanced OCR options to TextDetectionParams ([#18980](https://github.com/googleapis/google-cloud-ruby/issues/18980)) 
+
+### 0.8.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.7.0 (2022-05-13)
+
+### ⚠ BREAKING CHANGES
+
+* Remove confidence scores from SafeSearchAnnotation
+
+#### Bug Fixes
+
+* Remove confidence scores from SafeSearchAnnotation
+
+### 0.6.4 / 2022-01-11
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.6.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+#### Documentation
+
+* Added code snippets illustrating how to call each rpc method
+
+### 0.6.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.6.1 / 2021-06-17
 
 #### Bug Fixes

@@ -49,6 +49,26 @@
               "methods": [
                 "mark_recommendation_failed"
               ]
+            },
+            "GetRecommenderConfig": {
+              "methods": [
+                "get_recommender_config"
+              ]
+            },
+            "UpdateRecommenderConfig": {
+              "methods": [
+                "update_recommender_config"
+              ]
+            },
+            "GetInsightTypeConfig": {
+              "methods": [
+                "get_insight_type_config"
+              ]
+            },
+            "UpdateInsightTypeConfig": {
+              "methods": [
+                "update_insight_type_config"
+              ]
             }
           }
         }

@@ -57,7 +57,6 @@ module Google
         #
         #     `feature_importance`
         #     : (boolean) Whether
-        #
         #     [feature_importance][google.cloud.automl.v1.TablesModelColumnInfo.feature_importance]
         #       is populated in the returned list of
         #       [TablesAnnotation][google.cloud.automl.v1.TablesAnnotation]

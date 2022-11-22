@@ -85,8 +85,8 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or LOGGING_TEST_PROJECT=test123 LOGGING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/cloud/logging/v2/config_service/credentials"
-  ::Google::Cloud::Logging::V2::ConfigService::Credentials.env_vars.each do |path|
+  require "google/cloud/logging/v2/logging_service/credentials"
+  ::Google::Cloud::Logging::V2::LoggingService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["LOGGING_PROJECT"] = project
@@ -156,11 +156,6 @@ end
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-logging-v2 gem does not have doctest tests."
-end
-
-task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-logging-v2"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
 end
 
 desc "Run the CI build"

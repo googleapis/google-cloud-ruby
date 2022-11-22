@@ -4,8 +4,7 @@
 require 'google/protobuf'
 
 require 'google/cloud/automl/v1/geometry_pb'
-require 'google/protobuf/duration_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/automl/v1/detection.proto", :syntax => :proto3) do
     add_message "google.cloud.automl.v1.ImageObjectDetectionAnnotation" do

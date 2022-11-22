@@ -1268,6 +1268,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     page_size = 42
     order_by = "hello world"
     filter = "hello world"
+    type = :DLP_JOB_TYPE_UNSPECIFIED
     location_id = "hello world"
 
     list_job_triggers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -1278,6 +1279,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["order_by"]
       assert_equal "hello world", request["filter"]
+      assert_equal :DLP_JOB_TYPE_UNSPECIFIED, request["type"]
       assert_equal "hello world", request["location_id"]
       refute_nil options
     end
@@ -1289,35 +1291,35 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_job_triggers({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, location_id: location_id }) do |response, operation|
+      client.list_job_triggers({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_job_triggers parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, location_id: location_id do |response, operation|
+      client.list_job_triggers parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_job_triggers ::Google::Cloud::Dlp::V2::ListJobTriggersRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, location_id: location_id) do |response, operation|
+      client.list_job_triggers ::Google::Cloud::Dlp::V2::ListJobTriggersRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_job_triggers({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, location_id: location_id }, grpc_options) do |response, operation|
+      client.list_job_triggers({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_job_triggers(::Google::Cloud::Dlp::V2::ListJobTriggersRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, location_id: location_id), grpc_options) do |response, operation|
+      client.list_job_triggers(::Google::Cloud::Dlp::V2::ListJobTriggersRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, type: type, location_id: location_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

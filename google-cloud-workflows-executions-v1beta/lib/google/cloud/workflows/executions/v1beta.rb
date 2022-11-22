@@ -26,6 +26,8 @@ module Google
         ##
         # To load this package, including all its services, and instantiate a client:
         #
+        # @example
+        #
         #     require "google/cloud/workflows/executions/v1beta"
         #     client = ::Google::Cloud::Workflows::Executions::V1beta::Executions::Client.new
         #

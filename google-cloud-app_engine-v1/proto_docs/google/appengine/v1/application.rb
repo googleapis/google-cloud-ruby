@@ -72,6 +72,11 @@ module Google
         #   @return [::String]
         #     Google Cloud Storage bucket that can be used by this application to store
         #     content.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     The service account associated with the application.
+        #     This is the app-level default identity. If no identity provided during
+        #     create version, Admin API will fallback to this one.
         # @!attribute [rw] iap
         #   @return [::Google::Cloud::AppEngine::V1::Application::IdentityAwareProxy]
         # @!attribute [rw] gcr_domain

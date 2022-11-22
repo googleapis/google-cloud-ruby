@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
+require "google/cloud/compute/v1/region_instances/rest/service_stub"
+require "google/cloud/compute/v1/region_operations/rest"
 
 module Google
   module Cloud
@@ -31,8 +33,6 @@ module Google
             # The RegionInstances API.
             #
             class Client
-              include GrpcTranscoding
-
               # @private
               attr_reader :region_instances_stub
 
@@ -42,13 +42,12 @@ module Google
               # See {::Google::Cloud::Compute::V1::RegionInstances::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all RegionInstances clients:
-              #
-              #     ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all RegionInstances clients
+              #   ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -65,6 +64,8 @@ module Google
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
+
+                  default_config.rpcs.bulk_insert.timeout = 600.0
 
                   default_config
                 end
@@ -95,28 +96,20 @@ module Google
               ##
               # Create a new RegionInstances REST client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new RegionInstances REST client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.new
               #
-              #     client = ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.new
-              #
-              # To create a new RegionInstances REST client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the RegionInstances client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
-                # These require statements are intentionally placed here to initialize
-                # the REST modules only when it's required.
-                require "gapic/rest"
-
                 # Create the configuration object
                 @config = Configuration.new Client.configure
 
@@ -126,12 +119,24 @@ module Google
                 # Create credentials
                 credentials = @config.credentials
                 credentials ||= Credentials.default scope: @config.scope
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
-                @client_stub = ::Gapic::Rest::ClientStub.new endpoint: @config.endpoint, credentials: credentials
+                @region_operations = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.endpoint = @config.endpoint
+                end
+
+                @region_instances_stub = ::Google::Cloud::Compute::V1::RegionInstances::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for long-running operations via RegionOperations.
+              #
+              # @return [::Google::Cloud::Compute::V1::RegionOperations::Rest::Client]
+              #
+              attr_reader :region_operations
 
               # Service calls
 
@@ -162,16 +167,12 @@ module Google
               #   @param region [::String]
               #     The name of the region for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def bulk_insert request, options = nil
@@ -183,29 +184,39 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.bulk_insert.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.bulk_insert.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_bulk_insert request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
-                yield result, response if block_given?
-                result
+                @region_instances_stub.bulk_insert request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_error
+                  raise ::Google::Cloud::Error.from_error gapic_error
+                end
               end
 
               ##
@@ -257,6 +268,9 @@ module Google
               # @!attribute [rw] timeout
               #   The call timeout in seconds.
               #   @return [::Numeric]
+              # @!attribute [rw] metadata
+              #   Additional REST headers to be sent with the call.
+              #   @return [::Hash{::Symbol=>::String}]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -270,12 +284,53 @@ module Google
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
                 config_attr :timeout,       nil, ::Numeric, nil
+                config_attr :metadata,      nil, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil
                   @parent_config = parent_config unless parent_config.nil?
 
                   yield self if block_given?
+                end
+
+                ##
+                # Configurations for individual RPCs
+                # @return [Rpcs]
+                #
+                def rpcs
+                  @rpcs ||= begin
+                    parent_rpcs = nil
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
+                    Rpcs.new parent_rpcs
+                  end
+                end
+
+                ##
+                # Configuration RPC class for the RegionInstances API.
+                #
+                # Includes fields providing the configuration for each RPC in this service.
+                # Each configuration object is of type `Gapic::Config::Method` and includes
+                # the following configuration fields:
+                #
+                #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
+                #
+                # there is one other field (`retry_policy`) that can be set
+                # but is currently not supported for REST Gapic libraries.
+                #
+                class Rpcs
+                  ##
+                  # RPC-specific configuration for `bulk_insert`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :bulk_insert
+
+                  # @private
+                  def initialize parent_rpcs = nil
+                    bulk_insert_config = parent_rpcs.bulk_insert if parent_rpcs.respond_to? :bulk_insert
+                    @bulk_insert = ::Gapic::Config::Method.new bulk_insert_config
+
+                    yield self if block_given?
+                  end
                 end
               end
             end

@@ -22,6 +22,53 @@ module Google
     module Firestore
       module Admin
         module V1
+          # A request to list the Firestore Databases in all locations for a project.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. A parent name of the form
+          #     `projects/{project_id}`
+          class ListDatabasesRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The list of databases for a project.
+          # @!attribute [rw] databases
+          #   @return [::Array<::Google::Cloud::Firestore::Admin::V1::Database>]
+          #     The databases in the project.
+          class ListDatabasesResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_database FirestoreAdmin.GetDatabase}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. A name of the form
+          #     `projects/{project_id}/databases/{database_id}`
+          class GetDatabaseRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_database FirestoreAdmin.UpdateDatabase}.
+          # @!attribute [rw] database
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Database]
+          #     Required. The database to update.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     The list of fields to be updated.
+          class UpdateDatabaseRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata related to the update database operation.
+          class UpdateDatabaseMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_index FirestoreAdmin.CreateIndex}.
           # @!attribute [rw] parent
           #   @return [::String]
@@ -122,8 +169,8 @@ module Google
           #     The filter to apply to list results. Currently,
           #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields} only supports listing fields
           #     that have been explicitly overridden. To issue this query, call
-          #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields} with the filter set to
-          #     `indexConfig.usesAncestorConfig:false`.
+          #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields} with a filter that includes
+          #     `indexConfig.usesAncestorConfig:false` .
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The number of results to return.
