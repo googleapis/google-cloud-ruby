@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Firestore      
+    module Firestore
       ##
       # # AggregateQuerySnapshot
       #
@@ -32,13 +32,12 @@ module Google
       #   # Create an aggregate query
       #   aggregate_query = query.aggregate_query
       #                          .add_count
-      # 
+      #
       #   aggregate_query.get do |aggregate_snapshot|
       #     puts aggregate_snapshot.get('count')
       #   end
       #
       class AggregateQuerySnapshot
-        
         ##
         # Retrieves the aggregate data.
         #
@@ -58,18 +57,15 @@ module Google
         #   # Create an aggregate query
         #   aggregate_query = query.aggregate_query
         #                          .add_count
-        # 
+        #
         #   aggregate_query.get do |aggregate_snapshot|
         #     puts aggregate_snapshot.get('count')
         #   end
         def get aggregate_alias
-          if @results.key?(aggregate_alias)
-            @results[aggregate_alias][:integer_value]
-          else
-            nil
-          end
+          return unless @results.key? aggregate_alias
+          @results[aggregate_alias][:integer_value]
         end
-        
+
         ##
         # @private New AggregateQuerySnapshot from a
         # Google::Cloud::Firestore::V1::RunAggregationQueryResponse object.

@@ -36,7 +36,7 @@ module Google
       #   # Create an aggregate query
       #   aggregate_query = query.aggregate_query
       #                          .add_count
-      # 
+      #
       #   aggregate_query.get do |aggregate_snapshot|
       #     puts aggregate_snapshot.get('count')
       #   end
@@ -52,13 +52,12 @@ module Google
       #   # Create an aggregate query
       #   aggregate_query = query.aggregate_query
       #                          .add_count aggregate_alias: 'total_cities'
-      # 
+      #
       #   aggregate_query.get do |aggregate_snapshot|
       #     puts aggregate_snapshot.get('total_cities')
       #   end
       #
       class AggregateQuery
-
         ##
         # @private The firestore client object.
         attr_accessor :client
@@ -98,7 +97,7 @@ module Google
         #   # Create an aggregate query
         #   aggregate_query = query.aggregate_query
         #                          .add_count
-        # 
+        #
         #   aggregate_query.get do |aggregate_snapshot|
         #     puts aggregate_snapshot.get('count')
         #   end
@@ -130,7 +129,7 @@ module Google
         #   # Create an aggregate query
         #   aggregate_query = query.aggregate_query
         #                          .add_count
-        # 
+        #
         #   aggregate_query.get do |aggregate_snapshot|
         #     puts aggregate_snapshot.get('count')
         #   end
