@@ -402,12 +402,6 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       [rickard, eddard, catelyn, arya, sansa, robb, bran, jon]
     end
 
-    let(:post) do
-      Google::Cloud::Datastore::Entity.new.tap do |e|
-        e["title"]       = "How to make the perfect pizza in your grill"
-      end
-    end
-
     before do
       dataset.transaction { |tx| tx.save *characters }
     end
@@ -849,7 +843,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       end
     end
 
-    focus; it "should limit results when limit > 300 in query" do
+    it "should limit results when limit > 300 in query" do
       # Testing limit with query
       query = dataset.query(kind_val).limit(limit)
       entities_count = 0
