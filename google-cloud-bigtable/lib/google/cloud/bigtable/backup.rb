@@ -429,19 +429,18 @@ module Google
         # if the backup is already a copied one.
         #
         # @param dest_project_id [String] Existing project ID. Copy of the backup
-        # will be created in this project. Required.
+        #   will be created in this project. Required.
         # @param dest_instance_id [Instance, String] Existing instance ID. Copy
-        # of the backup will be created in this instance. Required.
+        #   of the backup will be created in this instance. Required.
         # @param dest_cluster_id [String] Existing cluster ID. Copy of the backup
-        # will be created in this cluster. Required.
+        #   will be created in this cluster. Required.
         # @param new_backup_id [String] The id of the copy of the backup to be created. This string must
         #   be between 1 and 50 characters in length and match the regex
         #   `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`. Required.
         # @param expire_time [Time] The expiration time of the copy of the backup, with microseconds
-        #     granularity that must be at least 6 hours and at most 30 days
-        #     from the time the request is received. Once the `expire_time`
-        #     has passed, Cloud Bigtable will delete the backup and free the
-        #     resources used by the backup. Required.
+        #   granularity that must be at least 6 hours and at most 30 days from the time the request
+        #   is received. Once the `expire_time` has passed, Cloud Bigtable will delete the backup
+        #   and free the resources used by the backup. Required.
         #
         # @return [Google::Cloud::Bigtable::Backup::Job] The job representing the long-running, asynchronous
         #   processing of a copy backup operation.
@@ -471,12 +470,12 @@ module Google
         #   end
         #
         def copy dest_project_id:, dest_instance_id:, dest_cluster_id:, new_backup_id:, expire_time:
-          grpc = service.copy_backup project_id:      dest_project_id,
-                                     instance_id:     dest_instance_id,
-                                     cluster_id:      dest_cluster_id,
-                                     backup_id:       new_backup_id,
-                                     source_backup:   service.backup_path(instance_id, cluster_id, backup_id),
-                                     expire_time:     expire_time
+          grpc = service.copy_backup project_id: dest_project_id,
+                                     instance_id: dest_instance_id,
+                                     cluster_id: dest_cluster_id,
+                                     backup_id: new_backup_id,
+                                     source_backup: service.backup_path(instance_id, cluster_id, backup_id),
+                                     expire_time: expire_time
           Backup::Job.from_grpc grpc, service
         end
 
