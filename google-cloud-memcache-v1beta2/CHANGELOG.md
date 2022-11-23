@@ -1,11 +1,5 @@
 # Release History
 
-### 0.4.0 (2022-11-17)
-
-#### Features
-
-* support scheduled maintenance 
-
 ### 0.3.0 (2022-07-05)
 
 #### Features
