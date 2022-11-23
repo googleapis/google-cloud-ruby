@@ -20,6 +20,7 @@ require "minitest/focus"
 require "minitest/rg"
 require "google/cloud/datastore"
 require "securerandom"
+require "minitest/hooks/default"
 
 # Create shared dataset object so we don't create new for each test
 $dataset = Google::Cloud.new.datastore
@@ -62,7 +63,7 @@ module Acceptance
     def self.run_one_method klass, method_name, reporter
       result = nil
       reporter.prerecord klass, method_name
-      (1..3).each do |try|
+      (1..1).each do |try|
         result = Minitest.run_one_method(klass, method_name)
         break if (result.passed? || result.skipped?)
         puts "Retrying #{klass}##{method_name} (#{try})"
