@@ -35,6 +35,7 @@ require_relative "../storage_enable_versioning"
 require_relative "../storage_get_bucket_metadata"
 require_relative "../storage_get_default_event_based_hold"
 require_relative "../storage_get_public_access_prevention"
+require_relative "../storage_get_requester_pays_status"
 require_relative "../storage_get_retention_policy"
 require_relative "../storage_get_uniform_bucket_level_access"
 require_relative "../storage_list_buckets"
@@ -190,7 +191,7 @@ describe "Buckets Snippets" do
   end
 
   describe "requester_pays" do
-    it "enable_requester_pays, disable_requester_pays" do
+    it "enable_requester_pays, disable_requester_pays, get_requester_pays_status" do
       # enable_requester_pays
       bucket.requester_pays = false
 
@@ -200,11 +201,23 @@ describe "Buckets Snippets" do
       bucket.refresh!
       assert bucket.requester_pays?
 
+      # get_requester_pays_status
+      assert_output "Requester pays status is enabled for #{bucket.name}\n" do
+        get_requester_pays_status bucket_name: bucket.name
+      end
+      assert bucket.requester_pays?
+
       # disable_requester_pays
       assert_output "Requester pays has been disabled for #{bucket.name}\n" do
         disable_requester_pays bucket_name: bucket.name
       end
       bucket.refresh!
+      refute bucket.requester_pays?
+
+      # get_requester_pays_status
+      assert_output "Requester pays status is disabled for #{bucket.name}\n" do
+        get_requester_pays_status bucket_name: bucket.name
+      end
       refute bucket.requester_pays?
     end
   end
