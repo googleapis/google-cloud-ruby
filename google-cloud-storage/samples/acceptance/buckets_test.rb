@@ -304,7 +304,7 @@ describe "Buckets Snippets" do
       end
 
       bucket.refresh!
-      assert bucket.labels.empty?
+      assert bucket.labels[label_key].empty?
     end
   end
 

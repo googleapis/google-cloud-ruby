@@ -23,9 +23,9 @@ def get_requester_pays_status bucket_name:
   bucket  = storage.bucket bucket_name
 
   if bucket.requester_pays
-    puts "Requester Pays is enabled for #{bucket_name}"
+    puts "Requester pays status is enabled for #{bucket_name}"
   else
-    puts "Requester Pays is disabled for #{bucket_name}"
+    puts "Requester pays status is disabled for #{bucket_name}"
   end
 end
 # [END storage_get_requester_pays_status]
