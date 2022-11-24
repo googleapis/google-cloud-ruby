@@ -588,6 +588,38 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "creates an empty file" do
+    new_file_name = random_file_path
+
+    Tempfile.create ["google-cloud", ".txt"] do |tmpfile|
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket_user_project.name, new_file_name),
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, user_project: "test", options: {retries: 0})
+
+      bucket_user_project.service.mocked_service = mock
+
+      created = bucket_user_project.create_file tmpfile, new_file_name
+      _(created.user_project).must_equal true
+
+      mock.verify
+    end
+  end
+
+  it "creates an file with a StringIO" do
+    new_file_name = random_file_path
+    new_file_contents = StringIO.new
+
+    mock = Minitest::Mock.new
+    mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+      [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: new_file_contents, options: {retries: 0})
+
+    bucket.service.mocked_service = mock
+
+    bucket.create_file new_file_contents, new_file_name
+
+    mock.verify
+  end
+
   it "raises when given a file that does not exist" do
     bad_file_path = "/this/file/does/not/exist.ext"
 
