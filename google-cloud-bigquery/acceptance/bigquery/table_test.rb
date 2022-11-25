@@ -150,7 +150,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "deletes itself and knows it no longer exists" do
-    test_table = dataset.table "kittens_delete_table"
+    test_table = dataset.create_table "kittens_delete_table"
     _(test_table.exists?).must_equal true
     _(test_table.delete).must_equal true
     _(test_table.exists?).must_equal false
