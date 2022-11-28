@@ -302,6 +302,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1::ConfidentialNodes]
         #     Confidential nodes config.
         #     All the nodes in the node pool will be Confidential VM once enabled.
+        # @!attribute [rw] fast_socket
+        #   @return [::Google::Cloud::Container::V1::FastSocket]
+        #     Enable or disable NCCL fast socket for the node pool.
         # @!attribute [rw] resource_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The resource labels for the node pool to use to annotate any related
@@ -953,9 +956,8 @@ module Google
         #     anything other than EVALUATION_MODE_UNSPECIFIED, this field is ignored.
         # @!attribute [rw] evaluation_mode
         #   @return [::Google::Cloud::Container::V1::BinaryAuthorization::EvaluationMode]
-        #     Mode of operation for binauthz policy evaluation. Currently the only
-        #     options are equivalent to enable/disable. If unspecified, defaults to
-        #     DISABLED.
+        #     Mode of operation for binauthz policy evaluation. If unspecified, defaults
+        #     to DISABLED.
         class BinaryAuthorization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2013,6 +2015,9 @@ module Google
         # @!attribute [rw] gvnic
         #   @return [::Google::Cloud::Container::V1::VirtualNIC]
         #     Enable or disable gvnic on the node pool.
+        # @!attribute [rw] fast_socket
+        #   @return [::Google::Cloud::Container::V1::FastSocket]
+        #     Enable or disable NCCL fast socket for the node pool.
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Container::V1::NodePoolLoggingConfig]
         #     Logging configuration.
@@ -4205,6 +4210,15 @@ module Google
         #   @return [::Boolean]
         #     Whether gVNIC features are enabled in the node pool.
         class VirtualNIC
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration of Fast Socket feature.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether Fast Socket features are enabled in the node pool.
+        class FastSocket
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
