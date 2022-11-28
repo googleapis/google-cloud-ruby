@@ -61,6 +61,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :gvnic, :message, 29, "google.container.v1beta1.VirtualNIC"
       optional :spot, :bool, 32
       optional :confidential_nodes, :message, 35, "google.container.v1beta1.ConfidentialNodes"
+      proto3_optional :fast_socket, :message, 36, "google.container.v1beta1.FastSocket"
       map :resource_labels, :string, :string, 37
       optional :logging_config, :message, 38, "google.container.v1beta1.NodePoolLoggingConfig"
     end
@@ -548,6 +549,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :gcfs_config, :message, 22, "google.container.v1beta1.GcfsConfig"
       optional :confidential_nodes, :message, 23, "google.container.v1beta1.ConfidentialNodes"
       optional :gvnic, :message, 29, "google.container.v1beta1.VirtualNIC"
+      optional :fast_socket, :message, 31, "google.container.v1beta1.FastSocket"
       optional :logging_config, :message, 32, "google.container.v1beta1.NodePoolLoggingConfig"
       optional :resource_labels, :message, 33, "google.container.v1beta1.ResourceLabels"
     end
@@ -1123,6 +1125,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.container.v1beta1.VirtualNIC" do
       optional :enabled, :bool, 1
     end
+    add_message "google.container.v1beta1.FastSocket" do
+      optional :enabled, :bool, 1
+    end
     add_message "google.container.v1beta1.GetOpenIDConfigRequest" do
       optional :parent, :string, 1
     end
@@ -1467,6 +1472,7 @@ module Google
         ResourceUsageExportConfig::ConsumptionMeteringConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ResourceUsageExportConfig.ConsumptionMeteringConfig").msgclass
         ShieldedNodes = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ShieldedNodes").msgclass
         VirtualNIC = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.VirtualNIC").msgclass
+        FastSocket = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.FastSocket").msgclass
         GetOpenIDConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.GetOpenIDConfigRequest").msgclass
         GetOpenIDConfigResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.GetOpenIDConfigResponse").msgclass
         GetJSONWebKeysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.GetJSONWebKeysRequest").msgclass
