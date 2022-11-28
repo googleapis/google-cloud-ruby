@@ -19,21 +19,27 @@
 # [START iap_v1_generated_IdentityAwareProxyAdminService_ListTunnelDestGroups_sync]
 require "google/cloud/iap/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#list_tunnel_dest_groups
+#
+def list_tunnel_dest_groups
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest.new
 
-# Call the list_tunnel_dest_groups method.
-result = client.list_tunnel_dest_groups request
+  # Call the list_tunnel_dest_groups method.
+  result = client.list_tunnel_dest_groups request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Iap::V1::TunnelDestGroup.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Iap::V1::TunnelDestGroup.
+    p response
+  end
 end
 # [END iap_v1_generated_IdentityAwareProxyAdminService_ListTunnelDestGroups_sync]

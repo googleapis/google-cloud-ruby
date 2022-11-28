@@ -19,15 +19,21 @@
 # [START retail_v2_generated_ControlService_DeleteControl_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::ControlService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ControlService::Client#delete_control
+#
+def delete_control
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::ControlService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::DeleteControlRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::DeleteControlRequest.new
 
-# Call the delete_control method.
-result = client.delete_control request
+  # Call the delete_control method.
+  result = client.delete_control request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END retail_v2_generated_ControlService_DeleteControl_sync]

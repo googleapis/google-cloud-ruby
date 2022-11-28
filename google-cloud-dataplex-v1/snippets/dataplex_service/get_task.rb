@@ -19,15 +19,21 @@
 # [START dataplex_v1_generated_DataplexService_GetTask_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::DataplexService::Client#get_task
+#
+def get_task
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::GetTaskRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::GetTaskRequest.new
 
-# Call the get_task method.
-result = client.get_task request
+  # Call the get_task method.
+  result = client.get_task request
 
-# The returned object is of type Google::Cloud::Dataplex::V1::Task.
-p result
+  # The returned object is of type Google::Cloud::Dataplex::V1::Task.
+  p result
+end
 # [END dataplex_v1_generated_DataplexService_GetTask_sync]

@@ -102,9 +102,9 @@ module Google
         # @!attribute [rw] limits
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Only memory and CPU are supported. Note: The only
-        #     supported values for CPU are '1', '2', and '4'. Setting 4 CPU requires at
-        #     least 2Gi of memory.
-        #     The values of the map is string form of the 'quantity' k8s type:
+        #     supported values for CPU are '1', '2',  '4', and '8'. Setting 4 CPU
+        #     requires at least 2Gi of memory. The values of the map is string form of
+        #     the 'quantity' k8s type:
         #     https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go
         # @!attribute [rw] cpu_idle
         #   @return [::Boolean]
@@ -165,7 +165,8 @@ module Google
         # @!attribute [rw] version
         #   @return [::String]
         #     The Cloud Secret Manager secret version.
-        #     Can be 'latest' for the latest value or an integer for a specific version.
+        #     Can be 'latest' for the latest version, an integer for a specific version,
+        #     or a version alias.
         class SecretKeySelector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -268,7 +269,8 @@ module Google
         # @!attribute [rw] version
         #   @return [::String]
         #     The Cloud Secret Manager secret version.
-        #     Can be 'latest' for the latest value or an integer for a specific version.
+        #     Can be 'latest' for the latest value, or an integer or a secret alias for a
+        #     specific version.
         # @!attribute [rw] mode
         #   @return [::Integer]
         #     Integer octal mode bits to use on this file, must be a value between
@@ -334,11 +336,15 @@ module Google
         # @!attribute [rw] http_get
         #   @return [::Google::Cloud::Run::V2::HTTPGetAction]
         #     HTTPGet specifies the http request to perform.
-        #     Exactly one of HTTPGet or TCPSocket must be specified.
+        #     Exactly one of httpGet, tcpSocket, or grpc must be specified.
         # @!attribute [rw] tcp_socket
         #   @return [::Google::Cloud::Run::V2::TCPSocketAction]
         #     TCPSocket specifies an action involving a TCP port.
-        #     Exactly one of HTTPGet or TCPSocket must be specified.
+        #     Exactly one of httpGet, tcpSocket, or grpc must be specified.
+        # @!attribute [rw] grpc
+        #   @return [::Google::Cloud::Run::V2::GRPCAction]
+        #     GRPC specifies an action involving a gRPC port.
+        #     Exactly one of httpGet, tcpSocket, or grpc must be specified.
         class Probe
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -372,7 +378,23 @@ module Google
         # @!attribute [rw] port
         #   @return [::Integer]
         #     Port number to access on the container. Must be in the range 1 to 65535.
+        #     If not specified, defaults to 8080.
         class TCPSocketAction
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GRPCAction describes an action involving a GRPC port.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Port number of the gRPC service. Number must be in the range 1 to 65535.
+        #     If not specified, defaults to 8080.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Service is the name of the service to place in the gRPC HealthCheckRequest
+        #     (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md). If
+        #     this is not specified, the default behavior is defined by gRPC.
+        class GRPCAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

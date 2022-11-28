@@ -19,15 +19,21 @@
 # [START certificatemanager_v1_generated_CertificateManager_GetCertificateMap_sync]
 require "google/cloud/certificate_manager/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate_map
+#
+def get_certificate_map
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::CertificateManager::V1::GetCertificateMapRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::CertificateManager::V1::GetCertificateMapRequest.new
 
-# Call the get_certificate_map method.
-result = client.get_certificate_map request
+  # Call the get_certificate_map method.
+  result = client.get_certificate_map request
 
-# The returned object is of type Google::Cloud::CertificateManager::V1::CertificateMap.
-p result
+  # The returned object is of type Google::Cloud::CertificateManager::V1::CertificateMap.
+  p result
+end
 # [END certificatemanager_v1_generated_CertificateManager_GetCertificateMap_sync]

@@ -25,6 +25,9 @@ Metrics/ModuleLength:
   Enabled: false
 Metrics/PerceivedComplexity:
   Enabled: false
+Naming/AccessorMethodName:
+  Exclude:
+    - "snippets/**/*.rb"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-video_intelligence-v1beta2.rb"

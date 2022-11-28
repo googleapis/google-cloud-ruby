@@ -19,15 +19,21 @@
 # [START language_v1_generated_LanguageService_AnalyzeSentiment_sync]
 require "google/cloud/language/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Language::V1::LanguageService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Language::V1::LanguageService::Client#analyze_sentiment
+#
+def analyze_sentiment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Language::V1::LanguageService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Language::V1::AnalyzeSentimentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Language::V1::AnalyzeSentimentRequest.new
 
-# Call the analyze_sentiment method.
-result = client.analyze_sentiment request
+  # Call the analyze_sentiment method.
+  result = client.analyze_sentiment request
 
-# The returned object is of type Google::Cloud::Language::V1::AnalyzeSentimentResponse.
-p result
+  # The returned object is of type Google::Cloud::Language::V1::AnalyzeSentimentResponse.
+  p result
+end
 # [END language_v1_generated_LanguageService_AnalyzeSentiment_sync]

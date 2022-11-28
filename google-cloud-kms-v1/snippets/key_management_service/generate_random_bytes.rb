@@ -19,15 +19,21 @@
 # [START cloudkms_v1_generated_KeyManagementService_GenerateRandomBytes_sync]
 require "google/cloud/kms/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Kms::V1::KeyManagementService::Client#generate_random_bytes
+#
+def generate_random_bytes
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new
 
-# Call the generate_random_bytes method.
-result = client.generate_random_bytes request
+  # Call the generate_random_bytes method.
+  result = client.generate_random_bytes request
 
-# The returned object is of type Google::Cloud::Kms::V1::GenerateRandomBytesResponse.
-p result
+  # The returned object is of type Google::Cloud::Kms::V1::GenerateRandomBytesResponse.
+  p result
+end
 # [END cloudkms_v1_generated_KeyManagementService_GenerateRandomBytes_sync]

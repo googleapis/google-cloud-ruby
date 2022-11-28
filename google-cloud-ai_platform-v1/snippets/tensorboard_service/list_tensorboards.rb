@@ -19,21 +19,27 @@
 # [START aiplatform_v1_generated_TensorboardService_ListTensorboards_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboards
+#
+def list_tensorboards
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::ListTensorboardsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::ListTensorboardsRequest.new
 
-# Call the list_tensorboards method.
-result = client.list_tensorboards request
+  # Call the list_tensorboards method.
+  result = client.list_tensorboards request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::AIPlatform::V1::Tensorboard.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::AIPlatform::V1::Tensorboard.
+    p response
+  end
 end
 # [END aiplatform_v1_generated_TensorboardService_ListTensorboards_sync]

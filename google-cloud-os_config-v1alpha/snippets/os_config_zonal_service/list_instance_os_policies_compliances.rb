@@ -19,21 +19,27 @@
 # [START osconfig_v1alpha_generated_OsConfigZonalService_ListInstanceOSPoliciesCompliances_sync]
 require "google/cloud/os_config/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_instance_os_policies_compliances
+#
+def list_instance_os_policies_compliances
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OsConfig::V1alpha::ListInstanceOSPoliciesCompliancesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OsConfig::V1alpha::ListInstanceOSPoliciesCompliancesRequest.new
 
-# Call the list_instance_os_policies_compliances method.
-result = client.list_instance_os_policies_compliances request
+  # Call the list_instance_os_policies_compliances method.
+  result = client.list_instance_os_policies_compliances request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::OsConfig::V1alpha::InstanceOSPoliciesCompliance.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::OsConfig::V1alpha::InstanceOSPoliciesCompliance.
+    p response
+  end
 end
 # [END osconfig_v1alpha_generated_OsConfigZonalService_ListInstanceOSPoliciesCompliances_sync]

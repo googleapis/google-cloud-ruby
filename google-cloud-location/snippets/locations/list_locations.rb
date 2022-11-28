@@ -19,21 +19,27 @@
 # [START location_v0_generated_Locations_ListLocations_sync]
 require "google/cloud/location"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Location::Locations::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Location::Locations::Client#list_locations
+#
+def list_locations
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Location::Locations::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Location::ListLocationsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Location::ListLocationsRequest.new
 
-# Call the list_locations method.
-result = client.list_locations request
+  # Call the list_locations method.
+  result = client.list_locations request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Location::Location.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Location::Location.
+    p response
+  end
 end
 # [END location_v0_generated_Locations_ListLocations_sync]

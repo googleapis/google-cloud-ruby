@@ -19,21 +19,27 @@
 # [START beyondcorp_v1_generated_AppConnectorsService_ListAppConnectors_sync]
 require "google/cloud/beyond_corp/app_connectors/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#list_app_connectors
+#
+def list_app_connectors
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BeyondCorp::AppConnectors::V1::ListAppConnectorsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BeyondCorp::AppConnectors::V1::ListAppConnectorsRequest.new
 
-# Call the list_app_connectors method.
-result = client.list_app_connectors request
+  # Call the list_app_connectors method.
+  result = client.list_app_connectors request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnector.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnector.
+    p response
+  end
 end
 # [END beyondcorp_v1_generated_AppConnectorsService_ListAppConnectors_sync]

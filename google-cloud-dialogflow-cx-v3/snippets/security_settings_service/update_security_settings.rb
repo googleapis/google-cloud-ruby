@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_SecuritySettingsService_UpdateSecuritySettings_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#update_security_settings
+#
+def update_security_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::UpdateSecuritySettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::UpdateSecuritySettingsRequest.new
 
-# Call the update_security_settings method.
-result = client.update_security_settings request
+  # Call the update_security_settings method.
+  result = client.update_security_settings request
 
-# The returned object is of type Google::Cloud::Dialogflow::CX::V3::SecuritySettings.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::CX::V3::SecuritySettings.
+  p result
+end
 # [END dialogflow_v3_generated_SecuritySettingsService_UpdateSecuritySettings_sync]

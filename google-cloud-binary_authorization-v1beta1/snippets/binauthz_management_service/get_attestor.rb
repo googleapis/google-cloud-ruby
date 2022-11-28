@@ -19,15 +19,21 @@
 # [START binaryauthorization_v1beta1_generated_BinauthzManagementService_GetAttestor_sync]
 require "google/cloud/binary_authorization/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#get_attestor
+#
+def get_attestor
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BinaryAuthorization::V1beta1::GetAttestorRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BinaryAuthorization::V1beta1::GetAttestorRequest.new
 
-# Call the get_attestor method.
-result = client.get_attestor request
+  # Call the get_attestor method.
+  result = client.get_attestor request
 
-# The returned object is of type Google::Cloud::BinaryAuthorization::V1beta1::Attestor.
-p result
+  # The returned object is of type Google::Cloud::BinaryAuthorization::V1beta1::Attestor.
+  p result
+end
 # [END binaryauthorization_v1beta1_generated_BinauthzManagementService_GetAttestor_sync]

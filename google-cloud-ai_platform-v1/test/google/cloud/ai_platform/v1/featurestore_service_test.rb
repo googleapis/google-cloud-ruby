@@ -1178,6 +1178,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::ClientTest < Minites
     destination = {}
     pass_through_fields = [{}]
     entity_type_specs = [{}]
+    start_time = {}
 
     batch_read_feature_values_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_read_feature_values, name
@@ -1188,6 +1189,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::ClientTest < Minites
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::FeatureValueDestination), request["destination"]
       assert_kind_of ::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest::PassThroughField, request["pass_through_fields"].first
       assert_kind_of ::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest::EntityTypeSpec, request["entity_type_specs"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["start_time"]
       refute_nil options
     end
 
@@ -1198,35 +1200,35 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::ClientTest < Minites
       end
 
       # Use hash object
-      client.batch_read_feature_values({ csv_read_instances: csv_read_instances, featurestore: featurestore, destination: destination, pass_through_fields: pass_through_fields, entity_type_specs: entity_type_specs }) do |response, operation|
+      client.batch_read_feature_values({ csv_read_instances: csv_read_instances, featurestore: featurestore, destination: destination, pass_through_fields: pass_through_fields, entity_type_specs: entity_type_specs, start_time: start_time }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_read_feature_values csv_read_instances: csv_read_instances, featurestore: featurestore, destination: destination, pass_through_fields: pass_through_fields, entity_type_specs: entity_type_specs do |response, operation|
+      client.batch_read_feature_values csv_read_instances: csv_read_instances, featurestore: featurestore, destination: destination, pass_through_fields: pass_through_fields, entity_type_specs: entity_type_specs, start_time: start_time do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_read_feature_values ::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest.new(csv_read_instances: csv_read_instances, featurestore: featurestore, destination: destination, pass_through_fields: pass_through_fields, entity_type_specs: entity_type_specs) do |response, operation|
+      client.batch_read_feature_values ::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest.new(csv_read_instances: csv_read_instances, featurestore: featurestore, destination: destination, pass_through_fields: pass_through_fields, entity_type_specs: entity_type_specs, start_time: start_time) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_read_feature_values({ csv_read_instances: csv_read_instances, featurestore: featurestore, destination: destination, pass_through_fields: pass_through_fields, entity_type_specs: entity_type_specs }, grpc_options) do |response, operation|
+      client.batch_read_feature_values({ csv_read_instances: csv_read_instances, featurestore: featurestore, destination: destination, pass_through_fields: pass_through_fields, entity_type_specs: entity_type_specs, start_time: start_time }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_read_feature_values(::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest.new(csv_read_instances: csv_read_instances, featurestore: featurestore, destination: destination, pass_through_fields: pass_through_fields, entity_type_specs: entity_type_specs), grpc_options) do |response, operation|
+      client.batch_read_feature_values(::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest.new(csv_read_instances: csv_read_instances, featurestore: featurestore, destination: destination, pass_through_fields: pass_through_fields, entity_type_specs: entity_type_specs, start_time: start_time), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

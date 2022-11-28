@@ -7,6 +7,7 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/notebooks/v1/diagnostic_config_pb'
 require 'google/cloud/notebooks/v1/environment_pb'
 require 'google/cloud/notebooks/v1/execution_pb'
 require 'google/cloud/notebooks/v1/instance_pb'
@@ -136,6 +137,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
     end
+    add_message "google.cloud.notebooks.v1.DiagnoseInstanceRequest" do
+      optional :name, :string, 1
+      optional :diagnostic_config, :message, 2, "google.cloud.notebooks.v1.DiagnosticConfig"
+    end
     add_message "google.cloud.notebooks.v1.ListEnvironmentsResponse" do
       repeated :environments, :message, 1, "google.cloud.notebooks.v1.Environment"
       optional :next_page_token, :string, 2
@@ -242,6 +247,7 @@ module Google
         RollbackInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RollbackInstanceRequest").msgclass
         UpgradeInstanceInternalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.UpgradeInstanceInternalRequest").msgclass
         ListEnvironmentsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ListEnvironmentsRequest").msgclass
+        DiagnoseInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.DiagnoseInstanceRequest").msgclass
         ListEnvironmentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ListEnvironmentsResponse").msgclass
         GetEnvironmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.GetEnvironmentRequest").msgclass
         CreateEnvironmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.CreateEnvironmentRequest").msgclass

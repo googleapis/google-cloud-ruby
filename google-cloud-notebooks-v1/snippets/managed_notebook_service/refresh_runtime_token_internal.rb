@@ -19,15 +19,21 @@
 # [START notebooks_v1_generated_ManagedNotebookService_RefreshRuntimeTokenInternal_sync]
 require "google/cloud/notebooks/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#refresh_runtime_token_internal
+#
+def refresh_runtime_token_internal
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest.new
 
-# Call the refresh_runtime_token_internal method.
-result = client.refresh_runtime_token_internal request
+  # Call the refresh_runtime_token_internal method.
+  result = client.refresh_runtime_token_internal request
 
-# The returned object is of type Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalResponse.
-p result
+  # The returned object is of type Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalResponse.
+  p result
+end
 # [END notebooks_v1_generated_ManagedNotebookService_RefreshRuntimeTokenInternal_sync]

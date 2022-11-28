@@ -19,15 +19,21 @@
 # [START jobs_v4_generated_JobService_SearchJobsForAlert_sync]
 require "google/cloud/talent/v4"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Talent::V4::JobService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Talent::V4::JobService::Client#search_jobs_for_alert
+#
+def search_jobs_for_alert
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Talent::V4::JobService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Talent::V4::SearchJobsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Talent::V4::SearchJobsRequest.new
 
-# Call the search_jobs_for_alert method.
-result = client.search_jobs_for_alert request
+  # Call the search_jobs_for_alert method.
+  result = client.search_jobs_for_alert request
 
-# The returned object is of type Google::Cloud::Talent::V4::SearchJobsResponse.
-p result
+  # The returned object is of type Google::Cloud::Talent::V4::SearchJobsResponse.
+  p result
+end
 # [END jobs_v4_generated_JobService_SearchJobsForAlert_sync]

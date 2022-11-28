@@ -6,4 +6,5 @@ gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-datastore-v1", path: "../google-cloud-datastore-v1"
 gem "google-cloud-errors", path: "../google-cloud-errors"
 
+gem "minitest-hooks", "~> 1.5"
 gem "rake"

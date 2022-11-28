@@ -19,21 +19,27 @@
 # [START speech_v2_generated_Speech_ListRecognizers_sync]
 require "google/cloud/speech/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Speech::V2::Speech::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Speech::V2::Speech::Client#list_recognizers
+#
+def list_recognizers
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Speech::V2::Speech::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Speech::V2::ListRecognizersRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Speech::V2::ListRecognizersRequest.new
 
-# Call the list_recognizers method.
-result = client.list_recognizers request
+  # Call the list_recognizers method.
+  result = client.list_recognizers request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Speech::V2::Recognizer.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Speech::V2::Recognizer.
+    p response
+  end
 end
 # [END speech_v2_generated_Speech_ListRecognizers_sync]

@@ -27,7 +27,8 @@ module Google
           ##
           # Client for the CloudBilling service.
           #
-          # Retrieves GCP Console billing accounts and associates them with projects.
+          # Retrieves the Google Cloud Console billing accounts and associates them with
+          # projects.
           #
           class Client
             include Paths
@@ -473,15 +474,20 @@ module Google
             end
 
             ##
-            # Creates a billing account.
-            # This method can only be used to create
-            # [billing subaccounts](https://cloud.google.com/billing/docs/concepts)
-            # by GCP resellers.
+            # This method creates [billing
+            # subaccounts](https://cloud.google.com/billing/docs/concepts#subaccounts).
+            #
+            # Google Cloud resellers should use the
+            # Channel Services APIs,
+            # [accounts.customers.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers/create)
+            # and
+            # [accounts.customers.entitlements.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers.entitlements/create).
+            #
             # When creating a subaccount, the current authenticated user must have the
-            # `billing.accounts.update` IAM permission on the master account, which is
+            # `billing.accounts.update` IAM permission on the parent account, which is
             # typically given to billing account
             # [administrators](https://cloud.google.com/billing/docs/how-to/billing-access).
-            # This method will return an error if the master account has not been
+            # This method will return an error if the parent account has not been
             # provisioned as a reseller account.
             #
             # @overload create_billing_account(request, options = nil)
@@ -502,7 +508,7 @@ module Google
             #   @param billing_account [::Google::Cloud::Billing::V1::BillingAccount, ::Hash]
             #     Required. The billing account resource to create.
             #     Currently CreateBillingAccount only supports subaccount creation, so
-            #     any created billing accounts must be under a provided master billing
+            #     any created billing accounts must be under a provided parent billing
             #     account.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -666,9 +672,10 @@ module Google
 
             ##
             # Gets the billing information for a project. The current authenticated user
-            # must have [permission to view the
-            # project](https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo
-            # ).
+            # must have the `resourcemanager.projects.get` permission for the project,
+            # which can be granted by assigning the [Project
+            # Viewer](https://cloud.google.com/iam/docs/understanding-roles#predefined_roles)
+            # role.
             #
             # @overload get_project_billing_info(request, options = nil)
             #   Pass arguments to `get_project_billing_info` via a request object, either of type
@@ -763,7 +770,7 @@ module Google
             # usage charges.
             #
             # *Note:* Incurred charges that have not yet been reported in the transaction
-            # history of the GCP Console might be billed to the new billing
+            # history of the Google Cloud Console might be billed to the new billing
             # account, even if the charge occurred before the new billing account was
             # assigned to the project.
             #

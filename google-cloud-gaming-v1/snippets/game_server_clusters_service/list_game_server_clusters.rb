@@ -19,21 +19,27 @@
 # [START gameservices_v1_generated_GameServerClustersService_ListGameServerClusters_sync]
 require "google/cloud/gaming/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::GameServerClustersService::Client#list_game_server_clusters
+#
+def list_game_server_clusters
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Gaming::V1::ListGameServerClustersRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Gaming::V1::ListGameServerClustersRequest.new
 
-# Call the list_game_server_clusters method.
-result = client.list_game_server_clusters request
+  # Call the list_game_server_clusters method.
+  result = client.list_game_server_clusters request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Gaming::V1::GameServerCluster.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Gaming::V1::GameServerCluster.
+    p response
+  end
 end
 # [END gameservices_v1_generated_GameServerClustersService_ListGameServerClusters_sync]

@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_MetadataService_QueryContextLineageSubgraph_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::MetadataService::Client#query_context_lineage_subgraph
+#
+def query_context_lineage_subgraph
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::QueryContextLineageSubgraphRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::QueryContextLineageSubgraphRequest.new
 
-# Call the query_context_lineage_subgraph method.
-result = client.query_context_lineage_subgraph request
+  # Call the query_context_lineage_subgraph method.
+  result = client.query_context_lineage_subgraph request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::LineageSubgraph.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::LineageSubgraph.
+  p result
+end
 # [END aiplatform_v1_generated_MetadataService_QueryContextLineageSubgraph_sync]

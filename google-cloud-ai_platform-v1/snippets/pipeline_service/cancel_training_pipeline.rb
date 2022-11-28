@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_PipelineService_CancelTrainingPipeline_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::PipelineService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::PipelineService::Client#cancel_training_pipeline
+#
+def cancel_training_pipeline
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::PipelineService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::CancelTrainingPipelineRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::CancelTrainingPipelineRequest.new
 
-# Call the cancel_training_pipeline method.
-result = client.cancel_training_pipeline request
+  # Call the cancel_training_pipeline method.
+  result = client.cancel_training_pipeline request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END aiplatform_v1_generated_PipelineService_CancelTrainingPipeline_sync]

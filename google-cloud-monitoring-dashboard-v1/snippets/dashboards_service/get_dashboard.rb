@@ -19,15 +19,21 @@
 # [START monitoring_v1_generated_DashboardsService_GetDashboard_sync]
 require "google/cloud/monitoring/dashboard/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#get_dashboard
+#
+def get_dashboard
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new
 
-# Call the get_dashboard method.
-result = client.get_dashboard request
+  # Call the get_dashboard method.
+  result = client.get_dashboard request
 
-# The returned object is of type Google::Cloud::Monitoring::Dashboard::V1::Dashboard.
-p result
+  # The returned object is of type Google::Cloud::Monitoring::Dashboard::V1::Dashboard.
+  p result
+end
 # [END monitoring_v1_generated_DashboardsService_GetDashboard_sync]

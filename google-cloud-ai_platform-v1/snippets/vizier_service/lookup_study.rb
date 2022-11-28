@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_VizierService_LookupStudy_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::VizierService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::VizierService::Client#lookup_study
+#
+def lookup_study
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::VizierService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::LookupStudyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::LookupStudyRequest.new
 
-# Call the lookup_study method.
-result = client.lookup_study request
+  # Call the lookup_study method.
+  result = client.lookup_study request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::Study.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::Study.
+  p result
+end
 # [END aiplatform_v1_generated_VizierService_LookupStudy_sync]

@@ -19,15 +19,21 @@
 # [START analyticshub_v1beta1_generated_AnalyticsHubService_CreateDataExchange_sync]
 require "google/cloud/bigquery/data_exchange/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#create_data_exchange
+#
+def create_data_exchange
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::DataExchange::V1beta1::CreateDataExchangeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::DataExchange::V1beta1::CreateDataExchangeRequest.new
 
-# Call the create_data_exchange method.
-result = client.create_data_exchange request
+  # Call the create_data_exchange method.
+  result = client.create_data_exchange request
 
-# The returned object is of type Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange.
+  p result
+end
 # [END analyticshub_v1beta1_generated_AnalyticsHubService_CreateDataExchange_sync]

@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :start_time, :message, 7, "google.protobuf.Timestamp"
       optional :end_time, :message, 8, "google.protobuf.Timestamp"
       repeated :parameter_definitions, :message, 9, "google.cloud.channel.v1.ParameterDefinition"
+      optional :deal_code, :string, 12
     end
     add_message "google.cloud.channel.v1.ParameterDefinition" do
       optional :name, :string, 1

@@ -19,15 +19,21 @@
 # [START speech_v2_generated_Speech_UpdateConfig_sync]
 require "google/cloud/speech/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Speech::V2::Speech::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Speech::V2::Speech::Client#update_config
+#
+def update_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Speech::V2::Speech::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Speech::V2::UpdateConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Speech::V2::UpdateConfigRequest.new
 
-# Call the update_config method.
-result = client.update_config request
+  # Call the update_config method.
+  result = client.update_config request
 
-# The returned object is of type Google::Cloud::Speech::V2::Config.
-p result
+  # The returned object is of type Google::Cloud::Speech::V2::Config.
+  p result
+end
 # [END speech_v2_generated_Speech_UpdateConfig_sync]

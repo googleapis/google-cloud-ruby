@@ -19,21 +19,27 @@
 # [START cloudbuild_v1_generated_CloudBuild_ListBuilds_sync]
 require "google/cloud/build/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Build::V1::CloudBuild::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Build::V1::CloudBuild::Client#list_builds
+#
+def list_builds
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Build::V1::CloudBuild::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Build::V1::ListBuildsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Build::V1::ListBuildsRequest.new
 
-# Call the list_builds method.
-result = client.list_builds request
+  # Call the list_builds method.
+  result = client.list_builds request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Build::V1::Build.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Build::V1::Build.
+    p response
+  end
 end
 # [END cloudbuild_v1_generated_CloudBuild_ListBuilds_sync]

@@ -43,6 +43,8 @@ module Google
         # @!attribute [rw] field_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Specifies which fields to include in ProcessResponse's document.
+        #     Only supports top level document and pages field so it must be in the form
+        #     of `{document_field_name}` or `pages.{page_field_name}`.
         class ProcessRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

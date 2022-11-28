@@ -19,21 +19,27 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_SearchChangeHistoryEvents_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#search_change_history_events
+#
+def search_change_history_events
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest.new
 
-# Call the search_change_history_events method.
-result = client.search_change_history_events request
+  # Call the search_change_history_events method.
+  result = client.search_change_history_events request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Analytics::Admin::V1alpha::ChangeHistoryEvent.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Analytics::Admin::V1alpha::ChangeHistoryEvent.
+    p response
+  end
 end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_SearchChangeHistoryEvents_sync]

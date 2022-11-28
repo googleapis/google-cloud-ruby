@@ -19,15 +19,21 @@
 # [START jobs_v4beta1_generated_TenantService_UpdateTenant_sync]
 require "google/cloud/talent/v4beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Talent::V4beta1::TenantService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Talent::V4beta1::TenantService::Client#update_tenant
+#
+def update_tenant
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Talent::V4beta1::TenantService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new
 
-# Call the update_tenant method.
-result = client.update_tenant request
+  # Call the update_tenant method.
+  result = client.update_tenant request
 
-# The returned object is of type Google::Cloud::Talent::V4beta1::Tenant.
-p result
+  # The returned object is of type Google::Cloud::Talent::V4beta1::Tenant.
+  p result
+end
 # [END jobs_v4beta1_generated_TenantService_UpdateTenant_sync]

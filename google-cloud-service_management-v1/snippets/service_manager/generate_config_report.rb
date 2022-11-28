@@ -19,15 +19,21 @@
 # [START servicemanagement_v1_generated_ServiceManager_GenerateConfigReport_sync]
 require "google/cloud/service_management/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceManagement::V1::ServiceManager::Client#generate_config_report
+#
+def generate_config_report
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceManagement::V1::GenerateConfigReportRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceManagement::V1::GenerateConfigReportRequest.new
 
-# Call the generate_config_report method.
-result = client.generate_config_report request
+  # Call the generate_config_report method.
+  result = client.generate_config_report request
 
-# The returned object is of type Google::Cloud::ServiceManagement::V1::GenerateConfigReportResponse.
-p result
+  # The returned object is of type Google::Cloud::ServiceManagement::V1::GenerateConfigReportResponse.
+  p result
+end
 # [END servicemanagement_v1_generated_ServiceManager_GenerateConfigReport_sync]

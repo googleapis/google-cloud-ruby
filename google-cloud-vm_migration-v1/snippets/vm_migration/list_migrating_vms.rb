@@ -19,21 +19,27 @@
 # [START vmmigration_v1_generated_VMMigration_ListMigratingVms_sync]
 require "google/cloud/vm_migration/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::VMMigration::V1::VMMigration::Client#list_migrating_vms
+#
+def list_migrating_vms
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::VMMigration::V1::ListMigratingVmsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::VMMigration::V1::ListMigratingVmsRequest.new
 
-# Call the list_migrating_vms method.
-result = client.list_migrating_vms request
+  # Call the list_migrating_vms method.
+  result = client.list_migrating_vms request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::VMMigration::V1::MigratingVm.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::VMMigration::V1::MigratingVm.
+    p response
+  end
 end
 # [END vmmigration_v1_generated_VMMigration_ListMigratingVms_sync]

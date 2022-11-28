@@ -19,21 +19,27 @@
 # [START pubsub_v1_generated_Subscriber_ListSubscriptions_sync]
 require "google/cloud/pubsub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Subscriber::Client#list_subscriptions
+#
+def list_subscriptions
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::PubSub::V1::Subscriber::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::PubSub::V1::ListSubscriptionsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::PubSub::V1::ListSubscriptionsRequest.new
 
-# Call the list_subscriptions method.
-result = client.list_subscriptions request
+  # Call the list_subscriptions method.
+  result = client.list_subscriptions request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::PubSub::V1::Subscription.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::PubSub::V1::Subscription.
+    p response
+  end
 end
 # [END pubsub_v1_generated_Subscriber_ListSubscriptions_sync]

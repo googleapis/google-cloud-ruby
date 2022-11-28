@@ -19,21 +19,27 @@
 # [START bigtableadmin_v2_generated_BigtableTableAdmin_ListTables_sync]
 require "google/cloud/bigtable/admin/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_tables
+#
+def list_tables
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigtable::Admin::V2::ListTablesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigtable::Admin::V2::ListTablesRequest.new
 
-# Call the list_tables method.
-result = client.list_tables request
+  # Call the list_tables method.
+  result = client.list_tables request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Bigtable::Admin::V2::Table.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Bigtable::Admin::V2::Table.
+    p response
+  end
 end
 # [END bigtableadmin_v2_generated_BigtableTableAdmin_ListTables_sync]

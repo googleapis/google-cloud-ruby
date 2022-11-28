@@ -19,15 +19,21 @@
 # [START notebooks_v1_generated_NotebookService_GetExecution_sync]
 require "google/cloud/notebooks/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Notebooks::V1::NotebookService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1::NotebookService::Client#get_execution
+#
+def get_execution
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Notebooks::V1::NotebookService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Notebooks::V1::GetExecutionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Notebooks::V1::GetExecutionRequest.new
 
-# Call the get_execution method.
-result = client.get_execution request
+  # Call the get_execution method.
+  result = client.get_execution request
 
-# The returned object is of type Google::Cloud::Notebooks::V1::Execution.
-p result
+  # The returned object is of type Google::Cloud::Notebooks::V1::Execution.
+  p result
+end
 # [END notebooks_v1_generated_NotebookService_GetExecution_sync]

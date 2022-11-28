@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_Agents_ValidateAgent_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::Agents::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Agents::Client#validate_agent
+#
+def validate_agent
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::Agents::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::ValidateAgentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::ValidateAgentRequest.new
 
-# Call the validate_agent method.
-result = client.validate_agent request
+  # Call the validate_agent method.
+  result = client.validate_agent request
 
-# The returned object is of type Google::Cloud::Dialogflow::CX::V3::AgentValidationResult.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::CX::V3::AgentValidationResult.
+  p result
+end
 # [END dialogflow_v3_generated_Agents_ValidateAgent_sync]

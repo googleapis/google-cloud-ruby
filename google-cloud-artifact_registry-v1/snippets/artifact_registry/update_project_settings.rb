@@ -19,15 +19,21 @@
 # [START artifactregistry_v1_generated_ArtifactRegistry_UpdateProjectSettings_sync]
 require "google/cloud/artifact_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#update_project_settings
+#
+def update_project_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ArtifactRegistry::V1::UpdateProjectSettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ArtifactRegistry::V1::UpdateProjectSettingsRequest.new
 
-# Call the update_project_settings method.
-result = client.update_project_settings request
+  # Call the update_project_settings method.
+  result = client.update_project_settings request
 
-# The returned object is of type Google::Cloud::ArtifactRegistry::V1::ProjectSettings.
-p result
+  # The returned object is of type Google::Cloud::ArtifactRegistry::V1::ProjectSettings.
+  p result
+end
 # [END artifactregistry_v1_generated_ArtifactRegistry_UpdateProjectSettings_sync]

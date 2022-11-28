@@ -19,15 +19,21 @@
 # [START cloudtasks_v2beta3_generated_CloudTasks_DeleteQueue_sync]
 require "google/cloud/tasks/v2beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tasks::V2beta3::CloudTasks::Client#delete_queue
+#
+def delete_queue
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Tasks::V2beta3::DeleteQueueRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Tasks::V2beta3::DeleteQueueRequest.new
 
-# Call the delete_queue method.
-result = client.delete_queue request
+  # Call the delete_queue method.
+  result = client.delete_queue request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END cloudtasks_v2beta3_generated_CloudTasks_DeleteQueue_sync]

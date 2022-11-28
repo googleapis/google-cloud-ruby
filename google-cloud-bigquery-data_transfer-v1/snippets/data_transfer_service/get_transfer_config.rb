@@ -19,15 +19,21 @@
 # [START bigquerydatatransfer_v1_generated_DataTransferService_GetTransferConfig_sync]
 require "google/cloud/bigquery/data_transfer/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#get_transfer_config
+#
+def get_transfer_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest.new
 
-# Call the get_transfer_config method.
-result = client.get_transfer_config request
+  # Call the get_transfer_config method.
+  result = client.get_transfer_config request
 
-# The returned object is of type Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig.
+  p result
+end
 # [END bigquerydatatransfer_v1_generated_DataTransferService_GetTransferConfig_sync]

@@ -262,6 +262,9 @@ module Google
         #
         #     Only one of {::Google::Cloud::AIPlatform::V1::InputDataConfig#saved_query_id saved_query_id} and {::Google::Cloud::AIPlatform::V1::InputDataConfig#annotation_schema_uri annotation_schema_uri} should be
         #     specified as both of them represent the same thing: problem type.
+        # @!attribute [rw] persist_ml_use_assignment
+        #   @return [::Boolean]
+        #     Whether to persist the ML use assignment to data item system labels.
         class InputDataConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

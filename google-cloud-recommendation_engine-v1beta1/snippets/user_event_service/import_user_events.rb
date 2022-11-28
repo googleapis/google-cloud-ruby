@@ -19,22 +19,28 @@
 # [START recommendationengine_v1beta1_generated_UserEventService_ImportUserEvents_sync]
 require "google/cloud/recommendation_engine/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#import_user_events
+#
+def import_user_events
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::RecommendationEngine::V1beta1::ImportUserEventsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::RecommendationEngine::V1beta1::ImportUserEventsRequest.new
 
-# Call the import_user_events method.
-result = client.import_user_events request
+  # Call the import_user_events method.
+  result = client.import_user_events request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END recommendationengine_v1beta1_generated_UserEventService_ImportUserEvents_sync]

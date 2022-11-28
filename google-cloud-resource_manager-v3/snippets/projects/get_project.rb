@@ -19,15 +19,21 @@
 # [START cloudresourcemanager_v3_generated_Projects_GetProject_sync]
 require "google/cloud/resource_manager/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ResourceManager::V3::Projects::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::Projects::Client#get_project
+#
+def get_project
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ResourceManager::V3::Projects::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ResourceManager::V3::GetProjectRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ResourceManager::V3::GetProjectRequest.new
 
-# Call the get_project method.
-result = client.get_project request
+  # Call the get_project method.
+  result = client.get_project request
 
-# The returned object is of type Google::Cloud::ResourceManager::V3::Project.
-p result
+  # The returned object is of type Google::Cloud::ResourceManager::V3::Project.
+  p result
+end
 # [END cloudresourcemanager_v3_generated_Projects_GetProject_sync]

@@ -28,7 +28,7 @@ module Google
         # @!attribute [rw] mime_type
         #   @return [::String]
         #     An IANA MIME type (RFC6838) indicating the nature and format of the
-        #     [content].
+        #     {::Google::Cloud::DocumentAI::V1beta3::RawDocument#content content}.
         class RawDocument
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -67,7 +67,7 @@ module Google
         # The common config to specify a set of documents used as input.
         # @!attribute [rw] gcs_prefix
         #   @return [::Google::Cloud::DocumentAI::V1beta3::GcsPrefix]
-        #     The set of documents that match the specified Cloud Storage [gcs_prefix].
+        #     The set of documents that match the specified Cloud Storage `gcs_prefix`.
         # @!attribute [rw] gcs_documents
         #   @return [::Google::Cloud::DocumentAI::V1beta3::GcsDocuments]
         #     The set of documents individually specified on Cloud Storage.
@@ -89,6 +89,11 @@ module Google
           # @!attribute [rw] gcs_uri
           #   @return [::String]
           #     The Cloud Storage uri (a directory) of the output.
+          # @!attribute [rw] field_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Specifies which fields to include in the output documents.
+          #     Only supports top level document and pages field so it must be in the
+          #     form of `{document_field_name}` or `pages.{page_field_name}`.
           class GcsOutputConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_JobService_GetCustomJob_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::JobService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::JobService::Client#get_custom_job
+#
+def get_custom_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::JobService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::GetCustomJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::GetCustomJobRequest.new
 
-# Call the get_custom_job method.
-result = client.get_custom_job request
+  # Call the get_custom_job method.
+  result = client.get_custom_job request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::CustomJob.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::CustomJob.
+  p result
+end
 # [END aiplatform_v1_generated_JobService_GetCustomJob_sync]

@@ -19,15 +19,21 @@
 # [START dataform_v1beta1_generated_Dataform_FetchGitAheadBehind_sync]
 require "google/cloud/dataform/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_git_ahead_behind
+#
+def fetch_git_ahead_behind
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest.new
 
-# Call the fetch_git_ahead_behind method.
-result = client.fetch_git_ahead_behind request
+  # Call the fetch_git_ahead_behind method.
+  result = client.fetch_git_ahead_behind request
 
-# The returned object is of type Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindResponse.
-p result
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindResponse.
+  p result
+end
 # [END dataform_v1beta1_generated_Dataform_FetchGitAheadBehind_sync]

@@ -19,21 +19,27 @@
 # [START websecurityscanner_v1_generated_WebSecurityScanner_ListScanConfigs_sync]
 require "google/cloud/web_security_scanner/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_scan_configs
+#
+def list_scan_configs
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::WebSecurityScanner::V1::ListScanConfigsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::WebSecurityScanner::V1::ListScanConfigsRequest.new
 
-# Call the list_scan_configs method.
-result = client.list_scan_configs request
+  # Call the list_scan_configs method.
+  result = client.list_scan_configs request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::WebSecurityScanner::V1::ScanConfig.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::WebSecurityScanner::V1::ScanConfig.
+    p response
+  end
 end
 # [END websecurityscanner_v1_generated_WebSecurityScanner_ListScanConfigs_sync]

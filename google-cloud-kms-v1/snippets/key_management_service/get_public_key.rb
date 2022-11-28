@@ -19,15 +19,21 @@
 # [START cloudkms_v1_generated_KeyManagementService_GetPublicKey_sync]
 require "google/cloud/kms/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key
+#
+def get_public_key
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Kms::V1::GetPublicKeyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Kms::V1::GetPublicKeyRequest.new
 
-# Call the get_public_key method.
-result = client.get_public_key request
+  # Call the get_public_key method.
+  result = client.get_public_key request
 
-# The returned object is of type Google::Cloud::Kms::V1::PublicKey.
-p result
+  # The returned object is of type Google::Cloud::Kms::V1::PublicKey.
+  p result
+end
 # [END cloudkms_v1_generated_KeyManagementService_GetPublicKey_sync]

@@ -19,21 +19,27 @@
 # [START dialogflow_v2_generated_Intents_ListIntents_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Intents::Client#list_intents
+#
+def list_intents
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Intents::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::ListIntentsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::ListIntentsRequest.new
 
-# Call the list_intents method.
-result = client.list_intents request
+  # Call the list_intents method.
+  result = client.list_intents request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dialogflow::V2::Intent.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dialogflow::V2::Intent.
+    p response
+  end
 end
 # [END dialogflow_v2_generated_Intents_ListIntents_sync]

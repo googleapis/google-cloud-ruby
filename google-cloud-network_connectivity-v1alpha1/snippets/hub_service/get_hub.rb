@@ -19,15 +19,21 @@
 # [START networkconnectivity_v1alpha1_generated_HubService_GetHub_sync]
 require "google/cloud/network_connectivity/v1alpha1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#get_hub
+#
+def get_hub
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::NetworkConnectivity::V1alpha1::GetHubRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::NetworkConnectivity::V1alpha1::GetHubRequest.new
 
-# Call the get_hub method.
-result = client.get_hub request
+  # Call the get_hub method.
+  result = client.get_hub request
 
-# The returned object is of type Google::Cloud::NetworkConnectivity::V1alpha1::Hub.
-p result
+  # The returned object is of type Google::Cloud::NetworkConnectivity::V1alpha1::Hub.
+  p result
+end
 # [END networkconnectivity_v1alpha1_generated_HubService_GetHub_sync]

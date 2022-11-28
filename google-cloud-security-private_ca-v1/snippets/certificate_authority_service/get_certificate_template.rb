@@ -19,15 +19,21 @@
 # [START privateca_v1_generated_CertificateAuthorityService_GetCertificateTemplate_sync]
 require "google/cloud/security/private_ca/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#get_certificate_template
+#
+def get_certificate_template
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Security::PrivateCA::V1::GetCertificateTemplateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Security::PrivateCA::V1::GetCertificateTemplateRequest.new
 
-# Call the get_certificate_template method.
-result = client.get_certificate_template request
+  # Call the get_certificate_template method.
+  result = client.get_certificate_template request
 
-# The returned object is of type Google::Cloud::Security::PrivateCA::V1::CertificateTemplate.
-p result
+  # The returned object is of type Google::Cloud::Security::PrivateCA::V1::CertificateTemplate.
+  p result
+end
 # [END privateca_v1_generated_CertificateAuthorityService_GetCertificateTemplate_sync]

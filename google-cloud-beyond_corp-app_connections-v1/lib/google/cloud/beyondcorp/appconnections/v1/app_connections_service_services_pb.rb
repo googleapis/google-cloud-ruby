@@ -25,12 +25,12 @@ module Google
       module AppConnections
         module V1
           module AppConnectionsService
-            # ## API Overview
+            # API Overview:
             #
             # The `beyondcorp.googleapis.com` service implements the Google Cloud
             # BeyondCorp API.
             #
-            # ## Data Model
+            # Data Model:
             #
             # The AppConnectionsService exposes the following resources:
             #

@@ -19,15 +19,21 @@
 # [START jobs_v4beta1_generated_JobService_CreateJob_sync]
 require "google/cloud/talent/v4beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Talent::V4beta1::JobService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Talent::V4beta1::JobService::Client#create_job
+#
+def create_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Talent::V4beta1::JobService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Talent::V4beta1::CreateJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Talent::V4beta1::CreateJobRequest.new
 
-# Call the create_job method.
-result = client.create_job request
+  # Call the create_job method.
+  result = client.create_job request
 
-# The returned object is of type Google::Cloud::Talent::V4beta1::Job.
-p result
+  # The returned object is of type Google::Cloud::Talent::V4beta1::Job.
+  p result
+end
 # [END jobs_v4beta1_generated_JobService_CreateJob_sync]

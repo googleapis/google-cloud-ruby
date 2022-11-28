@@ -19,15 +19,21 @@
 # [START contactcenterinsights_v1_generated_ContactCenterInsights_GetSettings_sync]
 require "google/cloud/contact_center_insights/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_settings
+#
+def get_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ContactCenterInsights::V1::GetSettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ContactCenterInsights::V1::GetSettingsRequest.new
 
-# Call the get_settings method.
-result = client.get_settings request
+  # Call the get_settings method.
+  result = client.get_settings request
 
-# The returned object is of type Google::Cloud::ContactCenterInsights::V1::Settings.
-p result
+  # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Settings.
+  p result
+end
 # [END contactcenterinsights_v1_generated_ContactCenterInsights_GetSettings_sync]

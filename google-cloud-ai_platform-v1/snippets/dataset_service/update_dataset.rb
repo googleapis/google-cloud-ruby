@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_DatasetService_UpdateDataset_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::DatasetService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::DatasetService::Client#update_dataset
+#
+def update_dataset
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::DatasetService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::UpdateDatasetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::UpdateDatasetRequest.new
 
-# Call the update_dataset method.
-result = client.update_dataset request
+  # Call the update_dataset method.
+  result = client.update_dataset request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::Dataset.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::Dataset.
+  p result
+end
 # [END aiplatform_v1_generated_DatasetService_UpdateDataset_sync]

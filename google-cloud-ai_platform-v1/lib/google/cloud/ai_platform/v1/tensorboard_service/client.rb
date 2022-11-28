@@ -975,7 +975,7 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the Tensorboard to list TensorboardExperiments.
             #     Format:
-            #     'projects/\\{project}/locations/\\{location}/tensorboards/\\{tensorboard}'
+            #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
             #   @param filter [::String]
             #     Lists the TensorboardExperiments that match the filter expression.
             #   @param page_size [::Integer]
@@ -1551,7 +1551,7 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the TensorboardExperiment to list TensorboardRuns.
             #     Format:
-            #     'projects/\\{project}/locations/\\{location}/tensorboards/\\{tensorboard}/experiments/\\{experiment}'
+            #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
             #   @param filter [::String]
             #     Lists the TensorboardRuns that match the filter expression.
             #   @param page_size [::Integer]
@@ -2130,7 +2130,7 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the TensorboardRun to list TensorboardTimeSeries.
             #     Format:
-            #     'projects/\\{project}/locations/\\{location}/tensorboards/\\{tensorboard}/experiments/\\{experiment}/runs/\\{run}'
+            #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
             #   @param filter [::String]
             #     Lists the TensorboardTimeSeries that match the filter expression.
             #   @param page_size [::Integer]
@@ -2535,7 +2535,7 @@ module Google
             #   @param time_series [::String]
             #     Required. The resource name of the TensorboardTimeSeries to list Blobs.
             #     Format:
-            #     'projects/\\{project}/locations/\\{location}/tensorboards/\\{tensorboard}/experiments/\\{experiment}/runs/\\{run}/timeSeries/\\{time_series}'
+            #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
             #   @param blob_ids [::Array<::String>]
             #     IDs of the blobs to read.
             #

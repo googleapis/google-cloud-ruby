@@ -117,6 +117,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
     order_by = "hello world"
+    filter = "hello world"
 
     list_triggers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_triggers, name
@@ -125,6 +126,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientTest < Minitest::Test
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -135,35 +137,35 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_triggers({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
+      client.list_triggers({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_triggers parent: parent, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
+      client.list_triggers parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_triggers ::Google::Cloud::Eventarc::V1::ListTriggersRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
+      client.list_triggers ::Google::Cloud::Eventarc::V1::ListTriggersRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_triggers({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
+      client.list_triggers({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_triggers(::Google::Cloud::Eventarc::V1::ListTriggersRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
+      client.list_triggers(::Google::Cloud::Eventarc::V1::ListTriggersRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1090,6 +1092,124 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, delete_channel_connection_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_google_channel_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::V1::GoogleChannelConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_google_channel_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_google_channel_config, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::GetGoogleChannelConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_google_channel_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_google_channel_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_google_channel_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_google_channel_config ::Google::Cloud::Eventarc::V1::GetGoogleChannelConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_google_channel_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_google_channel_config(::Google::Cloud::Eventarc::V1::GetGoogleChannelConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_google_channel_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_google_channel_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::V1::GoogleChannelConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    google_channel_config = {}
+    update_mask = {}
+
+    update_google_channel_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_google_channel_config, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::UpdateGoogleChannelConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Eventarc::V1::GoogleChannelConfig), request["google_channel_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_google_channel_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_google_channel_config({ google_channel_config: google_channel_config, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_google_channel_config google_channel_config: google_channel_config, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_google_channel_config ::Google::Cloud::Eventarc::V1::UpdateGoogleChannelConfigRequest.new(google_channel_config: google_channel_config, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_google_channel_config({ google_channel_config: google_channel_config, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_google_channel_config(::Google::Cloud::Eventarc::V1::UpdateGoogleChannelConfigRequest.new(google_channel_config: google_channel_config, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_google_channel_config_client_stub.call_rpc_count
     end
   end
 

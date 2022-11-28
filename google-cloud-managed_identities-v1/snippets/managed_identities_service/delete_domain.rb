@@ -19,22 +19,28 @@
 # [START managedidentities_v1_generated_ManagedIdentitiesService_DeleteDomain_sync]
 require "google/cloud/managed_identities/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#delete_domain
+#
+def delete_domain
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ManagedIdentities::V1::DeleteDomainRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ManagedIdentities::V1::DeleteDomainRequest.new
 
-# Call the delete_domain method.
-result = client.delete_domain request
+  # Call the delete_domain method.
+  result = client.delete_domain request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END managedidentities_v1_generated_ManagedIdentitiesService_DeleteDomain_sync]

@@ -19,21 +19,27 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAccounts_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_accounts
+#
+def list_accounts
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::ListAccountsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::ListAccountsRequest.new
 
-# Call the list_accounts method.
-result = client.list_accounts request
+  # Call the list_accounts method.
+  result = client.list_accounts request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Analytics::Admin::V1alpha::Account.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Analytics::Admin::V1alpha::Account.
+    p response
+  end
 end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAccounts_sync]

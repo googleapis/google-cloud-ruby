@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_MetadataService_QueryExecutionInputsAndOutputs_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::MetadataService::Client#query_execution_inputs_and_outputs
+#
+def query_execution_inputs_and_outputs
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::QueryExecutionInputsAndOutputsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::QueryExecutionInputsAndOutputsRequest.new
 
-# Call the query_execution_inputs_and_outputs method.
-result = client.query_execution_inputs_and_outputs request
+  # Call the query_execution_inputs_and_outputs method.
+  result = client.query_execution_inputs_and_outputs request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::LineageSubgraph.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::LineageSubgraph.
+  p result
+end
 # [END aiplatform_v1_generated_MetadataService_QueryExecutionInputsAndOutputs_sync]

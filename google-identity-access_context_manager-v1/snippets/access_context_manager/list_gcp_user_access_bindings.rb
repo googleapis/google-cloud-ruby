@@ -19,21 +19,27 @@
 # [START accesscontextmanager_v1_generated_AccessContextManager_ListGcpUserAccessBindings_sync]
 require "google/identity/access_context_manager/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#list_gcp_user_access_bindings
+#
+def list_gcp_user_access_bindings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Identity::AccessContextManager::V1::ListGcpUserAccessBindingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Identity::AccessContextManager::V1::ListGcpUserAccessBindingsRequest.new
 
-# Call the list_gcp_user_access_bindings method.
-result = client.list_gcp_user_access_bindings request
+  # Call the list_gcp_user_access_bindings method.
+  result = client.list_gcp_user_access_bindings request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Identity::AccessContextManager::V1::GcpUserAccessBinding.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Identity::AccessContextManager::V1::GcpUserAccessBinding.
+    p response
+  end
 end
 # [END accesscontextmanager_v1_generated_AccessContextManager_ListGcpUserAccessBindings_sync]

@@ -19,15 +19,21 @@
 # [START notebooks_v1_generated_ManagedNotebookService_GetRuntime_sync]
 require "google/cloud/notebooks/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#get_runtime
+#
+def get_runtime
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Notebooks::V1::GetRuntimeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Notebooks::V1::GetRuntimeRequest.new
 
-# Call the get_runtime method.
-result = client.get_runtime request
+  # Call the get_runtime method.
+  result = client.get_runtime request
 
-# The returned object is of type Google::Cloud::Notebooks::V1::Runtime.
-p result
+  # The returned object is of type Google::Cloud::Notebooks::V1::Runtime.
+  p result
+end
 # [END notebooks_v1_generated_ManagedNotebookService_GetRuntime_sync]

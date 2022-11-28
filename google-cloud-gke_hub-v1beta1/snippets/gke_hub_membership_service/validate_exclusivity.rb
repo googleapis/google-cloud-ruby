@@ -19,15 +19,21 @@
 # [START gkehub_v1beta1_generated_GkeHubMembershipService_ValidateExclusivity_sync]
 require "google/cloud/gke_hub/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#validate_exclusivity
+#
+def validate_exclusivity
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeHub::V1beta1::ValidateExclusivityRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeHub::V1beta1::ValidateExclusivityRequest.new
 
-# Call the validate_exclusivity method.
-result = client.validate_exclusivity request
+  # Call the validate_exclusivity method.
+  result = client.validate_exclusivity request
 
-# The returned object is of type Google::Cloud::GkeHub::V1beta1::ValidateExclusivityResponse.
-p result
+  # The returned object is of type Google::Cloud::GkeHub::V1beta1::ValidateExclusivityResponse.
+  p result
+end
 # [END gkehub_v1beta1_generated_GkeHubMembershipService_ValidateExclusivity_sync]

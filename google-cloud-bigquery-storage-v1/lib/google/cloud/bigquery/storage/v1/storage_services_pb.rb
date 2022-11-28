@@ -134,13 +134,6 @@ module Google
               # * For PENDING streams, data is not made visible until the stream itself is
               # finalized (via the `FinalizeWriteStream` rpc), and the stream is explicitly
               # committed via the `BatchCommitWriteStreams` rpc.
-              #
-              # Note: For users coding against the gRPC api directly, it may be
-              # necessary to supply the x-goog-request-params system parameter
-              # with `write_stream=<full_write_stream_name>`.
-              #
-              # More information about system parameters:
-              # https://cloud.google.com/apis/docs/system-parameters
               rpc :AppendRows, stream(::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest), stream(::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse)
               # Gets information about a write stream.
               rpc :GetWriteStream, ::Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest, ::Google::Cloud::Bigquery::Storage::V1::WriteStream

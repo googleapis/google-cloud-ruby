@@ -19,15 +19,21 @@
 # [START cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_sync]
 require "google/cloud/billing/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Billing::V1::CloudBilling::Client#create_billing_account
+#
+def create_billing_account
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Billing::V1::CloudBilling::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Billing::V1::CreateBillingAccountRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Billing::V1::CreateBillingAccountRequest.new
 
-# Call the create_billing_account method.
-result = client.create_billing_account request
+  # Call the create_billing_account method.
+  result = client.create_billing_account request
 
-# The returned object is of type Google::Cloud::Billing::V1::BillingAccount.
-p result
+  # The returned object is of type Google::Cloud::Billing::V1::BillingAccount.
+  p result
+end
 # [END cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_sync]

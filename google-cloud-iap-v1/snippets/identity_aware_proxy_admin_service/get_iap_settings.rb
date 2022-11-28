@@ -19,15 +19,21 @@
 # [START iap_v1_generated_IdentityAwareProxyAdminService_GetIapSettings_sync]
 require "google/cloud/iap/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#get_iap_settings
+#
+def get_iap_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iap::V1::GetIapSettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iap::V1::GetIapSettingsRequest.new
 
-# Call the get_iap_settings method.
-result = client.get_iap_settings request
+  # Call the get_iap_settings method.
+  result = client.get_iap_settings request
 
-# The returned object is of type Google::Cloud::Iap::V1::IapSettings.
-p result
+  # The returned object is of type Google::Cloud::Iap::V1::IapSettings.
+  p result
+end
 # [END iap_v1_generated_IdentityAwareProxyAdminService_GetIapSettings_sync]

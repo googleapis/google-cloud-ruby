@@ -19,15 +19,21 @@
 # [START artifactregistry_v1_generated_ArtifactRegistry_GetPackage_sync]
 require "google/cloud/artifact_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_package
+#
+def get_package
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ArtifactRegistry::V1::GetPackageRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ArtifactRegistry::V1::GetPackageRequest.new
 
-# Call the get_package method.
-result = client.get_package request
+  # Call the get_package method.
+  result = client.get_package request
 
-# The returned object is of type Google::Cloud::ArtifactRegistry::V1::Package.
-p result
+  # The returned object is of type Google::Cloud::ArtifactRegistry::V1::Package.
+  p result
+end
 # [END artifactregistry_v1_generated_ArtifactRegistry_GetPackage_sync]

@@ -19,15 +19,21 @@
 # [START securitycenter_v1p1beta1_generated_SecurityCenter_DeleteNotificationConfig_sync]
 require "google/cloud/security_center/v1p1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#delete_notification_config
+#
+def delete_notification_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest.new
 
-# Call the delete_notification_config method.
-result = client.delete_notification_config request
+  # Call the delete_notification_config method.
+  result = client.delete_notification_config request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END securitycenter_v1p1beta1_generated_SecurityCenter_DeleteNotificationConfig_sync]

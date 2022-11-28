@@ -19,15 +19,21 @@
 # [START cloudiot_v1_generated_DeviceManager_GetDevice_sync]
 require "google/cloud/iot/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#get_device
+#
+def get_device
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iot::V1::DeviceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iot::V1::GetDeviceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iot::V1::GetDeviceRequest.new
 
-# Call the get_device method.
-result = client.get_device request
+  # Call the get_device method.
+  result = client.get_device request
 
-# The returned object is of type Google::Cloud::Iot::V1::Device.
-p result
+  # The returned object is of type Google::Cloud::Iot::V1::Device.
+  p result
+end
 # [END cloudiot_v1_generated_DeviceManager_GetDevice_sync]

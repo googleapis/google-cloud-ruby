@@ -19,15 +19,21 @@
 # [START documentai_v1_generated_DocumentProcessorService_GetProcessor_sync]
 require "google/cloud/document_ai/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_processor
+#
+def get_processor
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DocumentAI::V1::GetProcessorRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DocumentAI::V1::GetProcessorRequest.new
 
-# Call the get_processor method.
-result = client.get_processor request
+  # Call the get_processor method.
+  result = client.get_processor request
 
-# The returned object is of type Google::Cloud::DocumentAI::V1::Processor.
-p result
+  # The returned object is of type Google::Cloud::DocumentAI::V1::Processor.
+  p result
+end
 # [END documentai_v1_generated_DocumentProcessorService_GetProcessor_sync]

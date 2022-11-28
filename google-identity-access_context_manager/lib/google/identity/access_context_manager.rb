@@ -40,15 +40,15 @@ module Google
       #
       # ## About AccessContextManager
       #
-      # API for setting [Access Levels]
-      # [google.identity.accesscontextmanager.v1.AccessLevel] and [Service
-      # Perimeters] [google.identity.accesscontextmanager.v1.ServicePerimeter]
-      # for Google Cloud Projects. Each organization has one [AccessPolicy]
-      # [google.identity.accesscontextmanager.v1.AccessPolicy] containing the
-      # [Access Levels] [google.identity.accesscontextmanager.v1.AccessLevel]
-      # and [Service Perimeters]
+      # API for setting [access levels]
+      # [google.identity.accesscontextmanager.v1.AccessLevel] and [service
+      # perimeters] [google.identity.accesscontextmanager.v1.ServicePerimeter]
+      # for Google Cloud projects. Each organization has one [access policy]
+      # [google.identity.accesscontextmanager.v1.AccessPolicy] that contains the
+      # [access levels] [google.identity.accesscontextmanager.v1.AccessLevel]
+      # and [service perimeters]
       # [google.identity.accesscontextmanager.v1.ServicePerimeter]. This
-      # [AccessPolicy] [google.identity.accesscontextmanager.v1.AccessPolicy] is
+      # [access policy] [google.identity.accesscontextmanager.v1.AccessPolicy] is
       # applicable to all resources in the organization.
       # AccessPolicies
       #

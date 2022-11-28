@@ -64,8 +64,7 @@ module Google
     #     varies based on the request protocol and deployment environment.
     # @!attribute [rw] min_deadline
     #   @return [::Float]
-    #     Minimum deadline in seconds needed for this method. Calls having deadline
-    #     value lower than this will be rejected.
+    #     Deprecated, do not use.
     # @!attribute [rw] operation_deadline
     #   @return [::Float]
     #     The number of seconds to wait for the completion of a long running

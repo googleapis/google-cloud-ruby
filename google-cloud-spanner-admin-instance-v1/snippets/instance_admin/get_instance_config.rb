@@ -19,15 +19,21 @@
 # [START spanner_v1_generated_InstanceAdmin_GetInstanceConfig_sync]
 require "google/cloud/spanner/admin/instance/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance_config
+#
+def get_instance_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new
 
-# Call the get_instance_config method.
-result = client.get_instance_config request
+  # Call the get_instance_config method.
+  result = client.get_instance_config request
 
-# The returned object is of type Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig.
-p result
+  # The returned object is of type Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig.
+  p result
+end
 # [END spanner_v1_generated_InstanceAdmin_GetInstanceConfig_sync]

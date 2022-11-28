@@ -1286,7 +1286,7 @@ module Google
             #     Required. The ID to use for the Feature, which will become the final component of
             #     the Feature's resource name.
             #
-            #     This value may be up to 60 characters, and valid characters are
+            #     This value may be up to 128 characters, and valid characters are
             #     `[a-z0-9_]`. The first character cannot be a number.
             #
             #     The value must be unique within an EntityType.
@@ -2052,7 +2052,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_read_feature_values(csv_read_instances: nil, bigquery_read_instances: nil, featurestore: nil, destination: nil, pass_through_fields: nil, entity_type_specs: nil)
+            # @overload batch_read_feature_values(csv_read_instances: nil, bigquery_read_instances: nil, featurestore: nil, destination: nil, pass_through_fields: nil, entity_type_specs: nil, start_time: nil)
             #   Pass arguments to `batch_read_feature_values` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2104,6 +2104,10 @@ module Google
             #     [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
             #     specifying entity IDs in the EntityType in
             #     [BatchReadFeatureValuesRequest.request][] .
+            #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Optional. Excludes Feature values with feature generation timestamp before this
+            #     timestamp. If not set, retrieve oldest values kept in Feature Store.
+            #     Timestamp, if present, must not have higher than millisecond precision.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

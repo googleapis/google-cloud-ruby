@@ -19,21 +19,27 @@
 # [START analyticshub_v1_generated_AnalyticsHubService_ListOrgDataExchanges_sync]
 require "google/cloud/bigquery/analytics_hub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#list_org_data_exchanges
+#
+def list_org_data_exchanges
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::AnalyticsHub::V1::ListOrgDataExchangesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::AnalyticsHub::V1::ListOrgDataExchangesRequest.new
 
-# Call the list_org_data_exchanges method.
-result = client.list_org_data_exchanges request
+  # Call the list_org_data_exchanges method.
+  result = client.list_org_data_exchanges request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Bigquery::AnalyticsHub::V1::DataExchange.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Bigquery::AnalyticsHub::V1::DataExchange.
+    p response
+  end
 end
 # [END analyticshub_v1_generated_AnalyticsHubService_ListOrgDataExchanges_sync]

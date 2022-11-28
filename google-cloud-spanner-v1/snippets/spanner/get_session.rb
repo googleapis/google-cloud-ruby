@@ -19,15 +19,21 @@
 # [START spanner_v1_generated_Spanner_GetSession_sync]
 require "google/cloud/spanner/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Spanner::V1::Spanner::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Spanner::V1::Spanner::Client#get_session
+#
+def get_session
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Spanner::V1::Spanner::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Spanner::V1::GetSessionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Spanner::V1::GetSessionRequest.new
 
-# Call the get_session method.
-result = client.get_session request
+  # Call the get_session method.
+  result = client.get_session request
 
-# The returned object is of type Google::Cloud::Spanner::V1::Session.
-p result
+  # The returned object is of type Google::Cloud::Spanner::V1::Session.
+  p result
+end
 # [END spanner_v1_generated_Spanner_GetSession_sync]

@@ -19,15 +19,21 @@
 # [START essentialcontacts_v1_generated_EssentialContactsService_DeleteContact_sync]
 require "google/cloud/essential_contacts/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client#delete_contact
+#
+def delete_contact
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::EssentialContacts::V1::DeleteContactRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::EssentialContacts::V1::DeleteContactRequest.new
 
-# Call the delete_contact method.
-result = client.delete_contact request
+  # Call the delete_contact method.
+  result = client.delete_contact request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END essentialcontacts_v1_generated_EssentialContactsService_DeleteContact_sync]

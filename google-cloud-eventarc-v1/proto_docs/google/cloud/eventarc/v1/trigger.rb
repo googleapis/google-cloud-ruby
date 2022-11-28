@@ -39,7 +39,7 @@ module Google
         #     Output only. The last-modified time.
         # @!attribute [rw] event_filters
         #   @return [::Array<::Google::Cloud::Eventarc::V1::EventFilter>]
-        #     Required. null The list of filters that applies to event attributes. Only events that
+        #     Required. Unordered list. The list of filters that applies to event attributes. Only events that
         #     match all the provided filters are sent to the destination.
         # @!attribute [rw] service_account
         #   @return [::String]
@@ -74,6 +74,9 @@ module Google
         #     Optional. The name of the channel associated with the trigger in
         #     `projects/{project}/locations/{location}/channels/{channel}` format.
         #     You must provide a channel to receive events from Eventarc SaaS partners.
+        # @!attribute [r] conditions
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Eventarc::V1::StateCondition}]
+        #     Output only. The reason(s) why a trigger is in FAILED state.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. This checksum is computed by the server based on the value of other
@@ -88,6 +91,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Eventarc::V1::StateCondition]
+          class ConditionsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -114,6 +126,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A condition that is part of the trigger state computation.
+        # @!attribute [rw] code
+        #   @return [::Google::Rpc::Code]
+        #     The canonical code of the condition.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     Human-readable message.
+        class StateCondition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a target of an invocation over HTTP.
         # @!attribute [rw] cloud_run
         #   @return [::Google::Cloud::Eventarc::V1::CloudRun]
@@ -127,6 +151,12 @@ module Google
         #   @return [::Google::Cloud::Eventarc::V1::GKE]
         #     A GKE service capable of receiving events. The service should be running
         #     in the same project as the trigger.
+        # @!attribute [rw] workflow
+        #   @return [::String]
+        #     The resource name of the Workflow whose Executions are triggered by
+        #     the events. The Workflow resource should be deployed in the same project
+        #     as the trigger.
+        #     Format: `projects/{project}/locations/{location}/workflows/{workflow}`
         class Destination
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

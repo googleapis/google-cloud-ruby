@@ -19,21 +19,27 @@
 # [START cloudiot_v1_generated_DeviceManager_ListDevices_sync]
 require "google/cloud/iot/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#list_devices
+#
+def list_devices
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iot::V1::DeviceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iot::V1::ListDevicesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iot::V1::ListDevicesRequest.new
 
-# Call the list_devices method.
-result = client.list_devices request
+  # Call the list_devices method.
+  result = client.list_devices request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Iot::V1::Device.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Iot::V1::Device.
+    p response
+  end
 end
 # [END cloudiot_v1_generated_DeviceManager_ListDevices_sync]

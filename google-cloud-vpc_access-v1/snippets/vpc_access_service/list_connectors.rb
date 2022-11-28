@@ -19,21 +19,27 @@
 # [START vpcaccess_v1_generated_VpcAccessService_ListConnectors_sync]
 require "google/cloud/vpc_access/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::VpcAccess::V1::VpcAccessService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::VpcAccess::V1::VpcAccessService::Client#list_connectors
+#
+def list_connectors
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::VpcAccess::V1::VpcAccessService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::VpcAccess::V1::ListConnectorsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::VpcAccess::V1::ListConnectorsRequest.new
 
-# Call the list_connectors method.
-result = client.list_connectors request
+  # Call the list_connectors method.
+  result = client.list_connectors request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::VpcAccess::V1::Connector.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::VpcAccess::V1::Connector.
+    p response
+  end
 end
 # [END vpcaccess_v1_generated_VpcAccessService_ListConnectors_sync]

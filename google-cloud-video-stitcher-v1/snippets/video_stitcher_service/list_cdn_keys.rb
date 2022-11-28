@@ -19,21 +19,27 @@
 # [START videostitcher_v1_generated_VideoStitcherService_ListCdnKeys_sync]
 require "google/cloud/video/stitcher/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#list_cdn_keys
+#
+def list_cdn_keys
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Video::Stitcher::V1::ListCdnKeysRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Video::Stitcher::V1::ListCdnKeysRequest.new
 
-# Call the list_cdn_keys method.
-result = client.list_cdn_keys request
+  # Call the list_cdn_keys method.
+  result = client.list_cdn_keys request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Video::Stitcher::V1::CdnKey.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Video::Stitcher::V1::CdnKey.
+    p response
+  end
 end
 # [END videostitcher_v1_generated_VideoStitcherService_ListCdnKeys_sync]

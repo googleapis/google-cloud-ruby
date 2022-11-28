@@ -19,15 +19,21 @@
 # [START redis_v1beta1_generated_CloudRedis_GetInstance_sync]
 require "google/cloud/redis/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Redis::V1beta1::CloudRedis::Client#get_instance
+#
+def get_instance
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Redis::V1beta1::GetInstanceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Redis::V1beta1::GetInstanceRequest.new
 
-# Call the get_instance method.
-result = client.get_instance request
+  # Call the get_instance method.
+  result = client.get_instance request
 
-# The returned object is of type Google::Cloud::Redis::V1beta1::Instance.
-p result
+  # The returned object is of type Google::Cloud::Redis::V1beta1::Instance.
+  p result
+end
 # [END redis_v1beta1_generated_CloudRedis_GetInstance_sync]

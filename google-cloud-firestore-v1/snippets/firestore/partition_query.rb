@@ -19,21 +19,27 @@
 # [START firestore_v1_generated_Firestore_PartitionQuery_sync]
 require "google/cloud/firestore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Firestore::V1::Firestore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Firestore::V1::Firestore::Client#partition_query
+#
+def partition_query
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Firestore::V1::Firestore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Firestore::V1::PartitionQueryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Firestore::V1::PartitionQueryRequest.new
 
-# Call the partition_query method.
-result = client.partition_query request
+  # Call the partition_query method.
+  result = client.partition_query request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Firestore::V1::Cursor.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Firestore::V1::Cursor.
+    p response
+  end
 end
 # [END firestore_v1_generated_Firestore_PartitionQuery_sync]

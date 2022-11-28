@@ -19,15 +19,21 @@
 # [START monitoring_v3_generated_UptimeCheckService_DeleteUptimeCheckConfig_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::UptimeCheckService::Client#delete_uptime_check_config
+#
+def delete_uptime_check_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest.new
 
-# Call the delete_uptime_check_config method.
-result = client.delete_uptime_check_config request
+  # Call the delete_uptime_check_config method.
+  result = client.delete_uptime_check_config request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END monitoring_v3_generated_UptimeCheckService_DeleteUptimeCheckConfig_sync]

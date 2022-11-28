@@ -19,15 +19,21 @@
 # [START privateca_v1_generated_CertificateAuthorityService_GetCaPool_sync]
 require "google/cloud/security/private_ca/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#get_ca_pool
+#
+def get_ca_pool
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Security::PrivateCA::V1::GetCaPoolRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Security::PrivateCA::V1::GetCaPoolRequest.new
 
-# Call the get_ca_pool method.
-result = client.get_ca_pool request
+  # Call the get_ca_pool method.
+  result = client.get_ca_pool request
 
-# The returned object is of type Google::Cloud::Security::PrivateCA::V1::CaPool.
-p result
+  # The returned object is of type Google::Cloud::Security::PrivateCA::V1::CaPool.
+  p result
+end
 # [END privateca_v1_generated_CertificateAuthorityService_GetCaPool_sync]

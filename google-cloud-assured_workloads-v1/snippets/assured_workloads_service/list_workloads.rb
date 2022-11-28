@@ -19,21 +19,27 @@
 # [START assuredworkloads_v1_generated_AssuredWorkloadsService_ListWorkloads_sync]
 require "google/cloud/assured_workloads/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client#list_workloads
+#
+def list_workloads
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AssuredWorkloads::V1::ListWorkloadsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AssuredWorkloads::V1::ListWorkloadsRequest.new
 
-# Call the list_workloads method.
-result = client.list_workloads request
+  # Call the list_workloads method.
+  result = client.list_workloads request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::AssuredWorkloads::V1::Workload.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::AssuredWorkloads::V1::Workload.
+    p response
+  end
 end
 # [END assuredworkloads_v1_generated_AssuredWorkloadsService_ListWorkloads_sync]

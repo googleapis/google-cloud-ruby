@@ -19,22 +19,28 @@
 # [START vision_v1p4beta1_generated_ProductSearch_PurgeProducts_sync]
 require "google/cloud/vision/v1p4beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Vision::V1p4beta1::ProductSearch::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#purge_products
+#
+def purge_products
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Vision::V1p4beta1::ProductSearch::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Vision::V1p4beta1::PurgeProductsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Vision::V1p4beta1::PurgeProductsRequest.new
 
-# Call the purge_products method.
-result = client.purge_products request
+  # Call the purge_products method.
+  result = client.purge_products request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END vision_v1p4beta1_generated_ProductSearch_PurgeProducts_sync]

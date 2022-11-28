@@ -206,7 +206,8 @@ module Google
         #         `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
         #
         #     Each of the above supported filter types can be combined together using
-        #     logical operators (`AND` & `OR`).
+        #     logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+        #     is 5.
         #
         #     For example: `display_name = "test" AND metadata.field1.bool_value = true`.
         # @!attribute [rw] order_by
@@ -400,7 +401,8 @@ module Google
         #        ```
         #
         #     Each of the above supported filters can be combined together using
-        #     logical operators (`AND` & `OR`).
+        #     logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+        #     is 5.
         #
         #     For example: `display_name = "test" AND metadata.field1.bool_value = true`.
         # @!attribute [rw] order_by
@@ -685,7 +687,9 @@ module Google
         #        `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
         #
         #     Each of the above supported filters can be combined together using
-        #     logical operators (`AND` & `OR`).
+        #     logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+        #     is 5.
+        #
         #     For example: `display_name = "test" AND metadata.field1.bool_value = true`.
         # @!attribute [rw] order_by
         #   @return [::String]
@@ -945,7 +949,8 @@ module Google
         #        For example: `metadata.field_1.number_value = 10.0`
         #
         #     Each of the above supported filter types can be combined together using
-        #     logical operators (`AND` & `OR`).
+        #     logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+        #     is 5.
         #
         #     For example: `display_name = "test" AND metadata.field1.bool_value = true`.
         class QueryArtifactLineageSubgraphRequest

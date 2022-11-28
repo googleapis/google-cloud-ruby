@@ -19,21 +19,27 @@
 # [START recommendationengine_v1beta1_generated_PredictionService_Predict_sync]
 require "google/cloud/recommendation_engine/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client#predict
+#
+def predict
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::RecommendationEngine::V1beta1::PredictRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::RecommendationEngine::V1beta1::PredictRequest.new
 
-# Call the predict method.
-result = client.predict request
+  # Call the predict method.
+  result = client.predict request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::RecommendationEngine::V1beta1::PredictResponse::PredictionResult.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::RecommendationEngine::V1beta1::PredictResponse::PredictionResult.
+    p response
+  end
 end
 # [END recommendationengine_v1beta1_generated_PredictionService_Predict_sync]

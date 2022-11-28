@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.1 (2022-11-10)
+
+#### Documentation
+
+* Fixed a few formatting strings ([#19401](https://github.com/googleapis/google-cloud-ruby/issues/19401)) 
+
 ### 0.4.0 (2022-10-19)
 
 #### Features

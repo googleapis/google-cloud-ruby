@@ -19,15 +19,21 @@
 # [START logging_v2_generated_ConfigService_DeleteExclusion_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::ConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::ConfigService::Client#delete_exclusion
+#
+def delete_exclusion
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::ConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::DeleteExclusionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::DeleteExclusionRequest.new
 
-# Call the delete_exclusion method.
-result = client.delete_exclusion request
+  # Call the delete_exclusion method.
+  result = client.delete_exclusion request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END logging_v2_generated_ConfigService_DeleteExclusion_sync]

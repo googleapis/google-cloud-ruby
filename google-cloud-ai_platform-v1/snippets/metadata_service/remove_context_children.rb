@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_MetadataService_RemoveContextChildren_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::MetadataService::Client#remove_context_children
+#
+def remove_context_children
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest.new
 
-# Call the remove_context_children method.
-result = client.remove_context_children request
+  # Call the remove_context_children method.
+  result = client.remove_context_children request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::RemoveContextChildrenResponse.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::RemoveContextChildrenResponse.
+  p result
+end
 # [END aiplatform_v1_generated_MetadataService_RemoveContextChildren_sync]

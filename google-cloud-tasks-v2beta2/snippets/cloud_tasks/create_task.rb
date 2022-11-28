@@ -19,15 +19,21 @@
 # [START cloudtasks_v2beta2_generated_CloudTasks_CreateTask_sync]
 require "google/cloud/tasks/v2beta2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task
+#
+def create_task
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Tasks::V2beta2::CreateTaskRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Tasks::V2beta2::CreateTaskRequest.new
 
-# Call the create_task method.
-result = client.create_task request
+  # Call the create_task method.
+  result = client.create_task request
 
-# The returned object is of type Google::Cloud::Tasks::V2beta2::Task.
-p result
+  # The returned object is of type Google::Cloud::Tasks::V2beta2::Task.
+  p result
+end
 # [END cloudtasks_v2beta2_generated_CloudTasks_CreateTask_sync]

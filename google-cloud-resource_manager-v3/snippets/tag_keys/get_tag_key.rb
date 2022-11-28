@@ -19,15 +19,21 @@
 # [START cloudresourcemanager_v3_generated_TagKeys_GetTagKey_sync]
 require "google/cloud/resource_manager/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ResourceManager::V3::TagKeys::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::TagKeys::Client#get_tag_key
+#
+def get_tag_key
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ResourceManager::V3::TagKeys::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ResourceManager::V3::GetTagKeyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ResourceManager::V3::GetTagKeyRequest.new
 
-# Call the get_tag_key method.
-result = client.get_tag_key request
+  # Call the get_tag_key method.
+  result = client.get_tag_key request
 
-# The returned object is of type Google::Cloud::ResourceManager::V3::TagKey.
-p result
+  # The returned object is of type Google::Cloud::ResourceManager::V3::TagKey.
+  p result
+end
 # [END cloudresourcemanager_v3_generated_TagKeys_GetTagKey_sync]

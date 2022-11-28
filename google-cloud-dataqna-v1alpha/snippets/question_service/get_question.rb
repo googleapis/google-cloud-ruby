@@ -19,15 +19,21 @@
 # [START dataqna_v1alpha_generated_QuestionService_GetQuestion_sync]
 require "google/cloud/dataqna/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataQnA::V1alpha::QuestionService::Client#get_question
+#
+def get_question
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataQnA::V1alpha::GetQuestionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataQnA::V1alpha::GetQuestionRequest.new
 
-# Call the get_question method.
-result = client.get_question request
+  # Call the get_question method.
+  result = client.get_question request
 
-# The returned object is of type Google::Cloud::DataQnA::V1alpha::Question.
-p result
+  # The returned object is of type Google::Cloud::DataQnA::V1alpha::Question.
+  p result
+end
 # [END dataqna_v1alpha_generated_QuestionService_GetQuestion_sync]

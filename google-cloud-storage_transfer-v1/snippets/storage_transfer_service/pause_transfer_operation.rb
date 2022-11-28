@@ -19,15 +19,21 @@
 # [START storagetransfer_v1_generated_StorageTransferService_PauseTransferOperation_sync]
 require "google/cloud/storage_transfer/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#pause_transfer_operation
+#
+def pause_transfer_operation
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::StorageTransfer::V1::PauseTransferOperationRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::StorageTransfer::V1::PauseTransferOperationRequest.new
 
-# Call the pause_transfer_operation method.
-result = client.pause_transfer_operation request
+  # Call the pause_transfer_operation method.
+  result = client.pause_transfer_operation request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END storagetransfer_v1_generated_StorageTransferService_PauseTransferOperation_sync]

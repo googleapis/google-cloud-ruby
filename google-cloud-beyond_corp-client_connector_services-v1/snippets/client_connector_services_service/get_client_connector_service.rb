@@ -19,15 +19,21 @@
 # [START beyondcorp_v1_generated_ClientConnectorServicesService_GetClientConnectorService_sync]
 require "google/cloud/beyond_corp/client_connector_services/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorServicesService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorServicesService::Client#get_client_connector_service
+#
+def get_client_connector_service
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorServicesService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BeyondCorp::ClientConnectorServices::V1::GetClientConnectorServiceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BeyondCorp::ClientConnectorServices::V1::GetClientConnectorServiceRequest.new
 
-# Call the get_client_connector_service method.
-result = client.get_client_connector_service request
+  # Call the get_client_connector_service method.
+  result = client.get_client_connector_service request
 
-# The returned object is of type Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorService.
-p result
+  # The returned object is of type Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorService.
+  p result
+end
 # [END beyondcorp_v1_generated_ClientConnectorServicesService_GetClientConnectorService_sync]

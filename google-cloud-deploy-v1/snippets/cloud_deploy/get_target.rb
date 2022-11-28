@@ -19,15 +19,21 @@
 # [START clouddeploy_v1_generated_CloudDeploy_GetTarget_sync]
 require "google/cloud/deploy/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Deploy::V1::CloudDeploy::Client#get_target
+#
+def get_target
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Deploy::V1::GetTargetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Deploy::V1::GetTargetRequest.new
 
-# Call the get_target method.
-result = client.get_target request
+  # Call the get_target method.
+  result = client.get_target request
 
-# The returned object is of type Google::Cloud::Deploy::V1::Target.
-p result
+  # The returned object is of type Google::Cloud::Deploy::V1::Target.
+  p result
+end
 # [END clouddeploy_v1_generated_CloudDeploy_GetTarget_sync]

@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_EndpointService_GetEndpoint_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::EndpointService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::EndpointService::Client#get_endpoint
+#
+def get_endpoint
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::EndpointService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::GetEndpointRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::GetEndpointRequest.new
 
-# Call the get_endpoint method.
-result = client.get_endpoint request
+  # Call the get_endpoint method.
+  result = client.get_endpoint request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::Endpoint.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::Endpoint.
+  p result
+end
 # [END aiplatform_v1_generated_EndpointService_GetEndpoint_sync]

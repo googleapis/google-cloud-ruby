@@ -19,15 +19,21 @@
 # [START appengine_v1_generated_Firewall_GetIngressRule_sync]
 require "google/cloud/app_engine/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::Firewall::Client#get_ingress_rule
+#
+def get_ingress_rule
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AppEngine::V1::Firewall::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AppEngine::V1::GetIngressRuleRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AppEngine::V1::GetIngressRuleRequest.new
 
-# Call the get_ingress_rule method.
-result = client.get_ingress_rule request
+  # Call the get_ingress_rule method.
+  result = client.get_ingress_rule request
 
-# The returned object is of type Google::Cloud::AppEngine::V1::FirewallRule.
-p result
+  # The returned object is of type Google::Cloud::AppEngine::V1::FirewallRule.
+  p result
+end
 # [END appengine_v1_generated_Firewall_GetIngressRule_sync]
