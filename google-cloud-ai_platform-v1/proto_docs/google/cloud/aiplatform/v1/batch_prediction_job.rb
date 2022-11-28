@@ -79,6 +79,15 @@ module Google
         #     DEDICATED_RESOURCES this config may be provided (and the job will use these
         #     resources), if the Model doesn't support AUTOMATIC_RESOURCES, this config
         #     must be provided.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     The service account that the DeployedModel's container runs as. If not
+        #     specified, a system generated one will be used, which
+        #     has minimal permissions and the custom container, if used, may not have
+        #     enough permission to access other GCP resources.
+        #
+        #     Users deploying the Model must have the `iam.serviceAccounts.actAs`
+        #     permission on this service account.
         # @!attribute [rw] manual_batch_tuning_parameters
         #   @return [::Google::Cloud::AIPlatform::V1::ManualBatchTuningParameters]
         #     Immutable. Parameters configuring the batch behavior. Currently only applicable when

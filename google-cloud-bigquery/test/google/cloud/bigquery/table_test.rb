@@ -31,6 +31,8 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json(table_hash.to_json).tap { |t| t.encryption_configuration = gapi_encrypt_config } }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:clone_table) { Google::Cloud::Bigquery::Table.from_gapi random_clone_gapi(dataset), bigquery.service }
+  let(:snapshot_table) { Google::Cloud::Bigquery::Table.from_gapi random_snapshot_gapi(dataset), bigquery.service }
 
   it "knows its attributes" do
     _(table.table_id).must_equal table_id
@@ -137,5 +139,21 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     _(table.exists?).must_equal false
 
     mock.verify
+  end
+
+  it "know if its a snapshot" do
+    _(snapshot_table.snapshot?).must_equal true
+  end
+
+  it "know if its a clone" do
+    _(clone_table.clone?).must_equal true
+  end
+
+  it "know snapshot definition if its a snapshot" do
+    _(snapshot_table.snapshot_definition).must_be_kind_of Google::Apis::BigqueryV2::SnapshotDefinition
+  end
+
+  it "knows clone definition if its a clone" do
+    _(clone_table.clone_definition).must_be_kind_of Google::Apis::BigqueryV2::CloneDefinition
   end
 end

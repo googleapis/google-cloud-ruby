@@ -19,21 +19,26 @@
 
 module Google
   module Api
-    # `Endpoint` describes a network endpoint of a service that serves a set of
+    # `Endpoint` describes a network address of a service that serves a set of
     # APIs. It is commonly known as a service endpoint. A service may expose
     # any number of service endpoints, and all service endpoints share the same
     # service definition, such as quota limits and monitoring metrics.
     #
-    # Example service configuration:
+    # Example:
     #
+    #     type: google.api.Service
     #     name: library-example.googleapis.com
     #     endpoints:
-    #       # Below entry makes 'google.example.library.v1.Library'
-    #       # API be served from endpoint address library-example.googleapis.com.
-    #       # It also allows HTTP OPTIONS calls to be passed to the backend, for
-    #       # it to decide whether the subsequent cross-origin request is
-    #       # allowed to proceed.
+    #       # Declares network address `https://library-example.googleapis.com`
+    #       # for service `library-example.googleapis.com`. The `https` scheme
+    #       # is implicit for all service endpoints. Other schemes may be
+    #       # supported in the future.
     #     - name: library-example.googleapis.com
+    #       allow_cors: false
+    #     - name: content-staging-library-example.googleapis.com
+    #       # Allows HTTP OPTIONS calls to be passed to the API frontend, for it
+    #       # to decide whether the subsequent cross-origin request is allowed
+    #       # to proceed.
     #       allow_cors: true
     # @!attribute [rw] name
     #   @return [::String]
@@ -43,8 +48,8 @@ module Google
     #     Unimplemented. Dot not use.
     #
     #     DEPRECATED: This field is no longer supported. Instead of using aliases,
-    #     please specify multiple {::Google::Api::Endpoint google.api.Endpoint} for each of the intended
-    #     aliases.
+    #     please specify multiple {::Google::Api::Endpoint google.api.Endpoint} for each
+    #     of the intended aliases.
     #
     #     Additional names that this endpoint will be hosted on.
     # @!attribute [rw] target

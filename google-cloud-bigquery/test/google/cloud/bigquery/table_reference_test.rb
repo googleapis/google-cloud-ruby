@@ -236,6 +236,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     job_gapi = copy_job_gapi(table, target_table, location: nil)
     job_resp_gapi = job_gapi.dup
     job_resp_gapi.status = status "done"
+    job_resp_gapi.configuration.copy.operation_type = "COPY"
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
     result = table.copy target_table

@@ -77,6 +77,15 @@ module Google
         #     The environment to pass into every action. Each action can also specify
         #     additional environment variables but cannot delete an entry from this map
         #     (though they can overwrite it with a different value).
+        # @!attribute [rw] encrypted_environment
+        #   @return [::Google::Cloud::LifeSciences::V2beta::Secret]
+        #     The encrypted environment to pass into every action. Each action can also
+        #     specify its own encrypted environment.
+        #
+        #     The secret must decrypt to a JSON-encoded dictionary where key-value pairs
+        #     serve as environment variable names and their values. The decoded
+        #     environment variables can overwrite the values specified by the
+        #     `environment` field.
         # @!attribute [rw] timeout
         #   @return [::Google::Protobuf::Duration]
         #     The maximum amount of time to give the pipeline to complete.  This includes
@@ -149,6 +158,17 @@ module Google
         #     `GOOGLE_LAST_EXIT_STATUS` will be set to the exit status of the last
         #     non-background action that executed. This can be used by workflow engine
         #     authors to determine whether an individual action has succeeded or failed.
+        # @!attribute [rw] encrypted_environment
+        #   @return [::Google::Cloud::LifeSciences::V2beta::Secret]
+        #     The encrypted environment to pass into the container. This environment is
+        #     merged with values specified in the
+        #     {::Google::Cloud::LifeSciences::V2beta::Pipeline google.cloud.lifesciences.v2beta.Pipeline} message, overwriting any
+        #     duplicate values.
+        #
+        #     The secret must decrypt to a JSON-encoded dictionary where key-value pairs
+        #     serve as environment variable names and their values. The decoded
+        #     environment variables can overwrite the values specified by the
+        #     `environment` field.
         # @!attribute [rw] pid_namespace
         #   @return [::String]
         #     An optional identifier for a PID namespace to run the action inside.
@@ -425,6 +445,10 @@ module Google
         #     The list of disks and other storage to create or attach to the VM.
         #
         #     Specify either the `volumes[]` field or the `disks[]` field, but not both.
+        # @!attribute [rw] reservation
+        #   @return [::String]
+        #     If specified, the VM will only be allocated inside the matching
+        #     reservation. It will fail if the VM parameters don't match the reservation.
         class VirtualMachine
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

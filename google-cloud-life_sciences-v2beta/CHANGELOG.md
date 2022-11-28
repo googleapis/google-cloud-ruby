@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.3.0 (2022-11-16)
+
+#### Features
+
+* add encrypted_environment to pipeline and Action 
+* add reservation to VirtualMachine and support location client 
+
 ### 0.2.0 (2022-07-02)
 
 #### Features

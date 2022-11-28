@@ -15,11 +15,13 @@
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
+require "net/http"
 
 require "google/cloud/video/stitcher"
 
 require_relative "akamai_cdn_key_definition"
 require_relative "cloud_cdn_key_definition"
+require_relative "live_session_definition"
 require_relative "slate_definition"
 require_relative "vod_session_definition"
 require_relative "../../../.toys/.lib/sample_loader"
@@ -54,6 +56,9 @@ class StitcherSnippetSpec < Minitest::Spec
 
   let(:vod_uri) { "https://storage.googleapis.com/cloud-samples-data/media/hls-vod/manifest.m3u8" }
   let(:vod_ad_tag_uri) { "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/vmap_ad_samples&sz=640x480&cust_params=sample_ar%3Dpreonly&ciu_szs=300x250%2C728x90&gdfp_req=1&ad_rule=1&output=vmap&unviewed_position_start=1&env=vp&impl=s&correlator=" }
+
+  let(:live_uri) { "https://storage.googleapis.com/cloud-samples-data/media/hls-live/manifest.m3u8" }
+  let(:live_ad_tag_uri) { "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_ad_samples&sz=640x480&cust_params=sample_ct%3Dlinear&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=" }
 
   attr_writer :slate_created
   attr_writer :akamai_cdn_key_created
@@ -110,6 +115,13 @@ class StitcherSnippetSpec < Minitest::Spec
     )
   end
 
+  let :live_session do
+    client.create_live_session(
+      parent: location_path,
+      live_session: live_session_def(live_uri, live_ad_tag_uri, slate_id)
+    )
+  end
+
   let :akamai_cdn_key do
     client.create_cdn_key(
       parent: location_path,
@@ -148,6 +160,21 @@ class StitcherSnippetSpec < Minitest::Spec
         puts "Rescued: #{e.inspect}"
       end
     end
+  end
+
+  ##
+  # Curl the play_uri first. The last line of the response will contain a
+  # renditions location. Curl the live session name with the rendition
+  # location appended.
+  def get_renditions uri
+    res = Net::HTTP.get_response URI(uri)
+    unless res.is_a? Net::HTTPSuccess
+      return
+    end
+    tmp = res.body.strip
+    renditions = tmp.split("\n").last
+    renditions_uri = uri.sub(/manifest\.m3u8.*/, renditions)
+    Net::HTTP.get_response URI(renditions_uri)
   end
 
   register_spec_type(self) { |*descs| descs.include? :stitcher_snippet }
