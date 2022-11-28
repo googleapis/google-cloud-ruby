@@ -81,7 +81,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Full resource name of catalog item, such as
-        #     "projects/*/locations/global/catalogs/default_catalog/catalogItems/some_catalog_item_id".
+        #     `projects/*/locations/global/catalogs/default_catalog/catalogItems/some_catalog_item_id`.
         # @!attribute [rw] catalog_item
         #   @return [::Google::Cloud::RecommendationEngine::V1beta1::CatalogItem]
         #     Required. The catalog item to update/create. The 'catalog_item_id' field
