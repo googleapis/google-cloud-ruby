@@ -23,6 +23,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :etag, :string, 6
       map :labels, :string, :string, 7
       optional :encryption_spec, :message, 11, "google.cloud.aiplatform.v1.EncryptionSpec"
+      optional :metadata_artifact, :string, 17
     end
     add_message "google.cloud.aiplatform.v1.ImportDataConfig" do
       map :data_item_labels, :string, :string, 2

@@ -28,11 +28,11 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The user-defined name of the Dataset.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. The description of the Dataset.
+        #     The description of the Dataset.
         # @!attribute [rw] metadata_schema_uri
         #   @return [::String]
         #     Required. Points to a YAML file stored on Google Cloud Storage describing additional
@@ -73,6 +73,11 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Customer-managed encryption key spec for a Dataset. If set, this Dataset
         #     and all sub-resources of this Dataset will be secured by this key.
+        # @!attribute [r] metadata_artifact
+        #   @return [::String]
+        #     Output only. The resource name of the Artifact that was created in MetadataStore when
+        #     creating the Dataset. The Artifact resource name pattern is
+        #     `projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}`.
         class Dataset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

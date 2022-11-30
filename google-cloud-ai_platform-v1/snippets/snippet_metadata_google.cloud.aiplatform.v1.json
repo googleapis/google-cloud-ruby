@@ -812,6 +812,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_FeaturestoreOnlineServingService_WriteFeatureValues_sync",
+      "title": "Snippet for write_feature_values in FeaturestoreOnlineServingService",
+      "description": "Basic snippet for write_feature_values in FeaturestoreOnlineServingService",
+      "file": "featurestore_online_serving_service/write_feature_values.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "write_feature_values",
+        "full_name": "::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#write_feature_values",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::WriteFeatureValuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::WriteFeatureValuesResponse",
+        "client": {
+          "short_name": "FeaturestoreOnlineServingService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client"
+        },
+        "method": {
+          "short_name": "WriteFeatureValues",
+          "full_name": "google.cloud.aiplatform.v1.FeaturestoreOnlineServingService.WriteFeatureValues",
+          "service": {
+            "short_name": "FeaturestoreOnlineServingService",
+            "full_name": "google.cloud.aiplatform.v1.FeaturestoreOnlineServingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_FeaturestoreService_CreateFeaturestore_sync",
       "title": "Snippet for create_featurestore in FeaturestoreService",
       "description": "Basic snippet for create_featurestore in FeaturestoreService",

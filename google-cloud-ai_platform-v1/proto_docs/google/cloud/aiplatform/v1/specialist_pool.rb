@@ -33,7 +33,7 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The user-defined name of the SpecialistPool.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         #     This field should be unique on project-level.
         # @!attribute [r] specialist_managers_count

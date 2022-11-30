@@ -933,6 +933,9 @@ module Google
         # @!attribute [rw] imported_feature_value_count
         #   @return [::Integer]
         #     Number of Feature values that have been imported by the operation.
+        # @!attribute [rw] source_uris
+        #   @return [::Array<::String>]
+        #     The source URI from where Feature values are imported.
         # @!attribute [rw] invalid_row_count
         #   @return [::Integer]
         #     The number of rows in input source that weren't imported due to either

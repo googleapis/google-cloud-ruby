@@ -325,6 +325,7 @@
     "snippets/endpoint_service/update_endpoint.rb",
     "snippets/featurestore_online_serving_service/read_feature_values.rb",
     "snippets/featurestore_online_serving_service/streaming_read_feature_values.rb",
+    "snippets/featurestore_online_serving_service/write_feature_values.rb",
     "snippets/featurestore_service/batch_create_features.rb",
     "snippets/featurestore_service/batch_read_feature_values.rb",
     "snippets/featurestore_service/create_entity_type.rb",
