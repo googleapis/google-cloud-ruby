@@ -143,6 +143,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :IMPORT_METHOD_UNSPECIFIED, 0
       value :RSA_OAEP_3072_SHA1_AES_256, 1
       value :RSA_OAEP_4096_SHA1_AES_256, 2
+      value :RSA_OAEP_3072_SHA256_AES_256, 3
+      value :RSA_OAEP_4096_SHA256_AES_256, 4
+      value :RSA_OAEP_3072_SHA256, 5
+      value :RSA_OAEP_4096_SHA256, 6
     end
     add_enum "google.cloud.kms.v1.ImportJob.ImportJobState" do
       value :IMPORT_JOB_STATE_UNSPECIFIED, 0
