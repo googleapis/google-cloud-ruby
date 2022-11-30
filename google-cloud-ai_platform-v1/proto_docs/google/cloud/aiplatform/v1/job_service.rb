@@ -504,7 +504,7 @@ module Google
           #     If set, all attribution scores between
           #     {::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest#start_time SearchModelDeploymentMonitoringStatsAnomaliesRequest.start_time} and
           #     {::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest#end_time SearchModelDeploymentMonitoringStatsAnomaliesRequest.end_time} are
-          #     fetched, and page token doesn't take affect in this case.
+          #     fetched, and page token doesn't take effect in this case.
           #     Only used to retrieve attribution score for the top Features which has
           #     the highest attribution score in the latest monitoring run.
           class StatsAnomaliesObjective

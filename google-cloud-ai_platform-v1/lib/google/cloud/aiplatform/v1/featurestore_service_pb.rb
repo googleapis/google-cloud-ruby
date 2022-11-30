@@ -209,6 +209,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :generic_metadata, :message, 1, "google.cloud.aiplatform.v1.GenericOperationMetadata"
       optional :imported_entity_count, :int64, 2
       optional :imported_feature_value_count, :int64, 3
+      repeated :source_uris, :string, 4
       optional :invalid_row_count, :int64, 6
       optional :timestamp_outside_retention_rows_count, :int64, 7
     end

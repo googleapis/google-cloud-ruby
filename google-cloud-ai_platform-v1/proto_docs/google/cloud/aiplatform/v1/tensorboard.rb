@@ -22,7 +22,7 @@ module Google
     module AIPlatform
       module V1
         # Tensorboard is a physical database that stores users' training metrics.
-        # A default Tensorboard is provided in each region of a GCP project.
+        # A default Tensorboard is provided in each region of a Google Cloud project.
         # If needed users can also create extra Tensorboards in their projects.
         # @!attribute [r] name
         #   @return [::String]
