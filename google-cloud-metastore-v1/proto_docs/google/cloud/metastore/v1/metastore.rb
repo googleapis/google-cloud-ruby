@@ -294,7 +294,7 @@ module Google
           #     be at least one IP address available in the subnet's primary range. The
           #     subnet is specified in the following form:
           #
-          #     `projects/{project_number}/regions/{region_id}/subnetworks/{subnetwork_id}
+          #     `projects/{project_number}/regions/{region_id}/subnetworks/{subnetwork_id}`
           # @!attribute [r] endpoint_uri
           #   @return [::String]
           #     Output only. The URI of the endpoint used to access the metastore service.
