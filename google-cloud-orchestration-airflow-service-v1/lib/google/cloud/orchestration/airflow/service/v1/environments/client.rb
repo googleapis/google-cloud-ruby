@@ -549,13 +549,10 @@ module Google
                 #     * `config.nodeCount`
                 #         * Horizontally scale the number of nodes in the environment. An integer
                 #           greater than or equal to 3 must be provided in the `config.nodeCount`
-                #           field.
+                #           field. Supported for Cloud Composer environments in versions
+                #           composer-1.*.*-airflow-*.*.*.
                 #     * `config.webServerNetworkAccessControl`
                 #         * Replace the environment's current `WebServerNetworkAccessControl`.
-                #     * `config.databaseConfig`
-                #         * Replace the environment's current `DatabaseConfig`.
-                #     * `config.webServerConfig`
-                #         * Replace the environment's current `WebServerConfig`.
                 #     * `config.softwareConfig.airflowConfigOverrides`
                 #         * Replace all Apache Airflow config overrides. If a replacement config
                 #           overrides map is not included in `environment`, all config overrides
@@ -573,9 +570,22 @@ module Google
                 #     * `config.softwareConfig.envVariables`
                 #         * Replace all environment variables. If a replacement environment
                 #           variable map is not included in `environment`, all custom environment
-                #           variables  are cleared.
-                #           It is an error to provide both this mask and a mask specifying one or
-                #           more individual environment variables.
+                #           variables are cleared.
+                #     * `config.softwareConfig.schedulerCount`
+                #         * Horizontally scale the number of schedulers in Airflow. A positive
+                #           integer not greater than the number of nodes must be provided in the
+                #           `config.softwareConfig.schedulerCount` field. Supported for Cloud
+                #           Composer environments in versions composer-1.*.*-airflow-2.*.*.
+                #     * `config.databaseConfig.machineType`
+                #         * Cloud SQL machine type used by Airflow database.
+                #           It has to be one of: db-n1-standard-2, db-n1-standard-4,
+                #           db-n1-standard-8 or db-n1-standard-16. Supported for Cloud Composer
+                #           environments in versions composer-1.*.*-airflow-*.*.*.
+                #     * `config.webServerConfig.machineType`
+                #         * Machine type on which Airflow web server is running.
+                #           It has to be one of: composer-n1-webserver-2, composer-n1-webserver-4
+                #           or composer-n1-webserver-8. Supported for Cloud Composer environments
+                #           in versions composer-1.*.*-airflow-*.*.*.
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::Operation]
@@ -744,6 +754,218 @@ module Google
                 end
 
                 ##
+                # Creates a snapshots of a Cloud Composer environment.
+                #
+                # As a result of this operation, snapshot of environment's state is stored
+                # in a location specified in the SaveSnapshotRequest.
+                #
+                # @overload save_snapshot(request, options = nil)
+                #   Pass arguments to `save_snapshot` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload save_snapshot(environment: nil, snapshot_location: nil)
+                #   Pass arguments to `save_snapshot` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param environment [::String]
+                #     The resource name of the source environment in the form:
+                #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+                #   @param snapshot_location [::String]
+                #     Location in a Cloud Storage where the snapshot is going to be stored, e.g.:
+                #     "gs://my-bucket/snapshots".
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Gapic::Operation]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest.new
+                #
+                #   # Call the save_snapshot method.
+                #   result = client.save_snapshot request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use this
+                #   # object to check the status of an operation, cancel it, or wait
+                #   # for results. Here is how to block until completion:
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "Error!"
+                #   end
+                #
+                def save_snapshot request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.save_snapshot.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.environment
+                    header_params["environment"] = request.environment
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.save_snapshot.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.save_snapshot.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :save_snapshot, request, options: options do |response, operation|
+                    response = ::Gapic::Operation.new response, @operations_client, options: options
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Loads a snapshot of a Cloud Composer environment.
+                #
+                # As a result of this operation, a snapshot of environment's specified in
+                # LoadSnapshotRequest is loaded into the environment.
+                #
+                # @overload load_snapshot(request, options = nil)
+                #   Pass arguments to `load_snapshot` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload load_snapshot(environment: nil, snapshot_path: nil, skip_pypi_packages_installation: nil, skip_environment_variables_setting: nil, skip_airflow_overrides_setting: nil, skip_gcs_data_copying: nil)
+                #   Pass arguments to `load_snapshot` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param environment [::String]
+                #     The resource name of the target environment in the form:
+                #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+                #   @param snapshot_path [::String]
+                #     A Cloud Storage path to a snapshot to load, e.g.:
+                #     "gs://my-bucket/snapshots/project_location_environment_timestamp".
+                #   @param skip_pypi_packages_installation [::Boolean]
+                #     Whether or not to skip installing Pypi packages when loading the
+                #     environment's state.
+                #   @param skip_environment_variables_setting [::Boolean]
+                #     Whether or not to skip setting environment variables when loading the
+                #     environment's state.
+                #   @param skip_airflow_overrides_setting [::Boolean]
+                #     Whether or not to skip setting Airflow overrides when loading the
+                #     environment's state.
+                #   @param skip_gcs_data_copying [::Boolean]
+                #     Whether or not to skip copying Cloud Storage data when loading the
+                #     environment's state.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Gapic::Operation]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest.new
+                #
+                #   # Call the load_snapshot method.
+                #   result = client.load_snapshot request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use this
+                #   # object to check the status of an operation, cancel it, or wait
+                #   # for results. Here is how to block until completion:
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "Error!"
+                #   end
+                #
+                def load_snapshot request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.load_snapshot.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.environment
+                    header_params["environment"] = request.environment
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.load_snapshot.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.load_snapshot.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :load_snapshot, request, options: options do |response, operation|
+                    response = ::Gapic::Operation.new response, @operations_client, options: options
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the Environments API.
                 #
                 # This class represents the configuration for Environments,
@@ -903,6 +1125,16 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :delete_environment
+                    ##
+                    # RPC-specific configuration for `save_snapshot`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :save_snapshot
+                    ##
+                    # RPC-specific configuration for `load_snapshot`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :load_snapshot
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -916,6 +1148,10 @@ module Google
                       @update_environment = ::Gapic::Config::Method.new update_environment_config
                       delete_environment_config = parent_rpcs.delete_environment if parent_rpcs.respond_to? :delete_environment
                       @delete_environment = ::Gapic::Config::Method.new delete_environment_config
+                      save_snapshot_config = parent_rpcs.save_snapshot if parent_rpcs.respond_to? :save_snapshot
+                      @save_snapshot = ::Gapic::Config::Method.new save_snapshot_config
+                      load_snapshot_config = parent_rpcs.load_snapshot if parent_rpcs.respond_to? :load_snapshot
+                      @load_snapshot = ::Gapic::Config::Method.new load_snapshot_config
 
                       yield self if block_given?
                     end

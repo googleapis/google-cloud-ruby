@@ -84,6 +84,12 @@ module Google
 
                 # A resource check operation.
                 CHECK = 4
+
+                # Saves snapshot of the resource operation.
+                SAVE_SNAPSHOT = 5
+
+                # Loads snapshot of the resource operation.
+                LOAD_SNAPSHOT = 6
               end
             end
           end
