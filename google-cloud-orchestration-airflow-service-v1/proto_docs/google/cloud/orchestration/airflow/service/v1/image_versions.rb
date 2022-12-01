@@ -58,7 +58,7 @@ module Google
             # @!attribute [rw] image_version_id
             #   @return [::String]
             #     The string identifier of the ImageVersion, in the form:
-            #     "composer-x.y.z-airflow-a.b(.c)"
+            #     "composer-x.y.z-airflow-a.b.c"
             # @!attribute [rw] is_default
             #   @return [::Boolean]
             #     Whether this is the default ImageVersion used by Composer during
