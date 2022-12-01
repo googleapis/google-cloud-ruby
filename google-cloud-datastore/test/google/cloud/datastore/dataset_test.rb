@@ -1154,6 +1154,21 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     _(tx).must_be_kind_of Google::Cloud::Datastore::ReadOnlyTransaction
   end
 
+  it "read_only_transaction with read_time set will return a read-only Transaction" do
+    read_time = Time.now
+    tx_id = "giterdone".encode("ASCII-8BIT")
+    tx_options = Google::Cloud::Datastore::V1::TransactionOptions.new(
+      read_write: nil,
+      read_only: Google::Cloud::Datastore::V1::TransactionOptions::ReadOnly.new(read_time: read_time_to_timestamp(read_time))
+    )
+    begin_tx_res = Google::Cloud::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, project_id: project, transaction_options: tx_options
+
+    tx = dataset.read_only_transaction read_time: read_time
+    _(tx).must_be_kind_of Google::Cloud::Datastore::ReadOnlyTransaction
+    _(tx.id).must_equal tx_id
+  end
+
   it "snapshot will return a read-only Transaction" do
     tx_id = "giterdone".encode("ASCII-8BIT")
     tx_options = Google::Cloud::Datastore::V1::TransactionOptions.new(

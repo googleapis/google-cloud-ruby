@@ -55,6 +55,63 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       end
     end
 
+    it "should be able to run queries with and without read_time set" do
+      kind_val = "Post_#{SecureRandom.hex(4)}"
+      post.key = Google::Cloud::Datastore::Key.new kind_val, "post_1_#{SecureRandom.hex(4)}"
+      post2.key = Google::Cloud::Datastore::Key.new kind_val, "post_2_#{SecureRandom.hex(4)}"
+      dataset.save post, post2
+
+      sleep(1)
+      read_time = Time.now
+      sleep(1)
+
+      post2["isDraft"] = true
+      dataset.update post2
+
+      query = dataset.query(kind_val).where("isDraft", "=", false)
+
+      entities = dataset.run query, read_time: read_time
+      _(entities.count).must_equal 2
+      _(entities.batch_read_time.seconds).must_equal read_time.to_i
+      entities = dataset.run query
+      _(entities.count).must_equal 1
+      assert( entities.batch_read_time.seconds > read_time.to_i)
+
+      dataset.read_only_transaction(read_time: read_time) do |tx|
+        entities = tx.run query
+        _(entities.count).must_equal 2
+        _(entities.batch_read_time.seconds).must_equal read_time.to_i
+      end
+      dataset.read_only_transaction do |tx|
+        entities = tx.run query
+        _(entities.count).must_equal 1
+        assert( entities.batch_read_time.seconds > read_time.to_i)
+      end
+
+      dataset.delete post, post2
+    end
+
+    it "should be able to lookup for entities with and without read_time set" do
+      post.key = Google::Cloud::Datastore::Key.new "Post", "post_1_#{SecureRandom.hex(4)}"
+      dataset.save post
+
+      sleep(1)
+      read_time = Time.now
+      sleep(1)
+
+      post2.key = Google::Cloud::Datastore::Key.new "Post", "post_2_#{SecureRandom.hex(4)}"
+      dataset.save post2
+
+      entities = dataset.find_all post.key, post2.key
+      _(entities.count).must_equal 2
+      assert( entities.response_read_time.seconds > read_time.to_i)
+      entities = dataset.find_all post.key, post2.key, read_time: read_time
+      _(entities.count).must_equal 1
+      _(entities.response_read_time.seconds).must_equal read_time.to_i
+
+      dataset.delete post, post2
+    end
+
     it "should save/find/delete with a key name" do
       post.key = Google::Cloud::Datastore::Key.new "Post", "#{prefix}_post1"
       post.exclude_from_indexes! "author", true
@@ -813,6 +870,60 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
 
       refresh = dataset.find "Post", "#{prefix}_post5"
       _(refresh).must_be :nil?
+    end
+  end
+
+  describe "querying with limit > 300" do
+    let(:kind_val) { "Post_#{SecureRandom.hex(4)}" }
+    let(:limit) { 700 }
+    let(:post) do
+      Google::Cloud::Datastore::Entity.new.tap do |e|
+        e["title"]       = "How to make the perfect pizza in your grill"
+      end
+    end
+
+    before :all do
+      # Add 1000 entities of the same kind to the datastore
+      1000.times.each do |id|
+        post_temp = post.dup
+        post_temp.key = Google::Cloud::Datastore::Key.new kind_val, "Post_#{id+1}"
+        dataset.save post_temp
+      end
+    end
+
+    after :all do
+      # Delete the entities added
+      1000.times.each do |id|
+        post_temp = post.dup
+        post_temp.key = Google::Cloud::Datastore::Key.new kind_val, "Post_#{id+1}"
+        dataset.delete post_temp
+      end
+    end
+
+    it "should limit results when limit > 300 in query" do
+      # Testing limit with query
+      query = dataset.query(kind_val).limit(limit)
+      entities_count = 0
+      results = dataset.run query
+      loop do
+        entities_count += results.count
+        break unless results.next?
+        results = results.next
+      end
+      _(entities_count).must_equal limit
+    end
+
+    it "should limit results when limit > 300 in GQL query" do
+      # Testing limit with GQL query
+      query_gql = dataset.gql "SELECT * FROM #{kind_val} LIMIT @limit", {limit: limit}
+      entities_count = 0
+      results = dataset.run query_gql
+      loop do
+        entities_count += results.count
+        break unless results.next?
+        results = results.next
+      end
+      _(entities_count).must_equal limit
     end
   end
 end

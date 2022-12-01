@@ -50,6 +50,7 @@ module Google
             config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
           end
         end
+
         attr_accessor :mocked_service
 
         ##
@@ -61,20 +62,19 @@ module Google
 
         ##
         # Look up entities by keys.
-        def lookup *keys, consistency: nil, transaction: nil
-          read_options = generate_read_options consistency, transaction
-
+        def lookup *keys, consistency: nil, transaction: nil, read_time: nil
+          read_options = generate_read_options consistency, transaction, read_time
           service.lookup project_id: project, keys: keys, read_options: read_options
         end
 
         # Query for entities.
-        def run_query query, namespace = nil, consistency: nil, transaction: nil
+        def run_query query, namespace = nil, consistency: nil, transaction: nil, read_time: nil
           gql_query = nil
           if query.is_a? Google::Cloud::Datastore::V1::GqlQuery
             gql_query = query
             query = nil
           end
-          read_options = generate_read_options consistency, transaction
+          read_options = generate_read_options consistency, transaction, read_time
           if namespace
             partition_id = Google::Cloud::Datastore::V1::PartitionId.new(
               namespace_id: namespace
@@ -90,11 +90,13 @@ module Google
 
         ##
         # Begin a new transaction.
-        def begin_transaction read_only: nil, previous_transaction: nil
+        def begin_transaction read_only: nil, previous_transaction: nil, read_time: nil
           if read_only
             transaction_options = Google::Cloud::Datastore::V1::TransactionOptions.new
             transaction_options.read_only = \
-              Google::Cloud::Datastore::V1::TransactionOptions::ReadOnly.new
+              Google::Cloud::Datastore::V1::TransactionOptions::ReadOnly.new \
+                read_time: read_time_to_timestamp(read_time)
+
           end
           if previous_transaction
             transaction_options ||= \
@@ -127,7 +129,7 @@ module Google
 
         protected
 
-        def generate_read_options consistency, transaction
+        def generate_read_options consistency, transaction, read_time
           if consistency == :eventual
             return Google::Cloud::Datastore::V1::ReadOptions.new(
               read_consistency: :EVENTUAL
@@ -140,8 +142,24 @@ module Google
             return Google::Cloud::Datastore::V1::ReadOptions.new(
               transaction: transaction
             )
+          elsif read_time
+            return Google::Cloud::Datastore::V1::ReadOptions.new(
+              read_time: read_time_to_timestamp(read_time)
+            )
           end
           nil
+        end
+
+        def read_time_to_timestamp time
+          return nil if time.nil?
+
+          # Force the object to be a Time object.
+          time = time.to_time.utc
+
+          Google::Protobuf::Timestamp.new(
+            seconds: time.to_i,
+            nanos:   time.usec * 1000
+          )
         end
       end
     end

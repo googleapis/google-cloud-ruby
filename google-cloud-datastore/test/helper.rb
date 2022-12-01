@@ -24,9 +24,23 @@ class MockDatastore < Minitest::Spec
   let(:project) { "my-todo-project" }
   let(:credentials) { OpenStruct.new }
   let(:dataset) { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials)) }
+  let (:read_time_to_timestamp) do
 
+  end
   # Register this spec type for when :dns is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_datastore
+  end
+
+  def read_time_to_timestamp time
+    return nil if time.nil?
+
+    # Force the object to be a Time object.
+    time = time.to_time.utc
+
+    Google::Protobuf::Timestamp.new(
+      seconds: time.to_i,
+      nanos:   time.usec * 1000
+    )
   end
 end

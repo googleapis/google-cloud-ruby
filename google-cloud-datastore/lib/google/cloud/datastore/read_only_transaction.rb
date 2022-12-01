@@ -60,12 +60,21 @@ module Google
         attr_accessor :service
 
         ##
+        # Reads entities at the given time.
+        # This may not be older than 60 seconds.
+        attr_reader :read_time
+
+        ##
         # @private Creates a new ReadOnlyTransaction instance.
         # Takes a Service instead of project and Credentials.
         #
-        def initialize service
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
+        #
+        def initialize service, read_time: nil
           @service = service
           reset!
+          @read_time = read_time
           start
         end
 
@@ -163,9 +172,8 @@ module Google
         #
         def start
           raise TransactionError, "Transaction already opened." unless @id.nil?
-
           ensure_service!
-          tx_res = service.begin_transaction read_only: true
+          tx_res = service.begin_transaction read_only: true, read_time: @read_time
           @id = tx_res.transaction
         end
         alias begin_transaction start
