@@ -19,21 +19,27 @@
 # [START secretmanager_v1_generated_SecretManagerService_ListSecretVersions_sync]
 require "google/cloud/secret_manager/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecretManager::V1::SecretManagerService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecretManager::V1::SecretManagerService::Client#list_secret_versions
+#
+def list_secret_versions
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecretManager::V1::SecretManagerService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecretManager::V1::ListSecretVersionsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecretManager::V1::ListSecretVersionsRequest.new
 
-# Call the list_secret_versions method.
-result = client.list_secret_versions request
+  # Call the list_secret_versions method.
+  result = client.list_secret_versions request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::SecretManager::V1::SecretVersion.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::SecretManager::V1::SecretVersion.
+    p response
+  end
 end
 # [END secretmanager_v1_generated_SecretManagerService_ListSecretVersions_sync]

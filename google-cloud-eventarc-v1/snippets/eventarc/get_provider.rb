@@ -19,15 +19,21 @@
 # [START eventarc_v1_generated_Eventarc_GetProvider_sync]
 require "google/cloud/eventarc/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Eventarc::V1::Eventarc::Client#get_provider
+#
+def get_provider
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Eventarc::V1::GetProviderRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Eventarc::V1::GetProviderRequest.new
 
-# Call the get_provider method.
-result = client.get_provider request
+  # Call the get_provider method.
+  result = client.get_provider request
 
-# The returned object is of type Google::Cloud::Eventarc::V1::Provider.
-p result
+  # The returned object is of type Google::Cloud::Eventarc::V1::Provider.
+  p result
+end
 # [END eventarc_v1_generated_Eventarc_GetProvider_sync]

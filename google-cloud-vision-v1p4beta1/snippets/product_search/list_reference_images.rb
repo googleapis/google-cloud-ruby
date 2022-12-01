@@ -19,21 +19,27 @@
 # [START vision_v1p4beta1_generated_ProductSearch_ListReferenceImages_sync]
 require "google/cloud/vision/v1p4beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Vision::V1p4beta1::ProductSearch::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#list_reference_images
+#
+def list_reference_images
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Vision::V1p4beta1::ProductSearch::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Vision::V1p4beta1::ListReferenceImagesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Vision::V1p4beta1::ListReferenceImagesRequest.new
 
-# Call the list_reference_images method.
-result = client.list_reference_images request
+  # Call the list_reference_images method.
+  result = client.list_reference_images request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Vision::V1p4beta1::ReferenceImage.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Vision::V1p4beta1::ReferenceImage.
+    p response
+  end
 end
 # [END vision_v1p4beta1_generated_ProductSearch_ListReferenceImages_sync]

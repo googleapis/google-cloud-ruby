@@ -310,6 +310,11 @@ module Google
         #     [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
         #     specifying entity IDs in the EntityType in
         #     [BatchReadFeatureValuesRequest.request][] .
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Excludes Feature values with feature generation timestamp before this
+        #     timestamp. If not set, retrieve oldest values kept in Feature Store.
+        #     Timestamp, if present, must not have higher than millisecond precision.
         class BatchReadFeatureValuesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -626,7 +631,7 @@ module Google
         #     Required. The ID to use for the Feature, which will become the final component of
         #     the Feature's resource name.
         #
-        #     This value may be up to 60 characters, and valid characters are
+        #     This value may be up to 128 characters, and valid characters are
         #     `[a-z0-9_]`. The first character cannot be a number.
         #
         #     The value must be unique within an EntityType.
@@ -928,6 +933,9 @@ module Google
         # @!attribute [rw] imported_feature_value_count
         #   @return [::Integer]
         #     Number of Feature values that have been imported by the operation.
+        # @!attribute [rw] source_uris
+        #   @return [::Array<::String>]
+        #     The source URI from where Feature values are imported.
         # @!attribute [rw] invalid_row_count
         #   @return [::Integer]
         #     The number of rows in input source that weren't imported due to either

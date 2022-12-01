@@ -19,15 +19,21 @@
 # [START servicedirectory_v1beta1_generated_RegistrationService_GetEndpoint_sync]
 require "google/cloud/service_directory/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_endpoint
+#
+def get_endpoint
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest.new
 
-# Call the get_endpoint method.
-result = client.get_endpoint request
+  # Call the get_endpoint method.
+  result = client.get_endpoint request
 
-# The returned object is of type Google::Cloud::ServiceDirectory::V1beta1::Endpoint.
-p result
+  # The returned object is of type Google::Cloud::ServiceDirectory::V1beta1::Endpoint.
+  p result
+end
 # [END servicedirectory_v1beta1_generated_RegistrationService_GetEndpoint_sync]

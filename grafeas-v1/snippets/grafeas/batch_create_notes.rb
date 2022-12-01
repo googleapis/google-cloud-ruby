@@ -19,15 +19,21 @@
 # [START grafeas_v1_generated_Grafeas_BatchCreateNotes_sync]
 require "grafeas/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Grafeas::V1::Grafeas::Client.new
+##
+# Example demonstrating basic usage of
+# Grafeas::V1::Grafeas::Client#batch_create_notes
+#
+def batch_create_notes
+  # Create a client object. The client can be reused for multiple calls.
+  client = Grafeas::V1::Grafeas::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Grafeas::V1::BatchCreateNotesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Grafeas::V1::BatchCreateNotesRequest.new
 
-# Call the batch_create_notes method.
-result = client.batch_create_notes request
+  # Call the batch_create_notes method.
+  result = client.batch_create_notes request
 
-# The returned object is of type Grafeas::V1::BatchCreateNotesResponse.
-p result
+  # The returned object is of type Grafeas::V1::BatchCreateNotesResponse.
+  p result
+end
 # [END grafeas_v1_generated_Grafeas_BatchCreateNotes_sync]

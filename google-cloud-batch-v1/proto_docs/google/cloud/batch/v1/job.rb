@@ -324,7 +324,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A new or an existing persistent disk or a local ssd attached to a VM
+          # A new or an existing persistent disk (PD) or a local ssd attached to a VM
           # instance.
           # @!attribute [rw] new_disk
           #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::Disk]
@@ -342,7 +342,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Accelerator describes Compute Engine accelerators to be attached to VMs.
+          # Accelerator describes Compute Engine accelerators to be attached to the VM.
           # @!attribute [rw] type
           #   @return [::String]
           #     The accelerator type. For example, "nvidia-tesla-t4".
@@ -375,11 +375,10 @@ module Google
           # @!attribute [rw] accelerators
           #   @return [::Array<::Google::Cloud::Batch::V1::AllocationPolicy::Accelerator>]
           #     The accelerators attached to each VM instance.
-          #     Not yet implemented.
           # @!attribute [rw] disks
           #   @return [::Array<::Google::Cloud::Batch::V1::AllocationPolicy::AttachedDisk>]
           #     Non-boot disks to be attached for each VM created by this InstancePolicy.
-          #     New disks will be deleted when the attached VM is deleted.
+          #     New disks will be deleted when the VM is deleted.
           class InstancePolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

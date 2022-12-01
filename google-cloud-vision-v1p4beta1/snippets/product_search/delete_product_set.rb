@@ -19,15 +19,21 @@
 # [START vision_v1p4beta1_generated_ProductSearch_DeleteProductSet_sync]
 require "google/cloud/vision/v1p4beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Vision::V1p4beta1::ProductSearch::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#delete_product_set
+#
+def delete_product_set
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Vision::V1p4beta1::ProductSearch::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Vision::V1p4beta1::DeleteProductSetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Vision::V1p4beta1::DeleteProductSetRequest.new
 
-# Call the delete_product_set method.
-result = client.delete_product_set request
+  # Call the delete_product_set method.
+  result = client.delete_product_set request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END vision_v1p4beta1_generated_ProductSearch_DeleteProductSet_sync]

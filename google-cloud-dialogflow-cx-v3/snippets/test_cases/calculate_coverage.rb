@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_TestCases_CalculateCoverage_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::TestCases::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::TestCases::Client#calculate_coverage
+#
+def calculate_coverage
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::TestCases::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::CalculateCoverageRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::CalculateCoverageRequest.new
 
-# Call the calculate_coverage method.
-result = client.calculate_coverage request
+  # Call the calculate_coverage method.
+  result = client.calculate_coverage request
 
-# The returned object is of type Google::Cloud::Dialogflow::CX::V3::CalculateCoverageResponse.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::CX::V3::CalculateCoverageResponse.
+  p result
+end
 # [END dialogflow_v3_generated_TestCases_CalculateCoverage_sync]

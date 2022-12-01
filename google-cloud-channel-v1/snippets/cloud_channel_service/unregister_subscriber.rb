@@ -19,15 +19,21 @@
 # [START cloudchannel_v1_generated_CloudChannelService_UnregisterSubscriber_sync]
 require "google/cloud/channel/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#unregister_subscriber
+#
+def unregister_subscriber
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new
 
-# Call the unregister_subscriber method.
-result = client.unregister_subscriber request
+  # Call the unregister_subscriber method.
+  result = client.unregister_subscriber request
 
-# The returned object is of type Google::Cloud::Channel::V1::UnregisterSubscriberResponse.
-p result
+  # The returned object is of type Google::Cloud::Channel::V1::UnregisterSubscriberResponse.
+  p result
+end
 # [END cloudchannel_v1_generated_CloudChannelService_UnregisterSubscriber_sync]

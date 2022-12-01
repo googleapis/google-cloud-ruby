@@ -20,7 +20,7 @@
 module Google
   module Api
     # The launch stage as defined by [Google Cloud Platform
-    # Launch Stages](http://cloud.google.com/terms/launch-stages).
+    # Launch Stages](https://cloud.google.com/terms/launch-stages).
     module LaunchStage
       # Do not use this default value.
       LAUNCH_STAGE_UNSPECIFIED = 0
@@ -42,7 +42,7 @@ module Google
       # for widespread use. By Alpha, all significant design issues are resolved
       # and we are in the process of verifying functionality. Alpha customers
       # need to apply for access, agree to applicable terms, and have their
-      # projects allowlisted. Alpha releases don’t have to be feature complete,
+      # projects allowlisted. Alpha releases don't have to be feature complete,
       # no SLAs are provided, and there are no technical support obligations, but
       # they will be far enough along that customers can actually use them in
       # test environments or for limited-use tests -- just like they would in
@@ -61,7 +61,7 @@ module Google
       GA = 4
 
       # Deprecated features are scheduled to be shut down and removed. For more
-      # information, see the “Deprecation Policy” section of our [Terms of
+      # information, see the "Deprecation Policy" section of our [Terms of
       # Service](https://cloud.google.com/terms/)
       # and the [Google Cloud Platform Subject to the Deprecation
       # Policy](https://cloud.google.com/terms/deprecation) documentation.

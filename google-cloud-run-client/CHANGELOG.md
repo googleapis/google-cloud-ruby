@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2022-11-10)
+
+#### Features
+
+* Support for Executions, Jobs, and Tasks services ([#19365](https://github.com/googleapis/google-cloud-ruby/issues/19365)) 
+
 ### 0.2.0 (2022-07-07)
 
 #### Features

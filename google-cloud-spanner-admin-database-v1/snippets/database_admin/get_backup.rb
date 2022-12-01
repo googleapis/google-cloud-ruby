@@ -19,15 +19,21 @@
 # [START spanner_v1_generated_DatabaseAdmin_GetBackup_sync]
 require "google/cloud/spanner/admin/database/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_backup
+#
+def get_backup
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest.new
 
-# Call the get_backup method.
-result = client.get_backup request
+  # Call the get_backup method.
+  result = client.get_backup request
 
-# The returned object is of type Google::Cloud::Spanner::Admin::Database::V1::Backup.
-p result
+  # The returned object is of type Google::Cloud::Spanner::Admin::Database::V1::Backup.
+  p result
+end
 # [END spanner_v1_generated_DatabaseAdmin_GetBackup_sync]

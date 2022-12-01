@@ -55,9 +55,9 @@ module Google
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The end timestamp of the duration of usage statistics.
-        # @!attribute [rw] usage_within_time_range
+        # @!attribute [r] usage_within_time_range
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DataCatalog::V1::UsageStats}]
-        #     Usage statistics over each of the predefined time ranges.
+        #     Output only. BigQuery usage statistics over each of the predefined time ranges.
         #
         #     Supported time ranges are `{"24H", "7D", "30D"}`.
         class UsageSignal

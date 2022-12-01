@@ -10,6 +10,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/eventarc/v1/channel_pb'
 require 'google/cloud/eventarc/v1/channel_connection_pb'
 require 'google/cloud/eventarc/v1/discovery_pb'
+require 'google/cloud/eventarc/v1/google_channel_config_pb'
 require 'google/cloud/eventarc/v1/trigger_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
@@ -25,6 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
       optional :order_by, :string, 4
+      optional :filter, :string, 5
     end
     add_message "google.cloud.eventarc.v1.ListTriggersResponse" do
       repeated :triggers, :message, 1, "google.cloud.eventarc.v1.Trigger"
@@ -114,6 +116,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.eventarc.v1.DeleteChannelConnectionRequest" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest" do
+      optional :google_channel_config, :message, 1, "google.cloud.eventarc.v1.GoogleChannelConfig"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.eventarc.v1.GetGoogleChannelConfigRequest" do
+      optional :name, :string, 1
+    end
     add_message "google.cloud.eventarc.v1.OperationMetadata" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
       optional :end_time, :message, 2, "google.protobuf.Timestamp"
@@ -150,6 +159,8 @@ module Google
         ListChannelConnectionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.ListChannelConnectionsResponse").msgclass
         CreateChannelConnectionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.CreateChannelConnectionRequest").msgclass
         DeleteChannelConnectionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.DeleteChannelConnectionRequest").msgclass
+        UpdateGoogleChannelConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest").msgclass
+        GetGoogleChannelConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.GetGoogleChannelConfigRequest").msgclass
         OperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.OperationMetadata").msgclass
       end
     end

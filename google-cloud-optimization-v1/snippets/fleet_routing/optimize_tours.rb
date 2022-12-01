@@ -19,15 +19,21 @@
 # [START cloudoptimization_v1_generated_FleetRouting_OptimizeTours_sync]
 require "google/cloud/optimization/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Optimization::V1::FleetRouting::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Optimization::V1::FleetRouting::Client#optimize_tours
+#
+def optimize_tours
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Optimization::V1::FleetRouting::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Optimization::V1::OptimizeToursRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Optimization::V1::OptimizeToursRequest.new
 
-# Call the optimize_tours method.
-result = client.optimize_tours request
+  # Call the optimize_tours method.
+  result = client.optimize_tours request
 
-# The returned object is of type Google::Cloud::Optimization::V1::OptimizeToursResponse.
-p result
+  # The returned object is of type Google::Cloud::Optimization::V1::OptimizeToursResponse.
+  p result
+end
 # [END cloudoptimization_v1_generated_FleetRouting_OptimizeTours_sync]

@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_JobService_CancelDataLabelingJob_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::JobService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::JobService::Client#cancel_data_labeling_job
+#
+def cancel_data_labeling_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::JobService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::CancelDataLabelingJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::CancelDataLabelingJobRequest.new
 
-# Call the cancel_data_labeling_job method.
-result = client.cancel_data_labeling_job request
+  # Call the cancel_data_labeling_job method.
+  result = client.cancel_data_labeling_job request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END aiplatform_v1_generated_JobService_CancelDataLabelingJob_sync]

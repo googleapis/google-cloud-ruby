@@ -19,22 +19,28 @@
 # [START certificatemanager_v1_generated_CertificateManager_DeleteCertificateIssuanceConfig_sync]
 require "google/cloud/certificate_manager/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_certificate_issuance_config
+#
+def delete_certificate_issuance_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::CertificateManager::V1::DeleteCertificateIssuanceConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::CertificateManager::V1::DeleteCertificateIssuanceConfigRequest.new
 
-# Call the delete_certificate_issuance_config method.
-result = client.delete_certificate_issuance_config request
+  # Call the delete_certificate_issuance_config method.
+  result = client.delete_certificate_issuance_config request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END certificatemanager_v1_generated_CertificateManager_DeleteCertificateIssuanceConfig_sync]

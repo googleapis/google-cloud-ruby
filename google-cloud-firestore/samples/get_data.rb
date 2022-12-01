@@ -121,14 +121,14 @@ def add_subcollection project_id:, collection_path: "cities"
   # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
-  # [START fs_add_subcollection]
+  # [START firestore_data_add_sub_collection]
   city_ref = firestore.doc "#{collection_path}/SF"
 
   subcollection_ref = city_ref.col "neighborhoods"
 
   added_doc_ref = subcollection_ref.add name: "Marina"
   puts "Added document with ID: #{added_doc_ref.document_id}."
-  # [END fs_add_subcollection]
+  # [END firestore_data_add_sub_collection]
 end
 
 def list_subcollections project_id:, collection_path: "cities"

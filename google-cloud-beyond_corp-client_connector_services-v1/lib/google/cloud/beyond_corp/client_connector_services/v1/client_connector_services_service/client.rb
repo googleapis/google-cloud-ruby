@@ -30,12 +30,12 @@ module Google
             ##
             # Client for the ClientConnectorServicesService service.
             #
-            # ## API Overview
+            # API Overview:
             #
             # The `beyondcorp.googleapis.com` service implements the Google Cloud
             # BeyondCorp API.
             #
-            # ## Data Model
+            # Data Model:
             #
             # The ClientConnectorServicesService exposes the following resources:
             #

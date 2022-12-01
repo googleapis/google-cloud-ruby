@@ -19,15 +19,21 @@
 # [START iap_v1_generated_IdentityAwareProxyOAuthService_ResetIdentityAwareProxyClientSecret_sync]
 require "google/cloud/iap/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#reset_identity_aware_proxy_client_secret
+#
+def reset_identity_aware_proxy_client_secret
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iap::V1::ResetIdentityAwareProxyClientSecretRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iap::V1::ResetIdentityAwareProxyClientSecretRequest.new
 
-# Call the reset_identity_aware_proxy_client_secret method.
-result = client.reset_identity_aware_proxy_client_secret request
+  # Call the reset_identity_aware_proxy_client_secret method.
+  result = client.reset_identity_aware_proxy_client_secret request
 
-# The returned object is of type Google::Cloud::Iap::V1::IdentityAwareProxyClient.
-p result
+  # The returned object is of type Google::Cloud::Iap::V1::IdentityAwareProxyClient.
+  p result
+end
 # [END iap_v1_generated_IdentityAwareProxyOAuthService_ResetIdentityAwareProxyClientSecret_sync]

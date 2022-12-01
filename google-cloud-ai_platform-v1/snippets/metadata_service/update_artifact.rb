@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_MetadataService_UpdateArtifact_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::MetadataService::Client#update_artifact
+#
+def update_artifact
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::UpdateArtifactRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::UpdateArtifactRequest.new
 
-# Call the update_artifact method.
-result = client.update_artifact request
+  # Call the update_artifact method.
+  result = client.update_artifact request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::Artifact.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::Artifact.
+  p result
+end
 # [END aiplatform_v1_generated_MetadataService_UpdateArtifact_sync]

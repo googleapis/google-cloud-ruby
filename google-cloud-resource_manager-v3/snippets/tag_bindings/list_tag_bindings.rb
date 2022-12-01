@@ -19,21 +19,27 @@
 # [START cloudresourcemanager_v3_generated_TagBindings_ListTagBindings_sync]
 require "google/cloud/resource_manager/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ResourceManager::V3::TagBindings::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::TagBindings::Client#list_tag_bindings
+#
+def list_tag_bindings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ResourceManager::V3::TagBindings::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ResourceManager::V3::ListTagBindingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ResourceManager::V3::ListTagBindingsRequest.new
 
-# Call the list_tag_bindings method.
-result = client.list_tag_bindings request
+  # Call the list_tag_bindings method.
+  result = client.list_tag_bindings request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::ResourceManager::V3::TagBinding.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::ResourceManager::V3::TagBinding.
+    p response
+  end
 end
 # [END cloudresourcemanager_v3_generated_TagBindings_ListTagBindings_sync]

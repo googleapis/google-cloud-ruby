@@ -19,15 +19,21 @@
 # [START datastore_v1_generated_Datastore_RunAggregationQuery_sync]
 require "google/cloud/datastore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Datastore::V1::Datastore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query
+#
+def run_aggregation_query
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Datastore::V1::Datastore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new
 
-# Call the run_aggregation_query method.
-result = client.run_aggregation_query request
+  # Call the run_aggregation_query method.
+  result = client.run_aggregation_query request
 
-# The returned object is of type Google::Cloud::Datastore::V1::RunAggregationQueryResponse.
-p result
+  # The returned object is of type Google::Cloud::Datastore::V1::RunAggregationQueryResponse.
+  p result
+end
 # [END datastore_v1_generated_Datastore_RunAggregationQuery_sync]

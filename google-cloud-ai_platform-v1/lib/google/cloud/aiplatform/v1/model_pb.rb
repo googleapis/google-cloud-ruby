@@ -41,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 17
       optional :encryption_spec, :message, 24, "google.cloud.aiplatform.v1.EncryptionSpec"
       optional :model_source_info, :message, 38, "google.cloud.aiplatform.v1.ModelSourceInfo"
+      optional :metadata_artifact, :string, 44
     end
     add_message "google.cloud.aiplatform.v1.Model.ExportFormat" do
       optional :id, :string, 1

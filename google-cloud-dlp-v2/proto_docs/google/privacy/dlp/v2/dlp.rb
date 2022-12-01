@@ -37,6 +37,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The rule to exclude findings based on a hotword. For record inspection of
+        # tables, column names are considered hotwords. An example of this is to
+        # exclude a finding if a BigQuery column matches a specific pattern.
+        # @!attribute [rw] hotword_regex
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Regex]
+        #     Regular expression pattern defining what qualifies as a hotword.
+        # @!attribute [rw] proximity
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
+        #     Range of characters within which the entire hotword must reside.
+        #     The total length of the window cannot exceed 1000 characters.
+        #     The windowBefore property in proximity should be set to 1 if the hotword
+        #     needs to be included in a column header.
+        class ExcludeByHotword
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The rule that specifies conditions when findings of infoTypes specified in
         # `InspectionRuleSet` are removed from results.
         # @!attribute [rw] dictionary
@@ -48,6 +65,10 @@ module Google
         # @!attribute [rw] exclude_info_types
         #   @return [::Google::Cloud::Dlp::V2::ExcludeInfoTypes]
         #     Set of infoTypes for which findings would affect this rule.
+        # @!attribute [rw] exclude_by_hotword
+        #   @return [::Google::Cloud::Dlp::V2::ExcludeByHotword]
+        #     Drop if the hotword rule is contained in the proximate context. For
+        #     tabular data, the context includes the column name.
         # @!attribute [rw] matching_type
         #   @return [::Google::Cloud::Dlp::V2::MatchingType]
         #     How the rule is applied, see MatchingType documentation for details.
@@ -241,7 +262,6 @@ module Google
           end
         end
 
-        # Container structure for the content to inspect.
         # @!attribute [rw] value
         #   @return [::String]
         #     String data to inspect or redact.
@@ -710,6 +730,13 @@ module Google
         # @!attribute [rw] item
         #   @return [::Google::Cloud::Dlp::V2::ContentItem]
         #     The item to de-identify. Will be treated as text.
+        #
+        #     This value must be of type
+        #     {::Google::Cloud::Dlp::V2::Table Table} if your
+        #     {::Google::Cloud::Dlp::V2::DeidentifyContentRequest#deidentify_config deidentify_config}
+        #     is a
+        #     {::Google::Cloud::Dlp::V2::RecordTransformations RecordTransformations}
+        #     object.
         # @!attribute [rw] inspect_template_name
         #   @return [::String]
         #     Template to use. Any configuration directly specified in
@@ -1167,6 +1194,9 @@ module Google
 
             # The infoType is typically used in Google internally.
             INTERNAL = 40
+
+            # The infoType is typically used in New Zealand.
+            NEW_ZEALAND = 41
           end
 
           # Enum of the current industries in the category.
@@ -3137,8 +3167,9 @@ module Google
         #     Create a de-identified copy of the input data.
         # @!attribute [rw] job_notification_emails
         #   @return [::Google::Cloud::Dlp::V2::Action::JobNotificationEmails]
-        #     Enable email notification for project owners and editors on job's
-        #     completion/failure.
+        #     Sends an email when the job completes. The email goes to IAM project
+        #     owners and technical [Essential
+        #     Contacts](https://cloud.google.com/resource-manager/docs/managing-notification-contacts).
         # @!attribute [rw] publish_to_stackdriver
         #   @return [::Google::Cloud::Dlp::V2::Action::PublishToStackdriver]
         #     Enable Stackdriver metric dlp.googleapis.com/finding_count.
@@ -4643,6 +4674,7 @@ module Google
         # @!attribute [rw] row_count
         #   @return [::Integer]
         #     Number of rows in the table when the profile was generated.
+        #     This will not be populated for BigLake tables.
         # @!attribute [rw] encryption_status
         #   @return [::Google::Cloud::Dlp::V2::EncryptionStatus]
         #     How the table is encrypted.

@@ -19,21 +19,27 @@
 # [START run_v2_generated_Revisions_ListRevisions_sync]
 require "google/cloud/run/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Run::V2::Revisions::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Run::V2::Revisions::Client#list_revisions
+#
+def list_revisions
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Run::V2::Revisions::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Run::V2::ListRevisionsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Run::V2::ListRevisionsRequest.new
 
-# Call the list_revisions method.
-result = client.list_revisions request
+  # Call the list_revisions method.
+  result = client.list_revisions request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Run::V2::Revision.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Run::V2::Revision.
+    p response
+  end
 end
 # [END run_v2_generated_Revisions_ListRevisions_sync]

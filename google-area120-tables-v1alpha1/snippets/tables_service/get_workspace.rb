@@ -19,15 +19,21 @@
 # [START area120tables_v1alpha1_generated_TablesService_GetWorkspace_sync]
 require "google/area120/tables/v1alpha1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Area120::Tables::V1alpha1::TablesService::Client#get_workspace
+#
+def get_workspace
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new
 
-# Call the get_workspace method.
-result = client.get_workspace request
+  # Call the get_workspace method.
+  result = client.get_workspace request
 
-# The returned object is of type Google::Area120::Tables::V1alpha1::Workspace.
-p result
+  # The returned object is of type Google::Area120::Tables::V1alpha1::Workspace.
+  p result
+end
 # [END area120tables_v1alpha1_generated_TablesService_GetWorkspace_sync]

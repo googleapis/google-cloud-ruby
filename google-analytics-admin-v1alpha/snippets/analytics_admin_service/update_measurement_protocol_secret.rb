@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateMeasurementProtocolSecret_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_measurement_protocol_secret
+#
+def update_measurement_protocol_secret
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::UpdateMeasurementProtocolSecretRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::UpdateMeasurementProtocolSecretRequest.new
 
-# Call the update_measurement_protocol_secret method.
-result = client.update_measurement_protocol_secret request
+  # Call the update_measurement_protocol_secret method.
+  result = client.update_measurement_protocol_secret request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateMeasurementProtocolSecret_sync]

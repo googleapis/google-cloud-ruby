@@ -19,15 +19,21 @@
 # [START accesscontextmanager_v1_generated_AccessContextManager_GetAccessPolicy_sync]
 require "google/identity/access_context_manager/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_access_policy
+#
+def get_access_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Identity::AccessContextManager::V1::GetAccessPolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Identity::AccessContextManager::V1::GetAccessPolicyRequest.new
 
-# Call the get_access_policy method.
-result = client.get_access_policy request
+  # Call the get_access_policy method.
+  result = client.get_access_policy request
 
-# The returned object is of type Google::Identity::AccessContextManager::V1::AccessPolicy.
-p result
+  # The returned object is of type Google::Identity::AccessContextManager::V1::AccessPolicy.
+  p result
+end
 # [END accesscontextmanager_v1_generated_AccessContextManager_GetAccessPolicy_sync]

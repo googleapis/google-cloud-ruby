@@ -19,22 +19,28 @@
 # [START apigateway_v1_generated_ApiGatewayService_CreateApi_sync]
 require "google/cloud/api_gateway/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#create_api
+#
+def create_api
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ApiGateway::V1::CreateApiRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ApiGateway::V1::CreateApiRequest.new
 
-# Call the create_api method.
-result = client.create_api request
+  # Call the create_api method.
+  result = client.create_api request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END apigateway_v1_generated_ApiGatewayService_CreateApi_sync]

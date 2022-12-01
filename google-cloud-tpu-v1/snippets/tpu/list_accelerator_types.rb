@@ -19,21 +19,27 @@
 # [START tpu_v1_generated_Tpu_ListAcceleratorTypes_sync]
 require "google/cloud/tpu/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tpu::V1::Tpu::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tpu::V1::Tpu::Client#list_accelerator_types
+#
+def list_accelerator_types
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tpu::V1::Tpu::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Tpu::V1::ListAcceleratorTypesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Tpu::V1::ListAcceleratorTypesRequest.new
 
-# Call the list_accelerator_types method.
-result = client.list_accelerator_types request
+  # Call the list_accelerator_types method.
+  result = client.list_accelerator_types request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Tpu::V1::AcceleratorType.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Tpu::V1::AcceleratorType.
+    p response
+  end
 end
 # [END tpu_v1_generated_Tpu_ListAcceleratorTypes_sync]

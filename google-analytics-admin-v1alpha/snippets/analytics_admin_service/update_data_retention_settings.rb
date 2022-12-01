@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDataRetentionSettings_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_data_retention_settings
+#
+def update_data_retention_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest.new
 
-# Call the update_data_retention_settings method.
-result = client.update_data_retention_settings request
+  # Call the update_data_retention_settings method.
+  result = client.update_data_retention_settings request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::DataRetentionSettings.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::DataRetentionSettings.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDataRetentionSettings_sync]

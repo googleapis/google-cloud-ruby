@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateAccount_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_account
+#
+def update_account
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::UpdateAccountRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::UpdateAccountRequest.new
 
-# Call the update_account method.
-result = client.update_account request
+  # Call the update_account method.
+  result = client.update_account request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::Account.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::Account.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateAccount_sync]

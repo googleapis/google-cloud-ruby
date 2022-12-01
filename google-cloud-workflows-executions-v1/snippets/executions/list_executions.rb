@@ -19,21 +19,27 @@
 # [START workflowexecutions_v1_generated_Executions_ListExecutions_sync]
 require "google/cloud/workflows/executions/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Workflows::Executions::V1::Executions::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Workflows::Executions::V1::Executions::Client#list_executions
+#
+def list_executions
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Workflows::Executions::V1::Executions::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Workflows::Executions::V1::ListExecutionsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Workflows::Executions::V1::ListExecutionsRequest.new
 
-# Call the list_executions method.
-result = client.list_executions request
+  # Call the list_executions method.
+  result = client.list_executions request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Workflows::Executions::V1::Execution.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Workflows::Executions::V1::Execution.
+    p response
+  end
 end
 # [END workflowexecutions_v1_generated_Executions_ListExecutions_sync]

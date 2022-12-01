@@ -19,15 +19,21 @@
 # [START bigquerymigration_v2_generated_MigrationService_GetMigrationSubtask_sync]
 require "google/cloud/bigquery/migration/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Migration::V2::MigrationService::Client#get_migration_subtask
+#
+def get_migration_subtask
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Migration::V2::GetMigrationSubtaskRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Migration::V2::GetMigrationSubtaskRequest.new
 
-# Call the get_migration_subtask method.
-result = client.get_migration_subtask request
+  # Call the get_migration_subtask method.
+  result = client.get_migration_subtask request
 
-# The returned object is of type Google::Cloud::Bigquery::Migration::V2::MigrationSubtask.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::Migration::V2::MigrationSubtask.
+  p result
+end
 # [END bigquerymigration_v2_generated_MigrationService_GetMigrationSubtask_sync]

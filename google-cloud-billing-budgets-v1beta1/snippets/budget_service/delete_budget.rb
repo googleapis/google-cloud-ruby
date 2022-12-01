@@ -19,15 +19,21 @@
 # [START billingbudgets_v1beta1_generated_BudgetService_DeleteBudget_sync]
 require "google/cloud/billing/budgets/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client#delete_budget
+#
+def delete_budget
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Billing::Budgets::V1beta1::DeleteBudgetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Billing::Budgets::V1beta1::DeleteBudgetRequest.new
 
-# Call the delete_budget method.
-result = client.delete_budget request
+  # Call the delete_budget method.
+  result = client.delete_budget request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END billingbudgets_v1beta1_generated_BudgetService_DeleteBudget_sync]

@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.4.0 (2022-11-17)
+
+#### Features
+
+* add Instance.reservation_affinity, nic_type, can_ip_forward 
+* add IsInstanceUpgradeableResponse.upgrade_image 
+* added Location and IAM methods 
+* Support UpdateRuntime, UpgradeRuntime, DiagnoseRuntime, DiagnoseInstance  
+
 ### 0.3.0 (2022-07-06)
 
 #### Features

@@ -19,15 +19,21 @@
 # [START dataform_v1beta1_generated_Dataform_MoveDirectory_sync]
 require "google/cloud/dataform/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#move_directory
+#
+def move_directory
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest.new
 
-# Call the move_directory method.
-result = client.move_directory request
+  # Call the move_directory method.
+  result = client.move_directory request
 
-# The returned object is of type Google::Cloud::Dataform::V1beta1::MoveDirectoryResponse.
-p result
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::MoveDirectoryResponse.
+  p result
+end
 # [END dataform_v1beta1_generated_Dataform_MoveDirectory_sync]

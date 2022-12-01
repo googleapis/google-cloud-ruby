@@ -19,15 +19,21 @@
 # [START dataplex_v1_generated_DataplexService_GetZone_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::DataplexService::Client#get_zone
+#
+def get_zone
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::GetZoneRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::GetZoneRequest.new
 
-# Call the get_zone method.
-result = client.get_zone request
+  # Call the get_zone method.
+  result = client.get_zone request
 
-# The returned object is of type Google::Cloud::Dataplex::V1::Zone.
-p result
+  # The returned object is of type Google::Cloud::Dataplex::V1::Zone.
+  p result
+end
 # [END dataplex_v1_generated_DataplexService_GetZone_sync]

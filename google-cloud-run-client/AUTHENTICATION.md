@@ -27,7 +27,7 @@ export GOOGLE_CLOUD_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/run"
 
-client = Google::Cloud::Run.revisions
+client = Google::Cloud::Run.executions
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-run-client
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::Run::V2::Revisions::Credentials`):
+`::Google::Cloud::Run::V2::Executions::Credentials`):
 
 * `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
 * `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
@@ -75,7 +75,7 @@ require "google/cloud/run"
 
 ENV["GOOGLE_CLOUD_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Run.revisions
+client = Google::Cloud::Run.executions
 ```
 
 ### Configuration
@@ -86,7 +86,7 @@ it in an environment variable. Either on an individual client initialization:
 ```ruby
 require "google/cloud/run"
 
-client = Google::Cloud::Run.revisions do |config|
+client = Google::Cloud::Run.executions do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -100,7 +100,7 @@ Google::Cloud::Run.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Run.revisions
+client = Google::Cloud::Run.executions
 ```
 
 ### Cloud SDK

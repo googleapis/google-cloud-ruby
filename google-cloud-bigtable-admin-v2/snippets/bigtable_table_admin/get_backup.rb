@@ -19,15 +19,21 @@
 # [START bigtableadmin_v2_generated_BigtableTableAdmin_GetBackup_sync]
 require "google/cloud/bigtable/admin/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_backup
+#
+def get_backup
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigtable::Admin::V2::GetBackupRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigtable::Admin::V2::GetBackupRequest.new
 
-# Call the get_backup method.
-result = client.get_backup request
+  # Call the get_backup method.
+  result = client.get_backup request
 
-# The returned object is of type Google::Cloud::Bigtable::Admin::V2::Backup.
-p result
+  # The returned object is of type Google::Cloud::Bigtable::Admin::V2::Backup.
+  p result
+end
 # [END bigtableadmin_v2_generated_BigtableTableAdmin_GetBackup_sync]

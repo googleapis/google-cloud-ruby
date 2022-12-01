@@ -19,15 +19,21 @@
 # [START vmmigration_v1_generated_VMMigration_GetMigratingVm_sync]
 require "google/cloud/vm_migration/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::VMMigration::V1::VMMigration::Client#get_migrating_vm
+#
+def get_migrating_vm
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::VMMigration::V1::GetMigratingVmRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::VMMigration::V1::GetMigratingVmRequest.new
 
-# Call the get_migrating_vm method.
-result = client.get_migrating_vm request
+  # Call the get_migrating_vm method.
+  result = client.get_migrating_vm request
 
-# The returned object is of type Google::Cloud::VMMigration::V1::MigratingVm.
-p result
+  # The returned object is of type Google::Cloud::VMMigration::V1::MigratingVm.
+  p result
+end
 # [END vmmigration_v1_generated_VMMigration_GetMigratingVm_sync]

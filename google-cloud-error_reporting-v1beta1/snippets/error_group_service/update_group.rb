@@ -19,15 +19,21 @@
 # [START clouderrorreporting_v1beta1_generated_ErrorGroupService_UpdateGroup_sync]
 require "google/cloud/error_reporting/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client#update_group
+#
+def update_group
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new
 
-# Call the update_group method.
-result = client.update_group request
+  # Call the update_group method.
+  result = client.update_group request
 
-# The returned object is of type Google::Cloud::ErrorReporting::V1beta1::ErrorGroup.
-p result
+  # The returned object is of type Google::Cloud::ErrorReporting::V1beta1::ErrorGroup.
+  p result
+end
 # [END clouderrorreporting_v1beta1_generated_ErrorGroupService_UpdateGroup_sync]

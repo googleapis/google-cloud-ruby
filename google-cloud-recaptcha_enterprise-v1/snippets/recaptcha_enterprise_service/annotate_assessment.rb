@@ -19,15 +19,21 @@
 # [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AnnotateAssessment_sync]
 require "google/cloud/recaptcha_enterprise/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#annotate_assessment
+#
+def annotate_assessment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest.new
 
-# Call the annotate_assessment method.
-result = client.annotate_assessment request
+  # Call the annotate_assessment method.
+  result = client.annotate_assessment request
 
-# The returned object is of type Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentResponse.
-p result
+  # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentResponse.
+  p result
+end
 # [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AnnotateAssessment_sync]

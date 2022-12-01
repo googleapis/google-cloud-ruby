@@ -19,22 +19,28 @@
 # [START videointelligence_v1p2beta1_generated_VideoIntelligenceService_AnnotateVideo_sync]
 require "google/cloud/video_intelligence/v1p2beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::VideoIntelligence::V1p2beta1::VideoIntelligenceService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::VideoIntelligence::V1p2beta1::VideoIntelligenceService::Client#annotate_video
+#
+def annotate_video
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::VideoIntelligence::V1p2beta1::VideoIntelligenceService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::VideoIntelligence::V1p2beta1::AnnotateVideoRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::VideoIntelligence::V1p2beta1::AnnotateVideoRequest.new
 
-# Call the annotate_video method.
-result = client.annotate_video request
+  # Call the annotate_video method.
+  result = client.annotate_video request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END videointelligence_v1p2beta1_generated_VideoIntelligenceService_AnnotateVideo_sync]

@@ -19,22 +19,28 @@
 # [START workflows_v1beta_generated_Workflows_UpdateWorkflow_sync]
 require "google/cloud/workflows/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Workflows::V1beta::Workflows::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Workflows::V1beta::Workflows::Client#update_workflow
+#
+def update_workflow
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Workflows::V1beta::Workflows::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Workflows::V1beta::UpdateWorkflowRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Workflows::V1beta::UpdateWorkflowRequest.new
 
-# Call the update_workflow method.
-result = client.update_workflow request
+  # Call the update_workflow method.
+  result = client.update_workflow request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END workflows_v1beta_generated_Workflows_UpdateWorkflow_sync]

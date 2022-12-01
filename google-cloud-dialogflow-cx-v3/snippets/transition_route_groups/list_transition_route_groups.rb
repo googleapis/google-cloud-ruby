@@ -19,21 +19,27 @@
 # [START dialogflow_v3_generated_TransitionRouteGroups_ListTransitionRouteGroups_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client#list_transition_route_groups
+#
+def list_transition_route_groups
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::ListTransitionRouteGroupsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::ListTransitionRouteGroupsRequest.new
 
-# Call the list_transition_route_groups method.
-result = client.list_transition_route_groups request
+  # Call the list_transition_route_groups method.
+  result = client.list_transition_route_groups request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
+    p response
+  end
 end
 # [END dialogflow_v3_generated_TransitionRouteGroups_ListTransitionRouteGroups_sync]

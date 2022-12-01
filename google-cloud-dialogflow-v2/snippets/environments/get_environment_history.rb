@@ -19,21 +19,27 @@
 # [START dialogflow_v2_generated_Environments_GetEnvironmentHistory_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Environments::Client#get_environment_history
+#
+def get_environment_history
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Environments::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest.new
 
-# Call the get_environment_history method.
-result = client.get_environment_history request
+  # Call the get_environment_history method.
+  result = client.get_environment_history request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dialogflow::V2::EnvironmentHistory::Entry.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dialogflow::V2::EnvironmentHistory::Entry.
+    p response
+  end
 end
 # [END dialogflow_v2_generated_Environments_GetEnvironmentHistory_sync]

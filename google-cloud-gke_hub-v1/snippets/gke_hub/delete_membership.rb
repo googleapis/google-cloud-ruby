@@ -19,22 +19,28 @@
 # [START gkehub_v1_generated_GkeHub_DeleteMembership_sync]
 require "google/cloud/gke_hub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeHub::V1::GkeHub::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeHub::V1::GkeHub::Client#delete_membership
+#
+def delete_membership
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeHub::V1::GkeHub::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeHub::V1::DeleteMembershipRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeHub::V1::DeleteMembershipRequest.new
 
-# Call the delete_membership method.
-result = client.delete_membership request
+  # Call the delete_membership method.
+  result = client.delete_membership request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END gkehub_v1_generated_GkeHub_DeleteMembership_sync]

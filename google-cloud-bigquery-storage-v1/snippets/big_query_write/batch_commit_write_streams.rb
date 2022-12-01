@@ -19,15 +19,21 @@
 # [START bigquerystorage_v1_generated_BigQueryWrite_BatchCommitWriteStreams_sync]
 require "google/cloud/bigquery/storage/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#batch_commit_write_streams
+#
+def batch_commit_write_streams
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Storage::V1::BatchCommitWriteStreamsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Storage::V1::BatchCommitWriteStreamsRequest.new
 
-# Call the batch_commit_write_streams method.
-result = client.batch_commit_write_streams request
+  # Call the batch_commit_write_streams method.
+  result = client.batch_commit_write_streams request
 
-# The returned object is of type Google::Cloud::Bigquery::Storage::V1::BatchCommitWriteStreamsResponse.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::Storage::V1::BatchCommitWriteStreamsResponse.
+  p result
+end
 # [END bigquerystorage_v1_generated_BigQueryWrite_BatchCommitWriteStreams_sync]

@@ -19,21 +19,27 @@
 # [START networkconnectivity_v1_generated_HubService_ListSpokes_sync]
 require "google/cloud/network_connectivity/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_spokes
+#
+def list_spokes
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::NetworkConnectivity::V1::ListSpokesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::NetworkConnectivity::V1::ListSpokesRequest.new
 
-# Call the list_spokes method.
-result = client.list_spokes request
+  # Call the list_spokes method.
+  result = client.list_spokes request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::NetworkConnectivity::V1::Spoke.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::NetworkConnectivity::V1::Spoke.
+    p response
+  end
 end
 # [END networkconnectivity_v1_generated_HubService_ListSpokes_sync]

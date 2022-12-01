@@ -19,15 +19,21 @@
 # [START securitycenter_v1p1beta1_generated_SecurityCenter_UpdateOrganizationSettings_sync]
 require "google/cloud/security_center/v1p1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_organization_settings
+#
+def update_organization_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest.new
 
-# Call the update_organization_settings method.
-result = client.update_organization_settings request
+  # Call the update_organization_settings method.
+  result = client.update_organization_settings request
 
-# The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings.
-p result
+  # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings.
+  p result
+end
 # [END securitycenter_v1p1beta1_generated_SecurityCenter_UpdateOrganizationSettings_sync]

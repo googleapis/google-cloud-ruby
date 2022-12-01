@@ -19,15 +19,21 @@
 # [START automl_v1_generated_PredictionService_Predict_sync]
 require "google/cloud/automl/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AutoML::V1::PredictionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AutoML::V1::PredictionService::Client#predict
+#
+def predict
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AutoML::V1::PredictionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AutoML::V1::PredictRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AutoML::V1::PredictRequest.new
 
-# Call the predict method.
-result = client.predict request
+  # Call the predict method.
+  result = client.predict request
 
-# The returned object is of type Google::Cloud::AutoML::V1::PredictResponse.
-p result
+  # The returned object is of type Google::Cloud::AutoML::V1::PredictResponse.
+  p result
+end
 # [END automl_v1_generated_PredictionService_Predict_sync]

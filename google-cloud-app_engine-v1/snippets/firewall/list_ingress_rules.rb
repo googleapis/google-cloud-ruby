@@ -19,21 +19,27 @@
 # [START appengine_v1_generated_Firewall_ListIngressRules_sync]
 require "google/cloud/app_engine/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::Firewall::Client#list_ingress_rules
+#
+def list_ingress_rules
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AppEngine::V1::Firewall::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AppEngine::V1::ListIngressRulesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AppEngine::V1::ListIngressRulesRequest.new
 
-# Call the list_ingress_rules method.
-result = client.list_ingress_rules request
+  # Call the list_ingress_rules method.
+  result = client.list_ingress_rules request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::AppEngine::V1::FirewallRule.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::AppEngine::V1::FirewallRule.
+    p response
+  end
 end
 # [END appengine_v1_generated_Firewall_ListIngressRules_sync]

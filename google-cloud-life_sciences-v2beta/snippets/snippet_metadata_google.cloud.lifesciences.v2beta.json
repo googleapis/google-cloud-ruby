@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-life_sciences-v2beta",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 39,
+          "end": 45,
           "type": "FULL"
         }
       ]

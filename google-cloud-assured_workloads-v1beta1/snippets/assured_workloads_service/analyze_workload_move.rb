@@ -19,15 +19,21 @@
 # [START assuredworkloads_v1beta1_generated_AssuredWorkloadsService_AnalyzeWorkloadMove_sync]
 require "google/cloud/assured_workloads/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#analyze_workload_move
+#
+def analyze_workload_move
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveRequest.new
 
-# Call the analyze_workload_move method.
-result = client.analyze_workload_move request
+  # Call the analyze_workload_move method.
+  result = client.analyze_workload_move request
 
-# The returned object is of type Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveResponse.
-p result
+  # The returned object is of type Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveResponse.
+  p result
+end
 # [END assuredworkloads_v1beta1_generated_AssuredWorkloadsService_AnalyzeWorkloadMove_sync]

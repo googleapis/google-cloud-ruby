@@ -19,15 +19,21 @@
 # [START container_v1beta1_generated_ClusterManager_ListNodePools_sync]
 require "google/cloud/container/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Container::V1beta1::ClusterManager::Client#list_node_pools
+#
+def list_node_pools
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Container::V1beta1::ListNodePoolsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Container::V1beta1::ListNodePoolsRequest.new
 
-# Call the list_node_pools method.
-result = client.list_node_pools request
+  # Call the list_node_pools method.
+  result = client.list_node_pools request
 
-# The returned object is of type Google::Cloud::Container::V1beta1::ListNodePoolsResponse.
-p result
+  # The returned object is of type Google::Cloud::Container::V1beta1::ListNodePoolsResponse.
+  p result
+end
 # [END container_v1beta1_generated_ClusterManager_ListNodePools_sync]

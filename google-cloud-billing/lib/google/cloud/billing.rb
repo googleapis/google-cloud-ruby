@@ -57,7 +57,8 @@ module Google
       #
       # ## About CloudBilling
       #
-      # Retrieves GCP Console billing accounts and associates them with projects.
+      # Retrieves the Google Cloud Console billing accounts and associates them with
+      # projects.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.

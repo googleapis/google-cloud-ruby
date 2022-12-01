@@ -79,6 +79,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :destination, :message, 4, "google.cloud.aiplatform.v1.FeatureValueDestination"
       repeated :pass_through_fields, :message, 8, "google.cloud.aiplatform.v1.BatchReadFeatureValuesRequest.PassThroughField"
       repeated :entity_type_specs, :message, 7, "google.cloud.aiplatform.v1.BatchReadFeatureValuesRequest.EntityTypeSpec"
+      optional :start_time, :message, 11, "google.protobuf.Timestamp"
       oneof :read_option do
         optional :csv_read_instances, :message, 3, "google.cloud.aiplatform.v1.CsvSource"
         optional :bigquery_read_instances, :message, 5, "google.cloud.aiplatform.v1.BigQuerySource"
@@ -208,6 +209,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :generic_metadata, :message, 1, "google.cloud.aiplatform.v1.GenericOperationMetadata"
       optional :imported_entity_count, :int64, 2
       optional :imported_feature_value_count, :int64, 3
+      repeated :source_uris, :string, 4
       optional :invalid_row_count, :int64, 6
       optional :timestamp_outside_retention_rows_count, :int64, 7
     end

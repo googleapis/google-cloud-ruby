@@ -19,15 +19,21 @@
 # [START servicecontrol_v1_generated_ServiceController_Report_sync]
 require "google/cloud/service_control/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceControl::V1::ServiceController::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceControl::V1::ServiceController::Client#report
+#
+def report
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceControl::V1::ServiceController::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceControl::V1::ReportRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceControl::V1::ReportRequest.new
 
-# Call the report method.
-result = client.report request
+  # Call the report method.
+  result = client.report request
 
-# The returned object is of type Google::Cloud::ServiceControl::V1::ReportResponse.
-p result
+  # The returned object is of type Google::Cloud::ServiceControl::V1::ReportResponse.
+  p result
+end
 # [END servicecontrol_v1_generated_ServiceController_Report_sync]

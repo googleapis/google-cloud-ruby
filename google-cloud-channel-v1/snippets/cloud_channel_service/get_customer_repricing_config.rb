@@ -19,15 +19,21 @@
 # [START cloudchannel_v1_generated_CloudChannelService_GetCustomerRepricingConfig_sync]
 require "google/cloud/channel/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer_repricing_config
+#
+def get_customer_repricing_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Channel::V1::GetCustomerRepricingConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Channel::V1::GetCustomerRepricingConfigRequest.new
 
-# Call the get_customer_repricing_config method.
-result = client.get_customer_repricing_config request
+  # Call the get_customer_repricing_config method.
+  result = client.get_customer_repricing_config request
 
-# The returned object is of type Google::Cloud::Channel::V1::CustomerRepricingConfig.
-p result
+  # The returned object is of type Google::Cloud::Channel::V1::CustomerRepricingConfig.
+  p result
+end
 # [END cloudchannel_v1_generated_CloudChannelService_GetCustomerRepricingConfig_sync]

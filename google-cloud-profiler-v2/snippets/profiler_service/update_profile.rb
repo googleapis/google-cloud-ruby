@@ -19,15 +19,21 @@
 # [START cloudprofiler_v2_generated_ProfilerService_UpdateProfile_sync]
 require "google/cloud/profiler/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Profiler::V2::ProfilerService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Profiler::V2::ProfilerService::Client#update_profile
+#
+def update_profile
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Profiler::V2::ProfilerService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Profiler::V2::UpdateProfileRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Profiler::V2::UpdateProfileRequest.new
 
-# Call the update_profile method.
-result = client.update_profile request
+  # Call the update_profile method.
+  result = client.update_profile request
 
-# The returned object is of type Google::Cloud::Profiler::V2::Profile.
-p result
+  # The returned object is of type Google::Cloud::Profiler::V2::Profile.
+  p result
+end
 # [END cloudprofiler_v2_generated_ProfilerService_UpdateProfile_sync]

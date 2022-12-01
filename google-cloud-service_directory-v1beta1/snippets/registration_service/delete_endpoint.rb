@@ -19,15 +19,21 @@
 # [START servicedirectory_v1beta1_generated_RegistrationService_DeleteEndpoint_sync]
 require "google/cloud/service_directory/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_endpoint
+#
+def delete_endpoint
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest.new
 
-# Call the delete_endpoint method.
-result = client.delete_endpoint request
+  # Call the delete_endpoint method.
+  result = client.delete_endpoint request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END servicedirectory_v1beta1_generated_RegistrationService_DeleteEndpoint_sync]

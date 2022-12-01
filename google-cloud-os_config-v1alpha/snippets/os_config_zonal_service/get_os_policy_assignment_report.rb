@@ -19,15 +19,21 @@
 # [START osconfig_v1alpha_generated_OsConfigZonalService_GetOSPolicyAssignmentReport_sync]
 require "google/cloud/os_config/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_os_policy_assignment_report
+#
+def get_os_policy_assignment_report
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OsConfig::V1alpha::GetOSPolicyAssignmentReportRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OsConfig::V1alpha::GetOSPolicyAssignmentReportRequest.new
 
-# Call the get_os_policy_assignment_report method.
-result = client.get_os_policy_assignment_report request
+  # Call the get_os_policy_assignment_report method.
+  result = client.get_os_policy_assignment_report request
 
-# The returned object is of type Google::Cloud::OsConfig::V1alpha::OSPolicyAssignmentReport.
-p result
+  # The returned object is of type Google::Cloud::OsConfig::V1alpha::OSPolicyAssignmentReport.
+  p result
+end
 # [END osconfig_v1alpha_generated_OsConfigZonalService_GetOSPolicyAssignmentReport_sync]

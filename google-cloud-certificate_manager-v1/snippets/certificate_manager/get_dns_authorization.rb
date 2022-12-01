@@ -19,15 +19,21 @@
 # [START certificatemanager_v1_generated_CertificateManager_GetDnsAuthorization_sync]
 require "google/cloud/certificate_manager/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_dns_authorization
+#
+def get_dns_authorization
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::CertificateManager::V1::GetDnsAuthorizationRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::CertificateManager::V1::GetDnsAuthorizationRequest.new
 
-# Call the get_dns_authorization method.
-result = client.get_dns_authorization request
+  # Call the get_dns_authorization method.
+  result = client.get_dns_authorization request
 
-# The returned object is of type Google::Cloud::CertificateManager::V1::DnsAuthorization.
-p result
+  # The returned object is of type Google::Cloud::CertificateManager::V1::DnsAuthorization.
+  p result
+end
 # [END certificatemanager_v1_generated_CertificateManager_GetDnsAuthorization_sync]

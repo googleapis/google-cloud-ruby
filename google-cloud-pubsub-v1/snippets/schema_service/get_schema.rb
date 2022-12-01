@@ -19,15 +19,21 @@
 # [START pubsub_v1_generated_SchemaService_GetSchema_sync]
 require "google/cloud/pubsub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::PubSub::V1::SchemaService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::SchemaService::Client#get_schema
+#
+def get_schema
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::PubSub::V1::SchemaService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::PubSub::V1::GetSchemaRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::PubSub::V1::GetSchemaRequest.new
 
-# Call the get_schema method.
-result = client.get_schema request
+  # Call the get_schema method.
+  result = client.get_schema request
 
-# The returned object is of type Google::Cloud::PubSub::V1::Schema.
-p result
+  # The returned object is of type Google::Cloud::PubSub::V1::Schema.
+  p result
+end
 # [END pubsub_v1_generated_SchemaService_GetSchema_sync]

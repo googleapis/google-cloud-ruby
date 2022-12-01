@@ -19,15 +19,21 @@
 # [START firestore_v1_generated_Firestore_UpdateDocument_sync]
 require "google/cloud/firestore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Firestore::V1::Firestore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Firestore::V1::Firestore::Client#update_document
+#
+def update_document
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Firestore::V1::Firestore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Firestore::V1::UpdateDocumentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Firestore::V1::UpdateDocumentRequest.new
 
-# Call the update_document method.
-result = client.update_document request
+  # Call the update_document method.
+  result = client.update_document request
 
-# The returned object is of type Google::Cloud::Firestore::V1::Document.
-p result
+  # The returned object is of type Google::Cloud::Firestore::V1::Document.
+  p result
+end
 # [END firestore_v1_generated_Firestore_UpdateDocument_sync]

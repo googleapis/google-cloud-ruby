@@ -19,15 +19,21 @@
 # [START monitoring_v3_generated_ServiceMonitoringService_CreateServiceLevelObjective_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#create_service_level_objective
+#
+def create_service_level_objective
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest.new
 
-# Call the create_service_level_objective method.
-result = client.create_service_level_objective request
+  # Call the create_service_level_objective method.
+  result = client.create_service_level_objective request
 
-# The returned object is of type Google::Cloud::Monitoring::V3::ServiceLevelObjective.
-p result
+  # The returned object is of type Google::Cloud::Monitoring::V3::ServiceLevelObjective.
+  p result
+end
 # [END monitoring_v3_generated_ServiceMonitoringService_CreateServiceLevelObjective_sync]

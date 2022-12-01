@@ -19,15 +19,21 @@
 # [START bigqueryreservation_v1_generated_ReservationService_UpdateBiReservation_sync]
 require "google/cloud/bigquery/reservation/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_bi_reservation
+#
+def update_bi_reservation
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Reservation::V1::UpdateBiReservationRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Reservation::V1::UpdateBiReservationRequest.new
 
-# Call the update_bi_reservation method.
-result = client.update_bi_reservation request
+  # Call the update_bi_reservation method.
+  result = client.update_bi_reservation request
 
-# The returned object is of type Google::Cloud::Bigquery::Reservation::V1::BiReservation.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::BiReservation.
+  p result
+end
 # [END bigqueryreservation_v1_generated_ReservationService_UpdateBiReservation_sync]

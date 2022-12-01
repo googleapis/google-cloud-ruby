@@ -19,15 +19,21 @@
 # [START clouddebugger_v2_generated_Debugger_ListDebuggees_sync]
 require "google/cloud/debugger/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Debugger::V2::Debugger::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Debugger::V2::Debugger::Client#list_debuggees
+#
+def list_debuggees
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Debugger::V2::Debugger::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Debugger::V2::ListDebuggeesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Debugger::V2::ListDebuggeesRequest.new
 
-# Call the list_debuggees method.
-result = client.list_debuggees request
+  # Call the list_debuggees method.
+  result = client.list_debuggees request
 
-# The returned object is of type Google::Cloud::Debugger::V2::ListDebuggeesResponse.
-p result
+  # The returned object is of type Google::Cloud::Debugger::V2::ListDebuggeesResponse.
+  p result
+end
 # [END clouddebugger_v2_generated_Debugger_ListDebuggees_sync]

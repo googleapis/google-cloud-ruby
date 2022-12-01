@@ -19,15 +19,21 @@
 # [START dataproc_v1_generated_WorkflowTemplateService_UpdateWorkflowTemplate_sync]
 require "google/cloud/dataproc/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#update_workflow_template
+#
+def update_workflow_template
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest.new
 
-# Call the update_workflow_template method.
-result = client.update_workflow_template request
+  # Call the update_workflow_template method.
+  result = client.update_workflow_template request
 
-# The returned object is of type Google::Cloud::Dataproc::V1::WorkflowTemplate.
-p result
+  # The returned object is of type Google::Cloud::Dataproc::V1::WorkflowTemplate.
+  p result
+end
 # [END dataproc_v1_generated_WorkflowTemplateService_UpdateWorkflowTemplate_sync]

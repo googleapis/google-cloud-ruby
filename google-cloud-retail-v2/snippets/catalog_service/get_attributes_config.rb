@@ -19,15 +19,21 @@
 # [START retail_v2_generated_CatalogService_GetAttributesConfig_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::CatalogService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::CatalogService::Client#get_attributes_config
+#
+def get_attributes_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::CatalogService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::GetAttributesConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::GetAttributesConfigRequest.new
 
-# Call the get_attributes_config method.
-result = client.get_attributes_config request
+  # Call the get_attributes_config method.
+  result = client.get_attributes_config request
 
-# The returned object is of type Google::Cloud::Retail::V2::AttributesConfig.
-p result
+  # The returned object is of type Google::Cloud::Retail::V2::AttributesConfig.
+  p result
+end
 # [END retail_v2_generated_CatalogService_GetAttributesConfig_sync]

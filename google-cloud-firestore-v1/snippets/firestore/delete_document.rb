@@ -19,15 +19,21 @@
 # [START firestore_v1_generated_Firestore_DeleteDocument_sync]
 require "google/cloud/firestore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Firestore::V1::Firestore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Firestore::V1::Firestore::Client#delete_document
+#
+def delete_document
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Firestore::V1::Firestore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Firestore::V1::DeleteDocumentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Firestore::V1::DeleteDocumentRequest.new
 
-# Call the delete_document method.
-result = client.delete_document request
+  # Call the delete_document method.
+  result = client.delete_document request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END firestore_v1_generated_Firestore_DeleteDocument_sync]

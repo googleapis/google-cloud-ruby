@@ -19,21 +19,27 @@
 # [START binaryauthorization_v1_generated_BinauthzManagementService_ListAttestors_sync]
 require "google/cloud/binary_authorization/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#list_attestors
+#
+def list_attestors
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BinaryAuthorization::V1::ListAttestorsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BinaryAuthorization::V1::ListAttestorsRequest.new
 
-# Call the list_attestors method.
-result = client.list_attestors request
+  # Call the list_attestors method.
+  result = client.list_attestors request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::BinaryAuthorization::V1::Attestor.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::BinaryAuthorization::V1::Attestor.
+    p response
+  end
 end
 # [END binaryauthorization_v1_generated_BinauthzManagementService_ListAttestors_sync]

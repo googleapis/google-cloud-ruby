@@ -19,15 +19,21 @@
 # [START bigquerydatatransfer_v1_generated_DataTransferService_ScheduleTransferRuns_sync]
 require "google/cloud/bigquery/data_transfer/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#schedule_transfer_runs
+#
+def schedule_transfer_runs
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest.new
 
-# Call the schedule_transfer_runs method.
-result = client.schedule_transfer_runs request
+  # Call the schedule_transfer_runs method.
+  result = client.schedule_transfer_runs request
 
-# The returned object is of type Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsResponse.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsResponse.
+  p result
+end
 # [END bigquerydatatransfer_v1_generated_DataTransferService_ScheduleTransferRuns_sync]

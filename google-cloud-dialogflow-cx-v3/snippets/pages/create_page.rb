@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_Pages_CreatePage_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::Pages::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Pages::Client#create_page
+#
+def create_page
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::Pages::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::CreatePageRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::CreatePageRequest.new
 
-# Call the create_page method.
-result = client.create_page request
+  # Call the create_page method.
+  result = client.create_page request
 
-# The returned object is of type Google::Cloud::Dialogflow::CX::V3::Page.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Page.
+  p result
+end
 # [END dialogflow_v3_generated_Pages_CreatePage_sync]

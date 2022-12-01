@@ -19,15 +19,21 @@
 # [START servicedirectory_v1_generated_RegistrationService_GetNamespace_sync]
 require "google/cloud/service_directory/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceDirectory::V1::RegistrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1::RegistrationService::Client#get_namespace
+#
+def get_namespace
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceDirectory::V1::RegistrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceDirectory::V1::GetNamespaceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceDirectory::V1::GetNamespaceRequest.new
 
-# Call the get_namespace method.
-result = client.get_namespace request
+  # Call the get_namespace method.
+  result = client.get_namespace request
 
-# The returned object is of type Google::Cloud::ServiceDirectory::V1::Namespace.
-p result
+  # The returned object is of type Google::Cloud::ServiceDirectory::V1::Namespace.
+  p result
+end
 # [END servicedirectory_v1_generated_RegistrationService_GetNamespace_sync]

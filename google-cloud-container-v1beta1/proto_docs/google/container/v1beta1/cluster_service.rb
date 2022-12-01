@@ -307,6 +307,13 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::ConfidentialNodes]
         #     Confidential nodes config.
         #     All the nodes in the node pool will be Confidential VM once enabled.
+        # @!attribute [rw] fast_socket
+        #   @return [::Google::Cloud::Container::V1beta1::FastSocket]
+        #     Enable or disable NCCL fast socket for the node pool.
+        # @!attribute [rw] resource_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The resource labels for the node pool to use to annotate any related
+        #     Google Compute Engine resources.
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
         #     Logging configuration.
@@ -328,6 +335,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceLabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -386,6 +402,11 @@ module Google
         #     Only applicable if `ip_allocation_policy.use_ip_aliases` is true.
         #
         #     This field cannot be changed after the node pool has been created.
+        # @!attribute [rw] enable_private_nodes
+        #   @return [::Boolean]
+        #     Whether nodes have internal IP addresses only.
+        #     If enable_private_nodes is not specified, then the value is derived from
+        #     [cluster.privateClusterConfig.enablePrivateNodes][google.container.v1beta1.PrivateClusterConfig.enablePrivateNodes]
         # @!attribute [rw] network_performance_config
         #   @return [::Google::Cloud::Container::V1beta1::NodeNetworkConfig::NetworkPerformanceConfig]
         #     Network bandwidth tier configuration.
@@ -566,6 +587,25 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Map of node label keys and node label values.
         class NodeLabels
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Collection of [GCP
+        # labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels).
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Map of node label keys and node label values.
+        class ResourceLabels
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
@@ -835,6 +875,10 @@ module Google
         # @!attribute [rw] master_global_access_config
         #   @return [::Google::Cloud::Container::V1beta1::PrivateClusterMasterGlobalAccessConfig]
         #     Controls master global access settings.
+        # @!attribute [rw] private_endpoint_subnetwork
+        #   @return [::String]
+        #     Subnet to provision the master's private endpoint during cluster creation.
+        #     Specified in projects/*/regions/*/subnetworks/* format.
         class PrivateClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -896,6 +940,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Container::V1beta1::MasterAuthorizedNetworksConfig::CidrBlock>]
         #     cidr_blocks define up to 10 external networks that could access
         #     Kubernetes master through HTTPS.
+        # @!attribute [rw] gcp_public_cidrs_access_enabled
+        #   @return [::Boolean]
+        #     Whether master is accessbile via Google Compute Engine Public IP addresses.
         class MasterAuthorizedNetworksConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1129,9 +1176,8 @@ module Google
         #     anything other than EVALUATION_MODE_UNSPECIFIED, this field is ignored.
         # @!attribute [rw] evaluation_mode
         #   @return [::Google::Cloud::Container::V1beta1::BinaryAuthorization::EvaluationMode]
-        #     Mode of operation for binauthz policy evaluation. Currently the only
-        #     options are equivalent to enable/disable. If unspecified, defaults to
-        #     DISABLED.
+        #     Mode of operation for binauthz policy evaluation. If unspecified, defaults
+        #     to DISABLED.
         class BinaryAuthorization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1864,6 +1910,9 @@ module Google
         # @!attribute [rw] desired_identity_service_config
         #   @return [::Google::Cloud::Container::V1beta1::IdentityServiceConfig]
         #     The desired Identity Service component configuration.
+        # @!attribute [rw] desired_enable_private_endpoint
+        #   @return [::Boolean]
+        #     Enable/Disable private endpoint for the cluster's master.
         # @!attribute [rw] desired_node_pool_auto_config_network_tags
         #   @return [::Google::Cloud::Container::V1beta1::NetworkTags]
         #     The desired network tags that apply to all auto-provisioned node pools
@@ -1871,6 +1920,9 @@ module Google
         # @!attribute [rw] desired_protect_config
         #   @return [::Google::Cloud::Container::V1beta1::ProtectConfig]
         #     Enable/Disable Protect API features for the cluster.
+        # @!attribute [rw] desired_gateway_api_config
+        #   @return [::Google::Cloud::Container::V1beta1::GatewayAPIConfig]
+        #     The desired config of Gateway API on this cluster.
         # @!attribute [rw] desired_node_pool_logging_config
         #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
         #     The desired node pool logging configuration defaults for the cluster.
@@ -2223,9 +2275,16 @@ module Google
         # @!attribute [rw] gvnic
         #   @return [::Google::Cloud::Container::V1beta1::VirtualNIC]
         #     Enable or disable gvnic on the node pool.
+        # @!attribute [rw] fast_socket
+        #   @return [::Google::Cloud::Container::V1beta1::FastSocket]
+        #     Enable or disable NCCL fast socket for the node pool.
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
         #     Logging configuration.
+        # @!attribute [rw] resource_labels
+        #   @return [::Google::Cloud::Container::V1beta1::ResourceLabels]
+        #     The resource labels for the node pool to use to annotate any related
+        #     Google Compute Engine resources.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2877,7 +2936,7 @@ module Google
           # Standard rollout policy is the default policy for blue-green.
           # @!attribute [rw] batch_percentage
           #   @return [::Float]
-          #     Percentage of the bool pool nodes to drain in a batch.
+          #     Percentage of the blue pool nodes to drain in a batch.
           #     The range of this field should be (0.0, 1.0].
           # @!attribute [rw] batch_node_count
           #   @return [::Integer]
@@ -4081,9 +4140,38 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::ServiceExternalIPsConfig]
         #     ServiceExternalIPsConfig specifies if services with externalIPs field are
         #     blocked or not.
+        # @!attribute [rw] gateway_api_config
+        #   @return [::Google::Cloud::Container::V1beta1::GatewayAPIConfig]
+        #     GatewayAPIConfig contains the desired config of Gateway API on this
+        #     cluster.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GatewayAPIConfig contains the desired config of Gateway API on this cluster.
+        # @!attribute [rw] channel
+        #   @return [::Google::Cloud::Container::V1beta1::GatewayAPIConfig::Channel]
+        #     The Gateway API release channel to use for Gateway API.
+        class GatewayAPIConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Channel describes if/how Gateway API should be installed and implemented in
+          # a cluster.
+          module Channel
+            # Default value.
+            CHANNEL_UNSPECIFIED = 0
+
+            # Gateway API support is disabled
+            CHANNEL_DISABLED = 1
+
+            # Gateway API support is enabled, experimental CRDs are installed
+            CHANNEL_EXPERIMENTAL = 3
+
+            # Gateway API support is enabled, standard CRDs are installed
+            CHANNEL_STANDARD = 4
+          end
         end
 
         # Config to block services with externalIPs field.
@@ -4432,6 +4520,15 @@ module Google
         #   @return [::Boolean]
         #     Whether gVNIC features are enabled in the node pool.
         class VirtualNIC
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration of Fast Socket feature.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether Fast Socket features are enabled in the node pool.
+        class FastSocket
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -4804,6 +4901,15 @@ module Google
 
             # workloads
             WORKLOADS = 2
+
+            # kube-apiserver
+            APISERVER = 3
+
+            # kube-scheduler
+            SCHEDULER = 4
+
+            # kube-controller-manager
+            CONTROLLER_MANAGER = 5
           end
         end
 

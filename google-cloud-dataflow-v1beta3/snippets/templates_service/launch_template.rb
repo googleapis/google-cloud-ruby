@@ -19,15 +19,21 @@
 # [START dataflow_v1beta3_generated_TemplatesService_LaunchTemplate_sync]
 require "google/cloud/dataflow/v1beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataflow::V1beta3::TemplatesService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#launch_template
+#
+def launch_template
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataflow::V1beta3::TemplatesService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataflow::V1beta3::LaunchTemplateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataflow::V1beta3::LaunchTemplateRequest.new
 
-# Call the launch_template method.
-result = client.launch_template request
+  # Call the launch_template method.
+  result = client.launch_template request
 
-# The returned object is of type Google::Cloud::Dataflow::V1beta3::LaunchTemplateResponse.
-p result
+  # The returned object is of type Google::Cloud::Dataflow::V1beta3::LaunchTemplateResponse.
+  p result
+end
 # [END dataflow_v1beta3_generated_TemplatesService_LaunchTemplate_sync]

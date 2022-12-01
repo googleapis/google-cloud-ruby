@@ -19,15 +19,21 @@
 # [START securitycenter_v1p1beta1_generated_SecurityCenter_SetFindingState_sync]
 require "google/cloud/security_center/v1p1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#set_finding_state
+#
+def set_finding_state
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest.new
 
-# Call the set_finding_state method.
-result = client.set_finding_state request
+  # Call the set_finding_state method.
+  result = client.set_finding_state request
 
-# The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::Finding.
-p result
+  # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::Finding.
+  p result
+end
 # [END securitycenter_v1p1beta1_generated_SecurityCenter_SetFindingState_sync]

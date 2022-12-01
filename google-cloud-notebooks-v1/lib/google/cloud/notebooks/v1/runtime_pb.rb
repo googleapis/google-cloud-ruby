@@ -113,6 +113,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :post_startup_script, :string, 7
       repeated :kernels, :message, 8, "google.cloud.notebooks.v1.ContainerImage"
       proto3_optional :upgradeable, :bool, 9
+      optional :post_startup_script_behavior, :enum, 10, "google.cloud.notebooks.v1.RuntimeSoftwareConfig.PostStartupScriptBehavior"
+      proto3_optional :disable_terminal, :bool, 11
+      proto3_optional :version, :string, 12
+    end
+    add_enum "google.cloud.notebooks.v1.RuntimeSoftwareConfig.PostStartupScriptBehavior" do
+      value :POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED, 0
+      value :RUN_EVERY_START, 1
+      value :DOWNLOAD_AND_RUN_EVERY_START, 2
     end
     add_message "google.cloud.notebooks.v1.RuntimeMetrics" do
       map :system_metrics, :string, :string, 1
@@ -173,6 +181,7 @@ module Google
         RuntimeAccessConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RuntimeAccessConfig").msgclass
         RuntimeAccessConfig::RuntimeAccessType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RuntimeAccessConfig.RuntimeAccessType").enummodule
         RuntimeSoftwareConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RuntimeSoftwareConfig").msgclass
+        RuntimeSoftwareConfig::PostStartupScriptBehavior = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RuntimeSoftwareConfig.PostStartupScriptBehavior").enummodule
         RuntimeMetrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RuntimeMetrics").msgclass
         RuntimeShieldedInstanceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RuntimeShieldedInstanceConfig").msgclass
         VirtualMachine = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.VirtualMachine").msgclass

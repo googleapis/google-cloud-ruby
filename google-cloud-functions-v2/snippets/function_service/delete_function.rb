@@ -19,22 +19,28 @@
 # [START cloudfunctions_v2_generated_FunctionService_DeleteFunction_sync]
 require "google/cloud/functions/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Functions::V2::FunctionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Functions::V2::FunctionService::Client#delete_function
+#
+def delete_function
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Functions::V2::FunctionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Functions::V2::DeleteFunctionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Functions::V2::DeleteFunctionRequest.new
 
-# Call the delete_function method.
-result = client.delete_function request
+  # Call the delete_function method.
+  result = client.delete_function request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END cloudfunctions_v2_generated_FunctionService_DeleteFunction_sync]

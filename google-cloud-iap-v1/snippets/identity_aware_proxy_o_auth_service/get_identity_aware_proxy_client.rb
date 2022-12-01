@@ -19,15 +19,21 @@
 # [START iap_v1_generated_IdentityAwareProxyOAuthService_GetIdentityAwareProxyClient_sync]
 require "google/cloud/iap/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#get_identity_aware_proxy_client
+#
+def get_identity_aware_proxy_client
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iap::V1::GetIdentityAwareProxyClientRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iap::V1::GetIdentityAwareProxyClientRequest.new
 
-# Call the get_identity_aware_proxy_client method.
-result = client.get_identity_aware_proxy_client request
+  # Call the get_identity_aware_proxy_client method.
+  result = client.get_identity_aware_proxy_client request
 
-# The returned object is of type Google::Cloud::Iap::V1::IdentityAwareProxyClient.
-p result
+  # The returned object is of type Google::Cloud::Iap::V1::IdentityAwareProxyClient.
+  p result
+end
 # [END iap_v1_generated_IdentityAwareProxyOAuthService_GetIdentityAwareProxyClient_sync]

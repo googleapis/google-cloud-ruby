@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetCustomDimension_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_custom_dimension
+#
+def get_custom_dimension
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::GetCustomDimensionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::GetCustomDimensionRequest.new
 
-# Call the get_custom_dimension method.
-result = client.get_custom_dimension request
+  # Call the get_custom_dimension method.
+  result = client.get_custom_dimension request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::CustomDimension.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::CustomDimension.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetCustomDimension_sync]

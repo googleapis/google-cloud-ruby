@@ -57,12 +57,14 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::ClientTest < Minites
     # Create request parameters for a unary method.
     channel_connection = "hello world"
     events = [{}]
+    text_events = ["hello world"]
 
     publish_channel_connection_events_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :publish_channel_connection_events, name
       assert_kind_of ::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest, request
       assert_equal "hello world", request["channel_connection"]
       assert_kind_of ::Google::Protobuf::Any, request["events"].first
+      assert_equal ["hello world"], request["text_events"]
       refute_nil options
     end
 
@@ -73,31 +75,31 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::ClientTest < Minites
       end
 
       # Use hash object
-      client.publish_channel_connection_events({ channel_connection: channel_connection, events: events }) do |response, operation|
+      client.publish_channel_connection_events({ channel_connection: channel_connection, events: events, text_events: text_events }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.publish_channel_connection_events channel_connection: channel_connection, events: events do |response, operation|
+      client.publish_channel_connection_events channel_connection: channel_connection, events: events, text_events: text_events do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.publish_channel_connection_events ::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events) do |response, operation|
+      client.publish_channel_connection_events ::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events, text_events: text_events) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.publish_channel_connection_events({ channel_connection: channel_connection, events: events }, grpc_options) do |response, operation|
+      client.publish_channel_connection_events({ channel_connection: channel_connection, events: events, text_events: text_events }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.publish_channel_connection_events(::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events), grpc_options) do |response, operation|
+      client.publish_channel_connection_events(::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events, text_events: text_events), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -117,12 +119,14 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::ClientTest < Minites
     # Create request parameters for a unary method.
     channel = "hello world"
     events = [{}]
+    text_events = ["hello world"]
 
     publish_events_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :publish_events, name
       assert_kind_of ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest, request
       assert_equal "hello world", request["channel"]
       assert_kind_of ::Google::Protobuf::Any, request["events"].first
+      assert_equal ["hello world"], request["text_events"]
       refute_nil options
     end
 
@@ -133,31 +137,31 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::ClientTest < Minites
       end
 
       # Use hash object
-      client.publish_events({ channel: channel, events: events }) do |response, operation|
+      client.publish_events({ channel: channel, events: events, text_events: text_events }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.publish_events channel: channel, events: events do |response, operation|
+      client.publish_events channel: channel, events: events, text_events: text_events do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.publish_events ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events) do |response, operation|
+      client.publish_events ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events, text_events: text_events) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.publish_events({ channel: channel, events: events }, grpc_options) do |response, operation|
+      client.publish_events({ channel: channel, events: events, text_events: text_events }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.publish_events(::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events), grpc_options) do |response, operation|
+      client.publish_events(::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events, text_events: text_events), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

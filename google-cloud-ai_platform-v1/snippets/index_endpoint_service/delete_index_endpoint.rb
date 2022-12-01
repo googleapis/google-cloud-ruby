@@ -19,22 +19,28 @@
 # [START aiplatform_v1_generated_IndexEndpointService_DeleteIndexEndpoint_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::IndexEndpointService::Client#delete_index_endpoint
+#
+def delete_index_endpoint
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::DeleteIndexEndpointRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::DeleteIndexEndpointRequest.new
 
-# Call the delete_index_endpoint method.
-result = client.delete_index_endpoint request
+  # Call the delete_index_endpoint method.
+  result = client.delete_index_endpoint request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END aiplatform_v1_generated_IndexEndpointService_DeleteIndexEndpoint_sync]

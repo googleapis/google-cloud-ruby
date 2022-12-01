@@ -7,9 +7,11 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/notebooks/v1/diagnostic_config_pb'
 require 'google/cloud/notebooks/v1/event_pb'
 require 'google/cloud/notebooks/v1/runtime_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -55,10 +57,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :request_id, :string, 2
     end
+    add_message "google.cloud.notebooks.v1.UpgradeRuntimeRequest" do
+      optional :name, :string, 1
+      optional :request_id, :string, 2
+    end
     add_message "google.cloud.notebooks.v1.ReportRuntimeEventRequest" do
       optional :name, :string, 1
       optional :vm_id, :string, 2
       optional :event, :message, 3, "google.cloud.notebooks.v1.Event"
+    end
+    add_message "google.cloud.notebooks.v1.UpdateRuntimeRequest" do
+      optional :runtime, :message, 1, "google.cloud.notebooks.v1.Runtime"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+      optional :request_id, :string, 3
     end
     add_message "google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest" do
       optional :name, :string, 1
@@ -67,6 +78,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse" do
       optional :access_token, :string, 1
       optional :expire_time, :message, 2, "google.protobuf.Timestamp"
+    end
+    add_message "google.cloud.notebooks.v1.DiagnoseRuntimeRequest" do
+      optional :name, :string, 1
+      optional :diagnostic_config, :message, 2, "google.cloud.notebooks.v1.DiagnosticConfig"
     end
   end
 end
@@ -84,9 +99,12 @@ module Google
         StopRuntimeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.StopRuntimeRequest").msgclass
         SwitchRuntimeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.SwitchRuntimeRequest").msgclass
         ResetRuntimeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ResetRuntimeRequest").msgclass
+        UpgradeRuntimeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.UpgradeRuntimeRequest").msgclass
         ReportRuntimeEventRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ReportRuntimeEventRequest").msgclass
+        UpdateRuntimeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.UpdateRuntimeRequest").msgclass
         RefreshRuntimeTokenInternalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest").msgclass
         RefreshRuntimeTokenInternalResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse").msgclass
+        DiagnoseRuntimeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.DiagnoseRuntimeRequest").msgclass
       end
     end
   end

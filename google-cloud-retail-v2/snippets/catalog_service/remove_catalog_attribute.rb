@@ -19,15 +19,21 @@
 # [START retail_v2_generated_CatalogService_RemoveCatalogAttribute_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::CatalogService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::CatalogService::Client#remove_catalog_attribute
+#
+def remove_catalog_attribute
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::CatalogService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::RemoveCatalogAttributeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::RemoveCatalogAttributeRequest.new
 
-# Call the remove_catalog_attribute method.
-result = client.remove_catalog_attribute request
+  # Call the remove_catalog_attribute method.
+  result = client.remove_catalog_attribute request
 
-# The returned object is of type Google::Cloud::Retail::V2::AttributesConfig.
-p result
+  # The returned object is of type Google::Cloud::Retail::V2::AttributesConfig.
+  p result
+end
 # [END retail_v2_generated_CatalogService_RemoveCatalogAttribute_sync]

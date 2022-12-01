@@ -19,15 +19,21 @@
 # [START language_v1_generated_LanguageService_AnalyzeSyntax_sync]
 require "google/cloud/language/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Language::V1::LanguageService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Language::V1::LanguageService::Client#analyze_syntax
+#
+def analyze_syntax
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Language::V1::LanguageService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Language::V1::AnalyzeSyntaxRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Language::V1::AnalyzeSyntaxRequest.new
 
-# Call the analyze_syntax method.
-result = client.analyze_syntax request
+  # Call the analyze_syntax method.
+  result = client.analyze_syntax request
 
-# The returned object is of type Google::Cloud::Language::V1::AnalyzeSyntaxResponse.
-p result
+  # The returned object is of type Google::Cloud::Language::V1::AnalyzeSyntaxResponse.
+  p result
+end
 # [END language_v1_generated_LanguageService_AnalyzeSyntax_sync]

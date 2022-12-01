@@ -19,15 +19,21 @@
 # [START gkemulticloud_v1_generated_AzureClusters_GenerateAzureAccessToken_sync]
 require "google/cloud/gke_multi_cloud/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#generate_azure_access_token
+#
+def generate_azure_access_token
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenRequest.new
 
-# Call the generate_azure_access_token method.
-result = client.generate_azure_access_token request
+  # Call the generate_azure_access_token method.
+  result = client.generate_azure_access_token request
 
-# The returned object is of type Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenResponse.
-p result
+  # The returned object is of type Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenResponse.
+  p result
+end
 # [END gkemulticloud_v1_generated_AzureClusters_GenerateAzureAccessToken_sync]

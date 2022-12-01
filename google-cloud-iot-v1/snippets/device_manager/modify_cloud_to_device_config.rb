@@ -19,15 +19,21 @@
 # [START cloudiot_v1_generated_DeviceManager_ModifyCloudToDeviceConfig_sync]
 require "google/cloud/iot/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#modify_cloud_to_device_config
+#
+def modify_cloud_to_device_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iot::V1::DeviceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest.new
 
-# Call the modify_cloud_to_device_config method.
-result = client.modify_cloud_to_device_config request
+  # Call the modify_cloud_to_device_config method.
+  result = client.modify_cloud_to_device_config request
 
-# The returned object is of type Google::Cloud::Iot::V1::DeviceConfig.
-p result
+  # The returned object is of type Google::Cloud::Iot::V1::DeviceConfig.
+  p result
+end
 # [END cloudiot_v1_generated_DeviceManager_ModifyCloudToDeviceConfig_sync]

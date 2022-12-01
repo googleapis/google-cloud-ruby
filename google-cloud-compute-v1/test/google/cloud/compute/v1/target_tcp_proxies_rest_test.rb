@@ -62,6 +62,64 @@ class ::Google::Cloud::Compute::V1::TargetTcpProxies::ClientTest < Minitest::Tes
     end
   end
 
+  def test_aggregated_list
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::TargetTcpProxyAggregatedList.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    filter = "hello world"
+    include_all_scopes = true
+    max_results = 42
+    order_by = "hello world"
+    page_token = "hello world"
+    project = "hello world"
+    return_partial_success = true
+
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    Gapic::Rest::ClientStub.stub :new, aggregated_list_client_stub do
+      # Create client
+      client = ::Google::Cloud::Compute::V1::TargetTcpProxies::Rest::Client.new do |config|
+        config.credentials = :dummy_value
+      end
+
+      # Use hash object
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use named arguments
+      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListTargetTcpProxiesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use hash object with options
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object with options
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListTargetTcpProxiesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Verify method calls
+      assert_equal 5, aggregated_list_client_stub.call_count
+    end
+  end
+
   def test_delete
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new

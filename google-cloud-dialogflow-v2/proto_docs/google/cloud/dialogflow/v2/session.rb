@@ -623,7 +623,7 @@ module Google
         # [Participants.StreamingDetectIntent][], it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params StreamingDetectIntentRequest.query_params}.
         # And for {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent} and
-        # [Participants.StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent], it needs to be configured in
+        # {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}, it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::ConversationProfile#human_agent_assistant_config ConversationProfile.human_agent_assistant_config}
         # @!attribute [rw] query_text_sentiment
         #   @return [::Google::Cloud::Dialogflow::V2::Sentiment]
@@ -634,7 +634,9 @@ module Google
         end
 
         # The sentiment, such as positive/negative feeling or association, for a unit
-        # of analysis, such as the query text.
+        # of analysis, such as the query text. See:
+        # https://cloud.google.com/natural-language/docs/basics#interpreting_sentiment_analysis_values
+        # for how to interpret the result.
         # @!attribute [rw] score
         #   @return [::Float]
         #     Sentiment score between -1.0 (negative sentiment) and 1.0 (positive

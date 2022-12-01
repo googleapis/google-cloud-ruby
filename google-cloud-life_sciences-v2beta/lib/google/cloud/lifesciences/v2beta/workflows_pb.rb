@@ -4,12 +4,12 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/code_pb'
-require 'google/api/client_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/lifesciences/v2beta/workflows.proto", :syntax => :proto3) do
@@ -25,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :actions, :message, 1, "google.cloud.lifesciences.v2beta.Action"
       optional :resources, :message, 2, "google.cloud.lifesciences.v2beta.Resources"
       map :environment, :string, :string, 3
+      optional :encrypted_environment, :message, 5, "google.cloud.lifesciences.v2beta.Secret"
       optional :timeout, :message, 4, "google.protobuf.Duration"
     end
     add_message "google.cloud.lifesciences.v2beta.Action" do
@@ -33,6 +34,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :commands, :string, 3
       optional :entrypoint, :string, 4
       map :environment, :string, :string, 5
+      optional :encrypted_environment, :message, 21, "google.cloud.lifesciences.v2beta.Secret"
       optional :pid_namespace, :string, 6
       map :port_mappings, :int32, :int32, 8
       repeated :mounts, :message, 9, "google.cloud.lifesciences.v2beta.Mount"
@@ -77,6 +79,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :enable_stackdriver_monitoring, :bool, 12
       repeated :docker_cache_images, :string, 13
       repeated :volumes, :message, 14, "google.cloud.lifesciences.v2beta.Volume"
+      optional :reservation, :string, 15
     end
     add_message "google.cloud.lifesciences.v2beta.ServiceAccount" do
       optional :email, :string, 1

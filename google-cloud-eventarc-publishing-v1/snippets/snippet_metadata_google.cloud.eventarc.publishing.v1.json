@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-eventarc-publishing-v1",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 32,
+          "end": 38,
           "type": "FULL"
         }
       ]
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 32,
+          "end": 38,
           "type": "FULL"
         }
       ]

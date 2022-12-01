@@ -26,10 +26,10 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the processor type.
-        #     Format: projects/\\{project}/processorTypes/\\{processor_type}
+        #     Format: `projects/{project}/processorTypes/{processor_type}`
         # @!attribute [rw] type
         #   @return [::String]
-        #     The type of the processor, e.g., "invoice_parsing".
+        #     The processor type, e.g., `OCR_PROCESSOR`, `INVOICE_PROCESSOR`, etc.
         # @!attribute [rw] category
         #   @return [::String]
         #     The processor category, used by UI to group processor types.

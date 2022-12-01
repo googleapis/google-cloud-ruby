@@ -22,6 +22,26 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
+  def test_executions
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Run.executions do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Run::V2::Executions::Client, client
+    end
+  end
+
+  def test_jobs
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Run.jobs do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Run::V2::Jobs::Client, client
+    end
+  end
+
   def test_revisions
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
@@ -39,6 +59,16 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Run::V2::Services::Client, client
+    end
+  end
+
+  def test_tasks
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Run.tasks do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Run::V2::Tasks::Client, client
     end
   end
 end
