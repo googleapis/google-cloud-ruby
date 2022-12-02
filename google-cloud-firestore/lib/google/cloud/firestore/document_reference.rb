@@ -73,6 +73,9 @@ module Google
         ##
         # Retrieves an enumerator for the collections nested under the document snapshot.
         #
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
+        #
         # @yield [collections] The block for accessing the collections.
         # @yieldparam [CollectionReference] collection A collection reference object.
         #
@@ -91,10 +94,10 @@ module Google
         #     puts col.collection_id
         #   end
         #
-        def cols &block
+        def cols read_time: nil, &block
           ensure_service!
-          grpc = service.list_collections path
-          cols_enum = CollectionReferenceList.from_grpc(grpc, client, path).all
+          grpc = service.list_collections path, read_time: read_time
+          cols_enum = CollectionReferenceList.from_grpc(grpc, client, path, read_time: read_time).all
           cols_enum.each(&block) if block_given?
           cols_enum
         end

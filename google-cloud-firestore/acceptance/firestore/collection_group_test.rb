@@ -179,5 +179,33 @@ describe Google::Cloud::Firestore::CollectionGroup, :firestore_acceptance do
       end
       _(result).must_equal results[1]
     end
+
+    it "queries a collection group using partitions on different timestamps" do
+      rand_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+
+      read_time = Time.now
+      sleep(1)
+
+      document_ids = ["a", "b", "c"].map do |prefix|
+        128.times.map do |i|
+          "#{prefix}#{(i+1).to_s.rjust(3, '0')}"
+        end
+      end.flatten # "a001", "a002", ... "c128"
+      firestore.batch do |b|
+        document_ids.each do |id|
+          doc_ref = rand_col.document id
+          b.set doc_ref, { foo: id }
+        end
+      end
+
+      collection_group = firestore.collection_group(rand_col.collection_id)
+
+      partitions = collection_group.partitions 6, read_time: read_time
+      _(partitions.count).must_equal 1
+      _(partitions[0].end_before).must_be :nil?
+      partitions = collection_group.partitions 6
+      _(partitions.count).must_equal 3
+      _(partitions[0].end_before[0].document_id).must_be :<, partitions[1].end_before[0].document_id
+    end
   end
 end
