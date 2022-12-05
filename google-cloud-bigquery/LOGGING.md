@@ -4,7 +4,7 @@ To enable logging for this library, set the logger for the underlying [Google
 API
 Client](https://github.com/google/google-api-ruby-client/blob/master/README.md#logging)
 library. The logger that you set may be a Ruby stdlib
-[`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as
+[`Logger`](https://ruby-doc.org/current/stdlibs/logger/Logger.html) as
 shown below, or a
 [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
 that will write logs to [Stackdriver
