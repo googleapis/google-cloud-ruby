@@ -119,6 +119,25 @@ module Google
               "projects/#{project}/locations/#{location}/services/#{service}"
             end
 
+            ##
+            # Create a fully-qualified Subnetwork resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/subnetworks/{subnetwork}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param subnetwork [String]
+            #
+            # @return [::String]
+            def subnetwork_path project:, region:, subnetwork:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/subnetworks/#{subnetwork}"
+            end
+
             extend self
           end
         end
