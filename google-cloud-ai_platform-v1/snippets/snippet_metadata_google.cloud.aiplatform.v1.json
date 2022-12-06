@@ -332,6 +332,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_DatasetService_SearchDataItems_sync",
+      "title": "Snippet for search_data_items in DatasetService",
+      "description": "Basic snippet for search_data_items in DatasetService",
+      "file": "dataset_service/search_data_items.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_data_items",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client#search_data_items",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::SearchDataItemsResponse",
+        "client": {
+          "short_name": "DatasetService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client"
+        },
+        "method": {
+          "short_name": "SearchDataItems",
+          "full_name": "google.cloud.aiplatform.v1.DatasetService.SearchDataItems",
+          "service": {
+            "short_name": "DatasetService",
+            "full_name": "google.cloud.aiplatform.v1.DatasetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_DatasetService_ListSavedQueries_sync",
       "title": "Snippet for list_saved_queries in DatasetService",
       "description": "Basic snippet for list_saved_queries in DatasetService",

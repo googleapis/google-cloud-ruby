@@ -315,6 +315,7 @@
     "snippets/dataset_service/list_data_items.rb",
     "snippets/dataset_service/list_datasets.rb",
     "snippets/dataset_service/list_saved_queries.rb",
+    "snippets/dataset_service/search_data_items.rb",
     "snippets/dataset_service/update_dataset.rb",
     "snippets/endpoint_service/create_endpoint.rb",
     "snippets/endpoint_service/delete_endpoint.rb",

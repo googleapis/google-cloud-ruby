@@ -245,6 +245,135 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for {::Google::Cloud::AIPlatform::V1::DatasetService::Client#search_data_items DatasetService.SearchDataItems}.
+        # @!attribute [rw] order_by_data_item
+        #   @return [::String]
+        #     A comma-separated list of data item fields to order by, sorted in
+        #     ascending order. Use "desc" after a field name for descending.
+        # @!attribute [rw] order_by_annotation
+        #   @return [::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest::OrderByAnnotation]
+        #     Expression that allows ranking results based on annotation's property.
+        # @!attribute [rw] dataset
+        #   @return [::String]
+        #     Required. The resource name of the Dataset from which to search DataItems.
+        #     Format:
+        #     `projects/{project}/locations/{location}/datasets/{dataset}`
+        # @!attribute [rw] saved_query
+        #   @return [::String]
+        #     The resource name of a SavedQuery(annotation set in UI).
+        #     Format:
+        #     `projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}`
+        #     All of the search will be done in the context of this SavedQuery.
+        # @!attribute [rw] data_labeling_job
+        #   @return [::String]
+        #     The resource name of a DataLabelingJob.
+        #     Format:
+        #     `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+        #     If this field is set, all of the search will be done in the context of
+        #     this DataLabelingJob.
+        # @!attribute [rw] data_item_filter
+        #   @return [::String]
+        #     An expression for filtering the DataItem that will be returned.
+        #
+        #       * `data_item_id` - for = or !=.
+        #       * `labeled` - for = or !=.
+        #       * `has_annotation(ANNOTATION_SPEC_ID)` - true only for DataItem that
+        #         have at least one annotation with annotation_spec_id =
+        #         `ANNOTATION_SPEC_ID` in the context of SavedQuery or DataLabelingJob.
+        #
+        #     For example:
+        #
+        #     * `data_item=1`
+        #     * `has_annotation(5)`
+        # @!attribute [rw] annotations_filter
+        #   @return [::String]
+        #     An expression for filtering the Annotations that will be returned per
+        #     DataItem.
+        #       * `annotation_spec_id` - for = or !=.
+        # @!attribute [rw] annotation_filters
+        #   @return [::Array<::String>]
+        #     An expression that specifies what Annotations will be returned per
+        #     DataItem. Annotations satisfied either of the conditions will be returned.
+        #       * `annotation_spec_id` - for = or !=.
+        #     Must specify `saved_query_id=` - saved query id that annotations should
+        #     belong to.
+        # @!attribute [rw] field_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Mask specifying which fields of {::Google::Cloud::AIPlatform::V1::DataItemView DataItemView} to read.
+        # @!attribute [rw] annotations_limit
+        #   @return [::Integer]
+        #     If set, only up to this many of Annotations will be returned per
+        #     DataItemView. The maximum value is 1000. If not set, the maximum value will
+        #     be used.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Requested page size. Server may return fewer results than requested.
+        #     Default and maximum page size is 100.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     A comma-separated list of fields to order by, sorted in ascending order.
+        #     Use "desc" after a field name for descending.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A token identifying a page of results for the server to return
+        #     Typically obtained via
+        #     {::Google::Cloud::AIPlatform::V1::SearchDataItemsResponse#next_page_token SearchDataItemsResponse.next_page_token} of the previous
+        #     {::Google::Cloud::AIPlatform::V1::DatasetService::Client#search_data_items DatasetService.SearchDataItems} call.
+        class SearchDataItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Expression that allows ranking results based on annotation's property.
+          # @!attribute [rw] saved_query
+          #   @return [::String]
+          #     Required. Saved query of the Annotation. Only Annotations belong to this saved
+          #     query will be considered for ordering.
+          # @!attribute [rw] order_by
+          #   @return [::String]
+          #     A comma-separated list of annotation fields to order by, sorted in
+          #     ascending order. Use "desc" after a field name for descending. Must also
+          #     specify saved_query.
+          class OrderByAnnotation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response message for {::Google::Cloud::AIPlatform::V1::DatasetService::Client#search_data_items DatasetService.SearchDataItems}.
+        # @!attribute [rw] data_item_views
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::DataItemView>]
+        #     The DataItemViews read.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve next page of results.
+        #     Pass to {::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest#page_token SearchDataItemsRequest.page_token} to obtain that page.
+        class SearchDataItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A container for a single DataItem and Annotations on it.
+        # @!attribute [rw] data_item
+        #   @return [::Google::Cloud::AIPlatform::V1::DataItem]
+        #     The DataItem.
+        # @!attribute [rw] annotations
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Annotation>]
+        #     The Annotations on the DataItem. If too many Annotations should be returned
+        #     for the DataItem, this field will be truncated per annotations_limit in
+        #     request. If it was, then the has_truncated_annotations will be set to true.
+        # @!attribute [rw] has_truncated_annotations
+        #   @return [::Boolean]
+        #     True if and only if the Annotations field has been truncated. It happens if
+        #     more Annotations for this DataItem met the request's annotation_filter than
+        #     are allowed to be returned by annotations_limit.
+        #     Note that if Annotations field is not being returned due to field mask,
+        #     then this field will not be set to true no matter how many Annotations are
+        #     there.
+        class DataItemView
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_saved_queries DatasetService.ListSavedQueries}.
         # @!attribute [rw] parent
         #   @return [::String]
