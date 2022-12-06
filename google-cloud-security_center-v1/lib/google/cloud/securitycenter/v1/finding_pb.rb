@@ -16,6 +16,7 @@ require 'google/cloud/securitycenter/v1/external_system_pb'
 require 'google/cloud/securitycenter/v1/file_pb'
 require 'google/cloud/securitycenter/v1/iam_binding_pb'
 require 'google/cloud/securitycenter/v1/indicator_pb'
+require 'google/cloud/securitycenter/v1/kernel_rootkit_pb'
 require 'google/cloud/securitycenter/v1/kubernetes_pb'
 require 'google/cloud/securitycenter/v1/mitre_attack_pb'
 require 'google/cloud/securitycenter/v1/process_pb'
@@ -61,6 +62,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :kubernetes, :message, 43, "google.cloud.securitycenter.v1.Kubernetes"
       optional :database, :message, 44, "google.cloud.securitycenter.v1.Database"
       repeated :files, :message, 46, "google.cloud.securitycenter.v1.File"
+      optional :kernel_rootkit, :message, 50, "google.cloud.securitycenter.v1.KernelRootkit"
     end
     add_enum "google.cloud.securitycenter.v1.Finding.State" do
       value :STATE_UNSPECIFIED, 0
