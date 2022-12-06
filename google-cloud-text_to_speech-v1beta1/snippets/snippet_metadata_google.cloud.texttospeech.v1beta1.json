@@ -90,6 +90,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "texttospeech_v1beta1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_sync",
+      "title": "Snippet for synthesize_long_audio in TextToSpeechLongAudioSynthesize",
+      "description": "Basic snippet for synthesize_long_audio in TextToSpeechLongAudioSynthesize",
+      "file": "text_to_speech_long_audio_synthesize/synthesize_long_audio.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "synthesize_long_audio",
+        "full_name": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client#synthesize_long_audio",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TextToSpeech::V1beta1::SynthesizeLongAudioRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TextToSpeechLongAudioSynthesize::Client",
+          "full_name": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client"
+        },
+        "method": {
+          "short_name": "SynthesizeLongAudio",
+          "full_name": "google.cloud.texttospeech.v1beta1.TextToSpeechLongAudioSynthesize.SynthesizeLongAudio",
+          "service": {
+            "short_name": "TextToSpeechLongAudioSynthesize",
+            "full_name": "google.cloud.texttospeech.v1beta1.TextToSpeechLongAudioSynthesize"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
