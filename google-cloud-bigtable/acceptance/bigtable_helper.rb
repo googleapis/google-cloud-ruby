@@ -80,10 +80,6 @@ module Acceptance
       @bigtable_2.instance(bigtable_instance_id)
     end
 
-    def bigtable_2_instance_2
-      @bigtable_2.instance(bigtable_instance_id_2)
-    end
-
     def bigtable_read_table
       bigtable.table(bigtable_instance_id, $bigtable_read_table_id)
     end
