@@ -32,7 +32,6 @@ if ENV["GCLOUD_TEST_GENERATE_XML_REPORT"]
 end
 
 # Create shared bigtable object so we don't create new for each test
-puts "here"
 $bigtable = Google::Cloud.new.bigtable
 
 # Create second bigtable object for tests requiring one, such as copy-backup.
