@@ -15,52 +15,109 @@
 require "helper"
 
 describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore do
+  let (:parent) { "projects/projectID/databases/(default)/documents" }
   let(:query) { Google::Cloud::Firestore::Query.start(nil, "#{firestore.path}/documents", firestore).select(:name) }
-  let(:read_time) { Time.now }
-  let :query_results_enum do
-    [
-      Google::Cloud::Firestore::V1::RunQueryResponse.new(
-        read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Cloud::Firestore::V1::Document.new(
-          name: "projects/#{project}/databases/(default)/documents/users/alice",
-          fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice") },
-          create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-          update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
-        )),
-      Google::Cloud::Firestore::V1::RunQueryResponse.new(
-        read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Cloud::Firestore::V1::Document.new(
-          name: "projects/#{project}/databases/(default)/documents/users/carol",
-          fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Bob") },
-          create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-          update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
-        ))
-    ].to_enum
+  let :expected_structured_query do
+    Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")])
+    )
   end
 
-  focus; it "sends an aggregate query with a count" do
-    # expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
-    #   select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
-    #     fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")])
-    # )
+  focus; it "gets an aggregate query with a count" do
     expected_params = {
-      structured_aggregation_query: Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
-          structured_query: query,
-          aggregates: [
-            Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
-              count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
-              alias: 'count'
-            )
-          ]
-        )
-      
+      :parent => parent,
+      :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+        structured_query: expected_structured_query,
+        aggregations: [
+          Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
+            alias: "count"
+          )
+        ]
+      )
     }
-    firestore_mock.expect :run_aggregate_query, expected_params
+    firestore_mock.expect :run_aggregation_query, [], [expected_params]
 
-    # results_enum = query.select(:name).get
     aq = query.aggregate_query.add_count
-    aq.get
+    aq.get {}
 
+    firestore_mock.verify
+  end
+
+  focus; it "gets an aggregate query with custom alias" do
+    expected_params = {
+      :parent => parent,
+      :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+        structured_query: expected_structured_query,
+        aggregations: [
+          Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
+            alias: "total_score"
+          )
+        ]
+      )
+    }
+    firestore_mock.expect :run_aggregation_query, [], [expected_params]
+
+    aq = query.aggregate_query.add_count aggregate_alias: "total_score"
+    aq.get {}
+
+    firestore_mock.verify
+  end
+
+  focus; it "gets multiple aggregates of query" do
+    expected_params = {
+      :parent => parent,
+      :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+        structured_query: expected_structured_query,
+        aggregations: [
+          Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
+            alias: "alias_1"
+          ),
+          Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
+            alias: "alias_2"
+          ),
+          Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
+            alias: "alias_3"
+          ),
+        ]
+      )
+    }
+    firestore_mock.expect :run_aggregation_query, [], [expected_params]
+
+    aq = query.aggregate_query.add_count(aggregate_alias: "alias_1")
+                              .add_count(aggregate_alias: "alias_2")
+                              .add_count(aggregate_alias: "alias_3")
+    aq.get {}
+
+    firestore_mock.verify
+  end
+
+  focus; it "gets multiple calls to run_aggregate_query" do
+    expected_params = {
+      :parent => parent,
+      :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+        structured_query: expected_structured_query,
+        aggregations: [
+          Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
+            alias: "count"
+          )
+        ]
+      )
+    }
+    firestore_mock.expect :run_aggregation_query, [], [expected_params]
+    firestore_mock.expect :run_aggregation_query, [], [expected_params]
+
+    aq = query.aggregate_query.add_count(aggregate_alias: "count")                      
+    aq.get {}
+    aq.get {}
+
+    firestore_mock.verify
     firestore_mock.verify
   end
 end
