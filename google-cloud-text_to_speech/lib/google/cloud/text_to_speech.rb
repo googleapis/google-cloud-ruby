@@ -75,6 +75,36 @@ module Google
       end
 
       ##
+      # Create a new client object for TextToSpeechLongAudioSynthesize.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::TextToSpeech::V1::TextToSpeechLongAudioSynthesize::Client](https://googleapis.dev/ruby/google-cloud-text_to_speech-v1/latest/Google/Cloud/TextToSpeech/V1/TextToSpeechLongAudioSynthesize/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the TextToSpeechLongAudioSynthesize service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About TextToSpeechLongAudioSynthesize
+      #
+      # Service that implements Google Cloud Text-to-Speech API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [TextToSpeechLongAudioSynthesize::Client] A client object for the specified version.
+      #
+      def self.text_to_speech_long_audio_synthesize version: :v1, &block
+        require "google/cloud/text_to_speech/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::TextToSpeech
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::TextToSpeech.const_get package_name
+        package_module.const_get(:TextToSpeechLongAudioSynthesize).const_get(:Client).new(&block)
+      end
+
+      ##
       # Configure the google-cloud-text_to_speech library.
       #
       # The following configuration parameters are supported:

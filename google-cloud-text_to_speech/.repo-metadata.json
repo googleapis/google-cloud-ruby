@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Text-to-Speech converts text or Speech Synthesis Markup Language (SSML) input into audio data of natural human speech.",
     "ruby-cloud-env-prefix": "TEXTTOSPEECH",
     "ruby-cloud-product-url": "https://cloud.google.com/text-to-speech",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }
