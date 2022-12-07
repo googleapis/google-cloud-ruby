@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.3.beta.1 (2022-12-07)
+
+* Test release for REST client.
+
 ### 0.2.0 (2022-07-02)
 
 #### Features
