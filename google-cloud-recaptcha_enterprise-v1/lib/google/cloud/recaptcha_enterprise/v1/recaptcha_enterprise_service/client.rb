@@ -269,11 +269,12 @@ module Google
             #     Required. The resource name of the Assessment, in the format
             #     "projects/\\{project}/assessments/\\{assessment}".
             #   @param annotation [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-            #     Optional. The annotation that will be assigned to the Event. This field can be left
-            #     empty to provide reasons that apply to an event without concluding whether
-            #     the event is legitimate or fraudulent.
+            #     Optional. The annotation that will be assigned to the Event. This field can
+            #     be left empty to provide reasons that apply to an event without concluding
+            #     whether the event is legitimate or fraudulent.
             #   @param reasons [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
-            #     Optional. Optional reasons for the annotation that will be assigned to the Event.
+            #     Optional. Optional reasons for the annotation that will be assigned to the
+            #     Event.
             #   @param hashed_account_id [::String]
             #     Optional. Unique stable hashed user identifier to apply to the assessment.
             #     This is an alternative to setting the hashed_account_id in
@@ -553,8 +554,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param key [::String]
-            #     Required. The public key name linked to the requested secret key in the format
-            #     "projects/\\{project}/keys/\\{key}".
+            #     Required. The public key name linked to the requested secret key in the
+            #     format "projects/\\{project}/keys/\\{key}".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyResponse]
@@ -727,8 +728,8 @@ module Google
             #   @param key [::Google::Cloud::RecaptchaEnterprise::V1::Key, ::Hash]
             #     Required. The key to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. The mask to control which fields of the key get updated. If the mask is not
-            #     present, all fields will be updated.
+            #     Optional. The mask to control which fields of the key get updated. If the
+            #     mask is not present, all fields will be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Key]
@@ -898,7 +899,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload migrate_key(name: nil)
+            # @overload migrate_key(name: nil, skip_billing_check: nil)
             #   Pass arguments to `migrate_key` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -906,6 +907,15 @@ module Google
             #   @param name [::String]
             #     Required. The name of the key to be migrated, in the format
             #     "projects/\\{project}/keys/\\{key}".
+            #   @param skip_billing_check [::Boolean]
+            #     Optional. If true, skips the billing check.
+            #     A reCAPTCHA Enterprise key or migrated key behaves differently than a
+            #     reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
+            #     https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid
+            #     any disruption of your usage, we check that a billing account is present.
+            #     If your usage of reCAPTCHA is under the free quota, you can safely skip the
+            #     billing check and proceed with the migration. See
+            #     https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Key]
@@ -1077,16 +1087,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project to list related account groups from, in the format
-            #     "projects/\\{project}".
+            #     Required. The name of the project to list related account groups from, in
+            #     the format "projects/\\{project}".
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of groups to return. The service might return fewer than
-            #     this value.
-            #     If unspecified, at most 50 groups are returned.
-            #     The maximum value is 1000; values above 1000 are coerced to 1000.
+            #     Optional. The maximum number of groups to return. The service might return
+            #     fewer than this value. If unspecified, at most 50 groups are returned. The
+            #     maximum value is 1000; values above 1000 are coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
-            #     Provide this to retrieve the subsequent page.
+            #     Optional. A page token, received from a previous `ListRelatedAccountGroups`
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
             #     `ListRelatedAccountGroups` must match the call that provided the page
@@ -1185,13 +1194,12 @@ module Google
             #     Required. The resource name for the related account group in the format
             #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of accounts to return. The service might return fewer
-            #     than this value.
-            #     If unspecified, at most 50 accounts are returned.
-            #     The maximum value is 1000; values above 1000 are coerced to 1000.
+            #     Optional. The maximum number of accounts to return. The service might
+            #     return fewer than this value. If unspecified, at most 50 accounts are
+            #     returned. The maximum value is 1000; values above 1000 are coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
-            #     call.
+            #     Optional. A page token, received from a previous
+            #     `ListRelatedAccountGroupMemberships` call.
             #
             #     When paginating, all other parameters provided to
             #     `ListRelatedAccountGroupMemberships` must match the call that provided the
@@ -1287,17 +1295,17 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project [::String]
-            #     Required. The name of the project to search related account group memberships from.
-            #     Specify the project name in the following format: "projects/\\{project}".
+            #     Required. The name of the project to search related account group
+            #     memberships from. Specify the project name in the following format:
+            #     "projects/\\{project}".
             #   @param hashed_account_id [::String]
-            #     Optional. The unique stable hashed user identifier we should search connections to.
-            #     The identifier should correspond to a `hashed_account_id` provided in a
-            #     previous `CreateAssessment` or `AnnotateAssessment` call.
+            #     Optional. The unique stable hashed user identifier we should search
+            #     connections to. The identifier should correspond to a `hashed_account_id`
+            #     provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of groups to return. The service might return fewer than
-            #     this value.
-            #     If unspecified, at most 50 groups are returned.
-            #     The maximum value is 1000; values above 1000 are coerced to 1000.
+            #     Optional. The maximum number of groups to return. The service might return
+            #     fewer than this value. If unspecified, at most 50 groups are returned. The
+            #     maximum value is 1000; values above 1000 are coerced to 1000.
             #   @param page_token [::String]
             #     Optional. A page token, received from a previous
             #     `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
