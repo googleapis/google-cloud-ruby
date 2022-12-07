@@ -923,12 +923,12 @@ module Google
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
-        def get
+        def get read_time: nil
           ensure_service!
 
           return enum_for :get unless block_given?
 
-          results = service.run_query parent_path, @query
+          results = service.run_query parent_path, @query, read_time: read_time
 
           # Reverse the results for Query#limit_to_last queries since that method reversed the order_by directions.
           results = results.to_a.reverse if limit_type == :last

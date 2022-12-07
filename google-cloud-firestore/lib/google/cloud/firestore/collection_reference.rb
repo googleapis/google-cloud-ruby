@@ -161,10 +161,10 @@ module Google
         #     puts doc_ref.document_id
         #   end
         #
-        def list_documents token: nil, max: nil
+        def list_documents token: nil, max: nil, read_time: nil
           ensure_client!
           client.list_documents \
-            parent_path, collection_id, token: token, max: max
+            parent_path, collection_id, token: token, max: max, read_time: read_time
         end
 
         ##

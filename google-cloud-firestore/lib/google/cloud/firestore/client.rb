@@ -248,7 +248,7 @@ module Google
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
-        def get_all *docs, field_mask: nil
+        def get_all *docs, field_mask: nil, read_time: nil
           ensure_service!
 
           unless block_given?
@@ -267,7 +267,7 @@ module Google
           end
           mask = nil if mask.empty?
 
-          results = service.get_documents doc_paths, mask: mask
+          results = service.get_documents doc_paths, mask: mask, read_time: read_time
           results.each do |result|
             next if result.result.nil?
             yield DocumentSnapshot.from_batch_result result, self
@@ -671,13 +671,52 @@ module Google
           end
         end
 
+        ##
+        # Create a transaction to perform multiple reads that are
+        # executed atomically at a single logical point in time in a database.
+        #
+        # All changes are accumulated in memory until the block completes.
+        # Transactions will be automatically retried when documents change
+        # before the transaction is committed. See {Transaction}.
+        #
+        # @see https://firebase.google.com/docs/firestore/manage-data/transactions
+        #   Transactions and Batched Writes
+        #
+        # @param [Time] read_time The maximum number of retries for
+        #   transactions failed due to errors. Default is 5. Optional.
+        #
+        # @yield [transaction] The block for reading data.
+        # @yieldparam [Transaction] transaction The transaction object for
+        #   making changes.
+        #
+        # @return [Object] The return value of the provided
+        #   yield block
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   firestore.transaction do |tx|
+        #     # Get a document snapshot
+        #     nyc_snap = tx.get nyc_ref
+        #   end
+        #
+        def read_only_transaction read_time: nil
+          transaction = Transaction.from_client self, read_time: read_time, read_only: true
+          yield transaction
+        end
+
         # @!endgroup
 
         # @private
-        def list_documents parent, collection_id, token: nil, max: nil
+        def list_documents parent, collection_id, token: nil, max: nil, read_time: nil
           ensure_service!
           grpc = service.list_documents parent, collection_id, token: token, max: max
-          DocumentReference::List.from_grpc grpc, self, parent, collection_id
+          DocumentReference::List.from_grpc grpc, self, parent, collection_id, read_time: read_time
         end
 
         protected
