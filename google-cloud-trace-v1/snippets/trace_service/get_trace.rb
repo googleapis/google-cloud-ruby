@@ -19,15 +19,21 @@
 # [START cloudtrace_v1_generated_TraceService_GetTrace_sync]
 require "google/cloud/trace/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Trace::V1::TraceService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Trace::V1::TraceService::Client#get_trace
+#
+def get_trace
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Trace::V1::TraceService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Trace::V1::GetTraceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Trace::V1::GetTraceRequest.new
 
-# Call the get_trace method.
-result = client.get_trace request
+  # Call the get_trace method.
+  result = client.get_trace request
 
-# The returned object is of type Google::Cloud::Trace::V1::Trace.
-p result
+  # The returned object is of type Google::Cloud::Trace::V1::Trace.
+  p result
+end
 # [END cloudtrace_v1_generated_TraceService_GetTrace_sync]

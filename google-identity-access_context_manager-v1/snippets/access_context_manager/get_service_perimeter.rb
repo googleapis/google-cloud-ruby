@@ -19,15 +19,21 @@
 # [START accesscontextmanager_v1_generated_AccessContextManager_GetServicePerimeter_sync]
 require "google/identity/access_context_manager/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_service_perimeter
+#
+def get_service_perimeter
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Identity::AccessContextManager::V1::GetServicePerimeterRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Identity::AccessContextManager::V1::GetServicePerimeterRequest.new
 
-# Call the get_service_perimeter method.
-result = client.get_service_perimeter request
+  # Call the get_service_perimeter method.
+  result = client.get_service_perimeter request
 
-# The returned object is of type Google::Identity::AccessContextManager::V1::ServicePerimeter.
-p result
+  # The returned object is of type Google::Identity::AccessContextManager::V1::ServicePerimeter.
+  p result
+end
 # [END accesscontextmanager_v1_generated_AccessContextManager_GetServicePerimeter_sync]

@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2022-11-16)
+
+#### Features
+
+* support geo_taxonomy 
+
 ### 0.9.0 (2022-07-01)
 
 #### Features

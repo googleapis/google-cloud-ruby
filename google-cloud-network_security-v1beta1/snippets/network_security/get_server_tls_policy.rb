@@ -19,15 +19,21 @@
 # [START networksecurity_v1beta1_generated_NetworkSecurity_GetServerTlsPolicy_sync]
 require "google/cloud/network_security/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#get_server_tls_policy
+#
+def get_server_tls_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::NetworkSecurity::V1beta1::GetServerTlsPolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::NetworkSecurity::V1beta1::GetServerTlsPolicyRequest.new
 
-# Call the get_server_tls_policy method.
-result = client.get_server_tls_policy request
+  # Call the get_server_tls_policy method.
+  result = client.get_server_tls_policy request
 
-# The returned object is of type Google::Cloud::NetworkSecurity::V1beta1::ServerTlsPolicy.
-p result
+  # The returned object is of type Google::Cloud::NetworkSecurity::V1beta1::ServerTlsPolicy.
+  p result
+end
 # [END networksecurity_v1beta1_generated_NetworkSecurity_GetServerTlsPolicy_sync]

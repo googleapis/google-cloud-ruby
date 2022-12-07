@@ -19,15 +19,21 @@
 # [START cloudbilling_v1_generated_CloudBilling_UpdateProjectBillingInfo_sync]
 require "google/cloud/billing/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Billing::V1::CloudBilling::Client#update_project_billing_info
+#
+def update_project_billing_info
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Billing::V1::CloudBilling::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest.new
 
-# Call the update_project_billing_info method.
-result = client.update_project_billing_info request
+  # Call the update_project_billing_info method.
+  result = client.update_project_billing_info request
 
-# The returned object is of type Google::Cloud::Billing::V1::ProjectBillingInfo.
-p result
+  # The returned object is of type Google::Cloud::Billing::V1::ProjectBillingInfo.
+  p result
+end
 # [END cloudbilling_v1_generated_CloudBilling_UpdateProjectBillingInfo_sync]

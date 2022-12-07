@@ -19,15 +19,21 @@
 # [START pubsub_v1_generated_Publisher_UpdateTopic_sync]
 require "google/cloud/pubsub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::PubSub::V1::Publisher::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Publisher::Client#update_topic
+#
+def update_topic
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::PubSub::V1::Publisher::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::PubSub::V1::UpdateTopicRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::PubSub::V1::UpdateTopicRequest.new
 
-# Call the update_topic method.
-result = client.update_topic request
+  # Call the update_topic method.
+  result = client.update_topic request
 
-# The returned object is of type Google::Cloud::PubSub::V1::Topic.
-p result
+  # The returned object is of type Google::Cloud::PubSub::V1::Topic.
+  p result
+end
 # [END pubsub_v1_generated_Publisher_UpdateTopic_sync]

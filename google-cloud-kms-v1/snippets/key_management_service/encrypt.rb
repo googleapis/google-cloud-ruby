@@ -19,15 +19,21 @@
 # [START cloudkms_v1_generated_KeyManagementService_Encrypt_sync]
 require "google/cloud/kms/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt
+#
+def encrypt
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Kms::V1::EncryptRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Kms::V1::EncryptRequest.new
 
-# Call the encrypt method.
-result = client.encrypt request
+  # Call the encrypt method.
+  result = client.encrypt request
 
-# The returned object is of type Google::Cloud::Kms::V1::EncryptResponse.
-p result
+  # The returned object is of type Google::Cloud::Kms::V1::EncryptResponse.
+  p result
+end
 # [END cloudkms_v1_generated_KeyManagementService_Encrypt_sync]

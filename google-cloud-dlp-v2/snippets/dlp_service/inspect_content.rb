@@ -19,15 +19,21 @@
 # [START dlp_v2_generated_DlpService_InspectContent_sync]
 require "google/cloud/dlp/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dlp::V2::DlpService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#inspect_content
+#
+def inspect_content
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dlp::V2::DlpService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dlp::V2::InspectContentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dlp::V2::InspectContentRequest.new
 
-# Call the inspect_content method.
-result = client.inspect_content request
+  # Call the inspect_content method.
+  result = client.inspect_content request
 
-# The returned object is of type Google::Cloud::Dlp::V2::InspectContentResponse.
-p result
+  # The returned object is of type Google::Cloud::Dlp::V2::InspectContentResponse.
+  p result
+end
 # [END dlp_v2_generated_DlpService_InspectContent_sync]

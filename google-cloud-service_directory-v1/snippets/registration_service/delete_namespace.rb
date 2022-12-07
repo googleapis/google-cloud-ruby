@@ -19,15 +19,21 @@
 # [START servicedirectory_v1_generated_RegistrationService_DeleteNamespace_sync]
 require "google/cloud/service_directory/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceDirectory::V1::RegistrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1::RegistrationService::Client#delete_namespace
+#
+def delete_namespace
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceDirectory::V1::RegistrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceDirectory::V1::DeleteNamespaceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceDirectory::V1::DeleteNamespaceRequest.new
 
-# Call the delete_namespace method.
-result = client.delete_namespace request
+  # Call the delete_namespace method.
+  result = client.delete_namespace request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END servicedirectory_v1_generated_RegistrationService_DeleteNamespace_sync]

@@ -19,15 +19,21 @@
 # [START pubsub_v1_generated_Publisher_Publish_sync]
 require "google/cloud/pubsub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::PubSub::V1::Publisher::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Publisher::Client#publish
+#
+def publish
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::PubSub::V1::Publisher::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::PubSub::V1::PublishRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::PubSub::V1::PublishRequest.new
 
-# Call the publish method.
-result = client.publish request
+  # Call the publish method.
+  result = client.publish request
 
-# The returned object is of type Google::Cloud::PubSub::V1::PublishResponse.
-p result
+  # The returned object is of type Google::Cloud::PubSub::V1::PublishResponse.
+  p result
+end
 # [END pubsub_v1_generated_Publisher_Publish_sync]

@@ -19,15 +19,21 @@
 # [START cloudiot_v1_generated_DeviceManager_UnbindDeviceFromGateway_sync]
 require "google/cloud/iot/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#unbind_device_from_gateway
+#
+def unbind_device_from_gateway
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iot::V1::DeviceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest.new
 
-# Call the unbind_device_from_gateway method.
-result = client.unbind_device_from_gateway request
+  # Call the unbind_device_from_gateway method.
+  result = client.unbind_device_from_gateway request
 
-# The returned object is of type Google::Cloud::Iot::V1::UnbindDeviceFromGatewayResponse.
-p result
+  # The returned object is of type Google::Cloud::Iot::V1::UnbindDeviceFromGatewayResponse.
+  p result
+end
 # [END cloudiot_v1_generated_DeviceManager_UnbindDeviceFromGateway_sync]

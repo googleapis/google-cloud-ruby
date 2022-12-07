@@ -19,15 +19,21 @@
 # [START tpu_v1_generated_Tpu_GetTensorFlowVersion_sync]
 require "google/cloud/tpu/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tpu::V1::Tpu::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tpu::V1::Tpu::Client#get_tensor_flow_version
+#
+def get_tensor_flow_version
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tpu::V1::Tpu::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Tpu::V1::GetTensorFlowVersionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Tpu::V1::GetTensorFlowVersionRequest.new
 
-# Call the get_tensor_flow_version method.
-result = client.get_tensor_flow_version request
+  # Call the get_tensor_flow_version method.
+  result = client.get_tensor_flow_version request
 
-# The returned object is of type Google::Cloud::Tpu::V1::TensorFlowVersion.
-p result
+  # The returned object is of type Google::Cloud::Tpu::V1::TensorFlowVersion.
+  p result
+end
 # [END tpu_v1_generated_Tpu_GetTensorFlowVersion_sync]

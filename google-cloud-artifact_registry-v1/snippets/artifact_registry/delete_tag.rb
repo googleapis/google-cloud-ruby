@@ -19,15 +19,21 @@
 # [START artifactregistry_v1_generated_ArtifactRegistry_DeleteTag_sync]
 require "google/cloud/artifact_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#delete_tag
+#
+def delete_tag
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ArtifactRegistry::V1::DeleteTagRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ArtifactRegistry::V1::DeleteTagRequest.new
 
-# Call the delete_tag method.
-result = client.delete_tag request
+  # Call the delete_tag method.
+  result = client.delete_tag request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END artifactregistry_v1_generated_ArtifactRegistry_DeleteTag_sync]

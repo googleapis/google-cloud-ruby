@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_FeaturestoreOnlineServingService_ReadFeatureValues_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#read_feature_values
+#
+def read_feature_values
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::ReadFeatureValuesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::ReadFeatureValuesRequest.new
 
-# Call the read_feature_values method.
-result = client.read_feature_values request
+  # Call the read_feature_values method.
+  result = client.read_feature_values request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse.
+  p result
+end
 # [END aiplatform_v1_generated_FeaturestoreOnlineServingService_ReadFeatureValues_sync]

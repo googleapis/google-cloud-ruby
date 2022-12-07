@@ -19,15 +19,21 @@
 # [START datastore_v1_generated_Datastore_AllocateIds_sync]
 require "google/cloud/datastore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Datastore::V1::Datastore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Datastore::V1::Datastore::Client#allocate_ids
+#
+def allocate_ids
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Datastore::V1::Datastore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Datastore::V1::AllocateIdsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Datastore::V1::AllocateIdsRequest.new
 
-# Call the allocate_ids method.
-result = client.allocate_ids request
+  # Call the allocate_ids method.
+  result = client.allocate_ids request
 
-# The returned object is of type Google::Cloud::Datastore::V1::AllocateIdsResponse.
-p result
+  # The returned object is of type Google::Cloud::Datastore::V1::AllocateIdsResponse.
+  p result
+end
 # [END datastore_v1_generated_Datastore_AllocateIds_sync]

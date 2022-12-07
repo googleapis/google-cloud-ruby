@@ -31,6 +31,9 @@ module Google
           # @!attribute [rw] akamai_cdn_key
           #   @return [::Google::Cloud::Video::Stitcher::V1::AkamaiCdnKey]
           #     The configuration for an Akamai CDN key.
+          # @!attribute [rw] media_cdn_key
+          #   @return [::Google::Cloud::Video::Stitcher::V1::MediaCdnKey]
+          #     The configuration for a Media CDN key.
           # @!attribute [rw] name
           #   @return [::String]
           #     The resource name of the CDN key, in the form of
@@ -61,6 +64,18 @@ module Google
           #   @return [::String]
           #     Input only. Token key for the Akamai CDN edge configuration.
           class AkamaiCdnKey
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for a Media CDN key.
+          # @!attribute [rw] private_key
+          #   @return [::String]
+          #     Input only. 64-byte ed25519 private key for this Media CDN key.
+          # @!attribute [rw] key_name
+          #   @return [::String]
+          #     The keyset name of the Media CDN key.
+          class MediaCdnKey
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

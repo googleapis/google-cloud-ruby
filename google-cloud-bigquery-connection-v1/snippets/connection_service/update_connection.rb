@@ -19,15 +19,21 @@
 # [START bigqueryconnection_v1_generated_ConnectionService_UpdateConnection_sync]
 require "google/cloud/bigquery/connection/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#update_connection
+#
+def update_connection
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest.new
 
-# Call the update_connection method.
-result = client.update_connection request
+  # Call the update_connection method.
+  result = client.update_connection request
 
-# The returned object is of type Google::Cloud::Bigquery::Connection::V1::Connection.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::Connection::V1::Connection.
+  p result
+end
 # [END bigqueryconnection_v1_generated_ConnectionService_UpdateConnection_sync]

@@ -19,15 +19,21 @@
 # [START iamcredentials_v1_generated_IAMCredentials_GenerateAccessToken_sync]
 require "google/iam/credentials/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Iam::Credentials::V1::IAMCredentials::Client#generate_access_token
+#
+def generate_access_token
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new
 
-# Call the generate_access_token method.
-result = client.generate_access_token request
+  # Call the generate_access_token method.
+  result = client.generate_access_token request
 
-# The returned object is of type Google::Iam::Credentials::V1::GenerateAccessTokenResponse.
-p result
+  # The returned object is of type Google::Iam::Credentials::V1::GenerateAccessTokenResponse.
+  p result
+end
 # [END iamcredentials_v1_generated_IAMCredentials_GenerateAccessToken_sync]

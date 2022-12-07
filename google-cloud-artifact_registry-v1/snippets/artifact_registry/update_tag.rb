@@ -19,15 +19,21 @@
 # [START artifactregistry_v1_generated_ArtifactRegistry_UpdateTag_sync]
 require "google/cloud/artifact_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#update_tag
+#
+def update_tag
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ArtifactRegistry::V1::UpdateTagRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ArtifactRegistry::V1::UpdateTagRequest.new
 
-# Call the update_tag method.
-result = client.update_tag request
+  # Call the update_tag method.
+  result = client.update_tag request
 
-# The returned object is of type Google::Cloud::ArtifactRegistry::V1::Tag.
-p result
+  # The returned object is of type Google::Cloud::ArtifactRegistry::V1::Tag.
+  p result
+end
 # [END artifactregistry_v1_generated_ArtifactRegistry_UpdateTag_sync]

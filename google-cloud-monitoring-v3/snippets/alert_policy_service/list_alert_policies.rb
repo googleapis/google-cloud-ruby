@@ -19,21 +19,27 @@
 # [START monitoring_v3_generated_AlertPolicyService_ListAlertPolicies_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::AlertPolicyService::Client#list_alert_policies
+#
+def list_alert_policies
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new
 
-# Call the list_alert_policies method.
-result = client.list_alert_policies request
+  # Call the list_alert_policies method.
+  result = client.list_alert_policies request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Monitoring::V3::AlertPolicy.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Monitoring::V3::AlertPolicy.
+    p response
+  end
 end
 # [END monitoring_v3_generated_AlertPolicyService_ListAlertPolicies_sync]

@@ -19,15 +19,21 @@
 # [START vision_v1p3beta1_generated_ProductSearch_RemoveProductFromProductSet_sync]
 require "google/cloud/vision/v1p3beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Vision::V1p3beta1::ProductSearch::Client#remove_product_from_product_set
+#
+def remove_product_from_product_set
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Vision::V1p3beta1::RemoveProductFromProductSetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Vision::V1p3beta1::RemoveProductFromProductSetRequest.new
 
-# Call the remove_product_from_product_set method.
-result = client.remove_product_from_product_set request
+  # Call the remove_product_from_product_set method.
+  result = client.remove_product_from_product_set request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END vision_v1p3beta1_generated_ProductSearch_RemoveProductFromProductSet_sync]

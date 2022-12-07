@@ -19,22 +19,28 @@
 # [START memcache_v1beta2_generated_CloudMemcache_UpdateInstance_sync]
 require "google/cloud/memcache/v1beta2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#update_instance
+#
+def update_instance
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new
 
-# Call the update_instance method.
-result = client.update_instance request
+  # Call the update_instance method.
+  result = client.update_instance request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END memcache_v1beta2_generated_CloudMemcache_UpdateInstance_sync]

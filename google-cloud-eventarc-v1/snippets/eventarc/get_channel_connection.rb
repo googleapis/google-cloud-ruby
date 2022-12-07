@@ -19,15 +19,21 @@
 # [START eventarc_v1_generated_Eventarc_GetChannelConnection_sync]
 require "google/cloud/eventarc/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Eventarc::V1::Eventarc::Client#get_channel_connection
+#
+def get_channel_connection
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Eventarc::V1::GetChannelConnectionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Eventarc::V1::GetChannelConnectionRequest.new
 
-# Call the get_channel_connection method.
-result = client.get_channel_connection request
+  # Call the get_channel_connection method.
+  result = client.get_channel_connection request
 
-# The returned object is of type Google::Cloud::Eventarc::V1::ChannelConnection.
-p result
+  # The returned object is of type Google::Cloud::Eventarc::V1::ChannelConnection.
+  p result
+end
 # [END eventarc_v1_generated_Eventarc_GetChannelConnection_sync]

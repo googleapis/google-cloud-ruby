@@ -423,9 +423,31 @@ module Google
         # @!attribute [r] upgradeable
         #   @return [::Boolean]
         #     Output only. Bool indicating whether an newer image is available in an image family.
+        # @!attribute [rw] post_startup_script_behavior
+        #   @return [::Google::Cloud::Notebooks::V1::RuntimeSoftwareConfig::PostStartupScriptBehavior]
+        #     Behavior for the post startup script.
+        # @!attribute [rw] disable_terminal
+        #   @return [::Boolean]
+        #     Bool indicating whether JupyterLab terminal will be available or not.
+        #     Default: False
+        # @!attribute [r] version
+        #   @return [::String]
+        #     Output only. version of boot image such as M100, from release label of the image.
         class RuntimeSoftwareConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Behavior for the post startup script.
+          module PostStartupScriptBehavior
+            # Unspecified post startup script behavior. Will run only once at creation.
+            POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED = 0
+
+            # Runs the post startup script provided during creation at every start.
+            RUN_EVERY_START = 1
+
+            # Downloads and runs the provided post startup script at every start.
+            DOWNLOAD_AND_RUN_EVERY_START = 2
+          end
         end
 
         # Contains runtime daemon metrics, such as OS and kernels and sessions stats.
@@ -526,8 +548,8 @@ module Google
         #
         #     A full URL or partial URI. Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default`
-        #     * `projects/[project_id]/regions/global/default`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/global/networks/default`
+        #     * `projects/[project_id]/global/networks/default`
         #
         #     Runtimes are managed resources inside Google Infrastructure.
         #     Runtimes support the following network configurations:

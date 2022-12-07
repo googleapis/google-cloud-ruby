@@ -19,22 +19,28 @@
 # [START documentai_v1_generated_DocumentProcessorService_DisableProcessor_sync]
 require "google/cloud/document_ai/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#disable_processor
+#
+def disable_processor
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DocumentAI::V1::DisableProcessorRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DocumentAI::V1::DisableProcessorRequest.new
 
-# Call the disable_processor method.
-result = client.disable_processor request
+  # Call the disable_processor method.
+  result = client.disable_processor request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END documentai_v1_generated_DocumentProcessorService_DisableProcessor_sync]

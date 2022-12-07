@@ -19,21 +19,27 @@
 # [START retail_v2_generated_ControlService_ListControls_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::ControlService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ControlService::Client#list_controls
+#
+def list_controls
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::ControlService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::ListControlsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::ListControlsRequest.new
 
-# Call the list_controls method.
-result = client.list_controls request
+  # Call the list_controls method.
+  result = client.list_controls request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Retail::V2::Control.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Retail::V2::Control.
+    p response
+  end
 end
 # [END retail_v2_generated_ControlService_ListControls_sync]

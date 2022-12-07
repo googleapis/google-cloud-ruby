@@ -26,6 +26,8 @@ module Google
           # Credentials for the CloudCatalog API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
+              "https://www.googleapis.com/auth/cloud-billing",
+              "https://www.googleapis.com/auth/cloud-billing.readonly",
               "https://www.googleapis.com/auth/cloud-platform"
             ]
             self.env_vars = [

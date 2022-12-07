@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2022-11-01)
+
+#### Features
+
+* Added support for Media CDN ([#19344](https://github.com/googleapis/google-cloud-ruby/issues/19344)) 
+
 ### 0.3.0 (2022-07-08)
 
 #### Features

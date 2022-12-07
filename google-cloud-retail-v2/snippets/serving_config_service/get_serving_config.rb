@@ -19,15 +19,21 @@
 # [START retail_v2_generated_ServingConfigService_GetServingConfig_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::ServingConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ServingConfigService::Client#get_serving_config
+#
+def get_serving_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::ServingConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::GetServingConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::GetServingConfigRequest.new
 
-# Call the get_serving_config method.
-result = client.get_serving_config request
+  # Call the get_serving_config method.
+  result = client.get_serving_config request
 
-# The returned object is of type Google::Cloud::Retail::V2::ServingConfig.
-p result
+  # The returned object is of type Google::Cloud::Retail::V2::ServingConfig.
+  p result
+end
 # [END retail_v2_generated_ServingConfigService_GetServingConfig_sync]

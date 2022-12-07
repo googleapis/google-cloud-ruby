@@ -19,15 +19,21 @@
 # [START managedidentities_v1_generated_ManagedIdentitiesService_GetDomain_sync]
 require "google/cloud/managed_identities/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#get_domain
+#
+def get_domain
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ManagedIdentities::V1::GetDomainRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ManagedIdentities::V1::GetDomainRequest.new
 
-# Call the get_domain method.
-result = client.get_domain request
+  # Call the get_domain method.
+  result = client.get_domain request
 
-# The returned object is of type Google::Cloud::ManagedIdentities::V1::Domain.
-p result
+  # The returned object is of type Google::Cloud::ManagedIdentities::V1::Domain.
+  p result
+end
 # [END managedidentities_v1_generated_ManagedIdentitiesService_GetDomain_sync]

@@ -19,15 +19,21 @@
 # [START bigquerydatapolicy_v1beta1_generated_DataPolicyService_CreateDataPolicy_sync]
 require "google/cloud/bigquery/data_policies/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#create_data_policy
+#
+def create_data_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::DataPolicies::V1beta1::CreateDataPolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::DataPolicies::V1beta1::CreateDataPolicyRequest.new
 
-# Call the create_data_policy method.
-result = client.create_data_policy request
+  # Call the create_data_policy method.
+  result = client.create_data_policy request
 
-# The returned object is of type Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicy.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicy.
+  p result
+end
 # [END bigquerydatapolicy_v1beta1_generated_DataPolicyService_CreateDataPolicy_sync]

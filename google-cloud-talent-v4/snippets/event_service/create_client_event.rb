@@ -19,15 +19,21 @@
 # [START jobs_v4_generated_EventService_CreateClientEvent_sync]
 require "google/cloud/talent/v4"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Talent::V4::EventService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Talent::V4::EventService::Client#create_client_event
+#
+def create_client_event
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Talent::V4::EventService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Talent::V4::CreateClientEventRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Talent::V4::CreateClientEventRequest.new
 
-# Call the create_client_event method.
-result = client.create_client_event request
+  # Call the create_client_event method.
+  result = client.create_client_event request
 
-# The returned object is of type Google::Cloud::Talent::V4::ClientEvent.
-p result
+  # The returned object is of type Google::Cloud::Talent::V4::ClientEvent.
+  p result
+end
 # [END jobs_v4_generated_EventService_CreateClientEvent_sync]

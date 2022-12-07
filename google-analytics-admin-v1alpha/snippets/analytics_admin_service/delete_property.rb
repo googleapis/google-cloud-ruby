@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteProperty_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_property
+#
+def delete_property
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::DeletePropertyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::DeletePropertyRequest.new
 
-# Call the delete_property method.
-result = client.delete_property request
+  # Call the delete_property method.
+  result = client.delete_property request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::Property.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::Property.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteProperty_sync]

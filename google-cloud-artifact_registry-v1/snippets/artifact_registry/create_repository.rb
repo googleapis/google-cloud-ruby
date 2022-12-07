@@ -19,22 +19,28 @@
 # [START artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_sync]
 require "google/cloud/artifact_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#create_repository
+#
+def create_repository
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ArtifactRegistry::V1::CreateRepositoryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ArtifactRegistry::V1::CreateRepositoryRequest.new
 
-# Call the create_repository method.
-result = client.create_repository request
+  # Call the create_repository method.
+  result = client.create_repository request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_sync]

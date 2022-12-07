@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_TensorboardService_CreateTensorboardTimeSeries_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::TensorboardService::Client#create_tensorboard_time_series
+#
+def create_tensorboard_time_series
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::CreateTensorboardTimeSeriesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::CreateTensorboardTimeSeriesRequest.new
 
-# Call the create_tensorboard_time_series method.
-result = client.create_tensorboard_time_series request
+  # Call the create_tensorboard_time_series method.
+  result = client.create_tensorboard_time_series request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::TensorboardTimeSeries.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::TensorboardTimeSeries.
+  p result
+end
 # [END aiplatform_v1_generated_TensorboardService_CreateTensorboardTimeSeries_sync]

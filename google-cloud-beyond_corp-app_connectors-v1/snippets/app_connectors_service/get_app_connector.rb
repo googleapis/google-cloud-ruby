@@ -19,15 +19,21 @@
 # [START beyondcorp_v1_generated_AppConnectorsService_GetAppConnector_sync]
 require "google/cloud/beyond_corp/app_connectors/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#get_app_connector
+#
+def get_app_connector
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BeyondCorp::AppConnectors::V1::GetAppConnectorRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BeyondCorp::AppConnectors::V1::GetAppConnectorRequest.new
 
-# Call the get_app_connector method.
-result = client.get_app_connector request
+  # Call the get_app_connector method.
+  result = client.get_app_connector request
 
-# The returned object is of type Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnector.
-p result
+  # The returned object is of type Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnector.
+  p result
+end
 # [END beyondcorp_v1_generated_AppConnectorsService_GetAppConnector_sync]

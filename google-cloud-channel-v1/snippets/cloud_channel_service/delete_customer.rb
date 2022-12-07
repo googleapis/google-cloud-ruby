@@ -19,15 +19,21 @@
 # [START cloudchannel_v1_generated_CloudChannelService_DeleteCustomer_sync]
 require "google/cloud/channel/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer
+#
+def delete_customer
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Channel::V1::DeleteCustomerRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Channel::V1::DeleteCustomerRequest.new
 
-# Call the delete_customer method.
-result = client.delete_customer request
+  # Call the delete_customer method.
+  result = client.delete_customer request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END cloudchannel_v1_generated_CloudChannelService_DeleteCustomer_sync]

@@ -19,15 +19,21 @@
 # [START recommendationengine_v1beta1_generated_CatalogService_DeleteCatalogItem_sync]
 require "google/cloud/recommendation_engine/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#delete_catalog_item
+#
+def delete_catalog_item
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::RecommendationEngine::V1beta1::DeleteCatalogItemRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::RecommendationEngine::V1beta1::DeleteCatalogItemRequest.new
 
-# Call the delete_catalog_item method.
-result = client.delete_catalog_item request
+  # Call the delete_catalog_item method.
+  result = client.delete_catalog_item request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END recommendationengine_v1beta1_generated_CatalogService_DeleteCatalogItem_sync]

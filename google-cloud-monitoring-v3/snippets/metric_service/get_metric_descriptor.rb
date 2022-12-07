@@ -19,15 +19,21 @@
 # [START monitoring_v3_generated_MetricService_GetMetricDescriptor_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::MetricService::Client#get_metric_descriptor
+#
+def get_metric_descriptor
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest.new
 
-# Call the get_metric_descriptor method.
-result = client.get_metric_descriptor request
+  # Call the get_metric_descriptor method.
+  result = client.get_metric_descriptor request
 
-# The returned object is of type Google::Api::MetricDescriptor.
-p result
+  # The returned object is of type Google::Api::MetricDescriptor.
+  p result
+end
 # [END monitoring_v3_generated_MetricService_GetMetricDescriptor_sync]

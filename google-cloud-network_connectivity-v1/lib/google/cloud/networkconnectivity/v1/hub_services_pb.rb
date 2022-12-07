@@ -35,25 +35,27 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.networkconnectivity.v1.HubService'
 
-            # Lists hubs in a given project.
+            # Lists the Network Connectivity Center hubs associated with a given project.
             rpc :ListHubs, ::Google::Cloud::NetworkConnectivity::V1::ListHubsRequest, ::Google::Cloud::NetworkConnectivity::V1::ListHubsResponse
-            # Gets details about the specified hub.
+            # Gets details about a Network Connectivity Center hub.
             rpc :GetHub, ::Google::Cloud::NetworkConnectivity::V1::GetHubRequest, ::Google::Cloud::NetworkConnectivity::V1::Hub
-            # Creates a new hub in the specified project.
+            # Creates a new Network Connectivity Center hub in the specified project.
             rpc :CreateHub, ::Google::Cloud::NetworkConnectivity::V1::CreateHubRequest, ::Google::Longrunning::Operation
-            # Updates the description and/or labels of the specified hub.
+            # Updates the description and/or labels of a Network Connectivity Center
+            # hub.
             rpc :UpdateHub, ::Google::Cloud::NetworkConnectivity::V1::UpdateHubRequest, ::Google::Longrunning::Operation
-            # Deletes the specified hub.
+            # Deletes a Network Connectivity Center hub.
             rpc :DeleteHub, ::Google::Cloud::NetworkConnectivity::V1::DeleteHubRequest, ::Google::Longrunning::Operation
-            # Lists the spokes in the specified project and location.
+            # Lists the Network Connectivity Center spokes in a specified project and
+            # location.
             rpc :ListSpokes, ::Google::Cloud::NetworkConnectivity::V1::ListSpokesRequest, ::Google::Cloud::NetworkConnectivity::V1::ListSpokesResponse
-            # Gets details about the specified spoke.
+            # Gets details about a Network Connectivity Center spoke.
             rpc :GetSpoke, ::Google::Cloud::NetworkConnectivity::V1::GetSpokeRequest, ::Google::Cloud::NetworkConnectivity::V1::Spoke
-            # Creates a spoke in the specified project and location.
+            # Creates a Network Connectivity Center spoke.
             rpc :CreateSpoke, ::Google::Cloud::NetworkConnectivity::V1::CreateSpokeRequest, ::Google::Longrunning::Operation
-            # Updates the parameters of the specified spoke.
+            # Updates the parameters of a Network Connectivity Center spoke.
             rpc :UpdateSpoke, ::Google::Cloud::NetworkConnectivity::V1::UpdateSpokeRequest, ::Google::Longrunning::Operation
-            # Deletes the specified spoke.
+            # Deletes a Network Connectivity Center spoke.
             rpc :DeleteSpoke, ::Google::Cloud::NetworkConnectivity::V1::DeleteSpokeRequest, ::Google::Longrunning::Operation
           end
 

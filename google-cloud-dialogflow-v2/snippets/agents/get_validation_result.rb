@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Agents_GetValidationResult_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Agents::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Agents::Client#get_validation_result
+#
+def get_validation_result
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Agents::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::GetValidationResultRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::GetValidationResultRequest.new
 
-# Call the get_validation_result method.
-result = client.get_validation_result request
+  # Call the get_validation_result method.
+  result = client.get_validation_result request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::ValidationResult.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::ValidationResult.
+  p result
+end
 # [END dialogflow_v2_generated_Agents_GetValidationResult_sync]

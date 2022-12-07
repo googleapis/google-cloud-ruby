@@ -19,15 +19,21 @@
 # [START videostitcher_v1_generated_VideoStitcherService_UpdateCdnKey_sync]
 require "google/cloud/video/stitcher/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#update_cdn_key
+#
+def update_cdn_key
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Video::Stitcher::V1::UpdateCdnKeyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Video::Stitcher::V1::UpdateCdnKeyRequest.new
 
-# Call the update_cdn_key method.
-result = client.update_cdn_key request
+  # Call the update_cdn_key method.
+  result = client.update_cdn_key request
 
-# The returned object is of type Google::Cloud::Video::Stitcher::V1::CdnKey.
-p result
+  # The returned object is of type Google::Cloud::Video::Stitcher::V1::CdnKey.
+  p result
+end
 # [END videostitcher_v1_generated_VideoStitcherService_UpdateCdnKey_sync]

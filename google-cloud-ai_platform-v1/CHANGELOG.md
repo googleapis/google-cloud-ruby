@@ -1,5 +1,21 @@
 # Changelog
 
+### 0.15.0 (2022-11-16)
+
+#### Features
+
+* add service_account to BatchPredictionJob 
+
+### 0.14.0 (2022-11-08)
+
+#### Features
+
+* add annotation_labels to ImportDataConfig 
+* add failed_main_jobs and failed_pre_caching_check_jobs to ContainerDetail 
+* add metadata_artifact to Model 
+* add persist_ml_use_assignment to InputDataConfig 
+* add start_time to BatchReadFeatureValuesRequest 
+
 ### 0.13.0 (2022-09-28)
 
 #### Features

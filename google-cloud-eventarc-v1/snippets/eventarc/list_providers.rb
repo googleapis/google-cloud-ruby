@@ -19,21 +19,27 @@
 # [START eventarc_v1_generated_Eventarc_ListProviders_sync]
 require "google/cloud/eventarc/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Eventarc::V1::Eventarc::Client#list_providers
+#
+def list_providers
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Eventarc::V1::ListProvidersRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Eventarc::V1::ListProvidersRequest.new
 
-# Call the list_providers method.
-result = client.list_providers request
+  # Call the list_providers method.
+  result = client.list_providers request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Eventarc::V1::Provider.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Eventarc::V1::Provider.
+    p response
+  end
 end
 # [END eventarc_v1_generated_Eventarc_ListProviders_sync]

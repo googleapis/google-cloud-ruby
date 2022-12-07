@@ -19,15 +19,21 @@
 # [START gameservices_v1_generated_RealmsService_PreviewRealmUpdate_sync]
 require "google/cloud/gaming/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::RealmsService::Client#preview_realm_update
+#
+def preview_realm_update
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Gaming::V1::RealmsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Gaming::V1::PreviewRealmUpdateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Gaming::V1::PreviewRealmUpdateRequest.new
 
-# Call the preview_realm_update method.
-result = client.preview_realm_update request
+  # Call the preview_realm_update method.
+  result = client.preview_realm_update request
 
-# The returned object is of type Google::Cloud::Gaming::V1::PreviewRealmUpdateResponse.
-p result
+  # The returned object is of type Google::Cloud::Gaming::V1::PreviewRealmUpdateResponse.
+  p result
+end
 # [END gameservices_v1_generated_RealmsService_PreviewRealmUpdate_sync]

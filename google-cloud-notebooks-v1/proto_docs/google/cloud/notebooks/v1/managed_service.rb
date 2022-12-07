@@ -156,6 +156,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request for upgrading a Managed Notebook Runtime to the latest version.
+        # option (google.api.message_visibility).restriction =
+        #     "TRUSTED_TESTER,SPECIAL_TESTER";
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Format:
+        #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Idempotent request UUID.
+        class UpgradeRuntimeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request for reporting a Managed Notebook Event.
         # @!attribute [rw] name
         #   @return [::String]
@@ -169,6 +184,43 @@ module Google
         #   @return [::Google::Cloud::Notebooks::V1::Event]
         #     Required. The Event to be reported.
         class ReportRuntimeEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for updating a Managed Notebook configuration.
+        # @!attribute [rw] runtime
+        #   @return [::Google::Cloud::Notebooks::V1::Runtime]
+        #     Required. The Runtime to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Specifies the path, relative to `Runtime`, of
+        #     the field to update. For example, to change the software configuration
+        #     kernels, the `update_mask` parameter would be
+        #     specified as `software_config.kernels`,
+        #     and the `PATCH` request body would specify the new value, as follows:
+        #
+        #         {
+        #           "software_config":{
+        #             "kernels": [{
+        #                'repository':
+        #                'gcr.io/deeplearning-platform-release/pytorch-gpu', 'tag':
+        #                'latest' }],
+        #             }
+        #         }
+        #
+        #
+        #     Currently, only the following fields can be updated:
+        #     - software_config.kernels
+        #     - software_config.post_startup_script
+        #     - software_config.custom_gpu_driver_path
+        #     - software_config.idle_shutdown
+        #     - software_config.idle_shutdown_timeout
+        #     - software_config.disable_terminal
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Idempotent request UUID.
+        class UpdateRuntimeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -195,6 +247,19 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Token expiration time.
         class RefreshRuntimeTokenInternalResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for creating a notebook instance diagnostic file.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Format:
+        #     `projects/{project_id}/locations/{location}/runtimes/{runtimes_id}`
+        # @!attribute [rw] diagnostic_config
+        #   @return [::Google::Cloud::Notebooks::V1::DiagnosticConfig]
+        #     Required. Defines flags that are used to run the diagnostic tool
+        class DiagnoseRuntimeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

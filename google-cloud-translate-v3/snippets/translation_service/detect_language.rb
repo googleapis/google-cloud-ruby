@@ -19,15 +19,21 @@
 # [START translate_v3_generated_TranslationService_DetectLanguage_sync]
 require "google/cloud/translate/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Translate::V3::TranslationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Translate::V3::TranslationService::Client#detect_language
+#
+def detect_language
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Translate::V3::TranslationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Translate::V3::DetectLanguageRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Translate::V3::DetectLanguageRequest.new
 
-# Call the detect_language method.
-result = client.detect_language request
+  # Call the detect_language method.
+  result = client.detect_language request
 
-# The returned object is of type Google::Cloud::Translate::V3::DetectLanguageResponse.
-p result
+  # The returned object is of type Google::Cloud::Translate::V3::DetectLanguageResponse.
+  p result
+end
 # [END translate_v3_generated_TranslationService_DetectLanguage_sync]

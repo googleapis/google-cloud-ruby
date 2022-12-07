@@ -19,15 +19,21 @@
 # [START bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateInstance_sync]
 require "google/cloud/bigtable/admin/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_instance
+#
+def update_instance
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigtable::Admin::V2::Instance.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigtable::Admin::V2::Instance.new
 
-# Call the update_instance method.
-result = client.update_instance request
+  # Call the update_instance method.
+  result = client.update_instance request
 
-# The returned object is of type Google::Cloud::Bigtable::Admin::V2::Instance.
-p result
+  # The returned object is of type Google::Cloud::Bigtable::Admin::V2::Instance.
+  p result
+end
 # [END bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateInstance_sync]

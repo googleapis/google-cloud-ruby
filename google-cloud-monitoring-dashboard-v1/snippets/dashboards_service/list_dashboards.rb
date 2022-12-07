@@ -19,21 +19,27 @@
 # [START monitoring_v1_generated_DashboardsService_ListDashboards_sync]
 require "google/cloud/monitoring/dashboard/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#list_dashboards
+#
+def list_dashboards
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new
 
-# Call the list_dashboards method.
-result = client.list_dashboards request
+  # Call the list_dashboards method.
+  result = client.list_dashboards request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard.
+    p response
+  end
 end
 # [END monitoring_v1_generated_DashboardsService_ListDashboards_sync]

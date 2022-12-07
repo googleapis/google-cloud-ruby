@@ -44,6 +44,11 @@
               "methods": [
                 "apply_parameters"
               ]
+            },
+            "RescheduleMaintenance": {
+              "methods": [
+                "reschedule_maintenance"
+              ]
             }
           }
         }

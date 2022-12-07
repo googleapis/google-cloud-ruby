@@ -19,15 +19,21 @@
 # [START appengine_v1_generated_AuthorizedCertificates_GetAuthorizedCertificate_sync]
 require "google/cloud/app_engine/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#get_authorized_certificate
+#
+def get_authorized_certificate
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AppEngine::V1::GetAuthorizedCertificateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AppEngine::V1::GetAuthorizedCertificateRequest.new
 
-# Call the get_authorized_certificate method.
-result = client.get_authorized_certificate request
+  # Call the get_authorized_certificate method.
+  result = client.get_authorized_certificate request
 
-# The returned object is of type Google::Cloud::AppEngine::V1::AuthorizedCertificate.
-p result
+  # The returned object is of type Google::Cloud::AppEngine::V1::AuthorizedCertificate.
+  p result
+end
 # [END appengine_v1_generated_AuthorizedCertificates_GetAuthorizedCertificate_sync]

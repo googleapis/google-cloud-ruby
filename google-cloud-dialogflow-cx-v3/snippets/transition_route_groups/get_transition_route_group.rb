@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_TransitionRouteGroups_GetTransitionRouteGroup_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client#get_transition_route_group
+#
+def get_transition_route_group
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::GetTransitionRouteGroupRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::GetTransitionRouteGroupRequest.new
 
-# Call the get_transition_route_group method.
-result = client.get_transition_route_group request
+  # Call the get_transition_route_group method.
+  result = client.get_transition_route_group request
 
-# The returned object is of type Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
+  p result
+end
 # [END dialogflow_v3_generated_TransitionRouteGroups_GetTransitionRouteGroup_sync]

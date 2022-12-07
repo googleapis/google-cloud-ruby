@@ -19,15 +19,21 @@
 # [START dlp_v2_generated_DlpService_CancelDlpJob_sync]
 require "google/cloud/dlp/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dlp::V2::DlpService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#cancel_dlp_job
+#
+def cancel_dlp_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dlp::V2::DlpService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dlp::V2::CancelDlpJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dlp::V2::CancelDlpJobRequest.new
 
-# Call the cancel_dlp_job method.
-result = client.cancel_dlp_job request
+  # Call the cancel_dlp_job method.
+  result = client.cancel_dlp_job request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END dlp_v2_generated_DlpService_CancelDlpJob_sync]

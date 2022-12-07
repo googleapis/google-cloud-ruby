@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.6.0 (2022-11-09)
+
+#### Features
+
+* add document_schema to processor 
+* add font_family, ImageQualityScores and Provenance to document 
+
 ### 0.5.0 (2022-08-10)
 
 #### Features

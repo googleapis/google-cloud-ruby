@@ -19,15 +19,21 @@
 # [START recommendationengine_v1beta1_generated_PredictionApiKeyRegistry_CreatePredictionApiKeyRegistration_sync]
 require "google/cloud/recommendation_engine/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client#create_prediction_api_key_registration
+#
+def create_prediction_api_key_registration
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new
 
-# Call the create_prediction_api_key_registration method.
-result = client.create_prediction_api_key_registration request
+  # Call the create_prediction_api_key_registration method.
+  result = client.create_prediction_api_key_registration request
 
-# The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistration.
-p result
+  # The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistration.
+  p result
+end
 # [END recommendationengine_v1beta1_generated_PredictionApiKeyRegistry_CreatePredictionApiKeyRegistration_sync]

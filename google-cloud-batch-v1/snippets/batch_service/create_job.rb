@@ -19,15 +19,21 @@
 # [START batch_v1_generated_BatchService_CreateJob_sync]
 require "google/cloud/batch/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Batch::V1::BatchService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Batch::V1::BatchService::Client#create_job
+#
+def create_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Batch::V1::BatchService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Batch::V1::CreateJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Batch::V1::CreateJobRequest.new
 
-# Call the create_job method.
-result = client.create_job request
+  # Call the create_job method.
+  result = client.create_job request
 
-# The returned object is of type Google::Cloud::Batch::V1::Job.
-p result
+  # The returned object is of type Google::Cloud::Batch::V1::Job.
+  p result
+end
 # [END batch_v1_generated_BatchService_CreateJob_sync]

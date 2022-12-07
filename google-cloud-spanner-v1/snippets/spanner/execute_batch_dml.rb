@@ -19,15 +19,21 @@
 # [START spanner_v1_generated_Spanner_ExecuteBatchDml_sync]
 require "google/cloud/spanner/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Spanner::V1::Spanner::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Spanner::V1::Spanner::Client#execute_batch_dml
+#
+def execute_batch_dml
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Spanner::V1::Spanner::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest.new
 
-# Call the execute_batch_dml method.
-result = client.execute_batch_dml request
+  # Call the execute_batch_dml method.
+  result = client.execute_batch_dml request
 
-# The returned object is of type Google::Cloud::Spanner::V1::ExecuteBatchDmlResponse.
-p result
+  # The returned object is of type Google::Cloud::Spanner::V1::ExecuteBatchDmlResponse.
+  p result
+end
 # [END spanner_v1_generated_Spanner_ExecuteBatchDml_sync]

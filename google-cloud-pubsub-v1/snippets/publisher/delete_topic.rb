@@ -19,15 +19,21 @@
 # [START pubsub_v1_generated_Publisher_DeleteTopic_sync]
 require "google/cloud/pubsub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::PubSub::V1::Publisher::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Publisher::Client#delete_topic
+#
+def delete_topic
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::PubSub::V1::Publisher::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::PubSub::V1::DeleteTopicRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::PubSub::V1::DeleteTopicRequest.new
 
-# Call the delete_topic method.
-result = client.delete_topic request
+  # Call the delete_topic method.
+  result = client.delete_topic request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END pubsub_v1_generated_Publisher_DeleteTopic_sync]

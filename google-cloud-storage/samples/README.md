@@ -103,6 +103,7 @@ Run the tests for these samples by running `bundle exec rake test`.
 | storage_get_default_event_based_hold.rb | `bucket` | Get state of event-based hold for a bucket |
 | storage_get_hmac_key | `access_id` | Get HMAC Key metadata |
 | storage_get_metadata.rb | `bucket` `file` | Display metadata for a file in a bucket |
+| storage_get_rerequester_pays_status.rb | `bucket` | Get requester pays status for a bucket |
 | storage_get_retention_policy.rb | `bucket` | Get retention policy for a bucket |
 | storage_get_service_account.rb | | Display the GCS service account for the project |
 | storage_get_uniform_bucket_level_access.rb | `bucket` | Get uniform bucket-level access for a bucket |

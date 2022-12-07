@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_Versions_CompareVersions_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::Versions::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Versions::Client#compare_versions
+#
+def compare_versions
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::Versions::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::CompareVersionsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::CompareVersionsRequest.new
 
-# Call the compare_versions method.
-result = client.compare_versions request
+  # Call the compare_versions method.
+  result = client.compare_versions request
 
-# The returned object is of type Google::Cloud::Dialogflow::CX::V3::CompareVersionsResponse.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::CX::V3::CompareVersionsResponse.
+  p result
+end
 # [END dialogflow_v3_generated_Versions_CompareVersions_sync]

@@ -19,21 +19,27 @@
 # [START datamigration_v1_generated_DataMigrationService_ListConnectionProfiles_sync]
 require "google/cloud/cloud_dms/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::CloudDMS::V1::DataMigrationService::Client#list_connection_profiles
+#
+def list_connection_profiles
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::CloudDMS::V1::ListConnectionProfilesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::CloudDMS::V1::ListConnectionProfilesRequest.new
 
-# Call the list_connection_profiles method.
-result = client.list_connection_profiles request
+  # Call the list_connection_profiles method.
+  result = client.list_connection_profiles request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::CloudDMS::V1::ConnectionProfile.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::CloudDMS::V1::ConnectionProfile.
+    p response
+  end
 end
 # [END datamigration_v1_generated_DataMigrationService_ListConnectionProfiles_sync]

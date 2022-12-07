@@ -19,15 +19,21 @@
 # [START storagetransfer_v1_generated_StorageTransferService_GetAgentPool_sync]
 require "google/cloud/storage_transfer/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#get_agent_pool
+#
+def get_agent_pool
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::StorageTransfer::V1::GetAgentPoolRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::StorageTransfer::V1::GetAgentPoolRequest.new
 
-# Call the get_agent_pool method.
-result = client.get_agent_pool request
+  # Call the get_agent_pool method.
+  result = client.get_agent_pool request
 
-# The returned object is of type Google::Cloud::StorageTransfer::V1::AgentPool.
-p result
+  # The returned object is of type Google::Cloud::StorageTransfer::V1::AgentPool.
+  p result
+end
 # [END storagetransfer_v1_generated_StorageTransferService_GetAgentPool_sync]

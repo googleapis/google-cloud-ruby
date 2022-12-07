@@ -19,15 +19,21 @@
 # [START run_v2_generated_Revisions_GetRevision_sync]
 require "google/cloud/run/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Run::V2::Revisions::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Run::V2::Revisions::Client#get_revision
+#
+def get_revision
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Run::V2::Revisions::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Run::V2::GetRevisionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Run::V2::GetRevisionRequest.new
 
-# Call the get_revision method.
-result = client.get_revision request
+  # Call the get_revision method.
+  result = client.get_revision request
 
-# The returned object is of type Google::Cloud::Run::V2::Revision.
-p result
+  # The returned object is of type Google::Cloud::Run::V2::Revision.
+  p result
+end
 # [END run_v2_generated_Revisions_GetRevision_sync]

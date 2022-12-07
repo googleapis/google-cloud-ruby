@@ -19,21 +19,27 @@
 # [START dialogflow_v3_generated_Webhooks_ListWebhooks_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#list_webhooks
+#
+def list_webhooks
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest.new
 
-# Call the list_webhooks method.
-result = client.list_webhooks request
+  # Call the list_webhooks method.
+  result = client.list_webhooks request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Webhook.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Webhook.
+    p response
+  end
 end
 # [END dialogflow_v3_generated_Webhooks_ListWebhooks_sync]

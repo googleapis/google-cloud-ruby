@@ -19,15 +19,21 @@
 # [START connectgateway_v1beta1_generated_GatewayService_PostResource_sync]
 require "google/cloud/gke_connect/gateway/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#post_resource
+#
+def post_resource
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Api::HttpBody.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Api::HttpBody.new
 
-# Call the post_resource method.
-result = client.post_resource request
+  # Call the post_resource method.
+  result = client.post_resource request
 
-# The returned object is of type Google::Api::HttpBody.
-p result
+  # The returned object is of type Google::Api::HttpBody.
+  p result
+end
 # [END connectgateway_v1beta1_generated_GatewayService_PostResource_sync]

@@ -19,15 +19,21 @@
 # [START gkemulticloud_v1_generated_AwsClusters_GetAwsNodePool_sync]
 require "google/cloud/gke_multi_cloud/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_node_pool
+#
+def get_aws_node_pool
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeMultiCloud::V1::GetAwsNodePoolRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeMultiCloud::V1::GetAwsNodePoolRequest.new
 
-# Call the get_aws_node_pool method.
-result = client.get_aws_node_pool request
+  # Call the get_aws_node_pool method.
+  result = client.get_aws_node_pool request
 
-# The returned object is of type Google::Cloud::GkeMultiCloud::V1::AwsNodePool.
-p result
+  # The returned object is of type Google::Cloud::GkeMultiCloud::V1::AwsNodePool.
+  p result
+end
 # [END gkemulticloud_v1_generated_AwsClusters_GetAwsNodePool_sync]

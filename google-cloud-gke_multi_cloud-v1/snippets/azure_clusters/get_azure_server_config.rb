@@ -19,15 +19,21 @@
 # [START gkemulticloud_v1_generated_AzureClusters_GetAzureServerConfig_sync]
 require "google/cloud/gke_multi_cloud/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_server_config
+#
+def get_azure_server_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeMultiCloud::V1::GetAzureServerConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeMultiCloud::V1::GetAzureServerConfigRequest.new
 
-# Call the get_azure_server_config method.
-result = client.get_azure_server_config request
+  # Call the get_azure_server_config method.
+  result = client.get_azure_server_config request
 
-# The returned object is of type Google::Cloud::GkeMultiCloud::V1::AzureServerConfig.
-p result
+  # The returned object is of type Google::Cloud::GkeMultiCloud::V1::AzureServerConfig.
+  p result
+end
 # [END gkemulticloud_v1_generated_AzureClusters_GetAzureServerConfig_sync]

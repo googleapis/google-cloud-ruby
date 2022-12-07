@@ -19,21 +19,27 @@
 # [START managedidentities_v1_generated_ManagedIdentitiesService_ListDomains_sync]
 require "google/cloud/managed_identities/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#list_domains
+#
+def list_domains
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ManagedIdentities::V1::ListDomainsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ManagedIdentities::V1::ListDomainsRequest.new
 
-# Call the list_domains method.
-result = client.list_domains request
+  # Call the list_domains method.
+  result = client.list_domains request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::ManagedIdentities::V1::Domain.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::ManagedIdentities::V1::Domain.
+    p response
+  end
 end
 # [END managedidentities_v1_generated_ManagedIdentitiesService_ListDomains_sync]

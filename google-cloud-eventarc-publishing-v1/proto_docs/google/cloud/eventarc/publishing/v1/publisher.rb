@@ -30,6 +30,14 @@ module Google
           # @!attribute [rw] events
           #   @return [::Array<::Google::Protobuf::Any>]
           #     The CloudEvents v1.0 events to publish. No other types are allowed.
+          #     If this field is set, then the `text_events` fields must not be set.
+          # @!attribute [rw] text_events
+          #   @return [::Array<::String>]
+          #     The text representation of events to publish.
+          #     CloudEvent v1.0 in JSON format is the only allowed type. Refer to
+          #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md
+          #     for specification.
+          #     If this field is set, then the `events` fields must not be set.
           class PublishChannelConnectionEventsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -49,6 +57,14 @@ module Google
           # @!attribute [rw] events
           #   @return [::Array<::Google::Protobuf::Any>]
           #     The CloudEvents v1.0 events to publish. No other types are allowed.
+          #     If this field is set, then the `text_events` fields must not be set.
+          # @!attribute [rw] text_events
+          #   @return [::Array<::String>]
+          #     The text representation of events to publish.
+          #     CloudEvent v1.0 in JSON format is the only allowed type. Refer to
+          #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md
+          #     for specification.
+          #     If this field is set, then the `events` fields must not be set.
           class PublishEventsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

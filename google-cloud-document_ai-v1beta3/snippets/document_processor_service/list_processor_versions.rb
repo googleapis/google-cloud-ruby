@@ -19,21 +19,27 @@
 # [START documentai_v1beta3_generated_DocumentProcessorService_ListProcessorVersions_sync]
 require "google/cloud/document_ai/v1beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#list_processor_versions
+#
+def list_processor_versions
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DocumentAI::V1beta3::ListProcessorVersionsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DocumentAI::V1beta3::ListProcessorVersionsRequest.new
 
-# Call the list_processor_versions method.
-result = client.list_processor_versions request
+  # Call the list_processor_versions method.
+  result = client.list_processor_versions request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion.
+    p response
+  end
 end
 # [END documentai_v1beta3_generated_DocumentProcessorService_ListProcessorVersions_sync]

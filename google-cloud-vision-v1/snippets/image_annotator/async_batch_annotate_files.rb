@@ -19,22 +19,28 @@
 # [START vision_v1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_sync]
 require "google/cloud/vision/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Vision::V1::ImageAnnotator::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Vision::V1::ImageAnnotator::Client#async_batch_annotate_files
+#
+def async_batch_annotate_files
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Vision::V1::ImageAnnotator::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new
 
-# Call the async_batch_annotate_files method.
-result = client.async_batch_annotate_files request
+  # Call the async_batch_annotate_files method.
+  result = client.async_batch_annotate_files request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END vision_v1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_sync]

@@ -19,21 +19,27 @@
 # [START firestore_v1_generated_FirestoreAdmin_ListIndexes_sync]
 require "google/cloud/firestore/admin/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_indexes
+#
+def list_indexes
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Firestore::Admin::V1::ListIndexesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Firestore::Admin::V1::ListIndexesRequest.new
 
-# Call the list_indexes method.
-result = client.list_indexes request
+  # Call the list_indexes method.
+  result = client.list_indexes request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Firestore::Admin::V1::Index.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Firestore::Admin::V1::Index.
+    p response
+  end
 end
 # [END firestore_v1_generated_FirestoreAdmin_ListIndexes_sync]

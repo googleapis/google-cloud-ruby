@@ -19,21 +19,27 @@
 # [START retail_v2_generated_ServingConfigService_ListServingConfigs_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::ServingConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ServingConfigService::Client#list_serving_configs
+#
+def list_serving_configs
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::ServingConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::ListServingConfigsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::ListServingConfigsRequest.new
 
-# Call the list_serving_configs method.
-result = client.list_serving_configs request
+  # Call the list_serving_configs method.
+  result = client.list_serving_configs request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Retail::V2::ServingConfig.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Retail::V2::ServingConfig.
+    p response
+  end
 end
 # [END retail_v2_generated_ServingConfigService_ListServingConfigs_sync]

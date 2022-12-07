@@ -19,15 +19,21 @@
 # [START bigquerydatatransfer_v1_generated_DataTransferService_EnrollDataSources_sync]
 require "google/cloud/bigquery/data_transfer/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#enroll_data_sources
+#
+def enroll_data_sources
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest.new
 
-# Call the enroll_data_sources method.
-result = client.enroll_data_sources request
+  # Call the enroll_data_sources method.
+  result = client.enroll_data_sources request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END bigquerydatatransfer_v1_generated_DataTransferService_EnrollDataSources_sync]

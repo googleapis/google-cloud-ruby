@@ -19,15 +19,21 @@
 # [START privateca_v1_generated_CertificateAuthorityService_RevokeCertificate_sync]
 require "google/cloud/security/private_ca/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#revoke_certificate
+#
+def revoke_certificate
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Security::PrivateCA::V1::RevokeCertificateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Security::PrivateCA::V1::RevokeCertificateRequest.new
 
-# Call the revoke_certificate method.
-result = client.revoke_certificate request
+  # Call the revoke_certificate method.
+  result = client.revoke_certificate request
 
-# The returned object is of type Google::Cloud::Security::PrivateCA::V1::Certificate.
-p result
+  # The returned object is of type Google::Cloud::Security::PrivateCA::V1::Certificate.
+  p result
+end
 # [END privateca_v1_generated_CertificateAuthorityService_RevokeCertificate_sync]

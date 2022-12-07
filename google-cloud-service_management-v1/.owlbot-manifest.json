@@ -26,6 +26,7 @@
     "proto_docs/google/api/auth.rb",
     "proto_docs/google/api/backend.rb",
     "proto_docs/google/api/billing.rb",
+    "proto_docs/google/api/client.rb",
     "proto_docs/google/api/config_change.rb",
     "proto_docs/google/api/context.rb",
     "proto_docs/google/api/control.rb",

@@ -19,15 +19,21 @@
 # [START cloudiot_v1_generated_DeviceManager_ListDeviceStates_sync]
 require "google/cloud/iot/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#list_device_states
+#
+def list_device_states
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iot::V1::DeviceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iot::V1::ListDeviceStatesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iot::V1::ListDeviceStatesRequest.new
 
-# Call the list_device_states method.
-result = client.list_device_states request
+  # Call the list_device_states method.
+  result = client.list_device_states request
 
-# The returned object is of type Google::Cloud::Iot::V1::ListDeviceStatesResponse.
-p result
+  # The returned object is of type Google::Cloud::Iot::V1::ListDeviceStatesResponse.
+  p result
+end
 # [END cloudiot_v1_generated_DeviceManager_ListDeviceStates_sync]

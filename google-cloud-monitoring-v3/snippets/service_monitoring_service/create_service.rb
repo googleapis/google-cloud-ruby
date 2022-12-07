@@ -19,15 +19,21 @@
 # [START monitoring_v3_generated_ServiceMonitoringService_CreateService_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#create_service
+#
+def create_service
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::CreateServiceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::CreateServiceRequest.new
 
-# Call the create_service method.
-result = client.create_service request
+  # Call the create_service method.
+  result = client.create_service request
 
-# The returned object is of type Google::Cloud::Monitoring::V3::Service.
-p result
+  # The returned object is of type Google::Cloud::Monitoring::V3::Service.
+  p result
+end
 # [END monitoring_v3_generated_ServiceMonitoringService_CreateService_sync]

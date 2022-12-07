@@ -19,15 +19,21 @@
 # [START webrisk_v1beta1_generated_WebRiskService_SearchHashes_sync]
 require "google/cloud/web_risk/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::WebRisk::V1beta1::WebRiskService::Client#search_hashes
+#
+def search_hashes
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new
 
-# Call the search_hashes method.
-result = client.search_hashes request
+  # Call the search_hashes method.
+  result = client.search_hashes request
 
-# The returned object is of type Google::Cloud::WebRisk::V1beta1::SearchHashesResponse.
-p result
+  # The returned object is of type Google::Cloud::WebRisk::V1beta1::SearchHashesResponse.
+  p result
+end
 # [END webrisk_v1beta1_generated_WebRiskService_SearchHashes_sync]

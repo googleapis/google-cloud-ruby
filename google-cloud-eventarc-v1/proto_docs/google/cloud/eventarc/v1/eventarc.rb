@@ -37,6 +37,7 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of triggers to return on each page.
+        #
         #     Note: The service may send fewer.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -51,6 +52,11 @@ module Google
         #     comma-separated list of fields. The default sorting order is ascending. To
         #     specify descending order for a field, append a `desc` suffix; for example:
         #     `name desc, trigger_id`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Filter field. Used to filter the Triggers to be listed. Possible filters
+        #     are described in https://google.aip.dev/160. For example, using
+        #     "?filter=destination:gke" would list only Triggers with a gke destination.
         class ListTriggersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -62,7 +68,7 @@ module Google
         #     The requested triggers, up to the number specified in `page_size`.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A page token that can be sent to ListTriggers to request the next page.
+        #     A page token that can be sent to `ListTriggers` to request the next page.
         #     If this is empty, then there are no more pages.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
@@ -150,6 +156,7 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of channels to return on each page.
+        #
         #     Note: The service may send fewer.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -175,7 +182,7 @@ module Google
         #     The requested channels, up to the number specified in `page_size`.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A page token that can be sent to ListChannels to request the next page.
+        #     A page token that can be sent to `ListChannels` to request the next page.
         #     If this is empty, then there are no more pages.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
@@ -278,7 +285,7 @@ module Google
         #     The requested providers, up to the number specified in `page_size`.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A page token that can be sent to ListProviders to request the next page.
+        #     A page token that can be sent to `ListProviders` to request the next page.
         #     If this is empty, then there are no more pages.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
@@ -304,6 +311,7 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of channel connections to return on each page.
+        #
         #     Note: The service may send fewer responses.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -324,7 +332,7 @@ module Google
         #     `page_size`.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A page token that can be sent to ListChannelConnections to request the
+        #     A page token that can be sent to `ListChannelConnections` to request the
         #     next page.
         #     If this is empty, then there are no more pages.
         # @!attribute [rw] unreachable
@@ -355,6 +363,29 @@ module Google
         #   @return [::String]
         #     Required. The name of the channel connection to delete.
         class DeleteChannelConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the UpdateGoogleChannelConfig method.
+        # @!attribute [rw] google_channel_config
+        #   @return [::Google::Cloud::Eventarc::V1::GoogleChannelConfig]
+        #     Required. The config to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The fields to be updated; only fields explicitly provided are updated.
+        #     If no field mask is provided, all provided fields in the request are
+        #     updated. To update all fields, provide a field mask of "*".
+        class UpdateGoogleChannelConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetGoogleChannelConfig method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the config to get.
+        class GetGoogleChannelConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

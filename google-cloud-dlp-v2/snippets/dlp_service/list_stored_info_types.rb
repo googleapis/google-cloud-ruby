@@ -19,21 +19,27 @@
 # [START dlp_v2_generated_DlpService_ListStoredInfoTypes_sync]
 require "google/cloud/dlp/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dlp::V2::DlpService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#list_stored_info_types
+#
+def list_stored_info_types
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dlp::V2::DlpService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest.new
 
-# Call the list_stored_info_types method.
-result = client.list_stored_info_types request
+  # Call the list_stored_info_types method.
+  result = client.list_stored_info_types request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dlp::V2::StoredInfoType.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dlp::V2::StoredInfoType.
+    p response
+  end
 end
 # [END dlp_v2_generated_DlpService_ListStoredInfoTypes_sync]

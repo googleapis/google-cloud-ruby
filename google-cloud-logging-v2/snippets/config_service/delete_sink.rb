@@ -19,15 +19,21 @@
 # [START logging_v2_generated_ConfigService_DeleteSink_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::ConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::ConfigService::Client#delete_sink
+#
+def delete_sink
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::ConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::DeleteSinkRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::DeleteSinkRequest.new
 
-# Call the delete_sink method.
-result = client.delete_sink request
+  # Call the delete_sink method.
+  result = client.delete_sink request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END logging_v2_generated_ConfigService_DeleteSink_sync]

@@ -19,15 +19,21 @@
 # [START bigqueryconnection_v1_generated_ConnectionService_TestIamPermissions_sync]
 require "google/cloud/bigquery/connection/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#test_iam_permissions
+#
+def test_iam_permissions
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::V1::TestIamPermissionsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::V1::TestIamPermissionsRequest.new
 
-# Call the test_iam_permissions method.
-result = client.test_iam_permissions request
+  # Call the test_iam_permissions method.
+  result = client.test_iam_permissions request
 
-# The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
-p result
+  # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+  p result
+end
 # [END bigqueryconnection_v1_generated_ConnectionService_TestIamPermissions_sync]

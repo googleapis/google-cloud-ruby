@@ -19,15 +19,21 @@
 # [START dataplex_v1_generated_DataplexService_GetEnvironment_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::DataplexService::Client#get_environment
+#
+def get_environment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::GetEnvironmentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::GetEnvironmentRequest.new
 
-# Call the get_environment method.
-result = client.get_environment request
+  # Call the get_environment method.
+  result = client.get_environment request
 
-# The returned object is of type Google::Cloud::Dataplex::V1::Environment.
-p result
+  # The returned object is of type Google::Cloud::Dataplex::V1::Environment.
+  p result
+end
 # [END dataplex_v1_generated_DataplexService_GetEnvironment_sync]

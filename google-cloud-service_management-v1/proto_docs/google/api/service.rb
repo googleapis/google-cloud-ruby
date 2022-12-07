@@ -19,11 +19,12 @@
 
 module Google
   module Api
-    # `Service` is the root object of Google service configuration schema. It
-    # describes basic information about a service, such as the name and the
-    # title, and delegates other aspects to sub-sections. Each sub-section is
-    # either a proto message or a repeated proto message that configures a
-    # specific aspect, such as auth. See each proto message definition for details.
+    # `Service` is the root object of Google API service configuration (service
+    # config). It describes the basic information about a logical service,
+    # such as the service name and the user-facing title, and delegates other
+    # aspects to sub-sections. Each sub-section is either a proto message or a
+    # repeated proto message that configures a specific aspect, such as auth.
+    # For more information, see each proto message definition.
     #
     # Example:
     #
@@ -32,6 +33,16 @@ module Google
     #     title: Google Calendar API
     #     apis:
     #     - name: google.calendar.v3.Calendar
+    #
+    #     visibility:
+    #       rules:
+    #       - selector: "google.calendar.v3.*"
+    #         restriction: PREVIEW
+    #     backend:
+    #       rules:
+    #       - selector: "google.calendar.v3.*"
+    #         address: calendar.example.com
+    #
     #     authentication:
     #       providers:
     #       - id: google_calendar_auth
@@ -49,7 +60,8 @@ module Google
     #     of the service also owns the DNS name.
     # @!attribute [rw] title
     #   @return [::String]
-    #     The product title for this service.
+    #     The product title for this service, it is the name displayed in Google
+    #     Cloud Console.
     # @!attribute [rw] producer_project_id
     #   @return [::String]
     #     The Google project that owns this service.
@@ -69,19 +81,19 @@ module Google
     # @!attribute [rw] types
     #   @return [::Array<::Google::Protobuf::Type>]
     #     A list of all proto message types included in this API service.
-    #     Types referenced directly or indirectly by the `apis` are
-    #     automatically included.  Messages which are not referenced but
-    #     shall be included, such as types used by the `google.protobuf.Any` type,
-    #     should be listed here by name. Example:
+    #     Types referenced directly or indirectly by the `apis` are automatically
+    #     included.  Messages which are not referenced but shall be included, such as
+    #     types used by the `google.protobuf.Any` type, should be listed here by
+    #     name by the configuration author. Example:
     #
     #         types:
     #         - name: google.protobuf.Int32
     # @!attribute [rw] enums
     #   @return [::Array<::Google::Protobuf::Enum>]
-    #     A list of all enum types included in this API service.  Enums
-    #     referenced directly or indirectly by the `apis` are automatically
-    #     included.  Enums which are not referenced but shall be included
-    #     should be listed here by name. Example:
+    #     A list of all enum types included in this API service.  Enums referenced
+    #     directly or indirectly by the `apis` are automatically included.  Enums
+    #     which are not referenced but shall be included should be listed here by
+    #     name by the configuration author. Example:
     #
     #         enums:
     #         - name: google.someapi.v1.SomeEnum
@@ -139,6 +151,11 @@ module Google
     # @!attribute [rw] source_info
     #   @return [::Google::Api::SourceInfo]
     #     Output only. The source information for this configuration if available.
+    # @!attribute [rw] publishing
+    #   @return [::Google::Api::Publishing]
+    #     Settings for [Google Cloud Client
+    #     libraries](https://cloud.google.com/apis/docs/cloud-client-libraries)
+    #     generated from APIs defined as protocol buffers.
     # @!attribute [rw] config_version
     #   @return [::Google::Protobuf::UInt32Value]
     #     Obsolete. Do not use.

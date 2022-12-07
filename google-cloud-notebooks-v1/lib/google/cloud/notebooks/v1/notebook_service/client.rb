@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/notebooks/v1/service_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -104,6 +106,8 @@ module Google
                 default_config.rpcs.upgrade_instance.timeout = 60.0
 
                 default_config.rpcs.rollback_instance.timeout = 60.0
+
+                default_config.rpcs.diagnose_instance.timeout = 60.0
 
                 default_config.rpcs.upgrade_instance_internal.timeout = 60.0
 
@@ -206,6 +210,18 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @notebook_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Notebooks::V1::NotebookService::Stub,
                 credentials:  credentials,
@@ -221,6 +237,20 @@ module Google
             # @return [::Google::Cloud::Notebooks::V1::NotebookService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -2032,6 +2062,102 @@ module Google
             end
 
             ##
+            # Creates a Diagnostic File and runs Diagnostic Tool given an Instance.
+            #
+            # @overload diagnose_instance(request, options = nil)
+            #   Pass arguments to `diagnose_instance` via a request object, either of type
+            #   {::Google::Cloud::Notebooks::V1::DiagnoseInstanceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Notebooks::V1::DiagnoseInstanceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload diagnose_instance(name: nil, diagnostic_config: nil)
+            #   Pass arguments to `diagnose_instance` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Format:
+            #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+            #   @param diagnostic_config [::Google::Cloud::Notebooks::V1::DiagnosticConfig, ::Hash]
+            #     Required. Defines flags that are used to run the diagnostic tool
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1::DiagnoseInstanceRequest.new
+            #
+            #   # Call the diagnose_instance method.
+            #   result = client.diagnose_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def diagnose_instance request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Notebooks::V1::DiagnoseInstanceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.diagnose_instance.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Notebooks::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.diagnose_instance.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.diagnose_instance.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @notebook_service_stub.call_rpc :diagnose_instance, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Allows notebook instances to
             # call this endpoint to upgrade themselves. Do not use this method directly.
             #
@@ -3596,6 +3722,11 @@ module Google
                 #
                 attr_reader :rollback_instance
                 ##
+                # RPC-specific configuration for `diagnose_instance`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :diagnose_instance
+                ##
                 # RPC-specific configuration for `upgrade_instance_internal`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3706,6 +3837,8 @@ module Google
                   @upgrade_instance = ::Gapic::Config::Method.new upgrade_instance_config
                   rollback_instance_config = parent_rpcs.rollback_instance if parent_rpcs.respond_to? :rollback_instance
                   @rollback_instance = ::Gapic::Config::Method.new rollback_instance_config
+                  diagnose_instance_config = parent_rpcs.diagnose_instance if parent_rpcs.respond_to? :diagnose_instance
+                  @diagnose_instance = ::Gapic::Config::Method.new diagnose_instance_config
                   upgrade_instance_internal_config = parent_rpcs.upgrade_instance_internal if parent_rpcs.respond_to? :upgrade_instance_internal
                   @upgrade_instance_internal = ::Gapic::Config::Method.new upgrade_instance_internal_config
                   list_environments_config = parent_rpcs.list_environments if parent_rpcs.respond_to? :list_environments

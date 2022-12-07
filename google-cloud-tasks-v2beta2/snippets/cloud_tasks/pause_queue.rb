@@ -19,15 +19,21 @@
 # [START cloudtasks_v2beta2_generated_CloudTasks_PauseQueue_sync]
 require "google/cloud/tasks/v2beta2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tasks::V2beta2::CloudTasks::Client#pause_queue
+#
+def pause_queue
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Tasks::V2beta2::PauseQueueRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Tasks::V2beta2::PauseQueueRequest.new
 
-# Call the pause_queue method.
-result = client.pause_queue request
+  # Call the pause_queue method.
+  result = client.pause_queue request
 
-# The returned object is of type Google::Cloud::Tasks::V2beta2::Queue.
-p result
+  # The returned object is of type Google::Cloud::Tasks::V2beta2::Queue.
+  p result
+end
 # [END cloudtasks_v2beta2_generated_CloudTasks_PauseQueue_sync]

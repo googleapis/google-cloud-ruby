@@ -19,15 +19,21 @@
 # [START pubsub_v1_generated_Subscriber_ModifyPushConfig_sync]
 require "google/cloud/pubsub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Subscriber::Client#modify_push_config
+#
+def modify_push_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::PubSub::V1::Subscriber::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::PubSub::V1::ModifyPushConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::PubSub::V1::ModifyPushConfigRequest.new
 
-# Call the modify_push_config method.
-result = client.modify_push_config request
+  # Call the modify_push_config method.
+  result = client.modify_push_config request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END pubsub_v1_generated_Subscriber_ModifyPushConfig_sync]

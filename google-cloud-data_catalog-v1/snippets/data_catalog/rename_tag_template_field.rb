@@ -19,15 +19,21 @@
 # [START datacatalog_v1_generated_DataCatalog_RenameTagTemplateField_sync]
 require "google/cloud/data_catalog/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field
+#
+def rename_tag_template_field
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest.new
 
-# Call the rename_tag_template_field method.
-result = client.rename_tag_template_field request
+  # Call the rename_tag_template_field method.
+  result = client.rename_tag_template_field request
 
-# The returned object is of type Google::Cloud::DataCatalog::V1::TagTemplateField.
-p result
+  # The returned object is of type Google::Cloud::DataCatalog::V1::TagTemplateField.
+  p result
+end
 # [END datacatalog_v1_generated_DataCatalog_RenameTagTemplateField_sync]

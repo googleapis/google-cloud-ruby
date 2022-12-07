@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_ArchiveAudience_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#archive_audience
+#
+def archive_audience
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::ArchiveAudienceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::ArchiveAudienceRequest.new
 
-# Call the archive_audience method.
-result = client.archive_audience request
+  # Call the archive_audience method.
+  result = client.archive_audience request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_ArchiveAudience_sync]
