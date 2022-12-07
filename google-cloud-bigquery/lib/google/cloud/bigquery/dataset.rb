@@ -370,33 +370,6 @@ module Google
         #
         # @!group Attributes
         #
-        ##
-        # The {EncryptionConfiguration} object that represents the default
-        # encryption method for all tables and models in the dataset. Once this
-        # property is set, all newly-created partitioned tables and models in
-        # the dataset will have their encryption set to this value, unless table
-        # creation request (or query) overrides it.
-        #
-        # Present only if this dataset is using custom default encryption.
-        #
-        # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
-        #   Protecting Data with Cloud KMS Keys
-        #
-        # @return [EncryptionConfiguration, nil] The default encryption
-        #   configuration.
-        #
-        #   @!group Attributes
-        #
-        # @example
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #
-        #   encrypt_config = dataset.default_encryption
-        #
-        # @!group Attributes
-        #
         def default_encryption
           return nil if reference?
           ensure_full_data!
@@ -2510,7 +2483,6 @@ module Google
         ##
         # @private New Dataset from a Google API Client object.
         def self.from_gapi gapi, conn
-          # puts gapi.access.dataset
           new.tap do |f|
             f.gapi = gapi
             f.service = conn
