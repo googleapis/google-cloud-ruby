@@ -36,13 +36,10 @@ puts "here"
 $bigtable = Google::Cloud.new.bigtable
 
 # Create second bigtable object for tests requiring one, such as copy-backup.
-puts ENV["GCLOUD_SEC_TEST_PROJECT"]
-puts ENV["GCLOUD_SEC_TEST_KEYFILE"]
 if (proj = ENV["GCLOUD_SEC_TEST_PROJECT"]) &&
   (keyfile = ENV["GCLOUD_SEC_TEST_KEYFILE"] ||
     (ENV["GCLOUD_SEC_TEST_KEYFILE_JSON"] &&
       JSON.parse(ENV["GCLOUD_SEC_TEST_KEYFILE_JSON"])))
-  puts "here"
   $bigtable_2 = Google::Cloud.bigtable project_id: proj, credentials: keyfile
 end
 
@@ -77,6 +74,14 @@ module Acceptance
 
     def bigtable_instance_2
       @instance_2 ||= @bigtable.instance(bigtable_instance_id_2)
+    end
+
+    def bigtable_2_instance
+      @bigtable_2.instance(bigtable_instance_id)
+    end
+
+    def bigtable_2_instance_2
+      @bigtable_2.instance(bigtable_instance_id_2)
     end
 
     def bigtable_read_table

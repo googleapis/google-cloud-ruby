@@ -63,7 +63,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
                 state: state,
                 source_backup: source_backup
   end
-  let(:source_backup) {"projects/#{bigtable.service.project_id}/instances/#{instance_id}/clusters/#{cluster_id}/backups/#{backup_id}" }
+  let(:source_backup) { "projects/#{bigtable.service.project_id}/instances/#{instance_id}/clusters/#{cluster_id}/backups/#{backup_id}" }
   let(:backup) { Google::Cloud::Bigtable::Backup.from_grpc backup_res, bigtable.service }
   let(:ops_name) { "operations/1234567890" }
   let(:job_grpc) do
