@@ -59,6 +59,7 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
     parent_model = "hello world"
     model_id = "hello world"
     model = {}
+    service_account = "hello world"
 
     upload_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :upload_model, name
@@ -67,6 +68,7 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
       assert_equal "hello world", request["parent_model"]
       assert_equal "hello world", request["model_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::Model), request["model"]
+      assert_equal "hello world", request["service_account"]
       refute_nil options
     end
 
@@ -77,35 +79,35 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model }) do |response, operation|
+      client.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upload_model parent: parent, parent_model: parent_model, model_id: model_id, model: model do |response, operation|
+      client.upload_model parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upload_model ::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model) do |response, operation|
+      client.upload_model ::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model }, grpc_options) do |response, operation|
+      client.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upload_model(::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model), grpc_options) do |response, operation|
+      client.upload_model(::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
