@@ -41,12 +41,13 @@ module Google
         #     "projects/\\{project}/assessments/\\{assessment}".
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-        #     Optional. The annotation that will be assigned to the Event. This field can be left
-        #     empty to provide reasons that apply to an event without concluding whether
-        #     the event is legitimate or fraudulent.
+        #     Optional. The annotation that will be assigned to the Event. This field can
+        #     be left empty to provide reasons that apply to an event without concluding
+        #     whether the event is legitimate or fraudulent.
         # @!attribute [rw] reasons
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
-        #     Optional. Optional reasons for the annotation that will be assigned to the Event.
+        #     Optional. Optional reasons for the annotation that will be assigned to the
+        #     Event.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
         #     Optional. Unique stable hashed user identifier to apply to the assessment.
@@ -152,26 +153,111 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Information about a verification endpoint that can be used for 2FA.
+        # @!attribute [rw] email_address
+        #   @return [::String]
+        #     Email address for which to trigger a verification request.
+        # @!attribute [rw] phone_number
+        #   @return [::String]
+        #     Phone number for which to trigger a verification request. Should be given
+        #     in E.164 format.
+        # @!attribute [r] request_token
+        #   @return [::String]
+        #     Output only. Token to provide to the client to trigger endpoint
+        #     verification. It must be used within 15 minutes.
+        # @!attribute [r] last_verification_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp of the last successful verification for the
+        #     endpoint, if any.
+        class EndpointVerificationInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Information about account verification, used for identity verification.
+        # @!attribute [rw] endpoints
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::EndpointVerificationInfo>]
+        #     Endpoints that can be used for identity verification.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     Language code preference for the verification message, set as a IETF BCP 47
+        #     language code.
+        # @!attribute [r] latest_verification_result
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountVerificationInfo::Result]
+        #     Output only. Result of the latest account verification challenge.
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Username of the account that is being verified. Deprecated. Customers
+        #     should now provide the hashed account ID field in Event.
+        class AccountVerificationInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Result of the account verification as contained in the verdict token issued
+          # at the end of the verification flow.
+          module Result
+            # No information about the latest account verification.
+            RESULT_UNSPECIFIED = 0
+
+            # The user was successfully verified. This means the account verification
+            # challenge was successfully completed.
+            SUCCESS_USER_VERIFIED = 1
+
+            # The user failed the verification challenge.
+            ERROR_USER_NOT_VERIFIED = 2
+
+            # The site is not properly onboarded to use the account verification
+            # feature.
+            ERROR_SITE_ONBOARDING_INCOMPLETE = 3
+
+            # The recipient is not allowed for account verification. This can occur
+            # during integration but should not occur in production.
+            ERROR_RECIPIENT_NOT_ALLOWED = 4
+
+            # The recipient has already been sent too many verification codes in a
+            # short amount of time.
+            ERROR_RECIPIENT_ABUSE_LIMIT_EXHAUSTED = 5
+
+            # The verification flow could not be completed due to a critical internal
+            # error.
+            ERROR_CRITICAL_INTERNAL = 6
+
+            # The client has exceeded their two factor request quota for this period of
+            # time.
+            ERROR_CUSTOMER_QUOTA_EXHAUSTED = 7
+
+            # The request cannot be processed at the time because of an incident. This
+            # bypass can be restricted to a problematic destination email domain, a
+            # customer, or could affect the entire service.
+            ERROR_VERIFICATION_BYPASSED = 8
+
+            # The request parameters do not match with the token provided and cannot be
+            # processed.
+            ERROR_VERDICT_MISMATCH = 9
+          end
+        end
+
         # Private password leak verification info.
         # @!attribute [rw] lookup_hash_prefix
         #   @return [::String]
-        #     Optional. Exactly 26-bit prefix of the SHA-256 hash of the canonicalized username. It
-        #     is used to look up password leaks associated with that hash prefix.
+        #     Optional. Exactly 26-bit prefix of the SHA-256 hash of the canonicalized
+        #     username. It is used to look up password leaks associated with that hash
+        #     prefix.
         # @!attribute [rw] encrypted_user_credentials_hash
         #   @return [::String]
-        #     Optional. Encrypted Scrypt hash of the canonicalized username+password. It is
-        #     re-encrypted by the server and returned through
+        #     Optional. Encrypted Scrypt hash of the canonicalized username+password. It
+        #     is re-encrypted by the server and returned through
         #     `reencrypted_user_credentials_hash`.
         # @!attribute [r] encrypted_leak_match_prefixes
         #   @return [::Array<::String>]
-        #     Output only. List of prefixes of the encrypted potential password leaks that matched the
-        #     given parameters. They must be compared with the client-side decryption
-        #     prefix of `reencrypted_user_credentials_hash`
+        #     Output only. List of prefixes of the encrypted potential password leaks
+        #     that matched the given parameters. They must be compared with the
+        #     client-side decryption prefix of `reencrypted_user_credentials_hash`
         # @!attribute [r] reencrypted_user_credentials_hash
         #   @return [::String]
-        #     Output only. Corresponds to the re-encryption of the `encrypted_user_credentials_hash`
-        #     field. It is used to match potential password leaks within
-        #     `encrypted_leak_match_prefixes`.
+        #     Output only. Corresponds to the re-encryption of the
+        #     `encrypted_user_credentials_hash` field. It is used to match potential
+        #     password leaks within `encrypted_leak_match_prefixes`.
         class PrivatePasswordLeakVerification
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -191,6 +277,10 @@ module Google
         # @!attribute [r] token_properties
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TokenProperties]
         #     Output only. Properties of the provided event token.
+        # @!attribute [rw] account_verification
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountVerificationInfo]
+        #     Account verification information for identity verification. The assessment
+        #     event must include a token and site key to use this feature.
         # @!attribute [rw] account_defender_assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment]
         #     Assessment returned by account defender when a hashed_account_id is
@@ -206,28 +296,29 @@ module Google
 
         # @!attribute [rw] token
         #   @return [::String]
-        #     Optional. The user response token provided by the reCAPTCHA client-side integration
-        #     on your site.
+        #     Optional. The user response token provided by the reCAPTCHA client-side
+        #     integration on your site.
         # @!attribute [rw] site_key
         #   @return [::String]
-        #     Optional. The site key that was used to invoke reCAPTCHA on your site and generate
-        #     the token.
+        #     Optional. The site key that was used to invoke reCAPTCHA on your site and
+        #     generate the token.
         # @!attribute [rw] user_agent
         #   @return [::String]
-        #     Optional. The user agent present in the request from the user's device related to
-        #     this event.
+        #     Optional. The user agent present in the request from the user's device
+        #     related to this event.
         # @!attribute [rw] user_ip_address
         #   @return [::String]
-        #     Optional. The IP address in the request from the user's device related to this event.
+        #     Optional. The IP address in the request from the user's device related to
+        #     this event.
         # @!attribute [rw] expected_action
         #   @return [::String]
-        #     Optional. The expected action for this type of event. This should be the same action
-        #     provided at token generation time on client-side platforms already
-        #     integrated with recaptcha enterprise.
+        #     Optional. The expected action for this type of event. This should be the
+        #     same action provided at token generation time on client-side platforms
+        #     already integrated with recaptcha enterprise.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     Optional. Unique stable hashed user identifier for the request. The identifier must
-        #     be hashed using hmac-sha256 with stable secret.
+        #     Optional. Unique stable hashed user identifier for the request. The
+        #     identifier must be hashed using hmac-sha256 with stable secret.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -286,6 +377,14 @@ module Google
         # @!attribute [rw] hostname
         #   @return [::String]
         #     The hostname of the page on which the token was generated (Web keys only).
+        # @!attribute [rw] android_package_name
+        #   @return [::String]
+        #     The name of the Android package with which the token was generated (Android
+        #     keys only).
+        # @!attribute [rw] ios_bundle_id
+        #   @return [::String]
+        #     The ID of the iOS bundle with which the token was generated (iOS keys
+        #     only).
         # @!attribute [rw] action
         #   @return [::String]
         #     Action name provided at token generation.
@@ -397,8 +496,8 @@ module Google
         # The retrieve legacy secret key request message.
         # @!attribute [rw] key
         #   @return [::String]
-        #     Required. The public key name linked to the requested secret key in the format
-        #     "projects/\\{project}/keys/\\{key}".
+        #     Required. The public key name linked to the requested secret key in the
+        #     format "projects/\\{project}/keys/\\{key}".
         class RetrieveLegacySecretKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -420,8 +519,8 @@ module Google
         #     Required. The key to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. The mask to control which fields of the key get updated. If the mask is not
-        #     present, all fields will be updated.
+        #     Optional. The mask to control which fields of the key get updated. If the
+        #     mask is not present, all fields will be updated.
         class UpdateKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -442,6 +541,16 @@ module Google
         #   @return [::String]
         #     Required. The name of the key to be migrated, in the format
         #     "projects/\\{project}/keys/\\{key}".
+        # @!attribute [rw] skip_billing_check
+        #   @return [::Boolean]
+        #     Optional. If true, skips the billing check.
+        #     A reCAPTCHA Enterprise key or migrated key behaves differently than a
+        #     reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
+        #     https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid
+        #     any disruption of your usage, we check that a billing account is present.
+        #     If your usage of reCAPTCHA is under the free quota, you can safely skip the
+        #     billing check and proceed with the migration. See
+        #     https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
         class MigrateKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -685,7 +794,6 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::RecaptchaEnterprise::V1::ScoreDistribution}]
         #     Action-based metrics. The map key is the action name which specified by the
         #     site owners at time of the "execute" client-side call.
-        #     Populated only for SCORE keys.
         class ScoreMetrics
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -729,14 +837,13 @@ module Google
         #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of accounts to return. The service might return fewer
-        #     than this value.
-        #     If unspecified, at most 50 accounts are returned.
-        #     The maximum value is 1000; values above 1000 are coerced to 1000.
+        #     Optional. The maximum number of accounts to return. The service might
+        #     return fewer than this value. If unspecified, at most 50 accounts are
+        #     returned. The maximum value is 1000; values above 1000 are coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
-        #     call.
+        #     Optional. A page token, received from a previous
+        #     `ListRelatedAccountGroupMemberships` call.
         #
         #     When paginating, all other parameters provided to
         #     `ListRelatedAccountGroupMemberships` must match the call that provided the
@@ -762,18 +869,17 @@ module Google
         # The request message to list related account groups.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project to list related account groups from, in the format
-        #     "projects/\\{project}".
+        #     Required. The name of the project to list related account groups from, in
+        #     the format "projects/\\{project}".
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of groups to return. The service might return fewer than
-        #     this value.
-        #     If unspecified, at most 50 groups are returned.
-        #     The maximum value is 1000; values above 1000 are coerced to 1000.
+        #     Optional. The maximum number of groups to return. The service might return
+        #     fewer than this value. If unspecified, at most 50 groups are returned. The
+        #     maximum value is 1000; values above 1000 are coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
-        #     Provide this to retrieve the subsequent page.
+        #     Optional. A page token, received from a previous `ListRelatedAccountGroups`
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
         #     `ListRelatedAccountGroups` must match the call that provided the page
@@ -799,19 +905,19 @@ module Google
         # The request message to search related account group memberships.
         # @!attribute [rw] project
         #   @return [::String]
-        #     Required. The name of the project to search related account group memberships from.
-        #     Specify the project name in the following format: "projects/\\{project}".
+        #     Required. The name of the project to search related account group
+        #     memberships from. Specify the project name in the following format:
+        #     "projects/\\{project}".
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     Optional. The unique stable hashed user identifier we should search connections to.
-        #     The identifier should correspond to a `hashed_account_id` provided in a
-        #     previous `CreateAssessment` or `AnnotateAssessment` call.
+        #     Optional. The unique stable hashed user identifier we should search
+        #     connections to. The identifier should correspond to a `hashed_account_id`
+        #     provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of groups to return. The service might return fewer than
-        #     this value.
-        #     If unspecified, at most 50 groups are returned.
-        #     The maximum value is 1000; values above 1000 are coerced to 1000.
+        #     Optional. The maximum number of groups to return. The service might return
+        #     fewer than this value. If unspecified, at most 50 groups are returned. The
+        #     maximum value is 1000; values above 1000 are coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous

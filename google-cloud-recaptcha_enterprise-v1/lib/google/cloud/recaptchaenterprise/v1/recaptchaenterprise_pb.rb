@@ -49,6 +49,32 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse" do
     end
+    add_message "google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo" do
+      optional :request_token, :string, 3
+      optional :last_verification_time, :message, 4, "google.protobuf.Timestamp"
+      oneof :endpoint do
+        optional :email_address, :string, 1
+        optional :phone_number, :string, 2
+      end
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.AccountVerificationInfo" do
+      repeated :endpoints, :message, 1, "google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo"
+      optional :language_code, :string, 3
+      optional :latest_verification_result, :enum, 7, "google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result"
+      optional :username, :string, 2
+    end
+    add_enum "google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result" do
+      value :RESULT_UNSPECIFIED, 0
+      value :SUCCESS_USER_VERIFIED, 1
+      value :ERROR_USER_NOT_VERIFIED, 2
+      value :ERROR_SITE_ONBOARDING_INCOMPLETE, 3
+      value :ERROR_RECIPIENT_NOT_ALLOWED, 4
+      value :ERROR_RECIPIENT_ABUSE_LIMIT_EXHAUSTED, 5
+      value :ERROR_CRITICAL_INTERNAL, 6
+      value :ERROR_CUSTOMER_QUOTA_EXHAUSTED, 7
+      value :ERROR_VERIFICATION_BYPASSED, 8
+      value :ERROR_VERDICT_MISMATCH, 9
+    end
     add_message "google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification" do
       optional :lookup_hash_prefix, :bytes, 1
       optional :encrypted_user_credentials_hash, :bytes, 2
@@ -60,6 +86,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :event, :message, 2, "google.cloud.recaptchaenterprise.v1.Event"
       optional :risk_analysis, :message, 3, "google.cloud.recaptchaenterprise.v1.RiskAnalysis"
       optional :token_properties, :message, 4, "google.cloud.recaptchaenterprise.v1.TokenProperties"
+      optional :account_verification, :message, 5, "google.cloud.recaptchaenterprise.v1.AccountVerificationInfo"
       optional :account_defender_assessment, :message, 6, "google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment"
       optional :private_password_leak_verification, :message, 8, "google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification"
     end
@@ -88,6 +115,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :invalid_reason, :enum, 2, "google.cloud.recaptchaenterprise.v1.TokenProperties.InvalidReason"
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :hostname, :string, 4
+      optional :android_package_name, :string, 8
+      optional :ios_bundle_id, :string, 9
       optional :action, :string, 5
     end
     add_enum "google.cloud.recaptchaenterprise.v1.TokenProperties.InvalidReason" do
@@ -137,6 +166,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.recaptchaenterprise.v1.MigrateKeyRequest" do
       optional :name, :string, 1
+      optional :skip_billing_check, :bool, 2
     end
     add_message "google.cloud.recaptchaenterprise.v1.GetMetricsRequest" do
       optional :name, :string, 1
@@ -273,6 +303,9 @@ module Google
         AnnotateAssessmentRequest::Annotation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation").enummodule
         AnnotateAssessmentRequest::Reason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason").enummodule
         AnnotateAssessmentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse").msgclass
+        EndpointVerificationInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo").msgclass
+        AccountVerificationInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AccountVerificationInfo").msgclass
+        AccountVerificationInfo::Result = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result").enummodule
         PrivatePasswordLeakVerification = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification").msgclass
         Assessment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.Assessment").msgclass
         Event = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.Event").msgclass
