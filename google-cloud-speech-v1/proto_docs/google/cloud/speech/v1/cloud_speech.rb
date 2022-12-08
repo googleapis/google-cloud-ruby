@@ -147,8 +147,7 @@ module Google
         #   @return [::Integer]
         #     The number of channels in the input audio data.
         #     ONLY set this for MULTI-CHANNEL recognition.
-        #     Valid values for LINEAR16 and FLAC are `1`-`8`.
-        #     Valid values for OGG_OPUS are '1'-'254'.
+        #     Valid values for LINEAR16, OGG_OPUS and FLAC are `1`-`8`.
         #     Valid value for MULAW, AMR, AMR_WB and SPEEX_WITH_HEADER_BYTE is only `1`.
         #     If `0` or omitted, defaults to one channel (mono).
         #     Note: We only recognize the first channel by default.
@@ -617,6 +616,13 @@ module Google
         # @!attribute [rw] total_billed_time
         #   @return [::Google::Protobuf::Duration]
         #     When available, billed audio seconds for the corresponding request.
+        # @!attribute [rw] speech_adaptation_info
+        #   @return [::Google::Cloud::Speech::V1::SpeechAdaptationInfo]
+        #     Provides information on adaptation behavior in response
+        # @!attribute [rw] request_id
+        #   @return [::Integer]
+        #     The ID associated with the request. This is a unique ID specific only to
+        #     the given request.
         class RecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -640,6 +646,13 @@ module Google
         # @!attribute [rw] output_error
         #   @return [::Google::Rpc::Status]
         #     If the transcript output fails this field contains the relevant error.
+        # @!attribute [rw] speech_adaptation_info
+        #   @return [::Google::Cloud::Speech::V1::SpeechAdaptationInfo]
+        #     Provides information on speech adaptation behavior in response
+        # @!attribute [rw] request_id
+        #   @return [::Integer]
+        #     The ID associated with the request. This is a unique ID specific only to
+        #     the given request.
         class LongRunningRecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -733,6 +746,13 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     When available, billed audio seconds for the stream.
         #     Set only if this is the last response in the stream.
+        # @!attribute [rw] speech_adaptation_info
+        #   @return [::Google::Cloud::Speech::V1::SpeechAdaptationInfo]
+        #     Provides information on adaptation behavior in response
+        # @!attribute [rw] request_id
+        #   @return [::Integer]
+        #     The ID associated with the request. This is a unique ID specific only to
+        #     the given request.
         class StreamingRecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -883,6 +903,20 @@ module Google
         #     speaker_tag is set if enable_speaker_diarization = 'true' and only in the
         #     top alternative.
         class WordInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Information on speech adaptation use in results
+        # @!attribute [rw] adaptation_timeout
+        #   @return [::Boolean]
+        #     Whether there was a timeout when applying speech adaptation. If true,
+        #     adaptation had no effect in the response transcript.
+        # @!attribute [rw] timeout_message
+        #   @return [::String]
+        #     If set, returns a message specifying which part of the speech adaptation
+        #     request timed out.
+        class SpeechAdaptationInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
