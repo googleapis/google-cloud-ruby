@@ -198,7 +198,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload upload_model(parent: nil, parent_model: nil, model_id: nil, model: nil)
+            # @overload upload_model(parent: nil, parent_model: nil, model_id: nil, model: nil, service_account: nil)
             #   Pass arguments to `upload_model` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -217,6 +217,14 @@ module Google
             #     `[a-z0-9_-]`. The first character cannot be a number or hyphen.
             #   @param model [::Google::Cloud::AIPlatform::V1::Model, ::Hash]
             #     Required. The Model to create.
+            #   @param service_account [::String]
+            #     Optional. The user-provided custom service account to use to do the model
+            #     upload. If empty, [Vertex AI Service
+            #     Agent](https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
+            #     will be used. Users uploading the Model must have the
+            #     `iam.serviceAccounts.actAs` permission on this service account. Also, this
+            #     account must belong to the project specified in the `parent` field and have
+            #     all necessary read permissions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
