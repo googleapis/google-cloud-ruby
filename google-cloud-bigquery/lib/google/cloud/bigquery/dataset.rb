@@ -2701,7 +2701,8 @@ module Google
         end
 
         ##
-        # Creates a dataset access entry object.
+        # Build an object of type Google::Apis::BigqueryV2::DatasetAccessEntry from
+        # the self.
         #
         # @param [Array<String>] target_types The list of target types within the dataset.
         #
@@ -2714,7 +2715,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   dataset_access_entry = dataset.access_entry target_types: ["VIEWS"]
         #
-        def access_entry target_types: nil
+        def build_access_entry target_types: nil
           params = {
             dataset: dataset_ref,
             target_types: target_types

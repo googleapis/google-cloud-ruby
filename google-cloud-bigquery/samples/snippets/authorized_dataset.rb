@@ -36,7 +36,7 @@ def authorized_dataset source_project_id:, source_database_id:, user_project_id:
 
   # Add the user dataset's DatasetAccessEntry object to the existing source dataset rules
   source_dataset.access do |access|
-    access.add_reader_dataset user_dataset.access_entry(target_types: target_types)
+    access.add_reader_dataset user_dataset.build_access_entry(target_types: target_types)
   end
 
   puts "Dataset #{user_dataset.dataset_id} added as authorized dataset in dataset #{source_dataset.dataset_id}"

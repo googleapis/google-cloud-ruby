@@ -89,24 +89,24 @@ describe Google::Cloud::Bigquery::Dataset, :access, :bigquery do
     refute dataset.access.reader_view? view
   end
 
-  it "adds an access entry with specifying dataset object" do
-    dataset_access_entry = dataset_access.access_entry target_types: target_types
+  it "adds and removes an access entry with specifying dataset object" do
+    dataset_access_entry = dataset_access.build_access_entry target_types: target_types
 
     refute dataset.access.reader_dataset? dataset_access_entry
     dataset.access do |acl|
       acl.add_reader_dataset dataset_access_entry
     end
-    dataset = bigquery.dataset dataset_id
+    dataset.reload!
     assert dataset.access.reader_dataset? dataset_access_entry
 
     dataset.access do |acl|
       acl.remove_reader_dataset dataset_access_entry
     end
-    dataset = bigquery.dataset dataset_id
+    dataset.reload!
     refute dataset.access.reader_dataset? dataset_access_entry
   end
 
-  it "adds an access entry with specifying dataset hash" do
+  it "adds and removes an access entry with specifying dataset hash" do
     dataset_access_entry = {
       project_id: dataset_access.project_id,
       dataset_id: dataset_access.dataset_id,
@@ -117,13 +117,13 @@ describe Google::Cloud::Bigquery::Dataset, :access, :bigquery do
     dataset.access do |acl|
       acl.add_reader_dataset dataset_access_entry
     end
-    dataset = bigquery.dataset dataset_id
+    dataset.reload!
     assert dataset.access.reader_dataset? dataset_access_entry
 
     dataset.access do |acl|
       acl.remove_reader_dataset dataset_access_entry
     end
-    dataset = bigquery.dataset dataset_id
+    dataset.reload!
     refute dataset.access.reader_dataset? dataset_access_entry
   end
 

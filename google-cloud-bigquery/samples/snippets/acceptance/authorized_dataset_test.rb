@@ -31,6 +31,6 @@ describe "Authorize dataset" do
     end
     assert_includes out, "Dataset #{dataset2.dataset_id} added as authorized dataset in dataset #{dataset1.dataset_id}"
 
-    assert dataset1.reload!.access.reader_dataset? dataset2.access_entry(target_types: ["VIEWS"])
+    assert dataset1.reload!.access.reader_dataset? dataset2.build_access_entry(target_types: ["VIEWS"])
   end
 end

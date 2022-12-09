@@ -1297,6 +1297,9 @@ module Google
           end
 
           # @private
+          #
+          # Checks the type of user input and converts it to acceptable format.
+          #
           def validate_dataset dataset
             if dataset.is_a? Google::Apis::BigqueryV2::DatasetAccessEntry
               dataset
@@ -1343,7 +1346,7 @@ module Google
           def add_access_dataset dataset
             # scope is dataset, make sure value is in the right format
             value = validate_dataset dataset
-            # Remove existing dataset rule, if any
+            # Remove existing rule for input dataset, if any
             @rules.reject!(&find_by_scope_and_resource_ref(:dataset, value))
             # Add new rule for this role, scope, and value
             opts = { dataset: value }
@@ -1380,7 +1383,7 @@ module Google
           def remove_access_dataset dataset
             # scope is dataset, make sure value is in the right format
             value = validate_dataset dataset
-            # Remove existing dataset rule, if any
+            # Remove existing rule for input dataset, if any
             @rules.reject!(&find_by_scope_and_resource_ref(:dataset, value))
           end
 
@@ -1412,7 +1415,7 @@ module Google
           def lookup_access_dataset dataset
             # scope is dataset, make sure value is in the right format
             value = validate_dataset dataset
-            # Detect dataset rule, if any
+            # Detect existing rule for input dataset, if any
             !(!@rules.detect(&find_by_scope_and_resource_ref(:dataset, value)))
           end
 
