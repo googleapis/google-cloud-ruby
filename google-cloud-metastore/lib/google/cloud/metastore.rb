@@ -91,6 +91,48 @@ module Google
       end
 
       ##
+      # Create a new client object for DataprocMetastoreFederation.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client](https://googleapis.dev/ruby/google-cloud-metastore-v1/latest/Google/Cloud/Metastore/V1/DataprocMetastoreFederation/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the DataprocMetastoreFederation service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About DataprocMetastoreFederation
+      #
+      # Configures and manages metastore federation services.
+      # Dataproc Metastore Federation Service allows federating a collection of
+      # backend metastores like BigQuery, Dataplex Lakes, and other Dataproc
+      # Metastores. The Federation Service exposes a gRPC URL through which metadata
+      # from the backend metastores are served at query time.
+      #
+      # The Dataproc Metastore Federation API defines the following resource model:
+      # * The service works with a collection of Google Cloud projects.
+      # * Each project has a collection of available locations.
+      # * Each location has a collection of federations.
+      # * Dataproc Metastore Federations are resources with names of the
+      # form:
+      # `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [DataprocMetastoreFederation::Client] A client object for the specified version.
+      #
+      def self.dataproc_metastore_federation version: :v1, &block
+        require "google/cloud/metastore/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Metastore
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Metastore.const_get package_name
+        package_module.const_get(:DataprocMetastoreFederation).const_get(:Client).new(&block)
+      end
+
+      ##
       # Configure the google-cloud-metastore library.
       #
       # The following configuration parameters are supported:
