@@ -194,7 +194,9 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @locations_stub.list_locations request, options do |result, response|
+              bindings_override = @config.bindings_override["google.cloud.location.Locations.ListLocations"]
+
+              @locations_stub.list_locations request, options, bindings_override: bindings_override do |result, response|
                 result = ::Gapic::Rest::PagedEnumerable.new @locations_stub, :list_locations, "locations", request, result, options
                 yield result, response if block_given?
                 return result
@@ -261,7 +263,9 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @locations_stub.get_location request, options do |result, response|
+              bindings_override = @config.bindings_override["google.cloud.location.Locations.GetLocation"]
+
+              @locations_stub.get_location request, options, bindings_override: bindings_override do |result, response|
                 yield result, response if block_given?
                 return result
               end
@@ -358,6 +362,13 @@ module Google
               config_attr :metadata,      nil, ::Hash, nil
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
+
+              # @private
+              # Overrides for http bindings for the RPCs of this service
+              # are only used when this service is used as mixin, and only
+              # by the host service.
+              # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+              config_attr :bindings_override, {}, ::Hash, nil
 
               # @private
               def initialize parent_config = nil

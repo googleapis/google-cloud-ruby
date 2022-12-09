@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.3.beta.2 (2022-12-09)
+
+* Include bindings_override for REST client.
+
 ### 0.3.beta.1 (2022-12-07)
 
 * Test release for REST client.
