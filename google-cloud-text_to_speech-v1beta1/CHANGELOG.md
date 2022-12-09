@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2022-12-09)
+
+#### Features
+
+* Support for synthesize_long_audio ([#19827](https://github.com/googleapis/google-cloud-ruby/issues/19827)) 
+
 ### 0.8.0 (2022-07-08)
 
 #### Features
