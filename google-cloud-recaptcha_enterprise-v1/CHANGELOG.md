@@ -1,5 +1,13 @@
 # Release History
 
+### 0.12.0 (2022-12-09)
+
+#### Features
+
+* Added account verification information to the Assessment resource ([#19836](https://github.com/googleapis/google-cloud-ruby/issues/19836)) 
+* Added Android package or iOS bundle with which a token was generated 
+* Added option to skip the billing check when migrating a key to reCAPTCHA Enterprise 
+
 ### 0.11.0 (2022-10-18)
 
 #### Features
