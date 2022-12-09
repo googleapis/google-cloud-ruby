@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.2 (2022-12-09)
+
+#### Documentation
+
+* Minor updates to reference documentation ([#19462](https://github.com/googleapis/google-cloud-ruby/issues/19462)) 
+
 ### 0.4.1 (2022-11-10)
 
 #### Documentation
