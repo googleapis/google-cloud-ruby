@@ -226,7 +226,9 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @iam_policy_stub.set_iam_policy request, options do |result, response|
+              bindings_override = @config.bindings_override["google.iam.v1.IAMPolicy.SetIamPolicy"]
+
+              @iam_policy_stub.set_iam_policy request, options, bindings_override: bindings_override do |result, response|
                 yield result, response if block_given?
                 return result
               end
@@ -298,7 +300,9 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @iam_policy_stub.get_iam_policy request, options do |result, response|
+              bindings_override = @config.bindings_override["google.iam.v1.IAMPolicy.GetIamPolicy"]
+
+              @iam_policy_stub.get_iam_policy request, options, bindings_override: bindings_override do |result, response|
                 yield result, response if block_given?
                 return result
               end
@@ -376,7 +380,9 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @iam_policy_stub.test_iam_permissions request, options do |result, response|
+              bindings_override = @config.bindings_override["google.iam.v1.IAMPolicy.TestIamPermissions"]
+
+              @iam_policy_stub.test_iam_permissions request, options, bindings_override: bindings_override do |result, response|
                 yield result, response if block_given?
                 return result
               end
@@ -473,6 +479,13 @@ module Google
               config_attr :metadata,      nil, ::Hash, nil
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
+
+              # @private
+              # Overrides for http bindings for the RPCs of this service
+              # are only used when this service is used as mixin, and only
+              # by the host service.
+              # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+              config_attr :bindings_override, {}, ::Hash, nil
 
               # @private
               def initialize parent_config = nil

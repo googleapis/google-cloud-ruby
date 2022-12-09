@@ -44,6 +44,8 @@ module Google
             #   A request object representing the call parameters. Required.
             # @param options [::Gapic::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+            # @param bindings_override [::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>, nil]
+            #   Binding overrides for the transcoding. Only used internally.
             #
             # @yield [result, response] Access the result along with the Faraday response object
             # @yieldparam result [::Google::Iam::V1::Policy]
@@ -51,10 +53,10 @@ module Google
             #
             # @return [::Google::Iam::V1::Policy]
             #   A result object deserialized from the server's reply
-            def set_iam_policy request_pb, options = nil
+            def set_iam_policy request_pb, options = nil, bindings_override: nil
               raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-              verb, uri, query_string_params, body = ServiceStub.transcode_set_iam_policy_request request_pb
+              verb, uri, query_string_params, body = ServiceStub.transcode_set_iam_policy_request request_pb, bindings_override: bindings_override
               query_string_params = if query_string_params.any?
                                       query_string_params.to_h { |p| p.split("=", 2) }
                                     else
@@ -81,6 +83,8 @@ module Google
             #   A request object representing the call parameters. Required.
             # @param options [::Gapic::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+            # @param bindings_override [::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>, nil]
+            #   Binding overrides for the transcoding. Only used internally.
             #
             # @yield [result, response] Access the result along with the Faraday response object
             # @yieldparam result [::Google::Iam::V1::Policy]
@@ -88,10 +92,10 @@ module Google
             #
             # @return [::Google::Iam::V1::Policy]
             #   A result object deserialized from the server's reply
-            def get_iam_policy request_pb, options = nil
+            def get_iam_policy request_pb, options = nil, bindings_override: nil
               raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-              verb, uri, query_string_params, body = ServiceStub.transcode_get_iam_policy_request request_pb
+              verb, uri, query_string_params, body = ServiceStub.transcode_get_iam_policy_request request_pb, bindings_override: bindings_override
               query_string_params = if query_string_params.any?
                                       query_string_params.to_h { |p| p.split("=", 2) }
                                     else
@@ -118,6 +122,8 @@ module Google
             #   A request object representing the call parameters. Required.
             # @param options [::Gapic::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+            # @param bindings_override [::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>, nil]
+            #   Binding overrides for the transcoding. Only used internally.
             #
             # @yield [result, response] Access the result along with the Faraday response object
             # @yieldparam result [::Google::Iam::V1::TestIamPermissionsResponse]
@@ -125,10 +131,10 @@ module Google
             #
             # @return [::Google::Iam::V1::TestIamPermissionsResponse]
             #   A result object deserialized from the server's reply
-            def test_iam_permissions request_pb, options = nil
+            def test_iam_permissions request_pb, options = nil, bindings_override: nil
               raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-              verb, uri, query_string_params, body = ServiceStub.transcode_test_iam_permissions_request request_pb
+              verb, uri, query_string_params, body = ServiceStub.transcode_test_iam_permissions_request request_pb, bindings_override: bindings_override
               query_string_params = if query_string_params.any?
                                       query_string_params.to_h { |p| p.split("=", 2) }
                                     else
@@ -155,18 +161,21 @@ module Google
             #
             # @param request_pb [::Google::Iam::V1::SetIamPolicyRequest]
             #   A request object representing the call parameters. Required.
+            # @param bindings_override [::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>, nil]
+            #   Binding overrides for the transcoding.
             # @return [Array(String, [String, nil], Hash{String => String})]
             #   Uri, Body, Query string parameters
-            def self.transcode_set_iam_policy_request request_pb
-              transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                      .with_bindings(
-                                                        uri_method: :post,
-                                                        uri_template: "/v1/{resource}:setIamPolicy",
-                                                        body: "*",
-                                                        matches: [
-                                                          ["resource", %r{^.*$}, true]
-                                                        ]
-                                                      )
+            def self.transcode_set_iam_policy_request request_pb, bindings_override: nil
+              transcoder = Gapic::Rest::GrpcTranscoder.new(bindings_override) if bindings_override
+              transcoder ||= Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{resource}:setIamPolicy",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["resource", %r{^.*$}, true]
+                                                          ]
+                                                        )
               transcoder.transcode request_pb
             end
 
@@ -177,18 +186,21 @@ module Google
             #
             # @param request_pb [::Google::Iam::V1::GetIamPolicyRequest]
             #   A request object representing the call parameters. Required.
+            # @param bindings_override [::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>, nil]
+            #   Binding overrides for the transcoding.
             # @return [Array(String, [String, nil], Hash{String => String})]
             #   Uri, Body, Query string parameters
-            def self.transcode_get_iam_policy_request request_pb
-              transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                      .with_bindings(
-                                                        uri_method: :post,
-                                                        uri_template: "/v1/{resource}:getIamPolicy",
-                                                        body: "*",
-                                                        matches: [
-                                                          ["resource", %r{^.*$}, true]
-                                                        ]
-                                                      )
+            def self.transcode_get_iam_policy_request request_pb, bindings_override: nil
+              transcoder = Gapic::Rest::GrpcTranscoder.new(bindings_override) if bindings_override
+              transcoder ||= Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{resource}:getIamPolicy",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["resource", %r{^.*$}, true]
+                                                          ]
+                                                        )
               transcoder.transcode request_pb
             end
 
@@ -199,18 +211,21 @@ module Google
             #
             # @param request_pb [::Google::Iam::V1::TestIamPermissionsRequest]
             #   A request object representing the call parameters. Required.
+            # @param bindings_override [::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>, nil]
+            #   Binding overrides for the transcoding.
             # @return [Array(String, [String, nil], Hash{String => String})]
             #   Uri, Body, Query string parameters
-            def self.transcode_test_iam_permissions_request request_pb
-              transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                      .with_bindings(
-                                                        uri_method: :post,
-                                                        uri_template: "/v1/{resource}:testIamPermissions",
-                                                        body: "*",
-                                                        matches: [
-                                                          ["resource", %r{^.*$}, true]
-                                                        ]
-                                                      )
+            def self.transcode_test_iam_permissions_request request_pb, bindings_override: nil
+              transcoder = Gapic::Rest::GrpcTranscoder.new(bindings_override) if bindings_override
+              transcoder ||= Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{resource}:testIamPermissions",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["resource", %r{^.*$}, true]
+                                                          ]
+                                                        )
               transcoder.transcode request_pb
             end
           end
