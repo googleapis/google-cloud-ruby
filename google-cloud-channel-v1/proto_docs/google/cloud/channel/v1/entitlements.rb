@@ -48,14 +48,15 @@ module Google
         #     Output only. Service provisioning details for the entitlement.
         # @!attribute [r] suspension_reasons
         #   @return [::Array<::Google::Cloud::Channel::V1::Entitlement::SuspensionReason>]
-        #     Output only. Enumerable of all current suspension reasons for an entitlement.
+        #     Output only. Enumerable of all current suspension reasons for an
+        #     entitlement.
         # @!attribute [rw] purchase_order_id
         #   @return [::String]
-        #     Optional. This purchase order (PO) information is for resellers to use for their
-        #     company tracking usage. If a purchaseOrderId value is given, it appears in
-        #     the API responses and shows up in the invoice. The property accepts up to
-        #     80 plain text characters. This is only supported for Google Workspace
-        #     entitlements.
+        #     Optional. This purchase order (PO) information is for resellers to use for
+        #     their company tracking usage. If a purchaseOrderId value is given, it
+        #     appears in the API responses and shows up in the invoice. The property
+        #     accepts up to 80 plain text characters. This is only supported for Google
+        #     Workspace entitlements.
         # @!attribute [r] trial_settings
         #   @return [::Google::Cloud::Channel::V1::TrialSettings]
         #     Output only. Settings for trial offers.
@@ -91,7 +92,9 @@ module Google
             SUSPENDED = 5
           end
 
-          # Suspension reason for an entitlement if {::Google::Cloud::Channel::V1::Entitlement#provisioning_state provisioning_state} = SUSPENDED.
+          # Suspension reason for an entitlement if
+          # {::Google::Cloud::Channel::V1::Entitlement#provisioning_state provisioning_state}
+          # = SUSPENDED.
           module SuspensionReason
             # Not used.
             SUSPENSION_REASON_UNSPECIFIED = 0
@@ -123,9 +126,9 @@ module Google
         #     Value of the parameter.
         # @!attribute [r] editable
         #   @return [::Boolean]
-        #     Output only. Specifies whether this parameter is allowed to be changed. For example, for
-        #     a Google Workspace Business Starter entitlement in commitment plan,
-        #     num_units is editable when entitlement is active.
+        #     Output only. Specifies whether this parameter is allowed to be changed. For
+        #     example, for a Google Workspace Business Starter entitlement in commitment
+        #     plan, num_units is editable when entitlement is active.
         class Parameter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -143,16 +146,17 @@ module Google
         # Service provisioned for an entitlement.
         # @!attribute [r] provisioning_id
         #   @return [::String]
-        #     Output only. Provisioning ID of the entitlement. For Google Workspace, this is the
-        #     underlying Subscription ID. For Google Cloud Platform, this is the
+        #     Output only. Provisioning ID of the entitlement. For Google Workspace, this
+        #     is the underlying Subscription ID. For Google Cloud Platform, this is the
         #     Billing Account ID of the billing subaccount."
         # @!attribute [r] product_id
         #   @return [::String]
-        #     Output only. The product pertaining to the provisioning resource as specified in the
-        #     Offer.
+        #     Output only. The product pertaining to the provisioning resource as
+        #     specified in the Offer.
         # @!attribute [r] sku_id
         #   @return [::String]
-        #     Output only. The SKU pertaining to the provisioning resource as specified in the Offer.
+        #     Output only. The SKU pertaining to the provisioning resource as specified
+        #     in the Offer.
         class ProvisionedService
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -221,7 +225,8 @@ module Google
         #     The SKU pertaining to the provisioning resource as specified in the Offer.
         # @!attribute [rw] legacy_sku
         #   @return [::Google::Cloud::Channel::V1::Sku]
-        #     Optional. The customer to transfer has an entitlement with the populated legacy SKU.
+        #     Optional. The customer to transfer has an entitlement with the populated
+        #     legacy SKU.
         class TransferableSku
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

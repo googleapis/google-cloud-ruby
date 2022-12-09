@@ -25,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :effective_invoice_month, :message, 1, "google.type.Date"
       optional :adjustment, :message, 2, "google.cloud.channel.v1.RepricingAdjustment"
       optional :rebilling_basis, :enum, 3, "google.cloud.channel.v1.RebillingBasis"
+      repeated :conditional_overrides, :message, 6, "google.cloud.channel.v1.ConditionalOverride"
       oneof :granularity do
         optional :entitlement_granularity, :message, 4, "google.cloud.channel.v1.RepricingConfig.EntitlementGranularity"
         optional :channel_partner_granularity, :message, 5, "google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity"
@@ -42,6 +43,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.channel.v1.PercentageAdjustment" do
       optional :percentage, :message, 2, "google.type.Decimal"
+    end
+    add_message "google.cloud.channel.v1.ConditionalOverride" do
+      optional :adjustment, :message, 1, "google.cloud.channel.v1.RepricingAdjustment"
+      optional :rebilling_basis, :enum, 2, "google.cloud.channel.v1.RebillingBasis"
+      optional :repricing_condition, :message, 3, "google.cloud.channel.v1.RepricingCondition"
+    end
+    add_message "google.cloud.channel.v1.RepricingCondition" do
+      oneof :condition do
+        optional :sku_group_condition, :message, 1, "google.cloud.channel.v1.SkuGroupCondition"
+      end
+    end
+    add_message "google.cloud.channel.v1.SkuGroupCondition" do
+      optional :sku_group, :string, 1
     end
     add_enum "google.cloud.channel.v1.RebillingBasis" do
       value :REBILLING_BASIS_UNSPECIFIED, 0
@@ -62,6 +76,9 @@ module Google
         RepricingConfig::ChannelPartnerGranularity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity").msgclass
         RepricingAdjustment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.RepricingAdjustment").msgclass
         PercentageAdjustment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.PercentageAdjustment").msgclass
+        ConditionalOverride = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ConditionalOverride").msgclass
+        RepricingCondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.RepricingCondition").msgclass
+        SkuGroupCondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.SkuGroupCondition").msgclass
         RebillingBasis = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.RebillingBasis").enummodule
       end
     end
