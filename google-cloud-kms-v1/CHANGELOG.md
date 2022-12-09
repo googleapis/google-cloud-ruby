@@ -1,5 +1,12 @@
 # Release History
 
+### 0.16.0 (2022-12-09)
+
+#### Features
+
+* Added SHA-2 import methods ([#19468](https://github.com/googleapis/google-cloud-ruby/issues/19468)) 
+* Renamed rsa_aes_wrapped_key parameter to wrapped_key 
+
 ### 0.15.0 (2022-11-16)
 
 #### Features
