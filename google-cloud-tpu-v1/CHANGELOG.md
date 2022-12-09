@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2022-12-09)
+
+#### Features
+
+* Support locations mixin client ([#19480](https://github.com/googleapis/google-cloud-ruby/issues/19480)) 
+
 ### 0.2.0 (2022-07-08)
 
 #### Features
