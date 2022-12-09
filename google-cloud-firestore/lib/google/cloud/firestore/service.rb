@@ -180,6 +180,18 @@ module Google
           "#{self.class}(#{@project})"
         end
 
+        def read_time_to_timestamp time
+          return nil if time.nil?
+
+          # Force the object to be a Time object.
+          time = time.to_time.utc
+
+          Google::Protobuf::Timestamp.new(
+            seconds: time.to_i,
+            nanos:   time.usec * 1000
+          )
+        end
+
         protected
 
         def default_headers parent = nil
@@ -203,17 +215,6 @@ module Google
           Google::Cloud::Firestore::V1::DocumentMask.new field_paths: mask
         end
 
-        def read_time_to_timestamp time
-          return nil if time.nil?
-
-          # Force the object to be a Time object.
-          time = time.to_time.utc
-
-          Google::Protobuf::Timestamp.new(
-            seconds: time.to_i,
-            nanos:   time.usec * 1000
-          )
-        end
       end
     end
   end

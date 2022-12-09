@@ -926,7 +926,7 @@ module Google
         def get read_time: nil
           ensure_service!
 
-          return enum_for :get unless block_given?
+          return enum_for :get, read_time: read_time unless block_given?
 
           results = service.run_query parent_path, @query, read_time: read_time
 

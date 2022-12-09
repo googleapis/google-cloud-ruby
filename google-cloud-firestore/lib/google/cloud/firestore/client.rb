@@ -252,7 +252,7 @@ module Google
           ensure_service!
 
           unless block_given?
-            return enum_for :get_all, *docs, field_mask: field_mask
+            return enum_for :get_all, *docs, field_mask: field_mask, read_time: read_time
           end
 
           doc_paths = Array(docs).flatten.map do |doc_path|
@@ -715,7 +715,7 @@ module Google
         # @private
         def list_documents parent, collection_id, token: nil, max: nil, read_time: nil
           ensure_service!
-          grpc = service.list_documents parent, collection_id, token: token, max: max
+          grpc = service.list_documents parent, collection_id, token: token, max: max, read_time: read_time
           DocumentReference::List.from_grpc grpc, self, parent, collection_id, read_time: read_time
         end
 

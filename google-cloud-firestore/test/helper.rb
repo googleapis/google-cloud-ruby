@@ -137,7 +137,8 @@ class MockFirestore < Minitest::Spec
                                documents: full_doc_paths,
                                mask: nil,
                                transaction: nil,
-                               new_transaction: nil
+                               new_transaction: nil,
+                               read_time: nil
     req = {
       database: database,
       documents: documents,
@@ -145,6 +146,7 @@ class MockFirestore < Minitest::Spec
     }
     req[:transaction] = transaction if transaction
     req[:new_transaction] = new_transaction if new_transaction
+    req[:read_time] = read_time if read_time
     [req, default_options]
   end
 
@@ -173,13 +175,15 @@ class MockFirestore < Minitest::Spec
   def run_query_args query,
                      parent: "projects/#{project}/databases/(default)/documents",
                      transaction: nil,
-                     new_transaction: nil
+                     new_transaction: nil,
+                     read_time: nil
     req = {
       parent: parent,
       structured_query: query
     }
     req[:transaction] = transaction if transaction
     req[:new_transaction] = new_transaction if new_transaction
+    req[:read_time] = read_time_to_timestamp(read_time) if read_time
     [req, default_options]
   end
 

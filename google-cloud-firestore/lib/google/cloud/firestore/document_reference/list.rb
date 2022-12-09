@@ -87,7 +87,7 @@ module Google
             return nil unless next?
             ensure_client!
             grpc = @client.service.list_documents @parent, @collection_id, token: token, max: @max, read_time: @read_time
-            self.class.from_grpc grpc, @client, @parent, @collection_id, @max, @read_time
+            self.class.from_grpc grpc, @client, @parent, @collection_id, @max, read_time: @read_time
           end
 
           ##
@@ -162,7 +162,7 @@ module Google
           ##
           # @private New DocumentReference::List from a
           # Google::Cloud::Firestore::V1::ListDocumentsResponse object.
-          def self.from_grpc grpc, client, parent, collection_id, max = nil, read_time = nil
+          def self.from_grpc grpc, client, parent, collection_id, max = nil, read_time: nil
             documents = List.new(Array(grpc.documents).map do |document|
               DocumentReference.from_path document.name, client
             end)
