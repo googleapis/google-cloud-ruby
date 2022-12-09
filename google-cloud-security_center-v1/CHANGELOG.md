@@ -1,5 +1,11 @@
 # Release History
 
+### 0.24.0 (2022-12-09)
+
+#### Features
+
+* Added kernel_rootkit field to Finding ([#19802](https://github.com/googleapis/google-cloud-ruby/issues/19802)) 
+
 ### 0.23.0 (2022-11-15)
 
 #### Features
