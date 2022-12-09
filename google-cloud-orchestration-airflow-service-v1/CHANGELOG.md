@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2022-12-09)
+
+#### Features
+
+* Added support for load_snapshot and save_snapshot calls ([#19485](https://github.com/googleapis/google-cloud-ruby/issues/19485)) 
+
 ### 0.2.0 (2022-07-06)
 
 #### Features
