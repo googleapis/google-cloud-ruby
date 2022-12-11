@@ -24,7 +24,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
     )
   end
 
-  focus; it "gets an aggregate query with a count" do
+  it "gets an aggregate query with a count" do
     expected_params = {
       :parent => parent,
       :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
@@ -37,15 +37,18 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
         ]
       )
     }
-    firestore_mock.expect :run_aggregation_query, [], [expected_params]
+    firestore_mock.expect :run_aggregation_query, aggregate_results_enum_helper(["count"]), [expected_params]
 
     aq = query.aggregate_query.add_count
-    aq.get {}
+    results = aq.get do |snapshot|
+      _(snapshot).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot
+      _(snapshot.get('count')).must_equal 3
+    end
 
     firestore_mock.verify
   end
 
-  focus; it "gets an aggregate query with custom alias" do
+  it "gets an aggregate query with custom alias" do
     expected_params = {
       :parent => parent,
       :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
@@ -58,15 +61,18 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
         ]
       )
     }
-    firestore_mock.expect :run_aggregation_query, [], [expected_params]
+    firestore_mock.expect :run_aggregation_query, aggregate_results_enum_helper(["total_score"]), [expected_params]
 
     aq = query.aggregate_query.add_count aggregate_alias: "total_score"
-    aq.get {}
+    aq.get do |snapshot|
+      _(snapshot).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot
+      _(snapshot.get('total_score')).must_equal 3
+    end
 
     firestore_mock.verify
   end
 
-  focus; it "gets multiple aggregates of query" do
+  it "gets multiple aggregates of query" do
     expected_params = {
       :parent => parent,
       :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
@@ -87,37 +93,30 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
         ]
       )
     }
-    firestore_mock.expect :run_aggregation_query, [], [expected_params]
+    firestore_mock.expect :run_aggregation_query, aggregate_results_enum_helper(["alias_1", "alias_2", "alias_3"]), [expected_params]
 
     aq = query.aggregate_query.add_count(aggregate_alias: "alias_1")
                               .add_count(aggregate_alias: "alias_2")
                               .add_count(aggregate_alias: "alias_3")
-    aq.get {}
+    aq.get do |snapshot|
+      _(snapshot).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot
+      _(snapshot.get('alias_1')).must_equal 3
+      _(snapshot.get('alias_2')).must_equal 3
+      _(snapshot.get('alias_3')).must_equal 3
+    end
 
     firestore_mock.verify
   end
+end
 
-  focus; it "gets multiple calls to run_aggregate_query" do
-    expected_params = {
-      :parent => parent,
-      :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
-        structured_query: expected_structured_query,
-        aggregations: [
-          Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
-            count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
-            alias: "count"
-          )
-        ]
-      )
-    }
-    firestore_mock.expect :run_aggregation_query, [], [expected_params]
-    firestore_mock.expect :run_aggregation_query, [], [expected_params]
-
-    aq = query.aggregate_query.add_count(aggregate_alias: "count")                      
-    aq.get {}
-    aq.get {}
-
-    firestore_mock.verify
-    firestore_mock.verify
-  end
+def aggregate_results_enum_helper aliases
+  [
+    Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
+      result: Google::Cloud::Firestore::V1::AggregationResult.new(
+        aggregate_fields: aliases.to_h { |a| [a, Google::Cloud::Firestore::V1::Value.new(integer_value: 3)] }
+      ),
+      transaction: "",
+      read_time: Google::Protobuf::Timestamp.new(seconds: 1670773857, nanos: 711532000)
+    )
+  ]
 end
