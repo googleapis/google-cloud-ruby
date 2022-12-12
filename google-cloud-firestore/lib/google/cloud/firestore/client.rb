@@ -718,7 +718,7 @@ module Google
         # @return [Object] The return value of the provided
         #   yield block
         #
-        # @example
+        # @example Read only transaction with read time
         #   require "google/cloud/firestore"
         #
         #   firestore = Google::Cloud::Firestore.new
@@ -726,7 +726,9 @@ module Google
         #   # Get a document reference
         #   nyc_ref = firestore.doc "cities/NYC"
         #
-        #   firestore.read_only_transaction do |tx|
+        #   read_time = Time.now
+        #
+        #   firestore.read_only_transaction(read_time: read_time) do |tx|
         #     # Get a document snapshot
         #     nyc_snap = tx.get nyc_ref
         #   end
