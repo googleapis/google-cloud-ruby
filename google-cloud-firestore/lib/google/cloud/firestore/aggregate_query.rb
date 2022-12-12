@@ -71,21 +71,25 @@ module Google
         attr_reader :query
 
         ##
+        # @private Array of Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation objects
+        attr_reader :aggregates
+
+        ##
         # @private Creates a new AggregateQuery
-        def initialize query, parent_path, client
+        def initialize query, aggregates, parent_path, client
+          aggregates ||= []
           @query = query
           @parent_path = parent_path
-          @aggregates = []
+          @aggregates = aggregates
           @client = client
         end
 
         ##
         # Adds a count aggregate.
         #
-        # @yield [snapshot] The block for accessing the aggregate query snapshots.
-        # @yieldparam [AggregateQuerySnapshot] An aggregate query snapshot.
+        # @param [aggregate_alias] Alias to refer to the aggregate. Optional
         #
-        # @return [Enumerator<AggregateQuerySnapshot>] A list of aggregate query snapshots.
+        # @return [AggregateQuery] A new aggregate query with the added count aggregate.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -104,15 +108,16 @@ module Google
         #
         def add_count aggregate_alias: nil
           aggregate_alias ||= ALIASES[:count]
-          @aggregates << StructuredAggregationQuery::Aggregation.new(
+          new_aggregates = @aggregates.dup
+          new_aggregates << StructuredAggregationQuery::Aggregation.new(
             count: StructuredAggregationQuery::Aggregation::Count.new,
             alias: aggregate_alias
           )
-          self
+          AggregateQuery.start query, new_aggregates, parent_path, client
         end
 
         ##
-        # Retrieves document snapshots for the query.
+        # Retrieves aggregate snapshot for the query.
         #
         # @yield [snapshot] The block for accessing the aggregate query snapshots.
         # @yieldparam [AggregateQuerySnapshot] An aggregate query snapshot.
@@ -153,6 +158,12 @@ module Google
             structured_query: @query,
             aggregations: @aggregates
           )
+        end
+
+        ##
+        # @private Start a new AggregateQuery.
+        def self.start query, aggregates, parent_path, client
+          new query, aggregates, parent_path, client
         end
 
         protected
