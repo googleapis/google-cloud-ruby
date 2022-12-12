@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-document_ai-v1beta3",
-    "version": "0.13.0",
+    "version": "0.14.0",
     "language": "RUBY",
     "apis": [
       {
@@ -247,6 +247,46 @@
         {
           "start": 20,
           "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_TrainProcessorVersion_sync",
+      "title": "Snippet for train_processor_version in DocumentProcessorService",
+      "description": "Basic snippet for train_processor_version in DocumentProcessorService",
+      "file": "document_processor_service/train_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "train_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#train_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "TrainProcessorVersion",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.TrainProcessorVersion",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
           "type": "FULL"
         }
       ]
@@ -687,6 +727,126 @@
         {
           "start": 20,
           "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_EvaluateProcessorVersion_sync",
+      "title": "Snippet for evaluate_processor_version in DocumentProcessorService",
+      "description": "Basic snippet for evaluate_processor_version in DocumentProcessorService",
+      "file": "document_processor_service/evaluate_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "evaluate_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#evaluate_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::EvaluateProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "EvaluateProcessorVersion",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.EvaluateProcessorVersion",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_GetEvaluation_sync",
+      "title": "Snippet for get_evaluation in DocumentProcessorService",
+      "description": "Basic snippet for get_evaluation in DocumentProcessorService",
+      "file": "document_processor_service/get_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_evaluation",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#get_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::GetEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DocumentAI::V1beta3::Evaluation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "GetEvaluation",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.GetEvaluation",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_ListEvaluations_sync",
+      "title": "Snippet for list_evaluations in DocumentProcessorService",
+      "description": "Basic snippet for list_evaluations in DocumentProcessorService",
+      "file": "document_processor_service/list_evaluations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_evaluations",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#list_evaluations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::ListEvaluationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DocumentAI::V1beta3::ListEvaluationsResponse",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "ListEvaluations",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.ListEvaluations",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
           "type": "FULL"
         }
       ]

@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Cloud Run deploys and manages user provided container images that scale automatically based on incoming requests.",
     "ruby-cloud-product-url": "https://cloud.google.com/run",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

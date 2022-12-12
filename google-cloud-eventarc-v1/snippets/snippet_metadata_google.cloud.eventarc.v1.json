@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-eventarc-v1",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -647,6 +647,86 @@
         {
           "start": 20,
           "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_GetGoogleChannelConfig_sync",
+      "title": "Snippet for get_google_channel_config in Eventarc",
+      "description": "Basic snippet for get_google_channel_config in Eventarc",
+      "file": "eventarc/get_google_channel_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_google_channel_config",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#get_google_channel_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::GetGoogleChannelConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::GoogleChannelConfig",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "GetGoogleChannelConfig",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.GetGoogleChannelConfig",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_UpdateGoogleChannelConfig_sync",
+      "title": "Snippet for update_google_channel_config in Eventarc",
+      "description": "Basic snippet for update_google_channel_config in Eventarc",
+      "file": "eventarc/update_google_channel_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_google_channel_config",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#update_google_channel_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::UpdateGoogleChannelConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::GoogleChannelConfig",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "UpdateGoogleChannelConfig",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleChannelConfig",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
           "type": "FULL"
         }
       ]

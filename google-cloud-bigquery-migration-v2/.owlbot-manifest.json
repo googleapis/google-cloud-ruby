@@ -26,6 +26,7 @@
     "lib/google/cloud/bigquery/migration/v2/translation_config_pb.rb",
     "lib/google/cloud/bigquery/migration/v2/version.rb",
     "proto_docs/README.md",
+    "proto_docs/google/api/client.rb",
     "proto_docs/google/api/distribution.rb",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/label.rb",

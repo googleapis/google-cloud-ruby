@@ -266,7 +266,7 @@ async.write_entries [entry1, entry2],
 ### Creating a Ruby Logger implementation
 
 If your environment requires a logger instance that is API-compatible with
-Ruby's standard library [Logger](http://ruby-doc.org/stdlib/libdoc/logger/rdoc),
+Ruby's standard library [Logger](https://ruby-doc.org/current/stdlibs/logger/),
 you can use {Google::Cloud::Logging::Project#logger Project#logger} to create
 one.
 

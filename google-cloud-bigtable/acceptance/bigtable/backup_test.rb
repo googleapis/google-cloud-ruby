@@ -134,10 +134,10 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
       _(restore_job).must_be_kind_of Google::Cloud::Bigtable::Table::RestoreJob
       restore_job.wait_until_done!
       _(restore_job.error).must_be :nil?
-      restore_table = restore_job.table
-      _(restore_table).must_be_kind_of Google::Cloud::Bigtable::Table
-      _(restore_table.name).must_equal restore_table_id
-      _(restore_table.instance_id).must_equal instance_2.instance_id
+      restore_table_2 = restore_job.table
+      _(restore_table_2).must_be_kind_of Google::Cloud::Bigtable::Table
+      _(restore_table_2.name).must_equal restore_table_id
+      _(restore_table_2.instance_id).must_equal instance_2.instance_id
     ensure
       # delete
       backup.delete if backup

@@ -17,6 +17,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :provider, :string, 7
       optional :state, :enum, 9, "google.cloud.eventarc.v1.Channel.State"
       optional :activation_token, :string, 10
+      optional :crypto_key_name, :string, 11
       oneof :transport do
         optional :pubsub_topic, :string, 8
       end

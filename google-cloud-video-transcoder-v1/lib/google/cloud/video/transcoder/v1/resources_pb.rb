@@ -156,6 +156,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :audio, :message, 4, "google.cloud.video.transcoder.v1.PreprocessingConfig.Audio"
       optional :crop, :message, 5, "google.cloud.video.transcoder.v1.PreprocessingConfig.Crop"
       optional :pad, :message, 6, "google.cloud.video.transcoder.v1.PreprocessingConfig.Pad"
+      optional :deinterlace, :message, 7, "google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace"
     end
     add_message "google.cloud.video.transcoder.v1.PreprocessingConfig.Color" do
       optional :saturation, :double, 1
@@ -186,6 +187,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :bottom_pixels, :int32, 2
       optional :left_pixels, :int32, 3
       optional :right_pixels, :int32, 4
+    end
+    add_message "google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace" do
+      oneof :deinterlacing_filter do
+        optional :yadif, :message, 1, "google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig"
+        optional :bwdif, :message, 2, "google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig"
+      end
+    end
+    add_message "google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig" do
+      optional :mode, :string, 1
+      optional :disable_spatial_interlacing, :bool, 2
+      optional :parity, :string, 3
+      optional :deinterlace_all_frames, :bool, 4
+    end
+    add_message "google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig" do
+      optional :mode, :string, 1
+      optional :parity, :string, 2
+      optional :deinterlace_all_frames, :bool, 3
     end
     add_message "google.cloud.video.transcoder.v1.VideoStream" do
       oneof :codec_settings do
@@ -321,6 +339,9 @@ module Google
           PreprocessingConfig::Audio = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.PreprocessingConfig.Audio").msgclass
           PreprocessingConfig::Crop = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.PreprocessingConfig.Crop").msgclass
           PreprocessingConfig::Pad = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.PreprocessingConfig.Pad").msgclass
+          PreprocessingConfig::Deinterlace = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace").msgclass
+          PreprocessingConfig::Deinterlace::YadifConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig").msgclass
+          PreprocessingConfig::Deinterlace::BwdifConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig").msgclass
           VideoStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.VideoStream").msgclass
           VideoStream::H264CodecSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings").msgclass
           VideoStream::H265CodecSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings").msgclass

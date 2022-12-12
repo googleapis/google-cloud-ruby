@@ -1243,6 +1243,14 @@
       "component": "google-cloud-vm_migration-v1",
       "version_file": "lib/google/cloud/vm_migration/v1/version.rb"
     },
+    "google-cloud-vmware_engine": {
+      "component": "google-cloud-vmware_engine",
+      "version_file": "lib/google/cloud/vmware_engine/version.rb"
+    },
+    "google-cloud-vmware_engine-v1": {
+      "component": "google-cloud-vmware_engine-v1",
+      "version_file": "lib/google/cloud/vmware_engine/v1/version.rb"
+    },
     "google-cloud-vpc_access": {
       "component": "google-cloud-vpc_access",
       "version_file": "lib/google/cloud/vpc_access/version.rb"

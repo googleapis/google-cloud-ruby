@@ -46,7 +46,7 @@ describe "Create Assessment" do
 
   after :all do
     shutdown_server
-    @driver.close
+    @driver.quit
     FileUtils.rm_f html_file
     client.delete_key name: @key.name
   end
@@ -71,6 +71,8 @@ describe "Create Assessment" do
     @pid = Process.fork do
       @server.start
     end
+    # wait for server to start
+    sleep 2
   end
 
   def shutdown_server
@@ -86,12 +88,15 @@ describe "Create Assessment" do
     @driver.find_element(:id, "password").send_keys("password")
     @driver.find_element(:id, "recaptchabutton").click
 
-    sleep 5
+    wait = Selenium::WebDriver::Wait.new timeout: 15
 
-    element = @driver.find_element :css, "#assessment"
-    token = element.attribute "data-token"
-    action = element.attribute "data-action"
-    [token, action]
+    wait.until do
+      element = @driver.find_element :css, "#assessment"
+      token = element.attribute "data-token"
+      action = element.attribute "data-action"
+      raise Selenium::WebDriver::Error::NoSuchElementError if token.empty? || action.empty?
+      [token, action]
+    end
   end
 
   it "gives score for assessment with valid token" do

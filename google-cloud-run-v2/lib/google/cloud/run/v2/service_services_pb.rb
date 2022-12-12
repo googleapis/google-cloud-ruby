@@ -37,7 +37,7 @@ module Google
             rpc :CreateService, ::Google::Cloud::Run::V2::CreateServiceRequest, ::Google::Longrunning::Operation
             # Gets information about a Service.
             rpc :GetService, ::Google::Cloud::Run::V2::GetServiceRequest, ::Google::Cloud::Run::V2::Service
-            # List Services.
+            # Lists Services.
             rpc :ListServices, ::Google::Cloud::Run::V2::ListServicesRequest, ::Google::Cloud::Run::V2::ListServicesResponse
             # Updates a Service.
             rpc :UpdateService, ::Google::Cloud::Run::V2::UpdateServiceRequest, ::Google::Longrunning::Operation
@@ -45,7 +45,7 @@ module Google
             # This will cause the Service to stop serving traffic and will delete all
             # revisions.
             rpc :DeleteService, ::Google::Cloud::Run::V2::DeleteServiceRequest, ::Google::Longrunning::Operation
-            # Get the IAM Access Control policy currently in effect for the given
+            # Gets the IAM Access Control policy currently in effect for the given
             # Cloud Run Service. This result does not include any inherited policies.
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Sets the IAM Access control policy for the specified Service. Overwrites

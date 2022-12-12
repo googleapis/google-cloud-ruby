@@ -33,8 +33,8 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/os_login/v1"
 
 client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new
-request = ::Google::Cloud::OsLogin::V1::DeletePosixAccountRequest.new # (request fields as keyword arguments...)
-response = client.delete_posix_account request
+request = ::Google::Cloud::OsLogin::V1::CreateSshPublicKeyRequest.new # (request fields as keyword arguments...)
+response = client.create_ssh_public_key request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-os_login-v1/latest)
@@ -46,7 +46,7 @@ for general usage information.
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/current/stdlibs/logger/Logger.html) as shown below,
 or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
 that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.

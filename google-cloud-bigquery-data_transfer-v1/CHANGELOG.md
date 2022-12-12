@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.1 (2022-11-17)
+
+#### Documentation
+
+* Format and clean up docs 
+
 ### 0.6.0 (2022-07-01)
 
 #### Features

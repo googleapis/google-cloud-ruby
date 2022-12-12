@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2022-11-08)
+
+#### Features
+
+* add text_event in publish_channel_connection_events 
+
 ### 0.3.0 (2022-07-02)
 
 #### Features

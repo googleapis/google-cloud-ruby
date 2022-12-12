@@ -188,7 +188,7 @@ module Google
 
         ##
         # Checks if the format of the source data is [newline-delimited
-        # JSON](http://jsonlines.org/). The default is `false`.
+        # JSON](https://jsonlines.org/). The default is `false`.
         #
         # @return [Boolean] `true` when the source format is
         #   `NEWLINE_DELIMITED_JSON`, `false` otherwise.
@@ -1269,7 +1269,7 @@ module Google
           # The following values are supported:
           #
           # * `csv` - CSV
-          # * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+          # * `json` - [Newline-delimited JSON](https://jsonlines.org/)
           # * `avro` - [Avro](http://avro.apache.org/)
           # * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
           # * `parquet` - [Parquet](https://parquet.apache.org/)

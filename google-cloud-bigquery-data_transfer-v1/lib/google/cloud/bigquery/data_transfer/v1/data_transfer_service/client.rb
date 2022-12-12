@@ -309,7 +309,7 @@ module Google
               #   @param parent [::String]
               #     Required. The BigQuery project id for which data sources should be returned.
               #     Must be in the form: `projects/{project_id}` or
-              #     `projects/{project_id}/locations/{location_id}
+              #     `projects/{project_id}/locations/{location_id}`
               #   @param page_token [::String]
               #     Pagination token, which can be used to request a specific page
               #     of `ListDataSourcesRequest` list results. For multiple-page
@@ -417,33 +417,44 @@ module Google
               #     Required. Data transfer configuration to create.
               #   @param authorization_code [::String]
               #     Optional OAuth2 authorization code to use with this transfer configuration.
-              #     This is required if new credentials are needed, as indicated by
-              #     `CheckValidCreds`.
-              #     In order to obtain authorization_code, please make a
-              #     request to
-              #     https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
+              #     This is required only if `transferConfig.dataSourceId` is 'youtube_channel'
+              #     and new credentials are needed, as indicated by `CheckValidCreds`. In order
+              #     to obtain authorization_code, make a request to the following URL:
+              #     <pre class="prettyprint" suppresswarning="true">
+              #     https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+              #     </pre>
+              #     * The <var>client_id</var> is the OAuth client_id of the a data source as
+              #     returned by ListDataSources method.
+              #     * <var>data_source_scopes</var> are the scopes returned by ListDataSources
+              #     method.
               #
-              #     * client_id should be OAuth client_id of BigQuery DTS API for the given
-              #       data source returned by ListDataSources method.
-              #     * data_source_scopes are the scopes returned by ListDataSources method.
-              #     * redirect_uri is an optional parameter. If not specified, then
-              #       authorization code is posted to the opener of authorization flow window.
-              #       Otherwise it will be sent to the redirect uri. A special value of
-              #       urn:ietf:wg:oauth:2.0:oob means that authorization code should be
-              #       returned in the title bar of the browser, with the page text prompting
-              #       the user to copy the code and paste it in the application.
+              #     Note that this should not be set when `service_account_name` is used to
+              #     create the transfer config.
               #   @param version_info [::String]
-              #     Optional version info. If users want to find a very recent access token,
-              #     that is, immediately after approving access, users have to set the
-              #     version_info claim in the token request. To obtain the version_info, users
-              #     must use the "none+gsession" response type. which be return a
-              #     version_info back in the authorization response which be be put in a JWT
-              #     claim in the token request.
+              #     Optional version info. This is required only if
+              #     `transferConfig.dataSourceId` is not 'youtube_channel' and new credentials
+              #     are needed, as indicated by `CheckValidCreds`. In order to obtain version
+              #     info, make a request to the following URL:
+              #     <pre class="prettyprint" suppresswarning="true">
+              #     https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+              #     </pre>
+              #     * The <var>client_id</var> is the OAuth client_id of the a data source as
+              #     returned by ListDataSources method.
+              #     * <var>data_source_scopes</var> are the scopes returned by ListDataSources
+              #     method.
+              #
+              #     Note that this should not be set when `service_account_name` is used to
+              #     create the transfer config.
               #   @param service_account_name [::String]
-              #     Optional service account name. If this field is set, transfer config will
-              #     be created with this service account credentials. It requires that
-              #     requesting user calling this API has permissions to act as this service
+              #     Optional service account name. If this field is set, the transfer config
+              #     will be created with this service account's credentials. It requires that
+              #     the requesting user calling this API has permissions to act as this service
               #     account.
+              #
+              #     Note that not all data sources support service account credentials when
+              #     creating a transfer config. For the latest list of data sources, read about
+              #     [using service
+              #     accounts](https://cloud.google.com/bigquery-transfer/docs/use-service-accounts).
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
@@ -532,36 +543,46 @@ module Google
               #     Required. Data transfer configuration to create.
               #   @param authorization_code [::String]
               #     Optional OAuth2 authorization code to use with this transfer configuration.
-              #     If it is provided, the transfer configuration will be associated with the
-              #     authorizing user.
-              #     In order to obtain authorization_code, please make a
-              #     request to
-              #     https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
+              #     This is required only if `transferConfig.dataSourceId` is 'youtube_channel'
+              #     and new credentials are needed, as indicated by `CheckValidCreds`. In order
+              #     to obtain authorization_code, make a request to the following URL:
+              #     <pre class="prettyprint" suppresswarning="true">
+              #     https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+              #     </pre>
+              #     * The <var>client_id</var> is the OAuth client_id of the a data source as
+              #     returned by ListDataSources method.
+              #     * <var>data_source_scopes</var> are the scopes returned by ListDataSources
+              #     method.
               #
-              #     * client_id should be OAuth client_id of BigQuery DTS API for the given
-              #       data source returned by ListDataSources method.
-              #     * data_source_scopes are the scopes returned by ListDataSources method.
-              #     * redirect_uri is an optional parameter. If not specified, then
-              #       authorization code is posted to the opener of authorization flow window.
-              #       Otherwise it will be sent to the redirect uri. A special value of
-              #       urn:ietf:wg:oauth:2.0:oob means that authorization code should be
-              #       returned in the title bar of the browser, with the page text prompting
-              #       the user to copy the code and paste it in the application.
+              #     Note that this should not be set when `service_account_name` is used to
+              #     update the transfer config.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Required. Required list of fields to be updated in this request.
               #   @param version_info [::String]
-              #     Optional version info. If users want to find a very recent access token,
-              #     that is, immediately after approving access, users have to set the
-              #     version_info claim in the token request. To obtain the version_info, users
-              #     must use the "none+gsession" response type. which be return a
-              #     version_info back in the authorization response which be be put in a JWT
-              #     claim in the token request.
+              #     Optional version info. This is required only if
+              #     `transferConfig.dataSourceId` is not 'youtube_channel' and new credentials
+              #     are needed, as indicated by `CheckValidCreds`. In order to obtain version
+              #     info, make a request to the following URL:
+              #     <pre class="prettyprint" suppresswarning="true">
+              #     https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+              #     </pre>
+              #     * The <var>client_id</var> is the OAuth client_id of the a data source as
+              #     returned by ListDataSources method.
+              #     * <var>data_source_scopes</var> are the scopes returned by ListDataSources
+              #     method.
+              #
+              #     Note that this should not be set when `service_account_name` is used to
+              #     update the transfer config.
               #   @param service_account_name [::String]
-              #     Optional service account name. If this field is set and
-              #     "service_account_name" is set in update_mask, transfer config will be
-              #     updated to use this service account credentials. It requires that
-              #     requesting user calling this API has permissions to act as this service
+              #     Optional service account name. If this field is set, the transfer config
+              #     will be created with this service account's credentials. It requires that
+              #     the requesting user calling this API has permissions to act as this service
               #     account.
+              #
+              #     Note that not all data sources support service account credentials when
+              #     creating a transfer config. For the latest list of data sources, read about
+              #     [using service
+              #     accounts](https://cloud.google.com/bigquery-transfer/docs/use-service-accounts).
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
@@ -822,7 +843,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The BigQuery project id for which data sources
+              #     Required. The BigQuery project id for which transfer configs
               #     should be returned: `projects/{project_id}` or
               #     `projects/{project_id}/locations/{location_id}`
               #   @param data_source_ids [::Array<::String>]
@@ -1578,10 +1599,12 @@ module Google
               ##
               # Enroll data sources in a user project. This allows users to create transfer
               # configurations for these data sources. They will also appear in the
-              # ListDataSources RPC and as such, will appear in the BigQuery UI
-              # 'https://bigquery.cloud.google.com' (and the documents can be found at
-              # https://cloud.google.com/bigquery/bigquery-web-ui and
-              # https://cloud.google.com/bigquery/docs/working-with-transfers).
+              # ListDataSources RPC and as such, will appear in the
+              # [BigQuery UI](https://console.cloud.google.com/bigquery), and the documents
+              # can be found in the public guide for
+              # [BigQuery Web UI](https://cloud.google.com/bigquery/bigquery-web-ui) and
+              # [Data Transfer
+              # Service](https://cloud.google.com/bigquery/docs/working-with-transfers).
               #
               # @overload enroll_data_sources(request, options = nil)
               #   Pass arguments to `enroll_data_sources` via a request object, either of type
@@ -1599,8 +1622,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     The name of the project resource in the form:
-              #     `projects/{project_id}`
+              #     The name of the project resource in the form: `projects/{project_id}`
               #   @param data_source_ids [::Array<::String>]
               #     Data sources that are enrolled. It is required to provide at least one
               #     data source id.

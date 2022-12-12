@@ -664,6 +664,11 @@ module Google
         #     Indicates whether the partial automated agent reply is interruptible when a
         #     later reply message arrives. e.g. if the agent specified some music as
         #     partial response, it can be cancelled.
+        # @!attribute [rw] cx_current_page
+        #   @return [::String]
+        #     The unique identifier of the current Dialogflow CX conversation page.
+        #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+        #     ID>/flows/<Flow ID>/pages/<Page ID>`.
         class AutomatedAgentReply
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

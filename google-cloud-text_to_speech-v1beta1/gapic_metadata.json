@@ -23,6 +23,20 @@
           }
         }
       }
+    },
+    "TextToSpeechLongAudioSynthesize": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client",
+          "rpcs": {
+            "SynthesizeLongAudio": {
+              "methods": [
+                "synthesize_long_audio"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

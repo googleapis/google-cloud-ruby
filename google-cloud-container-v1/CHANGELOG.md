@@ -1,5 +1,17 @@
 # Release History
 
+### 0.13.0 (2022-12-09)
+
+#### Features
+
+* Support for enabling NCCL Fast Sockets in a node pool ([#19475](https://github.com/googleapis/google-cloud-ruby/issues/19475)) 
+
+### 0.12.0 (2022-11-16)
+
+#### Features
+
+* support placement_policy 
+
 ### 0.11.0 (2022-10-18)
 
 #### Features

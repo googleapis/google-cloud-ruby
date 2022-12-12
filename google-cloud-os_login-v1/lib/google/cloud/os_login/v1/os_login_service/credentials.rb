@@ -27,7 +27,9 @@ module Google
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/compute"
+              "https://www.googleapis.com/auth/cloud-platform.read-only",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
             ]
             self.env_vars = [
               "OS_LOGIN_CREDENTIALS",

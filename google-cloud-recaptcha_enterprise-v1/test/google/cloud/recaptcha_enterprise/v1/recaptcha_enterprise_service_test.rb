@@ -541,11 +541,13 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
 
     # Create request parameters for a unary method.
     name = "hello world"
+    skip_billing_check = true
 
     migrate_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :migrate_key, name
       assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1::MigrateKeyRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["skip_billing_check"]
       refute_nil options
     end
 
@@ -556,31 +558,31 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
       end
 
       # Use hash object
-      client.migrate_key({ name: name }) do |response, operation|
+      client.migrate_key({ name: name, skip_billing_check: skip_billing_check }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.migrate_key name: name do |response, operation|
+      client.migrate_key name: name, skip_billing_check: skip_billing_check do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.migrate_key ::Google::Cloud::RecaptchaEnterprise::V1::MigrateKeyRequest.new(name: name) do |response, operation|
+      client.migrate_key ::Google::Cloud::RecaptchaEnterprise::V1::MigrateKeyRequest.new(name: name, skip_billing_check: skip_billing_check) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.migrate_key({ name: name }, grpc_options) do |response, operation|
+      client.migrate_key({ name: name, skip_billing_check: skip_billing_check }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.migrate_key(::Google::Cloud::RecaptchaEnterprise::V1::MigrateKeyRequest.new(name: name), grpc_options) do |response, operation|
+      client.migrate_key(::Google::Cloud::RecaptchaEnterprise::V1::MigrateKeyRequest.new(name: name, skip_billing_check: skip_billing_check), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -31,4 +31,14 @@ class Google::Cloud::Metastore::ClientConstructionMinitest < Minitest::Test
       assert_kind_of Google::Cloud::Metastore::V1::DataprocMetastore::Client, client
     end
   end
+
+  def test_dataproc_metastore_federation
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Metastore.dataproc_metastore_federation do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client, client
+    end
+  end
 end

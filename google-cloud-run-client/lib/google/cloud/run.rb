@@ -45,6 +45,66 @@ module Google
   module Cloud
     module Run
       ##
+      # Create a new client object for Executions.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Run::V2::Executions::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Executions/Client.html)
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the Executions service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About Executions
+      #
+      # Cloud Run Execution Control Plane API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @return [Executions::Client] A client object for the specified version.
+      #
+      def self.executions version: :v2, &block
+        require "google/cloud/run/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Run
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Run.const_get package_name
+        package_module.const_get(:Executions).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for Jobs.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Run::V2::Jobs::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Jobs/Client.html)
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the Jobs service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About Jobs
+      #
+      # Cloud Run Job Control Plane API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @return [Jobs::Client] A client object for the specified version.
+      #
+      def self.jobs version: :v2, &block
+        require "google/cloud/run/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Run
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Run.const_get package_name
+        package_module.const_get(:Jobs).const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for Revisions.
       #
       # By default, this returns an instance of
@@ -102,6 +162,36 @@ module Google
                        .first
         package_module = Google::Cloud::Run.const_get package_name
         package_module.const_get(:Services).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for Tasks.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Run::V2::Tasks::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Tasks/Client.html)
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the Tasks service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About Tasks
+      #
+      # Cloud Run Task Control Plane API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @return [Tasks::Client] A client object for the specified version.
+      #
+      def self.tasks version: :v2, &block
+        require "google/cloud/run/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Run
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Run.const_get package_name
+        package_module.const_get(:Tasks).const_get(:Client).new(&block)
       end
 
       ##

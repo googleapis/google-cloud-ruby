@@ -28,8 +28,8 @@ module Google
           # Client for the DataprocMetastore service.
           #
           # Configures and manages metastore services.
-          # Metastore services are fully managed, highly available, auto-scaled,
-          # auto-healing, OSS-native deployments of technical metadata management
+          # Metastore services are fully managed, highly available, autoscaled,
+          # autohealing, OSS-native deployments of technical metadata management
           # software. Each metastore service exposes a network endpoint through which
           # metadata queries are served. Metadata queries can originate from a variety
           # of sources, including Apache Hive, Apache Presto, and Apache Spark.
@@ -969,7 +969,7 @@ module Google
             #     Required. The relative resource name of the service in which to create a
             #     metastore import, in the following form:
             #
-            #     `projects/{project_number}/locations/{location_id}/services/{service_id}`
+            #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
             #   @param metadata_import_id [::String]
             #     Required. The ID of the metadata import, which is used as the final
             #     component of the metadata import's name.
@@ -1209,7 +1209,7 @@ module Google
             #     Required. The relative resource name of the metastore service to run
             #     export, in the following form:
             #
-            #     `projects/{project_id}/locations/{location_id}/services/{service_id}`
+            #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
             #   @param request_id [::String]
             #     Optional. A request ID. Specify a unique request ID to allow the server to
             #     ignore the request if it has completed. The server will ignore subsequent
@@ -1321,12 +1321,12 @@ module Google
             #     Required. The relative resource name of the metastore service to run
             #     restore, in the following form:
             #
-            #     `projects/{project_id}/locations/{location_id}/services/{service_id}`
+            #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
             #   @param backup [::String]
             #     Required. The relative resource name of the metastore service backup to
             #     restore from, in the following form:
             #
-            #     `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`
+            #     `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
             #   @param restore_type [::Google::Cloud::Metastore::V1beta::Restore::RestoreType]
             #     Optional. The type of restore. If unspecified, defaults to `METADATA_ONLY`.
             #   @param request_id [::String]
@@ -1619,7 +1619,7 @@ module Google
             end
 
             ##
-            # Creates a new Backup in a given project and location.
+            # Creates a new backup in a given project and location.
             #
             # @overload create_backup(request, options = nil)
             #   Pass arguments to `create_backup` via a request object, either of type
@@ -1640,7 +1640,7 @@ module Google
             #     Required. The relative resource name of the service in which to create a
             #     backup of the following form:
             #
-            #     `projects/{project_number}/locations/{location_id}/services/{service_id}`
+            #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
             #   @param backup_id [::String]
             #     Required. The ID of the backup, which is used as the final component of the
             #     backup's name.

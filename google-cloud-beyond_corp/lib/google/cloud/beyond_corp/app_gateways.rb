@@ -58,12 +58,12 @@ module Google
         #
         # ## About AppGatewaysService
         #
-        # ## API Overview
+        # API Overview:
         #
         # The `beyondcorp.googleapis.com` service implements the Google Cloud
         # BeyondCorp API.
         #
-        # ## Data Model
+        # Data Model:
         #
         # The AppGatewaysService exposes the following resources:
         #

@@ -1,5 +1,31 @@
 # Changelog
 
+### 0.16.0 (2022-12-09)
+
+#### Features
+
+* Added metadata_artifact field  to Dataset 
+* Added source_uris field to ImportFeatureValuesOperationMetadata 
+* Support for search_data_items RPC ([#19803](https://github.com/googleapis/google-cloud-ruby/issues/19803)) 
+* Support for specifying a custom service account for model uploads ([#19842](https://github.com/googleapis/google-cloud-ruby/issues/19842)) 
+* Support for the write_feature_values RPC ([#19481](https://github.com/googleapis/google-cloud-ruby/issues/19481)) 
+
+### 0.15.0 (2022-11-16)
+
+#### Features
+
+* add service_account to BatchPredictionJob 
+
+### 0.14.0 (2022-11-08)
+
+#### Features
+
+* add annotation_labels to ImportDataConfig 
+* add failed_main_jobs and failed_pre_caching_check_jobs to ContainerDetail 
+* add metadata_artifact to Model 
+* add persist_ml_use_assignment to InputDataConfig 
+* add start_time to BatchReadFeatureValuesRequest 
+
 ### 0.13.0 (2022-09-28)
 
 #### Features
