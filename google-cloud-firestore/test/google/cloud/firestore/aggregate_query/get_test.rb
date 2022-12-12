@@ -24,7 +24,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
     )
   end
 
-  it "gets an aggregate query with a count" do
+  focus; it "gets an aggregate query with a count" do
     expected_params = {
       :parent => parent,
       :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
@@ -40,15 +40,14 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
     firestore_mock.expect :run_aggregation_query, aggregate_results_enum_helper(["count"]), [expected_params]
 
     aq = query.aggregate_query.add_count
-    results = aq.get do |snapshot|
+    aq.get do |snapshot|
       _(snapshot).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot
       _(snapshot.get('count')).must_equal 3
     end
-
     firestore_mock.verify
   end
 
-  it "gets an aggregate query with custom alias" do
+  focus; it "gets an aggregate query with custom alias" do
     expected_params = {
       :parent => parent,
       :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
@@ -72,7 +71,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
     firestore_mock.verify
   end
 
-  it "gets multiple aggregates of query" do
+  focus; it "gets multiple aggregates of query" do
     expected_params = {
       :parent => parent,
       :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
@@ -107,16 +106,16 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
 
     firestore_mock.verify
   end
-end
 
-def aggregate_results_enum_helper aliases
-  [
-    Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
-      result: Google::Cloud::Firestore::V1::AggregationResult.new(
-        aggregate_fields: aliases.to_h { |a| [a, Google::Cloud::Firestore::V1::Value.new(integer_value: 3)] }
-      ),
-      transaction: "",
-      read_time: Google::Protobuf::Timestamp.new(seconds: 1670773857, nanos: 711532000)
-    )
-  ]
+  def aggregate_results_enum_helper aliases
+    [
+      Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
+        result: Google::Cloud::Firestore::V1::AggregationResult.new(
+          aggregate_fields: aliases.to_h { |a| [a, Google::Cloud::Firestore::V1::Value.new(integer_value: 3)] }
+        ),
+        transaction: "",
+        read_time: Google::Protobuf::Timestamp.new(seconds: 1670773857, nanos: 711532000)
+      )
+    ]
+  end
 end
