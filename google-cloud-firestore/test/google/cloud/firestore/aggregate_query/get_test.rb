@@ -37,14 +37,27 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
         ]
       )
     }
-    firestore_mock.expect :run_aggregation_query, aggregate_results_enum_helper(["count"]), [expected_params]
+    mocked_response = [
+      Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
+        result: Google::Cloud::Firestore::V1::AggregationResult.new(
+          aggregate_fields: {
+            "count": Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
+          }
+        )
+      )
+    ]
+    firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params]
 
     aq = query.aggregate_query.add_count
-    aq.get do |snapshot|
-      _(snapshot).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot
-      _(snapshot.get('count')).must_equal 3
+    results_enum = aq.get
+
+    _(results_enum).must_be_kind_of Enumerator
+    results = results_enum.to_a
+    _(results.count).must_equal 1
+    results.each do |result|
+      _(result).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot 
+      _(result.get('count')).must_equal 3
     end
-    firestore_mock.verify
   end
 
   it "gets an aggregate query with custom alias" do
@@ -60,15 +73,27 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
         ]
       )
     }
-    firestore_mock.expect :run_aggregation_query, aggregate_results_enum_helper(["total_score"]), [expected_params]
+    mocked_response = [
+      Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
+        result: Google::Cloud::Firestore::V1::AggregationResult.new(
+          aggregate_fields: {
+            "total_score": Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
+          }
+        )
+      )
+    ]
+    firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params]
 
     aq = query.aggregate_query.add_count aggregate_alias: "total_score"
-    aq.get do |snapshot|
-      _(snapshot).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot
-      _(snapshot.get('total_score')).must_equal 3
-    end
+    results_enum = aq.get
 
-    firestore_mock.verify
+    _(results_enum).must_be_kind_of Enumerator
+    results = results_enum.to_a
+    _(results.count).must_equal 1
+    results.each do |result|
+      _(result).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot 
+      _(result.get('total_score')).must_equal 3
+    end
   end
 
   it "gets multiple aggregates of query" do
@@ -92,30 +117,32 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
         ]
       )
     }
-    firestore_mock.expect :run_aggregation_query, aggregate_results_enum_helper(["alias_1", "alias_2", "alias_3"]), [expected_params]
+    mocked_response = [
+      Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
+        result: Google::Cloud::Firestore::V1::AggregationResult.new(
+          aggregate_fields: {
+            "alias_1": Google::Cloud::Firestore::V1::Value.new(integer_value: 3),
+            "alias_2": Google::Cloud::Firestore::V1::Value.new(integer_value: 3),
+            "alias_3": Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
+          }
+        )
+      )
+    ]
+    firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params]
 
     aq = query.aggregate_query.add_count(aggregate_alias: "alias_1")
                               .add_count(aggregate_alias: "alias_2")
                               .add_count(aggregate_alias: "alias_3")
-    aq.get do |snapshot|
-      _(snapshot).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot
-      _(snapshot.get('alias_1')).must_equal 3
-      _(snapshot.get('alias_2')).must_equal 3
-      _(snapshot.get('alias_3')).must_equal 3
+    results_enum = aq.get
+
+    _(results_enum).must_be_kind_of Enumerator
+    results = results_enum.to_a
+    _(results.count).must_equal 1
+    results.each do |result|
+      _(result).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot 
+      _(result.get('alias_1')).must_equal 3
+      _(result.get('alias_2')).must_equal 3
+      _(result.get('alias_3')).must_equal 3
     end
-
-    firestore_mock.verify
-  end
-
-  def aggregate_results_enum_helper aliases
-    [
-      Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
-        result: Google::Cloud::Firestore::V1::AggregationResult.new(
-          aggregate_fields: aliases.to_h { |a| [a, Google::Cloud::Firestore::V1::Value.new(integer_value: 3)] }
-        ),
-        transaction: "",
-        read_time: Google::Protobuf::Timestamp.new(seconds: 1670773857, nanos: 711532000)
-      )
-    ]
   end
 end
