@@ -94,6 +94,20 @@ module Google
         #     puts col.collection_id
         #   end
         #
+        # @example Get collection with read time
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   read_time = Time.now
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   nyc_ref.cols(read_time: read_time).each do |col|
+        #     puts col.collection_id
+        #   end
+        #
         def cols read_time: nil, &block
           ensure_service!
           grpc = service.list_collections path, read_time: read_time

@@ -214,7 +214,6 @@ module Google
 
           Google::Cloud::Firestore::V1::DocumentMask.new field_paths: mask
         end
-
       end
     end
   end

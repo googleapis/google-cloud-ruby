@@ -903,6 +903,9 @@ module Google
         ##
         # Retrieves document snapshots for the query.
         #
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
+        #
         # @yield [documents] The block for accessing the document snapshots.
         # @yieldparam [DocumentSnapshot] document A document snapshot.
         #
@@ -920,6 +923,23 @@ module Google
         #   query = cities_col.select(:population)
         #
         #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Get query with read time
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #
+        #   # Create a query
+        #   query = cities_col.select(:population)
+        #
+        #   read_time = Time.now
+        #
+        #   query.get(read_time: read_time) do |city|
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #

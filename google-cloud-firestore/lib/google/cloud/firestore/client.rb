@@ -104,6 +104,17 @@ module Google
         #     puts col.collection_id
         #   end
         #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   read_time = Time.now
+        #
+        #   # Get the root collections
+        #   firestore.cols(read_time: read_time).each do |col|
+        #     puts col.collection_id
+        #   end
+        #
         def cols read_time: nil, &block
           ensure_service!
           grpc = service.list_collections "#{path}/documents", read_time: read_time
@@ -220,6 +231,8 @@ module Google
         #   individual fields joined by ".". Fields containing `~`, `*`, `/`,
         #   `[`, `]`, and `.` cannot be in a dotted string, and should provided
         #   using a {FieldPath} object instead. (See {#field_path}.)
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
         #
         # @yield [documents] The block for accessing the document snapshots.
         # @yieldparam [DocumentSnapshot] document A document snapshot.
@@ -245,6 +258,19 @@ module Google
         #   # Get and print city documents
         #   cities = ["cities/NYC", "cities/SF", "cities/LA"]
         #   firestore.get_all(cities, field_mask: [:population]).each do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Get docs using a read_time:
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   read_time = Time.now
+        #
+        #   # Get and print city documents
+        #   cities = ["cities/NYC", "cities/SF", "cities/LA"]
+        #   firestore.get_all(cities, read_time: read_time).each do |city|
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
@@ -700,7 +726,7 @@ module Google
         #   # Get a document reference
         #   nyc_ref = firestore.doc "cities/NYC"
         #
-        #   firestore.transaction do |tx|
+        #   firestore.read_only_transaction do |tx|
         #     # Get a document snapshot
         #     nyc_snap = tx.get nyc_ref
         #   end
