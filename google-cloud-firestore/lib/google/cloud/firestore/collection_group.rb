@@ -48,7 +48,7 @@ module Google
         #
         # @param [Integer] partition_count The desired maximum number of partition points. The number must be strictly
         #   positive. The actual number of partitions returned may be fewer.
-        # @param [Timestamp] read_time Reads documents as they were at the given time.
+        # @param [Time] read_time Reads documents as they were at the given time.
         #   This may not be older than 270 seconds. Optional
         #
         # @return [Array<QueryPartition>] An ordered array of query partitions.
@@ -61,6 +61,19 @@ module Google
         #   col_group = firestore.col_group "cities"
         #
         #   partitions = col_group.partitions 3
+        #
+        #   queries = partitions.map(&:to_query)
+        #
+        # @example partition with read time
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   col_group = firestore.col_group "cities"
+        #
+        #   read_time = Time.now
+        #
+        #   partitions = col_group.partitions 3, read_time: read_time
         #
         #   queries = partitions.map(&:to_query)
         #
