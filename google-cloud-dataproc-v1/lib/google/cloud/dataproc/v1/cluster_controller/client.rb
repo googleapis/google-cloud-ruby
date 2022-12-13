@@ -216,11 +216,12 @@ module Google
             #   @param cluster [::Google::Cloud::Dataproc::V1::Cluster, ::Hash]
             #     Required. The cluster to create.
             #   @param request_id [::String]
-            #     Optional. A unique ID used to identify the request. If the server receives two
+            #     Optional. A unique ID used to identify the request. If the server receives
+            #     two
             #     [CreateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest)s
             #     with the same id, then the second request will be ignored and the
-            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the backend
-            #     is returned.
+            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+            #     and stored in the backend is returned.
             #
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -309,7 +310,8 @@ module Google
             # Updates a cluster in a project. The returned
             # {::Google::Longrunning::Operation#metadata Operation.metadata} will be
             # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
-            # The cluster must be in a {::Google::Cloud::Dataproc::V1::ClusterStatus::State `RUNNING`} state or an error
+            # The cluster must be in a
+            # {::Google::Cloud::Dataproc::V1::ClusterStatus::State `RUNNING`} state or an error
             # is returned.
             #
             # @overload update_cluster(request, options = nil)
@@ -403,8 +405,8 @@ module Google
             #     receives two
             #     [UpdateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest)s
             #     with the same id, then the second request will be ignored and the
-            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-            #     backend is returned.
+            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+            #     and stored in the backend is returned.
             #
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -523,8 +525,8 @@ module Google
             #     receives two
             #     [StopClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StopClusterRequest)s
             #     with the same id, then the second request will be ignored and the
-            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-            #     backend is returned.
+            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+            #     and stored in the backend is returned.
             #
             #     Recommendation: Set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -643,8 +645,8 @@ module Google
             #     receives two
             #     [StartClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest)s
             #     with the same id, then the second request will be ignored and the
-            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-            #     backend is returned.
+            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+            #     and stored in the backend is returned.
             #
             #     Recommendation: Set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -765,8 +767,8 @@ module Google
             #     receives two
             #     [DeleteClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
             #     with the same id, then the second request will be ignored and the
-            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-            #     backend is returned.
+            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+            #     and stored in the backend is returned.
             #
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
