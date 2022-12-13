@@ -296,6 +296,8 @@ module Google
           ensure_not_closed!
           ensure_service!
 
+          return enum_for :get_aggregate, aggregate_query unless block_given?
+
           results = service.run_aggregate_query aggregate_query.parent_path,
                                                 aggregate_query.structured_aggregation_query,
                                                 transaction: transaction_or_create

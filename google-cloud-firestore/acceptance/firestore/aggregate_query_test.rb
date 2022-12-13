@@ -25,9 +25,8 @@ describe "Aggregate Query", :firestore_acceptance do
     aq = rand_query_col.aggregate_query
                        .add_count
 
-    aq.get do |snapshot|
-      _(snapshot.get('count')).must_equal 3
-    end
+    snapshot = aq.get.first
+    _(snapshot.get('count')).must_equal 3
   end
 
   it "returns 0 for no records" do
@@ -36,9 +35,8 @@ describe "Aggregate Query", :firestore_acceptance do
     aq = rand_query_col.aggregate_query
                        .add_count
 
-    aq.get do |snapshot|
-      _(snapshot.get('count')).must_equal 0
-    end
+    snapshot = aq.get.first
+    _(snapshot.get('count')).must_equal 0
   end
 
   it "returns count on filter" do
@@ -51,9 +49,8 @@ describe "Aggregate Query", :firestore_acceptance do
     aq = query.aggregate_query
               .add_count
 
-    aq.get do |snapshot|
-      _(snapshot.get('count')).must_equal 1
-    end
+    snapshot = aq.get.first
+    _(snapshot.get('count')).must_equal 1
   end
 
   it "returns count on limit" do
@@ -67,9 +64,8 @@ describe "Aggregate Query", :firestore_acceptance do
     aq = query.aggregate_query
               .add_count
 
-    aq.get do |snapshot|
-      _(snapshot.get('count')).must_equal 2
-    end
+    snapshot = aq.get.first
+    _(snapshot.get('count')).must_equal 2
   end
 
   it "returns count with a custom alias" do
@@ -81,9 +77,8 @@ describe "Aggregate Query", :firestore_acceptance do
     aq = rand_query_col.aggregate_query
                        .add_count aggregate_alias: 'one'
 
-    aq.get do |snapshot|
-      _(snapshot.get('one')).must_equal 3
-    end
+    snapshot = aq.get.first
+    _(snapshot.get('one')).must_equal 3
   end
 
   it "returns count with multiple custom aliases" do
@@ -96,10 +91,9 @@ describe "Aggregate Query", :firestore_acceptance do
                        .add_count(aggregate_alias: 'one')
                        .add_count(aggregate_alias: 'two')
 
-    aq.get do |snapshot|
-      _(snapshot.get('one')).must_equal 3
-      _(snapshot.get('two')).must_equal 3
-    end
+    snapshot = aq.get.first
+    _(snapshot.get('one')).must_equal 3
+    _(snapshot.get('two')).must_equal 3
   end
   
   it "returns nil for unspecified alias" do
@@ -111,9 +105,8 @@ describe "Aggregate Query", :firestore_acceptance do
     aq = rand_query_col.aggregate_query
                        .add_count
 
-    aq.get do |snapshot|
-      _(snapshot.get('unspecified_alias')).must_be :nil?
-    end
+    snapshot = aq.get.first
+    _(snapshot.get('unspecified_alias')).must_be :nil?
   end
 
   it "throws error when duplicating aliases" do
@@ -126,9 +119,7 @@ describe "Aggregate Query", :firestore_acceptance do
                        .add_count(aggregate_alias: 'one')
                        .add_count(aggregate_alias: 'one')
 
-    expect do
-      aq.get { |snapshot| }
-    end.must_raise GRPC::InvalidArgument
+    expect { snapshot = aq.get.first }.must_raise GRPC::InvalidArgument
   end
 
 
@@ -141,13 +132,11 @@ describe "Aggregate Query", :firestore_acceptance do
     aq = rand_query_col.aggregate_query
                        .add_count
 
-    aq.get do |snapshot|
-      _(snapshot.get('count')).must_equal 3
-    end
+    snapshot = aq.get.first
+    _(snapshot.get('count')).must_equal 3
 
-    aq.get do |snapshot|
-      _(snapshot.get('count')).must_equal 3
-    end
+    snapshot = aq.get.first
+    _(snapshot.get('count')).must_equal 3
   end
 
   it "returns different count when data changes" do
@@ -159,16 +148,13 @@ describe "Aggregate Query", :firestore_acceptance do
     aq = rand_query_col.aggregate_query
                        .add_count
 
-    aq.get do |snapshot|
-      _(snapshot.get('count')).must_equal 3
-    end
+    snapshot = aq.get.first
+    _(snapshot.get('count')).must_equal 3
 
-    # insert more data
     rand_query_col.doc("doc4").create({foo: "d"})
 
-    aq.get do |snapshot|
-      _(snapshot.get('count')).must_equal 4
-    end
+    snapshot = aq.get.first
+    _(snapshot.get('count')).must_equal 4
   end
   
   it "throws error when no aggregate is added" do
@@ -180,9 +166,7 @@ describe "Aggregate Query", :firestore_acceptance do
     # aggregate object with no added aggregate (ex: aq.add_count)
     aq = rand_query_col.aggregate_query
 
-    expect do
-      aq.get { |snapshot| }
-    end.must_raise GRPC::InvalidArgument
+    expect { snapshot = aq.get.first }.must_raise GRPC::InvalidArgument
   end
 
   it "returns count inside a transaction" do
@@ -194,10 +178,11 @@ describe "Aggregate Query", :firestore_acceptance do
     aq = rand_query_col.aggregate_query
                        .add_count
 
-    firestore.transaction do |tx|
-      tx.get_aggregate aq do |snapshot|
-        _(snapshot.get('count')).must_equal 3
-      end
+    results = firestore.transaction do |tx|
+      tx.get_aggregate(aq).to_a
     end
+
+    snapshot = results.first
+    _(snapshot.get('count')).must_equal 3
   end
 end
