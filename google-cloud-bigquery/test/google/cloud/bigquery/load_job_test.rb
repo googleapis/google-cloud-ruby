@@ -50,28 +50,28 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     _(table.table_id).must_equal   "target_table_id"
   end
 
-  focus; it "knows its destination table with partial projection of table metadata" do
-    mock = Minitest::Mock.new
-    view = "basic"
-    mock.expect :get_table, destination_table_partial_gapi,
-                ["target_project_id", "target_dataset_id", "target_table_id"],
-                view: table_metadata_view_type_for(view)
+  it "knows its destination table with partial projection of table metadata" do
+    %w[unspecified basic storage full].each do |view|
+      mock = Minitest::Mock.new
+      job.service.mocked_service = mock
+      destination_table_result = destination_table_gapi
 
-    job.service.mocked_service = mock
+      if view == "basic"
+        destination_table_result = destination_table_partial_gapi
+      end
 
-    table = job.destination view: view
-    _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+      mock.expect :get_table, destination_table_result, ["target_project_id", "target_dataset_id", "target_table_id"],
+                  view: table_metadata_view_type_for(view)
 
-    mock.verify
+      table = job.destination view: view
+      _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+      _(table.project_id).must_equal "target_project_id"
+      _(table.dataset_id).must_equal "target_dataset_id"
+      _(table.table_id).must_equal "target_table_id"
+      verify_table_metadata table, view
 
-    _(table.project_id).must_equal "target_project_id"
-    _(table.dataset_id).must_equal "target_dataset_id"
-    _(table.table_id).must_equal "target_table_id"
-    assert_nil(table.bytes_count)
-    assert_nil(table.rows_count)
-    assert_nil(table.modified_at)
-    assert_nil(table.gapi.num_long_term_bytes)
-
+      mock.verify
+    end
   end
 
   it "knows its default attributes" do

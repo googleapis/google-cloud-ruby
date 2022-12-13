@@ -1133,4 +1133,16 @@ class MockBigquery < Minitest::Spec
       "full" => "FULL"
     }[str.to_s.downcase]
   end
+
+  def verify_table_metadata table, view
+    if view == "basic"
+      assert_nil(table.bytes_count)
+      assert_nil(table.rows_count)
+      assert_nil(table.modified_at)
+    else
+      refute_nil table.bytes_count, "Transient stats should not be nil"
+      refute_nil table.rows_count, "Transient stats should not be nil"
+      refute_nil table.modified_at, "Transient stats should not be nil"
+    end
+  end
 end

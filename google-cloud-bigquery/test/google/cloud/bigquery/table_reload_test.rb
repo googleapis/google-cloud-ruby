@@ -43,36 +43,36 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
     mock.verify
   end
 
-  focus; it "loads the table partial resource by making an HTTP call" do
-    mock = Minitest::Mock.new
-    view = "basic"
+  it "loads the table partial resource by making an HTTP call" do
+    %w[unspecified basic storage full].each do |view|
+      mock = Minitest::Mock.new
+      table.service.mocked_service = mock
+      table_result = table_gapi
 
-    mock.expect :get_table, table_partial_gapi, [project, dataset_id, table_id],
-                view: table_metadata_view_type_for(view)
-    table.service.mocked_service = mock
+      if view == "basic"
+        table_result = table_partial_gapi
+      end
 
-    partial_table = Google::Cloud::Bigquery::Table.from_gapi table_partial_gapi, bigquery.service, metadata_view: view
+      mock.expect :get_table, table_result, [project, dataset_id, table_id],
+                  view: table_metadata_view_type_for(view)
 
-    _(partial_table).wont_be :reference?
-    _(partial_table).must_be :resource?
-    _(partial_table).wont_be :resource_partial?
-    _(partial_table).must_be :resource_full?
-    assert_nil(partial_table.bytes_count)
-    assert_nil(partial_table.rows_count)
-    assert_nil(partial_table.modified_at)
-    assert_nil(partial_table.gapi.num_long_term_bytes)
+      partial_table = Google::Cloud::Bigquery::Table.from_gapi table_result, bigquery.service, metadata_view: view
 
-    partial_table.reload!
-    _(partial_table).wont_be :reference?
-    _(partial_table).must_be :resource?
-    _(partial_table).wont_be :resource_partial?
-    _(partial_table).must_be :resource_full?
-    assert_nil(partial_table.bytes_count)
-    assert_nil(partial_table.rows_count)
-    assert_nil(partial_table.modified_at)
-    assert_nil(partial_table.gapi.num_long_term_bytes)
+      _(partial_table).wont_be :reference?
+      _(partial_table).must_be :resource?
+      _(partial_table).wont_be :resource_partial?
+      _(partial_table).must_be :resource_full?
+      verify_table_metadata partial_table, view
 
-    mock.verify
+      partial_table.reload!
+      _(partial_table).wont_be :reference?
+      _(partial_table).must_be :resource?
+      _(partial_table).wont_be :resource_partial?
+      _(partial_table).must_be :resource_full?
+      verify_table_metadata partial_table, view
+
+      mock.verify
+    end
   end
 
   describe "partial table resource from list" do

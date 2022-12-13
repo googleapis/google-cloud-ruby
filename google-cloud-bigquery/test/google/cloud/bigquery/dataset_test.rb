@@ -917,25 +917,27 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     _(table.table_id).must_equal found_table_id
   end
 
-  focus; it "finds a table with partial metadata" do
+  it "finds a table with partial projection of table metadata" do
     found_table_id = "found_table"
-    view = "basic"
+    %w[unspecified basic storage full].each do |view|
+      mock = Minitest::Mock.new
+      dataset.service.mocked_service = mock
+      table_result = find_table_gapi(found_table_id)
 
-    mock = Minitest::Mock.new
-    mock.expect :get_table, find_partial_table_gapi(found_table_id), [project, dataset_id, found_table_id],
-                view: table_metadata_view_type_for(view)
-    dataset.service.mocked_service = mock
+      if view == "basic"
+        table_result = find_partial_table_gapi(found_table_id)
+      end
 
-    table = dataset.table found_table_id, view: view
+      mock.expect :get_table, table_result, [project, dataset_id, found_table_id],
+                  view: table_metadata_view_type_for(view)
 
-    mock.verify
+      table = dataset.table found_table_id, view: view
+      _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+      _(table.table_id).must_equal found_table_id
+      verify_table_metadata table, view
 
-    _(table).must_be_kind_of Google::Cloud::Bigquery::Table
-    _(table.table_id).must_equal found_table_id
-    assert_nil(table.bytes_count)
-    assert_nil(table.rows_count)
-    assert_nil(table.modified_at)
-    assert_nil(table.gapi.num_long_term_bytes)
+      mock.verify
+    end
   end
 
   it "finds a table with skip_lookup option" do

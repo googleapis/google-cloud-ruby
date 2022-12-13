@@ -47,39 +47,40 @@ describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
     mock.verify
   end
 
-  focus; it "knows its copy tables" do
-    mock = Minitest::Mock.new
-    view = "basic"
-    bigquery.service.mocked_service = mock
+  it "knows its copy tables with partial projection of table metadata" do
+    %w[unspecified basic storage full].each do |view|
+      mock = Minitest::Mock.new
+      bigquery.service.mocked_service = mock
+      source_table_result = source_table_gapi
+      destination_table_result = destination_table_gapi
 
-    mock.expect :get_table, source_table_partial_gapi, ["source_project_id", "source_dataset_id", "source_table_id"],
-                view: table_metadata_view_type_for(view)
+      if view == "basic"
+        source_table_result = source_table_partial_gapi
+        destination_table_result = destination_table_partial_gapi
+      end
 
+      mock.expect :get_table, source_table_result, ["source_project_id", "source_dataset_id", "source_table_id"],
+                  view: table_metadata_view_type_for(view)
 
-    source = job.source view: view
-    _(source).must_be_kind_of Google::Cloud::Bigquery::Table
-    _(source.project_id).must_equal "source_project_id"
-    _(source.dataset_id).must_equal "source_dataset_id"
-    _(source.table_id).must_equal "source_table_id"
-    assert_nil(source.bytes_count)
-    assert_nil(source.rows_count)
-    assert_nil(source.modified_at)
-    assert_nil(source.gapi.num_long_term_bytes)
+      source = job.source view: view
+      _(source).must_be_kind_of Google::Cloud::Bigquery::Table
+      _(source.project_id).must_equal "source_project_id"
+      _(source.dataset_id).must_equal "source_dataset_id"
+      _(source.table_id).must_equal "source_table_id"
+      verify_table_metadata source, view
 
-    mock.expect :get_table, destination_table_partial_gapi, ["target_project_id", "target_dataset_id", "target_table_id"],
-                view: table_metadata_view_type_for(view)
+      mock.expect :get_table, destination_table_result, ["target_project_id", "target_dataset_id", "target_table_id"],
+                  view: table_metadata_view_type_for(view)
 
-    destination = job.destination view: view
-    _(destination).must_be_kind_of Google::Cloud::Bigquery::Table
-    _(destination.project_id).must_equal "target_project_id"
-    _(destination.dataset_id).must_equal "target_dataset_id"
-    _(destination.table_id).must_equal "target_table_id"
-    assert_nil(destination.bytes_count)
-    assert_nil(destination.rows_count)
-    assert_nil(destination.modified_at)
-    assert_nil(destination.gapi.num_long_term_bytes)
+      destination = job.destination view: view
+      _(destination).must_be_kind_of Google::Cloud::Bigquery::Table
+      _(destination.project_id).must_equal "target_project_id"
+      _(destination.dataset_id).must_equal "target_dataset_id"
+      _(destination.table_id).must_equal "target_table_id"
+      verify_table_metadata destination, view
 
-    mock.verify
+      mock.verify
+    end
   end
 
   it "knows its create/write disposition flags" do
