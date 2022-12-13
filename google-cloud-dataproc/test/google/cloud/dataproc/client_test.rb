@@ -71,4 +71,14 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
       assert_kind_of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client, client
     end
   end
+
+  def test_node_group_controller
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dataproc.node_group_controller do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dataproc::V1::NodeGroupController::Client, client
+    end
+  end
 end
