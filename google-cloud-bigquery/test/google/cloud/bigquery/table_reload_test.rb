@@ -20,6 +20,8 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
   let(:table_id) { "my_table" }
   let(:table_hash) { random_table_hash dataset_id, table_id }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
+  let(:table_partial_hash) { random_table_partial_hash dataset_id, table_id }
+  let(:table_partial_gapi) { Google::Apis::BigqueryV2::Table.from_json table_partial_hash.to_json }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
   it "loads the table full resource by making an HTTP call" do
@@ -37,6 +39,38 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
     _(table).must_be :resource?
     _(table).wont_be :resource_partial?
     _(table).must_be :resource_full?
+
+    mock.verify
+  end
+
+  focus; it "loads the table partial resource by making an HTTP call" do
+    mock = Minitest::Mock.new
+    view = "basic"
+
+    mock.expect :get_table, table_partial_gapi, [project, dataset_id, table_id],
+                view: table_metadata_view_type_for(view)
+    table.service.mocked_service = mock
+
+    partial_table = Google::Cloud::Bigquery::Table.from_gapi table_partial_gapi, bigquery.service, metadata_view: view
+
+    _(partial_table).wont_be :reference?
+    _(partial_table).must_be :resource?
+    _(partial_table).wont_be :resource_partial?
+    _(partial_table).must_be :resource_full?
+    assert_nil(partial_table.bytes_count)
+    assert_nil(partial_table.rows_count)
+    assert_nil(partial_table.modified_at)
+    assert_nil(partial_table.gapi.num_long_term_bytes)
+
+    partial_table.reload!
+    _(partial_table).wont_be :reference?
+    _(partial_table).must_be :resource?
+    _(partial_table).wont_be :resource_partial?
+    _(partial_table).must_be :resource_full?
+    assert_nil(partial_table.bytes_count)
+    assert_nil(partial_table.rows_count)
+    assert_nil(partial_table.modified_at)
+    assert_nil(partial_table.gapi.num_long_term_bytes)
 
     mock.verify
   end

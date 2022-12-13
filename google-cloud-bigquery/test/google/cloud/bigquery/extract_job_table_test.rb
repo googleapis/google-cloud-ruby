@@ -45,6 +45,26 @@ describe Google::Cloud::Bigquery::ExtractJob, :table, :mock_bigquery do
     mock.verify
   end
 
+  focus; it "knows its source table with partial prjection of table metadata" do
+    mock = Minitest::Mock.new
+    view = "basic"
+    bigquery.service.mocked_service = mock
+
+    mock.expect :get_table, source_table_partial_gapi, ["source_project_id", "source_dataset_id", "source_table_id"],
+                view: table_metadata_view_type_for(view)
+
+    source = job.source view: view
+    _(source).must_be_kind_of Google::Cloud::Bigquery::Table
+    _(source.project_id).must_equal "source_project_id"
+    _(source.dataset_id).must_equal "source_dataset_id"
+    _(source.table_id).must_equal "source_table_id"
+    assert_nil(source.bytes_count)
+    assert_nil(source.rows_count)
+    assert_nil(source.modified_at)
+    assert_nil(source.gapi.num_long_term_bytes)
+    mock.verify
+  end
+
   it "knows its attributes" do
     _(job).must_be :table?
     _(job).wont_be :model?

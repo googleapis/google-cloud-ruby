@@ -817,11 +817,11 @@ module Google
         #
         # @!group Table
         #
-        def table table_id, skip_lookup: nil
+        def table table_id, skip_lookup: nil, view: nil
           ensure_service!
           return Table.new_reference project_id, dataset_id, table_id, service if skip_lookup
-          gapi = service.get_table dataset_id, table_id
-          Table.from_gapi gapi, service
+          gapi = service.get_table dataset_id, table_id, metadata_view: view
+          Table.from_gapi gapi, service, metadata_view: view
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -2687,12 +2687,12 @@ module Google
         #   inserter.stop.wait!
         #
         def insert_async table_id, skip_invalid: nil, ignore_unknown: nil, max_bytes: 10_000_000, max_rows: 500,
-                         interval: 10, threads: 4, &block
+                         interval: 10, threads: 4, view: nil, &block
           ensure_service!
 
           # Get table, don't use Dataset#table which handles NotFoundError
-          gapi = service.get_table dataset_id, table_id
-          table = Table.from_gapi gapi, service
+          gapi = service.get_table dataset_id, table_id, metadata_view: view
+          table = Table.from_gapi gapi, service, metadata_view: view
           # Get the AsyncInserter from the table
           table.insert_async skip_invalid: skip_invalid,
                              ignore_unknown: ignore_unknown,

@@ -50,6 +50,30 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     _(table.table_id).must_equal   "target_table_id"
   end
 
+  focus; it "knows its destination table with partial projection of table metadata" do
+    mock = Minitest::Mock.new
+    view = "basic"
+    mock.expect :get_table, destination_table_partial_gapi,
+                ["target_project_id", "target_dataset_id", "target_table_id"],
+                view: table_metadata_view_type_for(view)
+
+    job.service.mocked_service = mock
+
+    table = job.destination view: view
+    _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+
+    mock.verify
+
+    _(table.project_id).must_equal "target_project_id"
+    _(table.dataset_id).must_equal "target_dataset_id"
+    _(table.table_id).must_equal "target_table_id"
+    assert_nil(table.bytes_count)
+    assert_nil(table.rows_count)
+    assert_nil(table.modified_at)
+    assert_nil(table.gapi.num_long_term_bytes)
+
+  end
+
   it "knows its default attributes" do
     _(job_defaults.transaction_id).must_be :nil?
     _(job_defaults.delimiter).must_equal ","
@@ -162,6 +186,16 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
 
   def destination_table_gapi
     hash = random_table_hash "getting_replaced_dataset_id"
+    hash["tableReference"] = {
+      "projectId" => "target_project_id",
+      "datasetId" => "target_dataset_id",
+      "tableId"   => "target_table_id"
+    }
+    Google::Apis::BigqueryV2::Table.from_json hash.to_json
+  end
+
+  def destination_table_partial_gapi
+    hash = random_table_partial_hash "getting_replaced_dataset_id"
     hash["tableReference"] = {
       "projectId" => "target_project_id",
       "datasetId" => "target_dataset_id",

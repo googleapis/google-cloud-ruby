@@ -67,11 +67,11 @@ module Google
         #
         # @return [Table, Model, nil] A table or model instance, or `nil`.
         #
-        def source
+        def source view: nil
           if (table = @gapi.configuration.extract.source_table)
-            retrieve_table table.project_id, table.dataset_id, table.table_id
+            retrieve_table table.project_id, table.dataset_id, table.table_id, metadata_view: view
           elsif (model = @gapi.configuration.extract.source_model)
-            retrieve_model model.project_id, model.dataset_id, model.model_id
+            retrieve_model model.project_id, model.dataset_id, model.model_id, metadata_view: view
           end
         end
 

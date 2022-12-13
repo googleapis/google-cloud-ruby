@@ -318,6 +318,34 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
+  def source_table_partial_gapi
+    Google::Apis::BigqueryV2::Table.from_json source_table_partial_json
+  end
+
+  def source_table_partial_json
+    hash = random_table_partial_hash "getting_replaced_dataset_id"
+    hash["tableReference"] = {
+      "projectId" => "source_project_id",
+      "datasetId" => "source_dataset_id",
+      "tableId"   => "source_table_id"
+    }
+    hash.to_json
+  end
+
+  def destination_table_partial_gapi
+    Google::Apis::BigqueryV2::Table.from_json destination_table_partial_json
+  end
+
+  def destination_table_partial_json
+    hash = random_table_partial_hash "getting_replaced_dataset_id"
+    hash["tableReference"] = {
+      "projectId" => "target_project_id",
+      "datasetId" => "target_dataset_id",
+      "tableId"   => "target_table_id"
+    }
+    hash.to_json
+  end
+
   def copy_job_gapi source, target, job_id: "job_9876543210", location: "US"
     Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target, job_id, location: location)
   end
@@ -1095,5 +1123,14 @@ class MockBigquery < Minitest::Spec
 
   def formatted_table_path dataset_id, table_id
     "projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}"
+  end
+
+  def table_metadata_view_type_for str
+    return nil if str.nil?
+    { "unspecified" => "TABLE_METADATA_VIEW_UNSPECIFIED",
+      "basic" => "BASIC",
+      "storage" => "STORAGE_STATS",
+      "full" => "FULL"
+    }[str.to_s.downcase]
   end
 end

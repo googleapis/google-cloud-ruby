@@ -64,10 +64,10 @@ module Google
         #
         # @return [Table] A table instance.
         #
-        def destination
+        def destination view: nil
           table = @gapi.configuration.load.destination_table
           return nil unless table
-          retrieve_table table.project_id, table.dataset_id, table.table_id
+          retrieve_table table.project_id, table.dataset_id, table.table_id, metadata_view: view
         end
 
         ##
