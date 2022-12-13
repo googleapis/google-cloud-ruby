@@ -43,6 +43,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
       optional :end_time, :message, 2, "google.protobuf.Timestamp"
       optional :conversation, :string, 3
+      optional :annotator_selector, :message, 4, "google.cloud.contactcenterinsights.v1.AnnotatorSelector"
     end
     add_message "google.cloud.contactcenterinsights.v1.CreateConversationRequest" do
       optional :parent, :string, 1
@@ -72,6 +73,33 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :force, :bool, 2
     end
+    add_message "google.cloud.contactcenterinsights.v1.IngestConversationsRequest" do
+      optional :parent, :string, 1
+      optional :conversation_config, :message, 4, "google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig"
+      oneof :source do
+        optional :gcs_source, :message, 2, "google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource"
+      end
+      oneof :object_config do
+        optional :transcript_object_config, :message, 3, "google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig"
+      end
+    end
+    add_message "google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource" do
+      optional :bucket_uri, :string, 1
+    end
+    add_message "google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig" do
+      optional :medium, :enum, 1, "google.cloud.contactcenterinsights.v1.Conversation.Medium"
+    end
+    add_message "google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig" do
+      optional :agent_id, :string, 1
+    end
+    add_message "google.cloud.contactcenterinsights.v1.IngestConversationsMetadata" do
+      optional :create_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      optional :request, :message, 3, "google.cloud.contactcenterinsights.v1.IngestConversationsRequest"
+      repeated :partial_errors, :message, 4, "google.rpc.Status"
+    end
+    add_message "google.cloud.contactcenterinsights.v1.IngestConversationsResponse" do
+    end
     add_message "google.cloud.contactcenterinsights.v1.CreateAnalysisRequest" do
       optional :parent, :string, 1
       optional :analysis, :message, 2, "google.cloud.contactcenterinsights.v1.Analysis"
@@ -91,6 +119,24 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest" do
       optional :name, :string, 1
+    end
+    add_message "google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest" do
+      optional :parent, :string, 1
+      optional :filter, :string, 2
+      optional :analysis_percentage, :float, 3
+      optional :annotator_selector, :message, 8, "google.cloud.contactcenterinsights.v1.AnnotatorSelector"
+    end
+    add_message "google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata" do
+      optional :create_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      optional :request, :message, 3, "google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest"
+      optional :completed_analyses_count, :int32, 4
+      optional :failed_analyses_count, :int32, 5
+      optional :total_requested_analyses_count, :int32, 6
+    end
+    add_message "google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsResponse" do
+      optional :successful_analysis_count, :int32, 1
+      optional :failed_analysis_count, :int32, 2
     end
     add_message "google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest" do
       optional :parent, :string, 1
@@ -182,6 +228,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :issue, :message, 1, "google.cloud.contactcenterinsights.v1.Issue"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
+    add_message "google.cloud.contactcenterinsights.v1.DeleteIssueRequest" do
+      optional :name, :string, 1
+    end
     add_message "google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest" do
       optional :issue_model, :string, 1
     end
@@ -265,11 +314,20 @@ module Google
         GetConversationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.GetConversationRequest").msgclass
         UpdateConversationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.UpdateConversationRequest").msgclass
         DeleteConversationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.DeleteConversationRequest").msgclass
+        IngestConversationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IngestConversationsRequest").msgclass
+        IngestConversationsRequest::GcsSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource").msgclass
+        IngestConversationsRequest::TranscriptObjectConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig").msgclass
+        IngestConversationsRequest::ConversationConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig").msgclass
+        IngestConversationsMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IngestConversationsMetadata").msgclass
+        IngestConversationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IngestConversationsResponse").msgclass
         CreateAnalysisRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.CreateAnalysisRequest").msgclass
         ListAnalysesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ListAnalysesRequest").msgclass
         ListAnalysesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ListAnalysesResponse").msgclass
         GetAnalysisRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.GetAnalysisRequest").msgclass
         DeleteAnalysisRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest").msgclass
+        BulkAnalyzeConversationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest").msgclass
+        BulkAnalyzeConversationsMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata").msgclass
+        BulkAnalyzeConversationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsResponse").msgclass
         ExportInsightsDataRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest").msgclass
         ExportInsightsDataRequest::BigQueryDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.BigQueryDestination").msgclass
         ExportInsightsDataRequest::WriteDisposition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition").enummodule
@@ -293,6 +351,7 @@ module Google
         ListIssuesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ListIssuesRequest").msgclass
         ListIssuesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ListIssuesResponse").msgclass
         UpdateIssueRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.UpdateIssueRequest").msgclass
+        DeleteIssueRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.DeleteIssueRequest").msgclass
         CalculateIssueModelStatsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest").msgclass
         CalculateIssueModelStatsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsResponse").msgclass
         CreatePhraseMatcherRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest").msgclass

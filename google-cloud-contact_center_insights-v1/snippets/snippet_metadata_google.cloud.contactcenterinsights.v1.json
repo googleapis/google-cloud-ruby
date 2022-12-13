@@ -372,6 +372,86 @@
       ]
     },
     {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_BulkAnalyzeConversations_sync",
+      "title": "Snippet for bulk_analyze_conversations in ContactCenterInsights",
+      "description": "Basic snippet for bulk_analyze_conversations in ContactCenterInsights",
+      "file": "contact_center_insights/bulk_analyze_conversations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "bulk_analyze_conversations",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#bulk_analyze_conversations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "BulkAnalyzeConversations",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkAnalyzeConversations",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_IngestConversations_sync",
+      "title": "Snippet for ingest_conversations in ContactCenterInsights",
+      "description": "Basic snippet for ingest_conversations in ContactCenterInsights",
+      "file": "contact_center_insights/ingest_conversations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "ingest_conversations",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#ingest_conversations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "IngestConversations",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.IngestConversations",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ExportInsightsData_sync",
       "title": "Snippet for export_insights_data in ContactCenterInsights",
       "description": "Basic snippet for export_insights_data in ContactCenterInsights",
@@ -795,6 +875,46 @@
         "method": {
           "short_name": "UpdateIssue",
           "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateIssue",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteIssue_sync",
+      "title": "Snippet for delete_issue in ContactCenterInsights",
+      "description": "Basic snippet for delete_issue in ContactCenterInsights",
+      "file": "contact_center_insights/delete_issue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_issue",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_issue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::DeleteIssueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "DeleteIssue",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteIssue",
           "service": {
             "short_name": "ContactCenterInsights",
             "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
