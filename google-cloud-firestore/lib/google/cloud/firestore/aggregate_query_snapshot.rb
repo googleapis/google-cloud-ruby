@@ -62,20 +62,21 @@ module Google
         #     puts aggregate_snapshot.get('count')
         #   end
         def get aggregate_alias
-          return unless @results.key? aggregate_alias
-          @results[aggregate_alias][:integer_value]
+          @aggregate_fields[aggregate_alias]
         end
 
         ##
         # @private New AggregateQuerySnapshot from a
         # Google::Cloud::Firestore::V1::RunAggregationQueryResponse object.
         def self.from_run_aggregate_query_response response
-          # convert from protobuf to ruby map
-          aggregate_fields = response.result.aggregate_fields.to_h
-          # { |k, v| [String(k), String(v)] }
+          aggregate_fields = response
+                             .result
+                             .aggregate_fields
+                             .to_h # convert from protobuf to ruby map
+                             .transform_values { |v| v[:integer_value] }
 
           new.tap do |s|
-            s.instance_variable_set :@results, aggregate_fields
+            s.instance_variable_set :@aggregate_fields, aggregate_fields
           end
         end
       end
