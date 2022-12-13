@@ -94,9 +94,24 @@ module Google
           #     Specifies which fields to include in the output documents.
           #     Only supports top level document and pages field so it must be in the
           #     form of `{document_field_name}` or `pages.{page_field_name}`.
+          # @!attribute [rw] sharding_config
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentOutputConfig::GcsOutputConfig::ShardingConfig]
+          #     Specifies the sharding config for the output document.
           class GcsOutputConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The sharding config for the output document.
+            # @!attribute [rw] pages_per_shard
+            #   @return [::Integer]
+            #     The number of pages per shard.
+            # @!attribute [rw] pages_overlap
+            #   @return [::Integer]
+            #     The number of overlapping pages between consecutive shards.
+            class ShardingConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
       end
