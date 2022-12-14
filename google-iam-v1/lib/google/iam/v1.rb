@@ -22,17 +22,14 @@ require "google/iam/v1/version"
 module Google
   module Iam
     ##
-    # To load this package, including all its services, and instantiate a GRPC client:
+    # API client module.
     #
-    # @example
+    # @example Load this package, including all its services, and instantiate a gRPC client
     #
     #     require "google/iam/v1"
     #     client = ::Google::Iam::V1::IAMPolicy::Client.new
     #
-    ##
-    # To load this package, including all its services, and instantiate a REST client:
-    #
-    # @example
+    # @example Load this package, including all its services, and instantiate a REST client
     #
     #     require "google/iam/v1"
     #     client = ::Google::Iam::V1::IAMPolicy::Rest::Client.new

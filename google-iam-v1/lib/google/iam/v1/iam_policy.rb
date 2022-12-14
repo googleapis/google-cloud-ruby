@@ -57,12 +57,12 @@ module Google
       # are created and deleted implicitly with the resources to which they are
       # attached.
       #
-      # To load this service and instantiate a GRPC client:
+      # @example Load this service and instantiate a gRPC client
       #
       #     require "google/iam/v1/iam_policy"
       #     client = ::Google::Iam::V1::IAMPolicy::Client.new
       #
-      # To load this service and instantiate a REST client:
+      # @example Load this service and instantiate a REST client
       #
       #     require "google/iam/v1/iam_policy/rest"
       #     client = ::Google::Iam::V1::IAMPolicy::Rest::Client.new

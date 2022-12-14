@@ -34,7 +34,9 @@ module Google
               # the REST modules only when it's required.
               require "gapic/rest"
 
-              @client_stub = ::Gapic::Rest::ClientStub.new endpoint: endpoint, credentials: credentials, numeric_enums: false
+              @client_stub = ::Gapic::Rest::ClientStub.new endpoint: endpoint, credentials: credentials,
+                                                           numeric_enums: false,
+                                                           raise_faraday_errors: false
             end
 
             ##
