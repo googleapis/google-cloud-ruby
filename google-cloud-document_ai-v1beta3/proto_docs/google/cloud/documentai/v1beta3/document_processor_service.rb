@@ -21,6 +21,16 @@ module Google
   module Cloud
     module DocumentAI
       module V1beta3
+        # Options for Process API
+        # @!attribute [rw] ocr_config
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::OcrConfig]
+        #     Only applicable to "Document OCR Processor". Returns error if set on other
+        #     processor types.
+        class ProcessOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for the process document method.
         # @!attribute [rw] inline_document
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Document]
@@ -30,11 +40,15 @@ module Google
         #     A raw document content (bytes).
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} or
+        #     Required. The resource name of the
+        #     {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} or
         #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion}
-        #     to use for processing. If a {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} is specified, the server will use
-        #     its {::Google::Cloud::DocumentAI::V1beta3::Processor#default_processor_version default version}. Format:
-        #     `projects/{project}/locations/{location}/processors/{processor}`, or
+        #     to use for processing. If a
+        #     {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} is specified, the
+        #     server will use its [default
+        #     version][google.cloud.documentai.v1beta3.Processor.default_processor_version].
+        #     Format: `projects/{project}/locations/{location}/processors/{processor}`,
+        #     or
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
         # @!attribute [rw] document
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Document]
@@ -48,6 +62,9 @@ module Google
         #     Specifies which fields to include in ProcessResponse's document.
         #     Only supports top level document and pages field so it must be in the form
         #     of `{document_field_name}` or `pages.{page_field_name}`.
+        # @!attribute [rw] process_options
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions]
+        #     Inference-time options for the process API
         class ProcessRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -114,7 +131,8 @@ module Google
         # Request message for batch process document method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} or
+        #     Required. The resource name of
+        #     {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} or
         #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion}.
         #     Format: `projects/{project}/locations/{location}/processors/{processor}`,
         #     or
@@ -135,6 +153,9 @@ module Google
         #   @return [::Boolean]
         #     Whether Human Review feature should be skipped for this request. Default to
         #     false.
+        # @!attribute [rw] process_options
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions]
+        #     Inference-time options for the process API
         class BatchProcessRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -297,8 +318,8 @@ module Google
         # Request message for list all processors belongs to a project.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) which owns this collection of Processors.
-        #     Format: `projects/{project}/locations/{location}`
+        #     Required. The parent (project and location) which owns this collection of
+        #     Processors. Format: `projects/{project}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of processors to return.
@@ -346,8 +367,9 @@ module Google
         # Request message for list all processor versions belongs to a processor.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project, location and processor) to list all versions.
-        #     Format: `projects/{project}/locations/{location}/processors/{processor}`
+        #     Required. The parent (project, location and processor) to list all
+        #     versions. Format:
+        #     `projects/{project}/locations/{location}/processors/{processor}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of processor versions to return.
@@ -446,12 +468,13 @@ module Google
         # on that region, the creation will fail.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) under which to create the processor.
-        #     Format: `projects/{project}/locations/{location}`
+        #     Required. The parent (project and location) under which to create the
+        #     processor. Format: `projects/{project}/locations/{location}`
         # @!attribute [rw] processor
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Processor]
-        #     Required. The processor to be created, requires [processor_type] and [display_name]
-        #     to be set. Also, the processor is under CMEK if CMEK fields are set.
+        #     Required. The processor to be created, requires [processor_type] and
+        #     [display_name] to be set. Also, the processor is under CMEK if CMEK fields
+        #     are set.
         class CreateProcessorRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -528,11 +551,14 @@ module Google
         # Request message for the set default processor version method.
         # @!attribute [rw] processor
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} to change default version.
+        #     Required. The resource name of the
+        #     {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} to change default
+        #     version.
         # @!attribute [rw] default_processor_version
         #   @return [::String]
-        #     Required. The resource name of child {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to use as default.
-        #     Format:
+        #     Required. The resource name of child
+        #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to use
+        #     as default. Format:
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{version}`
         class SetDefaultProcessorVersionRequest
           include ::Google::Protobuf::MessageExts
@@ -558,8 +584,9 @@ module Google
         # Request message for the create processor version method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project, location and processor) to create the new version for.
-        #     Format: `projects/{project}/locations/{location}/processors/{processor}`.
+        #     Required. The parent (project, location and processor) to create the new
+        #     version for. Format:
+        #     `projects/{project}/locations/{location}/processors/{processor}`.
         # @!attribute [rw] processor_version
         #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion]
         #     Required. The processor version to be created.
@@ -571,8 +598,8 @@ module Google
         #     Optional. The input data used to train the `ProcessorVersion`.
         # @!attribute [rw] base_processor_version
         #   @return [::String]
-        #     Optional. The processor version to use as a base for training. This processor version
-        #     must be a child of `parent`. Format:
+        #     Optional. The processor version to use as a base for training. This
+        #     processor version must be a child of `parent`. Format:
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
         class TrainProcessorVersionRequest
           include ::Google::Protobuf::MessageExts
@@ -644,8 +671,8 @@ module Google
         #     An inline document proto.
         # @!attribute [rw] human_review_config
         #   @return [::String]
-        #     Required. The resource name of the HumanReviewConfig that the document will be
-        #     reviewed with.
+        #     Required. The resource name of the HumanReviewConfig that the document will
+        #     be reviewed with.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Document]
         #     The document that needs human review.
@@ -750,12 +777,14 @@ module Google
         # Evaluates the given ProcessorVersion against the supplied documents.
         # @!attribute [rw] processor_version
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to evaluate.
+        #     Required. The resource name of the
+        #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to
+        #     evaluate.
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
         # @!attribute [rw] evaluation_documents
         #   @return [::Google::Cloud::DocumentAI::V1beta3::BatchDocumentsInputConfig]
-        #     Optional. The documents used in the evaluation. If unspecified, use the processor's
-        #     dataset as evaluation input.
+        #     Optional. The documents used in the evaluation. If unspecified, use the
+        #     processor's dataset as evaluation input.
         class EvaluateProcessorVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -782,7 +811,8 @@ module Google
         # Retrieves a specific Evaluation.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1beta3::Evaluation Evaluation} to get.
+        #     Required. The resource name of the
+        #     {::Google::Cloud::DocumentAI::V1beta3::Evaluation Evaluation} to get.
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}/evaluations/{evaluation}`
         class GetEvaluationRequest
           include ::Google::Protobuf::MessageExts
@@ -792,7 +822,9 @@ module Google
         # Retrieves a list of evaluations for a given ProcessorVersion.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to list evaluations for.
+        #     Required. The resource name of the
+        #     {::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion ProcessorVersion} to
+        #     list evaluations for.
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
         # @!attribute [rw] page_size
         #   @return [::Integer]

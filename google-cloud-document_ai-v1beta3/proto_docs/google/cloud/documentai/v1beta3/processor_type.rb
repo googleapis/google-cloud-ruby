@@ -43,6 +43,9 @@ module Google
         # @!attribute [rw] launch_stage
         #   @return [::Google::Api::LaunchStage]
         #     Launch stage of the processor type
+        # @!attribute [rw] sample_document_uris
+        #   @return [::Array<::String>]
+        #     A set of Cloud Storage URIs of sample documents for this processor.
         class ProcessorType
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
