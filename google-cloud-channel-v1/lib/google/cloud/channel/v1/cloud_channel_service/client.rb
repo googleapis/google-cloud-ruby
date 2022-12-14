@@ -37,15 +37,16 @@ module Google
           # 3. Resellers and distributors can manage customer entitlements.
           #
           # CloudChannelService exposes the following resources:
-          # - {::Google::Cloud::Channel::V1::Customer Customer}s: An entity—usually an enterprise—managed by a reseller or
-          # distributor.
+          # - {::Google::Cloud::Channel::V1::Customer Customer}s: An entity-usually an
+          # enterprise-managed by a reseller or distributor.
           #
-          # - {::Google::Cloud::Channel::V1::Entitlement Entitlement}s: An entity that provides a customer with the means to use
-          # a service. Entitlements are created or updated as a result of a successful
-          # fulfillment.
+          # - {::Google::Cloud::Channel::V1::Entitlement Entitlement}s: An entity that
+          # provides a customer with the means to use a service. Entitlements are created
+          # or updated as a result of a successful fulfillment.
           #
-          # - {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}s: An entity that identifies links between
-          # distributors and their indirect resellers in a channel.
+          # - {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}s: An
+          # entity that identifies links between distributors and their indirect
+          # resellers in a channel.
           #
           class Client
             include Paths
@@ -212,7 +213,8 @@ module Google
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             #
             # Return value:
-            # List of {::Google::Cloud::Channel::V1::Customer Customer}s, or an empty list if there are no customers.
+            # List of {::Google::Cloud::Channel::V1::Customer Customer}s, or an empty list if
+            # there are no customers.
             #
             # @overload list_customers(request, options = nil)
             #   Pass arguments to `list_customers` via a request object, either of type
@@ -233,16 +235,19 @@ module Google
             #     Required. The resource name of the reseller account to list customers from.
             #     Parent uses the format: accounts/\\{account_id}.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of customers to return. The service may return fewer
-            #     than this value. If unspecified, returns at most 10 customers. The
+            #     Optional. The maximum number of customers to return. The service may return
+            #     fewer than this value. If unspecified, returns at most 10 customers. The
             #     maximum value is 50.
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results other than the first page.
             #     Obtained through
-            #     {::Google::Cloud::Channel::V1::ListCustomersResponse#next_page_token ListCustomersResponse.next_page_token} of the previous
-            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers CloudChannelService.ListCustomers} call.
+            #     {::Google::Cloud::Channel::V1::ListCustomersResponse#next_page_token ListCustomersResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers CloudChannelService.ListCustomers}
+            #     call.
             #   @param filter [::String]
-            #     Optional. Filters applied to the [CloudChannelService.ListCustomers] results. See
+            #     Optional. Filters applied to the [CloudChannelService.ListCustomers]
+            #     results. See
             #     https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
             #     for more information.
             #
@@ -318,7 +323,8 @@ module Google
             end
 
             ##
-            # Returns the requested {::Google::Cloud::Channel::V1::Customer Customer} resource.
+            # Returns the requested {::Google::Cloud::Channel::V1::Customer Customer}
+            # resource.
             #
             # Possible error codes:
             #
@@ -426,11 +432,14 @@ module Google
             # * INVALID_VALUE: Invalid domain value in the request.
             #
             # Return value:
-            # A list of {::Google::Cloud::Channel::V1::CloudIdentityCustomerAccount CloudIdentityCustomerAccount} resources for the domain (may be
-            # empty)
+            # A list of
+            # {::Google::Cloud::Channel::V1::CloudIdentityCustomerAccount CloudIdentityCustomerAccount}
+            # resources for the domain (may be empty)
             #
             # Note: in the v1alpha1 version of the API, a NOT_FOUND error returns if
-            # no {::Google::Cloud::Channel::V1::CloudIdentityCustomerAccount CloudIdentityCustomerAccount} resources match the domain.
+            # no
+            # {::Google::Cloud::Channel::V1::CloudIdentityCustomerAccount CloudIdentityCustomerAccount}
+            # resources match the domain.
             #
             # @overload check_cloud_identity_accounts_exist(request, options = nil)
             #   Pass arguments to `check_cloud_identity_accounts_exist` via a request object, either of type
@@ -518,8 +527,8 @@ module Google
             end
 
             ##
-            # Creates a new {::Google::Cloud::Channel::V1::Customer Customer} resource under the reseller or distributor
-            # account.
+            # Creates a new {::Google::Cloud::Channel::V1::Customer Customer} resource under
+            # the reseller or distributor account.
             #
             # Possible error codes:
             #
@@ -548,8 +557,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of reseller account in which to create the customer.
-            #     Parent uses the format: accounts/\\{account_id}
+            #     Required. The resource name of reseller account in which to create the
+            #     customer. Parent uses the format: accounts/\\{account_id}
             #   @param customer [::Google::Cloud::Channel::V1::Customer, ::Hash]
             #     Required. The customer to create.
             #
@@ -618,15 +627,16 @@ module Google
             end
 
             ##
-            # Updates an existing {::Google::Cloud::Channel::V1::Customer Customer} resource for the reseller or
-            # distributor.
+            # Updates an existing {::Google::Cloud::Channel::V1::Customer Customer} resource
+            # for the reseller or distributor.
             #
             # Possible error codes:
             #
             # * PERMISSION_DENIED: The reseller account making the request is different
             # from the reseller account in the API request.
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-            # * NOT_FOUND: No {::Google::Cloud::Channel::V1::Customer Customer} resource found for the name in the request.
+            # * NOT_FOUND: No {::Google::Cloud::Channel::V1::Customer Customer} resource found
+            # for the name in the request.
             #
             # Return value:
             # The updated {::Google::Cloud::Channel::V1::Customer Customer} resource.
@@ -725,7 +735,8 @@ module Google
             # this customer.
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             # * FAILED_PRECONDITION: The customer has existing entitlements.
-            # * NOT_FOUND: No {::Google::Cloud::Channel::V1::Customer Customer} resource found for the name in the request.
+            # * NOT_FOUND: No {::Google::Cloud::Channel::V1::Customer Customer} resource found
+            # for the name in the request.
             #
             # @overload delete_customer(request, options = nil)
             #   Pass arguments to `delete_customer` via a request object, either of type
@@ -810,10 +821,10 @@ module Google
             end
 
             ##
-            # Imports a {::Google::Cloud::Channel::V1::Customer Customer} from the Cloud Identity associated with the provided
-            # Cloud Identity ID or domain before a TransferEntitlements call. If a
-            # linked Customer already exists and overwrite_if_exists is true, it will
-            # update that Customer's data.
+            # Imports a {::Google::Cloud::Channel::V1::Customer Customer} from the Cloud
+            # Identity associated with the provided Cloud Identity ID or domain before a
+            # TransferEntitlements call. If a linked Customer already exists and
+            # overwrite_if_exists is true, it will update that Customer's data.
             #
             # Possible error codes:
             #
@@ -861,9 +872,10 @@ module Google
             #     This must be set to true if there is an existing customer with a
             #     conflicting region code or domain.
             #   @param channel_partner_id [::String]
-            #     Optional. Cloud Identity ID of a channel partner who will be the direct reseller for
-            #     the customer's order. This field is required for 2-tier transfer scenarios
-            #     and can be provided via the request Parent binding as well.
+            #     Optional. Cloud Identity ID of a channel partner who will be the direct
+            #     reseller for the customer's order. This field is required for 2-tier
+            #     transfer scenarios and can be provided via the request Parent binding as
+            #     well.
             #   @param customer [::String]
             #     Optional. Specifies the customer that will receive imported Cloud Identity
             #     information.
@@ -1054,7 +1066,8 @@ module Google
             end
 
             ##
-            # Lists {::Google::Cloud::Channel::V1::Entitlement Entitlement}s belonging to a customer.
+            # Lists {::Google::Cloud::Channel::V1::Entitlement Entitlement}s belonging to a
+            # customer.
             #
             # Possible error codes:
             #
@@ -1062,7 +1075,8 @@ module Google
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             #
             # Return value:
-            # A list of the customer's {::Google::Cloud::Channel::V1::Entitlement Entitlement}s.
+            # A list of the customer's
+            # {::Google::Cloud::Channel::V1::Entitlement Entitlement}s.
             #
             # @overload list_entitlements(request, options = nil)
             #   Pass arguments to `list_entitlements` via a request object, either of type
@@ -1084,14 +1098,16 @@ module Google
             #     entitlements for.
             #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server might return fewer results than requested.
-            #     If unspecified, return at most 50 entitlements.
-            #     The maximum value is 100; the server will coerce values above 100.
+            #     Optional. Requested page size. Server might return fewer results than
+            #     requested. If unspecified, return at most 50 entitlements. The maximum
+            #     value is 100; the server will coerce values above 100.
             #   @param page_token [::String]
             #     Optional. A token for a page of results other than the first page.
             #     Obtained using
-            #     {::Google::Cloud::Channel::V1::ListEntitlementsResponse#next_page_token ListEntitlementsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements CloudChannelService.ListEntitlements} call.
+            #     {::Google::Cloud::Channel::V1::ListEntitlementsResponse#next_page_token ListEntitlementsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements CloudChannelService.ListEntitlements}
+            #     call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::Entitlement>]
@@ -1165,8 +1181,8 @@ module Google
             end
 
             ##
-            # List {::Google::Cloud::Channel::V1::TransferableSku TransferableSku}s of a customer based on the Cloud Identity ID or
-            # Customer Name in the request.
+            # List {::Google::Cloud::Channel::V1::TransferableSku TransferableSku}s of a
+            # customer based on the Cloud Identity ID or Customer Name in the request.
             #
             # Use this method to list the entitlements information of an
             # unowned customer. You should provide the customer's
@@ -1182,7 +1198,8 @@ module Google
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             #
             # Return value:
-            # A list of the customer's {::Google::Cloud::Channel::V1::TransferableSku TransferableSku}.
+            # A list of the customer's
+            # {::Google::Cloud::Channel::V1::TransferableSku TransferableSku}.
             #
             # @overload list_transferable_skus(request, options = nil)
             #   Pass arguments to `list_transferable_skus` via a request object, either of type
@@ -1217,9 +1234,10 @@ module Google
             #   @param page_token [::String]
             #     A token for a page of results other than the first page.
             #     Obtained using
-            #     {::Google::Cloud::Channel::V1::ListTransferableSkusResponse#next_page_token ListTransferableSkusResponse.next_page_token} of the previous
-            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus CloudChannelService.ListTransferableSkus} call.
-            #     Optional.
+            #     {::Google::Cloud::Channel::V1::ListTransferableSkusResponse#next_page_token ListTransferableSkusResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus CloudChannelService.ListTransferableSkus}
+            #     call. Optional.
             #   @param auth_token [::String]
             #     Optional. The super admin of the resold customer generates this token to
             #     authorize a reseller to access their Cloud Identity and purchase
@@ -1303,8 +1321,8 @@ module Google
             end
 
             ##
-            # List {::Google::Cloud::Channel::V1::TransferableOffer TransferableOffer}s of a customer based on Cloud Identity ID or
-            # Customer Name in the request.
+            # List {::Google::Cloud::Channel::V1::TransferableOffer TransferableOffer}s of a
+            # customer based on Cloud Identity ID or Customer Name in the request.
             #
             # Use this method when a reseller gets the entitlement information of an
             # unowned customer. The reseller should provide the customer's
@@ -1321,7 +1339,8 @@ module Google
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             #
             # Return value:
-            # List of {::Google::Cloud::Channel::V1::TransferableOffer TransferableOffer} for the given customer and SKU.
+            # List of {::Google::Cloud::Channel::V1::TransferableOffer TransferableOffer} for
+            # the given customer and SKU.
             #
             # @overload list_transferable_offers(request, options = nil)
             #   Pass arguments to `list_transferable_offers` via a request object, either of type
@@ -1352,8 +1371,10 @@ module Google
             #   @param page_token [::String]
             #     A token for a page of results other than the first page.
             #     Obtained using
-            #     {::Google::Cloud::Channel::V1::ListTransferableOffersResponse#next_page_token ListTransferableOffersResponse.next_page_token} of the previous
-            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers CloudChannelService.ListTransferableOffers} call.
+            #     {::Google::Cloud::Channel::V1::ListTransferableOffersResponse#next_page_token ListTransferableOffersResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers CloudChannelService.ListTransferableOffers}
+            #     call.
             #   @param sku [::String]
             #     Required. The SKU to look up Offers for.
             #   @param language_code [::String]
@@ -1433,7 +1454,8 @@ module Google
             end
 
             ##
-            # Returns the requested {::Google::Cloud::Channel::V1::Entitlement Entitlement} resource.
+            # Returns the requested {::Google::Cloud::Channel::V1::Entitlement Entitlement}
+            # resource.
             #
             # Possible error codes:
             #
@@ -1582,14 +1604,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the reseller's customer account in which to create the
-            #     entitlement.
-            #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}
+            #     Required. The resource name of the reseller's customer account in which to
+            #     create the entitlement. Parent uses the format:
+            #     accounts/\\{account_id}/customers/\\{customer_id}
             #   @param entitlement [::Google::Cloud::Channel::V1::Entitlement, ::Hash]
             #     Required. The entitlement to create.
             #   @param request_id [::String]
-            #     Optional. You can specify an optional unique request ID, and if you need to retry
-            #     your request, the server will know to ignore the request if it's complete.
+            #     Optional. You can specify an optional unique request ID, and if you need to
+            #     retry your request, the server will know to ignore the request if it's
+            #     complete.
             #
             #     For example, you make an initial request and the request times out. If you
             #     make the request again with the same request ID, the server can check if
@@ -1717,13 +1740,16 @@ module Google
             #     Name uses the format:
             #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
             #   @param parameters [::Array<::Google::Cloud::Channel::V1::Parameter, ::Hash>]
-            #     Required. Entitlement parameters to update. You can only change editable parameters.
+            #     Required. Entitlement parameters to update. You can only change editable
+            #     parameters.
             #
             #     To view the available Parameters for a request, refer to the
-            #     {::Google::Cloud::Channel::V1::Offer#parameter_definitions Offer.parameter_definitions} from the desired offer.
+            #     {::Google::Cloud::Channel::V1::Offer#parameter_definitions Offer.parameter_definitions}
+            #     from the desired offer.
             #   @param request_id [::String]
-            #     Optional. You can specify an optional unique request ID, and if you need to retry
-            #     your request, the server will know to ignore the request if it's complete.
+            #     Optional. You can specify an optional unique request ID, and if you need to
+            #     retry your request, the server will know to ignore the request if it's
+            #     complete.
             #
             #     For example, you make an initial request and the request times out. If you
             #     make the request again with the same request ID, the server can check if
@@ -1855,8 +1881,9 @@ module Google
             #   @param renewal_settings [::Google::Cloud::Channel::V1::RenewalSettings, ::Hash]
             #     Required. New renewal settings.
             #   @param request_id [::String]
-            #     Optional. You can specify an optional unique request ID, and if you need to retry
-            #     your request, the server will know to ignore the request if it's complete.
+            #     Optional. You can specify an optional unique request ID, and if you need to
+            #     retry your request, the server will know to ignore the request if it's
+            #     complete.
             #
             #     For example, you make an initial request and the request times out. If you
             #     make the request again with the same request ID, the server can check if
@@ -1985,13 +2012,16 @@ module Google
             #     Required. New Offer.
             #     Format: accounts/\\{account_id}/offers/\\{offer_id}.
             #   @param parameters [::Array<::Google::Cloud::Channel::V1::Parameter, ::Hash>]
-            #     Optional. Parameters needed to purchase the Offer. To view the available Parameters
-            #     refer to the {::Google::Cloud::Channel::V1::Offer#parameter_definitions Offer.parameter_definitions} from the desired offer.
+            #     Optional. Parameters needed to purchase the Offer. To view the available
+            #     Parameters refer to the
+            #     {::Google::Cloud::Channel::V1::Offer#parameter_definitions Offer.parameter_definitions}
+            #     from the desired offer.
             #   @param purchase_order_id [::String]
             #     Optional. Purchase order id provided by the reseller.
             #   @param request_id [::String]
-            #     Optional. You can specify an optional unique request ID, and if you need to retry
-            #     your request, the server will know to ignore the request if it's complete.
+            #     Optional. You can specify an optional unique request ID, and if you need to
+            #     retry your request, the server will know to ignore the request if it's
+            #     complete.
             #
             #     For example, you make an initial request and the request times out. If you
             #     make the request again with the same request ID, the server can check if
@@ -2120,8 +2150,9 @@ module Google
             #     Name uses the format:
             #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
             #   @param request_id [::String]
-            #     Optional. You can specify an optional unique request ID, and if you need to retry
-            #     your request, the server will know to ignore the request if it's complete.
+            #     Optional. You can specify an optional unique request ID, and if you need to
+            #     retry your request, the server will know to ignore the request if it's
+            #     complete.
             #
             #     For example, you make an initial request and the request times out. If you
             #     make the request again with the same request ID, the server can check if
@@ -2247,8 +2278,9 @@ module Google
             #     Name uses the format:
             #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
             #   @param request_id [::String]
-            #     Optional. You can specify an optional unique request ID, and if you need to retry
-            #     your request, the server will know to ignore the request if it's complete.
+            #     Optional. You can specify an optional unique request ID, and if you need to
+            #     retry your request, the server will know to ignore the request if it's
+            #     complete.
             #
             #     For example, you make an initial request and the request times out. If you
             #     make the request again with the same request ID, the server can check if
@@ -2379,8 +2411,9 @@ module Google
             #     Name uses the format:
             #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
             #   @param request_id [::String]
-            #     Optional. You can specify an optional unique request ID, and if you need to retry
-            #     your request, the server will know to ignore the request if it's complete.
+            #     Optional. You can specify an optional unique request ID, and if you need to
+            #     retry your request, the server will know to ignore the request if it's
+            #     complete.
             #
             #     For example, you make an initial request and the request times out. If you
             #     make the request again with the same request ID, the server can check if
@@ -2512,8 +2545,9 @@ module Google
             #     Name uses the format:
             #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
             #   @param request_id [::String]
-            #     Optional. You can specify an optional unique request ID, and if you need to retry
-            #     your request, the server will know to ignore the request if it's complete.
+            #     Optional. You can specify an optional unique request ID, and if you need to
+            #     retry your request, the server will know to ignore the request if it's
+            #     complete.
             #
             #     For example, you make an initial request and the request times out. If you
             #     make the request again with the same request ID, the server can check if
@@ -2643,9 +2677,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the reseller's customer account that will receive
-            #     transferred entitlements.
-            #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}
+            #     Required. The resource name of the reseller's customer account that will
+            #     receive transferred entitlements. Parent uses the format:
+            #     accounts/\\{account_id}/customers/\\{customer_id}
             #   @param entitlements [::Array<::Google::Cloud::Channel::V1::Entitlement, ::Hash>]
             #     Required. The new entitlements to create or transfer.
             #   @param auth_token [::String]
@@ -2654,8 +2688,9 @@ module Google
             #     entitlements on their behalf. You can omit this token after authorization.
             #     See https://support.google.com/a/answer/7643790 for more details.
             #   @param request_id [::String]
-            #     Optional. You can specify an optional unique request ID, and if you need to retry
-            #     your request, the server will know to ignore the request if it's complete.
+            #     Optional. You can specify an optional unique request ID, and if you need to
+            #     retry your request, the server will know to ignore the request if it's
+            #     complete.
             #
             #     For example, you make an initial request and the request times out. If you
             #     make the request again with the same request ID, the server can check if
@@ -2785,14 +2820,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the reseller's customer account where the entitlements
-            #     transfer from.
-            #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}
+            #     Required. The resource name of the reseller's customer account where the
+            #     entitlements transfer from. Parent uses the format:
+            #     accounts/\\{account_id}/customers/\\{customer_id}
             #   @param entitlements [::Array<::Google::Cloud::Channel::V1::Entitlement, ::Hash>]
             #     Required. The entitlements to transfer to Google.
             #   @param request_id [::String]
-            #     Optional. You can specify an optional unique request ID, and if you need to retry
-            #     your request, the server will know to ignore the request if it's complete.
+            #     Optional. You can specify an optional unique request ID, and if you need to
+            #     retry your request, the server will know to ignore the request if it's
+            #     complete.
             #
             #     For example, you make an initial request and the request times out. If you
             #     make the request again with the same request ID, the server can check if
@@ -2876,8 +2912,8 @@ module Google
             end
 
             ##
-            # List {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}s belonging to a distributor.
-            # You must be a distributor to call this method.
+            # List {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}s
+            # belonging to a distributor. You must be a distributor to call this method.
             #
             # Possible error codes:
             #
@@ -2886,7 +2922,8 @@ module Google
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             #
             # Return value:
-            # The list of the distributor account's {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} resources.
+            # The list of the distributor account's
+            # {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} resources.
             #
             # @overload list_channel_partner_links(request, options = nil)
             #   Pass arguments to `list_channel_partner_links` via a request object, either of type
@@ -2904,18 +2941,19 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the reseller account for listing channel partner
-            #     links.
-            #     Parent uses the format: accounts/\\{account_id}
+            #     Required. The resource name of the reseller account for listing channel
+            #     partner links. Parent uses the format: accounts/\\{account_id}
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server might return fewer results than requested.
-            #     If unspecified, server will pick a default size (25).
-            #     The maximum value is 200; the server will coerce values above 200.
+            #     Optional. Requested page size. Server might return fewer results than
+            #     requested. If unspecified, server will pick a default size (25). The
+            #     maximum value is 200; the server will coerce values above 200.
             #   @param page_token [::String]
             #     Optional. A token for a page of results other than the first page.
             #     Obtained using
-            #     {::Google::Cloud::Channel::V1::ListChannelPartnerLinksResponse#next_page_token ListChannelPartnerLinksResponse.next_page_token} of the previous
-            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links CloudChannelService.ListChannelPartnerLinks} call.
+            #     {::Google::Cloud::Channel::V1::ListChannelPartnerLinksResponse#next_page_token ListChannelPartnerLinksResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links CloudChannelService.ListChannelPartnerLinks}
+            #     call.
             #   @param view [::Google::Cloud::Channel::V1::ChannelPartnerLinkView]
             #     Optional. The level of granularity the ChannelPartnerLink will display.
             #
@@ -2991,7 +3029,8 @@ module Google
             end
 
             ##
-            # Returns the requested {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} resource.
+            # Returns the requested
+            # {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} resource.
             # You must be a distributor to call this method.
             #
             # Possible error codes:
@@ -3003,7 +3042,8 @@ module Google
             # invalid channel partner link name.
             #
             # Return value:
-            # The {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} resource.
+            # The {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}
+            # resource.
             #
             # @overload get_channel_partner_link(request, options = nil)
             #   Pass arguments to `get_channel_partner_link` via a request object, either of type
@@ -3113,7 +3153,8 @@ module Google
             # Contact Cloud Channel support.
             #
             # Return value:
-            # The new {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} resource.
+            # The new {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}
+            # resource.
             #
             # @overload create_channel_partner_link(request, options = nil)
             #   Pass arguments to `create_channel_partner_link` via a request object, either of type
@@ -3224,7 +3265,8 @@ module Google
             # Contact Cloud Channel support.
             #
             # Return value:
-            # The updated {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} resource.
+            # The updated
+            # {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} resource.
             #
             # @overload update_channel_partner_link(request, options = nil)
             #   Pass arguments to `update_channel_partner_link` via a request object, either of type
@@ -3246,8 +3288,8 @@ module Google
             #     Name uses the format: accounts/\\{account_id}/channelPartnerLinks/\\{id}
             #     where \\{id} is the Cloud Identity ID of the partner.
             #   @param channel_partner_link [::Google::Cloud::Channel::V1::ChannelPartnerLink, ::Hash]
-            #     Required. The channel partner link to update. Only channel_partner_link.link_state
-            #     is allowed for updates.
+            #     Required. The channel partner link to update. Only
+            #     channel_partner_link.link_state is allowed for updates.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The update mask that applies to the resource.
             #     The only allowable value for an update mask is
@@ -3325,13 +3367,16 @@ module Google
             #
             # * PERMISSION_DENIED: If the account making the request and the account
             # being queried are different.
-            # * NOT_FOUND: The {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig} was not found.
+            # * NOT_FOUND: The
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
+            # was not found.
             # * INTERNAL: Any non-user error related to technical issues in the
             # backend. In this case, contact Cloud Channel support.
             #
             # Return Value:
-            # If successful, the {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig} resource, otherwise returns
-            # an error.
+            # If successful, the
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
+            # resource, otherwise returns an error.
             #
             # @overload get_customer_repricing_config(request, options = nil)
             #   Pass arguments to `get_customer_repricing_config` via a request object, either of type
@@ -3425,14 +3470,17 @@ module Google
             #
             # * PERMISSION_DENIED: If the account making the request and the account
             # being queried are different.
-            # * NOT_FOUND: The {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig} specified does not exist or is
-            # not associated with the given account.
+            # * NOT_FOUND: The
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
+            # specified does not exist or is not associated with the given account.
             # * INTERNAL: Any non-user error related to technical issues in the
             # backend. In this case, contact Cloud Channel support.
             #
             # Return Value:
-            # If successful, the {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig} resources. The
-            # data for each resource is displayed in the ascending order of:
+            # If successful, the
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
+            # resources. The data for each resource is displayed in the ascending order
+            # of:
             # * customer ID
             # * {::Google::Cloud::Channel::V1::RepricingConfig::EntitlementGranularity#entitlement RepricingConfig.EntitlementGranularity.entitlement}
             # * {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
@@ -3461,14 +3509,16 @@ module Google
             #     Supports accounts/\\{account_id}/customers/- to retrieve configs for all
             #     customers.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of repricing configs to return. The service may return
-            #     fewer than this value. If unspecified, returns a maximum of 50 rules. The
-            #     maximum value is 100; values above 100 will be coerced to 100.
+            #     Optional. The maximum number of repricing configs to return. The service
+            #     may return fewer than this value. If unspecified, returns a maximum of 50
+            #     rules. The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results beyond the first page.
             #     Obtained through
-            #     {::Google::Cloud::Channel::V1::ListCustomerRepricingConfigsResponse#next_page_token ListCustomerRepricingConfigsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs CloudChannelService.ListCustomerRepricingConfigs} call.
+            #     {::Google::Cloud::Channel::V1::ListCustomerRepricingConfigsResponse#next_page_token ListCustomerRepricingConfigsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs CloudChannelService.ListCustomerRepricingConfigs}
+            #     call.
             #   @param filter [::String]
             #     Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
             #     results (customer only). You can use this filter when you support
@@ -3552,9 +3602,9 @@ module Google
             ##
             # Creates a CustomerRepricingConfig. Call this method to set modifications
             # for a specific customer's bill. You can only create configs if the
-            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month} is a
-            # future month. If needed, you can create a config for the current month,
-            # with some restrictions.
+            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
+            # is a future month. If needed, you can create a config for the current
+            # month, with some restrictions.
             #
             # When creating a config for a future month, make sure there are no existing
             # configs for that
@@ -3568,9 +3618,11 @@ module Google
             # Changes to the config may be immediate, but may take up to 24 hours.
             # * There is a limit of ten configs for any
             # {::Google::Cloud::Channel::V1::RepricingConfig::EntitlementGranularity#entitlement RepricingConfig.EntitlementGranularity.entitlement}
-            # or {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}.
-            # * The contained {::Google::Cloud::Channel::V1::CustomerRepricingConfig#repricing_config CustomerRepricingConfig.repricing_config} vaule must be
-            # different from the value used in the current config for a
+            # or
+            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}.
+            # * The contained
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig#repricing_config CustomerRepricingConfig.repricing_config}
+            # vaule must be different from the value used in the current config for a
             # {::Google::Cloud::Channel::V1::RepricingConfig::EntitlementGranularity#entitlement RepricingConfig.EntitlementGranularity.entitlement}.
             #
             # Possible Error Codes:
@@ -3580,14 +3632,16 @@ module Google
             # * INVALID_ARGUMENT: Missing or invalid required parameters in the
             # request. Also displays if the updated config is for the current month or
             # past months.
-            # * NOT_FOUND: The {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig} specified does not exist or is
-            # not associated with the given account.
+            # * NOT_FOUND: The
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
+            # specified does not exist or is not associated with the given account.
             # * INTERNAL: Any non-user error related to technical issues in the
             # backend. In this case, contact Cloud Channel support.
             #
             # Return Value:
-            # If successful, the updated {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig} resource, otherwise
-            # returns an error.
+            # If successful, the updated
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
+            # resource, otherwise returns an error.
             #
             # @overload create_customer_repricing_config(request, options = nil)
             #   Pass arguments to `create_customer_repricing_config` via a request object, either of type
@@ -3605,8 +3659,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the customer that will receive this repricing config.
-            #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}
+            #     Required. The resource name of the customer that will receive this
+            #     repricing config. Parent uses the format:
+            #     accounts/\\{account_id}/customers/\\{customer_id}
             #   @param customer_repricing_config [::Google::Cloud::Channel::V1::CustomerRepricingConfig, ::Hash]
             #     Required. The CustomerRepricingConfig object to update.
             #
@@ -3680,10 +3735,11 @@ module Google
             # CustomerRepricingConfig.
             #
             # You can only update configs if the
-            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month} is a
-            # future month. To make changes to configs for the current month, use
-            # {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer_repricing_config CreateCustomerRepricingConfig}, taking note of its restrictions. You
-            # cannot update the {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}.
+            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
+            # is a future month. To make changes to configs for the current month, use
+            # {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer_repricing_config CreateCustomerRepricingConfig},
+            # taking note of its restrictions. You cannot update the
+            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}.
             #
             # When updating a config in the future:
             #
@@ -3696,14 +3752,16 @@ module Google
             # * INVALID_ARGUMENT: Missing or invalid required parameters in the
             # request. Also displays if the updated config is for the current month or
             # past months.
-            # * NOT_FOUND: The {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig} specified does not exist or is
-            # not associated with the given account.
+            # * NOT_FOUND: The
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
+            # specified does not exist or is not associated with the given account.
             # * INTERNAL: Any non-user error related to technical issues in the
             # backend. In this case, contact Cloud Channel support.
             #
             # Return Value:
-            # If successful, the updated {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig} resource, otherwise
-            # returns an error.
+            # If successful, the updated
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
+            # resource, otherwise returns an error.
             #
             # @overload update_customer_repricing_config(request, options = nil)
             #   Pass arguments to `update_customer_repricing_config` via a request object, either of type
@@ -3788,19 +3846,23 @@ module Google
             end
 
             ##
-            # Deletes the given {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig} permanently. You can only
-            # delete configs if their {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month} is set
-            # to a date after the current month.
+            # Deletes the given
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
+            # permanently. You can only delete configs if their
+            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
+            # is set to a date after the current month.
             #
             # Possible error codes:
             #
             # * PERMISSION_DENIED: The account making the request does not own
             # this customer.
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-            # * FAILED_PRECONDITION: The {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig} is active or in the
-            # past.
-            # * NOT_FOUND: No {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig} found for the name in the
-            # request.
+            # * FAILED_PRECONDITION: The
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
+            # is active or in the past.
+            # * NOT_FOUND: No
+            # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
+            # found for the name in the request.
             #
             # @overload delete_customer_repricing_config(request, options = nil)
             #   Pass arguments to `delete_customer_repricing_config` via a request object, either of type
@@ -3818,8 +3880,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the customer repricing config rule to delete.
-            #     Format:
+            #     Required. The resource name of the customer repricing config rule to
+            #     delete. Format:
             #     accounts/\\{account_id}/customers/\\{customer_id}/customerRepricingConfigs/\\{id}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -3894,13 +3956,16 @@ module Google
             #
             # * PERMISSION_DENIED: If the account making the request and the account
             # being queried are different.
-            # * NOT_FOUND: The {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig} was not found.
+            # * NOT_FOUND: The
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
+            # was not found.
             # * INTERNAL: Any non-user error related to technical issues in the
             # backend. In this case, contact Cloud Channel support.
             #
             # Return Value:
-            # If successful, the {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig} resource, otherwise
-            # returns an error.
+            # If successful, the
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
+            # resource, otherwise returns an error.
             #
             # @overload get_channel_partner_repricing_config(request, options = nil)
             #   Pass arguments to `get_channel_partner_repricing_config` via a request object, either of type
@@ -3994,14 +4059,17 @@ module Google
             #
             # * PERMISSION_DENIED: If the account making the request and the account
             # being queried are different.
-            # * NOT_FOUND: The {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig} specified does not exist
-            # or is not associated with the given account.
+            # * NOT_FOUND: The
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
+            # specified does not exist or is not associated with the given account.
             # * INTERNAL: Any non-user error related to technical issues in the
             # backend. In this case, contact Cloud Channel support.
             #
             # Return Value:
-            # If successful, the {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig} resources.
-            # The data for each resource is displayed in the ascending order of:
+            # If successful, the
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
+            # resources. The data for each resource is displayed in the ascending order
+            # of:
             # * channel partner ID
             # * {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
             # * {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig#update_time ChannelPartnerRepricingConfig.update_time}
@@ -4024,25 +4092,28 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the account's {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}.
-            #     Parent uses the format:
+            #     Required. The resource name of the account's
+            #     {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}. Parent
+            #     uses the format:
             #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}.
             #     Supports accounts/\\{account_id}/channelPartnerLinks/- to retrieve configs
             #     for all channel partners.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of repricing configs to return. The service may return
-            #     fewer than this value. If unspecified, returns a maximum of 50 rules. The
-            #     maximum value is 100; values above 100 will be coerced to 100.
+            #     Optional. The maximum number of repricing configs to return. The service
+            #     may return fewer than this value. If unspecified, returns a maximum of 50
+            #     rules. The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results beyond the first page.
             #     Obtained through
-            #     {::Google::Cloud::Channel::V1::ListChannelPartnerRepricingConfigsResponse#next_page_token ListChannelPartnerRepricingConfigsResponse.next_page_token} of the
-            #     previous {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs CloudChannelService.ListChannelPartnerRepricingConfigs} call.
+            #     {::Google::Cloud::Channel::V1::ListChannelPartnerRepricingConfigsResponse#next_page_token ListChannelPartnerRepricingConfigsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs CloudChannelService.ListChannelPartnerRepricingConfigs}
+            #     call.
             #   @param filter [::String]
-            #     Optional. A filter for [CloudChannelService.ListChannelPartnerRepricingConfigs]
-            #     results (channel_partner_link only). You can use this filter when you
-            #     support a BatchGet-like query.
-            #     To use the filter, you must set
+            #     Optional. A filter for
+            #     [CloudChannelService.ListChannelPartnerRepricingConfigs] results
+            #     (channel_partner_link only). You can use this filter when you support a
+            #     BatchGet-like query. To use the filter, you must set
             #     `parent=accounts/{account_id}/channelPartnerLinks/-`.
             #
             #     Example: `channel_partner_link =
@@ -4123,9 +4194,10 @@ module Google
             ##
             # Creates a ChannelPartnerRepricingConfig. Call this method to set
             # modifications for a specific ChannelPartner's bill. You can only create
-            # configs if the {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month} is a future
-            # month. If needed, you can create a config for the current month, with some
-            # restrictions.
+            # configs if the
+            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
+            # is a future month. If needed, you can create a config for the current
+            # month, with some restrictions.
             #
             # When creating a config for a future month, make sure there are no existing
             # configs for that
@@ -4139,8 +4211,9 @@ module Google
             # Changes to the config may be immediate, but may take up to 24 hours.
             # * There is a limit of ten configs for any ChannelPartner or
             # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}.
-            # * The contained {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig#repricing_config ChannelPartnerRepricingConfig.repricing_config} vaule
-            # must be different from the value used in the current config for a
+            # * The contained
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig#repricing_config ChannelPartnerRepricingConfig.repricing_config}
+            # vaule must be different from the value used in the current config for a
             # ChannelPartner.
             #
             # Possible Error Codes:
@@ -4150,14 +4223,16 @@ module Google
             # * INVALID_ARGUMENT: Missing or invalid required parameters in the
             # request. Also displays if the updated config is for the current month or
             # past months.
-            # * NOT_FOUND: The {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig} specified does not exist
-            # or is not associated with the given account.
+            # * NOT_FOUND: The
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
+            # specified does not exist or is not associated with the given account.
             # * INTERNAL: Any non-user error related to technical issues in the
             # backend. In this case, contact Cloud Channel support.
             #
             # Return Value:
-            # If successful, the updated {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig} resource,
-            # otherwise returns an error.
+            # If successful, the updated
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
+            # resource, otherwise returns an error.
             #
             # @overload create_channel_partner_repricing_config(request, options = nil)
             #   Pass arguments to `create_channel_partner_repricing_config` via a request object, either of type
@@ -4175,8 +4250,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the ChannelPartner that will receive the repricing
-            #     config. Parent uses the format:
+            #     Required. The resource name of the ChannelPartner that will receive the
+            #     repricing config. Parent uses the format:
             #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}
             #   @param channel_partner_repricing_config [::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig, ::Hash]
             #     Required. The ChannelPartnerRepricingConfig object to update.
@@ -4251,10 +4326,11 @@ module Google
             # the existing CustomerRepricingConfig.
             #
             # You can only update configs if the
-            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month} is a
-            # future month. To make changes to configs for the current month, use
-            # {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_repricing_config CreateChannelPartnerRepricingConfig}, taking note of its restrictions.
-            # You cannot update the {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}.
+            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
+            # is a future month. To make changes to configs for the current month, use
+            # {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_repricing_config CreateChannelPartnerRepricingConfig},
+            # taking note of its restrictions. You cannot update the
+            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}.
             #
             # When updating a config in the future:
             #
@@ -4267,14 +4343,16 @@ module Google
             # * INVALID_ARGUMENT: Missing or invalid required parameters in the
             # request. Also displays if the updated config is for the current month or
             # past months.
-            # * NOT_FOUND: The {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig} specified does not exist
-            # or is not associated with the given account.
+            # * NOT_FOUND: The
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
+            # specified does not exist or is not associated with the given account.
             # * INTERNAL: Any non-user error related to technical issues in the
             # backend. In this case, contact Cloud Channel support.
             #
             # Return Value:
-            # If successful, the updated {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig} resource,
-            # otherwise returns an error.
+            # If successful, the updated
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
+            # resource, otherwise returns an error.
             #
             # @overload update_channel_partner_repricing_config(request, options = nil)
             #   Pass arguments to `update_channel_partner_repricing_config` via a request object, either of type
@@ -4359,19 +4437,23 @@ module Google
             end
 
             ##
-            # Deletes the given {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig} permanently. You can
-            # only delete configs if their {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month} is
-            # set to a date after the current month.
+            # Deletes the given
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
+            # permanently. You can only delete configs if their
+            # {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
+            # is set to a date after the current month.
             #
             # Possible error codes:
             #
             # * PERMISSION_DENIED: The account making the request does not own
             # this customer.
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-            # * FAILED_PRECONDITION: The {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig} is active or
-            # in the past.
-            # * NOT_FOUND: No {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig} found for the name in the
-            # request.
+            # * FAILED_PRECONDITION: The
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
+            # is active or in the past.
+            # * NOT_FOUND: No
+            # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
+            # found for the name in the request.
             #
             # @overload delete_channel_partner_repricing_config(request, options = nil)
             #   Pass arguments to `delete_channel_partner_repricing_config` via a request object, either of type
@@ -4389,7 +4471,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the channel partner repricing config rule to delete.
+            #     Required. The resource name of the channel partner repricing config rule to
+            #     delete.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -4577,9 +4660,9 @@ module Google
             #     Required. The resource name of the reseller account.
             #     Format: accounts/\\{account_id}.
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server might return fewer results than requested.
-            #     If unspecified, returns at most 100 Products.
-            #     The maximum value is 1000; the server will coerce values above 1000.
+            #     Optional. Requested page size. Server might return fewer results than
+            #     requested. If unspecified, returns at most 100 Products. The maximum value
+            #     is 1000; the server will coerce values above 1000.
             #   @param page_token [::String]
             #     Optional. A token for a page of results other than the first page.
             #   @param language_code [::String]
@@ -4680,9 +4763,9 @@ module Google
             #     Required. Resource name of the reseller.
             #     Format: accounts/\\{account_id}.
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server might return fewer results than requested.
-            #     If unspecified, returns at most 100 SKUs.
-            #     The maximum value is 1000; the server will coerce values above 1000.
+            #     Optional. Requested page size. Server might return fewer results than
+            #     requested. If unspecified, returns at most 100 SKUs. The maximum value is
+            #     1000; the server will coerce values above 1000.
             #   @param page_token [::String]
             #     Optional. A token for a page of results other than the first page.
             #     Optional.
@@ -4785,12 +4868,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the reseller account from which to list Offers.
-            #     Parent uses the format: accounts/\\{account_id}.
+            #     Required. The resource name of the reseller account from which to list
+            #     Offers. Parent uses the format: accounts/\\{account_id}.
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server might return fewer results than requested.
-            #     If unspecified, returns at most 500 Offers.
-            #     The maximum value is 1000; the server will coerce values above 1000.
+            #     Optional. Requested page size. Server might return fewer results than
+            #     requested. If unspecified, returns at most 500 Offers. The maximum value is
+            #     1000; the server will coerce values above 1000.
             #   @param page_token [::String]
             #     Optional. A token for a page of results other than the first page.
             #   @param filter [::String]
@@ -4909,9 +4992,9 @@ module Google
             #     Required. The resource name of the customer to list SKUs for.
             #     Format: accounts/\\{account_id}/customers/\\{customer_id}.
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server might return fewer results than requested.
-            #     If unspecified, returns at most 100 SKUs.
-            #     The maximum value is 1000; the server will coerce values above 1000.
+            #     Optional. Requested page size. Server might return fewer results than
+            #     requested. If unspecified, returns at most 100 SKUs. The maximum value is
+            #     1000; the server will coerce values above 1000.
             #   @param page_token [::String]
             #     Optional. A token for a page of results other than the first page.
             #   @param language_code [::String]
@@ -5024,9 +5107,9 @@ module Google
             #     Required. The resource name of the customer to list Offers for.
             #     Format: accounts/\\{account_id}/customers/\\{customer_id}.
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server might return fewer results than requested.
-            #     If unspecified, returns at most 100 Offers.
-            #     The maximum value is 1000; the server will coerce values above 1000.
+            #     Optional. Requested page size. Server might return fewer results than
+            #     requested. If unspecified, returns at most 100 Offers. The maximum value is
+            #     1000; the server will coerce values above 1000.
             #   @param page_token [::String]
             #     Optional. A token for a page of results other than the first page.
             #   @param language_code [::String]
@@ -5108,7 +5191,8 @@ module Google
             ##
             # Registers a service account with subscriber privileges on the Cloud Pub/Sub
             # topic for this Channel Services account. After you create a
-            # subscriber, you get the events through {::Google::Cloud::Channel::V1::SubscriberEvent SubscriberEvent}
+            # subscriber, you get the events through
+            # {::Google::Cloud::Channel::V1::SubscriberEvent SubscriberEvent}
             #
             # Possible error codes:
             #
@@ -5142,7 +5226,8 @@ module Google
             #   @param account [::String]
             #     Required. Resource name of the account.
             #   @param service_account [::String]
-            #     Required. Service account that provides subscriber access to the registered topic.
+            #     Required. Service account that provides subscriber access to the registered
+            #     topic.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Channel::V1::RegisterSubscriberResponse]
@@ -5249,7 +5334,8 @@ module Google
             #   @param account [::String]
             #     Required. Resource name of the account.
             #   @param service_account [::String]
-            #     Required. Service account to unregister from subscriber access to the topic.
+            #     Required. Service account to unregister from subscriber access to the
+            #     topic.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Channel::V1::UnregisterSubscriberResponse]
@@ -5352,10 +5438,10 @@ module Google
             #   @param account [::String]
             #     Required. Resource name of the account.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of service accounts to return. The service may return
-            #     fewer than this value.
-            #     If unspecified, returns at most 100 service accounts.
-            #     The maximum value is 1000; the server will coerce values above 1000.
+            #     Optional. The maximum number of service accounts to return. The service may
+            #     return fewer than this value. If unspecified, returns at most 100 service
+            #     accounts. The maximum value is 1000; the server will coerce values above
+            #     1000.
             #   @param page_token [::String]
             #     Optional. A page token, received from a previous `ListSubscribers` call.
             #     Provide this to retrieve the subsequent page.
