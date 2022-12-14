@@ -109,7 +109,7 @@ module Google
         attr_reader :reference
 
         ##
-        # @private A Google API Client Table Reference object.
+        # @private The metadata view type string.
         attr_accessor :metadata_view
 
         ##

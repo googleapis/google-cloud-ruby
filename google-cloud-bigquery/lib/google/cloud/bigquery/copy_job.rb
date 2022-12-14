@@ -46,6 +46,12 @@ module Google
         # The table from which data is copied. This is the table on
         # which {Table#copy_job} was called.
         #
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
+        #
         # @return [Table] A table instance.
         #
         def source view: nil
@@ -56,6 +62,12 @@ module Google
 
         ##
         # The table to which data is copied.
+        #
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
         #
         # @return [Table] A table instance.
         #

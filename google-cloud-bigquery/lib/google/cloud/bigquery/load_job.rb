@@ -62,6 +62,12 @@ module Google
         # The table into which the operation loads data. This is the table on
         # which {Table#load_job} was invoked.
         #
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
+        #
         # @return [Table] A table instance.
         #
         def destination view: nil

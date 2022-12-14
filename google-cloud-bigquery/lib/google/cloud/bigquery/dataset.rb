@@ -793,6 +793,11 @@ module Google
         #   object without verifying that the resource exists on the BigQuery
         #   service. Calls made on this object will raise errors if the resource
         #   does not exist. Default is `false`. Optional.
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
         #
         # @return [Google::Cloud::Bigquery::Table, nil] Returns `nil` if the
         #   table does not exist.
@@ -814,6 +819,15 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   table = dataset.table "my_table", skip_lookup: true
+        #
+        # @example Avoid retrieving transient stats of the table with `view`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   table = dataset.table "my_table", view: "basic"
         #
         # @!group Table
         #
@@ -2658,6 +2672,11 @@ module Google
         #   messages before the batch is published. Default is 10.
         # @attr_reader [Numeric] threads The number of threads used to insert
         #   batches of rows. Default is 4.
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
         # @yield [response] the callback for when a batch of rows is inserted
         # @yieldparam [Table::AsyncInserter::Result] result the result of the
         #   asynchronous insert
@@ -2670,6 +2689,28 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   inserter = dataset.insert_async "my_table" do |result|
+        #     if result.error?
+        #       log_error result.error
+        #     else
+        #       log_insert "inserted #{result.insert_count} rows " \
+        #         "with #{result.error_count} errors"
+        #     end
+        #   end
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   inserter.insert rows
+        #
+        #   inserter.stop.wait!
+        #
+        # @example Avoid retrieving transient stats of the table with while inserting :
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   inserter = dataset.insert_async("my_table", view: "basic") do |result|
         #     if result.error?
         #       log_error result.error
         #     else
