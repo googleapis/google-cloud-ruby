@@ -1,5 +1,11 @@
 # Release History
 
+### 1.40.0 (2022-12-14)
+
+#### Features
+
+* support table snapshot and clone ([#19354](https://github.com/googleapis/google-cloud-ruby/issues/19354)) 
+
 ### 1.39.0 (2022-07-27)
 
 #### Features
