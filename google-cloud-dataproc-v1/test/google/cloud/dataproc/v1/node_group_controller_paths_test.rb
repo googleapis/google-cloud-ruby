@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,30 +20,30 @@ require "helper"
 
 require "gapic/grpc/service_stub"
 
-require "google/cloud/dataproc/v1/cluster_controller"
+require "google/cloud/dataproc/v1/node_group_controller"
 
-class ::Google::Cloud::Dataproc::V1::ClusterController::ClientPathsTest < Minitest::Test
+class ::Google::Cloud::Dataproc::V1::NodeGroupController::ClientPathsTest < Minitest::Test
+  def test_cluster_region_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dataproc::V1::NodeGroupController::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.cluster_region_path project: "value0", region: "value1", cluster: "value2"
+      assert_equal "projects/value0/regions/value1/clusters/value2", path
+    end
+  end
+
   def test_node_group_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::Dataproc::V1::ClusterController::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1::NodeGroupController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       path = client.node_group_path project: "value0", region: "value1", cluster: "value2", node_group: "value3"
       assert_equal "projects/value0/regions/value1/clusters/value2/nodeGroups/value3", path
-    end
-  end
-
-  def test_service_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::Dataproc::V1::ClusterController::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.service_path project: "value0", location: "value1", service: "value2"
-      assert_equal "projects/value0/locations/value1/services/value2", path
     end
   end
 end

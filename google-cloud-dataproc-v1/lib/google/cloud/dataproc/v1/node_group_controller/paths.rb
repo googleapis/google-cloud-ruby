@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,9 +21,28 @@ module Google
   module Cloud
     module Dataproc
       module V1
-        module ClusterController
-          # Path helper methods for the ClusterController API.
+        module NodeGroupController
+          # Path helper methods for the NodeGroupController API.
           module Paths
+            ##
+            # Create a fully-qualified ClusterRegion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/clusters/{cluster}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param cluster [String]
+            #
+            # @return [::String]
+            def cluster_region_path project:, region:, cluster:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/clusters/#{cluster}"
+            end
+
             ##
             # Create a fully-qualified NodeGroup resource string.
             #
@@ -43,25 +62,6 @@ module Google
               raise ::ArgumentError, "cluster cannot contain /" if cluster.to_s.include? "/"
 
               "projects/#{project}/regions/#{region}/clusters/#{cluster}/nodeGroups/#{node_group}"
-            end
-
-            ##
-            # Create a fully-qualified Service resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/services/{service}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param service [String]
-            #
-            # @return [::String]
-            def service_path project:, location:, service:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/services/#{service}"
             end
 
             extend self
