@@ -875,8 +875,9 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "copies itself and fetches partial projection of affected table's metadata" do
+    destination_table_id = target_table_id + SecureRandom.urlsafe_base64(4)
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
-    copy_job = table.copy_job target_table_id, create: :needed, write: :empty, job_id: job_id, labels: labels
+    copy_job = table.copy_job destination_table_id, create: :needed, write: :empty, job_id: job_id, labels: labels
 
     _(copy_job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
     _(copy_job.job_id).must_equal job_id
@@ -895,7 +896,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       _(source_table.table_id).must_equal table.table_id
       verify_table_metadata source_table, view
       destination_table = copy_job.destination view: view
-      _(destination_table.table_id).must_equal target_table_id
+      _(destination_table.table_id).must_equal destination_table_id
       verify_table_metadata destination_table, view
     end
   end
