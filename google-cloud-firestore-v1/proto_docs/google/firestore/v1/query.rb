@@ -172,6 +172,9 @@ module Google
 
               # Documents are required to satisfy all of the combined filters.
               AND = 1
+
+              # Documents are required to satisfy at least one of the combined filters.
+              OR = 2
             end
           end
 
@@ -324,7 +327,8 @@ module Google
           #
           #     Requires:
           #
-          #     * Conform to {::Google::Cloud::Firestore::V1::Document#fields document field name} limitations.
+          #     * Conform to {::Google::Cloud::Firestore::V1::Document#fields document field name}
+          #     limitations.
           class FieldReference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -355,13 +359,15 @@ module Google
           end
         end
 
-        # Firestore query for running an aggregation over a {::Google::Cloud::Firestore::V1::StructuredQuery StructuredQuery}.
+        # Firestore query for running an aggregation over a
+        # {::Google::Cloud::Firestore::V1::StructuredQuery StructuredQuery}.
         # @!attribute [rw] structured_query
         #   @return [::Google::Cloud::Firestore::V1::StructuredQuery]
         #     Nested structured query.
         # @!attribute [rw] aggregations
         #   @return [::Array<::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation>]
-        #     Optional. Series of aggregations to apply over the results of the `structured_query`.
+        #     Optional. Series of aggregations to apply over the results of the
+        #     `structured_query`.
         #
         #     Requires:
         #
@@ -376,7 +382,8 @@ module Google
           #     Count aggregator.
           # @!attribute [rw] alias
           #   @return [::String]
-          #     Optional. Optional name of the field to store the result of the aggregation into.
+          #     Optional. Optional name of the field to store the result of the
+          #     aggregation into.
           #
           #     If not provided, Firestore will pick a default name following the format
           #     `field_<incremental_id++>`. For example:
@@ -408,7 +415,8 @@ module Google
           #     Requires:
           #
           #     * Must be unique across all aggregation aliases.
-          #     * Conform to {::Google::Cloud::Firestore::V1::Document#fields document field name} limitations.
+          #     * Conform to {::Google::Cloud::Firestore::V1::Document#fields document field name}
+          #     limitations.
           class Aggregation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -419,7 +427,8 @@ module Google
             # so it does not require a field reference.
             # @!attribute [rw] up_to
             #   @return [::Google::Protobuf::Int64Value]
-            #     Optional. Optional constraint on the maximum number of documents to count.
+            #     Optional. Optional constraint on the maximum number of documents to
+            #     count.
             #
             #     This provides a way to set an upper bound on the number of documents
             #     to scan, limiting latency and cost.

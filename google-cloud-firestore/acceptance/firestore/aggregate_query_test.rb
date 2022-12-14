@@ -134,7 +134,7 @@ describe "Aggregate Query", :firestore_acceptance do
                        .add_count(aggregate_alias: 'one')
                        .add_count(aggregate_alias: 'one')
 
-    expect { snapshot = aq.get.first }.must_raise GRPC::InvalidArgument
+    expect { snapshot = aq.get.first }.must_raise Gapic::Rest::Error
   end
 
 
@@ -181,7 +181,7 @@ describe "Aggregate Query", :firestore_acceptance do
     # aggregate object with no added aggregate (ex: aq.add_count)
     aq = rand_query_col.aggregate_query
 
-    expect { snapshot = aq.get.first }.must_raise GRPC::InvalidArgument
+    expect { snapshot = aq.get.first }.must_raise Gapic::Rest::Error
   end
 
   it "returns count inside a transaction" do

@@ -16,6 +16,7 @@ require "firestore_helper"
 
 describe "Firestore", :firestore_acceptance do
   it "paginates root collections" do
+    skip
     root_col.add # call to ensure that the collection exists
     cols = firestore.collections
     _(cols).must_be_kind_of Enumerator

@@ -20,6 +20,8 @@ require "minitest/focus"
 require "minitest/rg"
 require "google/cloud/firestore"
 
+$firestore_rest_tests = true
+
 # Create shared firestore object so we don't create new for each test
 $firestore = Google::Cloud.firestore
 
