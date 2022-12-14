@@ -140,7 +140,7 @@ module Google
         #   end
         #
         def get
-          # ensure_service!
+          ensure_service!
 
           return enum_for :get unless block_given?
 
@@ -182,6 +182,13 @@ module Google
         # @private Raise an error unless a database is available.
         def ensure_client!
           raise "Must have active connection to service" unless client
+        end
+
+        ##
+        # @private Raise an error unless an active connection to the service
+        # is available.
+        def ensure_service!
+          raise "Must have active connection to service" unless service
         end
 
         ##
