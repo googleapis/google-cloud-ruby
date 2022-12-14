@@ -1,3 +1,6 @@
 source "https://rubygems.org"
 
 gemspec
+
+gem "google-cloud-location", "= 0.3.beta.3"
+gem "google-iam-v1", "= 0.3.beta.3"

@@ -3,3 +3,6 @@ source "https://rubygems.org"
 gemspec
 
 gem "google-cloud-kms-v1", path: "../google-cloud-kms-v1"
+
+gem "google-cloud-location", "= 0.3.beta.3"
+gem "google-iam-v1", "= 0.3.beta.3"

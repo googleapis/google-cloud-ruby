@@ -18,8 +18,16 @@ require "minitest/autorun"
 require "google/cloud/kms"
 
 class KmsServiceSmokeTest < Minitest::Spec
-  def test_list_key_rings
-    kms = Google::Cloud::Kms.key_management_service version: :v1
+  def test_list_key_rings_grpc
+    kms = Google::Cloud::Kms.key_management_service version: :v1, transport: :grpc
+    key_ring_parent = kms.location_path project: ENV["KMS_PROJECT"], location: "us-central1"
+    key_rings = kms.list_key_rings(parent: key_ring_parent).to_a
+    _(key_rings.size).must_equal 1
+    _(key_rings[0].name).must_match %r{keyRings/ruby-test$}
+  end
+
+  def test_list_key_rings_rest
+    kms = Google::Cloud::Kms.key_management_service version: :v1, transport: :rest
     key_ring_parent = kms.location_path project: ENV["KMS_PROJECT"], location: "us-central1"
     key_rings = kms.list_key_rings(parent: key_ring_parent).to_a
     _(key_rings.size).must_equal 1

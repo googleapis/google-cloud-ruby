@@ -24,7 +24,7 @@ require_relative "../snippets"
 describe "Cloud KMS samples" do
   let(:instance) { Snippets.new }
 
-  let(:client) { Google::Cloud::Kms.key_management_service }
+  let(:client) { Google::Cloud::Kms.key_management_service transport: :rest }
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
   let(:location_id) { "us-east1" }
 
