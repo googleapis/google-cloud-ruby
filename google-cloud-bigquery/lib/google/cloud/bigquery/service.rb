@@ -142,14 +142,6 @@ module Google
           end
         end
 
-        def table_metadata_view_type_for str
-          return nil if str.nil?
-          { "unspecified" => "TABLE_METADATA_VIEW_UNSPECIFIED",
-            "basic" => "BASIC",
-            "storage" => "STORAGE_STATS",
-            "full" => "FULL" }[str.to_s.downcase]
-        end
-
         ##
         # Gets the specified table resource by full table reference.
         def get_project_table project_id, dataset_id, table_id, metadata_view: nil
@@ -579,6 +571,14 @@ module Google
           end
         rescue Google::Apis::Error => e
           raise Google::Cloud::Error.from_error e
+        end
+
+        def table_metadata_view_type_for str
+          return nil if str.nil?
+          { "unspecified" => "TABLE_METADATA_VIEW_UNSPECIFIED",
+            "basic" => "BASIC",
+            "storage" => "STORAGE_STATS",
+            "full" => "FULL" }[str.to_s.downcase]
         end
 
         class Backoff
