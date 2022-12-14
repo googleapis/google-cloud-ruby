@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.0 (2022-12-14)
+
+#### Features
+
+* Added support for the TextToSpeechLongAudioSynthesize client ([#19834](https://github.com/googleapis/google-cloud-ruby/issues/19834)) 
+
 ### 1.3.0 (2022-07-08)
 
 #### Features
