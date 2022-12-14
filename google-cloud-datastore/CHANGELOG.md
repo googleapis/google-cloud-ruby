@@ -1,5 +1,11 @@
 # Release History
 
+### 2.3.1 (2022-12-14)
+
+#### Bug Fixes
+
+* fixed request limit 
+
 ### 2.3.0 (2022-06-28)
 
 #### Features
