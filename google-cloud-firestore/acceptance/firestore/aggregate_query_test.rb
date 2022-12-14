@@ -15,6 +15,13 @@
 require "firestore_helper"
 
 describe "Aggregate Query", :firestore_acceptance do
+  let :expected_error_class do
+    if Google::Cloud.configure.firestore.transport == :rest
+      Gapic::Rest::Error
+    else
+      GRPC::InvalidArgument
+    end
+  end
 
   it "returns count for non-zero records" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
@@ -134,7 +141,7 @@ describe "Aggregate Query", :firestore_acceptance do
                        .add_count(aggregate_alias: 'one')
                        .add_count(aggregate_alias: 'one')
 
-    expect { snapshot = aq.get.first }.must_raise GRPC::InvalidArgument
+    expect { snapshot = aq.get.first }.must_raise expected_error_class
   end
 
 
@@ -181,7 +188,7 @@ describe "Aggregate Query", :firestore_acceptance do
     # aggregate object with no added aggregate (ex: aq.add_count)
     aq = rand_query_col.aggregate_query
 
-    expect { snapshot = aq.get.first }.must_raise GRPC::InvalidArgument
+    expect { snapshot = aq.get.first }.must_raise expected_error_class
   end
 
   it "returns count inside a transaction" do

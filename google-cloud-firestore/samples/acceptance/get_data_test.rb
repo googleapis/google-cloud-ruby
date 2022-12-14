@@ -88,6 +88,7 @@ describe "Google Cloud Firestore API samples - Get Data" do
   end
 
   it "list_subcollections" do
+    skip if Google::Cloud.configure.firestore.transport == :rest
     # Setup
     capture_io do
       add_subcollection project_id: @firestore_project, collection_path: @collection_path

@@ -34,17 +34,19 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil, database: nil
+        def initialize project, credentials, host: nil, timeout: nil, database: nil, transport: :grpc
           @project = project
           @credentials = credentials
           @host = host
           @timeout = timeout
           @database = database
+          @transport = transport
         end
 
         def firestore
-          @firestore ||= \
-            V1::Firestore::Client.new do |config|
+          @firestore ||= begin
+            client_class = @transport == :rest ? V1::Firestore::Rest::Client : V1::Firestore::Client
+            client_class.new do |config|
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout
               config.endpoint = host if host
@@ -52,6 +54,7 @@ module Google
               config.lib_version = Google::Cloud::Firestore::VERSION
               config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/#{@database}" }
             end
+          end
         end
 
         def get_documents document_paths, mask: nil, transaction: nil, read_time: nil
