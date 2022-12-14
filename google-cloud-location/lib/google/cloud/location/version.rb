@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Location
-      VERSION = "0.3.beta.2"
+      VERSION = "0.3.beta.3"
     end
   end
 end
