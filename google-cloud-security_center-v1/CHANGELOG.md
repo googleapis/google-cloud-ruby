@@ -1,5 +1,11 @@
 # Release History
 
+### 0.25.0 (2022-12-14)
+
+#### Features
+
+* Added user name field to finding Access resource ([#19860](https://github.com/googleapis/google-cloud-ruby/issues/19860)) 
+
 ### 0.24.0 (2022-12-09)
 
 #### Features
