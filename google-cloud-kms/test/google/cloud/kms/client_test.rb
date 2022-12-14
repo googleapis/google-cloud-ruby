@@ -20,25 +20,44 @@ require "helper"
 require "google/cloud/kms"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Kms::ClientConstructionMinitest < Minitest::Test
-  def test_ekm_service
+  def test_ekm_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Kms.ekm_service do |config|
+      client = Google::Cloud::Kms.ekm_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Kms::V1::EkmService::Client, client
     end
   end
 
-  def test_key_management_service
+  def test_ekm_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Kms.ekm_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Kms::V1::EkmService::Rest::Client, client
+    end
+  end
+
+  def test_key_management_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Kms.key_management_service do |config|
+      client = Google::Cloud::Kms.key_management_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Kms::V1::KeyManagementService::Client, client
+    end
+  end
+
+  def test_key_management_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Kms.key_management_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Kms::V1::KeyManagementService::Rest::Client, client
     end
   end
 end
