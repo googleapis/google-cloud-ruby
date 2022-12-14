@@ -100,15 +100,16 @@ module Google
       # 3. Resellers and distributors can manage customer entitlements.
       #
       # CloudChannelService exposes the following resources:
-      # - Customers: An entity—usually an enterprise—managed by a reseller or
-      # distributor.
+      # - Customers: An entity-usually an
+      # enterprise-managed by a reseller or distributor.
       #
-      # - Entitlements: An entity that provides a customer with the means to use
-      # a service. Entitlements are created or updated as a result of a successful
-      # fulfillment.
+      # - Entitlements: An entity that
+      # provides a customer with the means to use a service. Entitlements are created
+      # or updated as a result of a successful fulfillment.
       #
-      # - ChannelPartnerLinks: An entity that identifies links between
-      # distributors and their indirect resellers in a channel.
+      # - ChannelPartnerLinks: An
+      # entity that identifies links between distributors and their indirect
+      # resellers in a channel.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
