@@ -31,4 +31,14 @@ class Google::Cloud::TextToSpeech::ClientConstructionMinitest < Minitest::Test
       assert_kind_of Google::Cloud::TextToSpeech::V1::TextToSpeech::Client, client
     end
   end
+
+  def test_text_to_speech_long_audio_synthesize
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::TextToSpeech.text_to_speech_long_audio_synthesize do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::TextToSpeech::V1::TextToSpeechLongAudioSynthesize::Client, client
+    end
+  end
 end
