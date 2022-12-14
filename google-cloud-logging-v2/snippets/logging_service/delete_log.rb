@@ -19,15 +19,21 @@
 # [START logging_v2_generated_LoggingService_DeleteLog_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::LoggingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::LoggingService::Client#delete_log
+#
+def delete_log
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::LoggingService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::DeleteLogRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::DeleteLogRequest.new
 
-# Call the delete_log method.
-result = client.delete_log request
+  # Call the delete_log method.
+  result = client.delete_log request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END logging_v2_generated_LoggingService_DeleteLog_sync]

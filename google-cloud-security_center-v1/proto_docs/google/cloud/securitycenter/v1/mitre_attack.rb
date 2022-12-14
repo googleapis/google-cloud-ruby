@@ -204,6 +204,9 @@ module Google
 
             # T1548
             ABUSE_ELEVATION_CONTROL_MECHANISM = 34
+
+            # T1078.001
+            DEFAULT_ACCOUNTS = 35
           end
         end
       end

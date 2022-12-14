@@ -12,12 +12,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest" do
       optional :channel_connection, :string, 1
       repeated :events, :message, 2, "google.protobuf.Any"
+      repeated :text_events, :string, 3
     end
     add_message "google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsResponse" do
     end
     add_message "google.cloud.eventarc.publishing.v1.PublishEventsRequest" do
       optional :channel, :string, 1
       repeated :events, :message, 2, "google.protobuf.Any"
+      repeated :text_events, :string, 3
     end
     add_message "google.cloud.eventarc.publishing.v1.PublishEventsResponse" do
     end

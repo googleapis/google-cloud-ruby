@@ -19,15 +19,21 @@
 # [START jobs_v4_generated_JobService_DeleteJob_sync]
 require "google/cloud/talent/v4"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Talent::V4::JobService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Talent::V4::JobService::Client#delete_job
+#
+def delete_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Talent::V4::JobService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Talent::V4::DeleteJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Talent::V4::DeleteJobRequest.new
 
-# Call the delete_job method.
-result = client.delete_job request
+  # Call the delete_job method.
+  result = client.delete_job request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END jobs_v4_generated_JobService_DeleteJob_sync]

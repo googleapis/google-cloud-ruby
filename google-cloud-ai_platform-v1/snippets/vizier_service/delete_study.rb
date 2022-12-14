@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_VizierService_DeleteStudy_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::VizierService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::VizierService::Client#delete_study
+#
+def delete_study
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::VizierService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::DeleteStudyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::DeleteStudyRequest.new
 
-# Call the delete_study method.
-result = client.delete_study request
+  # Call the delete_study method.
+  result = client.delete_study request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END aiplatform_v1_generated_VizierService_DeleteStudy_sync]

@@ -19,15 +19,21 @@
 # [START gameservices_v1_generated_GameServerClustersService_GetGameServerCluster_sync]
 require "google/cloud/gaming/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::GameServerClustersService::Client#get_game_server_cluster
+#
+def get_game_server_cluster
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Gaming::V1::GetGameServerClusterRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Gaming::V1::GetGameServerClusterRequest.new
 
-# Call the get_game_server_cluster method.
-result = client.get_game_server_cluster request
+  # Call the get_game_server_cluster method.
+  result = client.get_game_server_cluster request
 
-# The returned object is of type Google::Cloud::Gaming::V1::GameServerCluster.
-p result
+  # The returned object is of type Google::Cloud::Gaming::V1::GameServerCluster.
+  p result
+end
 # [END gameservices_v1_generated_GameServerClustersService_GetGameServerCluster_sync]

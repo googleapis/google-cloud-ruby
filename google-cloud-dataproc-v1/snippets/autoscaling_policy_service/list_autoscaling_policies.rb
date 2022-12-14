@@ -19,21 +19,27 @@
 # [START dataproc_v1_generated_AutoscalingPolicyService_ListAutoscalingPolicies_sync]
 require "google/cloud/dataproc/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#list_autoscaling_policies
+#
+def list_autoscaling_policies
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest.new
 
-# Call the list_autoscaling_policies method.
-result = client.list_autoscaling_policies request
+  # Call the list_autoscaling_policies method.
+  result = client.list_autoscaling_policies request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dataproc::V1::AutoscalingPolicy.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dataproc::V1::AutoscalingPolicy.
+    p response
+  end
 end
 # [END dataproc_v1_generated_AutoscalingPolicyService_ListAutoscalingPolicies_sync]

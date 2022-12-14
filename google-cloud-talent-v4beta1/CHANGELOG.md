@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.1 (2022-11-09)
+
+#### Documentation
+
+* mark company_size and keyword_searchable_job_custom_attributes deprecated 
+
 ### 0.6.0 (2022-07-08)
 
 #### Features

@@ -19,15 +19,21 @@
 # [START dataproc_v1_generated_ClusterController_GetCluster_sync]
 require "google/cloud/dataproc/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataproc::V1::ClusterController::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataproc::V1::ClusterController::Client#get_cluster
+#
+def get_cluster
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataproc::V1::ClusterController::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataproc::V1::GetClusterRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataproc::V1::GetClusterRequest.new
 
-# Call the get_cluster method.
-result = client.get_cluster request
+  # Call the get_cluster method.
+  result = client.get_cluster request
 
-# The returned object is of type Google::Cloud::Dataproc::V1::Cluster.
-p result
+  # The returned object is of type Google::Cloud::Dataproc::V1::Cluster.
+  p result
+end
 # [END dataproc_v1_generated_ClusterController_GetCluster_sync]

@@ -19,15 +19,21 @@
 # [START datamigration_v1_generated_DataMigrationService_GetMigrationJob_sync]
 require "google/cloud/cloud_dms/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::CloudDMS::V1::DataMigrationService::Client#get_migration_job
+#
+def get_migration_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::CloudDMS::V1::GetMigrationJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::CloudDMS::V1::GetMigrationJobRequest.new
 
-# Call the get_migration_job method.
-result = client.get_migration_job request
+  # Call the get_migration_job method.
+  result = client.get_migration_job request
 
-# The returned object is of type Google::Cloud::CloudDMS::V1::MigrationJob.
-p result
+  # The returned object is of type Google::Cloud::CloudDMS::V1::MigrationJob.
+  p result
+end
 # [END datamigration_v1_generated_DataMigrationService_GetMigrationJob_sync]

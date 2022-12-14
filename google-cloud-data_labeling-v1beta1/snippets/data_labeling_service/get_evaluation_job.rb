@@ -19,15 +19,21 @@
 # [START datalabeling_v1beta1_generated_DataLabelingService_GetEvaluationJob_sync]
 require "google/cloud/data_labeling/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_evaluation_job
+#
+def get_evaluation_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataLabeling::V1beta1::GetEvaluationJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataLabeling::V1beta1::GetEvaluationJobRequest.new
 
-# Call the get_evaluation_job method.
-result = client.get_evaluation_job request
+  # Call the get_evaluation_job method.
+  result = client.get_evaluation_job request
 
-# The returned object is of type Google::Cloud::DataLabeling::V1beta1::EvaluationJob.
-p result
+  # The returned object is of type Google::Cloud::DataLabeling::V1beta1::EvaluationJob.
+  p result
+end
 # [END datalabeling_v1beta1_generated_DataLabelingService_GetEvaluationJob_sync]

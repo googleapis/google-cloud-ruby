@@ -19,21 +19,27 @@
 # [START securitycenter_v1_generated_SecurityCenter_GroupFindings_sync]
 require "google/cloud/security_center/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#group_findings
+#
+def group_findings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new
 
-# Call the group_findings method.
-result = client.group_findings request
+  # Call the group_findings method.
+  result = client.group_findings request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::SecurityCenter::V1::GroupResult.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::SecurityCenter::V1::GroupResult.
+    p response
+  end
 end
 # [END securitycenter_v1_generated_SecurityCenter_GroupFindings_sync]

@@ -19,15 +19,21 @@
 # [START monitoring_v3_generated_ServiceMonitoringService_DeleteService_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#delete_service
+#
+def delete_service
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::DeleteServiceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::DeleteServiceRequest.new
 
-# Call the delete_service method.
-result = client.delete_service request
+  # Call the delete_service method.
+  result = client.delete_service request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END monitoring_v3_generated_ServiceMonitoringService_DeleteService_sync]

@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2022-11-07)
+
+#### Features
+
+* Added support for policy-based routing ([#19362](https://github.com/googleapis/google-cloud-ruby/issues/19362)) 
+
 ### 0.3.0 (2022-07-05)
 
 #### Features

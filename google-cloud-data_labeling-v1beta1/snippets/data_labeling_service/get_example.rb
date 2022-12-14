@@ -19,15 +19,21 @@
 # [START datalabeling_v1beta1_generated_DataLabelingService_GetExample_sync]
 require "google/cloud/data_labeling/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_example
+#
+def get_example
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataLabeling::V1beta1::GetExampleRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataLabeling::V1beta1::GetExampleRequest.new
 
-# Call the get_example method.
-result = client.get_example request
+  # Call the get_example method.
+  result = client.get_example request
 
-# The returned object is of type Google::Cloud::DataLabeling::V1beta1::Example.
-p result
+  # The returned object is of type Google::Cloud::DataLabeling::V1beta1::Example.
+  p result
+end
 # [END datalabeling_v1beta1_generated_DataLabelingService_GetExample_sync]

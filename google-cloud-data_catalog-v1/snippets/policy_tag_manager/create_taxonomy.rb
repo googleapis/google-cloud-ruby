@@ -19,15 +19,21 @@
 # [START datacatalog_v1_generated_PolicyTagManager_CreateTaxonomy_sync]
 require "google/cloud/data_catalog/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_taxonomy
+#
+def create_taxonomy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataCatalog::V1::CreateTaxonomyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataCatalog::V1::CreateTaxonomyRequest.new
 
-# Call the create_taxonomy method.
-result = client.create_taxonomy request
+  # Call the create_taxonomy method.
+  result = client.create_taxonomy request
 
-# The returned object is of type Google::Cloud::DataCatalog::V1::Taxonomy.
-p result
+  # The returned object is of type Google::Cloud::DataCatalog::V1::Taxonomy.
+  p result
+end
 # [END datacatalog_v1_generated_PolicyTagManager_CreateTaxonomy_sync]

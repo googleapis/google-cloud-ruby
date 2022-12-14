@@ -19,15 +19,21 @@
 # [START area120tables_v1alpha1_generated_TablesService_BatchUpdateRows_sync]
 require "google/area120/tables/v1alpha1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Area120::Tables::V1alpha1::TablesService::Client#batch_update_rows
+#
+def batch_update_rows
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new
 
-# Call the batch_update_rows method.
-result = client.batch_update_rows request
+  # Call the batch_update_rows method.
+  result = client.batch_update_rows request
 
-# The returned object is of type Google::Area120::Tables::V1alpha1::BatchUpdateRowsResponse.
-p result
+  # The returned object is of type Google::Area120::Tables::V1alpha1::BatchUpdateRowsResponse.
+  p result
+end
 # [END area120tables_v1alpha1_generated_TablesService_BatchUpdateRows_sync]

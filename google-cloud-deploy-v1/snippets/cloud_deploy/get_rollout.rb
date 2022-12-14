@@ -19,15 +19,21 @@
 # [START clouddeploy_v1_generated_CloudDeploy_GetRollout_sync]
 require "google/cloud/deploy/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Deploy::V1::CloudDeploy::Client#get_rollout
+#
+def get_rollout
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Deploy::V1::GetRolloutRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Deploy::V1::GetRolloutRequest.new
 
-# Call the get_rollout method.
-result = client.get_rollout request
+  # Call the get_rollout method.
+  result = client.get_rollout request
 
-# The returned object is of type Google::Cloud::Deploy::V1::Rollout.
-p result
+  # The returned object is of type Google::Cloud::Deploy::V1::Rollout.
+  p result
+end
 # [END clouddeploy_v1_generated_CloudDeploy_GetRollout_sync]

@@ -52,6 +52,9 @@ module Google
         # @!attribute [rw] parameter_definitions
         #   @return [::Array<::Google::Cloud::Channel::V1::ParameterDefinition>]
         #     Parameters required to use current Offer to purchase.
+        # @!attribute [rw] deal_code
+        #   @return [::String]
+        #     The deal code of the offer to get a special promotion or discount.
         class Offer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

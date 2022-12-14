@@ -19,15 +19,21 @@
 # [START datastore_v1_generated_Datastore_Commit_sync]
 require "google/cloud/datastore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Datastore::V1::Datastore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Datastore::V1::Datastore::Client#commit
+#
+def commit
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Datastore::V1::Datastore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Datastore::V1::CommitRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Datastore::V1::CommitRequest.new
 
-# Call the commit method.
-result = client.commit request
+  # Call the commit method.
+  result = client.commit request
 
-# The returned object is of type Google::Cloud::Datastore::V1::CommitResponse.
-p result
+  # The returned object is of type Google::Cloud::Datastore::V1::CommitResponse.
+  p result
+end
 # [END datastore_v1_generated_Datastore_Commit_sync]

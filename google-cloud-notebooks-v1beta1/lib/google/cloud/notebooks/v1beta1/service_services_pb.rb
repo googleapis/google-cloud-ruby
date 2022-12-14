@@ -64,11 +64,14 @@ module Google
             # the instance metadata store. Do not use this method directly.
             rpc :ReportInstanceInfo, ::Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest, ::Google::Longrunning::Operation
             # Check if a notebook instance is upgradable.
+            # Deprecated. Please consider using v1.
             rpc :IsInstanceUpgradeable, ::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest, ::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableResponse
             # Upgrades a notebook instance to the latest version.
+            # Deprecated. Please consider using v1.
             rpc :UpgradeInstance, ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest, ::Google::Longrunning::Operation
             # Allows notebook instances to
             # call this endpoint to upgrade themselves. Do not use this method directly.
+            # Deprecated. Please consider using v1.
             rpc :UpgradeInstanceInternal, ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest, ::Google::Longrunning::Operation
             # Lists environments in a project.
             rpc :ListEnvironments, ::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest, ::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsResponse

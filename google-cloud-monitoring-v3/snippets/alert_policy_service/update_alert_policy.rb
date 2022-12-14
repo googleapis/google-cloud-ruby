@@ -19,15 +19,21 @@
 # [START monitoring_v3_generated_AlertPolicyService_UpdateAlertPolicy_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::AlertPolicyService::Client#update_alert_policy
+#
+def update_alert_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new
 
-# Call the update_alert_policy method.
-result = client.update_alert_policy request
+  # Call the update_alert_policy method.
+  result = client.update_alert_policy request
 
-# The returned object is of type Google::Cloud::Monitoring::V3::AlertPolicy.
-p result
+  # The returned object is of type Google::Cloud::Monitoring::V3::AlertPolicy.
+  p result
+end
 # [END monitoring_v3_generated_AlertPolicyService_UpdateAlertPolicy_sync]

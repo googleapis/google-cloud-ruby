@@ -19,21 +19,27 @@
 # [START iam_v1beta_generated_WorkloadIdentityPools_ListWorkloadIdentityPools_sync]
 require "google/iam/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Iam::V1beta::WorkloadIdentityPools::Client#list_workload_identity_pools
+#
+def list_workload_identity_pools
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest.new
 
-# Call the list_workload_identity_pools method.
-result = client.list_workload_identity_pools request
+  # Call the list_workload_identity_pools method.
+  result = client.list_workload_identity_pools request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Iam::V1beta::WorkloadIdentityPool.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Iam::V1beta::WorkloadIdentityPool.
+    p response
+  end
 end
 # [END iam_v1beta_generated_WorkloadIdentityPools_ListWorkloadIdentityPools_sync]

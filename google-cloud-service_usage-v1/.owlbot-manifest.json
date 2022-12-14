@@ -24,6 +24,7 @@
     "lib/google/cloud/service_usage/v1/version.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/auth.rb",
+    "proto_docs/google/api/client.rb",
     "proto_docs/google/api/documentation.rb",
     "proto_docs/google/api/endpoint.rb",
     "proto_docs/google/api/label.rb",

@@ -19,15 +19,21 @@
 # [START automl_v1_generated_AutoML_GetModel_sync]
 require "google/cloud/automl/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AutoML::V1::AutoML::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AutoML::V1::AutoML::Client#get_model
+#
+def get_model
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AutoML::V1::AutoML::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AutoML::V1::GetModelRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AutoML::V1::GetModelRequest.new
 
-# Call the get_model method.
-result = client.get_model request
+  # Call the get_model method.
+  result = client.get_model request
 
-# The returned object is of type Google::Cloud::AutoML::V1::Model.
-p result
+  # The returned object is of type Google::Cloud::AutoML::V1::Model.
+  p result
+end
 # [END automl_v1_generated_AutoML_GetModel_sync]

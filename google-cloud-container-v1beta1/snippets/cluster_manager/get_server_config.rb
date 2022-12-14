@@ -19,15 +19,21 @@
 # [START container_v1beta1_generated_ClusterManager_GetServerConfig_sync]
 require "google/cloud/container/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Container::V1beta1::ClusterManager::Client#get_server_config
+#
+def get_server_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Container::V1beta1::GetServerConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Container::V1beta1::GetServerConfigRequest.new
 
-# Call the get_server_config method.
-result = client.get_server_config request
+  # Call the get_server_config method.
+  result = client.get_server_config request
 
-# The returned object is of type Google::Cloud::Container::V1beta1::ServerConfig.
-p result
+  # The returned object is of type Google::Cloud::Container::V1beta1::ServerConfig.
+  p result
+end
 # [END container_v1beta1_generated_ClusterManager_GetServerConfig_sync]

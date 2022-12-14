@@ -19,15 +19,21 @@
 # [START dataplex_v1_generated_MetadataService_GetEntity_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::MetadataService::Client#get_entity
+#
+def get_entity
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::GetEntityRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::GetEntityRequest.new
 
-# Call the get_entity method.
-result = client.get_entity request
+  # Call the get_entity method.
+  result = client.get_entity request
 
-# The returned object is of type Google::Cloud::Dataplex::V1::Entity.
-p result
+  # The returned object is of type Google::Cloud::Dataplex::V1::Entity.
+  p result
+end
 # [END dataplex_v1_generated_MetadataService_GetEntity_sync]

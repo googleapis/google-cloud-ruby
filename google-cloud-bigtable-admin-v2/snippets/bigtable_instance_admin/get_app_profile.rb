@@ -19,15 +19,21 @@
 # [START bigtableadmin_v2_generated_BigtableInstanceAdmin_GetAppProfile_sync]
 require "google/cloud/bigtable/admin/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_app_profile
+#
+def get_app_profile
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigtable::Admin::V2::GetAppProfileRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigtable::Admin::V2::GetAppProfileRequest.new
 
-# Call the get_app_profile method.
-result = client.get_app_profile request
+  # Call the get_app_profile method.
+  result = client.get_app_profile request
 
-# The returned object is of type Google::Cloud::Bigtable::Admin::V2::AppProfile.
-p result
+  # The returned object is of type Google::Cloud::Bigtable::Admin::V2::AppProfile.
+  p result
+end
 # [END bigtableadmin_v2_generated_BigtableInstanceAdmin_GetAppProfile_sync]

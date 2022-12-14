@@ -19,15 +19,21 @@
 # [START container_v1_generated_ClusterManager_DeleteNodePool_sync]
 require "google/cloud/container/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Container::V1::ClusterManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Container::V1::ClusterManager::Client#delete_node_pool
+#
+def delete_node_pool
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Container::V1::ClusterManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Container::V1::DeleteNodePoolRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Container::V1::DeleteNodePoolRequest.new
 
-# Call the delete_node_pool method.
-result = client.delete_node_pool request
+  # Call the delete_node_pool method.
+  result = client.delete_node_pool request
 
-# The returned object is of type Google::Cloud::Container::V1::Operation.
-p result
+  # The returned object is of type Google::Cloud::Container::V1::Operation.
+  p result
+end
 # [END container_v1_generated_ClusterManager_DeleteNodePool_sync]

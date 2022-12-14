@@ -19,15 +19,21 @@
 # [START logging_v2_generated_ConfigService_GetView_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::ConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::ConfigService::Client#get_view
+#
+def get_view
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::ConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::GetViewRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::GetViewRequest.new
 
-# Call the get_view method.
-result = client.get_view request
+  # Call the get_view method.
+  result = client.get_view request
 
-# The returned object is of type Google::Cloud::Logging::V2::LogView.
-p result
+  # The returned object is of type Google::Cloud::Logging::V2::LogView.
+  p result
+end
 # [END logging_v2_generated_ConfigService_GetView_sync]

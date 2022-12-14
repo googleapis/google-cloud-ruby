@@ -1,5 +1,14 @@
 # Release History
 
+### 0.14.0 (2022-11-16)
+
+#### Features
+
+* add documentSchema to ProcessorVersion 
+* add field_mask to GcsOutputConfig 
+* add image_quality_scores to Font_size and Provenance to Dimension 
+* support train_processor_version, evaluate_processor_version and evaluations api 
+
 ### 0.13.0 (2022-08-17)
 
 #### Features

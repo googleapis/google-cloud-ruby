@@ -19,22 +19,28 @@
 # [START retail_v2_generated_ProductService_RemoveFulfillmentPlaces_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::ProductService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places
+#
+def remove_fulfillment_places
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::ProductService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest.new
 
-# Call the remove_fulfillment_places method.
-result = client.remove_fulfillment_places request
+  # Call the remove_fulfillment_places method.
+  result = client.remove_fulfillment_places request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END retail_v2_generated_ProductService_RemoveFulfillmentPlaces_sync]

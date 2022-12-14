@@ -19,15 +19,21 @@
 # [START monitoring_v1_generated_MetricsScopes_GetMetricsScope_sync]
 require "google/cloud/monitoring/metrics_scope/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#get_metrics_scope
+#
+def get_metrics_scope
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::MetricsScope::V1::GetMetricsScopeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::MetricsScope::V1::GetMetricsScopeRequest.new
 
-# Call the get_metrics_scope method.
-result = client.get_metrics_scope request
+  # Call the get_metrics_scope method.
+  result = client.get_metrics_scope request
 
-# The returned object is of type Google::Cloud::Monitoring::MetricsScope::V1::MetricsScope.
-p result
+  # The returned object is of type Google::Cloud::Monitoring::MetricsScope::V1::MetricsScope.
+  p result
+end
 # [END monitoring_v1_generated_MetricsScopes_GetMetricsScope_sync]

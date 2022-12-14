@@ -19,21 +19,27 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListGoogleAdsLinks_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_google_ads_links
+#
+def list_google_ads_links
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::ListGoogleAdsLinksRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::ListGoogleAdsLinksRequest.new
 
-# Call the list_google_ads_links method.
-result = client.list_google_ads_links request
+  # Call the list_google_ads_links method.
+  result = client.list_google_ads_links request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Analytics::Admin::V1alpha::GoogleAdsLink.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Analytics::Admin::V1alpha::GoogleAdsLink.
+    p response
+  end
 end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListGoogleAdsLinks_sync]

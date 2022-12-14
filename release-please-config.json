@@ -395,6 +395,14 @@
       "component": "google-cloud-dataflow-v1beta3",
       "version_file": "lib/google/cloud/dataflow/v1beta3/version.rb"
     },
+    "google-cloud-dataform": {
+      "component": "google-cloud-dataform",
+      "version_file": "lib/google/cloud/dataform/version.rb"
+    },
+    "google-cloud-dataform-v1beta1": {
+      "component": "google-cloud-dataform-v1beta1",
+      "version_file": "lib/google/cloud/dataform/v1beta1/version.rb"
+    },
     "google-cloud-dataplex": {
       "component": "google-cloud-dataplex",
       "version_file": "lib/google/cloud/dataplex/version.rb"
@@ -1046,10 +1054,6 @@
     "google-cloud-shell-v1": {
       "component": "google-cloud-shell-v1",
       "version_file": "lib/google/cloud/shell/v1/version.rb"
-    },
-    "google-cloud-spanner": {
-      "component": "google-cloud-spanner",
-      "version_file": "lib/google/cloud/spanner/version.rb"
     },
     "google-cloud-spanner-admin-database-v1": {
       "component": "google-cloud-spanner-admin-database-v1",

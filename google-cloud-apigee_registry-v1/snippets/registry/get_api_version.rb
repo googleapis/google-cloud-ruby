@@ -19,15 +19,21 @@
 # [START apigeeregistry_v1_generated_Registry_GetApiVersion_sync]
 require "google/cloud/apigee_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ApigeeRegistry::V1::Registry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_api_version
+#
+def get_api_version
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ApigeeRegistry::V1::Registry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ApigeeRegistry::V1::GetApiVersionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ApigeeRegistry::V1::GetApiVersionRequest.new
 
-# Call the get_api_version method.
-result = client.get_api_version request
+  # Call the get_api_version method.
+  result = client.get_api_version request
 
-# The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiVersion.
-p result
+  # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiVersion.
+  p result
+end
 # [END apigeeregistry_v1_generated_Registry_GetApiVersion_sync]

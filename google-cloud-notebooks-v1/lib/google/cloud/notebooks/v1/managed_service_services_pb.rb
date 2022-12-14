@@ -40,6 +40,8 @@ module Google
             rpc :GetRuntime, ::Google::Cloud::Notebooks::V1::GetRuntimeRequest, ::Google::Cloud::Notebooks::V1::Runtime
             # Creates a new Runtime in a given project and location.
             rpc :CreateRuntime, ::Google::Cloud::Notebooks::V1::CreateRuntimeRequest, ::Google::Longrunning::Operation
+            # Update Notebook Runtime configuration.
+            rpc :UpdateRuntime, ::Google::Cloud::Notebooks::V1::UpdateRuntimeRequest, ::Google::Longrunning::Operation
             # Deletes a single Runtime.
             rpc :DeleteRuntime, ::Google::Cloud::Notebooks::V1::DeleteRuntimeRequest, ::Google::Longrunning::Operation
             # Starts a Managed Notebook Runtime.
@@ -58,11 +60,15 @@ module Google
             rpc :SwitchRuntime, ::Google::Cloud::Notebooks::V1::SwitchRuntimeRequest, ::Google::Longrunning::Operation
             # Resets a Managed Notebook Runtime.
             rpc :ResetRuntime, ::Google::Cloud::Notebooks::V1::ResetRuntimeRequest, ::Google::Longrunning::Operation
+            # Upgrades a Managed Notebook Runtime to the latest version.
+            rpc :UpgradeRuntime, ::Google::Cloud::Notebooks::V1::UpgradeRuntimeRequest, ::Google::Longrunning::Operation
             # Report and process a runtime event.
             rpc :ReportRuntimeEvent, ::Google::Cloud::Notebooks::V1::ReportRuntimeEventRequest, ::Google::Longrunning::Operation
             # Gets an access token for the consumer service account that the customer
             # attached to the runtime. Only accessible from the tenant instance.
             rpc :RefreshRuntimeTokenInternal, ::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest, ::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalResponse
+            # Creates a Diagnostic File and runs Diagnostic Tool given a Runtime.
+            rpc :DiagnoseRuntime, ::Google::Cloud::Notebooks::V1::DiagnoseRuntimeRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

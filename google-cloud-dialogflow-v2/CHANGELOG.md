@@ -1,5 +1,13 @@
 # Release History
 
+### 0.19.0 (2022-11-01)
+
+#### Features
+
+* Added obfuscated_external_user_id to Participant 
+* Added support for the streaming_analyze_content call ([#19340](https://github.com/googleapis/google-cloud-ruby/issues/19340)) 
+* Can directly set Cloud Speech model on the SpeechToTextConfig 
+
 ### 0.18.0 (2022-10-03)
 
 #### Features

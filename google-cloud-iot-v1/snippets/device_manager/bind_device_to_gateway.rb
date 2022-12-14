@@ -19,15 +19,21 @@
 # [START cloudiot_v1_generated_DeviceManager_BindDeviceToGateway_sync]
 require "google/cloud/iot/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#bind_device_to_gateway
+#
+def bind_device_to_gateway
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iot::V1::DeviceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iot::V1::BindDeviceToGatewayRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iot::V1::BindDeviceToGatewayRequest.new
 
-# Call the bind_device_to_gateway method.
-result = client.bind_device_to_gateway request
+  # Call the bind_device_to_gateway method.
+  result = client.bind_device_to_gateway request
 
-# The returned object is of type Google::Cloud::Iot::V1::BindDeviceToGatewayResponse.
-p result
+  # The returned object is of type Google::Cloud::Iot::V1::BindDeviceToGatewayResponse.
+  p result
+end
 # [END cloudiot_v1_generated_DeviceManager_BindDeviceToGateway_sync]

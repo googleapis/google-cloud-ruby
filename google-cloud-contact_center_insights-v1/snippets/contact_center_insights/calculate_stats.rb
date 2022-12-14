@@ -19,15 +19,21 @@
 # [START contactcenterinsights_v1_generated_ContactCenterInsights_CalculateStats_sync]
 require "google/cloud/contact_center_insights/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#calculate_stats
+#
+def calculate_stats
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ContactCenterInsights::V1::CalculateStatsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ContactCenterInsights::V1::CalculateStatsRequest.new
 
-# Call the calculate_stats method.
-result = client.calculate_stats request
+  # Call the calculate_stats method.
+  result = client.calculate_stats request
 
-# The returned object is of type Google::Cloud::ContactCenterInsights::V1::CalculateStatsResponse.
-p result
+  # The returned object is of type Google::Cloud::ContactCenterInsights::V1::CalculateStatsResponse.
+  p result
+end
 # [END contactcenterinsights_v1_generated_ContactCenterInsights_CalculateStats_sync]

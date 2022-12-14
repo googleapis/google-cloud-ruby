@@ -19,15 +19,21 @@
 # [START gkebackup_v1_generated_BackupForGKE_GetRestore_sync]
 require "google/cloud/gke_backup/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeBackup::V1::BackupForGKE::Client#get_restore
+#
+def get_restore
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeBackup::V1::GetRestoreRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeBackup::V1::GetRestoreRequest.new
 
-# Call the get_restore method.
-result = client.get_restore request
+  # Call the get_restore method.
+  result = client.get_restore request
 
-# The returned object is of type Google::Cloud::GkeBackup::V1::Restore.
-p result
+  # The returned object is of type Google::Cloud::GkeBackup::V1::Restore.
+  p result
+end
 # [END gkebackup_v1_generated_BackupForGKE_GetRestore_sync]

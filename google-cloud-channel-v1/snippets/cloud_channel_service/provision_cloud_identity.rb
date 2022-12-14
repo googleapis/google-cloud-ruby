@@ -19,22 +19,28 @@
 # [START cloudchannel_v1_generated_CloudChannelService_ProvisionCloudIdentity_sync]
 require "google/cloud/channel/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#provision_cloud_identity
+#
+def provision_cloud_identity
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Channel::V1::ProvisionCloudIdentityRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Channel::V1::ProvisionCloudIdentityRequest.new
 
-# Call the provision_cloud_identity method.
-result = client.provision_cloud_identity request
+  # Call the provision_cloud_identity method.
+  result = client.provision_cloud_identity request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END cloudchannel_v1_generated_CloudChannelService_ProvisionCloudIdentity_sync]

@@ -19,22 +19,28 @@
 # [START dataplex_v1_generated_DataplexService_DeleteAsset_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::DataplexService::Client#delete_asset
+#
+def delete_asset
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::DeleteAssetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::DeleteAssetRequest.new
 
-# Call the delete_asset method.
-result = client.delete_asset request
+  # Call the delete_asset method.
+  result = client.delete_asset request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END dataplex_v1_generated_DataplexService_DeleteAsset_sync]

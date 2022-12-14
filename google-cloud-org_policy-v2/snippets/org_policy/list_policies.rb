@@ -19,21 +19,27 @@
 # [START orgpolicy_v2_generated_OrgPolicy_ListPolicies_sync]
 require "google/cloud/org_policy/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_policies
+#
+def list_policies
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OrgPolicy::V2::ListPoliciesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OrgPolicy::V2::ListPoliciesRequest.new
 
-# Call the list_policies method.
-result = client.list_policies request
+  # Call the list_policies method.
+  result = client.list_policies request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::OrgPolicy::V2::Policy.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::OrgPolicy::V2::Policy.
+    p response
+  end
 end
 # [END orgpolicy_v2_generated_OrgPolicy_ListPolicies_sync]

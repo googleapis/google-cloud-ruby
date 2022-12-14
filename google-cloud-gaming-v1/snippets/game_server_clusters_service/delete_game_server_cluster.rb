@@ -19,22 +19,28 @@
 # [START gameservices_v1_generated_GameServerClustersService_DeleteGameServerCluster_sync]
 require "google/cloud/gaming/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::GameServerClustersService::Client#delete_game_server_cluster
+#
+def delete_game_server_cluster
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Gaming::V1::DeleteGameServerClusterRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Gaming::V1::DeleteGameServerClusterRequest.new
 
-# Call the delete_game_server_cluster method.
-result = client.delete_game_server_cluster request
+  # Call the delete_game_server_cluster method.
+  result = client.delete_game_server_cluster request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END gameservices_v1_generated_GameServerClustersService_DeleteGameServerCluster_sync]

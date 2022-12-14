@@ -25,6 +25,11 @@
                 "create_runtime"
               ]
             },
+            "UpdateRuntime": {
+              "methods": [
+                "update_runtime"
+              ]
+            },
             "DeleteRuntime": {
               "methods": [
                 "delete_runtime"
@@ -50,6 +55,11 @@
                 "reset_runtime"
               ]
             },
+            "UpgradeRuntime": {
+              "methods": [
+                "upgrade_runtime"
+              ]
+            },
             "ReportRuntimeEvent": {
               "methods": [
                 "report_runtime_event"
@@ -58,6 +68,11 @@
             "RefreshRuntimeTokenInternal": {
               "methods": [
                 "refresh_runtime_token_internal"
+              ]
+            },
+            "DiagnoseRuntime": {
+              "methods": [
+                "diagnose_runtime"
               ]
             }
           }
@@ -162,6 +177,11 @@
             "RollbackInstance": {
               "methods": [
                 "rollback_instance"
+              ]
+            },
+            "DiagnoseInstance": {
+              "methods": [
+                "diagnose_instance"
               ]
             },
             "UpgradeInstanceInternal": {

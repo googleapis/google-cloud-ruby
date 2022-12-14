@@ -19,22 +19,28 @@
 # [START logging_v2_generated_ConfigService_CopyLogEntries_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::ConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::ConfigService::Client#copy_log_entries
+#
+def copy_log_entries
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::ConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::CopyLogEntriesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::CopyLogEntriesRequest.new
 
-# Call the copy_log_entries method.
-result = client.copy_log_entries request
+  # Call the copy_log_entries method.
+  result = client.copy_log_entries request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END logging_v2_generated_ConfigService_CopyLogEntries_sync]

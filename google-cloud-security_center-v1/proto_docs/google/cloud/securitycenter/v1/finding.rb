@@ -193,6 +193,9 @@ module Google
         # @!attribute [rw] database
         #   @return [::Google::Cloud::SecurityCenter::V1::Database]
         #     Database associated with the finding.
+        # @!attribute [rw] files
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::File>]
+        #     File associated with the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

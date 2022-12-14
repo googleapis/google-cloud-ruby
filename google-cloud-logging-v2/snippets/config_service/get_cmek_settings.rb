@@ -19,15 +19,21 @@
 # [START logging_v2_generated_ConfigService_GetCmekSettings_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::ConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::ConfigService::Client#get_cmek_settings
+#
+def get_cmek_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::ConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::GetCmekSettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::GetCmekSettingsRequest.new
 
-# Call the get_cmek_settings method.
-result = client.get_cmek_settings request
+  # Call the get_cmek_settings method.
+  result = client.get_cmek_settings request
 
-# The returned object is of type Google::Cloud::Logging::V2::CmekSettings.
-p result
+  # The returned object is of type Google::Cloud::Logging::V2::CmekSettings.
+  p result
+end
 # [END logging_v2_generated_ConfigService_GetCmekSettings_sync]

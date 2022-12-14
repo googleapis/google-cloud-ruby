@@ -369,13 +369,66 @@ class MockBigquery < Minitest::Spec
             "tableId" => target.table_id
           },
           "createDisposition" => nil,
-          "writeDisposition" => nil
+          "writeDisposition" => nil,
+          "operationType" => nil
         },
         "dryRun" => nil
       }
     }
     hash["jobReference"]["location"] = location if location
     hash.to_json
+  end
+
+  def random_snapshot_gapi dataset, id = nil, name = nil, description = nil
+    json = random_snapshot_hash(dataset, id, name, description).to_json
+    Google::Apis::BigqueryV2::Table.from_json json
+  end
+
+  def random_snapshot_hash dataset, id = nil, name = nil, description = nil
+    id ||= "my_snapshot"
+    name ||= "Snapshot Name"
+
+    base = random_table_partial_hash dataset, id, name, type: "SNAPSHOT"
+    base.merge({
+      "etag" => "etag123456789",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
+      "description" => description,
+      "schema" => random_schema_hash,
+      "creationTime" => time_millis,
+      "expirationTime" => time_millis,
+      "lastModifiedTime" => time_millis,
+      "snapshotDefinition" => {
+        "snapshotTime" => DateTime.now,
+        "baseTableReference" => Google::Apis::BigqueryV2::TableReference.new
+      },
+      "location" => "US"
+    })
+  end
+
+  def random_clone_gapi dataset, id = nil, name = nil, description = nil
+    json = random_clone_hash(dataset, id, name, description).to_json
+    Google::Apis::BigqueryV2::Table.from_json json
+  end
+
+  def random_clone_hash dataset, id = nil, name = nil, description = nil
+    id ||= "my_clone"
+    name ||= "Clone Name"
+
+    base = random_table_partial_hash dataset, id, name, type: "TABLE"
+    base.merge({
+      "etag" => "etag123456789",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
+      "description" => description,
+      "schema" => random_schema_hash,
+      "creationTime" => time_millis,
+      "expirationTime" => time_millis,
+      "lastModifiedTime" => time_millis,
+      "cloneDefinition" => {
+        "cloneTime" => DateTime.now,
+        "baseTableReference" => Google::Apis::BigqueryV2::TableReference.new
+      },
+      "location" => "US"
+    })
   end
 
   def random_view_gapi dataset, id = nil, name = nil, description = nil

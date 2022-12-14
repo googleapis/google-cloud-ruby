@@ -75,6 +75,7 @@ module Google
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Struct]
         #     Properties of the Artifact.
+        #     Top level metadata keys' heading and trailing spaces will be trimmed.
         #     The size of this field should not exceed 200KB.
         # @!attribute [rw] description
         #   @return [::String]

@@ -19,15 +19,21 @@
 # [START contactcenterinsights_v1_generated_ContactCenterInsights_ListIssues_sync]
 require "google/cloud/contact_center_insights/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_issues
+#
+def list_issues
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ContactCenterInsights::V1::ListIssuesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ContactCenterInsights::V1::ListIssuesRequest.new
 
-# Call the list_issues method.
-result = client.list_issues request
+  # Call the list_issues method.
+  result = client.list_issues request
 
-# The returned object is of type Google::Cloud::ContactCenterInsights::V1::ListIssuesResponse.
-p result
+  # The returned object is of type Google::Cloud::ContactCenterInsights::V1::ListIssuesResponse.
+  p result
+end
 # [END contactcenterinsights_v1_generated_ContactCenterInsights_ListIssues_sync]

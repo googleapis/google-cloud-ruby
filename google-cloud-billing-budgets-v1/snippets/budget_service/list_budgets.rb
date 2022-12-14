@@ -19,21 +19,27 @@
 # [START billingbudgets_v1_generated_BudgetService_ListBudgets_sync]
 require "google/cloud/billing/budgets/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Billing::Budgets::V1::BudgetService::Client#list_budgets
+#
+def list_budgets
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new
 
-# Call the list_budgets method.
-result = client.list_budgets request
+  # Call the list_budgets method.
+  result = client.list_budgets request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Billing::Budgets::V1::Budget.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Billing::Budgets::V1::Budget.
+    p response
+  end
 end
 # [END billingbudgets_v1_generated_BudgetService_ListBudgets_sync]

@@ -1,5 +1,12 @@
 # Release History
 
+### 0.13.0 (2022-11-01)
+
+#### Features
+
+* Added allow_failure, exit_code, and allow_exit_code fields to BuildStep type ([#19349](https://github.com/googleapis/google-cloud-ruby/issues/19349)) 
+* Support for uploading Python packages and Maven artifacts to Artifact Registry ([#19353](https://github.com/googleapis/google-cloud-ruby/issues/19353)) 
+
 ### 0.12.0 (2022-07-02)
 
 #### Features

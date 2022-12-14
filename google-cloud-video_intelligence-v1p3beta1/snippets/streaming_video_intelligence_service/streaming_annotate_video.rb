@@ -19,24 +19,30 @@
 # [START videointelligence_v1p3beta1_generated_StreamingVideoIntelligenceService_StreamingAnnotateVideo_sync]
 require "google/cloud/video_intelligence/v1p3beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceService::Client#streaming_annotate_video
+#
+def streaming_annotate_video
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceService::Client.new
 
-# Create an input stream
-input = Gapic::StreamInput.new
+  # Create an input stream
+  input = Gapic::StreamInput.new
 
-# Call the streaming_annotate_video method to start streaming.
-output = client.streaming_annotate_video input
+  # Call the streaming_annotate_video method to start streaming.
+  output = client.streaming_annotate_video input
 
-# Send requests on the stream. For each request, pass in keyword
-# arguments to set fields. Be sure to close the stream when done.
-input << Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoRequest.new
-input << Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoRequest.new
-input.close
+  # Send requests on the stream. For each request, pass in keyword
+  # arguments to set fields. Be sure to close the stream when done.
+  input << Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoRequest.new
+  input << Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoRequest.new
+  input.close
 
-# Handle streamed responses. These may be interleaved with inputs.
-# Each response is of type ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoResponse.
-output.each do |response|
-  p response
+  # Handle streamed responses. These may be interleaved with inputs.
+  # Each response is of type ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoResponse.
+  output.each do |response|
+    p response
+  end
 end
 # [END videointelligence_v1p3beta1_generated_StreamingVideoIntelligenceService_StreamingAnnotateVideo_sync]

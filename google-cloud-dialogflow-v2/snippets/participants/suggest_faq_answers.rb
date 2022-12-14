@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Participants_SuggestFaqAnswers_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Participants::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Participants::Client#suggest_faq_answers
+#
+def suggest_faq_answers
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Participants::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest.new
 
-# Call the suggest_faq_answers method.
-result = client.suggest_faq_answers request
+  # Call the suggest_faq_answers method.
+  result = client.suggest_faq_answers request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::SuggestFaqAnswersResponse.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::SuggestFaqAnswersResponse.
+  p result
+end
 # [END dialogflow_v2_generated_Participants_SuggestFaqAnswers_sync]

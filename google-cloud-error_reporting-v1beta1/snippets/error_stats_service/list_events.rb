@@ -19,21 +19,27 @@
 # [START clouderrorreporting_v1beta1_generated_ErrorStatsService_ListEvents_sync]
 require "google/cloud/error_reporting/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client#list_events
+#
+def list_events
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new
 
-# Call the list_events method.
-result = client.list_events request
+  # Call the list_events method.
+  result = client.list_events request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::ErrorReporting::V1beta1::ErrorEvent.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::ErrorReporting::V1beta1::ErrorEvent.
+    p response
+  end
 end
 # [END clouderrorreporting_v1beta1_generated_ErrorStatsService_ListEvents_sync]

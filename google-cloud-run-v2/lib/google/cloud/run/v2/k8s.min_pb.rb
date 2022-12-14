@@ -75,6 +75,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :probe_type do
         optional :http_get, :message, 5, "google.cloud.run.v2.HTTPGetAction"
         optional :tcp_socket, :message, 6, "google.cloud.run.v2.TCPSocketAction"
+        optional :grpc, :message, 7, "google.cloud.run.v2.GRPCAction"
       end
     end
     add_message "google.cloud.run.v2.HTTPGetAction" do
@@ -87,6 +88,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.run.v2.TCPSocketAction" do
       optional :port, :int32, 1
+    end
+    add_message "google.cloud.run.v2.GRPCAction" do
+      optional :port, :int32, 1
+      optional :service, :string, 2
     end
   end
 end
@@ -110,6 +115,7 @@ module Google
         HTTPGetAction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.HTTPGetAction").msgclass
         HTTPHeader = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.HTTPHeader").msgclass
         TCPSocketAction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.TCPSocketAction").msgclass
+        GRPCAction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.GRPCAction").msgclass
       end
     end
   end

@@ -19,24 +19,30 @@
 # [START firestore_v1_generated_Firestore_Write_sync]
 require "google/cloud/firestore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Firestore::V1::Firestore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Firestore::V1::Firestore::Client#write
+#
+def write
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Firestore::V1::Firestore::Client.new
 
-# Create an input stream
-input = Gapic::StreamInput.new
+  # Create an input stream
+  input = Gapic::StreamInput.new
 
-# Call the write method to start streaming.
-output = client.write input
+  # Call the write method to start streaming.
+  output = client.write input
 
-# Send requests on the stream. For each request, pass in keyword
-# arguments to set fields. Be sure to close the stream when done.
-input << Google::Cloud::Firestore::V1::WriteRequest.new
-input << Google::Cloud::Firestore::V1::WriteRequest.new
-input.close
+  # Send requests on the stream. For each request, pass in keyword
+  # arguments to set fields. Be sure to close the stream when done.
+  input << Google::Cloud::Firestore::V1::WriteRequest.new
+  input << Google::Cloud::Firestore::V1::WriteRequest.new
+  input.close
 
-# Handle streamed responses. These may be interleaved with inputs.
-# Each response is of type ::Google::Cloud::Firestore::V1::WriteResponse.
-output.each do |response|
-  p response
+  # Handle streamed responses. These may be interleaved with inputs.
+  # Each response is of type ::Google::Cloud::Firestore::V1::WriteResponse.
+  output.each do |response|
+    p response
+  end
 end
 # [END firestore_v1_generated_Firestore_Write_sync]

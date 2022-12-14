@@ -19,21 +19,27 @@
 # [START gkehub_v1_generated_GkeHub_ListMemberships_sync]
 require "google/cloud/gke_hub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeHub::V1::GkeHub::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeHub::V1::GkeHub::Client#list_memberships
+#
+def list_memberships
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeHub::V1::GkeHub::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeHub::V1::ListMembershipsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeHub::V1::ListMembershipsRequest.new
 
-# Call the list_memberships method.
-result = client.list_memberships request
+  # Call the list_memberships method.
+  result = client.list_memberships request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::GkeHub::V1::Membership.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::GkeHub::V1::Membership.
+    p response
+  end
 end
 # [END gkehub_v1_generated_GkeHub_ListMemberships_sync]

@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchDeleteUserLinks_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#batch_delete_user_links
+#
+def batch_delete_user_links
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest.new
 
-# Call the batch_delete_user_links method.
-result = client.batch_delete_user_links request
+  # Call the batch_delete_user_links method.
+  result = client.batch_delete_user_links request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchDeleteUserLinks_sync]

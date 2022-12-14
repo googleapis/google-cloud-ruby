@@ -19,15 +19,21 @@
 # [START area120tables_v1alpha1_generated_TablesService_CreateRow_sync]
 require "google/area120/tables/v1alpha1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Area120::Tables::V1alpha1::TablesService::Client#create_row
+#
+def create_row
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Area120::Tables::V1alpha1::CreateRowRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Area120::Tables::V1alpha1::CreateRowRequest.new
 
-# Call the create_row method.
-result = client.create_row request
+  # Call the create_row method.
+  result = client.create_row request
 
-# The returned object is of type Google::Area120::Tables::V1alpha1::Row.
-p result
+  # The returned object is of type Google::Area120::Tables::V1alpha1::Row.
+  p result
+end
 # [END area120tables_v1alpha1_generated_TablesService_CreateRow_sync]

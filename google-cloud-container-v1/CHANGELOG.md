@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 (2022-11-16)
+
+#### Features
+
+* support placement_policy 
+
 ### 0.11.0 (2022-10-18)
 
 #### Features

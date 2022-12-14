@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Intents_DeleteIntent_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Intents::Client#delete_intent
+#
+def delete_intent
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Intents::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::DeleteIntentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::DeleteIntentRequest.new
 
-# Call the delete_intent method.
-result = client.delete_intent request
+  # Call the delete_intent method.
+  result = client.delete_intent request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END dialogflow_v2_generated_Intents_DeleteIntent_sync]

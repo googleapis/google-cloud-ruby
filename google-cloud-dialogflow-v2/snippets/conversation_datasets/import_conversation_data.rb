@@ -19,22 +19,28 @@
 # [START dialogflow_v2_generated_ConversationDatasets_ImportConversationData_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#import_conversation_data
+#
+def import_conversation_data
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::ImportConversationDataRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::ImportConversationDataRequest.new
 
-# Call the import_conversation_data method.
-result = client.import_conversation_data request
+  # Call the import_conversation_data method.
+  result = client.import_conversation_data request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END dialogflow_v2_generated_ConversationDatasets_ImportConversationData_sync]

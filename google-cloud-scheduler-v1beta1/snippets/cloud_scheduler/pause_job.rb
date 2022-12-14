@@ -19,15 +19,21 @@
 # [START cloudscheduler_v1beta1_generated_CloudScheduler_PauseJob_sync]
 require "google/cloud/scheduler/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#pause_job
+#
+def pause_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Scheduler::V1beta1::PauseJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Scheduler::V1beta1::PauseJobRequest.new
 
-# Call the pause_job method.
-result = client.pause_job request
+  # Call the pause_job method.
+  result = client.pause_job request
 
-# The returned object is of type Google::Cloud::Scheduler::V1beta1::Job.
-p result
+  # The returned object is of type Google::Cloud::Scheduler::V1beta1::Job.
+  p result
+end
 # [END cloudscheduler_v1beta1_generated_CloudScheduler_PauseJob_sync]

@@ -19,21 +19,27 @@
 # [START bigqueryreservation_v1_generated_ReservationService_ListCapacityCommitments_sync]
 require "google/cloud/bigquery/reservation/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_capacity_commitments
+#
+def list_capacity_commitments
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Reservation::V1::ListCapacityCommitmentsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Reservation::V1::ListCapacityCommitmentsRequest.new
 
-# Call the list_capacity_commitments method.
-result = client.list_capacity_commitments request
+  # Call the list_capacity_commitments method.
+  result = client.list_capacity_commitments request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
+    p response
+  end
 end
 # [END bigqueryreservation_v1_generated_ReservationService_ListCapacityCommitments_sync]

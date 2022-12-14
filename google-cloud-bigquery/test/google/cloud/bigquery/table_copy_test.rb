@@ -183,7 +183,8 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
             "tableId" => target.table_id
           },
           "createDisposition" => nil,
-          "writeDisposition" => nil
+          "writeDisposition" => nil,
+          "operationType" => "COPY"
         },
         "dryRun" => nil
       }

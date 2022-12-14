@@ -19,15 +19,21 @@
 # [START dataform_v1beta1_generated_Dataform_ReadFile_sync]
 require "google/cloud/dataform/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#read_file
+#
+def read_file
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataform::V1beta1::ReadFileRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataform::V1beta1::ReadFileRequest.new
 
-# Call the read_file method.
-result = client.read_file request
+  # Call the read_file method.
+  result = client.read_file request
 
-# The returned object is of type Google::Cloud::Dataform::V1beta1::ReadFileResponse.
-p result
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::ReadFileResponse.
+  p result
+end
 # [END dataform_v1beta1_generated_Dataform_ReadFile_sync]

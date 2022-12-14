@@ -19,15 +19,21 @@
 # [START bigqueryreservation_v1_generated_ReservationService_MoveAssignment_sync]
 require "google/cloud/bigquery/reservation/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#move_assignment
+#
+def move_assignment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new
 
-# Call the move_assignment method.
-result = client.move_assignment request
+  # Call the move_assignment method.
+  result = client.move_assignment request
 
-# The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Assignment.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Assignment.
+  p result
+end
 # [END bigqueryreservation_v1_generated_ReservationService_MoveAssignment_sync]

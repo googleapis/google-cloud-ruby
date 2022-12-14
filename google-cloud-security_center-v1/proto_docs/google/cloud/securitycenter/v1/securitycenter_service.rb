@@ -1114,7 +1114,7 @@ module Google
         #     Required. The relative resource name of the finding. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
         #     Example:
-        #     "organizations/\\{organization_id}/sources/\\{source_id}/finding/\\{finding_id}".
+        #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}".
         # @!attribute [rw] state
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding::State]
         #     Required. The desired State of the finding.
@@ -1132,9 +1132,9 @@ module Google
         #     Required. The relative resource name of the finding. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
         #     Example:
-        #     "organizations/\\{organization_id}/sources/\\{source_id}/finding/\\{finding_id}",
-        #     "folders/\\{folder_id}/sources/\\{source_id}/finding/\\{finding_id}",
-        #     "projects/\\{project_id}/sources/\\{source_id}/finding/\\{finding_id}".
+        #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}",
+        #     "folders/\\{folder_id}/sources/\\{source_id}/findings/\\{finding_id}",
+        #     "projects/\\{project_id}/sources/\\{source_id}/findings/\\{finding_id}".
         # @!attribute [rw] mute
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding::Mute]
         #     Required. The desired state of the Mute.
@@ -1300,7 +1300,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for listing  BigQuery exports at a given scope e.g.
+        # Request message for listing BigQuery exports at a given scope e.g.
         # organization, folder or project.
         # @!attribute [rw] parent
         #   @return [::String]

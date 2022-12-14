@@ -19,15 +19,21 @@
 # [START dataform_v1beta1_generated_Dataform_InstallNpmPackages_sync]
 require "google/cloud/dataform/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#install_npm_packages
+#
+def install_npm_packages
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new
 
-# Call the install_npm_packages method.
-result = client.install_npm_packages request
+  # Call the install_npm_packages method.
+  result = client.install_npm_packages request
 
-# The returned object is of type Google::Cloud::Dataform::V1beta1::InstallNpmPackagesResponse.
-p result
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::InstallNpmPackagesResponse.
+  p result
+end
 # [END dataform_v1beta1_generated_Dataform_InstallNpmPackages_sync]

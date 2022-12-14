@@ -19,15 +19,21 @@
 # [START iam_v1beta_generated_WorkloadIdentityPools_GetWorkloadIdentityPoolProvider_sync]
 require "google/iam/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Iam::V1beta::WorkloadIdentityPools::Client#get_workload_identity_pool_provider
+#
+def get_workload_identity_pool_provider
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::V1beta::GetWorkloadIdentityPoolProviderRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::V1beta::GetWorkloadIdentityPoolProviderRequest.new
 
-# Call the get_workload_identity_pool_provider method.
-result = client.get_workload_identity_pool_provider request
+  # Call the get_workload_identity_pool_provider method.
+  result = client.get_workload_identity_pool_provider request
 
-# The returned object is of type Google::Iam::V1beta::WorkloadIdentityPoolProvider.
-p result
+  # The returned object is of type Google::Iam::V1beta::WorkloadIdentityPoolProvider.
+  p result
+end
 # [END iam_v1beta_generated_WorkloadIdentityPools_GetWorkloadIdentityPoolProvider_sync]

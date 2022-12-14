@@ -19,15 +19,21 @@
 # [START networkconnectivity_v1alpha1_generated_HubService_GetSpoke_sync]
 require "google/cloud/network_connectivity/v1alpha1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#get_spoke
+#
+def get_spoke
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::NetworkConnectivity::V1alpha1::GetSpokeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::NetworkConnectivity::V1alpha1::GetSpokeRequest.new
 
-# Call the get_spoke method.
-result = client.get_spoke request
+  # Call the get_spoke method.
+  result = client.get_spoke request
 
-# The returned object is of type Google::Cloud::NetworkConnectivity::V1alpha1::Spoke.
-p result
+  # The returned object is of type Google::Cloud::NetworkConnectivity::V1alpha1::Spoke.
+  p result
+end
 # [END networkconnectivity_v1alpha1_generated_HubService_GetSpoke_sync]

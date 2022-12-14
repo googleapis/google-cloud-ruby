@@ -19,22 +19,28 @@
 # [START iam_v2_generated_Policies_CreatePolicy_sync]
 require "google/iam/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Iam::V2::Policies::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Iam::V2::Policies::Client#create_policy
+#
+def create_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Iam::V2::Policies::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::V2::CreatePolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::V2::CreatePolicyRequest.new
 
-# Call the create_policy method.
-result = client.create_policy request
+  # Call the create_policy method.
+  result = client.create_policy request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END iam_v2_generated_Policies_CreatePolicy_sync]

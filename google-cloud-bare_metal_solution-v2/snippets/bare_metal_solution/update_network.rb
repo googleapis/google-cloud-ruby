@@ -19,22 +19,28 @@
 # [START baremetalsolution_v2_generated_BareMetalSolution_UpdateNetwork_sync]
 require "google/cloud/bare_metal_solution/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#update_network
+#
+def update_network
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BareMetalSolution::V2::UpdateNetworkRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BareMetalSolution::V2::UpdateNetworkRequest.new
 
-# Call the update_network method.
-result = client.update_network request
+  # Call the update_network method.
+  result = client.update_network request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END baremetalsolution_v2_generated_BareMetalSolution_UpdateNetwork_sync]

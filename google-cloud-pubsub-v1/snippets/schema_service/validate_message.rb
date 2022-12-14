@@ -19,15 +19,21 @@
 # [START pubsub_v1_generated_SchemaService_ValidateMessage_sync]
 require "google/cloud/pubsub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::PubSub::V1::SchemaService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::SchemaService::Client#validate_message
+#
+def validate_message
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::PubSub::V1::SchemaService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::PubSub::V1::ValidateMessageRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::PubSub::V1::ValidateMessageRequest.new
 
-# Call the validate_message method.
-result = client.validate_message request
+  # Call the validate_message method.
+  result = client.validate_message request
 
-# The returned object is of type Google::Cloud::PubSub::V1::ValidateMessageResponse.
-p result
+  # The returned object is of type Google::Cloud::PubSub::V1::ValidateMessageResponse.
+  p result
+end
 # [END pubsub_v1_generated_SchemaService_ValidateMessage_sync]

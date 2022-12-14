@@ -19,15 +19,21 @@
 # [START cloudtasks_v2beta3_generated_CloudTasks_ResumeQueue_sync]
 require "google/cloud/tasks/v2beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tasks::V2beta3::CloudTasks::Client#resume_queue
+#
+def resume_queue
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Tasks::V2beta3::ResumeQueueRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Tasks::V2beta3::ResumeQueueRequest.new
 
-# Call the resume_queue method.
-result = client.resume_queue request
+  # Call the resume_queue method.
+  result = client.resume_queue request
 
-# The returned object is of type Google::Cloud::Tasks::V2beta3::Queue.
-p result
+  # The returned object is of type Google::Cloud::Tasks::V2beta3::Queue.
+  p result
+end
 # [END cloudtasks_v2beta3_generated_CloudTasks_ResumeQueue_sync]

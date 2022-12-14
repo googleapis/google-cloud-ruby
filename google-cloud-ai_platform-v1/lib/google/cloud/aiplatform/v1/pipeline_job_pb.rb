@@ -101,6 +101,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.PipelineTaskExecutorDetail.ContainerDetail" do
       optional :main_job, :string, 1
       optional :pre_caching_check_job, :string, 2
+      repeated :failed_main_jobs, :string, 3
+      repeated :failed_pre_caching_check_jobs, :string, 4
     end
     add_message "google.cloud.aiplatform.v1.PipelineTaskExecutorDetail.CustomJobDetail" do
       optional :job, :string, 1

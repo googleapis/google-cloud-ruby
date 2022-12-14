@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Participants_GetParticipant_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Participants::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Participants::Client#get_participant
+#
+def get_participant
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Participants::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::GetParticipantRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::GetParticipantRequest.new
 
-# Call the get_participant method.
-result = client.get_participant request
+  # Call the get_participant method.
+  result = client.get_participant request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::Participant.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::Participant.
+  p result
+end
 # [END dialogflow_v2_generated_Participants_GetParticipant_sync]

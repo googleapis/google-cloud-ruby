@@ -159,6 +159,45 @@ module Google
         end
 
         ##
+        # The type of the table like if its a TABLE, VIEW or SNAPSHOT etc.,
+        #
+        # @return [String, nil] Type of the table, or
+        #   `nil` if the object is a reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def type
+          return nil if reference?
+          @gapi.type
+        end
+
+        ##
+        # The Information about base table and snapshot time of the table.
+        #
+        # @return [Google::Apis::BigqueryV2::SnapshotDefinition, nil] Snapshot definition of table snapshot, or
+        #   `nil` if not snapshot or the object is a reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def snapshot_definition
+          return nil if reference?
+          @gapi.snapshot_definition
+        end
+
+        ##
+        # The Information about base table and clone time of the table.
+        #
+        # @return [Google::Apis::BigqueryV2::CloneDefinition, nil] Clone definition of table clone, or
+        #   `nil` if not clone or the object is a reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def clone_definition
+          return nil if reference?
+          @gapi.clone_definition
+        end
+
+        ##
         # @private The gapi fragment containing the Project ID, Dataset ID, and
         # Table ID.
         #
@@ -822,6 +861,40 @@ module Google
         def view?
           return nil if reference?
           @gapi.type == "VIEW"
+        end
+
+        ##
+        # Checks if the table's type is `SNAPSHOT`, indicating that the table
+        # represents a BigQuery table snapshot.
+        #
+        # @see https://cloud.google.com/bigquery/docs/table-snapshots-intro
+        #
+        # @return [Boolean, nil] `true` when the type is `SNAPSHOT`, `false`
+        #   otherwise, if the object is a resource (see {#resource?}); `nil` if
+        #   the object is a reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def snapshot?
+          return nil if reference?
+          @gapi.type == "SNAPSHOT"
+        end
+
+        ##
+        # Checks if the table's type is `CLONE`, indicating that the table
+        # represents a BigQuery table clone.
+        #
+        # @see https://cloud.google.com/bigquery/docs/table-clones-intro
+        #
+        # @return [Boolean, nil] `true` when the type is `CLONE`, `false`
+        #   otherwise, if the object is a resource (see {#resource?}); `nil` if
+        #   the object is a reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def clone?
+          return nil if reference?
+          !@gapi.clone_definition.nil?
         end
 
         ##
@@ -1701,9 +1774,16 @@ module Google
         #
         # @!group Data
         #
-        def copy_job destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil, dryrun: nil
+        def copy_job destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil, dryrun: nil,
+                     operation_type: nil
           ensure_service!
-          options = { create: create, write: write, dryrun: dryrun, labels: labels, job_id: job_id, prefix: prefix }
+          options = { create: create,
+                      write: write,
+                      dryrun: dryrun,
+                      labels: labels,
+                      job_id: job_id,
+                      prefix: prefix,
+                      operation_type: operation_type }
           updater = CopyJob::Updater.from_options(
             service,
             table_ref,
@@ -1784,10 +1864,195 @@ module Google
         # @!group Data
         #
         def copy destination_table, create: nil, write: nil, &block
-          job = copy_job destination_table, create: create, write: write, &block
-          job.wait_until_done!
-          ensure_job_succeeded! job
-          true
+          copy_job_with_operation_type destination_table,
+                                       create: create,
+                                       write: write,
+                                       operation_type: OperationType::COPY,
+                                       &block
+        end
+
+        ##
+        # Clones the data from the table to another table using a synchronous
+        # method that blocks for a response.
+        # The source and destination table have the same table type, but only bill for
+        # unique data.
+        # Timeouts and transient errors are generally handled as needed to complete the job.
+        # See also {#copy_job}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {CopyJob::Updater#location=} in a block passed to this method. If the
+        # table is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # table.
+        #
+        # @param [Table, String] destination_table The destination for the
+        #   copied data. This can also be a string identifier as specified by
+        #   the [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`). This is useful for referencing
+        #   tables in other projects and datasets.
+        #
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
+        #   configuration object for setting additional options.
+        #
+        # @return [Boolean] Returns `true` if the copy operation succeeded.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #   destination_table = dataset.table "my_destination_table"
+        #
+        #   table.clone destination_table
+        #
+        # @example Passing a string identifier for the destination table:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.clone "other-project:other_dataset.other_table"
+        #
+        # @!group Data
+        #
+        def clone destination_table, &block
+          copy_job_with_operation_type destination_table,
+                                       operation_type: OperationType::CLONE,
+                                       &block
+        end
+
+        ##
+        # Takes snapshot of the data from the table to another table using a synchronous
+        # method that blocks for a response.
+        # The source table type is TABLE and the destination table type is SNAPSHOT.
+        # Timeouts and transient errors are generally handled as needed to complete the job.
+        # See also {#copy_job}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {CopyJob::Updater#location=} in a block passed to this method. If the
+        # table is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # table.
+        #
+        # @param [Table, String] destination_table The destination for the
+        #   copied data. This can also be a string identifier as specified by
+        #   the [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`). This is useful for referencing
+        #   tables in other projects and datasets.
+        #
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
+        #   configuration object for setting additional options.
+        #
+        # @return [Boolean] Returns `true` if the copy operation succeeded.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #   destination_table = dataset.table "my_destination_table"
+        #
+        #   table.snapshot destination_table
+        #
+        # @example Passing a string identifier for the destination table:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.snapshot "other-project:other_dataset.other_table"
+        #
+        # @!group Data
+        #
+        def snapshot destination_table, &block
+          copy_job_with_operation_type destination_table,
+                                       operation_type: OperationType::SNAPSHOT,
+                                       &block
+        end
+
+        ##
+        # Restore the data from the table to another table using a synchronous
+        # method that blocks for a response.
+        # The source table type is SNAPSHOT and the destination table type is TABLE.
+        # Timeouts and transient errors are generally handled as needed to complete the job.
+        # See also {#copy_job}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {CopyJob::Updater#location=} in a block passed to this method. If the
+        # table is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # table.
+        #
+        # @param [Table, String] destination_table The destination for the
+        #   copied data. This can also be a string identifier as specified by
+        #   the [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`). This is useful for referencing
+        #   tables in other projects and datasets.
+        # @param [String] create Specifies whether the job is allowed to create
+        #   new tables. The default value is `needed`.
+        #
+        #   The following values are supported:
+        #
+        #   * `needed` - Create the table if it does not exist.
+        #   * `never` - The table must already exist. A 'notFound' error is
+        #     raised if the table does not exist.
+        # @param [String] write Specifies how to handle data already present in
+        #   the destination table. The default value is `empty`.
+        #
+        #   The following values are supported:
+        #
+        #   * `truncate` - BigQuery overwrites the table data.
+        #   * `append` - BigQuery appends the data to the table.
+        #   * `empty` - An error will be returned if the destination table
+        #     already contains data.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
+        #   configuration object for setting additional options.
+        #
+        # @return [Boolean] Returns `true` if the copy operation succeeded.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #   destination_table = dataset.table "my_destination_table"
+        #
+        #   table.restore destination_table
+        #
+        # @example Passing a string identifier for the destination table:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.restore "other-project:other_dataset.other_table"
+        #
+        # @!group Data
+        #
+        def restore destination_table, create: nil, write: nil, &block
+          copy_job_with_operation_type destination_table,
+                                       create: create,
+                                       write: write,
+                                       operation_type: OperationType::RESTORE,
+                                       &block
         end
 
         ##
@@ -2743,6 +3008,17 @@ module Google
         end
 
         protected
+
+        def copy_job_with_operation_type destination_table, create: nil, write: nil, operation_type: nil, &block
+          job = copy_job destination_table,
+                         create: create,
+                         write: write,
+                         operation_type: operation_type,
+                         &block
+          job.wait_until_done!
+          ensure_job_succeeded! job
+          true
+        end
 
         ##
         # Raise an error unless an active service is available.

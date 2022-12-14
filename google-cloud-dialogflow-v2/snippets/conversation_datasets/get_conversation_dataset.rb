@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_ConversationDatasets_GetConversationDataset_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#get_conversation_dataset
+#
+def get_conversation_dataset
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest.new
 
-# Call the get_conversation_dataset method.
-result = client.get_conversation_dataset request
+  # Call the get_conversation_dataset method.
+  result = client.get_conversation_dataset request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::ConversationDataset.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::ConversationDataset.
+  p result
+end
 # [END dialogflow_v2_generated_ConversationDatasets_GetConversationDataset_sync]

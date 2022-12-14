@@ -19,15 +19,21 @@
 # [START notebooks_v1_generated_NotebookService_UpdateInstanceMetadataItems_sync]
 require "google/cloud/notebooks/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Notebooks::V1::NotebookService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1::NotebookService::Client#update_instance_metadata_items
+#
+def update_instance_metadata_items
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Notebooks::V1::NotebookService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest.new
 
-# Call the update_instance_metadata_items method.
-result = client.update_instance_metadata_items request
+  # Call the update_instance_metadata_items method.
+  result = client.update_instance_metadata_items request
 
-# The returned object is of type Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsResponse.
-p result
+  # The returned object is of type Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsResponse.
+  p result
+end
 # [END notebooks_v1_generated_NotebookService_UpdateInstanceMetadataItems_sync]

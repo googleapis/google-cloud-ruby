@@ -19,15 +19,21 @@
 # [START networkmanagement_v1_generated_ReachabilityService_GetConnectivityTest_sync]
 require "google/cloud/network_management/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#get_connectivity_test
+#
+def get_connectivity_test
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::NetworkManagement::V1::GetConnectivityTestRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::NetworkManagement::V1::GetConnectivityTestRequest.new
 
-# Call the get_connectivity_test method.
-result = client.get_connectivity_test request
+  # Call the get_connectivity_test method.
+  result = client.get_connectivity_test request
 
-# The returned object is of type Google::Cloud::NetworkManagement::V1::ConnectivityTest.
-p result
+  # The returned object is of type Google::Cloud::NetworkManagement::V1::ConnectivityTest.
+  p result
+end
 # [END networkmanagement_v1_generated_ReachabilityService_GetConnectivityTest_sync]

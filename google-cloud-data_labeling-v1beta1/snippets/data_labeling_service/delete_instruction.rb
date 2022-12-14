@@ -19,15 +19,21 @@
 # [START datalabeling_v1beta1_generated_DataLabelingService_DeleteInstruction_sync]
 require "google/cloud/data_labeling/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#delete_instruction
+#
+def delete_instruction
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataLabeling::V1beta1::DeleteInstructionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataLabeling::V1beta1::DeleteInstructionRequest.new
 
-# Call the delete_instruction method.
-result = client.delete_instruction request
+  # Call the delete_instruction method.
+  result = client.delete_instruction request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END datalabeling_v1beta1_generated_DataLabelingService_DeleteInstruction_sync]

@@ -19,15 +19,21 @@
 # [START documentai_v1beta3_generated_DocumentProcessorService_GetProcessorVersion_sync]
 require "google/cloud/document_ai/v1beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#get_processor_version
+#
+def get_processor_version
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DocumentAI::V1beta3::GetProcessorVersionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DocumentAI::V1beta3::GetProcessorVersionRequest.new
 
-# Call the get_processor_version method.
-result = client.get_processor_version request
+  # Call the get_processor_version method.
+  result = client.get_processor_version request
 
-# The returned object is of type Google::Cloud::DocumentAI::V1beta3::ProcessorVersion.
-p result
+  # The returned object is of type Google::Cloud::DocumentAI::V1beta3::ProcessorVersion.
+  p result
+end
 # [END documentai_v1beta3_generated_DocumentProcessorService_GetProcessorVersion_sync]

@@ -19,15 +19,21 @@
 # [START gameservices_v1_generated_RealmsService_GetRealm_sync]
 require "google/cloud/gaming/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::RealmsService::Client#get_realm
+#
+def get_realm
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Gaming::V1::RealmsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Gaming::V1::GetRealmRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Gaming::V1::GetRealmRequest.new
 
-# Call the get_realm method.
-result = client.get_realm request
+  # Call the get_realm method.
+  result = client.get_realm request
 
-# The returned object is of type Google::Cloud::Gaming::V1::Realm.
-p result
+  # The returned object is of type Google::Cloud::Gaming::V1::Realm.
+  p result
+end
 # [END gameservices_v1_generated_RealmsService_GetRealm_sync]

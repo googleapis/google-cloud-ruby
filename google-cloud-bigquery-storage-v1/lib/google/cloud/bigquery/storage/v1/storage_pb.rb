@@ -67,6 +67,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :write_stream, :string, 1
       optional :offset, :message, 2, "google.protobuf.Int64Value"
       optional :trace_id, :string, 6
+      map :missing_value_interpretations, :string, :enum, 7, "google.cloud.bigquery.storage.v1.AppendRowsRequest.MissingValueInterpretation"
       oneof :rows do
         optional :proto_rows, :message, 4, "google.cloud.bigquery.storage.v1.AppendRowsRequest.ProtoData"
       end
@@ -74,6 +75,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.bigquery.storage.v1.AppendRowsRequest.ProtoData" do
       optional :writer_schema, :message, 1, "google.cloud.bigquery.storage.v1.ProtoSchema"
       optional :rows, :message, 2, "google.cloud.bigquery.storage.v1.ProtoRows"
+    end
+    add_enum "google.cloud.bigquery.storage.v1.AppendRowsRequest.MissingValueInterpretation" do
+      value :MISSING_VALUE_INTERPRETATION_UNSPECIFIED, 0
+      value :NULL_VALUE, 1
+      value :DEFAULT_VALUE, 2
     end
     add_message "google.cloud.bigquery.storage.v1.AppendRowsResponse" do
       optional :updated_schema, :message, 3, "google.cloud.bigquery.storage.v1.TableSchema"
@@ -157,6 +163,7 @@ module Google
           CreateWriteStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.CreateWriteStreamRequest").msgclass
           AppendRowsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AppendRowsRequest").msgclass
           AppendRowsRequest::ProtoData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AppendRowsRequest.ProtoData").msgclass
+          AppendRowsRequest::MissingValueInterpretation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AppendRowsRequest.MissingValueInterpretation").enummodule
           AppendRowsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AppendRowsResponse").msgclass
           AppendRowsResponse::AppendResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AppendRowsResponse.AppendResult").msgclass
           GetWriteStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.GetWriteStreamRequest").msgclass

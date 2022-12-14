@@ -19,15 +19,21 @@
 # [START redis_v1beta1_generated_CloudRedis_GetInstanceAuthString_sync]
 require "google/cloud/redis/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Redis::V1beta1::CloudRedis::Client#get_instance_auth_string
+#
+def get_instance_auth_string
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Redis::V1beta1::GetInstanceAuthStringRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Redis::V1beta1::GetInstanceAuthStringRequest.new
 
-# Call the get_instance_auth_string method.
-result = client.get_instance_auth_string request
+  # Call the get_instance_auth_string method.
+  result = client.get_instance_auth_string request
 
-# The returned object is of type Google::Cloud::Redis::V1beta1::InstanceAuthString.
-p result
+  # The returned object is of type Google::Cloud::Redis::V1beta1::InstanceAuthString.
+  p result
+end
 # [END redis_v1beta1_generated_CloudRedis_GetInstanceAuthString_sync]

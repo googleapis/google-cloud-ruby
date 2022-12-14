@@ -19,18 +19,24 @@
 # [START firestore_v1_generated_Firestore_BatchGetDocuments_sync]
 require "google/cloud/firestore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Firestore::V1::Firestore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Firestore::V1::Firestore::Client#batch_get_documents
+#
+def batch_get_documents
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Firestore::V1::Firestore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new
 
-# Call the batch_get_documents method.
-result = client.batch_get_documents request
+  # Call the batch_get_documents method.
+  result = client.batch_get_documents request
 
-# The returned object is a streamed enumerable yielding elements of
-# type ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse.
-result.each do |response|
-  p response
+  # The returned object is a streamed enumerable yielding elements of
+  # type ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse.
+  result.each do |response|
+    p response
+  end
 end
 # [END firestore_v1_generated_Firestore_BatchGetDocuments_sync]

@@ -19,21 +19,27 @@
 # [START videostitcher_v1_generated_VideoStitcherService_ListLiveAdTagDetails_sync]
 require "google/cloud/video/stitcher/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#list_live_ad_tag_details
+#
+def list_live_ad_tag_details
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Video::Stitcher::V1::ListLiveAdTagDetailsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Video::Stitcher::V1::ListLiveAdTagDetailsRequest.new
 
-# Call the list_live_ad_tag_details method.
-result = client.list_live_ad_tag_details request
+  # Call the list_live_ad_tag_details method.
+  result = client.list_live_ad_tag_details request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Video::Stitcher::V1::LiveAdTagDetail.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Video::Stitcher::V1::LiveAdTagDetail.
+    p response
+  end
 end
 # [END videostitcher_v1_generated_VideoStitcherService_ListLiveAdTagDetails_sync]

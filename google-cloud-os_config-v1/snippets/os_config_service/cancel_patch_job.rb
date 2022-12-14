@@ -19,15 +19,21 @@
 # [START osconfig_v1_generated_OsConfigService_CancelPatchJob_sync]
 require "google/cloud/os_config/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OsConfig::V1::OsConfigService::Client#cancel_patch_job
+#
+def cancel_patch_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new
 
-# Call the cancel_patch_job method.
-result = client.cancel_patch_job request
+  # Call the cancel_patch_job method.
+  result = client.cancel_patch_job request
 
-# The returned object is of type Google::Cloud::OsConfig::V1::PatchJob.
-p result
+  # The returned object is of type Google::Cloud::OsConfig::V1::PatchJob.
+  p result
+end
 # [END osconfig_v1_generated_OsConfigService_CancelPatchJob_sync]

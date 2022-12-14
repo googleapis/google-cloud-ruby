@@ -19,15 +19,21 @@
 # [START oslogin_v1_generated_OsLoginService_DeletePosixAccount_sync]
 require "google/cloud/os_login/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OsLogin::V1::OsLoginService::Client#delete_posix_account
+#
+def delete_posix_account
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OsLogin::V1::DeletePosixAccountRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OsLogin::V1::DeletePosixAccountRequest.new
 
-# Call the delete_posix_account method.
-result = client.delete_posix_account request
+  # Call the delete_posix_account method.
+  result = client.delete_posix_account request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END oslogin_v1_generated_OsLoginService_DeletePosixAccount_sync]

@@ -19,15 +19,21 @@
 # [START servicecontrol_v1_generated_ServiceController_Check_sync]
 require "google/cloud/service_control/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceControl::V1::ServiceController::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceControl::V1::ServiceController::Client#check
+#
+def check
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceControl::V1::ServiceController::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceControl::V1::CheckRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceControl::V1::CheckRequest.new
 
-# Call the check method.
-result = client.check request
+  # Call the check method.
+  result = client.check request
 
-# The returned object is of type Google::Cloud::ServiceControl::V1::CheckResponse.
-p result
+  # The returned object is of type Google::Cloud::ServiceControl::V1::CheckResponse.
+  p result
+end
 # [END servicecontrol_v1_generated_ServiceController_Check_sync]
