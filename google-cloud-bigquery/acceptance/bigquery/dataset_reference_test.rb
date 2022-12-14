@@ -243,7 +243,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
     _(data.total).wont_be_nil
   end
 
-  focus; it "inserts rows asynchronously and gets its data" do
+  it "inserts rows asynchronously and gets its data" do
     %w[unspecified basic storage full].each do |view|
       insert_result = nil
       inserter = dataset.insert_async(table_id, view: view) do |result|

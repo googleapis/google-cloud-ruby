@@ -147,8 +147,7 @@ module Google
           { "unspecified" => "TABLE_METADATA_VIEW_UNSPECIFIED",
             "basic" => "BASIC",
             "storage" => "STORAGE_STATS",
-            "full" => "FULL"
-          }[str.to_s.downcase]
+            "full" => "FULL" }[str.to_s.downcase]
         end
 
         ##
@@ -617,8 +616,6 @@ module Google
             end
           end
 
-
-
           protected
 
           def retry? result, current_retries
@@ -639,8 +636,6 @@ module Google
           rescue StandardError
             false
           end
-
-
         end
       end
     end
