@@ -26,7 +26,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     The resource states of the request in the form of
-        #     projects/*/locations/*/voices/*.
+        #     `projects/*/locations/*/voices/*`.
         # @!attribute [rw] input
         #   @return [::Google::Cloud::TextToSpeech::V1beta1::SynthesisInput]
         #     Required. The Synthesizer requires either plain text or SSML as input.
