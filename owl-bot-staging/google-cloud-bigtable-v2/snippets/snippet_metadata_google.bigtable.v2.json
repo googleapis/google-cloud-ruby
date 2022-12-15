@@ -1,0 +1,295 @@
+{
+  "client_library": {
+    "name": "google-cloud-bigtable-v2",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.bigtable.v2",
+        "version": "v2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_ReadRows_sync",
+      "title": "Snippet for read_rows in Bigtable",
+      "description": "Basic snippet for read_rows in Bigtable",
+      "file": "bigtable/read_rows.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "read_rows",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#read_rows",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::ReadRowsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::ReadRowsResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "ReadRows",
+          "full_name": "google.bigtable.v2.Bigtable.ReadRows",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_SampleRowKeys_sync",
+      "title": "Snippet for sample_row_keys in Bigtable",
+      "description": "Basic snippet for sample_row_keys in Bigtable",
+      "file": "bigtable/sample_row_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "sample_row_keys",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#sample_row_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::SampleRowKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::SampleRowKeysResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "SampleRowKeys",
+          "full_name": "google.bigtable.v2.Bigtable.SampleRowKeys",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_MutateRow_sync",
+      "title": "Snippet for mutate_row in Bigtable",
+      "description": "Basic snippet for mutate_row in Bigtable",
+      "file": "bigtable/mutate_row.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "mutate_row",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#mutate_row",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::MutateRowRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::MutateRowResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "MutateRow",
+          "full_name": "google.bigtable.v2.Bigtable.MutateRow",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_MutateRows_sync",
+      "title": "Snippet for mutate_rows in Bigtable",
+      "description": "Basic snippet for mutate_rows in Bigtable",
+      "file": "bigtable/mutate_rows.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "mutate_rows",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#mutate_rows",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::MutateRowsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::MutateRowsResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "MutateRows",
+          "full_name": "google.bigtable.v2.Bigtable.MutateRows",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_CheckAndMutateRow_sync",
+      "title": "Snippet for check_and_mutate_row in Bigtable",
+      "description": "Basic snippet for check_and_mutate_row in Bigtable",
+      "file": "bigtable/check_and_mutate_row.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "check_and_mutate_row",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#check_and_mutate_row",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::CheckAndMutateRowResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "CheckAndMutateRow",
+          "full_name": "google.bigtable.v2.Bigtable.CheckAndMutateRow",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_PingAndWarm_sync",
+      "title": "Snippet for ping_and_warm in Bigtable",
+      "description": "Basic snippet for ping_and_warm in Bigtable",
+      "file": "bigtable/ping_and_warm.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "ping_and_warm",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#ping_and_warm",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::PingAndWarmRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::PingAndWarmResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "PingAndWarm",
+          "full_name": "google.bigtable.v2.Bigtable.PingAndWarm",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_ReadModifyWriteRow_sync",
+      "title": "Snippet for read_modify_write_row in Bigtable",
+      "description": "Basic snippet for read_modify_write_row in Bigtable",
+      "file": "bigtable/read_modify_write_row.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "read_modify_write_row",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#read_modify_write_row",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "ReadModifyWriteRow",
+          "full_name": "google.bigtable.v2.Bigtable.ReadModifyWriteRow",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
