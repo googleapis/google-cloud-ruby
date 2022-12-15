@@ -35,7 +35,7 @@ module Google
         # Service for ingesting {::Google::Cloud::Retail::V2::Product Product} information
         # of the customer's website.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/retail/v2/product_service"
         #     client = ::Google::Cloud::Retail::V2::ProductService::Client.new

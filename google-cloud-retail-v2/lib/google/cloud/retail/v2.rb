@@ -30,9 +30,9 @@ module Google
   module Cloud
     module Retail
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/retail/v2"
       #     client = ::Google::Cloud::Retail::V2::CatalogService::Client.new
