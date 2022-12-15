@@ -47,6 +47,7 @@ require "google/cloud/compute/v1/license_codes"
 require "google/cloud/compute/v1/licenses"
 require "google/cloud/compute/v1/machine_images"
 require "google/cloud/compute/v1/machine_types"
+require "google/cloud/compute/v1/network_attachments"
 require "google/cloud/compute/v1/network_edge_security_services"
 require "google/cloud/compute/v1/network_endpoint_groups"
 require "google/cloud/compute/v1/network_firewall_policies"
@@ -109,9 +110,9 @@ module Google
   module Cloud
     module Compute
       ##
-      # To load this package, including all its services, and instantiate a REST client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a REST client
       #
       #     require "google/cloud/compute/v1"
       #     client = ::Google::Cloud::Compute::V1::AcceleratorTypes::Rest::Client.new

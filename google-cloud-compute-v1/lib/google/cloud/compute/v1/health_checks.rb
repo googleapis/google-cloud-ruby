@@ -31,9 +31,9 @@ module Google
         ##
         # The HealthChecks API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/health_checks"
+        #     require "google/cloud/compute/v1/health_checks/rest"
         #     client = ::Google::Cloud::Compute::V1::HealthChecks::Rest::Client.new
         #
         module HealthChecks
