@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.0 (2022-12-15)
+
+#### Features
+
+* Added sample_document_uris field to ProcessorType ([#19877](https://github.com/googleapis/google-cloud-ruby/issues/19877)) 
+
 ### 0.7.0 (2022-12-14)
 
 #### Features
