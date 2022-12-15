@@ -41,9 +41,8 @@ module Google
         #     characters. Otherwise, an INVALID_ARGUMENT error is thrown.
         # @!attribute [r] associated_serving_config_ids
         #   @return [::Array<::String>]
-        #     Output only. List of [serving
-        #     configuration][google.cloud.retail.v2.ServingConfig] ids that are
-        #     associated with this control in the same
+        #     Output only. List of {::Google::Cloud::Retail::V2::ServingConfig serving config}
+        #     ids that are associated with this control in the same
         #     {::Google::Cloud::Retail::V2::Catalog Catalog}.
         #
         #     Note the association is managed via the

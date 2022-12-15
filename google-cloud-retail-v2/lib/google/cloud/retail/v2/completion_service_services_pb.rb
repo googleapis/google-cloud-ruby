@@ -27,7 +27,7 @@ module Google
           # Auto-completion service for retail.
           #
           # This feature is only available for users who have Retail Search enabled.
-          # Please enable Retail Search on Cloud Console before using this feature.
+          # Enable Retail Search on Cloud Console before using this feature.
           class Service
 
             include ::GRPC::GenericService
@@ -39,7 +39,7 @@ module Google
             # Completes the specified prefix with keyword suggestions.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             rpc :CompleteQuery, ::Google::Cloud::Retail::V2::CompleteQueryRequest, ::Google::Cloud::Retail::V2::CompleteQueryResponse
             # Bulk import of processed completion dataset.
             #
@@ -49,7 +49,7 @@ module Google
             # are indexed successfully and ready for serving. The process takes hours.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             rpc :ImportCompletionData, ::Google::Cloud::Retail::V2::ImportCompletionDataRequest, ::Google::Longrunning::Operation
           end
 
