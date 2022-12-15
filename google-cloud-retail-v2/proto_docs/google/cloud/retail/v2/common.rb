@@ -48,8 +48,8 @@ module Google
           #     Value cannot be empty.
           #     Value can have at most 3 terms if specified as a partial match. Each
           #     space separated string is considered as one term.
-          #     Example) "a b c" is 3 terms and allowed, " a b c d" is 4 terms and not
-          #     allowed for partial match.
+          #     For example, "a b c" is 3 terms and allowed, but " a b c d" is 4 terms
+          #     and not allowed for a partial match.
           # @!attribute [rw] full_match
           #   @return [::Boolean]
           #     Whether this is supposed to be a full or partial match.
@@ -73,6 +73,7 @@ module Google
         end
 
         # A rule is a condition-action pair
+        #
         # * A condition defines when a rule is to be triggered.
         # * An action specifies what occurs on that trigger.
         # Currently rules only work for {::Google::Cloud::Retail::V2::Control controls} with
@@ -202,7 +203,8 @@ module Google
           end
 
           # Creates a set of terms that will be treated as synonyms of each other.
-          # Example: synonyms of "sneakers" and "shoes".
+          # Example: synonyms of "sneakers" and "shoes":
+          #
           #  * "sneakers" will use a synonym of "shoes".
           #  * "shoes" will use a synonym of "sneakers".
           # @!attribute [rw] synonyms

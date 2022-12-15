@@ -63,7 +63,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the ServingConfig to delete. Format:
-        #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}/servingConfigs/\\{serving_config_id}
+        #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
         class DeleteServingConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -73,7 +73,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the ServingConfig to get. Format:
-        #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}/servingConfigs/\\{serving_config_id}
+        #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
         class GetServingConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -83,7 +83,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The catalog resource name. Format:
-        #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}
+        #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of results to return. If unspecified, defaults
@@ -114,7 +114,7 @@ module Google
         # @!attribute [rw] serving_config
         #   @return [::String]
         #     Required. The source ServingConfig resource name . Format:
-        #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}/servingConfigs/\\{serving_config_id}
+        #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
         # @!attribute [rw] control_id
         #   @return [::String]
         #     Required. The id of the control to apply. Assumed to be in the same catalog
@@ -128,7 +128,7 @@ module Google
         # @!attribute [rw] serving_config
         #   @return [::String]
         #     Required. The source ServingConfig resource name . Format:
-        #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}/servingConfigs/\\{serving_config_id}
+        #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
         # @!attribute [rw] control_id
         #   @return [::String]
         #     Required. The id of the control to apply. Assumed to be in the same catalog

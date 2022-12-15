@@ -21,6 +21,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :indexable_option, :enum, 5, "google.cloud.retail.v2.CatalogAttribute.IndexableOption"
       optional :dynamic_facetable_option, :enum, 6, "google.cloud.retail.v2.CatalogAttribute.DynamicFacetableOption"
       optional :searchable_option, :enum, 7, "google.cloud.retail.v2.CatalogAttribute.SearchableOption"
+      optional :exact_searchable_option, :enum, 11, "google.cloud.retail.v2.CatalogAttribute.ExactSearchableOption"
+      optional :retrievable_option, :enum, 12, "google.cloud.retail.v2.CatalogAttribute.RetrievableOption"
     end
     add_enum "google.cloud.retail.v2.CatalogAttribute.AttributeType" do
       value :UNKNOWN, 0
@@ -41,6 +43,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SEARCHABLE_OPTION_UNSPECIFIED, 0
       value :SEARCHABLE_ENABLED, 1
       value :SEARCHABLE_DISABLED, 2
+    end
+    add_enum "google.cloud.retail.v2.CatalogAttribute.ExactSearchableOption" do
+      value :EXACT_SEARCHABLE_OPTION_UNSPECIFIED, 0
+      value :EXACT_SEARCHABLE_ENABLED, 1
+      value :EXACT_SEARCHABLE_DISABLED, 2
+    end
+    add_enum "google.cloud.retail.v2.CatalogAttribute.RetrievableOption" do
+      value :RETRIEVABLE_OPTION_UNSPECIFIED, 0
+      value :RETRIEVABLE_ENABLED, 1
+      value :RETRIEVABLE_DISABLED, 2
     end
     add_message "google.cloud.retail.v2.AttributesConfig" do
       optional :name, :string, 1
@@ -78,6 +90,8 @@ module Google
         CatalogAttribute::IndexableOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.CatalogAttribute.IndexableOption").enummodule
         CatalogAttribute::DynamicFacetableOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.CatalogAttribute.DynamicFacetableOption").enummodule
         CatalogAttribute::SearchableOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.CatalogAttribute.SearchableOption").enummodule
+        CatalogAttribute::ExactSearchableOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.CatalogAttribute.ExactSearchableOption").enummodule
+        CatalogAttribute::RetrievableOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.CatalogAttribute.RetrievableOption").enummodule
         AttributesConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.AttributesConfig").msgclass
         CompletionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.CompletionConfig").msgclass
         Catalog = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.Catalog").msgclass

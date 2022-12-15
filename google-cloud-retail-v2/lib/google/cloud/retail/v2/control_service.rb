@@ -33,7 +33,7 @@ module Google
         ##
         # Service for modifying Control.
         #
-        # @example Load this service and instantiate a gRPC client
+        # To load this service and instantiate a client:
         #
         #     require "google/cloud/retail/v2/control_service"
         #     client = ::Google::Cloud::Retail::V2::ControlService::Client.new

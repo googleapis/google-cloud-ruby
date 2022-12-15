@@ -34,7 +34,7 @@ module Google
         ##
         # Service for ingesting end user actions on the customer website.
         #
-        # @example Load this service and instantiate a gRPC client
+        # To load this service and instantiate a client:
         #
         #     require "google/cloud/retail/v2/user_event_service"
         #     client = ::Google::Cloud::Retail::V2::UserEventService::Client.new
