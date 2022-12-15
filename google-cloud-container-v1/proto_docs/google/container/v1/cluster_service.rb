@@ -1666,6 +1666,11 @@ module Google
         # @!attribute [rw] desired_node_pool_logging_config
         #   @return [::Google::Cloud::Container::V1::NodePoolLoggingConfig]
         #     The desired node pool logging configuration defaults for the cluster.
+        # @!attribute [rw] desired_stack_type
+        #   @return [::Google::Cloud::Container::V1::StackType]
+        #     The desired stack type of the cluster.
+        #     If a stack type is provided and does not match the current stack type of
+        #     the cluster, update will attempt to change the stack type to the new type.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
