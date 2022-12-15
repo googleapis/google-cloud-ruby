@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::ArtifactRegistry::ClientConstructionMinitest < Minitest::Test
-  def test_artifact_registry
+  def test_artifact_registry_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ArtifactRegistry.artifact_registry do |config|

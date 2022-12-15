@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::AppEngine::ClientConstructionMinitest < Minitest::Test
-  def test_applications
+  def test_applications_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::AppEngine.applications do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::AppEngine::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_services
+  def test_services_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::AppEngine.services do |config|
@@ -42,7 +42,7 @@ class Google::Cloud::AppEngine::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_versions
+  def test_versions_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::AppEngine.versions do |config|
@@ -52,7 +52,7 @@ class Google::Cloud::AppEngine::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_instances
+  def test_instances_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::AppEngine.instances do |config|
@@ -62,7 +62,7 @@ class Google::Cloud::AppEngine::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_firewall
+  def test_firewall_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::AppEngine.firewall do |config|
@@ -72,7 +72,7 @@ class Google::Cloud::AppEngine::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_authorized_domains
+  def test_authorized_domains_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::AppEngine.authorized_domains do |config|
@@ -82,7 +82,7 @@ class Google::Cloud::AppEngine::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_authorized_certificates
+  def test_authorized_certificates_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::AppEngine.authorized_certificates do |config|
@@ -92,7 +92,7 @@ class Google::Cloud::AppEngine::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_domain_mappings
+  def test_domain_mappings_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::AppEngine.domain_mappings do |config|

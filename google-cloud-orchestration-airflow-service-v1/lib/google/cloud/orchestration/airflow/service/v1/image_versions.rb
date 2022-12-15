@@ -34,7 +34,7 @@ module Google
             ##
             # Readonly service to query available ImageVersions.
             #
-            # To load this service and instantiate a client:
+            # @example Load this service and instantiate a gRPC client
             #
             #     require "google/cloud/orchestration/airflow/service/v1/image_versions"
             #     client = ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client.new

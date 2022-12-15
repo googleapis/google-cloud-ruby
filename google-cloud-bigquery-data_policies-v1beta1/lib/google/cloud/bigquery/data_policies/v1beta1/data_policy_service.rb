@@ -34,7 +34,7 @@ module Google
           ##
           # Data Policy Service provides APIs for managing the label-policy bindings.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigquery/data_policies/v1beta1/data_policy_service"
           #     client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new

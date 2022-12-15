@@ -34,7 +34,7 @@ module Google
         # Retrieves the Google Cloud Console billing accounts and associates them with
         # projects.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/billing/v1/cloud_billing"
         #     client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new

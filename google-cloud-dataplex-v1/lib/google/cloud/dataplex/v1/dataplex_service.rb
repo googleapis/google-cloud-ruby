@@ -38,7 +38,7 @@ module Google
         # their organization located across cloud projects in a variety of storage
         # systems including Cloud Storage and BigQuery.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataplex/v1/dataplex_service"
         #     client = ::Google::Cloud::Dataplex::V1::DataplexService::Client.new

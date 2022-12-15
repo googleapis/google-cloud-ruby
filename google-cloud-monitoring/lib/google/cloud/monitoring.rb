@@ -49,8 +49,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Monitoring::V3::AlertPolicyService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/AlertPolicyService/Client.html)
-      # for version V3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AlertPolicyService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -69,7 +69,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v3`.
-      # @return [AlertPolicyService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.alert_policy_service version: :v3, &block
         require "google/cloud/monitoring/#{version.to_s.downcase}"
@@ -78,8 +78,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Monitoring.const_get package_name
-        package_module.const_get(:AlertPolicyService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:AlertPolicyService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -87,8 +87,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Monitoring::V3::GroupService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/GroupService/Client.html)
-      # for version V3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GroupService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -110,7 +110,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v3`.
-      # @return [GroupService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.group_service version: :v3, &block
         require "google/cloud/monitoring/#{version.to_s.downcase}"
@@ -119,8 +119,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Monitoring.const_get package_name
-        package_module.const_get(:GroupService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:GroupService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -128,8 +128,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Monitoring::V3::MetricService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/MetricService/Client.html)
-      # for version V3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the MetricService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -141,7 +141,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v3`.
-      # @return [MetricService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.metric_service version: :v3, &block
         require "google/cloud/monitoring/#{version.to_s.downcase}"
@@ -150,8 +150,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Monitoring.const_get package_name
-        package_module.const_get(:MetricService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:MetricService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -159,8 +159,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Monitoring::V3::NotificationChannelService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/NotificationChannelService/Client.html)
-      # for version V3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NotificationChannelService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -172,7 +172,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v3`.
-      # @return [NotificationChannelService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.notification_channel_service version: :v3, &block
         require "google/cloud/monitoring/#{version.to_s.downcase}"
@@ -181,8 +181,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Monitoring.const_get package_name
-        package_module.const_get(:NotificationChannelService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:NotificationChannelService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -190,8 +190,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Monitoring::V3::QueryService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/QueryService/Client.html)
-      # for version V3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the QueryService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -204,7 +204,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v3`.
-      # @return [QueryService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.query_service version: :v3, &block
         require "google/cloud/monitoring/#{version.to_s.downcase}"
@@ -213,8 +213,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Monitoring.const_get package_name
-        package_module.const_get(:QueryService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:QueryService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -222,8 +222,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/ServiceMonitoringService/Client.html)
-      # for version V3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ServiceMonitoringService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -237,7 +237,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v3`.
-      # @return [ServiceMonitoringService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.service_monitoring_service version: :v3, &block
         require "google/cloud/monitoring/#{version.to_s.downcase}"
@@ -246,8 +246,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Monitoring.const_get package_name
-        package_module.const_get(:ServiceMonitoringService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:ServiceMonitoringService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -255,8 +255,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Monitoring::V3::UptimeCheckService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/UptimeCheckService/Client.html)
-      # for version V3 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V3 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the UptimeCheckService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -274,7 +274,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v3`.
-      # @return [UptimeCheckService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.uptime_check_service version: :v3, &block
         require "google/cloud/monitoring/#{version.to_s.downcase}"
@@ -283,8 +283,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Monitoring.const_get package_name
-        package_module.const_get(:UptimeCheckService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:UptimeCheckService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -304,7 +304,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

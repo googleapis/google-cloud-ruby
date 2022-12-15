@@ -35,7 +35,7 @@ module Google
         # The `NodeGroupControllerService` provides methods to manage node groups
         # of Compute Engine managed instances.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataproc/v1/node_group_controller"
         #     client = ::Google::Cloud::Dataproc::V1::NodeGroupController::Client.new

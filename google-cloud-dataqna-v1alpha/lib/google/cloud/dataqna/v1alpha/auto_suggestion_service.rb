@@ -98,7 +98,7 @@ module Google
         # }
         # ```
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataqna/v1alpha/auto_suggestion_service"
         #     client = ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client.new

@@ -33,7 +33,7 @@ module Google
         ##
         # Service for making recommendation prediction.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/retail/v2/prediction_service"
         #     client = ::Google::Cloud::Retail::V2::PredictionService::Client.new

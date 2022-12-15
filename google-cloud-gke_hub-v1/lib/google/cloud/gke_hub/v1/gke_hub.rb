@@ -47,7 +47,7 @@ module Google
         # of the Google-provided client libraries or tools where possible when working
         # with Membership resources.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/gke_hub/v1/gke_hub"
         #     client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new

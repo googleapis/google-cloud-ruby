@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Bigquery::Storage::ClientConstructionMinitest < Minitest::Test
-  def test_big_query_read
+  def test_big_query_read_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Bigquery::Storage.big_query_read do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::Bigquery::Storage::ClientConstructionMinitest < Minitest::T
     end
   end
 
-  def test_big_query_write
+  def test_big_query_write_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Bigquery::Storage.big_query_write do |config|

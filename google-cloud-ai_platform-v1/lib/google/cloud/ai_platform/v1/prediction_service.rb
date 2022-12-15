@@ -33,7 +33,7 @@ module Google
         ##
         # A service for online predictions and explanations.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/prediction_service"
         #     client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new

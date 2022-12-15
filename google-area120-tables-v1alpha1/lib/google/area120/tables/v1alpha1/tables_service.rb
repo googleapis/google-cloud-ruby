@@ -44,7 +44,7 @@ module Google
         #   {::Google::Area120::Tables::V1alpha1::Workspace Workspace}
         #   resources, named `workspaces/*`.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/area120/tables/v1alpha1/tables_service"
         #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new

@@ -53,7 +53,7 @@ module Google
         # entity that identifies links between distributors and their indirect
         # resellers in a channel.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/channel/v1/cloud_channel_service"
         #     client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new

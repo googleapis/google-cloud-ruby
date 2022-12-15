@@ -34,7 +34,7 @@ module Google
         ##
         # VM Migration Service
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/vm_migration/v1/vm_migration"
         #     client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new

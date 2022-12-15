@@ -36,7 +36,7 @@ module Google
         # Data Fusion enables ETL developers to build code-free, data integration
         # pipelines via a point-and-click UI.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/data_fusion/v1/data_fusion"
         #     client = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new

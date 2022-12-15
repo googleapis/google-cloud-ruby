@@ -33,7 +33,7 @@ module Google
         ##
         # The Registry service allows teams to manage descriptions of APIs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/apigee_registry/v1/registry"
         #     client = ::Google::Cloud::ApigeeRegistry::V1::Registry::Client.new

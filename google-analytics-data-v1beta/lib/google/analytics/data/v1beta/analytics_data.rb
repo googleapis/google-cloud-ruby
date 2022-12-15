@@ -33,7 +33,7 @@ module Google
         ##
         # Google Analytics reporting data service.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/analytics/data/v1beta/analytics_data"
         #     client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new

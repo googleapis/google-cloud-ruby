@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Speech::ClientConstructionMinitest < Minitest::Test
-  def test_speech
+  def test_speech_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Speech.speech do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::Speech::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_adaptation
+  def test_adaptation_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Speech.adaptation do |config|

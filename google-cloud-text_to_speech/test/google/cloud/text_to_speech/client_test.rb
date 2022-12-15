@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::TextToSpeech::ClientConstructionMinitest < Minitest::Test
-  def test_text_to_speech
+  def test_text_to_speech_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::TextToSpeech.text_to_speech do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::TextToSpeech::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_text_to_speech_long_audio_synthesize
+  def test_text_to_speech_long_audio_synthesize_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::TextToSpeech.text_to_speech_long_audio_synthesize do |config|

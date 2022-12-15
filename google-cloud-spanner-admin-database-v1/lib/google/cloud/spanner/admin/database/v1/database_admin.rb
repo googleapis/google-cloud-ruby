@@ -42,7 +42,7 @@ module Google
             #   * create, delete and list backups for a database
             #   * restore a database from an existing backup
             #
-            # To load this service and instantiate a client:
+            # @example Load this service and instantiate a gRPC client
             #
             #     require "google/cloud/spanner/admin/database/v1/database_admin"
             #     client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new

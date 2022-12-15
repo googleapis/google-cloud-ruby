@@ -34,7 +34,7 @@ module Google
         ##
         # The API Gateway Service is the interface for managing API Gateways.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/api_gateway/v1/api_gateway_service"
         #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new

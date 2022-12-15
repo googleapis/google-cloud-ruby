@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::PhishingProtection::ClientConstructionMinitest < Minitest::Test
-  def test_phishing_protection_service
+  def test_phishing_protection_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::PhishingProtection.phishing_protection_service do |config|

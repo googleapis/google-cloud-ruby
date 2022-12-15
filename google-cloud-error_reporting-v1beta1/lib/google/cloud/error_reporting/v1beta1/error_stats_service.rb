@@ -34,7 +34,7 @@ module Google
         # An API for retrieving and managing error statistics as well as data for
         # individual events.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/error_reporting/v1beta1/error_stats_service"
         #     client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new

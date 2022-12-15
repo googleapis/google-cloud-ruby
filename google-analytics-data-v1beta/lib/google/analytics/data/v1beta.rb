@@ -23,9 +23,9 @@ module Google
   module Analytics
     module Data
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/analytics/data/v1beta"
       #     client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new

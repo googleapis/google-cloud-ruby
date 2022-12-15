@@ -22,9 +22,9 @@ require "google/iam/v1beta/version"
 module Google
   module Iam
     ##
-    # To load this package, including all its services, and instantiate a client:
+    # API client module.
     #
-    # @example
+    # @example Load this package, including all its services, and instantiate a gRPC client
     #
     #     require "google/iam/v1beta"
     #     client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new

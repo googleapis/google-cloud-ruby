@@ -34,7 +34,7 @@ module Google
         ##
         # Enables speech transcription and resource management.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/speech/v2/speech"
         #     client = ::Google::Cloud::Speech::V2::Speech::Client.new

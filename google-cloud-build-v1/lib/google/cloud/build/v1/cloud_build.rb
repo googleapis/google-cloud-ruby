@@ -41,7 +41,7 @@ module Google
         # A user can list previously-requested builds or get builds by their ID to
         # determine the status of the build.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/build/v1/cloud_build"
         #     client = ::Google::Cloud::Build::V1::CloudBuild::Client.new

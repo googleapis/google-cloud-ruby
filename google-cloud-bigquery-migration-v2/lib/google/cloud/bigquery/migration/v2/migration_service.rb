@@ -34,7 +34,7 @@ module Google
           ##
           # Service to handle EDW migrations.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigquery/migration/v2/migration_service"
           #     client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new

@@ -35,7 +35,7 @@ module Google
         # Policy-Based Routing allows GCP customers to specify flexibile routing
         # policies for Layer 4 traffic traversing through the connected service.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/network_connectivity/v1/policy_based_routing_service"
         #     client = ::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client.new

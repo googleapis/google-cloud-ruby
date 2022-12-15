@@ -23,9 +23,9 @@ module Google
   module Cloud
     module Dlp
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/dlp/v2"
       #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new

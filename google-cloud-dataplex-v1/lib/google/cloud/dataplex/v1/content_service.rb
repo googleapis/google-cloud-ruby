@@ -33,7 +33,7 @@ module Google
         ##
         # ContentService manages Notebook and SQL Scripts for Dataplex.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataplex/v1/content_service"
         #     client = ::Google::Cloud::Dataplex::V1::ContentService::Client.new

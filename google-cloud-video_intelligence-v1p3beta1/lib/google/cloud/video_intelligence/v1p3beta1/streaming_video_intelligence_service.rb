@@ -32,7 +32,7 @@ module Google
         ##
         # Service that implements streaming Video Intelligence API.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/video_intelligence/v1p3beta1/streaming_video_intelligence_service"
         #     client = ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceService::Client.new

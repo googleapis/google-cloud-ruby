@@ -40,7 +40,7 @@ module Google
         # clicking on "Monitoring" on the left-hand side to navigate to Stackdriver,
         # and then clicking on "Uptime".
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/monitoring/v3/uptime_check_service"
         #     client = ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new

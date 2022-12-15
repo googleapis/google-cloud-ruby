@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::GkeBackup::ClientConstructionMinitest < Minitest::Test
-  def test_backup_for_gke
+  def test_backup_for_gke_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::GkeBackup.backup_for_gke do |config|

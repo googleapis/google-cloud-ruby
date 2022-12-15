@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Gaming::ClientConstructionMinitest < Minitest::Test
-  def test_game_server_clusters_service
+  def test_game_server_clusters_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Gaming.game_server_clusters_service do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::Gaming::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_game_server_configs_service
+  def test_game_server_configs_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Gaming.game_server_configs_service do |config|
@@ -42,7 +42,7 @@ class Google::Cloud::Gaming::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_game_server_deployments_service
+  def test_game_server_deployments_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Gaming.game_server_deployments_service do |config|
@@ -52,7 +52,7 @@ class Google::Cloud::Gaming::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_realms_service
+  def test_realms_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Gaming.realms_service do |config|

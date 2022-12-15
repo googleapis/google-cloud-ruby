@@ -37,7 +37,7 @@ module Google
         # multiple products (Google Cloud Platform (GCP), Google Voice, and
         # Google Workspace.)
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/channel/v1/cloud_channel_reports_service"
         #     client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new

@@ -38,7 +38,7 @@ module Google
         # control policies. A taxonomy is a hierarchical grouping of policy tags that
         # classify data along a common axis.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/data_catalog/v1/policy_tag_manager"
         #     client = ::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new

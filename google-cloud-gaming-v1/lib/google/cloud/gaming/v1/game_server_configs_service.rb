@@ -34,7 +34,7 @@ module Google
         ##
         # The game server config configures the game servers in an Agones fleet.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/gaming/v1/game_server_configs_service"
         #     client = ::Google::Cloud::Gaming::V1::GameServerConfigsService::Client.new

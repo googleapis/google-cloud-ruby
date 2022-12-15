@@ -34,7 +34,7 @@ module Google
         ##
         # The Cloud Domains API enables management and configuration of domain names.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/domains/v1/domains"
         #     client = ::Google::Cloud::Domains::V1::Domains::Client.new

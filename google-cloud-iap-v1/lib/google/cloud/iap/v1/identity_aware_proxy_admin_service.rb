@@ -33,7 +33,7 @@ module Google
         ##
         # APIs for Identity-Aware Proxy Admin configurations.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/iap/v1/identity_aware_proxy_admin_service"
         #     client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new

@@ -35,7 +35,7 @@ module Google
         # applications hosted on Google Cloud Platform. It crawls your application, and
         # attempts to exercise as many user inputs and event handlers as possible.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/web_security_scanner/v1beta/web_security_scanner"
         #     client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new

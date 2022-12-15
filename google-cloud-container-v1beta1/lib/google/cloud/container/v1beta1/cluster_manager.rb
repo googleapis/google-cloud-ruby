@@ -33,7 +33,7 @@ module Google
         ##
         # Google Kubernetes Engine Cluster Manager v1beta1
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/container/v1beta1/cluster_manager"
         #     client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new

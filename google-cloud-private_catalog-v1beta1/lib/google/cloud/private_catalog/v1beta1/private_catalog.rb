@@ -52,7 +52,7 @@ module Google
         # name and a subset of the data of the original
         # [google.cloud.privatecatalogproducer.v1beta.Version][].
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/private_catalog/v1beta1/private_catalog"
         #     client = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client.new

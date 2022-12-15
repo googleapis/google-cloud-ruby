@@ -33,7 +33,7 @@ module Google
         ##
         # Service Directory API for looking up service data at runtime.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/service_directory/v1beta1/lookup_service"
         #     client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new

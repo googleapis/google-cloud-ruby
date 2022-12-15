@@ -36,7 +36,7 @@ module Google
         #
         # Taxonomy is a hierarchical group of policy tags.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/data_catalog/v1/policy_tag_manager_serialization"
         #     client = ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client.new

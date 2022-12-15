@@ -34,7 +34,7 @@ module Google
         # Dataform is a service to develop, create, document, test, and update curated
         # tables in BigQuery.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataform/v1beta1/dataform"
         #     client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new
