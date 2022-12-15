@@ -49,8 +49,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Retail::V2::CatalogService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/CatalogService/Client.html)
-      # for a gRPC client for version V2 of the API.
-      # However, you can specify a different API version by passing it in the
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the CatalogService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -61,7 +61,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [::Object] A client object for the specified version.
+      # @return [CatalogService::Client] A client object for the specified version.
       #
       def self.catalog_service version: :v2, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
@@ -70,8 +70,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        service_module = Google::Cloud::Retail.const_get(package_name).const_get(:CatalogService)
-        service_module.const_get(:Client).new(&block)
+        package_module = Google::Cloud::Retail.const_get package_name
+        package_module.const_get(:CatalogService).const_get(:Client).new(&block)
       end
 
       ##
@@ -79,8 +79,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Retail::V2::CompletionService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/CompletionService/Client.html)
-      # for a gRPC client for version V2 of the API.
-      # However, you can specify a different API version by passing it in the
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the CompletionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -90,11 +90,11 @@ module Google
       # Auto-completion service for retail.
       #
       # This feature is only available for users who have Retail Search enabled.
-      # Please enable Retail Search on Cloud Console before using this feature.
+      # Enable Retail Search on Cloud Console before using this feature.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [::Object] A client object for the specified version.
+      # @return [CompletionService::Client] A client object for the specified version.
       #
       def self.completion_service version: :v2, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
@@ -103,8 +103,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        service_module = Google::Cloud::Retail.const_get(package_name).const_get(:CompletionService)
-        service_module.const_get(:Client).new(&block)
+        package_module = Google::Cloud::Retail.const_get package_name
+        package_module.const_get(:CompletionService).const_get(:Client).new(&block)
       end
 
       ##
@@ -112,8 +112,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Retail::V2::ControlService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/ControlService/Client.html)
-      # for a gRPC client for version V2 of the API.
-      # However, you can specify a different API version by passing it in the
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the ControlService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -124,7 +124,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [::Object] A client object for the specified version.
+      # @return [ControlService::Client] A client object for the specified version.
       #
       def self.control_service version: :v2, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
@@ -133,8 +133,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        service_module = Google::Cloud::Retail.const_get(package_name).const_get(:ControlService)
-        service_module.const_get(:Client).new(&block)
+        package_module = Google::Cloud::Retail.const_get package_name
+        package_module.const_get(:ControlService).const_get(:Client).new(&block)
       end
 
       ##
@@ -142,8 +142,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Retail::V2::PredictionService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/PredictionService/Client.html)
-      # for a gRPC client for version V2 of the API.
-      # However, you can specify a different API version by passing it in the
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the PredictionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -154,7 +154,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [::Object] A client object for the specified version.
+      # @return [PredictionService::Client] A client object for the specified version.
       #
       def self.prediction_service version: :v2, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
@@ -163,8 +163,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        service_module = Google::Cloud::Retail.const_get(package_name).const_get(:PredictionService)
-        service_module.const_get(:Client).new(&block)
+        package_module = Google::Cloud::Retail.const_get package_name
+        package_module.const_get(:PredictionService).const_get(:Client).new(&block)
       end
 
       ##
@@ -172,8 +172,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Retail::V2::ProductService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/ProductService/Client.html)
-      # for a gRPC client for version V2 of the API.
-      # However, you can specify a different API version by passing it in the
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the ProductService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -185,7 +185,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [::Object] A client object for the specified version.
+      # @return [ProductService::Client] A client object for the specified version.
       #
       def self.product_service version: :v2, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
@@ -194,8 +194,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        service_module = Google::Cloud::Retail.const_get(package_name).const_get(:ProductService)
-        service_module.const_get(:Client).new(&block)
+        package_module = Google::Cloud::Retail.const_get package_name
+        package_module.const_get(:ProductService).const_get(:Client).new(&block)
       end
 
       ##
@@ -203,8 +203,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Retail::V2::SearchService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/SearchService/Client.html)
-      # for a gRPC client for version V2 of the API.
-      # However, you can specify a different API version by passing it in the
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the SearchService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -214,11 +214,11 @@ module Google
       # Service for search.
       #
       # This feature is only available for users who have Retail Search enabled.
-      # Please enable Retail Search on Cloud Console before using this feature.
+      # Enable Retail Search on Cloud Console before using this feature.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [::Object] A client object for the specified version.
+      # @return [SearchService::Client] A client object for the specified version.
       #
       def self.search_service version: :v2, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
@@ -227,8 +227,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        service_module = Google::Cloud::Retail.const_get(package_name).const_get(:SearchService)
-        service_module.const_get(:Client).new(&block)
+        package_module = Google::Cloud::Retail.const_get package_name
+        package_module.const_get(:SearchService).const_get(:Client).new(&block)
       end
 
       ##
@@ -236,8 +236,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Retail::V2::ServingConfigService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/ServingConfigService/Client.html)
-      # for a gRPC client for version V2 of the API.
-      # However, you can specify a different API version by passing it in the
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the ServingConfigService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -248,7 +248,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [::Object] A client object for the specified version.
+      # @return [ServingConfigService::Client] A client object for the specified version.
       #
       def self.serving_config_service version: :v2, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
@@ -257,8 +257,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        service_module = Google::Cloud::Retail.const_get(package_name).const_get(:ServingConfigService)
-        service_module.const_get(:Client).new(&block)
+        package_module = Google::Cloud::Retail.const_get package_name
+        package_module.const_get(:ServingConfigService).const_get(:Client).new(&block)
       end
 
       ##
@@ -266,8 +266,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Retail::V2::UserEventService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/UserEventService/Client.html)
-      # for a gRPC client for version V2 of the API.
-      # However, you can specify a different API version by passing it in the
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the UserEventService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -278,7 +278,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [::Object] A client object for the specified version.
+      # @return [UserEventService::Client] A client object for the specified version.
       #
       def self.user_event_service version: :v2, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
@@ -287,8 +287,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        service_module = Google::Cloud::Retail.const_get(package_name).const_get(:UserEventService)
-        service_module.const_get(:Client).new(&block)
+        package_module = Google::Cloud::Retail.const_get package_name
+        package_module.const_get(:UserEventService).const_get(:Client).new(&block)
       end
 
       ##
@@ -308,7 +308,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional headers to be sent with the call.
+      #   Additional gRPC headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
