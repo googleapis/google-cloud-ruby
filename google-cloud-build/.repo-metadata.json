@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Cloud Build is a service that executes your builds on Google Cloud Platform infrastructure. Cloud Build can import source code from Google Cloud Storage, Cloud Source Repositories, GitHub, or Bitbucket, execute a build to your specifications, and produce artifacts such as Docker containers or Java archives.",
     "ruby-cloud-env-prefix": "CLOUD_BUILD",
     "ruby-cloud-product-url": "https://cloud.google.com/cloud-build",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

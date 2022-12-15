@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Backup for GKE lets you protect, manage, and restore your containerized applications and data for stateful workloads running on Google Kubernetes Engine clusters.",
     "ruby-cloud-product-url": "https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

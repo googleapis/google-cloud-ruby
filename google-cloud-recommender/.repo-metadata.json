@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Recommender is a service on Google Cloud that provides usage recommendations for Cloud products and services.",
     "ruby-cloud-env-prefix": "RECOMMENDER",
     "ruby-cloud-product-url": "https://cloud.google.com/recommender",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

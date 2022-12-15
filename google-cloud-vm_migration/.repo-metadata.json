@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Migrate for Compute Engine enables you to migrate (Lift and Shift) your virtual machines (VMs), with minor automatic modifications, from your source environment to Google Compute Engine.",
     "ruby-cloud-product-url": "https://cloud.google.com/migrate/compute-engine/",
     "ruby-cloud-namespace-override": "VmMigration=VMMigration",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

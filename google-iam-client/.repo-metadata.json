@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Manages identity and access control policies for Google Cloud Platform resources.",
     "ruby-cloud-product-url": "https://cloud.google.com/iam",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

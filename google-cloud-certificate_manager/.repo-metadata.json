@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Certificate Manager lets you acquire and manage Transport Layer Security (TLS) (SSL) certificates for use with classic external HTTP(S) load balancers in Google Cloud.",
     "ruby-cloud-product-url": "https://cloud.google.com/certificate-manager",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }
