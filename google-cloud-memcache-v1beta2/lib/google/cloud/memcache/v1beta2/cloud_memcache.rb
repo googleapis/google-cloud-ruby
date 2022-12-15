@@ -48,7 +48,7 @@ module Google
         # Note that location_id must be a GCP `region`; for example:
         # * `projects/my-memcached-project/locations/us-central1/instances/my-memcached`
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/memcache/v1beta2/cloud_memcache"
         #     client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new

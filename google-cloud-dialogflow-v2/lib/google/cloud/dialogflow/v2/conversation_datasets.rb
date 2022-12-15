@@ -37,7 +37,7 @@ module Google
         # Conversation datasets contain raw conversation files and their
         # customizable metadata that can be used for model training.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/conversation_datasets"
         #     client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new

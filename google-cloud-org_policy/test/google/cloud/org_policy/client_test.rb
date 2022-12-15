@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::OrgPolicy::ClientConstructionMinitest < Minitest::Test
-  def test_org_policy
+  def test_org_policy_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::OrgPolicy.org_policy do |config|

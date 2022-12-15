@@ -34,7 +34,7 @@ module Google
         # The service that an application uses to manipulate topics, and to send
         # messages to a topic.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/pubsub/v1/publisher"
         #     client = ::Google::Cloud::PubSub::V1::Publisher::Client.new

@@ -36,7 +36,7 @@ module Google
         # authorization policies. Refer to per API resource documentation for more
         # information.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/network_security/v1beta1/network_security"
         #     client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new

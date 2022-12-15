@@ -33,7 +33,7 @@ module Google
         # Provides text analysis operations such as sentiment analysis and entity
         # recognition.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/language/v1/language_service"
         #     client = ::Google::Cloud::Language::V1::LanguageService::Client.new

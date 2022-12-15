@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "The client library for the Google Network Security V1beta1 API.",
     "ruby-cloud-product-url": "https://cloud.google.com/traffic-director/docs/reference/network-security/rest/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

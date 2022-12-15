@@ -33,7 +33,7 @@ module Google
         ##
         # Service that implements Google Cloud Text-to-Speech API.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/text_to_speech/v1beta1/text_to_speech"
         #     client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new

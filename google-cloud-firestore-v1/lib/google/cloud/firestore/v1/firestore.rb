@@ -39,7 +39,7 @@ module Google
         # integrations with Firebase and Google Cloud Platform (GCP) accelerate
         # building truly serverless apps.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/firestore/v1/firestore"
         #     client = ::Google::Cloud::Firestore::V1::Firestore::Client.new

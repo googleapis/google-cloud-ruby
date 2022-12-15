@@ -34,7 +34,7 @@ module Google
         #
         # This service helps you troubleshoot access issues for Google Cloud resources.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/policy_troubleshooter/v1/iam_checker"
         #     client = ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Client.new

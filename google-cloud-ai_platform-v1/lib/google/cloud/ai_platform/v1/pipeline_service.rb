@@ -36,7 +36,7 @@ module Google
         # `TrainingPipeline` resources (used for AutoML and custom training) and
         # `PipelineJob` resources (used for Vertex AI Pipelines).
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/pipeline_service"
         #     client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new

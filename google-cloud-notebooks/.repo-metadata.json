@@ -14,5 +14,5 @@
     "ruby-cloud-description": "AI Platform Notebooks makes it easy to manage JupyterLab instances through a protected, publicly available notebook instance URL. A JupyterLab instance is a Deep Learning virtual machine instance with the latest machine learning and data science libraries pre-installed.",
     "ruby-cloud-env-prefix": "NOTEBOOKS",
     "ruby-cloud-product-url": "https://cloud.google.com/ai-platform-notebooks",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

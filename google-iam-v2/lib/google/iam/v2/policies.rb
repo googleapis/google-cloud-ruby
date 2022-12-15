@@ -32,7 +32,7 @@ module Google
       ##
       # An interface for managing Identity and Access Management (IAM) policies.
       #
-      # To load this service and instantiate a client:
+      # @example Load this service and instantiate a gRPC client
       #
       #     require "google/iam/v2/policies"
       #     client = ::Google::Iam::V2::Policies::Client.new

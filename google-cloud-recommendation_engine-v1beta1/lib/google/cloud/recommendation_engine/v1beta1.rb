@@ -26,9 +26,9 @@ module Google
   module Cloud
     module RecommendationEngine
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/recommendation_engine/v1beta1"
       #     client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new

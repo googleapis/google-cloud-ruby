@@ -34,7 +34,7 @@ module Google
         ##
         # Service to manage AssuredWorkloads.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/assured_workloads/v1/assured_workloads_service"
         #     client = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new

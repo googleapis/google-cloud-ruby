@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Notebooks::ClientConstructionMinitest < Minitest::Test
-  def test_notebook_service
+  def test_notebook_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Notebooks.notebook_service do |config|

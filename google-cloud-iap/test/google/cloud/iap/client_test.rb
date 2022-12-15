@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Iap::ClientConstructionMinitest < Minitest::Test
-  def test_identity_aware_proxy_admin_service
+  def test_identity_aware_proxy_admin_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Iap.identity_aware_proxy_admin_service do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::Iap::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_identity_aware_proxy_o_auth_service
+  def test_identity_aware_proxy_o_auth_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Iap.identity_aware_proxy_o_auth_service do |config|

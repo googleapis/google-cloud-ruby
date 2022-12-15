@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
-  def test_executions
+  def test_executions_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Run.executions do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_jobs
+  def test_jobs_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Run.jobs do |config|
@@ -42,7 +42,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_revisions
+  def test_revisions_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Run.revisions do |config|
@@ -52,7 +52,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_services
+  def test_services_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Run.services do |config|
@@ -62,7 +62,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_tasks
+  def test_tasks_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Run.tasks do |config|

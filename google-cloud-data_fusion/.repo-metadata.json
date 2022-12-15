@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Cloud Data Fusion is a fully managed, cloud-native, enterprise data integration service for quickly building and managing data pipelines.",
     "ruby-cloud-product-url": "https://cloud.google.com/data-fusion",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

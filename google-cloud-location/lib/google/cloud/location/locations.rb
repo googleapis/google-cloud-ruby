@@ -33,7 +33,7 @@ module Google
       # a service. Service-specific metadata is provided through the
       # {::Google::Cloud::Location::Location#metadata Location.metadata} field.
       #
-      # To load this service and instantiate a client:
+      # @example Load this service and instantiate a gRPC client
       #
       #     require "google/cloud/location/locations"
       #     client = ::Google::Cloud::Location::Locations::Client.new

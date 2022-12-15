@@ -33,7 +33,7 @@ module Google
         ##
         # A service handles client event report.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/talent/v4beta1/event_service"
         #     client = ::Google::Cloud::Talent::V4beta1::EventService::Client.new

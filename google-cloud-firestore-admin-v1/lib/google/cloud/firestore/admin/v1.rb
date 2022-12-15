@@ -24,9 +24,9 @@ module Google
     module Firestore
       module Admin
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/firestore/admin/v1"
         #     client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new

@@ -46,7 +46,7 @@ module Google
         # form:
         # `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/metastore/v1/dataproc_metastore_federation"
         #     client = ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client.new

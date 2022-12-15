@@ -39,7 +39,7 @@ module Google
           # features such as Digital Rights Management (DRM), audio equalization, content
           # concatenation, and digital ad-stitch ready content generation.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/video/transcoder/v1/transcoder_service"
           #     client = ::Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new

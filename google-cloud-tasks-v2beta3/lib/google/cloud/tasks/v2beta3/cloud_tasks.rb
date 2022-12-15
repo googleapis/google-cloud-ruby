@@ -34,7 +34,7 @@ module Google
         # Cloud Tasks allows developers to manage the execution of background
         # work in their applications.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/tasks/v2beta3/cloud_tasks"
         #     client = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new

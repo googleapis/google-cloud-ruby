@@ -24,9 +24,9 @@ module Google
   module Cloud
     module Vision
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/vision/v1p3beta1"
       #     client = ::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new

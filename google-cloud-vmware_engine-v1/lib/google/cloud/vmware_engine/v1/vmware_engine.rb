@@ -34,7 +34,7 @@ module Google
         ##
         # VMwareEngine manages VMware's private clusters in the Cloud.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/vmware_engine/v1/vmware_engine"
         #     client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new

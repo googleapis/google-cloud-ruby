@@ -24,9 +24,9 @@ module Google
     module Bigquery
       module DataExchange
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/bigquery/data_exchange/v1beta1"
         #     client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new

@@ -34,7 +34,7 @@ module Google
         # services in data planes that runs in a remote datacenter without
         # requiring customers to open firewalls on their runtime plane.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/apigee_connect/v1/tether"
         #     client = ::Google::Cloud::ApigeeConnect::V1::Tether::Client.new

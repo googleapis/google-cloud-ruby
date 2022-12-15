@@ -33,7 +33,7 @@ module Google
         ##
         # API for working with the system policy.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/binary_authorization/v1beta1/system_policy"
         #     client = ::Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Client.new

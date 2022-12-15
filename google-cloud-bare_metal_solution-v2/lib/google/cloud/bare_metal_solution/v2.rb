@@ -23,9 +23,9 @@ module Google
   module Cloud
     module BareMetalSolution
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/bare_metal_solution/v2"
       #     client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new

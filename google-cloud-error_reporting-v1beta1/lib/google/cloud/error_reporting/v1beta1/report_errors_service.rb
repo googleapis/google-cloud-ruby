@@ -33,7 +33,7 @@ module Google
         ##
         # An API for reporting error events.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/error_reporting/v1beta1/report_errors_service"
         #     client = ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client.new

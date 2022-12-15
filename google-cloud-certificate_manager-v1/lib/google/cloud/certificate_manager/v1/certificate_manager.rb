@@ -59,7 +59,7 @@ module Google
         #
         # Provides methods to manage Cloud Certificate Manager entities.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/certificate_manager/v1/certificate_manager"
         #     client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Client.new

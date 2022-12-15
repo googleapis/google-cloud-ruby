@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "The Data Policy Service provides APIs for managing the BigQuery label-policy bindings.",
     "ruby-cloud-product-url": "https://cloud.google.com/bigquery",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

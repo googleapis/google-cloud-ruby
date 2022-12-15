@@ -14,5 +14,5 @@
     "ruby-cloud-description": "The Service Account Credentials API creates short-lived credentials for Identity and Access Management (IAM) service accounts. You can also use this API to sign JSON Web Tokens (JWTs), as well as blobs of binary data that contain other types of tokens.",
     "ruby-cloud-env-prefix": "IAM_CREDENTIALS",
     "ruby-cloud-product-url": "https://cloud.google.com/iam",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

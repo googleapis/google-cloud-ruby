@@ -37,7 +37,7 @@ module Google
         # * Profiles for a single deployment must be created in ascending time order.
         # * Profiles can be created in either online or offline mode, see below.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/profiler/v2/profiler_service"
         #     client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new

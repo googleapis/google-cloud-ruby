@@ -36,7 +36,7 @@ module Google
         # For more information, see the [API interactions
         # guide](https://cloud.google.com/dialogflow/docs/api-overview).
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/sessions"
         #     client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new

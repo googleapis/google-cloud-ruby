@@ -49,8 +49,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::DatasetService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/DatasetService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DatasetService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -62,7 +62,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [DatasetService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.dataset_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -71,8 +71,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:DatasetService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:DatasetService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -80,8 +80,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::EndpointService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/EndpointService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the EndpointService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -92,7 +92,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [EndpointService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.endpoint_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -101,8 +101,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:EndpointService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:EndpointService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -110,8 +110,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/FeaturestoreOnlineServingService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the FeaturestoreOnlineServingService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -122,7 +122,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [FeaturestoreOnlineServingService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.featurestore_online_serving_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -131,8 +131,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:FeaturestoreOnlineServingService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:FeaturestoreOnlineServingService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -140,8 +140,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::FeaturestoreService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/FeaturestoreService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the FeaturestoreService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -152,7 +152,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [FeaturestoreService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.featurestore_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -161,8 +161,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:FeaturestoreService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:FeaturestoreService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -170,8 +170,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::IndexEndpointService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/IndexEndpointService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the IndexEndpointService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -182,7 +182,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [IndexEndpointService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.index_endpoint_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -191,8 +191,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:IndexEndpointService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:IndexEndpointService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -200,8 +200,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::IndexService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/IndexService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the IndexService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -212,7 +212,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [IndexService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.index_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -221,8 +221,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:IndexService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:IndexService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -230,8 +230,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::JobService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/JobService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the JobService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -242,7 +242,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [JobService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.job_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -251,8 +251,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:JobService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:JobService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -260,8 +260,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::MetadataService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/MetadataService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the MetadataService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -272,7 +272,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [MetadataService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.metadata_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -281,8 +281,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:MetadataService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:MetadataService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -290,8 +290,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::MigrationService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/MigrationService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the MigrationService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -303,7 +303,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [MigrationService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.migration_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -312,8 +312,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:MigrationService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:MigrationService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -321,8 +321,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::ModelService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/ModelService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ModelService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -333,7 +333,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [ModelService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.model_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -342,8 +342,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:ModelService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:ModelService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -351,8 +351,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::PipelineService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/PipelineService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PipelineService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -365,7 +365,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [PipelineService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.pipeline_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -374,8 +374,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:PipelineService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:PipelineService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -383,8 +383,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::PredictionService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/PredictionService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PredictionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -395,7 +395,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [PredictionService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.prediction_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -404,8 +404,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:PredictionService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:PredictionService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -413,8 +413,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/SpecialistPoolService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SpecialistPoolService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -430,7 +430,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [SpecialistPoolService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.specialist_pool_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -439,8 +439,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:SpecialistPoolService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:SpecialistPoolService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -448,8 +448,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::TensorboardService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/TensorboardService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TensorboardService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -460,7 +460,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [TensorboardService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.tensorboard_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -469,8 +469,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:TensorboardService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:TensorboardService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -478,8 +478,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::AIPlatform::V1::VizierService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/VizierService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the VizierService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -494,7 +494,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [VizierService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.vizier_service version: :v1, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
@@ -503,8 +503,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::AIPlatform.const_get package_name
-        package_module.const_get(:VizierService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:VizierService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -524,7 +524,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

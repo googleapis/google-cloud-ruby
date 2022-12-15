@@ -33,7 +33,7 @@ module Google
       ##
       # Manages WorkloadIdentityPools.
       #
-      # To load this service and instantiate a client:
+      # @example Load this service and instantiate a gRPC client
       #
       #     require "google/iam/v1beta/workload_identity_pools"
       #     client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new

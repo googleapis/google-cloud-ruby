@@ -35,7 +35,7 @@ module Google
         # A service that migrates resources from automl.googleapis.com,
         # datalabeling.googleapis.com and ml.googleapis.com to Vertex AI.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/migration_service"
         #     client = ::Google::Cloud::AIPlatform::V1::MigrationService::Client.new

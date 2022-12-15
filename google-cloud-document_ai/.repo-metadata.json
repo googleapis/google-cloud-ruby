@@ -15,5 +15,5 @@
     "ruby-cloud-env-prefix": "DOCUMENT_AI",
     "ruby-cloud-product-url": "https://cloud.google.com/document-ai/",
     "ruby-cloud-namespace-override": "DocumentAi=DocumentAI",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

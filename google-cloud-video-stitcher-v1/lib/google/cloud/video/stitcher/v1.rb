@@ -24,9 +24,9 @@ module Google
     module Video
       module Stitcher
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/video/stitcher/v1"
         #     client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new

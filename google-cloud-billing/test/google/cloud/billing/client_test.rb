@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Billing::ClientConstructionMinitest < Minitest::Test
-  def test_cloud_billing_service
+  def test_cloud_billing_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Billing.cloud_billing_service do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::Billing::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_cloud_catalog_service
+  def test_cloud_catalog_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Billing.cloud_catalog_service do |config|

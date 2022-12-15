@@ -49,8 +49,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Run::V2::Executions::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Executions/Client.html)
-      # for version V2 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V2 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Executions service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -61,7 +61,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [Executions::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.executions version: :v2, &block
         require "google/cloud/run/#{version.to_s.downcase}"
@@ -70,8 +70,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Run.const_get package_name
-        package_module.const_get(:Executions).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Run.const_get(package_name).const_get(:Executions)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -79,8 +79,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Run::V2::Jobs::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Jobs/Client.html)
-      # for version V2 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V2 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Jobs service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -91,7 +91,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [Jobs::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.jobs version: :v2, &block
         require "google/cloud/run/#{version.to_s.downcase}"
@@ -100,8 +100,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Run.const_get package_name
-        package_module.const_get(:Jobs).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Run.const_get(package_name).const_get(:Jobs)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -109,8 +109,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Run::V2::Revisions::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Revisions/Client.html)
-      # for version V2 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V2 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Revisions service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -121,7 +121,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [Revisions::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.revisions version: :v2, &block
         require "google/cloud/run/#{version.to_s.downcase}"
@@ -130,8 +130,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Run.const_get package_name
-        package_module.const_get(:Revisions).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Run.const_get(package_name).const_get(:Revisions)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -139,8 +139,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Run::V2::Services::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Services/Client.html)
-      # for version V2 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V2 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Services service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -151,7 +151,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [Services::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.services version: :v2, &block
         require "google/cloud/run/#{version.to_s.downcase}"
@@ -160,8 +160,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Run.const_get package_name
-        package_module.const_get(:Services).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Run.const_get(package_name).const_get(:Services)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -169,8 +169,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Run::V2::Tasks::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Tasks/Client.html)
-      # for version V2 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V2 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Tasks service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -181,7 +181,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
-      # @return [Tasks::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.tasks version: :v2, &block
         require "google/cloud/run/#{version.to_s.downcase}"
@@ -190,8 +190,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Run.const_get package_name
-        package_module.const_get(:Tasks).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Run.const_get(package_name).const_get(:Tasks)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -211,7 +211,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

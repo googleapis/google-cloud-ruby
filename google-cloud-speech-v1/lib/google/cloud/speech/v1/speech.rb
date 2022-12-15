@@ -34,7 +34,7 @@ module Google
         ##
         # Service that implements Google Cloud Speech API.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/speech/v1/speech"
         #     client = ::Google::Cloud::Speech::V1::Speech::Client.new

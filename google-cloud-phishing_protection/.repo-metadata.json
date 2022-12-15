@@ -15,5 +15,5 @@
     "ruby-cloud-env-prefix": "PHISHING_PROTECTION",
     "ruby-cloud-product-url": "https://cloud.google.com/phishing-protection",
     "ruby-cloud-service-override": "PhishingProtectionServiceV1Beta1=PhishingProtectionService",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

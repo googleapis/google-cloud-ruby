@@ -33,7 +33,7 @@ module Google
         ##
         # Service to report phishing URIs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/phishing_protection/v1beta1/phishing_protection_service"
         #     client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new

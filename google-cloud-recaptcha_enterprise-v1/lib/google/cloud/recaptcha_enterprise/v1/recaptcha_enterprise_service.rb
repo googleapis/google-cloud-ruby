@@ -33,7 +33,7 @@ module Google
         ##
         # Service to determine the likelihood an event is legitimate.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/recaptcha_enterprise/v1/recaptcha_enterprise_service"
         #     client = ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new

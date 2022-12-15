@@ -36,7 +36,7 @@ module Google
         # images, such as face, landmark, logo, label, and text detection. The
         # ImageAnnotator service returns detected entities from the images.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/vision/v1/image_annotator"
         #     client = ::Google::Cloud::Vision::V1::ImageAnnotator::Client.new

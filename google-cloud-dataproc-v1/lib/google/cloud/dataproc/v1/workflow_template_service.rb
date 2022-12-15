@@ -35,7 +35,7 @@ module Google
         # The API interface for managing Workflow Templates in the
         # Dataproc API.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataproc/v1/workflow_template_service"
         #     client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new

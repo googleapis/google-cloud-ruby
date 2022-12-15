@@ -33,7 +33,7 @@ module Google
         ##
         # Service for configuring logs-based metrics.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/logging/v2/metrics_service"
         #     client = ::Google::Cloud::Logging::V2::MetricsService::Client.new

@@ -34,7 +34,7 @@ module Google
         ##
         # A service that application uses to manipulate triggers and functions.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/functions/v1/cloud_functions_service"
         #     client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new

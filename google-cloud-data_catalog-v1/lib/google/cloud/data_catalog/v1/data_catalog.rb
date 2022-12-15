@@ -34,7 +34,7 @@ module Google
         # Data Catalog API service allows you to discover, understand, and manage
         # your data.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/data_catalog/v1/data_catalog"
         #     client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new

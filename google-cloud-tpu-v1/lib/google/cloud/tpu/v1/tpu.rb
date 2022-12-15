@@ -36,7 +36,7 @@ module Google
         #
         # TPU API v1
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/tpu/v1/tpu"
         #     client = ::Google::Cloud::Tpu::V1::Tpu::Client.new

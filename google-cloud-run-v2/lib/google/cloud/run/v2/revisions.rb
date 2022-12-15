@@ -34,7 +34,7 @@ module Google
         ##
         # Cloud Run Revision Control Plane API.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/run/v2/revisions"
         #     client = ::Google::Cloud::Run::V2::Revisions::Client.new
