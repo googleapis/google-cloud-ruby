@@ -204,7 +204,7 @@ module Google
       #   Google::Cloud::Trace.get.create_span "my_span"
       #
       def self.set trace
-        trace_context = trace ? trace.trace_context : nil
+        trace_context = trace&.trace_context
         Stackdriver::Core::TraceContext.set trace_context
         Thread.current[THREAD_KEY] = trace
       end
