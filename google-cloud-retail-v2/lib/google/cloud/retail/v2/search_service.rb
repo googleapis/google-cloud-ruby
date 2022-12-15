@@ -34,7 +34,7 @@ module Google
         # Service for search.
         #
         # This feature is only available for users who have Retail Search enabled.
-        # Please enable Retail Search on Cloud Console before using this feature.
+        # Enable Retail Search on Cloud Console before using this feature.
         #
         # @example Load this service and instantiate a gRPC client
         #

@@ -57,12 +57,14 @@ class ::Google::Cloud::Retail::V2::UserEventService::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     parent = "hello world"
     user_event = {}
+    write_async = true
 
     write_user_event_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :write_user_event, name
       assert_kind_of ::Google::Cloud::Retail::V2::WriteUserEventRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Retail::V2::UserEvent), request["user_event"]
+      assert_equal true, request["write_async"]
       refute_nil options
     end
 
@@ -73,31 +75,31 @@ class ::Google::Cloud::Retail::V2::UserEventService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.write_user_event({ parent: parent, user_event: user_event }) do |response, operation|
+      client.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.write_user_event parent: parent, user_event: user_event do |response, operation|
+      client.write_user_event parent: parent, user_event: user_event, write_async: write_async do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.write_user_event ::Google::Cloud::Retail::V2::WriteUserEventRequest.new(parent: parent, user_event: user_event) do |response, operation|
+      client.write_user_event ::Google::Cloud::Retail::V2::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.write_user_event({ parent: parent, user_event: user_event }, grpc_options) do |response, operation|
+      client.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.write_user_event(::Google::Cloud::Retail::V2::WriteUserEventRequest.new(parent: parent, user_event: user_event), grpc_options) do |response, operation|
+      client.write_user_event(::Google::Cloud::Retail::V2::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -115,18 +117,23 @@ class ::Google::Cloud::Retail::V2::UserEventService::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    prebuilt_rule = "hello world"
     parent = "hello world"
     user_event = "hello world"
     uri = "hello world"
     ets = 42
+    raw_json = "hello world"
 
     collect_user_event_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :collect_user_event, name
       assert_kind_of ::Google::Cloud::Retail::V2::CollectUserEventRequest, request
+      assert_equal "hello world", request["prebuilt_rule"]
+      assert_equal :prebuilt_rule, request.conversion_rule
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["user_event"]
       assert_equal "hello world", request["uri"]
       assert_equal 42, request["ets"]
+      assert_equal "hello world", request["raw_json"]
       refute_nil options
     end
 
@@ -137,31 +144,31 @@ class ::Google::Cloud::Retail::V2::UserEventService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.collect_user_event({ parent: parent, user_event: user_event, uri: uri, ets: ets }) do |response, operation|
+      client.collect_user_event({ prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.collect_user_event parent: parent, user_event: user_event, uri: uri, ets: ets do |response, operation|
+      client.collect_user_event prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.collect_user_event ::Google::Cloud::Retail::V2::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets) do |response, operation|
+      client.collect_user_event ::Google::Cloud::Retail::V2::CollectUserEventRequest.new(prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.collect_user_event({ parent: parent, user_event: user_event, uri: uri, ets: ets }, grpc_options) do |response, operation|
+      client.collect_user_event({ prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.collect_user_event(::Google::Cloud::Retail::V2::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets), grpc_options) do |response, operation|
+      client.collect_user_event(::Google::Cloud::Retail::V2::CollectUserEventRequest.new(prebuilt_rule: prebuilt_rule, parent: parent, user_event: user_event, uri: uri, ets: ets, raw_json: raw_json), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
