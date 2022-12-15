@@ -41,6 +41,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :pages_per_shard, :int32, 1
       optional :pages_overlap, :int32, 2
     end
+    add_message "google.cloud.documentai.v1beta3.OcrConfig" do
+      optional :enable_native_pdf_parsing, :bool, 3
+    end
   end
 end
 
@@ -56,6 +59,7 @@ module Google
         DocumentOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.DocumentOutputConfig").msgclass
         DocumentOutputConfig::GcsOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig").msgclass
         DocumentOutputConfig::GcsOutputConfig::ShardingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig").msgclass
+        OcrConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.OcrConfig").msgclass
       end
     end
   end

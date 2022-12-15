@@ -114,6 +114,16 @@ module Google
             end
           end
         end
+
+        # Config for Document OCR.
+        # @!attribute [rw] enable_native_pdf_parsing
+        #   @return [::Boolean]
+        #     Enables special handling for PDFs with existing text information. Results
+        #     in better text extraction quality in such PDF inputs.
+        class OcrConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

@@ -15,6 +15,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :available_locations, :message, 4, "google.cloud.documentai.v1beta3.ProcessorType.LocationInfo"
       optional :allow_creation, :bool, 6
       optional :launch_stage, :enum, 8, "google.api.LaunchStage"
+      repeated :sample_document_uris, :string, 9
     end
     add_message "google.cloud.documentai.v1beta3.ProcessorType.LocationInfo" do
       optional :location_id, :string, 1
