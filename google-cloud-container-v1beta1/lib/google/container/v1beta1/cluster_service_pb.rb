@@ -452,6 +452,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :desired_protect_config, :message, 112, "google.container.v1beta1.ProtectConfig"
       optional :desired_gateway_api_config, :message, 114, "google.container.v1beta1.GatewayAPIConfig"
       optional :desired_node_pool_logging_config, :message, 116, "google.container.v1beta1.NodePoolLoggingConfig"
+      optional :desired_stack_type, :enum, 119, "google.container.v1beta1.StackType"
     end
     add_message "google.container.v1beta1.Operation" do
       optional :name, :string, 1
@@ -1290,6 +1291,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :LEGACY_DATAPATH, 1
       value :ADVANCED_DATAPATH, 2
     end
+    add_enum "google.container.v1beta1.StackType" do
+      value :STACK_TYPE_UNSPECIFIED, 0
+      value :IPV4, 1
+      value :IPV4_IPV6, 2
+    end
   end
 end
 
@@ -1506,6 +1512,7 @@ module Google
         UpgradeResourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.UpgradeResourceType").enummodule
         NodePoolUpdateStrategy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodePoolUpdateStrategy").enummodule
         DatapathProvider = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.DatapathProvider").enummodule
+        StackType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.StackType").enummodule
       end
     end
   end
