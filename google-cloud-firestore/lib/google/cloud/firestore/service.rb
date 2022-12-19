@@ -127,16 +127,15 @@ module Google
         ##
         # Returns Google::Cloud::Firestore::V1::RunAggregationQueryResponse
         def run_aggregate_query parent, structured_aggregation_query, transaction: nil
-          request = {
+          request = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
             parent: parent,
             structured_aggregation_query: structured_aggregation_query
-          }
+          )
           if transaction.is_a? String
-            request[:transaction] = transaction
+            request.transaction = transaction
           elsif transaction
-            request[:new_transaction] = transaction
+            request.new_transaction = transaction
           end
-
           firestore.run_aggregation_query request
         end
 

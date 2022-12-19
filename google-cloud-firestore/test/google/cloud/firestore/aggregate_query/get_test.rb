@@ -25,9 +25,9 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
   end
 
   it "gets an aggregate query with a count" do
-    expected_params = {
-      :parent => parent,
-      :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+    expected_params = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
+      parent: parent,
+      structured_aggregation_query: Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
         structured_query: expected_structured_query,
         aggregations: [
           Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
@@ -36,7 +36,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
           )
         ]
       )
-    }
+    )
     mocked_response = [
       Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
         result: Google::Cloud::Firestore::V1::AggregationResult.new(
@@ -45,7 +45,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
           }
         )
       )
-    ]
+    ].to_enum
     firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params]
 
     aq = query.aggregate_query.add_count
@@ -61,9 +61,9 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
   end
 
   it "gets an aggregate query with custom alias" do
-    expected_params = {
-      :parent => parent,
-      :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+    expected_params = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
+      parent: parent,
+      structured_aggregation_query: Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
         structured_query: expected_structured_query,
         aggregations: [
           Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
@@ -72,7 +72,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
           )
         ]
       )
-    }
+    )
     mocked_response = [
       Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
         result: Google::Cloud::Firestore::V1::AggregationResult.new(
@@ -81,7 +81,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
           }
         )
       )
-    ]
+    ].to_enum
     firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params]
 
     aq = query.aggregate_query.add_count aggregate_alias: "total_score"
@@ -97,9 +97,9 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
   end
 
   it "gets multiple aggregates of query" do
-    expected_params = {
-      :parent => parent,
-      :structured_aggregation_query => Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+    expected_params = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
+      parent: parent,
+      structured_aggregation_query: Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
         structured_query: expected_structured_query,
         aggregations: [
           Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
@@ -116,7 +116,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
           ),
         ]
       )
-    }
+    )
     mocked_response = [
       Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
         result: Google::Cloud::Firestore::V1::AggregationResult.new(
@@ -127,7 +127,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
           }
         )
       )
-    ]
+    ].to_enum
     firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params]
 
     aq = query.aggregate_query.add_count(aggregate_alias: "alias_1")
