@@ -62,6 +62,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :cors_settings, :message, 2, "google.cloud.iap.v1.CorsSettings"
       optional :oauth_settings, :message, 3, "google.cloud.iap.v1.OAuthSettings"
       optional :reauth_settings, :message, 6, "google.cloud.iap.v1.ReauthSettings"
+      optional :allowed_domains_settings, :message, 7, "google.cloud.iap.v1.AllowedDomainsSettings"
     end
     add_message "google.cloud.iap.v1.GcipSettings" do
       repeated :tenant_ids, :string, 1
@@ -89,10 +90,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MINIMUM, 1
       value :DEFAULT, 2
     end
+    add_message "google.cloud.iap.v1.AllowedDomainsSettings" do
+      proto3_optional :enable, :bool, 1
+      repeated :domains, :string, 2
+    end
     add_message "google.cloud.iap.v1.ApplicationSettings" do
       optional :csm_settings, :message, 1, "google.cloud.iap.v1.CsmSettings"
       optional :access_denied_page_settings, :message, 2, "google.cloud.iap.v1.AccessDeniedPageSettings"
       optional :cookie_domain, :message, 3, "google.protobuf.StringValue"
+      optional :attribute_propagation_settings, :message, 4, "google.cloud.iap.v1.AttributePropagationSettings"
     end
     add_message "google.cloud.iap.v1.CsmSettings" do
       optional :rctoken_aud, :message, 1, "google.protobuf.StringValue"
@@ -100,6 +106,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.iap.v1.AccessDeniedPageSettings" do
       optional :access_denied_page_uri, :message, 1, "google.protobuf.StringValue"
       optional :generate_troubleshooting_uri, :message, 2, "google.protobuf.BoolValue"
+      proto3_optional :remediation_token_generation_enabled, :message, 3, "google.protobuf.BoolValue"
+    end
+    add_message "google.cloud.iap.v1.AttributePropagationSettings" do
+      proto3_optional :expression, :string, 1
+      repeated :output_credentials, :enum, 2, "google.cloud.iap.v1.AttributePropagationSettings.OutputCredentials"
+      proto3_optional :enable, :bool, 3
+    end
+    add_enum "google.cloud.iap.v1.AttributePropagationSettings.OutputCredentials" do
+      value :OUTPUT_CREDENTIALS_UNSPECIFIED, 0
+      value :HEADER, 1
+      value :JWT, 2
+      value :RCTOKEN, 3
     end
     add_message "google.cloud.iap.v1.ListBrandsRequest" do
       optional :parent, :string, 1
@@ -171,9 +189,12 @@ module Google
         ReauthSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.ReauthSettings").msgclass
         ReauthSettings::Method = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.ReauthSettings.Method").enummodule
         ReauthSettings::PolicyType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.ReauthSettings.PolicyType").enummodule
+        AllowedDomainsSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.AllowedDomainsSettings").msgclass
         ApplicationSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.ApplicationSettings").msgclass
         CsmSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.CsmSettings").msgclass
         AccessDeniedPageSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.AccessDeniedPageSettings").msgclass
+        AttributePropagationSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.AttributePropagationSettings").msgclass
+        AttributePropagationSettings::OutputCredentials = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.AttributePropagationSettings.OutputCredentials").enummodule
         ListBrandsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.ListBrandsRequest").msgclass
         ListBrandsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.ListBrandsResponse").msgclass
         CreateBrandRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.iap.v1.CreateBrandRequest").msgclass
