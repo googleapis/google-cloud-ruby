@@ -1276,6 +1276,126 @@ module Google
             AVRO = 2
           end
         end
+
+        # Request message for
+        # {::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#remove_iam_policy DataprocMetastore.RemoveIamPolicy}.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Required. The relative resource name of the dataplane resource to remove
+        #     IAM policy, in the following form:
+        #
+        #     `projects/{project_id}/locations/{location_id}/services/{service_id}/databases/{database_id}`
+        #     or
+        #     `projects/{project_id}/locations/{location_id}/services/{service_id}/databases/{database_id}/tables/{table_id}`.
+        # @!attribute [rw] asynchronous
+        #   @return [::Boolean]
+        #     Optional. Removes IAM policy attached to database or table asynchronously
+        #     when it is set. The default is false.
+        class RemoveIamPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#remove_iam_policy DataprocMetastore.RemoveIamPolicy}.
+        # @!attribute [rw] success
+        #   @return [::Boolean]
+        #     True if the policy is successfully removed.
+        class RemoveIamPolicyResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#query_metadata DataprocMetastore.QueryMetadata}.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Required. The relative resource name of the metastore service to query
+        #     metadata, in the following format:
+        #
+        #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+        # @!attribute [rw] query
+        #   @return [::String]
+        #     Required. A read-only SQL query to execute against the metadata database.
+        #     The query cannot change or mutate the data.
+        class QueryMetadataRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#query_metadata DataprocMetastore.QueryMetadata}.
+        # @!attribute [rw] result_manifest_uri
+        #   @return [::String]
+        #     The manifest URI  is link to a JSON instance in Cloud Storage.
+        #     This instance manifests immediately along with QueryMetadataResponse. The
+        #     content of the URI is not retriable until the long-running operation query
+        #     against the metadata finishes.
+        class QueryMetadataResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#move_table_to_database DataprocMetastore.MoveTableToDatabase}.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Required. The relative resource name of the metastore service to mutate
+        #     metadata, in the following format:
+        #
+        #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+        # @!attribute [rw] table_name
+        #   @return [::String]
+        #     Required. The name of the table to be moved.
+        # @!attribute [rw] db_name
+        #   @return [::String]
+        #     Required. The name of the database where the table resides.
+        # @!attribute [rw] destination_db_name
+        #   @return [::String]
+        #     Required. The name of the database where the table should be moved.
+        class MoveTableToDatabaseRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#move_table_to_database DataprocMetastore.MoveTableToDatabase}.
+        class MoveTableToDatabaseResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#alter_metadata_resource_location DataprocMetastore.AlterMetadataResourceLocation}.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Required. The relative resource name of the metastore service to mutate
+        #     metadata, in the following format:
+        #
+        #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+        # @!attribute [rw] resource_name
+        #   @return [::String]
+        #     Required. The relative metadata resource name in the following format.
+        #
+        #     `databases/{database_id}`
+        #     or
+        #     `databases/{database_id}/tables/{table_id}`
+        #     or
+        #     `databases/{database_id}/tables/{table_id}/partitions/{partition_id}`
+        # @!attribute [rw] location_uri
+        #   @return [::String]
+        #     Required. The new location URI for the metadata resource.
+        class AlterMetadataResourceLocationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#alter_metadata_resource_location DataprocMetastore.AlterMetadataResourceLocation}.
+        class AlterMetadataResourceLocationResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

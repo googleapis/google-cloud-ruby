@@ -84,6 +84,26 @@
               "methods": [
                 "delete_backup"
               ]
+            },
+            "RemoveIamPolicy": {
+              "methods": [
+                "remove_iam_policy"
+              ]
+            },
+            "QueryMetadata": {
+              "methods": [
+                "query_metadata"
+              ]
+            },
+            "MoveTableToDatabase": {
+              "methods": [
+                "move_table_to_database"
+              ]
+            },
+            "AlterMetadataResourceLocation": {
+              "methods": [
+                "alter_metadata_resource_location"
+              ]
             }
           }
         }
