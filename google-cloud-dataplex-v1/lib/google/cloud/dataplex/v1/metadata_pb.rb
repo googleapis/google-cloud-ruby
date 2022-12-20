@@ -162,6 +162,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :options do
         optional :csv, :message, 10, "google.cloud.dataplex.v1.StorageFormat.CsvOptions"
         optional :json, :message, 11, "google.cloud.dataplex.v1.StorageFormat.JsonOptions"
+        optional :iceberg, :message, 12, "google.cloud.dataplex.v1.StorageFormat.IcebergOptions"
       end
     end
     add_message "google.cloud.dataplex.v1.StorageFormat.CsvOptions" do
@@ -172,6 +173,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dataplex.v1.StorageFormat.JsonOptions" do
       optional :encoding, :string, 1
+    end
+    add_message "google.cloud.dataplex.v1.StorageFormat.IcebergOptions" do
+      optional :metadata_location, :string, 1
     end
     add_enum "google.cloud.dataplex.v1.StorageFormat.Format" do
       value :FORMAT_UNSPECIFIED, 0
@@ -232,6 +236,7 @@ module Google
         StorageFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageFormat").msgclass
         StorageFormat::CsvOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageFormat.CsvOptions").msgclass
         StorageFormat::JsonOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageFormat.JsonOptions").msgclass
+        StorageFormat::IcebergOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageFormat.IcebergOptions").msgclass
         StorageFormat::Format = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageFormat.Format").enummodule
         StorageFormat::CompressionFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageFormat.CompressionFormat").enummodule
         StorageSystem = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageSystem").enummodule
