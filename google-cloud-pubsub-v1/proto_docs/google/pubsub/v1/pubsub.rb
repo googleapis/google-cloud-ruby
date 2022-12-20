@@ -464,8 +464,8 @@ module Google
         #     in responses from the server; it is ignored if it is set in any requests.
         # @!attribute [r] state
         #   @return [::Google::Cloud::PubSub::V1::Subscription::State]
-        #     Output only. An output-only field indicating whether or not the subscription can receive
-        #     messages.
+        #     Output only. An output-only field indicating whether or not the
+        #     subscription can receive messages.
         class Subscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -663,8 +663,8 @@ module Google
         #     subscription's backlog.
         # @!attribute [r] state
         #   @return [::Google::Cloud::PubSub::V1::BigQueryConfig::State]
-        #     Output only. An output-only field that indicates whether or not the subscription can
-        #     receive messages.
+        #     Output only. An output-only field that indicates whether or not the
+        #     subscription can receive messages.
         class BigQueryConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
