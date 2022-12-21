@@ -332,6 +332,35 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MYSQL, 1
       value :AVRO, 2
     end
+    add_message "google.cloud.metastore.v1beta.RemoveIamPolicyRequest" do
+      optional :resource, :string, 1
+      optional :asynchronous, :bool, 2
+    end
+    add_message "google.cloud.metastore.v1beta.RemoveIamPolicyResponse" do
+      optional :success, :bool, 1
+    end
+    add_message "google.cloud.metastore.v1beta.QueryMetadataRequest" do
+      optional :service, :string, 1
+      optional :query, :string, 2
+    end
+    add_message "google.cloud.metastore.v1beta.QueryMetadataResponse" do
+      optional :result_manifest_uri, :string, 1
+    end
+    add_message "google.cloud.metastore.v1beta.MoveTableToDatabaseRequest" do
+      optional :service, :string, 1
+      optional :table_name, :string, 2
+      optional :db_name, :string, 3
+      optional :destination_db_name, :string, 4
+    end
+    add_message "google.cloud.metastore.v1beta.MoveTableToDatabaseResponse" do
+    end
+    add_message "google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest" do
+      optional :service, :string, 1
+      optional :resource_name, :string, 2
+      optional :location_uri, :string, 3
+    end
+    add_message "google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse" do
+    end
   end
 end
 
@@ -394,6 +423,14 @@ module Google
         LocationMetadata::HiveMetastoreVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion").msgclass
         DatabaseDumpSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.DatabaseDumpSpec").msgclass
         DatabaseDumpSpec::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.DatabaseDumpSpec.Type").enummodule
+        RemoveIamPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.RemoveIamPolicyRequest").msgclass
+        RemoveIamPolicyResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.RemoveIamPolicyResponse").msgclass
+        QueryMetadataRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.QueryMetadataRequest").msgclass
+        QueryMetadataResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.QueryMetadataResponse").msgclass
+        MoveTableToDatabaseRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.MoveTableToDatabaseRequest").msgclass
+        MoveTableToDatabaseResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.MoveTableToDatabaseResponse").msgclass
+        AlterMetadataResourceLocationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest").msgclass
+        AlterMetadataResourceLocationResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse").msgclass
       end
     end
   end
