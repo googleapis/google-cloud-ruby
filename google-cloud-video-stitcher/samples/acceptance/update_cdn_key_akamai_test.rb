@@ -14,15 +14,18 @@
 
 require_relative "helper"
 
-describe "#list_cdn_keys", :stitcher_snippet do
-  it "lists the CDN keys" do
-    sample = SampleLoader.load "list_cdn_keys.rb"
+describe "#update_cdn_key_akamai", :stitcher_snippet do
+  it "updates the Akamai CDN key" do
+    sample = SampleLoader.load "update_cdn_key_akamai.rb"
 
-    refute_nil cloud_cdn_key
-    @cloud_cdn_key_created = true
+    refute_nil akamai_cdn_key
+    @akamai_cdn_key_created = true
 
-    assert_output(/CDN keys:\n#{cloud_cdn_key_name}/) do
-      sample.run project_id: project_id, location: location_id
+    out, _err = capture_io do
+      sample.run project_id: project_id, location: location_id, cdn_key_id: akamai_cdn_key_id, hostname: updated_hostname, akamai_token_key: akamai_token_key
     end
+
+    cdn_key_id_regex = Regexp.escape akamai_cdn_key_id
+    assert_match %r{Updated CDN key: projects/\S+/locations/#{location_id}/cdnKeys/#{cdn_key_id_regex}}, out
   end
 end

@@ -1,10 +1,10 @@
 require "google/cloud/video/stitcher"
 
-def cloud_cdn_def cdn_key_path, hostname, key_name, private_key
+def media_cdn_def cdn_key_path, hostname, key_name, private_key
   {
     name: cdn_key_path,
     hostname: hostname,
-    google_cdn_key: {
+    media_cdn_key: {
       key_name: key_name,
       private_key: private_key
     }
