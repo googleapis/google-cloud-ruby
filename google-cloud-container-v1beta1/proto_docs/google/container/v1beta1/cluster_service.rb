@@ -72,6 +72,29 @@ module Google
           end
         end
 
+        # Parameters that can be configured on Windows nodes.
+        # Windows Node Config that define the parameters that will be used to
+        # configure the Windows node pool settings
+        # @!attribute [rw] os_version
+        #   @return [::Google::Cloud::Container::V1beta1::WindowsNodeConfig::OSVersion]
+        #     OSVersion specifies the Windows node config to be used on the node
+        class WindowsNodeConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible OS version that can be used.
+          module OSVersion
+            # When OSVersion is not specified
+            OS_VERSION_UNSPECIFIED = 0
+
+            # LTSC2019 specifies to use LTSC2019 as the Windows Servercore Base Image
+            OS_VERSION_LTSC2019 = 1
+
+            # LTSC2022 specifies to use LTSC2022 as the Windows Servercore Base Image
+            OS_VERSION_LTSC2022 = 2
+          end
+        end
+
         # Node kubelet configs.
         # @!attribute [rw] cpu_manager_policy
         #   @return [::String]
@@ -317,6 +340,17 @@ module Google
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
         #     Logging configuration.
+        # @!attribute [rw] windows_node_config
+        #   @return [::Google::Cloud::Container::V1beta1::WindowsNodeConfig]
+        #     Parameters that can be configured on Windows nodes.
+        # @!attribute [rw] local_nvme_ssd_block_config
+        #   @return [::Google::Cloud::Container::V1beta1::LocalNvmeSsdBlockConfig]
+        #     Parameters for using raw-block Local NVMe SSDs.
+        # @!attribute [rw] ephemeral_storage_local_ssd_config
+        #   @return [::Google::Cloud::Container::V1beta1::EphemeralStorageLocalSsdConfig]
+        #     Parameters for the node ephemeral storage using Local SSDs.
+        #     If unspecified, ephemeral storage is backed by the boot disk.
+        #     This field is functionally equivalent to the ephemeral_storage_config
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -487,6 +521,38 @@ module Google
         #     interfaces. Each local SSD is 375 GB in size.
         #     If zero, it means to disable using local SSDs as ephemeral storage.
         class EphemeralStorageConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # LocalNvmeSsdBlockConfig contains configuration for using raw-block local
+        # NVMe SSDs
+        # @!attribute [rw] local_ssd_count
+        #   @return [::Integer]
+        #     The number of raw-block local NVMe SSD disks to be attached to the node.
+        #     Each local SSD is 375 GB in size. If zero, it means no raw-block local NVMe
+        #     SSD disks to be attached to the node.
+        #     The limit for this value is dependent upon the maximum number of
+        #     disks available on a machine per zone. See:
+        #     https://cloud.google.com/compute/docs/disks/local-ssd
+        #     for more information.
+        class LocalNvmeSsdBlockConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # EphemeralStorageLocalSsdConfig contains configuration for the node ephemeral
+        # storage using Local SSDs.
+        # @!attribute [rw] local_ssd_count
+        #   @return [::Integer]
+        #     Number of local SSDs to use to back ephemeral storage. Uses NVMe
+        #     interfaces. Each local SSD is 375 GB in size.
+        #     If zero, it means to disable using local SSDs as ephemeral storage.
+        #     The limit for this value is dependent upon the maximum number of
+        #     disks available on a machine per zone. See:
+        #     https://cloud.google.com/compute/docs/disks/local-ssd
+        #     for more information.
+        class EphemeralStorageLocalSsdConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2290,6 +2356,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::ResourceLabels]
         #     The resource labels for the node pool to use to annotate any related
         #     Google Compute Engine resources.
+        # @!attribute [rw] windows_node_config
+        #   @return [::Google::Cloud::Container::V1beta1::WindowsNodeConfig]
+        #     Parameters that can be configured on Windows nodes.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

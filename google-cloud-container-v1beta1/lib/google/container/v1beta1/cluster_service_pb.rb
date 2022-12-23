@@ -26,6 +26,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CGROUP_MODE_V1, 1
       value :CGROUP_MODE_V2, 2
     end
+    add_message "google.container.v1beta1.WindowsNodeConfig" do
+      optional :os_version, :enum, 1, "google.container.v1beta1.WindowsNodeConfig.OSVersion"
+    end
+    add_enum "google.container.v1beta1.WindowsNodeConfig.OSVersion" do
+      value :OS_VERSION_UNSPECIFIED, 0
+      value :OS_VERSION_LTSC2019, 1
+      value :OS_VERSION_LTSC2022, 2
+    end
     add_message "google.container.v1beta1.NodeKubeletConfig" do
       optional :cpu_manager_policy, :string, 1
       optional :cpu_cfs_quota, :message, 2, "google.protobuf.BoolValue"
@@ -64,6 +72,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :fast_socket, :message, 36, "google.container.v1beta1.FastSocket"
       map :resource_labels, :string, :string, 37
       optional :logging_config, :message, 38, "google.container.v1beta1.NodePoolLoggingConfig"
+      optional :windows_node_config, :message, 39, "google.container.v1beta1.WindowsNodeConfig"
+      optional :local_nvme_ssd_block_config, :message, 40, "google.container.v1beta1.LocalNvmeSsdBlockConfig"
+      optional :ephemeral_storage_local_ssd_config, :message, 41, "google.container.v1beta1.EphemeralStorageLocalSsdConfig"
     end
     add_message "google.container.v1beta1.AdvancedMachineFeatures" do
       proto3_optional :threads_per_core, :int64, 1
@@ -96,6 +107,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :GVISOR, 1
     end
     add_message "google.container.v1beta1.EphemeralStorageConfig" do
+      optional :local_ssd_count, :int32, 1
+    end
+    add_message "google.container.v1beta1.LocalNvmeSsdBlockConfig" do
+      optional :local_ssd_count, :int32, 1
+    end
+    add_message "google.container.v1beta1.EphemeralStorageLocalSsdConfig" do
       optional :local_ssd_count, :int32, 1
     end
     add_message "google.container.v1beta1.GcfsConfig" do
@@ -553,6 +570,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :fast_socket, :message, 31, "google.container.v1beta1.FastSocket"
       optional :logging_config, :message, 32, "google.container.v1beta1.NodePoolLoggingConfig"
       optional :resource_labels, :message, 33, "google.container.v1beta1.ResourceLabels"
+      optional :windows_node_config, :message, 34, "google.container.v1beta1.WindowsNodeConfig"
     end
     add_message "google.container.v1beta1.SetNodePoolAutoscalingRequest" do
       optional :project_id, :string, 1
@@ -1305,6 +1323,8 @@ module Google
       module V1beta1
         LinuxNodeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.LinuxNodeConfig").msgclass
         LinuxNodeConfig::CgroupMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.LinuxNodeConfig.CgroupMode").enummodule
+        WindowsNodeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.WindowsNodeConfig").msgclass
+        WindowsNodeConfig::OSVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.WindowsNodeConfig.OSVersion").enummodule
         NodeKubeletConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodeKubeletConfig").msgclass
         NodeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodeConfig").msgclass
         AdvancedMachineFeatures = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.AdvancedMachineFeatures").msgclass
@@ -1315,6 +1335,8 @@ module Google
         SandboxConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.SandboxConfig").msgclass
         SandboxConfig::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.SandboxConfig.Type").enummodule
         EphemeralStorageConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.EphemeralStorageConfig").msgclass
+        LocalNvmeSsdBlockConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.LocalNvmeSsdBlockConfig").msgclass
+        EphemeralStorageLocalSsdConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.EphemeralStorageLocalSsdConfig").msgclass
         GcfsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.GcfsConfig").msgclass
         ReservationAffinity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ReservationAffinity").msgclass
         ReservationAffinity::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ReservationAffinity.Type").enummodule
