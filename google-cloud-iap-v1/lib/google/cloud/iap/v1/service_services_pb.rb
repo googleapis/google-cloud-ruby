@@ -24,6 +24,8 @@ module Google
     module Iap
       module V1
         module IdentityAwareProxyAdminService
+          # The Cloud Identity-Aware Proxy API.
+          #
           # APIs for Identity-Aware Proxy Admin configurations.
           class Service
 
