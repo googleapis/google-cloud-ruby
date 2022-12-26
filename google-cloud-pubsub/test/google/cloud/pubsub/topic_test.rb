@@ -613,7 +613,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, topic: topic_path(topic_name), messages: messages
+    mock.expect :publish, publish_res, [{topic: topic_path(topic_name), messages: messages}]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message
@@ -632,7 +632,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, topic: topic_path(topic_name), messages: messages
+    mock.expect :publish, publish_res, [{topic: topic_path(topic_name), messages: messages}]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message, format: :text
@@ -655,7 +655,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1", "msg2"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, topic: topic_path(topic_name), messages: messages
+    mock.expect :publish, publish_res, [{topic: topic_path(topic_name), messages: messages}]
     topic.service.mocked_publisher = mock
 
     msgs = topic.publish do |batch|
