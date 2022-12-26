@@ -76,8 +76,7 @@ module Google
 
         ##
         # @private Creates a new AggregateQuery
-        def initialize query, aggregates, parent_path, client
-          aggregates ||= []
+        def initialize query, parent_path, client, aggregates: []
           @query = query
           @parent_path = parent_path
           @aggregates = aggregates
@@ -161,15 +160,9 @@ module Google
         end
 
         ##
-        # @private Start a new empty AggregateQuery.
-        def self.empty_aggregate query, parent_path, client
-          new query, [], parent_path, client
-        end
-
-        ##
         # @private Start a new AggregateQuery.
         def self.start query, aggregates, parent_path, client
-          new query, aggregates, parent_path, client
+          new query, parent_path, client, aggregates: aggregates
         end
 
         protected
