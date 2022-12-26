@@ -40,10 +40,25 @@ module Google
         attr_reader :messages
 
         ##
+        # @private Enables publisher compression
+        attr_reader :compress
+
+        ##
+        # @private The threshold bytes size for compression
+        attr_reader :compression_bytes_threshold
+
+        ##
+        # @private The total bytes size of messages data. 
+        attr_reader :total_message_bytes
+
+        ##
         # @private Create a new instance of the object.
-        def initialize data, attributes, ordering_key, extra_attrs
+        def initialize data, attributes, ordering_key, compress, compression_bytes_threshold, extra_attrs
           @messages = []
           @mode = :batch
+          @compress = compress
+          @compression_bytes_threshold = compression_bytes_threshold
+          @total_message_bytes = 0
           return if data.nil?
           @mode = :single
           publish data, attributes, ordering_key: ordering_key, **extra_attrs
@@ -74,6 +89,7 @@ module Google
         #
         def publish data, attributes = nil, ordering_key: nil, **extra_attrs
           msg = Convert.pubsub_message data, attributes, ordering_key, extra_attrs
+          @total_message_bytes += msg.data.bytesize + 2
           @messages << msg
         end
 
