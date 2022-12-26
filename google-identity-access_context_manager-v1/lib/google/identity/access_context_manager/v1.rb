@@ -23,9 +23,9 @@ module Google
   module Identity
     module AccessContextManager
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/identity/access_context_manager/v1"
       #     client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new

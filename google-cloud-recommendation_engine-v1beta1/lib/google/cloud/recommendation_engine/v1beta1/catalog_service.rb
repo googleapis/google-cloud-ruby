@@ -34,7 +34,7 @@ module Google
         ##
         # Service for ingesting catalog information of the customer's website.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/recommendation_engine/v1beta1/catalog_service"
         #     client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new

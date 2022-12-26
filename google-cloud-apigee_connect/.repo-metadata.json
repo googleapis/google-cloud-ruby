@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Apigee Connect allows the Apigee hybrid management plane to connect securely to the MART service in the runtime plane without requiring you to expose the MART endpoint on the internet. If you use Apigee Connect, you do not need to configure the MART ingress gateway with a host alias and an authorized DNS certificate.",
     "ruby-cloud-env-prefix": "APIGEE_CONNECT",
     "ruby-cloud-product-url": "https://cloud.google.com/apigee/docs/hybrid/v1.4/apigee-connect",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

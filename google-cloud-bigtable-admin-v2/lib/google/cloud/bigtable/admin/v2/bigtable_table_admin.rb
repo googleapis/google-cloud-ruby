@@ -39,7 +39,7 @@ module Google
           # Provides access to the table schemas only, not the data stored within
           # the tables.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigtable/admin/v2/bigtable_table_admin"
           #     client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new

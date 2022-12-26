@@ -48,7 +48,7 @@ module Google
         # Note that location_id must be referring to a GCP `region`; for example:
         # * `projects/redpepper-1290/locations/us-central1/instances/my-redis`
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/redis/v1/cloud_redis"
         #     client = ::Google::Cloud::Redis::V1::CloudRedis::Client.new

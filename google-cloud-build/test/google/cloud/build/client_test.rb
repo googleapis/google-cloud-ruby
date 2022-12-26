@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Build::ClientConstructionMinitest < Minitest::Test
-  def test_cloud_build
+  def test_cloud_build_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Build.cloud_build do |config|

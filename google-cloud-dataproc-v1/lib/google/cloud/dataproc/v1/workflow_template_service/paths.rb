@@ -42,6 +42,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified NodeGroup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{node_group}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param cluster [String]
+            # @param node_group [String]
+            #
+            # @return [::String]
+            def node_group_path project:, region:, cluster:, node_group:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+              raise ::ArgumentError, "cluster cannot contain /" if cluster.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/clusters/#{cluster}/nodeGroups/#{node_group}"
+            end
+
+            ##
             # Create a fully-qualified Region resource string.
             #
             # The resource will be in the following format:

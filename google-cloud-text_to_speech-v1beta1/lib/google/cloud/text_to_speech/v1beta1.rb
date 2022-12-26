@@ -24,9 +24,9 @@ module Google
   module Cloud
     module TextToSpeech
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/text_to_speech/v1beta1"
       #     client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new

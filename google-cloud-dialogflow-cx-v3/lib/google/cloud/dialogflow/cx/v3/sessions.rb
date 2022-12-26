@@ -36,7 +36,7 @@ module Google
           # and pass it to the {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#detect_intent DetectIntent} method to determine
           # user intent and respond.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/dialogflow/cx/v3/sessions"
           #     client = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Client.new

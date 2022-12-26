@@ -15,5 +15,5 @@
     "ruby-cloud-env-prefix": "LIFE_SCIENCES",
     "ruby-cloud-product-url": "https://cloud.google.com/life-sciences/",
     "ruby-cloud-service-override": "WorkflowsServiceV2Beta=WorkflowsService",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

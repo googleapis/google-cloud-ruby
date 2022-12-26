@@ -56,7 +56,7 @@ module Google
             # instance resources, fewer resources are available for other
             # databases in that instance, and their performance may suffer.
             #
-            # To load this service and instantiate a client:
+            # @example Load this service and instantiate a gRPC client
             #
             #     require "google/cloud/spanner/admin/instance/v1/instance_admin"
             #     client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new

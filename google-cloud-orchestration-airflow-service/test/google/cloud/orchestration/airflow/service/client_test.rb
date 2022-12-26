@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Orchestration::Airflow::Service::ClientConstructionMinitest < Minitest::Test
-  def test_environments
+  def test_environments_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Orchestration::Airflow::Service.environments do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::Orchestration::Airflow::Service::ClientConstructionMinitest
     end
   end
 
-  def test_image_versions
+  def test_image_versions_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Orchestration::Airflow::Service.image_versions do |config|

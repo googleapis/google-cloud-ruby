@@ -21,11 +21,12 @@ module Google
   module Cloud
     module Channel
       module V1
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job CloudChannelReportsService.RunReportJob}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job CloudChannelReportsService.RunReportJob}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The report's resource name. Specifies the account and report used to
-        #     generate report data. The report_id identifier is a UID (for example,
+        #     Required. The report's resource name. Specifies the account and report used
+        #     to generate report data. The report_id identifier is a UID (for example,
         #     `613bf59q`).
         #     Name uses the format:
         #     accounts/\\{account_id}/reports/\\{report_id}
@@ -34,8 +35,8 @@ module Google
         #     Optional. The range of usage or invoice dates to include in the result.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. A structured string that defines conditions on dimension columns to
-        #     restrict the report output.
+        #     Optional. A structured string that defines conditions on dimension columns
+        #     to restrict the report output.
         #
         #     Filters support logical operators (AND, OR, NOT) and conditional operators
         #     (=, !=, <, >, <=, and >=) using `column_id` as keys.
@@ -55,10 +56,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job CloudChannelReportsService.RunReportJob}.
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job CloudChannelReportsService.RunReportJob}.
         # @!attribute [rw] report_job
         #   @return [::Google::Cloud::Channel::V1::ReportJob]
-        #     Pass `report_job.name` to {::Google::Cloud::Channel::V1::FetchReportResultsRequest#report_job FetchReportResultsRequest.report_job}
+        #     Pass `report_job.name` to
+        #     {::Google::Cloud::Channel::V1::FetchReportResultsRequest#report_job FetchReportResultsRequest.report_job}
         #     to retrieve the report's results.
         # @!attribute [rw] report_metadata
         #   @return [::Google::Cloud::Channel::V1::ReportResultsMetadata]
@@ -70,17 +73,19 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}.
         # @!attribute [rw] report_job
         #   @return [::String]
-        #     Required. The report job created by {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job CloudChannelReportsService.RunReportJob}.
+        #     Required. The report job created by
+        #     {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job CloudChannelReportsService.RunReportJob}.
         #     Report_job uses the format:
         #     accounts/\\{account_id}/reportJobs/\\{report_job_id}
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Requested page size of the report. The server may return fewer results than
-        #     requested. If you don't specify a page size, the server uses a sensible
-        #     default (may change over time).
+        #     Optional. Requested page size of the report. The server may return fewer
+        #     results than requested. If you don't specify a page size, the server uses a
+        #     sensible default (may change over time).
         #
         #     The maximum value is 30,000; the server will change larger values to
         #     30,000.
@@ -88,14 +93,17 @@ module Google
         #   @return [::String]
         #     Optional. A token that specifies a page of results beyond the first page.
         #     Obtained through
-        #     {::Google::Cloud::Channel::V1::FetchReportResultsResponse#next_page_token FetchReportResultsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults} call.
+        #     {::Google::Cloud::Channel::V1::FetchReportResultsResponse#next_page_token FetchReportResultsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}
+        #     call.
         class FetchReportResultsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}.
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}.
         # Contains a tabular representation of the report results.
         # @!attribute [rw] report_metadata
         #   @return [::Google::Cloud::Channel::V1::ReportResultsMetadata]
@@ -107,30 +115,33 @@ module Google
         #     of the columns from `report_metadata`.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     Pass this token to {::Google::Cloud::Channel::V1::FetchReportResultsRequest#page_token FetchReportResultsRequest.page_token} to retrieve
-        #     the next page of results.
+        #     Pass this token to
+        #     {::Google::Cloud::Channel::V1::FetchReportResultsRequest#page_token FetchReportResultsRequest.page_token}
+        #     to retrieve the next page of results.
         class FetchReportResultsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports CloudChannelReportsService.ListReports}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports CloudChannelReportsService.ListReports}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the partner account to list available reports for.
-        #     Parent uses the format:
-        #     accounts/\\{account_id}
+        #     Required. The resource name of the partner account to list available
+        #     reports for. Parent uses the format: accounts/\\{account_id}
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Requested page size of the report. The server might return fewer results
-        #     than requested. If unspecified, returns 20 reports.
-        #     The maximum value is 100.
+        #     Optional. Requested page size of the report. The server might return fewer
+        #     results than requested. If unspecified, returns 20 reports. The maximum
+        #     value is 100.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token that specifies a page of results beyond the first page.
         #     Obtained through
-        #     {::Google::Cloud::Channel::V1::ListReportsResponse#next_page_token ListReportsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports CloudChannelReportsService.ListReports} call.
+        #     {::Google::Cloud::Channel::V1::ListReportsResponse#next_page_token ListReportsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports CloudChannelReportsService.ListReports}
+        #     call.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Optional. The BCP-47 language code, such as "en-US".  If specified, the
@@ -142,21 +153,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports CloudChannelReportsService.ListReports}.
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports CloudChannelReportsService.ListReports}.
         # @!attribute [rw] reports
         #   @return [::Array<::Google::Cloud::Channel::V1::Report>]
         #     The reports available to the partner.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     Pass this token to {::Google::Cloud::Channel::V1::FetchReportResultsRequest#page_token FetchReportResultsRequest.page_token} to retrieve
-        #     the next page of results.
+        #     Pass this token to
+        #     {::Google::Cloud::Channel::V1::FetchReportResultsRequest#page_token FetchReportResultsRequest.page_token}
+        #     to retrieve the next page of results.
         class ListReportsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The result of a [RunReportJob][] operation. Contains the name to use in
-        # {::Google::Cloud::Channel::V1::FetchReportResultsRequest#report_job FetchReportResultsRequest.report_job} and the status of the operation.
+        # {::Google::Cloud::Channel::V1::FetchReportResultsRequest#report_job FetchReportResultsRequest.report_job}
+        # and the status of the operation.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of a report job.
@@ -171,7 +185,8 @@ module Google
         end
 
         # The features describing the data. Returned by
-        # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job CloudChannelReportsService.RunReportJob} and
+        # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job CloudChannelReportsService.RunReportJob}
+        # and
         # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}.
         # @!attribute [rw] report
         #   @return [::Google::Cloud::Channel::V1::Report]
@@ -348,9 +363,9 @@ module Google
         # For example, "GCP Daily Spend", "Google Workspace License Activity", etc.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The report's resource name. Specifies the account and report used to
-        #     generate report data. The report_id identifier is a UID
-        #     (for example, `613bf59q`).
+        #     Required. The report's resource name. Specifies the account and report used
+        #     to generate report data. The report_id identifier is a UID (for example,
+        #     `613bf59q`).
         #
         #     Name uses the format:
         #     accounts/\\{account_id}/reports/\\{report_id}

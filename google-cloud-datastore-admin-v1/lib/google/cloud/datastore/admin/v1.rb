@@ -24,9 +24,9 @@ module Google
     module Datastore
       module Admin
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/datastore/admin/v1"
         #     client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new

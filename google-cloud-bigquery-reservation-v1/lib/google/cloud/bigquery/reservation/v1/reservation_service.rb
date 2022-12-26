@@ -48,7 +48,7 @@ module Google
           # location, e.g.:
           #   `projects/myproject/locations/US/capacityCommitments/id`.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigquery/reservation/v1/reservation_service"
           #     client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new

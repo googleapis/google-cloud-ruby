@@ -75,8 +75,10 @@ module Google
             rpc :EnableProcessor, ::Google::Cloud::DocumentAI::V1beta3::EnableProcessorRequest, ::Google::Longrunning::Operation
             # Disables a processor
             rpc :DisableProcessor, ::Google::Cloud::DocumentAI::V1beta3::DisableProcessorRequest, ::Google::Longrunning::Operation
-            # Set the default (active) version of a [Processor][google.cloud.documentai.v1beta3.Processor] that will be used in
-            # [ProcessDocument][google.cloud.documentai.v1beta3.DocumentProcessorService.ProcessDocument] and
+            # Set the default (active) version of a
+            # [Processor][google.cloud.documentai.v1beta3.Processor] that will be used in
+            # [ProcessDocument][google.cloud.documentai.v1beta3.DocumentProcessorService.ProcessDocument]
+            # and
             # [BatchProcessDocuments][google.cloud.documentai.v1beta3.DocumentProcessorService.BatchProcessDocuments].
             rpc :SetDefaultProcessorVersion, ::Google::Cloud::DocumentAI::V1beta3::SetDefaultProcessorVersionRequest, ::Google::Longrunning::Operation
             # Send a document for Human Review. The input document should be processed by

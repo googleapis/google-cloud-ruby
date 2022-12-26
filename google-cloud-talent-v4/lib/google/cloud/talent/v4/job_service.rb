@@ -34,7 +34,7 @@ module Google
         ##
         # A service handles job management, including job CRUD, enumeration and search.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/talent/v4/job_service"
         #     client = ::Google::Cloud::Talent::V4::JobService::Client.new

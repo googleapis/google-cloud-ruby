@@ -34,7 +34,7 @@ module Google
         ##
         # The BatchController provides methods to manage batch workloads.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataproc/v1/batch_controller"
         #     client = ::Google::Cloud::Dataproc::V1::BatchController::Client.new

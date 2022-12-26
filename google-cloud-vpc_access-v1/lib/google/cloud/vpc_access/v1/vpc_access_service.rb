@@ -36,7 +36,7 @@ module Google
         # App Engine, Cloud Functions and Cloud Run to have internal connections to
         # Virtual Private Cloud networks.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/vpc_access/v1/vpc_access_service"
         #     client = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Client.new

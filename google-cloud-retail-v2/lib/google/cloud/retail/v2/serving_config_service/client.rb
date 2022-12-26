@@ -264,7 +264,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the ServingConfig to delete. Format:
-            #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}/servingConfigs/\\{serving_config_id}
+            #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -445,7 +445,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the ServingConfig to get. Format:
-            #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}/servingConfigs/\\{serving_config_id}
+            #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Retail::V2::ServingConfig]
@@ -531,7 +531,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The catalog resource name. Format:
-            #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}
+            #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
             #   @param page_size [::Integer]
             #     Optional. Maximum number of results to return. If unspecified, defaults
             #     to 100. If a value greater than 100 is provided, at most 100 results are
@@ -637,7 +637,7 @@ module Google
             #
             #   @param serving_config [::String]
             #     Required. The source ServingConfig resource name . Format:
-            #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}/servingConfigs/\\{serving_config_id}
+            #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
             #   @param control_id [::String]
             #     Required. The id of the control to apply. Assumed to be in the same catalog
             #     as the serving config - if id is not found a NOT_FOUND error is returned.
@@ -729,7 +729,7 @@ module Google
             #
             #   @param serving_config [::String]
             #     Required. The source ServingConfig resource name . Format:
-            #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}/servingConfigs/\\{serving_config_id}
+            #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
             #   @param control_id [::String]
             #     Required. The id of the control to apply. Assumed to be in the same catalog
             #     as the serving config.

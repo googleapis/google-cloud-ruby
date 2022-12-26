@@ -94,7 +94,7 @@ module Google
           # Operations are created by service DatastoreAdmin,
           # but are accessed via service google.longrunning.Operations.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/datastore/admin/v1/datastore_admin"
           #     client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new

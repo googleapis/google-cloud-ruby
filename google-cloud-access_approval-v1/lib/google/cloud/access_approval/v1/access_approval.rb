@@ -65,7 +65,7 @@ module Google
         #
         # If a request is not approved or dismissed, we call it pending.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/access_approval/v1/access_approval"
         #     client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new

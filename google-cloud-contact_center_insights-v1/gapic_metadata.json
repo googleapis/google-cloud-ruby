@@ -55,6 +55,16 @@
                 "delete_analysis"
               ]
             },
+            "BulkAnalyzeConversations": {
+              "methods": [
+                "bulk_analyze_conversations"
+              ]
+            },
+            "IngestConversations": {
+              "methods": [
+                "ingest_conversations"
+              ]
+            },
             "ExportInsightsData": {
               "methods": [
                 "export_insights_data"
@@ -108,6 +118,11 @@
             "UpdateIssue": {
               "methods": [
                 "update_issue"
+              ]
+            },
+            "DeleteIssue": {
+              "methods": [
+                "delete_issue"
               ]
             },
             "CalculateIssueModelStats": {

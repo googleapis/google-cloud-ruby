@@ -72,6 +72,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :request_time, :message, 2, "google.protobuf.Timestamp"
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :analysis_result, :message, 7, "google.cloud.contactcenterinsights.v1.AnalysisResult"
+      optional :annotator_selector, :message, 8, "google.cloud.contactcenterinsights.v1.AnnotatorSelector"
     end
     add_message "google.cloud.contactcenterinsights.v1.ConversationDataSource" do
       oneof :source do
@@ -126,6 +127,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :entity_mention_data, :message, 15, "google.cloud.contactcenterinsights.v1.EntityMentionData"
         optional :intent_match_data, :message, 16, "google.cloud.contactcenterinsights.v1.IntentMatchData"
         optional :phrase_match_data, :message, 17, "google.cloud.contactcenterinsights.v1.PhraseMatchData"
+        optional :issue_match_data, :message, 18, "google.cloud.contactcenterinsights.v1.IssueMatchData"
       end
     end
     add_message "google.cloud.contactcenterinsights.v1.AnnotationBoundary" do
@@ -190,6 +192,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :magnitude, :float, 1
       optional :score, :float, 2
     end
+    add_message "google.cloud.contactcenterinsights.v1.IssueMatchData" do
+      optional :issue_assignment, :message, 1, "google.cloud.contactcenterinsights.v1.IssueAssignment"
+    end
     add_message "google.cloud.contactcenterinsights.v1.IssueModel" do
       optional :name, :string, 1
       optional :display_name, :string, 2
@@ -217,6 +222,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :display_name, :string, 2
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :update_time, :message, 4, "google.protobuf.Timestamp"
+      repeated :sample_utterances, :string, 6
     end
     add_message "google.cloud.contactcenterinsights.v1.IssueModelLabelStats" do
       optional :analyzed_conversations_count, :int64, 1
@@ -279,6 +285,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig" do
       optional :runtime_integration_analysis_percentage, :double, 1
+      optional :annotator_selector, :message, 5, "google.cloud.contactcenterinsights.v1.AnnotatorSelector"
     end
     add_message "google.cloud.contactcenterinsights.v1.RuntimeAnnotation" do
       optional :annotation_id, :string, 1
@@ -360,6 +367,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :update_time, :message, 4, "google.protobuf.Timestamp"
       optional :value, :string, 5
     end
+    add_message "google.cloud.contactcenterinsights.v1.AnnotatorSelector" do
+      optional :run_interruption_annotator, :bool, 1
+      optional :run_silence_annotator, :bool, 2
+      optional :run_phrase_matcher_annotator, :bool, 3
+      repeated :phrase_matchers, :string, 4
+      optional :run_sentiment_annotator, :bool, 5
+      optional :run_entity_annotator, :bool, 6
+      optional :run_intent_annotator, :bool, 7
+      optional :run_issue_model_annotator, :bool, 8
+      repeated :issue_models, :string, 10
+    end
   end
 end
 
@@ -397,6 +415,7 @@ module Google
         EntityMentionData::MentionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.EntityMentionData.MentionType").enummodule
         IntentMatchData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IntentMatchData").msgclass
         SentimentData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.SentimentData").msgclass
+        IssueMatchData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IssueMatchData").msgclass
         IssueModel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IssueModel").msgclass
         IssueModel::InputDataConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig").msgclass
         IssueModel::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IssueModel.State").enummodule
@@ -423,6 +442,7 @@ module Google
         ConversationParticipant = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ConversationParticipant").msgclass
         ConversationParticipant::Role = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ConversationParticipant.Role").enummodule
         View = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.View").msgclass
+        AnnotatorSelector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.AnnotatorSelector").msgclass
       end
     end
   end

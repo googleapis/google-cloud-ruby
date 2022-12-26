@@ -42,6 +42,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :endpoint_config, :message, 19, "google.cloud.dataproc.v1.EndpointConfig"
       optional :metastore_config, :message, 20, "google.cloud.dataproc.v1.MetastoreConfig"
       optional :dataproc_metric_config, :message, 23, "google.cloud.dataproc.v1.DataprocMetricConfig"
+      repeated :auxiliary_node_groups, :message, 25, "google.cloud.dataproc.v1.AuxiliaryNodeGroup"
     end
     add_message "google.cloud.dataproc.v1.VirtualClusterConfig" do
       optional :staging_bucket, :string, 1
@@ -126,6 +127,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :boot_disk_size_gb, :int32, 1
       optional :num_local_ssds, :int32, 2
       optional :local_ssd_interface, :string, 4
+    end
+    add_message "google.cloud.dataproc.v1.AuxiliaryNodeGroup" do
+      optional :node_group, :message, 1, "google.cloud.dataproc.v1.NodeGroup"
+      optional :node_group_id, :string, 2
+    end
+    add_message "google.cloud.dataproc.v1.NodeGroup" do
+      optional :name, :string, 1
+      repeated :roles, :enum, 2, "google.cloud.dataproc.v1.NodeGroup.Role"
+      optional :node_group_config, :message, 3, "google.cloud.dataproc.v1.InstanceGroupConfig"
+      map :labels, :string, :string, 4
+    end
+    add_enum "google.cloud.dataproc.v1.NodeGroup.Role" do
+      value :ROLE_UNSPECIFIED, 0
+      value :DRIVER, 1
     end
     add_message "google.cloud.dataproc.v1.NodeInitializationAction" do
       optional :executable_file, :string, 1
@@ -310,6 +325,9 @@ module Google
         ManagedGroupConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ManagedGroupConfig").msgclass
         AcceleratorConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.AcceleratorConfig").msgclass
         DiskConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.DiskConfig").msgclass
+        AuxiliaryNodeGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.AuxiliaryNodeGroup").msgclass
+        NodeGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.NodeGroup").msgclass
+        NodeGroup::Role = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.NodeGroup.Role").enummodule
         NodeInitializationAction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.NodeInitializationAction").msgclass
         ClusterStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterStatus").msgclass
         ClusterStatus::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterStatus.State").enummodule

@@ -372,6 +372,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :desired_node_pool_auto_config_network_tags, :message, 110, "google.container.v1.NetworkTags"
       optional :desired_gateway_api_config, :message, 114, "google.container.v1.GatewayAPIConfig"
       optional :desired_node_pool_logging_config, :message, 116, "google.container.v1.NodePoolLoggingConfig"
+      optional :desired_stack_type, :enum, 119, "google.container.v1.StackType"
     end
     add_message "google.container.v1.Operation" do
       optional :name, :string, 1

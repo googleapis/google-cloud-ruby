@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::BinaryAuthorization::ClientConstructionMinitest < Minitest::Test
-  def test_binauthz_management_service
+  def test_binauthz_management_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::BinaryAuthorization.binauthz_management_service do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::BinaryAuthorization::ClientConstructionMinitest < Minitest:
     end
   end
 
-  def test_system_policy
+  def test_system_policy_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::BinaryAuthorization.system_policy do |config|
@@ -42,7 +42,7 @@ class Google::Cloud::BinaryAuthorization::ClientConstructionMinitest < Minitest:
     end
   end
 
-  def test_validation_helper
+  def test_validation_helper_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::BinaryAuthorization.validation_helper do |config|

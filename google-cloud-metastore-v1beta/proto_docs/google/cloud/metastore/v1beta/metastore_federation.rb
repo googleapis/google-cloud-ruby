@@ -38,8 +38,8 @@ module Google
         #     User-defined labels for the metastore federation.
         # @!attribute [rw] version
         #   @return [::String]
-        #     Immutable. The Apache Hive metastore version of the federation. All backend metastore
-        #     versions must be compatible with the federation version.
+        #     Immutable. The Apache Hive metastore version of the federation. All backend
+        #     metastore versions must be compatible with the federation version.
         # @!attribute [rw] backend_metastores
         #   @return [::Google::Protobuf::Map{::Integer => ::Google::Cloud::Metastore::V1beta::BackendMetastore}]
         #     A map from `BackendMetastore` rank to `BackendMetastore`s from which the
@@ -56,11 +56,12 @@ module Google
         #     Output only. The current state of the federation.
         # @!attribute [r] state_message
         #   @return [::String]
-        #     Output only. Additional information about the current state of the metastore federation,
-        #     if available.
+        #     Output only. Additional information about the current state of the
+        #     metastore federation, if available.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. The globally unique resource identifier of the metastore federation.
+        #     Output only. The globally unique resource identifier of the metastore
+        #     federation.
         class Federation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -143,14 +144,15 @@ module Google
         # Request message for ListFederations.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The relative resource name of the location of metastore federations
-        #     to list, in the following form:
+        #     Required. The relative resource name of the location of metastore
+        #     federations to list, in the following form:
         #     `projects/{project_number}/locations/{location_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of federations to return. The response may contain less
-        #     than the maximum number. If unspecified, no more than 500 services are
-        #     returned. The maximum value is 1000; values above 1000 are changed to 1000.
+        #     Optional. The maximum number of federations to return. The response may
+        #     contain less than the maximum number. If unspecified, no more than 500
+        #     services are returned. The maximum value is 1000; values above 1000 are
+        #     changed to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous ListFederationServices
@@ -193,8 +195,8 @@ module Google
         # Request message for GetFederation.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The relative resource name of the metastore federation to retrieve,
-        #     in the following form:
+        #     Required. The relative resource name of the metastore federation to
+        #     retrieve, in the following form:
         #
         #     `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
         class GetFederationRequest
@@ -205,8 +207,8 @@ module Google
         # Request message for CreateFederation.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The relative resource name of the location in which to create a federation
-        #     service, in the following form:
+        #     Required. The relative resource name of the location in which to create a
+        #     federation service, in the following form:
         #
         #     `projects/{project_number}/locations/{location_id}`.
         # @!attribute [rw] federation_id
@@ -224,10 +226,10 @@ module Google
         #     provided in the request's `federation_id` field.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent
@@ -257,10 +259,10 @@ module Google
         #     metastore service to be updated.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent
@@ -283,10 +285,10 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent

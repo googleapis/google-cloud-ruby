@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Security Command Center API provides access to temporal views of assets and findings within an organization.",
     "ruby-cloud-env-prefix": "SECURITY_CENTER",
     "ruby-cloud-product-url": "https://cloud.google.com/security-command-center",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

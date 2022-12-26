@@ -23,9 +23,9 @@ module Google
   module Cloud
     module Memcache
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/memcache/v1beta2"
       #     client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new

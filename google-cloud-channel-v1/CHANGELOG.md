@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 (2022-12-14)
+
+#### Features
+
+* Added support for granular repricing configurations via SkuGroups ([#19848](https://github.com/googleapis/google-cloud-ruby/issues/19848)) 
+
 ### 0.14.0 (2022-11-10)
 
 #### Features

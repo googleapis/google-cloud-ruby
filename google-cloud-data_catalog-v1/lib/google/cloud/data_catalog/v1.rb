@@ -25,9 +25,9 @@ module Google
   module Cloud
     module DataCatalog
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/data_catalog/v1"
       #     client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new

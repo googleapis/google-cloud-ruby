@@ -14,5 +14,5 @@
     "ruby-cloud-description": "The App Engine Admin API provisions and manages your App Engine applications.",
     "ruby-cloud-env-prefix": "APP_ENGINE",
     "ruby-cloud-product-url": "https://cloud.google.com/appengine/docs/admin-api/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

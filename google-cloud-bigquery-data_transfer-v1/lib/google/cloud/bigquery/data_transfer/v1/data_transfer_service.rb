@@ -34,7 +34,7 @@ module Google
           ##
           # This API allows users to manage their data transfers into BigQuery.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigquery/data_transfer/v1/data_transfer_service"
           #     client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new

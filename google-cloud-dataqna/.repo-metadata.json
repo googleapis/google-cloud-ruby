@@ -14,5 +14,5 @@
     "ruby-cloud-env-prefix": "BIGQUERY_DATAQNA",
     "ruby-cloud-path-override": "data_qn_a=dataqna",
     "ruby-cloud-namespace-override": "Dataqna=DataQnA",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

@@ -44,6 +44,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 13
       repeated :warnings, :string, 14
     end
+    add_message "google.cloud.dataproc.v1.NodeGroupOperationMetadata" do
+      optional :node_group_id, :string, 1
+      optional :cluster_uuid, :string, 2
+      optional :status, :message, 3, "google.cloud.dataproc.v1.ClusterOperationStatus"
+      repeated :status_history, :message, 4, "google.cloud.dataproc.v1.ClusterOperationStatus"
+      optional :operation_type, :enum, 5, "google.cloud.dataproc.v1.NodeGroupOperationMetadata.NodeGroupOperationType"
+      optional :description, :string, 6
+      map :labels, :string, :string, 7
+      repeated :warnings, :string, 8
+    end
+    add_enum "google.cloud.dataproc.v1.NodeGroupOperationMetadata.NodeGroupOperationType" do
+      value :NODE_GROUP_OPERATION_TYPE_UNSPECIFIED, 0
+      value :CREATE, 1
+      value :UPDATE, 2
+      value :DELETE, 3
+      value :RESIZE, 4
+    end
   end
 end
 
@@ -56,6 +73,8 @@ module Google
         ClusterOperationStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterOperationStatus").msgclass
         ClusterOperationStatus::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterOperationStatus.State").enummodule
         ClusterOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterOperationMetadata").msgclass
+        NodeGroupOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.NodeGroupOperationMetadata").msgclass
+        NodeGroupOperationMetadata::NodeGroupOperationType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.NodeGroupOperationMetadata.NodeGroupOperationType").enummodule
       end
     end
   end

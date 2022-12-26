@@ -36,7 +36,7 @@ module Google
         # The Cloud Spanner API can be used to manage sessions and execute
         # transactions on data stored in Cloud Spanner databases.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/spanner/v1/spanner"
         #     client = ::Google::Cloud::Spanner::V1::Spanner::Client.new

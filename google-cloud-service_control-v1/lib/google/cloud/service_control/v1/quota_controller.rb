@@ -35,7 +35,7 @@ module Google
         # Allows clients to allocate and release quota against a [managed
         # service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/service_control/v1/quota_controller"
         #     client = ::Google::Cloud::ServiceControl::V1::QuotaController::Client.new

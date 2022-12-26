@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
-  def test_pages
+  def test_pages_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.pages do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_flows
+  def test_flows_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.flows do |config|
@@ -42,7 +42,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_agents
+  def test_agents_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.agents do |config|
@@ -52,7 +52,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_changelogs
+  def test_changelogs_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.changelogs do |config|
@@ -62,7 +62,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_deployments
+  def test_deployments_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.deployments do |config|
@@ -72,7 +72,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_entity_types
+  def test_entity_types_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.entity_types do |config|
@@ -82,7 +82,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_intents
+  def test_intents_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.intents do |config|
@@ -92,7 +92,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_session_entity_types
+  def test_session_entity_types_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.session_entity_types do |config|
@@ -102,7 +102,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_sessions
+  def test_sessions_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.sessions do |config|
@@ -112,7 +112,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_transition_route_groups
+  def test_transition_route_groups_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.transition_route_groups do |config|
@@ -122,7 +122,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_test_cases
+  def test_test_cases_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.test_cases do |config|
@@ -132,7 +132,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_webhooks
+  def test_webhooks_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.webhooks do |config|
@@ -142,7 +142,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_environments
+  def test_environments_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.environments do |config|
@@ -152,7 +152,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_experiments
+  def test_experiments_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.experiments do |config|
@@ -162,7 +162,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_security_settings_service
+  def test_security_settings_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.security_settings_service do |config|
@@ -172,7 +172,7 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_versions
+  def test_versions_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow::CX.versions do |config|

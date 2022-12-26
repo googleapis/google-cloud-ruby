@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Google Cloud Deploy is a managed service that automates delivery of your applications to a series of target environments in a defined promotion sequence.",
     "ruby-cloud-product-url": "https://cloud.google.com/deploy/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

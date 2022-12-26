@@ -33,7 +33,7 @@ module Google
         ##
         # Manages App Engine applications.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/app_engine/v1/applications"
         #     client = ::Google::Cloud::AppEngine::V1::Applications::Client.new

@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Area120::Tables::ClientConstructionMinitest < Minitest::Test
-  def test_tables_service
+  def test_tables_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Area120::Tables.tables_service do |config|

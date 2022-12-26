@@ -14,5 +14,5 @@
     "ruby-cloud-description": "The BigQuery Connection API allows users to manage BigQuery connections to external data sources.",
     "ruby-cloud-env-prefix": "BIGQUERY_CONNECTION",
     "ruby-cloud-product-url": "https://cloud.google.com/bigquery/docs/reference/bigqueryconnection",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

@@ -47,7 +47,7 @@ module Google
         # - Each {::Google::Cloud::Vision::V1p3beta1::Product Product} has a collection of {::Google::Cloud::Vision::V1p3beta1::ReferenceImage ReferenceImage} resources, named
         #   `projects/*/locations/*/products/*/referenceImages/*`
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/vision/v1p3beta1/product_search"
         #     client = ::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new

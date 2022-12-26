@@ -30,7 +30,7 @@ module Google
           # Auto-completion service for retail.
           #
           # This feature is only available for users who have Retail Search enabled.
-          # Please enable Retail Search on Cloud Console before using this feature.
+          # Enable Retail Search on Cloud Console before using this feature.
           #
           class Client
             include Paths
@@ -169,7 +169,7 @@ module Google
             # Completes the specified prefix with keyword suggestions.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload complete_query(request, options = nil)
             #   Pass arguments to `complete_query` via a request object, either of type
@@ -214,8 +214,10 @@ module Google
             #     Identifying Languages](https://tools.ietf.org/html/bcp47). The maximum
             #     number of language codes is 3.
             #   @param device_type [::String]
-            #     The device type context for completion suggestions.
-            #     It is useful to apply different suggestions on different device types, e.g.
+            #     The device type context for completion suggestions. We recommend that you
+            #     leave this field empty.
+            #
+            #     It can apply different suggestions on different device types, e.g.
             #     `DESKTOP`, `MOBILE`. If it is empty, the suggestions are across all device
             #     types.
             #
@@ -323,7 +325,7 @@ module Google
             # are indexed successfully and ready for serving. The process takes hours.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload import_completion_data(request, options = nil)
             #   Pass arguments to `import_completion_data` via a request object, either of type

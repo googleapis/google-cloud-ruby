@@ -24,9 +24,9 @@ module Google
   module Cloud
     module AutoML
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/automl/v1beta1"
       #     client = ::Google::Cloud::AutoML::V1beta1::PredictionService::Client.new

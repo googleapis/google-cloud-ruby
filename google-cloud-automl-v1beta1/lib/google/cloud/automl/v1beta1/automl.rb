@@ -47,7 +47,7 @@ module Google
         # On any input that is documented to expect a string parameter in
         # snake_case or kebab-case, either of those cases is accepted.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/automl/v1beta1/automl"
         #     client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new

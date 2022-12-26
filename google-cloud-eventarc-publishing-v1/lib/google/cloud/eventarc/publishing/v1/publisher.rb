@@ -56,7 +56,7 @@ module Google
           #
           # Publisher allows an event provider to publish events to Eventarc.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/eventarc/publishing/v1/publisher"
           #     client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new

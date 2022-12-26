@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Eventarc::Publishing::ClientConstructionMinitest < Minitest::Test
-  def test_publisher
+  def test_publisher_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Eventarc::Publishing.publisher do |config|

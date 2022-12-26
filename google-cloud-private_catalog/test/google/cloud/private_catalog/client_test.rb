@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::PrivateCatalog::ClientConstructionMinitest < Minitest::Test
-  def test_private_catalog
+  def test_private_catalog_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::PrivateCatalog.private_catalog do |config|

@@ -23,9 +23,9 @@ module Google
   module Cloud
     module WebSecurityScanner
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/web_security_scanner/v1"
       #     client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new

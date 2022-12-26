@@ -15,6 +15,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :principal_subject, :string, 7
       optional :service_account_key_name, :string, 8
       repeated :service_account_delegation_info, :message, 9, "google.cloud.securitycenter.v1.ServiceAccountDelegationInfo"
+      optional :user_name, :string, 11
     end
     add_message "google.cloud.securitycenter.v1.ServiceAccountDelegationInfo" do
       optional :principal_email, :string, 1

@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Bigquery::Migration::ClientConstructionMinitest < Minitest::Test
-  def test_migration_service
+  def test_migration_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Bigquery::Migration.migration_service do |config|

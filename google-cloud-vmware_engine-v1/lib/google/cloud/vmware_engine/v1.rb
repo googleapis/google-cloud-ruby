@@ -23,9 +23,9 @@ module Google
   module Cloud
     module VmwareEngine
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/vmware_engine/v1"
       #     client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new

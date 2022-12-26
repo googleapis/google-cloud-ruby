@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Memcache::ClientConstructionMinitest < Minitest::Test
-  def test_cloud_memcache
+  def test_cloud_memcache_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Memcache.cloud_memcache do |config|

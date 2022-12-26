@@ -23,9 +23,9 @@ module Google
   module Cloud
     module NetworkSecurity
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/network_security/v1beta1"
       #     client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new

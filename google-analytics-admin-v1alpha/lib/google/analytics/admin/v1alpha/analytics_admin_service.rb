@@ -33,7 +33,7 @@ module Google
         ##
         # Service Interface for the Analytics Admin API (GA4).
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/analytics/admin/v1alpha/analytics_admin_service"
         #     client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new

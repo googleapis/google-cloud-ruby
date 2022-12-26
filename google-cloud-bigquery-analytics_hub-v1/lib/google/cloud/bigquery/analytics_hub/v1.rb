@@ -24,9 +24,9 @@ module Google
     module Bigquery
       module AnalyticsHub
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/bigquery/analytics_hub/v1"
         #     client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new

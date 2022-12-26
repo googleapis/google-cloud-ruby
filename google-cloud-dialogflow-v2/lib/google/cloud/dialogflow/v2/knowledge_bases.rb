@@ -33,7 +33,7 @@ module Google
         ##
         # Service for managing {::Google::Cloud::Dialogflow::V2::KnowledgeBase KnowledgeBases}.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/knowledge_bases"
         #     client = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new

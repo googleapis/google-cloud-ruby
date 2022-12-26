@@ -34,7 +34,7 @@ module Google
         ##
         # Service for managing {::Google::Cloud::Dialogflow::V2::EntityType EntityTypes}.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/entity_types"
         #     client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new

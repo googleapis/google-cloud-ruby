@@ -33,7 +33,7 @@ module Google
         ##
         # The JobController provides methods to manage jobs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataproc/v1/job_controller"
         #     client = ::Google::Cloud::Dataproc::V1::JobController::Client.new

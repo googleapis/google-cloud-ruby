@@ -36,7 +36,7 @@ module Google
         # discovery, etc. Insights and recommendations are generated automatically
         # based on analysis of user resources, configuration and monitoring metrics.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/recommender/v1/recommender"
         #     client = ::Google::Cloud::Recommender::V1::Recommender::Client.new

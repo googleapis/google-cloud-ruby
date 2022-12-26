@@ -36,7 +36,7 @@ module Google
         # Workflows makes sure the program executes reliably, despite hardware and
         # networking interruptions.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/workflows/v1/workflows"
         #     client = ::Google::Cloud::Workflows::V1::Workflows::Client.new

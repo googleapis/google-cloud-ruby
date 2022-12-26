@@ -185,7 +185,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload write_user_event(parent: nil, user_event: nil)
+            # @overload write_user_event(parent: nil, user_event: nil, write_async: nil)
             #   Pass arguments to `write_user_event` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -195,6 +195,11 @@ module Google
             #     `projects/1234/locations/global/catalogs/default_catalog`.
             #   @param user_event [::Google::Cloud::Retail::V2::UserEvent, ::Hash]
             #     Required. User event to write.
+            #   @param write_async [::Boolean]
+            #     If set to true, the user event will be written asynchronously after
+            #     validation, and the API will respond without waiting for the write.
+            #     Therefore, silent failures can occur even if the API returns success. In
+            #     case of silent failures, error messages can be found in Stackdriver logs.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Retail::V2::UserEvent]
@@ -277,11 +282,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload collect_user_event(parent: nil, user_event: nil, uri: nil, ets: nil)
+            # @overload collect_user_event(prebuilt_rule: nil, parent: nil, user_event: nil, uri: nil, ets: nil, raw_json: nil)
             #   Pass arguments to `collect_user_event` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param prebuilt_rule [::String]
+            #     The prebuilt rule name that can convert a specific type of raw_json.
+            #     For example: "default_schema/v1.0"
             #   @param parent [::String]
             #     Required. The parent catalog name, such as
             #     `projects/1234/locations/global/catalogs/default_catalog`.
@@ -297,6 +305,11 @@ module Google
             #     The event timestamp in milliseconds. This prevents browser caching of
             #     otherwise identical get requests. The name is abbreviated to reduce the
             #     payload bytes.
+            #   @param raw_json [::String]
+            #     An arbitrary serialized JSON string that contains necessary information
+            #     that can comprise a user event. When this field is specified, the
+            #     user_event field will be ignored. Note: line-delimited JSON is not
+            #     supported, a single JSON only.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Api::HttpBody]
@@ -593,14 +606,14 @@ module Google
             end
 
             ##
-            # Starts a user event rejoin operation with latest product catalog. Events
-            # will not be annotated with detailed product information if product is
-            # missing from the catalog at the time the user event is ingested, and these
-            # events are stored as unjoined events with a limited usage on training and
-            # serving. This method can be used to start a join operation on specified
-            # events with latest version of product catalog. It can also be used to
-            # correct events joined with the wrong product catalog. A rejoin operation
-            # can take hours or days to complete.
+            # Starts a user-event rejoin operation with latest product catalog. Events
+            # are not annotated with detailed product information for products that are
+            # missing from the catalog when the user event is ingested. These
+            # events are stored as unjoined events with limited usage on training and
+            # serving. You can use this method to start a join operation on specified
+            # events with the latest version of product catalog. You can also use this
+            # method to correct events joined with the wrong product catalog. A rejoin
+            # operation can take hours or days to complete.
             #
             # @overload rejoin_user_events(request, options = nil)
             #   Pass arguments to `rejoin_user_events` via a request object, either of type
@@ -623,8 +636,8 @@ module Google
             #   @param user_event_rejoin_scope [::Google::Cloud::Retail::V2::RejoinUserEventsRequest::UserEventRejoinScope]
             #     The type of the user event rejoin to define the scope and range of the user
             #     events to be rejoined with the latest product catalog. Defaults to
-            #     USER_EVENT_REJOIN_SCOPE_UNSPECIFIED if this field is not set, or set to an
-            #     invalid integer value.
+            #     `USER_EVENT_REJOIN_SCOPE_UNSPECIFIED` if this field is not set, or set to
+            #     an invalid integer value.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
