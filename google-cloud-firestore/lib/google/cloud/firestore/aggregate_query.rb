@@ -144,10 +144,10 @@ module Google
 
           return enum_for :get unless block_given?
 
-          results = service.run_aggregate_query @parent_path, structured_aggregation_query
-          results.each do |result|
-            next if result.result.nil?
-            yield AggregateQuerySnapshot.from_run_aggregate_query_response result
+          responses = service.run_aggregate_query @parent_path, structured_aggregation_query
+          responses.each do |response|
+            next if response.result.nil?
+            yield AggregateQuerySnapshot.from_run_aggregate_query_response response
           end
         end
 
@@ -158,6 +158,12 @@ module Google
             structured_query: @query,
             aggregations: @aggregates
           )
+        end
+
+        ##
+        # @private Start a new empty AggregateQuery.
+        def self.empty_aggregate query, parent_path, client
+          new query, [], parent_path, client
         end
 
         ##

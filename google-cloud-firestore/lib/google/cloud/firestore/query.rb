@@ -958,7 +958,7 @@ module Google
         #   aggregate_query = query.aggregate_query
         #
         def aggregate_query
-          AggregateQuery.new query, [], parent_path, client
+          AggregateQuery.empty_aggregate query, parent_path, client
         end
 
         ##
