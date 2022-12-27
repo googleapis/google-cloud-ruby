@@ -39,7 +39,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    mock.expect :get_table, destination_table_gapi, ["target_project_id", "target_dataset_id", "target_table_id"]
+    mock.expect :get_table, destination_table_gapi, ["target_project_id", "target_dataset_id", "target_table_id"], **patch_table_args
 
     destination = job.destination
     _(destination).must_be_kind_of Google::Cloud::Bigquery::Table

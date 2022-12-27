@@ -51,7 +51,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     insert_req = {
       rows: [insert_rows.first], ignoreUnknownValues: nil, skipInvalidRows: nil
     }.to_json
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
     mock.expect :insert_all_table_data, success_table_insert_gapi,
       [project, dataset_id, table_id, insert_req], options: { skip_serialization: true }
     dataset.service.mocked_service = mock
@@ -87,7 +87,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
       insert_req = {
         rows: [insert_rows.first], ignoreUnknownValues: nil, skipInvalidRows: nil
       }.to_json
-      mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+      mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
       mock.expect :insert_all_table_data, success_table_insert_gapi,
         [project, dataset_id, table_id, insert_req], options: { skip_serialization: true }
       dataset.service.mocked_service = mock
@@ -121,7 +121,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     insert_req = {
       rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: nil
     }.to_json
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
     mock.expect :insert_all_table_data, success_table_insert_gapi,
       [project, dataset_id, table_id, insert_req], options: { skip_serialization: true }
     dataset.service.mocked_service = mock
@@ -154,7 +154,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     insert_req = {
       rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: nil
     }.to_json
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
     mock.expect :insert_all_table_data, success_table_insert_gapi,
       [project, dataset_id, table_id, insert_req], options: { skip_serialization: true }
     dataset.service.mocked_service = mock
@@ -189,7 +189,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     insert_req = {
       rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: nil
     }.to_json
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
     mock.expect :insert_all_table_data, success_table_insert_gapi,
       [project, dataset_id, table_id, insert_req], options: { skip_serialization: true }
     dataset.service.mocked_service = mock
@@ -239,7 +239,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
 
   it "inserts multiple batches when row byte size limit is reached" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
     # It makes two requests, but we can't control what order they occur,
     # and minitest 5.16 can't specify a "wildcard" for keyword arguments, so
     # we don't verify these two calls for now.
@@ -277,7 +277,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
 
   it "inserts multiple batches when row count limit is reached" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
     # It makes two requests, but we can't control what order they occur,
     # and minitest 5.16 can't specify a "wildcard" for keyword arguments, so
     # we don't verify these two calls for now.
@@ -318,7 +318,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     insert_req = {
         rows: rows_with_user_insert_ids, ignoreUnknownValues: nil, skipInvalidRows: nil
     }.to_json
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
     mock.expect :insert_all_table_data, success_table_insert_gapi,
                 [project, dataset_id, table_id, insert_req], options: { skip_serialization: true }
     dataset.service.mocked_service = mock
@@ -349,7 +349,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     insert_req = {
         rows: rows_with_user_insert_ids, ignoreUnknownValues: nil, skipInvalidRows: nil
     }.to_json
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
     mock.expect :insert_all_table_data, success_table_insert_gapi,
                 [project, dataset_id, table_id, insert_req], options: { skip_serialization: true }
     dataset.service.mocked_service = mock
@@ -380,7 +380,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
   it "raises if the insert_ids option is provided but size does not match rows" do
     insert_ids.pop # Remove one of the insert_ids to cause error.
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
     dataset.service.mocked_service = mock
 
     inserter = dataset.insert_async table_id
@@ -407,7 +407,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     insert_req = {
         rows: rows_without_insert_ids, ignoreUnknownValues: nil, skipInvalidRows: nil
     }.to_json
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
     mock.expect :insert_all_table_data, success_table_insert_gapi,
                 [project, dataset_id, table_id, insert_req], options: { skip_serialization: true }
     dataset.service.mocked_service = mock
@@ -438,7 +438,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     insert_req = {
         rows: rows_without_insert_ids, ignoreUnknownValues: nil, skipInvalidRows: nil
     }.to_json
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
     mock.expect :insert_all_table_data, success_table_insert_gapi,
                 [project, dataset_id, table_id, insert_req], options: { skip_serialization: true }
     dataset.service.mocked_service = mock
