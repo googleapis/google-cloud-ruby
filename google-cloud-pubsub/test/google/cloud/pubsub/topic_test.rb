@@ -605,6 +605,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     end
   end
 
+  focus
   it "can publish a message" do
     message = "new-message-here"
     encoded_msg = message.encode(Encoding::ASCII_8BIT)
@@ -613,7 +614,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
+    request = {topic: topic_path(topic_name), messages: messages}
+    mock.expect :publish, publish_res, [request]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message
