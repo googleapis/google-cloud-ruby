@@ -647,7 +647,6 @@ module Google
         def ensure_service!
           raise "Must have active connection to service" unless service
         end
-
       end
     end
 

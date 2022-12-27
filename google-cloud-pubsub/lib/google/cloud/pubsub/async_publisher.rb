@@ -82,7 +82,7 @@ module Google
                        interval: 0.01,
                        threads: {},
                        flow_control: {},
-                       compress: false, 
+                       compress: false,
                        compression_bytes_threshold: 240
           # init MonitorMixin
           super()
@@ -375,9 +375,9 @@ module Google
             items = batch.rebalance!
 
             unless items.empty?
-              grpc = @service.publish topic_name, 
-                                      items.map(&:msg), 
-                                      compress: compress && compression_bytes_threshold >= batch.total_message_bytes 
+              grpc = @service.publish topic_name,
+                                      items.map(&:msg),
+                                      compress: compress && compression_bytes_threshold >= batch.total_message_bytes
               items.zip Array(grpc.message_ids) do |item, id|
                 @flow_controller.release item.bytesize
                 next unless item.callback

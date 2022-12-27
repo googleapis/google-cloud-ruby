@@ -48,7 +48,7 @@ module Google
         attr_reader :compression_bytes_threshold
 
         ##
-        # @private The total bytes size of messages data. 
+        # @private The total bytes size of messages data.
         attr_reader :total_message_bytes
 
         ##

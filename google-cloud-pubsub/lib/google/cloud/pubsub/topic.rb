@@ -676,7 +676,7 @@ module Google
         #   topic.publish "task completed",
         #                 ordering_key: "task-key"
         #
-        def publish data = nil, attributes = nil, ordering_key: nil, compress: false, compression_bytes_threshold: 240, 
+        def publish data = nil, attributes = nil, ordering_key: nil, compress: false, compression_bytes_threshold: 240,
                     **extra_attrs, &block
           ensure_service!
           batch = BatchPublisher.new data, attributes, ordering_key, compress, compression_bytes_threshold, extra_attrs
@@ -1090,9 +1090,11 @@ module Google
         ##
         # Call the publish API with arrays of data data and attrs.
         def publish_batch_messages batch
-          grpc = service.publish name, 
-                                 batch.messages, 
-                                 compress: batch.compress && batch.total_message_bytes >= batch.compression_bytes_threshold
+          grpc = service.publish name,
+                                 batch.messages,
+                                 compress: batch.compress &&
+                                           batch.total_message_bytes >=
+                                           batch.compression_bytes_threshold
           batch.to_gcloud_messages Array(grpc.message_ids)
         end
       end
