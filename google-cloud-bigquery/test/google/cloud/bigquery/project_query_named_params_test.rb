@@ -587,7 +587,6 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
     assert_valid_data data
   end
 
-  # focus
   it "queries the data with an array of string values parameter" do
     job_gapi = query_job_gapi "#{query} WHERE name IN @names", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
@@ -685,7 +684,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
           array_values: [
             Google::Apis::BigqueryV2::QueryParameterValue.new(value: "1"),
-            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "22"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "2"),
             Google::Apis::BigqueryV2::QueryParameterValue.new(value: "3")
           ]
         )
@@ -710,7 +709,6 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
     assert_valid_data data
   end
 
-  # focus
   it "queries the data with a struct parameter" do
     job_gapi = query_job_gapi "#{query} WHERE meta = @meta", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
