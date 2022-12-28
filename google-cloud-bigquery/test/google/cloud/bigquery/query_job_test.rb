@@ -60,7 +60,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
       end
 
       mock.expect :get_table, destination_table_result, ["target_project_id", "target_dataset_id", "target_table_id"],
-                  view: table_metadata_view_type_for(view)
+                  **patch_table_args(view: view)
 
       table = job.destination view: view
       _(table).must_be_kind_of Google::Cloud::Bigquery::Table

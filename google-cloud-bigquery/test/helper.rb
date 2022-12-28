@@ -1205,6 +1205,8 @@ class MockBigquery < Minitest::Spec
                        quota_user: nil,
                        user_ip: nil,
                        options: nil
-    {}
+    {
+      view: table_metadata_view_type_for(view)
+    }
   end
 end

@@ -148,11 +148,7 @@ module Google
           metadata_view = table_metadata_view_type_for metadata_view
           # The get operation is considered idempotent
           execute backoff: true do
-            if metadata_view.nil?
-              service.get_table project_id, dataset_id, table_id
-            else
-              service.get_table project_id, dataset_id, table_id, view: metadata_view
-            end
+            service.get_table project_id, dataset_id, table_id, view: metadata_view
           end
         end
 

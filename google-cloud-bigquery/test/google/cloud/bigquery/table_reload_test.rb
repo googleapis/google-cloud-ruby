@@ -54,7 +54,7 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
       end
 
       mock.expect :get_table, table_result, [project, dataset_id, table_id],
-                  view: table_metadata_view_type_for(view)
+                  **patch_table_args(view: view)
 
       partial_table = Google::Cloud::Bigquery::Table.from_gapi table_result, bigquery.service, metadata_view: view
 

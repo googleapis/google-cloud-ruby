@@ -56,7 +56,7 @@ describe Google::Cloud::Bigquery::ExtractJob, :table, :mock_bigquery do
       end
 
       mock.expect :get_table, source_table_result, ["source_project_id", "source_dataset_id", "source_table_id"],
-                  view: table_metadata_view_type_for(view)
+                  **patch_table_args(view: view)
 
       source = job.source view: view
       _(source).must_be_kind_of Google::Cloud::Bigquery::Table

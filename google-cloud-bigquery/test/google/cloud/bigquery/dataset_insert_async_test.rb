@@ -158,7 +158,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
         rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: nil
       }.to_json
       mock.expect :get_table, table_gapi, [project, dataset_id, table_id],
-                  view: table_metadata_view_type_for(view)
+                  **patch_table_args(view: view)
       mock.expect :insert_all_table_data, success_table_insert_gapi,
                   [project, dataset_id, table_id, insert_req], options: { skip_serialization: true }
       dataset.service.mocked_service = mock

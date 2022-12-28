@@ -929,7 +929,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       end
 
       mock.expect :get_table, table_result, [project, dataset_id, found_table_id],
-                  view: table_metadata_view_type_for(view)
+                  **patch_table_args(view: view)
 
       table = dataset.table found_table_id, view: view
       _(table).must_be_kind_of Google::Cloud::Bigquery::Table

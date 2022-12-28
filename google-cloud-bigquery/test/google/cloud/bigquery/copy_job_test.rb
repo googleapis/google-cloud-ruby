@@ -60,7 +60,7 @@ describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
       end
 
       mock.expect :get_table, source_table_result, ["source_project_id", "source_dataset_id", "source_table_id"],
-                  view: table_metadata_view_type_for(view)
+                  **patch_table_args(view: view)
 
       source = job.source view: view
       _(source).must_be_kind_of Google::Cloud::Bigquery::Table
@@ -70,7 +70,7 @@ describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
       verify_table_metadata source, view
 
       mock.expect :get_table, destination_table_result, ["target_project_id", "target_dataset_id", "target_table_id"],
-                  view: table_metadata_view_type_for(view)
+                  **patch_table_args(view: view)
 
       destination = job.destination view: view
       _(destination).must_be_kind_of Google::Cloud::Bigquery::Table
