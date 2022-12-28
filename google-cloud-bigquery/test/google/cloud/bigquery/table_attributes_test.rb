@@ -29,8 +29,8 @@ describe Google::Cloud::Bigquery::Table, :attributes, :mock_bigquery do
 
   it "gets full data for created_at" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_full_gapi,
-      [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, table_full_gapi, 
+      [table.project_id, table.dataset_id, table.table_id], **patch_table_args, **patch_table_args
     table.service.mocked_service = mock
 
     _(table.created_at).must_be_close_to ::Time.now, 1
@@ -43,8 +43,8 @@ describe Google::Cloud::Bigquery::Table, :attributes, :mock_bigquery do
 
   it "gets full data for expires_at" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_full_gapi,
-      [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, table_full_gapi, 
+      [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     _(table.expires_at).must_be_close_to ::Time.now, 1
@@ -59,8 +59,8 @@ describe Google::Cloud::Bigquery::Table, :attributes, :mock_bigquery do
     mock = Minitest::Mock.new
     g = table_full_gapi
     g.expiration_time = nil
-    mock.expect :get_table, g,
-      [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, g, 
+      [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     _(table.expires_at).must_be :nil?
@@ -73,8 +73,8 @@ describe Google::Cloud::Bigquery::Table, :attributes, :mock_bigquery do
 
   it "gets full data for modified_at" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_full_gapi,
-      [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, table_full_gapi, 
+      [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     _(table.modified_at).must_be_close_to ::Time.now, 1
@@ -87,8 +87,8 @@ describe Google::Cloud::Bigquery::Table, :attributes, :mock_bigquery do
 
   it "gets full data for schema" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_full_gapi,
-      [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, table_full_gapi, 
+      [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
@@ -107,8 +107,8 @@ describe Google::Cloud::Bigquery::Table, :attributes, :mock_bigquery do
   def self.attr_test attr, val
     define_method "test_#{attr}" do
       mock = Minitest::Mock.new
-      mock.expect :get_table, table_full_gapi,
-        [table.project_id, table.dataset_id, table.table_id]
+      mock.expect :get_table, table_full_gapi, 
+        [table.project_id, table.dataset_id, table.table_id], **patch_table_args
       table.service.mocked_service = mock
 
       _(table.send(attr)).must_equal val

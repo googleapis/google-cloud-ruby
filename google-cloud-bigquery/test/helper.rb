@@ -1149,4 +1149,13 @@ class MockBigquery < Minitest::Spec
   def formatted_table_path dataset_id, table_id
     "projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}"
   end
+
+  def patch_table_args selected_fields: nil,
+                       view: nil,
+                       fields: nil,
+                       quota_user: nil,
+                       user_ip: nil,
+                       options: nil
+    {}
+  end
 end
