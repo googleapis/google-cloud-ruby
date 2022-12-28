@@ -34,7 +34,7 @@ module Google
         ##
         # Manages the API keys associated with projects.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/api_keys/v2/api_keys"
         #     client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new

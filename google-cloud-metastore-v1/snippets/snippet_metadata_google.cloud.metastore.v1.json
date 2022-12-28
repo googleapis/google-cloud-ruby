@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-metastore-v1",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -598,6 +598,206 @@
           "service": {
             "short_name": "DataprocMetastore",
             "full_name": "google.cloud.metastore.v1.DataprocMetastore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "metastore_v1_generated_DataprocMetastoreFederation_ListFederations_sync",
+      "title": "Snippet for list_federations in DataprocMetastoreFederation",
+      "description": "Basic snippet for list_federations in DataprocMetastoreFederation",
+      "file": "dataproc_metastore_federation/list_federations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_federations",
+        "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client#list_federations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Metastore::V1::ListFederationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Metastore::V1::ListFederationsResponse",
+        "client": {
+          "short_name": "DataprocMetastoreFederation::Client",
+          "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client"
+        },
+        "method": {
+          "short_name": "ListFederations",
+          "full_name": "google.cloud.metastore.v1.DataprocMetastoreFederation.ListFederations",
+          "service": {
+            "short_name": "DataprocMetastoreFederation",
+            "full_name": "google.cloud.metastore.v1.DataprocMetastoreFederation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "metastore_v1_generated_DataprocMetastoreFederation_GetFederation_sync",
+      "title": "Snippet for get_federation in DataprocMetastoreFederation",
+      "description": "Basic snippet for get_federation in DataprocMetastoreFederation",
+      "file": "dataproc_metastore_federation/get_federation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_federation",
+        "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client#get_federation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Metastore::V1::GetFederationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Metastore::V1::Federation",
+        "client": {
+          "short_name": "DataprocMetastoreFederation::Client",
+          "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client"
+        },
+        "method": {
+          "short_name": "GetFederation",
+          "full_name": "google.cloud.metastore.v1.DataprocMetastoreFederation.GetFederation",
+          "service": {
+            "short_name": "DataprocMetastoreFederation",
+            "full_name": "google.cloud.metastore.v1.DataprocMetastoreFederation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "metastore_v1_generated_DataprocMetastoreFederation_CreateFederation_sync",
+      "title": "Snippet for create_federation in DataprocMetastoreFederation",
+      "description": "Basic snippet for create_federation in DataprocMetastoreFederation",
+      "file": "dataproc_metastore_federation/create_federation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_federation",
+        "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client#create_federation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Metastore::V1::CreateFederationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataprocMetastoreFederation::Client",
+          "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client"
+        },
+        "method": {
+          "short_name": "CreateFederation",
+          "full_name": "google.cloud.metastore.v1.DataprocMetastoreFederation.CreateFederation",
+          "service": {
+            "short_name": "DataprocMetastoreFederation",
+            "full_name": "google.cloud.metastore.v1.DataprocMetastoreFederation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "metastore_v1_generated_DataprocMetastoreFederation_UpdateFederation_sync",
+      "title": "Snippet for update_federation in DataprocMetastoreFederation",
+      "description": "Basic snippet for update_federation in DataprocMetastoreFederation",
+      "file": "dataproc_metastore_federation/update_federation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_federation",
+        "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client#update_federation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Metastore::V1::UpdateFederationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataprocMetastoreFederation::Client",
+          "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client"
+        },
+        "method": {
+          "short_name": "UpdateFederation",
+          "full_name": "google.cloud.metastore.v1.DataprocMetastoreFederation.UpdateFederation",
+          "service": {
+            "short_name": "DataprocMetastoreFederation",
+            "full_name": "google.cloud.metastore.v1.DataprocMetastoreFederation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "metastore_v1_generated_DataprocMetastoreFederation_DeleteFederation_sync",
+      "title": "Snippet for delete_federation in DataprocMetastoreFederation",
+      "description": "Basic snippet for delete_federation in DataprocMetastoreFederation",
+      "file": "dataproc_metastore_federation/delete_federation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_federation",
+        "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client#delete_federation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Metastore::V1::DeleteFederationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataprocMetastoreFederation::Client",
+          "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client"
+        },
+        "method": {
+          "short_name": "DeleteFederation",
+          "full_name": "google.cloud.metastore.v1.DataprocMetastoreFederation.DeleteFederation",
+          "service": {
+            "short_name": "DataprocMetastoreFederation",
+            "full_name": "google.cloud.metastore.v1.DataprocMetastoreFederation"
           }
         }
       },

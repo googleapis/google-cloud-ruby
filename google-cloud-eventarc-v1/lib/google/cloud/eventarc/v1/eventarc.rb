@@ -35,7 +35,7 @@ module Google
         # Eventarc allows users to subscribe to various events that are provided by
         # Google Cloud services and forward them to supported destinations.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/eventarc/v1/eventarc"
         #     client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new

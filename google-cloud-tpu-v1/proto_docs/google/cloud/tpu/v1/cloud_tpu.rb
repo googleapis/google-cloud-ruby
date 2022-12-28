@@ -146,7 +146,7 @@ module Google
             # TPU node is being created.
             CREATING = 1
 
-            # TPU node has been created and is fully usable.
+            # TPU node has been created.
             READY = 2
 
             # TPU node is restarting.

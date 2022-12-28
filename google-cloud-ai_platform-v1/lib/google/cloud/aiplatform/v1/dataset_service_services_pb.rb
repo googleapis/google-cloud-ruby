@@ -50,6 +50,8 @@ module Google
             rpc :ExportData, ::Google::Cloud::AIPlatform::V1::ExportDataRequest, ::Google::Longrunning::Operation
             # Lists DataItems in a Dataset.
             rpc :ListDataItems, ::Google::Cloud::AIPlatform::V1::ListDataItemsRequest, ::Google::Cloud::AIPlatform::V1::ListDataItemsResponse
+            # Searches DataItems in a Dataset.
+            rpc :SearchDataItems, ::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest, ::Google::Cloud::AIPlatform::V1::SearchDataItemsResponse
             # Lists SavedQueries in a Dataset.
             rpc :ListSavedQueries, ::Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest, ::Google::Cloud::AIPlatform::V1::ListSavedQueriesResponse
             # Gets an AnnotationSpec.

@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::AutoML::ClientConstructionMinitest < Minitest::Test
-  def test_prediction_service
+  def test_prediction_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::AutoML.prediction_service do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::AutoML::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_auto_ml
+  def test_auto_ml_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::AutoML.auto_ml do |config|

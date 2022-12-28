@@ -32,8 +32,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Analytics::Data::V1beta::AnalyticsData::Client](https://googleapis.dev/ruby/google-analytics-data-v1beta/latest/Google/Analytics/Data/V1beta/AnalyticsData/Client.html)
-      # for version V1beta of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1beta of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AnalyticsData service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -44,7 +44,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta`.
-      # @return [AnalyticsData::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.analytics_data version: :v1beta, &block
         require "google/analytics/data/#{version.to_s.downcase}"
@@ -53,8 +53,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Analytics::Data.const_get package_name
-        package_module.const_get(:AnalyticsData).const_get(:Client).new(&block)
+        service_module = Google::Analytics::Data.const_get(package_name).const_get(:AnalyticsData)
+        service_module.const_get(:Client).new(&block)
       end
     end
   end

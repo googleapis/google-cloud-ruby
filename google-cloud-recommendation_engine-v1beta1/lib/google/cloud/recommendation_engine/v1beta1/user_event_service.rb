@@ -34,7 +34,7 @@ module Google
         ##
         # Service for ingesting end user actions on the customer website.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/recommendation_engine/v1beta1/user_event_service"
         #     client = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client.new

@@ -34,7 +34,7 @@ module Google
         # Web Risk API defines an interface to detect malicious URLs on your
         # website and in client applications.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/web_risk/v1/web_risk_service"
         #     client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new

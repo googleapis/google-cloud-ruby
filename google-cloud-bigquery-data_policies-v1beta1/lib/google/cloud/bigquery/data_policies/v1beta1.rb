@@ -24,9 +24,9 @@ module Google
     module Bigquery
       module DataPolicies
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/bigquery/data_policies/v1beta1"
         #     client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new

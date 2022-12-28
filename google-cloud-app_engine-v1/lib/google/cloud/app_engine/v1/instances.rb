@@ -33,7 +33,7 @@ module Google
         ##
         # Manages instances of a version.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/app_engine/v1/instances"
         #     client = ::Google::Cloud::AppEngine::V1::Instances::Client.new

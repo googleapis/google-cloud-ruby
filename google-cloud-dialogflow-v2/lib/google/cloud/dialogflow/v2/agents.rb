@@ -34,7 +34,7 @@ module Google
         ##
         # Service for managing {::Google::Cloud::Dialogflow::V2::Agent Agents}.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/agents"
         #     client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new

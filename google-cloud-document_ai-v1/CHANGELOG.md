@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.8.0 (2022-12-15)
+
+#### Features
+
+* Added sample_document_uris field to ProcessorType ([#19877](https://github.com/googleapis/google-cloud-ruby/issues/19877)) 
+
+### 0.7.0 (2022-12-14)
+
+#### Features
+
+* Support for configuring sharding for a GCS output document ([#19856](https://github.com/googleapis/google-cloud-ruby/issues/19856)) 
+
 ### 0.6.0 (2022-11-09)
 
 #### Features

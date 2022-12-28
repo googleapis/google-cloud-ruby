@@ -44,7 +44,7 @@ module Google
         # For all requests, returns a `google.rpc.Status` with
         # `google.rpc.Code.INVALID_ARGUMENT` if the request is malformed.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/resource_settings/v1/resource_settings_service"
         #     client = ::Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client.new

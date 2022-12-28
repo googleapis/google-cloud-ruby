@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Secret Manager is a secure and convenient storage system for API keys, passwords, certificates, and other sensitive data. Secret Manager provides a central place and single source of truth to manage, access, and audit secrets across Google Cloud.",
     "ruby-cloud-env-prefix": "SECRET_MANAGER",
     "ruby-cloud-product-url": "https://cloud.google.com/secret-manager",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

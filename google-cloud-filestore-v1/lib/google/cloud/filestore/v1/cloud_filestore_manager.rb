@@ -52,7 +52,7 @@ module Google
         # * `projects/12345/locations/us-central1-c/instances/my-filestore`
         # * `projects/12345/locations/us-central1/backups/my-backup`
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/filestore/v1/cloud_filestore_manager"
         #     client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new

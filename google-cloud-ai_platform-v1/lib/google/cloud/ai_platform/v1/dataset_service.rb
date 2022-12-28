@@ -35,7 +35,7 @@ module Google
         # The service that handles the CRUD of Vertex AI Dataset and its child
         # resources.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/dataset_service"
         #     client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new

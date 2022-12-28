@@ -21,9 +21,9 @@ require "grafeas/v1/version"
 
 module Grafeas
   ##
-  # To load this package, including all its services, and instantiate a client:
+  # API client module.
   #
-  # @example
+  # @example Load this package, including all its services, and instantiate a gRPC client
   #
   #     require "grafeas/v1"
   #     client = ::Grafeas::V1::Grafeas::Client.new

@@ -34,7 +34,7 @@ module Google
         ##
         # Service for the AI Platform Data Labeling API.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/data_labeling/v1beta1/data_labeling_service"
         #     client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new

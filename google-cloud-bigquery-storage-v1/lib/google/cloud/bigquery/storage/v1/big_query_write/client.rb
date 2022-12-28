@@ -581,8 +581,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Parent table that all the streams should belong to, in the form of
-              #     `projects/{project}/datasets/{dataset}/tables/{table}`.
+              #     Required. Parent table that all the streams should belong to, in the form
+              #     of `projects/{project}/datasets/{dataset}/tables/{table}`.
               #   @param write_streams [::Array<::String>]
               #     Required. The group of streams that will be committed atomically.
               #

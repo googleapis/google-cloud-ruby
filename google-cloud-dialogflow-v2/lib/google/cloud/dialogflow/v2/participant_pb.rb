@@ -152,6 +152,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :detect_intent_response, :message, 1, "google.cloud.dialogflow.v2.DetectIntentResponse"
       optional :automated_agent_reply_type, :enum, 7, "google.cloud.dialogflow.v2.AutomatedAgentReply.AutomatedAgentReplyType"
       optional :allow_cancellation, :bool, 8
+      optional :cx_current_page, :string, 11
     end
     add_enum "google.cloud.dialogflow.v2.AutomatedAgentReply.AutomatedAgentReplyType" do
       value :AUTOMATED_AGENT_REPLY_TYPE_UNSPECIFIED, 0

@@ -26,9 +26,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :replacement_control_ids, :string, 14
       repeated :ignore_control_ids, :string, 15
       optional :diversity_level, :string, 8
+      optional :diversity_type, :enum, 20, "google.cloud.retail.v2.ServingConfig.DiversityType"
       optional :enable_category_filter_level, :string, 16
       optional :personalization_spec, :message, 21, "google.cloud.retail.v2.SearchRequest.PersonalizationSpec"
       repeated :solution_types, :enum, 19, "google.cloud.retail.v2.SolutionType"
+    end
+    add_enum "google.cloud.retail.v2.ServingConfig.DiversityType" do
+      value :DIVERSITY_TYPE_UNSPECIFIED, 0
+      value :RULE_BASED_DIVERSITY, 2
+      value :DATA_DRIVEN_DIVERSITY, 3
     end
   end
 end
@@ -38,6 +44,7 @@ module Google
     module Retail
       module V2
         ServingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ServingConfig").msgclass
+        ServingConfig::DiversityType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ServingConfig.DiversityType").enummodule
       end
     end
   end

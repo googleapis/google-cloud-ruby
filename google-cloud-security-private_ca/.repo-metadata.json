@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Certificate Authority Service is a highly available, scalable Google Cloud service that enables you to simplify, automate, and customize the deployment, management, and security of private certificate authorities (CA).",
     "ruby-cloud-env-prefix": "PRIVATE_CA",
     "ruby-cloud-product-url": "https://cloud.google.com/certificate-authority-service/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

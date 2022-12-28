@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.0 (2022-12-14)
+
+#### Features
+
+* Added estimated row count to create_read_session response ([#19859](https://github.com/googleapis/google-cloud-ruby/issues/19859)) 
+
 ### 0.16.0 (2022-11-16)
 
 #### Features

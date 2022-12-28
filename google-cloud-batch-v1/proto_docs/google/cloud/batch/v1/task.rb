@@ -241,8 +241,7 @@ module Google
         #     If task ends with non-zero exit code, retry the task with max_retry_count.
         # @!attribute [rw] environments
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Environment variables to set before running the Task.
-        #     You can set up to 100 environments.
+        #     Deprecated: please use environment(non-plural) instead.
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Batch::V1::Volume>]
         #     Volumes to mount before running Tasks using this TaskSpec.

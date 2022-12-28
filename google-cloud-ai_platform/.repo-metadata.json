@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Vertex AI enables data scientists, developers, and AI newcomers to create custom machine learning models specific to their business needs by leveraging Google's state-of-the-art transfer learning and innovative AI research.",
     "ruby-cloud-product-url": "https://cloud.google.com/vertex-ai/docs/",
     "ruby-cloud-service-override": "AiPlatform=AIPlatform",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

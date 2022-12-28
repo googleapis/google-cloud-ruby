@@ -36,7 +36,7 @@ module Google
         # Folders can be used to organize the resources under an
         # organization and to control the policies applied to groups of resources.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/resource_manager/v3/folders"
         #     client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new

@@ -36,7 +36,7 @@ module Google
         # connectivity management in Google Cloud. It reduces operational complexity
         # through a simple, centralized connectivity management model.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/network_connectivity/v1/hub_service"
         #     client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new

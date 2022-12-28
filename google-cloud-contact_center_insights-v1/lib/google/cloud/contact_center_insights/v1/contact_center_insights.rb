@@ -34,7 +34,7 @@ module Google
         ##
         # An API that lets users analyze and explore their business conversation data.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/contact_center_insights/v1/contact_center_insights"
         #     client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new

@@ -26,9 +26,9 @@ module Google
       module Airflow
         module Service
           ##
-          # To load this package, including all its services, and instantiate a client:
+          # API client module.
           #
-          # @example
+          # @example Load this package, including all its services, and instantiate a gRPC client
           #
           #     require "google/cloud/orchestration/airflow/service/v1"
           #     client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new

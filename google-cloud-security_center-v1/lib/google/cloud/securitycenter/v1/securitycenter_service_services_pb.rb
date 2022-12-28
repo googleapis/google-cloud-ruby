@@ -50,7 +50,7 @@ module Google
             rpc :DeleteMuteConfig, ::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest, ::Google::Protobuf::Empty
             # Deletes a notification config.
             rpc :DeleteNotificationConfig, ::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest, ::Google::Protobuf::Empty
-            # Gets a big query export.
+            # Gets a BigQuery export.
             rpc :GetBigQueryExport, ::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest, ::Google::Cloud::SecurityCenter::V1::BigQueryExport
             # Gets the access control policy on the specified Source.
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
@@ -118,9 +118,9 @@ module Google
             rpc :UpdateSource, ::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest, ::Google::Cloud::SecurityCenter::V1::Source
             # Updates security marks.
             rpc :UpdateSecurityMarks, ::Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest, ::Google::Cloud::SecurityCenter::V1::SecurityMarks
-            # Creates a big query export.
+            # Creates a BigQuery export.
             rpc :CreateBigQueryExport, ::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest, ::Google::Cloud::SecurityCenter::V1::BigQueryExport
-            # Deletes an existing big query export.
+            # Deletes an existing BigQuery export.
             rpc :DeleteBigQueryExport, ::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest, ::Google::Protobuf::Empty
             # Updates a BigQuery export.
             rpc :UpdateBigQueryExport, ::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest, ::Google::Cloud::SecurityCenter::V1::BigQueryExport

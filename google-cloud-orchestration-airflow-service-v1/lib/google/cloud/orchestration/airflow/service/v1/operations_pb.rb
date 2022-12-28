@@ -29,6 +29,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DELETE, 2
       value :UPDATE, 3
       value :CHECK, 4
+      value :SAVE_SNAPSHOT, 5
+      value :LOAD_SNAPSHOT, 6
     end
   end
 end

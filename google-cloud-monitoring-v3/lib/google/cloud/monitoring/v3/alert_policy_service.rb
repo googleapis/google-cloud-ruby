@@ -41,7 +41,7 @@ module Google
         # which can be reached by clicking the "Monitoring" tab in
         # [Cloud console](https://console.cloud.google.com/).
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/monitoring/v3/alert_policy_service"
         #     client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new

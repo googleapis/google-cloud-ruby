@@ -1,5 +1,11 @@
 # Release History
 
+### 0.20.0 (2022-12-09)
+
+#### Features
+
+* Added cx_current_page field to AutomatedAgentReply ([#19464](https://github.com/googleapis/google-cloud-ruby/issues/19464)) 
+
 ### 0.19.0 (2022-11-01)
 
 #### Features

@@ -482,7 +482,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. Full resource name of catalog item, such as
-            #     "projects/*/locations/global/catalogs/default_catalog/catalogItems/some_catalog_item_id".
+            #     `projects/*/locations/global/catalogs/default_catalog/catalogItems/some_catalog_item_id`.
             #   @param catalog_item [::Google::Cloud::RecommendationEngine::V1beta1::CatalogItem, ::Hash]
             #     Required. The catalog item to update/create. The 'catalog_item_id' field
             #     has to match that in the 'name'.

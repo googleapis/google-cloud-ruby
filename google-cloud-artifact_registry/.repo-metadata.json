@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Artifact Registry stores and manages build artifacts in a scalable and integrated service built on Google infrastructure.",
     "ruby-cloud-env-prefix": "ARTIFACT_REGISTRY",
     "ruby-cloud-product-url": "https://cloud.google.com/artifact-registry/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

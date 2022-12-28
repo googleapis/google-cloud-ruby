@@ -307,6 +307,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::ConfidentialNodes]
         #     Confidential nodes config.
         #     All the nodes in the node pool will be Confidential VM once enabled.
+        # @!attribute [rw] fast_socket
+        #   @return [::Google::Cloud::Container::V1beta1::FastSocket]
+        #     Enable or disable NCCL fast socket for the node pool.
         # @!attribute [rw] resource_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The resource labels for the node pool to use to annotate any related
@@ -1173,9 +1176,8 @@ module Google
         #     anything other than EVALUATION_MODE_UNSPECIFIED, this field is ignored.
         # @!attribute [rw] evaluation_mode
         #   @return [::Google::Cloud::Container::V1beta1::BinaryAuthorization::EvaluationMode]
-        #     Mode of operation for binauthz policy evaluation. Currently the only
-        #     options are equivalent to enable/disable. If unspecified, defaults to
-        #     DISABLED.
+        #     Mode of operation for binauthz policy evaluation. If unspecified, defaults
+        #     to DISABLED.
         class BinaryAuthorization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1924,6 +1926,11 @@ module Google
         # @!attribute [rw] desired_node_pool_logging_config
         #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
         #     The desired node pool logging configuration defaults for the cluster.
+        # @!attribute [rw] desired_stack_type
+        #   @return [::Google::Cloud::Container::V1beta1::StackType]
+        #     The desired stack type of the cluster.
+        #     If a stack type is provided and does not match the current stack type of
+        #     the cluster, update will attempt to change the stack type to the new type.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2273,6 +2280,9 @@ module Google
         # @!attribute [rw] gvnic
         #   @return [::Google::Cloud::Container::V1beta1::VirtualNIC]
         #     Enable or disable gvnic on the node pool.
+        # @!attribute [rw] fast_socket
+        #   @return [::Google::Cloud::Container::V1beta1::FastSocket]
+        #     Enable or disable NCCL fast socket for the node pool.
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
         #     Logging configuration.
@@ -4519,6 +4529,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration of Fast Socket feature.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether Fast Socket features are enabled in the node pool.
+        class FastSocket
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # GetOpenIDConfigRequest gets the OIDC discovery document for the
         # cluster. See the OpenID Connect Discovery 1.0 specification for details.
         # @!attribute [rw] parent
@@ -5029,6 +5048,18 @@ module Google
           # documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/dataplane-v2)
           # for more.
           ADVANCED_DATAPATH = 2
+        end
+
+        # Possible values for IP stack type
+        module StackType
+          # By default, the clusters will be IPV4 only
+          STACK_TYPE_UNSPECIFIED = 0
+
+          # The value used if the cluster is a IPV4 only
+          IPV4 = 1
+
+          # The value used if the cluster is a dual stack cluster
+          IPV4_IPV6 = 2
         end
       end
     end

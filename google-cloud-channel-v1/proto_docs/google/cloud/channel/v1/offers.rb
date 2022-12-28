@@ -22,8 +22,8 @@ module Google
     module Channel
       module V1
         # Represents an offer made to resellers for purchase.
-        # An offer is associated with a {::Google::Cloud::Channel::V1::Sku Sku}, has a plan for payment, a price, and
-        # defines the constraints for buying.
+        # An offer is associated with a {::Google::Cloud::Channel::V1::Sku Sku}, has a plan
+        # for payment, a price, and defines the constraints for buying.
         # @!attribute [rw] name
         #   @return [::String]
         #     Resource Name of the Offer.

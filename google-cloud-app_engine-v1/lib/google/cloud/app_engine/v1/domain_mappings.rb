@@ -33,7 +33,7 @@ module Google
         ##
         # Manages domains serving an application.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/app_engine/v1/domain_mappings"
         #     client = ::Google::Cloud::AppEngine::V1::DomainMappings::Client.new

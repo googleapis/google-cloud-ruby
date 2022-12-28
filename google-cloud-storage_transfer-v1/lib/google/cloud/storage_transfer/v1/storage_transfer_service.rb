@@ -36,7 +36,7 @@ module Google
         # Transfers data between between Google Cloud Storage buckets or from a data
         # source external to Google to a Cloud Storage bucket.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/storage_transfer/v1/storage_transfer_service"
         #     client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new

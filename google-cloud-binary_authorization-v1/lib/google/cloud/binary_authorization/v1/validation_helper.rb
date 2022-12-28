@@ -32,7 +32,7 @@ module Google
         ##
         # BinAuthz Attestor verification
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/binary_authorization/v1/validation_helper"
         #     client = ::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client.new

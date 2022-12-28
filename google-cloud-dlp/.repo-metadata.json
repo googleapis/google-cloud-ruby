@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.",
     "ruby-cloud-env-prefix": "DLP",
     "ruby-cloud-product-url": "https://cloud.google.com/dlp",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

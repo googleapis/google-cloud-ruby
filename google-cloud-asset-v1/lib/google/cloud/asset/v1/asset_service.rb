@@ -34,7 +34,7 @@ module Google
         ##
         # Asset service definition.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/asset/v1/asset_service"
         #     client = ::Google::Cloud::Asset::V1::AssetService::Client.new

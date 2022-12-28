@@ -14,5 +14,5 @@
     "ruby-cloud-description": "The Service Control API provides control plane functionality to managed services, such as logging, monitoring, and status checks.",
     "ruby-cloud-env-prefix": "SERVICE_CONTROL",
     "ruby-cloud-product-url": "https://cloud.google.com/service-infrastructure/docs/overview/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

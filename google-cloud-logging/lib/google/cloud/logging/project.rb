@@ -398,7 +398,7 @@ module Google
 
         ##
         # Creates a logger instance that is API-compatible with Ruby's standard
-        # library [Logger](http://ruby-doc.org/stdlib/libdoc/logger/rdoc).
+        # library [Logger](https://ruby-doc.org/current/stdlibs/logger/).
         #
         # The logger will create a new AsyncWriter object to transmit log
         # entries on a background thread.

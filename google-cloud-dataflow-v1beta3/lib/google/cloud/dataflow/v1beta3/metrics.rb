@@ -33,7 +33,7 @@ module Google
         # The Dataflow Metrics API lets you monitor the progress of Dataflow
         # jobs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataflow/v1beta3/metrics"
         #     client = ::Google::Cloud::Dataflow::V1beta3::Metrics::Client.new

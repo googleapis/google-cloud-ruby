@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Creates and manages Redis instances on the Google Cloud Platform.",
     "ruby-cloud-env-prefix": "REDIS",
     "ruby-cloud-product-url": "https://cloud.google.com/memorystore/docs/redis",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

@@ -34,7 +34,7 @@ module Google
         ##
         # Manages Google Cloud Projects.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/resource_manager/v3/projects"
         #     client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new

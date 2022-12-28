@@ -21,6 +21,53 @@ module Google
   module Cloud
     module AIPlatform
       module V1
+        # Request message for {::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#write_feature_values FeaturestoreOnlineServingService.WriteFeatureValues}.
+        # @!attribute [rw] entity_type
+        #   @return [::String]
+        #     Required. The resource name of the EntityType for the entities being written.
+        #     Value format: `projects/{project}/locations/{location}/featurestores/
+        #     \\{featurestore}/entityTypes/\\{entityType}`. For example,
+        #     for a machine learning model predicting user clicks on a website, an
+        #     EntityType ID could be `user`.
+        # @!attribute [rw] payloads
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::WriteFeatureValuesPayload>]
+        #     Required. The entities to be written. Up to 100,000 feature values can be written
+        #     across all `payloads`.
+        class WriteFeatureValuesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains Feature values to be written for a specific entity.
+        # @!attribute [rw] entity_id
+        #   @return [::String]
+        #     Required. The ID of the entity.
+        # @!attribute [rw] feature_values
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::FeatureValue}]
+        #     Required. Feature values to be written, mapping from Feature ID to value. Up to
+        #     100,000 `feature_values` entries may be written across all payloads.  The
+        #     feature generation time, aligned by days, must be no older than five
+        #     years (1825 days) and no later than one year (366 days) in the future.
+        class WriteFeatureValuesPayload
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AIPlatform::V1::FeatureValue]
+          class FeatureValuesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response message for {::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#write_feature_values FeaturestoreOnlineServingService.WriteFeatureValues}.
+        class WriteFeatureValuesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#read_feature_values FeaturestoreOnlineServingService.ReadFeatureValues}.
         # @!attribute [rw] entity_type
         #   @return [::String]

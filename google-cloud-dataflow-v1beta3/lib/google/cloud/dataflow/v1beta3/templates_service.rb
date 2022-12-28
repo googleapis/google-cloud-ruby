@@ -32,7 +32,7 @@ module Google
         ##
         # Provides a method to create Cloud Dataflow jobs from templates.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataflow/v1beta3/templates_service"
         #     client = ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Client.new

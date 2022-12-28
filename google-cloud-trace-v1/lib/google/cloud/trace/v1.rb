@@ -23,9 +23,9 @@ module Google
   module Cloud
     module Trace
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/trace/v1"
       #     client = ::Google::Cloud::Trace::V1::TraceService::Client.new

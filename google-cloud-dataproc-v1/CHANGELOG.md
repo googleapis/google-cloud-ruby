@@ -1,5 +1,13 @@
 # Release History
 
+### 0.14.0 (2022-12-14)
+
+#### Features
+
+* Support for configuring driver scheduling in a Job 
+* Support for setting auxiliary node groups in a ClusterConfig 
+* Support for the NodeGroupController service ([#19853](https://github.com/googleapis/google-cloud-ruby/issues/19853)) 
+
 ### 0.13.0 (2022-09-28)
 
 #### Features

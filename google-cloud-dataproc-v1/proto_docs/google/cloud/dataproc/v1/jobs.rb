@@ -133,7 +133,7 @@ module Google
           end
         end
 
-        # A Dataproc job for running [Apache Spark](http://spark.apache.org/)
+        # A Dataproc job for running [Apache Spark](https://spark.apache.org/)
         # applications on YARN.
         # @!attribute [rw] main_jar_file_uri
         #   @return [::String]
@@ -310,7 +310,7 @@ module Google
         end
 
         # A Dataproc job for running [Apache Spark
-        # SQL](http://spark.apache.org/sql/) queries.
+        # SQL](https://spark.apache.org/sql/) queries.
         # @!attribute [rw] query_file_uri
         #   @return [::String]
         #     The HCFS URI of the script that contains SQL queries.
@@ -507,7 +507,8 @@ module Google
         #     the job is submitted.
         # @!attribute [rw] cluster_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. Cluster labels to identify a cluster where the job will be submitted.
+        #     Optional. Cluster labels to identify a cluster where the job will be
+        #     submitted.
         class JobPlacement
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -608,8 +609,8 @@ module Google
         # Encapsulates the full scoping used to reference a job.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     Optional. The ID of the Google Cloud Platform project that the job belongs to. If
-        #     specified, must match the request project ID.
+        #     Optional. The ID of the Google Cloud Platform project that the job belongs
+        #     to. If specified, must match the request project ID.
         # @!attribute [rw] job_id
         #   @return [::String]
         #     Optional. The job ID, which must be unique within the project.
@@ -756,10 +757,13 @@ module Google
         #     may be reused over time.
         # @!attribute [r] done
         #   @return [::Boolean]
-        #     Output only. Indicates whether the job is completed. If the value is `false`,
-        #     the job is still in progress. If `true`, the job is completed, and
+        #     Output only. Indicates whether the job is completed. If the value is
+        #     `false`, the job is still in progress. If `true`, the job is completed, and
         #     `status.state` field will indicate if it was successful, failed,
         #     or cancelled.
+        # @!attribute [rw] driver_scheduling_config
+        #   @return [::Google::Cloud::Dataproc::V1::DriverSchedulingConfig]
+        #     Optional. Driver scheduling configuration.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -774,6 +778,18 @@ module Google
           end
         end
 
+        # Driver scheduling configuration.
+        # @!attribute [rw] memory_mb
+        #   @return [::Integer]
+        #     Required. The amount of memory in MB the driver is requesting.
+        # @!attribute [rw] vcores
+        #   @return [::Integer]
+        #     Required. The number of vCPUs the driver is requesting.
+        class DriverSchedulingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Job scheduling options.
         # @!attribute [rw] max_failures_per_hour
         #   @return [::Integer]
@@ -781,27 +797,26 @@ module Google
         #     a result of driver exiting with non-zero code before job is
         #     reported failed.
         #
-        #     A job may be reported as thrashing if driver exits with non-zero code
-        #     4 times within 10 minute window.
+        #     A job may be reported as thrashing if the driver exits with a non-zero code
+        #     four times within a 10-minute window.
         #
         #     Maximum value is 10.
         #
-        #     **Note:** Currently, this restartable job option is
-        #     not supported in Dataproc
-        #     [workflow
-        #     template](https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template)
-        #     jobs.
+        #     **Note:** This restartable job option is not supported in Dataproc
+        #     [workflow templates]
+        #     (https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template).
         # @!attribute [rw] max_failures_total
         #   @return [::Integer]
-        #     Optional. Maximum number of times in total a driver may be restarted as a result of
-        #     driver exiting with non-zero code before job is reported failed.
+        #     Optional. Maximum total number of times a driver may be restarted as a
+        #     result of the driver exiting with a non-zero code. After the maximum number
+        #     is reached, the job will be reported as failed.
+        #
         #     Maximum value is 240.
         #
         #     **Note:** Currently, this restartable job option is
         #     not supported in Dataproc
         #     [workflow
-        #     template](https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template)
-        #     jobs.
+        #     templates](https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template).
         class JobScheduling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

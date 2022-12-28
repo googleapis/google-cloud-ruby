@@ -80,6 +80,36 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :data_items, :message, 1, "google.cloud.aiplatform.v1.DataItem"
       optional :next_page_token, :string, 2
     end
+    add_message "google.cloud.aiplatform.v1.SearchDataItemsRequest" do
+      optional :dataset, :string, 1
+      optional :saved_query, :string, 2
+      optional :data_labeling_job, :string, 3
+      optional :data_item_filter, :string, 4
+      optional :annotations_filter, :string, 5
+      repeated :annotation_filters, :string, 11
+      optional :field_mask, :message, 6, "google.protobuf.FieldMask"
+      optional :annotations_limit, :int32, 7
+      optional :page_size, :int32, 8
+      optional :order_by, :string, 9
+      optional :page_token, :string, 10
+      oneof :order do
+        optional :order_by_data_item, :string, 12
+        optional :order_by_annotation, :message, 13, "google.cloud.aiplatform.v1.SearchDataItemsRequest.OrderByAnnotation"
+      end
+    end
+    add_message "google.cloud.aiplatform.v1.SearchDataItemsRequest.OrderByAnnotation" do
+      optional :saved_query, :string, 1
+      optional :order_by, :string, 2
+    end
+    add_message "google.cloud.aiplatform.v1.SearchDataItemsResponse" do
+      repeated :data_item_views, :message, 1, "google.cloud.aiplatform.v1.DataItemView"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.aiplatform.v1.DataItemView" do
+      optional :data_item, :message, 1, "google.cloud.aiplatform.v1.DataItem"
+      repeated :annotations, :message, 2, "google.cloud.aiplatform.v1.Annotation"
+      optional :has_truncated_annotations, :bool, 3
+    end
     add_message "google.cloud.aiplatform.v1.ListSavedQueriesRequest" do
       optional :parent, :string, 1
       optional :filter, :string, 2
@@ -130,6 +160,10 @@ module Google
         ExportDataOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportDataOperationMetadata").msgclass
         ListDataItemsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListDataItemsRequest").msgclass
         ListDataItemsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListDataItemsResponse").msgclass
+        SearchDataItemsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.SearchDataItemsRequest").msgclass
+        SearchDataItemsRequest::OrderByAnnotation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.SearchDataItemsRequest.OrderByAnnotation").msgclass
+        SearchDataItemsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.SearchDataItemsResponse").msgclass
+        DataItemView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DataItemView").msgclass
         ListSavedQueriesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListSavedQueriesRequest").msgclass
         ListSavedQueriesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListSavedQueriesResponse").msgclass
         GetAnnotationSpecRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.GetAnnotationSpecRequest").msgclass

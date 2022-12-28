@@ -150,10 +150,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "deletes itself and knows it no longer exists" do
-    _(table.exists?).must_equal true
-    _(table.delete).must_equal true
-    _(table.exists?).must_equal false
-    _(table.exists?(force: true)).must_equal false
+    test_table = dataset.create_table "kittens_delete_table"
+    _(test_table.exists?).must_equal true
+    _(test_table.delete).must_equal true
+    _(test_table.exists?).must_equal false
+    _(test_table.exists?(force: true)).must_equal false
   end
 
   it "gets and sets metadata" do
@@ -227,17 +228,17 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "creates a table, loading the schema from a File" do
     begin
-      table = dataset.create_table "schema_kittens" do |t|
+      schema_kittens_table = dataset.create_table "schema_kittens" do |t|
         t.schema.load File.open("acceptance/data/schema.json")
       end
 
-      _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
-      _(table.schema).wont_be :empty?
+      _(schema_kittens_table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+      _(schema_kittens_table.schema).wont_be :empty?
       %i[id breed name dob features].each do |k|
-        _(table.headers).must_include k
+        _(schema_kittens_table.headers).must_include k
       end
 
-      fields = table.schema.fields
+      fields = schema_kittens_table.schema.fields
       fields.each do |f|
         _(f.name).wont_be :nil?
         _(f.type).wont_be :nil?
@@ -261,18 +262,18 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "creates a table, loading the schema from a JSON string" do
     begin
-      table = dataset.create_table "schema_kittens" do |t|
+      schema_kittens_table = dataset.create_table "schema_kittens" do |t|
         json = File.read("acceptance/data/schema.json")
         t.schema.load json
       end
 
-      _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
-      _(table.schema).wont_be :empty?
+      _(schema_kittens_table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+      _(schema_kittens_table.schema).wont_be :empty?
       %i[id breed name dob features].each do |k|
-        _(table.headers).must_include k
+        _(schema_kittens_table.headers).must_include k
       end
 
-      fields = table.schema.fields
+      fields = schema_kittens_table.schema.fields
       fields.each do |f|
         _(f.name).wont_be :nil?
         _(f.type).wont_be :nil?
@@ -296,18 +297,18 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "creates a table, loading the schema from an Array of Hashes" do
     begin
-      table = dataset.create_table "schema_kittens" do |t|
+      schema_kittens_table = dataset.create_table "schema_kittens" do |t|
         json = JSON.parse(File.read("acceptance/data/schema.json"))
         t.schema.load json
       end
 
-      _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
-      _(table.schema).wont_be :empty?
+      _(schema_kittens_table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+      _(schema_kittens_table.schema).wont_be :empty?
       %i[id breed name dob features].each do |k|
-        _(table.headers).must_include k
+        _(schema_kittens_table.headers).must_include k
       end
 
-      fields = table.schema.fields
+      fields = schema_kittens_table.schema.fields
       fields.each do |f|
         _(f.name).wont_be :nil?
         _(f.type).wont_be :nil?
@@ -486,18 +487,18 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "allows tables to be created and updated with time_partitioning and clustering" do
     begin
-      table = time_partitioned_table
-      _(table.time_partitioning?).must_equal true
-      _(table.time_partitioning_type).must_equal "DAY"
-      _(table.time_partitioning_field).must_equal "dob"
-      _(table.time_partitioning_expiration).must_equal seven_days
-      _(table.clustering_fields).must_equal clustering_fields
+      tp_table = time_partitioned_table
+      _(tp_table.time_partitioning?).must_equal true
+      _(tp_table.time_partitioning_type).must_equal "DAY"
+      _(tp_table.time_partitioning_field).must_equal "dob"
+      _(tp_table.time_partitioning_expiration).must_equal seven_days
+      _(tp_table.clustering_fields).must_equal clustering_fields
 
       new_clustering_fields = ["last_name"]
-      table.clustering_fields = new_clustering_fields
-      _(table.clustering_fields).must_equal new_clustering_fields
+      tp_table.clustering_fields = new_clustering_fields
+      _(tp_table.clustering_fields).must_equal new_clustering_fields
 
-      table.clustering_fields = nil
+      tp_table.clustering_fields = nil
       _(table.clustering_fields).must_be :nil?
     ensure
       time_partitioned_table.delete
@@ -505,12 +506,12 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "allows tables to be created with range_partitioning" do
-    table = range_partitioned_table
-    _(table.range_partitioning?).must_equal true
-    _(table.range_partitioning_field).must_equal "my_table_id"
-    _(table.range_partitioning_start).must_equal 0
-    _(table.range_partitioning_interval).must_equal 10
-    _(table.range_partitioning_end).must_equal 100
+    rp_table = range_partitioned_table
+    _(rp_table.range_partitioning?).must_equal true
+    _(rp_table.range_partitioning_field).must_equal "my_table_id"
+    _(rp_table.range_partitioning_start).must_equal 0
+    _(rp_table.range_partitioning_interval).must_equal 10
+    _(rp_table.range_partitioning_end).must_equal 100
   end
 
   it "inserts rows directly and gets its data" do

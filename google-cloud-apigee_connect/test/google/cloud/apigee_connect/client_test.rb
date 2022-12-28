@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::ApigeeConnect::ClientConstructionMinitest < Minitest::Test
-  def test_connection_service
+  def test_connection_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ApigeeConnect.connection_service do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::ApigeeConnect::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_tether
+  def test_tether_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ApigeeConnect.tether do |config|

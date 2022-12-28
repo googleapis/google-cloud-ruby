@@ -30,7 +30,7 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the HyperparameterTuningJob.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         # @!attribute [rw] study_spec
         #   @return [::Google::Cloud::AIPlatform::V1::StudySpec]

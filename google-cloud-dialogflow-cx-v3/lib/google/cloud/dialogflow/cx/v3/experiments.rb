@@ -34,7 +34,7 @@ module Google
           ##
           # Service for managing {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiments}.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/dialogflow/cx/v3/experiments"
           #     client = ::Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new

@@ -21,7 +21,8 @@ module Google
   module Cloud
     module Kms
       module V1
-        # Request message for [KeyManagementService.ListEkmConnections][].
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#list_ekm_connections EkmService.ListEkmConnections}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the location associated with the
@@ -57,7 +58,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for [KeyManagementService.ListEkmConnections][].
+        # Response message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#list_ekm_connections EkmService.ListEkmConnections}.
         # @!attribute [rw] ekm_connections
         #   @return [::Array<::Google::Cloud::Kms::V1::EkmConnection>]
         #     The list of {::Google::Cloud::Kms::V1::EkmConnection EkmConnections}.
@@ -75,7 +77,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [KeyManagementService.GetEkmConnection][].
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#get_ekm_connection EkmService.GetEkmConnection}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The {::Google::Cloud::Kms::V1::EkmConnection#name name} of the
@@ -85,7 +88,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [KeyManagementService.CreateEkmConnection][].
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#create_ekm_connection EkmService.CreateEkmConnection}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the location associated with the
@@ -104,7 +108,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [KeyManagementService.UpdateEkmConnection][].
+        # Request message for
+        # {::Google::Cloud::Kms::V1::EkmService::Client#update_ekm_connection EkmService.UpdateEkmConnection}.
         # @!attribute [rw] ekm_connection
         #   @return [::Google::Cloud::Kms::V1::EkmConnection]
         #     Required. {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} with updated
@@ -185,9 +190,8 @@ module Google
         #     supported.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     This checksum is computed by the server based on the value of other fields,
-        #     and may be sent on update requests to ensure the client has an up-to-date
-        #     value before proceeding.
+        #     Optional. Etag of the currently stored
+        #     {::Google::Cloud::Kms::V1::EkmConnection EkmConnection}.
         class EkmConnection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -214,7 +218,8 @@ module Google
           # @!attribute [rw] server_certificates
           #   @return [::Array<::Google::Cloud::Kms::V1::Certificate>]
           #     Required. A list of leaf server certificates used to authenticate HTTPS
-          #     connections to the EKM replica.
+          #     connections to the EKM replica. Currently, a maximum of 10
+          #     {::Google::Cloud::Kms::V1::Certificate Certificate} is supported.
           class ServiceResolver
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

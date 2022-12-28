@@ -49,8 +49,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Dataplex::V1::ContentService::Client](https://googleapis.dev/ruby/google-cloud-dataplex-v1/latest/Google/Cloud/Dataplex/V1/ContentService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ContentService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -61,7 +61,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [ContentService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.content_service version: :v1, &block
         require "google/cloud/dataplex/#{version.to_s.downcase}"
@@ -70,8 +70,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataplex.const_get package_name
-        package_module.const_get(:ContentService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:ContentService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -79,8 +79,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Dataplex::V1::MetadataService::Client](https://googleapis.dev/ruby/google-cloud-dataplex-v1/latest/Google/Cloud/Dataplex/V1/MetadataService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the MetadataService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -92,7 +92,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [MetadataService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.metadata_service version: :v1, &block
         require "google/cloud/dataplex/#{version.to_s.downcase}"
@@ -101,8 +101,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataplex.const_get package_name
-        package_module.const_get(:MetadataService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:MetadataService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -110,8 +110,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::Dataplex::V1::DataplexService::Client](https://googleapis.dev/ruby/google-cloud-dataplex-v1/latest/Google/Cloud/Dataplex/V1/DataplexService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DataplexService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -126,7 +126,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [DataplexService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.dataplex_service version: :v1, &block
         require "google/cloud/dataplex/#{version.to_s.downcase}"
@@ -135,8 +135,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataplex.const_get package_name
-        package_module.const_get(:DataplexService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:DataplexService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -156,7 +156,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

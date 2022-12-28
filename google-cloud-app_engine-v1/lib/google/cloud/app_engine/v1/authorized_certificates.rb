@@ -33,7 +33,7 @@ module Google
         # Manages SSL certificates a user is authorized to administer. A user can
         # administer any SSL certificates applicable to their authorized domains.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/app_engine/v1/authorized_certificates"
         #     client = ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new

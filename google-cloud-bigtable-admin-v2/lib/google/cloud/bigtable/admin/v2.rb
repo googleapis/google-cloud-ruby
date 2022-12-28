@@ -25,9 +25,9 @@ module Google
     module Bigtable
       module Admin
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/bigtable/admin/v2"
         #     client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new

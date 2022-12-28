@@ -33,7 +33,7 @@ module Google
         ##
         # Service for managing {::Google::Cloud::Dialogflow::V2::AnswerRecord AnswerRecords}.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/answer_records"
         #     client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new

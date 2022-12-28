@@ -15,5 +15,5 @@
     "ruby-cloud-env-prefix": "DIALOGFLOW",
     "ruby-cloud-product-url": "https://cloud.google.com/dialogflow",
     "ruby-cloud-namespace-override": "Cx=CX",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

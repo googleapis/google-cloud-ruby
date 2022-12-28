@@ -52,7 +52,7 @@ module Google
         # collection of `constraints` that defines their allowable configuration on a
         # particular resource and its child resources.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/org_policy/v2/org_policy"
         #     client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new

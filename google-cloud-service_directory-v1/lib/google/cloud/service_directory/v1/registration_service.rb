@@ -47,7 +47,7 @@ module Google
         # resources, named
         # `projects/*/locations/*/namespaces/*/services/*/endpoints/*`.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/service_directory/v1/registration_service"
         #     client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Client.new

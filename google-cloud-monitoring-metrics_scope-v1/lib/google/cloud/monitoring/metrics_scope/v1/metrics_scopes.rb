@@ -36,7 +36,7 @@ module Google
           # Manages Cloud Monitoring Metrics Scopes, and the monitoring of Google Cloud
           # projects and AWS accounts.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/monitoring/metrics_scope/v1/metrics_scopes"
           #     client = ::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client.new

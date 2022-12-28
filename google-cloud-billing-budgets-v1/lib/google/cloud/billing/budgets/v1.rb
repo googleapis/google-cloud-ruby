@@ -24,9 +24,9 @@ module Google
     module Billing
       module Budgets
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/billing/budgets/v1"
         #     client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new

@@ -608,7 +608,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. Full CompletionConfig resource name. Format:
-            #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}/completionConfig
+            #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Retail::V2::CompletionConfig]

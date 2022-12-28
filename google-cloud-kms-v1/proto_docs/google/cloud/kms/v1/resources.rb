@@ -254,6 +254,9 @@ module Google
 
             # Cavium HSM attestation compressed with gzip. Note that this format is
             # defined by Cavium and subject to change at any time.
+            #
+            # See
+            # https://www.marvell.com/products/security-solutions/nitrox-hs-adapters/software-key-attestation.html.
             CAVIUM_V1_COMPRESSED = 3
 
             # Cavium HSM attestation V2 compressed with gzip. This is a new format
@@ -736,6 +739,34 @@ module Google
             # [RSA AES key wrap
             # mechanism](http://docs.oasis-open.org/pkcs11/pkcs11-curr/v2.40/cos01/pkcs11-curr-v2.40-cos01.html#_Toc408226908).
             RSA_OAEP_4096_SHA1_AES_256 = 2
+
+            # This ImportMethod represents the CKM_RSA_AES_KEY_WRAP key wrapping
+            # scheme defined in the PKCS #11 standard. In summary, this involves
+            # wrapping the raw key with an ephemeral AES key, and wrapping the
+            # ephemeral AES key with a 3072 bit RSA key. For more details, see
+            # [RSA AES key wrap
+            # mechanism](http://docs.oasis-open.org/pkcs11/pkcs11-curr/v2.40/cos01/pkcs11-curr-v2.40-cos01.html#_Toc408226908).
+            RSA_OAEP_3072_SHA256_AES_256 = 3
+
+            # This ImportMethod represents the CKM_RSA_AES_KEY_WRAP key wrapping
+            # scheme defined in the PKCS #11 standard. In summary, this involves
+            # wrapping the raw key with an ephemeral AES key, and wrapping the
+            # ephemeral AES key with a 4096 bit RSA key. For more details, see
+            # [RSA AES key wrap
+            # mechanism](http://docs.oasis-open.org/pkcs11/pkcs11-curr/v2.40/cos01/pkcs11-curr-v2.40-cos01.html#_Toc408226908).
+            RSA_OAEP_4096_SHA256_AES_256 = 4
+
+            # This ImportMethod represents RSAES-OAEP with a 3072 bit RSA key. The
+            # key material to be imported is wrapped directly with the RSA key. Due
+            # to technical limitations of RSA wrapping, this method cannot be used to
+            # wrap RSA keys for import.
+            RSA_OAEP_3072_SHA256 = 5
+
+            # This ImportMethod represents RSAES-OAEP with a 4096 bit RSA key. The
+            # key material to be imported is wrapped directly with the RSA key. Due
+            # to technical limitations of RSA wrapping, this method cannot be used to
+            # wrap RSA keys for import.
+            RSA_OAEP_4096_SHA256 = 6
           end
 
           # The state of the {::Google::Cloud::Kms::V1::ImportJob ImportJob}, indicating if
