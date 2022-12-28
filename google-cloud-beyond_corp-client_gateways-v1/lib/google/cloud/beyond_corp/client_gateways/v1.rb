@@ -24,9 +24,9 @@ module Google
     module BeyondCorp
       module ClientGateways
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/beyond_corp/client_gateways/v1"
         #     client = ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new

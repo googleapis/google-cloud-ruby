@@ -118,8 +118,8 @@ module Google
         #   @return [::String]
         #     Required.
         #     Unique identifier provided by the client within the parent scope.
-        #     It must be between 1 and 128 characters, and contains alphanumeric
-        #     characters, underscores or hyphens only.
+        #     It must be between 1 and 128 characters and contain alphanumeric
+        #     characters, underscores, or hyphens only.
         # @!attribute [rw] notification_config
         #   @return [::Google::Cloud::SecurityCenter::V1::NotificationConfig]
         #     Required. The notification config being created. The name and the service
@@ -160,16 +160,18 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the notification config to delete. Its format is
-        #     "organizations/[organization_id]/notificationConfigs/[config_id]".
+        #     "organizations/[organization_id]/notificationConfigs/[config_id]",
+        #     "folders/[folder_id]/notificationConfigs/[config_id]",
+        #     or "projects/[project_id]/notificationConfigs/[config_id]".
         class DeleteNotificationConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for retrieving a big query export.
+        # Request message for retrieving a BigQuery export.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the big query export to retrieve. Its format is
+        #     Required. Name of the BigQuery export to retrieve. Its format is
         #     organizations/\\{organization}/bigQueryExports/\\{export_id},
         #     folders/\\{folder}/bigQueryExports/\\{export_id}, or
         #     projects/\\{project}/bigQueryExports/\\{export_id}
@@ -194,7 +196,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the notification config to get. Its format is
-        #     "organizations/[organization_id]/notificationConfigs/[config_id]".
+        #     "organizations/[organization_id]/notificationConfigs/[config_id]",
+        #     "folders/[folder_id]/notificationConfigs/[config_id]",
+        #     or "projects/[project_id]/notificationConfigs/[config_id]".
         class GetNotificationConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -223,7 +227,7 @@ module Google
         # Request message for grouping by assets.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of the organization to groupBy. Its format is
+        #     Required. The name of the parent to group the assets by. Its format is
         #     "organizations/[organization_id], folders/[folder_id], or
         #     projects/[project_id]".
         # @!attribute [rw] filter
@@ -605,9 +609,9 @@ module Google
         # Request message for listing notification configs.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of the organization to list notification configs. Its format
-        #     is "organizations/[organization_id]", "folders/[folder_id]", or
-        #     "projects/[project_id]".
+        #     Required. The name of the parent in which to list the notification
+        #     configurations. Its format is "organizations/[organization_id]",
+        #     "folders/[folder_id]", or "projects/[project_id]".
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The value returned by the last `ListNotificationConfigsResponse`; indicates
@@ -671,8 +675,8 @@ module Google
         # Request message for listing assets.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of the organization assets should belong to. Its format is
-        #     "organizations/[organization_id], folders/[folder_id], or
+        #     Required. The name of the parent that the listed assets belong to. Its
+        #     format is "organizations/[organization_id], folders/[folder_id], or
         #     projects/[project_id]".
         # @!attribute [rw] filter
         #   @return [::String]
@@ -1111,10 +1115,12 @@ module Google
         # Request message for updating a finding's state.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The relative resource name of the finding. See:
-        #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
-        #     Example:
-        #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}".
+        #     Required. The [relative resource
+        #     name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+        #     of the finding. Example:
+        #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}",
+        #     "folders/\\{folder_id}/sources/\\{source_id}/findings/\\{finding_id}",
+        #     "projects/\\{project_id}/sources/\\{source_id}/findings/\\{finding_id}".
         # @!attribute [rw] state
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding::State]
         #     Required. The desired State of the finding.
@@ -1129,9 +1135,9 @@ module Google
         # Request message for updating a finding's mute status.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The relative resource name of the finding. See:
-        #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
-        #     Example:
+        #     Required. The [relative resource
+        #     name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+        #     of the finding. Example:
         #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}",
         #     "folders/\\{folder_id}/sources/\\{source_id}/findings/\\{finding_id}",
         #     "projects/\\{project_id}/sources/\\{source_id}/findings/\\{finding_id}".
@@ -1267,15 +1273,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for creating a big query export.
+        # Request message for creating a BigQuery export.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Resource name of the new big query export's parent. Its format is
-        #     "organizations/[organization_id]", "folders/[folder_id]", or
+        #     Required. The name of the parent resource of the new BigQuery export. Its
+        #     format is "organizations/[organization_id]", "folders/[folder_id]", or
         #     "projects/[project_id]".
         # @!attribute [rw] big_query_export
         #   @return [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
-        #     Required. The big query export being created.
+        #     Required. The BigQuery export being created.
         # @!attribute [rw] big_query_export_id
         #   @return [::String]
         #     Required. Unique identifier provided by the client within the parent scope.
@@ -1337,10 +1343,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for deleting a big query export.
+        # Request message for deleting a BigQuery export.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the big query export to delete. Its format is
+        #     Required. The name of the BigQuery export to delete. Its format is
         #     organizations/\\{organization}/bigQueryExports/\\{export_id},
         #     folders/\\{folder}/bigQueryExports/\\{export_id}, or
         #     projects/\\{project}/bigQueryExports/\\{export_id}

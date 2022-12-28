@@ -37,7 +37,7 @@ module Google
         # Implements a REST model with the following objects:
         # * {::Google::Cloud::Kms::V1::EkmConnection EkmConnection}
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/kms/v1/ekm_service"
         #     client = ::Google::Cloud::Kms::V1::EkmService::Client.new

@@ -33,8 +33,8 @@ module Google
       module V1beta
         ##
         # Configures and manages metastore services.
-        # Metastore services are fully managed, highly available, auto-scaled,
-        # auto-healing, OSS-native deployments of technical metadata management
+        # Metastore services are fully managed, highly available, autoscaled,
+        # autohealing, OSS-native deployments of technical metadata management
         # software. Each metastore service exposes a network endpoint through which
         # metadata queries are served. Metadata queries can originate from a variety
         # of sources, including Apache Hive, Apache Presto, and Apache Spark.
@@ -50,7 +50,7 @@ module Google
         #
         #   `/projects/{project_number}/locations/{location_id}/services/{service_id}`.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/metastore/v1beta/dataproc_metastore"
         #     client = ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new

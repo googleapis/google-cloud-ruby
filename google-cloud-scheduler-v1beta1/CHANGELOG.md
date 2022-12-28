@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 (2022-12-14)
+
+#### Features
+
+* Added support for the locations mixin client ([#19858](https://github.com/googleapis/google-cloud-ruby/issues/19858)) 
+* Support for deleting legacy App Engine crons 
+* Support for filters when listing jobs 
+* Support for force-running a legacy App Engine cron 
+* Support for including legacy App Engine crons in job listings 
+
 ### 0.5.0 (2022-07-07)
 
 #### Features

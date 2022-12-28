@@ -145,6 +145,9 @@ module Google
         # @!attribute [r] conversation
         #   @return [::String]
         #     Output only. The Conversation that this Analysis Operation belongs to.
+        # @!attribute [r] annotator_selector
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector]
+        #     Output only. The annotator selector used for the analysis (if any).
         class CreateAnalysisOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -249,6 +252,77 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The request to ingest conversations.
+        # @!attribute [rw] gcs_source
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::GcsSource]
+        #     A cloud storage bucket source.
+        # @!attribute [rw] transcript_object_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::TranscriptObjectConfig]
+        #     Configuration for when `source` contains conversation transcripts.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource for new conversations.
+        # @!attribute [rw] conversation_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::ConversationConfig]
+        #     Configuration that applies to all conversations.
+        class IngestConversationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for Cloud Storage bucket sources.
+          # @!attribute [rw] bucket_uri
+          #   @return [::String]
+          #     Required. The Cloud Storage bucket containing source objects.
+          class GcsSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for processing transcript objects.
+          # @!attribute [rw] medium
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Medium]
+          #     Required. The medium transcript objects represent.
+          class TranscriptObjectConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration that applies to all conversations.
+          # @!attribute [rw] agent_id
+          #   @return [::String]
+          #     An opaque, user-specified string representing the human agent who handled
+          #     the conversations.
+          class ConversationConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The metadata for an IngestConversations operation.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation was created.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation finished running.
+        # @!attribute [r] request
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest]
+        #     Output only. The original request for ingest.
+        # @!attribute [r] partial_errors
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Output only. Partial errors during ingest operation that might cause the operation
+        #     output to be incomplete.
+        class IngestConversationsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to an IngestConversations operation.
+        class IngestConversationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request to create an analysis.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -312,6 +386,63 @@ module Google
         #   @return [::String]
         #     Required. The name of the analysis to delete.
         class DeleteAnalysisRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to analyze conversations in bulk.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource to create analyses in.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Required. Filter used to select the subset of conversations to analyze.
+        # @!attribute [rw] analysis_percentage
+        #   @return [::Float]
+        #     Required. Percentage of selected conversation to analyze, between
+        #     [0, 100].
+        # @!attribute [rw] annotator_selector
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector]
+        #     To select the annotators to run and the phrase matchers to use
+        #     (if any). If not specified, all annotators will be run.
+        class BulkAnalyzeConversationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The metadata for a bulk analyze conversations operation.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the operation was created.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the operation finished running.
+        # @!attribute [rw] request
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::BulkAnalyzeConversationsRequest]
+        #     The original request for bulk analyze.
+        # @!attribute [rw] completed_analyses_count
+        #   @return [::Integer]
+        #     The number of requested analyses that have completed successfully so far.
+        # @!attribute [rw] failed_analyses_count
+        #   @return [::Integer]
+        #     The number of requested analyses that have failed so far.
+        # @!attribute [rw] total_requested_analyses_count
+        #   @return [::Integer]
+        #     Total number of analyses requested. Computed by the number of conversations
+        #     returned by `filter` multiplied by `analysis_percentage` in the request.
+        class BulkAnalyzeConversationsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for a bulk analyze conversations operation.
+        # @!attribute [rw] successful_analysis_count
+        #   @return [::Integer]
+        #     Count of successful analyses.
+        # @!attribute [rw] failed_analysis_count
+        #   @return [::Integer]
+        #     Count of failed analyses.
+        class BulkAnalyzeConversationsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -584,6 +715,15 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     The list of fields to be updated.
         class UpdateIssueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to delete an issue.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the issue to delete.
+        class DeleteIssueRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

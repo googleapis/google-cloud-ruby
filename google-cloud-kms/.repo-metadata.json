@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications.",
     "ruby-cloud-env-prefix": "KMS",
     "ruby-cloud-product-url": "https://cloud.google.com/kms",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

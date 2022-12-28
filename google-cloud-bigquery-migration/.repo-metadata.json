@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "The BigQuery Migration Service is a comprehensive solution for migrating your data warehouse to BigQuery.",
     "ruby-cloud-product-url": "https://cloud.google.com/bigquery/docs/reference/migration",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

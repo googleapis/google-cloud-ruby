@@ -34,7 +34,7 @@ module Google
         # A service for running workflows, such as pipelines consisting of Docker
         # containers.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/life_sciences/v2beta/workflows_service"
         #     client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new

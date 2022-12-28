@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Analytics::Admin::ClientConstructionMinitest < Minitest::Test
-  def test_analytics_admin_service
+  def test_analytics_admin_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Analytics::Admin.analytics_admin_service do |config|

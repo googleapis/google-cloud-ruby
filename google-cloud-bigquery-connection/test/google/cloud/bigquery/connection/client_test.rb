@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Bigquery::Connection::ClientConstructionMinitest < Minitest::Test
-  def test_connection_service
+  def test_connection_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Bigquery::Connection.connection_service do |config|

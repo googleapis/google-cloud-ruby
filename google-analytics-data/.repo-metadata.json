@@ -15,5 +15,5 @@
     "ruby-cloud-env-prefix": "ANALYTICS_DATA",
     "ruby-cloud-product-url": "https://developers.google.com/analytics/devguides/reporting/data/v1",
     "ruby-cloud-service-override": "BetaAnalyticsData=AnalyticsData",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

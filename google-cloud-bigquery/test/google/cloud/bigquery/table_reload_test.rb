@@ -26,7 +26,7 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
 
   it "loads the table full resource by making an HTTP call" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args, **patch_table_args
     table.service.mocked_service = mock
 
     _(table).wont_be :reference?
@@ -81,7 +81,7 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
 
     it "loads the table full resource by making an HTTP call" do
       mock = Minitest::Mock.new
-      mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+      mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
       table.service.mocked_service = mock
 
       _(table).wont_be :reference?
@@ -104,7 +104,7 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
 
     it "loads the table full resource by making an HTTP call" do
       mock = Minitest::Mock.new
-      mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+      mock.expect :get_table, table_gapi, [project, dataset_id, table_id], **patch_table_args
       table.service.mocked_service = mock
 
       _(table).must_be :reference?

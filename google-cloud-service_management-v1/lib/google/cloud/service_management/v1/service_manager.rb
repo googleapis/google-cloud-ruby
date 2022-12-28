@@ -34,7 +34,7 @@ module Google
         # [Google Service Management
         # API](https://cloud.google.com/service-infrastructure/docs/overview)
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/service_management/v1/service_manager"
         #     client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new

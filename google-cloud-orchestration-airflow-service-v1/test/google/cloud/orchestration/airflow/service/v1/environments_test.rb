@@ -367,6 +367,144 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client
     end
   end
 
+  def test_save_snapshot
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+    snapshot_location = "hello world"
+
+    save_snapshot_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :save_snapshot, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest, request
+      assert_equal "hello world", request["environment"]
+      assert_equal "hello world", request["snapshot_location"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, save_snapshot_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.save_snapshot({ environment: environment, snapshot_location: snapshot_location }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.save_snapshot environment: environment, snapshot_location: snapshot_location do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.save_snapshot ::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest.new(environment: environment, snapshot_location: snapshot_location) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.save_snapshot({ environment: environment, snapshot_location: snapshot_location }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.save_snapshot(::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest.new(environment: environment, snapshot_location: snapshot_location), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, save_snapshot_client_stub.call_rpc_count
+    end
+  end
+
+  def test_load_snapshot
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+    snapshot_path = "hello world"
+    skip_pypi_packages_installation = true
+    skip_environment_variables_setting = true
+    skip_airflow_overrides_setting = true
+    skip_gcs_data_copying = true
+
+    load_snapshot_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :load_snapshot, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest, request
+      assert_equal "hello world", request["environment"]
+      assert_equal "hello world", request["snapshot_path"]
+      assert_equal true, request["skip_pypi_packages_installation"]
+      assert_equal true, request["skip_environment_variables_setting"]
+      assert_equal true, request["skip_airflow_overrides_setting"]
+      assert_equal true, request["skip_gcs_data_copying"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, load_snapshot_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.load_snapshot({ environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.load_snapshot environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.load_snapshot ::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest.new(environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.load_snapshot({ environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.load_snapshot(::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest.new(environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, load_snapshot_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

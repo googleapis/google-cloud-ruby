@@ -50,8 +50,8 @@ module Google
         #
         # By default, this returns an instance of
         # [Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client](https://googleapis.dev/ruby/google-cloud-bigquery-data_policies-v1beta1/latest/Google/Cloud/Bigquery/DataPolicies/V1beta1/DataPolicyService/Client.html)
-        # for version V1beta1 of the API.
-        # However, you can specify specify a different API version by passing it in the
+        # for a gRPC client for version V1beta1 of the API.
+        # However, you can specify a different API version by passing it in the
         # `version` parameter. If the DataPolicyService service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
@@ -62,7 +62,7 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1beta1`.
-        # @return [DataPolicyService::Client] A client object for the specified version.
+        # @return [::Object] A client object for the specified version.
         #
         def self.data_policy_service version: :v1beta1, &block
           require "google/cloud/bigquery/data_policies/#{version.to_s.downcase}"
@@ -71,8 +71,8 @@ module Google
                          .constants
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
-          package_module = Google::Cloud::Bigquery::DataPolicies.const_get package_name
-          package_module.const_get(:DataPolicyService).const_get(:Client).new(&block)
+          service_module = Google::Cloud::Bigquery::DataPolicies.const_get(package_name).const_get(:DataPolicyService)
+          service_module.const_get(:Client).new(&block)
         end
 
         ##
@@ -92,7 +92,7 @@ module Google
         # * `timeout` (*type:* `Numeric`) -
         #   Default timeout in seconds.
         # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-        #   Additional gRPC headers to be sent with the call.
+        #   Additional headers to be sent with the call.
         # * `retry_policy` (*type:* `Hash`) -
         #   The retry policy. The value is a hash with the following keys:
         #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

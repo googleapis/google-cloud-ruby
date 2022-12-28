@@ -49,7 +49,7 @@ module Google
         #     * longitude must be in [-180.0, 180.0].
         #     * at least one of latitude and longitude must be non-zero.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/optimization/v1/fleet_routing"
         #     client = ::Google::Cloud::Optimization::V1::FleetRouting::Client.new

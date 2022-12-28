@@ -23,9 +23,9 @@ module Google
   module Cloud
     module VideoIntelligence
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/video_intelligence/v1beta2"
       #     client = ::Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceService::Client.new

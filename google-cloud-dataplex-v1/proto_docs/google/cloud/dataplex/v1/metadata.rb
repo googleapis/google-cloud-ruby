@@ -61,8 +61,8 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Required. The etag associated with the entity, which can be retrieved with a
-        #     [GetEntity][] request.
+        #     Required. The etag associated with the entity, which can be retrieved with
+        #     a [GetEntity][] request.
         class DeleteEntityRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -78,9 +78,10 @@ module Google
         #     Required. Specify the entity view to make a partial list request.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of entities to return. The service may return fewer than
-        #     this value. If unspecified, 100 entities will be returned by default. The
-        #     maximum value is 500; larger values will will be truncated to 500.
+        #     Optional. Maximum number of entities to return. The service may return
+        #     fewer than this value. If unspecified, 100 entities will be returned by
+        #     default. The maximum value is 500; larger values will will be truncated to
+        #     500.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. Page token received from a previous `ListEntities` call. Provide
@@ -89,8 +90,8 @@ module Google
         #     page token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. The following filter parameters can be added to the URL to limit the
-        #     entities returned by the API:
+        #     Optional. The following filter parameters can be added to the URL to limit
+        #     the entities returned by the API:
         #
         #     - Entity ID: ?filter="id=entityID"
         #     - Asset ID: ?filter="asset=assetID"
@@ -164,19 +165,20 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of partitions to return. The service may return fewer than
-        #     this value. If unspecified, 100 partitions will be returned by default. The
-        #     maximum page size is 500; larger values will will be truncated to 500.
+        #     Optional. Maximum number of partitions to return. The service may return
+        #     fewer than this value. If unspecified, 100 partitions will be returned by
+        #     default. The maximum page size is 500; larger values will will be truncated
+        #     to 500.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Page token received from a previous `ListPartitions` call. Provide
-        #     this to retrieve the subsequent page. When paginating, all other parameters
-        #     provided to `ListPartitions` must match the call that provided the
-        #     page token.
+        #     Optional. Page token received from a previous `ListPartitions` call.
+        #     Provide this to retrieve the subsequent page. When paginating, all other
+        #     parameters provided to `ListPartitions` must match the call that provided
+        #     the page token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. Filter the partitions returned to the caller using a key value pair
-        #     expression. Supported operators and syntax:
+        #     Optional. Filter the partitions returned to the caller using a key value
+        #     pair expression. Supported operators and syntax:
         #
         #     - logic operators: AND, OR
         #     - comparison operators: <, >, >=, <= ,=, !=
@@ -267,8 +269,8 @@ module Google
         #     Optional. Display name must be shorter than or equal to 256 characters.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. User friendly longer description text. Must be shorter than or equal to
-        #     1024 characters.
+        #     Optional. User friendly longer description text. Must be shorter than or
+        #     equal to 1024 characters.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the entity was created.
@@ -285,15 +287,16 @@ module Google
         #     characters.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. The etag associated with the entity, which can be retrieved with a
-        #     [GetEntity][] request. Required for update and delete requests.
+        #     Optional. The etag associated with the entity, which can be retrieved with
+        #     a [GetEntity][] request. Required for update and delete requests.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Dataplex::V1::Entity::Type]
         #     Required. Immutable. The type of entity.
         # @!attribute [rw] asset
         #   @return [::String]
-        #     Required. Immutable. The ID of the asset associated with the storage location containing the
-        #     entity data. The entity must be with in the same zone with the asset.
+        #     Required. Immutable. The ID of the asset associated with the storage
+        #     location containing the entity data. The entity must be with in the same
+        #     zone with the asset.
         # @!attribute [rw] data_path
         #   @return [::String]
         #     Required. Immutable. The storage path of the entity data.
@@ -303,9 +306,9 @@ module Google
         #     `projects/project_id/datasets/dataset_id/tables/table_id`.
         # @!attribute [rw] data_path_pattern
         #   @return [::String]
-        #     Optional. The set of items within the data path constituting the data in the entity,
-        #     represented as a glob path.
-        #     Example: `gs://bucket/path/to/data/**/*.csv`.
+        #     Optional. The set of items within the data path constituting the data in
+        #     the entity, represented as a glob path. Example:
+        #     `gs://bucket/path/to/data/**/*.csv`.
         # @!attribute [r] catalog_entry
         #   @return [::String]
         #     Output only. The name of the associated Data Catalog entry.
@@ -342,12 +345,12 @@ module Google
             # Provides compatibility information for a specific metadata store.
             # @!attribute [r] compatible
             #   @return [::Boolean]
-            #     Output only. Whether the entity is compatible and can be represented in the metadata
-            #     store.
+            #     Output only. Whether the entity is compatible and can be represented in
+            #     the metadata store.
             # @!attribute [r] reason
             #   @return [::String]
-            #     Output only. Provides additional detail if the entity is incompatible with the
-            #     metadata store.
+            #     Output only. Provides additional detail if the entity is incompatible
+            #     with the metadata store.
             class Compatibility
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -377,13 +380,13 @@ module Google
         #     The name field in the response retains the encoded format.
         # @!attribute [rw] values
         #   @return [::Array<::String>]
-        #     Required. Immutable. The set of values representing the partition, which correspond to the
-        #     partition schema defined in the parent entity.
+        #     Required. Immutable. The set of values representing the partition, which
+        #     correspond to the partition schema defined in the parent entity.
         # @!attribute [rw] location
         #   @return [::String]
-        #     Required. Immutable. The location of the entity data within the partition, for example,
-        #     `gs://bucket/path/to/entity/key1=value1/key2=value2`.
-        #     Or `projects/<project_id>/datasets/<dataset_id>/tables/<table_id>`
+        #     Required. Immutable. The location of the entity data within the partition,
+        #     for example, `gs://bucket/path/to/entity/key1=value1/key2=value2`. Or
+        #     `projects/<project_id>/datasets/<dataset_id>/tables/<table_id>`
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. The etag for this partition.
@@ -395,8 +398,8 @@ module Google
         # Schema information describing the structure and layout of the data.
         # @!attribute [rw] user_managed
         #   @return [::Boolean]
-        #     Required. Set to `true` if user-managed or `false` if managed by Dataplex. The
-        #     default is `false` (managed by Dataplex).
+        #     Required. Set to `true` if user-managed or `false` if managed by Dataplex.
+        #     The default is `false` (managed by Dataplex).
         #
         #     - Set to `false`to enable Dataplex discovery to update the schema.
         #       including new data discovery, schema inference, and schema evolution.
@@ -414,11 +417,12 @@ module Google
         #     **Note:** BigQuery SchemaFields are immutable.
         # @!attribute [rw] partition_fields
         #   @return [::Array<::Google::Cloud::Dataplex::V1::Schema::PartitionField>]
-        #     Optional. The sequence of fields describing the partition structure in entities.
-        #     If this field is empty, there are no partitions within the data.
+        #     Optional. The sequence of fields describing the partition structure in
+        #     entities. If this field is empty, there are no partitions within the data.
         # @!attribute [rw] partition_style
         #   @return [::Google::Cloud::Dataplex::V1::Schema::PartitionStyle]
-        #     Optional. The structure of paths containing partition data within the entity.
+        #     Optional. The structure of paths containing partition data within the
+        #     entity.
         class Schema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -431,8 +435,8 @@ module Google
           #     and must begin with a letter or underscore.
           # @!attribute [rw] description
           #   @return [::String]
-          #     Optional. User friendly field description. Must be less than or equal to 1024
-          #     characters.
+          #     Optional. User friendly field description. Must be less than or equal to
+          #     1024 characters.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Dataplex::V1::Schema::Type]
           #     Required. The type of field.
@@ -453,9 +457,9 @@ module Google
           # Partition fields are immutable.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. Partition field name must consist of letters, numbers, and underscores
-          #     only, with a maximum of length of 256 characters,
-          #     and must begin with a letter or underscore..
+          #     Required. Partition field name must consist of letters, numbers, and
+          #     underscores only, with a maximum of length of 256 characters, and must
+          #     begin with a letter or underscore..
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Dataplex::V1::Schema::Type]
           #     Required. Immutable. The type of field.
@@ -546,8 +550,8 @@ module Google
         # Describes the format of the data within its storage location.
         # @!attribute [r] format
         #   @return [::Google::Cloud::Dataplex::V1::StorageFormat::Format]
-        #     Output only. The data format associated with the stored data, which represents
-        #     content type values. The value is inferred from mime type.
+        #     Output only. The data format associated with the stored data, which
+        #     represents content type values. The value is inferred from mime type.
         # @!attribute [rw] compression_format
         #   @return [::Google::Cloud::Dataplex::V1::StorageFormat::CompressionFormat]
         #     Optional. The compression type associated with the stored data.
@@ -581,12 +585,12 @@ module Google
           # Describes CSV and similar semi-structured data formats.
           # @!attribute [rw] encoding
           #   @return [::String]
-          #     Optional. The character encoding of the data. Accepts "US-ASCII", "UTF-8", and
-          #     "ISO-8859-1". Defaults to UTF-8 if unspecified.
+          #     Optional. The character encoding of the data. Accepts "US-ASCII",
+          #     "UTF-8", and "ISO-8859-1". Defaults to UTF-8 if unspecified.
           # @!attribute [rw] header_rows
           #   @return [::Integer]
-          #     Optional. The number of rows to interpret as header rows that should be skipped
-          #     when reading data rows. Defaults to 0.
+          #     Optional. The number of rows to interpret as header rows that should be
+          #     skipped when reading data rows. Defaults to 0.
           # @!attribute [rw] delimiter
           #   @return [::String]
           #     Optional. The delimiter used to separate values. Defaults to ','.
@@ -603,8 +607,8 @@ module Google
           # Describes JSON data format.
           # @!attribute [rw] encoding
           #   @return [::String]
-          #     Optional. The character encoding of the data. Accepts "US-ASCII", "UTF-8" and
-          #     "ISO-8859-1". Defaults to UTF-8 if not specified.
+          #     Optional. The character encoding of the data. Accepts "US-ASCII", "UTF-8"
+          #     and "ISO-8859-1". Defaults to UTF-8 if not specified.
           class JsonOptions
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

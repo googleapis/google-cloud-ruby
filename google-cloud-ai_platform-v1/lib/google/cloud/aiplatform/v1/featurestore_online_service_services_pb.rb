@@ -41,6 +41,12 @@ module Google
             # for different entities may be broken
             # up across multiple responses.
             rpc :StreamingReadFeatureValues, ::Google::Cloud::AIPlatform::V1::StreamingReadFeatureValuesRequest, stream(::Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse)
+            # Writes Feature values of one or more entities of an EntityType.
+            #
+            # The Feature values are merged into existing entities if any. The Feature
+            # values to be written must have timestamp within the online storage
+            # retention.
+            rpc :WriteFeatureValues, ::Google::Cloud::AIPlatform::V1::WriteFeatureValuesRequest, ::Google::Cloud::AIPlatform::V1::WriteFeatureValuesResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -40,7 +40,7 @@ module Google
         # which can then be used to connect to that environment via a separate SSH
         # client.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/shell/v1/cloud_shell_service"
         #     client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new

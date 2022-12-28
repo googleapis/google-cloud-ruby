@@ -212,11 +212,15 @@ module Google
             #   @param raw_document [::Google::Cloud::DocumentAI::V1::RawDocument, ::Hash]
             #     A raw document content (bytes).
             #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1::Processor Processor} or
+            #     Required. The resource name of the
+            #     {::Google::Cloud::DocumentAI::V1::Processor Processor} or
             #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}
-            #     to use for processing. If a {::Google::Cloud::DocumentAI::V1::Processor Processor} is specified, the server will use
-            #     its {::Google::Cloud::DocumentAI::V1::Processor#default_processor_version default version}. Format:
-            #     `projects/{project}/locations/{location}/processors/{processor}`, or
+            #     to use for processing. If a
+            #     {::Google::Cloud::DocumentAI::V1::Processor Processor} is specified, the server
+            #     will use its [default
+            #     version][google.cloud.documentai.v1.Processor.default_processor_version].
+            #     Format: `projects/{project}/locations/{location}/processors/{processor}`,
+            #     or
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
             #   @param skip_human_review [::Boolean]
             #     Whether Human Review feature should be skipped for this request. Default to
@@ -310,7 +314,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of {::Google::Cloud::DocumentAI::V1::Processor Processor} or
+            #     Required. The resource name of
+            #     {::Google::Cloud::DocumentAI::V1::Processor Processor} or
             #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}.
             #     Format: `projects/{project}/locations/{location}/processors/{processor}`,
             #     or
@@ -602,8 +607,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) which owns this collection of Processors.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The parent (project and location) which owns this collection of
+            #     Processors. Format: `projects/{project}/locations/{location}`
             #   @param page_size [::Integer]
             #     The maximum number of processors to return.
             #     If unspecified, at most 50 processors will be returned.
@@ -872,8 +877,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project, location and processor) to list all versions.
-            #     Format: `projects/{project}/locations/{location}/processors/{processor}`
+            #     Required. The parent (project, location and processor) to list all
+            #     versions. Format:
+            #     `projects/{project}/locations/{location}/processors/{processor}`
             #   @param page_size [::Integer]
             #     The maximum number of processor versions to return.
             #     If unspecified, at most 10 processor versions will be returned.
@@ -1253,11 +1259,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) under which to create the processor.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The parent (project and location) under which to create the
+            #     processor. Format: `projects/{project}/locations/{location}`
             #   @param processor [::Google::Cloud::DocumentAI::V1::Processor, ::Hash]
-            #     Required. The processor to be created, requires [processor_type] and [display_name]
-            #     to be set. Also, the processor is under CMEK if CMEK fields are set.
+            #     Required. The processor to be created, requires [processor_type] and
+            #     [display_name] to be set. Also, the processor is under CMEK if CMEK fields
+            #     are set.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DocumentAI::V1::Processor]
@@ -1604,8 +1611,10 @@ module Google
             end
 
             ##
-            # Set the default (active) version of a {::Google::Cloud::DocumentAI::V1::Processor Processor} that will be used in
-            # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#process_document ProcessDocument} and
+            # Set the default (active) version of a
+            # {::Google::Cloud::DocumentAI::V1::Processor Processor} that will be used in
+            # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#process_document ProcessDocument}
+            # and
             # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#batch_process_documents BatchProcessDocuments}.
             #
             # @overload set_default_processor_version(request, options = nil)
@@ -1624,10 +1633,13 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param processor [::String]
-            #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1::Processor Processor} to change default version.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::DocumentAI::V1::Processor Processor} to change default
+            #     version.
             #   @param default_processor_version [::String]
-            #     Required. The resource name of child {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to use as default.
-            #     Format:
+            #     Required. The resource name of child
+            #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to use as
+            #     default. Format:
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{version}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1724,8 +1736,8 @@ module Google
             #   @param inline_document [::Google::Cloud::DocumentAI::V1::Document, ::Hash]
             #     An inline document proto.
             #   @param human_review_config [::String]
-            #     Required. The resource name of the HumanReviewConfig that the document will be
-            #     reviewed with.
+            #     Required. The resource name of the HumanReviewConfig that the document will
+            #     be reviewed with.
             #   @param enable_schema_validation [::Boolean]
             #     Whether the validation should be performed on the ad-hoc review request.
             #   @param priority [::Google::Cloud::DocumentAI::V1::ReviewDocumentRequest::Priority]

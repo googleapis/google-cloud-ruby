@@ -47,7 +47,7 @@ module Google
         # `projects/*/locations/*/questions/*/userFeedback`, which allows access to
         # user feedback.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataqna/v1alpha/question_service"
         #     client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new

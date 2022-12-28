@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/tpu/v1/cloud_tpu_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -143,6 +144,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @tpu_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Tpu::V1::Tpu::Stub,
                 credentials:  credentials,
@@ -158,6 +165,13 @@ module Google
             # @return [::Google::Cloud::Tpu::V1::Tpu::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -628,7 +642,7 @@ module Google
             end
 
             ##
-            # Stops a node.
+            # Stops a node, this operation is only available with single TPU nodes.
             #
             # @overload stop_node(request, options = nil)
             #   Pass arguments to `stop_node` via a request object, either of type

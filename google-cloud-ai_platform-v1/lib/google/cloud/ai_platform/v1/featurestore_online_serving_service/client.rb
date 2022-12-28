@@ -372,6 +372,102 @@ module Google
             end
 
             ##
+            # Writes Feature values of one or more entities of an EntityType.
+            #
+            # The Feature values are merged into existing entities if any. The Feature
+            # values to be written must have timestamp within the online storage
+            # retention.
+            #
+            # @overload write_feature_values(request, options = nil)
+            #   Pass arguments to `write_feature_values` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::WriteFeatureValuesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::WriteFeatureValuesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload write_feature_values(entity_type: nil, payloads: nil)
+            #   Pass arguments to `write_feature_values` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param entity_type [::String]
+            #     Required. The resource name of the EntityType for the entities being written.
+            #     Value format: `projects/{project}/locations/{location}/featurestores/
+            #     \\{featurestore}/entityTypes/\\{entityType}`. For example,
+            #     for a machine learning model predicting user clicks on a website, an
+            #     EntityType ID could be `user`.
+            #   @param payloads [::Array<::Google::Cloud::AIPlatform::V1::WriteFeatureValuesPayload, ::Hash>]
+            #     Required. The entities to be written. Up to 100,000 feature values can be written
+            #     across all `payloads`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::WriteFeatureValuesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::WriteFeatureValuesResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::WriteFeatureValuesRequest.new
+            #
+            #   # Call the write_feature_values method.
+            #   result = client.write_feature_values request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::WriteFeatureValuesResponse.
+            #   p result
+            #
+            def write_feature_values request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::WriteFeatureValuesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.write_feature_values.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.entity_type
+                header_params["entity_type"] = request.entity_type
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.write_feature_values.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.write_feature_values.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @featurestore_online_serving_service_stub.call_rpc :write_feature_values, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the FeaturestoreOnlineServingService API.
             #
             # This class represents the configuration for FeaturestoreOnlineServingService,
@@ -516,6 +612,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :streaming_read_feature_values
+                ##
+                # RPC-specific configuration for `write_feature_values`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :write_feature_values
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -523,6 +624,8 @@ module Google
                   @read_feature_values = ::Gapic::Config::Method.new read_feature_values_config
                   streaming_read_feature_values_config = parent_rpcs.streaming_read_feature_values if parent_rpcs.respond_to? :streaming_read_feature_values
                   @streaming_read_feature_values = ::Gapic::Config::Method.new streaming_read_feature_values_config
+                  write_feature_values_config = parent_rpcs.write_feature_values if parent_rpcs.respond_to? :write_feature_values
+                  @write_feature_values = ::Gapic::Config::Method.new write_feature_values_config
 
                   yield self if block_given?
                 end

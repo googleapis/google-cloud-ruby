@@ -1198,4 +1198,13 @@ class MockBigquery < Minitest::Spec
       refute_nil table.modified_at, "Transient stats should not be nil"
     end
   end
+
+  def patch_table_args selected_fields: nil,
+                       view: nil,
+                       fields: nil,
+                       quota_user: nil,
+                       user_ip: nil,
+                       options: nil
+    {}
+  end
 end

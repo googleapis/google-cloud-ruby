@@ -14,5 +14,5 @@
     "ruby-cloud-description": "Provides methods to view, create, and manage Cloud Billing budgets programmatically at scale.",
     "ruby-cloud-env-prefix": "BILLING_BUDGETS",
     "ruby-cloud-product-url": "https://cloud.google.com/billing/docs/how-to/budget-api-overview",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

@@ -2081,7 +2081,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         # @param [String] compression The compression type to use for exported
         #   files. Possible values include `GZIP` and `NONE`. The default value
@@ -2184,7 +2184,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         # @param [String] compression The compression type to use for exported
         #   files. Possible values include `GZIP` and `NONE`. The default value
@@ -2255,7 +2255,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
         #   * `parquet` - [Parquet](https://parquet.apache.org/)
@@ -2468,7 +2468,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
         #   * `parquet` - [Parquet](https://parquet.apache.org/)

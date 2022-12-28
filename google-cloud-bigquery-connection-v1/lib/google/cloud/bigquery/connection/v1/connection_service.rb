@@ -34,7 +34,7 @@ module Google
           ##
           # Manages external data source connections and credentials.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigquery/connection/v1/connection_service"
           #     client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new

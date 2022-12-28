@@ -40,6 +40,15 @@ module Google
         # @!attribute [rw] model
         #   @return [::Google::Cloud::AIPlatform::V1::Model]
         #     Required. The Model to create.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. The user-provided custom service account to use to do the model
+        #     upload. If empty, [Vertex AI Service
+        #     Agent](https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
+        #     will be used. Users uploading the Model must have the
+        #     `iam.serviceAccounts.actAs` permission on this service account. Also, this
+        #     account must belong to the project specified in the `parent` field and have
+        #     all necessary read permissions.
         class UploadModelRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

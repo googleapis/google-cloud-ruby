@@ -51,7 +51,7 @@ module Google
         # a completed breakpoint. This functionality is available using the Debugger
         # service.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/debugger/v2/controller"
         #     client = ::Google::Cloud::Debugger::V2::Controller::Client.new

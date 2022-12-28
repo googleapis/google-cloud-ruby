@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Analytics::Data::ClientConstructionMinitest < Minitest::Test
-  def test_analytics_data
+  def test_analytics_data_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Analytics::Data.analytics_data do |config|

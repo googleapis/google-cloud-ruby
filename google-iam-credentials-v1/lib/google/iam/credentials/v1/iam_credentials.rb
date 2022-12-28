@@ -41,7 +41,7 @@ module Google
         # tokens, OpenID Connect ID tokens, self-signed JSON Web Tokens (JWTs), and
         # more.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/iam/credentials/v1/iam_credentials"
         #     client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new

@@ -745,11 +745,11 @@ module Google
             #   @param tunnel_dest_group [::Google::Cloud::Iap::V1::TunnelDestGroup, ::Hash]
             #     Required. The TunnelDestGroup to create.
             #   @param tunnel_dest_group_id [::String]
-            #     Required. The ID to use for the TunnelDestGroup, which becomes the final component of
-            #     the resource name.
+            #     Required. The ID to use for the TunnelDestGroup, which becomes the final
+            #     component of the resource name.
             #
             #     This value must be 4-63 characters, and valid characters
-            #     are `[a-z][0-9]-`.
+            #     are `[a-z]-`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Iap::V1::TunnelDestGroup]

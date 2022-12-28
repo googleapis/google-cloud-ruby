@@ -38,7 +38,7 @@ module Google
           # seamless playback and tracking on native players and monetize
           # content with any standard VMAP compliant ad server.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/video/stitcher/v1/video_stitcher_service"
           #     client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new

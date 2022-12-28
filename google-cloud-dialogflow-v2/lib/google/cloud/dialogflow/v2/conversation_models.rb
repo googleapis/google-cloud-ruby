@@ -34,7 +34,7 @@ module Google
         ##
         # Manages a collection of models for human agent assistant.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/conversation_models"
         #     client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new

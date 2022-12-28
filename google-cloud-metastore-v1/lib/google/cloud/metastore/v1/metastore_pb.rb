@@ -31,6 +31,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :uid, :string, 16
       optional :metadata_management_activity, :message, 17, "google.cloud.metastore.v1.MetadataManagementActivity"
       optional :release_channel, :enum, 19, "google.cloud.metastore.v1.Service.ReleaseChannel"
+      optional :encryption_config, :message, 20, "google.cloud.metastore.v1.EncryptionConfig"
+      optional :network_config, :message, 21, "google.cloud.metastore.v1.NetworkConfig"
+      optional :database_type, :enum, 22, "google.cloud.metastore.v1.Service.DatabaseType"
+      optional :telemetry_config, :message, 23, "google.cloud.metastore.v1.TelemetryConfig"
       oneof :metastore_config do
         optional :hive_metastore_config, :message, 5, "google.cloud.metastore.v1.HiveMetastoreConfig"
       end
@@ -55,6 +59,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CANARY, 1
       value :STABLE, 2
     end
+    add_enum "google.cloud.metastore.v1.Service.DatabaseType" do
+      value :DATABASE_TYPE_UNSPECIFIED, 0
+      value :MYSQL, 1
+      value :SPANNER, 2
+    end
     add_message "google.cloud.metastore.v1.MaintenanceWindow" do
       optional :hour_of_day, :message, 1, "google.protobuf.Int32Value"
       optional :day_of_week, :enum, 2, "google.type.DayOfWeek"
@@ -73,6 +82,26 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :value do
         optional :cloud_secret, :string, 2
       end
+    end
+    add_message "google.cloud.metastore.v1.EncryptionConfig" do
+      optional :kms_key, :string, 1
+    end
+    add_message "google.cloud.metastore.v1.NetworkConfig" do
+      repeated :consumers, :message, 1, "google.cloud.metastore.v1.NetworkConfig.Consumer"
+    end
+    add_message "google.cloud.metastore.v1.NetworkConfig.Consumer" do
+      optional :endpoint_uri, :string, 3
+      oneof :vpc_resource do
+        optional :subnetwork, :string, 1
+      end
+    end
+    add_message "google.cloud.metastore.v1.TelemetryConfig" do
+      optional :log_format, :enum, 1, "google.cloud.metastore.v1.TelemetryConfig.LogFormat"
+    end
+    add_enum "google.cloud.metastore.v1.TelemetryConfig.LogFormat" do
+      value :LOG_FORMAT_UNSPECIFIED, 0
+      value :LEGACY, 1
+      value :JSON, 2
     end
     add_message "google.cloud.metastore.v1.MetadataManagementActivity" do
       repeated :metadata_exports, :message, 1, "google.cloud.metastore.v1.MetadataExport"
@@ -287,10 +316,16 @@ module Google
         Service::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.Service.State").enummodule
         Service::Tier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.Service.Tier").enummodule
         Service::ReleaseChannel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.Service.ReleaseChannel").enummodule
+        Service::DatabaseType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.Service.DatabaseType").enummodule
         MaintenanceWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.MaintenanceWindow").msgclass
         HiveMetastoreConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.HiveMetastoreConfig").msgclass
         KerberosConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.KerberosConfig").msgclass
         Secret = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.Secret").msgclass
+        EncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.EncryptionConfig").msgclass
+        NetworkConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.NetworkConfig").msgclass
+        NetworkConfig::Consumer = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.NetworkConfig.Consumer").msgclass
+        TelemetryConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.TelemetryConfig").msgclass
+        TelemetryConfig::LogFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.TelemetryConfig.LogFormat").enummodule
         MetadataManagementActivity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.MetadataManagementActivity").msgclass
         MetadataImport = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.MetadataImport").msgclass
         MetadataImport::DatabaseDump = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.MetadataImport.DatabaseDump").msgclass

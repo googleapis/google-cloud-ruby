@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::DataCatalog::ClientConstructionMinitest < Minitest::Test
-  def test_data_catalog
+  def test_data_catalog_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::DataCatalog.data_catalog do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::DataCatalog::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_policy_tag_manager
+  def test_policy_tag_manager_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::DataCatalog.policy_tag_manager do |config|
@@ -42,7 +42,7 @@ class Google::Cloud::DataCatalog::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_policy_tag_manager_serialization
+  def test_policy_tag_manager_serialization_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::DataCatalog.policy_tag_manager_serialization do |config|

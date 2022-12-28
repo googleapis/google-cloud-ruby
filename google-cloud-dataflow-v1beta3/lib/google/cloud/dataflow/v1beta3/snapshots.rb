@@ -32,7 +32,7 @@ module Google
         ##
         # Provides methods to manage snapshots of Google Cloud Dataflow jobs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataflow/v1beta3/snapshots"
         #     client = ::Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new

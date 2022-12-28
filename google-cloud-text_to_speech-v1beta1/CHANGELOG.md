@@ -1,5 +1,17 @@
 # Release History
 
+### 0.9.1 (2022-12-15)
+
+#### Documentation
+
+* Minor fixes to reference documentation formatting ([#19874](https://github.com/googleapis/google-cloud-ruby/issues/19874)) 
+
+### 0.9.0 (2022-12-09)
+
+#### Features
+
+* Support for synthesize_long_audio ([#19827](https://github.com/googleapis/google-cloud-ruby/issues/19827)) 
+
 ### 0.8.0 (2022-07-08)
 
 #### Features

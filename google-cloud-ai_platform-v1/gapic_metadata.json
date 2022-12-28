@@ -50,6 +50,11 @@
                 "list_data_items"
               ]
             },
+            "SearchDataItems": {
+              "methods": [
+                "search_data_items"
+              ]
+            },
             "ListSavedQueries": {
               "methods": [
                 "list_saved_queries"
@@ -126,6 +131,11 @@
             "StreamingReadFeatureValues": {
               "methods": [
                 "streaming_read_feature_values"
+              ]
+            },
+            "WriteFeatureValues": {
+              "methods": [
+                "write_feature_values"
               ]
             }
           }

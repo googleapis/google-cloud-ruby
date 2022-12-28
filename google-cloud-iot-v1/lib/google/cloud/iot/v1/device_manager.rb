@@ -33,7 +33,7 @@ module Google
         ##
         # Internet of Things (IoT) service. Securely connect and manage IoT devices.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/iot/v1/device_manager"
         #     client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new

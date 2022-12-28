@@ -102,6 +102,27 @@ module Google
               "projects/#{project}/locations/#{location}"
             end
 
+            ##
+            # Create a fully-qualified SavedQuery resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param dataset [String]
+            # @param saved_query [String]
+            #
+            # @return [::String]
+            def saved_query_path project:, location:, dataset:, saved_query:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "dataset cannot contain /" if dataset.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/datasets/#{dataset}/savedQueries/#{saved_query}"
+            end
+
             extend self
           end
         end

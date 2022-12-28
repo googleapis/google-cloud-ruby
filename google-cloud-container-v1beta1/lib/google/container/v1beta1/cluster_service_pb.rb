@@ -61,6 +61,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :gvnic, :message, 29, "google.container.v1beta1.VirtualNIC"
       optional :spot, :bool, 32
       optional :confidential_nodes, :message, 35, "google.container.v1beta1.ConfidentialNodes"
+      proto3_optional :fast_socket, :message, 36, "google.container.v1beta1.FastSocket"
       map :resource_labels, :string, :string, 37
       optional :logging_config, :message, 38, "google.container.v1beta1.NodePoolLoggingConfig"
     end
@@ -451,6 +452,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :desired_protect_config, :message, 112, "google.container.v1beta1.ProtectConfig"
       optional :desired_gateway_api_config, :message, 114, "google.container.v1beta1.GatewayAPIConfig"
       optional :desired_node_pool_logging_config, :message, 116, "google.container.v1beta1.NodePoolLoggingConfig"
+      optional :desired_stack_type, :enum, 119, "google.container.v1beta1.StackType"
     end
     add_message "google.container.v1beta1.Operation" do
       optional :name, :string, 1
@@ -548,6 +550,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :gcfs_config, :message, 22, "google.container.v1beta1.GcfsConfig"
       optional :confidential_nodes, :message, 23, "google.container.v1beta1.ConfidentialNodes"
       optional :gvnic, :message, 29, "google.container.v1beta1.VirtualNIC"
+      optional :fast_socket, :message, 31, "google.container.v1beta1.FastSocket"
       optional :logging_config, :message, 32, "google.container.v1beta1.NodePoolLoggingConfig"
       optional :resource_labels, :message, 33, "google.container.v1beta1.ResourceLabels"
     end
@@ -1123,6 +1126,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.container.v1beta1.VirtualNIC" do
       optional :enabled, :bool, 1
     end
+    add_message "google.container.v1beta1.FastSocket" do
+      optional :enabled, :bool, 1
+    end
     add_message "google.container.v1beta1.GetOpenIDConfigRequest" do
       optional :parent, :string, 1
     end
@@ -1284,6 +1290,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DATAPATH_PROVIDER_UNSPECIFIED, 0
       value :LEGACY_DATAPATH, 1
       value :ADVANCED_DATAPATH, 2
+    end
+    add_enum "google.container.v1beta1.StackType" do
+      value :STACK_TYPE_UNSPECIFIED, 0
+      value :IPV4, 1
+      value :IPV4_IPV6, 2
     end
   end
 end
@@ -1467,6 +1478,7 @@ module Google
         ResourceUsageExportConfig::ConsumptionMeteringConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ResourceUsageExportConfig.ConsumptionMeteringConfig").msgclass
         ShieldedNodes = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ShieldedNodes").msgclass
         VirtualNIC = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.VirtualNIC").msgclass
+        FastSocket = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.FastSocket").msgclass
         GetOpenIDConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.GetOpenIDConfigRequest").msgclass
         GetOpenIDConfigResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.GetOpenIDConfigResponse").msgclass
         GetJSONWebKeysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.GetJSONWebKeysRequest").msgclass
@@ -1500,6 +1512,7 @@ module Google
         UpgradeResourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.UpgradeResourceType").enummodule
         NodePoolUpdateStrategy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodePoolUpdateStrategy").enummodule
         DatapathProvider = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.DatapathProvider").enummodule
+        StackType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.StackType").enummodule
       end
     end
   end

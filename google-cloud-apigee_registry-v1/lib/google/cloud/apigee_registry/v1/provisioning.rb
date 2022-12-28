@@ -35,7 +35,7 @@ module Google
         # The service that is used for managing the data plane provisioning of the
         # Registry.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/apigee_registry/v1/provisioning"
         #     client = ::Google::Cloud::ApigeeRegistry::V1::Provisioning::Client.new

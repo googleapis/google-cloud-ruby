@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Identity::AccessContextManager::ClientConstructionMinitest < Minitest::Test
-  def test_access_context_manager
+  def test_access_context_manager_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Identity::AccessContextManager.access_context_manager do |config|

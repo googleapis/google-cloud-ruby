@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2022-12-09)
+
+#### Features
+
+* add Deinterlace to PreprocessingConfig 
+
 ### 0.4.0 (2022-07-08)
 
 #### Features

@@ -37,7 +37,7 @@ module Google
         #
         # See [Service Usage API](https://cloud.google.com/service-usage/docs/overview)
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/service_usage/v1/service_usage"
         #     client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new

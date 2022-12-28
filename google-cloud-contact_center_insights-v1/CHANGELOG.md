@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.9.0 (2022-12-14)
+
+#### Features
+
+* Added annotator_selector field to Analysis 
+* Added issue match data to CallAnnotation 
+* Added sample utterances to Issue 
+* Support for the bulk_analyze_conversations RPC ([#19857](https://github.com/googleapis/google-cloud-ruby/issues/19857)) 
+* Support for the delete_issue RPC 
+* Support for the ingest_conversations RPC 
+
 ### 0.8.2 (2022-08-24)
 
 #### Documentation

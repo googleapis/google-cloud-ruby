@@ -14,5 +14,5 @@
     "ruby-cloud-description": "The Transcoder API allows you to convert video files and package them for optimized delivery to web, mobile and connected TVs.",
     "ruby-cloud-env-prefix": "TRANSCODER",
     "ruby-cloud-product-url": "https://cloud.google.com/transcoder/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

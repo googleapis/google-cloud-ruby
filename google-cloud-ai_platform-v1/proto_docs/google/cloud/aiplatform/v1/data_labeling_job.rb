@@ -29,7 +29,7 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The user-defined name of the DataLabelingJob.
-        #     The name can be up to 128 characters long and can be consist of any UTF-8
+        #     The name can be up to 128 characters long and can consist of any UTF-8
         #     characters.
         #     Display name of a DataLabelingJob.
         # @!attribute [rw] datasets

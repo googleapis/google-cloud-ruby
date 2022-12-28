@@ -34,7 +34,7 @@ module Google
         # Metadata service manages metadata resources such as tables, filesets and
         # partitions.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataplex/v1/metadata_service"
         #     client = ::Google::Cloud::Dataplex::V1::MetadataService::Client.new

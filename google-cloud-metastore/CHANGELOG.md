@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.0 (2022-12-12)
+
+#### Features
+
+* Support for the DataprocMetastoreFederation client ([#19471](https://github.com/googleapis/google-cloud-ruby/issues/19471)) 
+
 ### 1.1.0 (2022-07-05)
 
 #### Features

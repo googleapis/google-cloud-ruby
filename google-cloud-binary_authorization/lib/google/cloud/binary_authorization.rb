@@ -49,8 +49,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client](https://googleapis.dev/ruby/google-cloud-binary_authorization-v1/latest/Google/Cloud/BinaryAuthorization/V1/BinauthzManagementService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the BinauthzManagementService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -67,7 +67,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [BinauthzManagementService::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.binauthz_management_service version: :v1, &block
         require "google/cloud/binary_authorization/#{version.to_s.downcase}"
@@ -76,8 +76,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::BinaryAuthorization.const_get package_name
-        package_module.const_get(:BinauthzManagementService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::BinaryAuthorization.const_get(package_name).const_get(:BinauthzManagementService)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -85,8 +85,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client](https://googleapis.dev/ruby/google-cloud-binary_authorization-v1/latest/Google/Cloud/BinaryAuthorization/V1/SystemPolicy/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SystemPolicy service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -97,7 +97,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [SystemPolicy::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.system_policy version: :v1, &block
         require "google/cloud/binary_authorization/#{version.to_s.downcase}"
@@ -106,8 +106,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::BinaryAuthorization.const_get package_name
-        package_module.const_get(:SystemPolicy).const_get(:Client).new(&block)
+        service_module = Google::Cloud::BinaryAuthorization.const_get(package_name).const_get(:SystemPolicy)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -115,8 +115,8 @@ module Google
       #
       # By default, this returns an instance of
       # [Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client](https://googleapis.dev/ruby/google-cloud-binary_authorization-v1/latest/Google/Cloud/BinaryAuthorization/V1/ValidationHelper/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ValidationHelper service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
@@ -127,7 +127,7 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [ValidationHelper::Client] A client object for the specified version.
+      # @return [::Object] A client object for the specified version.
       #
       def self.validation_helper version: :v1, &block
         require "google/cloud/binary_authorization/#{version.to_s.downcase}"
@@ -136,8 +136,8 @@ module Google
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::BinaryAuthorization.const_get package_name
-        package_module.const_get(:ValidationHelper).const_get(:Client).new(&block)
+        service_module = Google::Cloud::BinaryAuthorization.const_get(package_name).const_get(:ValidationHelper)
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -157,7 +157,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

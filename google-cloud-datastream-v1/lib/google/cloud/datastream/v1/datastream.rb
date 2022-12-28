@@ -34,7 +34,7 @@ module Google
         ##
         # Datastream service
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/datastream/v1/datastream"
         #     client = ::Google::Cloud::Datastream::V1::Datastream::Client.new

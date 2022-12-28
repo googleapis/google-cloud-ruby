@@ -24,9 +24,9 @@ module Google
     module Bigquery
       module Reservation
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/bigquery/reservation/v1"
         #     client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new

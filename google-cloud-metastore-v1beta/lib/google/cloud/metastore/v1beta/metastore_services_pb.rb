@@ -25,8 +25,8 @@ module Google
       module V1beta
         module DataprocMetastore
           # Configures and manages metastore services.
-          # Metastore services are fully managed, highly available, auto-scaled,
-          # auto-healing, OSS-native deployments of technical metadata management
+          # Metastore services are fully managed, highly available, autoscaled,
+          # autohealing, OSS-native deployments of technical metadata management
           # software. Each metastore service exposes a network endpoint through which
           # metadata queries are served. Metadata queries can originate from a variety
           # of sources, including Apache Hive, Apache Presto, and Apache Spark.
@@ -76,10 +76,21 @@ module Google
             rpc :ListBackups, ::Google::Cloud::Metastore::V1beta::ListBackupsRequest, ::Google::Cloud::Metastore::V1beta::ListBackupsResponse
             # Gets details of a single backup.
             rpc :GetBackup, ::Google::Cloud::Metastore::V1beta::GetBackupRequest, ::Google::Cloud::Metastore::V1beta::Backup
-            # Creates a new Backup in a given project and location.
+            # Creates a new backup in a given project and location.
             rpc :CreateBackup, ::Google::Cloud::Metastore::V1beta::CreateBackupRequest, ::Google::Longrunning::Operation
             # Deletes a single backup.
             rpc :DeleteBackup, ::Google::Cloud::Metastore::V1beta::DeleteBackupRequest, ::Google::Longrunning::Operation
+            # Removes the attached IAM policies for a resource
+            rpc :RemoveIamPolicy, ::Google::Cloud::Metastore::V1beta::RemoveIamPolicyRequest, ::Google::Cloud::Metastore::V1beta::RemoveIamPolicyResponse
+            # Query DPMS metadata.
+            rpc :QueryMetadata, ::Google::Cloud::Metastore::V1beta::QueryMetadataRequest, ::Google::Longrunning::Operation
+            # Move a table to another database.
+            rpc :MoveTableToDatabase, ::Google::Cloud::Metastore::V1beta::MoveTableToDatabaseRequest, ::Google::Longrunning::Operation
+            # Alter metadata resource location. The metadata resource can be a database,
+            # table, or partition. This functionality only updates the parent directory
+            # for the respective metadata resource and does not transfer any existing
+            # data to the new location.
+            rpc :AlterMetadataResourceLocation, ::Google::Cloud::Metastore::V1beta::AlterMetadataResourceLocationRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

@@ -39,7 +39,7 @@ module Google
         # * {::Google::Cloud::SecretManager::V1beta1::Secret Secret}
         # * {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/secret_manager/v1beta1/secret_manager_service"
         #     client = ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new

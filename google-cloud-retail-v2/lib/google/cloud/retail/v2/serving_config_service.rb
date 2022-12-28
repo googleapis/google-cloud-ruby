@@ -33,7 +33,7 @@ module Google
         ##
         # Service for modifying ServingConfig.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/retail/v2/serving_config_service"
         #     client = ::Google::Cloud::Retail::V2::ServingConfigService::Client.new

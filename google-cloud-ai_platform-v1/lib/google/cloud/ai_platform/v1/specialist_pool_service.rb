@@ -39,7 +39,7 @@ module Google
         # then Managers will get email notifications to manage Specialists and tasks on
         # CrowdCompute console.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/specialist_pool_service"
         #     client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new

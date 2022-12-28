@@ -37,7 +37,7 @@ module Google
         # input keys sets the project ID (if not already set) to the project ID from
         # the request.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/datastore/v1/datastore"
         #     client = ::Google::Cloud::Datastore::V1::Datastore::Client.new

@@ -26,9 +26,9 @@ module Google
   module Cloud
     module Gaming
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/gaming/v1"
       #     client = ::Google::Cloud::Gaming::V1::GameServerClustersService::Client.new

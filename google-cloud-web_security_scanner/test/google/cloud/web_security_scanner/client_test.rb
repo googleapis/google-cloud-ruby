@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::WebSecurityScanner::ClientConstructionMinitest < Minitest::Test
-  def test_web_security_scanner
+  def test_web_security_scanner_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::WebSecurityScanner.web_security_scanner do |config|

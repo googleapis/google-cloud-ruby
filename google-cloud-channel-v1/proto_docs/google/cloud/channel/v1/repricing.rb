@@ -29,13 +29,14 @@ module Google
         #     accounts/\\{account_id}/customers/\\{customer_id}/customerRepricingConfigs/\\{id}.
         # @!attribute [rw] repricing_config
         #   @return [::Google::Cloud::Channel::V1::RepricingConfig]
-        #     Required. The configuration for bill modifications made by a reseller before
-        #     sending it to customers.
+        #     Required. The configuration for bill modifications made by a reseller
+        #     before sending it to customers.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Timestamp of an update to the repricing rule. If `update_time` is after
-        #     {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month} then it indicates this was set
-        #     mid-month.
+        #     Output only. Timestamp of an update to the repricing rule. If `update_time`
+        #     is after
+        #     {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
+        #     then it indicates this was set mid-month.
         class CustomerRepricingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -50,13 +51,14 @@ module Google
         #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}/channelPartnerRepricingConfigs/\\{id}.
         # @!attribute [rw] repricing_config
         #   @return [::Google::Cloud::Channel::V1::RepricingConfig]
-        #     Required. The configuration for bill modifications made by a reseller before
-        #     sending it to ChannelPartner.
+        #     Required. The configuration for bill modifications made by a reseller
+        #     before sending it to ChannelPartner.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Timestamp of an update to the repricing rule. If `update_time` is after
-        #     {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month} then it indicates this was set
-        #     mid-month.
+        #     Output only. Timestamp of an update to the repricing rule. If `update_time`
+        #     is after
+        #     {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
+        #     then it indicates this was set mid-month.
         class ChannelPartnerRepricingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -73,15 +75,21 @@ module Google
         #     This is the only supported value for ChannelPartnerRepricingConfig.
         # @!attribute [rw] effective_invoice_month
         #   @return [::Google::Type::Date]
-        #     Required. The YearMonth when these adjustments activate. The Day field needs to be
-        #     "0" since we only accept YearMonth repricing boundaries.
+        #     Required. The YearMonth when these adjustments activate. The Day field
+        #     needs to be "0" since we only accept YearMonth repricing boundaries.
         # @!attribute [rw] adjustment
         #   @return [::Google::Cloud::Channel::V1::RepricingAdjustment]
         #     Required. Information about the adjustment.
         # @!attribute [rw] rebilling_basis
         #   @return [::Google::Cloud::Channel::V1::RebillingBasis]
-        #     Required. The {::Google::Cloud::Channel::V1::RebillingBasis RebillingBasis} to use for this bill. Specifies the relative cost
-        #     based on repricing costs you will apply.
+        #     Required. The {::Google::Cloud::Channel::V1::RebillingBasis RebillingBasis} to
+        #     use for this bill. Specifies the relative cost based on repricing costs you
+        #     will apply.
+        # @!attribute [rw] conditional_overrides
+        #   @return [::Array<::Google::Cloud::Channel::V1::ConditionalOverride>]
+        #     The conditional overrides to apply for this configuration. If you list
+        #     multiple overrides, only the first valid override is used.  If you don't
+        #     list any overrides, the API uses the normal adjustment and rebilling basis.
         class RepricingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -124,6 +132,47 @@ module Google
         #     Mark up by 1%   => "1.00"
         #     Pass-Through    => "0.00"
         class PercentageAdjustment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies the override to conditionally apply.
+        # @!attribute [rw] adjustment
+        #   @return [::Google::Cloud::Channel::V1::RepricingAdjustment]
+        #     Required. Information about the applied override's adjustment.
+        # @!attribute [rw] rebilling_basis
+        #   @return [::Google::Cloud::Channel::V1::RebillingBasis]
+        #     Required. The {::Google::Cloud::Channel::V1::RebillingBasis RebillingBasis} to
+        #     use for the applied override. Shows the relative cost based on your
+        #     repricing costs.
+        # @!attribute [rw] repricing_condition
+        #   @return [::Google::Cloud::Channel::V1::RepricingCondition]
+        #     Required. Specifies the condition which, if met, will apply the override.
+        class ConditionalOverride
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the various repricing conditions you can use for a conditional
+        # override.
+        # @!attribute [rw] sku_group_condition
+        #   @return [::Google::Cloud::Channel::V1::SkuGroupCondition]
+        #     SKU Group condition for override.
+        class RepricingCondition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A condition that applies the override if a line item SKU is found in the SKU
+        # group.
+        # @!attribute [rw] sku_group
+        #   @return [::String]
+        #     Specifies a SKU group (https://cloud.google.com/skus/sku-groups).
+        #     Resource name of SKU group. Format:
+        #     accounts/\\{account}/skuGroups/\\{sku_group}.
+        #     Example:
+        #     "accounts/C01234/skuGroups/3d50fd57-3157-4577-a5a9-a219b8490041".
+        class SkuGroupCondition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Dataplex is an intelligent data fabric that provides a way to centrally manage, monitor, and govern your data across data lakes, data warehouses and data marts, and make this data securely accessible to a variety of analytics and data science tools.",
     "ruby-cloud-product-url": "https://cloud.google.com/dataplex/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

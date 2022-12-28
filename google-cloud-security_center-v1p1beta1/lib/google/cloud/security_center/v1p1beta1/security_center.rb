@@ -34,7 +34,7 @@ module Google
         ##
         # V1p1Beta1 APIs for Security Center service.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/security_center/v1p1beta1/security_center"
         #     client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new

@@ -35,8 +35,8 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
 
   it "knows its destination table" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, destination_table_gapi,
-      ["target_project_id", "target_dataset_id", "target_table_id"]
+    mock.expect :get_table, destination_table_gapi, 
+      ["target_project_id", "target_dataset_id", "target_table_id"], **patch_table_args
 
     job.service.mocked_service = mock
 

@@ -165,7 +165,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Full CompletionConfig resource name. Format:
-        #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}/completionConfig
+        #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig`
         class GetCompletionConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

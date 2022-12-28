@@ -34,7 +34,7 @@ module Google
         ##
         # Service for managing knowledge {::Google::Cloud::Dialogflow::V2::Document Documents}.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/documents"
         #     client = ::Google::Cloud::Dialogflow::V2::Documents::Client.new

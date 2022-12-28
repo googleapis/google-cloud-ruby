@@ -36,7 +36,7 @@ module Google
           #
           # The Read API can be used to read data from BigQuery.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigquery/storage/v1/big_query_read"
           #     client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new

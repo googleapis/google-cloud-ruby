@@ -25,9 +25,9 @@ module Google
   module Cloud
     module PubSub
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/pubsub/v1"
       #     client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new

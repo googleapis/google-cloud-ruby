@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::BareMetalSolution::ClientConstructionMinitest < Minitest::Test
-  def test_bare_metal_solution
+  def test_bare_metal_solution_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::BareMetalSolution.bare_metal_solution do |config|

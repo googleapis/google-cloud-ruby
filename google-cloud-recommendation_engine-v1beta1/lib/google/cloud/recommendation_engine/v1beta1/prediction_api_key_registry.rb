@@ -37,7 +37,7 @@ module Google
         # authenticate your `predict` method call, you do not need to register an API
         # key. You can register up to 20 API keys per project.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/recommendation_engine/v1beta1/prediction_api_key_registry"
         #     client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new

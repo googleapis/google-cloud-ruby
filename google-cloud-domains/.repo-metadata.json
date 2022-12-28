@@ -14,5 +14,5 @@
     "ruby-cloud-description": "The Cloud Domains API provides registration, management and configuration of domain names.",
     "ruby-cloud-env-prefix": "DOMAINS",
     "ruby-cloud-product-url": "https://cloud.google.com/domains",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

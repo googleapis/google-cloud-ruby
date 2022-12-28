@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 (2022-12-09)
+
+#### Features
+
+* Responses now provide information on adaptation behavior ([#19486](https://github.com/googleapis/google-cloud-ruby/issues/19486)) 
+
 ### 0.13.0 (2022-07-08)
 
 #### Features

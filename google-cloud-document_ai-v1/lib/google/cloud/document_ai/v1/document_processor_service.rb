@@ -37,7 +37,7 @@ module Google
         # AI such as natural language, computer vision, and translation to extract
         # structured information from unstructured or semi-structured documents.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/document_ai/v1/document_processor_service"
         #     client = ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client.new

@@ -29,7 +29,7 @@ describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    mock.expect :get_table, source_table_gapi, ["source_project_id", "source_dataset_id", "source_table_id"]
+    mock.expect :get_table, source_table_gapi, ["source_project_id", "source_dataset_id", "source_table_id"], **patch_table_args
 
     source = job.source
     _(source).must_be_kind_of Google::Cloud::Bigquery::Table
@@ -37,7 +37,7 @@ describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
     _(source.dataset_id).must_equal "source_dataset_id"
     _(source.table_id).must_equal   "source_table_id"
 
-    mock.expect :get_table, destination_table_gapi, ["target_project_id", "target_dataset_id", "target_table_id"]
+    mock.expect :get_table, destination_table_gapi, ["target_project_id", "target_dataset_id", "target_table_id"], **patch_table_args
     destination = job.destination
     _(destination).must_be_kind_of Google::Cloud::Bigquery::Table
     _(destination.project_id).must_equal "target_project_id"

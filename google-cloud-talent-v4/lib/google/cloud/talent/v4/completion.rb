@@ -33,7 +33,7 @@ module Google
         ##
         # A service handles auto completion.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/talent/v4/completion"
         #     client = ::Google::Cloud::Talent::V4::Completion::Client.new

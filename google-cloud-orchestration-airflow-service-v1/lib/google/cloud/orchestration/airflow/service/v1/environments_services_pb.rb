@@ -45,6 +45,16 @@ module Google
                 rpc :UpdateEnvironment, ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateEnvironmentRequest, ::Google::Longrunning::Operation
                 # Delete an environment.
                 rpc :DeleteEnvironment, ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteEnvironmentRequest, ::Google::Longrunning::Operation
+                # Creates a snapshots of a Cloud Composer environment.
+                #
+                # As a result of this operation, snapshot of environment's state is stored
+                # in a location specified in the SaveSnapshotRequest.
+                rpc :SaveSnapshot, ::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest, ::Google::Longrunning::Operation
+                # Loads a snapshot of a Cloud Composer environment.
+                #
+                # As a result of this operation, a snapshot of environment's specified in
+                # LoadSnapshotRequest is loaded into the environment.
+                rpc :LoadSnapshot, ::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest, ::Google::Longrunning::Operation
               end
 
               Stub = Service.rpc_stub_class

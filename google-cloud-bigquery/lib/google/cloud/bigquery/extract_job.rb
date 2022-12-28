@@ -114,7 +114,7 @@ module Google
 
         ##
         # Checks if the destination format for the table data is [newline-delimited
-        # JSON](http://jsonlines.org/). The default is `false`. Not applicable when
+        # JSON](https://jsonlines.org/). The default is `false`. Not applicable when
         # extracting models.
         #
         # @return [Boolean] `true` when `NEWLINE_DELIMITED_JSON`, `false` if not
@@ -368,7 +368,7 @@ module Google
           # Supported values for tables:
           #
           # * `csv` - CSV
-          # * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+          # * `json` - [Newline-delimited JSON](https://jsonlines.org/)
           # * `avro` - [Avro](http://avro.apache.org/)
           #
           # Supported values for models:

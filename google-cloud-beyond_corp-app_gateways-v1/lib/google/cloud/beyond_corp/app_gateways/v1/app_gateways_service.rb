@@ -48,7 +48,7 @@ module Google
           # The AppGatewaysService service provides methods to manage
           # (create/read/update/delete) BeyondCorp AppGateways.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/beyond_corp/app_gateways/v1/app_gateways_service"
           #     client = ::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client.new

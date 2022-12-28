@@ -1,5 +1,18 @@
 # Release History
 
+### 0.16.0 (2022-12-15)
+
+#### Features
+
+* Added sample_document_uris field to ProcessorType 
+* Added process_options argument to process_document RPC ([#19878](https://github.com/googleapis/google-cloud-ruby/issues/19878)) 
+
+### 0.15.0 (2022-12-14)
+
+#### Features
+
+* Support for configuring sharding for a GCS output document ([#19855](https://github.com/googleapis/google-cloud-ruby/issues/19855)) 
+
 ### 0.14.0 (2022-11-16)
 
 #### Features
