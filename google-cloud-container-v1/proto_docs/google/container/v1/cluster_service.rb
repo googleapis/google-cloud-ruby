@@ -1449,6 +1449,11 @@ module Google
         #   @return [::Google::Cloud::Container::V1::NodePoolAutoConfig]
         #     Node pool configs that apply to all auto-provisioned node pools
         #     in autopilot clusters and node auto-provisioning enabled clusters.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     This checksum is computed by the server based on the value of cluster
+        #     fields, and may be sent on update requests to ensure the client has an
+        #     up-to-date value before proceeding.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1696,6 +1701,11 @@ module Google
         # @!attribute [rw] desired_gateway_api_config
         #   @return [::Google::Cloud::Container::V1::GatewayAPIConfig]
         #     The desired config of Gateway API on this cluster.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     The current etag of the cluster.
+        #     If an etag is provided and does not match the current etag of the cluster,
+        #     update will be blocked and an ABORTED error will be returned.
         # @!attribute [rw] desired_node_pool_logging_config
         #   @return [::Google::Cloud::Container::V1::NodePoolLoggingConfig]
         #     The desired node pool logging configuration defaults for the cluster.
@@ -2053,6 +2063,11 @@ module Google
         # @!attribute [rw] gvnic
         #   @return [::Google::Cloud::Container::V1::VirtualNIC]
         #     Enable or disable gvnic on the node pool.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     The current etag of the node pool.
+        #     If an etag is provided and does not match the current etag of the node
+        #     pool, update will be blocked and an ABORTED error will be returned.
         # @!attribute [rw] fast_socket
         #   @return [::Google::Cloud::Container::V1::FastSocket]
         #     Enable or disable NCCL fast socket for the node pool.
@@ -2760,6 +2775,11 @@ module Google
         #   @return [::Google::Cloud::Container::V1::NodePool::UpdateInfo]
         #     Output only. [Output only] Update info contains relevant information during a node
         #     pool update.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     This checksum is computed by the server based on the value of node pool
+        #     fields, and may be sent on update requests to ensure the client has an
+        #     up-to-date value before proceeding.
         class NodePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

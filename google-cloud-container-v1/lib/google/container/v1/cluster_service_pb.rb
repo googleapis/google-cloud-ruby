@@ -324,6 +324,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :logging_config, :message, 132, "google.container.v1.LoggingConfig"
       optional :monitoring_config, :message, 133, "google.container.v1.MonitoringConfig"
       optional :node_pool_auto_config, :message, 136, "google.container.v1.NodePoolAutoConfig"
+      optional :etag, :string, 139
     end
     add_enum "google.container.v1.Cluster.Status" do
       value :STATUS_UNSPECIFIED, 0
@@ -382,6 +383,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :desired_gcfs_config, :message, 109, "google.container.v1.GcfsConfig"
       optional :desired_node_pool_auto_config_network_tags, :message, 110, "google.container.v1.NetworkTags"
       optional :desired_gateway_api_config, :message, 114, "google.container.v1.GatewayAPIConfig"
+      optional :etag, :string, 115
       optional :desired_node_pool_logging_config, :message, 116, "google.container.v1.NodePoolLoggingConfig"
       optional :desired_stack_type, :enum, 119, "google.container.v1.StackType"
     end
@@ -481,6 +483,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :gcfs_config, :message, 22, "google.container.v1.GcfsConfig"
       optional :confidential_nodes, :message, 23, "google.container.v1.ConfidentialNodes"
       optional :gvnic, :message, 29, "google.container.v1.VirtualNIC"
+      optional :etag, :string, 30
       optional :fast_socket, :message, 31, "google.container.v1.FastSocket"
       optional :logging_config, :message, 32, "google.container.v1.NodePoolLoggingConfig"
       optional :resource_labels, :message, 33, "google.container.v1.ResourceLabels"
@@ -656,6 +659,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :upgrade_settings, :message, 107, "google.container.v1.NodePool.UpgradeSettings"
       optional :placement_policy, :message, 108, "google.container.v1.NodePool.PlacementPolicy"
       optional :update_info, :message, 109, "google.container.v1.NodePool.UpdateInfo"
+      optional :etag, :string, 110
     end
     add_message "google.container.v1.NodePool.UpgradeSettings" do
       optional :max_surge, :int32, 1
