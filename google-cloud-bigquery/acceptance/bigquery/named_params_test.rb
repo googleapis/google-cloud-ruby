@@ -438,4 +438,22 @@ describe Google::Cloud::Bigquery, :named_params, :bigquery do
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_equal({ message: "hello", repeat: 1 })
   end
+
+  it "queries the data with array of structs" do
+    rows = bigquery.query "SELECT @value AS value",
+               params: { value: [{ message: "hello", repeat: 1 }, { message: "world", repeat: 2 }] },
+               types:  { value: [{ message: :STRING, repeat: :INT64 }] }
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :record?
+    _(rows.fields.first.fields.count).must_equal 2
+    _(rows.fields.first.fields.first.name).must_equal "message"
+    _(rows.fields.first.fields.first).must_be :string?
+    _(rows.fields.first.fields.last.name).must_equal "repeat"
+    _(rows.fields.first.fields.last).must_be :integer?
+    _(rows.first[:value].first).must_equal({ message: "hello", repeat: 1 })
+    _(rows.first[:value].last).must_equal({ message: "world", repeat: 2 })
+  end
 end
