@@ -240,7 +240,7 @@ describe Google::Cloud::PubSub::Service do
     expected_request = {topic: "projects/test/topics/test", messages: "data"}
     expected_options = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     mocked_publisher.expect :publish, nil do |actual_request, actual_option|
-      actual_request === expected_request && actual_option === expected_options
+      actual_request == expected_request && actual_option == expected_options
     end
     service.publish "test", "data", compress: true
   end
@@ -251,7 +251,7 @@ describe Google::Cloud::PubSub::Service do
     service.mocked_publisher = mocked_publisher
     expected_request = {topic: "projects/test/topics/test", messages: "data"}
     mocked_publisher.expect :publish, nil do |actual_request, actual_option|
-      actual_request === expected_request && actual_option.nil?
+      actual_request == expected_request && actual_option.nil?
     end
     service.publish "test", "data"
   end

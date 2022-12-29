@@ -33,7 +33,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     mock = Minitest::Mock.new
     expected_request = {topic: topic_path(topic_name), messages: messages}
     mock.expect :publish, publish_res do |actual_request|
-      actual_request === expected_request
+      actual_request == expected_request
     end
     topic.service.mocked_publisher = mock
 
@@ -53,7 +53,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     mock = Minitest::Mock.new
     expected_request = {topic: topic_path(topic_name), messages: messages}
     mock.expect :publish, publish_res do |actual_request|
-      actual_request === expected_request
+      actual_request == expected_request
     end
     topic.service.mocked_publisher = mock
 
@@ -76,7 +76,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     mock = Minitest::Mock.new
     expected_request = {topic: topic_path(topic_name), messages: messages}
     mock.expect :publish, publish_res do |actual_request|
-      actual_request === expected_request
+      actual_request == expected_request
     end
     topic.service.mocked_publisher = mock
 
