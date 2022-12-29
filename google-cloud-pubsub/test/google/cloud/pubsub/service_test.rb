@@ -243,6 +243,7 @@ describe Google::Cloud::PubSub::Service do
       actual_request == expected_request && actual_option == expected_options
     end
     service.publish "test", "data", compress: true
+    mocked_publisher.verify
   end
 
   it "should not add call option when compress disabled" do
@@ -254,6 +255,7 @@ describe Google::Cloud::PubSub::Service do
       actual_request == expected_request && actual_option.nil?
     end
     service.publish "test", "data"
+    mocked_publisher.verify
   end
 
   # @param [Numeric, nil] timeout Expected non-default timeout.

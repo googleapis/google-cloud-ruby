@@ -15,6 +15,7 @@
 
 require "monitor"
 require "concurrent"
+require "ostruct"
 require "google/cloud/pubsub/errors"
 require "google/cloud/pubsub/flow_controller"
 require "google/cloud/pubsub/async_publisher/batch"
@@ -377,7 +378,7 @@ module Google
             unless items.empty?
               grpc = @service.publish topic_name,
                                       items.map(&:msg),
-                                      compress: compress && compression_bytes_threshold >= batch.total_message_bytes
+                                      compress: compress && batch.total_message_bytes >= compression_bytes_threshold
               items.zip Array(grpc.message_ids) do |item, id|
                 @flow_controller.release item.bytesize
                 next unless item.callback
