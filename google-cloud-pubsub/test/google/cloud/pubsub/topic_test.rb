@@ -613,7 +613,10 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock_expect mock, :publish, publish_res, [{topic: topic_path(topic_name), messages: messages}]
+    expected_request = {topic: topic_path(topic_name), messages: messages}
+    mock.expect :publish, publish_res do |actual_request|
+      actual_request === expected_request
+    end
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message
@@ -632,7 +635,10 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock_expect mock, :publish, publish_res, [{topic: topic_path(topic_name), messages: messages}]
+    expected_request = {topic: topic_path(topic_name), messages: messages}
+    mock.expect :publish, publish_res do |actual_request|
+      actual_request === expected_request
+    end
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message, format: :text
@@ -655,7 +661,10 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1", "msg2"] })
     mock = Minitest::Mock.new
-    mock_expect mock, :publish, publish_res, [{topic: topic_path(topic_name), messages: messages}]
+    expected_request = {topic: topic_path(topic_name), messages: messages}
+    mock.expect :publish, publish_res do |actual_request|
+      actual_request === expected_request
+    end
     topic.service.mocked_publisher = mock
 
     msgs = topic.publish do |batch|

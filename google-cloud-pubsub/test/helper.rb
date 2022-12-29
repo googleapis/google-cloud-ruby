@@ -330,11 +330,3 @@ class MockPubsub < Minitest::Spec
 end
 
 
-def mock_expect mock, method, response, param
-  if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3")
-    mock.expect method, response, param
-  else
-    mock.expect method, response, param.first
-  end
-end
-
