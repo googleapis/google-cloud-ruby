@@ -49,6 +49,30 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     mock.verify
   end
 
+  it "knows its destination table with partial projection of table metadata" do
+    %w[unspecified basic storage full].each do |view|
+      mock = Minitest::Mock.new
+      bigquery.service.mocked_service = mock
+      destination_table_result = destination_table_gapi
+
+      if view == "basic"
+        destination_table_result = destination_table_partial_gapi
+      end
+
+      mock.expect :get_table, destination_table_result, ["target_project_id", "target_dataset_id", "target_table_id"],
+                  **patch_table_args(view: view)
+
+      table = job.destination view: view
+      _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+      _(table.project_id).must_equal "target_project_id"
+      _(table.dataset_id).must_equal "target_dataset_id"
+      _(table.table_id).must_equal "target_table_id"
+      verify_table_metadata table, view
+
+      mock.verify
+    end
+  end
+
   it "knows its attributes" do
     _(job).must_be :batch?
     _(job).wont_be :interactive?

@@ -76,6 +76,13 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
   end
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
   let(:user_val) { "blowmage@gmail.com" }
+  let(:rows) do
+    [
+      { name: "silvano", breed: "the cat kind",      id: 4, dob: Time.now.utc },
+      { name: "ryan",    breed: "golden retriever?", id: 5, dob: Time.now.utc },
+      { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
+    ]
+  end
 
   before do
     table
@@ -114,6 +121,14 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
     _(dataset_2.delete).must_equal true
     _(dataset_2.exists?).must_equal false
     _(dataset_2.exists?(force: true)).must_equal false
+  end
+
+  it "loads table with partial projection of table metadata" do
+    %w[unspecified basic storage full].each do |view|
+      table = dataset.table table_id, view: view
+      _(table.table_id).must_equal table_id
+      verify_table_metadata table, view
+    end
   end
 
   it "should set & get metadata" do
@@ -226,5 +241,24 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
     data = dataset.query query
     _(data.class).must_equal Google::Cloud::Bigquery::Data
     _(data.total).wont_be_nil
+  end
+
+  it "inserts rows asynchronously and gets its data" do
+    %w[unspecified basic storage full].each do |view|
+      insert_result = nil
+      inserter = dataset.insert_async(table_id, view: view) do |result|
+        insert_result = result
+      end
+      inserter.insert rows
+
+      inserter.flush
+      inserter.stop.wait!
+
+      _(insert_result).must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+      _(insert_result).must_be :success?
+      _(insert_result.insert_count).must_equal 3
+      _(insert_result.insert_errors).must_be :empty?
+      _(insert_result.error_rows).must_be :empty?
+    end
   end
 end

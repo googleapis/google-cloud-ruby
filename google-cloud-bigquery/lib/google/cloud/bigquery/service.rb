@@ -144,10 +144,11 @@ module Google
 
         ##
         # Gets the specified table resource by full table reference.
-        def get_project_table project_id, dataset_id, table_id
+        def get_project_table project_id, dataset_id, table_id, metadata_view: nil
+          metadata_view = table_metadata_view_type_for metadata_view
           # The get operation is considered idempotent
           execute backoff: true do
-            service.get_table project_id, dataset_id, table_id
+            service.get_table project_id, dataset_id, table_id, view: metadata_view
           end
         end
 
@@ -156,8 +157,8 @@ module Google
         # This method does not return the data in the table,
         # it only returns the table resource,
         # which describes the structure of this table.
-        def get_table dataset_id, table_id
-          get_project_table @project, dataset_id, table_id
+        def get_table dataset_id, table_id, metadata_view: nil
+          get_project_table @project, dataset_id, table_id, metadata_view: metadata_view
         end
 
         ##
@@ -570,6 +571,14 @@ module Google
           end
         rescue Google::Apis::Error => e
           raise Google::Cloud::Error.from_error e
+        end
+
+        def table_metadata_view_type_for str
+          return nil if str.nil?
+          { "unspecified" => "TABLE_METADATA_VIEW_UNSPECIFIED",
+            "basic" => "BASIC",
+            "storage" => "STORAGE_STATS",
+            "full" => "FULL" }[str.to_s.downcase]
         end
 
         class Backoff

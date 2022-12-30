@@ -793,6 +793,11 @@ module Google
         #   object without verifying that the resource exists on the BigQuery
         #   service. Calls made on this object will raise errors if the resource
         #   does not exist. Default is `false`. Optional.
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
         #
         # @return [Google::Cloud::Bigquery::Table, nil] Returns `nil` if the
         #   table does not exist.
@@ -815,13 +820,22 @@ module Google
         #
         #   table = dataset.table "my_table", skip_lookup: true
         #
+        # @example Avoid retrieving transient stats of the table with `view`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   table = dataset.table "my_table", view: "basic"
+        #
         # @!group Table
         #
-        def table table_id, skip_lookup: nil
+        def table table_id, skip_lookup: nil, view: nil
           ensure_service!
           return Table.new_reference project_id, dataset_id, table_id, service if skip_lookup
-          gapi = service.get_table dataset_id, table_id
-          Table.from_gapi gapi, service
+          gapi = service.get_table dataset_id, table_id, metadata_view: view
+          Table.from_gapi gapi, service, metadata_view: view
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -2658,6 +2672,11 @@ module Google
         #   messages before the batch is published. Default is 10.
         # @attr_reader [Numeric] threads The number of threads used to insert
         #   batches of rows. Default is 4.
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
         # @yield [response] the callback for when a batch of rows is inserted
         # @yieldparam [Table::AsyncInserter::Result] result the result of the
         #   asynchronous insert
@@ -2686,13 +2705,35 @@ module Google
         #
         #   inserter.stop.wait!
         #
+        # @example Avoid retrieving transient stats of the table with while inserting :
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   inserter = dataset.insert_async("my_table", view: "basic") do |result|
+        #     if result.error?
+        #       log_error result.error
+        #     else
+        #       log_insert "inserted #{result.insert_count} rows " \
+        #         "with #{result.error_count} errors"
+        #     end
+        #   end
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   inserter.insert rows
+        #
+        #   inserter.stop.wait!
+        #
         def insert_async table_id, skip_invalid: nil, ignore_unknown: nil, max_bytes: 10_000_000, max_rows: 500,
-                         interval: 10, threads: 4, &block
+                         interval: 10, threads: 4, view: nil, &block
           ensure_service!
 
           # Get table, don't use Dataset#table which handles NotFoundError
-          gapi = service.get_table dataset_id, table_id
-          table = Table.from_gapi gapi, service
+          gapi = service.get_table dataset_id, table_id, metadata_view: view
+          table = Table.from_gapi gapi, service, metadata_view: view
           # Get the AsyncInserter from the table
           table.insert_async skip_invalid: skip_invalid,
                              ignore_unknown: ignore_unknown,
