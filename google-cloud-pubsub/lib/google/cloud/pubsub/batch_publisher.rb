@@ -110,7 +110,7 @@ module Google
         end
 
         ##
-        # @private  Call the publish API with arrays of data data and attrs.
+        # @private  Call the publish API with arrays of data and attrs.
         def publish_batch_messages topic_name, service
           grpc = service.publish topic_name,
                                  messages,

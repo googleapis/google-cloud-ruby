@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "helper"
+require "ostruct"
 
 Thread.abort_on_exception = true
 

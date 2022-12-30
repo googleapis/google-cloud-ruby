@@ -15,7 +15,6 @@
 
 require "monitor"
 require "concurrent"
-require "ostruct"
 require "google/cloud/pubsub/errors"
 require "google/cloud/pubsub/flow_controller"
 require "google/cloud/pubsub/async_publisher/batch"

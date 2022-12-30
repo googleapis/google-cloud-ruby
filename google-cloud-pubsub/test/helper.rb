@@ -328,5 +328,3 @@ class MockPubsub < Minitest::Spec
     addl.include? :mock_pubsub
   end
 end
-
-
