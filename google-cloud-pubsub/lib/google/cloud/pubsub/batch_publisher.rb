@@ -53,7 +53,7 @@ module Google
 
         ##
         # @private Create a new instance of the object.
-        def initialize data, attributes, ordering_key, compress, compression_bytes_threshold, extra_attrs
+        def initialize data, attributes, ordering_key, extra_attrs, compress: false, compression_bytes_threshold: 240
           @messages = []
           @mode = :batch
           @compress = compress
@@ -107,6 +107,15 @@ module Google
           else
             msgs
           end
+        end
+
+        ##
+        # @private  Call the publish API with arrays of data data and attrs.
+        def publish_batch_messages topic_name, service
+          grpc = service.publish topic_name,
+                                 messages,
+                                 compress: compress && total_message_bytes >= compression_bytes_threshold
+          to_gcloud_messages Array(grpc.message_ids)
         end
       end
     end
