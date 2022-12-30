@@ -679,13 +679,13 @@ module Google
         def publish data = nil, attributes = nil, ordering_key: nil, compress: false, compression_bytes_threshold: 240,
                     **extra_attrs, &block
           ensure_service!
-          batch = BatchPublisher.new data, 
-                                     attributes, 
-                                     ordering_key, 
+          batch = BatchPublisher.new data,
+                                     attributes,
+                                     ordering_key,
                                      extra_attrs,
-                                     compress: compress, 
+                                     compress: compress,
                                      compression_bytes_threshold: compression_bytes_threshold
-                                     
+
           block&.call batch
           return nil if batch.messages.count.zero?
           batch.publish_batch_messages name, service
