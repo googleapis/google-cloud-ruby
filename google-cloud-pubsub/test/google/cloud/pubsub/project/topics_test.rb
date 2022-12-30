@@ -38,6 +38,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
       max_bytes: 2_000_000,
       max_messages: 200,
       interval: 0.02,
+      compress: true,
+      compression_bytes_threshold: 140,
       threads: {
         publish: 3,
         callback: 5
@@ -255,6 +257,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.async_publisher.publish_threads).must_equal async[:threads][:publish]
     _(topic.async_publisher.callback_threads).must_equal async[:threads][:callback]
     _(topic.async_publisher.flow_control).must_equal async[:flow_control]
+    _(topic.async_publisher.compress).must_equal async[:compress]
+    _(topic.async_publisher.compression_bytes_threshold).must_equal async[:compression_bytes_threshold]
   end
 
   it "raises when creating a topic with schema_name but without message_encoding" do
@@ -405,6 +409,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.async_publisher.publish_threads).must_equal async[:threads][:publish]
     _(topic.async_publisher.callback_threads).must_equal async[:threads][:callback]
     _(topic.async_publisher.flow_control).must_equal async[:flow_control]
+    _(topic.async_publisher.compress).must_equal async[:compress]
+    _(topic.async_publisher.compression_bytes_threshold).must_equal async[:compression_bytes_threshold]
   end
 
   it "lists topics" do
