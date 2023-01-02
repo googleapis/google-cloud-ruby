@@ -33,13 +33,13 @@ def pubsub_publisher_with_compression project_id:, topic_id:
     compress: true,
     compression_bytes_threshold: 10
   }
-  
+
   begin
     topic.publish_async "This is a test message." do |result|
       raise "Failed to publish the message." unless result.succeeded?
       puts "Published a compressed message of message ID: #{result.message_id}"
     end
-  
+
     # Stop the async_publisher to send all queued messages immediately.
     topic.async_publisher.stop.wait!
   rescue StandardError => e
