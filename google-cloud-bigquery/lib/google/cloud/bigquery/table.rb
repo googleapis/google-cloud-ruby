@@ -3987,8 +3987,6 @@ module Google
             schema.record name, description: description, mode: mode, &block
           end
 
-          # rubocop:disable Style/MethodDefParentheses
-
           ##
           # @raise [RuntimeError] not implemented
           def data(*)
@@ -4073,8 +4071,6 @@ module Google
             raise "not implemented in #{self.class}"
           end
           alias refresh! reload!
-
-          # rubocop:enable Style/MethodDefParentheses
 
           ##
           # @private Make sure any access changes are saved
