@@ -490,7 +490,6 @@ module Google
             end
 
             fields.each do |field|
-
               prev_hash[last_field] = tmp_hash unless last_field.nil?
               last_field = field
               tmp_hash[field] = {}
