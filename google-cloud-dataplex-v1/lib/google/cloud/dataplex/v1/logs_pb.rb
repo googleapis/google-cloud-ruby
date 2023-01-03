@@ -113,6 +113,52 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :QUERY, 3
       value :CREATE, 4
     end
+    add_message "google.cloud.dataplex.v1.DataScanEvent" do
+      optional :data_source, :string, 1
+      optional :job_id, :string, 2
+      optional :start_time, :message, 3, "google.protobuf.Timestamp"
+      optional :end_time, :message, 4, "google.protobuf.Timestamp"
+      optional :type, :enum, 5, "google.cloud.dataplex.v1.DataScanEvent.ScanType"
+      optional :state, :enum, 6, "google.cloud.dataplex.v1.DataScanEvent.State"
+      optional :message, :string, 7
+      optional :spec_version, :string, 8
+      optional :trigger, :enum, 9, "google.cloud.dataplex.v1.DataScanEvent.Trigger"
+      optional :scope, :enum, 10, "google.cloud.dataplex.v1.DataScanEvent.Scope"
+      oneof :result do
+        optional :data_profile, :message, 101, "google.cloud.dataplex.v1.DataScanEvent.DataProfileResult"
+        optional :data_quality, :message, 102, "google.cloud.dataplex.v1.DataScanEvent.DataQualityResult"
+      end
+    end
+    add_message "google.cloud.dataplex.v1.DataScanEvent.DataProfileResult" do
+      optional :row_count, :int64, 1
+    end
+    add_message "google.cloud.dataplex.v1.DataScanEvent.DataQualityResult" do
+      optional :row_count, :int64, 1
+      optional :passed, :bool, 2
+      map :dimension_passed, :string, :bool, 3
+    end
+    add_enum "google.cloud.dataplex.v1.DataScanEvent.ScanType" do
+      value :SCAN_TYPE_UNSPECIFIED, 0
+      value :DATA_PROFILE, 1
+      value :DATA_QUALITY, 2
+    end
+    add_enum "google.cloud.dataplex.v1.DataScanEvent.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :STARTED, 1
+      value :SUCCEEDED, 2
+      value :FAILED, 3
+      value :CANCELLED, 4
+    end
+    add_enum "google.cloud.dataplex.v1.DataScanEvent.Trigger" do
+      value :TRIGGER_UNSPECIFIED, 0
+      value :ON_DEMAND, 1
+      value :SCHEDULE, 2
+    end
+    add_enum "google.cloud.dataplex.v1.DataScanEvent.Scope" do
+      value :SCOPE_UNSPECIFIED, 0
+      value :FULL, 1
+      value :INCREMENTAL, 2
+    end
   end
 end
 
@@ -135,6 +181,13 @@ module Google
         SessionEvent::QueryDetail = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.SessionEvent.QueryDetail").msgclass
         SessionEvent::QueryDetail::Engine = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine").enummodule
         SessionEvent::EventType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.SessionEvent.EventType").enummodule
+        DataScanEvent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.DataScanEvent").msgclass
+        DataScanEvent::DataProfileResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.DataScanEvent.DataProfileResult").msgclass
+        DataScanEvent::DataQualityResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.DataScanEvent.DataQualityResult").msgclass
+        DataScanEvent::ScanType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.DataScanEvent.ScanType").enummodule
+        DataScanEvent::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.DataScanEvent.State").enummodule
+        DataScanEvent::Trigger = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.DataScanEvent.Trigger").enummodule
+        DataScanEvent::Scope = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.DataScanEvent.Scope").enummodule
       end
     end
   end
