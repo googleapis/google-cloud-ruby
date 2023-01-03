@@ -261,9 +261,7 @@ module Google
             # Choose only the data there are field paths for
             field_paths -= delete_field_paths_and_values.keys
             field_paths -= field_paths_and_values.keys
-            # puts "Here1 : ", data
             data = select_by_field_paths data, field_paths
-            # puts "Here2 : ", data
             # Restore delete paths
             field_paths += delete_field_paths_and_values.keys
 
@@ -470,7 +468,6 @@ module Google
             new_hash = {}
             field_paths.map do |field_path|
               selected_hash = select_field_path hash, field_path
-              # puts "Here3 : ", select_field_path(hash, field_path)
               deep_merge_hashes new_hash, selected_hash
             end
             new_hash
@@ -502,8 +499,6 @@ module Google
               dup_hash = dup_hash[field]
             end
             prev_hash[last_field] = dup_hash
-            # puts "Here4 : ", prev_hash
-            prev_hash
             ret_hash
           end
 
