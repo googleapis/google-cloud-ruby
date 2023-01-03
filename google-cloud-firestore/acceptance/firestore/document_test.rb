@@ -91,6 +91,21 @@ describe "Document", :firestore_acceptance do
     _(doc_snp[:binary].read).must_equal all_values[:binary].read
   end
 
+  focus; it "merge empty fields to a document" do
+    all_values = {
+      name: "hello world",
+    }
+    doc_ref = root_col.doc
+
+    doc_ref.set all_values
+    doc_snp = doc_ref.get
+    _(doc_snp[:name]).must_equal all_values[:name]
+
+    doc_ref.set({nullField: nil}, merge: true)
+    doc_snp = doc_ref.get
+    _(doc_snp[:nullField]).must_equal nil
+  end
+
   it "supports server timestamps" do
     data = {
       a: :bar,
