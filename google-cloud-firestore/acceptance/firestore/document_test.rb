@@ -91,7 +91,7 @@ describe "Document", :firestore_acceptance do
     _(doc_snp[:binary].read).must_equal all_values[:binary].read
   end
 
-  focus; it "merge empty fields to a document" do
+  it "merge empty fields to a document" do
     all_values = {
       name: "hello world",
     }
