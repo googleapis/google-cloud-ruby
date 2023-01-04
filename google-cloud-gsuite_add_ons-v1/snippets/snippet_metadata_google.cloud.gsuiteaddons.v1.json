@@ -1,0 +1,375 @@
+{
+  "client_library": {
+    "name": "google-cloud-gsuite_add_ons-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.gsuiteaddons.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_GetAuthorization_sync",
+      "title": "Snippet for get_authorization in GSuiteAddOns",
+      "description": "Basic snippet for get_authorization in GSuiteAddOns",
+      "file": "gsuite_add_ons/get_authorization.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_authorization",
+        "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#get_authorization",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GSuiteAddOns::V1::GetAuthorizationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GSuiteAddOns::V1::Authorization",
+        "client": {
+          "short_name": "GSuiteAddOns::Client",
+          "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client"
+        },
+        "method": {
+          "short_name": "GetAuthorization",
+          "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns.GetAuthorization",
+          "service": {
+            "short_name": "GSuiteAddOns",
+            "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_CreateDeployment_sync",
+      "title": "Snippet for create_deployment in GSuiteAddOns",
+      "description": "Basic snippet for create_deployment in GSuiteAddOns",
+      "file": "gsuite_add_ons/create_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_deployment",
+        "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#create_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GSuiteAddOns::V1::CreateDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GSuiteAddOns::V1::Deployment",
+        "client": {
+          "short_name": "GSuiteAddOns::Client",
+          "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client"
+        },
+        "method": {
+          "short_name": "CreateDeployment",
+          "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns.CreateDeployment",
+          "service": {
+            "short_name": "GSuiteAddOns",
+            "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_ReplaceDeployment_sync",
+      "title": "Snippet for replace_deployment in GSuiteAddOns",
+      "description": "Basic snippet for replace_deployment in GSuiteAddOns",
+      "file": "gsuite_add_ons/replace_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "replace_deployment",
+        "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#replace_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GSuiteAddOns::V1::ReplaceDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GSuiteAddOns::V1::Deployment",
+        "client": {
+          "short_name": "GSuiteAddOns::Client",
+          "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client"
+        },
+        "method": {
+          "short_name": "ReplaceDeployment",
+          "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns.ReplaceDeployment",
+          "service": {
+            "short_name": "GSuiteAddOns",
+            "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_GetDeployment_sync",
+      "title": "Snippet for get_deployment in GSuiteAddOns",
+      "description": "Basic snippet for get_deployment in GSuiteAddOns",
+      "file": "gsuite_add_ons/get_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_deployment",
+        "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#get_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GSuiteAddOns::V1::GetDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GSuiteAddOns::V1::Deployment",
+        "client": {
+          "short_name": "GSuiteAddOns::Client",
+          "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client"
+        },
+        "method": {
+          "short_name": "GetDeployment",
+          "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns.GetDeployment",
+          "service": {
+            "short_name": "GSuiteAddOns",
+            "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_ListDeployments_sync",
+      "title": "Snippet for list_deployments in GSuiteAddOns",
+      "description": "Basic snippet for list_deployments in GSuiteAddOns",
+      "file": "gsuite_add_ons/list_deployments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_deployments",
+        "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#list_deployments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GSuiteAddOns::V1::ListDeploymentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GSuiteAddOns::V1::ListDeploymentsResponse",
+        "client": {
+          "short_name": "GSuiteAddOns::Client",
+          "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client"
+        },
+        "method": {
+          "short_name": "ListDeployments",
+          "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns.ListDeployments",
+          "service": {
+            "short_name": "GSuiteAddOns",
+            "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_DeleteDeployment_sync",
+      "title": "Snippet for delete_deployment in GSuiteAddOns",
+      "description": "Basic snippet for delete_deployment in GSuiteAddOns",
+      "file": "gsuite_add_ons/delete_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_deployment",
+        "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#delete_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GSuiteAddOns::V1::DeleteDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "GSuiteAddOns::Client",
+          "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client"
+        },
+        "method": {
+          "short_name": "DeleteDeployment",
+          "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns.DeleteDeployment",
+          "service": {
+            "short_name": "GSuiteAddOns",
+            "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_InstallDeployment_sync",
+      "title": "Snippet for install_deployment in GSuiteAddOns",
+      "description": "Basic snippet for install_deployment in GSuiteAddOns",
+      "file": "gsuite_add_ons/install_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "install_deployment",
+        "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#install_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GSuiteAddOns::V1::InstallDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "GSuiteAddOns::Client",
+          "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client"
+        },
+        "method": {
+          "short_name": "InstallDeployment",
+          "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns.InstallDeployment",
+          "service": {
+            "short_name": "GSuiteAddOns",
+            "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_UninstallDeployment_sync",
+      "title": "Snippet for uninstall_deployment in GSuiteAddOns",
+      "description": "Basic snippet for uninstall_deployment in GSuiteAddOns",
+      "file": "gsuite_add_ons/uninstall_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "uninstall_deployment",
+        "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#uninstall_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GSuiteAddOns::V1::UninstallDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "GSuiteAddOns::Client",
+          "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client"
+        },
+        "method": {
+          "short_name": "UninstallDeployment",
+          "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns.UninstallDeployment",
+          "service": {
+            "short_name": "GSuiteAddOns",
+            "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_GetInstallStatus_sync",
+      "title": "Snippet for get_install_status in GSuiteAddOns",
+      "description": "Basic snippet for get_install_status in GSuiteAddOns",
+      "file": "gsuite_add_ons/get_install_status.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_install_status",
+        "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#get_install_status",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GSuiteAddOns::V1::GetInstallStatusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GSuiteAddOns::V1::InstallStatus",
+        "client": {
+          "short_name": "GSuiteAddOns::Client",
+          "full_name": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client"
+        },
+        "method": {
+          "short_name": "GetInstallStatus",
+          "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns.GetInstallStatus",
+          "service": {
+            "short_name": "GSuiteAddOns",
+            "full_name": "google.cloud.gsuiteaddons.v1.GSuiteAddOns"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
