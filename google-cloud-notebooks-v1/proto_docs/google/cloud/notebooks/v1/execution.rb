@@ -173,20 +173,21 @@ module Google
           # @!attribute [rw] network
           #   @return [::String]
           #     The full name of the Compute Engine
-          #     [network](/compute/docs/networks-and-firewalls#networks) to which the Job
-          #     should be peered. For example, `projects/12345/global/networks/myVPC`.
+          #     [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks)
+          #     to which the Job should be peered. For example,
+          #     `projects/12345/global/networks/myVPC`.
           #     [Format](https://cloud.google.com/compute/docs/reference/rest/v1/networks/insert)
           #     is of the form `projects/{project}/global/networks/{network}`.
-          #     Where \\{project} is a project number, as in `12345`, and \\{network} is a
-          #     network name.
+          #     Where `{project}` is a project number, as in `12345`, and `{network}` is
+          #     a network name.
           #
           #     Private services access must already be configured for the network. If
           #     left unspecified, the job is not peered with any network.
           # @!attribute [rw] env
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Environment variables.
-          #      At most 100 environment variables can be specified and unique.
-          #     Example: GCP_BUCKET=gs://my-bucket/samples/
+          #     At most 100 environment variables can be specified and unique.
+          #     Example: `GCP_BUCKET=gs://my-bucket/samples/`
           class VertexAIParameters
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
