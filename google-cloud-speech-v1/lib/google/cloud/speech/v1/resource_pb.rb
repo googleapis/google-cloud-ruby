@@ -28,6 +28,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :phrase_sets, :message, 1, "google.cloud.speech.v1.PhraseSet"
       repeated :phrase_set_references, :string, 2
       repeated :custom_classes, :message, 3, "google.cloud.speech.v1.CustomClass"
+      optional :abnf_grammar, :message, 4, "google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar"
+    end
+    add_message "google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar" do
+      repeated :abnf_strings, :string, 1
     end
   end
 end
@@ -41,6 +45,7 @@ module Google
         PhraseSet = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.PhraseSet").msgclass
         PhraseSet::Phrase = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.PhraseSet.Phrase").msgclass
         SpeechAdaptation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.SpeechAdaptation").msgclass
+        SpeechAdaptation::ABNFGrammar = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar").msgclass
       end
     end
   end
