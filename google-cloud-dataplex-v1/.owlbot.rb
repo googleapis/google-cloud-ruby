@@ -14,7 +14,11 @@
 
 # Fix a camel cased pattern variable name.
 # See https://github.com/googleapis/gapic-generator-ruby/issues/894
-OwlBot.modifier path: "lib/google/cloud/dataplex/v1/data_scan_service/paths.rb" do |content|
+paths = [
+  "lib/google/cloud/dataplex/v1/data_scan_service/paths.rb",
+  "test/google/cloud/dataplex/v1/data_scan_service_paths_test.rb"
+]
+OwlBot.modifier path: paths do |content|
   content.gsub(/dataScan(?=[^s])/, "data_scan")
 end
 
