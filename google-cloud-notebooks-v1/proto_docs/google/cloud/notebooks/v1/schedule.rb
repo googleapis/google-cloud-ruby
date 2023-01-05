@@ -29,8 +29,8 @@ module Google
         # @!attribute [r] display_name
         #   @return [::String]
         #     Output only. Display name used for UI purposes.
-        #     Name can only contain alphanumeric characters, hyphens '-',
-        #     and underscores '_'.
+        #     Name can only contain alphanumeric characters, hyphens `-`,
+        #     and underscores `_`.
         # @!attribute [rw] description
         #   @return [::String]
         #     A brief description of this environment.
@@ -40,7 +40,7 @@ module Google
         #   @return [::String]
         #     Cron-tab formatted schedule by which the job will execute.
         #     Format: minute, hour, day of month, month, day of week,
-        #     e.g. 0 0 * * WED = every Wednesday
+        #     e.g. `0 0 * * WED` = every Wednesday
         #     More examples: https://crontab.guru/examples.html
         # @!attribute [rw] time_zone
         #   @return [::String]

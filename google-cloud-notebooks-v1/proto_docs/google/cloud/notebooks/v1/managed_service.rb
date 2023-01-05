@@ -49,7 +49,7 @@ module Google
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
         #     Locations that could not be reached. For example,
-        #     ['us-west1', 'us-central1'].
+        #     `['us-west1', 'us-central1']`.
         #     A ListRuntimesResponse will only contain either runtimes or unreachables,
         class ListRuntimesResponse
           include ::Google::Protobuf::MessageExts
@@ -211,12 +211,12 @@ module Google
         #
         #
         #     Currently, only the following fields can be updated:
-        #     - software_config.kernels
-        #     - software_config.post_startup_script
-        #     - software_config.custom_gpu_driver_path
-        #     - software_config.idle_shutdown
-        #     - software_config.idle_shutdown_timeout
-        #     - software_config.disable_terminal
+        #     - `software_config.kernels`
+        #     - `software_config.post_startup_script`
+        #     - `software_config.custom_gpu_driver_path`
+        #     - `software_config.idle_shutdown`
+        #     - `software_config.idle_shutdown_timeout`
+        #     - `software_config.disable_terminal`
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Idempotent request UUID.
