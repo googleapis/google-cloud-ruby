@@ -54,6 +54,55 @@
         }
       }
     },
+    "DataScanService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataplex::V1::DataScanService::Client",
+          "rpcs": {
+            "CreateDataScan": {
+              "methods": [
+                "create_data_scan"
+              ]
+            },
+            "UpdateDataScan": {
+              "methods": [
+                "update_data_scan"
+              ]
+            },
+            "DeleteDataScan": {
+              "methods": [
+                "delete_data_scan"
+              ]
+            },
+            "GetDataScan": {
+              "methods": [
+                "get_data_scan"
+              ]
+            },
+            "ListDataScans": {
+              "methods": [
+                "list_data_scans"
+              ]
+            },
+            "RunDataScan": {
+              "methods": [
+                "run_data_scan"
+              ]
+            },
+            "GetDataScanJob": {
+              "methods": [
+                "get_data_scan_job"
+              ]
+            },
+            "ListDataScanJobs": {
+              "methods": [
+                "list_data_scan_jobs"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MetadataService": {
       "clients": {
         "grpc": {
