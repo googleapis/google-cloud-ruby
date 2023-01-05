@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/gke_multi_cloud/v1"
 
-client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
-request = ::Google::Cloud::GkeMultiCloud::V1::CreateAwsClusterRequest.new # (request fields as keyword arguments...)
-response = client.create_aws_cluster request
+client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client.new
+request = ::Google::Cloud::GkeMultiCloud::V1::CreateAttachedClusterRequest.new # (request fields as keyword arguments...)
+response = client.create_attached_cluster request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_multi_cloud-v1/latest)

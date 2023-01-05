@@ -22,6 +22,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :target, :string, 3
       optional :status_detail, :string, 4
       optional :error_detail, :string, 5
+      optional :verb, :string, 7
+      optional :requested_cancellation, :bool, 6
     end
     add_message "google.cloud.gkemulticloud.v1.NodeTaint" do
       optional :key, :string, 1
@@ -49,6 +51,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SYSTEM_COMPONENTS, 1
       value :WORKLOADS, 2
     end
+    add_message "google.cloud.gkemulticloud.v1.MonitoringConfig" do
+      optional :managed_prometheus_config, :message, 2, "google.cloud.gkemulticloud.v1.ManagedPrometheusConfig"
+    end
+    add_message "google.cloud.gkemulticloud.v1.ManagedPrometheusConfig" do
+      optional :enabled, :bool, 1
+    end
   end
 end
 
@@ -65,6 +73,8 @@ module Google
         LoggingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.LoggingConfig").msgclass
         LoggingComponentConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.LoggingComponentConfig").msgclass
         LoggingComponentConfig::Component = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.LoggingComponentConfig.Component").enummodule
+        MonitoringConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.MonitoringConfig").msgclass
+        ManagedPrometheusConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.ManagedPrometheusConfig").msgclass
       end
     end
   end

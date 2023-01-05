@@ -12,6 +12,326 @@
   },
   "snippets": [
     {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_CreateAttachedCluster_sync",
+      "title": "Snippet for create_attached_cluster in AttachedClusters",
+      "description": "Basic snippet for create_attached_cluster in AttachedClusters",
+      "file": "attached_clusters/create_attached_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_attached_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#create_attached_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::CreateAttachedClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "CreateAttachedCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.CreateAttachedCluster",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_UpdateAttachedCluster_sync",
+      "title": "Snippet for update_attached_cluster in AttachedClusters",
+      "description": "Basic snippet for update_attached_cluster in AttachedClusters",
+      "file": "attached_clusters/update_attached_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_attached_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#update_attached_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::UpdateAttachedClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "UpdateAttachedCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.UpdateAttachedCluster",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_ImportAttachedCluster_sync",
+      "title": "Snippet for import_attached_cluster in AttachedClusters",
+      "description": "Basic snippet for import_attached_cluster in AttachedClusters",
+      "file": "attached_clusters/import_attached_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_attached_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#import_attached_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::ImportAttachedClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "ImportAttachedCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.ImportAttachedCluster",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_GetAttachedCluster_sync",
+      "title": "Snippet for get_attached_cluster in AttachedClusters",
+      "description": "Basic snippet for get_attached_cluster in AttachedClusters",
+      "file": "attached_clusters/get_attached_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_attached_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAttachedClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AttachedCluster",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAttachedCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.GetAttachedCluster",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_ListAttachedClusters_sync",
+      "title": "Snippet for list_attached_clusters in AttachedClusters",
+      "description": "Basic snippet for list_attached_clusters in AttachedClusters",
+      "file": "attached_clusters/list_attached_clusters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_attached_clusters",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#list_attached_clusters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::ListAttachedClustersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::ListAttachedClustersResponse",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "ListAttachedClusters",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.ListAttachedClusters",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_DeleteAttachedCluster_sync",
+      "title": "Snippet for delete_attached_cluster in AttachedClusters",
+      "description": "Basic snippet for delete_attached_cluster in AttachedClusters",
+      "file": "attached_clusters/delete_attached_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_attached_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#delete_attached_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::DeleteAttachedClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "DeleteAttachedCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.DeleteAttachedCluster",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_GetAttachedServerConfig_sync",
+      "title": "Snippet for get_attached_server_config in AttachedClusters",
+      "description": "Basic snippet for get_attached_server_config in AttachedClusters",
+      "file": "attached_clusters/get_attached_server_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_attached_server_config",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_server_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAttachedServerConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AttachedServerConfig",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAttachedServerConfig",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.GetAttachedServerConfig",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterInstallManifest_sync",
+      "title": "Snippet for generate_attached_cluster_install_manifest in AttachedClusters",
+      "description": "Basic snippet for generate_attached_cluster_install_manifest in AttachedClusters",
+      "file": "attached_clusters/generate_attached_cluster_install_manifest.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_attached_cluster_install_manifest",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#generate_attached_cluster_install_manifest",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterInstallManifestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterInstallManifestResponse",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "GenerateAttachedClusterInstallManifest",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.GenerateAttachedClusterInstallManifest",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_sync",
       "title": "Snippet for create_aws_cluster in AwsClusters",
       "description": "Basic snippet for create_aws_cluster in AwsClusters",
