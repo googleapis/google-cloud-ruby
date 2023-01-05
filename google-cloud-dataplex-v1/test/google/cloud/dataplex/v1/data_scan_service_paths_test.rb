@@ -30,7 +30,7 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientPathsTest < Minitest
         config.credentials = grpc_channel
       end
 
-      path = client.data_scan_path project: "value0", location: "value1", dataScan: "value2"
+      path = client.data_scan_path project: "value0", location: "value1", data_scan: "value2"
       assert_equal "projects/value0/locations/value1/dataScans/value2", path
     end
   end
@@ -42,7 +42,7 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientPathsTest < Minitest
         config.credentials = grpc_channel
       end
 
-      path = client.data_scan_job_path project: "value0", location: "value1", dataScan: "value2", job: "value3"
+      path = client.data_scan_job_path project: "value0", location: "value1", data_scan: "value2", job: "value3"
       assert_equal "projects/value0/locations/value1/dataScans/value2/jobs/value3", path
     end
   end

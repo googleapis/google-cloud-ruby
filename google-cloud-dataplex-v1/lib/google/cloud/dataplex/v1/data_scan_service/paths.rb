@@ -21,9 +21,49 @@ module Google
   module Cloud
     module Dataplex
       module V1
-        module MetadataService
-          # Path helper methods for the MetadataService API.
+        module DataScanService
+          # Path helper methods for the DataScanService API.
           module Paths
+            ##
+            # Create a fully-qualified DataScan resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/dataScans/{data_scan}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param data_scan [String]
+            #
+            # @return [::String]
+            def data_scan_path project:, location:, data_scan:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/dataScans/#{data_scan}"
+            end
+
+            ##
+            # Create a fully-qualified DataScanJob resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/dataScans/{data_scan}/jobs/{job}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param data_scan [String]
+            # @param job [String]
+            #
+            # @return [::String]
+            def data_scan_job_path project:, location:, data_scan:, job:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "data_scan cannot contain /" if data_scan.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/dataScans/#{data_scan}/jobs/#{job}"
+            end
+
             ##
             # Create a fully-qualified Entity resource string.
             #
@@ -48,49 +88,20 @@ module Google
             end
 
             ##
-            # Create a fully-qualified Partition resource string.
+            # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}`
+            # `projects/{project}/locations/{location}`
             #
             # @param project [String]
             # @param location [String]
-            # @param lake [String]
-            # @param zone [String]
-            # @param entity [String]
-            # @param partition [String]
             #
             # @return [::String]
-            def partition_path project:, location:, lake:, zone:, entity:, partition:
+            def location_path project:, location:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "lake cannot contain /" if lake.to_s.include? "/"
-              raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
-              raise ::ArgumentError, "entity cannot contain /" if entity.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/lakes/#{lake}/zones/#{zone}/entities/#{entity}/partitions/#{partition}"
-            end
-
-            ##
-            # Create a fully-qualified Zone resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param lake [String]
-            # @param zone [String]
-            #
-            # @return [::String]
-            def zone_path project:, location:, lake:, zone:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "lake cannot contain /" if lake.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/lakes/#{lake}/zones/#{zone}"
+              "projects/#{project}/locations/#{location}"
             end
 
             extend self
