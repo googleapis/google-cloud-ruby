@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.3.0 (2023-01-05)
+
+#### Features
+
+* Added verb and requested cancellation to operation metadata 
+* Support for configuring autoscaling metrics collection for an AWS node 
+* Support for managing Attached Clusters ([#19904](https://github.com/googleapis/google-cloud-ruby/issues/19904)) 
+* Support for reporting errors from an AWS or Azure cluster 
+* Support for setting the monitoring configuration for an AWS or Azure cluster 
+
 ### 0.2.0 (2022-07-02)
 
 #### Features
