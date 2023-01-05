@@ -211,6 +211,10 @@
       "component": "google-cloud-bigquery-data_policies",
       "version_file": "lib/google/cloud/bigquery/data_policies/version.rb"
     },
+    "google-cloud-bigquery-data_policies-v1": {
+      "component": "google-cloud-bigquery-data_policies-v1",
+      "version_file": "lib/google/cloud/bigquery/data_policies/v1/version.rb"
+    },
     "google-cloud-bigquery-data_policies-v1beta1": {
       "component": "google-cloud-bigquery-data_policies-v1beta1",
       "version_file": "lib/google/cloud/bigquery/data_policies/v1beta1/version.rb"
@@ -634,6 +638,10 @@
     "google-cloud-gke_multi_cloud-v1": {
       "component": "google-cloud-gke_multi_cloud-v1",
       "version_file": "lib/google/cloud/gke_multi_cloud/v1/version.rb"
+    },
+    "google-cloud-gsuite_add_ons-v1": {
+      "component": "google-cloud-gsuite_add_ons-v1",
+      "version_file": "lib/google/cloud/gsuite_add_ons/v1/version.rb"
     },
     "google-cloud-iap": {
       "component": "google-cloud-iap",
