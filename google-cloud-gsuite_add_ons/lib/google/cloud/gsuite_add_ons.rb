@@ -90,7 +90,7 @@ module Google
       #   Defaults to `:v1`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.g_suite_add_ons version: :v1, &block
+      def self.gsuite_add_ons version: :v1, &block
         require "google/cloud/gsuite_add_ons/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::GSuiteAddOns

@@ -27,7 +27,7 @@ export GOOGLE_CLOUD_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/gsuite_add_ons"
 
-client = Google::Cloud::GSuiteAddOns.g_suite_add_ons
+client = Google::Cloud::GSuiteAddOns.gsuite_add_ons
 ```
 
 ## Credential Lookup
@@ -75,7 +75,7 @@ require "google/cloud/gsuite_add_ons"
 
 ENV["GOOGLE_CLOUD_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::GSuiteAddOns.g_suite_add_ons
+client = Google::Cloud::GSuiteAddOns.gsuite_add_ons
 ```
 
 ### Configuration
@@ -86,7 +86,7 @@ it in an environment variable. Either on an individual client initialization:
 ```ruby
 require "google/cloud/gsuite_add_ons"
 
-client = Google::Cloud::GSuiteAddOns.g_suite_add_ons do |config|
+client = Google::Cloud::GSuiteAddOns.gsuite_add_ons do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -100,7 +100,7 @@ Google::Cloud::GSuiteAddOns.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::GSuiteAddOns.g_suite_add_ons
+client = Google::Cloud::GSuiteAddOns.gsuite_add_ons
 ```
 
 ### Cloud SDK

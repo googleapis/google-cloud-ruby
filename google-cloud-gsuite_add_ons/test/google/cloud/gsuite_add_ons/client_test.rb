@@ -22,10 +22,10 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::GSuiteAddOns::ClientConstructionMinitest < Minitest::Test
-  def test_g_suite_add_ons_grpc
+  def test_gsuite_add_ons_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::GSuiteAddOns.g_suite_add_ons do |config|
+      client = Google::Cloud::GSuiteAddOns.gsuite_add_ons do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client, client
