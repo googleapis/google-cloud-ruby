@@ -1,5 +1,14 @@
 # Release History
 
+### 0.4.0 (2023-01-05)
+
+#### Features
+
+* Support for alter_metadata_resource_location RPC ([#19897](https://github.com/googleapis/google-cloud-ruby/issues/19897)) 
+* Support for move_table_to_database RPC 
+* Support for query_metadata RPC 
+* Support for remove_iam_policy RPC 
+
 ### 0.3.0 (2022-12-06)
 
 #### Features
