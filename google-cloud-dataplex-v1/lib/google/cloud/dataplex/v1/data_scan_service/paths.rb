@@ -29,18 +29,18 @@ module Google
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/dataScans/{dataScan}`
+            # `projects/{project}/locations/{location}/dataScans/{data_scan}`
             #
             # @param project [String]
             # @param location [String]
-            # @param dataScan [String]
+            # @param data_scan [String]
             #
             # @return [::String]
-            def data_scan_path project:, location:, dataScan:
+            def data_scan_path project:, location:, data_scan:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/dataScans/#{dataScan}"
+              "projects/#{project}/locations/#{location}/dataScans/#{data_scan}"
             end
 
             ##
@@ -48,20 +48,20 @@ module Google
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}`
+            # `projects/{project}/locations/{location}/dataScans/{data_scan}/jobs/{job}`
             #
             # @param project [String]
             # @param location [String]
-            # @param dataScan [String]
+            # @param data_scan [String]
             # @param job [String]
             #
             # @return [::String]
-            def data_scan_job_path project:, location:, dataScan:, job:
+            def data_scan_job_path project:, location:, data_scan:, job:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "dataScan cannot contain /" if dataScan.to_s.include? "/"
+              raise ::ArgumentError, "data_scan cannot contain /" if data_scan.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/dataScans/#{dataScan}/jobs/#{job}"
+              "projects/#{project}/locations/#{location}/dataScans/#{data_scan}/jobs/#{job}"
             end
 
             ##

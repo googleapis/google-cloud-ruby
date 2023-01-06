@@ -131,9 +131,23 @@ module Google
         #     class' `name` blank and fill in the rest of its fields, giving it a unique
         #     `custom_class_id`. Refer to the inline defined class in phrase hints by its
         #     `custom_class_id`.
+        # @!attribute [rw] abnf_grammar
+        #   @return [::Google::Cloud::Speech::V1::SpeechAdaptation::ABNFGrammar]
+        #     Augmented Backus-Naur form (ABNF) is a standardized grammar notation
+        #     comprised by a set of derivation rules.
+        #     See specifications: https://www.w3.org/TR/speech-grammar
         class SpeechAdaptation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] abnf_strings
+          #   @return [::Array<::String>]
+          #     All declarations and rules of an ABNF grammar broken up into multiple
+          #     strings that will end up concatenated.
+          class ABNFGrammar
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

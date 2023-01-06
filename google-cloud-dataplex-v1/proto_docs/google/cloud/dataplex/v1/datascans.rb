@@ -231,12 +231,14 @@ module Google
 
         # Represents a user-visible job which provides the insights for the related
         # data source.
-        # For examples:
-        #   - Data Quality: generates queries based on the rules and run against the
-        #     data to get data quality check results.
-        #   - Data Profile: analyzes the data in table(s) and generates insights about
-        #     the structure, content and relationships (such as null percent,
-        #     cardinality, min/max/mean, etc).
+        #
+        # For example:
+        #
+        # * Data Quality: generates queries based on the rules and runs against the
+        #   data to get data quality check results.
+        # * Data Profile: analyzes the data in table(s) and generates insights about
+        #   the structure, content and relationships (such as null percent,
+        #   cardinality, min/max/mean, etc).
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The relative resource name of the scan, of the form:

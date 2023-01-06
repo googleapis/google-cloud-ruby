@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/gsuiteaddons/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-gsuite_add_ons/$1

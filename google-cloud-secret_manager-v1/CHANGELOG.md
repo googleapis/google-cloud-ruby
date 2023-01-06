@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 (2023-01-05)
+
+#### Features
+
+* add support for annotations in resources ([#19896](https://github.com/googleapis/google-cloud-ruby/issues/19896)) 
+
 ### 0.14.0 (2022-07-07)
 
 #### Features

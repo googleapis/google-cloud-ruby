@@ -1,5 +1,12 @@
 # Release History
 
+### 0.15.0 (2023-01-05)
+
+#### Features
+
+* Support for local SSD configs in a node config 
+* Support for setting etag and windows node config when updating a node pool ([#19908](https://github.com/googleapis/google-cloud-ruby/issues/19908)) 
+
 ### 0.14.0 (2022-12-15)
 
 #### Features
