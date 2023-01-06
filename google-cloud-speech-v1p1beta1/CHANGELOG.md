@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 (2023-01-05)
+
+#### Features
+
+* Support ABNF grammars in speech adaptation ([#19953](https://github.com/googleapis/google-cloud-ruby/issues/19953)) 
+
 ### 0.14.0 (2022-12-09)
 
 #### Features
