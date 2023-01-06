@@ -1,5 +1,14 @@
 # Release History
 
+### 1.41.0 (2023-01-05)
+
+#### Features
+
+* Add support for partial projection of table metadata 
+#### Bug Fixes
+
+* Fix querying of array of structs in named parameters ([#19466](https://github.com/googleapis/google-cloud-ruby/issues/19466)) 
+
 ### 1.40.0 (2022-12-14)
 
 #### Features
