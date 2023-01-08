@@ -82,6 +82,16 @@ class Google::Cloud::Monitoring::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_snooze_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Monitoring.snooze_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Monitoring::V3::SnoozeService::Client, client
+    end
+  end
+
   def test_uptime_check_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
