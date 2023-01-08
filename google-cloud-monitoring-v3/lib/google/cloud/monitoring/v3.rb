@@ -22,6 +22,7 @@ require "google/cloud/monitoring/v3/metric_service"
 require "google/cloud/monitoring/v3/notification_channel_service"
 require "google/cloud/monitoring/v3/query_service"
 require "google/cloud/monitoring/v3/service_monitoring_service"
+require "google/cloud/monitoring/v3/snooze_service"
 require "google/cloud/monitoring/v3/uptime_check_service"
 require "google/cloud/monitoring/v3/version"
 
