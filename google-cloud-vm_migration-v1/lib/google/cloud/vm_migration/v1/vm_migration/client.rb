@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/vmmigration/v1/vmmigration_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -147,6 +149,18 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @vm_migration_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::VMMigration::V1::VmMigration::Stub,
                 credentials:  credentials,
@@ -162,6 +176,20 @@ module Google
             # @return [::Google::Cloud::VMMigration::V1::VMMigration::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -4661,6 +4689,198 @@ module Google
             end
 
             ##
+            # Lists ReplicationCycles in a given MigratingVM.
+            #
+            # @overload list_replication_cycles(request, options = nil)
+            #   Pass arguments to `list_replication_cycles` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_replication_cycles(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_replication_cycles` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent, which owns this collection of ReplicationCycles.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of replication cycles to return. The service
+            #     may return fewer than this value. If unspecified, at most 100 migrating VMs
+            #     will be returned. The maximum value is 100; values above 100 will be
+            #     coerced to 100.
+            #   @param page_token [::String]
+            #     Required. A page token, received from a previous `ListReplicationCycles`
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListReplicationCycles`
+            #     must match the call that provided the page token.
+            #   @param filter [::String]
+            #     Optional. The filter request.
+            #   @param order_by [::String]
+            #     Optional. the order by fields for the result.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::ReplicationCycle>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::ReplicationCycle>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest.new
+            #
+            #   # Call the list_replication_cycles method.
+            #   result = client.list_replication_cycles request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::VMMigration::V1::ReplicationCycle.
+            #     p response
+            #   end
+            #
+            def list_replication_cycles request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_replication_cycles.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_replication_cycles.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_replication_cycles.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :list_replication_cycles, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_replication_cycles, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single ReplicationCycle.
+            #
+            # @overload get_replication_cycle(request, options = nil)
+            #   Pass arguments to `get_replication_cycle` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_replication_cycle(name: nil)
+            #   Pass arguments to `get_replication_cycle` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the ReplicationCycle.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::VMMigration::V1::ReplicationCycle]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::VMMigration::V1::ReplicationCycle]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::GetReplicationCycleRequest.new
+            #
+            #   # Call the get_replication_cycle method.
+            #   result = client.get_replication_cycle request
+            #
+            #   # The returned object is of type Google::Cloud::VMMigration::V1::ReplicationCycle.
+            #   p result
+            #
+            def get_replication_cycle request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_replication_cycle.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_replication_cycle.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_replication_cycle.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :get_replication_cycle, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the VmMigration API.
             #
             # This class represents the configuration for VmMigration,
@@ -5015,6 +5235,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_target_project
+                ##
+                # RPC-specific configuration for `list_replication_cycles`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_replication_cycles
+                ##
+                # RPC-specific configuration for `get_replication_cycle`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_replication_cycle
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -5106,6 +5336,10 @@ module Google
                   @update_target_project = ::Gapic::Config::Method.new update_target_project_config
                   delete_target_project_config = parent_rpcs.delete_target_project if parent_rpcs.respond_to? :delete_target_project
                   @delete_target_project = ::Gapic::Config::Method.new delete_target_project_config
+                  list_replication_cycles_config = parent_rpcs.list_replication_cycles if parent_rpcs.respond_to? :list_replication_cycles
+                  @list_replication_cycles = ::Gapic::Config::Method.new list_replication_cycles_config
+                  get_replication_cycle_config = parent_rpcs.get_replication_cycle if parent_rpcs.respond_to? :get_replication_cycle
+                  @get_replication_cycle = ::Gapic::Config::Method.new get_replication_cycle_config
 
                   yield self if block_given?
                 end
