@@ -207,10 +207,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The location that the migratable resources should be searched from.
-            #     It's the Vertex AI location that the resources can be migrated to, not
-            #     the resources' original location.
-            #     Format:
+            #     Required. The location that the migratable resources should be searched
+            #     from. It's the Vertex AI location that the resources can be migrated to,
+            #     not the resources' original location. Format:
             #     `projects/{project}/locations/{location}`
             #   @param page_size [::Integer]
             #     The standard page size.

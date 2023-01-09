@@ -42,8 +42,8 @@ module Google
         #     this key.
         # @!attribute [r] blob_storage_path_prefix
         #   @return [::String]
-        #     Output only. Consumer project Cloud Storage path prefix used to store blob data, which
-        #     can either be a bucket or directory. Does not end with a '/'.
+        #     Output only. Consumer project Cloud Storage path prefix used to store blob
+        #     data, which can either be a bucket or directory. Does not end with a '/'.
         # @!attribute [r] run_count
         #   @return [::Integer]
         #     Output only. The number of Runs stored in this Tensorboard.

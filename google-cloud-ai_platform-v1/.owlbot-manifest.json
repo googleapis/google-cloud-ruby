@@ -480,6 +480,7 @@
     "snippets/tensorboard_service/list_tensorboards.rb",
     "snippets/tensorboard_service/read_tensorboard_blob_data.rb",
     "snippets/tensorboard_service/read_tensorboard_time_series_data.rb",
+    "snippets/tensorboard_service/read_tensorboard_usage.rb",
     "snippets/tensorboard_service/update_tensorboard.rb",
     "snippets/tensorboard_service/update_tensorboard_experiment.rb",
     "snippets/tensorboard_service/update_tensorboard_run.rb",

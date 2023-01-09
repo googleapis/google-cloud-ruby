@@ -52,6 +52,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_token, :string, 3
       optional :filter, :string, 4
       optional :read_mask, :message, 5, "google.protobuf.FieldMask"
+      optional :order_by, :string, 6
     end
     add_message "google.cloud.aiplatform.v1.ListModelVersionsResponse" do
       repeated :models, :message, 1, "google.cloud.aiplatform.v1.Model"

@@ -50,8 +50,8 @@ module Google
         #     Output only. Timestamp when this Context was last updated.
         # @!attribute [r] parent_contexts
         #   @return [::Array<::String>]
-        #     Output only. A list of resource names of Contexts that are parents of this Context.
-        #     A Context may have at most 10 parent_contexts.
+        #     Output only. A list of resource names of Contexts that are parents of this
+        #     Context. A Context may have at most 10 parent_contexts.
         # @!attribute [rw] schema_title
         #   @return [::String]
         #     The title of the schema describing the metadata.

@@ -32,12 +32,15 @@ module Google
         #     See the [list of machine types supported for custom
         #     training](https://cloud.google.com/vertex-ai/docs/training/configure-compute#machine-types).
         #
-        #     For {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel} this field is optional, and the default
-        #     value is `n1-standard-2`. For {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob} or as part of
-        #     {::Google::Cloud::AIPlatform::V1::WorkerPoolSpec WorkerPoolSpec} this field is required.
+        #     For {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel} this field is
+        #     optional, and the default value is `n1-standard-2`. For
+        #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob} or as
+        #     part of {::Google::Cloud::AIPlatform::V1::WorkerPoolSpec WorkerPoolSpec} this
+        #     field is required.
         # @!attribute [rw] accelerator_type
         #   @return [::Google::Cloud::AIPlatform::V1::AcceleratorType]
-        #     Immutable. The type of accelerator(s) that may be attached to the machine as per
+        #     Immutable. The type of accelerator(s) that may be attached to the machine
+        #     as per
         #     {::Google::Cloud::AIPlatform::V1::MachineSpec#accelerator_count accelerator_count}.
         # @!attribute [rw] accelerator_count
         #   @return [::Integer]
@@ -51,25 +54,28 @@ module Google
         # that need a higher degree of manual configuration.
         # @!attribute [rw] machine_spec
         #   @return [::Google::Cloud::AIPlatform::V1::MachineSpec]
-        #     Required. Immutable. The specification of a single machine used by the prediction.
+        #     Required. Immutable. The specification of a single machine used by the
+        #     prediction.
         # @!attribute [rw] min_replica_count
         #   @return [::Integer]
-        #     Required. Immutable. The minimum number of machine replicas this DeployedModel will be always
-        #     deployed on. This value must be greater than or equal to 1.
+        #     Required. Immutable. The minimum number of machine replicas this
+        #     DeployedModel will be always deployed on. This value must be greater than
+        #     or equal to 1.
         #
         #     If traffic against the DeployedModel increases, it may dynamically be
         #     deployed onto more replicas, and as traffic decreases, some of these extra
         #     replicas may be freed.
         # @!attribute [rw] max_replica_count
         #   @return [::Integer]
-        #     Immutable. The maximum number of replicas this DeployedModel may be deployed on when
-        #     the traffic against it increases. If the requested value is too large,
-        #     the deployment will error, but if deployment succeeds then the ability
-        #     to scale the model to that many replicas is guaranteed (barring service
-        #     outages). If traffic against the DeployedModel increases beyond what its
-        #     replicas at maximum may handle, a portion of the traffic will be dropped.
-        #     If this value is not provided, will use {::Google::Cloud::AIPlatform::V1::DedicatedResources#min_replica_count min_replica_count} as the
-        #     default value.
+        #     Immutable. The maximum number of replicas this DeployedModel may be
+        #     deployed on when the traffic against it increases. If the requested value
+        #     is too large, the deployment will error, but if deployment succeeds then
+        #     the ability to scale the model to that many replicas is guaranteed (barring
+        #     service outages). If traffic against the DeployedModel increases beyond
+        #     what its replicas at maximum may handle, a portion of the traffic will be
+        #     dropped. If this value is not provided, will use
+        #     {::Google::Cloud::AIPlatform::V1::DedicatedResources#min_replica_count min_replica_count}
+        #     as the default value.
         #
         #     The value of this field impacts the charge against Vertex CPU and GPU
         #     quotas. Specifically, you will be charged for (max_replica_count *
@@ -82,21 +88,24 @@ module Google
         #     target value (default to 60 if not set). At most one entry is allowed per
         #     metric.
         #
-        #     If {::Google::Cloud::AIPlatform::V1::MachineSpec#accelerator_count machine_spec.accelerator_count} is
-        #     above 0, the autoscaling will be based on both CPU utilization and
+        #     If
+        #     {::Google::Cloud::AIPlatform::V1::MachineSpec#accelerator_count machine_spec.accelerator_count}
+        #     is above 0, the autoscaling will be based on both CPU utilization and
         #     accelerator's duty cycle metrics and scale up when either metrics exceeds
         #     its target value while scale down if both metrics are under their target
         #     value. The default target value is 60 for both metrics.
         #
-        #     If {::Google::Cloud::AIPlatform::V1::MachineSpec#accelerator_count machine_spec.accelerator_count} is
-        #     0, the autoscaling will be based on CPU utilization metric only with
+        #     If
+        #     {::Google::Cloud::AIPlatform::V1::MachineSpec#accelerator_count machine_spec.accelerator_count}
+        #     is 0, the autoscaling will be based on CPU utilization metric only with
         #     default target value 60 if not explicitly set.
         #
         #     For example, in the case of Online Prediction, if you want to override
         #     target CPU utilization to 80, you should set
         #     {::Google::Cloud::AIPlatform::V1::AutoscalingMetricSpec#metric_name autoscaling_metric_specs.metric_name}
         #     to `aiplatform.googleapis.com/prediction/online/cpu/utilization` and
-        #     {::Google::Cloud::AIPlatform::V1::AutoscalingMetricSpec#target autoscaling_metric_specs.target} to `80`.
+        #     {::Google::Cloud::AIPlatform::V1::AutoscalingMetricSpec#target autoscaling_metric_specs.target}
+        #     to `80`.
         class DedicatedResources
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -107,22 +116,23 @@ module Google
         # Each Model supporting these resources documents its specific guidelines.
         # @!attribute [rw] min_replica_count
         #   @return [::Integer]
-        #     Immutable. The minimum number of replicas this DeployedModel will be always deployed
-        #     on. If traffic against it increases, it may dynamically be deployed onto
-        #     more replicas up to {::Google::Cloud::AIPlatform::V1::AutomaticResources#max_replica_count max_replica_count}, and as traffic decreases, some
-        #     of these extra replicas may be freed.
-        #     If the requested value is too large, the deployment will error.
+        #     Immutable. The minimum number of replicas this DeployedModel will be always
+        #     deployed on. If traffic against it increases, it may dynamically be
+        #     deployed onto more replicas up to
+        #     {::Google::Cloud::AIPlatform::V1::AutomaticResources#max_replica_count max_replica_count},
+        #     and as traffic decreases, some of these extra replicas may be freed. If the
+        #     requested value is too large, the deployment will error.
         # @!attribute [rw] max_replica_count
         #   @return [::Integer]
-        #     Immutable. The maximum number of replicas this DeployedModel may be deployed on when
-        #     the traffic against it increases. If the requested value is too large,
-        #     the deployment will error, but if deployment succeeds then the ability
-        #     to scale the model to that many replicas is guaranteed (barring service
-        #     outages). If traffic against the DeployedModel increases beyond what its
-        #     replicas at maximum may handle, a portion of the traffic will be dropped.
-        #     If this value is not provided, a no upper bound for scaling under heavy
-        #     traffic will be assume, though Vertex AI may be unable to scale beyond
-        #     certain replica number.
+        #     Immutable. The maximum number of replicas this DeployedModel may be
+        #     deployed on when the traffic against it increases. If the requested value
+        #     is too large, the deployment will error, but if deployment succeeds then
+        #     the ability to scale the model to that many replicas is guaranteed (barring
+        #     service outages). If traffic against the DeployedModel increases beyond
+        #     what its replicas at maximum may handle, a portion of the traffic will be
+        #     dropped. If this value is not provided, a no upper bound for scaling under
+        #     heavy traffic will be assume, though Vertex AI may be unable to scale
+        #     beyond certain replica number.
         class AutomaticResources
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -135,13 +145,13 @@ module Google
         #     Required. Immutable. The specification of a single machine.
         # @!attribute [rw] starting_replica_count
         #   @return [::Integer]
-        #     Immutable. The number of machine replicas used at the start of the batch operation.
-        #     If not set, Vertex AI decides starting number, not greater than
+        #     Immutable. The number of machine replicas used at the start of the batch
+        #     operation. If not set, Vertex AI decides starting number, not greater than
         #     {::Google::Cloud::AIPlatform::V1::BatchDedicatedResources#max_replica_count max_replica_count}
         # @!attribute [rw] max_replica_count
         #   @return [::Integer]
-        #     Immutable. The maximum number of machine replicas the batch operation may be scaled
-        #     to. The default value is 10.
+        #     Immutable. The maximum number of machine replicas the batch operation may
+        #     be scaled to. The default value is 10.
         class BatchDedicatedResources
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -150,9 +160,9 @@ module Google
         # Statistics information about resource consumption.
         # @!attribute [r] replica_hours
         #   @return [::Float]
-        #     Output only. The number of replica hours used. Note that many replicas may run in
-        #     parallel, and additionally any given work may be queued for some time.
-        #     Therefore this value is not strictly related to wall time.
+        #     Output only. The number of replica hours used. Note that many replicas may
+        #     run in parallel, and additionally any given work may be queued for some
+        #     time. Therefore this value is not strictly related to wall time.
         class ResourcesConsumed
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -183,8 +193,8 @@ module Google
         #     the source mount path in the form of `server:path`
         # @!attribute [rw] mount_point
         #   @return [::String]
-        #     Required. Destination mount path. The NFS will be mounted for the user under
-        #     /mnt/nfs/<mount_point>
+        #     Required. Destination mount path. The NFS will be mounted for the user
+        #     under /mnt/nfs/<mount_point>
         class NfsMount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -76,7 +76,8 @@ module Google
         #     Output only. URIs for accessing [interactive
         #     shells](https://cloud.google.com/vertex-ai/docs/training/monitor-debug-interactive-shell)
         #     (one URI for each training node). Only available if
-        #     {::Google::Cloud::AIPlatform::V1::CustomJobSpec#enable_web_access job_spec.enable_web_access} is `true`.
+        #     {::Google::Cloud::AIPlatform::V1::CustomJobSpec#enable_web_access job_spec.enable_web_access}
+        #     is `true`.
         #
         #     The keys are names of each node in the training job; for example,
         #     `workerpool0-0` for the primary node, `workerpool1-0` for the first node in
@@ -110,9 +111,9 @@ module Google
         # Represents the spec of a CustomJob.
         # @!attribute [rw] worker_pool_specs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::WorkerPoolSpec>]
-        #     Required. The spec of the worker pools including machine type and Docker image.
-        #     All worker pools except the first one are optional and can be skipped by
-        #     providing an empty value.
+        #     Required. The spec of the worker pools including machine type and Docker
+        #     image. All worker pools except the first one are optional and can be
+        #     skipped by providing an empty value.
         # @!attribute [rw] scheduling
         #   @return [::Google::Cloud::AIPlatform::V1::Scheduling]
         #     Scheduling options for a CustomJob.
@@ -154,8 +155,8 @@ module Google
         #     HyperparameterTuningJob. For HyperparameterTuningJob,
         #     the baseOutputDirectory of
         #     each child CustomJob backing a Trial is set to a subdirectory of name
-        #     {::Google::Cloud::AIPlatform::V1::Trial#id id} under its parent HyperparameterTuningJob's
-        #     baseOutputDirectory.
+        #     {::Google::Cloud::AIPlatform::V1::Trial#id id} under its parent
+        #     HyperparameterTuningJob's baseOutputDirectory.
         #
         #     The following Vertex AI environment variables will be passed to
         #     containers or python modules when this field is set:
@@ -173,9 +174,9 @@ module Google
         #       * AIP_TENSORBOARD_LOG_DIR = `<base_output_directory>/<trial_id>/logs/`
         # @!attribute [rw] tensorboard
         #   @return [::String]
-        #     Optional. The name of a Vertex AI {::Google::Cloud::AIPlatform::V1::Tensorboard Tensorboard} resource to which this CustomJob
-        #     will upload Tensorboard logs.
-        #     Format:
+        #     Optional. The name of a Vertex AI
+        #     {::Google::Cloud::AIPlatform::V1::Tensorboard Tensorboard} resource to which
+        #     this CustomJob will upload Tensorboard logs. Format:
         #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
         # @!attribute [rw] enable_web_access
         #   @return [::Boolean]
@@ -184,7 +185,11 @@ module Google
         #     to training containers.
         #
         #     If set to `true`, you can access interactive shells at the URIs given
-        #     by {::Google::Cloud::AIPlatform::V1::CustomJob#web_access_uris CustomJob.web_access_uris} or {::Google::Cloud::AIPlatform::V1::Trial#web_access_uris Trial.web_access_uris} (within
+        #     by
+        #     {::Google::Cloud::AIPlatform::V1::CustomJob#web_access_uris CustomJob.web_access_uris}
+        #     or
+        #     {::Google::Cloud::AIPlatform::V1::Trial#web_access_uris Trial.web_access_uris}
+        #     (within
         #     {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob#trials HyperparameterTuningJob.trials}).
         class CustomJobSpec
           include ::Google::Protobuf::MessageExts
@@ -218,8 +223,8 @@ module Google
         # The spec of a Container.
         # @!attribute [rw] image_uri
         #   @return [::String]
-        #     Required. The URI of a container image in the Container Registry that is to be run on
-        #     each worker replica.
+        #     Required. The URI of a container image in the Container Registry that is to
+        #     be run on each worker replica.
         # @!attribute [rw] command
         #   @return [::Array<::String>]
         #     The command to be invoked when the container is started.
@@ -239,17 +244,17 @@ module Google
         # The spec of a Python packaged code.
         # @!attribute [rw] executor_image_uri
         #   @return [::String]
-        #     Required. The URI of a container image in Artifact Registry that will run the
-        #     provided Python package. Vertex AI provides a wide range of executor
+        #     Required. The URI of a container image in Artifact Registry that will run
+        #     the provided Python package. Vertex AI provides a wide range of executor
         #     images with pre-installed packages to meet users' various use cases. See
         #     the list of [pre-built containers for
         #     training](https://cloud.google.com/vertex-ai/docs/training/pre-built-containers).
         #     You must use an image from this list.
         # @!attribute [rw] package_uris
         #   @return [::Array<::String>]
-        #     Required. The Google Cloud Storage location of the Python package files which are
-        #     the training program and its dependent packages.
-        #     The maximum number of package URIs is 100.
+        #     Required. The Google Cloud Storage location of the Python package files
+        #     which are the training program and its dependent packages. The maximum
+        #     number of package URIs is 100.
         # @!attribute [rw] python_module
         #   @return [::String]
         #     Required. The Python module name to run after installing the packages.

@@ -408,8 +408,10 @@ module Google
             #   @param page_token [::String]
             #     The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListCustomJobsResponse#next_page_token ListCustomJobsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_custom_jobs JobService.ListCustomJobs} call.
+            #     {::Google::Cloud::AIPlatform::V1::ListCustomJobsResponse#next_page_token ListCustomJobsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_custom_jobs JobService.ListCustomJobs}
+            #     call.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #
@@ -583,12 +585,15 @@ module Google
             # Cancels a CustomJob.
             # Starts asynchronous cancellation on the CustomJob. The server
             # makes a best effort to cancel the job, but success is not
-            # guaranteed. Clients can use {::Google::Cloud::AIPlatform::V1::JobService::Client#get_custom_job JobService.GetCustomJob} or
-            # other methods to check whether the cancellation succeeded or whether the
+            # guaranteed. Clients can use
+            # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_custom_job JobService.GetCustomJob}
+            # or other methods to check whether the cancellation succeeded or whether the
             # job completed despite cancellation. On successful cancellation,
             # the CustomJob is not deleted; instead it becomes a job with
-            # a {::Google::Cloud::AIPlatform::V1::CustomJob#error CustomJob.error} value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-            # corresponding to `Code.CANCELLED`, and {::Google::Cloud::AIPlatform::V1::CustomJob#state CustomJob.state} is set to
+            # a {::Google::Cloud::AIPlatform::V1::CustomJob#error CustomJob.error} value with
+            # a {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+            # `Code.CANCELLED`, and
+            # {::Google::Cloud::AIPlatform::V1::CustomJob#state CustomJob.state} is set to
             # `CANCELLED`.
             #
             # @overload cancel_custom_job(request, options = nil)
@@ -1178,8 +1183,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the Location to create the HyperparameterTuningJob in.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The resource name of the Location to create the
+            #     HyperparameterTuningJob in. Format:
+            #     `projects/{project}/locations/{location}`
             #   @param hyperparameter_tuning_job [::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob, ::Hash]
             #     Required. The HyperparameterTuningJob to create.
             #
@@ -1353,8 +1359,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the Location to list the HyperparameterTuningJobs
-            #     from. Format: `projects/{project}/locations/{location}`
+            #     Required. The resource name of the Location to list the
+            #     HyperparameterTuningJobs from. Format:
+            #     `projects/{project}/locations/{location}`
             #   @param filter [::String]
             #     The standard list filter.
             #
@@ -1381,8 +1388,10 @@ module Google
             #   @param page_token [::String]
             #     The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsResponse#next_page_token ListHyperparameterTuningJobsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_hyperparameter_tuning_jobs JobService.ListHyperparameterTuningJobs} call.
+            #     {::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsResponse#next_page_token ListHyperparameterTuningJobsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_hyperparameter_tuning_jobs JobService.ListHyperparameterTuningJobs}
+            #     call.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #
@@ -1556,13 +1565,17 @@ module Google
             # Cancels a HyperparameterTuningJob.
             # Starts asynchronous cancellation on the HyperparameterTuningJob. The server
             # makes a best effort to cancel the job, but success is not
-            # guaranteed. Clients can use {::Google::Cloud::AIPlatform::V1::JobService::Client#get_hyperparameter_tuning_job JobService.GetHyperparameterTuningJob} or
-            # other methods to check whether the cancellation succeeded or whether the
+            # guaranteed. Clients can use
+            # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_hyperparameter_tuning_job JobService.GetHyperparameterTuningJob}
+            # or other methods to check whether the cancellation succeeded or whether the
             # job completed despite cancellation. On successful cancellation,
             # the HyperparameterTuningJob is not deleted; instead it becomes a job with
-            # a {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob#error HyperparameterTuningJob.error} value with a {::Google::Rpc::Status#code google.rpc.Status.code}
-            # of 1, corresponding to `Code.CANCELLED`, and
-            # {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob#state HyperparameterTuningJob.state} is set to `CANCELLED`.
+            # a
+            # {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob#error HyperparameterTuningJob.error}
+            # value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+            # corresponding to `Code.CANCELLED`, and
+            # {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob#state HyperparameterTuningJob.state}
+            # is set to `CANCELLED`.
             #
             # @overload cancel_hyperparameter_tuning_job(request, options = nil)
             #   Pass arguments to `cancel_hyperparameter_tuning_job` via a request object, either of type
@@ -1668,8 +1681,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the Location to create the BatchPredictionJob in.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The resource name of the Location to create the
+            #     BatchPredictionJob in. Format: `projects/{project}/locations/{location}`
             #   @param batch_prediction_job [::Google::Cloud::AIPlatform::V1::BatchPredictionJob, ::Hash]
             #     Required. The BatchPredictionJob to create.
             #
@@ -1872,8 +1885,10 @@ module Google
             #   @param page_token [::String]
             #     The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsResponse#next_page_token ListBatchPredictionJobsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_batch_prediction_jobs JobService.ListBatchPredictionJobs} call.
+            #     {::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsResponse#next_page_token ListBatchPredictionJobsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_batch_prediction_jobs JobService.ListBatchPredictionJobs}
+            #     call.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #
@@ -2049,12 +2064,14 @@ module Google
             #
             # Starts asynchronous cancellation on the BatchPredictionJob. The server
             # makes the best effort to cancel the job, but success is not
-            # guaranteed. Clients can use {::Google::Cloud::AIPlatform::V1::JobService::Client#get_batch_prediction_job JobService.GetBatchPredictionJob} or
-            # other methods to check whether the cancellation succeeded or whether the
+            # guaranteed. Clients can use
+            # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_batch_prediction_job JobService.GetBatchPredictionJob}
+            # or other methods to check whether the cancellation succeeded or whether the
             # job completed despite cancellation. On a successful cancellation,
             # the BatchPredictionJob is not deleted;instead its
-            # {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#state BatchPredictionJob.state} is set to `CANCELLED`. Any files already
-            # outputted by the job are not deleted.
+            # {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#state BatchPredictionJob.state}
+            # is set to `CANCELLED`. Any files already outputted by the job are not
+            # deleted.
             #
             # @overload cancel_batch_prediction_job(request, options = nil)
             #   Pass arguments to `cancel_batch_prediction_job` via a request object, either of type
@@ -2571,17 +2588,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param model_deployment_monitoring_job [::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringJob, ::Hash]
-            #     Required. The model monitoring configuration which replaces the resource on the
-            #     server.
+            #     Required. The model monitoring configuration which replaces the resource on
+            #     the server.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The update mask is used to specify the fields to be overwritten in the
-            #     ModelDeploymentMonitoringJob resource by the update.
-            #     The fields specified in the update_mask are relative to the resource, not
-            #     the full request. A field will be overwritten if it is in the mask. If the
-            #     user does not provide a mask then only the non-empty fields present in the
-            #     request will be overwritten. Set the update_mask to `*` to override all
-            #     fields.
-            #     For the objective config, the user can either provide the update mask for
+            #     Required. The update mask is used to specify the fields to be overwritten
+            #     in the ModelDeploymentMonitoringJob resource by the update. The fields
+            #     specified in the update_mask are relative to the resource, not the full
+            #     request. A field will be overwritten if it is in the mask. If the user does
+            #     not provide a mask then only the non-empty fields present in the request
+            #     will be overwritten. Set the update_mask to `*` to override all fields. For
+            #     the objective config, the user can either provide the update mask for
             #     model_deployment_monitoring_objective_configs or any combination of its
             #     nested fields, such as:
             #     model_deployment_monitoring_objective_configs.objective_config.training_dataset.
@@ -2772,7 +2788,8 @@ module Google
             ##
             # Pauses a ModelDeploymentMonitoringJob. If the job is running, the server
             # makes a best effort to cancel the job. Will mark
-            # {::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringJob#state ModelDeploymentMonitoringJob.state} to 'PAUSED'.
+            # {::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringJob#state ModelDeploymentMonitoringJob.state}
+            # to 'PAUSED'.
             #
             # @overload pause_model_deployment_monitoring_job(request, options = nil)
             #   Pass arguments to `pause_model_deployment_monitoring_job` via a request object, either of type
