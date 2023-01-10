@@ -32,6 +32,16 @@ class Google::Cloud::Dataplex::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_data_scan_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dataplex.data_scan_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dataplex::V1::DataScanService::Client, client
+    end
+  end
+
   def test_metadata_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
