@@ -31,9 +31,9 @@ module Google
         ##
         # The Addresses API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/addresses"
+        #     require "google/cloud/compute/v1/addresses/rest"
         #     client = ::Google::Cloud::Compute::V1::Addresses::Rest::Client.new
         #
         module Addresses

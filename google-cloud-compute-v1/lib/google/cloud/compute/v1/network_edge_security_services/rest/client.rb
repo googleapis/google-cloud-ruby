@@ -132,13 +132,22 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                credentials ||= Credentials.default scope: @config.scope
+                # Use self-signed JWT if the endpoint is unchanged from default,
+                # but only if the default endpoint does not have a region prefix.
+                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                                         !@config.endpoint.split(".").first.include?("-")
+                credentials ||= Credentials.default scope: @config.scope,
+                                                    enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
+                @quota_project_id = @config.quota_project
+                @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
                 @region_operations = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
                   config.credentials = credentials
+                  config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
                 end
 
@@ -166,8 +175,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil)
               #   Pass arguments to `aggregated_list` via keyword arguments. Note that at
@@ -206,29 +213,29 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.aggregated_list.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.aggregated_list.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.aggregated_list.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @network_edge_security_services_stub.aggregated_list request, options do |result, response|
                   result = ::Gapic::Rest::PagedEnumerable.new @network_edge_security_services_stub, :aggregated_list, "items", request, result, options
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -243,8 +250,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload delete(network_edge_security_service: nil, project: nil, region: nil, request_id: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
@@ -277,17 +282,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.delete.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.delete.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @network_edge_security_services_stub.delete request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
@@ -302,12 +311,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -322,8 +327,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload get(network_edge_security_service: nil, project: nil, region: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
@@ -354,28 +357,28 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.get.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @network_edge_security_services_stub.get request, options do |result, response|
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -390,8 +393,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload insert(network_edge_security_service_resource: nil, project: nil, region: nil, request_id: nil, validate_only: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
@@ -426,17 +427,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.insert.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.insert.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.insert.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @network_edge_security_services_stub.insert request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
@@ -451,12 +456,8 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -471,8 +472,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload patch(network_edge_security_service: nil, network_edge_security_service_resource: nil, paths: nil, project: nil, region: nil, request_id: nil, update_mask: nil)
               #   Pass arguments to `patch` via keyword arguments. Note that at
@@ -510,17 +509,21 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.patch.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
                 options.apply_defaults timeout:      @config.rpcs.patch.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.patch.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
                 @network_edge_security_services_stub.patch request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
@@ -535,36 +538,38 @@ module Google
                   yield result, response if block_given?
                   return result
                 end
-              rescue ::Faraday::Error => e
-                begin
-                  raise ::Gapic::Rest::Error.wrap_faraday_error e
-                rescue ::Gapic::Rest::Error => gapic_error
-                  raise ::Google::Cloud::Error.from_error gapic_error
-                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
               # Configuration class for the NetworkEdgeSecurityServices REST API.
               #
               # This class represents the configuration for NetworkEdgeSecurityServices REST,
-              # providing control over credentials, timeouts, retry behavior, logging.
+              # providing control over timeouts, retry behavior, logging, transport
+              # parameters, and other low-level controls. Certain parameters can also be
+              # applied individually to specific RPCs. See
+              # {::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client::Configuration::Rpcs}
+              # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for all calls to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # aggregated_list to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.aggregated_list.timeout = 20.0
+              #   end
               #
-              #     ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.aggregated_list.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.
@@ -593,8 +598,19 @@ module Google
               #   The call timeout in seconds.
               #   @return [::Numeric]
               # @!attribute [rw] metadata
-              #   Additional REST headers to be sent with the call.
+              #   Additional headers to be sent with the call.
               #   @return [::Hash{::Symbol=>::String}]
+              # @!attribute [rw] retry_policy
+              #   The retry policy. The value is a hash with the following keys:
+              #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+              #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+              #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
+              #       trigger a retry.
+              #   @return [::Hash]
+              # @!attribute [rw] quota_project
+              #   A separate project against which to charge quota.
+              #   @return [::String]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -609,6 +625,8 @@ module Google
                 config_attr :lib_version,   nil, ::String, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
+                config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
+                config_attr :quota_project, nil, ::String, nil
 
                 # @private
                 def initialize parent_config = nil
@@ -637,9 +655,14 @@ module Google
                 # the following configuration fields:
                 #
                 #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
-                #
-                # there is one other field (`retry_policy`) that can be set
-                # but is currently not supported for REST Gapic libraries.
+                #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional headers
+                #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
+                #     include the following keys:
+                #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+                #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+                #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
+                #         trigger a retry.
                 #
                 class Rpcs
                   ##

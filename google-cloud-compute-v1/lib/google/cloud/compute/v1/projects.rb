@@ -31,9 +31,9 @@ module Google
         ##
         # The Projects API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/projects"
+        #     require "google/cloud/compute/v1/projects/rest"
         #     client = ::Google::Cloud::Compute::V1::Projects::Rest::Client.new
         #
         module Projects

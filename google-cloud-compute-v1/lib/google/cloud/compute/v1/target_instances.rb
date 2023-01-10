@@ -31,9 +31,9 @@ module Google
         ##
         # The TargetInstances API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/target_instances"
+        #     require "google/cloud/compute/v1/target_instances/rest"
         #     client = ::Google::Cloud::Compute::V1::TargetInstances::Rest::Client.new
         #
         module TargetInstances

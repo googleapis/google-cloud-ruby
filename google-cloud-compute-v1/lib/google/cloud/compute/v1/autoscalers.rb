@@ -31,9 +31,9 @@ module Google
         ##
         # The Autoscalers API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/autoscalers"
+        #     require "google/cloud/compute/v1/autoscalers/rest"
         #     client = ::Google::Cloud::Compute::V1::Autoscalers::Rest::Client.new
         #
         module Autoscalers
