@@ -44,6 +44,16 @@ module Google
         # @!attribute [rw] encoding
         #   @return [::Google::Cloud::PubSub::V1::Encoding]
         #     The encoding of messages validated against `schema`.
+        # @!attribute [rw] first_revision_id
+        #   @return [::String]
+        #     The minimum (inclusive) revision allowed for validating messages. If empty
+        #     or not present, allow any revision to be validated against last_revision or
+        #     any revision created before.
+        # @!attribute [rw] last_revision_id
+        #   @return [::String]
+        #     The maximum (inclusive) revision allowed for validating messages. If empty
+        #     or not present, allow any revision to be validated against first_revision
+        #     or any revision created after.
         class SchemaSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

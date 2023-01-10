@@ -132,6 +132,166 @@
       ]
     },
     {
+      "region_tag": "pubsub_v1_generated_SchemaService_ListSchemaRevisions_sync",
+      "title": "Snippet for list_schema_revisions in SchemaService",
+      "description": "Basic snippet for list_schema_revisions in SchemaService",
+      "file": "schema_service/list_schema_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_schema_revisions",
+        "full_name": "::Google::Cloud::PubSub::V1::SchemaService::Client#list_schema_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::PubSub::V1::ListSchemaRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::PubSub::V1::ListSchemaRevisionsResponse",
+        "client": {
+          "short_name": "SchemaService::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SchemaService::Client"
+        },
+        "method": {
+          "short_name": "ListSchemaRevisions",
+          "full_name": "google.pubsub.v1.SchemaService.ListSchemaRevisions",
+          "service": {
+            "short_name": "SchemaService",
+            "full_name": "google.pubsub.v1.SchemaService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "pubsub_v1_generated_SchemaService_CommitSchema_sync",
+      "title": "Snippet for commit_schema in SchemaService",
+      "description": "Basic snippet for commit_schema in SchemaService",
+      "file": "schema_service/commit_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "commit_schema",
+        "full_name": "::Google::Cloud::PubSub::V1::SchemaService::Client#commit_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::PubSub::V1::CommitSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::PubSub::V1::Schema",
+        "client": {
+          "short_name": "SchemaService::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SchemaService::Client"
+        },
+        "method": {
+          "short_name": "CommitSchema",
+          "full_name": "google.pubsub.v1.SchemaService.CommitSchema",
+          "service": {
+            "short_name": "SchemaService",
+            "full_name": "google.pubsub.v1.SchemaService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "pubsub_v1_generated_SchemaService_RollbackSchema_sync",
+      "title": "Snippet for rollback_schema in SchemaService",
+      "description": "Basic snippet for rollback_schema in SchemaService",
+      "file": "schema_service/rollback_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rollback_schema",
+        "full_name": "::Google::Cloud::PubSub::V1::SchemaService::Client#rollback_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::PubSub::V1::RollbackSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::PubSub::V1::Schema",
+        "client": {
+          "short_name": "SchemaService::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SchemaService::Client"
+        },
+        "method": {
+          "short_name": "RollbackSchema",
+          "full_name": "google.pubsub.v1.SchemaService.RollbackSchema",
+          "service": {
+            "short_name": "SchemaService",
+            "full_name": "google.pubsub.v1.SchemaService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "pubsub_v1_generated_SchemaService_DeleteSchemaRevision_sync",
+      "title": "Snippet for delete_schema_revision in SchemaService",
+      "description": "Basic snippet for delete_schema_revision in SchemaService",
+      "file": "schema_service/delete_schema_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_schema_revision",
+        "full_name": "::Google::Cloud::PubSub::V1::SchemaService::Client#delete_schema_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::PubSub::V1::DeleteSchemaRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::PubSub::V1::Schema",
+        "client": {
+          "short_name": "SchemaService::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SchemaService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSchemaRevision",
+          "full_name": "google.pubsub.v1.SchemaService.DeleteSchemaRevision",
+          "service": {
+            "short_name": "SchemaService",
+            "full_name": "google.pubsub.v1.SchemaService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "pubsub_v1_generated_SchemaService_DeleteSchema_sync",
       "title": "Snippet for delete_schema in SchemaService",
       "description": "Basic snippet for delete_schema in SchemaService",
