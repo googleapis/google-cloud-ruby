@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2023-01-11)
+
+#### Features
+
+* Support for the DataScanService ([#19899](https://github.com/googleapis/google-cloud-ruby/issues/19899)) 
+
 ### 0.3.0 (2022-07-02)
 
 #### Features
