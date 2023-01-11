@@ -12,12 +12,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/monitoring/dashboard/v1/table.proto", :syntax => :proto3) do
     add_message "google.monitoring.dashboard.v1.TimeSeriesTable" do
       repeated :data_sets, :message, 1, "google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet"
+      optional :metric_visualization, :enum, 2, "google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization"
+      repeated :column_settings, :message, 4, "google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings"
     end
     add_message "google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet" do
       optional :time_series_query, :message, 1, "google.monitoring.dashboard.v1.TimeSeriesQuery"
       optional :table_template, :string, 2
       optional :min_alignment_period, :message, 3, "google.protobuf.Duration"
       optional :table_display_options, :message, 4, "google.monitoring.dashboard.v1.TableDisplayOptions"
+    end
+    add_message "google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings" do
+      optional :column, :string, 1
+      optional :visible, :bool, 2
+    end
+    add_enum "google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization" do
+      value :METRIC_VISUALIZATION_UNSPECIFIED, 0
+      value :NUMBER, 1
+      value :BAR, 2
     end
   end
 end
@@ -29,6 +40,8 @@ module Google
         module V1
           TimeSeriesTable = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesTable").msgclass
           TimeSeriesTable::TableDataSet = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet").msgclass
+          TimeSeriesTable::ColumnSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings").msgclass
+          TimeSeriesTable::MetricVisualization = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization").enummodule
         end
       end
     end
