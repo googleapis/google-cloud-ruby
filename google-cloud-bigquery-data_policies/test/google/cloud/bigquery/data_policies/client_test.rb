@@ -28,7 +28,7 @@ class Google::Cloud::Bigquery::DataPolicies::ClientConstructionMinitest < Minite
       client = Google::Cloud::Bigquery::DataPolicies.data_policy_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client, client
+      assert_kind_of Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Client, client
     end
   end
 end

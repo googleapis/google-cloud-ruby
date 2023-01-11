@@ -1,6 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-bigquery-data_policies-v1", path: "../google-cloud-bigquery-data_policies-v1"
-gem "google-cloud-bigquery-data_policies-v1beta1", path: "../google-cloud-bigquery-data_policies-v1beta1"
