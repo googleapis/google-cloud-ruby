@@ -136,6 +136,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :min_measurement_count, :int64, 3
       optional :learning_rate_parameter_name, :string, 4
       optional :use_elapsed_duration, :bool, 5
+      proto3_optional :update_all_stopped_trials, :bool, 6
     end
     add_enum "google.cloud.aiplatform.v1.StudySpec.Algorithm" do
       value :ALGORITHM_UNSPECIFIED, 0

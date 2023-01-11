@@ -398,9 +398,11 @@ module Google
             #     The standard list page size.
             #   @param page_token [::String]
             #     The standard list page token.
-            #     Typically obtained by {::Google::Cloud::AIPlatform::V1::ListSpecialistPoolsResponse#next_page_token ListSpecialistPoolsResponse.next_page_token} of
-            #     the previous {::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client#list_specialist_pools SpecialistPoolService.ListSpecialistPools} call. Return
-            #     first page if empty.
+            #     Typically obtained by
+            #     {::Google::Cloud::AIPlatform::V1::ListSpecialistPoolsResponse#next_page_token ListSpecialistPoolsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client#list_specialist_pools SpecialistPoolService.ListSpecialistPools}
+            #     call. Return first page if empty.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read. FieldMask represents a set of
             #

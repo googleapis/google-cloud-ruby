@@ -391,8 +391,8 @@ module Google
             #     Required. The Dataset which replaces the resource on the server.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The update mask applies to the resource.
-            #     For the `FieldMask` definition, see {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
-            #     Updatable fields:
+            #     For the `FieldMask` definition, see
+            #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}. Updatable fields:
             #
             #       * `display_name`
             #       * `description`
@@ -702,8 +702,8 @@ module Google
             #     Format:
             #     `projects/{project}/locations/{location}/datasets/{dataset}`
             #   @param import_configs [::Array<::Google::Cloud::AIPlatform::V1::ImportDataConfig, ::Hash>]
-            #     Required. The desired input locations. The contents of all input locations will be
-            #     imported in one batch.
+            #     Required. The desired input locations. The contents of all input locations
+            #     will be imported in one batch.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1041,7 +1041,8 @@ module Google
             #     Must specify `saved_query_id=` - saved query id that annotations should
             #     belong to.
             #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Mask specifying which fields of {::Google::Cloud::AIPlatform::V1::DataItemView DataItemView} to read.
+            #     Mask specifying which fields of
+            #     {::Google::Cloud::AIPlatform::V1::DataItemView DataItemView} to read.
             #   @param annotations_limit [::Integer]
             #     If set, only up to this many of Annotations will be returned per
             #     DataItemView. The maximum value is 1000. If not set, the maximum value will
@@ -1055,8 +1056,10 @@ module Google
             #   @param page_token [::String]
             #     A token identifying a page of results for the server to return
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::SearchDataItemsResponse#next_page_token SearchDataItemsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AIPlatform::V1::DatasetService::Client#search_data_items DatasetService.SearchDataItems} call.
+            #     {::Google::Cloud::AIPlatform::V1::SearchDataItemsResponse#next_page_token SearchDataItemsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::DatasetService::Client#search_data_items DatasetService.SearchDataItems}
+            #     call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::DataItemView>]

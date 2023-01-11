@@ -26,6 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :model_version_id, :string, 30
       optional :unmanaged_container_model, :message, 28, "google.cloud.aiplatform.v1.UnmanagedContainerModel"
       optional :input_config, :message, 4, "google.cloud.aiplatform.v1.BatchPredictionJob.InputConfig"
+      optional :instance_config, :message, 27, "google.cloud.aiplatform.v1.BatchPredictionJob.InstanceConfig"
       optional :model_parameters, :message, 5, "google.protobuf.Value"
       optional :output_config, :message, 6, "google.cloud.aiplatform.v1.BatchPredictionJob.OutputConfig"
       optional :dedicated_resources, :message, 7, "google.cloud.aiplatform.v1.BatchDedicatedResources"
@@ -53,6 +54,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :bigquery_source, :message, 3, "google.cloud.aiplatform.v1.BigQuerySource"
       end
     end
+    add_message "google.cloud.aiplatform.v1.BatchPredictionJob.InstanceConfig" do
+      optional :instance_type, :string, 1
+      optional :key_field, :string, 2
+      repeated :included_fields, :string, 3
+      repeated :excluded_fields, :string, 4
+    end
     add_message "google.cloud.aiplatform.v1.BatchPredictionJob.OutputConfig" do
       optional :predictions_format, :string, 1
       oneof :destination do
@@ -76,6 +83,7 @@ module Google
       module V1
         BatchPredictionJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchPredictionJob").msgclass
         BatchPredictionJob::InputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchPredictionJob.InputConfig").msgclass
+        BatchPredictionJob::InstanceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchPredictionJob.InstanceConfig").msgclass
         BatchPredictionJob::OutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchPredictionJob.OutputConfig").msgclass
         BatchPredictionJob::OutputInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchPredictionJob.OutputInfo").msgclass
       end

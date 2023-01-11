@@ -297,12 +297,12 @@ module Google
             #     for a machine learning model predicting user clicks on a website, an
             #     EntityType ID could be `user`.
             #   @param entity_ids [::Array<::String>]
-            #     Required. IDs of entities to read Feature values of. The maximum number of IDs is
-            #     100. For example, for a machine learning model predicting user clicks on a
-            #     website, an entity ID could be `user_123`.
+            #     Required. IDs of entities to read Feature values of. The maximum number of
+            #     IDs is 100. For example, for a machine learning model predicting user
+            #     clicks on a website, an entity ID could be `user_123`.
             #   @param feature_selector [::Google::Cloud::AIPlatform::V1::FeatureSelector, ::Hash]
-            #     Required. Selector choosing Features of the target EntityType. Feature IDs will be
-            #     deduplicated.
+            #     Required. Selector choosing Features of the target EntityType. Feature IDs
+            #     will be deduplicated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse>]
@@ -394,14 +394,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param entity_type [::String]
-            #     Required. The resource name of the EntityType for the entities being written.
-            #     Value format: `projects/{project}/locations/{location}/featurestores/
+            #     Required. The resource name of the EntityType for the entities being
+            #     written. Value format:
+            #     `projects/{project}/locations/{location}/featurestores/
             #     \\{featurestore}/entityTypes/\\{entityType}`. For example,
             #     for a machine learning model predicting user clicks on a website, an
             #     EntityType ID could be `user`.
             #   @param payloads [::Array<::Google::Cloud::AIPlatform::V1::WriteFeatureValuesPayload, ::Hash>]
-            #     Required. The entities to be written. Up to 100,000 feature values can be written
-            #     across all `payloads`.
+            #     Required. The entities to be written. Up to 100,000 feature values can be
+            #     written across all `payloads`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::WriteFeatureValuesResponse]

@@ -78,9 +78,11 @@ module Google
         #     network name.
         # @!attribute [rw] enable_private_service_connect
         #   @return [::Boolean]
-        #     Optional. Deprecated: If true, expose the IndexEndpoint via private service connect.
+        #     Optional. Deprecated: If true, expose the IndexEndpoint via private service
+        #     connect.
         #
-        #     Only one of the fields, {::Google::Cloud::AIPlatform::V1::IndexEndpoint#network network} or
+        #     Only one of the fields,
+        #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#network network} or
         #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#enable_private_service_connect enable_private_service_connect},
         #     can be set.
         class IndexEndpoint
@@ -117,16 +119,18 @@ module Google
         #     Output only. Timestamp when the DeployedIndex was created.
         # @!attribute [r] private_endpoints
         #   @return [::Google::Cloud::AIPlatform::V1::IndexPrivateEndpoints]
-        #     Output only. Provides paths for users to send requests directly to the deployed index
-        #     services running on Cloud via private services access. This field is
-        #     populated if {::Google::Cloud::AIPlatform::V1::IndexEndpoint#network network} is configured.
+        #     Output only. Provides paths for users to send requests directly to the
+        #     deployed index services running on Cloud via private services access. This
+        #     field is populated if
+        #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#network network} is configured.
         # @!attribute [r] index_sync_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The DeployedIndex may depend on various data on its original Index.
-        #     Additionally when certain changes to the original Index are being done
-        #     (e.g. when what the Index contains is being changed) the DeployedIndex may
-        #     be asynchronously updated in the background to reflect this changes.
-        #     If this timestamp's value is at least the {::Google::Cloud::AIPlatform::V1::Index#update_time Index.update_time} of the
+        #     Output only. The DeployedIndex may depend on various data on its original
+        #     Index. Additionally when certain changes to the original Index are being
+        #     done (e.g. when what the Index contains is being changed) the DeployedIndex
+        #     may be asynchronously updated in the background to reflect this changes. If
+        #     this timestamp's value is at least the
+        #     {::Google::Cloud::AIPlatform::V1::Index#update_time Index.update_time} of the
         #     original Index, it means that this DeployedIndex and the original Index are
         #     in sync. If this timestamp is older, then to see which updates this
         #     DeployedIndex already contains (and which not), one must
@@ -138,8 +142,8 @@ module Google
         #     equal or before this sync time are contained in this DeployedIndex.
         # @!attribute [rw] automatic_resources
         #   @return [::Google::Cloud::AIPlatform::V1::AutomaticResources]
-        #     Optional. A description of resources that the DeployedIndex uses, which to large
-        #     degree are decided by Vertex AI, and optionally allows only a modest
+        #     Optional. A description of resources that the DeployedIndex uses, which to
+        #     large degree are decided by Vertex AI, and optionally allows only a modest
         #     additional configuration.
         #     If min_replica_count is not set, the default value is 2 (we don't provide
         #     SLA when min_replica_count=1). If max_replica_count is not set, the
@@ -147,19 +151,27 @@ module Google
         #     1000.
         # @!attribute [rw] dedicated_resources
         #   @return [::Google::Cloud::AIPlatform::V1::DedicatedResources]
-        #     Optional. A description of resources that are dedicated to the DeployedIndex, and
-        #     that need a higher degree of manual configuration.
-        #     If min_replica_count is not set, the default value is 2 (we don't provide
-        #     SLA when min_replica_count=1). If max_replica_count is not set, the
-        #     default value is min_replica_count. The max allowed replica count is
-        #     1000.
+        #     Optional. A description of resources that are dedicated to the
+        #     DeployedIndex, and that need a higher degree of manual configuration. If
+        #     min_replica_count is not set, the default value is 2 (we don't provide SLA
+        #     when min_replica_count=1). If max_replica_count is not set, the default
+        #     value is min_replica_count. The max allowed replica count is 1000.
         #
-        #     Available machine types:
-        #     n1-standard-16
-        #     n1-standard-32
+        #     Available machine types for SMALL shard:
+        #     e2-standard-2 and all machine types available for MEDIUM and LARGE shard.
+        #
+        #     Available machine types for MEDIUM shard:
+        #     e2-standard-16 and all machine types available for LARGE shard.
+        #
+        #     Available machine types for LARGE shard:
+        #     e2-standard-32, e2-highmem-16, n2d-standard-32.
+        #
+        #     n1-standard-16 and n1-standard-32 are still available, but we recommend
+        #     e2-standard-16 and e2-standard-32 for cost efficiency.
         # @!attribute [rw] enable_access_logging
         #   @return [::Boolean]
-        #     Optional. If true, private endpoint's access logs are sent to StackDriver Logging.
+        #     Optional. If true, private endpoint's access logs are sent to StackDriver
+        #     Logging.
         #
         #     These logs are like standard server access logs, containing
         #     information like timestamp and latency for each MatchRequest.
@@ -240,8 +252,8 @@ module Google
         #     Output only. The ip address used to send match gRPC requests.
         # @!attribute [r] service_attachment
         #   @return [::String]
-        #     Output only. The name of the service attachment resource. Populated if private service
-        #     connect is enabled.
+        #     Output only. The name of the service attachment resource. Populated if
+        #     private service connect is enabled.
         class IndexPrivateEndpoints
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

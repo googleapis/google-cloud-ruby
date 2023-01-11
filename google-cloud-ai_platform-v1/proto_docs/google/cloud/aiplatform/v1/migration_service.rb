@@ -21,13 +21,13 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Request message for {::Google::Cloud::AIPlatform::V1::MigrationService::Client#search_migratable_resources MigrationService.SearchMigratableResources}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MigrationService::Client#search_migratable_resources MigrationService.SearchMigratableResources}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The location that the migratable resources should be searched from.
-        #     It's the Vertex AI location that the resources can be migrated to, not
-        #     the resources' original location.
-        #     Format:
+        #     Required. The location that the migratable resources should be searched
+        #     from. It's the Vertex AI location that the resources can be migrated to,
+        #     not the resources' original location. Format:
         #     `projects/{project}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -55,7 +55,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MigrationService::Client#search_migratable_resources MigrationService.SearchMigratableResources}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MigrationService::Client#search_migratable_resources MigrationService.SearchMigratableResources}.
         # @!attribute [rw] migratable_resources
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::MigratableResource>]
         #     All migratable resources that can be migrated to the
@@ -70,7 +71,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::MigrationService::Client#batch_migrate_resources MigrationService.BatchMigrateResources}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::MigrationService::Client#batch_migrate_resources MigrationService.BatchMigrateResources}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location of the migrated resource will live in.
@@ -109,9 +111,8 @@ module Google
           # Config for migrating version in ml.googleapis.com to Vertex AI's Model.
           # @!attribute [rw] endpoint
           #   @return [::String]
-          #     Required. The ml.googleapis.com endpoint that this model version should be migrated
-          #     from.
-          #     Example values:
+          #     Required. The ml.googleapis.com endpoint that this model version should
+          #     be migrated from. Example values:
           #
           #     * ml.googleapis.com
           #
@@ -177,9 +178,9 @@ module Google
           #     System will pick a display name if unspecified.
           # @!attribute [rw] migrate_data_labeling_annotated_dataset_configs
           #   @return [::Array<::Google::Cloud::AIPlatform::V1::MigrateResourceRequest::MigrateDataLabelingDatasetConfig::MigrateDataLabelingAnnotatedDatasetConfig>]
-          #     Optional. Configs for migrating AnnotatedDataset in datalabeling.googleapis.com to
-          #     Vertex AI's SavedQuery. The specified AnnotatedDatasets have to belong
-          #     to the datalabeling Dataset.
+          #     Optional. Configs for migrating AnnotatedDataset in
+          #     datalabeling.googleapis.com to Vertex AI's SavedQuery. The specified
+          #     AnnotatedDatasets have to belong to the datalabeling Dataset.
           class MigrateDataLabelingDatasetConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -198,7 +199,8 @@ module Google
           end
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::MigrationService::Client#batch_migrate_resources MigrationService.BatchMigrateResources}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::MigrationService::Client#batch_migrate_resources MigrationService.BatchMigrateResources}.
         # @!attribute [rw] migrate_resource_responses
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::MigrateResourceResponse>]
         #     Successfully migrated resources.
@@ -223,7 +225,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Runtime operation information for {::Google::Cloud::AIPlatform::V1::MigrationService::Client#batch_migrate_resources MigrationService.BatchMigrateResources}.
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::MigrationService::Client#batch_migrate_resources MigrationService.BatchMigrateResources}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The common part of the operation metadata.

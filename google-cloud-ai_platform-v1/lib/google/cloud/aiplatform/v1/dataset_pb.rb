@@ -7,6 +7,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/aiplatform/v1/encryption_spec_pb'
 require 'google/cloud/aiplatform/v1/io_pb'
+require 'google/cloud/aiplatform/v1/saved_query_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 
@@ -22,6 +23,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :update_time, :message, 5, "google.protobuf.Timestamp"
       optional :etag, :string, 6
       map :labels, :string, :string, 7
+      repeated :saved_queries, :message, 9, "google.cloud.aiplatform.v1.SavedQuery"
       optional :encryption_spec, :message, 11, "google.cloud.aiplatform.v1.EncryptionSpec"
       optional :metadata_artifact, :string, 17
     end
