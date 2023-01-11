@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.0 (2023-01-11)
+
+#### Features
+
+* Support for etags in clusters and node pools ([#19980](https://github.com/googleapis/google-cloud-ruby/issues/19980)) 
+
 ### 0.15.0 (2023-01-05)
 
 #### Features
