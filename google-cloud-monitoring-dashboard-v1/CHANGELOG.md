@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2023-01-12)
+
+#### Features
+
+* added support for horizontal bar rendering and column settings on time series tables ([#19993](https://github.com/googleapis/google-cloud-ruby/issues/19993)) 
+
 ### 0.9.1 (2022-12-09)
 
 #### Documentation
