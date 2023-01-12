@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.6"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-monitoring-v3", ">= 0.4", "< 2.a"
+  gem.add_dependency "google-cloud-monitoring-v3", ">= 0.10", "< 2.a"
   gem.add_dependency "google-cloud-monitoring-dashboard-v1", ">= 0.5", "< 2.a"
   gem.add_dependency "google-cloud-monitoring-metrics_scope-v1", ">= 0.0", "< 2.a"
 

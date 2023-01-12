@@ -251,6 +251,38 @@ module Google
       end
 
       ##
+      # Create a new client object for SnoozeService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Monitoring::V3::SnoozeService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/SnoozeService/Client.html)
+      # for a gRPC client for version V3 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the SnoozeService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About SnoozeService
+      #
+      # The SnoozeService API is used to temporarily prevent an alert policy from
+      # generating alerts. A Snooze is a description of the criteria under which one
+      # or more alert policies should not fire alerts for the specified duration.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v3`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.snooze_service version: :v3, &block
+        require "google/cloud/monitoring/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Monitoring
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:SnoozeService)
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for UptimeCheckService.
       #
       # By default, this returns an instance of
