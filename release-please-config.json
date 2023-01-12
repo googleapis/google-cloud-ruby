@@ -439,6 +439,10 @@
       "component": "google-cloud-datastore",
       "version_file": "lib/google/cloud/datastore/version.rb"
     },
+    "google-cloud-datastore-admin": {
+      "component": "google-cloud-datastore-admin",
+      "version_file": "lib/google/cloud/datastore/admin/version.rb"
+    },
     "google-cloud-datastore-admin-v1": {
       "component": "google-cloud-datastore-admin-v1",
       "version_file": "lib/google/cloud/datastore/admin/v1/version.rb"
@@ -574,6 +578,10 @@
     "google-cloud-firestore": {
       "component": "google-cloud-firestore",
       "version_file": "lib/google/cloud/firestore/version.rb"
+    },
+    "google-cloud-firestore-admin": {
+      "component": "google-cloud-firestore-admin",
+      "version_file": "lib/google/cloud/firestore/admin/version.rb"
     },
     "google-cloud-firestore-admin-v1": {
       "component": "google-cloud-firestore-admin-v1",
