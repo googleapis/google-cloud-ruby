@@ -268,7 +268,8 @@ module Google
         #
         # ## About SessionEntityTypes
         #
-        # Service for managing SessionEntityTypes.
+        # Service for managing
+        # SessionEntityTypes.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
@@ -299,8 +300,9 @@ module Google
         # ## About Sessions
         #
         # A session represents an interaction with a user. You retrieve user input
-        # and pass it to the DetectIntent method to determine
-        # user intent and respond.
+        # and pass it to the
+        # DetectIntent method to
+        # determine user intent and respond.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
@@ -330,7 +332,8 @@ module Google
         #
         # ## About TransitionRouteGroups
         #
-        # Service for managing TransitionRouteGroups.
+        # Service for managing
+        # TransitionRouteGroups.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
@@ -421,7 +424,8 @@ module Google
         #
         # ## About Environments
         #
-        # Service for managing Environments.
+        # Service for managing
+        # Environments.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
