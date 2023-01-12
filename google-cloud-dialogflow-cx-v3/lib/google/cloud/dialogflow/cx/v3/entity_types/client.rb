@@ -616,9 +616,11 @@ module Google
               #        indicating the referencing resources.
               #     *  If `force` is set to true, Dialogflow will remove the entity type, as
               #        well as any references to the entity type (i.e. Page
-              #        {::Google::Cloud::Dialogflow::CX::V3::Form::Parameter parameter} of the entity type will be changed to
-              #        '@sys.any' and intent {::Google::Cloud::Dialogflow::CX::V3::Intent::Parameter parameter} of the entity type
-              #        will be removed).
+              #        {::Google::Cloud::Dialogflow::CX::V3::Form::Parameter parameter} of the entity
+              #        type will be changed to
+              #        '@sys.any' and intent
+              #        {::Google::Cloud::Dialogflow::CX::V3::Intent::Parameter parameter} of the
+              #        entity type will be removed).
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]

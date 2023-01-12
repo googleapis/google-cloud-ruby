@@ -9,6 +9,7 @@ require 'google/protobuf/struct_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/cx/v3/response_message.proto", :syntax => :proto3) do
     add_message "google.cloud.dialogflow.cx.v3.ResponseMessage" do
+      optional :channel, :string, 19
       oneof :message do
         optional :text, :message, 1, "google.cloud.dialogflow.cx.v3.ResponseMessage.Text"
         optional :payload, :message, 2, "google.protobuf.Struct"

@@ -77,6 +77,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :analyze_query_text_sentiment, :bool, 8
       map :webhook_headers, :string, :string, 10
       repeated :flow_versions, :string, 14
+      optional :channel, :string, 15
     end
     add_message "google.cloud.dialogflow.cx.v3.QueryInput" do
       optional :language_code, :string, 4

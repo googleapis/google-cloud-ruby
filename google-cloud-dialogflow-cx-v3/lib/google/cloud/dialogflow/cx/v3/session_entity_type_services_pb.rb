@@ -25,7 +25,8 @@ module Google
       module CX
         module V3
           module SessionEntityTypes
-            # Service for managing [SessionEntityTypes][google.cloud.dialogflow.cx.v3.SessionEntityType].
+            # Service for managing
+            # [SessionEntityTypes][google.cloud.dialogflow.cx.v3.SessionEntityType].
             class Service
 
               include ::GRPC::GenericService

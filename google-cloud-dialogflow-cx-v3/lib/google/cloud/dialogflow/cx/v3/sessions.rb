@@ -33,8 +33,9 @@ module Google
         module V3
           ##
           # A session represents an interaction with a user. You retrieve user input
-          # and pass it to the {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#detect_intent DetectIntent} method to determine
-          # user intent and respond.
+          # and pass it to the
+          # {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#detect_intent DetectIntent} method to
+          # determine user intent and respond.
           #
           # @example Load this service and instantiate a gRPC client
           #

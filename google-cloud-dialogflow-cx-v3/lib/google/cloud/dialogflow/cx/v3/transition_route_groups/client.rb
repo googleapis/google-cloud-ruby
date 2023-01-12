@@ -29,7 +29,8 @@ module Google
             ##
             # Client for the TransitionRouteGroups service.
             #
-            # Service for managing {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroups}.
+            # Service for managing
+            # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroups}.
             #
             class Client
               include Paths
@@ -278,7 +279,8 @@ module Google
               end
 
               ##
-              # Retrieves the specified {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
+              # Retrieves the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
               #
               # @overload get_transition_route_group(request, options = nil)
               #   Pass arguments to `get_transition_route_group` via a request object, either of type
@@ -296,7 +298,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
               #   @param language_code [::String]
@@ -378,7 +381,9 @@ module Google
               end
 
               ##
-              # Creates an {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup} in the specified flow.
+              # Creates an
+              # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
+              # in the specified flow.
               #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
@@ -400,8 +405,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The flow to create an {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup} for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     Required. The flow to create an
+              #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
+              #     for. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/flows/<Flow ID>`.
               #   @param transition_route_group [::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup, ::Hash]
               #     Required. The transition route group to create.
@@ -483,7 +489,8 @@ module Google
               end
 
               ##
-              # Updates the specified {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
+              # Updates the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
               #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
@@ -586,7 +593,8 @@ module Google
               end
 
               ##
-              # Deletes the specified {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
+              # Deletes the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.
               #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
@@ -608,9 +616,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup} to delete.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}
+              #     to delete. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/flows/<Flow ID>/transitionRouteGroups/<Transition
+              #     Route Group ID>`.
               #   @param force [::Boolean]
               #     This field has no effect for transition route group that no page is using.
               #     If the transition route group is referenced by any page:

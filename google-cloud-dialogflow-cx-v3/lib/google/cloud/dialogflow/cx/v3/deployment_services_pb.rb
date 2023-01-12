@@ -34,9 +34,11 @@ module Google
               self.unmarshal_class_method = :decode
               self.service_name = 'google.cloud.dialogflow.cx.v3.Deployments'
 
-              # Returns the list of all deployments in the specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
+              # Returns the list of all deployments in the specified
+              # [Environment][google.cloud.dialogflow.cx.v3.Environment].
               rpc :ListDeployments, ::Google::Cloud::Dialogflow::CX::V3::ListDeploymentsRequest, ::Google::Cloud::Dialogflow::CX::V3::ListDeploymentsResponse
-              # Retrieves the specified [Deployment][google.cloud.dialogflow.cx.v3.Deployment].
+              # Retrieves the specified
+              # [Deployment][google.cloud.dialogflow.cx.v3.Deployment].
               rpc :GetDeployment, ::Google::Cloud::Dialogflow::CX::V3::GetDeploymentRequest, ::Google::Cloud::Dialogflow::CX::V3::Deployment
             end
 

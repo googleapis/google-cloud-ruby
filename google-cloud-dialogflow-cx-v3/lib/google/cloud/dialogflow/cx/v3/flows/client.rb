@@ -997,7 +997,8 @@ module Google
               #
               # - `metadata`: An empty [Struct
               #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ImportFlowResponse ImportFlowResponse}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ImportFlowResponse ImportFlowResponse}
               #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
@@ -1117,7 +1118,8 @@ module Google
               #
               # - `metadata`: An empty [Struct
               #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ExportFlowResponse ExportFlowResponse}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ExportFlowResponse ExportFlowResponse}
               #
               # Note that resources (e.g. intents, entities, webhooks) that the flow
               # references will also be exported.
@@ -1142,10 +1144,10 @@ module Google
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/flows/<Flow ID>`.
               #   @param flow_uri [::String]
-              #     Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to
-              #     export the flow to. The format of this URI must be
-              #     `gs://<bucket-name>/<object-name>`.
-              #     If left unspecified, the serialized flow is returned inline.
+              #     Optional. The [Google Cloud
+              #     Storage](https://cloud.google.com/storage/docs/) URI to export the flow to.
+              #     The format of this URI must be `gs://<bucket-name>/<object-name>`. If left
+              #     unspecified, the serialized flow is returned inline.
               #
               #     Dialogflow performs a write operation for the Cloud Storage object
               #     on the caller's behalf, so your request authentication must

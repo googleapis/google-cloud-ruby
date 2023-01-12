@@ -32,7 +32,8 @@ module Google
       module CX
         module V3
           ##
-          # Service for managing {::Google::Cloud::Dialogflow::CX::V3::SessionEntityType SessionEntityTypes}.
+          # Service for managing
+          # {::Google::Cloud::Dialogflow::CX::V3::SessionEntityType SessionEntityTypes}.
           #
           # @example Load this service and instantiate a gRPC client
           #

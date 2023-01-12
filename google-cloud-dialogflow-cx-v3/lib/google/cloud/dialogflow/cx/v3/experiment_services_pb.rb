@@ -34,21 +34,27 @@ module Google
               self.unmarshal_class_method = :decode
               self.service_name = 'google.cloud.dialogflow.cx.v3.Experiments'
 
-              # Returns the list of all experiments in the specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
+              # Returns the list of all experiments in the specified
+              # [Environment][google.cloud.dialogflow.cx.v3.Environment].
               rpc :ListExperiments, ::Google::Cloud::Dialogflow::CX::V3::ListExperimentsRequest, ::Google::Cloud::Dialogflow::CX::V3::ListExperimentsResponse
-              # Retrieves the specified [Experiment][google.cloud.dialogflow.cx.v3.Experiment].
+              # Retrieves the specified
+              # [Experiment][google.cloud.dialogflow.cx.v3.Experiment].
               rpc :GetExperiment, ::Google::Cloud::Dialogflow::CX::V3::GetExperimentRequest, ::Google::Cloud::Dialogflow::CX::V3::Experiment
-              # Creates an [Experiment][google.cloud.dialogflow.cx.v3.Experiment] in the specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
+              # Creates an [Experiment][google.cloud.dialogflow.cx.v3.Experiment] in the
+              # specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
               rpc :CreateExperiment, ::Google::Cloud::Dialogflow::CX::V3::CreateExperimentRequest, ::Google::Cloud::Dialogflow::CX::V3::Experiment
-              # Updates the specified [Experiment][google.cloud.dialogflow.cx.v3.Experiment].
+              # Updates the specified
+              # [Experiment][google.cloud.dialogflow.cx.v3.Experiment].
               rpc :UpdateExperiment, ::Google::Cloud::Dialogflow::CX::V3::UpdateExperimentRequest, ::Google::Cloud::Dialogflow::CX::V3::Experiment
-              # Deletes the specified [Experiment][google.cloud.dialogflow.cx.v3.Experiment].
+              # Deletes the specified
+              # [Experiment][google.cloud.dialogflow.cx.v3.Experiment].
               rpc :DeleteExperiment, ::Google::Cloud::Dialogflow::CX::V3::DeleteExperimentRequest, ::Google::Protobuf::Empty
-              # Starts the specified [Experiment][google.cloud.dialogflow.cx.v3.Experiment]. This rpc only changes the state of
-              # experiment from PENDING to RUNNING.
+              # Starts the specified
+              # [Experiment][google.cloud.dialogflow.cx.v3.Experiment]. This rpc only
+              # changes the state of experiment from PENDING to RUNNING.
               rpc :StartExperiment, ::Google::Cloud::Dialogflow::CX::V3::StartExperimentRequest, ::Google::Cloud::Dialogflow::CX::V3::Experiment
-              # Stops the specified [Experiment][google.cloud.dialogflow.cx.v3.Experiment]. This rpc only changes the state of
-              # experiment from RUNNING to DONE.
+              # Stops the specified [Experiment][google.cloud.dialogflow.cx.v3.Experiment].
+              # This rpc only changes the state of experiment from RUNNING to DONE.
               rpc :StopExperiment, ::Google::Cloud::Dialogflow::CX::V3::StopExperimentRequest, ::Google::Cloud::Dialogflow::CX::V3::Experiment
             end
 

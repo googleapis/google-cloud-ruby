@@ -640,7 +640,8 @@ module Google
               #
               # - `metadata`: An empty [Struct
               #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ExportAgentResponse ExportAgentResponse}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ExportAgentResponse ExportAgentResponse}
               #
               # @overload export_agent(request, options = nil)
               #   Pass arguments to `export_agent` via a request object, either of type
@@ -661,10 +662,10 @@ module Google
               #     Required. The name of the agent to export.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
               #   @param agent_uri [::String]
-              #     Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to
-              #     export the agent to. The format of this URI must be
-              #     `gs://<bucket-name>/<object-name>`.
-              #     If left unspecified, the serialized agent is returned inline.
+              #     Optional. The [Google Cloud
+              #     Storage](https://cloud.google.com/storage/docs/) URI to export the agent
+              #     to. The format of this URI must be `gs://<bucket-name>/<object-name>`. If
+              #     left unspecified, the serialized agent is returned inline.
               #
               #     Dialogflow performs a write operation for the Cloud Storage object
               #     on the caller's behalf, so your request authentication must
@@ -672,7 +673,8 @@ module Google
               #     [Dialogflow access
               #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
               #   @param data_format [::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest::DataFormat]
-              #     Optional. The data format of the exported agent. If not specified, `BLOB` is assumed.
+              #     Optional. The data format of the exported agent. If not specified, `BLOB`
+              #     is assumed.
               #   @param environment [::String]
               #     Optional. Environment name. If not set, draft environment is assumed.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
