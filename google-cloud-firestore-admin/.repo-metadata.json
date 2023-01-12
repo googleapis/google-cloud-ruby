@@ -8,7 +8,7 @@
     "name": "firestore",
     "name_pretty": "Cloud Firestore Admin API",
     "product_documentation": "https://cloud.google.com/firestore",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Cloud Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development.",
