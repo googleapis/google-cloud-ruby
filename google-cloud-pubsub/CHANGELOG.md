@@ -1,5 +1,11 @@
 # Release History
 
+### 2.14.0 (2023-01-12)
+
+#### Features
+
+* Added support for schema evolution, including managing schema revisions, and schema commit and rollback ([#19981](https://github.com/googleapis/google-cloud-ruby/issues/19981)) 
+
 ### 2.13.0 (2022-10-18)
 
 #### Features
