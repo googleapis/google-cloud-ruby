@@ -497,6 +497,19 @@ module Google
           ref
         end
 
+        ##
+        # Converts a hash to a Google::Apis::BigqueryV2::DatasetAccessEntry oject.
+        #
+        # @param [Hash<String,String>] dataset_hash Hash for a DatasetAccessEntry.
+        #
+        def self.dataset_access_entry_from_hash dataset_hash
+          params = {
+            dataset: Google::Apis::BigqueryV2::DatasetReference.new(**dataset_hash),
+            target_types: dataset_hash[:target_types]
+          }.delete_if { |_, v| v.nil? }
+          Google::Apis::BigqueryV2::DatasetAccessEntry.new(**params)
+        end
+
         def self.validate_table_ref table_ref
           [:project_id, :dataset_id, :table_id].each do |f|
             raise ArgumentError, "TableReference is missing #{f}" if table_ref.send(f).nil?

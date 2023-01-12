@@ -2741,6 +2741,29 @@ module Google
                              interval: interval, threads: threads, &block
         end
 
+        ##
+        # Build an object of type Google::Apis::BigqueryV2::DatasetAccessEntry from
+        # the self.
+        #
+        # @param [Array<String>] target_types The list of target types within the dataset.
+        #
+        # @return [Google::Apis::BigqueryV2::DatasetAccessEntry] Returns a DatasetAccessEntry object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   dataset_access_entry = dataset.access_entry target_types: ["VIEWS"]
+        #
+        def build_access_entry target_types: nil
+          params = {
+            dataset: dataset_ref,
+            target_types: target_types
+          }.delete_if { |_, v| v.nil? }
+          Google::Apis::BigqueryV2::DatasetAccessEntry.new(**params)
+        end
+
         protected
 
         def insert_data_with_autocreate table_id, rows, skip_invalid: nil, ignore_unknown: nil, insert_ids: nil

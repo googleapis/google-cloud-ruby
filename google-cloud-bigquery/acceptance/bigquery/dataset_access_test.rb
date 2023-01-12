@@ -41,6 +41,8 @@ describe Google::Cloud::Bigquery::Dataset, :access, :bigquery do
     end
     t
   end
+  let(:target_types) { ["VIEWS"] }
+
 
   it "adds an access entry with specifying user scope" do
     dataset.access do |acl|
@@ -85,6 +87,44 @@ describe Google::Cloud::Bigquery::Dataset, :access, :bigquery do
     end
     dataset = bigquery.dataset dataset_id
     refute dataset.access.reader_view? view
+  end
+
+  it "adds and removes an access entry with specifying dataset object" do
+    dataset_access_entry = dataset_access.build_access_entry target_types: target_types
+
+    refute dataset.access.reader_dataset? dataset_access_entry
+    dataset.access do |acl|
+      acl.add_reader_dataset dataset_access_entry
+    end
+    dataset.reload!
+    assert dataset.access.reader_dataset? dataset_access_entry
+
+    dataset.access do |acl|
+      acl.remove_reader_dataset dataset_access_entry
+    end
+    dataset.reload!
+    refute dataset.access.reader_dataset? dataset_access_entry
+  end
+
+  it "adds and removes an access entry with specifying dataset hash" do
+    dataset_access_entry = {
+      project_id: dataset_access.project_id,
+      dataset_id: dataset_access.dataset_id,
+      target_types: target_types
+    }
+
+    refute dataset.access.reader_dataset? dataset_access_entry
+    dataset.access do |acl|
+      acl.add_reader_dataset dataset_access_entry
+    end
+    dataset.reload!
+    assert dataset.access.reader_dataset? dataset_access_entry
+
+    dataset.access do |acl|
+      acl.remove_reader_dataset dataset_access_entry
+    end
+    dataset.reload!
+    refute dataset.access.reader_dataset? dataset_access_entry
   end
 
   describe :routine do
