@@ -19,12 +19,6 @@ require "net/http"
 
 require "google/cloud/video/stitcher"
 
-require_relative "akamai_cdn_key_definition"
-require_relative "cloud_cdn_key_definition"
-require_relative "live_session_definition"
-require_relative "media_cdn_key_definition"
-require_relative "slate_definition"
-require_relative "vod_session_definition"
 require_relative "../../../.toys/.lib/sample_loader"
 
 
@@ -181,6 +175,65 @@ class StitcherSnippetSpec < Minitest::Spec
         puts "Rescued: #{e.inspect}"
       end
     end
+  end
+
+  ##
+  # Definitions for Video Stitcher resources
+  def akamai_cdn_def cdn_key_path, hostname, akamai_token_key
+    {
+      name: cdn_key_path,
+      hostname: hostname,
+      akamai_cdn_key: {
+        token_key: akamai_token_key
+      }
+    }
+  end
+
+  def cloud_cdn_def cdn_key_path, hostname, key_name, private_key
+    {
+      name: cdn_key_path,
+      hostname: hostname,
+      google_cdn_key: {
+        key_name: key_name,
+        private_key: private_key
+      }
+    }
+  end
+
+  def live_session_def source_uri, ad_tag_uri, slate_id
+    {
+      source_uri: source_uri,
+      ad_tag_map: {
+        default: {
+          uri: ad_tag_uri
+        }
+      },
+      default_slate_id: slate_id
+    }
+  end
+
+  def media_cdn_def cdn_key_path, hostname, key_name, private_key
+    {
+      name: cdn_key_path,
+      hostname: hostname,
+      media_cdn_key: {
+        key_name: key_name,
+        private_key: private_key
+      }
+    }
+  end
+
+  def slate_def slate_uri
+    {
+      uri: slate_uri
+    }
+  end
+
+  def vod_session_def source_uri, ad_tag_uri
+    {
+      source_uri: source_uri,
+      ad_tag_uri: ad_tag_uri
+    }
   end
 
   ##
