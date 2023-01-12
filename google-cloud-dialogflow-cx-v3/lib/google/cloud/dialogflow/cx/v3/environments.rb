@@ -33,7 +33,8 @@ module Google
       module CX
         module V3
           ##
-          # Service for managing {::Google::Cloud::Dialogflow::CX::V3::Environment Environments}.
+          # Service for managing
+          # {::Google::Cloud::Dialogflow::CX::V3::Environment Environments}.
           #
           # @example Load this service and instantiate a gRPC client
           #

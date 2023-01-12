@@ -178,7 +178,8 @@ module Google
               # Service calls
 
               ##
-              # Returns the list of all versions in the specified {::Google::Cloud::Dialogflow::CX::V3::Flow Flow}.
+              # Returns the list of all versions in the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Flow Flow}.
               #
               # @overload list_versions(request, options = nil)
               #   Pass arguments to `list_versions` via a request object, either of type
@@ -196,9 +197,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Flow Flow} to list all versions for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Flow Flow} to list all
+              #     versions for. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/flows/<Flow ID>`.
               #   @param page_size [::Integer]
               #     The maximum number of items to return in a single page. By default 20 and
               #     at most 100.
@@ -364,13 +365,15 @@ module Google
               end
 
               ##
-              # Creates a {::Google::Cloud::Dialogflow::CX::V3::Version Version} in the specified {::Google::Cloud::Dialogflow::CX::V3::Flow Flow}.
+              # Creates a {::Google::Cloud::Dialogflow::CX::V3::Version Version} in the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Flow Flow}.
               #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::CreateVersionOperationMetadata CreateVersionOperationMetadata}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::CreateVersionOperationMetadata CreateVersionOperationMetadata}
               # - `response`: {::Google::Cloud::Dialogflow::CX::V3::Version Version}
               #
               # @overload create_version(request, options = nil)
@@ -389,8 +392,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Flow Flow} to create an {::Google::Cloud::Dialogflow::CX::V3::Version Version} for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Flow Flow} to create an
+              #     {::Google::Cloud::Dialogflow::CX::V3::Version Version} for. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/flows/<Flow ID>`.
               #   @param version [::Google::Cloud::Dialogflow::CX::V3::Version, ::Hash]
               #     Required. The version to create.
@@ -488,8 +492,8 @@ module Google
               #   @param version [::Google::Cloud::Dialogflow::CX::V3::Version, ::Hash]
               #     Required. The version to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The mask to control which fields get updated. Currently only `description`
-              #     and `display_name` can be updated.
+              #     Required. The mask to control which fields get updated. Currently only
+              #     `description` and `display_name` can be updated.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Dialogflow::CX::V3::Version]
@@ -574,9 +578,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Version Version} to delete.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>/versions/<Version ID>`.
+              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Version Version}
+              #     to delete. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -670,9 +674,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Version Version} to be loaded to draft flow.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>/versions/<Version ID>`.
+              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Version Version} to be loaded
+              #     to draft flow. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
               #   @param allow_override_agent_resources [::Boolean]
               #     This field is used to prevent accidental overwrite of other agent
               #     resources, which can potentially impact other flow's behavior. If
@@ -770,8 +774,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param base_version [::String]
-              #     Required. Name of the base flow version to compare with the target version. Use
-              #     version ID `0` to indicate the draft version of the specified flow.
+              #     Required. Name of the base flow version to compare with the target version.
+              #     Use version ID `0` to indicate the draft version of the specified flow.
               #
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/
               #     <Agent ID>/flows/<Flow ID>/versions/<Version ID>`.

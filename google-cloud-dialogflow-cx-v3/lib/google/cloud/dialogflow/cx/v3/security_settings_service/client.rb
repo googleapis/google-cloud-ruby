@@ -183,7 +183,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The location to create an {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings} for.
+              #     Required. The location to create an
+              #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings} for.
               #     Format: `projects/<Project ID>/locations/<Location ID>`.
               #   @param security_settings [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings, ::Hash]
               #     Required. The security settings to create.
@@ -253,8 +254,9 @@ module Google
               end
 
               ##
-              # Retrieves the specified {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings}.
-              # The returned settings may be stale by up to 1 minute.
+              # Retrieves the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings}. The
+              # returned settings may be stale by up to 1 minute.
               #
               # @overload get_security_settings(request, options = nil)
               #   Pass arguments to `get_security_settings` via a request object, either of type
@@ -341,7 +343,8 @@ module Google
               end
 
               ##
-              # Updates the specified {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings}.
+              # Updates the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings}.
               #
               # @overload update_security_settings(request, options = nil)
               #   Pass arguments to `update_security_settings` via a request object, either of type
@@ -362,8 +365,8 @@ module Google
               #     Required. [SecuritySettings] object that contains values for each of the
               #     fields to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The mask to control which fields get updated. If the mask is not present,
-              #     all fields will be updated.
+              #     Required. The mask to control which fields get updated. If the mask is not
+              #     present, all fields will be updated.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings]
@@ -528,7 +531,8 @@ module Google
               end
 
               ##
-              # Deletes the specified {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings}.
+              # Deletes the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings}.
               #
               # @overload delete_security_settings(request, options = nil)
               #   Pass arguments to `delete_security_settings` via a request object, either of type
@@ -546,8 +550,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings} to delete.
-              #     Format: `projects/<Project ID>/locations/<Location
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings} to
+              #     delete. Format: `projects/<Project ID>/locations/<Location
               #     ID>/securitySettings/<Security Settings ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
