@@ -88,7 +88,17 @@ class MockBigquery < Minitest::Spec
       "creationTime" => time_millis,
       "lastModifiedTime" => time_millis,
       "location" => location,
-      "labels" => { "foo" => "bar" }
+      "labels" => { "foo" => "bar" },
+      "tags" => [
+        {
+          "tagKey" => "2424242256/environment",
+          "tagValue" => "production"
+        },
+        {
+          "tagKey" => "2424242256/cost_center",
+          "tagValue" => "sales"
+        }
+      ]
     }
   end
 
