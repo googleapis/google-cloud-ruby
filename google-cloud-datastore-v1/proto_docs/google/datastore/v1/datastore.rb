@@ -96,7 +96,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#run_query Datastore.RunQuery}.
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#run_query Datastore.RunQuery}.
         # @!attribute [rw] batch
         #   @return [::Google::Cloud::Datastore::V1::QueryResultBatch]
         #     A batch of query results (always present).
@@ -108,7 +109,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query Datastore.RunAggregationQuery}.
+        # The request for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query Datastore.RunAggregationQuery}.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
@@ -138,7 +140,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query Datastore.RunAggregationQuery}.
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query Datastore.RunAggregationQuery}.
         # @!attribute [rw] batch
         #   @return [::Google::Cloud::Datastore::V1::AggregationResultBatch]
         #     A batch of aggregation results. Always present.
@@ -150,7 +153,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+        # The request for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
@@ -168,7 +172,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
         # @!attribute [rw] transaction
         #   @return [::String]
         #     The transaction identifier (always present).
@@ -196,8 +201,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#rollback Datastore.Rollback}.
-        # (an empty message).
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#rollback Datastore.Rollback}. (an empty
+        # message).
         class RollbackResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -272,7 +278,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Datastore::V1::Datastore::Client#allocate_ids Datastore.AllocateIds}.
+        # The request for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#allocate_ids Datastore.AllocateIds}.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
@@ -284,14 +291,15 @@ module Google
         #     database.
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::Datastore::V1::Key>]
-        #     Required. A list of keys with incomplete key paths for which to allocate IDs.
-        #     No key may be reserved/read-only.
+        #     Required. A list of keys with incomplete key paths for which to allocate
+        #     IDs. No key may be reserved/read-only.
         class AllocateIdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#allocate_ids Datastore.AllocateIds}.
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#allocate_ids Datastore.AllocateIds}.
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::Datastore::V1::Key>]
         #     The keys specified in the request (in the same order), each with
@@ -301,7 +309,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Datastore::V1::Datastore::Client#reserve_ids Datastore.ReserveIds}.
+        # The request for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#reserve_ids Datastore.ReserveIds}.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
@@ -313,14 +322,15 @@ module Google
         #     database.
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::Datastore::V1::Key>]
-        #     Required. A list of keys with complete key paths whose numeric IDs should not be
-        #     auto-allocated.
+        #     Required. A list of keys with complete key paths whose numeric IDs should
+        #     not be auto-allocated.
         class ReserveIdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#reserve_ids Datastore.ReserveIds}.
+        # The response for
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#reserve_ids Datastore.ReserveIds}.
         class ReserveIdsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -419,8 +429,10 @@ module Google
         # Options for beginning a new transaction.
         #
         # Transactions can be created explicitly with calls to
-        # {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction} or implicitly by setting
-        # [ReadOptions.new_transaction][google.datastore.v1.ReadOptions.new_transaction] in read requests.
+        # {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}
+        # or implicitly by setting
+        # [ReadOptions.new_transaction][google.datastore.v1.ReadOptions.new_transaction]
+        # in read requests.
         # @!attribute [rw] read_write
         #   @return [::Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite]
         #     The transaction should allow both reads and writes.
