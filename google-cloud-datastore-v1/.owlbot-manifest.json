@@ -28,6 +28,7 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/api/routing.rb",
     "proto_docs/google/datastore/v1/aggregation_result.rb",
     "proto_docs/google/datastore/v1/datastore.rb",
     "proto_docs/google/datastore/v1/entity.rb",
