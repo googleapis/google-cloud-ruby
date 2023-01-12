@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.0 (2023-01-12)
+
+#### Features
+
+* Added support for the Snooze Service ([#19975](https://github.com/googleapis/google-cloud-ruby/issues/19975)) 
+
 ### 1.4.1 (2022-08-09)
 
 #### Documentation
