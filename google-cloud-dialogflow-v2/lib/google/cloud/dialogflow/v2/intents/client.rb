@@ -683,7 +683,8 @@ module Google
             #
             # - `metadata`: An empty [Struct
             #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-            # - `response`: {::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse BatchUpdateIntentsResponse}
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse BatchUpdateIntentsResponse}
             #
             # Note: You should always train an agent prior to sending it queries. See the
             # [training

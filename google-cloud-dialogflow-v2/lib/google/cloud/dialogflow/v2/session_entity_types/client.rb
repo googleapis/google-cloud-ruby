@@ -28,7 +28,8 @@ module Google
           ##
           # Client for the SessionEntityTypes service.
           #
-          # Service for managing {::Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityTypes}.
+          # Service for managing
+          # {::Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityTypes}.
           #
           class Client
             include Paths

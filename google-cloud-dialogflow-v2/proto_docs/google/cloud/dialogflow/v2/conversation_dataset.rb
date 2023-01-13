@@ -24,9 +24,9 @@ module Google
         # Represents metadata of a conversation.
         # @!attribute [rw] language_code
         #   @return [::String]
-        #     Optional. The language code of the conversation data within this dataset. See
-        #     https://cloud.google.com/apis/design/standard_fields for more information.
-        #     Supports all UTF-8 languages.
+        #     Optional. The language code of the conversation data within this dataset.
+        #     See https://cloud.google.com/apis/design/standard_fields for more
+        #     information. Supports all UTF-8 languages.
         class ConversationInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -70,7 +70,8 @@ module Google
         #     Output only. Metadata set during conversation data import.
         # @!attribute [r] conversation_count
         #   @return [::Integer]
-        #     Output only. The number of conversations this conversation dataset contains.
+        #     Output only. The number of conversations this conversation dataset
+        #     contains.
         class ConversationDataset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -106,8 +107,8 @@ module Google
         # {::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#list_conversation_datasets ConversationDatasets.ListConversationDatasets}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project and location name to list all conversation datasets for.
-        #     Format: `projects/<Project ID>/locations/<Location ID>`
+        #     Required. The project and location name to list all conversation datasets
+        #     for. Format: `projects/<Project ID>/locations/<Location ID>`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of conversation datasets to return in a single
@@ -146,7 +147,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#import_conversation_data ConversationDatasets.ImportConversationData}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#import_conversation_data ConversationDatasets.ImportConversationData}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Dataset resource name. Format:
@@ -160,7 +162,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for a {::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#import_conversation_data ConversationDatasets.ImportConversationData} operation.
+        # Metadata for a
+        # {::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#import_conversation_data ConversationDatasets.ImportConversationData}
+        # operation.
         # @!attribute [rw] conversation_dataset
         #   @return [::String]
         #     The resource name of the imported conversation dataset. Format:
@@ -179,8 +183,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response used for {::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#import_conversation_data ConversationDatasets.ImportConversationData} long
-        # running operation.
+        # Response used for
+        # {::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client#import_conversation_data ConversationDatasets.ImportConversationData}
+        # long running operation.
         # @!attribute [rw] conversation_dataset
         #   @return [::String]
         #     The resource name of the imported conversation dataset. Format:

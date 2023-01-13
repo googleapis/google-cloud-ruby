@@ -28,7 +28,8 @@ module Google
           ##
           # Client for the Documents service.
           #
-          # Service for managing knowledge {::Google::Cloud::Dialogflow::V2::Document Documents}.
+          # Service for managing knowledge
+          # {::Google::Cloud::Dialogflow::V2::Document Documents}.
           #
           class Client
             include Paths
@@ -391,7 +392,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
             # - `response`: {::Google::Cloud::Dialogflow::V2::Document Document}
             #
             # @overload create_document(request, options = nil)
@@ -497,8 +499,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
-            # - `response`: {::Google::Cloud::Dialogflow::V2::ImportDocumentsResponse ImportDocumentsResponse}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::ImportDocumentsResponse ImportDocumentsResponse}
             #
             # @overload import_documents(request, options = nil)
             #   Pass arguments to `import_documents` via a request object, either of type
@@ -611,7 +615,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
             # - `response`: An [Empty
             #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
             #
@@ -714,7 +719,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
             # - `response`: {::Google::Cloud::Dialogflow::V2::Document Document}
             #
             # @overload update_document(request, options = nil)
@@ -821,7 +827,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
             # - `response`: {::Google::Cloud::Dialogflow::V2::Document Document}
             #
             # Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
@@ -847,8 +854,8 @@ module Google
             #     Format: `projects/<Project ID>/locations/<Location
             #     ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`
             #   @param content_uri [::String]
-            #     Optional. The path of gcs source file for reloading document content. For now,
-            #     only gcs uri is supported.
+            #     Optional. The path of gcs source file for reloading document content. For
+            #     now, only gcs uri is supported.
             #
             #     For documents stored in Google Cloud Storage, these URIs must have
             #     the form `gs://<bucket-name>/<object-name>`.
@@ -856,8 +863,8 @@ module Google
             #     Optional. Whether to import custom metadata from Google Cloud Storage.
             #     Only valid when the document source is Google Cloud Storage URI.
             #   @param smart_messaging_partial_update [::Boolean]
-            #     Optional. When enabled, the reload request is to apply partial update to the smart
-            #     messaging allowlist.
+            #     Optional. When enabled, the reload request is to apply partial update to
+            #     the smart messaging allowlist.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -939,7 +946,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
             # - `response`: {::Google::Cloud::Dialogflow::V2::Document Document}
             #
             # @overload export_document(request, options = nil)

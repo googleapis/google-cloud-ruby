@@ -356,6 +356,11 @@
               "methods": [
                 "list_messages"
               ]
+            },
+            "SuggestConversationSummary": {
+              "methods": [
+                "suggest_conversation_summary"
+              ]
             }
           }
         }

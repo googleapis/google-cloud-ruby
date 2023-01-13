@@ -28,7 +28,8 @@ module Google
           ##
           # Client for the ConversationProfiles service.
           #
-          # Service for managing {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfiles}.
+          # Service for managing
+          # {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfiles}.
           #
           class Client
             include Paths
@@ -366,7 +367,8 @@ module Google
             #
             # [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][]
             # aren't populated in the response. You can retrieve them via
-            # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#get_conversation_profile GetConversationProfile} API.
+            # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#get_conversation_profile GetConversationProfile}
+            # API.
             #
             # @overload create_conversation_profile(request, options = nil)
             #   Pass arguments to `create_conversation_profile` via a request object, either of type
@@ -458,7 +460,8 @@ module Google
             #
             # [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][]
             # aren't populated in the response. You can retrieve them via
-            # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#get_conversation_profile GetConversationProfile} API.
+            # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#get_conversation_profile GetConversationProfile}
+            # API.
             #
             # @overload update_conversation_profile(request, options = nil)
             #   Pass arguments to `update_conversation_profile` via a request object, either of type
@@ -641,8 +644,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigOperationMetadata SetSuggestionFeatureConfigOperationMetadata}
-            # - `response`: {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigOperationMetadata SetSuggestionFeatureConfigOperationMetadata}
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}
             #
             # If a long running operation to add or update suggestion feature
             # config for the same conversation profile, participant role and suggestion
@@ -754,8 +759,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigOperationMetadata ClearSuggestionFeatureConfigOperationMetadata}
-            # - `response`: {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigOperationMetadata ClearSuggestionFeatureConfigOperationMetadata}
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}
             #
             # @overload clear_suggestion_feature_config(request, options = nil)
             #   Pass arguments to `clear_suggestion_feature_config` via a request object, either of type

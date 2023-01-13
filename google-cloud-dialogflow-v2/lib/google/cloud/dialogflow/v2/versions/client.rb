@@ -188,8 +188,8 @@ module Google
             #     - `projects/<Project ID>/agent`
             #     - `projects/<Project ID>/locations/<Location ID>/agent`
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of items to return in a single page. By default 100 and
-            #     at most 1000.
+            #     Optional. The maximum number of items to return in a single page. By
+            #     default 100 and at most 1000.
             #   @param page_token [::String]
             #     Optional. The next_page_token value returned from a previous list request.
             #

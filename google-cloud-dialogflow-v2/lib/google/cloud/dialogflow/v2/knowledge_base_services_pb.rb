@@ -24,7 +24,8 @@ module Google
     module Dialogflow
       module V2
         module KnowledgeBases
-          # Service for managing [KnowledgeBases][google.cloud.dialogflow.v2.KnowledgeBase].
+          # Service for managing
+          # [KnowledgeBases][google.cloud.dialogflow.v2.KnowledgeBase].
           class Service
 
             include ::GRPC::GenericService

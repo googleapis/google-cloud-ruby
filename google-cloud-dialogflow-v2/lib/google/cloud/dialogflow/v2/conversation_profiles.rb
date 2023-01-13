@@ -32,7 +32,8 @@ module Google
     module Dialogflow
       module V2
         ##
-        # Service for managing {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfiles}.
+        # Service for managing
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfiles}.
         #
         # @example Load this service and instantiate a gRPC client
         #

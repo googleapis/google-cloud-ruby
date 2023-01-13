@@ -186,8 +186,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::CreateConversationDatasetOperationMetadata CreateConversationDatasetOperationMetadata}
-            # - `response`: {::Google::Cloud::Dialogflow::V2::ConversationDataset ConversationDataset}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::CreateConversationDatasetOperationMetadata CreateConversationDatasetOperationMetadata}
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::ConversationDataset ConversationDataset}
             #
             # @overload create_conversation_dataset(request, options = nil)
             #   Pass arguments to `create_conversation_dataset` via a request object, either of type
@@ -389,8 +391,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location name to list all conversation datasets for.
-            #     Format: `projects/<Project ID>/locations/<Location ID>`
+            #     Required. The project and location name to list all conversation datasets
+            #     for. Format: `projects/<Project ID>/locations/<Location ID>`
             #   @param page_size [::Integer]
             #     Optional. Maximum number of conversation datasets to return in a single
             #     page. By default 100 and at most 1000.
@@ -475,7 +477,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetOperationMetadata DeleteConversationDatasetOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetOperationMetadata DeleteConversationDatasetOperationMetadata}
             # - `response`: An [Empty
             #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
             #
@@ -580,8 +583,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::ImportConversationDataOperationMetadata ImportConversationDataOperationMetadata}
-            # - `response`: {::Google::Cloud::Dialogflow::V2::ImportConversationDataOperationResponse ImportConversationDataOperationResponse}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::ImportConversationDataOperationMetadata ImportConversationDataOperationMetadata}
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::ImportConversationDataOperationResponse ImportConversationDataOperationResponse}
             #
             # @overload import_conversation_data(request, options = nil)
             #   Pass arguments to `import_conversation_data` via a request object, either of type
