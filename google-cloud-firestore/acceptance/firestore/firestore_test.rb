@@ -72,7 +72,7 @@ describe "Firestore", :firestore_acceptance do
     _(docs.to_a.count).must_equal 2
   end
 
-  focus; it "has get_all method with read_time argument" do
+  it "has get_all method with read_time argument" do
     get_all_col = firestore.col "#{root_path}/get_all/#{SecureRandom.hex(4)}"
     results = []
     results_1 = []
