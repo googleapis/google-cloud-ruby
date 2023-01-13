@@ -157,6 +157,15 @@ module Google
         end
         alias run_query run
 
+        def run_aggregation aggregate_query, namespace: nil
+          ensure_service!
+          unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
+            raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
+          end
+          aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc, namespace
+          AggregateQueryResults.from_grpc aggregate_query_results
+        end
+
         ##
         # Begins a transaction.
         # This method is run when a new ReadOnlyTransaction is created.

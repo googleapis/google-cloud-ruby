@@ -253,24 +253,43 @@ describe "Aggregate Queries", :datastore do
       expect { res = dataset.run_aggregation aggregate_query }.must_raise Google::Cloud::InvalidArgumentError
     end
 
+    focus;
+    it "returns count inside a transaction" do
+      query = Google::Cloud::Datastore.new.
+        query("Character").
+        ancestor(book)
+      dataset.read_only_transaction do |tx|
+        aggregate_query = query.aggregate_query
+                               .add_count
+        res = dataset.run_aggregation aggregate_query
+        _(res.get('count')).must_equal 8
+      end
+    end
   end
 
   describe "via GQL" do
-    
     focus
-    it "aggregates simple gql query" do
+    it "returns count for non-zero records" do
       gql = dataset.gql "SELECT COUNT(*) AS total FROM Character"
       res = dataset.run_aggregation gql
       _(res.get('total')).must_equal 8
     end
   
     focus
-    it "aggregates gql query with a filter" do
+    it "returns count with a filter" do
       gql = dataset.gql "SELECT COUNT(*) AS total_alive FROM Character WHERE alive = @alive", alive: true
       res = dataset.run_aggregation gql
       _(res.get('total_alive')).must_equal 4
     end
 
+    focus;
+    it "returns count inside a transaction" do
+      dataset.read_only_transaction do |tx|
+        gql = dataset.gql "SELECT COUNT(*) AS total FROM Character"
+        res = dataset.run_aggregation gql
+        _(res.get('total')).must_equal 8
+      end
+    end
   end
 
 end
