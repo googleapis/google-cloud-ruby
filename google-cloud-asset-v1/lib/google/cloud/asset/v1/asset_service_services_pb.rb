@@ -36,13 +36,14 @@ module Google
             # Exports assets with time and resource types to a given Cloud Storage
             # location/BigQuery table. For Cloud Storage location destinations, the
             # output format is newline-delimited JSON. Each line represents a
-            # [google.cloud.asset.v1.Asset][google.cloud.asset.v1.Asset] in the JSON format; for BigQuery table
-            # destinations, the output table stores the fields in asset Protobuf as
-            # columns. This API implements the [google.longrunning.Operation][google.longrunning.Operation] API,
-            # which allows you to keep track of the export. We recommend intervals of at
-            # least 2 seconds with exponential retry to poll the export operation result.
-            # For regular-size resource parent, the export operation usually finishes
-            # within 5 minutes.
+            # [google.cloud.asset.v1.Asset][google.cloud.asset.v1.Asset] in the JSON
+            # format; for BigQuery table destinations, the output table stores the fields
+            # in asset Protobuf as columns. This API implements the
+            # [google.longrunning.Operation][google.longrunning.Operation] API, which
+            # allows you to keep track of the export. We recommend intervals of at least
+            # 2 seconds with exponential retry to poll the export operation result. For
+            # regular-size resource parent, the export operation usually finishes within
+            # 5 minutes.
             rpc :ExportAssets, ::Google::Cloud::Asset::V1::ExportAssetsRequest, ::Google::Longrunning::Operation
             # Lists assets with time and resource types and returns paged results in
             # response.
@@ -66,8 +67,8 @@ module Google
             rpc :UpdateFeed, ::Google::Cloud::Asset::V1::UpdateFeedRequest, ::Google::Cloud::Asset::V1::Feed
             # Deletes an asset feed.
             rpc :DeleteFeed, ::Google::Cloud::Asset::V1::DeleteFeedRequest, ::Google::Protobuf::Empty
-            # Searches all Cloud resources within the specified scope, such as a project,
-            # folder, or organization. The caller must be granted the
+            # Searches all Google Cloud resources within the specified scope, such as a
+            # project, folder, or organization. The caller must be granted the
             # `cloudasset.assets.searchAllResources` permission on the desired scope,
             # otherwise the request will be rejected.
             rpc :SearchAllResources, ::Google::Cloud::Asset::V1::SearchAllResourcesRequest, ::Google::Cloud::Asset::V1::SearchAllResourcesResponse
@@ -83,11 +84,12 @@ module Google
             # accesses on which resources, and writes the analysis results to a Google
             # Cloud Storage or a BigQuery destination. For Cloud Storage destination, the
             # output format is the JSON format that represents a
-            # [AnalyzeIamPolicyResponse][google.cloud.asset.v1.AnalyzeIamPolicyResponse]. This method implements the
-            # [google.longrunning.Operation][google.longrunning.Operation], which allows you to track the operation
-            # status. We recommend intervals of at least 2 seconds with exponential
-            # backoff retry to poll the operation result. The metadata contains the
-            # metadata for the long-running operation.
+            # [AnalyzeIamPolicyResponse][google.cloud.asset.v1.AnalyzeIamPolicyResponse].
+            # This method implements the
+            # [google.longrunning.Operation][google.longrunning.Operation], which allows
+            # you to track the operation status. We recommend intervals of at least 2
+            # seconds with exponential backoff retry to poll the operation result. The
+            # metadata contains the metadata for the long-running operation.
             rpc :AnalyzeIamPolicyLongrunning, ::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest, ::Google::Longrunning::Operation
             # Analyze moving a resource to a specified destination without kicking off
             # the actual move. The analysis is best effort depending on the user's
@@ -122,6 +124,31 @@ module Google
             rpc :DeleteSavedQuery, ::Google::Cloud::Asset::V1::DeleteSavedQueryRequest, ::Google::Protobuf::Empty
             # Gets effective IAM policies for a batch of resources.
             rpc :BatchGetEffectiveIamPolicies, ::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest, ::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse
+            # Analyzes organization policies under a scope.
+            rpc :AnalyzeOrgPolicies, ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest, ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse
+            # Analyzes organization policies governed containers (projects, folders or
+            # organization) under a scope.
+            rpc :AnalyzeOrgPolicyGovernedContainers, ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest, ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse
+            # Analyzes organization policies governed assets (Google Cloud resources or
+            # policies) under a scope. This RPC supports custom constraints and the
+            # following 10 canned constraints:
+            #
+            # * storage.uniformBucketLevelAccess
+            # * iam.disableServiceAccountKeyCreation
+            # * iam.allowedPolicyMemberDomains
+            # * compute.vmExternalIpAccess
+            # * appengine.enforceServiceAccountActAsCheck
+            # * gcp.resourceLocations
+            # * compute.trustedImageProjects
+            # * compute.skipDefaultNetworkCreation
+            # * compute.requireOsLogin
+            # * compute.disableNestedVirtualization
+            #
+            # This RPC only returns either resources of types supported by [searchable
+            # asset
+            # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types),
+            # or IAM policies.
+            rpc :AnalyzeOrgPolicyGovernedAssets, ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest, ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse
           end
 
           Stub = Service.rpc_stub_class

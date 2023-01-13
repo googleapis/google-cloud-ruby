@@ -810,6 +810,126 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_AnalyzeOrgPolicies_sync",
+      "title": "Snippet for analyze_org_policies in AssetService",
+      "description": "Basic snippet for analyze_org_policies in AssetService",
+      "file": "asset_service/analyze_org_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "analyze_org_policies",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#analyze_org_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "AnalyzeOrgPolicies",
+          "full_name": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicies",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedContainers_sync",
+      "title": "Snippet for analyze_org_policy_governed_containers in AssetService",
+      "description": "Basic snippet for analyze_org_policy_governed_containers in AssetService",
+      "file": "asset_service/analyze_org_policy_governed_containers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "analyze_org_policy_governed_containers",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#analyze_org_policy_governed_containers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "AnalyzeOrgPolicyGovernedContainers",
+          "full_name": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedContainers",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedAssets_sync",
+      "title": "Snippet for analyze_org_policy_governed_assets in AssetService",
+      "description": "Basic snippet for analyze_org_policy_governed_assets in AssetService",
+      "file": "asset_service/analyze_org_policy_governed_assets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "analyze_org_policy_governed_assets",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#analyze_org_policy_governed_assets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "AnalyzeOrgPolicyGovernedAssets",
+          "full_name": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedAssets",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
