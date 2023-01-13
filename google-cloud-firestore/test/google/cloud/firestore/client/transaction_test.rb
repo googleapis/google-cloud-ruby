@@ -24,7 +24,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   let(:read_only_transaction_opt) do
     Google::Cloud::Firestore::V1::TransactionOptions.new(
       read_only: Google::Cloud::Firestore::V1::TransactionOptions::ReadOnly.new(
-        read_time: read_time_to_timestamp(read_time)
+        read_time: firestore.service.read_time_to_timestamp(read_time)
       )
     )
   end
@@ -126,7 +126,6 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
     )
     firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query, new_transaction: read_only_transaction_opt)
-    # firestore_mock.expect :commit, empty_commit_resp, commit_args(transaction: transaction_id)
 
     firestore.read_only_transaction read_time: read_time do |tx|
       results_enum = tx.get firestore.col(:users).select(:name)

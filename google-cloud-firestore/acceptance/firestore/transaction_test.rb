@@ -64,7 +64,7 @@ describe "Transaction", :firestore_acceptance do
     _(doc_ref.get[:foo]).must_equal "bar"
   end
 
-  focus; it "read only transaction with read time" do
+  it "read only transaction with read time" do
     get_all_col = firestore.col "#{root_path}/get_all/#{SecureRandom.hex(4)}"
     results = []
     results_1 = []

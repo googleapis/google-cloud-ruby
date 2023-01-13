@@ -183,7 +183,7 @@ class MockFirestore < Minitest::Spec
     }
     req[:transaction] = transaction if transaction
     req[:new_transaction] = new_transaction if new_transaction
-    req[:read_time] = read_time_to_timestamp(read_time) if read_time
+    req[:read_time] = firestore.service.read_time_to_timestamp(read_time) if read_time
     [req, default_options]
   end
 
@@ -232,17 +232,6 @@ class MockFirestore < Minitest::Spec
     "projects/#{project}/databases/(default)/documents/my-collection-id/#{doc_id}"
   end
 
-  def read_time_to_timestamp time
-    return nil if time.nil?
-
-    # Force the object to be a Time object.
-    time = time.to_time.utc
-
-    Google::Protobuf::Timestamp.new(
-      seconds: time.to_i,
-      nanos:   time.usec * 1000
-    )
-  end
 end
 
 class WatchFirestore < MockFirestore

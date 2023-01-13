@@ -183,7 +183,7 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
       page_token: page_token,
       mask: {field_paths: []},
       show_missing: true,
-      read_time: read_time_to_timestamp(read_time)
+      read_time: firestore.service.read_time_to_timestamp(read_time)
     }
   end
 end

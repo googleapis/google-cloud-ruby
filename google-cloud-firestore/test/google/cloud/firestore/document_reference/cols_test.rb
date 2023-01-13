@@ -160,9 +160,9 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
   describe "using read time" do
     it "iterates collections with pagination" do
       shallow_doc = Google::Cloud::Firestore::DocumentReference.from_path parent, firestore
-      firestore_mock.expect :list_collection_ids, first_page, list_collection_ids_args(parent: parent, read_time: read_time_to_timestamp(read_time))
-      firestore_mock.expect :list_collection_ids, second_page, list_collection_ids_args(parent: parent, page_token: "next_page_token", read_time: read_time_to_timestamp(read_time))
-      firestore_mock.expect :list_collection_ids, last_page, list_collection_ids_args(parent: parent, page_token: "next_page_token", read_time: read_time_to_timestamp(read_time))
+      firestore_mock.expect :list_collection_ids, first_page, list_collection_ids_args(parent: parent, read_time: firestore.service.read_time_to_timestamp(read_time))
+      firestore_mock.expect :list_collection_ids, second_page, list_collection_ids_args(parent: parent, page_token: "next_page_token", read_time: firestore.service.read_time_to_timestamp(read_time))
+      firestore_mock.expect :list_collection_ids, last_page, list_collection_ids_args(parent: parent, page_token: "next_page_token", read_time: firestore.service.read_time_to_timestamp(read_time))
 
       collections = shallow_doc.collections(read_time: read_time).to_a
 
@@ -172,7 +172,7 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
     it "iterates collections from top-level document" do
       shallow_doc = Google::Cloud::Firestore::DocumentReference.from_path parent, firestore
 
-      firestore_mock.expect :list_collection_ids, list_collection_ids_resp("messages", "follows", "followers"), list_collection_ids_args(parent: shallow_doc.path, read_time: read_time_to_timestamp(read_time))
+      firestore_mock.expect :list_collection_ids, list_collection_ids_resp("messages", "follows", "followers"), list_collection_ids_args(parent: shallow_doc.path, read_time: firestore.service.read_time_to_timestamp(read_time))
 
       col_enum = shallow_doc.cols read_time: read_time
       _(col_enum).must_be_kind_of Enumerator
@@ -193,7 +193,7 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
     it "iterates collections from top-level document with a block" do
       shallow_doc = Google::Cloud::Firestore::DocumentReference.from_path parent, firestore
 
-      firestore_mock.expect :list_collection_ids, list_collection_ids_resp("messages", "follows", "followers"), list_collection_ids_args(parent: shallow_doc.path, read_time: read_time_to_timestamp(read_time))
+      firestore_mock.expect :list_collection_ids, list_collection_ids_resp("messages", "follows", "followers"), list_collection_ids_args(parent: shallow_doc.path, read_time: firestore.service.read_time_to_timestamp(read_time))
 
       col_ids = []
       col_enum = shallow_doc.cols read_time: read_time do |col|
@@ -212,7 +212,7 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
     it "iterates collections from nested document" do
       nested_doc = Google::Cloud::Firestore::DocumentReference.from_path "projects/#{project}/databases/(default)/documents/users/alice/messages/abc123", firestore
 
-      firestore_mock.expect :list_collection_ids, list_collection_ids_resp("likes", "saves", "hearts"), list_collection_ids_args(parent: nested_doc.path, read_time: read_time_to_timestamp(read_time))
+      firestore_mock.expect :list_collection_ids, list_collection_ids_resp("likes", "saves", "hearts"), list_collection_ids_args(parent: nested_doc.path, read_time: firestore.service.read_time_to_timestamp(read_time))
 
       col_enum = nested_doc.cols read_time: read_time
       _(col_enum).must_be_kind_of Enumerator
@@ -233,7 +233,7 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
     it "iterates collections from a document that does not exist" do
       missing_doc = Google::Cloud::Firestore::DocumentReference.from_path "projects/#{project}/databases/(default)/documents/users/doesnotexist", firestore
 
-      firestore_mock.expect :list_collection_ids, list_collection_ids_resp, list_collection_ids_args(parent: missing_doc.path, read_time: read_time_to_timestamp(read_time))
+      firestore_mock.expect :list_collection_ids, list_collection_ids_resp, list_collection_ids_args(parent: missing_doc.path, read_time: firestore.service.read_time_to_timestamp(read_time))
 
       col_enum = missing_doc.cols read_time: read_time
       _(col_enum).must_be_kind_of Enumerator

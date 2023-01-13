@@ -112,7 +112,7 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
     # Use an ID ending in "-" to ensure correct sorting, since full path strings are sorted dash before slash
     # See Google::Cloud::Firestore::ResourcePath
     list_res = paged_enum_struct partition_query_resp(doc_ids: ["alice-", "alice"])
-    firestore_mock.expect :partition_query, list_res, partition_query_args(expected_query, read_time: read_time_to_timestamp(read_time))
+    firestore_mock.expect :partition_query, list_res, partition_query_args(expected_query, read_time: firestore.service.read_time_to_timestamp(read_time))
 
     partitions = collection_group.partitions 3, read_time: read_time
 

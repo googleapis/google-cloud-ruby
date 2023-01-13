@@ -180,15 +180,14 @@ module Google
           "#{self.class}(#{@project})"
         end
 
-        def read_time_to_timestamp time
-          return nil if time.nil?
+        def read_time_to_timestamp read_time
+          return nil if read_time.nil?
 
-          # Force the object to be a Time object.
-          time = time.to_time.utc
+          raise TypeError, "read_time is expected to be a Time object" unless read_time.is_a? Time
 
           Google::Protobuf::Timestamp.new(
-            seconds: time.to_i,
-            nanos:   time.usec * 1000
+            seconds: read_time.to_i,
+            nanos:   read_time.usec * 1000
           )
         end
 

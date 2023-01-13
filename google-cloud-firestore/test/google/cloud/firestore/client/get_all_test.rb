@@ -50,7 +50,7 @@ describe Google::Cloud::Firestore::Client, :get_all, :mock_firestore do
 
   it "gets multiple docs using splat (string) with read time" do
     firestore_mock.expect :batch_get_documents, batch_docs_enum, batch_get_documents_args(
-      read_time: read_time_to_timestamp(read_time)
+      read_time: firestore.service.read_time_to_timestamp(read_time)
     )
 
     docs_enum = firestore.get_all "users/alice", "users/bob", "users/carol", read_time: read_time
