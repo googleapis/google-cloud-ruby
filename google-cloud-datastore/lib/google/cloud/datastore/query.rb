@@ -15,6 +15,7 @@
 
 require "google/cloud/datastore/entity"
 require "google/cloud/datastore/key"
+require "google/cloud/datastore/aggregate_query"
 
 module Google
   module Cloud

@@ -454,15 +454,15 @@ module Google
         end
         alias run_query run
 
-        def run_aggregation query, namespace: nil, consistency: nil
+        def run_aggregation aggregate_query, namespace: nil, consistency: nil
           ensure_service!
-          unless query.is_a?(Query) || query.is_a?(GqlQuery)
-            raise ArgumentError, "Cannot run a #{query.class} object."
+          unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
+            raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
           end
           check_consistency! consistency
-          query_res = service.run_aggregation_query query.to_grpc, namespace,
+          aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc, namespace,
                                         consistency: consistency
-          AggregateQueryResults.from_grpc query_res
+          AggregateQueryResults.from_grpc aggregate_query_results
         end
 
         ##
