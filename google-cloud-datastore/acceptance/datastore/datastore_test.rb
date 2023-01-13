@@ -662,6 +662,20 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 2
     end
 
+    focus
+    it "aggregates simple gql query" do
+      gql = dataset.gql "SELECT COUNT(*) AS total FROM Character"
+      res = dataset.run_aggregation gql
+      _(res.get('total')).must_equal 8
+    end
+
+    focus
+    it "aggregates gql query with a filter" do
+      gql = dataset.gql "SELECT COUNT(*) AS total_alive FROM Character WHERE alive = @alive", alive: true
+      res = dataset.run_aggregation gql
+      _(res.get('total_alive')).must_equal 4
+    end
+
     it "should filter queries with simple indexes using GQL and named bindings" do
       gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND appearances >= @appearanceCount",
                         bookKey: book.key, appearanceCount: 20

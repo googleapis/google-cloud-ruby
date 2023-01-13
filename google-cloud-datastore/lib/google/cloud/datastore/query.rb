@@ -324,6 +324,10 @@ module Google
           self
         end
 
+        def aggregate_query
+          AggregateQuery.new @grpc
+        end
+
         ##
         # Set the cursor to start the results at.
         #
