@@ -146,7 +146,6 @@ describe "Aggregate Queries", :datastore do
                             .add_count
       res = dataset.run_aggregation aggregate_query
       _(res.get('count')).must_equal 0
-
     end
 
     focus;
