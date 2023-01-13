@@ -32,20 +32,37 @@ describe "#delete_cdn_key", :stitcher_snippet do
     end
   end
 
+  it "deletes the Media CDN key" do
+    sample = SampleLoader.load "delete_cdn_key.rb"
+
+    refute_nil media_cdn_key
+    @media_cdn_key_created = true
+
+    client.get_cdn_key name: media_cdn_key_name
+
+    assert_output(/Deleted CDN key/) do
+      sample.run project_id: project_id, location: location_id, cdn_key_id: media_cdn_key_id
+    end
+
+    assert_raises Google::Cloud::NotFoundError do
+      client.get_cdn_key name: media_cdn_key_name
+    end
+  end
+
   it "deletes the Cloud CDN key" do
     sample = SampleLoader.load "delete_cdn_key.rb"
 
     refute_nil cloud_cdn_key
     @cloud_cdn_key_created = true
 
-    client.get_cdn_key name: gcdn_cdn_key_name
+    client.get_cdn_key name: cloud_cdn_key_name
 
     assert_output(/Deleted CDN key/) do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: gcdn_cdn_key_id
+      sample.run project_id: project_id, location: location_id, cdn_key_id: cloud_cdn_key_id
     end
 
     assert_raises Google::Cloud::NotFoundError do
-      client.get_cdn_key name: gcdn_cdn_key_name
+      client.get_cdn_key name: cloud_cdn_key_name
     end
   end
 end
