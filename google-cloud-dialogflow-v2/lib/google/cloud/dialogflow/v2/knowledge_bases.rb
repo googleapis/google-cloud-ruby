@@ -31,7 +31,8 @@ module Google
     module Dialogflow
       module V2
         ##
-        # Service for managing {::Google::Cloud::Dialogflow::V2::KnowledgeBase KnowledgeBases}.
+        # Service for managing
+        # {::Google::Cloud::Dialogflow::V2::KnowledgeBase KnowledgeBases}.
         #
         # @example Load this service and instantiate a gRPC client
         #

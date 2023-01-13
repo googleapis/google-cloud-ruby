@@ -124,6 +124,51 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Message resource string.
+            #
+            # @overload message_path(project:, conversation:, message:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/conversations/{conversation}/messages/{message}`
+            #
+            #   @param project [String]
+            #   @param conversation [String]
+            #   @param message [String]
+            #
+            # @overload message_path(project:, location:, conversation:, message:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param conversation [String]
+            #   @param message [String]
+            #
+            # @return [::String]
+            def message_path **args
+              resources = {
+                "conversation:message:project" => (proc do |project:, conversation:, message:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "conversation cannot contain /" if conversation.to_s.include? "/"
+
+                  "projects/#{project}/conversations/#{conversation}/messages/#{message}"
+                end),
+                "conversation:location:message:project" => (proc do |project:, location:, conversation:, message:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "conversation cannot contain /" if conversation.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/conversations/#{conversation}/messages/#{message}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Project resource string.
             #
             # The resource will be in the following format:

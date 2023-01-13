@@ -32,7 +32,8 @@ module Google
     module Dialogflow
       module V2
         ##
-        # Service for managing knowledge {::Google::Cloud::Dialogflow::V2::Document Documents}.
+        # Service for managing knowledge
+        # {::Google::Cloud::Dialogflow::V2::Document Documents}.
         #
         # @example Load this service and instantiate a gRPC client
         #
