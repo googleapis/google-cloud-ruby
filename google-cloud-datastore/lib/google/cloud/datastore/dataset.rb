@@ -461,7 +461,7 @@ module Google
           end
           check_consistency! consistency
           aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc, namespace,
-                                        consistency: consistency
+                                                                  consistency: consistency
           AggregateQueryResults.from_grpc aggregate_query_results
         end
 

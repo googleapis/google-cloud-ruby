@@ -14,16 +14,15 @@
 
 
 class AggregateQueryResults
-
   attr_reader :read_time
 
   def self.from_grpc aggregate_query_results
     aggregate_fields = aggregate_query_results
-                        .batch
-                        .aggregation_results[0]
-                        .aggregate_properties
-                        .to_h
-                        .transform_values { |v| v[:integer_value] }
+                       .batch
+                       .aggregation_results[0]
+                       .aggregate_properties
+                       .to_h
+                       .transform_values { |v| v[:integer_value] }
     new.tap do |s|
       s.instance_variable_set :@aggregate_fields, aggregate_fields
       s.instance_variable_set :@read_time, aggregate_query_results.batch.read_time

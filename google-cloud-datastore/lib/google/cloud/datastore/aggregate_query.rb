@@ -16,7 +16,6 @@
 require "google/cloud/datastore/v1"
 
 class AggregateQuery
-
   ##
   # @private The Google::Cloud::Datastore::V1::Query object.
   attr_reader :query
@@ -53,8 +52,6 @@ class AggregateQuery
       aggregations: aggregates
     )
   end
-
-  protected
 
   ##
   # @private
