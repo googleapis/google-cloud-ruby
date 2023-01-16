@@ -1,4 +1,4 @@
-# Copyright 2014 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,36 +42,35 @@ describe "Aggregate Query", :mock_datastore do
   focus
   it "creates an aggregate query with default alias" do
     expected_aggregation_query = aggregation_query_factory('count')
-    mocked_response = aggregation_query_response_factory({'count' => 4})
-    dataset.service.mocked_service.expect :run_aggregation_query,
-      mocked_response,
-      **aggregate_query_args(project_id: project_id, aggregation_query: expected_aggregation_query)
+    aggr_resp = aggregation_query_response_factory('count': 4)
+    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, aggregation_query: expected_aggregation_query)
+
     aq = query.aggregate_query
               .add_count
     res = dataset.run_aggregation aq
+
     _(res.get('count')).must_equal 4
   end
 
   focus
   it "creates an aggregate query with custom alias" do
     expected_aggregation_query = aggregation_query_factory('total')
-    mocked_response = aggregation_query_response_factory({'total' => 4})
-    dataset.service.mocked_service.expect :run_aggregation_query,
-      mocked_response,
-      **aggregate_query_args(project_id: project_id, aggregation_query: expected_aggregation_query)
+    aggr_resp = aggregation_query_response_factory('total': 4)
+    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, aggregation_query: expected_aggregation_query)
+
     aq = query.aggregate_query
               .add_count(aggregate_alias: 'total')
     res = dataset.run_aggregation aq
+
     _(res.get('total')).must_equal 4
   end
 
   focus
   it "creates an aggregate query with multiple aliases" do
     expected_aggregation_query = aggregation_query_factory('total_1', 'total_2')
-    mocked_response = aggregation_query_response_factory({'total_1' => 4, 'total_2' => 4})
-    dataset.service.mocked_service.expect :run_aggregation_query,
-    mocked_response,
-      **aggregate_query_args(project_id: project_id, aggregation_query: expected_aggregation_query)
+    aggr_resp = aggregation_query_response_factory('total_1': 4, 'total_2': 4)
+    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, aggregation_query: expected_aggregation_query)
+
     aq = query.aggregate_query
               .add_count(aggregate_alias: 'total_1')
               .add_count(aggregate_alias: 'total_2')
@@ -80,37 +79,47 @@ describe "Aggregate Query", :mock_datastore do
     _(res.get('total_2')).must_equal 4
   end
 
-  def aggregation_query_factory *aliases
-    Google::Cloud::Datastore::V1::AggregationQuery.new(
-      nested_query: expected_query,
-      aggregations: aliases.map do |a|
-        Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
-          alias: a,
-          count: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count.new
-        )
-      end
-    )
+  focus
+  it "creates an aggregate query with unspecified alias" do
+    expected_aggregation_query = aggregation_query_factory('count')
+    aggr_resp = aggregation_query_response_factory
+    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, aggregation_query: expected_aggregation_query)
+
+    aq = query.aggregate_query
+              .add_count
+    res = dataset.run_aggregation aq
+
+    _(res.get('unspecified_alias')).must_be :nil?
   end
 
-  def aggregation_query_response_factory props
+  def aggregation_query_factory *aliases
+    aggregations = aliases.map do |a|
+      Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
+        alias: a,
+        count: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count.new
+      )
+    end
+    Google::Cloud::Datastore::V1::AggregationQuery.new(nested_query: expected_query, aggregations: aggregations)
+  end
+
+  def aggregation_query_response_factory **kwargs
+    aggregation_results = [
+      Google::Cloud::Datastore::V1::AggregationResult.new(aggregate_properties: kwargs.transform_values { |v| Google::Cloud::Datastore::V1::Value.new(meaning: 0, exclude_from_indexes: false, integer_value: v) })
+    ]
     Google::Cloud::Datastore::V1::RunAggregationQueryResponse.new(
       batch: Google::Cloud::Datastore::V1::AggregationResultBatch.new(
         read_time: Google::Protobuf::Timestamp.new(seconds: 1673852227, nanos: 370563000),
         more_results: :NO_MORE_RESULTS,
-        aggregation_results: [
-          Google::Cloud::Datastore::V1::AggregationResult.new(
-            aggregate_properties: props.transform_values { |v| Google::Cloud::Datastore::V1::Value.new(meaning: 0, exclude_from_indexes: false, integer_value: v) }
-          )
-        ]
+        aggregation_results: aggregation_results
       )
     )
   end
 
-  def aggregate_query_args project_id: nil,
-                           partition_id: nil,
-                           read_options: nil,
-                           aggregation_query: nil,
-                           gql_query: nil
+ def aggr_args project_id: nil,
+               partition_id: nil,
+               read_options: nil,
+               aggregation_query: nil,
+               gql_query: nil
     {
       project_id: project_id,
       partition_id: partition_id,
