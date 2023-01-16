@@ -82,8 +82,8 @@ module Google
                        interval: 0.01,
                        threads: {},
                        flow_control: {},
-                       compress: false,
-                       compression_bytes_threshold: 240
+                       compress: nil,
+                       compression_bytes_threshold: nil
           # init MonitorMixin
           super()
           @topic_name = service.topic_path topic_name
@@ -108,8 +108,9 @@ module Google
           @cond = new_cond
           @flow_controller = FlowController.new(**@flow_control)
           @thread = Thread.new { run_background }
-          @compress = compress
-          @compression_bytes_threshold = compression_bytes_threshold
+          @compress = compress || Google::Cloud::PubSub::DEFAULT_COMPRESS
+          @compression_bytes_threshold = compression_bytes_threshold ||
+                                         Google::Cloud::PubSub::DEFAULT_COMPRESSION_BYTES_THRESHOLD
         end
 
         ##

@@ -24,6 +24,10 @@ require "google/cloud/pubsub/snapshot"
 module Google
   module Cloud
     module PubSub
+
+      DEFAULT_COMPRESS = false
+      DEFAULT_COMPRESSION_BYTES_THRESHOLD = 240
+      
       ##
       # # Project
       #
