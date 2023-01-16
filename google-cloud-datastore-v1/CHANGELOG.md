@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 (2023-01-15)
+
+#### Features
+
+* Set database ID routing header ([#20010](https://github.com/googleapis/google-cloud-ruby/issues/20010)) 
+
 ### 0.7.0 (2022-10-03)
 
 #### Features
