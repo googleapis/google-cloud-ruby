@@ -1,5 +1,11 @@
 # Release History
 
+### 0.23.0 (2023-01-15)
+
+#### Features
+
+* Added support for RPCs for analyzing org policies ([#20015](https://github.com/googleapis/google-cloud-ruby/issues/20015)) 
+
 ### 0.22.0 (2022-10-18)
 
 #### Features
