@@ -260,6 +260,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :use_routes, :bool, 15
       optional :stack_type, :enum, 16, "google.container.v1.StackType"
       optional :ipv6_access_type, :enum, 17, "google.container.v1.IPv6AccessType"
+      optional :subnet_ipv6_cidr_block, :string, 22
+      optional :services_ipv6_cidr_block, :string, 23
     end
     add_message "google.container.v1.Cluster" do
       optional :name, :string, 1
