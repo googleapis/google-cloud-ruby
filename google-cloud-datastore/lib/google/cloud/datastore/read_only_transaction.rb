@@ -162,7 +162,7 @@ module Google
           unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
             raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
           end
-          aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc, namespace
+          aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc, namespace, transaction: @id
           AggregateQueryResults.from_grpc aggregate_query_results
         end
 
