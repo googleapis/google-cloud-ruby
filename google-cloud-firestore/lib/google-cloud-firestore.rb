@@ -42,6 +42,8 @@ module Google
     #
     #   * `https://www.googleapis.com/auth/datastore`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [String] database_id Identifier for a Firestore database. If not
+    #   present, the default database of the project is used.
     #
     # @return [Google::Cloud::Firestore::Client]
     #
@@ -57,6 +59,13 @@ module Google
     #   gcloud  = Google::Cloud.new
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   firestore = gcloud.firestore scope: platform_scope
+    #
+    # @example The default database can be overridden with the `database_id` option:
+    #   require "google/cloud"
+    #
+    #   gcloud  = Google::Cloud.new
+    #   database_id = "my-todo-database"
+    #   firestore = gcloud.firestore database_id: database_id
     #
     def firestore scope: nil, timeout: nil, database_id: nil
       Google::Cloud.firestore @project, @keyfile, scope: scope, timeout: (timeout || @timeout), database_id: database_id
@@ -83,6 +92,8 @@ module Google
     #
     #   * `https://www.googleapis.com/auth/datastore`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [String] database_id Identifier for a Firestore database. If not
+    #   present, the default database of the project is used.
     #
     # @return [Google::Cloud::Firestore::Client]
     #

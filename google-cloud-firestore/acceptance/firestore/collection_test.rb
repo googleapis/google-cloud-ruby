@@ -44,7 +44,7 @@ describe "Collection", :firestore_acceptance do
     _(doc_snp[:foo]).must_equal "hello world"
   end
 
-  focus; it "lists its documents" do
+  it "lists its documents" do
     rand_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_col.add({foo: "bar"})
     rand_col.add({bar: "foo"})
@@ -58,15 +58,34 @@ describe "Collection", :firestore_acceptance do
     docs_max_1 = rand_col.list_documents max: 1
     _(docs_max_1.size).must_equal 1
 
-    col_2 = firestore_2.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    col_2.add({foo: "bar"})
-    col_2.add({bar: "foo"})
+    rand_col.list_documents.map(&:delete)
+    _(rand_col.list_documents).must_be :empty?
+  end
 
-    pp firestore_2.service.inspect
-    puts "Diptanshu : ", col_2.list_documents.size
+  it "lists the documents of multiple databases" do
+    col_id = "#{root_path}/query/#{SecureRandom.hex(4)}"
+
+    rand_col = firestore.col col_id
+    rand_col.add({foo: "bar"})
+    rand_col.add({bar: "foo"})
+    rand_col_2 = firestore_2.col col_id
+    rand_col_2.add({foo: "bar"})
+    rand_col_2.add({bar: "foo"})
+
+    docs = rand_col.list_documents
+    _(docs).must_be_kind_of Google::Cloud::Firestore::DocumentReference::List
+    _(docs.size).must_equal 2
+    _(docs.first).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(docs.first.client).must_be_kind_of Google::Cloud::Firestore::Client
+    docs = rand_col_2.list_documents
+    _(docs).must_be_kind_of Google::Cloud::Firestore::DocumentReference::List
+    _(docs.size).must_equal 2
+    _(docs.first).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(docs.first.client).must_be_kind_of Google::Cloud::Firestore::Client
 
     rand_col.list_documents.map(&:delete)
     _(rand_col.list_documents).must_be :empty?
-
+    rand_col_2.list_documents.map(&:delete)
+    _(rand_col_2.list_documents).must_be :empty?
   end
 end

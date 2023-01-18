@@ -59,6 +59,8 @@ module Google
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Firestore emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
+      # @param [String] database_id Identifier for a Firestore database. If not
+      #   present, the default database of the project is used.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
