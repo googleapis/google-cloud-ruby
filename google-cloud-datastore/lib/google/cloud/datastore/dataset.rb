@@ -84,6 +84,24 @@ module Google
         alias project project_id
 
         ##
+        # The Datastore database connected to.
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new(
+        #     project_id: "my-todo-project",
+        #     credentials: "/path/to/keyfile.json",
+        #     database_id: "my-database"
+        #   )
+        #
+        #   datastore.database_id #=> "my-database"
+        #
+        def database_id
+          service.database
+        end
+
+        ##
         # Generate IDs for a Key before creating an entity.
         #
         # @param [Key] incomplete_key A Key without `id` or `name` set.

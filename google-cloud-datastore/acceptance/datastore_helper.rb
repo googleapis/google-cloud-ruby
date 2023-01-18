@@ -24,6 +24,7 @@ require "minitest/hooks/default"
 
 # Create shared dataset object so we don't create new for each test
 $dataset = Google::Cloud.new.datastore
+$dataset_2 = Google::Cloud.new.datastore database_id: "newdb001"
 
 module Acceptance
   ##
@@ -41,11 +42,13 @@ module Acceptance
   #   end
   class DatastoreTest < Minitest::Test
     attr_accessor :dataset
+    attr_accessor :dataset_2
 
     ##
     # Setup project based on available ENV variables
     def setup
       @dataset = $dataset
+      @dataset_2 = $dataset_2
 
       refute_nil @dataset, "You do not have an active dataset to run the tests."
 

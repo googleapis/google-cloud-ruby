@@ -67,9 +67,10 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   datastore = gcloud.datastore scope: platform_scope
     #
-    def datastore scope: nil, timeout: nil
+    def datastore scope: nil, timeout: nil, database_id: nil
       Google::Cloud.datastore @project, @keyfile,
-                              scope: scope, timeout: (timeout || @timeout)
+                              scope: scope, timeout: (timeout || @timeout),
+                              database_id: database_id
     end
 
     ##
@@ -112,11 +113,12 @@ module Google
     #   datastore.save task
     #
     def self.datastore project_id = nil, credentials = nil, scope: nil,
-                       timeout: nil
+                       timeout: nil, database_id: nil
       require "google/cloud/datastore"
       Google::Cloud::Datastore.new project_id: project_id,
                                    credentials: credentials,
-                                   scope: scope, timeout: timeout
+                                   scope: scope, timeout: timeout,
+                                   database_id: database_id
     end
   end
 end
@@ -136,8 +138,7 @@ Google::Cloud.configure.add_config! :datastore do |config|
     ENV["DATASTORE_EMULATOR_HOST"]
   end
   default_scopes = [
-    "https://www.googleapis.com/auth/cloud-platform",
-    "https://www.googleapis.com/auth/datastore"
+    "https://www.googleapis.com/auth/cloud-platform", "https://www.googleapis.com/auth/datastore"
   ]
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
@@ -149,4 +150,5 @@ Google::Cloud.configure.add_config! :datastore do |config|
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :endpoint, "datastore.googleapis.com", match: String
+  config.add_field! :database_id, "", match: String
 end
