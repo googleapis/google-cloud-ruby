@@ -245,10 +245,10 @@ module Google
             #   @param job [::Google::Cloud::Batch::V1::Job, ::Hash]
             #     Required. The Job to create.
             #   @param request_id [::String]
-            #     Optional. An optional request ID to identify requests. Specify a unique request ID
-            #     so that if you must retry your request, the server will know to ignore
-            #     the request if it has already been completed. The server will guarantee
-            #     that for at least 60 minutes since the first request.
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and t
             #     he request times out. If you make the request again with the same request
@@ -431,10 +431,10 @@ module Google
             #   @param reason [::String]
             #     Optional. Reason for this deletion.
             #   @param request_id [::String]
-            #     Optional. An optional request ID to identify requests. Specify a unique request ID
-            #     so that if you must retry your request, the server will know to ignore
-            #     the request if it has already been completed. The server will guarantee
-            #     that for at least 60 minutes after the first request.
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes after the first request.
             #
             #     For example, consider a situation where you make an initial request and t
             #     he request times out. If you make the request again with the same request
