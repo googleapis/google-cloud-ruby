@@ -366,11 +366,13 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     policy = {}
+    update_mask = {}
 
     update_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_policy, name
       assert_kind_of ::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OrgPolicy::V2::Policy), request["policy"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -381,31 +383,31 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.update_policy({ policy: policy }) do |response, operation|
+      client.update_policy({ policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_policy policy: policy do |response, operation|
+      client.update_policy policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_policy ::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new(policy: policy) do |response, operation|
+      client.update_policy ::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new(policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_policy({ policy: policy }, grpc_options) do |response, operation|
+      client.update_policy({ policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_policy(::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new(policy: policy), grpc_options) do |response, operation|
+      client.update_policy(::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new(policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
