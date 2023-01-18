@@ -257,20 +257,23 @@ describe "Aggregate Queries", :datastore do
 
   describe "via GQL" do
     it "returns count for non-zero records" do
-      gql = dataset.gql "SELECT COUNT(*) AS total FROM Character"
+      gql = dataset.gql "SELECT COUNT(*) AS total FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
+                        bookKey: book.key
       res = dataset.run_aggregation gql
       _(res.get('total')).must_equal 8
     end
   
     it "returns count with a filter" do
-      gql = dataset.gql "SELECT COUNT(*) AS total_alive FROM Character WHERE alive = @alive", alive: true
+      gql = dataset.gql "SELECT COUNT(*) AS total_alive FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND alive = @alive",
+                        alive: true, bookKey: book.key
       res = dataset.run_aggregation gql
       _(res.get('total_alive')).must_equal 4
     end
 
     it "returns count inside a transaction" do
       dataset.read_only_transaction do |tx|
-        gql = dataset.gql "SELECT COUNT(*) AS total FROM Character"
+        gql = dataset.gql "SELECT COUNT(*) AS total FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
+                          bookKey: book.key
         res = dataset.run_aggregation gql
         _(res.get('total')).must_equal 8
       end
