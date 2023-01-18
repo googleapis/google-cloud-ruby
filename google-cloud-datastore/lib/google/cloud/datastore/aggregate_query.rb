@@ -66,9 +66,9 @@ module Google
 
         ##
         # @private Creates a new AggregateQuery
-        def initialize query, aggregates: []
+        def initialize query
           @query = query
-          @aggregates = aggregates
+          @aggregates = []
         end
 
         ##
@@ -112,18 +112,12 @@ module Google
         #
         def add_count aggregate_alias: nil
           aggregate_alias ||= ALIASES[:count]
-          new_aggregates = @aggregates.dup
-          new_aggregates << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
+          aggregates << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
             count: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count.new,
             alias: aggregate_alias
           )
-          AggregateQuery.start query, new_aggregates
-        end
 
-        ##
-        # @private Start a new AggregateQuery.
-        def self.start query, aggregates
-          new query, aggregates: aggregates
+          self
         end
 
         # @private
