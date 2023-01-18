@@ -12,24 +12,84 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module Google
+  module Cloud
+    module Datastore
+      class Dataset
+        ##
+        # # AggregateQueryResults
+        #
+        # An AggregateQueryResult object is a representation for
+        # a result of an AggregateQuery or a GqlQuery.
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = Google::Cloud::Datastore::Query.new
+        #   query.kind("Task").
+        #     where("done", "=", false)
+        #
+        #   Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #                          .add_count
+        #
+        #   aggregate_query_results = dataset.run_aggregation aggregate_query
+        #   puts aggregate_query_results.get('count')
+        #
+        class AggregateQueryResults
+          ##
+          # Read timestamp the query was done on the database at.
+          #
+          # @return Google::Protobuf::Timestamp
+          attr_reader :read_time
 
-class AggregateQueryResults
-  attr_reader :read_time
+          ##
+          # Retrieves the aggregate data.
+          #
+          # @param [String] aggregate_alias The alias used
+          #   to access the aggregate value. For count, the
+          #   default value is "count".
+          #
+          # @return [Integer] The aggregate value.
+          #
+          # @example
+          #   require "google/cloud/datastore"
+          #
+          #   datastore = Google::Cloud::Datastore.new
+          #
+          #   query = Google::Cloud::Datastore::Query.new
+          #   query.kind("Task").
+          #     where("done", "=", false)
+          #
+          #   Create an aggregate query
+          #   aggregate_query = query.aggregate_query
+          #                          .add_count
+          #
+          #   aggregate_query_results = dataset.run_aggregation aggregate_query
+          #   puts aggregate_query_results.get('count')
+          def get aggregate_alias
+            @aggregate_fields[aggregate_alias]
+          end
 
-  def self.from_grpc aggregate_query_results
-    aggregate_fields = aggregate_query_results
-                       .batch
-                       .aggregation_results[0]
-                       .aggregate_properties
-                       .to_h
-                       .transform_values { |v| v[:integer_value] }
-    new.tap do |s|
-      s.instance_variable_set :@aggregate_fields, aggregate_fields
-      s.instance_variable_set :@read_time, aggregate_query_results.batch.read_time
+          ##
+          # @private New AggregateQueryResults from a
+          # Google::Cloud::Datastore::V1::RunAggregationQueryResponse object.
+          def self.from_grpc aggregate_query_response
+            aggregate_fields = aggregate_query_response
+                               .batch
+                               .aggregation_results[0]
+                               .aggregate_properties
+                               .to_h
+                               .transform_values { |v| v[:integer_value] }
+            new.tap do |s|
+              s.instance_variable_set :@aggregate_fields, aggregate_fields
+              s.instance_variable_set :@read_time, aggregate_query_response.batch.read_time
+            end
+          end
+        end
+      end
     end
-  end
-
-  def get aggregate_alias
-    @aggregate_fields[aggregate_alias]
   end
 end

@@ -325,10 +325,6 @@ module Google
           self
         end
 
-        def aggregate_query
-          AggregateQuery.new @grpc
-        end
-
         ##
         # Set the cursor to start the results at.
         #
@@ -429,6 +425,29 @@ module Google
           self
         end
         alias distinct_on group_by
+
+        ##
+        # Creates an AggregateQuery object for the query.
+        #
+        # @return [AggregateQuery] New empty aggregate query.
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = Google::Cloud::Datastore::Query.new
+        #   query.kind("Task").
+        #     where("done", "=", false).
+        #     where("priority", ">=", 4).
+        #     order("priority", :desc)
+        #
+        #   Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #
+        def aggregate_query
+          AggregateQuery.new @grpc
+        end
 
         # @private
         def to_grpc
