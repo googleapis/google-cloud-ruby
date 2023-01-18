@@ -39,7 +39,6 @@ describe "Aggregate Query", :mock_datastore do
     dataset.service.mocked_service.verify
   end
 
-  focus
   it "creates an aggregate query with default alias" do
     expected_aggregation_query = aggregation_query_factory('count')
     aggr_resp = aggregation_query_response_factory('count': 4)
@@ -52,7 +51,6 @@ describe "Aggregate Query", :mock_datastore do
     _(res.get('count')).must_equal 4
   end
 
-  focus
   it "creates an aggregate query with custom alias" do
     expected_aggregation_query = aggregation_query_factory('total')
     aggr_resp = aggregation_query_response_factory('total': 4)
@@ -65,7 +63,6 @@ describe "Aggregate Query", :mock_datastore do
     _(res.get('total')).must_equal 4
   end
 
-  focus
   it "creates an aggregate query with multiple aliases" do
     expected_aggregation_query = aggregation_query_factory('total_1', 'total_2')
     aggr_resp = aggregation_query_response_factory('total_1': 4, 'total_2': 4)
@@ -79,7 +76,6 @@ describe "Aggregate Query", :mock_datastore do
     _(res.get('total_2')).must_equal 4
   end
 
-  focus
   it "creates an aggregate query with unspecified alias" do
     expected_aggregation_query = aggregation_query_factory('count')
     aggr_resp = aggregation_query_response_factory
@@ -92,7 +88,6 @@ describe "Aggregate Query", :mock_datastore do
     _(res.get('unspecified_alias')).must_be :nil?
   end
 
-  focus
   it "creates aggregate via gql query" do
     expected_aggregation_query = gql_aggregation_query_factory "SELECT COUNT(*) AS total FROM User"
     aggr_resp = gql_query_response_factory('total': 4)

@@ -136,7 +136,6 @@ describe "Aggregate Queries", :datastore do
 
   describe "via AggregateQuery" do
     
-    focus;
     it "returns 0 for no records" do
       dataset.delete *characters
       query = Google::Cloud::Datastore.new.
@@ -148,7 +147,6 @@ describe "Aggregate Queries", :datastore do
       _(res.get('count')).must_equal 0
     end
 
-    focus;
     it "returns count for non-zero records" do
       query = Google::Cloud::Datastore.new.
         query("Character").
@@ -159,7 +157,6 @@ describe "Aggregate Queries", :datastore do
       _(res.get('count')).must_equal 8
     end
 
-    focus;
     it "returns count on filter" do
       query = Google::Cloud::Datastore.new.
         query("Character").
@@ -171,7 +168,6 @@ describe "Aggregate Queries", :datastore do
       _(res.get('count')).must_equal 4
     end
 
-    focus;
     it "returns count on limit" do
       query = Google::Cloud::Datastore.new.
         query("Character").
@@ -183,7 +179,6 @@ describe "Aggregate Queries", :datastore do
       _(res.get('count')).must_equal 5
     end
 
-    focus;
     it "returns count with a custom alias" do
       query = Google::Cloud::Datastore.new.
         query("Character").
@@ -194,7 +189,6 @@ describe "Aggregate Queries", :datastore do
       _(res.get('total')).must_equal 8
     end
 
-    focus;
     it "returns count with multiple custom aliases" do
       query = Google::Cloud::Datastore.new.
         query("Character").
@@ -207,7 +201,6 @@ describe "Aggregate Queries", :datastore do
       _(res.get('total_2')).must_equal 8
     end
 
-    focus;
     it "returns count with unspecified aliases" do
       query = Google::Cloud::Datastore.new.
         query("Character").
@@ -218,7 +211,6 @@ describe "Aggregate Queries", :datastore do
       _(res.get('unspecified_alias')).must_be :nil?
     end
 
-    focus;
     it "throws error when duplicating aliases" do
       query = Google::Cloud::Datastore.new.
         query("Character").
@@ -229,7 +221,6 @@ describe "Aggregate Queries", :datastore do
       expect { res = dataset.run_aggregation aggregate_query }.must_raise Google::Cloud::InvalidArgumentError
     end
 
-    focus;
     it "returns different count when data changes" do
       query = Google::Cloud::Datastore.new.
         query("Character").
@@ -243,7 +234,6 @@ describe "Aggregate Queries", :datastore do
       _(res.get('count')).must_equal 7
     end
     
-    focus;
     it "throws error when no aggregate is added" do
       query = Google::Cloud::Datastore.new.
         query("Character").
@@ -252,7 +242,6 @@ describe "Aggregate Queries", :datastore do
       expect { res = dataset.run_aggregation aggregate_query }.must_raise Google::Cloud::InvalidArgumentError
     end
 
-    focus;
     it "returns count inside a transaction" do
       query = Google::Cloud::Datastore.new.
         query("Character").
@@ -267,21 +256,18 @@ describe "Aggregate Queries", :datastore do
   end
 
   describe "via GQL" do
-    focus
     it "returns count for non-zero records" do
       gql = dataset.gql "SELECT COUNT(*) AS total FROM Character"
       res = dataset.run_aggregation gql
       _(res.get('total')).must_equal 8
     end
   
-    focus
     it "returns count with a filter" do
       gql = dataset.gql "SELECT COUNT(*) AS total_alive FROM Character WHERE alive = @alive", alive: true
       res = dataset.run_aggregation gql
       _(res.get('total_alive')).must_equal 4
     end
 
-    focus;
     it "returns count inside a transaction" do
       dataset.read_only_transaction do |tx|
         gql = dataset.gql "SELECT COUNT(*) AS total FROM Character"

@@ -202,7 +202,6 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
     refute entities.no_more?
   end
 
-  # focus
   it "run_aggregate will fulfill an aggregate query" do
     transaction.service.mocked_service.expect :run_aggregation_query, run_aggregation_query_res, project_id: project, partition_id: nil, read_options: read_options, aggregation_query: aggregate_query_grpc, gql_query: nil
     query = Google::Cloud::Datastore::Query.new.kind("User")
@@ -212,7 +211,6 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
     _(res.get('count')).must_equal 2
   end
 
-  # focus
   it "run_aggregate will fulfill an aggregate gql query" do
     transaction.service.mocked_service.expect :run_aggregation_query, aggregate_gql_query_res, project_id: project, partition_id: nil, read_options: read_options, aggregation_query: nil, gql_query: gql_aggregate_query_grpc
     gql = dataset.gql "SELECT COUNT(*) as total FROM Task"
