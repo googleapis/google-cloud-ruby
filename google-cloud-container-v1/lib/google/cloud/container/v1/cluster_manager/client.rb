@@ -1156,8 +1156,8 @@ module Google
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
             #   @param addons_config [::Google::Cloud::Container::V1::AddonsConfig, ::Hash]
-            #     Required. The desired configurations for the various addons available to run in the
-            #     cluster.
+            #     Required. The desired configurations for the various addons available to
+            #     run in the cluster.
             #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set addons.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
