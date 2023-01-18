@@ -156,9 +156,9 @@ module Google
           #     to the email address of the user who owns this transfer config.
           # @!attribute [r] owner_info
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::UserInfo]
-          #     Output only. Information about the user whose credentials are used to transfer data.
-          #     Populated only for `transferConfigs.get` requests. In case the user
-          #     information is not available, this field will not be populated.
+          #     Output only. Information about the user whose credentials are used to
+          #     transfer data. Populated only for `transferConfigs.get` requests. In case
+          #     the user information is not available, this field will not be populated.
           class TransferConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -194,9 +194,10 @@ module Google
           #     Output only. Last time the data transfer run state was updated.
           # @!attribute [r] params
           #   @return [::Google::Protobuf::Struct]
-          #     Output only. Parameters specific to each data source. For more information see the
-          #     bq tab in the 'Setting up a data transfer' section for each data source.
-          #     For example the parameters for Cloud Storage transfers are listed here:
+          #     Output only. Parameters specific to each data source. For more information
+          #     see the bq tab in the 'Setting up a data transfer' section for each data
+          #     source. For example the parameters for Cloud Storage transfers are listed
+          #     here:
           #     https://cloud.google.com/bigquery-transfer/docs/cloud-storage-transfer#bq
           # @!attribute [r] destination_dataset_id
           #   @return [::String]
