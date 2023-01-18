@@ -33,7 +33,7 @@ describe "Collection", :firestore_acceptance do
     _(doc_ref.parent.collection_path).must_equal root_col.collection_path
   end
 
-  focus; it "has add method" do
+  it "has add method" do
     doc_ref = root_col.add({ foo: "hello world" })
     _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
     _(doc_ref.client).must_be_kind_of Google::Cloud::Firestore::Client

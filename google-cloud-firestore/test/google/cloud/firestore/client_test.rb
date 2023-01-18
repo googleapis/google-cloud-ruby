@@ -28,6 +28,5 @@ describe Google::Cloud::Firestore::Client, :mock_firestore do
     _(secondary_firestore.database_id).must_equal secondary_database
     _(secondary_firestore.path).must_equal "projects/projectID/databases/#{secondary_database}"
     _(secondary_firestore.service.documents_path).must_equal "projects/projectID/databases/#{secondary_database}/documents"
-
   end
 end
