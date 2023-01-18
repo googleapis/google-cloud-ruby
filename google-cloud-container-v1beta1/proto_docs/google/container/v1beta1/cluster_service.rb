@@ -1201,7 +1201,8 @@ module Google
         #     The ipv6 access type (internal or external) when create_subnetwork is true
         # @!attribute [r] subnet_ipv6_cidr_block
         #   @return [::String]
-        #     Output only. [Output only] The subnet's IPv6 CIDR block used by nodes and pods.
+        #     Output only. [Output only] The subnet's IPv6 CIDR block used by nodes and
+        #     pods.
         # @!attribute [r] services_ipv6_cidr_block
         #   @return [::String]
         #     Output only. [Output only] The services IPv6 CIDR block for the cluster.
@@ -2506,8 +2507,8 @@ module Google
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] addons_config
         #   @return [::Google::Cloud::Container::V1beta1::AddonsConfig]
-        #     Required. The desired configurations for the various addons available to run in the
-        #     cluster.
+        #     Required. The desired configurations for the various addons available to
+        #     run in the cluster.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name (project, location, cluster) of the cluster to set addons.
@@ -3142,8 +3143,8 @@ module Google
         #     Specifies the node placement policy.
         # @!attribute [r] update_info
         #   @return [::Google::Cloud::Container::V1beta1::NodePool::UpdateInfo]
-        #     Output only. [Output only] Update info contains relevant information during a node
-        #     pool update.
+        #     Output only. [Output only] Update info contains relevant information during
+        #     a node pool update.
         # @!attribute [rw] etag
         #   @return [::String]
         #     This checksum is computed by the server based on the value of node pool
