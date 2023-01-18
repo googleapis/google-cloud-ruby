@@ -76,19 +76,22 @@ module Google
                    timeout: nil,
                    endpoint: nil,
                    emulator_host: nil,
+                   database_id: nil,
                    project: nil,
                    keyfile: nil
-        project_id    ||= (project || default_project_id)
-        scope         ||= configure.scope
-        timeout       ||= configure.timeout
-        endpoint      ||= configure.endpoint
+        project_id ||= (project || default_project_id)
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        endpoint ||= configure.endpoint
         emulator_host ||= configure.emulator_host
+        database_id ||= configure.database_id
 
         if emulator_host
           project_id = project_id.to_s
           raise ArgumentError, "project_id is missing" if project_id.empty?
 
-          service = Firestore::Service.new project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout
+          service = Firestore::Service.new project_id, :this_channel_is_insecure, host: emulator_host,
+                                           timeout: timeout, database: database_id
           return Firestore::Client.new service
         end
 
@@ -103,7 +106,8 @@ module Google
         project_id = project_id.to_s
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        service = Firestore::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        service = Firestore::Service.new project_id, credentials, host: endpoint,
+                                         timeout: timeout, database: database_id
         Firestore::Client.new service
       end
 

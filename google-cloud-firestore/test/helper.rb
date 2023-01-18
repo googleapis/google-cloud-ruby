@@ -99,6 +99,7 @@ end
 
 class MockFirestore < Minitest::Spec
   let(:project) { "projectID" }
+  let(:database) { "(default)" }
   let(:transaction_id) { "transaction123" }
   let(:database_path) { "projects/#{project}/databases/(default)" }
   let(:documents_path) { "#{database_path}/documents" }
@@ -108,7 +109,7 @@ class MockFirestore < Minitest::Spec
   let(:default_project_options) { Gapic::CallOptions.new(metadata: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
   let(:default_options) { Gapic::CallOptions.new(metadata: { "google-cloud-resource-prefix" => database_path }, retry_policy: {}) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:firestore) { Google::Cloud::Firestore::Client.new(Google::Cloud::Firestore::Service.new(project, credentials)) }
+  let(:firestore) { Google::Cloud::Firestore::Client.new(Google::Cloud::Firestore::Service.new(project, credentials, database: database)) }
   let(:firestore_mock) { Minitest::Mock.new }
 
   before do

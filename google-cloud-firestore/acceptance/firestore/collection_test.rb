@@ -33,7 +33,7 @@ describe "Collection", :firestore_acceptance do
     _(doc_ref.parent.collection_path).must_equal root_col.collection_path
   end
 
-  it "has add method" do
+  focus; it "has add method" do
     doc_ref = root_col.add({ foo: "hello world" })
     _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
     _(doc_ref.client).must_be_kind_of Google::Cloud::Firestore::Client
@@ -44,7 +44,7 @@ describe "Collection", :firestore_acceptance do
     _(doc_snp[:foo]).must_equal "hello world"
   end
 
-  it "lists its documents" do
+  focus; it "lists its documents" do
     rand_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_col.add({foo: "bar"})
     rand_col.add({bar: "foo"})
@@ -58,7 +58,15 @@ describe "Collection", :firestore_acceptance do
     docs_max_1 = rand_col.list_documents max: 1
     _(docs_max_1.size).must_equal 1
 
+    col_2 = firestore_2.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    col_2.add({foo: "bar"})
+    col_2.add({bar: "foo"})
+
+    pp firestore_2.service.inspect
+    puts "Diptanshu : ", col_2.list_documents.size
+
     rand_col.list_documents.map(&:delete)
     _(rand_col.list_documents).must_be :empty?
+
   end
 end

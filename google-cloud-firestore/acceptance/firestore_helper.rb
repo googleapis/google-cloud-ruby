@@ -22,6 +22,7 @@ require "google/cloud/firestore"
 
 # Create shared firestore object so we don't create new for each test
 $firestore = Google::Cloud.firestore
+$firestore_2 = Google::Cloud::Firestore.new project_id: ENV["GCLOUD_TEST_PROJECT"], keyfile: ENV["GOOGLE_APPLICATION_CREDENTIALS"], database_id: "newdb0011"
 
 module Acceptance
   ##
@@ -38,11 +39,13 @@ module Acceptance
   #   end
   class FirestoreTest < Minitest::Test
     attr_accessor :firestore
+    attr_accessor :firestore_2
 
     ##
     # Setup project based on available ENV variables
     def setup
       @firestore = $firestore
+      @firestore_2 = $firestore_2
 
       refute_nil @firestore, "You do not have an active firestore to run the tests."
 
