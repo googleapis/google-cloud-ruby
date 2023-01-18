@@ -172,6 +172,46 @@
       ]
     },
     {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_GetProcessorType_sync",
+      "title": "Snippet for get_processor_type in DocumentProcessorService",
+      "description": "Basic snippet for get_processor_type in DocumentProcessorService",
+      "file": "document_processor_service/get_processor_type.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_processor_type",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#get_processor_type",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::GetProcessorTypeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DocumentAI::V1beta3::ProcessorType",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "GetProcessorType",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.GetProcessorType",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_ListProcessors_sync",
       "title": "Snippet for list_processors in DocumentProcessorService",
       "description": "Basic snippet for list_processors in DocumentProcessorService",

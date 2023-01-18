@@ -30,6 +30,11 @@
                 "list_processor_types"
               ]
             },
+            "GetProcessorType": {
+              "methods": [
+                "get_processor_type"
+              ]
+            },
             "ListProcessors": {
               "methods": [
                 "list_processors"

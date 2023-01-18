@@ -349,6 +349,15 @@ module Google
         # Request message for get processor.
         # @!attribute [rw] name
         #   @return [::String]
+        #     Required. The processor type resource name.
+        class GetProcessorTypeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for get processor.
+        # @!attribute [rw] name
+        #   @return [::String]
         #     Required. The processor resource name.
         class GetProcessorRequest
           include ::Google::Protobuf::MessageExts
