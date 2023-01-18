@@ -92,6 +92,16 @@ describe "Aggregate Query", :mock_datastore do
     _(res.get('unspecified_alias')).must_be :nil?
   end
 
+  focus
+  it "creates aggregate via gql query" do
+    expected_aggregation_query = gql_aggregation_query_factory "SELECT COUNT(*) AS total FROM User"
+    aggr_resp = gql_query_response_factory('total': 4)
+    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, gql_query: expected_aggregation_query)
+    gql = dataset.gql "SELECT COUNT(*) AS total FROM User"
+    res = dataset.run_aggregation gql
+    _(res.get('total')).must_equal 4
+  end
+
   def aggregation_query_factory *aliases
     aggregations = aliases.map do |a|
       Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
@@ -115,11 +125,37 @@ describe "Aggregate Query", :mock_datastore do
     )
   end
 
- def aggr_args project_id: nil,
-               partition_id: nil,
-               read_options: nil,
-               aggregation_query: nil,
-               gql_query: nil
+  def gql_aggregation_query_factory query_string
+    Google::Cloud::Datastore::V1::GqlQuery.new(query_string: query_string, allow_literals: false, named_bindings: {}, positional_bindings: [])
+  end
+
+  def gql_query_response_factory **kwargs
+    aggregation_results = [
+      Google::Cloud::Datastore::V1::AggregationResult.new(aggregate_properties: kwargs.transform_values { |v| Google::Cloud::Datastore::V1::Value.new(meaning: 0, exclude_from_indexes: false, integer_value: v) })
+    ]
+    Google::Cloud::Datastore::V1::RunAggregationQueryResponse.new(
+      batch: Google::Cloud::Datastore::V1::AggregationResultBatch.new(
+        read_time: Google::Protobuf::Timestamp.new(seconds: 1673852227, nanos: 370563000),
+        more_results: :NO_MORE_RESULTS,
+        aggregation_results: aggregation_results
+      ),
+      query: Google::Cloud::Datastore::V1::AggregationQuery.new(
+        nested_query: expected_query,
+        aggregations: [
+          Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
+            alias: "total",
+            count: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count.new
+          )
+        ]
+      )
+    )
+  end
+
+  def aggr_args project_id: nil,
+                partition_id: nil,
+                read_options: nil,
+                aggregation_query: nil,
+                gql_query: nil
     {
       project_id: project_id,
       partition_id: partition_id,
