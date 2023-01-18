@@ -191,6 +191,18 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::Trial#web_access_uris Trial.web_access_uris}
         #     (within
         #     {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob#trials HyperparameterTuningJob.trials}).
+        # @!attribute [rw] enable_dashboard_access
+        #   @return [::Boolean]
+        #     Optional. Whether you want Vertex AI to enable access to the customized
+        #     dashboard in training chief container.
+        #
+        #     If set to `true`, you can access the dashboard at the URIs given
+        #     by
+        #     {::Google::Cloud::AIPlatform::V1::CustomJob#web_access_uris CustomJob.web_access_uris}
+        #     or
+        #     {::Google::Cloud::AIPlatform::V1::Trial#web_access_uris Trial.web_access_uris}
+        #     (within
+        #     {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob#trials HyperparameterTuningJob.trials}).
         class CustomJobSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
