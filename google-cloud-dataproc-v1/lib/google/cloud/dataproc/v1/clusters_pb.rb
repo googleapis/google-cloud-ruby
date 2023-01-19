@@ -113,6 +113,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :PREEMPTIBILITY_UNSPECIFIED, 0
       value :NON_PREEMPTIBLE, 1
       value :PREEMPTIBLE, 2
+      value :SPOT, 3
     end
     add_message "google.cloud.dataproc.v1.ManagedGroupConfig" do
       optional :instance_template_name, :string, 1
