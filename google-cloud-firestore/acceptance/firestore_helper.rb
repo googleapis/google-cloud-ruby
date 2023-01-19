@@ -22,7 +22,10 @@ require "google/cloud/firestore"
 
 # Create shared firestore object so we don't create new for each test
 $firestore = Google::Cloud.firestore
-$firestore_2 = Google::Cloud::Firestore.new project_id: ENV["GCLOUD_TEST_PROJECT"], keyfile: ENV["GOOGLE_APPLICATION_CREDENTIALS"], database_id: "newdb0011"
+
+if ENV["FIRESTORE_MULTI_DB_DATABASE"]
+  $firestore_2 = Google::Cloud::Firestore.new project_id: ENV["GCLOUD_TEST_PROJECT"], keyfile: ENV["GOOGLE_APPLICATION_CREDENTIALS"], database_id: ENV["FIRESTORE_MULTI_DB_DATABASE"]
+end
 
 module Acceptance
   ##
@@ -106,4 +109,10 @@ end
 
 Minitest.after_run do
   clean_up_firestore
+  unless $firestore_2
+    puts "The multiple database tests were not run. These tests require a secondary " \
+       "database which is not configured. To enable, ensure that the following " \
+       "is present in the environment: \n" \
+       "FIRESTORE_MULTI_DB_DATABASE"
+  end
 end
