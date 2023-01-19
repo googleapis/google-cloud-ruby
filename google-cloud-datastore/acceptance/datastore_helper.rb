@@ -24,7 +24,10 @@ require "minitest/hooks/default"
 
 # Create shared dataset object so we don't create new for each test
 $dataset = Google::Cloud.new.datastore
-$dataset_2 = Google::Cloud.new.datastore database_id: "newdb001"
+
+if ENV["DATASTORE_MULTI_DB_DATABASE"]
+  $dataset_2 = Google::Cloud.new.datastore database_id: ENV["DATASTORE_MULTI_DB_DATABASE"]
+end
 
 module Acceptance
   ##
@@ -87,5 +90,14 @@ module Acceptance
         end
       end
     end
+  end
+end
+
+Minitest.after_run do
+  unless $dataset_2
+    puts "The multiple database tests were not run. These tests require a secondary " \
+       "database which is not configured. To enable, ensure that the following " \
+       "is present in the environment: \n" \
+       "DATASTORE_MULTI_DB_DATABASE"
   end
 end

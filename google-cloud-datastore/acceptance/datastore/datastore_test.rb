@@ -150,6 +150,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
     end
 
     it "should save/find/delete multiple entities at once on multiple database" do
+      skip "Don't have secondary database to run the test" unless dataset_2
       post.key  = Google::Cloud::Datastore::Key.new "Post"
       post2.key = Google::Cloud::Datastore::Key.new "Post"
 
