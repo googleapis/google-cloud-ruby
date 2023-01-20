@@ -1973,6 +1973,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] specific_sku_allocation
+        #   @return [::Google::Cloud::Compute::V1::AllocationResourceStatusSpecificSKUAllocation]
+        class AllocationResourceStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] source_instance_template_id
+        #   @return [::String]
+        class AllocationResourceStatusSpecificSKUAllocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] disk_size_gb
         #   @return [::Integer]
         #     Specifies the size of the disk in base-2 GB.
@@ -2029,6 +2043,9 @@ module Google
         # @!attribute [rw] instance_properties
         #   @return [::Google::Cloud::Compute::V1::AllocationSpecificSKUAllocationReservedInstanceProperties]
         #     The instance properties for the reservation.
+        # @!attribute [rw] source_instance_template
+        #   @return [::String]
+        #     Specifies the instance template to create the reservation. If you use this field, you must exclude the instanceProperties field. This field is optional, and it can be a full or partial URL. For example, the following are all valid URLs to an instance template: - https://www.googleapis.com/compute/v1/projects/project /global/instanceTemplates/instanceTemplate - projects/project/global/instanceTemplates/instanceTemplate - global/instanceTemplates/instanceTemplate
         class AllocationSpecificSKUReservation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -7155,7 +7172,7 @@ module Google
         # Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny).
         # @!attribute [rw] action
         #   @return [::String]
-        #     The Action to perform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.
+        #     The Action to perform when the client connection triggers the rule. Valid actions are "allow", "deny" and "goto_next".
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description for this resource.
@@ -7371,7 +7388,7 @@ module Google
         #     This field identifies the subnetwork that the load balanced IP should belong to for this Forwarding Rule, used in internal load balancing and network load balancing with IPv6. If the network specified is in auto subnet mode, this field is optional. However, a subnetwork must be specified if the network is in custom subnet mode or when creating external forwarding rule with IPv6.
         # @!attribute [rw] target
         #   @return [::String]
-        #     The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle: - vpc-sc - APIs that support VPC Service Controls. - all-apis - All supported Google APIs.
+        #     The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. - For load balancers, see the "Target" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). - For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle: - vpc-sc - APIs that support VPC Service Controls. - all-apis - All supported Google APIs. - For Private Service Connect forwarding rules that forward traffic to managed services, the target must be a service attachment.
         class ForwardingRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -9647,6 +9664,8 @@ module Google
             SECURE_BOOT = 376811194
 
             SEV_CAPABLE = 87083793
+
+            SEV_SNP_CAPABLE = 426919
 
             UEFI_COMPATIBLE = 195865408
 
@@ -13465,7 +13484,7 @@ module Google
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
         # @!attribute [rw] noc_contact_email
         #   @return [::String]
-        #     Email address to contact the customer NOC for operations and maintenance notifications regarding this Interconnect. If specified, this will be used for notifications in addition to all other forms described, such as Stackdriver logs alerting and Cloud Notifications.
+        #     Email address to contact the customer NOC for operations and maintenance notifications regarding this Interconnect. If specified, this will be used for notifications in addition to all other forms described, such as Cloud Monitoring logs alerting and Cloud Notifications. This field is required for users who sign up for Cloud Interconnect using workforce identity federation.
         # @!attribute [rw] operational_status
         #   @return [::String]
         #     [Output Only] The current status of this Interconnect's functionality, which can take one of the following values: - OS_ACTIVE: A valid Interconnect, which is turned up and is ready to use. Attachments may be provisioned on this Interconnect. - OS_UNPROVISIONED: An Interconnect that has not completed turnup. No attachments may be provisioned on this Interconnect. - OS_UNDER_MAINTENANCE: An Interconnect that is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect.
@@ -18591,6 +18610,9 @@ module Google
         # @!attribute [rw] network
         #   @return [::String]
         #     URL of the VPC network resource for this instance. When creating an instance, if neither the network nor the subnetwork is specified, the default network global/networks/default is used. If the selected project doesn't have the default network, you must specify a network or subnet. If the network is not specified but the subnetwork is specified, the network is inferred. If you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs: - https://www.googleapis.com/compute/v1/projects/project/global/networks/ network - projects/project/global/networks/network - global/networks/default
+        # @!attribute [rw] network_attachment
+        #   @return [::String]
+        #     The URL of the network attachment that this interface should connect to in the following format: projects/\\{project_number}/regions/\\{region_name}/networkAttachments/\\{network_attachment_name}.
         # @!attribute [rw] network_i_p
         #   @return [::String]
         #     An IPv4 internal IP address to assign to the instance for this network interface. If not specified by the user, an unused internal IP is assigned by the system.
@@ -22777,7 +22799,9 @@ module Google
         #     The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
         # @!attribute [rw] resource_policies
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Resource policies to be added to this reservation. The key is defined by user, and the value is resource policy url. This is to define placement policy with reservation.
+        # @!attribute [rw] resource_status
+        #   @return [::Google::Cloud::Compute::V1::AllocationResourceStatus]
+        #     [Output Only] Status information for Reservation resource.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
         #     [Output Only] Reserved for future use.
