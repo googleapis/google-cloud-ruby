@@ -27288,7 +27288,7 @@ module Google
         # A specification of the parameters to use when creating the instance template from a source instance.
         # @!attribute [rw] disk_configs
         #   @return [::Array<::Google::Cloud::Compute::V1::DiskInstantiationConfig>]
-        #     Attached disks configuration. If not provided, defaults are applied: For boot disk and any other R/W disks, new custom images will be created from each disk. For read-only disks, they will be attached in read-only mode. Local SSD disks will be created as blank volumes.
+        #     Attached disks configuration. If not provided, defaults are applied: For boot disk and any other R/W disks, the source images for each disk will be used. For read-only disks, they will be attached in read-only mode. Local SSD disks will be created as blank volumes.
         class SourceInstanceParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
