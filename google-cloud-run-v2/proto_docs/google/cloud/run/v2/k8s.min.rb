@@ -28,11 +28,13 @@ module Google
         # at runtime.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of the container specified as a DNS_LABEL.
+        #     Name of the container specified as a DNS_LABEL (RFC 1123).
         # @!attribute [rw] image
         #   @return [::String]
-        #     Required. URL of the Container image in Google Container Registry or Google Artifact
-        #     Registry. More info: https://kubernetes.io/docs/concepts/containers/images
+        #     Required. Name of the container image in Dockerhub, Google Artifact
+        #     Registry, or Google Container Registry. If the host is not provided,
+        #     Dockerhub is assumed. More info:
+        #     https://kubernetes.io/docs/concepts/containers/images
         # @!attribute [rw] command
         #   @return [::Array<::String>]
         #     Entrypoint array. Not executed within a shell.
@@ -126,8 +128,8 @@ module Google
         # EnvVar represents an environment variable present in a Container.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the environment variable. Must be a C_IDENTIFIER, and mnay not
-        #     exceed 32768 characters.
+        #     Required. Name of the environment variable. Must be a C_IDENTIFIER, and
+        #     mnay not exceed 32768 characters.
         # @!attribute [rw] value
         #   @return [::String]
         #     Variable references $(VAR_NAME) are expanded
@@ -192,8 +194,8 @@ module Google
         #     Required. This must match the Name of a Volume.
         # @!attribute [rw] mount_path
         #   @return [::String]
-        #     Required. Path within the container at which the volume should be mounted.  Must
-        #     not contain ':'. For Cloud SQL volumes, it can be left empty, or must
+        #     Required. Path within the container at which the volume should be mounted.
+        #     Must not contain ':'. For Cloud SQL volumes, it can be left empty, or must
         #     otherwise be `/cloudsql`. All instances defined in the Volume will be
         #     available as `/cloudsql/[instance]`. For more information on Cloud SQL
         #     volumes, visit https://cloud.google.com/sql/docs/mysql/connect-run
@@ -293,7 +295,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents a specific Cloud SQL instance.
+        # Represents a set of Cloud SQL instances. Each one will be available under
+        # /cloudsql/[instance]. Visit
+        # https://cloud.google.com/sql/docs/mysql/connect-run for more information on
+        # how to connect Cloud SQL and Cloud Run.
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The Cloud SQL instance connection names, as can be found in
