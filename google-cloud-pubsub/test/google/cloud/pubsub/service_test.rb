@@ -233,6 +233,31 @@ describe Google::Cloud::PubSub::Service do
     end
   end
 
+  it "should pass call option with compression header when compress enabled" do
+    service = Google::Cloud::PubSub::Service.new project, nil
+    mocked_publisher = Minitest::Mock.new
+    service.mocked_publisher = mocked_publisher
+    expected_request = {topic: "projects/test/topics/test", messages: "data"}
+    expected_options = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
+    mocked_publisher.expect :publish, nil do |actual_request, actual_option|
+      actual_request == expected_request && actual_option == expected_options
+    end
+    service.publish "test", "data", compress: true
+    mocked_publisher.verify
+  end
+
+  it "should not add call option when compress disabled" do
+    service = Google::Cloud::PubSub::Service.new project, nil
+    mocked_publisher = Minitest::Mock.new
+    service.mocked_publisher = mocked_publisher
+    expected_request = {topic: "projects/test/topics/test", messages: "data"}
+    mocked_publisher.expect :publish, nil do |actual_request, actual_option|
+      actual_request == expected_request && actual_option.nil?
+    end
+    service.publish "test", "data"
+    mocked_publisher.verify
+  end
+
   # @param [Numeric, nil] timeout Expected non-default timeout.
   def assert_config_rpcs_equals expected_rpcs, expected_rpcs_count, actual_rpcs, timeout: nil
     expected_rpc_names = expected_rpcs.methods - Object.methods

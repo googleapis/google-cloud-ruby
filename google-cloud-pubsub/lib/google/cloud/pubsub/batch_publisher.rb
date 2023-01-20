@@ -40,10 +40,31 @@ module Google
         attr_reader :messages
 
         ##
+        # @private Enables publisher compression
+        attr_reader :compress
+
+        ##
+        # @private The threshold bytes size for compression
+        attr_reader :compression_bytes_threshold
+
+        ##
+        # @private The total bytes size of messages data.
+        attr_reader :total_message_bytes
+
+        ##
         # @private Create a new instance of the object.
-        def initialize data, attributes, ordering_key, extra_attrs
+        def initialize data,
+                       attributes,
+                       ordering_key,
+                       extra_attrs,
+                       compress: nil,
+                       compression_bytes_threshold: nil
           @messages = []
           @mode = :batch
+          @compress = compress || Google::Cloud::PubSub::DEFAULT_COMPRESS
+          @compression_bytes_threshold = compression_bytes_threshold ||
+                                         Google::Cloud::PubSub::DEFAULT_COMPRESSION_BYTES_THRESHOLD
+          @total_message_bytes = 0
           return if data.nil?
           @mode = :single
           publish data, attributes, ordering_key: ordering_key, **extra_attrs
@@ -74,6 +95,7 @@ module Google
         #
         def publish data, attributes = nil, ordering_key: nil, **extra_attrs
           msg = Convert.pubsub_message data, attributes, ordering_key, extra_attrs
+          @total_message_bytes += msg.data.bytesize + 2
           @messages << msg
         end
 
@@ -91,6 +113,15 @@ module Google
           else
             msgs
           end
+        end
+
+        ##
+        # @private  Call the publish API with arrays of data and attrs.
+        def publish_batch_messages topic_name, service
+          grpc = service.publish topic_name,
+                                 messages,
+                                 compress: compress && total_message_bytes >= compression_bytes_threshold
+          to_gcloud_messages Array(grpc.message_ids)
         end
       end
     end

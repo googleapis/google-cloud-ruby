@@ -70,7 +70,8 @@ module Google
         ##
         # @private Implementation accessors
         attr_reader :service, :batch, :publish_thread_pool,
-                    :callback_thread_pool, :flow_controller
+                    :callback_thread_pool, :flow_controller,
+                    :compress, :compression_bytes_threshold
 
         ##
         # @private Create a new instance of the object.
@@ -80,7 +81,9 @@ module Google
                        max_messages: 100,
                        interval: 0.01,
                        threads: {},
-                       flow_control: {}
+                       flow_control: {},
+                       compress: nil,
+                       compression_bytes_threshold: nil
           # init MonitorMixin
           super()
           @topic_name = service.topic_path topic_name
@@ -105,6 +108,9 @@ module Google
           @cond = new_cond
           @flow_controller = FlowController.new(**@flow_control)
           @thread = Thread.new { run_background }
+          @compress = compress || Google::Cloud::PubSub::DEFAULT_COMPRESS
+          @compression_bytes_threshold = compression_bytes_threshold ||
+                                         Google::Cloud::PubSub::DEFAULT_COMPRESSION_BYTES_THRESHOLD
         end
 
         ##
@@ -370,7 +376,9 @@ module Google
             items = batch.rebalance!
 
             unless items.empty?
-              grpc = @service.publish topic_name, items.map(&:msg)
+              grpc = @service.publish topic_name,
+                                      items.map(&:msg),
+                                      compress: compress && batch.total_message_bytes >= compression_bytes_threshold
               items.zip Array(grpc.message_ids) do |item, id|
                 @flow_controller.release item.bytesize
                 next unless item.callback
