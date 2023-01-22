@@ -1,5 +1,11 @@
 # Release History
 
+### 2.15.0 (2023-01-22)
+
+#### Features
+
+* support publisher compression ([#19910](https://github.com/googleapis/google-cloud-ruby/issues/19910)) 
+
 ### 2.14.0 (2023-01-12)
 
 #### Features
