@@ -15,7 +15,6 @@
 require_relative "helper"
 require_relative "../topics.rb"
 require_relative "../subscriptions.rb"
-require_relative "../pubsub_publisher_with_compression.rb"
 
 describe "topics" do
   let(:pubsub) { Google::Cloud::Pubsub.new }
@@ -248,14 +247,16 @@ describe "topics" do
     end
   end
 
+  focus
   it "supports pubsub_publisher_with_compression" do
     #setup
+    sample = SampleLoader.load "pubsub_publisher_with_compression.rb"
     @topic = pubsub.create_topic topic_id
     @subscription = @topic.subscribe random_subscription_id
 
     # pubsub_publisher_with_compression
     assert_output /Published a compressed message of message ID:/ do
-      pubsub_publisher_with_compression project_id: pubsub.project, topic_id: topic_id
+      sample.run project_id: pubsub.project, topic_id: topic_id
     end
 
     messages = []
