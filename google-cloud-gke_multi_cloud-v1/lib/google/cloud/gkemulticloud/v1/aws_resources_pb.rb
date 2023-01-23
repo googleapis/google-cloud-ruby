@@ -29,6 +29,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :cluster_ca_certificate, :string, 17
       optional :fleet, :message, 18, "google.cloud.gkemulticloud.v1.Fleet"
       optional :logging_config, :message, 19, "google.cloud.gkemulticloud.v1.LoggingConfig"
+      repeated :errors, :message, 20, "google.cloud.gkemulticloud.v1.AwsClusterError"
+      optional :monitoring_config, :message, 21, "google.cloud.gkemulticloud.v1.MonitoringConfig"
     end
     add_enum "google.cloud.gkemulticloud.v1.AwsCluster.State" do
       value :STATE_UNSPECIFIED, 0
@@ -98,6 +100,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :etag, :string, 21
       map :annotations, :string, :string, 22
       optional :max_pods_constraint, :message, 27, "google.cloud.gkemulticloud.v1.MaxPodsConstraint"
+      repeated :errors, :message, 29, "google.cloud.gkemulticloud.v1.AwsNodePoolError"
     end
     add_enum "google.cloud.gkemulticloud.v1.AwsNodePool.State" do
       value :STATE_UNSPECIFIED, 0
@@ -121,6 +124,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :proxy_config, :message, 12, "google.cloud.gkemulticloud.v1.AwsProxyConfig"
       optional :config_encryption, :message, 13, "google.cloud.gkemulticloud.v1.AwsConfigEncryption"
       optional :instance_placement, :message, 14, "google.cloud.gkemulticloud.v1.AwsInstancePlacement"
+      optional :autoscaling_metrics_collection, :message, 15, "google.cloud.gkemulticloud.v1.AwsAutoscalingGroupMetricsCollection"
     end
     add_message "google.cloud.gkemulticloud.v1.AwsNodePoolAutoscaling" do
       optional :min_node_count, :int32, 1
@@ -153,6 +157,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DEDICATED, 2
       value :HOST, 3
     end
+    add_message "google.cloud.gkemulticloud.v1.AwsAutoscalingGroupMetricsCollection" do
+      optional :granularity, :string, 1
+      repeated :metrics, :string, 2
+    end
+    add_message "google.cloud.gkemulticloud.v1.AwsClusterError" do
+      optional :message, :string, 1
+    end
+    add_message "google.cloud.gkemulticloud.v1.AwsNodePoolError" do
+      optional :message, :string, 1
+    end
   end
 end
 
@@ -181,6 +195,9 @@ module Google
         AwsConfigEncryption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AwsConfigEncryption").msgclass
         AwsInstancePlacement = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AwsInstancePlacement").msgclass
         AwsInstancePlacement::Tenancy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AwsInstancePlacement.Tenancy").enummodule
+        AwsAutoscalingGroupMetricsCollection = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AwsAutoscalingGroupMetricsCollection").msgclass
+        AwsClusterError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AwsClusterError").msgclass
+        AwsNodePoolError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AwsNodePoolError").msgclass
       end
     end
   end

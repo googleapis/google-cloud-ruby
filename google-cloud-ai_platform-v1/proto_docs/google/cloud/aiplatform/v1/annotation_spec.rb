@@ -38,8 +38,8 @@ module Google
         #     Output only. Timestamp when AnnotationSpec was last updated.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. Used to perform consistent read-modify-write updates. If not set, a blind
-        #     "overwrite" update happens.
+        #     Optional. Used to perform consistent read-modify-write updates. If not set,
+        #     a blind "overwrite" update happens.
         class AnnotationSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

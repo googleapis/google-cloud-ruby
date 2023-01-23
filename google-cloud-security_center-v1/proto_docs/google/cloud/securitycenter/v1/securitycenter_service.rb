@@ -228,8 +228,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the parent to group the assets by. Its format is
-        #     "organizations/[organization_id], folders/[folder_id], or
-        #     projects/[project_id]".
+        #     "organizations/[organization_id]", "folders/[folder_id]", or
+        #     "projects/[project_id]".
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across assets.
@@ -643,8 +643,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the parent of sources to list. Its format should
-        #     be "organizations/[organization_id], folders/[folder_id], or
-        #     projects/[project_id]".
+        #     be "organizations/[organization_id]", "folders/[folder_id]", or
+        #     "projects/[project_id]".
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The value returned by the last `ListSourcesResponse`; indicates
@@ -675,9 +675,11 @@ module Google
         # Request message for listing assets.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the parent that the listed assets belong to. Its
-        #     format is "organizations/[organization_id], folders/[folder_id], or
-        #     projects/[project_id]".
+        #     Required. The name of the parent resource that contains the assets. The
+        #     value that you can specify on parent depends on the method in which you
+        #     specify parent. You can specify one of the following values:
+        #     "organizations/[organization_id]", "folders/[folder_id]", or
+        #     "projects/[project_id]".
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across assets.

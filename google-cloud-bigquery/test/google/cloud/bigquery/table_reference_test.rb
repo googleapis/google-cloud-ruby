@@ -112,7 +112,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
   it "adds to its existing schema" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     end_date_timestamp_gapi = field_timestamp_gapi.dup
     end_date_timestamp_gapi.name = "end_date"
     new_schema_gapi = table_gapi.schema.dup
@@ -123,7 +123,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
       [table.project_id, table.dataset_id, table.table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
-    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     table.schema do |schema|
@@ -137,7 +137,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
   it "replaces existing schema with replace option" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     new_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
       fields: [field_timestamp_gapi])
     returned_table_gapi = table_gapi.dup
@@ -145,7 +145,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
       [table.project_id, table.dataset_id, table.table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
-    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
@@ -176,10 +176,10 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     response_table_gapi.external_data_configuration = request_table_gapi.external_data_configuration
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     mock.expect :patch_table, table_gapi,
       [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
-    mock.expect :get_table, response_table_gapi, [project, dataset_id, table_id]
+    mock.expect :get_table, response_table_gapi, [project, dataset_id, table_id], **patch_table_args
     table.service.mocked_service = mock
 
     table.external = bigquery.external "gs://my-bucket/path/to/file.json" do |json|
@@ -205,7 +205,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
   it "returns data as a list of hashes" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
                 [project, dataset_id, table_id],   max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} 
@@ -362,7 +362,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
   it "can test its existence" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     _(table.exists?).must_equal true
@@ -372,7 +372,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
   it "can test its existence with force to load resource" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     _(table.exists?(force: true)).must_equal true

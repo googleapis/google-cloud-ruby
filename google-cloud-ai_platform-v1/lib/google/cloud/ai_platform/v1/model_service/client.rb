@@ -207,8 +207,8 @@ module Google
             #     Required. The resource name of the Location into which to upload the Model.
             #     Format: `projects/{project}/locations/{location}`
             #   @param parent_model [::String]
-            #     Optional. The resource name of the model into which to upload the version. Only
-            #     specify this field when uploading a new version.
+            #     Optional. The resource name of the model into which to upload the version.
+            #     Only specify this field when uploading a new version.
             #   @param model_id [::String]
             #     Optional. The ID to use for the uploaded Model, which will become the final
             #     component of the model resource name.
@@ -420,7 +420,8 @@ module Google
             #     both snake_case and camelCase are supported.
             #
             #       * `model` supports = and !=. `model` represents the Model ID,
-            #         i.e. the last segment of the Model's {::Google::Cloud::AIPlatform::V1::Model#name resource name}.
+            #         i.e. the last segment of the Model's [resource
+            #         name][google.cloud.aiplatform.v1.Model.name].
             #       * `display_name` supports = and !=
             #       * `labels` supports general map functions that is:
             #         * `labels.key=value` - key:value equality
@@ -437,8 +438,10 @@ module Google
             #   @param page_token [::String]
             #     The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListModelsResponse#next_page_token ListModelsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_models ModelService.ListModels} call.
+            #     {::Google::Cloud::AIPlatform::V1::ListModelsResponse#next_page_token ListModelsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_models ModelService.ListModels}
+            #     call.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #   @param order_by [::String]
@@ -536,7 +539,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_model_versions(name: nil, page_size: nil, page_token: nil, filter: nil, read_mask: nil)
+            # @overload list_model_versions(name: nil, page_size: nil, page_token: nil, filter: nil, read_mask: nil, order_by: nil)
             #   Pass arguments to `list_model_versions` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -548,8 +551,8 @@ module Google
             #   @param page_token [::String]
             #     The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse#next_page_token ListModelVersionsResponse.next_page_token} of the previous
-            #     [ModelService.ListModelversions][] call.
+            #     {::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse#next_page_token ListModelVersionsResponse.next_page_token}
+            #     of the previous [ModelService.ListModelversions][] call.
             #   @param filter [::String]
             #     An expression for filtering the results of the request. For field names
             #     both snake_case and camelCase are supported.
@@ -564,6 +567,15 @@ module Google
             #       * `labels.myKey="myValue"`
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
+            #   @param order_by [::String]
+            #     A comma-separated list of fields to order by, sorted in ascending order.
+            #     Use "desc" after a field name for descending.
+            #     Supported fields:
+            #
+            #       * `create_time`
+            #       * `update_time`
+            #
+            #     Example: `update_time asc, create_time desc`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::Model>]
@@ -675,7 +687,8 @@ module Google
             #     must update them separately.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The update mask applies to the resource.
-            #     For the `FieldMask` definition, see {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+            #     For the `FieldMask` definition, see
+            #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::Model]
@@ -744,9 +757,12 @@ module Google
             ##
             # Deletes a Model.
             #
-            # A model cannot be deleted if any {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} resource has a
-            # {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel} based on the model in its
-            # {::Google::Cloud::AIPlatform::V1::Endpoint#deployed_models deployed_models} field.
+            # A model cannot be deleted if any
+            # {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} resource has a
+            # {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel} based on the
+            # model in its
+            # {::Google::Cloud::AIPlatform::V1::Endpoint#deployed_models deployed_models}
+            # field.
             #
             # @overload delete_model(request, options = nil)
             #   Pass arguments to `delete_model` via a request object, either of type
@@ -844,7 +860,8 @@ module Google
             #
             # Model version can only be deleted if there are no [DeployedModels][]
             # created from it. Deleting the only version in the Model is not allowed. Use
-            # {::Google::Cloud::AIPlatform::V1::ModelService::Client#delete_model DeleteModel} for deleting the Model instead.
+            # {::Google::Cloud::AIPlatform::V1::ModelService::Client#delete_model DeleteModel} for
+            # deleting the Model instead.
             #
             # @overload delete_model_version(request, options = nil)
             #   Pass arguments to `delete_model_version` via a request object, either of type
@@ -862,8 +879,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the model version to be deleted, with a version ID explicitly
-            #     included.
+            #     Required. The name of the model version to be deleted, with a version ID
+            #     explicitly included.
             #
             #     Example: `projects/{project}/locations/{location}/models/{model}@1234`
             #
@@ -1043,7 +1060,8 @@ module Google
             ##
             # Exports a trained, exportable Model to a location specified by the
             # user. A Model is considered to be exportable if it has at least one
-            # {::Google::Cloud::AIPlatform::V1::Model#supported_export_formats supported export format}.
+            # [supported export
+            # format][google.cloud.aiplatform.v1.Model.supported_export_formats].
             #
             # @overload export_model(request, options = nil)
             #   Pass arguments to `export_model` via a request object, either of type
@@ -1431,8 +1449,10 @@ module Google
             #   @param page_token [::String]
             #     The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListModelEvaluationsResponse#next_page_token ListModelEvaluationsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluations ModelService.ListModelEvaluations} call.
+            #     {::Google::Cloud::AIPlatform::V1::ListModelEvaluationsResponse#next_page_token ListModelEvaluationsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluations ModelService.ListModelEvaluations}
+            #     call.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #
@@ -1613,8 +1633,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
-            #     from. Format:
+            #     Required. The resource name of the ModelEvaluation to list the
+            #     ModelEvaluationSlices from. Format:
             #     `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
             #   @param filter [::String]
             #     The standard list filter.
@@ -1625,8 +1645,10 @@ module Google
             #   @param page_token [::String]
             #     The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListModelEvaluationSlicesResponse#next_page_token ListModelEvaluationSlicesResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices ModelService.ListModelEvaluationSlices} call.
+            #     {::Google::Cloud::AIPlatform::V1::ListModelEvaluationSlicesResponse#next_page_token ListModelEvaluationSlicesResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices ModelService.ListModelEvaluationSlices}
+            #     call.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #

@@ -206,7 +206,8 @@ module Google
             #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#instance_schema_uri instance_schema_uri}.
             #   @param parameters [::Google::Protobuf::Value, ::Hash]
             #     The parameters that govern the prediction. The schema of the parameters may
-            #     be specified via Endpoint's DeployedModels' [Model's ][google.cloud.aiplatform.v1.DeployedModel.model]
+            #     be specified via Endpoint's DeployedModels' [Model's
+            #     ][google.cloud.aiplatform.v1.DeployedModel.model]
             #     [PredictSchemata's][google.cloud.aiplatform.v1.Model.predict_schemata]
             #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#parameters_schema_uri parameters_schema_uri}.
             #
@@ -279,11 +280,13 @@ module Google
             #
             # The response includes the following HTTP headers:
             #
-            # * `X-Vertex-AI-Endpoint-Id`: ID of the {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} that served this
+            # * `X-Vertex-AI-Endpoint-Id`: ID of the
+            # {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} that served this
             # prediction.
             #
-            # * `X-Vertex-AI-Deployed-Model-Id`: ID of the Endpoint's {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel}
-            # that served this prediction.
+            # * `X-Vertex-AI-Deployed-Model-Id`: ID of the Endpoint's
+            # {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel} that served this
+            # prediction.
             #
             # @overload raw_predict(request, options = nil)
             #   Pass arguments to `raw_predict` via a request object, either of type
@@ -307,16 +310,18 @@ module Google
             #   @param http_body [::Google::Api::HttpBody, ::Hash]
             #     The prediction input. Supports HTTP headers and arbitrary data payload.
             #
-            #     A {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel} may have an upper limit on the number of instances it
-            #     supports per request. When this limit it is exceeded for an AutoML model,
-            #     the {::Google::Cloud::AIPlatform::V1::PredictionService::Client#raw_predict RawPredict} method returns an error.
-            #     When this limit is exceeded for a custom-trained model, the behavior varies
-            #     depending on the model.
+            #     A {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModel} may have an
+            #     upper limit on the number of instances it supports per request. When this
+            #     limit it is exceeded for an AutoML model, the
+            #     {::Google::Cloud::AIPlatform::V1::PredictionService::Client#raw_predict RawPredict}
+            #     method returns an error. When this limit is exceeded for a custom-trained
+            #     model, the behavior varies depending on the model.
             #
             #     You can specify the schema for each instance in the
             #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#instance_schema_uri predict_schemata.instance_schema_uri}
-            #     field when you create a {::Google::Cloud::AIPlatform::V1::Model Model}. This schema applies when you deploy the
-            #     `Model` as a `DeployedModel` to an {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} and use the `RawPredict`
+            #     field when you create a {::Google::Cloud::AIPlatform::V1::Model Model}. This
+            #     schema applies when you deploy the `Model` as a `DeployedModel` to an
+            #     {::Google::Cloud::AIPlatform::V1::Endpoint Endpoint} and use the `RawPredict`
             #     method.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -386,10 +391,12 @@ module Google
             ##
             # Perform an online explanation.
             #
-            # If {::Google::Cloud::AIPlatform::V1::ExplainRequest#deployed_model_id deployed_model_id} is specified,
-            # the corresponding DeployModel must have
+            # If
+            # {::Google::Cloud::AIPlatform::V1::ExplainRequest#deployed_model_id deployed_model_id}
+            # is specified, the corresponding DeployModel must have
             # {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
-            # populated. If {::Google::Cloud::AIPlatform::V1::ExplainRequest#deployed_model_id deployed_model_id}
+            # populated. If
+            # {::Google::Cloud::AIPlatform::V1::ExplainRequest#deployed_model_id deployed_model_id}
             # is not specified, all DeployedModels must have
             # {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
             # populated. Only deployed AutoML tabular Models have
@@ -426,21 +433,23 @@ module Google
             #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#instance_schema_uri instance_schema_uri}.
             #   @param parameters [::Google::Protobuf::Value, ::Hash]
             #     The parameters that govern the prediction. The schema of the parameters may
-            #     be specified via Endpoint's DeployedModels' [Model's ][google.cloud.aiplatform.v1.DeployedModel.model]
+            #     be specified via Endpoint's DeployedModels' [Model's
+            #     ][google.cloud.aiplatform.v1.DeployedModel.model]
             #     [PredictSchemata's][google.cloud.aiplatform.v1.Model.predict_schemata]
             #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#parameters_schema_uri parameters_schema_uri}.
             #   @param explanation_spec_override [::Google::Cloud::AIPlatform::V1::ExplanationSpecOverride, ::Hash]
             #     If specified, overrides the
-            #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec} of the DeployedModel.
-            #     Can be used for explaining prediction results with different
-            #     configurations, such as:
+            #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
+            #     of the DeployedModel. Can be used for explaining prediction results with
+            #     different configurations, such as:
             #      - Explaining top-5 predictions results as opposed to top-1;
             #      - Increasing path count or step count of the attribution methods to reduce
             #        approximate errors;
             #      - Using different baselines for explaining the prediction results.
             #   @param deployed_model_id [::String]
             #     If specified, this ExplainRequest will be served by the chosen
-            #     DeployedModel, overriding {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split Endpoint.traffic_split}.
+            #     DeployedModel, overriding
+            #     {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split Endpoint.traffic_split}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::ExplainResponse]

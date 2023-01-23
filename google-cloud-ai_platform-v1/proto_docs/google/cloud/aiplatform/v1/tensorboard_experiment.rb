@@ -62,7 +62,8 @@ module Google
         #     "overwrite" update happens.
         # @!attribute [rw] source
         #   @return [::String]
-        #     Immutable. Source of the TensorboardExperiment. Example: a custom training job.
+        #     Immutable. Source of the TensorboardExperiment. Example: a custom training
+        #     job.
         class TensorboardExperiment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

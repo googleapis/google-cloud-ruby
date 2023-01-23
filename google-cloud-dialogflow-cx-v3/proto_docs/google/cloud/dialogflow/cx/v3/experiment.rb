@@ -30,8 +30,8 @@ module Google
           #     ID>/environments/<Environment ID>/experiments/<Experiment ID>..
           # @!attribute [rw] display_name
           #   @return [::String]
-          #     Required. The human-readable name of the experiment (unique in an environment). Limit
-          #     of 64 characters.
+          #     Required. The human-readable name of the experiment (unique in an
+          #     environment). Limit of 64 characters.
           # @!attribute [rw] description
           #   @return [::String]
           #     The human-readable description of the experiment.
@@ -328,12 +328,14 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#list_experiments Experiments.ListExperiments}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#list_experiments Experiments.ListExperiments}.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to list all environments for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/environments/<Environment ID>`.
+          #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to
+          #     list all environments for. Format: `projects/<Project
+          #     ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
+          #     ID>`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of items to return in a single page. By default 20 and
@@ -346,7 +348,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response message for {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#list_experiments Experiments.ListExperiments}.
+          # The response message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#list_experiments Experiments.ListExperiments}.
           # @!attribute [rw] experiments
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Experiment>]
           #     The list of experiments. There will be a maximum number of items
@@ -362,22 +365,26 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#get_experiment Experiments.GetExperiment}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#get_experiment Experiments.GetExperiment}.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     Required. The name of the
+          #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}. Format:
+          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
           #     ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
           class GetExperimentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#create_experiment Experiments.CreateExperiment}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#create_experiment Experiments.CreateExperiment}.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to create an {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to create an
+          #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} for. Format:
+          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
           #     ID>/environments/<Environment ID>`.
           # @!attribute [rw] experiment
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Experiment]
@@ -387,7 +394,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#update_experiment Experiments.UpdateExperiment}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#update_experiment Experiments.UpdateExperiment}.
           # @!attribute [rw] experiment
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Experiment]
           #     Required. The experiment to update.
@@ -399,18 +407,21 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#delete_experiment Experiments.DeleteExperiment}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#delete_experiment Experiments.DeleteExperiment}.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to delete.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     Required. The name of the
+          #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to delete. Format:
+          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
           #     ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
           class DeleteExperimentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#start_experiment Experiments.StartExperiment}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#start_experiment Experiments.StartExperiment}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the experiment to start.
@@ -421,7 +432,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#stop_experiment Experiments.StopExperiment}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Experiments::Client#stop_experiment Experiments.StopExperiment}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the experiment to stop.

@@ -257,8 +257,8 @@ module Google
         #     The status of the event.
         # @!attribute [rw] fast_startup_enabled
         #   @return [::Boolean]
-        #     If the session is associated with an Environment with fast startup enabled,
-        #     and was pre-created before being assigned to a user.
+        #     If the session is associated with an environment with fast startup enabled,
+        #     and was created before being assigned to a user.
         # @!attribute [rw] unassigned_duration
         #   @return [::Google::Protobuf::Duration]
         #     The idle duration of a warm pooled session before it is assigned to user.
@@ -319,6 +319,139 @@ module Google
             # Event for creation of a cluster. It is not yet assigned to a user.
             # This comes before START in the sequence
             CREATE = 4
+          end
+        end
+
+        # These messages contain information about the execution of a datascan.
+        # The monitored resource is 'DataScan'
+        # @!attribute [rw] data_source
+        #   @return [::String]
+        #     The data source of the data scan
+        # @!attribute [rw] job_id
+        #   @return [::String]
+        #     The identifier of the specific data scan job this log entry is for.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the data scan job started to run.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the data scan job finished.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::ScanType]
+        #     The type of the data scan.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::State]
+        #     The status of the data scan job.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     The message describing the data scan job event.
+        # @!attribute [rw] spec_version
+        #   @return [::String]
+        #     A version identifier of the spec which was used to execute this job.
+        # @!attribute [rw] trigger
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::Trigger]
+        #     The trigger type of the data scan job.
+        # @!attribute [rw] scope
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::Scope]
+        #     The scope of the data scan (e.g. full, incremental).
+        # @!attribute [rw] data_profile
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::DataProfileResult]
+        #     Data profile result for data profile type data scan.
+        # @!attribute [rw] data_quality
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::DataQualityResult]
+        #     Data quality result for data quality type data scan.
+        class DataScanEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Data profile result for data scan job.
+          # @!attribute [rw] row_count
+          #   @return [::Integer]
+          #     The count of rows processed in the data scan job.
+          class DataProfileResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Data quality result for data scan job.
+          # @!attribute [rw] row_count
+          #   @return [::Integer]
+          #     The count of rows processed in the data scan job.
+          # @!attribute [rw] passed
+          #   @return [::Boolean]
+          #     Whether the data quality result was `pass` or not.
+          # @!attribute [rw] dimension_passed
+          #   @return [::Google::Protobuf::Map{::String => ::Boolean}]
+          #     The result of each dimension for data quality result.
+          #     The key of the map is the name of the dimension.
+          #     The value is the bool value depicting whether the dimension result was
+          #     `pass` or not.
+          class DataQualityResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Boolean]
+            class DimensionPassedEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # The type of the data scan.
+          module ScanType
+            # An unspecified data scan type.
+            SCAN_TYPE_UNSPECIFIED = 0
+
+            # Data scan for data profile.
+            DATA_PROFILE = 1
+
+            # Data scan for data quality.
+            DATA_QUALITY = 2
+          end
+
+          # The job state of the data scan.
+          module State
+            # Unspecified job state.
+            STATE_UNSPECIFIED = 0
+
+            # Data scan started.
+            STARTED = 1
+
+            # Data scan successfully completed.
+            SUCCEEDED = 2
+
+            # Data scan was unsuccessful.
+            FAILED = 3
+
+            # Data scan was cancelled.
+            CANCELLED = 4
+          end
+
+          # The trigger type for the data scan.
+          module Trigger
+            # An unspecified trigger type.
+            TRIGGER_UNSPECIFIED = 0
+
+            # Data scan triggers on demand.
+            ON_DEMAND = 1
+
+            # Data scan triggers as per schedule.
+            SCHEDULE = 2
+          end
+
+          # The scope of job for the data scan.
+          module Scope
+            # An unspecified scope type.
+            SCOPE_UNSPECIFIED = 0
+
+            # Data scan runs on all of the data.
+            FULL = 1
+
+            # Data scan runs on incremental data.
+            INCREMENTAL = 2
           end
         end
       end

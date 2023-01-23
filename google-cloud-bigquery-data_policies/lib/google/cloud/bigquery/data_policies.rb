@@ -49,8 +49,8 @@ module Google
         # Create a new client object for DataPolicyService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client](https://googleapis.dev/ruby/google-cloud-bigquery-data_policies-v1beta1/latest/Google/Cloud/Bigquery/DataPolicies/V1beta1/DataPolicyService/Client.html)
-        # for a gRPC client for version V1beta1 of the API.
+        # [Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Client](https://googleapis.dev/ruby/google-cloud-bigquery-data_policies-v1/latest/Google/Cloud/Bigquery/DataPolicies/V1/DataPolicyService/Client.html)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the DataPolicyService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -61,10 +61,10 @@ module Google
         # Data Policy Service provides APIs for managing the label-policy bindings.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta1`.
+        #   Defaults to `:v1`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.data_policy_service version: :v1beta1, &block
+        def self.data_policy_service version: :v1, &block
           require "google/cloud/bigquery/data_policies/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Bigquery::DataPolicies

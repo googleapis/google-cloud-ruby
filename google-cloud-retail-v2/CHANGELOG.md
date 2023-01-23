@@ -1,5 +1,18 @@
 # Release History
 
+### 0.12.0 (2023-01-05)
+
+#### Features
+
+* Support asynchronous operation of write_user_event ([#19892](https://github.com/googleapis/google-cloud-ruby/issues/19892)) 
+* Support for diversity_type in ServingConfig 
+* Support for exact_searchable_option and retrievable_option in catalog attributes 
+* Support prebuilt rule names for collect_user_event 
+* Support raw JSON user event payload for collect_user_event 
+#### Documentation
+
+* Various fixes for documentation formatting 
+
 ### 0.11.0 (2022-08-24)
 
 #### Features

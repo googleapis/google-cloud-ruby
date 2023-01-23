@@ -53,11 +53,17 @@ module Google
 
         ##
         # @private Create a new instance of the object.
-        def initialize data, attributes, ordering_key, extra_attrs, compress: false, compression_bytes_threshold: 240
+        def initialize data,
+                       attributes,
+                       ordering_key,
+                       extra_attrs,
+                       compress: nil,
+                       compression_bytes_threshold: nil
           @messages = []
           @mode = :batch
-          @compress = compress
-          @compression_bytes_threshold = compression_bytes_threshold
+          @compress = compress || Google::Cloud::PubSub::DEFAULT_COMPRESS
+          @compression_bytes_threshold = compression_bytes_threshold ||
+                                         Google::Cloud::PubSub::DEFAULT_COMPRESSION_BYTES_THRESHOLD
           @total_message_bytes = 0
           return if data.nil?
           @mode = :single

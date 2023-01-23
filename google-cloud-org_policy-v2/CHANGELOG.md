@@ -1,5 +1,12 @@
 # Release History
 
+### 0.4.0 (2023-01-19)
+
+#### Features
+
+* Support for dry run policies ([#20040](https://github.com/googleapis/google-cloud-ruby/issues/20040)) 
+* Support for field masks when updating policies 
+
 ### 0.3.0 (2022-07-06)
 
 #### Features

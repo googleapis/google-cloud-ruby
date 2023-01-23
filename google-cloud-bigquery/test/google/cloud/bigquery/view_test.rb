@@ -74,7 +74,7 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
 
   it "can test its existence with force to load resource" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, view_gapi, [view.project_id, view.dataset_id, view.table_id]
+    mock.expect :get_table, view_gapi, [view.project_id, view.dataset_id, view.table_id], **patch_table_args
     view.service.mocked_service = mock
 
     _(view.exists?(force: true)).must_equal true
@@ -100,8 +100,8 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
 
     mock = Minitest::Mock.new
     view_hash = random_view_hash dataset, table_id, table_name, new_description
-    mock.expect :get_table, Google::Apis::BigqueryV2::Table.from_json(view_hash.to_json),
-      [project, dataset, table_id]
+    mock.expect :get_table, Google::Apis::BigqueryV2::Table.from_json(view_hash.to_json), 
+      [project, dataset, table_id], **patch_table_args
     view.service.mocked_service = mock
 
     _(view.description).must_equal description

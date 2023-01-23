@@ -183,7 +183,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal metadata
-          assert_config_rpcs_equals schema_service_default_config.rpcs, 6, config.rpcs
+          assert_config_rpcs_equals schema_service_default_config.rpcs, 10, config.rpcs
         end
       end
     end
@@ -203,7 +203,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal metadata
-          assert_config_rpcs_equals schema_service_default_config.rpcs, 6, config.rpcs, timeout: timeout
+          assert_config_rpcs_equals schema_service_default_config.rpcs, 10, config.rpcs, timeout: timeout
         end
       end
     end

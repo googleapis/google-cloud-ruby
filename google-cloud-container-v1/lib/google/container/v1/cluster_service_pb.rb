@@ -25,6 +25,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CGROUP_MODE_V1, 1
       value :CGROUP_MODE_V2, 2
     end
+    add_message "google.container.v1.WindowsNodeConfig" do
+      optional :os_version, :enum, 1, "google.container.v1.WindowsNodeConfig.OSVersion"
+    end
+    add_enum "google.container.v1.WindowsNodeConfig.OSVersion" do
+      value :OS_VERSION_UNSPECIFIED, 0
+      value :OS_VERSION_LTSC2019, 1
+      value :OS_VERSION_LTSC2022, 2
+    end
     add_message "google.container.v1.NodeKubeletConfig" do
       optional :cpu_manager_policy, :string, 1
       optional :cpu_cfs_quota, :message, 2, "google.protobuf.BoolValue"
@@ -62,6 +70,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :fast_socket, :message, 36, "google.container.v1.FastSocket"
       map :resource_labels, :string, :string, 37
       optional :logging_config, :message, 38, "google.container.v1.NodePoolLoggingConfig"
+      optional :windows_node_config, :message, 39, "google.container.v1.WindowsNodeConfig"
+      optional :local_nvme_ssd_block_config, :message, 40, "google.container.v1.LocalNvmeSsdBlockConfig"
+      optional :ephemeral_storage_local_ssd_config, :message, 41, "google.container.v1.EphemeralStorageLocalSsdConfig"
     end
     add_message "google.container.v1.AdvancedMachineFeatures" do
       proto3_optional :threads_per_core, :int64, 1
@@ -249,6 +260,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :use_routes, :bool, 15
       optional :stack_type, :enum, 16, "google.container.v1.StackType"
       optional :ipv6_access_type, :enum, 17, "google.container.v1.IPv6AccessType"
+      optional :subnet_ipv6_cidr_block, :string, 22
+      optional :services_ipv6_cidr_block, :string, 23
     end
     add_message "google.container.v1.Cluster" do
       optional :name, :string, 1
@@ -313,6 +326,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :logging_config, :message, 132, "google.container.v1.LoggingConfig"
       optional :monitoring_config, :message, 133, "google.container.v1.MonitoringConfig"
       optional :node_pool_auto_config, :message, 136, "google.container.v1.NodePoolAutoConfig"
+      optional :etag, :string, 139
     end
     add_enum "google.container.v1.Cluster.Status" do
       value :STATUS_UNSPECIFIED, 0
@@ -371,6 +385,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :desired_gcfs_config, :message, 109, "google.container.v1.GcfsConfig"
       optional :desired_node_pool_auto_config_network_tags, :message, 110, "google.container.v1.NetworkTags"
       optional :desired_gateway_api_config, :message, 114, "google.container.v1.GatewayAPIConfig"
+      optional :etag, :string, 115
       optional :desired_node_pool_logging_config, :message, 116, "google.container.v1.NodePoolLoggingConfig"
       optional :desired_stack_type, :enum, 119, "google.container.v1.StackType"
     end
@@ -470,9 +485,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :gcfs_config, :message, 22, "google.container.v1.GcfsConfig"
       optional :confidential_nodes, :message, 23, "google.container.v1.ConfidentialNodes"
       optional :gvnic, :message, 29, "google.container.v1.VirtualNIC"
+      optional :etag, :string, 30
       optional :fast_socket, :message, 31, "google.container.v1.FastSocket"
       optional :logging_config, :message, 32, "google.container.v1.NodePoolLoggingConfig"
       optional :resource_labels, :message, 33, "google.container.v1.ResourceLabels"
+      optional :windows_node_config, :message, 34, "google.container.v1.WindowsNodeConfig"
     end
     add_message "google.container.v1.SetNodePoolAutoscalingRequest" do
       optional :project_id, :string, 1
@@ -644,6 +661,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :upgrade_settings, :message, 107, "google.container.v1.NodePool.UpgradeSettings"
       optional :placement_policy, :message, 108, "google.container.v1.NodePool.PlacementPolicy"
       optional :update_info, :message, 109, "google.container.v1.NodePool.UpdateInfo"
+      optional :etag, :string, 110
     end
     add_message "google.container.v1.NodePool.UpgradeSettings" do
       optional :max_surge, :int32, 1
@@ -964,6 +982,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_enum "google.container.v1.DNSConfig.DNSScope" do
       value :DNS_SCOPE_UNSPECIFIED, 0
+      value :CLUSTER_SCOPE, 1
       value :VPC_SCOPE, 2
     end
     add_message "google.container.v1.MaxPodsConstraint" do
@@ -1133,6 +1152,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.container.v1.ManagedPrometheusConfig" do
       optional :enabled, :bool, 1
     end
+    add_message "google.container.v1.LocalNvmeSsdBlockConfig" do
+      optional :local_ssd_count, :int32, 1
+    end
+    add_message "google.container.v1.EphemeralStorageLocalSsdConfig" do
+      optional :local_ssd_count, :int32, 1
+    end
     add_enum "google.container.v1.PrivateIPv6GoogleAccess" do
       value :PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED, 0
       value :PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED, 1
@@ -1173,6 +1198,8 @@ module Google
       module V1
         LinuxNodeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.LinuxNodeConfig").msgclass
         LinuxNodeConfig::CgroupMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.LinuxNodeConfig.CgroupMode").enummodule
+        WindowsNodeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.WindowsNodeConfig").msgclass
+        WindowsNodeConfig::OSVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.WindowsNodeConfig.OSVersion").enummodule
         NodeKubeletConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodeKubeletConfig").msgclass
         NodeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodeConfig").msgclass
         AdvancedMachineFeatures = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.AdvancedMachineFeatures").msgclass
@@ -1351,6 +1378,8 @@ module Google
         MonitoringComponentConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MonitoringComponentConfig").msgclass
         MonitoringComponentConfig::Component = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MonitoringComponentConfig.Component").enummodule
         ManagedPrometheusConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ManagedPrometheusConfig").msgclass
+        LocalNvmeSsdBlockConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.LocalNvmeSsdBlockConfig").msgclass
+        EphemeralStorageLocalSsdConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.EphemeralStorageLocalSsdConfig").msgclass
         PrivateIPv6GoogleAccess = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.PrivateIPv6GoogleAccess").enummodule
         UpgradeResourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.UpgradeResourceType").enummodule
         DatapathProvider = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.DatapathProvider").enummodule

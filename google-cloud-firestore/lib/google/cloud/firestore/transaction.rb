@@ -269,6 +269,45 @@ module Google
         end
         alias run get
 
+        ##
+        # Retrieves aggregate query snapshots for the given value. Valid values can be
+        # a string representing either a document or a collection of documents,
+        # a document reference object, a collection reference object, or a query
+        # to be run.
+        #
+        # @param [AggregateQuery] aggregate_query
+        #   An AggregateQuery object
+        #
+        # @yield [documents] The block for accessing the aggregate query snapshot.
+        # @yieldparam [AggregateQuerySnapshot] aggregate_snapshot An aggregate query snapshot.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   firestore.transaction do |tx|
+        #     tx.get_aggregate aq do |aggregate_snapshot|
+        #       puts aggregate_snapshot.get('count')
+        #     end
+        #   end
+        #
+        def get_aggregate aggregate_query
+          ensure_not_closed!
+          ensure_service!
+
+          return enum_for :get_aggregate, aggregate_query unless block_given?
+
+          results = service.run_aggregate_query aggregate_query.parent_path,
+                                                aggregate_query.structured_aggregation_query,
+                                                transaction: transaction_or_create
+          results.each do |result|
+            extract_transaction_from_result! result
+            next if result.result.nil?
+            yield AggregateQuerySnapshot.from_run_aggregate_query_response result
+          end
+        end
+
         # @!endgroup
 
         # @!group Modifications

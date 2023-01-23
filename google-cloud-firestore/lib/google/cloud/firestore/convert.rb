@@ -498,7 +498,6 @@ module Google
               dup_hash = dup_hash[field]
             end
             prev_hash[last_field] = dup_hash
-            prev_hash.delete_if { |_k, v| v.nil? }
             ret_hash
           end
 

@@ -73,7 +73,7 @@ module Google
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Creation time of this resource.
@@ -134,8 +134,8 @@ module Google
           #     1034](https://datatracker.ietf.org/doc/html/rfc1034) (section 3.5)
           # @!attribute [rw] node_type_configs
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::VmwareEngine::V1::NodeTypeConfig}]
-          #     Required. The map of cluster node types in this cluster, where the key is canonical
-          #     identifier of the node type (corresponds to the `NodeType`).
+          #     Required. The map of cluster node types in this cluster, where the key is
+          #     canonical identifier of the node type (corresponds to the `NodeType`).
           class ManagementCluster
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -177,14 +177,15 @@ module Google
           end
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_clouds VmwareEngine.ListPrivateClouds}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_clouds VmwareEngine.ListPrivateClouds}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the private cloud to be queried for
         #     clusters. Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a`
+        #     `projects/my-project/locations/us-central1-a`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of private clouds to return in one page.
@@ -238,7 +239,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_clouds VmwareEngine.ListPrivateClouds}
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_clouds VmwareEngine.ListPrivateClouds}
         # @!attribute [rw] private_clouds
         #   @return [::Array<::Google::Cloud::VmwareEngine::V1::PrivateCloud>]
         #     A list of private clouds.
@@ -255,27 +257,29 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_private_cloud VmwareEngine.GetPrivateCloud}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_private_cloud VmwareEngine.GetPrivateCloud}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the private cloud to retrieve.
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
         class GetPrivateCloudRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_private_cloud VmwareEngine.CreatePrivateCloud}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_private_cloud VmwareEngine.CreatePrivateCloud}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the location to create the new
         #     private cloud in. Resource names are schemeless URIs that follow the
         #     conventions in https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a`
+        #     `projects/my-project/locations/us-central1-a`
         # @!attribute [rw] private_cloud_id
         #   @return [::String]
         #     Required. The user-provided identifier of the private cloud to be created.
@@ -294,18 +298,19 @@ module Google
         #     Required. The initial description of the new private cloud.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     Optional. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. True if you want the request to be validated and not executed; false
-        #     otherwise.
+        #     Optional. True if you want the request to be validated and not executed;
+        #     false otherwise.
         class CreatePrivateCloudRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_private_cloud VmwareEngine.UpdatePrivateCloud}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_private_cloud VmwareEngine.UpdatePrivateCloud}
         # @!attribute [rw] private_cloud
         #   @return [::Google::Cloud::VmwareEngine::V1::PrivateCloud]
         #     Required. Private cloud description.
@@ -318,58 +323,61 @@ module Google
         #     all fields will be overwritten.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     Optional. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         class UpdatePrivateCloudRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_private_cloud VmwareEngine.DeletePrivateCloud}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_private_cloud VmwareEngine.DeletePrivateCloud}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the private cloud to delete.
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     Optional. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] force
         #   @return [::Boolean]
-        #     Optional. If set to true, cascade delete is enabled and all children of this private
-        #     cloud resource are also deleted. When this flag is set to false, the
-        #     private cloud will not be deleted if there are any children other than the
-        #     management cluster. The management cluster is always deleted.
+        #     Optional. If set to true, cascade delete is enabled and all children of
+        #     this private cloud resource are also deleted. When this flag is set to
+        #     false, the private cloud will not be deleted if there are any children
+        #     other than the management cluster. The management cluster is always
+        #     deleted.
         # @!attribute [rw] delay_hours
         #   @return [::Integer]
         #     Optional. Time delay of the deletion specified in hours. The default value
         #     is `3`. Specifying a non-zero value for this field changes the value of
         #     `PrivateCloud.state` to `DELETED` and sets `expire_time` to the planned
         #     deletion time. Deletion can be cancelled before `expire_time` elapses using
-        #     {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#undelete_private_cloud VmwareEngine.UndeletePrivateCloud}. Specifying a value of `0` for
-        #     this field instead begins the deletion process and ceases billing
-        #     immediately. During the final deletion process, the value of
-        #     `PrivateCloud.state` becomes `PURGING`.
+        #     {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#undelete_private_cloud VmwareEngine.UndeletePrivateCloud}.
+        #     Specifying a value of `0` for this field instead begins the deletion
+        #     process and ceases billing immediately. During the final deletion process,
+        #     the value of `PrivateCloud.state` becomes `PURGING`.
         class DeletePrivateCloudRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#undelete_private_cloud VmwareEngine.UndeletePrivateCloud}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#undelete_private_cloud VmwareEngine.UndeletePrivateCloud}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the private cloud scheduled for deletion.
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     Optional. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         class UndeletePrivateCloudRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -382,7 +390,7 @@ module Google
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud/clusters/my-cluster`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/clusters/my-cluster`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Creation time of this resource.
@@ -402,8 +410,8 @@ module Google
         #     Output only. System-generated unique identifier for the resource.
         # @!attribute [rw] node_type_configs
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::VmwareEngine::V1::NodeTypeConfig}]
-        #     Required. The map of cluster node types in this cluster, where the key is canonical
-        #     identifier of the node type (corresponds to the `NodeType`).
+        #     Required. The map of cluster node types in this cluster, where the key is
+        #     canonical identifier of the node type (corresponds to the `NodeType`).
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -441,14 +449,15 @@ module Google
           end
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_clusters VmwareEngine.ListClusters}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_clusters VmwareEngine.ListClusters}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the private cloud to query for clusters.
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of clusters to return in one page.
@@ -489,7 +498,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_clusters VmwareEngine.ListClusters}
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_clusters VmwareEngine.ListClusters}
         # @!attribute [rw] clusters
         #   @return [::Array<::Google::Cloud::VmwareEngine::V1::Cluster>]
         #     A list of private cloud clusters.
@@ -506,27 +516,29 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_cluster VmwareEngine.GetCluster}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_cluster VmwareEngine.GetCluster}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The cluster resource name to retrieve.
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud/clusters/my-cluster`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/clusters/my-cluster`
         class GetClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_cluster VmwareEngine.CreateCluster}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_cluster VmwareEngine.CreateCluster}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the private cloud to create a new cluster
         #     in. Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
         # @!attribute [rw] cluster_id
         #   @return [::String]
         #     Required. The user-provided identifier of the new `Cluster`.
@@ -545,18 +557,19 @@ module Google
         #     Required. The initial description of the new cluster.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     Optional. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. True if you want the request to be validated and not executed; false
-        #     otherwise.
+        #     Optional. True if you want the request to be validated and not executed;
+        #     false otherwise.
         class CreateClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_cluster VmwareEngine.UpdateCluster}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_cluster VmwareEngine.UpdateCluster}
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Field mask is used to specify the fields to be overwritten in the
@@ -573,25 +586,26 @@ module Google
         #     zero UUID is not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. True if you want the request to be validated and not executed; false
-        #     otherwise.
+        #     Optional. True if you want the request to be validated and not executed;
+        #     false otherwise.
         class UpdateClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_cluster VmwareEngine.DeleteCluster}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_cluster VmwareEngine.DeleteCluster}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the cluster to delete.
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud/clusters/my-cluster`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/clusters/my-cluster`
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     Optional. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         class DeleteClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -605,7 +619,7 @@ module Google
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud/subnets/my-subnet`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/subnets/my-subnet`
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
         #     The IP address range of the subnet in CIDR format '10.0.0.0/24'.
@@ -615,7 +629,8 @@ module Google
         #     Must fall within the IP prefix defined above.
         # @!attribute [r] type
         #   @return [::String]
-        #     Output only. The type of the subnet. For example "management" or "userDefined".
+        #     Output only. The type of the subnet. For example "management" or
+        #     "userDefined".
         # @!attribute [r] state
         #   @return [::Google::Cloud::VmwareEngine::V1::Subnet::State]
         #     Output only. The state of the resource.
@@ -642,7 +657,8 @@ module Google
           end
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_subnets VmwareEngine.ListSubnets}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_subnets VmwareEngine.ListSubnets}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the private cloud to be queried for
@@ -650,7 +666,7 @@ module Google
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of subnets to return in one page.
@@ -669,7 +685,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_subnets VmwareEngine.ListSubnets}
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_subnets VmwareEngine.ListSubnets}
         # @!attribute [rw] subnets
         #   @return [::Array<::Google::Cloud::VmwareEngine::V1::Subnet>]
         #     A list of subnets.
@@ -703,8 +720,9 @@ module Google
         #     Output only. True if the user has requested cancellation
         #     of the operation; false otherwise.
         #     Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
@@ -720,7 +738,7 @@ module Google
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-proj/locations/us-west1-a/nodeTypes/standard-72`
+        #     `projects/my-proj/locations/us-central1-a/nodeTypes/standard-72`
         # @!attribute [r] node_type_id
         #   @return [::String]
         #     Output only. The canonical identifier of the node type
@@ -749,14 +767,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_node_types VmwareEngine.ListNodeTypes}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_node_types VmwareEngine.ListNodeTypes}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the location to be queried for node types.
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a`
+        #     `projects/my-project/locations/us-central1-a`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of node types to return in one page.
@@ -802,7 +821,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_node_types VmwareEngine.ListNodeTypes}
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_node_types VmwareEngine.ListNodeTypes}
         # @!attribute [rw] node_types
         #   @return [::Array<::Google::Cloud::VmwareEngine::V1::NodeType>]
         #     A list of Node Types.
@@ -819,14 +839,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_node_type VmwareEngine.GetNodeType}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_node_type VmwareEngine.GetNodeType}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the node type to retrieve.
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-proj/locations/us-west1-a/nodeTypes/standard-72`
+        #     `projects/my-proj/locations/us-central1-a/nodeTypes/standard-72`
         class GetNodeTypeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -844,7 +865,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#show_nsx_credentials VmwareEngine.ShowNsxCredentials}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#show_nsx_credentials VmwareEngine.ShowNsxCredentials}
         # @!attribute [rw] private_cloud
         #   @return [::String]
         #     Required. The resource name of the private cloud
@@ -852,13 +874,14 @@ module Google
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
         class ShowNsxCredentialsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#show_vcenter_credentials VmwareEngine.ShowVcenterCredentials}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#show_vcenter_credentials VmwareEngine.ShowVcenterCredentials}
         # @!attribute [rw] private_cloud
         #   @return [::String]
         #     Required. The resource name of the private cloud
@@ -866,13 +889,14 @@ module Google
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
         class ShowVcenterCredentialsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#reset_nsx_credentials VmwareEngine.ResetNsxCredentials}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#reset_nsx_credentials VmwareEngine.ResetNsxCredentials}
         # @!attribute [rw] private_cloud
         #   @return [::String]
         #     Required. The resource name of the private cloud
@@ -880,7 +904,7 @@ module Google
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. A request ID to identify requests. Specify a unique request ID
@@ -902,7 +926,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#reset_vcenter_credentials VmwareEngine.ResetVcenterCredentials}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#reset_vcenter_credentials VmwareEngine.ResetVcenterCredentials}
         # @!attribute [rw] private_cloud
         #   @return [::String]
         #     Required. The resource name of the private cloud
@@ -910,7 +935,7 @@ module Google
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. A request ID to identify requests. Specify a unique request ID
@@ -932,7 +957,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_hcx_activation_keys VmwareEngine.ListHcxActivationKeys}
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_hcx_activation_keys VmwareEngine.ListHcxActivationKeys}
         # @!attribute [rw] hcx_activation_keys
         #   @return [::Array<::Google::Cloud::VmwareEngine::V1::HcxActivationKey>]
         #     List of HCX activation keys.
@@ -952,15 +978,18 @@ module Google
         # HCX activation key. A default key is created during
         # private cloud provisioning, but this behavior is subject to change
         # and you should always verify active keys.
-        # Use {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_hcx_activation_keys VmwareEngine.ListHcxActivationKeys} to retrieve existing keys
-        # and {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_hcx_activation_key VmwareEngine.CreateHcxActivationKey} to create new ones.
+        # Use
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_hcx_activation_keys VmwareEngine.ListHcxActivationKeys}
+        # to retrieve existing keys and
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_hcx_activation_key VmwareEngine.CreateHcxActivationKey}
+        # to create new ones.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of this HcxActivationKey.
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1/privateClouds/my-cloud/hcxActivationKeys/my-key`
+        #     `projects/my-project/locations/us-central1/privateClouds/my-cloud/hcxActivationKeys/my-key`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Creation time of HCX activation key.
@@ -993,7 +1022,8 @@ module Google
           end
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_hcx_activation_keys VmwareEngine.ListHcxActivationKeys}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_hcx_activation_keys VmwareEngine.ListHcxActivationKeys}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the private cloud
@@ -1028,13 +1058,14 @@ module Google
         #     Resource names are schemeless URIs that follow the conventions in
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
-        #     `projects/my-project/locations/us-west1/privateClouds/my-cloud/hcxActivationKeys/my-key`
+        #     `projects/my-project/locations/us-central1/privateClouds/my-cloud/hcxActivationKeys/my-key`
         class GetHcxActivationKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_hcx_activation_key VmwareEngine.CreateHcxActivationKey}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_hcx_activation_key VmwareEngine.CreateHcxActivationKey}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the private cloud to create the key for.
@@ -1257,7 +1288,8 @@ module Google
           end
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_network_policies VmwareEngine.ListNetworkPolicies}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_network_policies VmwareEngine.ListNetworkPolicies}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the location (region) to query for
@@ -1317,7 +1349,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_network_policies VmwareEngine.ListNetworkPolicies}
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_network_policies VmwareEngine.ListNetworkPolicies}
         # @!attribute [rw] network_policies
         #   @return [::Array<::Google::Cloud::VmwareEngine::V1::NetworkPolicy>]
         #     A list of network policies.
@@ -1334,7 +1367,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_network_policy VmwareEngine.GetNetworkPolicy}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_network_policy VmwareEngine.GetNetworkPolicy}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the network policy to retrieve.
@@ -1347,7 +1381,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_network_policy VmwareEngine.UpdateNetworkPolicy}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_network_policy VmwareEngine.UpdateNetworkPolicy}
         # @!attribute [rw] network_policy
         #   @return [::Google::Cloud::VmwareEngine::V1::NetworkPolicy]
         #     Required. Network policy description.
@@ -1379,7 +1414,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_network_policy VmwareEngine.CreateNetworkPolicy}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_network_policy VmwareEngine.CreateNetworkPolicy}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the location (region)
@@ -1426,7 +1462,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_network_policy VmwareEngine.DeleteNetworkPolicy}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_network_policy VmwareEngine.DeleteNetworkPolicy}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the network policy to delete.
@@ -1563,7 +1600,8 @@ module Google
           end
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_vmware_engine_network VmwareEngine.CreateVmwareEngineNetwork}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_vmware_engine_network VmwareEngine.CreateVmwareEngineNetwork}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the location to create the new VMware Engine
@@ -1582,7 +1620,7 @@ module Google
         #
         #     * For networks of type LEGACY, adheres to the format:
         #     `{region-id}-default`. Replace `{region-id}` with the region where you want
-        #     to create the VMware Engine network. For example, "us-west1-default".
+        #     to create the VMware Engine network. For example, "us-central1-default".
         #     * Only contains 1-63 alphanumeric characters and hyphens
         #     * Begins with an alphabetical character
         #     * Ends with a non-hyphen character
@@ -1613,7 +1651,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_vmware_engine_network VmwareEngine.UpdateVmwareEngineNetwork}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_vmware_engine_network VmwareEngine.UpdateVmwareEngineNetwork}
         # @!attribute [rw] vmware_engine_network
         #   @return [::Google::Cloud::VmwareEngine::V1::VmwareEngineNetwork]
         #     Required. VMware Engine network description.
@@ -1646,7 +1685,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_vmware_engine_network VmwareEngine.DeleteVmwareEngineNetwork}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_vmware_engine_network VmwareEngine.DeleteVmwareEngineNetwork}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the VMware Engine network to be deleted.
@@ -1672,16 +1712,17 @@ module Google
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. Checksum used to ensure that the user-provided value is up to date before
-        #     the server processes the request. The server compares provided checksum
-        #     with the current checksum of the resource. If the user-provided value is
-        #     out of date, this request returns an `ABORTED` error.
+        #     Optional. Checksum used to ensure that the user-provided value is up to
+        #     date before the server processes the request. The server compares provided
+        #     checksum with the current checksum of the resource. If the user-provided
+        #     value is out of date, this request returns an `ABORTED` error.
         class DeleteVmwareEngineNetworkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_vmware_engine_network VmwareEngine.GetVmwareEngineNetwork}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_vmware_engine_network VmwareEngine.GetVmwareEngineNetwork}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the VMware Engine network to retrieve.
@@ -1694,7 +1735,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_vmware_engine_networks VmwareEngine.ListVmwareEngineNetworks}
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_vmware_engine_networks VmwareEngine.ListVmwareEngineNetworks}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the location to query for
@@ -1753,7 +1795,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_vmware_engine_networks VmwareEngine.ListVmwareEngineNetworks}
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_vmware_engine_networks VmwareEngine.ListVmwareEngineNetworks}
         # @!attribute [rw] vmware_engine_networks
         #   @return [::Array<::Google::Cloud::VmwareEngine::V1::VmwareEngineNetwork>]
         #     A list of VMware Engine networks.

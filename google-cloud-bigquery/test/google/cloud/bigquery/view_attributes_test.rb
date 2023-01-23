@@ -29,8 +29,8 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
 
   it "gets full data for created_at" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, view_full_gapi,
-      [view.project_id, view.dataset_id, view.table_id]
+    mock.expect :get_table, view_full_gapi, 
+      [view.project_id, view.dataset_id, view.table_id], **patch_table_args
     view.service.mocked_service = mock
 
     _(view.created_at).must_be_close_to ::Time.now, 1
@@ -43,8 +43,8 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
 
   it "gets full data for expires_at" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, view_full_gapi,
-      [view.project_id, view.dataset_id, view.table_id]
+    mock.expect :get_table, view_full_gapi, 
+      [view.project_id, view.dataset_id, view.table_id], **patch_table_args
     view.service.mocked_service = mock
 
     _(view.expires_at).must_be_close_to ::Time.now, 1
@@ -57,8 +57,8 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
 
   it "gets full data for modified_at" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, view_full_gapi,
-      [view.project_id, view.dataset_id, view.table_id]
+    mock.expect :get_table, view_full_gapi, 
+      [view.project_id, view.dataset_id, view.table_id], **patch_table_args
     view.service.mocked_service = mock
 
     _(view.modified_at).must_be_close_to ::Time.now, 1
@@ -71,8 +71,8 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
 
   it "gets full data for schema" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, view_full_gapi,
-      [view.project_id, view.dataset_id, view.table_id]
+    mock.expect :get_table, view_full_gapi, 
+      [view.project_id, view.dataset_id, view.table_id], **patch_table_args
     view.service.mocked_service = mock
 
     _(view.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
@@ -91,8 +91,8 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
   def self.attr_test attr, val
     define_method "test_#{attr}" do
       mock = Minitest::Mock.new
-      mock.expect :get_table, view_full_gapi,
-        [view.project_id, view.dataset_id, view.table_id]
+      mock.expect :get_table, view_full_gapi, 
+        [view.project_id, view.dataset_id, view.table_id], **patch_table_args
       view.service.mocked_service = mock
 
       _(view.send(attr)).must_equal val

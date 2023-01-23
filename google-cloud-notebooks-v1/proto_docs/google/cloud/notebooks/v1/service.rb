@@ -82,7 +82,7 @@ module Google
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
         #     Locations that could not be reached. For example,
-        #     ['us-west1-a', 'us-central1-b'].
+        #     `['us-west1-a', 'us-central1-b']`.
         #     A ListInstancesResponse will only contain either instances or unreachables,
         class ListInstancesResponse
           include ::Google::Protobuf::MessageExts
@@ -374,13 +374,13 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Output only. Additional information about instance health.
         #     Example:
-        #      healthInfo": {
-        #       "docker_proxy_agent_status": "1",
-        #       "docker_status": "1",
-        #       "jupyterlab_api_status": "-1",
-        #       "jupyterlab_status": "-1",
-        #       "updated": "2020-10-18 09:40:03.573409"
-        #      }
+        #         healthInfo": {
+        #           "docker_proxy_agent_status": "1",
+        #           "docker_status": "1",
+        #           "jupyterlab_api_status": "-1",
+        #           "jupyterlab_status": "-1",
+        #           "updated": "2020-10-18 09:40:03.573409"
+        #         }
         class GetInstanceHealthResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -441,7 +441,7 @@ module Google
         # @!attribute [rw] target_snapshot
         #   @return [::String]
         #     Required. The snapshot for rollback.
-        #     Example: "projects/test-project/global/snapshots/krwlzipynril".
+        #     Example: `projects/test-project/global/snapshots/krwlzipynril`.
         class RollbackInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -651,7 +651,7 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Filter applied to resulting executions. Currently only supports filtering
-        #     executions by a specified schedule_id.
+        #     executions by a specified `schedule_id`.
         #     Format: `schedule_id=<Schedule_ID>`
         # @!attribute [rw] order_by
         #   @return [::String]

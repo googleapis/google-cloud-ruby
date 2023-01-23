@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.6.0 (2023-01-12)
+
+#### Features
+
+* Support for the NetworkAttachments service ([#19832](https://github.com/googleapis/google-cloud-ruby/issues/19832)) 
+* Support for the retry policy and quota project configuration fields 
+
 ### 0.5.0 (2022-09-20)
 
 #### Features

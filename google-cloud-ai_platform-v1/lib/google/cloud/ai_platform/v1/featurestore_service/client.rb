@@ -210,8 +210,8 @@ module Google
             #   @param featurestore [::Google::Cloud::AIPlatform::V1::Featurestore, ::Hash]
             #     Required. The Featurestore to create.
             #   @param featurestore_id [::String]
-            #     Required. The ID to use for this Featurestore, which will become the final component
-            #     of the Featurestore's resource name.
+            #     Required. The ID to use for this Featurestore, which will become the final
+            #     component of the Featurestore's resource name.
             #
             #     This value may be up to 60 characters, and valid characters are
             #     `[a-z0-9_]`. The first character cannot be a number.
@@ -424,12 +424,12 @@ module Google
             #     coerced to 100.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_featurestores FeaturestoreService.ListFeaturestores} call.
-            #     Provide this to retrieve the subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_featurestores FeaturestoreService.ListFeaturestores}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
-            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_featurestores FeaturestoreService.ListFeaturestores} must
-            #     match the call that provided the page token.
+            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_featurestores FeaturestoreService.ListFeaturestores}
+            #     must match the call that provided the page token.
             #   @param order_by [::String]
             #     A comma-separated list of fields to order by, sorted in ascending order.
             #     Use "desc" after a field name for descending.
@@ -531,9 +531,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param featurestore [::Google::Cloud::AIPlatform::V1::Featurestore, ::Hash]
-            #     Required. The Featurestore's `name` field is used to identify the Featurestore to be
-            #     updated.
-            #     Format:
+            #     Required. The Featurestore's `name` field is used to identify the
+            #     Featurestore to be updated. Format:
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Field mask is used to specify the fields to be overwritten in the
@@ -549,6 +548,7 @@ module Google
             #       * `labels`
             #       * `online_serving_config.fixed_node_count`
             #       * `online_serving_config.scaling`
+            #       * `online_storage_ttl_days` (available in Preview)
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -747,8 +747,8 @@ module Google
             #   @param entity_type [::Google::Cloud::AIPlatform::V1::EntityType, ::Hash]
             #     The EntityType to create.
             #   @param entity_type_id [::String]
-            #     Required. The ID to use for the EntityType, which will become the final component of
-            #     the EntityType's resource name.
+            #     Required. The ID to use for the EntityType, which will become the final
+            #     component of the EntityType's resource name.
             #
             #     This value may be up to 60 characters, and valid characters are
             #     `[a-z0-9_]`. The first character cannot be a number.
@@ -962,12 +962,12 @@ module Google
             #     1000.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_entity_types FeaturestoreService.ListEntityTypes} call.
-            #     Provide this to retrieve the subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_entity_types FeaturestoreService.ListEntityTypes}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
-            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_entity_types FeaturestoreService.ListEntityTypes} must
-            #     match the call that provided the page token.
+            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_entity_types FeaturestoreService.ListEntityTypes}
+            #     must match the call that provided the page token.
             #   @param order_by [::String]
             #     A comma-separated list of fields to order by, sorted in ascending order.
             #     Use "desc" after a field name for descending.
@@ -1070,9 +1070,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param entity_type [::Google::Cloud::AIPlatform::V1::EntityType, ::Hash]
-            #     Required. The EntityType's `name` field is used to identify the EntityType to be
-            #     updated.
-            #     Format:
+            #     Required. The EntityType's `name` field is used to identify the EntityType
+            #     to be updated. Format:
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Field mask is used to specify the fields to be overwritten in the
@@ -1094,6 +1093,7 @@ module Google
             #       * `monitoring_config.import_features_analysis.anomaly_detection_baseline`
             #       * `monitoring_config.numerical_threshold_config.value`
             #       * `monitoring_config.categorical_threshold_config.value`
+            #       * `offline_storage_ttl_days` (available in Preview)
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::EntityType]
@@ -1283,8 +1283,8 @@ module Google
             #   @param feature [::Google::Cloud::AIPlatform::V1::Feature, ::Hash]
             #     Required. The Feature to create.
             #   @param feature_id [::String]
-            #     Required. The ID to use for the Feature, which will become the final component of
-            #     the Feature's resource name.
+            #     Required. The ID to use for the Feature, which will become the final
+            #     component of the Feature's resource name.
             #
             #     This value may be up to 128 characters, and valid characters are
             #     `[a-z0-9_]`. The first character cannot be a number.
@@ -1382,14 +1382,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the EntityType to create the batch of Features under.
-            #     Format:
+            #     Required. The resource name of the EntityType to create the batch of
+            #     Features under. Format:
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
             #   @param requests [::Array<::Google::Cloud::AIPlatform::V1::CreateFeatureRequest, ::Hash>]
-            #     Required. The request message specifying the Features to create. All Features must be
-            #     created under the same parent EntityType. The `parent` field in each child
-            #     request message can be omitted. If `parent` is set in a child request, then
-            #     the value must match the `parent` value in this request message.
+            #     Required. The request message specifying the Features to create. All
+            #     Features must be created under the same parent EntityType. The `parent`
+            #     field in each child request message can be omitted. If `parent` is set in a
+            #     child request, then the value must match the `parent` value in this request
+            #     message.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1600,12 +1601,12 @@ module Google
             #     1000.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_features FeaturestoreService.ListFeatures} call.
-            #     Provide this to retrieve the subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_features FeaturestoreService.ListFeatures}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
-            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_features FeaturestoreService.ListFeatures} must
-            #     match the call that provided the page token.
+            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_features FeaturestoreService.ListFeatures}
+            #     must match the call that provided the page token.
             #   @param order_by [::String]
             #     A comma-separated list of fields to order by, sorted in ascending order.
             #     Use "desc" after a field name for descending.
@@ -1618,10 +1619,12 @@ module Google
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #   @param latest_stats_count [::Integer]
-            #     If set, return the most recent {::Google::Cloud::AIPlatform::V1::ListFeaturesRequest#latest_stats_count ListFeaturesRequest.latest_stats_count}
+            #     If set, return the most recent
+            #     {::Google::Cloud::AIPlatform::V1::ListFeaturesRequest#latest_stats_count ListFeaturesRequest.latest_stats_count}
             #     of stats for each Feature in response. Valid value is [0, 10]. If number of
-            #     stats exists < {::Google::Cloud::AIPlatform::V1::ListFeaturesRequest#latest_stats_count ListFeaturesRequest.latest_stats_count}, return all
-            #     existing stats.
+            #     stats exists <
+            #     {::Google::Cloud::AIPlatform::V1::ListFeaturesRequest#latest_stats_count ListFeaturesRequest.latest_stats_count},
+            #     return all existing stats.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::Feature>]
@@ -1938,16 +1941,16 @@ module Google
             #     Single Feature timestamp for all entities being imported. The
             #     timestamp must not have higher than millisecond precision.
             #   @param entity_type [::String]
-            #     Required. The resource name of the EntityType grouping the Features for which values
-            #     are being imported. Format:
+            #     Required. The resource name of the EntityType grouping the Features for
+            #     which values are being imported. Format:
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
             #   @param entity_id_field [::String]
             #     Source column that holds entity IDs. If not provided, entity IDs are
             #     extracted from the column named `entity_id`.
             #   @param feature_specs [::Array<::Google::Cloud::AIPlatform::V1::ImportFeatureValuesRequest::FeatureSpec, ::Hash>]
-            #     Required. Specifications defining which Feature values to import from the entity. The
-            #     request fails if no feature_specs are provided, and having multiple
-            #     feature_specs for one Feature is not allowed.
+            #     Required. Specifications defining which Feature values to import from the
+            #     entity. The request fails if no feature_specs are provided, and having
+            #     multiple feature_specs for one Feature is not allowed.
             #   @param disable_online_serving [::Boolean]
             #     If set, data will not be imported for online serving. This
             #     is typically used for backfilling, where Feature generation timestamps are
@@ -2085,8 +2088,8 @@ module Google
             #   @param bigquery_read_instances [::Google::Cloud::AIPlatform::V1::BigQuerySource, ::Hash]
             #     Similar to csv_read_instances, but from BigQuery source.
             #   @param featurestore [::String]
-            #     Required. The resource name of the Featurestore from which to query Feature values.
-            #     Format:
+            #     Required. The resource name of the Featurestore from which to query Feature
+            #     values. Format:
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}`
             #   @param destination [::Google::Cloud::AIPlatform::V1::FeatureValueDestination, ::Hash]
             #     Required. Specifies output location and format.
@@ -2099,14 +2102,14 @@ module Google
             #     automatically inferred. For CSV source, the pass-through values will be
             #     passed as opaque bytes.
             #   @param entity_type_specs [::Array<::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest::EntityTypeSpec, ::Hash>]
-            #     Required. Specifies EntityType grouping Features to read values of and settings.
-            #     Each EntityType referenced in
+            #     Required. Specifies EntityType grouping Features to read values of and
+            #     settings. Each EntityType referenced in
             #     [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
             #     specifying entity IDs in the EntityType in
             #     [BatchReadFeatureValuesRequest.request][] .
             #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
-            #     Optional. Excludes Feature values with feature generation timestamp before this
-            #     timestamp. If not set, retrieve oldest values kept in Feature Store.
+            #     Optional. Excludes Feature values with feature generation timestamp before
+            #     this timestamp. If not set, retrieve oldest values kept in Feature Store.
             #     Timestamp, if present, must not have higher than millisecond precision.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2206,8 +2209,8 @@ module Google
             #     Exports all historical values of all entities of the EntityType within a
             #     time range
             #   @param entity_type [::String]
-            #     Required. The resource name of the EntityType from which to export Feature values.
-            #     Format:
+            #     Required. The resource name of the EntityType from which to export Feature
+            #     values. Format:
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
             #   @param destination [::Google::Cloud::AIPlatform::V1::FeatureValueDestination, ::Hash]
             #     Required. Specifies destination location and format.
@@ -2377,12 +2380,12 @@ module Google
             #     100.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#search_features FeaturestoreService.SearchFeatures} call.
-            #     Provide this to retrieve the subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#search_features FeaturestoreService.SearchFeatures}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
-            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#search_features FeaturestoreService.SearchFeatures}, except `page_size`, must
-            #     match the call that provided the page token.
+            #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#search_features FeaturestoreService.SearchFeatures},
+            #     except `page_size`, must match the call that provided the page token.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::Feature>]

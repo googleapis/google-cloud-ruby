@@ -173,6 +173,27 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(table.labels).must_equal new_labels
   end
 
+  it "loads and reloads table with partial projection of table metadata" do
+    %w[unspecified basic storage full].each do |view|
+      table = dataset.table table_id, view: view
+      _(table.table_id).must_equal table_id
+      verify_table_metadata table, view
+
+      rand_str = SecureRandom.urlsafe_base64(4)
+      new_name = "New_name_#{rand_str}"
+      new_desc = "New_description_#{rand_str}"
+
+      table.name = new_name
+      table.description = new_desc
+
+      table.reload!
+      _(table.table_id).must_equal table_id
+      _(table.name).must_equal new_name
+      _(table.description).must_equal new_desc
+      verify_table_metadata table, view
+    end
+  end
+
   it "should fail to set metadata with stale etag" do
     fresh = dataset.table table.table_id
     _(fresh.etag).wont_be :nil?
@@ -717,6 +738,23 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(data.next).must_be :nil?
   end
 
+  it "inserts and query the data with partial projection of destination table metadata" do
+    inserter = table.insert_async
+    inserter.insert rows
+    inserter.flush
+    inserter.stop.wait!
+
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    query_job = dataset.query_job query, job_id: job_id
+    query_job.wait_until_done!
+
+    %w[unspecified basic storage full].each do |view|
+      destination_table = query_job.destination view: view
+      verify_table_metadata destination_table, view
+    end
+
+  end
+
   it "inserts rows asynchronously with insert_ids option" do
     insert_result = nil
 
@@ -834,6 +872,33 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(copy_job.write_truncate?).must_equal false
     _(copy_job.write_append?).must_equal false
     _(copy_job.write_empty?).must_equal true
+  end
+
+  it "copies itself and fetches partial projection of affected table's metadata" do
+    destination_table_id = target_table_id + SecureRandom.urlsafe_base64(4)
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    copy_job = table.copy_job destination_table_id, create: :needed, write: :empty, job_id: job_id, labels: labels
+
+    _(copy_job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(copy_job.job_id).must_equal job_id
+    _(copy_job.labels).must_equal labels
+    copy_job.wait_until_done!
+
+    _(copy_job).wont_be :failed?
+    _(copy_job.create_if_needed?).must_equal true
+    _(copy_job.create_never?).must_equal false
+    _(copy_job.write_truncate?).must_equal false
+    _(copy_job.write_append?).must_equal false
+    _(copy_job.write_empty?).must_equal true
+
+    %w[unspecified basic storage full].each do |view|
+      source_table = copy_job.source view: view
+      _(source_table.table_id).must_equal table.table_id
+      verify_table_metadata source_table, view
+      destination_table = copy_job.destination view: view
+      _(destination_table.table_id).must_equal destination_table_id
+      verify_table_metadata destination_table, view
+    end
   end
 
   it "copies itself to another table with copy_job block updater" do
@@ -958,6 +1023,37 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       extract_file = bucket.file dest_file_name
       downloaded_file = extract_file.download tmp.path
       _(downloaded_file.size).must_be :>, 0
+    end
+  end
+
+  it "load jobs test with partial projection of table metadata" do
+    load_job = table.load_job local_file
+    load_job.wait_until_done!
+
+    %w[unspecified basic storage full].each do |view|
+      destination_table = load_job.destination view: view
+      _(destination_table.table_id).must_equal table.table_id
+      verify_table_metadata destination_table, view
+    end
+  end
+
+  it "extract jobs test with partial projection of table metadata" do
+    Tempfile.open "empty_extract_file.json" do |tmp|
+      dest_file_name = random_file_destination_name
+      extract_url = "gs://#{bucket.name}/#{dest_file_name}"
+      extract_job = table.extract_job extract_url do |j|
+        j.labels = labels
+      end
+
+      _(extract_job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+      _(extract_job.labels).must_equal labels
+      extract_job.wait_until_done!
+
+      %w[unspecified basic storage full].each do |view|
+        source_table = extract_job.source view: view
+        _(source_table.table_id).must_equal table.table_id
+        verify_table_metadata source_table, view
+      end
     end
   end
 

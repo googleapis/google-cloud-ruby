@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2023-01-05)
+
+#### Features
+
+* Added support for location ([#19920](https://github.com/googleapis/google-cloud-ruby/issues/19920)) 
+
 ### 0.5.0 (2022-07-01)
 
 #### Features

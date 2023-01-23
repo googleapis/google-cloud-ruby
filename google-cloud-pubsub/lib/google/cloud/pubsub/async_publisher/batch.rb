@@ -255,6 +255,10 @@ module Google
             end
           end
 
+          def total_message_bytes
+            @total_message_bytes
+          end
+
           protected
 
           def items_add msg, callback
@@ -286,10 +290,6 @@ module Google
 
           def total_message_count
             @items.count
-          end
-
-          def total_message_bytes
-            @total_message_bytes
           end
 
           Item = Struct.new :msg, :callback do

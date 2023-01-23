@@ -565,6 +565,9 @@ module Google
         #     - application/x-avro
         #     - application/x-orc
         #     - application/x-tfrecord
+        #     - application/x-parquet+iceberg
+        #     - application/x-avro+iceberg
+        #     - application/x-orc+iceberg
         #     - application/json
         #     - application/\\{subtypes}
         #     - text/csv
@@ -578,6 +581,9 @@ module Google
         # @!attribute [rw] json
         #   @return [::Google::Cloud::Dataplex::V1::StorageFormat::JsonOptions]
         #     Optional. Additional information about CSV formatted data.
+        # @!attribute [rw] iceberg
+        #   @return [::Google::Cloud::Dataplex::V1::StorageFormat::IcebergOptions]
+        #     Optional. Additional information about iceberg tables.
         class StorageFormat
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -610,6 +616,16 @@ module Google
           #     Optional. The character encoding of the data. Accepts "US-ASCII", "UTF-8"
           #     and "ISO-8859-1". Defaults to UTF-8 if not specified.
           class JsonOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Describes Iceberg data format.
+          # @!attribute [rw] metadata_location
+          #   @return [::String]
+          #     Optional. The location of where the iceberg metadata is present, must be
+          #     within the table path
+          class IcebergOptions
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

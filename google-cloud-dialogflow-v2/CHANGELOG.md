@@ -1,5 +1,13 @@
 # Release History
 
+### 0.21.0 (2023-01-15)
+
+#### Features
+
+* Include a human eval template in ConversationModelEvaluation 
+* Support for the suggest_conversation_summary RPC ([#20023](https://github.com/googleapis/google-cloud-ruby/issues/20023)) 
+* Support summarization feedback in AgentAssistantFeedback 
+
 ### 0.20.0 (2022-12-09)
 
 #### Features

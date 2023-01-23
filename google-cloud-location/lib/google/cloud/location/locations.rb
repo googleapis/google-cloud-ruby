@@ -24,6 +24,7 @@ require "google/cloud/location/version"
 
 require "google/cloud/location/locations/credentials"
 require "google/cloud/location/locations/client"
+require "google/cloud/location/locations/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
       #
       #     require "google/cloud/location/locations"
       #     client = ::Google::Cloud::Location::Locations::Client.new
+      #
+      # @example Load this service and instantiate a REST client
+      #
+      #     require "google/cloud/location/locations/rest"
+      #     client = ::Google::Cloud::Location::Locations::Rest::Client.new
       #
       module Locations
       end

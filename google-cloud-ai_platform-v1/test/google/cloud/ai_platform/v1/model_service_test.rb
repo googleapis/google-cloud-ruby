@@ -262,6 +262,7 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
     page_token = "hello world"
     filter = "hello world"
     read_mask = {}
+    order_by = "hello world"
 
     list_model_versions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_model_versions, name
@@ -271,6 +272,7 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["read_mask"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -281,35 +283,35 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask }) do |response, operation|
+      client.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_model_versions name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask do |response, operation|
+      client.list_model_versions name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_model_versions ::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask) do |response, operation|
+      client.list_model_versions ::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask }, grpc_options) do |response, operation|
+      client.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_model_versions(::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask), grpc_options) do |response, operation|
+      client.list_model_versions(::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

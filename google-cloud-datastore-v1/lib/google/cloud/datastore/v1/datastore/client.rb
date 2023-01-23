@@ -246,11 +246,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
+              if request.project_id && !request.project_id.empty?
                 header_params["project_id"] = request.project_id
               end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.lookup.timeout,
@@ -347,11 +350,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
+              if request.project_id && !request.project_id.empty?
                 header_params["project_id"] = request.project_id
               end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_query.timeout,
@@ -448,11 +454,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
+              if request.project_id && !request.project_id.empty?
                 header_params["project_id"] = request.project_id
               end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_aggregation_query.timeout,
@@ -540,11 +549,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
+              if request.project_id && !request.project_id.empty?
                 header_params["project_id"] = request.project_id
               end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.begin_transaction.timeout,
@@ -577,7 +589,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload commit(project_id: nil, database_id: nil, mode: nil, transaction: nil, mutations: nil)
+            # @overload commit(project_id: nil, database_id: nil, mode: nil, transaction: nil, single_use_transaction: nil, mutations: nil)
             #   Pass arguments to `commit` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -595,6 +607,12 @@ module Google
             #     The identifier of the transaction associated with the commit. A
             #     transaction identifier is returned by a call to
             #     {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+            #   @param single_use_transaction [::Google::Cloud::Datastore::V1::TransactionOptions, ::Hash]
+            #     Options for beginning a new transaction for this request.
+            #     The transaction is committed when the request completes. If specified,
+            #     [TransactionOptions.mode][google.datastore.v1.TransactionOptions.mode]
+            #     must be
+            #     {::Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite TransactionOptions.ReadWrite}.
             #   @param mutations [::Array<::Google::Cloud::Datastore::V1::Mutation, ::Hash>]
             #     The mutations to perform.
             #
@@ -651,11 +669,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
+              if request.project_id && !request.project_id.empty?
                 header_params["project_id"] = request.project_id
               end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.commit.timeout,
@@ -744,11 +765,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
+              if request.project_id && !request.project_id.empty?
                 header_params["project_id"] = request.project_id
               end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.rollback.timeout,
@@ -794,8 +818,8 @@ module Google
             #     '(default)' is not allowed; please use empty string '' to refer the default
             #     database.
             #   @param keys [::Array<::Google::Cloud::Datastore::V1::Key, ::Hash>]
-            #     Required. A list of keys with incomplete key paths for which to allocate IDs.
-            #     No key may be reserved/read-only.
+            #     Required. A list of keys with incomplete key paths for which to allocate
+            #     IDs. No key may be reserved/read-only.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastore::V1::AllocateIdsResponse]
@@ -838,11 +862,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
+              if request.project_id && !request.project_id.empty?
                 header_params["project_id"] = request.project_id
               end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.allocate_ids.timeout,
@@ -888,8 +915,8 @@ module Google
             #     '(default)' is not allowed; please use empty string '' to refer the default
             #     database.
             #   @param keys [::Array<::Google::Cloud::Datastore::V1::Key, ::Hash>]
-            #     Required. A list of keys with complete key paths whose numeric IDs should not be
-            #     auto-allocated.
+            #     Required. A list of keys with complete key paths whose numeric IDs should
+            #     not be auto-allocated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastore::V1::ReserveIdsResponse]
@@ -932,11 +959,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
+              if request.project_id && !request.project_id.empty?
                 header_params["project_id"] = request.project_id
               end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.reserve_ids.timeout,

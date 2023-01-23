@@ -32,6 +32,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :fleet, :message, 20, "google.cloud.gkemulticloud.v1.Fleet"
       optional :managed_resources, :message, 21, "google.cloud.gkemulticloud.v1.AzureClusterResources"
       optional :logging_config, :message, 23, "google.cloud.gkemulticloud.v1.LoggingConfig"
+      repeated :errors, :message, 24, "google.cloud.gkemulticloud.v1.AzureClusterError"
+      optional :monitoring_config, :message, 25, "google.cloud.gkemulticloud.v1.MonitoringConfig"
     end
     add_enum "google.cloud.gkemulticloud.v1.AzureCluster.State" do
       value :STATE_UNSPECIFIED, 0
@@ -110,6 +112,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :annotations, :string, :string, 13
       optional :max_pods_constraint, :message, 21, "google.cloud.gkemulticloud.v1.MaxPodsConstraint"
       optional :azure_availability_zone, :string, 23
+      repeated :errors, :message, 29, "google.cloud.gkemulticloud.v1.AzureNodePoolError"
     end
     add_enum "google.cloud.gkemulticloud.v1.AzureNodePool.State" do
       value :STATE_UNSPECIFIED, 0
@@ -150,6 +153,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :network_security_group_id, :string, 1
       optional :control_plane_application_security_group_id, :string, 2
     end
+    add_message "google.cloud.gkemulticloud.v1.AzureClusterError" do
+      optional :message, :string, 1
+    end
+    add_message "google.cloud.gkemulticloud.v1.AzureNodePoolError" do
+      optional :message, :string, 1
+    end
   end
 end
 
@@ -177,6 +186,8 @@ module Google
         AzureK8sVersionInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureK8sVersionInfo").msgclass
         AzureSshConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureSshConfig").msgclass
         AzureClusterResources = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureClusterResources").msgclass
+        AzureClusterError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureClusterError").msgclass
+        AzureNodePoolError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureNodePoolError").msgclass
       end
     end
   end

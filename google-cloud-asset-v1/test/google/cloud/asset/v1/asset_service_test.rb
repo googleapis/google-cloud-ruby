@@ -1335,6 +1335,222 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     end
   end
 
+  def test_analyze_org_policies
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    scope = "hello world"
+    constraint = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    analyze_org_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :analyze_org_policies, name
+      assert_kind_of ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest, request
+      assert_equal "hello world", request["scope"]
+      assert_equal "hello world", request["constraint"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert request.has_page_size?
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, analyze_org_policies_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.analyze_org_policies({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.analyze_org_policies scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.analyze_org_policies ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.analyze_org_policies({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.analyze_org_policies(::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, analyze_org_policies_client_stub.call_rpc_count
+    end
+  end
+
+  def test_analyze_org_policy_governed_containers
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    scope = "hello world"
+    constraint = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    analyze_org_policy_governed_containers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :analyze_org_policy_governed_containers, name
+      assert_kind_of ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest, request
+      assert_equal "hello world", request["scope"]
+      assert_equal "hello world", request["constraint"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert request.has_page_size?
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, analyze_org_policy_governed_containers_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.analyze_org_policy_governed_containers({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.analyze_org_policy_governed_containers scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.analyze_org_policy_governed_containers ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.analyze_org_policy_governed_containers({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.analyze_org_policy_governed_containers(::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, analyze_org_policy_governed_containers_client_stub.call_rpc_count
+    end
+  end
+
+  def test_analyze_org_policy_governed_assets
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    scope = "hello world"
+    constraint = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    analyze_org_policy_governed_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :analyze_org_policy_governed_assets, name
+      assert_kind_of ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest, request
+      assert_equal "hello world", request["scope"]
+      assert_equal "hello world", request["constraint"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert request.has_page_size?
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, analyze_org_policy_governed_assets_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.analyze_org_policy_governed_assets({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.analyze_org_policy_governed_assets scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.analyze_org_policy_governed_assets ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.analyze_org_policy_governed_assets({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.analyze_org_policy_governed_assets(::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, analyze_org_policy_governed_assets_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

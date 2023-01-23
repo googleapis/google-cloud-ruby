@@ -74,17 +74,20 @@ module Google
             #
             # - `metadata`: An empty [Struct
             #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-            # - `response`: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse]
+            # - `response`:
+            # [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse]
             rpc :ExportAgent, ::Google::Cloud::Dialogflow::V2::ExportAgentRequest, ::Google::Longrunning::Operation
             # Imports the specified agent from a ZIP file.
             #
             # Uploads new intents and entity types without deleting the existing ones.
             # Intents and entity types with the same name are replaced with the new
-            # versions from [ImportAgentRequest][google.cloud.dialogflow.v2.ImportAgentRequest]. After the import, the imported draft
-            # agent will be trained automatically (unless disabled in agent settings).
-            # However, once the import is done, training may not be completed yet. Please
-            # call [TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent] and wait for the operation it returns in order to train
-            # explicitly.
+            # versions from
+            # [ImportAgentRequest][google.cloud.dialogflow.v2.ImportAgentRequest]. After
+            # the import, the imported draft agent will be trained automatically (unless
+            # disabled in agent settings). However, once the import is done, training may
+            # not be completed yet. Please call
+            # [TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent] and wait for the
+            # operation it returns in order to train explicitly.
             #
             # This method is a [long-running
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
@@ -108,8 +111,9 @@ module Google
             # entity types in the older version are deleted. After the restore, the
             # restored draft agent will be trained automatically (unless disabled in
             # agent settings). However, once the restore is done, training may not be
-            # completed yet. Please call [TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent] and wait for the operation it
-            # returns in order to train explicitly.
+            # completed yet. Please call
+            # [TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent] and wait for the
+            # operation it returns in order to train explicitly.
             #
             # This method is a [long-running
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).

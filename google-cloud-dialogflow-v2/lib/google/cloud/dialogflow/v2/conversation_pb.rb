@@ -65,6 +65,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dialogflow.v2.ConversationPhoneNumber" do
       optional :phone_number, :string, 3
     end
+    add_message "google.cloud.dialogflow.v2.SuggestConversationSummaryRequest" do
+      optional :conversation, :string, 1
+      optional :latest_message, :string, 3
+      optional :context_size, :int32, 4
+    end
+    add_message "google.cloud.dialogflow.v2.SuggestConversationSummaryResponse" do
+      optional :summary, :message, 1, "google.cloud.dialogflow.v2.SuggestConversationSummaryResponse.Summary"
+      optional :latest_message, :string, 2
+      optional :context_size, :int32, 3
+    end
+    add_message "google.cloud.dialogflow.v2.SuggestConversationSummaryResponse.Summary" do
+      optional :text, :string, 1
+      map :text_sections, :string, :string, 4
+      optional :answer_record, :string, 3
+    end
   end
 end
 
@@ -83,6 +98,9 @@ module Google
         ListMessagesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ListMessagesRequest").msgclass
         ListMessagesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ListMessagesResponse").msgclass
         ConversationPhoneNumber = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ConversationPhoneNumber").msgclass
+        SuggestConversationSummaryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SuggestConversationSummaryRequest").msgclass
+        SuggestConversationSummaryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SuggestConversationSummaryResponse").msgclass
+        SuggestConversationSummaryResponse::Summary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SuggestConversationSummaryResponse.Summary").msgclass
       end
     end
   end

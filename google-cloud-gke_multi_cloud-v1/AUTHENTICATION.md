@@ -27,7 +27,7 @@ export GOOGLE_CLOUD_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/gke_multi_cloud/v1"
 
-client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
+client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-gke_multi_cloud-v1
 checks for credentials are configured on the service Credentials class (such as
-{::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Credentials}):
+{::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Credentials}):
 
 * `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
 * `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
@@ -75,7 +75,7 @@ require "google/cloud/gke_multi_cloud/v1"
 
 ENV["GOOGLE_CLOUD_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
+client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client.new
 ```
 
 ### Configuration
@@ -86,7 +86,7 @@ it in an environment variable. Either on an individual client initialization:
 ```ruby
 require "google/cloud/gke_multi_cloud/v1"
 
-client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new do |config|
+client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -96,11 +96,11 @@ Or globally for all clients:
 ```ruby
 require "google/cloud/gke_multi_cloud/v1"
 
-::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.configure do |config|
+::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
+client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client.new
 ```
 
 ### Cloud SDK

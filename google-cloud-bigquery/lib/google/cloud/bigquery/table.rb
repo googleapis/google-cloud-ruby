@@ -109,6 +109,10 @@ module Google
         attr_reader :reference
 
         ##
+        # @private The metadata view type string.
+        attr_accessor :metadata_view
+
+        ##
         # @private Create an empty Table object.
         def initialize
           @service = nil
@@ -2836,7 +2840,7 @@ module Google
         #
         def reload!
           ensure_service!
-          @gapi = service.get_table dataset_id, table_id
+          @gapi = service.get_table dataset_id, table_id, metadata_view: metadata_view
           @reference = nil
           @exists = nil
           self
@@ -2970,10 +2974,11 @@ module Google
 
         ##
         # @private New Table from a Google API Client object.
-        def self.from_gapi gapi, service
+        def self.from_gapi gapi, service, metadata_view: nil
           new.tap do |f|
             f.gapi = gapi
             f.service = service
+            f.metadata_view = metadata_view
           end
         end
 
@@ -3982,8 +3987,6 @@ module Google
             schema.record name, description: description, mode: mode, &block
           end
 
-          # rubocop:disable Style/MethodDefParentheses
-
           ##
           # @raise [RuntimeError] not implemented
           def data(*)
@@ -4068,8 +4071,6 @@ module Google
             raise "not implemented in #{self.class}"
           end
           alias refresh! reload!
-
-          # rubocop:enable Style/MethodDefParentheses
 
           ##
           # @private Make sure any access changes are saved

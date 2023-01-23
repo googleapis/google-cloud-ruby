@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.4.0 (2023-01-11)
+
+#### Features
+
+* Added support for AWS as a source ([#19978](https://github.com/googleapis/google-cloud-ruby/issues/19978)) 
+* Added support for get_replication_cycle and list_replication_cycles RPCs 
+* Added support for retrieving the steps of a clone or cutover job 
+* Added support for the IAM mixin client 
+* Added support for the locations mixin client 
+
 ### 0.3.0 (2022-07-20)
 
 #### Features

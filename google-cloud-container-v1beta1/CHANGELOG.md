@@ -1,5 +1,19 @@
 # Release History
 
+### 0.16.0 (2023-01-11)
+
+#### Features
+
+* Support for etags in clusters and node pools ([#19980](https://github.com/googleapis/google-cloud-ruby/issues/19980)) 
+
+### 0.15.0 (2023-01-05)
+
+#### Features
+
+* add stack type for clusters ([#19895](https://github.com/googleapis/google-cloud-ruby/issues/19895)) 
+* Support for local SSD configs in a node config 
+* Support for setting windows node config when updating a node pool ([#19907](https://github.com/googleapis/google-cloud-ruby/issues/19907)) 
+
 ### 0.14.0 (2022-12-09)
 
 #### Features

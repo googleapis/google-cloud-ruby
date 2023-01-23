@@ -31,9 +31,9 @@ module Google
         ##
         # The NodeTypes API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/node_types"
+        #     require "google/cloud/compute/v1/node_types/rest"
         #     client = ::Google::Cloud::Compute::V1::NodeTypes::Rest::Client.new
         #
         module NodeTypes

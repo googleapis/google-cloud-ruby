@@ -22,7 +22,8 @@ module Google
     module Dialogflow
       module CX
         module V3
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Changelogs::Client#list_changelogs Changelogs.ListChangelogs}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Changelogs::Client#list_changelogs Changelogs.ListChangelogs}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent containing the changelogs.
@@ -61,7 +62,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response message for {::Google::Cloud::Dialogflow::CX::V3::Changelogs::Client#list_changelogs Changelogs.ListChangelogs}.
+          # The response message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Changelogs::Client#list_changelogs Changelogs.ListChangelogs}.
           # @!attribute [rw] changelogs
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Changelog>]
           #     The list of changelogs. There will be a maximum number of items returned
@@ -76,7 +78,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Changelogs::Client#get_changelog Changelogs.GetChangelog}.
+          # The request message for
+          # {::Google::Cloud::Dialogflow::CX::V3::Changelogs::Client#get_changelog Changelogs.GetChangelog}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the changelog to get.

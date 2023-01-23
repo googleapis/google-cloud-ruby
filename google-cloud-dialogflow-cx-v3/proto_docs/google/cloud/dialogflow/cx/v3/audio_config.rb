@@ -63,10 +63,12 @@ module Google
           #     more details.
           # @!attribute [rw] enable_word_info
           #   @return [::Boolean]
-          #     Optional. If `true`, Dialogflow returns {::Google::Cloud::Dialogflow::CX::V3::SpeechWordInfo SpeechWordInfo} in
-          #     {::Google::Cloud::Dialogflow::CX::V3::StreamingRecognitionResult StreamingRecognitionResult} with information about the recognized speech
-          #     words, e.g. start and end time offsets. If false or unspecified, Speech
-          #     doesn't return any word-level information.
+          #     Optional. If `true`, Dialogflow returns
+          #     {::Google::Cloud::Dialogflow::CX::V3::SpeechWordInfo SpeechWordInfo} in
+          #     {::Google::Cloud::Dialogflow::CX::V3::StreamingRecognitionResult StreamingRecognitionResult}
+          #     with information about the recognized speech words, e.g. start and end time
+          #     offsets. If false or unspecified, Speech doesn't return any word-level
+          #     information.
           # @!attribute [rw] phrase_hints
           #   @return [::Array<::String>]
           #     Optional. A list of strings containing words and phrases that the speech
@@ -90,7 +92,8 @@ module Google
           #     for more details.
           # @!attribute [rw] model_variant
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SpeechModelVariant]
-          #     Optional. Which variant of the {::Google::Cloud::Dialogflow::CX::V3::InputAudioConfig#model Speech model} to use.
+          #     Optional. Which variant of the [Speech
+          #     model][google.cloud.dialogflow.cx.v3.InputAudioConfig.model] to use.
           # @!attribute [rw] single_utterance
           #   @return [::Boolean]
           #     Optional. If `false` (default), recognition does not cease until the
@@ -119,10 +122,10 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SsmlVoiceGender]
           #     Optional. The preferred gender of the voice. If not set, the service will
           #     choose a voice based on the other parameters such as language_code and
-          #     {::Google::Cloud::Dialogflow::CX::V3::VoiceSelectionParams#name name}. Note that this is only a preference, not requirement. If a
-          #     voice of the appropriate gender is not available, the synthesizer
-          #     substitutes a voice with a different gender rather than failing the
-          #     request.
+          #     {::Google::Cloud::Dialogflow::CX::V3::VoiceSelectionParams#name name}. Note that
+          #     this is only a preference, not requirement. If a voice of the appropriate
+          #     gender is not available, the synthesizer substitutes a voice with a
+          #     different gender rather than failing the request.
           class VoiceSelectionParams
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -231,7 +234,8 @@ module Google
             AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
           end
 
-          # Variant of the specified {::Google::Cloud::Dialogflow::CX::V3::InputAudioConfig#model Speech model} to use.
+          # Variant of the specified [Speech
+          # model][google.cloud.dialogflow.cx.v3.InputAudioConfig.model] to use.
           #
           # See the [Cloud Speech
           # documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)
@@ -260,8 +264,8 @@ module Google
             # Use an enhanced model variant:
             #
             # * If an enhanced variant does not exist for the given
-            #   {::Google::Cloud::Dialogflow::CX::V3::InputAudioConfig#model model} and request language, Dialogflow falls
-            #   back to the standard variant.
+            #   {::Google::Cloud::Dialogflow::CX::V3::InputAudioConfig#model model} and request
+            #   language, Dialogflow falls back to the standard variant.
             #
             #   The [Cloud Speech
             #   documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)

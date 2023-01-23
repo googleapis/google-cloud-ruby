@@ -31,9 +31,9 @@ module Google
         ##
         # The NodeGroups API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/node_groups"
+        #     require "google/cloud/compute/v1/node_groups/rest"
         #     client = ::Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
         #
         module NodeGroups

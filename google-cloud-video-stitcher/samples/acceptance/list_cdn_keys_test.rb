@@ -21,7 +21,7 @@ describe "#list_cdn_keys", :stitcher_snippet do
     refute_nil cloud_cdn_key
     @cloud_cdn_key_created = true
 
-    assert_output(/CDN keys:\n#{gcdn_cdn_key_name}/) do
+    assert_output(/CDN keys:\n#{cloud_cdn_key_name}/) do
       sample.run project_id: project_id, location: location_id
     end
   end

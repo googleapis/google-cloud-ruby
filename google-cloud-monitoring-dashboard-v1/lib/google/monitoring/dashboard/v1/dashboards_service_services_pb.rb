@@ -35,8 +35,12 @@ module Google
               self.unmarshal_class_method = :decode
               self.service_name = 'google.monitoring.dashboard.v1.DashboardsService'
 
-              # Creates a new custom dashboard. For examples on how you can use this API to create dashboards, see [Managing dashboards by API](https://cloud.google.com/monitoring/dashboards/api-dashboard).
-              # This method requires the `monitoring.dashboards.create` permission on the specified project. For more information about permissions, see [Cloud Identity and Access Management](https://cloud.google.com/iam).
+              # Creates a new custom dashboard. For examples on how you can use this API to
+              # create dashboards, see [Managing dashboards by
+              # API](https://cloud.google.com/monitoring/dashboards/api-dashboard). This
+              # method requires the `monitoring.dashboards.create` permission on the
+              # specified project. For more information about permissions, see [Cloud
+              # Identity and Access Management](https://cloud.google.com/iam).
               rpc :CreateDashboard, ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest, ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard
               # Lists the existing dashboards.
               #

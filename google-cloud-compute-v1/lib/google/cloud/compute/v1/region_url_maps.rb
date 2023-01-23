@@ -31,9 +31,9 @@ module Google
         ##
         # The RegionUrlMaps API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/region_url_maps"
+        #     require "google/cloud/compute/v1/region_url_maps/rest"
         #     client = ::Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client.new
         #
         module RegionUrlMaps

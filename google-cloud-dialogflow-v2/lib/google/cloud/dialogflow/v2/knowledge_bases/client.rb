@@ -28,7 +28,8 @@ module Google
           ##
           # Client for the KnowledgeBases service.
           #
-          # Service for managing {::Google::Cloud::Dialogflow::V2::KnowledgeBase KnowledgeBases}.
+          # Service for managing
+          # {::Google::Cloud::Dialogflow::V2::KnowledgeBase KnowledgeBases}.
           #
           class Client
             include Paths

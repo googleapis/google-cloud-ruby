@@ -396,8 +396,10 @@ module Google
             #   @param page_token [::String]
             #     The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListIndexesResponse#next_page_token ListIndexesResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AIPlatform::V1::IndexService::Client#list_indexes IndexService.ListIndexes} call.
+            #     {::Google::Cloud::AIPlatform::V1::ListIndexesResponse#next_page_token ListIndexesResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::IndexService::Client#list_indexes IndexService.ListIndexes}
+            #     call.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #
@@ -494,7 +496,8 @@ module Google
             #     Required. The Index which updates the resource on the server.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The update mask applies to the resource.
-            #     For the `FieldMask` definition, see {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+            #     For the `FieldMask` definition, see
+            #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -571,7 +574,8 @@ module Google
             ##
             # Deletes an Index.
             # An Index can only be deleted when all its
-            # {::Google::Cloud::AIPlatform::V1::Index#deployed_indexes DeployedIndexes} had been undeployed.
+            # {::Google::Cloud::AIPlatform::V1::Index#deployed_indexes DeployedIndexes} had
+            # been undeployed.
             #
             # @overload delete_index(request, options = nil)
             #   Pass arguments to `delete_index` via a request object, either of type

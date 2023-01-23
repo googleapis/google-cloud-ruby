@@ -17,8 +17,41 @@ require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/vmmigration/v1/vmmigration.proto", :syntax => :proto3) do
     add_message "google.cloud.vmmigration.v1.ReplicationCycle" do
+      optional :name, :string, 13
+      optional :cycle_number, :int32, 10
       optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 6, "google.protobuf.Timestamp"
+      optional :total_pause_duration, :message, 7, "google.protobuf.Duration"
       optional :progress_percent, :int32, 5
+      repeated :steps, :message, 9, "google.cloud.vmmigration.v1.CycleStep"
+      optional :state, :enum, 11, "google.cloud.vmmigration.v1.ReplicationCycle.State"
+      optional :error, :message, 12, "google.rpc.Status"
+    end
+    add_enum "google.cloud.vmmigration.v1.ReplicationCycle.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :RUNNING, 1
+      value :PAUSED, 2
+      value :FAILED, 3
+      value :SUCCEEDED, 4
+    end
+    add_message "google.cloud.vmmigration.v1.CycleStep" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      oneof :step do
+        optional :initializing_replication, :message, 3, "google.cloud.vmmigration.v1.InitializingReplicationStep"
+        optional :replicating, :message, 4, "google.cloud.vmmigration.v1.ReplicatingStep"
+        optional :post_processing, :message, 5, "google.cloud.vmmigration.v1.PostProcessingStep"
+      end
+    end
+    add_message "google.cloud.vmmigration.v1.InitializingReplicationStep" do
+    end
+    add_message "google.cloud.vmmigration.v1.ReplicatingStep" do
+      optional :total_bytes, :int64, 1
+      optional :replicated_bytes, :int64, 2
+      optional :last_two_minutes_average_bytes_per_second, :int64, 3
+      optional :last_thirty_minutes_average_bytes_per_second, :int64, 4
+    end
+    add_message "google.cloud.vmmigration.v1.PostProcessingStep" do
     end
     add_message "google.cloud.vmmigration.v1.ReplicationSync" do
       optional :last_sync_time, :message, 1, "google.protobuf.Timestamp"
@@ -43,6 +76,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :target_vm_defaults do
         optional :compute_engine_target_defaults, :message, 26, "google.cloud.vmmigration.v1.ComputeEngineTargetDefaults"
       end
+      oneof :source_vm_details do
+        optional :aws_source_vm_details, :message, 29, "google.cloud.vmmigration.v1.AwsSourceVmDetails"
+      end
     end
     add_enum "google.cloud.vmmigration.v1.MigratingVm.State" do
       value :STATE_UNSPECIFIED, 0
@@ -65,6 +101,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 12, "google.cloud.vmmigration.v1.CloneJob.State"
       optional :state_time, :message, 14, "google.protobuf.Timestamp"
       optional :error, :message, 17, "google.rpc.Status"
+      repeated :steps, :message, 23, "google.cloud.vmmigration.v1.CloneStep"
       oneof :target_vm_details do
         optional :compute_engine_target_details, :message, 20, "google.cloud.vmmigration.v1.ComputeEngineTargetDetails"
       end
@@ -79,6 +116,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CANCELLING, 6
       value :ADAPTING_OS, 7
     end
+    add_message "google.cloud.vmmigration.v1.CloneStep" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      oneof :step do
+        optional :adapting_os, :message, 3, "google.cloud.vmmigration.v1.AdaptingOSStep"
+        optional :preparing_vm_disks, :message, 4, "google.cloud.vmmigration.v1.PreparingVMDisksStep"
+        optional :instantiating_migrated_vm, :message, 5, "google.cloud.vmmigration.v1.InstantiatingMigratedVMStep"
+      end
+    end
+    add_message "google.cloud.vmmigration.v1.AdaptingOSStep" do
+    end
+    add_message "google.cloud.vmmigration.v1.PreparingVMDisksStep" do
+    end
+    add_message "google.cloud.vmmigration.v1.InstantiatingMigratedVMStep" do
+    end
     add_message "google.cloud.vmmigration.v1.CutoverJob" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
       optional :end_time, :message, 16, "google.protobuf.Timestamp"
@@ -88,6 +140,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :progress_percent, :int32, 13
       optional :error, :message, 9, "google.rpc.Status"
       optional :state_message, :string, 10
+      repeated :steps, :message, 17, "google.cloud.vmmigration.v1.CutoverStep"
       oneof :target_vm_details do
         optional :compute_engine_target_details, :message, 14, "google.cloud.vmmigration.v1.ComputeEngineTargetDetails"
       end
@@ -101,6 +154,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CANCELLING, 5
       value :ACTIVE, 6
       value :ADAPTING_OS, 7
+    end
+    add_message "google.cloud.vmmigration.v1.CutoverStep" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      oneof :step do
+        optional :previous_replication_cycle, :message, 3, "google.cloud.vmmigration.v1.ReplicationCycle"
+        optional :shutting_down_source_vm, :message, 4, "google.cloud.vmmigration.v1.ShuttingDownSourceVMStep"
+        optional :final_sync, :message, 5, "google.cloud.vmmigration.v1.ReplicationCycle"
+        optional :preparing_vm_disks, :message, 6, "google.cloud.vmmigration.v1.PreparingVMDisksStep"
+        optional :instantiating_migrated_vm, :message, 7, "google.cloud.vmmigration.v1.InstantiatingMigratedVMStep"
+      end
+    end
+    add_message "google.cloud.vmmigration.v1.ShuttingDownSourceVMStep" do
     end
     add_message "google.cloud.vmmigration.v1.CreateCloneJobRequest" do
       optional :parent, :string, 1
@@ -136,6 +202,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 6
       oneof :source_details do
         optional :vmware, :message, 10, "google.cloud.vmmigration.v1.VmwareSourceDetails"
+        optional :aws, :message, 12, "google.cloud.vmmigration.v1.AwsSourceDetails"
       end
     end
     add_message "google.cloud.vmmigration.v1.VmwareSourceDetails" do
@@ -143,6 +210,32 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :password, :string, 2
       optional :vcenter_ip, :string, 3
       optional :thumbprint, :string, 4
+    end
+    add_message "google.cloud.vmmigration.v1.AwsSourceDetails" do
+      optional :aws_region, :string, 3
+      optional :state, :enum, 4, "google.cloud.vmmigration.v1.AwsSourceDetails.State"
+      optional :error, :message, 5, "google.rpc.Status"
+      repeated :inventory_tag_list, :message, 10, "google.cloud.vmmigration.v1.AwsSourceDetails.Tag"
+      repeated :inventory_security_group_names, :string, 7
+      map :migration_resources_user_tags, :string, :string, 8
+      optional :public_ip, :string, 9
+      oneof :credentials_type do
+        optional :access_key_creds, :message, 11, "google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials"
+      end
+    end
+    add_message "google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials" do
+      optional :access_key_id, :string, 1
+      optional :secret_access_key, :string, 2
+    end
+    add_message "google.cloud.vmmigration.v1.AwsSourceDetails.Tag" do
+      optional :key, :string, 1
+      optional :value, :string, 2
+    end
+    add_enum "google.cloud.vmmigration.v1.AwsSourceDetails.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :PENDING, 1
+      value :FAILED, 2
+      value :ACTIVE, 3
     end
     add_message "google.cloud.vmmigration.v1.DatacenterConnector" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
@@ -249,13 +342,65 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EFI, 1
       value :BIOS, 2
     end
+    add_message "google.cloud.vmmigration.v1.AwsVmDetails" do
+      optional :vm_id, :string, 1
+      optional :display_name, :string, 2
+      optional :source_id, :string, 3
+      optional :source_description, :string, 4
+      optional :power_state, :enum, 5, "google.cloud.vmmigration.v1.AwsVmDetails.PowerState"
+      optional :cpu_count, :int32, 6
+      optional :memory_mb, :int32, 7
+      optional :disk_count, :int32, 8
+      optional :committed_storage_mb, :int64, 9
+      optional :os_description, :string, 10
+      optional :boot_option, :enum, 11, "google.cloud.vmmigration.v1.AwsVmDetails.BootOption"
+      optional :instance_type, :string, 12
+      optional :vpc_id, :string, 13
+      repeated :security_groups, :message, 14, "google.cloud.vmmigration.v1.AwsSecurityGroup"
+      map :tags, :string, :string, 15
+      optional :zone, :string, 16
+      optional :virtualization_type, :enum, 17, "google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType"
+      optional :architecture, :enum, 18, "google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture"
+    end
+    add_enum "google.cloud.vmmigration.v1.AwsVmDetails.PowerState" do
+      value :POWER_STATE_UNSPECIFIED, 0
+      value :ON, 1
+      value :OFF, 2
+      value :SUSPENDED, 3
+      value :PENDING, 4
+    end
+    add_enum "google.cloud.vmmigration.v1.AwsVmDetails.BootOption" do
+      value :BOOT_OPTION_UNSPECIFIED, 0
+      value :EFI, 1
+      value :BIOS, 2
+    end
+    add_enum "google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType" do
+      value :VM_VIRTUALIZATION_TYPE_UNSPECIFIED, 0
+      value :HVM, 1
+      value :PARAVIRTUAL, 2
+    end
+    add_enum "google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture" do
+      value :VM_ARCHITECTURE_UNSPECIFIED, 0
+      value :I386, 1
+      value :X86_64, 2
+      value :ARM64, 3
+      value :X86_64_MAC, 4
+    end
+    add_message "google.cloud.vmmigration.v1.AwsSecurityGroup" do
+      optional :id, :string, 1
+      optional :name, :string, 2
+    end
     add_message "google.cloud.vmmigration.v1.VmwareVmsDetails" do
       repeated :details, :message, 1, "google.cloud.vmmigration.v1.VmwareVmDetails"
+    end
+    add_message "google.cloud.vmmigration.v1.AwsVmsDetails" do
+      repeated :details, :message, 1, "google.cloud.vmmigration.v1.AwsVmDetails"
     end
     add_message "google.cloud.vmmigration.v1.FetchInventoryResponse" do
       optional :update_time, :message, 2, "google.protobuf.Timestamp"
       oneof :SourceVms do
         optional :vmware_vms, :message, 1, "google.cloud.vmmigration.v1.VmwareVmsDetails"
+        optional :aws_vms, :message, 3, "google.cloud.vmmigration.v1.AwsVmsDetails"
       end
     end
     add_message "google.cloud.vmmigration.v1.UtilizationReport" do
@@ -634,6 +779,30 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :UTILIZATION_REPORT_ERROR, 8
       value :APPLIANCE_UPGRADE_ERROR, 9
     end
+    add_message "google.cloud.vmmigration.v1.AwsSourceVmDetails" do
+      optional :firmware, :enum, 1, "google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware"
+      optional :committed_storage_bytes, :int64, 2
+    end
+    add_enum "google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware" do
+      value :FIRMWARE_UNSPECIFIED, 0
+      value :EFI, 1
+      value :BIOS, 2
+    end
+    add_message "google.cloud.vmmigration.v1.ListReplicationCyclesRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+      optional :filter, :string, 4
+      optional :order_by, :string, 5
+    end
+    add_message "google.cloud.vmmigration.v1.ListReplicationCyclesResponse" do
+      repeated :replication_cycles, :message, 1, "google.cloud.vmmigration.v1.ReplicationCycle"
+      optional :next_page_token, :string, 2
+      repeated :unreachable, :string, 3
+    end
+    add_message "google.cloud.vmmigration.v1.GetReplicationCycleRequest" do
+      optional :name, :string, 1
+    end
     add_enum "google.cloud.vmmigration.v1.UtilizationReportView" do
       value :UTILIZATION_REPORT_VIEW_UNSPECIFIED, 0
       value :BASIC, 1
@@ -668,13 +837,24 @@ module Google
     module VMMigration
       module V1
         ReplicationCycle = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ReplicationCycle").msgclass
+        ReplicationCycle::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ReplicationCycle.State").enummodule
+        CycleStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.CycleStep").msgclass
+        InitializingReplicationStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.InitializingReplicationStep").msgclass
+        ReplicatingStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ReplicatingStep").msgclass
+        PostProcessingStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.PostProcessingStep").msgclass
         ReplicationSync = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ReplicationSync").msgclass
         MigratingVm = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.MigratingVm").msgclass
         MigratingVm::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.MigratingVm.State").enummodule
         CloneJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.CloneJob").msgclass
         CloneJob::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.CloneJob.State").enummodule
+        CloneStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.CloneStep").msgclass
+        AdaptingOSStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AdaptingOSStep").msgclass
+        PreparingVMDisksStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.PreparingVMDisksStep").msgclass
+        InstantiatingMigratedVMStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.InstantiatingMigratedVMStep").msgclass
         CutoverJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.CutoverJob").msgclass
         CutoverJob::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.CutoverJob.State").enummodule
+        CutoverStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.CutoverStep").msgclass
+        ShuttingDownSourceVMStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ShuttingDownSourceVMStep").msgclass
         CreateCloneJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.CreateCloneJobRequest").msgclass
         CancelCloneJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.CancelCloneJobRequest").msgclass
         CancelCloneJobResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.CancelCloneJobResponse").msgclass
@@ -683,6 +863,10 @@ module Google
         GetCloneJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.GetCloneJobRequest").msgclass
         Source = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.Source").msgclass
         VmwareSourceDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.VmwareSourceDetails").msgclass
+        AwsSourceDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsSourceDetails").msgclass
+        AwsSourceDetails::AccessKeyCredentials = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials").msgclass
+        AwsSourceDetails::Tag = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsSourceDetails.Tag").msgclass
+        AwsSourceDetails::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsSourceDetails.State").enummodule
         DatacenterConnector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.DatacenterConnector").msgclass
         DatacenterConnector::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.DatacenterConnector.State").enummodule
         UpgradeStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.UpgradeStatus").msgclass
@@ -699,7 +883,14 @@ module Google
         VmwareVmDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.VmwareVmDetails").msgclass
         VmwareVmDetails::PowerState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.VmwareVmDetails.PowerState").enummodule
         VmwareVmDetails::BootOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.VmwareVmDetails.BootOption").enummodule
+        AwsVmDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsVmDetails").msgclass
+        AwsVmDetails::PowerState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsVmDetails.PowerState").enummodule
+        AwsVmDetails::BootOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsVmDetails.BootOption").enummodule
+        AwsVmDetails::VmVirtualizationType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType").enummodule
+        AwsVmDetails::VmArchitecture = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture").enummodule
+        AwsSecurityGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsSecurityGroup").msgclass
         VmwareVmsDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.VmwareVmsDetails").msgclass
+        AwsVmsDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsVmsDetails").msgclass
         FetchInventoryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.FetchInventoryResponse").msgclass
         UtilizationReport = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.UtilizationReport").msgclass
         UtilizationReport::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.UtilizationReport.State").enummodule
@@ -770,6 +961,11 @@ module Google
         OperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.OperationMetadata").msgclass
         MigrationError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.MigrationError").msgclass
         MigrationError::ErrorCode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.MigrationError.ErrorCode").enummodule
+        AwsSourceVmDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsSourceVmDetails").msgclass
+        AwsSourceVmDetails::Firmware = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware").enummodule
+        ListReplicationCyclesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ListReplicationCyclesRequest").msgclass
+        ListReplicationCyclesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ListReplicationCyclesResponse").msgclass
+        GetReplicationCycleRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.GetReplicationCycleRequest").msgclass
         UtilizationReportView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.UtilizationReportView").enummodule
         MigratingVmView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.MigratingVmView").enummodule
         ComputeEngineDiskType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ComputeEngineDiskType").enummodule

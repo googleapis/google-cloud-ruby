@@ -217,8 +217,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The Cloud resource that parents the constraint. Must be in one of the
-            #     following forms:
+            #     Required. The Cloud resource that parents the constraint. Must be in one of
+            #     the following forms:
             #     * `projects/{project_number}`
             #     * `projects/{project_id}`
             #     * `folders/{folder_id}`
@@ -321,9 +321,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The target Cloud resource that parents the set of constraints and policies
-            #     that will be returned from this call. Must be in one of the following
-            #     forms:
+            #     Required. The target Cloud resource that parents the set of constraints and
+            #     policies that will be returned from this call. Must be in one of the
+            #     following forms:
             #     * `projects/{project_number}`
             #     * `projects/{project_id}`
             #     * `folders/{folder_id}`
@@ -430,7 +430,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the policy. See `Policy` for naming requirements.
+            #     Required. Resource name of the policy. See `Policy` for naming
+            #     requirements.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::OrgPolicy::V2::Policy]
@@ -610,8 +611,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The Cloud resource that will parent the new Policy. Must be in one of the
-            #     following forms:
+            #     Required. The Cloud resource that will parent the new Policy. Must be in
+            #     one of the following forms:
             #     * `projects/{project_number}`
             #     * `projects/{project_id}`
             #     * `folders/{folder_id}`
@@ -704,13 +705,17 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_policy(policy: nil)
+            # @overload update_policy(policy: nil, update_mask: nil)
             #   Pass arguments to `update_policy` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param policy [::Google::Cloud::OrgPolicy::V2::Policy, ::Hash]
             #     Required. `Policy` to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Field mask used to specify the fields to be overwritten in the policy
+            #     by the set. The fields specified in the update_mask are relative to the
+            #     policy, not the full request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::OrgPolicy::V2::Policy]

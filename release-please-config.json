@@ -211,6 +211,10 @@
       "component": "google-cloud-bigquery-data_policies",
       "version_file": "lib/google/cloud/bigquery/data_policies/version.rb"
     },
+    "google-cloud-bigquery-data_policies-v1": {
+      "component": "google-cloud-bigquery-data_policies-v1",
+      "version_file": "lib/google/cloud/bigquery/data_policies/v1/version.rb"
+    },
     "google-cloud-bigquery-data_policies-v1beta1": {
       "component": "google-cloud-bigquery-data_policies-v1beta1",
       "version_file": "lib/google/cloud/bigquery/data_policies/v1beta1/version.rb"
@@ -435,6 +439,10 @@
       "component": "google-cloud-datastore",
       "version_file": "lib/google/cloud/datastore/version.rb"
     },
+    "google-cloud-datastore-admin": {
+      "component": "google-cloud-datastore-admin",
+      "version_file": "lib/google/cloud/datastore/admin/version.rb"
+    },
     "google-cloud-datastore-admin-v1": {
       "component": "google-cloud-datastore-admin-v1",
       "version_file": "lib/google/cloud/datastore/admin/v1/version.rb"
@@ -571,6 +579,10 @@
       "component": "google-cloud-firestore",
       "version_file": "lib/google/cloud/firestore/version.rb"
     },
+    "google-cloud-firestore-admin": {
+      "component": "google-cloud-firestore-admin",
+      "version_file": "lib/google/cloud/firestore/admin/version.rb"
+    },
     "google-cloud-firestore-admin-v1": {
       "component": "google-cloud-firestore-admin-v1",
       "version_file": "lib/google/cloud/firestore/admin/v1/version.rb"
@@ -634,6 +646,14 @@
     "google-cloud-gke_multi_cloud-v1": {
       "component": "google-cloud-gke_multi_cloud-v1",
       "version_file": "lib/google/cloud/gke_multi_cloud/v1/version.rb"
+    },
+    "google-cloud-gsuite_add_ons": {
+      "component": "google-cloud-gsuite_add_ons",
+      "version_file": "lib/google/cloud/gsuite_add_ons/version.rb"
+    },
+    "google-cloud-gsuite_add_ons-v1": {
+      "component": "google-cloud-gsuite_add_ons-v1",
+      "version_file": "lib/google/cloud/gsuite_add_ons/v1/version.rb"
     },
     "google-cloud-iap": {
       "component": "google-cloud-iap",

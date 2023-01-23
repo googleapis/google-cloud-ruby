@@ -1987,7 +1987,7 @@ module Google
             #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
             #   @param target_snapshot [::String]
             #     Required. The snapshot for rollback.
-            #     Example: "projects/test-project/global/snapshots/krwlzipynril".
+            #     Example: `projects/test-project/global/snapshots/krwlzipynril`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -3137,7 +3137,7 @@ module Google
             #     from the last result.
             #   @param filter [::String]
             #     Filter applied to resulting executions. Currently only supports filtering
-            #     executions by a specified schedule_id.
+            #     executions by a specified `schedule_id`.
             #     Format: `schedule_id=<Schedule_ID>`
             #   @param order_by [::String]
             #     Sort by field.

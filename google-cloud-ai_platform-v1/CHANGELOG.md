@@ -1,5 +1,20 @@
 # Changelog
 
+### 0.18.0 (2023-01-19)
+
+#### Features
+
+* Support for enabling access to the customized dashboard in training chief container ([#20037](https://github.com/googleapis/google-cloud-ruby/issues/20037)) 
+
+### 0.17.0 (2023-01-11)
+
+#### Features
+
+* Support for order_by in the list_model_versions RPC 
+* Support for saved_queries in the Dataset resource 
+* Support for the read_tensorboard_usage RPC ([#19979](https://github.com/googleapis/google-cloud-ruby/issues/19979)) 
+* Support for update_all_stopped_trials in the ConvexAutomatedStoppingSpec resource 
+
 ### 0.16.0 (2022-12-09)
 
 #### Features

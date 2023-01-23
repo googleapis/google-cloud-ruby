@@ -45,6 +45,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :display_name, :string, 2
       optional :evaluation_config, :message, 6, "google.cloud.dialogflow.v2.EvaluationConfig"
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
+      optional :raw_human_eval_template_csv, :string, 8
       oneof :metrics do
         optional :smart_reply_metrics, :message, 5, "google.cloud.dialogflow.v2.SmartReplyMetrics"
       end

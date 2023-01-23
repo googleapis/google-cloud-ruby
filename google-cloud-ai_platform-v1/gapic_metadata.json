@@ -897,6 +897,11 @@
                 "get_tensorboard"
               ]
             },
+            "ReadTensorboardUsage": {
+              "methods": [
+                "read_tensorboard_usage"
+              ]
+            },
             "UpdateTensorboard": {
               "methods": [
                 "update_tensorboard"

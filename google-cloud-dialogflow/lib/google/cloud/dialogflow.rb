@@ -177,7 +177,8 @@ module Google
       #
       # ## About SessionEntityTypes
       #
-      # Service for managing SessionEntityTypes.
+      # Service for managing
+      # SessionEntityTypes.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
@@ -270,7 +271,8 @@ module Google
       #
       # ## About AnswerRecords
       #
-      # Service for managing AnswerRecords.
+      # Service for managing
+      # AnswerRecords.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
@@ -300,7 +302,8 @@ module Google
       #
       # ## About Conversations
       #
-      # Service for managing Conversations.
+      # Service for managing
+      # Conversations.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
@@ -393,7 +396,8 @@ module Google
       #
       # ## About ConversationProfiles
       #
-      # Service for managing ConversationProfiles.
+      # Service for managing
+      # ConversationProfiles.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
@@ -423,7 +427,8 @@ module Google
       #
       # ## About Documents
       #
-      # Service for managing knowledge Documents.
+      # Service for managing knowledge
+      # Documents.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
@@ -513,7 +518,8 @@ module Google
       #
       # ## About KnowledgeBases
       #
-      # Service for managing KnowledgeBases.
+      # Service for managing
+      # KnowledgeBases.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.

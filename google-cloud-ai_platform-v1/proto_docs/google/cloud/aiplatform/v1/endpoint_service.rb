@@ -21,7 +21,8 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Request message for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#create_endpoint EndpointService.CreateEndpoint}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#create_endpoint EndpointService.CreateEndpoint}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location to create the Endpoint in.
@@ -44,7 +45,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Runtime operation information for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#create_endpoint EndpointService.CreateEndpoint}.
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#create_endpoint EndpointService.CreateEndpoint}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The operation generic information.
@@ -53,7 +55,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#get_endpoint EndpointService.GetEndpoint}
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#get_endpoint EndpointService.GetEndpoint}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Endpoint resource.
@@ -64,18 +67,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#list_endpoints EndpointService.ListEndpoints}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#list_endpoints EndpointService.ListEndpoints}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the Location from which to list the Endpoints.
-        #     Format: `projects/{project}/locations/{location}`
+        #     Required. The resource name of the Location from which to list the
+        #     Endpoints. Format: `projects/{project}/locations/{location}`
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. An expression for filtering the results of the request. For field names
-        #     both snake_case and camelCase are supported.
+        #     Optional. An expression for filtering the results of the request. For field
+        #     names both snake_case and camelCase are supported.
         #
         #       * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
-        #         i.e. the last segment of the Endpoint's {::Google::Cloud::AIPlatform::V1::Endpoint#name resource name}.
+        #         i.e. the last segment of the Endpoint's [resource
+        #         name][google.cloud.aiplatform.v1.Endpoint.name].
         #       * `display_name` supports = and, !=
         #       * `labels` supports general map functions that is:
         #         * `labels.key=value` - key:value equality
@@ -93,8 +98,10 @@ module Google
         #   @return [::String]
         #     Optional. The standard list page token.
         #     Typically obtained via
-        #     {::Google::Cloud::AIPlatform::V1::ListEndpointsResponse#next_page_token ListEndpointsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::AIPlatform::V1::EndpointService::Client#list_endpoints EndpointService.ListEndpoints} call.
+        #     {::Google::Cloud::AIPlatform::V1::ListEndpointsResponse#next_page_token ListEndpointsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::EndpointService::Client#list_endpoints EndpointService.ListEndpoints}
+        #     call.
         # @!attribute [rw] read_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. Mask specifying which fields to read.
@@ -113,32 +120,38 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#list_endpoints EndpointService.ListEndpoints}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#list_endpoints EndpointService.ListEndpoints}.
         # @!attribute [rw] endpoints
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Endpoint>]
         #     List of Endpoints in the requested page.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
-        #     Pass to {::Google::Cloud::AIPlatform::V1::ListEndpointsRequest#page_token ListEndpointsRequest.page_token} to obtain that page.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListEndpointsRequest#page_token ListEndpointsRequest.page_token}
+        #     to obtain that page.
         class ListEndpointsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#update_endpoint EndpointService.UpdateEndpoint}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#update_endpoint EndpointService.UpdateEndpoint}.
         # @!attribute [rw] endpoint
         #   @return [::Google::Cloud::AIPlatform::V1::Endpoint]
         #     Required. The Endpoint which replaces the resource on the server.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The update mask applies to the resource. See {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+        #     Required. The update mask applies to the resource. See
+        #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
         class UpdateEndpointRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#delete_endpoint EndpointService.DeleteEndpoint}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#delete_endpoint EndpointService.DeleteEndpoint}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Endpoint resource to be deleted.
@@ -149,7 +162,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model EndpointService.DeployModel}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model EndpointService.DeployModel}.
         # @!attribute [rw] endpoint
         #   @return [::String]
         #     Required. The name of the Endpoint resource into which to deploy a Model.
@@ -158,8 +172,9 @@ module Google
         # @!attribute [rw] deployed_model
         #   @return [::Google::Cloud::AIPlatform::V1::DeployedModel]
         #     Required. The DeployedModel to be created within the Endpoint. Note that
-        #     {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split Endpoint.traffic_split} must be updated for the DeployedModel to start
-        #     receiving traffic, either as part of this call, or via
+        #     {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split Endpoint.traffic_split}
+        #     must be updated for the DeployedModel to start receiving traffic, either as
+        #     part of this call, or via
         #     {::Google::Cloud::AIPlatform::V1::EndpointService::Client#update_endpoint EndpointService.UpdateEndpoint}.
         # @!attribute [rw] traffic_split
         #   @return [::Google::Protobuf::Map{::String => ::Integer}]
@@ -167,13 +182,15 @@ module Google
         #     traffic that should be forwarded to that DeployedModel.
         #
         #     If this field is non-empty, then the Endpoint's
-        #     {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split traffic_split} will be overwritten with it.
-        #     To refer to the ID of the just being deployed Model, a "0" should be used,
-        #     and the actual ID of the new DeployedModel will be filled in its place by
-        #     this method. The traffic percentage values must add up to 100.
+        #     {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split traffic_split} will be
+        #     overwritten with it. To refer to the ID of the just being deployed Model, a
+        #     "0" should be used, and the actual ID of the new DeployedModel will be
+        #     filled in its place by this method. The traffic percentage values must add
+        #     up to 100.
         #
         #     If this field is empty, then the Endpoint's
-        #     {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split traffic_split} is not updated.
+        #     {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split traffic_split} is not
+        #     updated.
         class DeployModelRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -188,7 +205,8 @@ module Google
           end
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model EndpointService.DeployModel}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model EndpointService.DeployModel}.
         # @!attribute [rw] deployed_model
         #   @return [::Google::Cloud::AIPlatform::V1::DeployedModel]
         #     The DeployedModel that had been deployed in the Endpoint.
@@ -197,7 +215,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Runtime operation information for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model EndpointService.DeployModel}.
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model EndpointService.DeployModel}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The operation generic information.
@@ -206,7 +225,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#undeploy_model EndpointService.UndeployModel}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#undeploy_model EndpointService.UndeployModel}.
         # @!attribute [rw] endpoint
         #   @return [::String]
         #     Required. The name of the Endpoint resource from which to undeploy a Model.
@@ -218,12 +238,12 @@ module Google
         # @!attribute [rw] traffic_split
         #   @return [::Google::Protobuf::Map{::String => ::Integer}]
         #     If this field is provided, then the Endpoint's
-        #     {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split traffic_split} will be overwritten with it. If
-        #     last DeployedModel is being undeployed from the Endpoint, the
-        #     [Endpoint.traffic_split] will always end up empty when this call returns.
-        #     A DeployedModel will be successfully undeployed only if it doesn't have
-        #     any traffic assigned to it when this method executes, or if this field
-        #     unassigns any traffic to it.
+        #     {::Google::Cloud::AIPlatform::V1::Endpoint#traffic_split traffic_split} will be
+        #     overwritten with it. If last DeployedModel is being undeployed from the
+        #     Endpoint, the [Endpoint.traffic_split] will always end up empty when this
+        #     call returns. A DeployedModel will be successfully undeployed only if it
+        #     doesn't have any traffic assigned to it when this method executes, or if
+        #     this field unassigns any traffic to it.
         class UndeployModelRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -238,13 +258,15 @@ module Google
           end
         end
 
-        # Response message for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#undeploy_model EndpointService.UndeployModel}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#undeploy_model EndpointService.UndeployModel}.
         class UndeployModelResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Runtime operation information for {::Google::Cloud::AIPlatform::V1::EndpointService::Client#undeploy_model EndpointService.UndeployModel}.
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#undeploy_model EndpointService.UndeployModel}.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The operation generic information.

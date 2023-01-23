@@ -710,9 +710,9 @@ module Google
           raise "Must have active connection" unless service
         end
 
-        def retrieve_table project_id, dataset_id, table_id
+        def retrieve_table project_id, dataset_id, table_id, metadata_view: nil
           ensure_service!
-          gapi = service.get_project_table project_id, dataset_id, table_id
+          gapi = service.get_project_table project_id, dataset_id, table_id, metadata_view: metadata_view
           Table.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
           nil

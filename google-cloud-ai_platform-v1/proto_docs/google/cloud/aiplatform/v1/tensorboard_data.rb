@@ -24,12 +24,12 @@ module Google
         # All the data stored in a TensorboardTimeSeries.
         # @!attribute [rw] tensorboard_time_series_id
         #   @return [::String]
-        #     Required. The ID of the TensorboardTimeSeries, which will become the final component
-        #     of the TensorboardTimeSeries' resource name
+        #     Required. The ID of the TensorboardTimeSeries, which will become the final
+        #     component of the TensorboardTimeSeries' resource name
         # @!attribute [rw] value_type
         #   @return [::Google::Cloud::AIPlatform::V1::TensorboardTimeSeries::ValueType]
-        #     Required. Immutable. The value type of this time series. All the values in this time series data
-        #     must match this value type.
+        #     Required. Immutable. The value type of this time series. All the values in
+        #     this time series data must match this value type.
         # @!attribute [rw] values
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::TimeSeriesDataPoint>]
         #     Required. Data points in this time series.
@@ -75,7 +75,8 @@ module Google
         #     https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/framework/tensor.proto
         # @!attribute [rw] version_number
         #   @return [::Integer]
-        #     Optional. Version number of TensorProto used to serialize {::Google::Cloud::AIPlatform::V1::TensorboardTensor#value value}.
+        #     Optional. Version number of TensorProto used to serialize
+        #     {::Google::Cloud::AIPlatform::V1::TensorboardTensor#value value}.
         class TensorboardTensor
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -94,8 +95,8 @@ module Google
         # One blob (e.g, image, graph) viewable on a blob metric plot.
         # @!attribute [r] id
         #   @return [::String]
-        #     Output only. A URI safe key uniquely identifying a blob. Can be used to locate the blob
-        #     stored in the Cloud Storage bucket of the consumer project.
+        #     Output only. A URI safe key uniquely identifying a blob. Can be used to
+        #     locate the blob stored in the Cloud Storage bucket of the consumer project.
         # @!attribute [rw] data
         #   @return [::String]
         #     Optional. The bytes of the blob is not present unless it's returned by the

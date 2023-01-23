@@ -676,7 +676,7 @@ module Google
         #   topic.publish "task completed",
         #                 ordering_key: "task-key"
         #
-        def publish data = nil, attributes = nil, ordering_key: nil, compress: false, compression_bytes_threshold: 240,
+        def publish data = nil, attributes = nil, ordering_key: nil, compress: nil, compression_bytes_threshold: nil,
                     **extra_attrs, &block
           ensure_service!
           batch = BatchPublisher.new data,

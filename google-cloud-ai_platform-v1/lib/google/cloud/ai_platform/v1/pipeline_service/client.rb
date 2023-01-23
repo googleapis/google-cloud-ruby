@@ -207,8 +207,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the Location to create the TrainingPipeline in.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The resource name of the Location to create the TrainingPipeline
+            #     in. Format: `projects/{project}/locations/{location}`
             #   @param training_pipeline [::Google::Cloud::AIPlatform::V1::TrainingPipeline, ::Hash]
             #     Required. The TrainingPipeline to create.
             #
@@ -382,8 +382,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the Location to list the TrainingPipelines from.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The resource name of the Location to list the TrainingPipelines
+            #     from. Format: `projects/{project}/locations/{location}`
             #   @param filter [::String]
             #     The standard list filter.
             #
@@ -410,8 +410,10 @@ module Google
             #   @param page_token [::String]
             #     The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListTrainingPipelinesResponse#next_page_token ListTrainingPipelinesResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AIPlatform::V1::PipelineService::Client#list_training_pipelines PipelineService.ListTrainingPipelines} call.
+            #     {::Google::Cloud::AIPlatform::V1::ListTrainingPipelinesResponse#next_page_token ListTrainingPipelinesResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::PipelineService::Client#list_training_pipelines PipelineService.ListTrainingPipelines}
+            #     call.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #
@@ -585,13 +587,17 @@ module Google
             # Cancels a TrainingPipeline.
             # Starts asynchronous cancellation on the TrainingPipeline. The server
             # makes a best effort to cancel the pipeline, but success is not
-            # guaranteed. Clients can use {::Google::Cloud::AIPlatform::V1::PipelineService::Client#get_training_pipeline PipelineService.GetTrainingPipeline} or
-            # other methods to check whether the cancellation succeeded or whether the
+            # guaranteed. Clients can use
+            # {::Google::Cloud::AIPlatform::V1::PipelineService::Client#get_training_pipeline PipelineService.GetTrainingPipeline}
+            # or other methods to check whether the cancellation succeeded or whether the
             # pipeline completed despite cancellation. On successful cancellation,
             # the TrainingPipeline is not deleted; instead it becomes a pipeline with
-            # a {::Google::Cloud::AIPlatform::V1::TrainingPipeline#error TrainingPipeline.error} value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-            # corresponding to `Code.CANCELLED`, and {::Google::Cloud::AIPlatform::V1::TrainingPipeline#state TrainingPipeline.state} is set to
-            # `CANCELLED`.
+            # a
+            # {::Google::Cloud::AIPlatform::V1::TrainingPipeline#error TrainingPipeline.error}
+            # value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+            # corresponding to `Code.CANCELLED`, and
+            # {::Google::Cloud::AIPlatform::V1::TrainingPipeline#state TrainingPipeline.state}
+            # is set to `CANCELLED`.
             #
             # @overload cancel_training_pipeline(request, options = nil)
             #   Pass arguments to `cancel_training_pipeline` via a request object, either of type
@@ -920,8 +926,10 @@ module Google
             #   @param page_token [::String]
             #     The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListPipelineJobsResponse#next_page_token ListPipelineJobsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AIPlatform::V1::PipelineService::Client#list_pipeline_jobs PipelineService.ListPipelineJobs} call.
+            #     {::Google::Cloud::AIPlatform::V1::ListPipelineJobsResponse#next_page_token ListPipelineJobsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::PipelineService::Client#list_pipeline_jobs PipelineService.ListPipelineJobs}
+            #     call.
             #   @param order_by [::String]
             #     A comma-separated list of fields to order by. The default sort order is in
             #     ascending order. Use "desc" after a field name for descending. You can have
@@ -1109,12 +1117,15 @@ module Google
             # Cancels a PipelineJob.
             # Starts asynchronous cancellation on the PipelineJob. The server
             # makes a best effort to cancel the pipeline, but success is not
-            # guaranteed. Clients can use {::Google::Cloud::AIPlatform::V1::PipelineService::Client#get_pipeline_job PipelineService.GetPipelineJob} or
-            # other methods to check whether the cancellation succeeded or whether the
+            # guaranteed. Clients can use
+            # {::Google::Cloud::AIPlatform::V1::PipelineService::Client#get_pipeline_job PipelineService.GetPipelineJob}
+            # or other methods to check whether the cancellation succeeded or whether the
             # pipeline completed despite cancellation. On successful cancellation,
             # the PipelineJob is not deleted; instead it becomes a pipeline with
-            # a {::Google::Cloud::AIPlatform::V1::PipelineJob#error PipelineJob.error} value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-            # corresponding to `Code.CANCELLED`, and {::Google::Cloud::AIPlatform::V1::PipelineJob#state PipelineJob.state} is set to
+            # a {::Google::Cloud::AIPlatform::V1::PipelineJob#error PipelineJob.error} value
+            # with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding
+            # to `Code.CANCELLED`, and
+            # {::Google::Cloud::AIPlatform::V1::PipelineJob#state PipelineJob.state} is set to
             # `CANCELLED`.
             #
             # @overload cancel_pipeline_job(request, options = nil)
