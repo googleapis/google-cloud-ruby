@@ -105,14 +105,15 @@ module Google
                    timeout: nil,
                    endpoint: nil,
                    emulator_host: nil,
-                   database_id: configure.database_id,
+                   database_id: nil,
                    project: nil,
                    keyfile: nil
-        project_id ||= (project || default_project_id)
+        project_id = get_project_id project_id, project
         scope ||= configure.scope
         timeout ||= configure.timeout
         endpoint ||= configure.endpoint
         emulator_host ||= configure.emulator_host
+        database_id ||= configure.database_id
 
         if emulator_host
           project_id = project_id.to_s # Always cast to a string
@@ -177,6 +178,14 @@ module Google
         yield Google::Cloud.configure.datastore if block_given?
 
         Google::Cloud.configure.datastore
+      end
+
+      ##
+      # @private Default project.
+      def self.get_project_id project_id, project
+        project_id || project || Google::Cloud.configure.datastore.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
       end
 
       ##

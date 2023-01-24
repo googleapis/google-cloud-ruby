@@ -86,6 +86,8 @@ module Google
         ##
         # The Datastore database connected to.
         #
+        # @return [String] ID of the database
+        #
         # @example
         #   require "google/cloud/datastore"
         #
