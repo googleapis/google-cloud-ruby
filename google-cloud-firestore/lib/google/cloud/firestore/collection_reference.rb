@@ -147,6 +147,8 @@ module Google
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of results to return.
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
         #
         # @return [Array<DocumentReference>] An array of document references.
         #
@@ -161,10 +163,23 @@ module Google
         #     puts doc_ref.document_id
         #   end
         #
-        def list_documents token: nil, max: nil
+        # @example List documents with read time
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   read_time = Time.now
+        #
+        #   col = firestore.col "cities"
+        #
+        #   col.list_documents(read_time: read_time).each do |doc_ref|
+        #     puts doc_ref.document_id
+        #   end
+        #
+        def list_documents token: nil, max: nil, read_time: nil
           ensure_client!
           client.list_documents \
-            parent_path, collection_id, token: token, max: max
+            parent_path, collection_id, token: token, max: max, read_time: read_time
         end
 
         ##

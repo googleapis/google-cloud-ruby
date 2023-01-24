@@ -682,10 +682,12 @@ module Google
 
         ##
         # @private New Transaction reference object from a path.
-        def self.from_client client, previous_transaction: nil
+        def self.from_client client, previous_transaction: nil, read_time: nil, read_only: nil
           new.tap do |s|
             s.instance_variable_set :@client, client
             s.instance_variable_set :@previous_transaction, previous_transaction
+            s.instance_variable_set :@read_time, read_time
+            s.instance_variable_set :@read_only, read_only
           end
         end
 
@@ -738,6 +740,10 @@ module Google
         ##
         # @private
         def transaction_opt
+          read_only = \
+            Google::Cloud::Firestore::V1::TransactionOptions::ReadOnly.new \
+              read_time: service.read_time_to_timestamp(@read_time)
+
           read_write = \
             Google::Cloud::Firestore::V1::TransactionOptions::ReadWrite.new
 
@@ -746,9 +752,11 @@ module Google
             @previous_transaction = nil
           end
 
-          Google::Cloud::Firestore::V1::TransactionOptions.new(
-            read_write: read_write
-          )
+          if @read_only
+            Google::Cloud::Firestore::V1::TransactionOptions.new read_only: read_only
+          else
+            Google::Cloud::Firestore::V1::TransactionOptions.new read_write: read_write
+          end
         end
 
         ##
