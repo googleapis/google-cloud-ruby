@@ -105,10 +105,11 @@ module Google
         #   array, or a comma-separated string. For a reference of allowed
         #   headers, see [Reference Headers](https://cloud.google.com/storage/docs/xml-api/reference-headers).
         #
-        # @return [Hash] Hash of Google extension headers included in requests that use the signed URLs.
+        # @return [Google::Cloud::Storage::Project] Returns the Project for method chaining
         #
         def add_custom_headers headers
           @service.add_custom_headers headers
+          self
         end
 
         ##
@@ -121,10 +122,11 @@ module Google
         # @param [Object] header_value Valid value of the Google extension header being added.
         #   For headers with multiple values, provide values as a simple array, or a comma-separated string.
         #
-        # @return [String] The value of the Google extension header included in the request.
+        # @return [Google::Cloud::Storage::Project] Returns the Project for method chaining
         #
         def add_custom_header header_name, header_value
           @service.add_custom_header header_name, header_value
+          self
         end
 
         ##
