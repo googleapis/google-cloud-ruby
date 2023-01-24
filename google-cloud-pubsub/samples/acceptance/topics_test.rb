@@ -247,7 +247,6 @@ describe "topics" do
     end
   end
 
-  focus
   it "supports pubsub_publisher_with_compression" do
     #setup
     sample = SampleLoader.load "pubsub_publisher_with_compression.rb"
