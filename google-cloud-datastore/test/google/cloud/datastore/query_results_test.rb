@@ -18,7 +18,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults, :mock_datastore do
   let(:project) { "my-todo-project" }
   let(:database) { "my-todo-database" }
   let(:credentials) { OpenStruct.new }
-  let(:dataset) { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials, database: default_database)) }
+  let(:dataset) { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials, default_database)) }
   let(:query) { Google::Cloud::Datastore::Query.new.kind("User") }
   let(:run_query_res) do
     run_query_res_entities = 2.times.map do |i|

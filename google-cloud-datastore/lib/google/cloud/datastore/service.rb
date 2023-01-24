@@ -33,7 +33,7 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil, database: nil
+        def initialize project, credentials, database, host: nil, timeout: nil
           @project = project
           @credentials = credentials
           @host = host

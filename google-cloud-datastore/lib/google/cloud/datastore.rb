@@ -121,8 +121,8 @@ module Google
 
           return Datastore::Dataset.new(
             Datastore::Service.new(
-              project_id, :this_channel_is_insecure,
-              host: emulator_host, timeout: timeout, database: database_id
+              project_id, :this_channel_is_insecure, database_id,
+              host: emulator_host, timeout: timeout
             )
           )
         end
@@ -140,9 +140,8 @@ module Google
 
         Datastore::Dataset.new(
           Datastore::Service.new(
-            project_id, credentials,
-            host: endpoint, timeout: timeout,
-            database: database_id
+            project_id, credentials, database_id,
+            host: endpoint, timeout: timeout
           )
         )
       end
