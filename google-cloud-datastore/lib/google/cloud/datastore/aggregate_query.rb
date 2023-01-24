@@ -74,7 +74,7 @@ module Google
         ##
         # Adds a count aggregate.
         #
-        # @param [aggregate_alias] Alias to refer to the aggregate. Optional
+        # @param aggregate_alias [String] Alias to refer to the aggregate. Optional
         #
         # @return [AggregateQuery] The modified aggregate query object with the added count aggregate.
         #
