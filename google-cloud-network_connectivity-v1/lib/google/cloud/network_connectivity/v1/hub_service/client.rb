@@ -177,7 +177,7 @@ module Google
             # Service calls
 
             ##
-            # Lists the Network Connectivity Center hubs associated with a given project.
+            # Lists hubs in a given project.
             #
             # @overload list_hubs(request, options = nil)
             #   Pass arguments to `list_hubs` via a request object, either of type
@@ -277,7 +277,7 @@ module Google
             end
 
             ##
-            # Gets details about a Network Connectivity Center hub.
+            # Gets details about the specified hub.
             #
             # @overload get_hub(request, options = nil)
             #   Pass arguments to `get_hub` via a request object, either of type
@@ -362,7 +362,7 @@ module Google
             end
 
             ##
-            # Creates a new Network Connectivity Center hub in the specified project.
+            # Creates a new hub in the specified project.
             #
             # @overload create_hub(request, options = nil)
             #   Pass arguments to `create_hub` via a request object, either of type
@@ -386,11 +386,11 @@ module Google
             #   @param hub [::Google::Cloud::NetworkConnectivity::V1::Hub, ::Hash]
             #     Required. The initial values for a new hub.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A unique request ID (optional). If you specify this ID, you can use it
+            #     in cases when you need to retry your request. When you need to retry, this
+            #     ID lets the server know that it can ignore the request if it has already
+            #     been completed. The server guarantees that for at least 60 minutes after
+            #     the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -474,8 +474,7 @@ module Google
             end
 
             ##
-            # Updates the description and/or labels of a Network Connectivity Center
-            # hub.
+            # Updates the description and/or labels of the specified hub.
             #
             # @overload update_hub(request, options = nil)
             #   Pass arguments to `update_hub` via a request object, either of type
@@ -493,19 +492,19 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. In the case of an update to an existing hub, field mask is used
-            #     to specify the fields to be overwritten. The fields specified in the
-            #     update_mask are relative to the resource, not the full request. A field is
-            #     overwritten if it is in the mask. If the user does not provide a mask, then
-            #     all fields are overwritten.
+            #     Optional. In the case of an update to an existing hub, field mask is used to specify
+            #     the fields to be overwritten. The fields specified in the update_mask are
+            #     relative to the resource, not the full request. A field is overwritten if
+            #     it is in the mask. If the user does not provide a mask, then all fields are
+            #     overwritten.
             #   @param hub [::Google::Cloud::NetworkConnectivity::V1::Hub, ::Hash]
             #     Required. The state that the hub should be in after the update.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A unique request ID (optional). If you specify this ID, you can use it
+            #     in cases when you need to retry your request. When you need to retry, this
+            #     ID lets the server know that it can ignore the request if it has already
+            #     been completed. The server guarantees that for at least 60 minutes after
+            #     the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -589,7 +588,7 @@ module Google
             end
 
             ##
-            # Deletes a Network Connectivity Center hub.
+            # Deletes the specified hub.
             #
             # @overload delete_hub(request, options = nil)
             #   Pass arguments to `delete_hub` via a request object, either of type
@@ -609,11 +608,11 @@ module Google
             #   @param name [::String]
             #     Required. The name of the hub to delete.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A unique request ID (optional). If you specify this ID, you can use it
+            #     in cases when you need to retry your request. When you need to retry, this
+            #     ID lets the server know that it can ignore the request if it has already
+            #     been completed. The server guarantees that for at least 60 minutes after
+            #     the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -697,8 +696,7 @@ module Google
             end
 
             ##
-            # Lists the Network Connectivity Center spokes in a specified project and
-            # location.
+            # Lists the spokes in the specified project and location.
             #
             # @overload list_spokes(request, options = nil)
             #   Pass arguments to `list_spokes` via a request object, either of type
@@ -798,7 +796,7 @@ module Google
             end
 
             ##
-            # Gets details about a Network Connectivity Center spoke.
+            # Gets details about the specified spoke.
             #
             # @overload get_spoke(request, options = nil)
             #   Pass arguments to `get_spoke` via a request object, either of type
@@ -883,7 +881,7 @@ module Google
             end
 
             ##
-            # Creates a Network Connectivity Center spoke.
+            # Creates a spoke in the specified project and location.
             #
             # @overload create_spoke(request, options = nil)
             #   Pass arguments to `create_spoke` via a request object, either of type
@@ -907,11 +905,11 @@ module Google
             #   @param spoke [::Google::Cloud::NetworkConnectivity::V1::Spoke, ::Hash]
             #     Required. The initial values for a new spoke.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A unique request ID (optional). If you specify this ID, you can use it
+            #     in cases when you need to retry your request. When you need to retry, this
+            #     ID lets the server know that it can ignore the request if it has already
+            #     been completed. The server guarantees that for at least 60 minutes after
+            #     the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -995,7 +993,7 @@ module Google
             end
 
             ##
-            # Updates the parameters of a Network Connectivity Center spoke.
+            # Updates the parameters of the specified spoke.
             #
             # @overload update_spoke(request, options = nil)
             #   Pass arguments to `update_spoke` via a request object, either of type
@@ -1013,19 +1011,19 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. In the case of an update to an existing spoke, field mask is used
-            #     to specify the fields to be overwritten. The fields specified in the
+            #     Optional. In the case of an update to an existing spoke, field mask is used to
+            #     specify the fields to be overwritten. The fields specified in the
             #     update_mask are relative to the resource, not the full request. A field is
             #     overwritten if it is in the mask. If the user does not provide a mask, then
             #     all fields are overwritten.
             #   @param spoke [::Google::Cloud::NetworkConnectivity::V1::Spoke, ::Hash]
             #     Required. The state that the spoke should be in after the update.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A unique request ID (optional). If you specify this ID, you can use it
+            #     in cases when you need to retry your request. When you need to retry, this
+            #     ID lets the server know that it can ignore the request if it has already
+            #     been completed. The server guarantees that for at least 60 minutes after
+            #     the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -1109,7 +1107,7 @@ module Google
             end
 
             ##
-            # Deletes a Network Connectivity Center spoke.
+            # Deletes the specified spoke.
             #
             # @overload delete_spoke(request, options = nil)
             #   Pass arguments to `delete_spoke` via a request object, either of type
@@ -1129,11 +1127,11 @@ module Google
             #   @param name [::String]
             #     Required. The name of the spoke to delete.
             #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can
-            #     use it in cases when you need to retry your request. When you need to
-            #     retry, this ID lets the server know that it can ignore the request if it
-            #     has already been completed. The server guarantees that for at least 60
-            #     minutes after the first request.
+            #     Optional. A unique request ID (optional). If you specify this ID, you can use it
+            #     in cases when you need to retry your request. When you need to retry, this
+            #     ID lets the server know that it can ignore the request if it has already
+            #     been completed. The server guarantees that for at least 60 minutes after
+            #     the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
