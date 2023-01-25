@@ -664,6 +664,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :ip_cidr_range, :string, 98117322
       proto3_optional :subnetwork_range_name, :string, 387995966
     end
+    add_message "google.cloud.compute.v1.AllocationResourceStatus" do
+      proto3_optional :specific_sku_allocation, :message, 196231151, "google.cloud.compute.v1.AllocationResourceStatusSpecificSKUAllocation"
+    end
+    add_message "google.cloud.compute.v1.AllocationResourceStatusSpecificSKUAllocation" do
+      proto3_optional :source_instance_template_id, :string, 111196154
+    end
     add_message "google.cloud.compute.v1.AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk" do
       proto3_optional :disk_size_gb, :int64, 316263735
       proto3_optional :interface, :string, 502623545
@@ -685,6 +691,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :count, :int64, 94851343
       proto3_optional :in_use_count, :int64, 493458877
       proto3_optional :instance_properties, :message, 215355165, "google.cloud.compute.v1.AllocationSpecificSKUAllocationReservedInstanceProperties"
+      proto3_optional :source_instance_template, :string, 332423616
     end
     add_message "google.cloud.compute.v1.Allowed" do
       proto3_optional :I_p_protocol, :string, 488094525
@@ -3263,6 +3270,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MULTI_IP_SUBNET, 151776719
       value :SECURE_BOOT, 376811194
       value :SEV_CAPABLE, 87083793
+      value :SEV_SNP_CAPABLE, 426919
       value :UEFI_COMPATIBLE, 195865408
       value :VIRTIO_SCSI_MULTIQUEUE, 201597069
       value :WINDOWS, 456863331
@@ -6279,6 +6287,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :kind, :string, 3292052
       proto3_optional :name, :string, 3373707
       proto3_optional :network, :string, 232872494
+      proto3_optional :network_attachment, :string, 224644052
       proto3_optional :network_i_p, :string, 207181961
       proto3_optional :nic_type, :string, 59810577
       proto3_optional :queue_count, :int32, 503708769
@@ -7753,6 +7762,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :kind, :string, 3292052
       proto3_optional :name, :string, 3373707
       map :resource_policies, :string, :string, 22220385
+      proto3_optional :resource_status, :message, 249429315, "google.cloud.compute.v1.AllocationResourceStatus"
       proto3_optional :satisfies_pzs, :bool, 480964267
       proto3_optional :self_link, :string, 456214797
       proto3_optional :share_settings, :message, 266668163, "google.cloud.compute.v1.ShareSettings"
@@ -10834,6 +10844,8 @@ module Google
         AggregatedListVpnGatewaysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListVpnGatewaysRequest").msgclass
         AggregatedListVpnTunnelsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListVpnTunnelsRequest").msgclass
         AliasIpRange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AliasIpRange").msgclass
+        AllocationResourceStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AllocationResourceStatus").msgclass
+        AllocationResourceStatusSpecificSKUAllocation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AllocationResourceStatusSpecificSKUAllocation").msgclass
         AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk").msgclass
         AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk::Interface = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk.Interface").enummodule
         AllocationSpecificSKUAllocationReservedInstanceProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AllocationSpecificSKUAllocationReservedInstanceProperties").msgclass
