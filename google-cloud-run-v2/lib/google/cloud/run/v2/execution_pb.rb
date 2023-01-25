@@ -56,6 +56,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :running_count, :int32, 19
       optional :succeeded_count, :int32, 20
       optional :failed_count, :int32, 21
+      optional :cancelled_count, :int32, 24
+      optional :retried_count, :int32, 25
+      optional :log_uri, :string, 26
       optional :etag, :string, 99
     end
   end
