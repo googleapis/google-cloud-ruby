@@ -69,7 +69,10 @@ module Google
           #
           #   aggregate_query_results = dataset.run_aggregation aggregate_query
           #   puts aggregate_query_results.get('count')
-          def get aggregate_alias
+          def get aggregate_alias = nil
+            return @aggregate_fields[aggregate_alias] unless aggregate_alias.nil?
+            raise ArgumentError unless @aggregate_fields.count == 1
+            aggregate_alias = @aggregate_fields.keys.first
             @aggregate_fields[aggregate_alias]
           end
 

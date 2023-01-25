@@ -48,6 +48,7 @@ describe "Aggregate Query", :mock_datastore do
               .add_count
     res = dataset.run_aggregation aq
 
+    _(res.get).must_equal 4
     _(res.get('count')).must_equal 4
   end
 
@@ -60,6 +61,7 @@ describe "Aggregate Query", :mock_datastore do
               .add_count(aggregate_alias: 'total')
     res = dataset.run_aggregation aq
 
+    _(res.get).must_equal 4
     _(res.get('total')).must_equal 4
   end
 
@@ -89,12 +91,12 @@ describe "Aggregate Query", :mock_datastore do
   end
 
   it "creates aggregate via gql query" do
-    expected_aggregation_query = gql_aggregation_query_factory "SELECT COUNT(*) AS total FROM User"
-    aggr_resp = gql_query_response_factory('total': 4)
+    expected_aggregation_query = gql_aggregation_query_factory "SELECT COUNT(*) FROM User"
+    aggr_resp = gql_query_response_factory('count': 4)
     dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, gql_query: expected_aggregation_query)
-    gql = dataset.gql "SELECT COUNT(*) AS total FROM User"
+    gql = dataset.gql "SELECT COUNT(*) FROM User"
     res = dataset.run_aggregation gql
-    _(res.get('total')).must_equal 4
+    _(res.get).must_equal 4
   end
 
   def aggregation_query_factory *aliases

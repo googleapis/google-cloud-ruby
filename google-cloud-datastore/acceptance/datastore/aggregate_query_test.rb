@@ -144,7 +144,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                             .add_count
       res = dataset.run_aggregation aggregate_query
-      _(res.get('count')).must_equal 0
+      _(res.get).must_equal 0
     end
 
     it "returns count for non-zero records" do
@@ -154,7 +154,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                             .add_count
       res = dataset.run_aggregation aggregate_query
-      _(res.get('count')).must_equal 8
+      _(res.get).must_equal 8
     end
 
     it "returns count on filter" do
@@ -165,7 +165,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                             .add_count
       res = dataset.run_aggregation aggregate_query
-      _(res.get('count')).must_equal 4
+      _(res.get).must_equal 4
     end
 
     it "returns count on limit" do
@@ -176,7 +176,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                             .add_count
       res = dataset.run_aggregation aggregate_query
-      _(res.get('count')).must_equal 5
+      _(res.get).must_equal 5
     end
 
     it "returns count with a custom alias" do
@@ -186,6 +186,7 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                             .add_count(aggregate_alias: "total")
       res = dataset.run_aggregation aggregate_query
+      _(res.get).must_equal 8
       _(res.get('total')).must_equal 8
     end
 
@@ -201,7 +202,7 @@ describe "Aggregate Queries", :datastore do
       _(res.get('total_2')).must_equal 8
     end
 
-    it "returns count with unspecified aliases" do
+    it "returns nil with unspecified aliases" do
       query = Google::Cloud::Datastore.new.
         query("Character").
         ancestor(book)
@@ -221,6 +222,17 @@ describe "Aggregate Queries", :datastore do
       expect { res = dataset.run_aggregation aggregate_query }.must_raise Google::Cloud::InvalidArgumentError
     end
 
+    it "throws error when custom alias isn't specified for multiple aliases" do
+      query = Google::Cloud::Datastore.new.
+        query("Character").
+        ancestor(book)
+      aggregate_query = query.aggregate_query
+                            .add_count(aggregate_alias: 'total_1')
+                            .add_count(aggregate_alias: 'total_2')
+      res = dataset.run_aggregation aggregate_query
+      expect { res.get }.must_raise ArgumentError
+    end
+
     it "returns different count when data changes" do
       query = Google::Cloud::Datastore.new.
         query("Character").
@@ -228,10 +240,10 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                             .add_count
       res = dataset.run_aggregation aggregate_query
-      _(res.get('count')).must_equal 8
+      _(res.get).must_equal 8
       dataset.delete jon.key
       res = dataset.run_aggregation aggregate_query
-      _(res.get('count')).must_equal 7
+      _(res.get).must_equal 7
     end
     
     it "throws error when no aggregate is added" do
@@ -250,32 +262,47 @@ describe "Aggregate Queries", :datastore do
         aggregate_query = query.aggregate_query
                                .add_count
         res = dataset.run_aggregation aggregate_query
-        _(res.get('count')).must_equal 8
+        _(res.get).must_equal 8
       end
     end
   end
 
   describe "via GQL" do
-    it "returns count for non-zero records" do
+    it "returns count without alias" do
+      gql = dataset.gql "SELECT COUNT(*) FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
+                        bookKey: book.key
+      res = dataset.run_aggregation gql
+      _(res.get).must_equal 8
+    end
+
+    it "returns count with single custom alias" do
       gql = dataset.gql "SELECT COUNT(*) AS total FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                         bookKey: book.key
       res = dataset.run_aggregation gql
+      _(res.get).must_equal 8
       _(res.get('total')).must_equal 8
     end
-  
+
     it "returns count with a filter" do
-      gql = dataset.gql "SELECT COUNT(*) AS total_alive FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND alive = @alive",
+      gql = dataset.gql "SELECT COUNT(*) FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND alive = @alive",
                         alive: true, bookKey: book.key
       res = dataset.run_aggregation gql
-      _(res.get('total_alive')).must_equal 4
+      _(res.get).must_equal 4
+    end
+
+    it "throws error when custom alias isn't specified for multiple aliases" do
+      gql = dataset.gql "SELECT COUNT(*) AS total_1, COUNT(*) as total_2 FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
+                        bookKey: book.key
+      res = dataset.run_aggregation gql
+      expect { res.get }.must_raise ArgumentError
     end
 
     it "returns count inside a transaction" do
       dataset.read_only_transaction do |tx|
-        gql = dataset.gql "SELECT COUNT(*) AS total FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
+        gql = dataset.gql "SELECT COUNT(*) FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                           bookKey: book.key
         res = dataset.run_aggregation gql
-        _(res.get('total')).must_equal 8
+        _(res.get).must_equal 8
       end
     end
   end
