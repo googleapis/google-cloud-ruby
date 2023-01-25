@@ -103,17 +103,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.networkconnectivity.v1.LinkedVpnTunnels" do
       repeated :uris, :string, 1
       optional :site_to_site_data_transfer, :bool, 2
-      optional :vpc_network, :string, 3
     end
     add_message "google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments" do
       repeated :uris, :string, 1
       optional :site_to_site_data_transfer, :bool, 2
-      optional :vpc_network, :string, 3
     end
     add_message "google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances" do
       repeated :instances, :message, 1, "google.cloud.networkconnectivity.v1.RouterApplianceInstance"
       optional :site_to_site_data_transfer, :bool, 2
-      optional :vpc_network, :string, 3
     end
     add_message "google.cloud.networkconnectivity.v1.RouterApplianceInstance" do
       optional :virtual_machine, :string, 1
@@ -122,17 +119,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.networkconnectivity.v1.LocationMetadata" do
       repeated :location_features, :enum, 1, "google.cloud.networkconnectivity.v1.LocationFeature"
     end
-    add_enum "google.cloud.networkconnectivity.v1.LocationFeature" do
-      value :LOCATION_FEATURE_UNSPECIFIED, 0
-      value :SITE_TO_CLOUD_SPOKES, 1
-      value :SITE_TO_SITE_SPOKES, 2
-    end
     add_enum "google.cloud.networkconnectivity.v1.State" do
       value :STATE_UNSPECIFIED, 0
       value :CREATING, 1
       value :ACTIVE, 2
       value :DELETING, 3
-      value :UPDATING, 6
+    end
+    add_enum "google.cloud.networkconnectivity.v1.LocationFeature" do
+      value :LOCATION_FEATURE_UNSPECIFIED, 0
+      value :SITE_TO_CLOUD_SPOKES, 1
+      value :SITE_TO_SITE_SPOKES, 2
     end
   end
 end
@@ -161,8 +157,8 @@ module Google
         LinkedRouterApplianceInstances = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances").msgclass
         RouterApplianceInstance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.RouterApplianceInstance").msgclass
         LocationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.LocationMetadata").msgclass
-        LocationFeature = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.LocationFeature").enummodule
         State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.State").enummodule
+        LocationFeature = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.LocationFeature").enummodule
       end
     end
   end
