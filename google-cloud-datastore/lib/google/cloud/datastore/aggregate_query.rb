@@ -29,8 +29,8 @@ module Google
       #   datastore = Google::Cloud::Datastore.new
       #
       #   query = Google::Cloud::Datastore::Query.new
-      #   query.kind("Task").
-      #     where("done", "=", false)
+      #   query.kind("Task")
+      #        .where("done", "=", false)
       #
       #   Create an aggregate query
       #   aggregate_query = query.aggregate_query
@@ -45,8 +45,8 @@ module Google
       #   datastore = Google::Cloud::Datastore.new
       #
       #   query = Google::Cloud::Datastore::Query.new
-      #   query.kind("Task").
-      #     where("done", "=", false)
+      #   query.kind("Task")
+      #        .where("done", "=", false)
       #
       #   Create an aggregate query
       #   aggregate_query = query.aggregate_query
@@ -84,8 +84,8 @@ module Google
         #   datastore = Google::Cloud::Datastore.new
         #
         #   query = Google::Cloud::Datastore::Query.new
-        #   query.kind("Task").
-        #     where("done", "=", false)
+        #   query.kind("Task")
+        #        .where("done", "=", false)
         #
         #   Create an aggregate query
         #   aggregate_query = query.aggregate_query
@@ -100,8 +100,8 @@ module Google
         #   datastore = Google::Cloud::Datastore.new
         #
         #   query = Google::Cloud::Datastore::Query.new
-        #   query.kind("Task").
-        #     where("done", "=", false)
+        #   query.kind("Task")
+        #        .where("done", "=", false)
         #
         #   Create an aggregate query
         #   aggregate_query = query.aggregate_query

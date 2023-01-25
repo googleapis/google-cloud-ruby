@@ -172,9 +172,10 @@ module Google
         #   datastore = Google::Cloud::Datastore.new
         #
         #   datastore.read_only_transaction do |tx|
-        #     query = tx.query("Task").
-        #       where("done", "=", false)
+        #     query = tx.query("Task")
+        #               .where("done", "=", false)
         #     aggregate_query = query.aggregate_query
+        #                            .add_count
         #     res = tx.run_aggregation aggregate_query
         #   end
         #

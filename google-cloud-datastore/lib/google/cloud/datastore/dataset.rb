@@ -475,8 +475,8 @@ module Google
         #
         #   datastore = Google::Cloud::Datastore.new
         #
-        #   query = datastore.query("Task").
-        #     where("done", "=", false)
+        #   query = datastore.query("Task")
+        #                    .where("done", "=", false)
         #
         #   aggregate_query = query.aggregate_query
         #
@@ -488,8 +488,8 @@ module Google
         #   datastore = Google::Cloud::Datastore.new
         #
         #   task_list_key = datastore.key "TaskList", "default"
-        #   query = datastore.query.kind("Task").
-        #     ancestor(task_list_key)
+        #   query = datastore.query.kind("Task")
+        #                    .ancestor(task_list_key)
         #
         #   aggregate_query = query.aggregate_query
         #
@@ -500,8 +500,8 @@ module Google
         #
         #   datastore = Google::Cloud::Datastore.new
         #
-        #   query = datastore.query("Task").
-        #     where("done", "=", false)
+        #   query = datastore.query("Task")
+        #                    .where("done", "=", false)
         #
         #   aggregate_query = query.aggregate_query
         #
