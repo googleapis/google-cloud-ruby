@@ -36,7 +36,7 @@ module Google
         #                          .add_count
         #
         #   aggregate_query_results = dataset.run_aggregation aggregate_query
-        #   puts aggregate_query_results.get('count')
+        #   puts aggregate_query_results.get
         #
         class AggregateQueryResults
           ##
@@ -48,9 +48,9 @@ module Google
           ##
           # Retrieves the aggregate data.
           #
-          # @param [String] aggregate_alias The alias used
-          #   to access the aggregate value. For count, the
-          #   default value is "count".
+          # @param aggregate_alias [String] The alias used to access
+          #   the aggregate value. For an AggregateQuery with a
+          #   single aggregate field, this parameter can be omitted.
           #
           # @return [Integer] The aggregate value.
           #
@@ -68,10 +68,26 @@ module Google
           #                          .add_count
           #
           #   aggregate_query_results = dataset.run_aggregation aggregate_query
-          #   puts aggregate_query_results.get('count')
+          #   puts aggregate_query_results.get
+          #
+          # @example Alias an aggregate query
+          #   require "google/cloud/datastore"
+          #
+          #   datastore = Google::Cloud::Datastore.new
+          #
+          #   query = Google::Cloud::Datastore::Query.new
+          #   query.kind("Task")
+          #        .where("done", "=", false)
+          #
+          #   Create an aggregate query
+          #   aggregate_query = query.aggregate_query
+          #                          .add_count aggregate_alias: 'total'
+          #
+          #   aggregate_query_results = dataset.run_aggregation aggregate_query
+          #   puts aggregate_query_results.get('total')
           def get aggregate_alias = nil
             if @aggregate_fields.count > 1 && aggregate_alias.nil?
-              raise ArgumentError, "Alias should be specified when multiple aggregates are present"
+              raise ArgumentError, "Required param aggregate_alias for AggregateQuery with multiple aggregate fields"
             end
             aggregate_alias = @aggregate_fields.keys.first if aggregate_alias.nil?
             @aggregate_fields[aggregate_alias]

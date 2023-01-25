@@ -37,7 +37,7 @@ module Google
       #                          .add_count
       #
       #   aggregate_query_results = dataset.run_aggregation aggregate_query
-      #   puts aggregate_query_results.get('count')
+      #   puts aggregate_query_results.get
       #
       # @example Alias an aggregate query
       #   require "google/cloud/datastore"
@@ -92,7 +92,7 @@ module Google
         #                          .add_count
         #
         #   aggregate_query_results = dataset.run_aggregation aggregate_query
-        #   puts aggregate_query_results.get('count')
+        #   puts aggregate_query_results.get
         #
         # @example Alias an aggregate query
         #   require "google/cloud/datastore"
