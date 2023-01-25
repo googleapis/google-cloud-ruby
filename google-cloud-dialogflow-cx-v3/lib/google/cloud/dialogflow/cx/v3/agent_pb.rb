@@ -66,6 +66,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.dialogflow.cx.v3.ExportAgentRequest.DataFormat" do
       value :DATA_FORMAT_UNSPECIFIED, 0
       value :BLOB, 1
+      value :JSON_PACKAGE, 4
     end
     add_message "google.cloud.dialogflow.cx.v3.ExportAgentResponse" do
       oneof :agent do
