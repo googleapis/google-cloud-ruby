@@ -26,18 +26,6 @@ describe "Aggregate Queries", :datastore do
     book
   end
 
-  let(:rickard) do
-    character = Google::Cloud::Datastore::Entity.new.tap do |e|
-      e["name"]        = "Rickard"
-      e["family"]      = "Stark"
-      e["appearances"] = 0
-      e["alive"]       = false
-    end
-    character.key = Google::Cloud::Datastore::Key.new "Character", "Rickard"
-    character.key.parent = book
-    character
-  end
-
   let(:eddard) do
     character = Google::Cloud::Datastore::Entity.new.tap do |e|
       e["name"]        = "Eddard"
@@ -46,18 +34,6 @@ describe "Aggregate Queries", :datastore do
       e["alive"]       = false
     end
     character.key = Google::Cloud::Datastore::Key.new "Character", "Eddard"
-    character.key.parent = rickard
-    character
-  end
-
-  let(:catelyn) do
-    character = Google::Cloud::Datastore::Entity.new.tap do |e|
-      e["name"]        = "Catelyn"
-      e["family"]      = "Stark"
-      e["appearances"] = 26
-      e["alive"]       = false
-    end
-    character.key = Google::Cloud::Datastore::Key.new "Character", "Catelyn"
     character.key.parent = book
     character
   end
@@ -74,30 +50,6 @@ describe "Aggregate Queries", :datastore do
     character
   end
 
-  let(:sansa) do
-    character = Google::Cloud::Datastore::Entity.new.tap do |e|
-      e["name"]        = "Sansa"
-      e["family"]      = "Stark"
-      e["appearances"] = 31
-      e["alive"]       = true
-    end
-    character.key = Google::Cloud::Datastore::Key.new "Character", "Sansa"
-    character.key.parent = eddard
-    character
-  end
-
-  let(:robb) do
-    character = Google::Cloud::Datastore::Entity.new.tap do |e|
-      e["name"]        = "Robb"
-      e["family"]      = "Stark"
-      e["appearances"] = 22
-      e["alive"]       = false
-    end
-    character.key = Google::Cloud::Datastore::Key.new "Character", "Robb"
-    character.key.parent = eddard
-    character
-  end
-
   let(:bran) do
     character = Google::Cloud::Datastore::Entity.new.tap do |e|
       e["name"]        = "Bran"
@@ -110,20 +62,8 @@ describe "Aggregate Queries", :datastore do
     character
   end
 
-  let(:jon) do
-    character = Google::Cloud::Datastore::Entity.new.tap do |e|
-      e["name"]        = "Jon"
-      e["family"]      = "Targaryen"
-      e["appearances"] = 32
-      e["alive"]       = true
-    end
-    character.key = Google::Cloud::Datastore::Key.new "Character", "Jon"
-    character.key.parent = eddard
-    character
-  end
-
   let(:characters) do
-    [rickard, eddard, catelyn, arya, sansa, robb, bran, jon]
+    [eddard, arya, bran]
   end
 
   before do
@@ -154,29 +94,29 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                             .add_count
       res = dataset.run_aggregation aggregate_query
-      _(res.get).must_equal 8
+      _(res.get).must_equal 3
     end
 
     it "returns count on filter" do
       query = Google::Cloud::Datastore.new.
         query("Character").
         ancestor(book).
-        where("alive", "=", true)
+        where("alive", "=", false)
       aggregate_query = query.aggregate_query
                             .add_count
       res = dataset.run_aggregation aggregate_query
-      _(res.get).must_equal 4
+      _(res.get).must_equal 1
     end
 
     it "returns count on limit" do
       query = Google::Cloud::Datastore.new.
         query("Character").
         ancestor(book).
-        limit(5)
+        limit(2)
       aggregate_query = query.aggregate_query
                             .add_count
       res = dataset.run_aggregation aggregate_query
-      _(res.get).must_equal 5
+      _(res.get).must_equal 2
     end
 
     it "returns count with a custom alias" do
@@ -186,8 +126,8 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                             .add_count(aggregate_alias: "total")
       res = dataset.run_aggregation aggregate_query
-      _(res.get).must_equal 8
-      _(res.get('total')).must_equal 8
+      _(res.get).must_equal 3
+      _(res.get('total')).must_equal 3
     end
 
     it "returns count with multiple custom aliases" do
@@ -198,8 +138,8 @@ describe "Aggregate Queries", :datastore do
                             .add_count(aggregate_alias: "total_1")
                             .add_count(aggregate_alias: "total_2")
       res = dataset.run_aggregation aggregate_query
-      _(res.get('total_1')).must_equal 8
-      _(res.get('total_2')).must_equal 8
+      _(res.get('total_1')).must_equal 3
+      _(res.get('total_2')).must_equal 3
     end
 
     it "returns nil with unspecified aliases" do
@@ -240,10 +180,10 @@ describe "Aggregate Queries", :datastore do
       aggregate_query = query.aggregate_query
                             .add_count
       res = dataset.run_aggregation aggregate_query
-      _(res.get).must_equal 8
-      dataset.delete jon.key
+      _(res.get).must_equal 3
+      dataset.delete bran.key
       res = dataset.run_aggregation aggregate_query
-      _(res.get).must_equal 7
+      _(res.get).must_equal 2
     end
     
     it "throws error when no aggregate is added" do
@@ -262,7 +202,7 @@ describe "Aggregate Queries", :datastore do
         aggregate_query = query.aggregate_query
                                .add_count
         res = dataset.run_aggregation aggregate_query
-        _(res.get).must_equal 8
+        _(res.get).must_equal 3
       end
     end
   end
@@ -272,22 +212,22 @@ describe "Aggregate Queries", :datastore do
       gql = dataset.gql "SELECT COUNT(*) FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                         bookKey: book.key
       res = dataset.run_aggregation gql
-      _(res.get).must_equal 8
+      _(res.get).must_equal 3
     end
 
     it "returns count with single custom alias" do
       gql = dataset.gql "SELECT COUNT(*) AS total FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                         bookKey: book.key
       res = dataset.run_aggregation gql
-      _(res.get).must_equal 8
-      _(res.get('total')).must_equal 8
+      _(res.get).must_equal 3
+      _(res.get('total')).must_equal 3
     end
 
     it "returns count with a filter" do
       gql = dataset.gql "SELECT COUNT(*) FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND alive = @alive",
-                        alive: true, bookKey: book.key
+                        alive: false, bookKey: book.key
       res = dataset.run_aggregation gql
-      _(res.get).must_equal 4
+      _(res.get).must_equal 1
     end
 
     it "throws error when custom alias isn't specified for multiple aliases" do
@@ -302,7 +242,7 @@ describe "Aggregate Queries", :datastore do
         gql = dataset.gql "SELECT COUNT(*) FROM Character WHERE __key__ HAS ANCESTOR @bookKey",
                           bookKey: book.key
         res = dataset.run_aggregation gql
-        _(res.get).must_equal 8
+        _(res.get).must_equal 3
       end
     end
   end
