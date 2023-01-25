@@ -78,30 +78,30 @@ describe "Aggregate Queries", :datastore do
     
     it "returns 0 for no records" do
       dataset.delete *characters
-      query = Google::Cloud::Datastore.new.
-        query("Character").
-        ancestor(book)
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
       aggregate_query = query.aggregate_query
-                            .add_count
+                             .add_count
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_equal 0
     end
 
     it "returns count for non-zero records" do
-      query = Google::Cloud::Datastore.new.
-        query("Character").
-        ancestor(book)
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
       aggregate_query = query.aggregate_query
-                            .add_count
+                             .add_count
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_equal 3
     end
 
     it "returns count on filter" do
-      query = Google::Cloud::Datastore.new.
-        query("Character").
-        ancestor(book).
-        where("alive", "=", false)
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
+                .where("alive", "=", false)
       aggregate_query = query.aggregate_query
                             .add_count
       res = dataset.run_aggregation aggregate_query
@@ -109,34 +109,34 @@ describe "Aggregate Queries", :datastore do
     end
 
     it "returns count on limit" do
-      query = Google::Cloud::Datastore.new.
-        query("Character").
-        ancestor(book).
-        limit(2)
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
+                .limit(2)
       aggregate_query = query.aggregate_query
-                            .add_count
+                             .add_count
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_equal 2
     end
 
     it "returns count with a custom alias" do
-      query = Google::Cloud::Datastore.new.
-        query("Character").
-        ancestor(book)
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
       aggregate_query = query.aggregate_query
-                            .add_count(aggregate_alias: "total")
+                             .add_count(aggregate_alias: "total")
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_equal 3
       _(res.get('total')).must_equal 3
     end
 
     it "returns count with multiple custom aliases" do
-      query = Google::Cloud::Datastore.new.
-        query("Character").
-        ancestor(book)
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
       aggregate_query = query.aggregate_query
-                            .add_count(aggregate_alias: "total_1")
-                            .add_count(aggregate_alias: "total_2")
+                             .add_count(aggregate_alias: "total_1")
+                             .add_count(aggregate_alias: "total_2")
       res = dataset.run_aggregation aggregate_query
       _(res.get('total_1')).must_equal 3
       _(res.get('total_2')).must_equal 3
@@ -147,38 +147,38 @@ describe "Aggregate Queries", :datastore do
         query("Character").
         ancestor(book)
       aggregate_query = query.aggregate_query
-                            .add_count
+                             .add_count
       res = dataset.run_aggregation aggregate_query
       _(res.get('unspecified_alias')).must_be :nil?
     end
 
     it "throws error when duplicating aliases" do
-      query = Google::Cloud::Datastore.new.
-        query("Character").
-        ancestor(book)
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
       aggregate_query = query.aggregate_query
-                            .add_count(aggregate_alias: 'total')
-                            .add_count(aggregate_alias: 'total')
+                             .add_count(aggregate_alias: 'total')
+                             .add_count(aggregate_alias: 'total')
       expect { res = dataset.run_aggregation aggregate_query }.must_raise Google::Cloud::InvalidArgumentError
     end
 
     it "throws error when custom alias isn't specified for multiple aliases" do
-      query = Google::Cloud::Datastore.new.
-        query("Character").
-        ancestor(book)
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
       aggregate_query = query.aggregate_query
-                            .add_count(aggregate_alias: 'total_1')
-                            .add_count(aggregate_alias: 'total_2')
+                             .add_count(aggregate_alias: 'total_1')
+                             .add_count(aggregate_alias: 'total_2')
       res = dataset.run_aggregation aggregate_query
       expect { res.get }.must_raise ArgumentError
     end
 
     it "returns different count when data changes" do
-      query = Google::Cloud::Datastore.new.
-        query("Character").
-        ancestor(book)
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
       aggregate_query = query.aggregate_query
-                            .add_count
+                             .add_count
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_equal 3
       dataset.delete bran.key
@@ -187,17 +187,17 @@ describe "Aggregate Queries", :datastore do
     end
     
     it "throws error when no aggregate is added" do
-      query = Google::Cloud::Datastore.new.
-        query("Character").
-        ancestor(book)
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
       aggregate_query = query.aggregate_query
       expect { res = dataset.run_aggregation aggregate_query }.must_raise Google::Cloud::InvalidArgumentError
     end
 
     it "returns count inside a transaction" do
-      query = Google::Cloud::Datastore.new.
-        query("Character").
-        ancestor(book)
+      query = Google::Cloud::Datastore.new
+                .query("Character")
+                .ancestor(book)
       dataset.read_only_transaction do |tx|
         aggregate_query = query.aggregate_query
                                .add_count
