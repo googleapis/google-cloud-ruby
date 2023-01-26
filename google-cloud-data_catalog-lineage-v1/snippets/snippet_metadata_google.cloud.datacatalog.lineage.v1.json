@@ -1,0 +1,655 @@
+{
+  "client_library": {
+    "name": "google-cloud-data_catalog-lineage-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.datacatalog.lineage.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_CreateProcess_sync",
+      "title": "Snippet for create_process in Lineage",
+      "description": "Basic snippet for create_process in Lineage",
+      "file": "lineage/create_process.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_process",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#create_process",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::CreateProcessRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::Process",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "CreateProcess",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.CreateProcess",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_UpdateProcess_sync",
+      "title": "Snippet for update_process in Lineage",
+      "description": "Basic snippet for update_process in Lineage",
+      "file": "lineage/update_process.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_process",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#update_process",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::Process",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "UpdateProcess",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.UpdateProcess",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_GetProcess_sync",
+      "title": "Snippet for get_process in Lineage",
+      "description": "Basic snippet for get_process in Lineage",
+      "file": "lineage/get_process.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_process",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#get_process",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::GetProcessRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::Process",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "GetProcess",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.GetProcess",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_ListProcesses_sync",
+      "title": "Snippet for list_processes in Lineage",
+      "description": "Basic snippet for list_processes in Lineage",
+      "file": "lineage/list_processes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_processes",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_processes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::ListProcessesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::ListProcessesResponse",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "ListProcesses",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.ListProcesses",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_DeleteProcess_sync",
+      "title": "Snippet for delete_process in Lineage",
+      "description": "Basic snippet for delete_process in Lineage",
+      "file": "lineage/delete_process.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_process",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#delete_process",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::DeleteProcessRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "DeleteProcess",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.DeleteProcess",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_CreateRun_sync",
+      "title": "Snippet for create_run in Lineage",
+      "description": "Basic snippet for create_run in Lineage",
+      "file": "lineage/create_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_run",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#create_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::CreateRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::Run",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "CreateRun",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.CreateRun",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_UpdateRun_sync",
+      "title": "Snippet for update_run in Lineage",
+      "description": "Basic snippet for update_run in Lineage",
+      "file": "lineage/update_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_run",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#update_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::Run",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "UpdateRun",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.UpdateRun",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_GetRun_sync",
+      "title": "Snippet for get_run in Lineage",
+      "description": "Basic snippet for get_run in Lineage",
+      "file": "lineage/get_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_run",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#get_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::GetRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::Run",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "GetRun",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.GetRun",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_ListRuns_sync",
+      "title": "Snippet for list_runs in Lineage",
+      "description": "Basic snippet for list_runs in Lineage",
+      "file": "lineage/list_runs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_runs",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_runs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::ListRunsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::ListRunsResponse",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "ListRuns",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.ListRuns",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_DeleteRun_sync",
+      "title": "Snippet for delete_run in Lineage",
+      "description": "Basic snippet for delete_run in Lineage",
+      "file": "lineage/delete_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_run",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#delete_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::DeleteRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "DeleteRun",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.DeleteRun",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_CreateLineageEvent_sync",
+      "title": "Snippet for create_lineage_event in Lineage",
+      "description": "Basic snippet for create_lineage_event in Lineage",
+      "file": "lineage/create_lineage_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_lineage_event",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#create_lineage_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::CreateLineageEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::LineageEvent",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "CreateLineageEvent",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.CreateLineageEvent",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_GetLineageEvent_sync",
+      "title": "Snippet for get_lineage_event in Lineage",
+      "description": "Basic snippet for get_lineage_event in Lineage",
+      "file": "lineage/get_lineage_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_lineage_event",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#get_lineage_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::GetLineageEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::LineageEvent",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "GetLineageEvent",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.GetLineageEvent",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_ListLineageEvents_sync",
+      "title": "Snippet for list_lineage_events in Lineage",
+      "description": "Basic snippet for list_lineage_events in Lineage",
+      "file": "lineage/list_lineage_events.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_lineage_events",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_lineage_events",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::ListLineageEventsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::ListLineageEventsResponse",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "ListLineageEvents",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.ListLineageEvents",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_DeleteLineageEvent_sync",
+      "title": "Snippet for delete_lineage_event in Lineage",
+      "description": "Basic snippet for delete_lineage_event in Lineage",
+      "file": "lineage/delete_lineage_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_lineage_event",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#delete_lineage_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::DeleteLineageEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "DeleteLineageEvent",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.DeleteLineageEvent",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_SearchLinks_sync",
+      "title": "Snippet for search_links in Lineage",
+      "description": "Basic snippet for search_links in Lineage",
+      "file": "lineage/search_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_links",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#search_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::SearchLinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::SearchLinksResponse",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "SearchLinks",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.SearchLinks",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_BatchSearchLinkProcesses_sync",
+      "title": "Snippet for batch_search_link_processes in Lineage",
+      "description": "Basic snippet for batch_search_link_processes in Lineage",
+      "file": "lineage/batch_search_link_processes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_search_link_processes",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#batch_search_link_processes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::BatchSearchLinkProcessesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::BatchSearchLinkProcessesResponse",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "BatchSearchLinkProcesses",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.BatchSearchLinkProcesses",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
