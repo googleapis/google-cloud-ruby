@@ -31,4 +31,14 @@ class Google::Cloud::NetworkConnectivity::ClientConstructionMinitest < Minitest:
       assert_kind_of Google::Cloud::NetworkConnectivity::V1::HubService::Client, client
     end
   end
+
+  def test_policy_based_routing_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::NetworkConnectivity.policy_based_routing_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client, client
+    end
+  end
 end
