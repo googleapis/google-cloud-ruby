@@ -21,11 +21,11 @@ module Google
   module Cloud
     module NetworkConnectivity
       module V1
-        # A hub is a collection of spokes. A single hub can contain spokes from
-        # multiple regions. However, if any of a hub's spokes use the data transfer
-        # feature, the resources associated with those spokes must all reside in the
-        # same VPC network. Spokes that do not use data transfer can be associated
-        # with any VPC network in your project.
+        # A Network Connectivity Center hub is a collection of spokes. A single hub
+        # can contain spokes from multiple regions. However, if any of a hub's spokes
+        # use the data transfer feature, the resources associated with those spokes
+        # must all reside in the same VPC network. Spokes that do not use data
+        # transfer can be associated with any VPC network in your project.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The name of the hub. Hub names must be unique. They use the
@@ -47,9 +47,9 @@ module Google
         #     An optional description of the hub.
         # @!attribute [r] unique_id
         #   @return [::String]
-        #     Output only. The Google-generated UUID for the hub. This value is unique across all hub
-        #     resources. If a hub is deleted and another with the same name is created,
-        #     the new hub is assigned a different unique_id.
+        #     Output only. The Google-generated UUID for the hub. This value is unique
+        #     across all hub resources. If a hub is deleted and another with the same
+        #     name is created, the new hub is assigned a different unique_id.
         # @!attribute [r] state
         #   @return [::Google::Cloud::NetworkConnectivity::V1::State]
         #     Output only. The current lifecycle state of this hub.
@@ -73,15 +73,15 @@ module Google
           end
         end
 
-        # RoutingVPC contains information about the VPC networks that are associated
-        # with a hub's spokes.
+        # RoutingVPC contains information about the VPC networks associated
+        # with the spokes of a Network Connectivity Center hub.
         # @!attribute [rw] uri
         #   @return [::String]
         #     The URI of the VPC network.
         # @!attribute [r] required_for_new_site_to_site_data_transfer_spokes
         #   @return [::Boolean]
-        #     Output only. If true, indicates that this VPC network is currently associated with
-        #     spokes that use the data transfer feature (spokes where the
+        #     Output only. If true, indicates that this VPC network is currently
+        #     associated with spokes that use the data transfer feature (spokes where the
         #     site_to_site_data_transfer field is set to true). If you create new spokes
         #     that use data transfer, they must be associated with this VPC network. At
         #     most, one VPC network will have this field set to true.
@@ -90,8 +90,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A spoke represents a connection between your Google Cloud network resources
-        # and a non-Google-Cloud network.
+        # A Network Connectivity Center spoke represents a connection between your
+        # Google Cloud network resources and a non-Google-Cloud network.
         #
         # When you create a spoke, you associate it with a hub. You must also identify
         # a value for exactly one of the following fields:
@@ -132,9 +132,9 @@ module Google
         #     Router appliance instances that are associated with the spoke.
         # @!attribute [r] unique_id
         #   @return [::String]
-        #     Output only. The Google-generated UUID for the spoke. This value is unique across all
-        #     spoke resources. If a spoke is deleted and another with the same name is
-        #     created, the new spoke is assigned a different unique_id.
+        #     Output only. The Google-generated UUID for the spoke. This value is unique
+        #     across all spoke resources. If a spoke is deleted and another with the same
+        #     name is created, the new spoke is assigned a different unique_id.
         # @!attribute [r] state
         #   @return [::Google::Cloud::NetworkConnectivity::V1::State]
         #     Output only. The current lifecycle state of this spoke.
@@ -152,7 +152,9 @@ module Google
           end
         end
 
-        # Request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hubs HubService.ListHubs} method.
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hubs HubService.ListHubs}
+        # method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource's name.
@@ -173,7 +175,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hubs HubService.ListHubs} method.
+        # Response for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hubs HubService.ListHubs}
+        # method.
         # @!attribute [rw] hubs
         #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::Hub>]
         #     The requested hubs.
@@ -189,7 +193,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_hub HubService.GetHub} method.
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_hub HubService.GetHub}
+        # method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the hub resource to get.
@@ -198,7 +204,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#create_hub HubService.CreateHub} method.
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#create_hub HubService.CreateHub}
+        # method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource.
@@ -210,11 +218,11 @@ module Google
         #     Required. The initial values for a new hub.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can use it
-        #     in cases when you need to retry your request. When you need to retry, this
-        #     ID lets the server know that it can ignore the request if it has already
-        #     been completed. The server guarantees that for at least 60 minutes after
-        #     the first request.
+        #     Optional. A unique request ID (optional). If you specify this ID, you can
+        #     use it in cases when you need to retry your request. When you need to
+        #     retry, this ID lets the server know that it can ignore the request if it
+        #     has already been completed. The server guarantees that for at least 60
+        #     minutes after the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -229,24 +237,26 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#update_hub HubService.UpdateHub} method.
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#update_hub HubService.UpdateHub}
+        # method.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. In the case of an update to an existing hub, field mask is used to specify
-        #     the fields to be overwritten. The fields specified in the update_mask are
-        #     relative to the resource, not the full request. A field is overwritten if
-        #     it is in the mask. If the user does not provide a mask, then all fields are
-        #     overwritten.
+        #     Optional. In the case of an update to an existing hub, field mask is used
+        #     to specify the fields to be overwritten. The fields specified in the
+        #     update_mask are relative to the resource, not the full request. A field is
+        #     overwritten if it is in the mask. If the user does not provide a mask, then
+        #     all fields are overwritten.
         # @!attribute [rw] hub
         #   @return [::Google::Cloud::NetworkConnectivity::V1::Hub]
         #     Required. The state that the hub should be in after the update.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can use it
-        #     in cases when you need to retry your request. When you need to retry, this
-        #     ID lets the server know that it can ignore the request if it has already
-        #     been completed. The server guarantees that for at least 60 minutes after
-        #     the first request.
+        #     Optional. A unique request ID (optional). If you specify this ID, you can
+        #     use it in cases when you need to retry your request. When you need to
+        #     retry, this ID lets the server know that it can ignore the request if it
+        #     has already been completed. The server guarantees that for at least 60
+        #     minutes after the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -261,17 +271,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#delete_hub HubService.DeleteHub}.
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#delete_hub HubService.DeleteHub}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the hub to delete.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can use it
-        #     in cases when you need to retry your request. When you need to retry, this
-        #     ID lets the server know that it can ignore the request if it has already
-        #     been completed. The server guarantees that for at least 60 minutes after
-        #     the first request.
+        #     Optional. A unique request ID (optional). If you specify this ID, you can
+        #     use it in cases when you need to retry your request. When you need to
+        #     retry, this ID lets the server know that it can ignore the request if it
+        #     has already been completed. The server guarantees that for at least 60
+        #     minutes after the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -286,7 +297,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_spokes HubService.ListSpokes}.
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_spokes HubService.ListSpokes}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource.
@@ -307,7 +319,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_spokes HubService.ListSpokes}.
+        # The response for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_spokes HubService.ListSpokes}.
         # @!attribute [rw] spokes
         #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::Spoke>]
         #     The requested spokes.
@@ -323,7 +336,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_spoke HubService.GetSpoke}.
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_spoke HubService.GetSpoke}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the spoke resource.
@@ -332,7 +346,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#create_spoke HubService.CreateSpoke}.
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#create_spoke HubService.CreateSpoke}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource.
@@ -344,11 +359,11 @@ module Google
         #     Required. The initial values for a new spoke.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can use it
-        #     in cases when you need to retry your request. When you need to retry, this
-        #     ID lets the server know that it can ignore the request if it has already
-        #     been completed. The server guarantees that for at least 60 minutes after
-        #     the first request.
+        #     Optional. A unique request ID (optional). If you specify this ID, you can
+        #     use it in cases when you need to retry your request. When you need to
+        #     retry, this ID lets the server know that it can ignore the request if it
+        #     has already been completed. The server guarantees that for at least 60
+        #     minutes after the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -363,11 +378,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#update_spoke HubService.UpdateSpoke} method.
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#update_spoke HubService.UpdateSpoke}
+        # method.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. In the case of an update to an existing spoke, field mask is used to
-        #     specify the fields to be overwritten. The fields specified in the
+        #     Optional. In the case of an update to an existing spoke, field mask is used
+        #     to specify the fields to be overwritten. The fields specified in the
         #     update_mask are relative to the resource, not the full request. A field is
         #     overwritten if it is in the mask. If the user does not provide a mask, then
         #     all fields are overwritten.
@@ -376,11 +393,11 @@ module Google
         #     Required. The state that the spoke should be in after the update.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can use it
-        #     in cases when you need to retry your request. When you need to retry, this
-        #     ID lets the server know that it can ignore the request if it has already
-        #     been completed. The server guarantees that for at least 60 minutes after
-        #     the first request.
+        #     Optional. A unique request ID (optional). If you specify this ID, you can
+        #     use it in cases when you need to retry your request. When you need to
+        #     retry, this ID lets the server know that it can ignore the request if it
+        #     has already been completed. The server guarantees that for at least 60
+        #     minutes after the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -395,17 +412,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#delete_spoke HubService.DeleteSpoke}.
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#delete_spoke HubService.DeleteSpoke}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the spoke to delete.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can use it
-        #     in cases when you need to retry your request. When you need to retry, this
-        #     ID lets the server know that it can ignore the request if it has already
-        #     been completed. The server guarantees that for at least 60 minutes after
-        #     the first request.
+        #     Optional. A unique request ID (optional). If you specify this ID, you can
+        #     use it in cases when you need to retry your request. When you need to
+        #     retry, this ID lets the server know that it can ignore the request if it
+        #     has already been completed. The server guarantees that for at least 60
+        #     minutes after the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -432,6 +450,9 @@ module Google
         #     A value that controls whether site-to-site data transfer is enabled for
         #     these resources. Data transfer is available only in [supported
         #     locations](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/locations).
+        # @!attribute [r] vpc_network
+        #   @return [::String]
+        #     Output only. The VPC network where these VPN tunnels are located.
         class LinkedVpnTunnels
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -449,6 +470,9 @@ module Google
         #     A value that controls whether site-to-site data transfer is enabled for
         #     these resources. Data transfer is available only in [supported
         #     locations](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/locations).
+        # @!attribute [r] vpc_network
+        #   @return [::String]
+        #     Output only. The VPC network where these VLAN attachments are located.
         class LinkedInterconnectAttachments
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -466,6 +490,10 @@ module Google
         #     A value that controls whether site-to-site data transfer is enabled for
         #     these resources. Data transfer is available only in [supported
         #     locations](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/locations).
+        # @!attribute [r] vpc_network
+        #   @return [::String]
+        #     Output only. The VPC network where these router appliance instances are
+        #     located.
         class LinkedRouterApplianceInstances
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -495,6 +523,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Supported features for a location
+        module LocationFeature
+          # No publicly supported feature in this location
+          LOCATION_FEATURE_UNSPECIFIED = 0
+
+          # Site-to-cloud spokes are supported in this location
+          SITE_TO_CLOUD_SPOKES = 1
+
+          # Site-to-site spokes are supported in this location
+          SITE_TO_SITE_SPOKES = 2
+        end
+
         # The State enum represents the lifecycle stage of a Network Connectivity
         # Center resource.
         module State
@@ -509,18 +549,9 @@ module Google
 
           # The resource's Delete operation is in progress
           DELETING = 3
-        end
 
-        # Supported features for a location
-        module LocationFeature
-          # No publicly supported feature in this location
-          LOCATION_FEATURE_UNSPECIFIED = 0
-
-          # Site-to-cloud spokes are supported in this location
-          SITE_TO_CLOUD_SPOKES = 1
-
-          # Site-to-site spokes are supported in this location
-          SITE_TO_SITE_SPOKES = 2
+          # The resource's Update operation is in progress
+          UPDATING = 6
         end
       end
     end
