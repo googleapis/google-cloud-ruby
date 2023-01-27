@@ -683,7 +683,9 @@ module Google
             #     - "1.X.Y-gke.N": picks an explicit Kubernetes version
             #     - "-": picks the Kubernetes master version
             #   @param image_type [::String]
-            #     Required. The desired image type for the node pool.
+            #     Required. The desired image type for the node pool. Please see
+            #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+            #     available image types.
             #   @param name [::String]
             #     The name (project, location, cluster, node pool) of the node pool to
             #     update. Specified in the format
