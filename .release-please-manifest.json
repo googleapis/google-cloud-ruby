@@ -179,6 +179,8 @@
   "google-cloud-core+FILLER": "0.0.0",
   "google-cloud-data_catalog": "1.3.0",
   "google-cloud-data_catalog+FILLER": "0.0.0",
+  "google-cloud-data_catalog-lineage": "0.0.1",
+  "google-cloud-data_catalog-lineage+FILLER": "0.0.0",
   "google-cloud-data_catalog-lineage-v1": "0.1.0",
   "google-cloud-data_catalog-lineage-v1+FILLER": "0.0.0",
   "google-cloud-data_catalog-v1": "0.12.1",
