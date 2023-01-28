@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.0 (2023-01-28)
+
+#### Features
+
+* Add field advanced_ocr_options in OcrConfig ([#20083](https://github.com/googleapis/google-cloud-ruby/issues/20083)) 
+
 ### 0.17.0 (2023-01-19)
 
 #### Features
