@@ -218,7 +218,9 @@ module Google
         # @!attribute [rw] image_type
         #   @return [::String]
         #     The image type to use for this node. Note that for a given image type,
-        #     the latest version of it will be used.
+        #     the latest version of it will be used. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The map of Kubernetes labels (key/value pairs) to be applied to each node.
@@ -2304,7 +2306,9 @@ module Google
         #     - "-": picks the Kubernetes master version
         # @!attribute [rw] image_type
         #   @return [::String]
-        #     Required. The desired image type for the node pool.
+        #     Required. The desired image type for the node pool. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         # @!attribute [rw] locations
         #   @return [::Array<::String>]
         #     The desired list of Google Compute Engine
@@ -3720,7 +3724,9 @@ module Google
         #     https://cloud.google.com/compute/docs/disks/customer-managed-encryption
         # @!attribute [rw] image_type
         #   @return [::String]
-        #     The image type to use for NAP created node.
+        #     The image type to use for NAP created node. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         class AutoprovisioningNodePoolDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5113,7 +5119,8 @@ module Google
 
         # Strategy used for node pool update.
         module NodePoolUpdateStrategy
-          # Default value.
+          # Default value if unset. GKE internally defaults the update strategy to
+          # SURGE for unspecified strategies.
           NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED = 0
 
           # blue-green upgrade.
