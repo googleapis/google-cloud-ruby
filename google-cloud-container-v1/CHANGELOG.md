@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.1 (2023-01-31)
+
+#### Documentation
+
+* clarify wording around the NodePoolUpdateStrategy default behavior ([#20099](https://github.com/googleapis/google-cloud-ruby/issues/20099)) 
+
 ### 0.16.0 (2023-01-19)
 
 #### Features
