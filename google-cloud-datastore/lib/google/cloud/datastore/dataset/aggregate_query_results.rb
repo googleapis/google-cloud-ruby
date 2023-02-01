@@ -89,7 +89,7 @@ module Google
             if @aggregate_fields.count > 1 && aggregate_alias.nil?
               raise ArgumentError, "Required param aggregate_alias for AggregateQuery with multiple aggregate fields"
             end
-            aggregate_alias = @aggregate_fields.keys.first if aggregate_alias.nil?
+            aggregate_alias ||= @aggregate_fields.keys.first
             @aggregate_fields[aggregate_alias]
           end
 
