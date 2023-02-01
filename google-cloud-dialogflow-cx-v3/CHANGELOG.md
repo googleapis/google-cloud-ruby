@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.12.0 (2023-01-26)
+
+#### Features
+
+* Added JSON_PACKAGE data format for ExportAgentRequest ([#20065](https://github.com/googleapis/google-cloud-ruby/issues/20065)) 
+
 ### 0.11.0 (2023-01-15)
 
 #### Features

@@ -371,6 +371,14 @@
       "component": "google-cloud-data_catalog",
       "version_file": "lib/google/cloud/data_catalog/version.rb"
     },
+    "google-cloud-data_catalog-lineage": {
+      "component": "google-cloud-data_catalog-lineage",
+      "version_file": "lib/google/cloud/data_catalog/lineage/version.rb"
+    },
+    "google-cloud-data_catalog-lineage-v1": {
+      "component": "google-cloud-data_catalog-lineage-v1",
+      "version_file": "lib/google/cloud/data_catalog/lineage/v1/version.rb"
+    },
     "google-cloud-data_catalog-v1": {
       "component": "google-cloud-data_catalog-v1",
       "version_file": "lib/google/cloud/data_catalog/v1/version.rb"

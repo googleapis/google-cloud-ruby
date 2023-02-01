@@ -54,7 +54,8 @@ module Google
         #     The street address of the company's main headquarters, which may be
         #     different from the job location. The service attempts
         #     to geolocate the provided address, and populates a more specific
-        #     location wherever possible in {::Google::Cloud::Talent::V4beta1::Company::DerivedInfo#headquarters_location DerivedInfo.headquarters_location}.
+        #     location wherever possible in
+        #     {::Google::Cloud::Talent::V4beta1::Company::DerivedInfo#headquarters_location DerivedInfo.headquarters_location}.
         # @!attribute [rw] hiring_agency
         #   @return [::Boolean]
         #     Set to true if it is the hiring agency that post jobs for other
@@ -84,10 +85,13 @@ module Google
         # @!attribute [rw] keyword_searchable_job_custom_attributes
         #   @return [::Array<::String>]
         #     This field is deprecated. Please set the searchability of the custom
-        #     attribute in the {::Google::Cloud::Talent::V4beta1::Job#custom_attributes Job.custom_attributes} going forward.
+        #     attribute in the
+        #     {::Google::Cloud::Talent::V4beta1::Job#custom_attributes Job.custom_attributes}
+        #     going forward.
         #
-        #     A list of keys of filterable {::Google::Cloud::Talent::V4beta1::Job#custom_attributes Job.custom_attributes}, whose
-        #     corresponding `string_values` are used in keyword searches. Jobs with
+        #     A list of keys of filterable
+        #     {::Google::Cloud::Talent::V4beta1::Job#custom_attributes Job.custom_attributes},
+        #     whose corresponding `string_values` are used in keyword searches. Jobs with
         #     `string_values` under these specified field keys are returned if any
         #     of the values match the search keyword. Custom field values with
         #     parenthesis, brackets and special symbols are not searchable as-is,
@@ -108,7 +112,8 @@ module Google
           # @!attribute [rw] headquarters_location
           #   @return [::Google::Cloud::Talent::V4beta1::Location]
           #     A structured headquarters location of the company, resolved from
-          #     {::Google::Cloud::Talent::V4beta1::Company#headquarters_address Company.headquarters_address} if provided.
+          #     {::Google::Cloud::Talent::V4beta1::Company#headquarters_address Company.headquarters_address}
+          #     if provided.
           class DerivedInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

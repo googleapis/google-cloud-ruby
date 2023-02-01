@@ -43,6 +43,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.documentai.v1beta3.OcrConfig" do
       optional :enable_native_pdf_parsing, :bool, 3
+      repeated :advanced_ocr_options, :string, 5
     end
   end
 end

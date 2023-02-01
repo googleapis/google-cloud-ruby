@@ -20,6 +20,8 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
     Google::Cloud::Firestore::CollectionGroup.from_collection_id documents_path, collection_id, firestore
   end
   let(:expected_query) { collection_group_query }
+  let(:read_time) { Time.now }
+
 
   it "raises if partition_count is < 1" do
     expect do
@@ -62,6 +64,57 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
     firestore_mock.expect :partition_query, list_res, partition_query_args(expected_query)
 
     partitions = collection_group.partitions 3
+
+    firestore_mock.verify
+
+    _(partitions).must_be_kind_of Array
+    _(partitions.count).must_equal 3
+
+    _(partitions[0]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
+    _(partitions[0].start_at).must_be :nil?
+    _(partitions[0].end_before).must_be_kind_of Array
+    _(partitions[0].end_before.count).must_equal 1 # The array should have an element for each field in Order By.
+    _(partitions[0].end_before[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(partitions[0].end_before[0].path).must_equal document_path("alice")
+
+    _(partitions[1]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
+    _(partitions[1].start_at).must_be_kind_of Array
+    _(partitions[1].start_at.count).must_equal 1 # The array should have an element for each field in Order By.
+    _(partitions[1].start_at[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(partitions[1].start_at[0].path).must_equal document_path("alice")
+    _(partitions[1].end_before).must_be_kind_of Array
+    _(partitions[1].end_before.count).must_equal 1 # The array should have an element for each field in Order By.
+    _(partitions[1].end_before[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(partitions[1].end_before[0].path).must_equal document_path("alice-")
+
+    _(partitions[2]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
+    _(partitions[2].start_at).must_be_kind_of Array
+    _(partitions[2].start_at.count).must_equal 1 # The array should have an element for each field in Order By.
+    _(partitions[2].start_at[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(partitions[2].start_at[0].path).must_equal document_path("alice-")
+    _(partitions[2].end_before).must_be :nil?
+
+    query_1 = partitions[0].to_query
+    _(query_1).must_be_kind_of Google::Cloud::Firestore::Query
+    _(query_1.query).must_equal collection_group_query(end_before: ["alice"])
+
+    query_2 = partitions[1].to_query
+    _(query_2).must_be_kind_of Google::Cloud::Firestore::Query
+    _(query_2.query).must_equal collection_group_query(start_at: ["alice"], end_before: ["alice-"])
+
+    query_3 = partitions[2].to_query
+    _(query_3).must_be_kind_of Google::Cloud::Firestore::Query
+    _(query_3.query).must_equal collection_group_query(start_at: ["alice-"])
+  end
+
+  it "sorts and lists partitions with read time" do
+    # Results should be sorted so that "alice" comes before "alice-"
+    # Use an ID ending in "-" to ensure correct sorting, since full path strings are sorted dash before slash
+    # See Google::Cloud::Firestore::ResourcePath
+    list_res = paged_enum_struct partition_query_resp(doc_ids: ["alice-", "alice"])
+    firestore_mock.expect :partition_query, list_res, partition_query_args(expected_query, read_time: firestore.service.read_time_to_timestamp(read_time))
+
+    partitions = collection_group.partitions 3, read_time: read_time
 
     firestore_mock.verify
 

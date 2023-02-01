@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.1 (2023-01-26)
+
+#### Documentation
+
+* Clarify boost usage in Phrase and PhraseSet ([#20066](https://github.com/googleapis/google-cloud-ruby/issues/20066)) 
+
 ### 0.15.0 (2023-01-05)
 
 #### Features

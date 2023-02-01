@@ -54,7 +54,7 @@ module Google
             end
         end
 
-        def get_documents document_paths, mask: nil, transaction: nil
+        def get_documents document_paths, mask: nil, transaction: nil, read_time: nil
           batch_get_req = {
             database:  database_path,
             documents: document_paths,
@@ -65,7 +65,9 @@ module Google
           elsif transaction
             batch_get_req[:new_transaction] = transaction
           end
-
+          if read_time
+            batch_get_req[:read_time] = read_time_to_timestamp(read_time)
+          end
           firestore.batch_get_documents batch_get_req, call_options(parent: database_path)
         end
 
@@ -76,23 +78,25 @@ module Google
         # the showMissing flag to true to support full document traversal. If
         # there are too many documents, recommendation will be not to call this
         # method.
-        def list_documents parent, collection_id, token: nil, max: nil
+        def list_documents parent, collection_id, token: nil, max: nil, read_time: nil
           mask = { field_paths: [] }
-          paged_enum = firestore.list_documents parent:        parent,
+          paged_enum = firestore.list_documents parent: parent,
                                                 collection_id: collection_id,
-                                                page_size:     max,
-                                                page_token:    token,
-                                                mask:          mask,
-                                                show_missing:  true
+                                                page_size: max,
+                                                page_token: token,
+                                                mask: mask,
+                                                show_missing: true,
+                                                read_time: read_time_to_timestamp(read_time)
           paged_enum.response
         end
 
-        def list_collections parent, token: nil, max: nil
+        def list_collections parent, token: nil, max: nil, read_time: nil
           firestore.list_collection_ids(
             {
-              parent:     parent,
-              page_size:  max,
-              page_token: token
+              parent: parent,
+              page_size: max,
+              page_token: token,
+              read_time: read_time_to_timestamp(read_time)
             },
             call_options(parent: database_path)
           )
@@ -100,19 +104,20 @@ module Google
 
         ##
         # Returns Google::Cloud::Firestore::V1::PartitionQueryResponse
-        def partition_query parent, query_grpc, partition_count, token: nil, max: nil
+        def partition_query parent, query_grpc, partition_count, token: nil, max: nil, read_time: nil
           request = Google::Cloud::Firestore::V1::PartitionQueryRequest.new(
             parent: parent,
             structured_query: query_grpc,
             partition_count: partition_count,
             page_token: token,
-            page_size: max
+            page_size: max,
+            read_time: read_time_to_timestamp(read_time)
           )
           paged_enum = firestore.partition_query request
           paged_enum.response
         end
 
-        def run_query path, query_grpc, transaction: nil
+        def run_query path, query_grpc, transaction: nil, read_time: nil
           run_query_req = {
             parent:           path,
             structured_query: query_grpc
@@ -121,6 +126,9 @@ module Google
             run_query_req[:transaction] = transaction
           elsif transaction
             run_query_req[:new_transaction] = transaction
+          end
+          if read_time
+            run_query_req[:read_time] = read_time_to_timestamp(read_time)
           end
 
           firestore.run_query run_query_req, call_options(parent: database_path)
@@ -187,6 +195,17 @@ module Google
 
         def inspect
           "#{self.class}(#{@project})(#{@database})"
+        end
+
+        def read_time_to_timestamp read_time
+          return nil if read_time.nil?
+
+          raise TypeError, "read_time is expected to be a Time object" unless read_time.is_a? Time
+
+          Google::Protobuf::Timestamp.new(
+            seconds: read_time.to_i,
+            nanos:   read_time.usec * 1000
+          )
         end
 
         protected

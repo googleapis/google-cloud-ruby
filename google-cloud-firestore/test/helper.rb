@@ -140,7 +140,8 @@ class MockFirestore < Minitest::Spec
                                documents: full_doc_paths,
                                mask: nil,
                                transaction: nil,
-                               new_transaction: nil
+                               new_transaction: nil,
+                               read_time: nil
     req = {
       database: database,
       documents: documents,
@@ -148,6 +149,7 @@ class MockFirestore < Minitest::Spec
     }
     req[:transaction] = transaction if transaction
     req[:new_transaction] = new_transaction if new_transaction
+    req[:read_time] = read_time if read_time
     [req, default_options]
   end
 
@@ -164,8 +166,9 @@ class MockFirestore < Minitest::Spec
 
   def list_collection_ids_args parent: "projects/#{project}/databases/(default)/documents",
                                page_size: nil,
-                               page_token: nil
-    [{ parent: parent, page_size: page_size, page_token: page_token }, default_options]
+                               page_token: nil,
+                               read_time: nil
+    [{ parent: parent, page_size: page_size, page_token: page_token, read_time: read_time }, default_options]
   end
 
   def list_collection_ids_resp *ids, next_page_token: nil
@@ -175,13 +178,15 @@ class MockFirestore < Minitest::Spec
   def run_query_args query,
                      parent: "projects/#{project}/databases/(default)/documents",
                      transaction: nil,
-                     new_transaction: nil
+                     new_transaction: nil,
+                     read_time: nil
     req = {
       parent: parent,
       structured_query: query
     }
     req[:transaction] = transaction if transaction
     req[:new_transaction] = new_transaction if new_transaction
+    req[:read_time] = firestore.service.read_time_to_timestamp(read_time) if read_time
     [req, default_options]
   end
 
@@ -189,14 +194,16 @@ class MockFirestore < Minitest::Spec
                            parent: "projects/#{project}/databases/(default)/documents",
                            partition_count: 2,
                            page_token: nil,
-                           page_size: nil
+                           page_size: nil,
+                           read_time: nil
     [
       Google::Cloud::Firestore::V1::PartitionQueryRequest.new(
         parent: parent,
         structured_query: query_grpc,
         partition_count: partition_count,
         page_token: page_token,
-        page_size: page_size
+        page_size: page_size,
+        read_time: read_time
       )
     ]
   end
@@ -227,6 +234,7 @@ class MockFirestore < Minitest::Spec
   def document_path doc_id
     "projects/#{project}/databases/(default)/documents/my-collection-id/#{doc_id}"
   end
+
 end
 
 class WatchFirestore < MockFirestore

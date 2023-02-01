@@ -16,8 +16,6 @@ require "helper"
 
 describe Google::Cloud::Firestore::Client, :get_all, :mock_firestore do
   let(:read_time) { Time.now }
-
-
   let :batch_docs_enum do
     [
       Google::Cloud::Firestore::V1::BatchGetDocumentsResponse.new(
@@ -46,6 +44,16 @@ describe Google::Cloud::Firestore::Client, :get_all, :mock_firestore do
     firestore_mock.expect :batch_get_documents, batch_docs_enum, batch_get_documents_args
 
     docs_enum = firestore.get_all "users/alice", "users/bob", "users/carol"
+
+    assert_docs_enum docs_enum
+  end
+
+  it "gets multiple docs using splat (string) with read time" do
+    firestore_mock.expect :batch_get_documents, batch_docs_enum, batch_get_documents_args(
+      read_time: firestore.service.read_time_to_timestamp(read_time)
+    )
+
+    docs_enum = firestore.get_all "users/alice", "users/bob", "users/carol", read_time: read_time
 
     assert_docs_enum docs_enum
   end

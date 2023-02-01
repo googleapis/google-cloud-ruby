@@ -904,6 +904,9 @@ module Google
         ##
         # Retrieves document snapshots for the query.
         #
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
+        #
         # @yield [documents] The block for accessing the document snapshots.
         # @yieldparam [DocumentSnapshot] document A document snapshot.
         #
@@ -924,12 +927,29 @@ module Google
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
-        def get
+        # @example Get query with read time
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #
+        #   # Create a query
+        #   query = cities_col.select(:population)
+        #
+        #   read_time = Time.now
+        #
+        #   query.get(read_time: read_time) do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def get read_time: nil
           ensure_service!
 
-          return enum_for :get unless block_given?
+          return enum_for :get, read_time: read_time unless block_given?
 
-          results = service.run_query parent_path, @query
+          results = service.run_query parent_path, @query, read_time: read_time
 
           # Reverse the results for Query#limit_to_last queries since that method reversed the order_by directions.
           results = results.to_a.reverse if limit_type == :last

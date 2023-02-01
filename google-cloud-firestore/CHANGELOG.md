@@ -1,5 +1,11 @@
 # Release History
 
+### 2.9.0 (2023-01-26)
+
+#### Features
+
+* Added support for read time ([#19851](https://github.com/googleapis/google-cloud-ruby/issues/19851)) 
+
 ### 2.8.0 (2023-01-05)
 
 #### Features

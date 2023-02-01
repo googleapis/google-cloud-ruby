@@ -42,10 +42,10 @@ module Google
         #     Required. The Job to create.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. An optional request ID to identify requests. Specify a unique request ID
-        #     so that if you must retry your request, the server will know to ignore
-        #     the request if it has already been completed. The server will guarantee
-        #     that for at least 60 minutes since the first request.
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and t
         #     he request times out. If you make the request again with the same request
@@ -78,10 +78,10 @@ module Google
         #     Optional. Reason for this deletion.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. An optional request ID to identify requests. Specify a unique request ID
-        #     so that if you must retry your request, the server will know to ignore
-        #     the request if it has already been completed. The server will guarantee
-        #     that for at least 60 minutes after the first request.
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes after the first request.
         #
         #     For example, consider a situation where you make an initial request and t
         #     he request times out. If you make the request again with the same request
@@ -195,8 +195,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.

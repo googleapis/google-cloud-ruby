@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.1 (2023-02-01)
+
+#### Bug Fixes
+
+* Remove policy_based_routing_service as it introduced breaking changes ([#20071](https://github.com/googleapis/google-cloud-ruby/issues/20071)) 
+
 ### 0.4.0 (2022-11-07)
 
 #### Features

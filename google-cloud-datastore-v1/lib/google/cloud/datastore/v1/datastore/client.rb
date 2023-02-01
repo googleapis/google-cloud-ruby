@@ -589,7 +589,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload commit(project_id: nil, database_id: nil, mode: nil, transaction: nil, mutations: nil)
+            # @overload commit(project_id: nil, database_id: nil, mode: nil, transaction: nil, single_use_transaction: nil, mutations: nil)
             #   Pass arguments to `commit` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -607,6 +607,12 @@ module Google
             #     The identifier of the transaction associated with the commit. A
             #     transaction identifier is returned by a call to
             #     {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+            #   @param single_use_transaction [::Google::Cloud::Datastore::V1::TransactionOptions, ::Hash]
+            #     Options for beginning a new transaction for this request.
+            #     The transaction is committed when the request completes. If specified,
+            #     [TransactionOptions.mode][google.datastore.v1.TransactionOptions.mode]
+            #     must be
+            #     {::Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite TransactionOptions.ReadWrite}.
             #   @param mutations [::Array<::Google::Cloud::Datastore::V1::Mutation, ::Hash>]
             #     The mutations to perform.
             #

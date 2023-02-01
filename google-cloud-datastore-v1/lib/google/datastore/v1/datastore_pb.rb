@@ -24,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :found, :message, 1, "google.datastore.v1.EntityResult"
       repeated :missing, :message, 2, "google.datastore.v1.EntityResult"
       repeated :deferred, :message, 3, "google.datastore.v1.Key"
+      optional :transaction, :bytes, 5
       optional :read_time, :message, 7, "google.protobuf.Timestamp"
     end
     add_message "google.datastore.v1.RunQueryRequest" do
@@ -39,6 +40,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.datastore.v1.RunQueryResponse" do
       optional :batch, :message, 1, "google.datastore.v1.QueryResultBatch"
       optional :query, :message, 2, "google.datastore.v1.Query"
+      optional :transaction, :bytes, 5
     end
     add_message "google.datastore.v1.RunAggregationQueryRequest" do
       optional :project_id, :string, 8
@@ -53,6 +55,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.datastore.v1.RunAggregationQueryResponse" do
       optional :batch, :message, 1, "google.datastore.v1.AggregationResultBatch"
       optional :query, :message, 2, "google.datastore.v1.AggregationQuery"
+      optional :transaction, :bytes, 5
     end
     add_message "google.datastore.v1.BeginTransactionRequest" do
       optional :project_id, :string, 8
@@ -76,6 +79,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :mutations, :message, 6, "google.datastore.v1.Mutation"
       oneof :transaction_selector do
         optional :transaction, :bytes, 1
+        optional :single_use_transaction, :message, 10, "google.datastore.v1.TransactionOptions"
       end
     end
     add_enum "google.datastore.v1.CommitRequest.Mode" do
@@ -125,6 +129,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :consistency_type do
         optional :read_consistency, :enum, 1, "google.datastore.v1.ReadOptions.ReadConsistency"
         optional :transaction, :bytes, 2
+        optional :new_transaction, :message, 3, "google.datastore.v1.TransactionOptions"
         optional :read_time, :message, 4, "google.protobuf.Timestamp"
       end
     end

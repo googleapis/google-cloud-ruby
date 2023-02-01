@@ -31,11 +31,13 @@ module Google
     module Trace
       module V2
         ##
-        # This file describes an API for collecting and viewing traces and spans
-        # within a trace.  A Trace is a collection of spans corresponding to a single
-        # operation or set of operations for an application. A span is an individual
-        # timed event which forms a node of the trace tree. A single trace may
-        # contain span(s) from multiple services.
+        # Service for collecting and viewing traces and spans within a trace.
+        #
+        # A trace is a collection of spans corresponding to a single
+        # operation or a set of operations in an application.
+        #
+        # A span is an individual timed event which forms a node of the trace tree.
+        # A single trace can contain spans from multiple services.
         #
         # @example Load this service and instantiate a gRPC client
         #
