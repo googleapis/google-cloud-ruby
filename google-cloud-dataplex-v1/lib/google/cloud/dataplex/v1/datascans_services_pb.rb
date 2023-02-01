@@ -24,6 +24,9 @@ module Google
     module Dataplex
       module V1
         module DataScanService
+          # DataScanService manages DataScan resources which can be configured to run
+          # various types of data scanning workload and generate enriched metadata (e.g.
+          # Data Profile, Data Quality) for the data source.
           class Service
 
             include ::GRPC::GenericService
@@ -32,21 +35,21 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.dataplex.v1.DataScanService'
 
-            # Creates a dataScan resource.
+            # Creates a DataScan resource.
             rpc :CreateDataScan, ::Google::Cloud::Dataplex::V1::CreateDataScanRequest, ::Google::Longrunning::Operation
-            # Update the dataScan resource.
+            # Updates a DataScan resource.
             rpc :UpdateDataScan, ::Google::Cloud::Dataplex::V1::UpdateDataScanRequest, ::Google::Longrunning::Operation
-            # Delete the dataScan resource.
+            # Deletes a DataScan resource.
             rpc :DeleteDataScan, ::Google::Cloud::Dataplex::V1::DeleteDataScanRequest, ::Google::Longrunning::Operation
-            # Get dataScan resource.
+            # Gets a DataScan resource.
             rpc :GetDataScan, ::Google::Cloud::Dataplex::V1::GetDataScanRequest, ::Google::Cloud::Dataplex::V1::DataScan
-            # Lists dataScans.
+            # Lists DataScans.
             rpc :ListDataScans, ::Google::Cloud::Dataplex::V1::ListDataScansRequest, ::Google::Cloud::Dataplex::V1::ListDataScansResponse
-            # Run an on demand execution of a DataScan.
+            # Runs an on-demand execution of a DataScan
             rpc :RunDataScan, ::Google::Cloud::Dataplex::V1::RunDataScanRequest, ::Google::Cloud::Dataplex::V1::RunDataScanResponse
-            # Get DataScanJob resource.
+            # Gets a DataScanJob resource.
             rpc :GetDataScanJob, ::Google::Cloud::Dataplex::V1::GetDataScanJobRequest, ::Google::Cloud::Dataplex::V1::DataScanJob
-            # Lists DataScanJobs under the given dataScan.
+            # Lists DataScanJobs under the given DataScan.
             rpc :ListDataScanJobs, ::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest, ::Google::Cloud::Dataplex::V1::ListDataScanJobsResponse
           end
 
