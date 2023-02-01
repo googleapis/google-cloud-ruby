@@ -95,6 +95,41 @@ module Google
         end
 
         ##
+        # Add custom Google extension headers to the requests that use the signed URLs.
+        #
+        # @param [Hash] headers Google extension headers (custom HTTP headers that
+        #   begin with `x-goog-`) to be included in requests that use the signed URLs.
+        #   Provide headers as a key/value array, where the key is
+        #   the header name, and the value is an array of header values.
+        #   For headers with multiple values, provide values as a simple
+        #   array, or a comma-separated string. For a reference of allowed
+        #   headers, see [Reference Headers](https://cloud.google.com/storage/docs/xml-api/reference-headers).
+        #
+        # @return [Google::Cloud::Storage::Project] Returns the Project for method chaining
+        #
+        def add_custom_headers headers
+          @service.add_custom_headers headers
+          self
+        end
+
+        ##
+        # Add custom Google extension header to the requests that use the signed URLs.
+        #
+        # @param [String] header_name Name of Google extension header (custom HTTP header that
+        #   begin with `x-goog-`) to be included in requests that use the signed URLs.
+        #   For a reference of allowed headers, see
+        #   [Reference Headers](https://cloud.google.com/storage/docs/xml-api/reference-headers).
+        # @param [Object] header_value Valid value of the Google extension header being added.
+        #   For headers with multiple values, provide values as a simple array, or a comma-separated string.
+        #
+        # @return [Google::Cloud::Storage::Project] Returns the Project for method chaining
+        #
+        def add_custom_header header_name, header_value
+          @service.add_custom_header header_name, header_value
+          self
+        end
+
+        ##
         # Retrieves a list of buckets for the given project.
         #
         # @param [String] prefix Filter results to buckets whose names begin
