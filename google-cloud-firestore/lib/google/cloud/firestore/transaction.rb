@@ -286,9 +286,15 @@ module Google
         #
         #   firestore = Google::Cloud::Firestore.new
         #
+        #   query = firestore.col "cities"
+        #
+        #   # Create an aggregate query
+        #   aq = query.aggregate_query
+        #             .add_count
+        #
         #   firestore.transaction do |tx|
         #     tx.get_aggregate aq do |aggregate_snapshot|
-        #       puts aggregate_snapshot.get('count')
+        #       puts aggregate_snapshot.get
         #     end
         #   end
         #
