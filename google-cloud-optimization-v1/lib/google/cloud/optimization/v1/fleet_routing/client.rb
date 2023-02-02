@@ -230,7 +230,7 @@ module Google
             #   @param solving_mode [::Google::Cloud::Optimization::V1::OptimizeToursRequest::SolvingMode]
             #     By default, the solving mode is `DEFAULT_SOLVE` (0).
             #   @param max_validation_errors [::Integer]
-            #     Truncates the number of validation errors returned. Those errors are
+            #     Truncates the number of validation errors returned. These errors are
             #     typically attached to an INVALID_ARGUMENT error payload as a BadRequest
             #     error detail (https://cloud.google.com/apis/design/errors#error_details),
             #     unless solving_mode=VALIDATE_ONLY: see the
@@ -395,7 +395,8 @@ module Google
             #     Label that may be used to identify this request, reported back in the
             #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#request_label OptimizeToursResponse.request_label}.
             #   @param populate_travel_step_polylines [::Boolean]
-            #     Deprecated: Use [OptimizeToursRequest.populate_transition_polylines][]
+            #     Deprecated: Use
+            #     {::Google::Cloud::Optimization::V1::OptimizeToursRequest#populate_transition_polylines OptimizeToursRequest.populate_transition_polylines}
             #     instead. If true, polylines will be populated in response
             #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}.
             #     Note that in this case, the polylines will also be populated in the
