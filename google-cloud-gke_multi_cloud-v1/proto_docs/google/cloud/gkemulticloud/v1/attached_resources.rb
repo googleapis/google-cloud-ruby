@@ -30,7 +30,7 @@ module Google
         #     `projects/<project-number>/locations/<region>/attachedClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. A human readable description of this cluster.
@@ -178,9 +178,9 @@ module Google
         # OIDC discovery information of the target cluster.
         #
         # Kubernetes Service Account (KSA) tokens are JWT tokens signed by the cluster
-        # API server. This fields indicates how GCP services
+        # API server. This fields indicates how Google Cloud Platform services
         # validate KSA tokens in order to allow system workloads (such as GKE Connect
-        # and telemetry agents) to authenticate back to GCP.
+        # and telemetry agents) to authenticate back to Google Cloud Platform.
         #
         # Both clusters with public and private issuer URLs are supported.
         # Clusters with public issuers only need to specify the `issuer_url` field

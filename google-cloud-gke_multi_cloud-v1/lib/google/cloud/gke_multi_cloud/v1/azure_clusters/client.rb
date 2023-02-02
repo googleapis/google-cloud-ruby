@@ -459,7 +459,7 @@ module Google
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
             #
@@ -664,7 +664,7 @@ module Google
 
             ##
             # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
-            # resource on a given GCP project and region.
+            # resource on a given Google Cloud Platform project and region.
             #
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
@@ -817,6 +817,9 @@ module Google
             #      *   `annotations`.
             #      *   `authorization.admin_users`.
             #      *   `control_plane.root_volume.size_gib`.
+            #      *   `azure_services_authentication`.
+            #      *   `azure_services_authentication.tenant_id`.
+            #      *   `azure_services_authentication.application_id`.
             #      *   `control_plane.proxy_config`.
             #      *   `control_plane.proxy_config.resource_group_id`.
             #      *   `control_plane.proxy_config.secret_id`.
@@ -924,7 +927,7 @@ module Google
             #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::AzureCluster]
@@ -1016,7 +1019,7 @@ module Google
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
             #
@@ -1135,7 +1138,7 @@ module Google
             #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the
             #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource is not

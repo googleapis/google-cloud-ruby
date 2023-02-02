@@ -190,7 +190,7 @@ module Google
             ##
             # Creates a new
             # {::Google::Cloud::GkeMultiCloud::V1::AttachedCluster AttachedCluster} resource
-            # on a given GCP project and region.
+            # on a given Google Cloud Platform project and region.
             #
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
@@ -569,7 +569,7 @@ module Google
             #     `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::AttachedCluster]
@@ -661,7 +661,7 @@ module Google
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
             #
@@ -777,7 +777,7 @@ module Google
             #     `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param validate_only [::Boolean]
             #     If set, only validate the request, but do not actually delete the resource.
             #   @param allow_missing [::Boolean]
@@ -996,7 +996,7 @@ module Google
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
             #     for more details on Google Cloud resource names.
             #   @param attached_cluster_id [::String]
-            #     Required. A client provided ID the resource. Must be unique within the
+            #     Required. A client provided ID of the resource. Must be unique within the
             #     parent resource.
             #
             #     The provided ID will be part of the
@@ -1009,7 +1009,7 @@ module Google
             #     When generating an install manifest for importing an existing Membership
             #     resource, the attached_cluster_id field must be the Membership id.
             #
-            #     Membership names are formatted as `resource name formatted as
+            #     Membership names are formatted as
             #     `projects/<project-id>/locations/<region>/memberships/<membership-id>`.
             #   @param platform_version [::String]
             #     Required. The platform version for the cluster (e.g. `1.19.0-gke.1000`).

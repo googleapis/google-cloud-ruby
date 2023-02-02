@@ -19,6 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :networking, :message, 4, "google.cloud.gkemulticloud.v1.AzureClusterNetworking"
       optional :control_plane, :message, 5, "google.cloud.gkemulticloud.v1.AzureControlPlane"
       optional :authorization, :message, 6, "google.cloud.gkemulticloud.v1.AzureAuthorization"
+      optional :azure_services_authentication, :message, 22, "google.cloud.gkemulticloud.v1.AzureServicesAuthentication"
       optional :state, :enum, 7, "google.cloud.gkemulticloud.v1.AzureCluster.State"
       optional :endpoint, :string, 8
       optional :uid, :string, 9
@@ -86,13 +87,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :tenant_id, :string, 2
       optional :application_id, :string, 3
+      optional :reconciling, :bool, 9
       map :annotations, :string, :string, 8
       optional :pem_certificate, :string, 7
       optional :uid, :string, 5
       optional :create_time, :message, 6, "google.protobuf.Timestamp"
+      optional :update_time, :message, 10, "google.protobuf.Timestamp"
     end
     add_message "google.cloud.gkemulticloud.v1.AzureAuthorization" do
       repeated :admin_users, :message, 1, "google.cloud.gkemulticloud.v1.AzureClusterUser"
+    end
+    add_message "google.cloud.gkemulticloud.v1.AzureServicesAuthentication" do
+      optional :tenant_id, :string, 1
+      optional :application_id, :string, 2
     end
     add_message "google.cloud.gkemulticloud.v1.AzureClusterUser" do
       optional :username, :string, 1
@@ -177,6 +184,7 @@ module Google
         AzureDiskTemplate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureDiskTemplate").msgclass
         AzureClient = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureClient").msgclass
         AzureAuthorization = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureAuthorization").msgclass
+        AzureServicesAuthentication = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureServicesAuthentication").msgclass
         AzureClusterUser = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureClusterUser").msgclass
         AzureNodePool = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureNodePool").msgclass
         AzureNodePool::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkemulticloud.v1.AzureNodePool.State").enummodule

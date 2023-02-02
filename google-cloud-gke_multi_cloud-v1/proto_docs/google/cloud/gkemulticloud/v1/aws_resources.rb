@@ -30,7 +30,7 @@ module Google
         #     `projects/<project-number>/locations/<region>/awsClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. A human readable description of this cluster.
