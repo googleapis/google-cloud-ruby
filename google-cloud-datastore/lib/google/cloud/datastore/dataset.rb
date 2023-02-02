@@ -24,6 +24,7 @@ require "google/cloud/datastore/gql_query"
 require "google/cloud/datastore/cursor"
 require "google/cloud/datastore/dataset/lookup_results"
 require "google/cloud/datastore/dataset/query_results"
+require "google/cloud/datastore/dataset/aggregate_query_results"
 require "google/cloud/datastore/transaction"
 require "google/cloud/datastore/read_only_transaction"
 
@@ -452,6 +453,88 @@ module Google
                                  query.to_grpc.dup
         end
         alias run_query run
+
+        ##
+        # Retrieve aggregate results specified by an AggregateQuery.
+        #
+        # @param [AggregateQuery, GqlQuery] query The object with the aggregate criteria.
+        # @param [String] namespace The namespace the query is to run within.
+        # @param [Symbol] consistency The non-transactional read consistency to
+        #   use. Cannot be set to `:strong` for global queries. Accepted values
+        #   are `:eventual` and `:strong`.
+        #
+        #   The default consistency depends on the type of query used. See
+        #   [Eventual Consistency in Google Cloud
+        #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
+        #   for more information.
+        #
+        # @return [Google::Cloud::Datastore::Dataset::AggregateQueryResults]
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = datastore.query("Task")
+        #                    .where("done", "=", false)
+        #
+        #   aggregate_query = query.aggregate_query
+        #
+        #   res = datastore.run_aggregation aggregate_query
+        #
+        # @example Run an aggregate ancestor query with eventual consistency:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   task_list_key = datastore.key "TaskList", "default"
+        #   query = datastore.query.kind("Task")
+        #                    .ancestor(task_list_key)
+        #
+        #   aggregate_query = query.aggregate_query
+        #
+        #   res = datastore.run_aggregation aggregate_query, consistency: :eventual
+        #
+        # @example Run the aggregate query within a namespace with the `namespace` option:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = datastore.query("Task")
+        #                    .where("done", "=", false)
+        #
+        #   aggregate_query = query.aggregate_query
+        #
+        #   res = datastore.run_aggregation aggregate_query, namespace: "example-ns"
+        #
+        # @example Run the aggregate query with a GQL string.
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   gql_query = datastore.gql "SELECT COUNT(*) FROM Task WHERE done = @done",
+        #                             done: false
+        #   res = datastore.run_aggregation gql_query
+        #
+        # @example Run the aggregate GQL query within a namespace with `namespace` option:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   gql_query = datastore.gql "SELECT COUNT(*) FROM Task WHERE done = @done",
+        #                             done: false
+        #   res = datastore.run_aggregation gql_query, namespace: "example-ns"
+        #
+        def run_aggregation aggregate_query, namespace: nil, consistency: nil
+          ensure_service!
+          unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
+            raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
+          end
+          check_consistency! consistency
+          aggregate_query_res = service.run_aggregation_query aggregate_query.to_grpc, namespace,
+                                                              consistency: consistency
+          AggregateQueryResults.from_grpc aggregate_query_res
+        end
 
         ##
         # Creates a Datastore Transaction.
