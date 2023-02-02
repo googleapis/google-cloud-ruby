@@ -29,6 +29,10 @@ module Google
           ##
           # Client for the DataScanService service.
           #
+          # DataScanService manages DataScan resources which can be configured to run
+          # various types of data scanning workload and generate enriched metadata (e.g.
+          # Data Profile, Data Quality) for the data source.
+          #
           class Client
             include Paths
 
@@ -184,7 +188,7 @@ module Google
             # Service calls
 
             ##
-            # Creates a dataScan resource.
+            # Creates a DataScan resource.
             #
             # @overload create_data_scan(request, options = nil)
             #   Pass arguments to `create_data_scan` via a request object, either of type
@@ -203,13 +207,14 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The resource name of the parent location:
-            #     projects/\\{project}/locations/\\{location_id}
-            #     where `{project}` refers to a project_id or project_number and
+            #     `projects/{project}/locations/{location_id}`
+            #     where `project` refers to a *project_id* or *project_number* and
             #     `location_id` refers to a GCP region.
             #   @param data_scan [::Google::Cloud::Dataplex::V1::DataScan, ::Hash]
             #     Required. DataScan resource.
             #   @param data_scan_id [::String]
             #     Required. DataScan identifier.
+            #
             #     * Must contain only lowercase letters, numbers and hyphens.
             #     * Must start with a letter.
             #     * Must end with a number or a letter.
@@ -289,7 +294,7 @@ module Google
             end
 
             ##
-            # Update the dataScan resource.
+            # Updates a DataScan resource.
             #
             # @overload update_data_scan(request, options = nil)
             #   Pass arguments to `update_data_scan` via a request object, either of type
@@ -307,7 +312,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param data_scan [::Google::Cloud::Dataplex::V1::DataScan, ::Hash]
-            #     Required. Update description.
+            #     Required. DataScan resource to be updated.
+            #
             #     Only fields specified in `update_mask` are updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Mask of fields to update.
@@ -385,7 +391,7 @@ module Google
             end
 
             ##
-            # Delete the dataScan resource.
+            # Deletes a DataScan resource.
             #
             # @overload delete_data_scan(request, options = nil)
             #   Pass arguments to `delete_data_scan` via a request object, either of type
@@ -404,8 +410,8 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the dataScan:
-            #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{data_scan_id}
-            #     where `{project}` refers to a project_id or project_number and
+            #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+            #     where `project` refers to a *project_id* or *project_number* and
             #     `location_id` refers to a GCP region.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -481,7 +487,7 @@ module Google
             end
 
             ##
-            # Get dataScan resource.
+            # Gets a DataScan resource.
             #
             # @overload get_data_scan(request, options = nil)
             #   Pass arguments to `get_data_scan` via a request object, either of type
@@ -500,12 +506,11 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the dataScan:
-            #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{data_scan_id}
-            #     where `{project}` refers to a project_id or project_number and
+            #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+            #     where `project` refers to a *project_id* or *project_number* and
             #     `location_id` refers to a GCP region.
             #   @param view [::Google::Cloud::Dataplex::V1::GetDataScanRequest::DataScanView]
-            #     Optional. Used to select the subset of DataScan information to return.
-            #     Defaults to `BASIC`.
+            #     Optional. Select the DataScan view to return. Defaults to `BASIC`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dataplex::V1::DataScan]
@@ -572,7 +577,7 @@ module Google
             end
 
             ##
-            # Lists dataScans.
+            # Lists DataScans.
             #
             # @overload list_data_scans(request, options = nil)
             #   Pass arguments to `list_data_scans` via a request object, either of type
@@ -590,8 +595,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. projects/\\{project}/locations/\\{location_id}
-            #     where `{project}` refers to a project_id or project_number and
+            #     Required. The resource name of the parent location:
+            #     `projects/{project}/locations/{location_id}`
+            #     where `project` refers to a *project_id* or *project_number* and
             #     `location_id` refers to a GCP region.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of dataScans to return. The service may return
@@ -605,7 +611,7 @@ module Google
             #   @param filter [::String]
             #     Optional. Filter request.
             #   @param order_by [::String]
-            #     Optional. Order by fields (name or create_time) for the result.
+            #     Optional. Order by fields (`name` or `create_time`) for the result.
             #     If not specified, the ordering is undefined.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -680,7 +686,7 @@ module Google
             end
 
             ##
-            # Run an on demand execution of a DataScan.
+            # Runs an on-demand execution of a DataScan
             #
             # @overload run_data_scan(request, options = nil)
             #   Pass arguments to `run_data_scan` via a request object, either of type
@@ -699,10 +705,11 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the DataScan:
-            #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{data_scan_id}.
-            #     where `{project}` refers to a project_id or project_number and
+            #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`.
+            #     where `project` refers to a *project_id* or *project_number* and
             #     `location_id` refers to a GCP region.
-            #     Only on-demand DataScans are allowed.
+            #
+            #     Only **OnDemand** data scans are allowed.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dataplex::V1::RunDataScanResponse]
@@ -769,7 +776,7 @@ module Google
             end
 
             ##
-            # Get DataScanJob resource.
+            # Gets a DataScanJob resource.
             #
             # @overload get_data_scan_job(request, options = nil)
             #   Pass arguments to `get_data_scan_job` via a request object, either of type
@@ -788,12 +795,11 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the DataScanJob:
-            #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{data_scan_id}/dataScanJobs/\\{data_scan_job_id}
-            #     where `{project}` refers to a project_id or project_number and
+            #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/dataScanJobs/{data_scan_job_id}`
+            #     where `project` refers to a *project_id* or *project_number* and
             #     `location_id` refers to a GCP region.
             #   @param view [::Google::Cloud::Dataplex::V1::GetDataScanJobRequest::DataScanJobView]
-            #     Optional. Used to select the subset of DataScan information to return.
-            #     Defaults to `BASIC`.
+            #     Optional. Select the DataScanJob view to return. Defaults to `BASIC`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dataplex::V1::DataScanJob]
@@ -860,7 +866,7 @@ module Google
             end
 
             ##
-            # Lists DataScanJobs under the given dataScan.
+            # Lists DataScanJobs under the given DataScan.
             #
             # @overload list_data_scan_jobs(request, options = nil)
             #   Pass arguments to `list_data_scan_jobs` via a request object, either of type
@@ -879,8 +885,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The resource name of the parent environment:
-            #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{data_scan_id}
-            #     where `{project}` refers to a project_id or project_number and
+            #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+            #     where `project` refers to a *project_id* or *project_number* and
             #     `location_id` refers to a GCP region.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of DataScanJobs to return. The service may return

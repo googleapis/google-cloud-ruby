@@ -32,6 +32,10 @@ module Google
     module Dataplex
       module V1
         ##
+        # DataScanService manages DataScan resources which can be configured to run
+        # various types of data scanning workload and generate enriched metadata (e.g.
+        # Data Profile, Data Quality) for the data source.
+        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataplex/v1/data_scan_service"
