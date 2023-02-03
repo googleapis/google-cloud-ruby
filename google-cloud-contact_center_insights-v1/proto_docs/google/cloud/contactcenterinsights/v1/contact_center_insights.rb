@@ -310,11 +310,35 @@ module Google
         #     Output only. The original request for ingest.
         # @!attribute [r] partial_errors
         #   @return [::Array<::Google::Rpc::Status>]
-        #     Output only. Partial errors during ingest operation that might cause the operation
-        #     output to be incomplete.
+        #     Output only. Partial errors during ingest operation that might cause the
+        #     operation output to be incomplete.
+        # @!attribute [r] ingest_conversations_stats
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsMetadata::IngestConversationsStats]
+        #     Output only. Statistics for IngestConversations operation.
         class IngestConversationsMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Statistics for IngestConversations operation.
+          # @!attribute [r] processed_object_count
+          #   @return [::Integer]
+          #     Output only. The number of objects processed during the ingest operation.
+          # @!attribute [r] duplicates_skipped_count
+          #   @return [::Integer]
+          #     Output only. The number of objects skipped because another conversation
+          #     with the same transcript uri had already been ingested.
+          # @!attribute [r] successful_ingest_count
+          #   @return [::Integer]
+          #     Output only. The number of new conversations added during this ingest
+          #     operation.
+          # @!attribute [r] failed_ingest_count
+          #   @return [::Integer]
+          #     Output only. The number of objects which were unable to be ingested due
+          #     to errors. The errors are populated in the partial_errors field.
+          class IngestConversationsStats
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The response to an IngestConversations operation.
@@ -478,9 +502,9 @@ module Google
           #     the resource project will be used.
           # @!attribute [rw] dataset
           #   @return [::String]
-          #     Required. The name of the BigQuery dataset that the snapshot result should be
-          #     exported to. If this dataset does not exist, the export call returns an
-          #     INVALID_ARGUMENT error.
+          #     Required. The name of the BigQuery dataset that the snapshot result
+          #     should be exported to. If this dataset does not exist, the export call
+          #     returns an INVALID_ARGUMENT error.
           # @!attribute [rw] table
           #   @return [::String]
           #     The BigQuery table name to which the insights data should be written.
@@ -750,10 +774,10 @@ module Google
         # Request to create a phrase matcher.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource of the phrase matcher. Required. The location to create
-        #     a phrase matcher for.
-        #     Format: `projects/<Project ID>/locations/<Location ID>` or
-        #     `projects/<Project Number>/locations/<Location ID>`
+        #     Required. The parent resource of the phrase matcher. Required. The location
+        #     to create a phrase matcher for. Format: `projects/<Project
+        #     ID>/locations/<Location ID>` or `projects/<Project
+        #     Number>/locations/<Location ID>`
         # @!attribute [rw] phrase_matcher
         #   @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher]
         #     Required. The phrase matcher resource to create.

@@ -2379,10 +2379,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource of the phrase matcher. Required. The location to create
-            #     a phrase matcher for.
-            #     Format: `projects/<Project ID>/locations/<Location ID>` or
-            #     `projects/<Project Number>/locations/<Location ID>`
+            #     Required. The parent resource of the phrase matcher. Required. The location
+            #     to create a phrase matcher for. Format: `projects/<Project
+            #     ID>/locations/<Location ID>` or `projects/<Project
+            #     Number>/locations/<Location ID>`
             #   @param phrase_matcher [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher, ::Hash]
             #     Required. The phrase matcher resource to create.
             #
