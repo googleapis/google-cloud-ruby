@@ -2892,6 +2892,286 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_JobService_CreateNasJob_sync",
+      "title": "Snippet for create_nas_job in JobService",
+      "description": "Basic snippet for create_nas_job in JobService",
+      "file": "job_service/create_nas_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_nas_job",
+        "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client#create_nas_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateNasJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::NasJob",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client"
+        },
+        "method": {
+          "short_name": "CreateNasJob",
+          "full_name": "google.cloud.aiplatform.v1.JobService.CreateNasJob",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.aiplatform.v1.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_JobService_GetNasJob_sync",
+      "title": "Snippet for get_nas_job in JobService",
+      "description": "Basic snippet for get_nas_job in JobService",
+      "file": "job_service/get_nas_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_nas_job",
+        "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client#get_nas_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetNasJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::NasJob",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client"
+        },
+        "method": {
+          "short_name": "GetNasJob",
+          "full_name": "google.cloud.aiplatform.v1.JobService.GetNasJob",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.aiplatform.v1.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_JobService_ListNasJobs_sync",
+      "title": "Snippet for list_nas_jobs in JobService",
+      "description": "Basic snippet for list_nas_jobs in JobService",
+      "file": "job_service/list_nas_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_nas_jobs",
+        "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListNasJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListNasJobsResponse",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client"
+        },
+        "method": {
+          "short_name": "ListNasJobs",
+          "full_name": "google.cloud.aiplatform.v1.JobService.ListNasJobs",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.aiplatform.v1.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_JobService_DeleteNasJob_sync",
+      "title": "Snippet for delete_nas_job in JobService",
+      "description": "Basic snippet for delete_nas_job in JobService",
+      "file": "job_service/delete_nas_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_nas_job",
+        "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client#delete_nas_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client"
+        },
+        "method": {
+          "short_name": "DeleteNasJob",
+          "full_name": "google.cloud.aiplatform.v1.JobService.DeleteNasJob",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.aiplatform.v1.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_JobService_CancelNasJob_sync",
+      "title": "Snippet for cancel_nas_job in JobService",
+      "description": "Basic snippet for cancel_nas_job in JobService",
+      "file": "job_service/cancel_nas_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_nas_job",
+        "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client#cancel_nas_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CancelNasJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client"
+        },
+        "method": {
+          "short_name": "CancelNasJob",
+          "full_name": "google.cloud.aiplatform.v1.JobService.CancelNasJob",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.aiplatform.v1.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_JobService_GetNasTrialDetail_sync",
+      "title": "Snippet for get_nas_trial_detail in JobService",
+      "description": "Basic snippet for get_nas_trial_detail in JobService",
+      "file": "job_service/get_nas_trial_detail.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_nas_trial_detail",
+        "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client#get_nas_trial_detail",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::NasTrialDetail",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client"
+        },
+        "method": {
+          "short_name": "GetNasTrialDetail",
+          "full_name": "google.cloud.aiplatform.v1.JobService.GetNasTrialDetail",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.aiplatform.v1.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_JobService_ListNasTrialDetails_sync",
+      "title": "Snippet for list_nas_trial_details in JobService",
+      "description": "Basic snippet for list_nas_trial_details in JobService",
+      "file": "job_service/list_nas_trial_details.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_nas_trial_details",
+        "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_trial_details",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsResponse",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::JobService::Client"
+        },
+        "method": {
+          "short_name": "ListNasTrialDetails",
+          "full_name": "google.cloud.aiplatform.v1.JobService.ListNasTrialDetails",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.aiplatform.v1.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_JobService_CreateBatchPredictionJob_sync",
       "title": "Snippet for create_batch_prediction_job in JobService",
       "description": "Basic snippet for create_batch_prediction_job in JobService",
@@ -5115,6 +5395,46 @@
         "method": {
           "short_name": "ExportModel",
           "full_name": "google.cloud.aiplatform.v1.ModelService.ExportModel",
+          "service": {
+            "short_name": "ModelService",
+            "full_name": "google.cloud.aiplatform.v1.ModelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ModelService_CopyModel_sync",
+      "title": "Snippet for copy_model in ModelService",
+      "description": "Basic snippet for copy_model in ModelService",
+      "file": "model_service/copy_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "copy_model",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client#copy_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CopyModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ModelService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client"
+        },
+        "method": {
+          "short_name": "CopyModel",
+          "full_name": "google.cloud.aiplatform.v1.ModelService.CopyModel",
           "service": {
             "short_name": "ModelService",
             "full_name": "google.cloud.aiplatform.v1.ModelService"

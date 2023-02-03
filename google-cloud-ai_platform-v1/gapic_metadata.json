@@ -424,6 +424,41 @@
                 "cancel_hyperparameter_tuning_job"
               ]
             },
+            "CreateNasJob": {
+              "methods": [
+                "create_nas_job"
+              ]
+            },
+            "GetNasJob": {
+              "methods": [
+                "get_nas_job"
+              ]
+            },
+            "ListNasJobs": {
+              "methods": [
+                "list_nas_jobs"
+              ]
+            },
+            "DeleteNasJob": {
+              "methods": [
+                "delete_nas_job"
+              ]
+            },
+            "CancelNasJob": {
+              "methods": [
+                "cancel_nas_job"
+              ]
+            },
+            "GetNasTrialDetail": {
+              "methods": [
+                "get_nas_trial_detail"
+              ]
+            },
+            "ListNasTrialDetails": {
+              "methods": [
+                "list_nas_trial_details"
+              ]
+            },
             "CreateBatchPredictionJob": {
               "methods": [
                 "create_batch_prediction_job"
@@ -729,6 +764,11 @@
             "ExportModel": {
               "methods": [
                 "export_model"
+              ]
+            },
+            "CopyModel": {
+              "methods": [
+                "copy_model"
               ]
             },
             "ImportModelEvaluation": {

@@ -1158,6 +1158,122 @@ module Google
             end
 
             ##
+            # Copies an already existing Vertex AI Model into the specified Location.
+            # The source Model must exist in the same Project.
+            # When copying custom Models, the users themselves are responsible for
+            # {::Google::Cloud::AIPlatform::V1::Model#metadata Model.metadata} content to be
+            # region-agnostic, as well as making sure that any resources (e.g. files) it
+            # depends on remain accessible.
+            #
+            # @overload copy_model(request, options = nil)
+            #   Pass arguments to `copy_model` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::CopyModelRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::CopyModelRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload copy_model(model_id: nil, parent_model: nil, parent: nil, source_model: nil, encryption_spec: nil)
+            #   Pass arguments to `copy_model` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param model_id [::String]
+            #     Optional. Copy source_model into a new Model with this ID. The ID will
+            #     become the final component of the model resource name.
+            #
+            #     This value may be up to 63 characters, and valid characters are
+            #     `[a-z0-9_-]`. The first character cannot be a number or hyphen.
+            #   @param parent_model [::String]
+            #     Optional. Specify this field to copy source_model into this existing
+            #     Model as a new version. Format:
+            #     `projects/{project}/locations/{location}/models/{model}`
+            #   @param parent [::String]
+            #     Required. The resource name of the Location into which to copy the Model.
+            #     Format: `projects/{project}/locations/{location}`
+            #   @param source_model [::String]
+            #     Required. The resource name of the Model to copy. That Model must be in the
+            #     same Project. Format:
+            #     `projects/{project}/locations/{location}/models/{model}`
+            #   @param encryption_spec [::Google::Cloud::AIPlatform::V1::EncryptionSpec, ::Hash]
+            #     Customer-managed encryption key options. If this is set,
+            #     then the Model copy will be encrypted with the provided encryption key.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::CopyModelRequest.new
+            #
+            #   # Call the copy_model method.
+            #   result = client.copy_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def copy_model request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::CopyModelRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.copy_model.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.copy_model.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.copy_model.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @model_service_stub.call_rpc :copy_model, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Imports an externally generated ModelEvaluation.
             #
             # @overload import_model_evaluation(request, options = nil)
@@ -1904,6 +2020,11 @@ module Google
                 #
                 attr_reader :export_model
                 ##
+                # RPC-specific configuration for `copy_model`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :copy_model
+                ##
                 # RPC-specific configuration for `import_model_evaluation`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1954,6 +2075,8 @@ module Google
                   @merge_version_aliases = ::Gapic::Config::Method.new merge_version_aliases_config
                   export_model_config = parent_rpcs.export_model if parent_rpcs.respond_to? :export_model
                   @export_model = ::Gapic::Config::Method.new export_model_config
+                  copy_model_config = parent_rpcs.copy_model if parent_rpcs.respond_to? :copy_model
+                  @copy_model = ::Gapic::Config::Method.new copy_model_config
                   import_model_evaluation_config = parent_rpcs.import_model_evaluation if parent_rpcs.respond_to? :import_model_evaluation
                   @import_model_evaluation = ::Gapic::Config::Method.new import_model_evaluation_config
                   batch_import_model_evaluation_slices_config = parent_rpcs.batch_import_model_evaluation_slices if parent_rpcs.respond_to? :batch_import_model_evaluation_slices

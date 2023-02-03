@@ -66,6 +66,13 @@ module Google
             # [supported export
             # format][google.cloud.aiplatform.v1.Model.supported_export_formats].
             rpc :ExportModel, ::Google::Cloud::AIPlatform::V1::ExportModelRequest, ::Google::Longrunning::Operation
+            # Copies an already existing Vertex AI Model into the specified Location.
+            # The source Model must exist in the same Project.
+            # When copying custom Models, the users themselves are responsible for
+            # [Model.metadata][google.cloud.aiplatform.v1.Model.metadata] content to be
+            # region-agnostic, as well as making sure that any resources (e.g. files) it
+            # depends on remain accessible.
+            rpc :CopyModel, ::Google::Cloud::AIPlatform::V1::CopyModelRequest, ::Google::Longrunning::Operation
             # Imports an externally generated ModelEvaluation.
             rpc :ImportModelEvaluation, ::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest, ::Google::Cloud::AIPlatform::V1::ModelEvaluation
             # Imports a list of externally generated ModelEvaluationSlice.

@@ -269,6 +269,10 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::ModelSourceInfo]
         #     Output only. Source of a model. It can either be automl training pipeline,
         #     custom training pipeline, BigQuery ML, or existing Vertex AI Model.
+        # @!attribute [r] original_model_info
+        #   @return [::Google::Cloud::AIPlatform::V1::Model::OriginalModelInfo]
+        #     Output only. If this Model is a copy of another Model, this contains info
+        #     about the original.
         # @!attribute [r] metadata_artifact
         #   @return [::String]
         #     Output only. The resource name of the Artifact that was created in
@@ -329,6 +333,17 @@ module Google
               # object.
               IMAGE = 2
             end
+          end
+
+          # Contains information about the original Model if this Model is a copy.
+          # @!attribute [r] model
+          #   @return [::String]
+          #     Output only. The resource name of the Model this Model is a copy of,
+          #     including the revision. Format:
+          #     `projects/{project}/locations/{location}/models/{model_id}@{version_id}`
+          class OriginalModelInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key

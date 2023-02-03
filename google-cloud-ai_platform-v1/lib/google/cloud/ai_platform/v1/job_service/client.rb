@@ -1662,6 +1662,690 @@ module Google
             end
 
             ##
+            # Creates a NasJob
+            #
+            # @overload create_nas_job(request, options = nil)
+            #   Pass arguments to `create_nas_job` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::CreateNasJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::CreateNasJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_nas_job(parent: nil, nas_job: nil)
+            #   Pass arguments to `create_nas_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the Location to create the NasJob in.
+            #     Format: `projects/{project}/locations/{location}`
+            #   @param nas_job [::Google::Cloud::AIPlatform::V1::NasJob, ::Hash]
+            #     Required. The NasJob to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::NasJob]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::NasJob]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::CreateNasJobRequest.new
+            #
+            #   # Call the create_nas_job method.
+            #   result = client.create_nas_job request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::NasJob.
+            #   p result
+            #
+            def create_nas_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::CreateNasJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_nas_job.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_nas_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_nas_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @job_service_stub.call_rpc :create_nas_job, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a NasJob
+            #
+            # @overload get_nas_job(request, options = nil)
+            #   Pass arguments to `get_nas_job` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::GetNasJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::GetNasJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_nas_job(name: nil)
+            #   Pass arguments to `get_nas_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the NasJob resource.
+            #     Format:
+            #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::NasJob]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::NasJob]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::GetNasJobRequest.new
+            #
+            #   # Call the get_nas_job method.
+            #   result = client.get_nas_job request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::NasJob.
+            #   p result
+            #
+            def get_nas_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::GetNasJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_nas_job.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_nas_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_nas_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @job_service_stub.call_rpc :get_nas_job, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists NasJobs in a Location.
+            #
+            # @overload list_nas_jobs(request, options = nil)
+            #   Pass arguments to `list_nas_jobs` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::ListNasJobsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::ListNasJobsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_nas_jobs(parent: nil, filter: nil, page_size: nil, page_token: nil, read_mask: nil)
+            #   Pass arguments to `list_nas_jobs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the Location to list the NasJobs
+            #     from. Format: `projects/{project}/locations/{location}`
+            #   @param filter [::String]
+            #     The standard list filter.
+            #
+            #     Supported fields:
+            #
+            #       * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+            #       * `state` supports `=`, `!=` comparisons.
+            #       * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+            #         `create_time` must be in RFC 3339 format.
+            #       * `labels` supports general map functions that is:
+            #         `labels.key=value` - key:value equality
+            #         `labels.key:* - key existence
+            #
+            #     Some examples of using the filter are:
+            #
+            #       * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+            #       * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+            #       * `NOT display_name="my_job"`
+            #       * `create_time>"2021-05-18T00:00:00Z"`
+            #       * `labels.keyA=valueA`
+            #       * `labels.keyB:*`
+            #   @param page_size [::Integer]
+            #     The standard list page size.
+            #   @param page_token [::String]
+            #     The standard list page token.
+            #     Typically obtained via
+            #     {::Google::Cloud::AIPlatform::V1::ListNasJobsResponse#next_page_token ListNasJobsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_jobs JobService.ListNasJobs}
+            #     call.
+            #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Mask specifying which fields to read.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::NasJob>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::NasJob>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::ListNasJobsRequest.new
+            #
+            #   # Call the list_nas_jobs method.
+            #   result = client.list_nas_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AIPlatform::V1::NasJob.
+            #     p response
+            #   end
+            #
+            def list_nas_jobs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::ListNasJobsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_nas_jobs.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_nas_jobs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_nas_jobs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @job_service_stub.call_rpc :list_nas_jobs, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @job_service_stub, :list_nas_jobs, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a NasJob.
+            #
+            # @overload delete_nas_job(request, options = nil)
+            #   Pass arguments to `delete_nas_job` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_nas_job(name: nil)
+            #   Pass arguments to `delete_nas_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the NasJob resource to be deleted.
+            #     Format:
+            #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::DeleteNasJobRequest.new
+            #
+            #   # Call the delete_nas_job method.
+            #   result = client.delete_nas_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def delete_nas_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_nas_job.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_nas_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_nas_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @job_service_stub.call_rpc :delete_nas_job, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Cancels a NasJob.
+            # Starts asynchronous cancellation on the NasJob. The server
+            # makes a best effort to cancel the job, but success is not
+            # guaranteed. Clients can use
+            # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_nas_job JobService.GetNasJob} or
+            # other methods to check whether the cancellation succeeded or whether the
+            # job completed despite cancellation. On successful cancellation,
+            # the NasJob is not deleted; instead it becomes a job with
+            # a {::Google::Cloud::AIPlatform::V1::NasJob#error NasJob.error} value with a
+            # {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+            # `Code.CANCELLED`, and
+            # {::Google::Cloud::AIPlatform::V1::NasJob#state NasJob.state} is set to
+            # `CANCELLED`.
+            #
+            # @overload cancel_nas_job(request, options = nil)
+            #   Pass arguments to `cancel_nas_job` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::CancelNasJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::CancelNasJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload cancel_nas_job(name: nil)
+            #   Pass arguments to `cancel_nas_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the NasJob to cancel.
+            #     Format:
+            #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::CancelNasJobRequest.new
+            #
+            #   # Call the cancel_nas_job method.
+            #   result = client.cancel_nas_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def cancel_nas_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::CancelNasJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.cancel_nas_job.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.cancel_nas_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.cancel_nas_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @job_service_stub.call_rpc :cancel_nas_job, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a NasTrialDetail.
+            #
+            # @overload get_nas_trial_detail(request, options = nil)
+            #   Pass arguments to `get_nas_trial_detail` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_nas_trial_detail(name: nil)
+            #   Pass arguments to `get_nas_trial_detail` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the NasTrialDetail resource.
+            #     Format:
+            #     `projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::NasTrialDetail]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::NasTrialDetail]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest.new
+            #
+            #   # Call the get_nas_trial_detail method.
+            #   result = client.get_nas_trial_detail request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::NasTrialDetail.
+            #   p result
+            #
+            def get_nas_trial_detail request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_nas_trial_detail.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_nas_trial_detail.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_nas_trial_detail.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @job_service_stub.call_rpc :get_nas_trial_detail, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List top NasTrialDetails of a NasJob.
+            #
+            # @overload list_nas_trial_details(request, options = nil)
+            #   Pass arguments to `list_nas_trial_details` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_nas_trial_details(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_nas_trial_details` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the NasJob resource.
+            #     Format:
+            #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+            #   @param page_size [::Integer]
+            #     The standard list page size.
+            #   @param page_token [::String]
+            #     The standard list page token.
+            #     Typically obtained via
+            #     {::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsResponse#next_page_token ListNasTrialDetailsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_trial_details JobService.ListNasTrialDetails}
+            #     call.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::NasTrialDetail>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::NasTrialDetail>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest.new
+            #
+            #   # Call the list_nas_trial_details method.
+            #   result = client.list_nas_trial_details request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AIPlatform::V1::NasTrialDetail.
+            #     p response
+            #   end
+            #
+            def list_nas_trial_details request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_nas_trial_details.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_nas_trial_details.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_nas_trial_details.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @job_service_stub.call_rpc :list_nas_trial_details, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @job_service_stub, :list_nas_trial_details, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a BatchPredictionJob. A BatchPredictionJob once created will
             # right away be attempted to start.
             #
@@ -3175,6 +3859,41 @@ module Google
                 #
                 attr_reader :cancel_hyperparameter_tuning_job
                 ##
+                # RPC-specific configuration for `create_nas_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_nas_job
+                ##
+                # RPC-specific configuration for `get_nas_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_nas_job
+                ##
+                # RPC-specific configuration for `list_nas_jobs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_nas_jobs
+                ##
+                # RPC-specific configuration for `delete_nas_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_nas_job
+                ##
+                # RPC-specific configuration for `cancel_nas_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :cancel_nas_job
+                ##
+                # RPC-specific configuration for `get_nas_trial_detail`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_nas_trial_detail
+                ##
+                # RPC-specific configuration for `list_nas_trial_details`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_nas_trial_details
+                ##
                 # RPC-specific configuration for `create_batch_prediction_job`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3272,6 +3991,20 @@ module Google
                   @delete_hyperparameter_tuning_job = ::Gapic::Config::Method.new delete_hyperparameter_tuning_job_config
                   cancel_hyperparameter_tuning_job_config = parent_rpcs.cancel_hyperparameter_tuning_job if parent_rpcs.respond_to? :cancel_hyperparameter_tuning_job
                   @cancel_hyperparameter_tuning_job = ::Gapic::Config::Method.new cancel_hyperparameter_tuning_job_config
+                  create_nas_job_config = parent_rpcs.create_nas_job if parent_rpcs.respond_to? :create_nas_job
+                  @create_nas_job = ::Gapic::Config::Method.new create_nas_job_config
+                  get_nas_job_config = parent_rpcs.get_nas_job if parent_rpcs.respond_to? :get_nas_job
+                  @get_nas_job = ::Gapic::Config::Method.new get_nas_job_config
+                  list_nas_jobs_config = parent_rpcs.list_nas_jobs if parent_rpcs.respond_to? :list_nas_jobs
+                  @list_nas_jobs = ::Gapic::Config::Method.new list_nas_jobs_config
+                  delete_nas_job_config = parent_rpcs.delete_nas_job if parent_rpcs.respond_to? :delete_nas_job
+                  @delete_nas_job = ::Gapic::Config::Method.new delete_nas_job_config
+                  cancel_nas_job_config = parent_rpcs.cancel_nas_job if parent_rpcs.respond_to? :cancel_nas_job
+                  @cancel_nas_job = ::Gapic::Config::Method.new cancel_nas_job_config
+                  get_nas_trial_detail_config = parent_rpcs.get_nas_trial_detail if parent_rpcs.respond_to? :get_nas_trial_detail
+                  @get_nas_trial_detail = ::Gapic::Config::Method.new get_nas_trial_detail_config
+                  list_nas_trial_details_config = parent_rpcs.list_nas_trial_details if parent_rpcs.respond_to? :list_nas_trial_details
+                  @list_nas_trial_details = ::Gapic::Config::Method.new list_nas_trial_details_config
                   create_batch_prediction_job_config = parent_rpcs.create_batch_prediction_job if parent_rpcs.respond_to? :create_batch_prediction_job
                   @create_batch_prediction_job = ::Gapic::Config::Method.new create_batch_prediction_job_config
                   get_batch_prediction_job_config = parent_rpcs.get_batch_prediction_job if parent_rpcs.respond_to? :get_batch_prediction_job
