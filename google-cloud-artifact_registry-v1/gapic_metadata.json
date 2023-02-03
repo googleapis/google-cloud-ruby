@@ -20,6 +20,36 @@
                 "get_docker_image"
               ]
             },
+            "ListMavenArtifacts": {
+              "methods": [
+                "list_maven_artifacts"
+              ]
+            },
+            "GetMavenArtifact": {
+              "methods": [
+                "get_maven_artifact"
+              ]
+            },
+            "ListNpmPackages": {
+              "methods": [
+                "list_npm_packages"
+              ]
+            },
+            "GetNpmPackage": {
+              "methods": [
+                "get_npm_package"
+              ]
+            },
+            "ListPythonPackages": {
+              "methods": [
+                "list_python_packages"
+              ]
+            },
+            "GetPythonPackage": {
+              "methods": [
+                "get_python_package"
+              ]
+            },
             "ImportAptArtifacts": {
               "methods": [
                 "import_apt_artifacts"
@@ -143,6 +173,16 @@
             "UpdateProjectSettings": {
               "methods": [
                 "update_project_settings"
+              ]
+            },
+            "GetVPCSCConfig": {
+              "methods": [
+                "get_vpcsc_config"
+              ]
+            },
+            "UpdateVPCSCConfig": {
+              "methods": [
+                "update_vpcsc_config"
               ]
             }
           }
