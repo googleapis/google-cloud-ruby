@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.1 (2023-02-03)
+
+#### Documentation
+
+* Improve to DataScan API documentation ([#20105](https://github.com/googleapis/google-cloud-ruby/issues/20105)) 
+
 ### 0.6.0 (2023-01-05)
 
 #### Features
