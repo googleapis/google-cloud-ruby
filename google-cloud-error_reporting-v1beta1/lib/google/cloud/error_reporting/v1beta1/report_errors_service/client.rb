@@ -161,10 +161,6 @@ module Google
             # on Cloud Logging and doesn't analyze logs stored
             # in regional log buckets or logs routed to other Google Cloud projects.
             #
-            # For more information, see
-            # [Using Error Reporting with regionalized
-            # logs](/error-reporting/docs/regionalization).
-            #
             # @overload report_error_event(request, options = nil)
             #   Pass arguments to `report_error_event` via a request object, either of type
             #   {::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest} or an equivalent Hash.
