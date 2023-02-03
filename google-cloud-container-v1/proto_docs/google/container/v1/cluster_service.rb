@@ -2743,7 +2743,9 @@ module Google
         #     [Output only] Server-defined URL for the resource.
         # @!attribute [rw] version
         #   @return [::String]
-        #     The version of the Kubernetes of this node.
+        #     The version of Kubernetes running on this NodePool's nodes. If unspecified,
+        #     it defaults as described
+        #     [here](https://cloud.google.com/kubernetes-engine/versioning#specifying_node_version).
         # @!attribute [rw] instance_group_urls
         #   @return [::Array<::String>]
         #     [Output only] The resource URLs of the [managed instance
@@ -3348,8 +3350,7 @@ module Google
         #     information, read [how to specify min CPU
         #     platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform).
         #     This field is deprecated, min_cpu_platform should be specified using
-        #     https://cloud.google.com/requested-min-cpu-platform label selector on the
-        #     pod.
+        #     `cloud.google.com/requested-min-cpu-platform` label selector on the pod.
         #     To unset the min cpu platform field pass "automatic"
         #     as field value.
         # @!attribute [rw] disk_size_gb
