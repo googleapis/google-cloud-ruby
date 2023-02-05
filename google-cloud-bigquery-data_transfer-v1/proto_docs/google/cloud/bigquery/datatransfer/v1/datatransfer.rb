@@ -213,8 +213,8 @@ module Google
           # A request to get data source info.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/dataSources/{data_source_id}` or
+          #     Required. The field will contain name of the resource requested, for
+          #     example: `projects/{project_id}/dataSources/{data_source_id}` or
           #     `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`
           class GetDataSourceRequest
             include ::Google::Protobuf::MessageExts
@@ -224,8 +224,8 @@ module Google
           # Request to list supported data sources and their data transfer settings.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The BigQuery project id for which data sources should be returned.
-          #     Must be in the form: `projects/{project_id}` or
+          #     Required. The BigQuery project id for which data sources should be
+          #     returned. Must be in the form: `projects/{project_id}` or
           #     `projects/{project_id}/locations/{location_id}`
           # @!attribute [rw] page_token
           #   @return [::String]
@@ -265,10 +265,11 @@ module Google
           # user.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The BigQuery project id where the transfer configuration should be created.
-          #     Must be in the format projects/\\{project_id}/locations/\\{location_id} or
-          #     projects/\\{project_id}. If specified location and location of the
-          #     destination bigquery dataset do not match - the request will fail.
+          #     Required. The BigQuery project id where the transfer configuration should
+          #     be created. Must be in the format
+          #     projects/\\{project_id}/locations/\\{location_id} or projects/\\{project_id}. If
+          #     specified location and location of the destination bigquery dataset do not
+          #     match - the request will fail.
           # @!attribute [rw] transfer_config
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
           #     Required. Data transfer configuration to create.
@@ -379,8 +380,8 @@ module Google
           # A request to get data transfer information.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}` or
+          #     Required. The field will contain name of the resource requested, for
+          #     example: `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
           class GetTransferConfigRequest
             include ::Google::Protobuf::MessageExts
@@ -391,8 +392,8 @@ module Google
           # and log messages will be deleted as well.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}` or
+          #     Required. The field will contain name of the resource requested, for
+          #     example: `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
           class DeleteTransferConfigRequest
             include ::Google::Protobuf::MessageExts
@@ -402,8 +403,9 @@ module Google
           # A request to get data transfer run information.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+          #     Required. The field will contain name of the resource requested, for
+          #     example: `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+          #     or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
           class GetTransferRunRequest
             include ::Google::Protobuf::MessageExts
@@ -413,8 +415,9 @@ module Google
           # A request to delete data transfer run information.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+          #     Required. The field will contain name of the resource requested, for
+          #     example: `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+          #     or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
           class DeleteTransferRunRequest
             include ::Google::Protobuf::MessageExts
@@ -463,8 +466,8 @@ module Google
           # A request to list data transfer runs.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. Name of transfer configuration for which transfer runs should be retrieved.
-          #     Format of transfer configuration resource name is:
+          #     Required. Name of transfer configuration for which transfer runs should be
+          #     retrieved. Format of transfer configuration resource name is:
           #     `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] states

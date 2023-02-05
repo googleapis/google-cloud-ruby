@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/orgpolicy/v2/constraint_pb'
 require 'google/protobuf/empty_pb'
+require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/expr_pb'
 
@@ -18,6 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :spec, :message, 2, "google.cloud.orgpolicy.v2.PolicySpec"
       optional :alternate, :message, 3, "google.cloud.orgpolicy.v2.AlternatePolicySpec"
+      optional :dry_run_spec, :message, 4, "google.cloud.orgpolicy.v2.PolicySpec"
     end
     add_message "google.cloud.orgpolicy.v2.AlternatePolicySpec" do
       optional :launch, :string, 1
@@ -73,6 +75,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.orgpolicy.v2.UpdatePolicyRequest" do
       optional :policy, :message, 1, "google.cloud.orgpolicy.v2.Policy"
+      optional :update_mask, :message, 3, "google.protobuf.FieldMask"
     end
     add_message "google.cloud.orgpolicy.v2.DeletePolicyRequest" do
       optional :name, :string, 1

@@ -52,8 +52,8 @@ module Google
         def next
           return nil unless next?
           ensure_service!
-          grpc = @client.service.list_collections @parent, token: token, max: @max
-          self.class.from_grpc grpc, @client, @parent, max: @max
+          grpc = @client.service.list_collections @parent, token: token, max: @max, read_time: @read_time
+          self.class.from_grpc grpc, @client, @parent, max: @max, read_time: @read_time
         end
 
         ##
@@ -110,7 +110,7 @@ module Google
         ##
         # @private New CollectionReference::List from a `Google::Cloud::Firestore::V1::ListCollectionIdsResponse`
         # object.
-        def self.from_grpc grpc, client, parent, max: nil
+        def self.from_grpc grpc, client, parent, max: nil, read_time: nil
           raise ArgumentError, "parent is required" unless parent
           cols = CollectionReferenceList.new(Array(grpc.collection_ids).map do |collection_id|
             CollectionReference.from_path "#{parent}/#{collection_id}", client
@@ -121,6 +121,7 @@ module Google
           cols.instance_variable_set :@client, client
           cols.instance_variable_set :@parent, parent
           cols.instance_variable_set :@max, max
+          cols.instance_variable_set :@read_time, read_time
           cols
         end
 

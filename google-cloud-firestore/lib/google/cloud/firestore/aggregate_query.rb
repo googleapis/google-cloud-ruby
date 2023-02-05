@@ -38,7 +38,7 @@ module Google
       #                          .add_count
       #
       #   aggregate_query.get do |aggregate_snapshot|
-      #     puts aggregate_snapshot.get('count')
+      #     puts aggregate_snapshot.get
       #   end
       #
       # @example Alias an aggregate query
@@ -102,7 +102,7 @@ module Google
         #                          .add_count
         #
         #   aggregate_query.get do |aggregate_snapshot|
-        #     puts aggregate_snapshot.get('count')
+        #     puts aggregate_snapshot.get
         #   end
         #
         def add_count aggregate_alias: nil
@@ -135,7 +135,7 @@ module Google
         #                          .add_count
         #
         #   aggregate_query.get do |aggregate_snapshot|
-        #     puts aggregate_snapshot.get('count')
+        #     puts aggregate_snapshot.get
         #   end
         #
         def get

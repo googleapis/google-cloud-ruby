@@ -1,5 +1,14 @@
 # Release History
 
+### 0.4.1 (2023-01-26)
+
+#### Bug Fixes
+
+* Improvements to retry behavior ([#20060](https://github.com/googleapis/google-cloud-ruby/issues/20060)) 
+#### Documentation
+
+* Various fixes to reference documentation formatting 
+
 ### 0.4.0 (2022-07-08)
 
 #### Features

@@ -91,6 +91,27 @@ module Google
                             gql_query: gql_query
         end
 
+        ## Query for aggregates
+        def run_aggregation_query query, namespace = nil, consistency: nil, transaction: nil
+          gql_query = nil
+          if query.is_a? Google::Cloud::Datastore::V1::GqlQuery
+            gql_query = query
+            query = nil
+          end
+          read_options = generate_read_options consistency, transaction
+          if namespace
+            partition_id = Google::Cloud::Datastore::V1::PartitionId.new(
+              namespace_id: namespace
+            )
+          end
+
+          service.run_aggregation_query project_id: project,
+                                        partition_id: partition_id,
+                                        read_options: read_options,
+                                        aggregation_query: query,
+                                        gql_query: gql_query
+        end
+
         ##
         # Begin a new transaction.
         def begin_transaction read_only: nil, previous_transaction: nil

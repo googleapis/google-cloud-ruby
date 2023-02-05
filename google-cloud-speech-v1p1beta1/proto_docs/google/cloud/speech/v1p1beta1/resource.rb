@@ -65,8 +65,8 @@ module Google
         #     enabled, so negative boost will simply be ignored. Though `boost` can
         #     accept a wide range of positive values, most use cases are best served with
         #     values between 0 (exclusive) and 20. We recommend using a binary search
-        #     approach to finding the optimal value for your use case. Speech recognition
-        #     will skip PhraseSets with a boost value of 0.
+        #     approach to finding the optimal value for your use case as well as adding
+        #     phrases both with and without boost to your requests.
         class PhraseSet
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -94,8 +94,8 @@ module Google
           # Speech-to-Text supports three locations: `global`, `us` (US North America),
           # and `eu` (Europe). If you are calling the `speech.googleapis.com`
           # endpoint, use the `global` location. To specify a region, use a
-          # [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-          # `eu` location value.
+          # [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+          # with matching `us` or `eu` location value.
           # @!attribute [rw] value
           #   @return [::String]
           #     The phrase itself.
@@ -108,8 +108,8 @@ module Google
           #     boost will simply be ignored. Though `boost` can accept a wide range of
           #     positive values, most use cases are best served
           #     with values between 0 and 20. We recommend using a binary search approach
-          #     to finding the optimal value for your use case. Speech recognition
-          #     will skip PhraseSets with a boost value of 0.
+          #     to finding the optimal value for your use case as well as adding
+          #     phrases both with and without boost to your requests.
           class Phrase
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

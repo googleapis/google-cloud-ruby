@@ -26,7 +26,7 @@ describe "Aggregate Query", :firestore_acceptance do
                        .add_count
 
     snapshot = aq.get.first
-    _(snapshot.get('count')).must_equal 3
+    _(snapshot.get).must_equal 3
   end
 
   it "returns 0 for no records" do
@@ -36,7 +36,7 @@ describe "Aggregate Query", :firestore_acceptance do
                        .add_count
 
     snapshot = aq.get.first
-    _(snapshot.get('count')).must_equal 0
+    _(snapshot.get).must_equal 0
   end
 
   it "returns count on filter" do
@@ -50,7 +50,7 @@ describe "Aggregate Query", :firestore_acceptance do
               .add_count
 
     snapshot = aq.get.first
-    _(snapshot.get('count')).must_equal 1
+    _(snapshot.get).must_equal 1
   end
 
   it "returns count on limit" do
@@ -65,7 +65,7 @@ describe "Aggregate Query", :firestore_acceptance do
               .add_count
 
     snapshot = aq.get.first
-    _(snapshot.get('count')).must_equal 2
+    _(snapshot.get).must_equal 2
   end
 
   it "returns count with a custom alias" do
@@ -78,6 +78,7 @@ describe "Aggregate Query", :firestore_acceptance do
                        .add_count aggregate_alias: 'one'
 
     snapshot = aq.get.first
+    _(snapshot.get).must_equal 3
     _(snapshot.get('one')).must_equal 3
   end
 
@@ -109,6 +110,20 @@ describe "Aggregate Query", :firestore_acceptance do
     _(snapshot.get('unspecified_alias')).must_be :nil?
   end
 
+  it "throws error when custom alias isn't specified for multiple aliases" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
+    rand_query_col.add({qux: "c"})
+
+    aq = rand_query_col.aggregate_query
+                       .add_count(aggregate_alias: 'one')
+                       .add_count(aggregate_alias: 'two')
+
+    snapshot = aq.get.first
+    expect { snapshot.get }.must_raise ArgumentError
+  end
+
   it "throws error when duplicating aliases" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
@@ -133,10 +148,10 @@ describe "Aggregate Query", :firestore_acceptance do
                        .add_count
 
     snapshot = aq.get.first
-    _(snapshot.get('count')).must_equal 3
+    _(snapshot.get).must_equal 3
 
     snapshot = aq.get.first
-    _(snapshot.get('count')).must_equal 3
+    _(snapshot.get).must_equal 3
   end
 
   it "returns different count when data changes" do
@@ -149,12 +164,12 @@ describe "Aggregate Query", :firestore_acceptance do
                        .add_count
 
     snapshot = aq.get.first
-    _(snapshot.get('count')).must_equal 3
+    _(snapshot.get).must_equal 3
 
     rand_query_col.doc("doc4").create({foo: "d"})
 
     snapshot = aq.get.first
-    _(snapshot.get('count')).must_equal 4
+    _(snapshot.get).must_equal 4
   end
   
   it "throws error when no aggregate is added" do
@@ -183,6 +198,6 @@ describe "Aggregate Query", :firestore_acceptance do
     end
 
     snapshot = results.first
-    _(snapshot.get('count')).must_equal 3
+    _(snapshot.get).must_equal 3
   end
 end

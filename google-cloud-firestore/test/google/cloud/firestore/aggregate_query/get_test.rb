@@ -56,7 +56,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
     _(results.count).must_equal 1
     results.each do |result|
       _(result).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot 
-      _(result.get('count')).must_equal 3
+      _(result.get).must_equal 3
     end
   end
 
@@ -92,6 +92,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
     _(results.count).must_equal 1
     results.each do |result|
       _(result).must_be_kind_of Google::Cloud::Firestore::AggregateQuerySnapshot 
+      _(result.get).must_equal 3
       _(result.get('total_score')).must_equal 3
     end
   end

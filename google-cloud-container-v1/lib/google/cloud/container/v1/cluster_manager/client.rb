@@ -683,7 +683,9 @@ module Google
             #     - "1.X.Y-gke.N": picks an explicit Kubernetes version
             #     - "-": picks the Kubernetes master version
             #   @param image_type [::String]
-            #     Required. The desired image type for the node pool.
+            #     Required. The desired image type for the node pool. Please see
+            #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+            #     available image types.
             #   @param name [::String]
             #     The name (project, location, cluster, node pool) of the node pool to
             #     update. Specified in the format
@@ -1156,8 +1158,8 @@ module Google
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
             #   @param addons_config [::Google::Cloud::Container::V1::AddonsConfig, ::Hash]
-            #     Required. The desired configurations for the various addons available to run in the
-            #     cluster.
+            #     Required. The desired configurations for the various addons available to
+            #     run in the cluster.
             #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set addons.
             #     Specified in the format `projects/*/locations/*/clusters/*`.

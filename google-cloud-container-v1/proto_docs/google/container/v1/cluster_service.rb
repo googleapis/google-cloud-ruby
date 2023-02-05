@@ -217,7 +217,9 @@ module Google
         # @!attribute [rw] image_type
         #   @return [::String]
         #     The image type to use for this node. Note that for a given image type,
-        #     the latest version of it will be used.
+        #     the latest version of it will be used. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The map of Kubernetes labels (key/value pairs) to be applied to each node.
@@ -1133,6 +1135,13 @@ module Google
         # @!attribute [rw] ipv6_access_type
         #   @return [::Google::Cloud::Container::V1::IPv6AccessType]
         #     The ipv6 access type (internal or external) when create_subnetwork is true
+        # @!attribute [r] subnet_ipv6_cidr_block
+        #   @return [::String]
+        #     Output only. [Output only] The subnet's IPv6 CIDR block used by nodes and
+        #     pods.
+        # @!attribute [r] services_ipv6_cidr_block
+        #   @return [::String]
+        #     Output only. [Output only] The services IPv6 CIDR block for the cluster.
         class IPAllocationPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2010,7 +2019,9 @@ module Google
         #     - "-": picks the Kubernetes master version
         # @!attribute [rw] image_type
         #   @return [::String]
-        #     Required. The desired image type for the node pool.
+        #     Required. The desired image type for the node pool. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name (project, location, cluster, node pool) of the node pool to
@@ -2213,8 +2224,8 @@ module Google
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] addons_config
         #   @return [::Google::Cloud::Container::V1::AddonsConfig]
-        #     Required. The desired configurations for the various addons available to run in the
-        #     cluster.
+        #     Required. The desired configurations for the various addons available to
+        #     run in the cluster.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name (project, location, cluster) of the cluster to set addons.
@@ -2773,8 +2784,8 @@ module Google
         #     Specifies the node placement policy.
         # @!attribute [r] update_info
         #   @return [::Google::Cloud::Container::V1::NodePool::UpdateInfo]
-        #     Output only. [Output only] Update info contains relevant information during a node
-        #     pool update.
+        #     Output only. [Output only] Update info contains relevant information during
+        #     a node pool update.
         # @!attribute [rw] etag
         #   @return [::String]
         #     This checksum is computed by the server based on the value of node pool
@@ -3366,7 +3377,9 @@ module Google
         #     https://cloud.google.com/compute/docs/disks/customer-managed-encryption
         # @!attribute [rw] image_type
         #   @return [::String]
-        #     The image type to use for NAP created node.
+        #     The image type to use for NAP created node. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         class AutoprovisioningNodePoolDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4652,7 +4665,8 @@ module Google
 
         # Strategy used for node pool update.
         module NodePoolUpdateStrategy
-          # Default value.
+          # Default value if unset. GKE internally defaults the update strategy to
+          # SURGE for unspecified strategies.
           NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED = 0
 
           # blue-green upgrade.

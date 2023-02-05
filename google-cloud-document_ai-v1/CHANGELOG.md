@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.0 (2023-01-19)
+
+#### Features
+
+* Support for the get_processor_type RPC ([#20034](https://github.com/googleapis/google-cloud-ruby/issues/20034)) 
+
 ### 0.8.0 (2022-12-15)
 
 #### Features

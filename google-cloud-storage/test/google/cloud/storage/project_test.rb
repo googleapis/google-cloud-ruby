@@ -39,6 +39,23 @@ describe Google::Cloud::Storage::Project, :mock_storage do
   let(:bucket_retention_period) { 86400 }
   let(:metageneration) { 6 }
 
+  it "adds custom headers to the request options" do
+    headers = {
+      "x-goog-1" => 1,
+      "x-goog-2" => ["x-goog-", 2]
+    }
+
+    storage.add_custom_header "x-goog-3" , "x-goog-3, x-goog-3"
+    storage.add_custom_header "x-goog-4" , ["x-goog-4", "x-goog-4"]
+    storage.add_custom_headers headers
+
+    headers["x-goog-3"] = "x-goog-3, x-goog-3"
+    headers["x-goog-4"] = ["x-goog-4", "x-goog-4"]
+    headers.each do |key, value|
+      _(storage.service.service.request_options.header[key]).must_equal value
+    end
+  end
+
   it "gets and memoizes its service_account_email" do
     mock = Minitest::Mock.new
     mock.expect :get_project_service_account, service_account_resp, [project]

@@ -104,6 +104,18 @@ module Google
           # Uses Second Generation environment.
           EXECUTION_ENVIRONMENT_GEN2 = 2
         end
+
+        # Specifies behavior if an encryption key used by a resource is revoked.
+        module EncryptionKeyRevocationAction
+          # Unspecified
+          ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED = 0
+
+          # Prevents the creation of new instances.
+          PREVENT_NEW = 1
+
+          # Shuts down existing instances, and prevents creation of new ones.
+          SHUTDOWN = 2
+        end
       end
     end
   end

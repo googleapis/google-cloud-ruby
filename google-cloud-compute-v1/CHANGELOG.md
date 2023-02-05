@@ -1,5 +1,13 @@
 # Release History
 
+### 1.10.0 (2023-01-26)
+
+#### Features
+
+* Added AllocationSpecificSKUReservation#source_instance_template ([#20054](https://github.com/googleapis/google-cloud-ruby/issues/20054)) 
+* Added NetworkInterface#network_attachment 
+* Added Reservation#resource_status 
+
 ### 1.9.0 (2023-01-10)
 
 #### Features

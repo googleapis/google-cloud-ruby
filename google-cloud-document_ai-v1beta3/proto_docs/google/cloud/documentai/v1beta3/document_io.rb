@@ -120,6 +120,9 @@ module Google
         #   @return [::Boolean]
         #     Enables special handling for PDFs with existing text information. Results
         #     in better text extraction quality in such PDF inputs.
+        # @!attribute [rw] advanced_ocr_options
+        #   @return [::Array<::String>]
+        #     A list of advanced OCR options to further fine-tune OCR behavior.
         class OcrConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -57,6 +57,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :last_attempt_result, :message, 26, "google.cloud.run.v2.TaskAttemptResult"
       optional :encryption_key, :string, 28
       optional :vpc_access, :message, 29, "google.cloud.run.v2.VpcAccess"
+      optional :log_uri, :string, 32
       optional :etag, :string, 99
     end
     add_message "google.cloud.run.v2.TaskAttemptResult" do

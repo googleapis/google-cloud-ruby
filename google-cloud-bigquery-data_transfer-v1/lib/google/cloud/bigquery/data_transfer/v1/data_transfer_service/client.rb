@@ -234,8 +234,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The field will contain name of the resource requested, for example:
-              #     `projects/{project_id}/dataSources/{data_source_id}` or
+              #     Required. The field will contain name of the resource requested, for
+              #     example: `projects/{project_id}/dataSources/{data_source_id}` or
               #     `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -321,8 +321,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The BigQuery project id for which data sources should be returned.
-              #     Must be in the form: `projects/{project_id}` or
+              #     Required. The BigQuery project id for which data sources should be
+              #     returned. Must be in the form: `projects/{project_id}` or
               #     `projects/{project_id}/locations/{location_id}`
               #   @param page_token [::String]
               #     Pagination token, which can be used to request a specific page
@@ -423,10 +423,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The BigQuery project id where the transfer configuration should be created.
-              #     Must be in the format projects/\\{project_id}/locations/\\{location_id} or
-              #     projects/\\{project_id}. If specified location and location of the
-              #     destination bigquery dataset do not match - the request will fail.
+              #     Required. The BigQuery project id where the transfer configuration should
+              #     be created. Must be in the format
+              #     projects/\\{project_id}/locations/\\{location_id} or projects/\\{project_id}. If
+              #     specified location and location of the destination bigquery dataset do not
+              #     match - the request will fail.
               #   @param transfer_config [::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig, ::Hash]
               #     Required. Data transfer configuration to create.
               #   @param authorization_code [::String]
@@ -682,8 +683,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The field will contain name of the resource requested, for example:
-              #     `projects/{project_id}/transferConfigs/{config_id}` or
+              #     Required. The field will contain name of the resource requested, for
+              #     example: `projects/{project_id}/transferConfigs/{config_id}` or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -769,8 +770,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The field will contain name of the resource requested, for example:
-              #     `projects/{project_id}/transferConfigs/{config_id}` or
+              #     Required. The field will contain name of the resource requested, for
+              #     example: `projects/{project_id}/transferConfigs/{config_id}` or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -1155,8 +1156,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The field will contain name of the resource requested, for example:
-              #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+              #     Required. The field will contain name of the resource requested, for
+              #     example: `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+              #     or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -1242,8 +1244,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The field will contain name of the resource requested, for example:
-              #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+              #     Required. The field will contain name of the resource requested, for
+              #     example: `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+              #     or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -1329,8 +1332,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Name of transfer configuration for which transfer runs should be retrieved.
-              #     Format of transfer configuration resource name is:
+              #     Required. Name of transfer configuration for which transfer runs should be
+              #     retrieved. Format of transfer configuration resource name is:
               #     `projects/{project_id}/transferConfigs/{config_id}` or
               #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
               #   @param states [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::TransferState>]

@@ -46,6 +46,8 @@ module Google
             rpc :FetchProcessorTypes, ::Google::Cloud::DocumentAI::V1::FetchProcessorTypesRequest, ::Google::Cloud::DocumentAI::V1::FetchProcessorTypesResponse
             # Lists the processor types that exist.
             rpc :ListProcessorTypes, ::Google::Cloud::DocumentAI::V1::ListProcessorTypesRequest, ::Google::Cloud::DocumentAI::V1::ListProcessorTypesResponse
+            # Gets a processor type detail.
+            rpc :GetProcessorType, ::Google::Cloud::DocumentAI::V1::GetProcessorTypeRequest, ::Google::Cloud::DocumentAI::V1::ProcessorType
             # Lists all processors which belong to this project.
             rpc :ListProcessors, ::Google::Cloud::DocumentAI::V1::ListProcessorsRequest, ::Google::Cloud::DocumentAI::V1::ListProcessorsResponse
             # Gets a processor detail.

@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.18.0 (2023-01-19)
+
+#### Features
+
+* Support for enabling access to the customized dashboard in training chief container ([#20037](https://github.com/googleapis/google-cloud-ruby/issues/20037)) 
+
 ### 0.17.0 (2023-01-11)
 
 #### Features

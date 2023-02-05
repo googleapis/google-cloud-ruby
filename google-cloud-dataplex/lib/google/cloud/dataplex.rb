@@ -85,6 +85,12 @@ module Google
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
       #
+      # ## About DataScanService
+      #
+      # DataScanService manages DataScan resources which can be configured to run
+      # various types of data scanning workload and generate enriched metadata (e.g.
+      # Data Profile, Data Quality) for the data source.
+      #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
       # @return [::Object] A client object for the specified version.

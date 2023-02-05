@@ -1,5 +1,17 @@
 # Release History
 
+### 2.9.1 (2023-02-03)
+
+#### Bug Fixes
+
+* Change "aggregate_alias" to optional param ([#20082](https://github.com/googleapis/google-cloud-ruby/issues/20082)) 
+
+### 2.9.0 (2023-01-26)
+
+#### Features
+
+* Added support for read time ([#19851](https://github.com/googleapis/google-cloud-ruby/issues/19851)) 
+
 ### 2.8.0 (2023-01-05)
 
 #### Features

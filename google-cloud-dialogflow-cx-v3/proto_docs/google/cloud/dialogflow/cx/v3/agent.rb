@@ -242,6 +242,9 @@ module Google
 
               # Agent content will be exported as raw bytes.
               BLOB = 1
+
+              # Agent content will be exported in JSON Package format.
+              JSON_PACKAGE = 4
             end
           end
 

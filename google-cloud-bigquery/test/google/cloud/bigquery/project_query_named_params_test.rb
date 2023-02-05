@@ -799,7 +799,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
     assert_valid_data data
   end
 
-  it "queries the data with arry of structs" do
+  it "queries the data with array of structs" do
     job_gapi = query_job_gapi "#{query} WHERE my_structs IN @my_structs", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters =  [
       Google::Apis::BigqueryV2::QueryParameter.new(
