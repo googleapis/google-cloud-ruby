@@ -55,6 +55,7 @@ module Google
     # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
     # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
     # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
+    # @param [Integer] upload_chunk_size The chunk size of storage upload.
     #
     # @return [Google::Cloud::Storage::Project]
     #
@@ -74,7 +75,7 @@ module Google
     #   readonly_storage = gcloud.storage scope: readonly_scope
     #
     def storage scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil,
-                max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil
+                max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil
       Google::Cloud.storage @project, @keyfile, scope: scope,
                                                 retries: (retries || @retries),
                                                 timeout: (timeout || @timeout),
@@ -84,7 +85,8 @@ module Google
                                                 max_elapsed_time: max_elapsed_time,
                                                 base_interval: base_interval,
                                                 max_interval: max_interval,
-                                                multiplier: multiplier
+                                                multiplier: multiplier,
+                                                upload_chunk_size: upload_chunk_size
     end
 
     ##
@@ -120,6 +122,7 @@ module Google
     # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
     # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
     # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
+    # @param [Integer] upload_chunk_size The chunk size of storage upload.
     #
     # @return [Google::Cloud::Storage::Project]
     #
@@ -134,7 +137,8 @@ module Google
     #
     def self.storage project_id = nil, credentials = nil, scope: nil,
                      retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil,
-                     max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil
+                     max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil,
+                     upload_chunk_size: nil
       require "google/cloud/storage"
       Google::Cloud::Storage.new project_id: project_id,
                                  credentials: credentials,
@@ -147,7 +151,8 @@ module Google
                                  max_elapsed_time: max_elapsed_time,
                                  base_interval: base_interval,
                                  max_interval: max_interval,
-                                 multiplier: multiplier
+                                 multiplier: multiplier,
+                                 upload_chunk_size: upload_chunk_size
     end
   end
 end
@@ -182,6 +187,7 @@ Google::Cloud.configure.add_config! :storage do |config|
   config.add_field! :open_timeout, nil, match: Integer
   config.add_field! :read_timeout, nil, match: Integer
   config.add_field! :send_timeout, nil, match: Integer
+  config.add_field! :upload_chunk_size, nil, match: Integer
   # TODO: Remove once discovery document is updated.
   config.add_field! :endpoint, "https://storage.googleapis.com/", match: String
 end

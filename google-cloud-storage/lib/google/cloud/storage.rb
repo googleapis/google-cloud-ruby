@@ -67,6 +67,7 @@ module Google
       # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
+      # @param [Integer] upload_chunk_size The chunk size of storage upload.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -89,7 +90,7 @@ module Google
                    timeout: nil, open_timeout: nil, read_timeout: nil,
                    send_timeout: nil, endpoint: nil, project: nil, keyfile: nil,
                    max_elapsed_time: nil, base_interval: nil, max_interval: nil,
-                   multiplier: nil
+                   multiplier: nil, upload_chunk_size: nil
         scope             ||= configure.scope
         retries           ||= configure.retries
         timeout           ||= configure.timeout
@@ -102,6 +103,7 @@ module Google
         base_interval     ||= configure.base_interval
         max_interval      ||= configure.max_interval
         multiplier        ||= configure.multiplier
+        upload_chunk_size ||= configure.upload_chunk_size
 
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Storage::Credentials.new credentials, scope: scope
@@ -117,7 +119,7 @@ module Google
             read_timeout: read_timeout, send_timeout: send_timeout,
             host: endpoint, quota_project: configure.quota_project,
             max_elapsed_time: max_elapsed_time, base_interval: base_interval,
-            max_interval: max_interval, multiplier: multiplier
+            max_interval: max_interval, multiplier: multiplier, upload_chunk_size: upload_chunk_size
           )
         )
       end
@@ -141,6 +143,7 @@ module Google
       # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
+      # @param [Integer] upload_chunk_size The chunk size of storage upload.
       #
       # @return [Google::Cloud::Storage::Project]
       #
@@ -159,7 +162,7 @@ module Google
       def self.anonymous retries: nil, timeout: nil, open_timeout: nil,
                          read_timeout: nil, send_timeout: nil, endpoint: nil,
                          max_elapsed_time: nil, base_interval: nil, max_interval: nil,
-                         multiplier: nil
+                         multiplier: nil, upload_chunk_size: nil
         open_timeout ||= timeout
         read_timeout ||= timeout
         send_timeout ||= timeout
@@ -168,7 +171,7 @@ module Google
             nil, nil, retries: retries, timeout: timeout, open_timeout: open_timeout,
             read_timeout: read_timeout, send_timeout: send_timeout, host: endpoint,
             max_elapsed_time: max_elapsed_time, base_interval: base_interval,
-            max_interval: max_interval, multiplier: multiplier
+            max_interval: max_interval, multiplier: multiplier, upload_chunk_size: upload_chunk_size
           )
         )
       end
@@ -202,6 +205,7 @@ module Google
       # * `open_timeout` - (Integer) How long, in seconds, before failed connections time out.
       # * `read_timeout` - (Integer) How long, in seconds, before requests time out.
       # * `send_timeout` - (Integer) How long, in seconds, before receiving response from server times out.
+      # * `upload_chunk_size` - (Integer) The chunk size of storage upload.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Storage library uses.
