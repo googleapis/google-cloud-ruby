@@ -3052,6 +3052,206 @@
       ]
     },
     {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetSearchAds360Link_sync",
+      "title": "Snippet for get_search_ads360_link in AnalyticsAdminService",
+      "description": "Basic snippet for get_search_ads360_link in AnalyticsAdminService",
+      "file": "analytics_admin_service/get_search_ads360_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_search_ads360_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_search_ads360_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetSearchAds360LinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::SearchAds360Link",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetSearchAds360Link",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetSearchAds360Link",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListSearchAds360Links_sync",
+      "title": "Snippet for list_search_ads360_links in AnalyticsAdminService",
+      "description": "Basic snippet for list_search_ads360_links in AnalyticsAdminService",
+      "file": "analytics_admin_service/list_search_ads360_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_search_ads360_links",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_search_ads360_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListSearchAds360Links",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListSearchAds360Links",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateSearchAds360Link_sync",
+      "title": "Snippet for create_search_ads360_link in AnalyticsAdminService",
+      "description": "Basic snippet for create_search_ads360_link in AnalyticsAdminService",
+      "file": "analytics_admin_service/create_search_ads360_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_search_ads360_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_search_ads360_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateSearchAds360LinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::SearchAds360Link",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateSearchAds360Link",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateSearchAds360Link",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteSearchAds360Link_sync",
+      "title": "Snippet for delete_search_ads360_link in AnalyticsAdminService",
+      "description": "Basic snippet for delete_search_ads360_link in AnalyticsAdminService",
+      "file": "analytics_admin_service/delete_search_ads360_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_search_ads360_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_search_ads360_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteSearchAds360LinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSearchAds360Link",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteSearchAds360Link",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateSearchAds360Link_sync",
+      "title": "Snippet for update_search_ads360_link in AnalyticsAdminService",
+      "description": "Basic snippet for update_search_ads360_link in AnalyticsAdminService",
+      "file": "analytics_admin_service/update_search_ads360_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_search_ads360_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_search_ads360_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateSearchAds360LinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::SearchAds360Link",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSearchAds360Link",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateSearchAds360Link",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAttributionSettings_sync",
       "title": "Snippet for get_attribution_settings in AnalyticsAdminService",
       "description": "Basic snippet for get_attribution_settings in AnalyticsAdminService",
@@ -3167,6 +3367,166 @@
         {
           "start": 20,
           "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_SetAutomatedGa4ConfigurationOptOut_sync",
+      "title": "Snippet for set_automated_ga4_configuration_opt_out in AnalyticsAdminService",
+      "description": "Basic snippet for set_automated_ga4_configuration_opt_out in AnalyticsAdminService",
+      "file": "analytics_admin_service/set_automated_ga4_configuration_opt_out.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_automated_ga4_configuration_opt_out",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#set_automated_ga4_configuration_opt_out",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "SetAutomatedGa4ConfigurationOptOut",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.SetAutomatedGa4ConfigurationOptOut",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_FetchAutomatedGa4ConfigurationOptOut_sync",
+      "title": "Snippet for fetch_automated_ga4_configuration_opt_out in AnalyticsAdminService",
+      "description": "Basic snippet for fetch_automated_ga4_configuration_opt_out in AnalyticsAdminService",
+      "file": "analytics_admin_service/fetch_automated_ga4_configuration_opt_out.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_automated_ga4_configuration_opt_out",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#fetch_automated_ga4_configuration_opt_out",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "FetchAutomatedGa4ConfigurationOptOut",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.FetchAutomatedGa4ConfigurationOptOut",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetBigQueryLink_sync",
+      "title": "Snippet for get_big_query_link in AnalyticsAdminService",
+      "description": "Basic snippet for get_big_query_link in AnalyticsAdminService",
+      "file": "analytics_admin_service/get_big_query_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_big_query_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_big_query_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::BigQueryLink",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetBigQueryLink",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetBigQueryLink",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListBigQueryLinks_sync",
+      "title": "Snippet for list_big_query_links in AnalyticsAdminService",
+      "description": "Basic snippet for list_big_query_links in AnalyticsAdminService",
+      "file": "analytics_admin_service/list_big_query_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_big_query_links",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_big_query_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListBigQueryLinksResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListBigQueryLinks",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListBigQueryLinks",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
           "type": "FULL"
         }
       ]

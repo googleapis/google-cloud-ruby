@@ -59,6 +59,18 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
+  def test_big_query_link_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.big_query_link_path property: "value0", bigquery_link: "value1"
+      assert_equal "properties/value0/bigQueryLinks/value1", path
+    end
+  end
+
   def test_conversion_event_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -224,6 +236,18 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
       path = client.property_path property: "value0"
       assert_equal "properties/value0", path
+    end
+  end
+
+  def test_search_ads360_link_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.search_ads360_link_path property: "value0", search_ads_360_link: "value1"
+      assert_equal "properties/value0/searchAds360Links/value1", path
     end
   end
 

@@ -80,7 +80,7 @@ module Google
             # will be permanently purged.
             # https://support.google.com/analytics/answer/6154772
             #
-            # Returns an error if the target is not found, or is not an GA4 Property.
+            # Returns an error if the target is not found, or is not a GA4 Property.
             rpc :DeleteProperty, ::Google::Analytics::Admin::V1alpha::DeletePropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
             # Updates a property.
             rpc :UpdateProperty, ::Google::Analytics::Admin::V1alpha::UpdatePropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
@@ -244,9 +244,11 @@ module Google
             rpc :GetDataStream, ::Google::Analytics::Admin::V1alpha::GetDataStreamRequest, ::Google::Analytics::Admin::V1alpha::DataStream
             # Lookup for a single Audience.
             # Audiences created before 2020 may not be supported.
+            # Default audiences will not show filter definitions.
             rpc :GetAudience, ::Google::Analytics::Admin::V1alpha::GetAudienceRequest, ::Google::Analytics::Admin::V1alpha::Audience
             # Lists Audiences on a property.
             # Audiences created before 2020 may not be supported.
+            # Default audiences will not show filter definitions.
             rpc :ListAudiences, ::Google::Analytics::Admin::V1alpha::ListAudiencesRequest, ::Google::Analytics::Admin::V1alpha::ListAudiencesResponse
             # Creates an Audience.
             rpc :CreateAudience, ::Google::Analytics::Admin::V1alpha::CreateAudienceRequest, ::Google::Analytics::Admin::V1alpha::Audience
@@ -254,6 +256,16 @@ module Google
             rpc :UpdateAudience, ::Google::Analytics::Admin::V1alpha::UpdateAudienceRequest, ::Google::Analytics::Admin::V1alpha::Audience
             # Archives an Audience on a property.
             rpc :ArchiveAudience, ::Google::Analytics::Admin::V1alpha::ArchiveAudienceRequest, ::Google::Protobuf::Empty
+            # Look up a single SearchAds360Link
+            rpc :GetSearchAds360Link, ::Google::Analytics::Admin::V1alpha::GetSearchAds360LinkRequest, ::Google::Analytics::Admin::V1alpha::SearchAds360Link
+            # Lists all SearchAds360Links on a property.
+            rpc :ListSearchAds360Links, ::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksRequest, ::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksResponse
+            # Creates a SearchAds360Link.
+            rpc :CreateSearchAds360Link, ::Google::Analytics::Admin::V1alpha::CreateSearchAds360LinkRequest, ::Google::Analytics::Admin::V1alpha::SearchAds360Link
+            # Deletes a SearchAds360Link on a property.
+            rpc :DeleteSearchAds360Link, ::Google::Analytics::Admin::V1alpha::DeleteSearchAds360LinkRequest, ::Google::Protobuf::Empty
+            # Updates a SearchAds360Link on a property.
+            rpc :UpdateSearchAds360Link, ::Google::Analytics::Admin::V1alpha::UpdateSearchAds360LinkRequest, ::Google::Analytics::Admin::V1alpha::SearchAds360Link
             # Lookup for a AttributionSettings singleton.
             rpc :GetAttributionSettings, ::Google::Analytics::Admin::V1alpha::GetAttributionSettingsRequest, ::Google::Analytics::Admin::V1alpha::AttributionSettings
             # Updates attribution settings on a property.
@@ -272,6 +284,18 @@ module Google
             # property's time zone. For configuration change history, see
             # [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
             rpc :RunAccessReport, ::Google::Analytics::Admin::V1alpha::RunAccessReportRequest, ::Google::Analytics::Admin::V1alpha::RunAccessReportResponse
+            # Sets the opt out status for the automated GA4 setup process for a UA
+            # property.
+            # Note: this has no effect on GA4 property.
+            rpc :SetAutomatedGa4ConfigurationOptOut, ::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest, ::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutResponse
+            # Fetches the opt out status for the automated GA4 setup process for a UA
+            # property.
+            # Note: this has no effect on GA4 property.
+            rpc :FetchAutomatedGa4ConfigurationOptOut, ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest, ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutResponse
+            # Lookup for a single BigQuery Link.
+            rpc :GetBigQueryLink, ::Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest, ::Google::Analytics::Admin::V1alpha::BigQueryLink
+            # Lists BigQuery Links on a property.
+            rpc :ListBigQueryLinks, ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest, ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksResponse
           end
 
           Stub = Service.rpc_stub_class
