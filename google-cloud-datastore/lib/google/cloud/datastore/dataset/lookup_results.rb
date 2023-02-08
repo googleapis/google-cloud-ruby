@@ -121,7 +121,7 @@ module Google
               *Array(@deferred).flatten.map(&:to_grpc),
               consistency: @consistency, transaction: @transaction, read_time: @read_time
             )
-            self.class.from_grpc lookup_res, @service, @consistency, read_time = @read_time
+            self.class.from_grpc lookup_res, @service, @consistency, nil, @read_time
           end
 
           ##

@@ -377,7 +377,7 @@ module Google
           check_consistency! consistency
           lookup_res = service.lookup(*Array(keys).flatten.map(&:to_grpc),
                                       consistency: consistency, read_time: read_time)
-          LookupResults.from_grpc lookup_res, service, consistency, read_time = read_time
+          LookupResults.from_grpc lookup_res, service, consistency, nil, read_time
         end
         alias lookup find_all
 
