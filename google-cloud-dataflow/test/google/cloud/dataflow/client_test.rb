@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
-  def test_snapshots
+  def test_snapshots_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.snapshots do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_jobs
+  def test_jobs_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.jobs do |config|
@@ -42,7 +42,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_messages
+  def test_messages_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.messages do |config|
@@ -52,7 +52,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_metrics
+  def test_metrics_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.metrics do |config|
@@ -62,7 +62,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_templates_service
+  def test_templates_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.templates_service do |config|
@@ -72,7 +72,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_flex_templates_service
+  def test_flex_templates_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.flex_templates_service do |config|

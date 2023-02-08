@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dialogflow-v2",
-    "version": "0.19.0",
+    "version": "0.21.0",
     "language": "RUBY",
     "apis": [
       {
@@ -2207,6 +2207,46 @@
         {
           "start": 20,
           "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Conversations_SuggestConversationSummary_sync",
+      "title": "Snippet for suggest_conversation_summary in Conversations",
+      "description": "Basic snippet for suggest_conversation_summary in Conversations",
+      "file": "conversations/suggest_conversation_summary.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "suggest_conversation_summary",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#suggest_conversation_summary",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse",
+        "client": {
+          "short_name": "Conversations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
+        },
+        "method": {
+          "short_name": "SuggestConversationSummary",
+          "full_name": "google.cloud.dialogflow.v2.Conversations.SuggestConversationSummary",
+          "service": {
+            "short_name": "Conversations",
+            "full_name": "google.cloud.dialogflow.v2.Conversations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
           "type": "FULL"
         }
       ]

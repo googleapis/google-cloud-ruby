@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Filestore instances are fully managed NFS file servers on Google Cloud for use with applications running on Compute Engine virtual machines (VMs) instances or Google Kubernetes Engine clusters.",
     "ruby-cloud-product-url": "https://cloud.google.com/filestore/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

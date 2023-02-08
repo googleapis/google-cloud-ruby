@@ -33,7 +33,7 @@ module Google
         ##
         # Service for managing catalog configuration.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/retail/v2/catalog_service"
         #     client = ::Google::Cloud::Retail::V2::CatalogService::Client.new

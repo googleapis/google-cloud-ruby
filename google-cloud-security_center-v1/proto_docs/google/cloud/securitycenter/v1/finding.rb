@@ -114,7 +114,7 @@ module Google
         #     Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise
         # @!attribute [rw] vulnerability
         #   @return [::Google::Cloud::SecurityCenter::V1::Vulnerability]
-        #     Represents vulnerability specific fields like cve, cvss scores etc.
+        #     Represents vulnerability-specific fields like CVE and CVS scores.
         #     CVE stands for Common Vulnerabilities and Exposures
         #     (https://cve.mitre.org/about/)
         # @!attribute [r] mute_update_time
@@ -196,6 +196,9 @@ module Google
         # @!attribute [rw] files
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::File>]
         #     File associated with the finding.
+        # @!attribute [rw] kernel_rootkit
+        #   @return [::Google::Cloud::SecurityCenter::V1::KernelRootkit]
+        #     Kernel Rootkit signature.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

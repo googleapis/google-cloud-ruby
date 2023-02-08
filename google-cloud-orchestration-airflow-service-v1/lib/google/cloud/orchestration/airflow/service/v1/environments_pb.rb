@@ -37,6 +37,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :environment, :message, 1, "google.cloud.orchestration.airflow.service.v1.Environment"
       optional :update_mask, :message, 3, "google.protobuf.FieldMask"
     end
+    add_message "google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest" do
+      optional :environment, :string, 1
+      optional :snapshot_location, :string, 2
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse" do
+      optional :snapshot_path, :string, 1
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest" do
+      optional :environment, :string, 1
+      optional :snapshot_path, :string, 2
+      optional :skip_pypi_packages_installation, :bool, 3
+      optional :skip_environment_variables_setting, :bool, 4
+      optional :skip_airflow_overrides_setting, :bool, 5
+      optional :skip_gcs_data_copying, :bool, 6
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse" do
+    end
     add_message "google.cloud.orchestration.airflow.service.v1.EnvironmentConfig" do
       optional :gke_cluster, :string, 1
       optional :dag_gcs_prefix, :string, 2
@@ -48,7 +65,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :database_config, :message, 9, "google.cloud.orchestration.airflow.service.v1.DatabaseConfig"
       optional :web_server_config, :message, 10, "google.cloud.orchestration.airflow.service.v1.WebServerConfig"
       optional :encryption_config, :message, 11, "google.cloud.orchestration.airflow.service.v1.EncryptionConfig"
+      optional :maintenance_window, :message, 12, "google.cloud.orchestration.airflow.service.v1.MaintenanceWindow"
+      optional :workloads_config, :message, 15, "google.cloud.orchestration.airflow.service.v1.WorkloadsConfig"
+      optional :environment_size, :enum, 16, "google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize"
       optional :airflow_uri, :string, 6
+      optional :master_authorized_networks_config, :message, 17, "google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig"
+      optional :recovery_config, :message, 18, "google.cloud.orchestration.airflow.service.v1.RecoveryConfig"
+    end
+    add_enum "google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize" do
+      value :ENVIRONMENT_SIZE_UNSPECIFIED, 0
+      value :ENVIRONMENT_SIZE_SMALL, 1
+      value :ENVIRONMENT_SIZE_MEDIUM, 2
+      value :ENVIRONMENT_SIZE_LARGE, 3
     end
     add_message "google.cloud.orchestration.airflow.service.v1.WebServerNetworkAccessControl" do
       repeated :allowed_ip_ranges, :message, 1, "google.cloud.orchestration.airflow.service.v1.WebServerNetworkAccessControl.AllowedIpRange"
@@ -66,12 +94,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.orchestration.airflow.service.v1.EncryptionConfig" do
       optional :kms_key_name, :string, 1
     end
+    add_message "google.cloud.orchestration.airflow.service.v1.MaintenanceWindow" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      optional :recurrence, :string, 3
+    end
     add_message "google.cloud.orchestration.airflow.service.v1.SoftwareConfig" do
       optional :image_version, :string, 1
       map :airflow_config_overrides, :string, :string, 2
       map :pypi_packages, :string, :string, 3
       map :env_variables, :string, :string, 4
       optional :python_version, :string, 6
+      optional :scheduler_count, :int32, 7
     end
     add_message "google.cloud.orchestration.airflow.service.v1.IPAllocationPolicy" do
       optional :use_ip_aliases, :bool, 1
@@ -94,11 +128,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :service_account, :string, 7
       repeated :tags, :string, 8
       optional :ip_allocation_policy, :message, 9, "google.cloud.orchestration.airflow.service.v1.IPAllocationPolicy"
+      optional :enable_ip_masq_agent, :bool, 11
     end
     add_message "google.cloud.orchestration.airflow.service.v1.PrivateClusterConfig" do
       optional :enable_private_endpoint, :bool, 1
       optional :master_ipv4_cidr_block, :string, 2
       optional :master_ipv4_reserved_range, :string, 3
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.NetworkingConfig" do
+      optional :connection_type, :enum, 1, "google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType"
+    end
+    add_enum "google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType" do
+      value :CONNECTION_TYPE_UNSPECIFIED, 0
+      value :VPC_PEERING, 1
+      value :PRIVATE_SERVICE_CONNECT, 2
     end
     add_message "google.cloud.orchestration.airflow.service.v1.PrivateEnvironmentConfig" do
       optional :enable_private_environment, :bool, 1
@@ -106,6 +149,51 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :web_server_ipv4_cidr_block, :string, 3
       optional :cloud_sql_ipv4_cidr_block, :string, 4
       optional :web_server_ipv4_reserved_range, :string, 5
+      optional :cloud_composer_network_ipv4_cidr_block, :string, 7
+      optional :cloud_composer_network_ipv4_reserved_range, :string, 8
+      optional :enable_privately_used_public_ips, :bool, 6
+      optional :cloud_composer_connection_subnetwork, :string, 9
+      optional :networking_config, :message, 10, "google.cloud.orchestration.airflow.service.v1.NetworkingConfig"
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.WorkloadsConfig" do
+      optional :scheduler, :message, 1, "google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource"
+      optional :web_server, :message, 2, "google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource"
+      optional :worker, :message, 3, "google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource"
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource" do
+      optional :cpu, :float, 1
+      optional :memory_gb, :float, 2
+      optional :storage_gb, :float, 3
+      optional :count, :int32, 4
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource" do
+      optional :cpu, :float, 1
+      optional :memory_gb, :float, 2
+      optional :storage_gb, :float, 3
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource" do
+      optional :cpu, :float, 1
+      optional :memory_gb, :float, 2
+      optional :storage_gb, :float, 3
+      optional :min_count, :int32, 4
+      optional :max_count, :int32, 5
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.RecoveryConfig" do
+      optional :scheduled_snapshots_config, :message, 1, "google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig"
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig" do
+      optional :enabled, :bool, 1
+      optional :snapshot_location, :string, 6
+      optional :snapshot_creation_schedule, :string, 3
+      optional :time_zone, :string, 5
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig" do
+      optional :enabled, :bool, 1
+      repeated :cidr_blocks, :message, 2, "google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock"
+    end
+    add_message "google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock" do
+      optional :display_name, :string, 1
+      optional :cidr_block, :string, 2
     end
     add_message "google.cloud.orchestration.airflow.service.v1.Environment" do
       optional :name, :string, 1
@@ -151,17 +239,33 @@ module Google
             ListEnvironmentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.ListEnvironmentsResponse").msgclass
             DeleteEnvironmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.DeleteEnvironmentRequest").msgclass
             UpdateEnvironmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.UpdateEnvironmentRequest").msgclass
+            SaveSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest").msgclass
+            SaveSnapshotResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse").msgclass
+            LoadSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest").msgclass
+            LoadSnapshotResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse").msgclass
             EnvironmentConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.EnvironmentConfig").msgclass
+            EnvironmentConfig::EnvironmentSize = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize").enummodule
             WebServerNetworkAccessControl = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.WebServerNetworkAccessControl").msgclass
             WebServerNetworkAccessControl::AllowedIpRange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.WebServerNetworkAccessControl.AllowedIpRange").msgclass
             DatabaseConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.DatabaseConfig").msgclass
             WebServerConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.WebServerConfig").msgclass
             EncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.EncryptionConfig").msgclass
+            MaintenanceWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.MaintenanceWindow").msgclass
             SoftwareConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.SoftwareConfig").msgclass
             IPAllocationPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.IPAllocationPolicy").msgclass
             NodeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.NodeConfig").msgclass
             PrivateClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.PrivateClusterConfig").msgclass
+            NetworkingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.NetworkingConfig").msgclass
+            NetworkingConfig::ConnectionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType").enummodule
             PrivateEnvironmentConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.PrivateEnvironmentConfig").msgclass
+            WorkloadsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.WorkloadsConfig").msgclass
+            WorkloadsConfig::SchedulerResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource").msgclass
+            WorkloadsConfig::WebServerResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource").msgclass
+            WorkloadsConfig::WorkerResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource").msgclass
+            RecoveryConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.RecoveryConfig").msgclass
+            ScheduledSnapshotsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig").msgclass
+            MasterAuthorizedNetworksConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig").msgclass
+            MasterAuthorizedNetworksConfig::CidrBlock = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock").msgclass
             Environment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.Environment").msgclass
             Environment::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.Environment.State").enummodule
             CheckUpgradeResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.orchestration.airflow.service.v1.CheckUpgradeResponse").msgclass

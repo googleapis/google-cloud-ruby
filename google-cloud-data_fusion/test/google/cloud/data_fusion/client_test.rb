@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::DataFusion::ClientConstructionMinitest < Minitest::Test
-  def test_data_fusion
+  def test_data_fusion_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::DataFusion.data_fusion do |config|

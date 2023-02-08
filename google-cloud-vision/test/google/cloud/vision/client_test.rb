@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Vision::ClientConstructionMinitest < Minitest::Test
-  def test_product_search
+  def test_product_search_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Vision.product_search do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::Vision::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_image_annotator
+  def test_image_annotator_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Vision.image_annotator do |config|

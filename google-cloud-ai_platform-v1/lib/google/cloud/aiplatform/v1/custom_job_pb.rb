@@ -39,6 +39,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :base_output_directory, :message, 6, "google.cloud.aiplatform.v1.GcsDestination"
       optional :tensorboard, :string, 7
       optional :enable_web_access, :bool, 10
+      optional :enable_dashboard_access, :bool, 16
     end
     add_message "google.cloud.aiplatform.v1.WorkerPoolSpec" do
       optional :machine_spec, :message, 1, "google.cloud.aiplatform.v1.MachineSpec"

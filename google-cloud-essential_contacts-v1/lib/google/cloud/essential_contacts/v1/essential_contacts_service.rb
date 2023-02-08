@@ -33,7 +33,7 @@ module Google
         ##
         # Manages contacts for important Google Cloud notifications.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/essential_contacts/v1/essential_contacts_service"
         #     client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new

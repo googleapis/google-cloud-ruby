@@ -36,7 +36,7 @@ module Google
         # timed event which forms a node of the trace tree. Spans for a single trace
         # may span multiple services.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/trace/v1/trace_service"
         #     client = ::Google::Cloud::Trace::V1::TraceService::Client.new

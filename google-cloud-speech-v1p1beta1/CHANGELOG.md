@@ -1,5 +1,23 @@
 # Release History
 
+### 0.15.1 (2023-01-26)
+
+#### Documentation
+
+* Clarify boost usage in Phrase and PhraseSet ([#20066](https://github.com/googleapis/google-cloud-ruby/issues/20066)) 
+
+### 0.15.0 (2023-01-05)
+
+#### Features
+
+* Support ABNF grammars in speech adaptation ([#19953](https://github.com/googleapis/google-cloud-ruby/issues/19953)) 
+
+### 0.14.0 (2022-12-09)
+
+#### Features
+
+* Responses now provide information on adaptation behavior ([#19486](https://github.com/googleapis/google-cloud-ruby/issues/19486)) 
+
 ### 0.13.0 (2022-07-08)
 
 #### Features

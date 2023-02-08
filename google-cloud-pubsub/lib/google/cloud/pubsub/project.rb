@@ -24,6 +24,9 @@ require "google/cloud/pubsub/snapshot"
 module Google
   module Cloud
     module PubSub
+      DEFAULT_COMPRESS = false
+      DEFAULT_COMPRESSION_BYTES_THRESHOLD = 240
+
       ##
       # # Project
       #
@@ -103,6 +106,9 @@ module Google
         #   * `:threads` (Hash) The number of threads to create to handle concurrent calls by the publisher:
         #     * `:publish` (Integer) The number of threads used to publish messages. Default is 2.
         #     * `:callback` (Integer) The number of threads to handle the published messages' callbacks. Default is 4.
+        #   * `:compress` (Boolean) The flag that enables publisher compression. Default is false
+        #   * `:compression_bytes_threshold` (Integer) The number of bytes above which compress should be enabled.
+        #       Default is 240.
         #   * `:flow_control` (Hash) The client flow control settings for message publishing:
         #     * `:message_limit` (Integer) The maximum number of messages allowed to wait to be published. Default is
         #       `10 * max_messages`.
@@ -211,11 +217,13 @@ module Google
         #     the batch is published. Default is 0.01.
         #   * `:threads` (Hash) The number of threads to create to handle concurrent
         #     calls by the publisher:
-        #
         #     * `:publish` (Integer) The number of threads used to publish messages.
         #       Default is 2.
         #     * `:callback` (Integer) The number of threads to handle the published
         #       messages' callbacks. Default is 4.
+        #   * `:compress` (Boolean) The flag that enables publisher compression. Default is false
+        #   * `:compression_bytes_threshold` (Integer) The number of bytes above which compress should be enabled.
+        #       Default is 240.
         #   * `:flow_control` (Hash) The client flow control settings for message publishing:
         #     * `:message_limit` (Integer) The maximum number of messages allowed to wait to be published. Default is
         #       `10 * max_messages`.
@@ -641,13 +649,6 @@ module Google
         # available.
         def ensure_service!
           raise "Must have active connection to service" unless service
-        end
-
-        ##
-        # Call the publish API with arrays of data data and attrs.
-        def publish_batch_messages topic_name, batch
-          grpc = service.publish topic_name, batch.messages
-          batch.to_gcloud_messages Array(grpc.message_ids)
         end
       end
     end

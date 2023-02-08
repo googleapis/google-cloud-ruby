@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dataproc-v1",
-    "version": "0.13.0",
+    "version": "0.15.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1238,6 +1238,126 @@
           "service": {
             "short_name": "WorkflowTemplateService",
             "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_NodeGroupController_CreateNodeGroup_sync",
+      "title": "Snippet for create_node_group in NodeGroupController",
+      "description": "Basic snippet for create_node_group in NodeGroupController",
+      "file": "node_group_controller/create_node_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_node_group",
+        "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client#create_node_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::CreateNodeGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NodeGroupController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client"
+        },
+        "method": {
+          "short_name": "CreateNodeGroup",
+          "full_name": "google.cloud.dataproc.v1.NodeGroupController.CreateNodeGroup",
+          "service": {
+            "short_name": "NodeGroupController",
+            "full_name": "google.cloud.dataproc.v1.NodeGroupController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_sync",
+      "title": "Snippet for resize_node_group in NodeGroupController",
+      "description": "Basic snippet for resize_node_group in NodeGroupController",
+      "file": "node_group_controller/resize_node_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resize_node_group",
+        "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client#resize_node_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::ResizeNodeGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NodeGroupController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client"
+        },
+        "method": {
+          "short_name": "ResizeNodeGroup",
+          "full_name": "google.cloud.dataproc.v1.NodeGroupController.ResizeNodeGroup",
+          "service": {
+            "short_name": "NodeGroupController",
+            "full_name": "google.cloud.dataproc.v1.NodeGroupController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_NodeGroupController_GetNodeGroup_sync",
+      "title": "Snippet for get_node_group in NodeGroupController",
+      "description": "Basic snippet for get_node_group in NodeGroupController",
+      "file": "node_group_controller/get_node_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_node_group",
+        "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client#get_node_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::GetNodeGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::NodeGroup",
+        "client": {
+          "short_name": "NodeGroupController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client"
+        },
+        "method": {
+          "short_name": "GetNodeGroup",
+          "full_name": "google.cloud.dataproc.v1.NodeGroupController.GetNodeGroup",
+          "service": {
+            "short_name": "NodeGroupController",
+            "full_name": "google.cloud.dataproc.v1.NodeGroupController"
           }
         }
       },

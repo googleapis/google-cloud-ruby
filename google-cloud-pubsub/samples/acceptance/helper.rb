@@ -17,6 +17,9 @@ require "minitest/focus"
 require "minitest/hooks/default"
 require "google/cloud/pubsub"
 require "securerandom"
+require "toys/utils/git_cache"
+require Toys::Utils::GitCache.new.get "https://github.com/googleapis/ruby-common-tools.git",
+                                      path: "lib/sample_loader.rb", update: 300
 
 def random_topic_id
   "ruby-pubsub-samples-test-topic-#{SecureRandom.hex 4}"

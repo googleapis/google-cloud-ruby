@@ -49,6 +49,8 @@
     "snippets/environments/delete_environment.rb",
     "snippets/environments/get_environment.rb",
     "snippets/environments/list_environments.rb",
+    "snippets/environments/load_snapshot.rb",
+    "snippets/environments/save_snapshot.rb",
     "snippets/environments/update_environment.rb",
     "snippets/image_versions/list_image_versions.rb",
     "snippets/snippet_metadata_google.cloud.orchestration.airflow.service.v1.json",

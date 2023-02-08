@@ -51,7 +51,7 @@ module Google
         # named
         #   `projects/*/locations/*/products/*/referenceImages/*`
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/vision/v1p4beta1/product_search"
         #     client = ::Google::Cloud::Vision::V1p4beta1::ProductSearch::Client.new

@@ -165,7 +165,8 @@ module Google
               # Service calls
 
               ##
-              # Returns the list of all experiments in the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Returns the list of all experiments in the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # @overload list_experiments(request, options = nil)
               #   Pass arguments to `list_experiments` via a request object, either of type
@@ -183,9 +184,10 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to list all environments for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/environments/<Environment ID>`.
+              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to
+              #     list all environments for. Format: `projects/<Project
+              #     ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
+              #     ID>`.
               #   @param page_size [::Integer]
               #     The maximum number of items to return in a single page. By default 20 and
               #     at most 100.
@@ -264,7 +266,8 @@ module Google
               end
 
               ##
-              # Retrieves the specified {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment}.
+              # Retrieves the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment}.
               #
               # @overload get_experiment(request, options = nil)
               #   Pass arguments to `get_experiment` via a request object, either of type
@@ -282,8 +285,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -351,7 +355,8 @@ module Google
               end
 
               ##
-              # Creates an {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment} in the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Creates an {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment} in the
+              # specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # @overload create_experiment(request, options = nil)
               #   Pass arguments to `create_experiment` via a request object, either of type
@@ -369,8 +374,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to create an {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to create an
+              #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} for. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/environments/<Environment ID>`.
               #   @param experiment [::Google::Cloud::Dialogflow::CX::V3::Experiment, ::Hash]
               #     Required. The experiment to create.
@@ -440,7 +446,8 @@ module Google
               end
 
               ##
-              # Updates the specified {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment}.
+              # Updates the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment}.
               #
               # @overload update_experiment(request, options = nil)
               #   Pass arguments to `update_experiment` via a request object, either of type
@@ -527,7 +534,8 @@ module Google
               end
 
               ##
-              # Deletes the specified {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment}.
+              # Deletes the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment}.
               #
               # @overload delete_experiment(request, options = nil)
               #   Pass arguments to `delete_experiment` via a request object, either of type
@@ -545,8 +553,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to delete.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to delete. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -614,8 +623,9 @@ module Google
               end
 
               ##
-              # Starts the specified {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment}. This rpc only changes the state of
-              # experiment from PENDING to RUNNING.
+              # Starts the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment}. This rpc only
+              # changes the state of experiment from PENDING to RUNNING.
               #
               # @overload start_experiment(request, options = nil)
               #   Pass arguments to `start_experiment` via a request object, either of type
@@ -702,8 +712,8 @@ module Google
               end
 
               ##
-              # Stops the specified {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment}. This rpc only changes the state of
-              # experiment from RUNNING to DONE.
+              # Stops the specified {::Google::Cloud::Dialogflow::CX::V3::Experiment Experiment}.
+              # This rpc only changes the state of experiment from RUNNING to DONE.
               #
               # @overload stop_experiment(request, options = nil)
               #   Pass arguments to `stop_experiment` via a request object, either of type

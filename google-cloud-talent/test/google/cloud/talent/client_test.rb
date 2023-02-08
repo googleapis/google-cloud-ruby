@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Talent::ClientConstructionMinitest < Minitest::Test
-  def test_company_service
+  def test_company_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Talent.company_service do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::Talent::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_completion
+  def test_completion_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Talent.completion do |config|
@@ -42,7 +42,7 @@ class Google::Cloud::Talent::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_event_service
+  def test_event_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Talent.event_service do |config|
@@ -52,7 +52,7 @@ class Google::Cloud::Talent::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_job_service
+  def test_job_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Talent.job_service do |config|
@@ -62,7 +62,7 @@ class Google::Cloud::Talent::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_tenant_service
+  def test_tenant_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Talent.tenant_service do |config|

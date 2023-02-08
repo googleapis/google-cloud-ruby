@@ -32,7 +32,7 @@ module Google
         ##
         # Provides a service for Flex templates. This feature is not ready yet.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataflow/v1beta3/flex_templates_service"
         #     client = ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client.new

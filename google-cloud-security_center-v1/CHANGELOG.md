@@ -1,5 +1,23 @@
 # Release History
 
+### 0.25.1 (2023-01-15)
+
+#### Documentation
+
+* Clarify some resource name formats ([#20012](https://github.com/googleapis/google-cloud-ruby/issues/20012)) 
+
+### 0.25.0 (2022-12-14)
+
+#### Features
+
+* Added user name field to finding Access resource ([#19860](https://github.com/googleapis/google-cloud-ruby/issues/19860)) 
+
+### 0.24.0 (2022-12-09)
+
+#### Features
+
+* Added kernel_rootkit field to Finding ([#19802](https://github.com/googleapis/google-cloud-ruby/issues/19802)) 
+
 ### 0.23.0 (2022-11-15)
 
 #### Features

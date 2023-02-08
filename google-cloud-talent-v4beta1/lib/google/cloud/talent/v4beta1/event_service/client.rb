@@ -177,8 +177,8 @@ module Google
             #     "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
             #     is created, for example, "projects/foo".
             #   @param client_event [::Google::Cloud::Talent::V4beta1::ClientEvent, ::Hash]
-            #     Required. Events issued when end user interacts with customer's application that
-            #     uses Cloud Talent Solution.
+            #     Required. Events issued when end user interacts with customer's application
+            #     that uses Cloud Talent Solution.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4beta1::ClientEvent]

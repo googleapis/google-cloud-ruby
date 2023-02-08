@@ -33,7 +33,7 @@ module Google
         # The Dataflow Messages API is used for monitoring the progress of
         # Dataflow jobs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataflow/v1beta3/messages"
         #     client = ::Google::Cloud::Dataflow::V1beta3::Messages::Client.new

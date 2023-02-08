@@ -39,7 +39,7 @@ module Google
         # A **function** is a resource which describes a function that should be
         # executed and how it is triggered.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/functions/v2/function_service"
         #     client = ::Google::Cloud::Functions::V2::FunctionService::Client.new

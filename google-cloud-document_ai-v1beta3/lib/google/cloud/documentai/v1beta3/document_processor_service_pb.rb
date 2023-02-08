@@ -21,11 +21,15 @@ require 'google/rpc/status_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/documentai/v1beta3/document_processor_service.proto", :syntax => :proto3) do
+    add_message "google.cloud.documentai.v1beta3.ProcessOptions" do
+      optional :ocr_config, :message, 1, "google.cloud.documentai.v1beta3.OcrConfig"
+    end
     add_message "google.cloud.documentai.v1beta3.ProcessRequest" do
       optional :name, :string, 1
       optional :document, :message, 2, "google.cloud.documentai.v1beta3.Document"
       optional :skip_human_review, :bool, 3
       optional :field_mask, :message, 6, "google.protobuf.FieldMask"
+      optional :process_options, :message, 7, "google.cloud.documentai.v1beta3.ProcessOptions"
       oneof :source do
         optional :inline_document, :message, 4, "google.cloud.documentai.v1beta3.Document"
         optional :raw_document, :message, 5, "google.cloud.documentai.v1beta3.RawDocument"
@@ -55,6 +59,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :input_documents, :message, 5, "google.cloud.documentai.v1beta3.BatchDocumentsInputConfig"
       optional :document_output_config, :message, 6, "google.cloud.documentai.v1beta3.DocumentOutputConfig"
       optional :skip_human_review, :bool, 4
+      optional :process_options, :message, 7, "google.cloud.documentai.v1beta3.ProcessOptions"
     end
     add_message "google.cloud.documentai.v1beta3.BatchProcessRequest.BatchInputConfig" do
       optional :gcs_source, :string, 1
@@ -111,6 +116,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.documentai.v1beta3.ListProcessorsResponse" do
       repeated :processors, :message, 1, "google.cloud.documentai.v1beta3.Processor"
       optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.documentai.v1beta3.GetProcessorTypeRequest" do
+      optional :name, :string, 1
     end
     add_message "google.cloud.documentai.v1beta3.GetProcessorRequest" do
       optional :name, :string, 1
@@ -278,6 +286,7 @@ module Google
   module Cloud
     module DocumentAI
       module V1beta3
+        ProcessOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ProcessOptions").msgclass
         ProcessRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ProcessRequest").msgclass
         HumanReviewStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.HumanReviewStatus").msgclass
         HumanReviewStatus::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.HumanReviewStatus.State").enummodule
@@ -295,6 +304,7 @@ module Google
         ListProcessorTypesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ListProcessorTypesResponse").msgclass
         ListProcessorsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ListProcessorsRequest").msgclass
         ListProcessorsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ListProcessorsResponse").msgclass
+        GetProcessorTypeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.GetProcessorTypeRequest").msgclass
         GetProcessorRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.GetProcessorRequest").msgclass
         GetProcessorVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.GetProcessorVersionRequest").msgclass
         ListProcessorVersionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ListProcessorVersionsRequest").msgclass

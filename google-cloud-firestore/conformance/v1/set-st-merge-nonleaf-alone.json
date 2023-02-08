@@ -20,7 +20,12 @@
           "writes": [
             {
               "update": {
-                "name": "projects/projectID/databases/(default)/documents/C/d"
+                "name": "projects/projectID/databases/(default)/documents/C/d",
+                "fields": {
+                  "h": {
+                    "nullValue": "NULL_VALUE"
+                  }
+                }
               },
               "updateMask": {
                 "fieldPaths": [

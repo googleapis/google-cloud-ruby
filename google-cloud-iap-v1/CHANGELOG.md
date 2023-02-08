@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.5.0 (2023-01-05)
+
+#### Features
+
+* Add field allowed domains settings to Access Settings ([#19902](https://github.com/googleapis/google-cloud-ruby/issues/19902)) 
+* Add field attribute propagation settings to Application Settings 
+* Add field remediation token generation enabled to Access Denied Page Settings 
+
 ### 0.4.0 (2022-07-02)
 
 #### Features

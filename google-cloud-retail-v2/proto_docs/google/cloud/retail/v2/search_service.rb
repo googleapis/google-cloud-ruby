@@ -29,7 +29,7 @@ module Google
         #     `projects/*/locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
         #     or the name of the legacy placement resource, such as
         #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
-        #     This field is used to identify the serving configuration name and the set
+        #     This field is used to identify the serving config name and the set
         #     of models that will be used to make the search.
         # @!attribute [rw] branch
         #   @return [::String]
@@ -230,7 +230,7 @@ module Google
         #     {::Google::Cloud::Retail::V2::UserEvent#page_categories UserEvent.page_categories};
         #
         #     To represent full path of category, use '>' sign to separate different
-        #     hierarchies. If '>' is part of the category name, please replace it with
+        #     hierarchies. If '>' is part of the category name, replace it with
         #     other character(s).
         #
         #     Category pages include special pages such as sales or promotions. For
@@ -286,7 +286,7 @@ module Google
           # @!attribute [rw] limit
           #   @return [::Integer]
           #     Maximum of facet values that should be returned for this facet. If
-          #     unspecified, defaults to 20. The maximum allowed value is 300. Values
+          #     unspecified, defaults to 50. The maximum allowed value is 300. Values
           #     above 300 will be coerced to 300.
           #
           #     If this field is negative, an INVALID_ARGUMENT is returned.
@@ -686,15 +686,20 @@ module Google
           # The search mode of each search request.
           module SearchMode
             # Default value. In this case both product search and faceted search will
-            # be performed. Both [SearchResponse.SearchResult] and
-            # [SearchResponse.Facet] will be returned.
+            # be performed. Both
+            # {::Google::Cloud::Retail::V2::SearchResponse::SearchResult SearchResponse.SearchResult}
+            # and {::Google::Cloud::Retail::V2::SearchResponse::Facet SearchResponse.Facet}
+            # will be returned.
             SEARCH_MODE_UNSPECIFIED = 0
 
             # Only product search will be performed. The faceted search will be
             # disabled.
             #
-            # Only [SearchResponse.SearchResult] will be returned.
-            # [SearchResponse.Facet] will not be returned, even if
+            # Only
+            # {::Google::Cloud::Retail::V2::SearchResponse::SearchResult SearchResponse.SearchResult}
+            # will be returned.
+            # {::Google::Cloud::Retail::V2::SearchResponse::Facet SearchResponse.Facet} will
+            # not be returned, even if
             # {::Google::Cloud::Retail::V2::SearchRequest#facet_specs SearchRequest.facet_specs}
             # or
             # {::Google::Cloud::Retail::V2::SearchRequest#dynamic_facet_spec SearchRequest.dynamic_facet_spec}
@@ -709,7 +714,9 @@ module Google
             # and
             # {::Google::Cloud::Retail::V2::SearchRequest#dynamic_facet_spec SearchRequest.dynamic_facet_spec}
             # should be set. Otherwise, an INVALID_ARGUMENT error is returned. Only
-            # [SearchResponse.Facet] will be returned. [SearchResponse.SearchResult]
+            # {::Google::Cloud::Retail::V2::SearchResponse::Facet SearchResponse.Facet} will
+            # be returned.
+            # {::Google::Cloud::Retail::V2::SearchResponse::SearchResult SearchResponse.SearchResult}
             # will not be returned.
             FACETED_SEARCH_ONLY = 2
           end

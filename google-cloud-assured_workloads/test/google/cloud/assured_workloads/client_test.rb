@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::AssuredWorkloads::ClientConstructionMinitest < Minitest::Test
-  def test_assured_workloads_service
+  def test_assured_workloads_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::AssuredWorkloads.assured_workloads_service do |config|

@@ -799,6 +799,68 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
     assert_valid_data data
   end
 
+  it "queries the data with array of structs" do
+    job_gapi = query_job_gapi "#{query} WHERE my_structs IN @my_structs", parameter_mode: "NAMED", location: nil
+    job_gapi.configuration.query.query_parameters =  [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        name: "my_structs",
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "ARRAY",
+          array_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+            type: "STRUCT",
+            struct_types: [
+              Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+                name: "name",
+                type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "STRING")),
+              Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+                name: "age",
+                type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "INT64")),
+              Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+                name: "active",
+                type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "BOOL")),
+              Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+                name: "score",
+                type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "FLOAT64"))
+  
+            ]
+          )
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          array_values: [
+            Google::Apis::BigqueryV2::QueryParameterValue.new(
+              struct_values: {
+                "name"   => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "Testy McTesterson"),
+                "age"    => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "42"),
+                "active" => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "false"),
+                "score"  => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "98.7")
+              }
+            )
+          ]
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
+    mock.expect :list_table_data,
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id"], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
+
+    data = bigquery.query "#{query} WHERE my_structs IN @my_structs",
+                          params: { my_structs: [{ name: "Testy McTesterson", age: 42, active: false, score: 98.7 }] },
+                          types: { my_structs: [{ name: :STRING, age: :INT64, active: :BOOL, score: :FLOAT64 }] }
+
+    mock.verify
+
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    assert_valid_data data
+  end
+
   def assert_valid_data data
     _(data.count).must_equal 3
     _(data[0]).must_be_kind_of Hash

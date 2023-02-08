@@ -35,7 +35,7 @@ module Google
         # CloudDeploy service creates and manages Continuous Delivery operations
         # on Google Cloud Platform via Skaffold (https://skaffold.dev).
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/deploy/v1/cloud_deploy"
         #     client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new

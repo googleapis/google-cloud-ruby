@@ -24,9 +24,9 @@ module Google
     module Bigquery
       module Connection
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
         #
-        # @example
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/bigquery/connection/v1"
         #     client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new

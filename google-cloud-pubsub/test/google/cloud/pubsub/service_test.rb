@@ -183,7 +183,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal metadata
-          assert_config_rpcs_equals schema_service_default_config.rpcs, 6, config.rpcs
+          assert_config_rpcs_equals schema_service_default_config.rpcs, 10, config.rpcs
         end
       end
     end
@@ -203,7 +203,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal metadata
-          assert_config_rpcs_equals schema_service_default_config.rpcs, 6, config.rpcs, timeout: timeout
+          assert_config_rpcs_equals schema_service_default_config.rpcs, 10, config.rpcs, timeout: timeout
         end
       end
     end
@@ -231,6 +231,31 @@ describe Google::Cloud::PubSub::Service do
     assert_raises RuntimeError do 
       service.modify_ack_deadline "sub","ack_id", 80
     end
+  end
+
+  it "should pass call option with compression header when compress enabled" do
+    service = Google::Cloud::PubSub::Service.new project, nil
+    mocked_publisher = Minitest::Mock.new
+    service.mocked_publisher = mocked_publisher
+    expected_request = {topic: "projects/test/topics/test", messages: "data"}
+    expected_options = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
+    mocked_publisher.expect :publish, nil do |actual_request, actual_option|
+      actual_request == expected_request && actual_option == expected_options
+    end
+    service.publish "test", "data", compress: true
+    mocked_publisher.verify
+  end
+
+  it "should not add call option when compress disabled" do
+    service = Google::Cloud::PubSub::Service.new project, nil
+    mocked_publisher = Minitest::Mock.new
+    service.mocked_publisher = mocked_publisher
+    expected_request = {topic: "projects/test/topics/test", messages: "data"}
+    mocked_publisher.expect :publish, nil do |actual_request, actual_option|
+      actual_request == expected_request && actual_option.nil?
+    end
+    service.publish "test", "data"
+    mocked_publisher.verify
   end
 
   # @param [Numeric, nil] timeout Expected non-default timeout.

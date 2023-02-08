@@ -99,6 +99,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :processors, :message, 1, "google.cloud.documentai.v1.Processor"
       optional :next_page_token, :string, 2
     end
+    add_message "google.cloud.documentai.v1.GetProcessorTypeRequest" do
+      optional :name, :string, 1
+    end
     add_message "google.cloud.documentai.v1.GetProcessorRequest" do
       optional :name, :string, 1
     end
@@ -220,6 +223,7 @@ module Google
         ListProcessorTypesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ListProcessorTypesResponse").msgclass
         ListProcessorsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ListProcessorsRequest").msgclass
         ListProcessorsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ListProcessorsResponse").msgclass
+        GetProcessorTypeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.GetProcessorTypeRequest").msgclass
         GetProcessorRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.GetProcessorRequest").msgclass
         GetProcessorVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.GetProcessorVersionRequest").msgclass
         ListProcessorVersionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ListProcessorVersionsRequest").msgclass

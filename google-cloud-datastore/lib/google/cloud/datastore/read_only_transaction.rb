@@ -167,6 +167,37 @@ module Google
         alias run_query run
 
         ##
+        # Retrieve aggregate query results specified by an AggregateQuery. The query is run within the
+        # transaction.
+        #
+        # @param [AggregateQuery, GqlQuery] query The Query object with the search criteria.
+        # @param [String] namespace The namespace the query is to run within.
+        #
+        # @return [Google::Cloud::Datastore::Dataset::AggregateQueryResults]
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     query = tx.query("Task")
+        #               .where("done", "=", false)
+        #     aggregate_query = query.aggregate_query
+        #                            .add_count
+        #     res = tx.run_aggregation aggregate_query
+        #   end
+        #
+        def run_aggregation aggregate_query, namespace: nil
+          ensure_service!
+          unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
+            raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
+          end
+          aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc, namespace, transaction: @id
+          Dataset::AggregateQueryResults.from_grpc aggregate_query_results
+        end
+
+        ##
         # Begins a transaction.
         # This method is run when a new ReadOnlyTransaction is created.
         #

@@ -31,9 +31,9 @@ module Google
         ##
         # The RegionBackendServices API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/region_backend_services"
+        #     require "google/cloud/compute/v1/region_backend_services/rest"
         #     client = ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::Client.new
         #
         module RegionBackendServices

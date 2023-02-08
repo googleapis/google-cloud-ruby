@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest::Test
-  def test_catalog_service
+  def test_catalog_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::RecommendationEngine.catalog_service do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
     end
   end
 
-  def test_prediction_api_key_registry
+  def test_prediction_api_key_registry_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::RecommendationEngine.prediction_api_key_registry do |config|
@@ -42,7 +42,7 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
     end
   end
 
-  def test_prediction_service
+  def test_prediction_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::RecommendationEngine.prediction_service do |config|
@@ -52,7 +52,7 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
     end
   end
 
-  def test_user_event_service
+  def test_user_event_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::RecommendationEngine.user_event_service do |config|

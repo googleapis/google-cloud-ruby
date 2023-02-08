@@ -91,6 +91,21 @@ describe "Document", :firestore_acceptance do
     _(doc_snp[:binary].read).must_equal all_values[:binary].read
   end
 
+  it "merge empty fields to a document" do
+    all_values = {
+      name: "hello world",
+    }
+    doc_ref = root_col.doc
+
+    doc_ref.set all_values
+    doc_snp = doc_ref.get
+    _(doc_snp[:name]).must_equal all_values[:name]
+
+    doc_ref.set({nullField: nil}, merge: true)
+    doc_snp = doc_ref.get
+    _(doc_snp[:nullField]).must_equal nil
+  end
+
   it "supports server timestamps" do
     data = {
       a: :bar,
@@ -276,6 +291,33 @@ describe "Document", :firestore_acceptance do
     end
     _(collection_ids.count).must_equal collections.count
     _(collection_ids.sort).must_equal collections.sort
+  end
+
+  it "has collections method with read time" do
+    collections_doc_ref = root_col.add
+
+    collections = ["a", "b", "c", "d", "e"]
+    collections.each do |collection|
+      collections_doc_ref.col(collection).add
+    end
+
+    sleep(1)
+    read_time = Time.now
+    sleep(1)
+
+    collections_2 = ["f", "g", "h", "i", "j"]
+    collections_2.each do |collection|
+      collections_doc_ref.col(collection).add
+    end
+
+    sub_cols = collections_doc_ref.cols read_time: read_time
+    _(sub_cols).must_be_kind_of Enumerator
+    _(sub_cols.to_a.count).must_equal collections.count
+    _(sub_cols.map(&:collection_id).sort).must_equal collections.sort
+    sub_cols = collections_doc_ref.cols
+    _(sub_cols).must_be_kind_of Enumerator
+    _(sub_cols.to_a.count).must_equal (collections + collections_2).count
+    _(sub_cols.map(&:collection_id).sort).must_equal (collections + collections_2).sort
   end
 
   it "can add and delete fields sequentially" do

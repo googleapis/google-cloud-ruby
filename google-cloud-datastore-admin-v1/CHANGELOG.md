@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.1 (2023-01-15)
+
+#### Documentation
+
+* Reference the correct main client gem name ([#19995](https://github.com/googleapis/google-cloud-ruby/issues/19995)) 
+
 ### 0.7.0 (2022-07-02)
 
 #### Features

@@ -30,11 +30,15 @@ module Google
         #     A raw document content (bytes).
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1::Processor Processor} or
+        #     Required. The resource name of the
+        #     {::Google::Cloud::DocumentAI::V1::Processor Processor} or
         #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}
-        #     to use for processing. If a {::Google::Cloud::DocumentAI::V1::Processor Processor} is specified, the server will use
-        #     its {::Google::Cloud::DocumentAI::V1::Processor#default_processor_version default version}. Format:
-        #     `projects/{project}/locations/{location}/processors/{processor}`, or
+        #     to use for processing. If a
+        #     {::Google::Cloud::DocumentAI::V1::Processor Processor} is specified, the server
+        #     will use its [default
+        #     version][google.cloud.documentai.v1.Processor.default_processor_version].
+        #     Format: `projects/{project}/locations/{location}/processors/{processor}`,
+        #     or
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
         # @!attribute [rw] skip_human_review
         #   @return [::Boolean]
@@ -105,7 +109,8 @@ module Google
         # Request message for batch process document method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of {::Google::Cloud::DocumentAI::V1::Processor Processor} or
+        #     Required. The resource name of
+        #     {::Google::Cloud::DocumentAI::V1::Processor Processor} or
         #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}.
         #     Format: `projects/{project}/locations/{location}/processors/{processor}`,
         #     or
@@ -253,8 +258,8 @@ module Google
         # Request message for list all processors belongs to a project.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) which owns this collection of Processors.
-        #     Format: `projects/{project}/locations/{location}`
+        #     Required. The parent (project and location) which owns this collection of
+        #     Processors. Format: `projects/{project}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of processors to return.
@@ -284,6 +289,15 @@ module Google
         # Request message for get processor.
         # @!attribute [rw] name
         #   @return [::String]
+        #     Required. The processor type resource name.
+        class GetProcessorTypeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for get processor.
+        # @!attribute [rw] name
+        #   @return [::String]
         #     Required. The processor resource name.
         class GetProcessorRequest
           include ::Google::Protobuf::MessageExts
@@ -302,8 +316,9 @@ module Google
         # Request message for list all processor versions belongs to a processor.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project, location and processor) to list all versions.
-        #     Format: `projects/{project}/locations/{location}/processors/{processor}`
+        #     Required. The parent (project, location and processor) to list all
+        #     versions. Format:
+        #     `projects/{project}/locations/{location}/processors/{processor}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of processor versions to return.
@@ -402,12 +417,13 @@ module Google
         # on that region, the creation will fail.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) under which to create the processor.
-        #     Format: `projects/{project}/locations/{location}`
+        #     Required. The parent (project and location) under which to create the
+        #     processor. Format: `projects/{project}/locations/{location}`
         # @!attribute [rw] processor
         #   @return [::Google::Cloud::DocumentAI::V1::Processor]
-        #     Required. The processor to be created, requires [processor_type] and [display_name]
-        #     to be set. Also, the processor is under CMEK if CMEK fields are set.
+        #     Required. The processor to be created, requires [processor_type] and
+        #     [display_name] to be set. Also, the processor is under CMEK if CMEK fields
+        #     are set.
         class CreateProcessorRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -484,11 +500,14 @@ module Google
         # Request message for the set default processor version method.
         # @!attribute [rw] processor
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1::Processor Processor} to change default version.
+        #     Required. The resource name of the
+        #     {::Google::Cloud::DocumentAI::V1::Processor Processor} to change default
+        #     version.
         # @!attribute [rw] default_processor_version
         #   @return [::String]
-        #     Required. The resource name of child {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to use as default.
-        #     Format:
+        #     Required. The resource name of child
+        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to use as
+        #     default. Format:
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{version}`
         class SetDefaultProcessorVersionRequest
           include ::Google::Protobuf::MessageExts
@@ -517,8 +536,8 @@ module Google
         #     An inline document proto.
         # @!attribute [rw] human_review_config
         #   @return [::String]
-        #     Required. The resource name of the HumanReviewConfig that the document will be
-        #     reviewed with.
+        #     Required. The resource name of the HumanReviewConfig that the document will
+        #     be reviewed with.
         # @!attribute [rw] enable_schema_validation
         #   @return [::Boolean]
         #     Whether the validation should be performed on the ad-hoc review request.

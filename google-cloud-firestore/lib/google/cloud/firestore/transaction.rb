@@ -269,6 +269,51 @@ module Google
         end
         alias run get
 
+        ##
+        # Retrieves aggregate query snapshots for the given value. Valid values can be
+        # a string representing either a document or a collection of documents,
+        # a document reference object, a collection reference object, or a query
+        # to be run.
+        #
+        # @param [AggregateQuery] aggregate_query
+        #   An AggregateQuery object
+        #
+        # @yield [documents] The block for accessing the aggregate query snapshot.
+        # @yieldparam [AggregateQuerySnapshot] aggregate_snapshot An aggregate query snapshot.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   query = firestore.col "cities"
+        #
+        #   # Create an aggregate query
+        #   aq = query.aggregate_query
+        #             .add_count
+        #
+        #   firestore.transaction do |tx|
+        #     tx.get_aggregate aq do |aggregate_snapshot|
+        #       puts aggregate_snapshot.get
+        #     end
+        #   end
+        #
+        def get_aggregate aggregate_query
+          ensure_not_closed!
+          ensure_service!
+
+          return enum_for :get_aggregate, aggregate_query unless block_given?
+
+          results = service.run_aggregate_query aggregate_query.parent_path,
+                                                aggregate_query.structured_aggregation_query,
+                                                transaction: transaction_or_create
+          results.each do |result|
+            extract_transaction_from_result! result
+            next if result.result.nil?
+            yield AggregateQuerySnapshot.from_run_aggregate_query_response result
+          end
+        end
+
         # @!endgroup
 
         # @!group Modifications
@@ -643,10 +688,12 @@ module Google
 
         ##
         # @private New Transaction reference object from a path.
-        def self.from_client client, previous_transaction: nil
+        def self.from_client client, previous_transaction: nil, read_time: nil, read_only: nil
           new.tap do |s|
             s.instance_variable_set :@client, client
             s.instance_variable_set :@previous_transaction, previous_transaction
+            s.instance_variable_set :@read_time, read_time
+            s.instance_variable_set :@read_only, read_only
           end
         end
 
@@ -699,6 +746,10 @@ module Google
         ##
         # @private
         def transaction_opt
+          read_only = \
+            Google::Cloud::Firestore::V1::TransactionOptions::ReadOnly.new \
+              read_time: service.read_time_to_timestamp(@read_time)
+
           read_write = \
             Google::Cloud::Firestore::V1::TransactionOptions::ReadWrite.new
 
@@ -707,9 +758,11 @@ module Google
             @previous_transaction = nil
           end
 
-          Google::Cloud::Firestore::V1::TransactionOptions.new(
-            read_write: read_write
-          )
+          if @read_only
+            Google::Cloud::Firestore::V1::TransactionOptions.new read_only: read_only
+          else
+            Google::Cloud::Firestore::V1::TransactionOptions.new read_write: read_write
+          end
         end
 
         ##

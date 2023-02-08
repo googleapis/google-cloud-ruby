@@ -406,8 +406,8 @@ module Google
             #     Must be in range 1-1000, inclusive. Defaults to 100.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_stores MetadataService.ListMetadataStores} call. Provide this to retrieve the
-            #     subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_stores MetadataService.ListMetadataStores}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other provided parameters must match the call that
             #     provided the page token. (Otherwise the request will fail with
@@ -793,7 +793,8 @@ module Google
             #     The maximum number of Artifacts to return. The service may return fewer.
             #     Must be in range 1-1000, inclusive. Defaults to 100.
             #   @param page_token [::String]
-            #     A page token, received from a previous {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_artifacts MetadataService.ListArtifacts}
+            #     A page token, received from a previous
+            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_artifacts MetadataService.ListArtifacts}
             #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other provided parameters must match the call that
@@ -927,15 +928,15 @@ module Google
             #
             #   @param artifact [::Google::Cloud::AIPlatform::V1::Artifact, ::Hash]
             #     Required. The Artifact containing updates.
-            #     The Artifact's {::Google::Cloud::AIPlatform::V1::Artifact#name Artifact.name} field is used to identify the Artifact to
-            #     be updated.
-            #     Format:
+            #     The Artifact's {::Google::Cloud::AIPlatform::V1::Artifact#name Artifact.name}
+            #     field is used to identify the Artifact to be updated. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. A FieldMask indicating which fields should be updated.
             #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is not found, a new {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
+            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
+            #     not found, a new {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
             #     created.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1222,9 +1223,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the MetadataStore where the Context should be
-            #     created.
-            #     Format:
+            #     Required. The resource name of the MetadataStore where the Context should
+            #     be created. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
             #   @param context [::Google::Cloud::AIPlatform::V1::Context, ::Hash]
             #     Required. The Context to create.
@@ -1414,7 +1414,8 @@ module Google
             #     The maximum number of Contexts to return. The service may return fewer.
             #     Must be in range 1-1000, inclusive. Defaults to 100.
             #   @param page_token [::String]
-            #     A page token, received from a previous {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_contexts MetadataService.ListContexts}
+            #     A page token, received from a previous
+            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_contexts MetadataService.ListContexts}
             #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other provided parameters must match the call that
@@ -1552,16 +1553,15 @@ module Google
             #
             #   @param context [::Google::Cloud::AIPlatform::V1::Context, ::Hash]
             #     Required. The Context containing updates.
-            #     The Context's {::Google::Cloud::AIPlatform::V1::Context#name Context.name} field is used to identify the Context to be
-            #     updated.
-            #     Format:
+            #     The Context's {::Google::Cloud::AIPlatform::V1::Context#name Context.name} field
+            #     is used to identify the Context to be updated. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. A FieldMask indicating which fields should be updated.
             #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Context Context} is not found, a new {::Google::Cloud::AIPlatform::V1::Context Context} is
-            #     created.
+            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Context Context} is
+            #     not found, a new {::Google::Cloud::AIPlatform::V1::Context Context} is created.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::Context]
@@ -1852,9 +1852,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param context [::String]
-            #     Required. The resource name of the Context that the Artifacts and Executions
-            #     belong to.
-            #     Format:
+            #     Required. The resource name of the Context that the Artifacts and
+            #     Executions belong to. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
             #   @param artifacts [::Array<::String>]
             #     The resource names of the Artifacts to attribute to the Context.
@@ -2423,7 +2422,8 @@ module Google
             #     The maximum number of Executions to return. The service may return fewer.
             #     Must be in range 1-1000, inclusive. Defaults to 100.
             #   @param page_token [::String]
-            #     A page token, received from a previous {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_executions MetadataService.ListExecutions}
+            #     A page token, received from a previous
+            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_executions MetadataService.ListExecutions}
             #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other provided parameters must match the call that
@@ -2557,16 +2557,16 @@ module Google
             #
             #   @param execution [::Google::Cloud::AIPlatform::V1::Execution, ::Hash]
             #     Required. The Execution containing updates.
-            #     The Execution's {::Google::Cloud::AIPlatform::V1::Execution#name Execution.name} field is used to identify the Execution
-            #     to be updated.
-            #     Format:
+            #     The Execution's {::Google::Cloud::AIPlatform::V1::Execution#name Execution.name}
+            #     field is used to identify the Execution to be updated. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. A FieldMask indicating which fields should be updated.
             #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Execution Execution} is not found, a new {::Google::Cloud::AIPlatform::V1::Execution Execution}
-            #     is created.
+            #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Execution Execution}
+            #     is not found, a new {::Google::Cloud::AIPlatform::V1::Execution Execution} is
+            #     created.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::Execution]
@@ -2947,9 +2947,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param execution [::String]
-            #     Required. The resource name of the Execution whose input and output Artifacts should
-            #     be retrieved as a LineageSubgraph.
-            #     Format:
+            #     Required. The resource name of the Execution whose input and output
+            #     Artifacts should be retrieved as a LineageSubgraph. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -3035,9 +3034,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the MetadataStore where the MetadataSchema should
-            #     be created.
-            #     Format:
+            #     Required. The resource name of the MetadataStore where the MetadataSchema
+            #     should be created. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
             #   @param metadata_schema [::Google::Cloud::AIPlatform::V1::MetadataSchema, ::Hash]
             #     Required. The MetadataSchema to create.
@@ -3230,8 +3228,8 @@ module Google
             #     Must be in range 1-1000, inclusive. Defaults to 100.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_schemas MetadataService.ListMetadataSchemas} call. Provide this to retrieve the
-            #     next page.
+            #     {::Google::Cloud::AIPlatform::V1::MetadataService::Client#list_metadata_schemas MetadataService.ListMetadataSchemas}
+            #     call. Provide this to retrieve the next page.
             #
             #     When paginating, all other provided parameters must match the call that
             #     provided the page token. (Otherwise the request will fail with
@@ -3330,9 +3328,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param artifact [::String]
-            #     Required. The resource name of the Artifact whose Lineage needs to be retrieved as a
-            #     LineageSubgraph.
-            #     Format:
+            #     Required. The resource name of the Artifact whose Lineage needs to be
+            #     retrieved as a LineageSubgraph. Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
             #
             #     The request may error with FAILED_PRECONDITION if the number of Artifacts,

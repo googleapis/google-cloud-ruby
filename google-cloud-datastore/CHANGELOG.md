@@ -1,5 +1,17 @@
 # Release History
 
+### 2.4.0 (2023-02-02)
+
+#### Features
+
+* Support query count for Datastore ([#20039](https://github.com/googleapis/google-cloud-ruby/issues/20039)) 
+
+### 2.3.1 (2022-12-14)
+
+#### Bug Fixes
+
+* fixed request limit 
+
 ### 2.3.0 (2022-06-28)
 
 #### Features

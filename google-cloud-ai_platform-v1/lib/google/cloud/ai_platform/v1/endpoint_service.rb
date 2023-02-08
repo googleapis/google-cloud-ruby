@@ -34,7 +34,7 @@ module Google
         ##
         # A service for managing Vertex AI's Endpoints.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/endpoint_service"
         #     client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new

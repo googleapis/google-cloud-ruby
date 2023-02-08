@@ -62,12 +62,18 @@ module Google
         # The table into which the operation loads data. This is the table on
         # which {Table#load_job} was invoked.
         #
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
+        #
         # @return [Table] A table instance.
         #
-        def destination
+        def destination view: nil
           table = @gapi.configuration.load.destination_table
           return nil unless table
-          retrieve_table table.project_id, table.dataset_id, table.table_id
+          retrieve_table table.project_id, table.dataset_id, table.table_id, metadata_view: view
         end
 
         ##
@@ -188,7 +194,7 @@ module Google
 
         ##
         # Checks if the format of the source data is [newline-delimited
-        # JSON](http://jsonlines.org/). The default is `false`.
+        # JSON](https://jsonlines.org/). The default is `false`.
         #
         # @return [Boolean] `true` when the source format is
         #   `NEWLINE_DELIMITED_JSON`, `false` otherwise.
@@ -1269,7 +1275,7 @@ module Google
           # The following values are supported:
           #
           # * `csv` - CSV
-          # * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+          # * `json` - [Newline-delimited JSON](https://jsonlines.org/)
           # * `avro` - [Avro](http://avro.apache.org/)
           # * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
           # * `parquet` - [Parquet](https://parquet.apache.org/)

@@ -32,12 +32,16 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::FeaturestoreMonitoringConfig::ThresholdConfig]
         #     Threshold for numerical features of anomaly detection.
         #     This is shared by all objectives of Featurestore Monitoring for numerical
-        #     features (i.e. Features with type ({::Google::Cloud::AIPlatform::V1::Feature::ValueType Feature.ValueType}) DOUBLE or INT64).
+        #     features (i.e. Features with type
+        #     ({::Google::Cloud::AIPlatform::V1::Feature::ValueType Feature.ValueType}) DOUBLE
+        #     or INT64).
         # @!attribute [rw] categorical_threshold_config
         #   @return [::Google::Cloud::AIPlatform::V1::FeaturestoreMonitoringConfig::ThresholdConfig]
         #     Threshold for categorical features of anomaly detection.
         #     This is shared by all types of Featurestore Monitoring for categorical
-        #     features (i.e. Features with type ({::Google::Cloud::AIPlatform::V1::Feature::ValueType Feature.ValueType}) BOOL or STRING).
+        #     features (i.e. Features with type
+        #     ({::Google::Cloud::AIPlatform::V1::Feature::ValueType Feature.ValueType}) BOOL or
+        #     STRING).
         class FeaturestoreMonitoringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -50,6 +50,11 @@
                 "list_data_items"
               ]
             },
+            "SearchDataItems": {
+              "methods": [
+                "search_data_items"
+              ]
+            },
             "ListSavedQueries": {
               "methods": [
                 "list_saved_queries"
@@ -890,6 +895,11 @@
             "GetTensorboard": {
               "methods": [
                 "get_tensorboard"
+              ]
+            },
+            "ReadTensorboardUsage": {
+              "methods": [
+                "read_tensorboard_usage"
               ]
             },
             "UpdateTensorboard": {

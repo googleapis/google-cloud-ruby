@@ -1,5 +1,12 @@
 # Release History
 
+### 0.4.0 (2022-12-06)
+
+#### Features
+
+* Added support for encryption, network, database type, and telemetry configuration in a Metastore Service 
+* Added support for Federations ([#19473](https://github.com/googleapis/google-cloud-ruby/issues/19473)) 
+
 ### 0.3.0 (2022-07-05)
 
 #### Features

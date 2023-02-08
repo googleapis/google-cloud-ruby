@@ -30,7 +30,7 @@ module Google
           # Service for search.
           #
           # This feature is only available for users who have Retail Search enabled.
-          # Please enable Retail Search on Cloud Console before using this feature.
+          # Enable Retail Search on Cloud Console before using this feature.
           #
           class Client
             include Paths
@@ -156,7 +156,7 @@ module Google
             # Performs a search.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload search(request, options = nil)
             #   Pass arguments to `search` via a request object, either of type
@@ -178,7 +178,7 @@ module Google
             #     `projects/*/locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
             #     or the name of the legacy placement resource, such as
             #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
-            #     This field is used to identify the serving configuration name and the set
+            #     This field is used to identify the serving config name and the set
             #     of models that will be used to make the search.
             #   @param branch [::String]
             #     The branch resource name, such as
@@ -363,7 +363,7 @@ module Google
             #     {::Google::Cloud::Retail::V2::UserEvent#page_categories UserEvent.page_categories};
             #
             #     To represent full path of category, use '>' sign to separate different
-            #     hierarchies. If '>' is part of the category name, please replace it with
+            #     hierarchies. If '>' is part of the category name, replace it with
             #     other character(s).
             #
             #     Category pages include special pages such as sales or promotions. For

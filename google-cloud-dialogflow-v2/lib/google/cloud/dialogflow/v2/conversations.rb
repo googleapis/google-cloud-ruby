@@ -31,9 +31,10 @@ module Google
     module Dialogflow
       module V2
         ##
-        # Service for managing {::Google::Cloud::Dialogflow::V2::Conversation Conversations}.
+        # Service for managing
+        # {::Google::Cloud::Dialogflow::V2::Conversation Conversations}.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dialogflow/v2/conversations"
         #     client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new

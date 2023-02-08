@@ -25,6 +25,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.GetTensorboardRequest" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.aiplatform.v1.ReadTensorboardUsageRequest" do
+      optional :tensorboard, :string, 1
+    end
+    add_message "google.cloud.aiplatform.v1.ReadTensorboardUsageResponse" do
+      map :monthly_usage_data, :string, :message, 1, "google.cloud.aiplatform.v1.ReadTensorboardUsageResponse.PerMonthUsageData"
+    end
+    add_message "google.cloud.aiplatform.v1.ReadTensorboardUsageResponse.PerUserUsageData" do
+      optional :username, :string, 1
+      optional :view_count, :int64, 2
+    end
+    add_message "google.cloud.aiplatform.v1.ReadTensorboardUsageResponse.PerMonthUsageData" do
+      repeated :user_usage_data, :message, 1, "google.cloud.aiplatform.v1.ReadTensorboardUsageResponse.PerUserUsageData"
+    end
     add_message "google.cloud.aiplatform.v1.ListTensorboardsRequest" do
       optional :parent, :string, 1
       optional :filter, :string, 2
@@ -199,6 +212,10 @@ module Google
       module V1
         CreateTensorboardRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.CreateTensorboardRequest").msgclass
         GetTensorboardRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.GetTensorboardRequest").msgclass
+        ReadTensorboardUsageRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ReadTensorboardUsageRequest").msgclass
+        ReadTensorboardUsageResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ReadTensorboardUsageResponse").msgclass
+        ReadTensorboardUsageResponse::PerUserUsageData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ReadTensorboardUsageResponse.PerUserUsageData").msgclass
+        ReadTensorboardUsageResponse::PerMonthUsageData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ReadTensorboardUsageResponse.PerMonthUsageData").msgclass
         ListTensorboardsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListTensorboardsRequest").msgclass
         ListTensorboardsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListTensorboardsResponse").msgclass
         UpdateTensorboardRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.UpdateTensorboardRequest").msgclass

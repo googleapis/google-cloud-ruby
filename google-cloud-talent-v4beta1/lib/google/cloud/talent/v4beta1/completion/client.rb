@@ -201,9 +201,11 @@ module Google
             #     If tenant id is unspecified, the default tenant is used, for
             #     example, "projects/foo".
             #   @param scope [::Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope]
-            #     The scope of the completion. The defaults is {::Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope::PUBLIC CompletionScope.PUBLIC}.
+            #     The scope of the completion. The defaults is
+            #     {::Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope::PUBLIC CompletionScope.PUBLIC}.
             #   @param type [::Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType]
-            #     The completion topic. The default is {::Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED CompletionType.COMBINED}.
+            #     The completion topic. The default is
+            #     {::Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED CompletionType.COMBINED}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4beta1::CompleteQueryResponse]

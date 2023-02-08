@@ -95,6 +95,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.batch.v1.Environment" do
       map :variables, :string, :string, 1
+      map :secret_variables, :string, :string, 2
+      optional :encrypted_variables, :message, 3, "google.cloud.batch.v1.Environment.KMSEnvMap"
+    end
+    add_message "google.cloud.batch.v1.Environment.KMSEnvMap" do
+      optional :key_name, :string, 1
+      optional :cipher_text, :string, 2
     end
   end
 end
@@ -118,6 +124,7 @@ module Google
         LifecyclePolicy::Action = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.LifecyclePolicy.Action").enummodule
         Task = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.Task").msgclass
         Environment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.Environment").msgclass
+        Environment::KMSEnvMap = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.Environment.KMSEnvMap").msgclass
       end
     end
   end

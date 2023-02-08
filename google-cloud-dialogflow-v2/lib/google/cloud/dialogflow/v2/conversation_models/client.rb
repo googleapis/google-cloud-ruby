@@ -183,8 +183,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::CreateConversationModelOperationMetadata CreateConversationModelOperationMetadata}
-            # - `response`: {::Google::Cloud::Dialogflow::V2::ConversationModel ConversationModel}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::CreateConversationModelOperationMetadata CreateConversationModelOperationMetadata}
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::ConversationModel ConversationModel}
             #
             # @overload create_conversation_model(request, options = nil)
             #   Pass arguments to `create_conversation_model` via a request object, either of type
@@ -470,7 +472,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::DeleteConversationModelOperationMetadata DeleteConversationModelOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::DeleteConversationModelOperationMetadata DeleteConversationModelOperationMetadata}
             # - `response`: An [Empty
             #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
             #
@@ -575,7 +578,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::DeployConversationModelOperationMetadata DeployConversationModelOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::DeployConversationModelOperationMetadata DeployConversationModelOperationMetadata}
             # - `response`: An [Empty
             #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
             #
@@ -680,7 +684,8 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: {::Google::Cloud::Dialogflow::V2::UndeployConversationModelOperationMetadata UndeployConversationModelOperationMetadata}
+            # - `metadata`:
+            # {::Google::Cloud::Dialogflow::V2::UndeployConversationModelOperationMetadata UndeployConversationModelOperationMetadata}
             # - `response`: An [Empty
             #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
             #

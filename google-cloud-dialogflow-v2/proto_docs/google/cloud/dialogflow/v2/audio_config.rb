@@ -102,10 +102,12 @@ module Google
         #     the same session do not necessarily need to specify the same language.
         # @!attribute [rw] enable_word_info
         #   @return [::Boolean]
-        #     If `true`, Dialogflow returns {::Google::Cloud::Dialogflow::V2::SpeechWordInfo SpeechWordInfo} in
-        #     {::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult} with information about the recognized speech
-        #     words, e.g. start and end time offsets. If false or unspecified, Speech
-        #     doesn't return any word-level information.
+        #     If `true`, Dialogflow returns
+        #     {::Google::Cloud::Dialogflow::V2::SpeechWordInfo SpeechWordInfo} in
+        #     {::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult}
+        #     with information about the recognized speech words, e.g. start and end time
+        #     offsets. If false or unspecified, Speech doesn't return any word-level
+        #     information.
         # @!attribute [rw] phrase_hints
         #   @return [::Array<::String>]
         #     A list of strings containing words and phrases that the speech
@@ -140,7 +142,8 @@ module Google
         #     for more details.
         # @!attribute [rw] model_variant
         #   @return [::Google::Cloud::Dialogflow::V2::SpeechModelVariant]
-        #     Which variant of the {::Google::Cloud::Dialogflow::V2::InputAudioConfig#model Speech model} to use.
+        #     Which variant of the [Speech
+        #     model][google.cloud.dialogflow.v2.InputAudioConfig.model] to use.
         # @!attribute [rw] single_utterance
         #   @return [::Boolean]
         #     If `false` (default), recognition does not cease until the
@@ -155,7 +158,9 @@ module Google
         #     over StreamingDetectIntentRequest.single_utterance.
         # @!attribute [rw] disable_no_speech_recognized_event
         #   @return [::Boolean]
-        #     Only used in {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent} and
+        #     Only used in
+        #     {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent}
+        #     and
         #     {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}.
         #     If `false` and recognition doesn't return any result, trigger
         #     `NO_SPEECH_RECOGNIZED` event to Dialogflow agent.
@@ -174,9 +179,10 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::SsmlVoiceGender]
         #     Optional. The preferred gender of the voice. If not set, the service will
         #     choose a voice based on the other parameters such as language_code and
-        #     {::Google::Cloud::Dialogflow::V2::VoiceSelectionParams#name name}. Note that this is only a preference, not requirement. If a
-        #     voice of the appropriate gender is not available, the synthesizer should
-        #     substitute a voice with a different gender rather than failing the request.
+        #     {::Google::Cloud::Dialogflow::V2::VoiceSelectionParams#name name}. Note that
+        #     this is only a preference, not requirement. If a voice of the appropriate
+        #     gender is not available, the synthesizer should substitute a voice with a
+        #     different gender rather than failing the request.
         class VoiceSelectionParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -247,16 +253,19 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Configures speech transcription for {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}.
+        # Configures speech transcription for
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}.
         # @!attribute [rw] speech_model_variant
         #   @return [::Google::Cloud::Dialogflow::V2::SpeechModelVariant]
         #     The speech model used in speech to text.
         #     `SPEECH_MODEL_VARIANT_UNSPECIFIED`, `USE_BEST_AVAILABLE` will be treated as
-        #     `USE_ENHANCED`. It can be overridden in {::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest AnalyzeContentRequest} and
-        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest StreamingAnalyzeContentRequest} request.
-        #     If enhanced model variant is specified and an enhanced
-        #     version of the specified model for the language does not exist, then it
-        #     would emit an error.
+        #     `USE_ENHANCED`. It can be overridden in
+        #     {::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest AnalyzeContentRequest}
+        #     and
+        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest StreamingAnalyzeContentRequest}
+        #     request. If enhanced model variant is specified and an enhanced version of
+        #     the specified model for the language does not exist, then it would emit an
+        #     error.
         # @!attribute [rw] model
         #   @return [::String]
         #     Which Speech model to select. Select the model best suited to your domain
@@ -320,7 +329,8 @@ module Google
           AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
         end
 
-        # Variant of the specified {::Google::Cloud::Dialogflow::V2::InputAudioConfig#model Speech model} to use.
+        # Variant of the specified [Speech
+        # model][google.cloud.dialogflow.v2.InputAudioConfig.model] to use.
         #
         # See the [Cloud Speech
         # documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)
@@ -349,8 +359,8 @@ module Google
           # Use an enhanced model variant:
           #
           # * If an enhanced variant does not exist for the given
-          #   {::Google::Cloud::Dialogflow::V2::InputAudioConfig#model model} and request language, Dialogflow falls
-          #   back to the standard variant.
+          #   {::Google::Cloud::Dialogflow::V2::InputAudioConfig#model model} and request
+          #   language, Dialogflow falls back to the standard variant.
           #
           #   The [Cloud Speech
           #   documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)

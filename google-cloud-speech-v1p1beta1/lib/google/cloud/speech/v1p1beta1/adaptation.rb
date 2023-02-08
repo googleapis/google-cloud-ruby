@@ -33,7 +33,7 @@ module Google
         ##
         # Service that implements Google Cloud Speech Adaptation API.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/speech/v1p1beta1/adaptation"
         #     client = ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new

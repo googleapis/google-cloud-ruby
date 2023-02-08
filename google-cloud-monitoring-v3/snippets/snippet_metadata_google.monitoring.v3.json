@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-monitoring-v3",
-    "version": "0.9.0",
+    "version": "0.10.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1638,6 +1638,166 @@
           "service": {
             "short_name": "ServiceMonitoringService",
             "full_name": "google.monitoring.v3.ServiceMonitoringService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_CreateSnooze_sync",
+      "title": "Snippet for create_snooze in SnoozeService",
+      "description": "Basic snippet for create_snooze in SnoozeService",
+      "file": "snooze_service/create_snooze.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_snooze",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#create_snooze",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateSnoozeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Snooze",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "CreateSnooze",
+          "full_name": "google.monitoring.v3.SnoozeService.CreateSnooze",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_ListSnoozes_sync",
+      "title": "Snippet for list_snoozes in SnoozeService",
+      "description": "Basic snippet for list_snoozes in SnoozeService",
+      "file": "snooze_service/list_snoozes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_snoozes",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#list_snoozes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListSnoozesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListSnoozesResponse",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "ListSnoozes",
+          "full_name": "google.monitoring.v3.SnoozeService.ListSnoozes",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_GetSnooze_sync",
+      "title": "Snippet for get_snooze in SnoozeService",
+      "description": "Basic snippet for get_snooze in SnoozeService",
+      "file": "snooze_service/get_snooze.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_snooze",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#get_snooze",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetSnoozeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Snooze",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "GetSnooze",
+          "full_name": "google.monitoring.v3.SnoozeService.GetSnooze",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_UpdateSnooze_sync",
+      "title": "Snippet for update_snooze in SnoozeService",
+      "description": "Basic snippet for update_snooze in SnoozeService",
+      "file": "snooze_service/update_snooze.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_snooze",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#update_snooze",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::UpdateSnoozeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Snooze",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSnooze",
+          "full_name": "google.monitoring.v3.SnoozeService.UpdateSnooze",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
           }
         }
       },

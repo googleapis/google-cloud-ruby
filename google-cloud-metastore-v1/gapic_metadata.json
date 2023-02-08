@@ -88,6 +88,40 @@
           }
         }
       }
+    },
+    "DataprocMetastoreFederation": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client",
+          "rpcs": {
+            "ListFederations": {
+              "methods": [
+                "list_federations"
+              ]
+            },
+            "GetFederation": {
+              "methods": [
+                "get_federation"
+              ]
+            },
+            "CreateFederation": {
+              "methods": [
+                "create_federation"
+              ]
+            },
+            "UpdateFederation": {
+              "methods": [
+                "update_federation"
+              ]
+            },
+            "DeleteFederation": {
+              "methods": [
+                "delete_federation"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

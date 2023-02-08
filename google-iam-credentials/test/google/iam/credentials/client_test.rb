@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Iam::Credentials::ClientConstructionMinitest < Minitest::Test
-  def test_iam_credentials
+  def test_iam_credentials_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Iam::Credentials.iam_credentials do |config|

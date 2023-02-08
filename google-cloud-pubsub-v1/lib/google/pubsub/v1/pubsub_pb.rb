@@ -21,6 +21,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.pubsub.v1.SchemaSettings" do
       optional :schema, :string, 1
       optional :encoding, :enum, 2, "google.pubsub.v1.Encoding"
+      optional :first_revision_id, :string, 3
+      optional :last_revision_id, :string, 4
     end
     add_message "google.pubsub.v1.Topic" do
       optional :name, :string, 1

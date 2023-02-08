@@ -42,17 +42,18 @@ module Google
         # 3. Resellers and distributors can manage customer entitlements.
         #
         # CloudChannelService exposes the following resources:
-        # - {::Google::Cloud::Channel::V1::Customer Customer}s: An entity—usually an enterprise—managed by a reseller or
-        # distributor.
+        # - {::Google::Cloud::Channel::V1::Customer Customer}s: An entity-usually an
+        # enterprise-managed by a reseller or distributor.
         #
-        # - {::Google::Cloud::Channel::V1::Entitlement Entitlement}s: An entity that provides a customer with the means to use
-        # a service. Entitlements are created or updated as a result of a successful
-        # fulfillment.
+        # - {::Google::Cloud::Channel::V1::Entitlement Entitlement}s: An entity that
+        # provides a customer with the means to use a service. Entitlements are created
+        # or updated as a result of a successful fulfillment.
         #
-        # - {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}s: An entity that identifies links between
-        # distributors and their indirect resellers in a channel.
+        # - {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}s: An
+        # entity that identifies links between distributors and their indirect
+        # resellers in a channel.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/channel/v1/cloud_channel_service"
         #     client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new

@@ -33,7 +33,7 @@ module Google
         ##
         # Service for retrieving and updating individual error groups.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/error_reporting/v1beta1/error_group_service"
         #     client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client.new

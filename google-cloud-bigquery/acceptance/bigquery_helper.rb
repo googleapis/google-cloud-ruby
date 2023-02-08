@@ -153,7 +153,7 @@ module Acceptance
     def self.run_one_method klass, method_name, reporter
       result = nil
       reporter.prerecord klass, method_name
-      (1..3).each do |try|
+      (1..1).each do |try|
         result = Minitest.run_one_method(klass, method_name)
         break if (result.passed? || result.skipped?)
         puts "Retrying #{klass}##{method_name} (#{try})"
@@ -181,6 +181,18 @@ def clean_up_storage_bucket
   safe_gcs_execute { $bucket.delete }
 rescue => e
   puts "Error while cleaning up bigquery bucket after tests.\n\n#{e}"
+end
+
+def verify_table_metadata table, view
+  if view == "basic"
+    assert_nil(table.bytes_count)
+    assert_nil(table.rows_count)
+    assert_nil(table.modified_at)
+  else
+    refute_nil table.bytes_count, "Transient stats should not be nil"
+    refute_nil table.rows_count, "Transient stats should not be nil"
+    refute_nil table.modified_at, "Transient stats should not be nil"
+  end
 end
 
 Minitest.after_run do

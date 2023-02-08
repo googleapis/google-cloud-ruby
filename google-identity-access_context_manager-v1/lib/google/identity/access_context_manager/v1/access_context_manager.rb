@@ -44,7 +44,7 @@ module Google
         # applicable to all resources in the organization.
         # AccessPolicies
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/identity/access_context_manager/v1/access_context_manager"
         #     client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new

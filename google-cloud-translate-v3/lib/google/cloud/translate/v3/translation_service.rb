@@ -34,7 +34,7 @@ module Google
         ##
         # Provides natural language translation operations.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/translate/v3/translation_service"
         #     client = ::Google::Cloud::Translate::V3::TranslationService::Client.new

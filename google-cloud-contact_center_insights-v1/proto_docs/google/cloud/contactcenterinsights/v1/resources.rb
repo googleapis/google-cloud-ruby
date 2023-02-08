@@ -231,6 +231,10 @@ module Google
         #   @return [::Google::Cloud::ContactCenterInsights::V1::AnalysisResult]
         #     Output only. The result of the analysis, which is populated when the analysis
         #     finishes.
+        # @!attribute [rw] annotator_selector
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector]
+        #     To select the annotators to run and the phrase matchers to use
+        #     (if any). If not specified, all annotators will be run.
         class Analysis
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -404,6 +408,9 @@ module Google
         # @!attribute [rw] phrase_match_data
         #   @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatchData]
         #     Data specifying a phrase match.
+        # @!attribute [rw] issue_match_data
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueMatchData]
+        #     Data specifying an issue match.
         # @!attribute [rw] channel_tag
         #   @return [::Integer]
         #     The channel of the audio where the annotation occurs. For single-channel
@@ -662,6 +669,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The data for an issue match annotation.
+        # @!attribute [rw] issue_assignment
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueAssignment]
+        #     Information about the issue's assignment.
+        class IssueMatchData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The issue model resource.
         # @!attribute [rw] name
         #   @return [::String]
@@ -746,6 +762,10 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The most recent time that this issue was updated.
+        # @!attribute [r] sample_utterances
+        #   @return [::Array<::String>]
+        #     Output only. Resource names of the sample representative utterances that match to this
+        #     issue.
         class Issue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -966,6 +986,10 @@ module Google
           #   @return [::Float]
           #     Percentage of conversations created using Dialogflow runtime integration
           #     to analyze automatically, between [0, 100].
+          # @!attribute [rw] annotator_selector
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector]
+          #     To select the annotators to run and the phrase matchers to use
+          #     (if any). If not specified, all annotators will be run.
           class AnalysisConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1270,6 +1294,48 @@ module Google
         #   @return [::String]
         #     String with specific view properties.
         class View
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Selector of all available annotators and phrase matchers to run.
+        # @!attribute [rw] run_interruption_annotator
+        #   @return [::Boolean]
+        #     Whether to run the interruption annotator.
+        # @!attribute [rw] run_silence_annotator
+        #   @return [::Boolean]
+        #     Whether to run the silence annotator.
+        # @!attribute [rw] run_phrase_matcher_annotator
+        #   @return [::Boolean]
+        #     Whether to run the active phrase matcher annotator(s).
+        # @!attribute [rw] phrase_matchers
+        #   @return [::Array<::String>]
+        #     The list of phrase matchers to run. If not provided, all active phrase
+        #     matchers will be used. If inactive phrase matchers are provided, they will
+        #     not be used. Phrase matchers will be run only if
+        #     run_phrase_matcher_annotator is set to true. Format:
+        #     projects/\\{project}/locations/\\{location}/phraseMatchers/\\{phrase_matcher}
+        # @!attribute [rw] run_sentiment_annotator
+        #   @return [::Boolean]
+        #     Whether to run the sentiment annotator.
+        # @!attribute [rw] run_entity_annotator
+        #   @return [::Boolean]
+        #     Whether to run the entity annotator.
+        # @!attribute [rw] run_intent_annotator
+        #   @return [::Boolean]
+        #     Whether to run the intent annotator.
+        # @!attribute [rw] run_issue_model_annotator
+        #   @return [::Boolean]
+        #     Whether to run the issue model annotator. A model should have already been
+        #     deployed for this to take effect.
+        # @!attribute [rw] issue_models
+        #   @return [::Array<::String>]
+        #     The issue model to run. If not provided, the most recently deployed topic
+        #     model will be used. The provided issue model will only be used for
+        #     inference if the issue model is deployed and if run_issue_model_annotator
+        #     is set to true. If more than one issue model is provided, only the first
+        #     provided issue model will be used for inference.
+        class AnnotatorSelector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-orchestration-airflow-service-v1",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -195,6 +195,86 @@
         "method": {
           "short_name": "DeleteEnvironment",
           "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.DeleteEnvironment",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_SaveSnapshot_sync",
+      "title": "Snippet for save_snapshot in Environments",
+      "description": "Basic snippet for save_snapshot in Environments",
+      "file": "environments/save_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "save_snapshot",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#save_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "SaveSnapshot",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.SaveSnapshot",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_LoadSnapshot_sync",
+      "title": "Snippet for load_snapshot in Environments",
+      "description": "Basic snippet for load_snapshot in Environments",
+      "file": "environments/load_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "load_snapshot",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#load_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "LoadSnapshot",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.LoadSnapshot",
           "service": {
             "short_name": "Environments",
             "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"

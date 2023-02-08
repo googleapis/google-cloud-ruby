@@ -34,7 +34,7 @@ module Google
         # domain, verify ownership via
         # [Webmaster Central](https://www.google.com/webmasters/verification/home).
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/app_engine/v1/authorized_domains"
         #     client = ::Google::Cloud::AppEngine::V1::AuthorizedDomains::Client.new

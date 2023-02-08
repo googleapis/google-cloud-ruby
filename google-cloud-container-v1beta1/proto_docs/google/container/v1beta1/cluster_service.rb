@@ -72,6 +72,29 @@ module Google
           end
         end
 
+        # Parameters that can be configured on Windows nodes.
+        # Windows Node Config that define the parameters that will be used to
+        # configure the Windows node pool settings
+        # @!attribute [rw] os_version
+        #   @return [::Google::Cloud::Container::V1beta1::WindowsNodeConfig::OSVersion]
+        #     OSVersion specifies the Windows node config to be used on the node
+        class WindowsNodeConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible OS version that can be used.
+          module OSVersion
+            # When OSVersion is not specified
+            OS_VERSION_UNSPECIFIED = 0
+
+            # LTSC2019 specifies to use LTSC2019 as the Windows Servercore Base Image
+            OS_VERSION_LTSC2019 = 1
+
+            # LTSC2022 specifies to use LTSC2022 as the Windows Servercore Base Image
+            OS_VERSION_LTSC2022 = 2
+          end
+        end
+
         # Node kubelet configs.
         # @!attribute [rw] cpu_manager_policy
         #   @return [::String]
@@ -195,7 +218,9 @@ module Google
         # @!attribute [rw] image_type
         #   @return [::String]
         #     The image type to use for this node. Note that for a given image type,
-        #     the latest version of it will be used.
+        #     the latest version of it will be used. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The map of Kubernetes labels (key/value pairs) to be applied to each node.
@@ -317,6 +342,17 @@ module Google
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
         #     Logging configuration.
+        # @!attribute [rw] windows_node_config
+        #   @return [::Google::Cloud::Container::V1beta1::WindowsNodeConfig]
+        #     Parameters that can be configured on Windows nodes.
+        # @!attribute [rw] local_nvme_ssd_block_config
+        #   @return [::Google::Cloud::Container::V1beta1::LocalNvmeSsdBlockConfig]
+        #     Parameters for using raw-block Local NVMe SSDs.
+        # @!attribute [rw] ephemeral_storage_local_ssd_config
+        #   @return [::Google::Cloud::Container::V1beta1::EphemeralStorageLocalSsdConfig]
+        #     Parameters for the node ephemeral storage using Local SSDs.
+        #     If unspecified, ephemeral storage is backed by the boot disk.
+        #     This field is functionally equivalent to the ephemeral_storage_config
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -487,6 +523,38 @@ module Google
         #     interfaces. Each local SSD is 375 GB in size.
         #     If zero, it means to disable using local SSDs as ephemeral storage.
         class EphemeralStorageConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # LocalNvmeSsdBlockConfig contains configuration for using raw-block local
+        # NVMe SSDs
+        # @!attribute [rw] local_ssd_count
+        #   @return [::Integer]
+        #     The number of raw-block local NVMe SSD disks to be attached to the node.
+        #     Each local SSD is 375 GB in size. If zero, it means no raw-block local NVMe
+        #     SSD disks to be attached to the node.
+        #     The limit for this value is dependent upon the maximum number of
+        #     disks available on a machine per zone. See:
+        #     https://cloud.google.com/compute/docs/disks/local-ssd
+        #     for more information.
+        class LocalNvmeSsdBlockConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # EphemeralStorageLocalSsdConfig contains configuration for the node ephemeral
+        # storage using Local SSDs.
+        # @!attribute [rw] local_ssd_count
+        #   @return [::Integer]
+        #     Number of local SSDs to use to back ephemeral storage. Uses NVMe
+        #     interfaces. Each local SSD is 375 GB in size.
+        #     If zero, it means to disable using local SSDs as ephemeral storage.
+        #     The limit for this value is dependent upon the maximum number of
+        #     disks available on a machine per zone. See:
+        #     https://cloud.google.com/compute/docs/disks/local-ssd
+        #     for more information.
+        class EphemeralStorageLocalSsdConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1135,7 +1203,8 @@ module Google
         #     The ipv6 access type (internal or external) when create_subnetwork is true
         # @!attribute [r] subnet_ipv6_cidr_block
         #   @return [::String]
-        #     Output only. [Output only] The subnet's IPv6 CIDR block used by nodes and pods.
+        #     Output only. [Output only] The subnet's IPv6 CIDR block used by nodes and
+        #     pods.
         # @!attribute [r] services_ipv6_cidr_block
         #   @return [::String]
         #     Output only. [Output only] The services IPv6 CIDR block for the cluster.
@@ -1595,6 +1664,11 @@ module Google
         # @!attribute [rw] protect_config
         #   @return [::Google::Cloud::Container::V1beta1::ProtectConfig]
         #     Enable/Disable Protect API features for the cluster.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     This checksum is computed by the server based on the value of cluster
+        #     fields, and may be sent on update requests to ensure the client has an
+        #     up-to-date value before proceeding.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1923,9 +1997,19 @@ module Google
         # @!attribute [rw] desired_gateway_api_config
         #   @return [::Google::Cloud::Container::V1beta1::GatewayAPIConfig]
         #     The desired config of Gateway API on this cluster.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     The current etag of the cluster.
+        #     If an etag is provided and does not match the current etag of the cluster,
+        #     update will be blocked and an ABORTED error will be returned.
         # @!attribute [rw] desired_node_pool_logging_config
         #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
         #     The desired node pool logging configuration defaults for the cluster.
+        # @!attribute [rw] desired_stack_type
+        #   @return [::Google::Cloud::Container::V1beta1::StackType]
+        #     The desired stack type of the cluster.
+        #     If a stack type is provided and does not match the current stack type of
+        #     the cluster, update will attempt to change the stack type to the new type.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2222,7 +2306,9 @@ module Google
         #     - "-": picks the Kubernetes master version
         # @!attribute [rw] image_type
         #   @return [::String]
-        #     Required. The desired image type for the node pool.
+        #     Required. The desired image type for the node pool. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         # @!attribute [rw] locations
         #   @return [::Array<::String>]
         #     The desired list of Google Compute Engine
@@ -2275,6 +2361,11 @@ module Google
         # @!attribute [rw] gvnic
         #   @return [::Google::Cloud::Container::V1beta1::VirtualNIC]
         #     Enable or disable gvnic on the node pool.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     The current etag of the node pool.
+        #     If an etag is provided and does not match the current etag of the node
+        #     pool, update will be blocked and an ABORTED error will be returned.
         # @!attribute [rw] fast_socket
         #   @return [::Google::Cloud::Container::V1beta1::FastSocket]
         #     Enable or disable NCCL fast socket for the node pool.
@@ -2285,6 +2376,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::ResourceLabels]
         #     The resource labels for the node pool to use to annotate any related
         #     Google Compute Engine resources.
+        # @!attribute [rw] windows_node_config
+        #   @return [::Google::Cloud::Container::V1beta1::WindowsNodeConfig]
+        #     Parameters that can be configured on Windows nodes.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2417,8 +2511,8 @@ module Google
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] addons_config
         #   @return [::Google::Cloud::Container::V1beta1::AddonsConfig]
-        #     Required. The desired configurations for the various addons available to run in the
-        #     cluster.
+        #     Required. The desired configurations for the various addons available to
+        #     run in the cluster.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name (project, location, cluster) of the cluster to set addons.
@@ -3053,8 +3147,13 @@ module Google
         #     Specifies the node placement policy.
         # @!attribute [r] update_info
         #   @return [::Google::Cloud::Container::V1beta1::NodePool::UpdateInfo]
-        #     Output only. [Output only] Update info contains relevant information during a node
-        #     pool update.
+        #     Output only. [Output only] Update info contains relevant information during
+        #     a node pool update.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     This checksum is computed by the server based on the value of node pool
+        #     fields, and may be sent on update requests to ensure the client has an
+        #     up-to-date value before proceeding.
         class NodePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3625,7 +3724,9 @@ module Google
         #     https://cloud.google.com/compute/docs/disks/customer-managed-encryption
         # @!attribute [rw] image_type
         #   @return [::String]
-        #     The image type to use for NAP created node.
+        #     The image type to use for NAP created node. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         class AutoprovisioningNodePoolDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5018,7 +5119,8 @@ module Google
 
         # Strategy used for node pool update.
         module NodePoolUpdateStrategy
-          # Default value.
+          # Default value if unset. GKE internally defaults the update strategy to
+          # SURGE for unspecified strategies.
           NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED = 0
 
           # blue-green upgrade.
@@ -5043,6 +5145,18 @@ module Google
           # documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/dataplane-v2)
           # for more.
           ADVANCED_DATAPATH = 2
+        end
+
+        # Possible values for IP stack type
+        module StackType
+          # By default, the clusters will be IPV4 only
+          STACK_TYPE_UNSPECIFIED = 0
+
+          # The value used if the cluster is a IPV4 only
+          IPV4 = 1
+
+          # The value used if the cluster is a dual stack cluster
+          IPV4_IPV6 = 2
         end
       end
     end

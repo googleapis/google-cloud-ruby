@@ -1,5 +1,28 @@
 # Release History
 
+### 1.10.0 (2023-01-26)
+
+#### Features
+
+* Added AllocationSpecificSKUReservation#source_instance_template ([#20054](https://github.com/googleapis/google-cloud-ruby/issues/20054)) 
+* Added NetworkInterface#network_attachment 
+* Added Reservation#resource_status 
+
+### 1.9.0 (2023-01-10)
+
+#### Features
+
+* Support for adding resource policies to a reservation 
+* Support for bundle aggregation type and bundle operational status in Interconnect 
+* Support for discarding local SSDs when stopping or suspending an instance 
+* Support for quota projects 
+* Support for retry policy confguration 
+* Support for specifying the network URL when setting ServiceAttachmentConsumerProjectLimit 
+* Support for the Network Attachments service 
+* Support for the TargetTcpProxies#aggregated_list call ([#19463](https://github.com/googleapis/google-cloud-ruby/issues/19463)) 
+* Support for VM internal DNS settings 
+* Use self-signed JWT credentials if available 
+
 ### 1.8.0 (2022-10-25)
 
 #### Features

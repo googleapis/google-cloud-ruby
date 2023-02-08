@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::ServiceDirectory::ClientConstructionMinitest < Minitest::Test
-  def test_lookup_service
+  def test_lookup_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ServiceDirectory.lookup_service do |config|
@@ -32,7 +32,7 @@ class Google::Cloud::ServiceDirectory::ClientConstructionMinitest < Minitest::Te
     end
   end
 
-  def test_registration_service
+  def test_registration_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ServiceDirectory.registration_service do |config|

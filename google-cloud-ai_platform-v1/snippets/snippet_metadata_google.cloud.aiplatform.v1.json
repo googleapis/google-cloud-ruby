@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-ai_platform-v1",
-    "version": "0.15.0",
+    "version": "0.18.0",
     "language": "RUBY",
     "apis": [
       {
@@ -315,6 +315,46 @@
         "method": {
           "short_name": "ListDataItems",
           "full_name": "google.cloud.aiplatform.v1.DatasetService.ListDataItems",
+          "service": {
+            "short_name": "DatasetService",
+            "full_name": "google.cloud.aiplatform.v1.DatasetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_DatasetService_SearchDataItems_sync",
+      "title": "Snippet for search_data_items in DatasetService",
+      "description": "Basic snippet for search_data_items in DatasetService",
+      "file": "dataset_service/search_data_items.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_data_items",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client#search_data_items",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::SearchDataItemsResponse",
+        "client": {
+          "short_name": "DatasetService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client"
+        },
+        "method": {
+          "short_name": "SearchDataItems",
+          "full_name": "google.cloud.aiplatform.v1.DatasetService.SearchDataItems",
           "service": {
             "short_name": "DatasetService",
             "full_name": "google.cloud.aiplatform.v1.DatasetService"
@@ -6115,6 +6155,46 @@
         "method": {
           "short_name": "GetTensorboard",
           "full_name": "google.cloud.aiplatform.v1.TensorboardService.GetTensorboard",
+          "service": {
+            "short_name": "TensorboardService",
+            "full_name": "google.cloud.aiplatform.v1.TensorboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_sync",
+      "title": "Snippet for read_tensorboard_usage in TensorboardService",
+      "description": "Basic snippet for read_tensorboard_usage in TensorboardService",
+      "file": "tensorboard_service/read_tensorboard_usage.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "read_tensorboard_usage",
+        "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse",
+        "client": {
+          "short_name": "TensorboardService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client"
+        },
+        "method": {
+          "short_name": "ReadTensorboardUsage",
+          "full_name": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
           "service": {
             "short_name": "TensorboardService",
             "full_name": "google.cloud.aiplatform.v1.TensorboardService"

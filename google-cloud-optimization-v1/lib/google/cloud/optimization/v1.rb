@@ -23,9 +23,9 @@ module Google
   module Cloud
     module Optimization
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/optimization/v1"
       #     client = ::Google::Cloud::Optimization::V1::FleetRouting::Client.new

@@ -173,8 +173,10 @@ module Google
         # Raises GRPC status code 5 if the topic does not exist.
         # The messages parameter is an array of arrays.
         # The first element is the data, second is attributes hash.
-        def publish topic, messages
-          publisher.publish topic: topic_path(topic), messages: messages
+        def publish topic, messages, compress: false
+          request = { topic: topic_path(topic), messages: messages }
+          compress_options = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
+          compress ? (publisher.publish request, compress_options) : (publisher.publish request)
         end
 
         ##

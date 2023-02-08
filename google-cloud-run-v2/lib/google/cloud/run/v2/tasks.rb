@@ -33,7 +33,7 @@ module Google
         ##
         # Cloud Run Task Control Plane API.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/run/v2/tasks"
         #     client = ::Google::Cloud::Run::V2::Tasks::Client.new

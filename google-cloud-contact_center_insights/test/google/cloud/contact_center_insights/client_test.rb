@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::ContactCenterInsights::ClientConstructionMinitest < Minitest::Test
-  def test_contact_center_insights
+  def test_contact_center_insights_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ContactCenterInsights.contact_center_insights do |config|

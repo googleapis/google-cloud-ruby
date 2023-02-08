@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-vm_migration-v1",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1767,6 +1767,86 @@
         {
           "start": 20,
           "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_ListReplicationCycles_sync",
+      "title": "Snippet for list_replication_cycles in VMMigration",
+      "description": "Basic snippet for list_replication_cycles in VMMigration",
+      "file": "vm_migration/list_replication_cycles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_replication_cycles",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#list_replication_cycles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VMMigration::V1::ListReplicationCyclesResponse",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "ListReplicationCycles",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.ListReplicationCycles",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_GetReplicationCycle_sync",
+      "title": "Snippet for get_replication_cycle in VMMigration",
+      "description": "Basic snippet for get_replication_cycle in VMMigration",
+      "file": "vm_migration/get_replication_cycle.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_replication_cycle",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#get_replication_cycle",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VMMigration::V1::ReplicationCycle",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "GetReplicationCycle",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.GetReplicationCycle",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
           "type": "FULL"
         }
       ]

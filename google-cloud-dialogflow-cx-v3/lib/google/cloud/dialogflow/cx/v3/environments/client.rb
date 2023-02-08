@@ -29,7 +29,8 @@ module Google
             ##
             # Client for the Environments service.
             #
-            # Service for managing {::Google::Cloud::Dialogflow::CX::V3::Environment Environments}.
+            # Service for managing
+            # {::Google::Cloud::Dialogflow::CX::V3::Environment Environments}.
             #
             class Client
               include Paths
@@ -178,7 +179,8 @@ module Google
               # Service calls
 
               ##
-              # Returns the list of all environments in the specified {::Google::Cloud::Dialogflow::CX::V3::Agent Agent}.
+              # Returns the list of all environments in the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Agent Agent}.
               #
               # @overload list_environments(request, options = nil)
               #   Pass arguments to `list_environments` via a request object, either of type
@@ -196,8 +198,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to list all environments for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to list all
+              #     environments for. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>`.
               #   @param page_size [::Integer]
               #     The maximum number of items to return in a single page. By default 20 and
               #     at most 100.
@@ -276,7 +279,8 @@ module Google
               end
 
               ##
-              # Retrieves the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Retrieves the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # @overload get_environment(request, options = nil)
               #   Pass arguments to `get_environment` via a request object, either of type
@@ -294,8 +298,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/environments/<Environment ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -363,7 +368,8 @@ module Google
               end
 
               ##
-              # Creates an {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} in the specified {::Google::Cloud::Dialogflow::CX::V3::Agent Agent}.
+              # Creates an {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} in the
+              # specified {::Google::Cloud::Dialogflow::CX::V3::Agent Agent}.
               #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
@@ -389,8 +395,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to create an {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to create an
+              #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} for. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
               #   @param environment [::Google::Cloud::Dialogflow::CX::V3::Environment, ::Hash]
               #     Required. The environment to create.
               #
@@ -467,7 +474,8 @@ module Google
               end
 
               ##
-              # Updates the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Updates the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
@@ -570,7 +578,8 @@ module Google
               end
 
               ##
-              # Deletes the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Deletes the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # @overload delete_environment(request, options = nil)
               #   Pass arguments to `delete_environment` via a request object, either of type
@@ -588,8 +597,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to delete.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to delete. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/environments/<Environment ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -657,7 +667,8 @@ module Google
               end
 
               ##
-              # Looks up the history of the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Looks up the history of the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # @overload lookup_environment_history(request, options = nil)
               #   Pass arguments to `lookup_environment_history` via a request object, either of type
@@ -756,14 +767,17 @@ module Google
               end
 
               ##
-              # Kicks off a continuous test under the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Kicks off a continuous test under the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestMetadata RunContinuousTestMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestResponse RunContinuousTestResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestMetadata RunContinuousTestMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestResponse RunContinuousTestResponse}
               #
               # @overload run_continuous_test(request, options = nil)
               #   Pass arguments to `run_continuous_test` via a request object, either of type
@@ -781,8 +795,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param environment [::String]
-              #     Required. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/environments/<Environment ID>`.
+              #     Required. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/environments/<Environment ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -956,14 +970,17 @@ module Google
               end
 
               ##
-              # Deploys a flow to the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Deploys a flow to the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::DeployFlowMetadata DeployFlowMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::DeployFlowResponse DeployFlowResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::DeployFlowMetadata DeployFlowMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::DeployFlowResponse DeployFlowResponse}
               #
               # @overload deploy_flow(request, options = nil)
               #   Pass arguments to `deploy_flow` via a request object, either of type

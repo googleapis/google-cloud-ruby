@@ -14,5 +14,5 @@
     "ruby-cloud-description": "reCAPTCHA Enterprise is a service that protects your site from spam and abuse.",
     "ruby-cloud-env-prefix": "RECAPTCHA_ENTERPRISE",
     "ruby-cloud-product-url": "https://cloud.google.com/recaptcha-enterprise",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_MANUAL"
 }

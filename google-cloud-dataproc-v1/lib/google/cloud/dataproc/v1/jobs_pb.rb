@@ -176,6 +176,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :scheduling, :message, 20, "google.cloud.dataproc.v1.JobScheduling"
       optional :job_uuid, :string, 22
       optional :done, :bool, 24
+      optional :driver_scheduling_config, :message, 27, "google.cloud.dataproc.v1.DriverSchedulingConfig"
       oneof :type_job do
         optional :hadoop_job, :message, 3, "google.cloud.dataproc.v1.HadoopJob"
         optional :spark_job, :message, 4, "google.cloud.dataproc.v1.SparkJob"
@@ -186,6 +187,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :spark_sql_job, :message, 12, "google.cloud.dataproc.v1.SparkSqlJob"
         optional :presto_job, :message, 23, "google.cloud.dataproc.v1.PrestoJob"
       end
+    end
+    add_message "google.cloud.dataproc.v1.DriverSchedulingConfig" do
+      optional :memory_mb, :int32, 1
+      optional :vcores, :int32, 2
     end
     add_message "google.cloud.dataproc.v1.JobScheduling" do
       optional :max_failures_per_hour, :int32, 1
@@ -269,6 +274,7 @@ module Google
         YarnApplication = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.YarnApplication").msgclass
         YarnApplication::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.YarnApplication.State").enummodule
         Job = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.Job").msgclass
+        DriverSchedulingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.DriverSchedulingConfig").msgclass
         JobScheduling = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.JobScheduling").msgclass
         SubmitJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SubmitJobRequest").msgclass
         JobMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.JobMetadata").msgclass

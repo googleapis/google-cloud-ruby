@@ -613,10 +613,55 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, topic: topic_path(topic_name), messages: messages
+    expected_request = {topic: topic_path(topic_name), messages: messages}
+    mock.expect :publish, publish_res do |actual_request, actual_option|
+      actual_request == expected_request && actual_option.nil?
+    end
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message
+
+    mock.verify
+
+    _(msg).must_be_kind_of Google::Cloud::PubSub::Message
+    _(msg.message_id).must_equal "msg1"
+  end
+
+  it "can publish a message with compression" do
+    messages = [
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "d"*238)
+    ]
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
+    mock = Minitest::Mock.new
+    expected_request = {topic: topic_path(topic_name), messages: messages}
+    expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
+    mock.expect :publish, publish_res do |actual_request, actual_option|
+      actual_request == expected_request && actual_option == expected_option
+    end
+    topic.service.mocked_publisher = mock
+
+    msg = topic.publish "d"*238, compress: true
+
+    mock.verify
+
+    _(msg).must_be_kind_of Google::Cloud::PubSub::Message
+    _(msg.message_id).must_equal "msg1"
+  end
+
+  it "can publish a message with compression_bytes_threshold " do
+    messages = [
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "d"*138)
+    ]
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
+    mock = Minitest::Mock.new
+    expected_request = {topic: topic_path(topic_name), messages: messages}
+    expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
+    mock.expect :publish, publish_res do |actual_request, actual_option|
+      actual_request == expected_request && actual_option == expected_option
+    end
+    topic.service.mocked_publisher = mock
+
+    msg = topic.publish "d"*138, compress: true, compression_bytes_threshold: 140
 
     mock.verify
 
@@ -632,7 +677,10 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, topic: topic_path(topic_name), messages: messages
+    expected_request = {topic: topic_path(topic_name), messages: messages}
+    mock.expect :publish, publish_res do |actual_request|
+      actual_request == expected_request
+    end
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message, format: :text
@@ -655,7 +703,10 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1", "msg2"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, topic: topic_path(topic_name), messages: messages
+    expected_request = {topic: topic_path(topic_name), messages: messages}
+    mock.expect :publish, publish_res do |actual_request|
+      actual_request == expected_request
+    end
     topic.service.mocked_publisher = mock
 
     msgs = topic.publish do |batch|

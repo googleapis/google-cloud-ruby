@@ -961,7 +961,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #   * `sheets` - Google Sheets
         #   * `datastore_backup` - Cloud Datastore backup
@@ -1554,7 +1554,7 @@ module Google
         #   Supported values for tables:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #
         #   Supported values for models:
@@ -1683,7 +1683,7 @@ module Google
         #   Supported values for tables:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #
         #   Supported values for models:

@@ -15,6 +15,7 @@
 
 require "google/cloud/datastore/entity"
 require "google/cloud/datastore/key"
+require "google/cloud/datastore/aggregate_query"
 
 module Google
   module Cloud
@@ -424,6 +425,27 @@ module Google
           self
         end
         alias distinct_on group_by
+
+        ##
+        # Creates an AggregateQuery object for the query.
+        #
+        # @return [AggregateQuery] New empty aggregate query.
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = Google::Cloud::Datastore::Query.new
+        #   query.kind("Task")
+        #        .where("done", "=", false)
+        #
+        #   Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #
+        def aggregate_query
+          AggregateQuery.new @grpc
+        end
 
         # @private
         def to_grpc

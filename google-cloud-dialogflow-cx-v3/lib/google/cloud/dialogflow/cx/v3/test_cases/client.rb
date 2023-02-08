@@ -566,7 +566,8 @@ module Google
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Required. The mask to specify which fields should be updated. The
               #     {::Google::Cloud::Dialogflow::CX::V3::TestCase#creation_time `creationTime`} and
-              #     {::Google::Cloud::Dialogflow::CX::V3::TestCase#last_test_result `lastTestResult`} cannot be updated.
+              #     {::Google::Cloud::Dialogflow::CX::V3::TestCase#last_test_result `lastTestResult`}
+              #     cannot be updated.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Dialogflow::CX::V3::TestCase]
@@ -639,8 +640,10 @@ module Google
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::RunTestCaseMetadata RunTestCaseMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::RunTestCaseResponse RunTestCaseResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::RunTestCaseMetadata RunTestCaseMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::RunTestCaseResponse RunTestCaseResponse}
               #
               # @overload run_test_case(request, options = nil)
               #   Pass arguments to `run_test_case` via a request object, either of type
@@ -658,8 +661,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Format of test case name to run: `projects/<Project ID>/locations/
-              #     <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
+              #     Required. Format of test case name to run: `projects/<Project
+              #     ID>/locations/ <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
               #   @param environment [::String]
               #     Optional. Environment name. If not set, draft environment is assumed.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
@@ -744,8 +747,10 @@ module Google
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesMetadata BatchRunTestCasesMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesResponse BatchRunTestCasesResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesMetadata BatchRunTestCasesMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesResponse BatchRunTestCasesResponse}
               #
               # @overload batch_run_test_cases(request, options = nil)
               #   Pass arguments to `batch_run_test_cases` via a request object, either of type
@@ -763,15 +768,15 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Agent name. Format: `projects/<Project ID>/locations/<Location ID>/agents/
-              #     <AgentID>`.
+              #     Required. Agent name. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/ <AgentID>`.
               #   @param environment [::String]
-              #     Optional. If not set, draft environment is assumed. Format: `projects/<Project
-              #     ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-              #     ID>`.
+              #     Optional. If not set, draft environment is assumed. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     ID>/environments/<Environment ID>`.
               #   @param test_cases [::Array<::String>]
-              #     Required. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/testCases/<TestCase ID>`.
+              #     Required. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/testCases/<TestCase ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -942,8 +947,10 @@ module Google
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesMetadata ImportTestCasesMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesResponse ImportTestCasesResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesMetadata ImportTestCasesMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesResponse ImportTestCasesResponse}
               #
               # @overload import_test_cases(request, options = nil)
               #   Pass arguments to `import_test_cases` via a request object, either of type
@@ -1056,8 +1063,10 @@ module Google
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
               #
-              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesMetadata ExportTestCasesMetadata}
-              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesResponse ExportTestCasesResponse}
+              # - `metadata`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesMetadata ExportTestCasesMetadata}
+              # - `response`:
+              # {::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesResponse ExportTestCasesResponse}
               #
               # @overload export_test_cases(request, options = nil)
               #   Pass arguments to `export_test_cases` via a request object, either of type

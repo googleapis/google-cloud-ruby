@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::OsLogin::ClientConstructionMinitest < Minitest::Test
-  def test_os_login_service
+  def test_os_login_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::OsLogin.os_login_service do |config|

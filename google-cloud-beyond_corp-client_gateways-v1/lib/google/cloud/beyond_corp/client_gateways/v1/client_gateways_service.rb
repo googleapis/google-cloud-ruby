@@ -45,7 +45,7 @@ module Google
           # * Client Gateways, named as follows:
           #   `projects/{project_id}/locations/{location_id}/clientGateways/{client_gateway_id}`.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/beyond_corp/client_gateways/v1/client_gateways_service"
           #     client = ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new

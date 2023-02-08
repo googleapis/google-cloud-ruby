@@ -35,6 +35,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig" do
       optional :gcs_uri, :string, 1
       optional :field_mask, :message, 2, "google.protobuf.FieldMask"
+      optional :sharding_config, :message, 3, "google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig"
+    end
+    add_message "google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig" do
+      optional :pages_per_shard, :int32, 1
+      optional :pages_overlap, :int32, 2
+    end
+    add_message "google.cloud.documentai.v1beta3.OcrConfig" do
+      optional :enable_native_pdf_parsing, :bool, 3
+      repeated :advanced_ocr_options, :string, 5
     end
   end
 end
@@ -50,6 +59,8 @@ module Google
         BatchDocumentsInputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.BatchDocumentsInputConfig").msgclass
         DocumentOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.DocumentOutputConfig").msgclass
         DocumentOutputConfig::GcsOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig").msgclass
+        DocumentOutputConfig::GcsOutputConfig::ShardingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig").msgclass
+        OcrConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.OcrConfig").msgclass
       end
     end
   end

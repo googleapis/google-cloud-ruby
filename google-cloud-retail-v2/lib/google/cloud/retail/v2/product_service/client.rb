@@ -880,9 +880,9 @@ module Google
             #
             # This process is asynchronous and does not require the
             # {::Google::Cloud::Retail::V2::Product Product} to exist before updating
-            # fulfillment information. If the request is valid, the update will be
-            # enqueued and processed downstream. As a consequence, when a response is
-            # returned, updates are not immediately manifested in the
+            # fulfillment information. If the request is valid, the update is enqueued
+            # and processed downstream. As a consequence, when a response is returned,
+            # updates are not immediately manifested in the
             # {::Google::Cloud::Retail::V2::Product Product} queried by
             # {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
             # or
@@ -892,10 +892,10 @@ module Google
             # {::Google::Cloud::Retail::V2::ProductService::Client#create_product ProductService.CreateProduct}
             # and
             # {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct},
-            # the specified inventory field value(s) will overwrite any existing value(s)
+            # the specified inventory field value(s) overwrite any existing value(s)
             # while ignoring the last update time for this field. Furthermore, the last
-            # update time for the specified inventory fields will be overwritten to the
-            # time of the
+            # update times for the specified inventory fields are overwritten by the
+            # times of the
             # {::Google::Cloud::Retail::V2::ProductService::Client#create_product ProductService.CreateProduct}
             # or
             # {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct}
@@ -903,11 +903,11 @@ module Google
             #
             # If no inventory fields are set in
             # {::Google::Cloud::Retail::V2::CreateProductRequest#product CreateProductRequest.product},
-            # then any pre-existing inventory information for this product will be used.
+            # then any pre-existing inventory information for this product is used.
             #
             # If no inventory fields are set in
             # {::Google::Cloud::Retail::V2::SetInventoryRequest#set_mask SetInventoryRequest.set_mask},
-            # then any existing inventory information will be preserved.
+            # then any existing inventory information is preserved.
             #
             # Pre-existing inventory information can only be updated with
             # {::Google::Cloud::Retail::V2::ProductService::Client#set_inventory ProductService.SetInventory},
@@ -915,15 +915,17 @@ module Google
             # and
             # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places ProductService.RemoveFulfillmentPlaces}.
             #
-            # The returned [Operation][]s will be obsolete after 1 day, and
-            # [GetOperation][] API will return NOT_FOUND afterwards.
+            # The returned {::Google::Longrunning::Operation Operation}s is obsolete after
+            # one day, and the GetOperation
+            # API returns `NOT_FOUND` afterwards.
             #
-            # If conflicting updates are issued, the [Operation][]s associated with the
-            # stale updates will not be marked as [done][Operation.done] until being
-            # obsolete.
+            # If conflicting updates are issued, the
+            # {::Google::Longrunning::Operation Operation}s associated with the stale
+            # updates are not marked as {::Google::Longrunning::Operation#done done} until
+            # they are obsolete.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload set_inventory(request, options = nil)
             #   Pass arguments to `set_inventory` via a request object, either of type
@@ -1105,15 +1107,17 @@ module Google
             # or
             # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
             #
-            # The returned [Operation][]s will be obsolete after 1 day, and
-            # [GetOperation][] API will return NOT_FOUND afterwards.
+            # The returned {::Google::Longrunning::Operation Operation}s will be obsolete
+            # after 1 day, and GetOperation
+            # API will return NOT_FOUND afterwards.
             #
-            # If conflicting updates are issued, the [Operation][]s associated with the
-            # stale updates will not be marked as [done][Operation.done] until being
-            # obsolete.
+            # If conflicting updates are issued, the
+            # {::Google::Longrunning::Operation Operation}s associated with the stale
+            # updates will not be marked as {::Google::Longrunning::Operation#done done}
+            # until being obsolete.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload add_fulfillment_places(request, options = nil)
             #   Pass arguments to `add_fulfillment_places` via a request object, either of type
@@ -1273,15 +1277,17 @@ module Google
             # or
             # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
             #
-            # The returned [Operation][]s will be obsolete after 1 day, and
-            # [GetOperation][] API will return NOT_FOUND afterwards.
+            # The returned {::Google::Longrunning::Operation Operation}s will be obsolete
+            # after 1 day, and GetOperation
+            # API will return NOT_FOUND afterwards.
             #
-            # If conflicting updates are issued, the [Operation][]s associated with the
-            # stale updates will not be marked as [done][Operation.done] until being
-            # obsolete.
+            # If conflicting updates are issued, the
+            # {::Google::Longrunning::Operation Operation}s associated with the stale
+            # updates will not be marked as {::Google::Longrunning::Operation#done done}
+            # until being obsolete.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload remove_fulfillment_places(request, options = nil)
             #   Pass arguments to `remove_fulfillment_places` via a request object, either of type
@@ -1443,15 +1449,17 @@ module Google
             # {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct}
             # has no effect on local inventories.
             #
-            # The returned [Operation][]s will be obsolete after 1 day, and
-            # [GetOperation][] API will return NOT_FOUND afterwards.
+            # The returned {::Google::Longrunning::Operation Operation}s will be obsolete
+            # after 1 day, and GetOperation
+            # API will return NOT_FOUND afterwards.
             #
-            # If conflicting updates are issued, the [Operation][]s associated with the
-            # stale updates will not be marked as [done][Operation.done] until being
-            # obsolete.
+            # If conflicting updates are issued, the
+            # {::Google::Longrunning::Operation Operation}s associated with the stale
+            # updates will not be marked as {::Google::Longrunning::Operation#done done}
+            # until being obsolete.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload add_local_inventories(request, options = nil)
             #   Pass arguments to `add_local_inventories` via a request object, either of type
@@ -1598,15 +1606,17 @@ module Google
             # {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct}
             # has no effect on local inventories.
             #
-            # The returned [Operation][]s will be obsolete after 1 day, and
-            # [GetOperation][] API will return NOT_FOUND afterwards.
+            # The returned {::Google::Longrunning::Operation Operation}s will be obsolete
+            # after 1 day, and GetOperation
+            # API will return NOT_FOUND afterwards.
             #
-            # If conflicting updates are issued, the [Operation][]s associated with the
-            # stale updates will not be marked as [done][Operation.done] until being
-            # obsolete.
+            # If conflicting updates are issued, the
+            # {::Google::Longrunning::Operation Operation}s associated with the stale
+            # updates will not be marked as {::Google::Longrunning::Operation#done done}
+            # until being obsolete.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please enable Retail Search on Cloud Console before using this feature.
+            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload remove_local_inventories(request, options = nil)
             #   Pass arguments to `remove_local_inventories` via a request object, either of type

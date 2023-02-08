@@ -24,7 +24,8 @@ module Google
     module Dialogflow
       module V2
         module SessionEntityTypes
-          # Service for managing [SessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityType].
+          # Service for managing
+          # [SessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityType].
           class Service
 
             include ::GRPC::GenericService

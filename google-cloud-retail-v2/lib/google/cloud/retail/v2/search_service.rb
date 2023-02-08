@@ -34,9 +34,9 @@ module Google
         # Service for search.
         #
         # This feature is only available for users who have Retail Search enabled.
-        # Please enable Retail Search on Cloud Console before using this feature.
+        # Enable Retail Search on Cloud Console before using this feature.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/retail/v2/search_service"
         #     client = ::Google::Cloud::Retail::V2::SearchService::Client.new

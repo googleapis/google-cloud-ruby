@@ -33,7 +33,7 @@ module Google
         ##
         # Service Interface for the Apigee Connect connection management APIs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/apigee_connect/v1/connection_service"
         #     client = ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Client.new

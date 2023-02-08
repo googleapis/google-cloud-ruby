@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-bigquery-data_policies
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Credentials`):
+`::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Credentials`):
 
 * `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
 * `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents

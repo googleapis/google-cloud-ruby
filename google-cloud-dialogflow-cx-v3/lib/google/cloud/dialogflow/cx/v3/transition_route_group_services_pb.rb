@@ -25,7 +25,8 @@ module Google
       module CX
         module V3
           module TransitionRouteGroups
-            # Service for managing [TransitionRouteGroups][google.cloud.dialogflow.cx.v3.TransitionRouteGroup].
+            # Service for managing
+            # [TransitionRouteGroups][google.cloud.dialogflow.cx.v3.TransitionRouteGroup].
             class Service
 
               include ::GRPC::GenericService
@@ -36,21 +37,26 @@ module Google
 
               # Returns the list of all transition route groups in the specified flow.
               rpc :ListTransitionRouteGroups, ::Google::Cloud::Dialogflow::CX::V3::ListTransitionRouteGroupsRequest, ::Google::Cloud::Dialogflow::CX::V3::ListTransitionRouteGroupsResponse
-              # Retrieves the specified [TransitionRouteGroup][google.cloud.dialogflow.cx.v3.TransitionRouteGroup].
+              # Retrieves the specified
+              # [TransitionRouteGroup][google.cloud.dialogflow.cx.v3.TransitionRouteGroup].
               rpc :GetTransitionRouteGroup, ::Google::Cloud::Dialogflow::CX::V3::GetTransitionRouteGroupRequest, ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup
-              # Creates an [TransitionRouteGroup][google.cloud.dialogflow.cx.v3.TransitionRouteGroup] in the specified flow.
+              # Creates an
+              # [TransitionRouteGroup][google.cloud.dialogflow.cx.v3.TransitionRouteGroup]
+              # in the specified flow.
               #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
               # documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
               rpc :CreateTransitionRouteGroup, ::Google::Cloud::Dialogflow::CX::V3::CreateTransitionRouteGroupRequest, ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup
-              # Updates the specified [TransitionRouteGroup][google.cloud.dialogflow.cx.v3.TransitionRouteGroup].
+              # Updates the specified
+              # [TransitionRouteGroup][google.cloud.dialogflow.cx.v3.TransitionRouteGroup].
               #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
               # documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
               rpc :UpdateTransitionRouteGroup, ::Google::Cloud::Dialogflow::CX::V3::UpdateTransitionRouteGroupRequest, ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup
-              # Deletes the specified [TransitionRouteGroup][google.cloud.dialogflow.cx.v3.TransitionRouteGroup].
+              # Deletes the specified
+              # [TransitionRouteGroup][google.cloud.dialogflow.cx.v3.TransitionRouteGroup].
               #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training

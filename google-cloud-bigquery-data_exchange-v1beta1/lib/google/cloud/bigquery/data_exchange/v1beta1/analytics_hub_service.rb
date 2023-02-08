@@ -39,7 +39,7 @@ module Google
           # listings. When you subscribe to a listing, Analytics Hub creates a linked
           # dataset in your project.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigquery/data_exchange/v1beta1/analytics_hub_service"
           #     client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new

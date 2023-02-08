@@ -36,7 +36,7 @@ module Google
             ##
             # Managed Apache Airflow Environments.
             #
-            # To load this service and instantiate a client:
+            # @example Load this service and instantiate a gRPC client
             #
             #     require "google/cloud/orchestration/airflow/service/v1/environments"
             #     client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new

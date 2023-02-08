@@ -906,7 +906,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     found_table_id = "found_table"
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, find_table_gapi(found_table_id), [project, dataset_id, found_table_id]
+    mock.expect :get_table, find_table_gapi(found_table_id), [project, dataset_id, found_table_id], **patch_table_args
     dataset.service.mocked_service = mock
 
     table = dataset.table found_table_id
@@ -915,6 +915,29 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
 
     _(table).must_be_kind_of Google::Cloud::Bigquery::Table
     _(table.table_id).must_equal found_table_id
+  end
+
+  it "finds a table with partial projection of table metadata" do
+    found_table_id = "found_table"
+    %w[unspecified basic storage full].each do |view|
+      mock = Minitest::Mock.new
+      dataset.service.mocked_service = mock
+      table_result = find_table_gapi(found_table_id)
+
+      if view == "basic"
+        table_result = find_partial_table_gapi(found_table_id)
+      end
+
+      mock.expect :get_table, table_result, [project, dataset_id, found_table_id],
+                  **patch_table_args(view: view)
+
+      table = dataset.table found_table_id, view: view
+      _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+      _(table.table_id).must_equal found_table_id
+      verify_table_metadata table, view
+
+      mock.verify
+    end
   end
 
   it "finds a table with skip_lookup option" do
@@ -964,5 +987,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
 
   def find_table_gapi id, name = nil, description = nil
     Google::Apis::BigqueryV2::Table.from_json random_table_hash(dataset_id, id, name, description).to_json
+  end
+
+  def find_partial_table_gapi id, name = nil, description = nil
+    Google::Apis::BigqueryV2::Table.from_json random_table_partial_hash(dataset_id, id, name, description).to_json
   end
 end

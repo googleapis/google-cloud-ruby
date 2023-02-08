@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/cloud/run/v2/execution_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'

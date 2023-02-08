@@ -35,7 +35,7 @@ module Google
         # Allow users to create and manage TagBindings between TagValues and
         # different cloud resources throughout the GCP resource hierarchy.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/resource_manager/v3/tag_bindings"
         #     client = ::Google::Cloud::ResourceManager::V3::TagBindings::Client.new

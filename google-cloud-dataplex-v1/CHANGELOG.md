@@ -1,5 +1,24 @@
 # Changelog
 
+### 0.6.1 (2023-02-03)
+
+#### Documentation
+
+* Improve to DataScan API documentation ([#20105](https://github.com/googleapis/google-cloud-ruby/issues/20105)) 
+
+### 0.6.0 (2023-01-05)
+
+#### Features
+
+* Support for DataScanService ([#19952](https://github.com/googleapis/google-cloud-ruby/issues/19952)) 
+* Support for Iceberg Tables 
+
+### 0.5.1 (2022-12-15)
+
+#### Documentation
+
+* Minor fixes to reference documentation formatting ([#19875](https://github.com/googleapis/google-cloud-ruby/issues/19875)) 
+
 ### 0.5.0 (2022-10-18)
 
 #### Features

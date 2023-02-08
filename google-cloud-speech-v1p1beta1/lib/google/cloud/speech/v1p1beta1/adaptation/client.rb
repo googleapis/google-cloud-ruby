@@ -165,7 +165,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource where this phrase set will be created. Format:
+            #     Required. The parent resource where this phrase set will be created.
+            #     Format:
             #
             #     `projects/{project}/locations/{location}/phraseSets`
             #
@@ -655,7 +656,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource where this custom class will be created. Format:
+            #     Required. The parent resource where this custom class will be created.
+            #     Format:
             #
             #     `projects/{project}/locations/{location}/customClasses`
             #

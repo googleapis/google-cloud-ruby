@@ -23,9 +23,9 @@ module Google
   module Cloud
     module AccessApproval
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/access_approval/v1"
       #     client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new

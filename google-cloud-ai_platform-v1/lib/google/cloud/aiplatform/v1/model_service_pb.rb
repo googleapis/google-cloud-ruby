@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent_model, :string, 4
       optional :model_id, :string, 5
       optional :model, :message, 2, "google.cloud.aiplatform.v1.Model"
+      optional :service_account, :string, 6
     end
     add_message "google.cloud.aiplatform.v1.UploadModelOperationMetadata" do
       optional :generic_metadata, :message, 1, "google.cloud.aiplatform.v1.GenericOperationMetadata"
@@ -51,6 +52,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_token, :string, 3
       optional :filter, :string, 4
       optional :read_mask, :message, 5, "google.protobuf.FieldMask"
+      optional :order_by, :string, 6
     end
     add_message "google.cloud.aiplatform.v1.ListModelVersionsResponse" do
       repeated :models, :message, 1, "google.cloud.aiplatform.v1.Model"

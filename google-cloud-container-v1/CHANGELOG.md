@@ -1,5 +1,36 @@
 # Release History
 
+### 0.16.1 (2023-01-31)
+
+#### Documentation
+
+* clarify wording around the NodePoolUpdateStrategy default behavior ([#20099](https://github.com/googleapis/google-cloud-ruby/issues/20099)) 
+
+### 0.16.0 (2023-01-19)
+
+#### Features
+
+* Added support for viewing the subnet IPv6 CIDR and services IPv6 CIDR assigned to dual stack clusters ([#20035](https://github.com/googleapis/google-cloud-ruby/issues/20035)) 
+
+### 0.15.0 (2023-01-05)
+
+#### Features
+
+* Support for local SSD configs in a node config 
+* Support for setting etag and windows node config when updating a node pool ([#19908](https://github.com/googleapis/google-cloud-ruby/issues/19908)) 
+
+### 0.14.0 (2022-12-15)
+
+#### Features
+
+* Added support for specifying stack type for clusters ([#19881](https://github.com/googleapis/google-cloud-ruby/issues/19881)) 
+
+### 0.13.0 (2022-12-09)
+
+#### Features
+
+* Support for enabling NCCL Fast Sockets in a node pool ([#19475](https://github.com/googleapis/google-cloud-ruby/issues/19475)) 
+
 ### 0.12.0 (2022-11-16)
 
 #### Features

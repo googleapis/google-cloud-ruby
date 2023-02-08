@@ -238,6 +238,255 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
     end
   end
 
+  def test_list_schema_revisions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::PubSub::V1::ListSchemaRevisionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    view = :SCHEMA_VIEW_UNSPECIFIED
+    page_size = 42
+    page_token = "hello world"
+
+    list_schema_revisions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_schema_revisions, name
+      assert_kind_of ::Google::Cloud::PubSub::V1::ListSchemaRevisionsRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal :SCHEMA_VIEW_UNSPECIFIED, request["view"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_schema_revisions_client_stub do
+      # Create client
+      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_schema_revisions({ name: name, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_schema_revisions name: name, view: view, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_schema_revisions ::Google::Cloud::PubSub::V1::ListSchemaRevisionsRequest.new(name: name, view: view, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_schema_revisions({ name: name, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_schema_revisions(::Google::Cloud::PubSub::V1::ListSchemaRevisionsRequest.new(name: name, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_schema_revisions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_commit_schema
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::PubSub::V1::Schema.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    schema = {}
+
+    commit_schema_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :commit_schema, name
+      assert_kind_of ::Google::Cloud::PubSub::V1::CommitSchemaRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::PubSub::V1::Schema), request["schema"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, commit_schema_client_stub do
+      # Create client
+      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.commit_schema({ name: name, schema: schema }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.commit_schema name: name, schema: schema do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.commit_schema ::Google::Cloud::PubSub::V1::CommitSchemaRequest.new(name: name, schema: schema) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.commit_schema({ name: name, schema: schema }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.commit_schema(::Google::Cloud::PubSub::V1::CommitSchemaRequest.new(name: name, schema: schema), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, commit_schema_client_stub.call_rpc_count
+    end
+  end
+
+  def test_rollback_schema
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::PubSub::V1::Schema.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    revision_id = "hello world"
+
+    rollback_schema_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :rollback_schema, name
+      assert_kind_of ::Google::Cloud::PubSub::V1::RollbackSchemaRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["revision_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, rollback_schema_client_stub do
+      # Create client
+      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.rollback_schema({ name: name, revision_id: revision_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.rollback_schema name: name, revision_id: revision_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.rollback_schema ::Google::Cloud::PubSub::V1::RollbackSchemaRequest.new(name: name, revision_id: revision_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.rollback_schema({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.rollback_schema(::Google::Cloud::PubSub::V1::RollbackSchemaRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, rollback_schema_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_schema_revision
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::PubSub::V1::Schema.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    revision_id = "hello world"
+
+    delete_schema_revision_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_schema_revision, name
+      assert_kind_of ::Google::Cloud::PubSub::V1::DeleteSchemaRevisionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["revision_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_schema_revision_client_stub do
+      # Create client
+      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_schema_revision({ name: name, revision_id: revision_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_schema_revision name: name, revision_id: revision_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_schema_revision ::Google::Cloud::PubSub::V1::DeleteSchemaRevisionRequest.new(name: name, revision_id: revision_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_schema_revision({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_schema_revision(::Google::Cloud::PubSub::V1::DeleteSchemaRevisionRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_schema_revision_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_schema
     # Create GRPC objects.
     grpc_response = ::Google::Protobuf::Empty.new

@@ -241,8 +241,7 @@ module Google
         #     If task ends with non-zero exit code, retry the task with max_retry_count.
         # @!attribute [rw] environments
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Environment variables to set before running the Task.
-        #     You can set up to 100 environments.
+        #     Deprecated: please use environment(non-plural) instead.
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Batch::V1::Volume>]
         #     Volumes to mount before running Tasks using this TaskSpec.
@@ -320,15 +319,44 @@ module Google
         # @!attribute [rw] variables
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     A map of environment variable names to values.
+        # @!attribute [rw] secret_variables
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     A map of environment variable names to Secret Manager secret names.
+        #     The VM will access the named secrets to set the value of each environment
+        #     variable.
+        # @!attribute [rw] encrypted_variables
+        #   @return [::Google::Cloud::Batch::V1::Environment::KMSEnvMap]
+        #     An encrypted JSON dictionary where the key/value pairs correspond to
+        #     environment variable names and their values.
         class Environment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key_name
+          #   @return [::String]
+          #     The name of the KMS key that will be used to decrypt the cipher text.
+          # @!attribute [rw] cipher_text
+          #   @return [::String]
+          #     The value of the cipherText response from the `encrypt` method.
+          class KMSEnvMap
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
           #   @return [::String]
           class VariablesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class SecretVariablesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

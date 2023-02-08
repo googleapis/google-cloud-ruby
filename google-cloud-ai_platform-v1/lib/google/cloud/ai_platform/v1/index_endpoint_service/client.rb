@@ -387,11 +387,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the Location from which to list the IndexEndpoints.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The resource name of the Location from which to list the
+            #     IndexEndpoints. Format: `projects/{project}/locations/{location}`
             #   @param filter [::String]
-            #     Optional. An expression for filtering the results of the request. For field names
-            #     both snake_case and camelCase are supported.
+            #     Optional. An expression for filtering the results of the request. For field
+            #     names both snake_case and camelCase are supported.
             #
             #       * `index_endpoint` supports = and !=. `index_endpoint` represents the
             #          IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
@@ -413,8 +413,10 @@ module Google
             #   @param page_token [::String]
             #     Optional. The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListIndexEndpointsResponse#next_page_token ListIndexEndpointsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client#list_index_endpoints IndexEndpointService.ListIndexEndpoints} call.
+            #     {::Google::Cloud::AIPlatform::V1::ListIndexEndpointsResponse#next_page_token ListIndexEndpointsResponse.next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client#list_index_endpoints IndexEndpointService.ListIndexEndpoints}
+            #     call.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. Mask specifying which fields to read.
             #
@@ -510,7 +512,8 @@ module Google
             #   @param index_endpoint [::Google::Cloud::AIPlatform::V1::IndexEndpoint, ::Hash]
             #     Required. The IndexEndpoint which replaces the resource on the server.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The update mask applies to the resource. See {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+            #     Required. The update mask applies to the resource. See
+            #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::IndexEndpoint]
@@ -692,8 +695,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param index_endpoint [::String]
-            #     Required. The name of the IndexEndpoint resource into which to deploy an Index.
-            #     Format:
+            #     Required. The name of the IndexEndpoint resource into which to deploy an
+            #     Index. Format:
             #     `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
             #   @param deployed_index [::Google::Cloud::AIPlatform::V1::DeployedIndex, ::Hash]
             #     Required. The DeployedIndex to be created within the IndexEndpoint.
@@ -790,11 +793,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param index_endpoint [::String]
-            #     Required. The name of the IndexEndpoint resource from which to undeploy an Index.
-            #     Format:
+            #     Required. The name of the IndexEndpoint resource from which to undeploy an
+            #     Index. Format:
             #     `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
             #   @param deployed_index_id [::String]
-            #     Required. The ID of the DeployedIndex to be undeployed from the IndexEndpoint.
+            #     Required. The ID of the DeployedIndex to be undeployed from the
+            #     IndexEndpoint.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -887,8 +891,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param index_endpoint [::String]
-            #     Required. The name of the IndexEndpoint resource into which to deploy an Index.
-            #     Format:
+            #     Required. The name of the IndexEndpoint resource into which to deploy an
+            #     Index. Format:
             #     `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
             #   @param deployed_index [::Google::Cloud::AIPlatform::V1::DeployedIndex, ::Hash]
             #     Required. The DeployedIndex to be updated within the IndexEndpoint.

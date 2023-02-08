@@ -39,7 +39,7 @@ module Google
         # * {::Google::Cloud::BinaryAuthorization::V1beta1::Policy Policy}
         # * {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor Attestor}
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/binary_authorization/v1beta1/binauthz_management_service"
         #     client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new

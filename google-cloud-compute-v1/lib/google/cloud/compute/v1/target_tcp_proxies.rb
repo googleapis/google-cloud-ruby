@@ -31,9 +31,9 @@ module Google
         ##
         # The TargetTcpProxies API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/target_tcp_proxies"
+        #     require "google/cloud/compute/v1/target_tcp_proxies/rest"
         #     client = ::Google::Cloud::Compute::V1::TargetTcpProxies::Rest::Client.new
         #
         module TargetTcpProxies

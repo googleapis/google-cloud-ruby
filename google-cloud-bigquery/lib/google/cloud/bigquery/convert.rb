@@ -254,11 +254,11 @@ module Google
 
         ##
         # Lists are specified by providing the type code in an array. For example, an array of integers are specified as
-        # `[:INT64]`. Extracts the symbol.
+        # `[:INT64]`. Extracts the symbol/hash.
         def self.extract_array_type type
           return nil if type.nil?
-          unless type.is_a?(Array) && type.count == 1 && type.first.is_a?(Symbol)
-            raise ArgumentError, "types Array #{type.inspect} should include only a single symbol element."
+          unless type.is_a?(Array) && type.count == 1 && (type.first.is_a?(Symbol) || type.first.is_a?(Hash))
+            raise ArgumentError, "types Array #{type.inspect} should include only a single symbol or hash element."
           end
           type.first
         end

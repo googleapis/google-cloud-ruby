@@ -35,7 +35,7 @@ module Google
           # Manages Stackdriver dashboards. A dashboard is an arrangement of data display
           # widgets in a specific layout.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/monitoring/dashboard/v1/dashboards_service"
           #     client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new

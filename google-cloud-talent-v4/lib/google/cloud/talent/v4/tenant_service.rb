@@ -33,7 +33,7 @@ module Google
         ##
         # A service that handles tenant management, including CRUD and enumeration.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/talent/v4/tenant_service"
         #     client = ::Google::Cloud::Talent::V4::TenantService::Client.new

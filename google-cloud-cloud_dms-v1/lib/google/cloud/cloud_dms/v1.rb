@@ -23,9 +23,9 @@ module Google
   module Cloud
     module CloudDMS
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/cloud_dms/v1"
       #     client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new

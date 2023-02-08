@@ -43,7 +43,7 @@ module Google
         # The Debugger service enables the client to set one or more Breakpoints on a
         # Debuggee and collect the results of the set Breakpoints.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/debugger/v2/debugger"
         #     client = ::Google::Cloud::Debugger::V2::Debugger::Client.new

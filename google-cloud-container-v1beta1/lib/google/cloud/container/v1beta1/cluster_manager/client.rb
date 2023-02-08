@@ -660,7 +660,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, locations: nil, workload_metadata_config: nil, name: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, fast_socket: nil, logging_config: nil, resource_labels: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, locations: nil, workload_metadata_config: nil, name: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -693,7 +693,9 @@ module Google
             #     - "1.X.Y-gke.N": picks an explicit Kubernetes version
             #     - "-": picks the Kubernetes master version
             #   @param image_type [::String]
-            #     Required. The desired image type for the node pool.
+            #     Required. The desired image type for the node pool. Please see
+            #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+            #     available image types.
             #   @param locations [::Array<::String>]
             #     The desired list of Google Compute Engine
             #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the
@@ -733,6 +735,10 @@ module Google
             #     All the nodes in the node pool will be Confidential VM once enabled.
             #   @param gvnic [::Google::Cloud::Container::V1beta1::VirtualNIC, ::Hash]
             #     Enable or disable gvnic on the node pool.
+            #   @param etag [::String]
+            #     The current etag of the node pool.
+            #     If an etag is provided and does not match the current etag of the node
+            #     pool, update will be blocked and an ABORTED error will be returned.
             #   @param fast_socket [::Google::Cloud::Container::V1beta1::FastSocket, ::Hash]
             #     Enable or disable NCCL fast socket for the node pool.
             #   @param logging_config [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig, ::Hash]
@@ -740,6 +746,8 @@ module Google
             #   @param resource_labels [::Google::Cloud::Container::V1beta1::ResourceLabels, ::Hash]
             #     The resource labels for the node pool to use to annotate any related
             #     Google Compute Engine resources.
+            #   @param windows_node_config [::Google::Cloud::Container::V1beta1::WindowsNodeConfig, ::Hash]
+            #     Parameters that can be configured on Windows nodes.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
@@ -1160,8 +1168,8 @@ module Google
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
             #   @param addons_config [::Google::Cloud::Container::V1beta1::AddonsConfig, ::Hash]
-            #     Required. The desired configurations for the various addons available to run in the
-            #     cluster.
+            #     Required. The desired configurations for the various addons available to
+            #     run in the cluster.
             #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set addons.
             #     Specified in the format `projects/*/locations/*/clusters/*`.

@@ -109,6 +109,21 @@
               "methods": [
                 "batch_get_effective_iam_policies"
               ]
+            },
+            "AnalyzeOrgPolicies": {
+              "methods": [
+                "analyze_org_policies"
+              ]
+            },
+            "AnalyzeOrgPolicyGovernedContainers": {
+              "methods": [
+                "analyze_org_policy_governed_containers"
+              ]
+            },
+            "AnalyzeOrgPolicyGovernedAssets": {
+              "methods": [
+                "analyze_org_policy_governed_assets"
+              ]
             }
           }
         }

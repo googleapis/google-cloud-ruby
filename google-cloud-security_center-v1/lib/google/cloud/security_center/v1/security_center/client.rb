@@ -659,8 +659,8 @@ module Google
             #   @param config_id [::String]
             #     Required.
             #     Unique identifier provided by the client within the parent scope.
-            #     It must be between 1 and 128 characters, and contains alphanumeric
-            #     characters, underscores or hyphens only.
+            #     It must be between 1 and 128 characters and contain alphanumeric
+            #     characters, underscores, or hyphens only.
             #   @param notification_config [::Google::Cloud::SecurityCenter::V1::NotificationConfig, ::Hash]
             #     Required. The notification config being created. The name and the service
             #     account will be ignored as they are both output only fields on this
@@ -838,7 +838,9 @@ module Google
             #
             #   @param name [::String]
             #     Required. Name of the notification config to delete. Its format is
-            #     "organizations/[organization_id]/notificationConfigs/[config_id]".
+            #     "organizations/[organization_id]/notificationConfigs/[config_id]",
+            #     "folders/[folder_id]/notificationConfigs/[config_id]",
+            #     or "projects/[project_id]/notificationConfigs/[config_id]".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -905,7 +907,7 @@ module Google
             end
 
             ##
-            # Gets a big query export.
+            # Gets a BigQuery export.
             #
             # @overload get_big_query_export(request, options = nil)
             #   Pass arguments to `get_big_query_export` via a request object, either of type
@@ -923,7 +925,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Name of the big query export to retrieve. Its format is
+            #     Required. Name of the BigQuery export to retrieve. Its format is
             #     organizations/\\{organization}/bigQueryExports/\\{export_id},
             #     folders/\\{folder}/bigQueryExports/\\{export_id}, or
             #     projects/\\{project}/bigQueryExports/\\{export_id}
@@ -1189,7 +1191,9 @@ module Google
             #
             #   @param name [::String]
             #     Required. Name of the notification config to get. Its format is
-            #     "organizations/[organization_id]/notificationConfigs/[config_id]".
+            #     "organizations/[organization_id]/notificationConfigs/[config_id]",
+            #     "folders/[folder_id]/notificationConfigs/[config_id]",
+            #     or "projects/[project_id]/notificationConfigs/[config_id]".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::NotificationConfig]
@@ -1447,9 +1451,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Name of the organization to groupBy. Its format is
-            #     "organizations/[organization_id], folders/[folder_id], or
-            #     projects/[project_id]".
+            #     Required. The name of the parent to group the assets by. Its format is
+            #     "organizations/[organization_id]", "folders/[folder_id]", or
+            #     "projects/[project_id]".
             #   @param filter [::String]
             #     Expression that defines the filter to apply across assets.
             #     The expression is a list of zero or more restrictions combined via logical
@@ -1888,9 +1892,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Name of the organization assets should belong to. Its format is
-            #     "organizations/[organization_id], folders/[folder_id], or
-            #     projects/[project_id]".
+            #     Required. The name of the parent resource that contains the assets. The
+            #     value that you can specify on parent depends on the method in which you
+            #     specify parent. You can specify one of the following values:
+            #     "organizations/[organization_id]", "folders/[folder_id]", or
+            #     "projects/[project_id]".
             #   @param filter [::String]
             #     Expression that defines the filter to apply across assets.
             #     The expression is a list of zero or more restrictions combined via logical
@@ -2441,9 +2447,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Name of the organization to list notification configs. Its format
-            #     is "organizations/[organization_id]", "folders/[folder_id]", or
-            #     "projects/[project_id]".
+            #     Required. The name of the parent in which to list the notification
+            #     configurations. Its format is "organizations/[organization_id]",
+            #     "folders/[folder_id]", or "projects/[project_id]".
             #   @param page_token [::String]
             #     The value returned by the last `ListNotificationConfigsResponse`; indicates
             #     that this is a continuation of a prior `ListNotificationConfigs` call, and
@@ -2543,8 +2549,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Resource name of the parent of sources to list. Its format should
-            #     be "organizations/[organization_id], folders/[folder_id], or
-            #     projects/[project_id]".
+            #     be "organizations/[organization_id]", "folders/[folder_id]", or
+            #     "projects/[project_id]".
             #   @param page_token [::String]
             #     The value returned by the last `ListSourcesResponse`; indicates
             #     that this is a continuation of a prior `ListSources` call, and
@@ -2742,10 +2748,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The relative resource name of the finding. See:
-            #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
-            #     Example:
-            #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}".
+            #     Required. The [relative resource
+            #     name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+            #     of the finding. Example:
+            #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}",
+            #     "folders/\\{folder_id}/sources/\\{source_id}/findings/\\{finding_id}",
+            #     "projects/\\{project_id}/sources/\\{source_id}/findings/\\{finding_id}".
             #   @param state [::Google::Cloud::SecurityCenter::V1::Finding::State]
             #     Required. The desired State of the finding.
             #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
@@ -2834,9 +2842,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The relative resource name of the finding. See:
-            #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
-            #     Example:
+            #     Required. The [relative resource
+            #     name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+            #     of the finding. Example:
             #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}",
             #     "folders/\\{folder_id}/sources/\\{source_id}/findings/\\{finding_id}",
             #     "projects/\\{project_id}/sources/\\{source_id}/findings/\\{finding_id}".
@@ -3736,7 +3744,7 @@ module Google
             end
 
             ##
-            # Creates a big query export.
+            # Creates a BigQuery export.
             #
             # @overload create_big_query_export(request, options = nil)
             #   Pass arguments to `create_big_query_export` via a request object, either of type
@@ -3754,11 +3762,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the new big query export's parent. Its format is
-            #     "organizations/[organization_id]", "folders/[folder_id]", or
+            #     Required. The name of the parent resource of the new BigQuery export. Its
+            #     format is "organizations/[organization_id]", "folders/[folder_id]", or
             #     "projects/[project_id]".
             #   @param big_query_export [::Google::Cloud::SecurityCenter::V1::BigQueryExport, ::Hash]
-            #     Required. The big query export being created.
+            #     Required. The BigQuery export being created.
             #   @param big_query_export_id [::String]
             #     Required. Unique identifier provided by the client within the parent scope.
             #     It must consist of lower case letters, numbers, and hyphen, with the first
@@ -3830,7 +3838,7 @@ module Google
             end
 
             ##
-            # Deletes an existing big query export.
+            # Deletes an existing BigQuery export.
             #
             # @overload delete_big_query_export(request, options = nil)
             #   Pass arguments to `delete_big_query_export` via a request object, either of type
@@ -3848,7 +3856,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Name of the big query export to delete. Its format is
+            #     Required. The name of the BigQuery export to delete. Its format is
             #     organizations/\\{organization}/bigQueryExports/\\{export_id},
             #     folders/\\{folder}/bigQueryExports/\\{export_id}, or
             #     projects/\\{project}/bigQueryExports/\\{export_id}

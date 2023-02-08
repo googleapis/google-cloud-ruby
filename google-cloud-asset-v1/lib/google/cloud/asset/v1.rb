@@ -23,9 +23,9 @@ module Google
   module Cloud
     module Asset
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
       #
-      # @example
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/asset/v1"
       #     client = ::Google::Cloud::Asset::V1::AssetService::Client.new

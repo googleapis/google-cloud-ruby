@@ -40,7 +40,7 @@ module Google
         #     The caller IP's geolocation, which identifies where the call came from.
         # @!attribute [rw] user_agent_family
         #   @return [::String]
-        #     What kind of user agent is associated, e.g. operating system shells,
+        #     What kind of user agent is associated, for example operating system shells,
         #     embedded or stand-alone applications, etc.
         # @!attribute [rw] service_name
         #   @return [::String]
@@ -72,6 +72,15 @@ module Google
         #     access GCP resources by delegating on a service account. When multiple
         #     authorities are present, they are guaranteed to be sorted based on the
         #     original ordering of the identity delegation events.
+        # @!attribute [rw] user_name
+        #   @return [::String]
+        #     A string that represents the username of a user, user account, or other
+        #     entity involved in the access event. What the entity is and what its role
+        #     in the access event is depends on the finding that this field appears in.
+        #     The entity is likely not an IAM principal, but could be a user that is
+        #     logged into an operating system, if the finding is VM-related, or a user
+        #     that is logged into some type of application that is involved in the
+        #     access event.
         class Access
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

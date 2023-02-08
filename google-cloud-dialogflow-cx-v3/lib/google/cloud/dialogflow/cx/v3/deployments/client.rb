@@ -165,7 +165,8 @@ module Google
               # Service calls
 
               ##
-              # Returns the list of all deployments in the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              # Returns the list of all deployments in the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
               # @overload list_deployments(request, options = nil)
               #   Pass arguments to `list_deployments` via a request object, either of type
@@ -183,9 +184,10 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to list all environments for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/environments/<Environment ID>`.
+              #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to
+              #     list all environments for. Format: `projects/<Project
+              #     ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
+              #     ID>`.
               #   @param page_size [::Integer]
               #     The maximum number of items to return in a single page. By default 20 and
               #     at most 100.
@@ -264,7 +266,8 @@ module Google
               end
 
               ##
-              # Retrieves the specified {::Google::Cloud::Dialogflow::CX::V3::Deployment Deployment}.
+              # Retrieves the specified
+              # {::Google::Cloud::Dialogflow::CX::V3::Deployment Deployment}.
               #
               # @overload get_deployment(request, options = nil)
               #   Pass arguments to `get_deployment` via a request object, either of type
@@ -282,8 +285,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Deployment Deployment}.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+              #     Required. The name of the
+              #     {::Google::Cloud::Dialogflow::CX::V3::Deployment Deployment}. Format:
+              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/environments/<Environment ID>/deployments/<Deployment ID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation

@@ -24,7 +24,8 @@ module Google
         # Message sent by the client for the `CreatePhraseSet` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource where this phrase set will be created. Format:
+        #     Required. The parent resource where this phrase set will be created.
+        #     Format:
         #
         #     `projects/{project}/locations/{location}/phraseSets`
         #
@@ -145,7 +146,8 @@ module Google
         # Message sent by the client for the `CreateCustomClass` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource where this custom class will be created. Format:
+        #     Required. The parent resource where this custom class will be created.
+        #     Format:
         #
         #     `projects/{project}/locations/{location}/customClasses`
         #

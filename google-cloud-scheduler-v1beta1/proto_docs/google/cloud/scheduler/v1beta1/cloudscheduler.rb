@@ -21,11 +21,22 @@ module Google
   module Cloud
     module Scheduler
       module V1beta1
-        # Request message for listing jobs using {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#list_jobs ListJobs}.
+        # Request message for listing jobs using
+        # {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#list_jobs ListJobs}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     `filter` can be used to specify a subset of jobs.
+        #
+        #     If `filter` equals `target_config="HttpConfig"`, then the http
+        #     target jobs are retrieved. If `filter` equals
+        #     `target_config="PubSubConfig"`, then the Pub/Sub target jobs are
+        #     retrieved. If `filter` equals `labels.foo=value1
+        #     labels.foo=value2` then only jobs which are labeled with
+        #     foo=value1 AND foo=value2 will be returned.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Requested page size.
@@ -39,26 +50,36 @@ module Google
         #     A token identifying a page of results the server will return. To
         #     request the first page results, page_token must be empty. To
         #     request the next page of results, page_token must be the value of
-        #     {::Google::Cloud::Scheduler::V1beta1::ListJobsResponse#next_page_token next_page_token} returned from
-        #     the previous call to {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#list_jobs ListJobs}. It is an error to
-        #     switch the value of [filter][google.cloud.scheduler.v1beta1.ListJobsRequest.filter] or
-        #     [order_by][google.cloud.scheduler.v1beta1.ListJobsRequest.order_by] while iterating through pages.
+        #     {::Google::Cloud::Scheduler::V1beta1::ListJobsResponse#next_page_token next_page_token}
+        #     returned from the previous call to
+        #     {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#list_jobs ListJobs}. It is
+        #     an error to switch the value of
+        #     {::Google::Cloud::Scheduler::V1beta1::ListJobsRequest#filter filter} or
+        #     [order_by][google.cloud.scheduler.v1beta1.ListJobsRequest.order_by] while
+        #     iterating through pages.
+        # @!attribute [rw] legacy_app_engine_cron
+        #   @return [::Boolean]
+        #     This field is used to manage the legacy App Engine Cron jobs using the
+        #     Cloud Scheduler API. If the field is set to true, the jobs in the __cron
+        #     queue will be listed instead.
         class ListJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing jobs using {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#list_jobs ListJobs}.
+        # Response message for listing jobs using
+        # {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#list_jobs ListJobs}.
         # @!attribute [rw] jobs
         #   @return [::Array<::Google::Cloud::Scheduler::V1beta1::Job>]
         #     The list of jobs.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve next page of results. Pass this value in the
-        #     {::Google::Cloud::Scheduler::V1beta1::ListJobsRequest#page_token page_token} field in the subsequent call to
-        #     {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#list_jobs ListJobs} to retrieve the next page of results.
-        #     If this is empty it indicates that there are no more results
-        #     through which to paginate.
+        #     {::Google::Cloud::Scheduler::V1beta1::ListJobsRequest#page_token page_token}
+        #     field in the subsequent call to
+        #     {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#list_jobs ListJobs} to
+        #     retrieve the next page of results. If this is empty it indicates that there
+        #     are no more results through which to paginate.
         #
         #     The page token is valid for only 2 hours.
         class ListJobsResponse
@@ -66,7 +87,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#get_job GetJob}.
+        # Request message for
+        # {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#get_job GetJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The job name. For example:
@@ -76,7 +98,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#create_job CreateJob}.
+        # Request message for
+        # {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#create_job CreateJob}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location name. For example:
@@ -84,7 +107,8 @@ module Google
         # @!attribute [rw] job
         #   @return [::Google::Cloud::Scheduler::V1beta1::Job]
         #     Required. The job to add. The user can optionally specify a name for the
-        #     job in {::Google::Cloud::Scheduler::V1beta1::Job#name name}. {::Google::Cloud::Scheduler::V1beta1::Job#name name} cannot be the same as an
+        #     job in {::Google::Cloud::Scheduler::V1beta1::Job#name name}.
+        #     {::Google::Cloud::Scheduler::V1beta1::Job#name name} cannot be the same as an
         #     existing job. If a name is not specified then the system will
         #     generate a random unique name that will be returned
         #     ({::Google::Cloud::Scheduler::V1beta1::Job#name name}) in the response.
@@ -93,10 +117,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#update_job UpdateJob}.
+        # Request message for
+        # {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#update_job UpdateJob}.
         # @!attribute [rw] job
         #   @return [::Google::Cloud::Scheduler::V1beta1::Job]
-        #     Required. The new job properties. {::Google::Cloud::Scheduler::V1beta1::Job#name name} must be specified.
+        #     Required. The new job properties.
+        #     {::Google::Cloud::Scheduler::V1beta1::Job#name name} must be specified.
         #
         #     Output only fields cannot be modified using UpdateJob.
         #     Any value specified for an output only field will be ignored.
@@ -114,12 +140,18 @@ module Google
         #   @return [::String]
         #     Required. The job name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
+        # @!attribute [rw] legacy_app_engine_cron
+        #   @return [::Boolean]
+        #     This field is used to manage the legacy App Engine Cron jobs using the
+        #     Cloud Scheduler API. If the field is set to true, the job in the __cron
+        #     queue with the corresponding name will be deleted instead.
         class DeleteJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#pause_job PauseJob}.
+        # Request message for
+        # {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#pause_job PauseJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The job name. For example:
@@ -129,7 +161,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#resume_job ResumeJob}.
+        # Request message for
+        # {::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#resume_job ResumeJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The job name. For example:
@@ -145,6 +178,11 @@ module Google
         #   @return [::String]
         #     Required. The job name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
+        # @!attribute [rw] legacy_app_engine_cron
+        #   @return [::Boolean]
+        #     This field is used to manage the legacy App Engine Cron jobs using the
+        #     Cloud Scheduler API. If the field is set to true, the job in the __cron
+        #     queue with the corresponding name will be forced to run instead.
         class RunJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

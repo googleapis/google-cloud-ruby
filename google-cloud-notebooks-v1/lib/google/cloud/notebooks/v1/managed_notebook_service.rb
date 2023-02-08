@@ -34,7 +34,7 @@ module Google
         ##
         # API v1 service for Managed Notebooks.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/notebooks/v1/managed_notebook_service"
         #     client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Client.new

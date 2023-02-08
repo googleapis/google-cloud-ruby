@@ -34,7 +34,7 @@ module Google
         ##
         # The IDS Service
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ids/v1/ids"
         #     client = ::Google::Cloud::IDS::V1::IDS::Client.new

@@ -30,8 +30,9 @@ module Google
             # Client for the Sessions service.
             #
             # A session represents an interaction with a user. You retrieve user input
-            # and pass it to the {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#detect_intent DetectIntent} method to determine
-            # user intent and respond.
+            # and pass it to the
+            # {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#detect_intent DetectIntent} method to
+            # determine user intent and respond.
             #
             class Client
               include Paths
@@ -472,9 +473,13 @@ module Google
               end
 
               ##
-              # Fulfills a matched intent returned by {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#match_intent MatchIntent}.
-              # Must be called after {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#match_intent MatchIntent}, with input from
-              # {::Google::Cloud::Dialogflow::CX::V3::MatchIntentResponse MatchIntentResponse}. Otherwise, the behavior is undefined.
+              # Fulfills a matched intent returned by
+              # {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#match_intent MatchIntent}. Must be
+              # called after
+              # {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#match_intent MatchIntent}, with
+              # input from
+              # {::Google::Cloud::Dialogflow::CX::V3::MatchIntentResponse MatchIntentResponse}.
+              # Otherwise, the behavior is undefined.
               #
               # @overload fulfill_intent(request, options = nil)
               #   Pass arguments to `fulfill_intent` via a request object, either of type

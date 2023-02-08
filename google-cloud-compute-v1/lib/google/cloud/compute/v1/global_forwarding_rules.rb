@@ -31,9 +31,9 @@ module Google
         ##
         # The GlobalForwardingRules API.
         #
-        # To load this service and instantiate a REST client:
+        # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/compute/v1/global_forwarding_rules"
+        #     require "google/cloud/compute/v1/global_forwarding_rules/rest"
         #     client = ::Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::Client.new
         #
         module GlobalForwardingRules

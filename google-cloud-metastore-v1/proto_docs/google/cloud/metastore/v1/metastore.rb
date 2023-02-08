@@ -28,7 +28,8 @@ module Google
         #     software as the metastore service.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Immutable. The relative resource name of the metastore service, of the form:
+        #     Immutable. The relative resource name of the metastore service, in the following
+        #     format:
         #
         #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
         # @!attribute [r] create_time
@@ -70,6 +71,8 @@ module Google
         #   @return [::Google::Cloud::Metastore::V1::MaintenanceWindow]
         #     The one hour maintenance window of the metastore service. This specifies
         #     when the service can be restarted for maintenance purposes in UTC time.
+        #     Maintenance window is not needed for services with the SPANNER
+        #     database type.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. The globally unique resource identifier of the metastore service.
@@ -80,6 +83,21 @@ module Google
         #   @return [::Google::Cloud::Metastore::V1::Service::ReleaseChannel]
         #     Immutable. The release channel of the service.
         #     If unspecified, defaults to `STABLE`.
+        # @!attribute [rw] encryption_config
+        #   @return [::Google::Cloud::Metastore::V1::EncryptionConfig]
+        #     Immutable. Information used to configure the Dataproc Metastore service to encrypt
+        #     customer data at rest. Cannot be updated.
+        # @!attribute [rw] network_config
+        #   @return [::Google::Cloud::Metastore::V1::NetworkConfig]
+        #     The configuration specifying the network settings for the
+        #     Dataproc Metastore service.
+        # @!attribute [rw] database_type
+        #   @return [::Google::Cloud::Metastore::V1::Service::DatabaseType]
+        #     Immutable. The database type that the Metastore service stores its data.
+        # @!attribute [rw] telemetry_config
+        #   @return [::Google::Cloud::Metastore::V1::TelemetryConfig]
+        #     The configuration specifying telemetry settings for the Dataproc Metastore
+        #     service. If unspecified defaults to `JSON`.
         class Service
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -153,6 +171,18 @@ module Google
             # and have been validated for production use.
             STABLE = 2
           end
+
+          # The backend database type for the metastore service.
+          module DatabaseType
+            # The DATABASE_TYPE is not set.
+            DATABASE_TYPE_UNSPECIFIED = 0
+
+            # MySQL is used to persist the metastore data.
+            MYSQL = 1
+
+            # Spanner is used to persist the metastore data.
+            SPANNER = 2
+          end
         end
 
         # Maintenance window. This specifies when Dataproc Metastore
@@ -177,7 +207,9 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     A mapping of Hive metastore configuration key-value pairs to apply to the
         #     Hive metastore (configured in `hive-site.xml`). The mappings
-        #     override system defaults (some keys cannot be overridden).
+        #     override system defaults (some keys cannot be overridden). These
+        #     overrides are also applied to auxiliary versions and can be further
+        #     customized in the auxiliary version's `AuxiliaryVersionConfig`.
         # @!attribute [rw] kerberos_config
         #   @return [::Google::Cloud::Metastore::V1::KerberosConfig]
         #     Information used to configure the Hive metastore service as a service
@@ -229,6 +261,67 @@ module Google
         class Secret
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Encryption settings for the service.
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     The fully qualified customer provided Cloud KMS key name to use for
+        #     customer data encryption, in the following form:
+        #
+        #     `projects/{project_number}/locations/{location_id}/keyRings/{key_ring_id}/cryptoKeys/{crypto_key_id}`.
+        class EncryptionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Network configuration for the Dataproc Metastore service.
+        # @!attribute [rw] consumers
+        #   @return [::Array<::Google::Cloud::Metastore::V1::NetworkConfig::Consumer>]
+        #     Immutable. The consumer-side network configuration for the Dataproc Metastore
+        #     instance.
+        class NetworkConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Contains information of the customer's network configurations.
+          # @!attribute [rw] subnetwork
+          #   @return [::String]
+          #     Immutable. The subnetwork of the customer project from which an IP address is
+          #     reserved and used as the Dataproc Metastore service's
+          #     endpoint. It is accessible to hosts in the subnet and to all
+          #     hosts in a subnet in the same region and same network. There must
+          #     be at least one IP address available in the subnet's primary range. The
+          #     subnet is specified in the following form:
+          #
+          #     `projects/{project_number}/regions/{region_id}/subnetworks/{subnetwork_id}`
+          # @!attribute [r] endpoint_uri
+          #   @return [::String]
+          #     Output only. The URI of the endpoint used to access the metastore service.
+          class Consumer
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Telemetry Configuration for the Dataproc Metastore service.
+        # @!attribute [rw] log_format
+        #   @return [::Google::Cloud::Metastore::V1::TelemetryConfig::LogFormat]
+        #     The output format of the Dataproc Metastore service's logs.
+        class TelemetryConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          module LogFormat
+            # The LOG_FORMAT is not set.
+            LOG_FORMAT_UNSPECIFIED = 0
+
+            # Logging output uses the legacy `textPayload` format.
+            LEGACY = 1
+
+            # Logging output uses the `jsonPayload` format.
+            JSON = 2
+          end
         end
 
         # The metadata management activities of the metastore service.

@@ -32,8 +32,8 @@ module Google
         # @!attribute [rw] metrics_schema_uri
         #   @return [::String]
         #     Points to a YAML file stored on Google Cloud Storage describing the
-        #     {::Google::Cloud::AIPlatform::V1::ModelEvaluation#metrics metrics} of this ModelEvaluation. The schema is
-        #     defined as an OpenAPI 3.0.2 [Schema
+        #     {::Google::Cloud::AIPlatform::V1::ModelEvaluation#metrics metrics} of this
+        #     ModelEvaluation. The schema is defined as an OpenAPI 3.0.2 [Schema
         #     Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject).
         # @!attribute [rw] metrics
         #   @return [::Google::Protobuf::Value]
@@ -46,8 +46,8 @@ module Google
         #   @return [::Array<::String>]
         #     All possible [dimensions][ModelEvaluationSlice.slice.dimension] of
         #     ModelEvaluationSlices. The dimensions can be used as the filter of the
-        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices ModelService.ListModelEvaluationSlices} request, in the form of
-        #     `slice.dimension = <dimension>`.
+        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices ModelService.ListModelEvaluationSlices}
+        #     request, in the form of `slice.dimension = <dimension>`.
         # @!attribute [rw] data_item_schema_uri
         #   @return [::String]
         #     Points to a YAML file stored on Google Cloud Storage describing
@@ -77,8 +77,9 @@ module Google
         #     is evaluated with explanations, and only for AutoML tabular Models.
         # @!attribute [rw] explanation_specs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModelEvaluation::ModelEvaluationExplanationSpec>]
-        #     Describes the values of {::Google::Cloud::AIPlatform::V1::ExplanationSpec ExplanationSpec} that are used for explaining
-        #     the predicted values on the evaluated data.
+        #     Describes the values of
+        #     {::Google::Cloud::AIPlatform::V1::ExplanationSpec ExplanationSpec} that are used
+        #     for explaining the predicted values on the evaluated data.
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Value]
         #     The metadata of the ModelEvaluation.

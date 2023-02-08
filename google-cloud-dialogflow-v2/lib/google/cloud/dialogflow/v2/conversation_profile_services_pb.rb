@@ -24,7 +24,8 @@ module Google
     module Dialogflow
       module V2
         module ConversationProfiles
-          # Service for managing [ConversationProfiles][google.cloud.dialogflow.v2.ConversationProfile].
+          # Service for managing
+          # [ConversationProfiles][google.cloud.dialogflow.v2.ConversationProfile].
           class Service
 
             include ::GRPC::GenericService
@@ -41,13 +42,15 @@ module Google
             #
             # [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][]
             # aren't populated in the response. You can retrieve them via
-            # [GetConversationProfile][google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile] API.
+            # [GetConversationProfile][google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile]
+            # API.
             rpc :CreateConversationProfile, ::Google::Cloud::Dialogflow::V2::CreateConversationProfileRequest, ::Google::Cloud::Dialogflow::V2::ConversationProfile
             # Updates the specified conversation profile.
             #
             # [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][]
             # aren't populated in the response. You can retrieve them via
-            # [GetConversationProfile][google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile] API.
+            # [GetConversationProfile][google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile]
+            # API.
             rpc :UpdateConversationProfile, ::Google::Cloud::Dialogflow::V2::UpdateConversationProfileRequest, ::Google::Cloud::Dialogflow::V2::ConversationProfile
             # Deletes the specified conversation profile.
             rpc :DeleteConversationProfile, ::Google::Cloud::Dialogflow::V2::DeleteConversationProfileRequest, ::Google::Protobuf::Empty
@@ -60,8 +63,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: [SetSuggestionFeatureConfigOperationMetadata][google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata]
-            # - `response`: [ConversationProfile][google.cloud.dialogflow.v2.ConversationProfile]
+            # - `metadata`:
+            # [SetSuggestionFeatureConfigOperationMetadata][google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata]
+            # - `response`:
+            # [ConversationProfile][google.cloud.dialogflow.v2.ConversationProfile]
             #
             # If a long running operation to add or update suggestion feature
             # config for the same conversation profile, participant role and suggestion
@@ -75,8 +80,10 @@ module Google
             # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
             # The returned `Operation` type has the following method-specific fields:
             #
-            # - `metadata`: [ClearSuggestionFeatureConfigOperationMetadata][google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata]
-            # - `response`: [ConversationProfile][google.cloud.dialogflow.v2.ConversationProfile]
+            # - `metadata`:
+            # [ClearSuggestionFeatureConfigOperationMetadata][google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata]
+            # - `response`:
+            # [ConversationProfile][google.cloud.dialogflow.v2.ConversationProfile]
             rpc :ClearSuggestionFeatureConfig, ::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest, ::Google::Longrunning::Operation
           end
 

@@ -46,6 +46,8 @@ module Google
             rpc :FetchProcessorTypes, ::Google::Cloud::DocumentAI::V1beta3::FetchProcessorTypesRequest, ::Google::Cloud::DocumentAI::V1beta3::FetchProcessorTypesResponse
             # Lists the processor types that exist.
             rpc :ListProcessorTypes, ::Google::Cloud::DocumentAI::V1beta3::ListProcessorTypesRequest, ::Google::Cloud::DocumentAI::V1beta3::ListProcessorTypesResponse
+            # Gets a processor type detail.
+            rpc :GetProcessorType, ::Google::Cloud::DocumentAI::V1beta3::GetProcessorTypeRequest, ::Google::Cloud::DocumentAI::V1beta3::ProcessorType
             # Lists all processors which belong to this project.
             rpc :ListProcessors, ::Google::Cloud::DocumentAI::V1beta3::ListProcessorsRequest, ::Google::Cloud::DocumentAI::V1beta3::ListProcessorsResponse
             # Gets a processor detail.
@@ -75,8 +77,10 @@ module Google
             rpc :EnableProcessor, ::Google::Cloud::DocumentAI::V1beta3::EnableProcessorRequest, ::Google::Longrunning::Operation
             # Disables a processor
             rpc :DisableProcessor, ::Google::Cloud::DocumentAI::V1beta3::DisableProcessorRequest, ::Google::Longrunning::Operation
-            # Set the default (active) version of a [Processor][google.cloud.documentai.v1beta3.Processor] that will be used in
-            # [ProcessDocument][google.cloud.documentai.v1beta3.DocumentProcessorService.ProcessDocument] and
+            # Set the default (active) version of a
+            # [Processor][google.cloud.documentai.v1beta3.Processor] that will be used in
+            # [ProcessDocument][google.cloud.documentai.v1beta3.DocumentProcessorService.ProcessDocument]
+            # and
             # [BatchProcessDocuments][google.cloud.documentai.v1beta3.DocumentProcessorService.BatchProcessDocuments].
             rpc :SetDefaultProcessorVersion, ::Google::Cloud::DocumentAI::V1beta3::SetDefaultProcessorVersionRequest, ::Google::Longrunning::Operation
             # Send a document for Human Review. The input document should be processed by

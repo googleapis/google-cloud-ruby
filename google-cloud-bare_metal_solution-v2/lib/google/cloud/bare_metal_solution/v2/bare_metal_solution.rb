@@ -41,7 +41,7 @@ module Google
         # Metal Solution API. Once enabled, the methods act
         # upon specific servers in your Bare Metal Solution environment.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/bare_metal_solution/v2/bare_metal_solution"
         #     client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new

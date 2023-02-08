@@ -1259,6 +1259,33 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkAttachments.AggregatedList. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
+        # @!attribute [rw] include_all_scopes
+        #   @return [::Boolean]
+        #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class AggregatedListNetworkAttachmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NetworkEdgeSecurityServices.AggregatedList. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -1946,6 +1973,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] specific_sku_allocation
+        #   @return [::Google::Cloud::Compute::V1::AllocationResourceStatusSpecificSKUAllocation]
+        class AllocationResourceStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] source_instance_template_id
+        #   @return [::String]
+        class AllocationResourceStatusSpecificSKUAllocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] disk_size_gb
         #   @return [::Integer]
         #     Specifies the size of the disk in base-2 GB.
@@ -2002,6 +2043,9 @@ module Google
         # @!attribute [rw] instance_properties
         #   @return [::Google::Cloud::Compute::V1::AllocationSpecificSKUAllocationReservedInstanceProperties]
         #     The instance properties for the reservation.
+        # @!attribute [rw] source_instance_template
+        #   @return [::String]
+        #     Specifies the instance template to create the reservation. If you use this field, you must exclude the instanceProperties field. This field is optional, and it can be a full or partial URL. For example, the following are all valid URLs to an instance template: - https://www.googleapis.com/compute/v1/projects/project /global/instanceTemplates/instanceTemplate - projects/project/global/instanceTemplates/instanceTemplate - global/instanceTemplates/instanceTemplate
         class AllocationSpecificSKUReservation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2803,7 +2847,7 @@ module Google
         #     Check the BalancingMode enum for the list of possible values.
         # @!attribute [rw] capacity_scaler
         #   @return [::Float]
-        #     A multiplier applied to the backend's target capacity of its balancing mode. The default value is 1, which means the group serves up to 100% of its configured capacity (depending on balancingMode). A setting of 0 means the group is completely drained, offering 0% of its available capacity. The valid ranges are 0.0 and [0.1,1.0]. You cannot configure a setting larger than 0 and smaller than 0.1. You cannot configure a setting of 0 when there is only one backend attached to the backend service.
+        #     A multiplier applied to the backend's target capacity of its balancing mode. The default value is 1, which means the group serves up to 100% of its configured capacity (depending on balancingMode). A setting of 0 means the group is completely drained, offering 0% of its available capacity. The valid ranges are 0.0 and [0.1,1.0]. You cannot configure a setting larger than 0 and smaller than 0.1. You cannot configure a setting of 0 when there is only one backend attached to the backend service. Not available with backends that don't support using a balancingMode. This includes backends such as global internet NEGs, regional serverless NEGs, and PSC NEGs.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
@@ -4997,6 +5041,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkAttachments.Delete. See the method description for details.
+        # @!attribute [rw] network_attachment
+        #   @return [::String]
+        #     Name of the NetworkAttachment resource to delete.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region of this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder
+        class DeleteNetworkAttachmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NetworkEdgeSecurityServices.Delete. See the method description for details.
         # @!attribute [rw] network_edge_security_service
         #   @return [::String]
@@ -6629,7 +6691,7 @@ module Google
         #     Additional structured details about this error. Keys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than \\{"instanceLimit": "100/request"}, should be returned as, \\{"instanceLimitPerRequest": "100"}, if the client exceeds the number of instances that can be created in a single (batch) request.
         # @!attribute [rw] reason
         #   @return [::String]
-        #     The reason of the error. This is a constant value that identifies the proximate cause of the error. Error reasons are unique within a particular domain of errors. This should be at most 63 characters and match /[A-Z0-9_]+/.
+        #     The reason of the error. This is a constant value that identifies the proximate cause of the error. Error reasons are unique within a particular domain of errors. This should be at most 63 characters and match a regular expression of `A-Z+[A-Z0-9]`, which represents UPPER_SNAKE_CASE.
         class ErrorInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -7040,7 +7102,7 @@ module Google
         #     [Output only] Type of the resource. Always compute#firewallPolicyfor firewall policies
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of the resource. For Organization Firewall Policies it's a [Output Only] numeric ID allocated by GCP which uniquely identifies the Organization Firewall Policy.
+        #     Name of the resource. For Organization Firewall Policies it's a [Output Only] numeric ID allocated by Google Cloud which uniquely identifies the Organization Firewall Policy.
         # @!attribute [rw] parent
         #   @return [::String]
         #     [Output Only] The parent of the firewall policy. This field is not applicable to network firewall policies.
@@ -7110,7 +7172,7 @@ module Google
         # Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny).
         # @!attribute [rw] action
         #   @return [::String]
-        #     The Action to perform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.
+        #     The Action to perform when the client connection triggers the rule. Valid actions are "allow", "deny" and "goto_next".
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description for this resource.
@@ -7239,7 +7301,7 @@ module Google
         #     Check the IPProtocolEnum enum for the list of possible values.
         # @!attribute [rw] all_ports
         #   @return [::Boolean]
-        #     This field is used along with the backend_service field for Internal TCP/UDP Load Balancing or Network Load Balancing, or with the target field for internal and external TargetInstance. You can only use one of ports and port_range, or allPorts. The three are mutually exclusive. For TCP, UDP and SCTP traffic, packets addressed to any ports will be forwarded to the target or backendService.
+        #     This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By internal TCP/UDP load balancers, backend service-based network load balancers, and internal and external protocol forwarding. Set this field to true to allow packets addressed to any port or packets lacking destination port information (for example, UDP fragments after the first fragment) to be forwarded to the backends configured with this forwarding rule. The ports, port_range, and allPorts fields are mutually exclusive.
         # @!attribute [rw] allow_global_access
         #   @return [::Boolean]
         #     This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. If the field is set to TRUE, clients can access ILB from all regions. Otherwise only allows access from clients in the same region as the internal load balancer.
@@ -7296,10 +7358,10 @@ module Google
         #     This is used in PSC consumer ForwardingRule to control whether it should try to auto-generate a DNS zone or not. Non-PSC forwarding rules do not use this field.
         # @!attribute [rw] port_range
         #   @return [::String]
-        #     This field can be used only if: - Load balancing scheme is one of EXTERNAL, INTERNAL_SELF_MANAGED or INTERNAL_MANAGED - IPProtocol is one of TCP, UDP, or SCTP. Packets addressed to ports in the specified range will be forwarded to target or backend_service. You can only use one of ports, port_range, or allPorts. The three are mutually exclusive. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint ports. Some types of forwarding target have constraints on the acceptable ports. For more information, see [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#port_specifications). @pattern: \\d+(?:-\\d+)?
+        #     This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By backend service-based network load balancers, target pool-based network load balancers, internal proxy load balancers, external proxy load balancers, Traffic Director, external protocol forwarding, and Classic VPN. Some products have restrictions on what ports can be used. See port specifications for details. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The ports, port_range, and allPorts fields are mutually exclusive. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. @pattern: \\d+(?:-\\d+)?
         # @!attribute [rw] ports
         #   @return [::Array<::String>]
-        #     The ports field is only supported when the forwarding rule references a backend_service directly. Only packets addressed to the [specified list of ports]((https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#port_specifications)) are forwarded to backends. You can only use one of ports and port_range, or allPorts. The three are mutually exclusive. You can specify a list of up to five ports, which can be non-contiguous. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint ports. @pattern: \\d+(?:-\\d+)?
+        #     This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By internal TCP/UDP load balancers, backend service-based network load balancers, and internal protocol forwarding. You can specify a list of up to five ports by number, separated by commas. The ports can be contiguous or discontiguous. Only packets addressed to these ports will be forwarded to the backends configured with this forwarding rule. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot share any values defined in ports. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot share any values defined in ports. The ports, port_range, and allPorts fields are mutually exclusive. @pattern: \\d+(?:-\\d+)?
         # @!attribute [rw] psc_connection_id
         #   @return [::Integer]
         #     [Output Only] The PSC connection id of the PSC Forwarding Rule.
@@ -7326,7 +7388,7 @@ module Google
         #     This field identifies the subnetwork that the load balanced IP should belong to for this Forwarding Rule, used in internal load balancing and network load balancing with IPv6. If the network specified is in auto subnet mode, this field is optional. However, a subnetwork must be specified if the network is in custom subnet mode or when creating external forwarding rule with IPv6.
         # @!attribute [rw] target
         #   @return [::String]
-        #     The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle: - vpc-sc - APIs that support VPC Service Controls. - all-apis - All supported Google APIs.
+        #     The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. - For load balancers, see the "Target" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). - For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle: - vpc-sc - APIs that support VPC Service Controls. - all-apis - All supported Google APIs. - For Private Service Connect forwarding rules that forward traffic to managed services, the target must be a service attachment.
         class ForwardingRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -8094,6 +8156,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkAttachments.GetIamPolicy. See the method description for details.
+        # @!attribute [rw] options_requested_policy_version
+        #   @return [::Integer]
+        #     Requested IAM Policy version.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class GetIamPolicyNetworkAttachmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NetworkFirewallPolicies.GetIamPolicy. See the method description for details.
         # @!attribute [rw] options_requested_policy_version
         #   @return [::Integer]
@@ -8486,6 +8566,21 @@ module Google
         #   @return [::String]
         #     Name of the Router resource to query for Nat Mapping information of VM endpoints.
         class GetNatMappingInfoRoutersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkAttachments.Get. See the method description for details.
+        # @!attribute [rw] network_attachment
+        #   @return [::String]
+        #     Name of the NetworkAttachment resource to return.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region of this request.
+        class GetNetworkAttachmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -9570,6 +9665,8 @@ module Google
 
             SEV_CAPABLE = 87083793
 
+            SEV_SNP_CAPABLE = 426919
+
             UEFI_COMPATIBLE = 195865408
 
             VIRTIO_SCSI_MULTIQUEUE = 201597069
@@ -9868,10 +9965,10 @@ module Google
         #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a HealthCheckService. An up-to-date fingerprint must be provided in order to patch/update the HealthCheckService; Otherwise, the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve the HealthCheckService.
         # @!attribute [rw] health_checks
         #   @return [::Array<::String>]
-        #     A list of URLs to the HealthCheck resources. Must have at least one HealthCheck, and not more than 10. HealthCheck resources must have portSpecification=USE_SERVING_PORT or portSpecification=USE_FIXED_PORT. For regional HealthCheckService, the HealthCheck must be regional and in the same region. For global HealthCheckService, HealthCheck must be global. Mix of regional and global HealthChecks is not supported. Multiple regional HealthChecks must belong to the same region. Regional HealthChecks must belong to the same region as zones of NEGs.
+        #     A list of URLs to the HealthCheck resources. Must have at least one HealthCheck, and not more than 10 for regional HealthCheckService, and not more than 1 for global HealthCheckService. HealthCheck resources must have portSpecification=USE_SERVING_PORT or portSpecification=USE_FIXED_PORT. For regional HealthCheckService, the HealthCheck must be regional and in the same region. For global HealthCheckService, HealthCheck must be global. Mix of regional and global HealthChecks is not supported. Multiple regional HealthChecks must belong to the same region. Regional HealthChecks must belong to the same region as zones of NetworkEndpointGroups. For global HealthCheckService using global INTERNET_IP_PORT NetworkEndpointGroups, the global HealthChecks must specify sourceRegions, and HealthChecks that specify sourceRegions can only be used with global INTERNET_IP_PORT NetworkEndpointGroups.
         # @!attribute [rw] health_status_aggregation_policy
         #   @return [::String]
-        #     Optional. Policy for how the results from multiple health checks for the same endpoint are aggregated. Defaults to NO_AGGREGATION if unspecified. - NO_AGGREGATION. An EndpointHealth message is returned for each pair in the health check service. - AND. If any health check of an endpoint reports UNHEALTHY, then UNHEALTHY is the HealthState of the endpoint. If all health checks report HEALTHY, the HealthState of the endpoint is HEALTHY. .
+        #     Optional. Policy for how the results from multiple health checks for the same endpoint are aggregated. Defaults to NO_AGGREGATION if unspecified. - NO_AGGREGATION. An EndpointHealth message is returned for each pair in the health check service. - AND. If any health check of an endpoint reports UNHEALTHY, then UNHEALTHY is the HealthState of the endpoint. If all health checks report HEALTHY, the HealthState of the endpoint is HEALTHY. . This is only allowed with regional HealthCheckService.
         #     Check the HealthStatusAggregationPolicy enum for the list of possible values.
         # @!attribute [rw] id
         #   @return [::Integer]
@@ -9884,7 +9981,7 @@ module Google
         #     Name of the resource. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
         # @!attribute [rw] network_endpoint_groups
         #   @return [::Array<::String>]
-        #     A list of URLs to the NetworkEndpointGroup resources. Must not have more than 100. For regional HealthCheckService, NEGs must be in zones in the region of the HealthCheckService.
+        #     A list of URLs to the NetworkEndpointGroup resources. Must not have more than 100. For regional HealthCheckService, NEGs must be in zones in the region of the HealthCheckService. For global HealthCheckServices, the NetworkEndpointGroups must be global INTERNET_IP_PORT.
         # @!attribute [rw] notification_endpoints
         #   @return [::Array<::String>]
         #     A list of URLs to the NotificationEndpoint resources. Must not have more than 10. A list of endpoints for receiving notifications of change in health status. For regional HealthCheckService, NotificationEndpoint must be regional and in the same region. For global HealthCheckService, NotificationEndpoint must be global.
@@ -9898,7 +9995,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Optional. Policy for how the results from multiple health checks for the same endpoint are aggregated. Defaults to NO_AGGREGATION if unspecified. - NO_AGGREGATION. An EndpointHealth message is returned for each pair in the health check service. - AND. If any health check of an endpoint reports UNHEALTHY, then UNHEALTHY is the HealthState of the endpoint. If all health checks report HEALTHY, the HealthState of the endpoint is HEALTHY. .
+          # Optional. Policy for how the results from multiple health checks for the same endpoint are aggregated. Defaults to NO_AGGREGATION if unspecified. - NO_AGGREGATION. An EndpointHealth message is returned for each pair in the health check service. - AND. If any health check of an endpoint reports UNHEALTHY, then UNHEALTHY is the HealthState of the endpoint. If all health checks report HEALTHY, the HealthState of the endpoint is HEALTHY. . This is only allowed with regional HealthCheckService.
           module HealthStatusAggregationPolicy
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATUS_AGGREGATION_POLICY = 0
@@ -10976,6 +11073,24 @@ module Google
         #   @return [::String]
         #     Required. Source instance that is used to create the machine image from.
         class InsertMachineImageRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkAttachments.Insert. See the method description for details.
+        # @!attribute [rw] network_attachment_resource
+        #   @return [::Google::Cloud::Compute::V1::NetworkAttachment]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region of this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder
+        class InsertNetworkAttachmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -13369,7 +13484,7 @@ module Google
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
         # @!attribute [rw] noc_contact_email
         #   @return [::String]
-        #     Email address to contact the customer NOC for operations and maintenance notifications regarding this Interconnect. If specified, this will be used for notifications in addition to all other forms described, such as Stackdriver logs alerting and Cloud Notifications.
+        #     Email address to contact the customer NOC for operations and maintenance notifications regarding this Interconnect. If specified, this will be used for notifications in addition to all other forms described, such as Cloud Monitoring logs alerting and Cloud Notifications. This field is required for users who sign up for Cloud Interconnect using workforce identity federation.
         # @!attribute [rw] operational_status
         #   @return [::String]
         #     [Output Only] The current status of this Interconnect's functionality, which can take one of the following values: - OS_ACTIVE: A valid Interconnect, which is turned up and is ready to use. Attachments may be provisioned on this Interconnect. - OS_UNPROVISIONED: An Interconnect that has not completed turnup. No attachments may be provisioned on this Interconnect. - OS_UNDER_MAINTENANCE: An Interconnect that is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect.
@@ -13811,6 +13926,14 @@ module Google
         # @!attribute [rw] arp_caches
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectDiagnosticsARPEntry>]
         #     A list of InterconnectDiagnostics.ARPEntry objects, describing individual neighbors currently seen by the Google router in the ARP cache for the Interconnect. This will be empty when the Interconnect is not bundled.
+        # @!attribute [rw] bundle_aggregation_type
+        #   @return [::String]
+        #     The aggregation type of the bundle interface.
+        #     Check the BundleAggregationType enum for the list of possible values.
+        # @!attribute [rw] bundle_operational_status
+        #   @return [::String]
+        #     The operational status of the bundle interface.
+        #     Check the BundleOperationalStatus enum for the list of possible values.
         # @!attribute [rw] links
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectDiagnosticsLinkStatus>]
         #     A list of InterconnectDiagnostics.LinkStatus objects, describing the status for each link on the Interconnect.
@@ -13820,6 +13943,30 @@ module Google
         class InterconnectDiagnostics
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The aggregation type of the bundle interface.
+          module BundleAggregationType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_BUNDLE_AGGREGATION_TYPE = 0
+
+            # LACP is enabled.
+            BUNDLE_AGGREGATION_TYPE_LACP = 27758925
+
+            # LACP is disabled.
+            BUNDLE_AGGREGATION_TYPE_STATIC = 50678873
+          end
+
+          # The operational status of the bundle interface.
+          module BundleOperationalStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_BUNDLE_OPERATIONAL_STATUS = 0
+
+            # If bundleAggregationType is LACP: LACP is not established and/or all links in the bundle have DOWN operational status. If bundleAggregationType is STATIC: one or more links in the bundle has DOWN operational status.
+            BUNDLE_OPERATIONAL_STATUS_DOWN = 453842693
+
+            # If bundleAggregationType is LACP: LACP is established and at least one link in the bundle has UP operational status. If bundleAggregationType is STATIC: all links in the bundle (typically just one) have UP operational status.
+            BUNDLE_OPERATIONAL_STATUS_UP = 161366462
+          end
         end
 
         # Describing the ARP neighbor entries seen on this link
@@ -13905,6 +14052,10 @@ module Google
         #     The Demarc address assigned by Google and provided in the LoA.
         # @!attribute [rw] lacp_status
         #   @return [::Google::Cloud::Compute::V1::InterconnectDiagnosticsLinkLACPStatus]
+        # @!attribute [rw] operational_status
+        #   @return [::String]
+        #     The operational status of the link.
+        #     Check the OperationalStatus enum for the list of possible values.
         # @!attribute [rw] receiving_optical_power
         #   @return [::Google::Cloud::Compute::V1::InterconnectDiagnosticsLinkOpticalPower]
         #     An InterconnectDiagnostics.LinkOpticalPower object, describing the current value and status of the received light level.
@@ -13914,6 +14065,18 @@ module Google
         class InterconnectDiagnosticsLinkStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The operational status of the link.
+          module OperationalStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_OPERATIONAL_STATUS = 0
+
+            # The interface is unable to communicate with the remote end.
+            LINK_OPERATIONAL_STATUS_DOWN = 281653885
+
+            # The interface has low level communication with the remote end.
+            LINK_OPERATIONAL_STATUS_UP = 305879862
+          end
         end
 
         # Response to the list request, and contains a list of interconnects.
@@ -15331,6 +15494,33 @@ module Google
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListManagedInstancesRegionInstanceGroupManagersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkAttachments.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region of this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class ListNetworkAttachmentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -17784,6 +17974,179 @@ module Google
           end
         end
 
+        # NetworkAttachments A network attachment resource ...
+        # @!attribute [rw] connection_endpoints
+        #   @return [::Array<::Google::Cloud::Compute::V1::NetworkAttachmentConnectedEndpoint>]
+        #     [Output Only] An array of connections for all the producers connected to this network attachment.
+        # @!attribute [rw] connection_preference
+        #   @return [::String]
+        #     Check the ConnectionPreference enum for the list of possible values.
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of this resource. Provide this property when you create the resource.
+        # @!attribute [rw] fingerprint
+        #   @return [::String]
+        #     [Output Only] Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. An up-to-date fingerprint must be provided in order to patch.
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     [Output Only] The unique identifier for the resource type. The server generates this identifier.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of the resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     [Output Only] The URL of the network which the Network Attachment belongs to.
+        # @!attribute [rw] producer_accept_lists
+        #   @return [::Array<::String>]
+        #     Projects that are allowed to connect to this network attachment. The project can be specified using its id or number.
+        # @!attribute [rw] producer_reject_lists
+        #   @return [::Array<::String>]
+        #     Projects that are not allowed to connect to this network attachment. The project can be specified using its id or number.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     [Output Only] URL of the region where the network attachment resides. This field applies only to the region resource. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] self_link_with_id
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource's resource id.
+        # @!attribute [rw] subnetworks
+        #   @return [::Array<::String>]
+        #     An array of URLs where each entry is the URL of a subnet provided by the service consumer to use for endpoints in the producers that connect to this network attachment.
+        class NetworkAttachment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+
+          module ConnectionPreference
+            # A value indicating that the enum field is not set.
+            UNDEFINED_CONNECTION_PREFERENCE = 0
+
+            ACCEPT_AUTOMATIC = 75250580
+
+            ACCEPT_MANUAL = 373061341
+
+            INVALID = 530283991
+          end
+        end
+
+        # Contains a list of NetworkAttachmentsScopedList.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::NetworkAttachmentsScopedList}]
+        #     A list of NetworkAttachmentsScopedList resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class NetworkAttachmentAggregatedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::NetworkAttachmentsScopedList]
+          class ItemsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # [Output Only] A connection connected to this network attachment.
+        # @!attribute [rw] ip_address
+        #   @return [::String]
+        #     The IP address assigned to the producer instance network interface. This value will be a range in case of Serverless.
+        # @!attribute [rw] project_id_or_num
+        #   @return [::String]
+        #     The project id or number of the interface to which the IP was assigned.
+        # @!attribute [rw] secondary_ip_cidr_ranges
+        #   @return [::Array<::String>]
+        #     Alias IP ranges from the same subnetwork
+        # @!attribute [rw] status
+        #   @return [::String]
+        #     The status of a connected endpoint to this network attachment.
+        #     Check the Status enum for the list of possible values.
+        # @!attribute [rw] subnetwork
+        #   @return [::String]
+        #     The subnetwork used to assign the IP to the producer instance network interface.
+        class NetworkAttachmentConnectedEndpoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The status of a connected endpoint to this network attachment.
+          module Status
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATUS = 0
+
+            # The consumer allows traffic from the producer to reach its VPC.
+            ACCEPTED = 246714279
+
+            # The consumer network attachment no longer exists.
+            CLOSED = 380163436
+
+            # The consumer needs to take further action before traffic can be served.
+            NEEDS_ATTENTION = 344491452
+
+            # The consumer neither allows nor prohibits traffic from the producer to reach its VPC.
+            PENDING = 35394935
+
+            # The consumer prohibits traffic from the producer to reach its VPC.
+            REJECTED = 174130302
+
+            STATUS_UNSPECIFIED = 42133066
+          end
+        end
+
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::NetworkAttachment>]
+        #     A list of NetworkAttachment resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class NetworkAttachmentList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] network_attachments
+        #   @return [::Array<::Google::Cloud::Compute::V1::NetworkAttachment>]
+        #     A list of NetworkAttachments contained in this scope.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     Informational warning which replaces the list of network attachments when the list is empty.
+        class NetworkAttachmentsScopedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a Google Cloud Armor network edge security service resource.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
@@ -18247,6 +18610,9 @@ module Google
         # @!attribute [rw] network
         #   @return [::String]
         #     URL of the VPC network resource for this instance. When creating an instance, if neither the network nor the subnetwork is specified, the default network global/networks/default is used. If the selected project doesn't have the default network, you must specify a network or subnet. If the network is not specified but the subnetwork is specified, the network is inferred. If you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs: - https://www.googleapis.com/compute/v1/projects/project/global/networks/ network - projects/project/global/networks/network - global/networks/default
+        # @!attribute [rw] network_attachment
+        #   @return [::String]
+        #     The URL of the network attachment that this interface should connect to in the following format: projects/\\{project_number}/regions/\\{region_name}/networkAttachments/\\{network_attachment_name}.
         # @!attribute [rw] network_i_p
         #   @return [::String]
         #     An IPv4 internal IP address to assign to the instance for this network interface. If not specified by the user, an unused internal IP is assigned by the system.
@@ -19162,7 +19528,7 @@ module Google
         #     Optional. If specified, this field is used to populate the "name" field in gRPC requests.
         # @!attribute [rw] resend_interval
         #   @return [::Google::Cloud::Compute::V1::Duration]
-        #     Optional. This field is used to configure how often to send a full update of all non-healthy backends. If unspecified, full updates are not sent. If specified, must be in the range between 600 seconds to 3600 seconds. Nanos are disallowed.
+        #     Optional. This field is used to configure how often to send a full update of all non-healthy backends. If unspecified, full updates are not sent. If specified, must be in the range between 600 seconds to 3600 seconds. Nanos are disallowed. Can only be set for regional notification endpoints.
         # @!attribute [rw] retry_duration_sec
         #   @return [::Integer]
         #     How much time (in seconds) is spent attempting notification retries until a successful response is received. Default is 30s. Limit is 20m (1200s). Must be a positive number.
@@ -20807,6 +21173,10 @@ module Google
         # @!attribute [rw] usage_export_location
         #   @return [::Google::Cloud::Compute::V1::UsageExportLocation]
         #     The naming prefix for daily usage reports and the Google Cloud Storage bucket where they are stored.
+        # @!attribute [rw] vm_dns_setting
+        #   @return [::String]
+        #     [Output Only] Default internal DNS setting used by VMs running in this project.
+        #     Check the VmDnsSetting enum for the list of possible values.
         # @!attribute [rw] xpn_project_status
         #   @return [::String]
         #     [Output Only] The role this project has in a shared VPC configuration. Currently, only projects with the host role, which is specified by the value HOST, are differentiated.
@@ -20831,6 +21201,20 @@ module Google
 
             # (Output only) Temporary tier for FIXED_STANDARD when fixed standard tier is expired or not configured.
             STANDARD_OVERRIDES_FIXED_STANDARD = 465847234
+          end
+
+          # [Output Only] Default internal DNS setting used by VMs running in this project.
+          module VmDnsSetting
+            # A value indicating that the enum field is not set.
+            UNDEFINED_VM_DNS_SETTING = 0
+
+            GLOBAL_DEFAULT = 345419141
+
+            UNSPECIFIED_VM_DNS_SETTING = 35691930
+
+            ZONAL_DEFAULT = 368475782
+
+            ZONAL_ONLY = 521198951
           end
 
           # [Output Only] The role this project has in a shared VPC configuration. Currently, only projects with the host role, which is specified by the value HOST, are differentiated.
@@ -21300,9 +21684,17 @@ module Google
 
             FORWARDING_RULES = 432668949
 
+            GLOBAL_EXTERNAL_MANAGED_BACKEND_SERVICES = 164566753
+
             GLOBAL_EXTERNAL_MANAGED_FORWARDING_RULES = 327611949
 
+            GLOBAL_EXTERNAL_PROXY_LB_BACKEND_SERVICES = 400256169
+
             GLOBAL_INTERNAL_ADDRESSES = 42738332
+
+            GLOBAL_INTERNAL_MANAGED_BACKEND_SERVICES = 256608303
+
+            GLOBAL_INTERNAL_TRAFFIC_DIRECTOR_BACKEND_SERVICES = 323514196
 
             GPUS_ALL_REGIONS = 39387177
 
@@ -21422,7 +21814,15 @@ module Google
 
             REGIONAL_AUTOSCALERS = 29363772
 
+            REGIONAL_EXTERNAL_MANAGED_BACKEND_SERVICES = 4240989
+
+            REGIONAL_EXTERNAL_NETWORK_LB_BACKEND_SERVICES = 409564525
+
             REGIONAL_INSTANCE_GROUP_MANAGERS = 37543696
+
+            REGIONAL_INTERNAL_LB_BACKEND_SERVICES = 137983760
+
+            REGIONAL_INTERNAL_MANAGED_BACKEND_SERVICES = 96282539
 
             RESERVATIONS = 32644647
 
@@ -22397,6 +22797,11 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] resource_policies
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        # @!attribute [rw] resource_status
+        #   @return [::Google::Cloud::Compute::V1::AllocationResourceStatus]
+        #     [Output Only] Status information for Reservation resource.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
         #     [Output Only] Reserved for future use.
@@ -22422,6 +22827,15 @@ module Google
         class Reservation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourcePoliciesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # [Output Only] The status of the reservation.
           module Status
@@ -22687,13 +23101,13 @@ module Google
         #     The amount of the resource purchased (in a type-dependent unit, such as bytes). For vCPUs, this can just be an integer. For memory, this must be provided in MB. Memory must be a multiple of 256 MB, with up to 6.5GB of memory per every vCPU.
         # @!attribute [rw] type
         #   @return [::String]
-        #     Type of resource for which this commitment applies. Possible values are VCPU and MEMORY
+        #     Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.
         #     Check the Type enum for the list of possible values.
         class ResourceCommitment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Type of resource for which this commitment applies. Possible values are VCPU and MEMORY
+          # Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -25035,6 +25449,9 @@ module Google
         # @!attribute [rw] connection_limit
         #   @return [::Integer]
         #     The value of the limit to set.
+        # @!attribute [rw] network_url
+        #   @return [::String]
+        #     The network URL for the network to set the limit for.
         # @!attribute [rw] project_id_or_num
         #   @return [::String]
         #     The project id or number for the project to set the limit for.
@@ -25403,6 +25820,24 @@ module Google
         #   @return [::String]
         #     Name or id of the resource for this request.
         class SetIamPolicyMachineImageRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkAttachments.SetIamPolicy. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] region_set_policy_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionSetPolicyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetIamPolicyNetworkAttachmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -26853,7 +27288,7 @@ module Google
         # A specification of the parameters to use when creating the instance template from a source instance.
         # @!attribute [rw] disk_configs
         #   @return [::Array<::Google::Cloud::Compute::V1::DiskInstantiationConfig>]
-        #     Attached disks configuration. If not provided, defaults are applied: For boot disk and any other R/W disks, new custom images will be created from each disk. For read-only disks, they will be attached in read-only mode. Local SSD disks will be created as blank volumes.
+        #     Attached disks configuration. If not provided, defaults are applied: For boot disk and any other R/W disks, the source images for each disk will be used. For read-only disks, they will be attached in read-only mode. Local SSD disks will be created as blank volumes.
         class SourceInstanceParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -27375,6 +27810,9 @@ module Google
         end
 
         # A request message for Instances.Stop. See the method description for details.
+        # @!attribute [rw] discard_local_ssd
+        #   @return [::Boolean]
+        #     If true, discard the contents of any attached localSSD partitions. Default value is false.
         # @!attribute [rw] instance
         #   @return [::String]
         #     Name of the instance resource to stop.
@@ -27739,6 +28177,9 @@ module Google
         end
 
         # A request message for Instances.Suspend. See the method description for details.
+        # @!attribute [rw] discard_local_ssd
+        #   @return [::Boolean]
+        #     If true, discard the contents of any attached localSSD partitions. Default value is false.
         # @!attribute [rw] instance
         #   @return [::String]
         #     Name of the instance resource to suspend.
@@ -29034,6 +29475,24 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
         #     The body resource for this request
         class TestIamPermissionsMachineImageRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkAttachments.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsNetworkAttachmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

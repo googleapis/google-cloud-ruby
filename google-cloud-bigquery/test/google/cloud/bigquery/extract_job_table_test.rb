@@ -35,7 +35,7 @@ describe Google::Cloud::Bigquery::ExtractJob, :table, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    mock.expect :get_table, source_table_gapi, ["source_project_id", "source_dataset_id", "source_table_id"]
+    mock.expect :get_table, source_table_gapi, ["source_project_id", "source_dataset_id", "source_table_id"], **patch_table_args
 
     source = job.source
     _(source).must_be_kind_of Google::Cloud::Bigquery::Table
@@ -43,6 +43,30 @@ describe Google::Cloud::Bigquery::ExtractJob, :table, :mock_bigquery do
     _(source.dataset_id).must_equal "source_dataset_id"
     _(source.table_id).must_equal   "source_table_id"
     mock.verify
+  end
+
+  it "knows its source table with partial prjection of table metadata" do
+    %w[unspecified basic storage full].each do |view|
+      mock = Minitest::Mock.new
+      bigquery.service.mocked_service = mock
+      source_table_result = source_table_gapi
+
+      if view == "basic"
+        source_table_result = source_table_partial_gapi
+      end
+
+      mock.expect :get_table, source_table_result, ["source_project_id", "source_dataset_id", "source_table_id"],
+                  **patch_table_args(view: view)
+
+      source = job.source view: view
+      _(source).must_be_kind_of Google::Cloud::Bigquery::Table
+      _(source.project_id).must_equal "source_project_id"
+      _(source.dataset_id).must_equal "source_dataset_id"
+      _(source.table_id).must_equal "source_table_id"
+      verify_table_metadata source, view
+
+      mock.verify
+    end
   end
 
   it "knows its attributes" do

@@ -46,7 +46,7 @@ module Google
         # * Files, which contain content and are optionally associated with a Package
         #   or Version.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/artifact_registry/v1/artifact_registry"
         #     client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
