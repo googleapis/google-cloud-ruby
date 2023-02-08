@@ -65,7 +65,7 @@ module Google
           @service.request_options.max_interval = max_interval if max_interval
           @service.request_options.multiplier = multiplier if multiplier
           @service.request_options.add_invocation_id_header = true
-          @service.request_options.upload_chunk_size = upload_chunk_size
+          @service.request_options.upload_chunk_size = upload_chunk_size if upload_chunk_size
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
         end
