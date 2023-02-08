@@ -89,13 +89,13 @@ module Google
         end
 
         ## Query for aggregates
-        def run_aggregation_query query, namespace = nil, consistency: nil, transaction: nil
+        def run_aggregation_query query, namespace = nil, consistency: nil, transaction: nil, read_time: nil
           gql_query = nil
           if query.is_a? Google::Cloud::Datastore::V1::GqlQuery
             gql_query = query
             query = nil
           end
-          read_options = generate_read_options consistency, transaction
+          read_options = generate_read_options consistency, transaction, read_time
           if namespace
             partition_id = Google::Cloud::Datastore::V1::PartitionId.new(
               namespace_id: namespace
