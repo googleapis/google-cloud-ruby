@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_AnswerRecords_UpdateAnswerRecord_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::AnswerRecords::Client#update_answer_record
+#
+def update_answer_record
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new
 
-# Call the update_answer_record method.
-result = client.update_answer_record request
+  # Call the update_answer_record method.
+  result = client.update_answer_record request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::AnswerRecord.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::AnswerRecord.
+  p result
+end
 # [END dialogflow_v2_generated_AnswerRecords_UpdateAnswerRecord_sync]

@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/rpc/code_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/eventarc/v1/trigger.proto", :syntax => :proto3) do
@@ -20,6 +21,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :transport, :message, 11, "google.cloud.eventarc.v1.Transport"
       map :labels, :string, :string, 12
       optional :channel, :string, 13
+      map :conditions, :string, :message, 15, "google.cloud.eventarc.v1.StateCondition"
       optional :etag, :string, 99
     end
     add_message "google.cloud.eventarc.v1.EventFilter" do
@@ -27,11 +29,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :value, :string, 2
       optional :operator, :string, 3
     end
+    add_message "google.cloud.eventarc.v1.StateCondition" do
+      optional :code, :enum, 1, "google.rpc.Code"
+      optional :message, :string, 2
+    end
     add_message "google.cloud.eventarc.v1.Destination" do
       oneof :descriptor do
         optional :cloud_run, :message, 1, "google.cloud.eventarc.v1.CloudRun"
         optional :cloud_function, :string, 2
         optional :gke, :message, 3, "google.cloud.eventarc.v1.GKE"
+        optional :workflow, :string, 4
       end
     end
     add_message "google.cloud.eventarc.v1.Transport" do
@@ -64,6 +71,7 @@ module Google
       module V1
         Trigger = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.Trigger").msgclass
         EventFilter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.EventFilter").msgclass
+        StateCondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.StateCondition").msgclass
         Destination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.Destination").msgclass
         Transport = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.Transport").msgclass
         CloudRun = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.CloudRun").msgclass

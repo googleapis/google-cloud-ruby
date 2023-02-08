@@ -97,6 +97,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EC_SIGN_P384_SHA384, 13
       value :EC_SIGN_SECP256K1_SHA256, 31
       value :HMAC_SHA256, 32
+      value :HMAC_SHA1, 33
+      value :HMAC_SHA384, 34
+      value :HMAC_SHA512, 35
+      value :HMAC_SHA224, 36
       value :EXTERNAL_SYMMETRIC_ENCRYPTION, 18
     end
     add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState" do
@@ -139,6 +143,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :IMPORT_METHOD_UNSPECIFIED, 0
       value :RSA_OAEP_3072_SHA1_AES_256, 1
       value :RSA_OAEP_4096_SHA1_AES_256, 2
+      value :RSA_OAEP_3072_SHA256_AES_256, 3
+      value :RSA_OAEP_4096_SHA256_AES_256, 4
+      value :RSA_OAEP_3072_SHA256, 5
+      value :RSA_OAEP_4096_SHA256, 6
     end
     add_enum "google.cloud.kms.v1.ImportJob.ImportJobState" do
       value :IMPORT_JOB_STATE_UNSPECIFIED, 0

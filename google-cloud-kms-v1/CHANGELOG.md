@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 (2022-11-16)
+
+#### Features
+
+* add support for additional HMAC algorithms 
+
 ### 0.14.0 (2022-10-21)
 
 #### Features

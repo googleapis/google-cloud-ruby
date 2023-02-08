@@ -19,15 +19,21 @@
 # [START certificatemanager_v1_generated_CertificateManager_GetCertificateIssuanceConfig_sync]
 require "google/cloud/certificate_manager/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate_issuance_config
+#
+def get_certificate_issuance_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::CertificateManager::V1::GetCertificateIssuanceConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::CertificateManager::V1::GetCertificateIssuanceConfigRequest.new
 
-# Call the get_certificate_issuance_config method.
-result = client.get_certificate_issuance_config request
+  # Call the get_certificate_issuance_config method.
+  result = client.get_certificate_issuance_config request
 
-# The returned object is of type Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig.
-p result
+  # The returned object is of type Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig.
+  p result
+end
 # [END certificatemanager_v1_generated_CertificateManager_GetCertificateIssuanceConfig_sync]

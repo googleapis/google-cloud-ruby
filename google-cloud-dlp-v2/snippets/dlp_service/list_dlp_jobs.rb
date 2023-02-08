@@ -19,21 +19,27 @@
 # [START dlp_v2_generated_DlpService_ListDlpJobs_sync]
 require "google/cloud/dlp/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dlp::V2::DlpService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#list_dlp_jobs
+#
+def list_dlp_jobs
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dlp::V2::DlpService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dlp::V2::ListDlpJobsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dlp::V2::ListDlpJobsRequest.new
 
-# Call the list_dlp_jobs method.
-result = client.list_dlp_jobs request
+  # Call the list_dlp_jobs method.
+  result = client.list_dlp_jobs request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dlp::V2::DlpJob.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dlp::V2::DlpJob.
+    p response
+  end
 end
 # [END dlp_v2_generated_DlpService_ListDlpJobs_sync]

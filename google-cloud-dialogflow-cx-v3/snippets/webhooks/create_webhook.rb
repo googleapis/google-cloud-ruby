@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_Webhooks_CreateWebhook_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#create_webhook
+#
+def create_webhook
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest.new
 
-# Call the create_webhook method.
-result = client.create_webhook request
+  # Call the create_webhook method.
+  result = client.create_webhook request
 
-# The returned object is of type Google::Cloud::Dialogflow::CX::V3::Webhook.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Webhook.
+  p result
+end
 # [END dialogflow_v3_generated_Webhooks_CreateWebhook_sync]

@@ -23,7 +23,9 @@
     "lib/google/cloud/memcache/v1/cloud_memcache_services_pb.rb",
     "lib/google/cloud/memcache/v1/version.rb",
     "proto_docs/README.md",
+    "proto_docs/google/api/client.rb",
     "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/cloud/memcache/v1/cloud_memcache.rb",
     "proto_docs/google/longrunning/operations.rb",
@@ -33,12 +35,15 @@
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/dayofweek.rb",
+    "proto_docs/google/type/timeofday.rb",
     "snippets/Gemfile",
     "snippets/cloud_memcache/apply_parameters.rb",
     "snippets/cloud_memcache/create_instance.rb",
     "snippets/cloud_memcache/delete_instance.rb",
     "snippets/cloud_memcache/get_instance.rb",
     "snippets/cloud_memcache/list_instances.rb",
+    "snippets/cloud_memcache/reschedule_maintenance.rb",
     "snippets/cloud_memcache/update_instance.rb",
     "snippets/cloud_memcache/update_parameters.rb",
     "snippets/snippet_metadata_google.cloud.memcache.v1.json",
@@ -48,6 +53,7 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    ".owlbot.rb"
   ]
 }

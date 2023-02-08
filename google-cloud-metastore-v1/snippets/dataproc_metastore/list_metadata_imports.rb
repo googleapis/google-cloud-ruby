@@ -19,21 +19,27 @@
 # [START metastore_v1_generated_DataprocMetastore_ListMetadataImports_sync]
 require "google/cloud/metastore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Metastore::V1::DataprocMetastore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_metadata_imports
+#
+def list_metadata_imports
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Metastore::V1::DataprocMetastore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Metastore::V1::ListMetadataImportsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Metastore::V1::ListMetadataImportsRequest.new
 
-# Call the list_metadata_imports method.
-result = client.list_metadata_imports request
+  # Call the list_metadata_imports method.
+  result = client.list_metadata_imports request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Metastore::V1::MetadataImport.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Metastore::V1::MetadataImport.
+    p response
+  end
 end
 # [END metastore_v1_generated_DataprocMetastore_ListMetadataImports_sync]

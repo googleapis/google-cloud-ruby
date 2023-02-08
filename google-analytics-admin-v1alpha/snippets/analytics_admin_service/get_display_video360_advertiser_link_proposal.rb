@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDisplayVideo360AdvertiserLinkProposal_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_display_video360_advertiser_link_proposal
+#
+def get_display_video360_advertiser_link_proposal
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkProposalRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkProposalRequest.new
 
-# Call the get_display_video360_advertiser_link_proposal method.
-result = client.get_display_video360_advertiser_link_proposal request
+  # Call the get_display_video360_advertiser_link_proposal method.
+  result = client.get_display_video360_advertiser_link_proposal request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDisplayVideo360AdvertiserLinkProposal_sync]

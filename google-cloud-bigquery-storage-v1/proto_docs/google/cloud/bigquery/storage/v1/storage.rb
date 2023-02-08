@@ -223,6 +223,26 @@ module Google
           #   @return [::String]
           #     Id set by client to annotate its identity. Only initial request setting is
           #     respected.
+          # @!attribute [rw] missing_value_interpretations
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::MissingValueInterpretation}]
+          #     A map to indicate how to interpret missing value for some fields. Missing
+          #     values are fields present in user schema but missing in rows. The key is
+          #     the field name. The value is the interpretation of missing values for the
+          #     field.
+          #
+          #     For example, a map \\{'foo': NULL_VALUE, 'bar': DEFAULT_VALUE} means all
+          #     missing values in field foo are interpreted as NULL, all missing values in
+          #     field bar are interpreted as the default value of field bar in table
+          #     schema.
+          #
+          #     If a field is not in this map and has missing values, the missing values
+          #     in this field are interpreted as NULL.
+          #
+          #     This field only applies to the current request, it won't affect other
+          #     requests on the connection.
+          #
+          #     Currently, field name can only be top-level column name, can't be a struct
+          #     field path like 'foo.bar'.
           class AppendRowsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -243,6 +263,32 @@ module Google
             class ProtoData
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::MissingValueInterpretation]
+            class MissingValueInterpretationsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # An enum to indicate how to interpret missing values. Missing values are
+            # fields present in user schema but missing in rows. A missing value can
+            # represent a NULL or a column default value defined in BigQuery table
+            # schema.
+            module MissingValueInterpretation
+              # Invalid missing value interpretation. Requests with this value will be
+              # rejected.
+              MISSING_VALUE_INTERPRETATION_UNSPECIFIED = 0
+
+              # Missing value is interpreted as NULL.
+              NULL_VALUE = 1
+
+              # Missing value is interpreted as column default value if declared in the
+              # table schema, NULL otherwise.
+              DEFAULT_VALUE = 2
             end
           end
 

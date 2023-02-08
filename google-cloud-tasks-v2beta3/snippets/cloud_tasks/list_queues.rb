@@ -19,21 +19,27 @@
 # [START cloudtasks_v2beta3_generated_CloudTasks_ListQueues_sync]
 require "google/cloud/tasks/v2beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tasks::V2beta3::CloudTasks::Client#list_queues
+#
+def list_queues
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Tasks::V2beta3::ListQueuesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Tasks::V2beta3::ListQueuesRequest.new
 
-# Call the list_queues method.
-result = client.list_queues request
+  # Call the list_queues method.
+  result = client.list_queues request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Tasks::V2beta3::Queue.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Tasks::V2beta3::Queue.
+    p response
+  end
 end
 # [END cloudtasks_v2beta3_generated_CloudTasks_ListQueues_sync]

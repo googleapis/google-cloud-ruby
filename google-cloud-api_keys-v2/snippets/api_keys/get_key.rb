@@ -19,15 +19,21 @@
 # [START apikeys_v2_generated_ApiKeys_GetKey_sync]
 require "google/cloud/api_keys/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ApiKeys::V2::ApiKeys::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ApiKeys::V2::ApiKeys::Client#get_key
+#
+def get_key
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ApiKeys::V2::ApiKeys::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ApiKeys::V2::GetKeyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ApiKeys::V2::GetKeyRequest.new
 
-# Call the get_key method.
-result = client.get_key request
+  # Call the get_key method.
+  result = client.get_key request
 
-# The returned object is of type Google::Cloud::ApiKeys::V2::Key.
-p result
+  # The returned object is of type Google::Cloud::ApiKeys::V2::Key.
+  p result
+end
 # [END apikeys_v2_generated_ApiKeys_GetKey_sync]

@@ -19,15 +19,21 @@
 # [START dataform_v1beta1_generated_Dataform_ResetWorkspaceChanges_sync]
 require "google/cloud/dataform/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#reset_workspace_changes
+#
+def reset_workspace_changes
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest.new
 
-# Call the reset_workspace_changes method.
-result = client.reset_workspace_changes request
+  # Call the reset_workspace_changes method.
+  result = client.reset_workspace_changes request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END dataform_v1beta1_generated_Dataform_ResetWorkspaceChanges_sync]

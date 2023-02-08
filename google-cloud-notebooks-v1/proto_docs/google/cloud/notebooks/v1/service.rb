@@ -481,6 +481,19 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request for creating a notebook instance diagnostic file.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Format:
+        #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+        # @!attribute [rw] diagnostic_config
+        #   @return [::Google::Cloud::Notebooks::V1::DiagnosticConfig]
+        #     Required. Defines flags that are used to run the diagnostic tool
+        class DiagnoseInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Response for listing environments.
         # @!attribute [rw] environments
         #   @return [::Array<::Google::Cloud::Notebooks::V1::Environment>]

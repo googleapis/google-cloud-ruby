@@ -19,15 +19,21 @@
 # [START cloudkms_v1_generated_KeyManagementService_MacVerify_sync]
 require "google/cloud/kms/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Kms::V1::KeyManagementService::Client#mac_verify
+#
+def mac_verify
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Kms::V1::MacVerifyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Kms::V1::MacVerifyRequest.new
 
-# Call the mac_verify method.
-result = client.mac_verify request
+  # Call the mac_verify method.
+  result = client.mac_verify request
 
-# The returned object is of type Google::Cloud::Kms::V1::MacVerifyResponse.
-p result
+  # The returned object is of type Google::Cloud::Kms::V1::MacVerifyResponse.
+  p result
+end
 # [END cloudkms_v1_generated_KeyManagementService_MacVerify_sync]

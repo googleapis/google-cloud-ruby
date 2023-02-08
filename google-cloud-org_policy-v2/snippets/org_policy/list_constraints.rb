@@ -19,21 +19,27 @@
 # [START orgpolicy_v2_generated_OrgPolicy_ListConstraints_sync]
 require "google/cloud/org_policy/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_constraints
+#
+def list_constraints
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new
 
-# Call the list_constraints method.
-result = client.list_constraints request
+  # Call the list_constraints method.
+  result = client.list_constraints request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::OrgPolicy::V2::Constraint.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::OrgPolicy::V2::Constraint.
+    p response
+  end
 end
 # [END orgpolicy_v2_generated_OrgPolicy_ListConstraints_sync]

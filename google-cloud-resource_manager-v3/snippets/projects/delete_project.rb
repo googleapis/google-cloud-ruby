@@ -19,22 +19,28 @@
 # [START cloudresourcemanager_v3_generated_Projects_DeleteProject_sync]
 require "google/cloud/resource_manager/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ResourceManager::V3::Projects::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::Projects::Client#delete_project
+#
+def delete_project
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ResourceManager::V3::Projects::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ResourceManager::V3::DeleteProjectRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ResourceManager::V3::DeleteProjectRequest.new
 
-# Call the delete_project method.
-result = client.delete_project request
+  # Call the delete_project method.
+  result = client.delete_project request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END cloudresourcemanager_v3_generated_Projects_DeleteProject_sync]

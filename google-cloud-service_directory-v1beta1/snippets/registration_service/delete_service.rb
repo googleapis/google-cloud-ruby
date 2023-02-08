@@ -19,15 +19,21 @@
 # [START servicedirectory_v1beta1_generated_RegistrationService_DeleteService_sync]
 require "google/cloud/service_directory/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_service
+#
+def delete_service
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest.new
 
-# Call the delete_service method.
-result = client.delete_service request
+  # Call the delete_service method.
+  result = client.delete_service request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END servicedirectory_v1beta1_generated_RegistrationService_DeleteService_sync]

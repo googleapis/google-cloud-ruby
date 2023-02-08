@@ -19,21 +19,27 @@
 # [START certificatemanager_v1_generated_CertificateManager_ListCertificateMapEntries_sync]
 require "google/cloud/certificate_manager/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificate_map_entries
+#
+def list_certificate_map_entries
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::CertificateManager::V1::ListCertificateMapEntriesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::CertificateManager::V1::ListCertificateMapEntriesRequest.new
 
-# Call the list_certificate_map_entries method.
-result = client.list_certificate_map_entries request
+  # Call the list_certificate_map_entries method.
+  result = client.list_certificate_map_entries request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateMapEntry.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateMapEntry.
+    p response
+  end
 end
 # [END certificatemanager_v1_generated_CertificateManager_ListCertificateMapEntries_sync]

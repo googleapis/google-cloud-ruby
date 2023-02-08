@@ -363,12 +363,22 @@ module Google
           #     source aspect ratio, set the {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_width_pixels SpriteSheet.sprite_width_pixels} field or
           #     the {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_height_pixels SpriteSheet.sprite_height_pixels} field, but not both (the API will
           #     automatically calculate the missing field).
+          #
+          #     For portrait videos that contain horizontal ASR and rotation metadata,
+          #     provide the width, in pixels, per the horizontal ASR. The API calculates
+          #     the height per the horizontal ASR. The API detects any rotation metadata
+          #     and swaps the requested height and width for the output.
           # @!attribute [rw] sprite_height_pixels
           #   @return [::Integer]
           #     Required. The height of sprite in pixels. Must be an even integer. To preserve the
           #     source aspect ratio, set the {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_height_pixels SpriteSheet.sprite_height_pixels} field or
           #     the {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_width_pixels SpriteSheet.sprite_width_pixels} field, but not both (the API will
           #     automatically calculate the missing field).
+          #
+          #     For portrait videos that contain horizontal ASR and rotation metadata,
+          #     provide the height, in pixels, per the horizontal ASR. The API calculates
+          #     the width per the horizontal ASR. The API detects any rotation metadata
+          #     and swaps the requested height and width for the output.
           # @!attribute [rw] column_count
           #   @return [::Integer]
           #     The maximum number of sprites per row in a sprite sheet. The default is 0,
@@ -548,6 +558,9 @@ module Google
           # @!attribute [rw] pad
           #   @return [::Google::Cloud::Video::Transcoder::V1::PreprocessingConfig::Pad]
           #     Specify the video pad filter configuration.
+          # @!attribute [rw] deinterlace
+          #   @return [::Google::Cloud::Video::Transcoder::V1::PreprocessingConfig::Deinterlace]
+          #     Specify the video deinterlace configuration.
           class PreprocessingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -677,6 +690,76 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+
+            # Deinterlace configuration for input video.
+            # @!attribute [rw] yadif
+            #   @return [::Google::Cloud::Video::Transcoder::V1::PreprocessingConfig::Deinterlace::YadifConfig]
+            #     Specifies the Yet Another Deinterlacing Filter Configuration.
+            # @!attribute [rw] bwdif
+            #   @return [::Google::Cloud::Video::Transcoder::V1::PreprocessingConfig::Deinterlace::BwdifConfig]
+            #     Specifies the Bob Weaver Deinterlacing Filter Configuration.
+            class Deinterlace
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Yet Another Deinterlacing Filter Configuration.
+              # @!attribute [rw] mode
+              #   @return [::String]
+              #     Specifies the deinterlacing mode to adopt.
+              #     The default is `send_frame`.
+              #     Supported values:
+              #
+              #     - `send_frame`: Output one frame for each frame
+              #     - `send_field`: Output one frame for each field
+              # @!attribute [rw] disable_spatial_interlacing
+              #   @return [::Boolean]
+              #     Disable spacial interlacing.
+              #     The default is `false`.
+              # @!attribute [rw] parity
+              #   @return [::String]
+              #     The picture field parity assumed for the input interlaced video.
+              #     The default is `auto`.
+              #     Supported values:
+              #
+              #     - `tff`: Assume the top field is first
+              #     - `bff`: Assume the bottom field is first
+              #     - `auto`: Enable automatic detection of field parity
+              # @!attribute [rw] deinterlace_all_frames
+              #   @return [::Boolean]
+              #     Deinterlace all frames rather than just the frames identified as
+              #     interlaced. The default is `false`.
+              class YadifConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Bob Weaver Deinterlacing Filter Configuration.
+              # @!attribute [rw] mode
+              #   @return [::String]
+              #     Specifies the deinterlacing mode to adopt.
+              #     The default is `send_frame`.
+              #     Supported values:
+              #
+              #     - `send_frame`: Output one frame for each frame
+              #     - `send_field`: Output one frame for each field
+              # @!attribute [rw] parity
+              #   @return [::String]
+              #     The picture field parity assumed for the input interlaced video.
+              #     The default is `auto`.
+              #     Supported values:
+              #
+              #     - `tff`: Assume the top field is first
+              #     - `bff`: Assume the bottom field is first
+              #     - `auto`: Enable automatic detection of field parity
+              # @!attribute [rw] deinterlace_all_frames
+              #   @return [::Boolean]
+              #     Deinterlace all frames rather than just the frames identified as
+              #     interlaced. The default is `false`.
+              class BwdifConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
           end
 
           # Video stream resource.
@@ -699,11 +782,21 @@ module Google
             #     The width of the video in pixels. Must be an even integer.
             #     When not specified, the width is adjusted to match the specified height
             #     and input aspect ratio. If both are omitted, the input width is used.
+            #
+            #     For portrait videos that contain horizontal ASR and rotation metadata,
+            #     provide the width, in pixels, per the horizontal ASR. The API calculates
+            #     the height per the horizontal ASR. The API detects any rotation metadata
+            #     and swaps the requested height and width for the output.
             # @!attribute [rw] height_pixels
             #   @return [::Integer]
             #     The height of the video in pixels. Must be an even integer.
             #     When not specified, the height is adjusted to match the specified width
             #     and input aspect ratio. If both are omitted, the input height is used.
+            #
+            #     For portrait videos that contain horizontal ASR and rotation metadata,
+            #     provide the height, in pixels, per the horizontal ASR. The API calculates
+            #     the width per the horizontal ASR. The API detects any rotation metadata
+            #     and swaps the requested height and width for the output.
             # @!attribute [rw] frame_rate
             #   @return [::Float]
             #     Required. The target video frame rate in frames per second (FPS). Must be less than
@@ -834,11 +927,21 @@ module Google
             #     The width of the video in pixels. Must be an even integer.
             #     When not specified, the width is adjusted to match the specified height
             #     and input aspect ratio. If both are omitted, the input width is used.
+            #
+            #     For portrait videos that contain horizontal ASR and rotation metadata,
+            #     provide the width, in pixels, per the horizontal ASR. The API calculates
+            #     the height per the horizontal ASR. The API detects any rotation metadata
+            #     and swaps the requested height and width for the output.
             # @!attribute [rw] height_pixels
             #   @return [::Integer]
             #     The height of the video in pixels. Must be an even integer.
             #     When not specified, the height is adjusted to match the specified width
             #     and input aspect ratio. If both are omitted, the input height is used.
+            #
+            #     For portrait videos that contain horizontal ASR and rotation metadata,
+            #     provide the height, in pixels, per the horizontal ASR. The API calculates
+            #     the width per the horizontal ASR. The API detects any rotation metadata
+            #     and swaps the requested height and width for the output.
             # @!attribute [rw] frame_rate
             #   @return [::Float]
             #     Required. The target video frame rate in frames per second (FPS). Must be less than
@@ -976,11 +1079,21 @@ module Google
             #     The width of the video in pixels. Must be an even integer.
             #     When not specified, the width is adjusted to match the specified height
             #     and input aspect ratio. If both are omitted, the input width is used.
+            #
+            #     For portrait videos that contain horizontal ASR and rotation metadata,
+            #     provide the width, in pixels, per the horizontal ASR. The API calculates
+            #     the height per the horizontal ASR. The API detects any rotation metadata
+            #     and swaps the requested height and width for the output.
             # @!attribute [rw] height_pixels
             #   @return [::Integer]
             #     The height of the video in pixels. Must be an even integer.
             #     When not specified, the height is adjusted to match the specified width
             #     and input aspect ratio. If both are omitted, the input height is used.
+            #
+            #     For portrait videos that contain horizontal ASR and rotation metadata,
+            #     provide the height, in pixels, per the horizontal ASR. The API calculates
+            #     the width per the horizontal ASR. The API detects any rotation metadata
+            #     and swaps the requested height and width for the output.
             # @!attribute [rw] frame_rate
             #   @return [::Float]
             #     Required. The target video frame rate in frames per second (FPS). Must be less than

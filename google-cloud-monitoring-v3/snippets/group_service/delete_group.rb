@@ -19,15 +19,21 @@
 # [START monitoring_v3_generated_GroupService_DeleteGroup_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::GroupService::Client#delete_group
+#
+def delete_group
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::GroupService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::DeleteGroupRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::DeleteGroupRequest.new
 
-# Call the delete_group method.
-result = client.delete_group request
+  # Call the delete_group method.
+  result = client.delete_group request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END monitoring_v3_generated_GroupService_DeleteGroup_sync]

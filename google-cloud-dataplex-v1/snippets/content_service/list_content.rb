@@ -19,21 +19,27 @@
 # [START dataplex_v1_generated_ContentService_ListContent_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::ContentService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::ContentService::Client#list_content
+#
+def list_content
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::ContentService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::ListContentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::ListContentRequest.new
 
-# Call the list_content method.
-result = client.list_content request
+  # Call the list_content method.
+  result = client.list_content request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dataplex::V1::Content.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dataplex::V1::Content.
+    p response
+  end
 end
 # [END dataplex_v1_generated_ContentService_ListContent_sync]

@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_FeaturestoreService_UpdateFeature_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::FeaturestoreService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#update_feature
+#
+def update_feature
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::FeaturestoreService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::UpdateFeatureRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::UpdateFeatureRequest.new
 
-# Call the update_feature method.
-result = client.update_feature request
+  # Call the update_feature method.
+  result = client.update_feature request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::Feature.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::Feature.
+  p result
+end
 # [END aiplatform_v1_generated_FeaturestoreService_UpdateFeature_sync]

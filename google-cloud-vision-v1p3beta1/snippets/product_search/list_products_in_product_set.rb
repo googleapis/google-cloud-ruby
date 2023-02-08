@@ -19,21 +19,27 @@
 # [START vision_v1p3beta1_generated_ProductSearch_ListProductsInProductSet_sync]
 require "google/cloud/vision/v1p3beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Vision::V1p3beta1::ProductSearch::Client#list_products_in_product_set
+#
+def list_products_in_product_set
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Vision::V1p3beta1::ListProductsInProductSetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Vision::V1p3beta1::ListProductsInProductSetRequest.new
 
-# Call the list_products_in_product_set method.
-result = client.list_products_in_product_set request
+  # Call the list_products_in_product_set method.
+  result = client.list_products_in_product_set request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Vision::V1p3beta1::Product.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Vision::V1p3beta1::Product.
+    p response
+  end
 end
 # [END vision_v1p3beta1_generated_ProductSearch_ListProductsInProductSet_sync]

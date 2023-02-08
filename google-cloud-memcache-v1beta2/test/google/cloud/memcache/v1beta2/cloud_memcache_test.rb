@@ -572,6 +572,73 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
     end
   end
 
+  def test_reschedule_maintenance
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    reschedule_type = :RESCHEDULE_TYPE_UNSPECIFIED
+    schedule_time = {}
+
+    reschedule_maintenance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :reschedule_maintenance, name
+      assert_kind_of ::Google::Cloud::Memcache::V1beta2::RescheduleMaintenanceRequest, request
+      assert_equal "hello world", request["instance"]
+      assert_equal :RESCHEDULE_TYPE_UNSPECIFIED, request["reschedule_type"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["schedule_time"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, reschedule_maintenance_client_stub do
+      # Create client
+      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.reschedule_maintenance({ instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.reschedule_maintenance instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.reschedule_maintenance ::Google::Cloud::Memcache::V1beta2::RescheduleMaintenanceRequest.new(instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.reschedule_maintenance({ instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.reschedule_maintenance(::Google::Cloud::Memcache::V1beta2::RescheduleMaintenanceRequest.new(instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, reschedule_maintenance_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

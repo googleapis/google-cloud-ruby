@@ -19,15 +19,21 @@
 # [START logging_v2_generated_ConfigService_GetBucket_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::ConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::ConfigService::Client#get_bucket
+#
+def get_bucket
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::ConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::GetBucketRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::GetBucketRequest.new
 
-# Call the get_bucket method.
-result = client.get_bucket request
+  # Call the get_bucket method.
+  result = client.get_bucket request
 
-# The returned object is of type Google::Cloud::Logging::V2::LogBucket.
-p result
+  # The returned object is of type Google::Cloud::Logging::V2::LogBucket.
+  p result
+end
 # [END logging_v2_generated_ConfigService_GetBucket_sync]

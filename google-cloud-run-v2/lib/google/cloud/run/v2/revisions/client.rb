@@ -262,7 +262,7 @@ module Google
             end
 
             ##
-            # List Revisions from a given Service, or from a given location.
+            # Lists Revisions from a given Service, or from a given location.
             #
             # @overload list_revisions(request, options = nil)
             #   Pass arguments to `list_revisions` via a request object, either of type
@@ -367,7 +367,7 @@ module Google
             end
 
             ##
-            # Delete a Revision.
+            # Deletes a Revision.
             #
             # @overload delete_revision(request, options = nil)
             #   Pass arguments to `delete_revision` via a request object, either of type

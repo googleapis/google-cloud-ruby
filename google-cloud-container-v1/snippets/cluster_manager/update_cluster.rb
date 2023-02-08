@@ -19,15 +19,21 @@
 # [START container_v1_generated_ClusterManager_UpdateCluster_sync]
 require "google/cloud/container/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Container::V1::ClusterManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Container::V1::ClusterManager::Client#update_cluster
+#
+def update_cluster
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Container::V1::ClusterManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Container::V1::UpdateClusterRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Container::V1::UpdateClusterRequest.new
 
-# Call the update_cluster method.
-result = client.update_cluster request
+  # Call the update_cluster method.
+  result = client.update_cluster request
 
-# The returned object is of type Google::Cloud::Container::V1::Operation.
-p result
+  # The returned object is of type Google::Cloud::Container::V1::Operation.
+  p result
+end
 # [END container_v1_generated_ClusterManager_UpdateCluster_sync]

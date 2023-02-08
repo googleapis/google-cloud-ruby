@@ -19,15 +19,21 @@
 # [START retail_v2_generated_CatalogService_SetDefaultBranch_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::CatalogService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::CatalogService::Client#set_default_branch
+#
+def set_default_branch
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::CatalogService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::SetDefaultBranchRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::SetDefaultBranchRequest.new
 
-# Call the set_default_branch method.
-result = client.set_default_branch request
+  # Call the set_default_branch method.
+  result = client.set_default_branch request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END retail_v2_generated_CatalogService_SetDefaultBranch_sync]

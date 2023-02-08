@@ -19,15 +19,21 @@
 # [START cloudscheduler_v1_generated_CloudScheduler_UpdateJob_sync]
 require "google/cloud/scheduler/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Scheduler::V1::CloudScheduler::Client#update_job
+#
+def update_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Scheduler::V1::UpdateJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Scheduler::V1::UpdateJobRequest.new
 
-# Call the update_job method.
-result = client.update_job request
+  # Call the update_job method.
+  result = client.update_job request
 
-# The returned object is of type Google::Cloud::Scheduler::V1::Job.
-p result
+  # The returned object is of type Google::Cloud::Scheduler::V1::Job.
+  p result
+end
 # [END cloudscheduler_v1_generated_CloudScheduler_UpdateJob_sync]

@@ -19,15 +19,21 @@
 # [START firestore_v1_generated_FirestoreAdmin_GetField_sync]
 require "google/cloud/firestore/admin/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_field
+#
+def get_field
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Firestore::Admin::V1::GetFieldRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Firestore::Admin::V1::GetFieldRequest.new
 
-# Call the get_field method.
-result = client.get_field request
+  # Call the get_field method.
+  result = client.get_field request
 
-# The returned object is of type Google::Cloud::Firestore::Admin::V1::Field.
-p result
+  # The returned object is of type Google::Cloud::Firestore::Admin::V1::Field.
+  p result
+end
 # [END firestore_v1_generated_FirestoreAdmin_GetField_sync]

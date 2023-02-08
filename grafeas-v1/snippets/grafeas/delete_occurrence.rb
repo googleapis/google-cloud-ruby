@@ -19,15 +19,21 @@
 # [START grafeas_v1_generated_Grafeas_DeleteOccurrence_sync]
 require "grafeas/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Grafeas::V1::Grafeas::Client.new
+##
+# Example demonstrating basic usage of
+# Grafeas::V1::Grafeas::Client#delete_occurrence
+#
+def delete_occurrence
+  # Create a client object. The client can be reused for multiple calls.
+  client = Grafeas::V1::Grafeas::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Grafeas::V1::DeleteOccurrenceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Grafeas::V1::DeleteOccurrenceRequest.new
 
-# Call the delete_occurrence method.
-result = client.delete_occurrence request
+  # Call the delete_occurrence method.
+  result = client.delete_occurrence request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END grafeas_v1_generated_Grafeas_DeleteOccurrence_sync]

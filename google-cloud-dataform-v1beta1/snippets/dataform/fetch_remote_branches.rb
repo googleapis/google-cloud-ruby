@@ -19,15 +19,21 @@
 # [START dataform_v1beta1_generated_Dataform_FetchRemoteBranches_sync]
 require "google/cloud/dataform/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_remote_branches
+#
+def fetch_remote_branches
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest.new
 
-# Call the fetch_remote_branches method.
-result = client.fetch_remote_branches request
+  # Call the fetch_remote_branches method.
+  result = client.fetch_remote_branches request
 
-# The returned object is of type Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesResponse.
-p result
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesResponse.
+  p result
+end
 # [END dataform_v1beta1_generated_Dataform_FetchRemoteBranches_sync]

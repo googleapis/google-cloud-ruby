@@ -19,21 +19,27 @@
 # [START speech_v2_generated_Speech_ListPhraseSets_sync]
 require "google/cloud/speech/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Speech::V2::Speech::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Speech::V2::Speech::Client#list_phrase_sets
+#
+def list_phrase_sets
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Speech::V2::Speech::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Speech::V2::ListPhraseSetsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Speech::V2::ListPhraseSetsRequest.new
 
-# Call the list_phrase_sets method.
-result = client.list_phrase_sets request
+  # Call the list_phrase_sets method.
+  result = client.list_phrase_sets request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Speech::V2::PhraseSet.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Speech::V2::PhraseSet.
+    p response
+  end
 end
 # [END speech_v2_generated_Speech_ListPhraseSets_sync]

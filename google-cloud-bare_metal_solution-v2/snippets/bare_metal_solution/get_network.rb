@@ -19,15 +19,21 @@
 # [START baremetalsolution_v2_generated_BareMetalSolution_GetNetwork_sync]
 require "google/cloud/bare_metal_solution/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_network
+#
+def get_network
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BareMetalSolution::V2::GetNetworkRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BareMetalSolution::V2::GetNetworkRequest.new
 
-# Call the get_network method.
-result = client.get_network request
+  # Call the get_network method.
+  result = client.get_network request
 
-# The returned object is of type Google::Cloud::BareMetalSolution::V2::Network.
-p result
+  # The returned object is of type Google::Cloud::BareMetalSolution::V2::Network.
+  p result
+end
 # [END baremetalsolution_v2_generated_BareMetalSolution_GetNetwork_sync]

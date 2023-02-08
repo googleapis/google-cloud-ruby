@@ -19,15 +19,21 @@
 # [START cloudchannel_v1_generated_CloudChannelService_UpdateCustomer_sync]
 require "google/cloud/channel/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer
+#
+def update_customer
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Channel::V1::UpdateCustomerRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Channel::V1::UpdateCustomerRequest.new
 
-# Call the update_customer method.
-result = client.update_customer request
+  # Call the update_customer method.
+  result = client.update_customer request
 
-# The returned object is of type Google::Cloud::Channel::V1::Customer.
-p result
+  # The returned object is of type Google::Cloud::Channel::V1::Customer.
+  p result
+end
 # [END cloudchannel_v1_generated_CloudChannelService_UpdateCustomer_sync]

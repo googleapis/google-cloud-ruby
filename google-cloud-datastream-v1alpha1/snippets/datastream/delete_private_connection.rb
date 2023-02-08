@@ -19,22 +19,28 @@
 # [START datastream_v1alpha1_generated_Datastream_DeletePrivateConnection_sync]
 require "google/cloud/datastream/v1alpha1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Datastream::V1alpha1::Datastream::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Datastream::V1alpha1::Datastream::Client#delete_private_connection
+#
+def delete_private_connection
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Datastream::V1alpha1::Datastream::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Datastream::V1alpha1::DeletePrivateConnectionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Datastream::V1alpha1::DeletePrivateConnectionRequest.new
 
-# Call the delete_private_connection method.
-result = client.delete_private_connection request
+  # Call the delete_private_connection method.
+  result = client.delete_private_connection request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END datastream_v1alpha1_generated_Datastream_DeletePrivateConnection_sync]

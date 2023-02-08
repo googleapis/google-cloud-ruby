@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-run-v2",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -11,6 +11,486 @@
     ]
   },
   "snippets": [
+    {
+      "region_tag": "run_v2_generated_Executions_GetExecution_sync",
+      "title": "Snippet for get_execution in Executions",
+      "description": "Basic snippet for get_execution in Executions",
+      "file": "executions/get_execution.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_execution",
+        "full_name": "::Google::Cloud::Run::V2::Executions::Client#get_execution",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::GetExecutionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Run::V2::Execution",
+        "client": {
+          "short_name": "Executions::Client",
+          "full_name": "::Google::Cloud::Run::V2::Executions::Client"
+        },
+        "method": {
+          "short_name": "GetExecution",
+          "full_name": "google.cloud.run.v2.Executions.GetExecution",
+          "service": {
+            "short_name": "Executions",
+            "full_name": "google.cloud.run.v2.Executions"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Executions_ListExecutions_sync",
+      "title": "Snippet for list_executions in Executions",
+      "description": "Basic snippet for list_executions in Executions",
+      "file": "executions/list_executions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_executions",
+        "full_name": "::Google::Cloud::Run::V2::Executions::Client#list_executions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::ListExecutionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Run::V2::ListExecutionsResponse",
+        "client": {
+          "short_name": "Executions::Client",
+          "full_name": "::Google::Cloud::Run::V2::Executions::Client"
+        },
+        "method": {
+          "short_name": "ListExecutions",
+          "full_name": "google.cloud.run.v2.Executions.ListExecutions",
+          "service": {
+            "short_name": "Executions",
+            "full_name": "google.cloud.run.v2.Executions"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Executions_DeleteExecution_sync",
+      "title": "Snippet for delete_execution in Executions",
+      "description": "Basic snippet for delete_execution in Executions",
+      "file": "executions/delete_execution.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_execution",
+        "full_name": "::Google::Cloud::Run::V2::Executions::Client#delete_execution",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::DeleteExecutionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Executions::Client",
+          "full_name": "::Google::Cloud::Run::V2::Executions::Client"
+        },
+        "method": {
+          "short_name": "DeleteExecution",
+          "full_name": "google.cloud.run.v2.Executions.DeleteExecution",
+          "service": {
+            "short_name": "Executions",
+            "full_name": "google.cloud.run.v2.Executions"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Jobs_CreateJob_sync",
+      "title": "Snippet for create_job in Jobs",
+      "description": "Basic snippet for create_job in Jobs",
+      "file": "jobs/create_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_job",
+        "full_name": "::Google::Cloud::Run::V2::Jobs::Client#create_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::CreateJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Run::V2::Jobs::Client"
+        },
+        "method": {
+          "short_name": "CreateJob",
+          "full_name": "google.cloud.run.v2.Jobs.CreateJob",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.cloud.run.v2.Jobs"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Jobs_GetJob_sync",
+      "title": "Snippet for get_job in Jobs",
+      "description": "Basic snippet for get_job in Jobs",
+      "file": "jobs/get_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_job",
+        "full_name": "::Google::Cloud::Run::V2::Jobs::Client#get_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::GetJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Run::V2::Job",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Run::V2::Jobs::Client"
+        },
+        "method": {
+          "short_name": "GetJob",
+          "full_name": "google.cloud.run.v2.Jobs.GetJob",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.cloud.run.v2.Jobs"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Jobs_ListJobs_sync",
+      "title": "Snippet for list_jobs in Jobs",
+      "description": "Basic snippet for list_jobs in Jobs",
+      "file": "jobs/list_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_jobs",
+        "full_name": "::Google::Cloud::Run::V2::Jobs::Client#list_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::ListJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Run::V2::ListJobsResponse",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Run::V2::Jobs::Client"
+        },
+        "method": {
+          "short_name": "ListJobs",
+          "full_name": "google.cloud.run.v2.Jobs.ListJobs",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.cloud.run.v2.Jobs"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Jobs_UpdateJob_sync",
+      "title": "Snippet for update_job in Jobs",
+      "description": "Basic snippet for update_job in Jobs",
+      "file": "jobs/update_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_job",
+        "full_name": "::Google::Cloud::Run::V2::Jobs::Client#update_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::UpdateJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Run::V2::Jobs::Client"
+        },
+        "method": {
+          "short_name": "UpdateJob",
+          "full_name": "google.cloud.run.v2.Jobs.UpdateJob",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.cloud.run.v2.Jobs"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Jobs_DeleteJob_sync",
+      "title": "Snippet for delete_job in Jobs",
+      "description": "Basic snippet for delete_job in Jobs",
+      "file": "jobs/delete_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_job",
+        "full_name": "::Google::Cloud::Run::V2::Jobs::Client#delete_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::DeleteJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Run::V2::Jobs::Client"
+        },
+        "method": {
+          "short_name": "DeleteJob",
+          "full_name": "google.cloud.run.v2.Jobs.DeleteJob",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.cloud.run.v2.Jobs"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Jobs_RunJob_sync",
+      "title": "Snippet for run_job in Jobs",
+      "description": "Basic snippet for run_job in Jobs",
+      "file": "jobs/run_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_job",
+        "full_name": "::Google::Cloud::Run::V2::Jobs::Client#run_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::RunJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Run::V2::Jobs::Client"
+        },
+        "method": {
+          "short_name": "RunJob",
+          "full_name": "google.cloud.run.v2.Jobs.RunJob",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.cloud.run.v2.Jobs"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Jobs_GetIamPolicy_sync",
+      "title": "Snippet for get_iam_policy in Jobs",
+      "description": "Basic snippet for get_iam_policy in Jobs",
+      "file": "jobs/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::Run::V2::Jobs::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Run::V2::Jobs::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.run.v2.Jobs.GetIamPolicy",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.cloud.run.v2.Jobs"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Jobs_SetIamPolicy_sync",
+      "title": "Snippet for set_iam_policy in Jobs",
+      "description": "Basic snippet for set_iam_policy in Jobs",
+      "file": "jobs/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::Run::V2::Jobs::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Run::V2::Jobs::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.run.v2.Jobs.SetIamPolicy",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.cloud.run.v2.Jobs"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Jobs_TestIamPermissions_sync",
+      "title": "Snippet for test_iam_permissions in Jobs",
+      "description": "Basic snippet for test_iam_permissions in Jobs",
+      "file": "jobs/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::Run::V2::Jobs::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Run::V2::Jobs::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.run.v2.Jobs.TestIamPermissions",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.cloud.run.v2.Jobs"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
     {
       "region_tag": "run_v2_generated_Revisions_GetRevision_sync",
       "title": "Snippet for get_revision in Revisions",
@@ -46,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 32,
+          "end": 38,
           "type": "FULL"
         }
       ]
@@ -86,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 44,
           "type": "FULL"
         }
       ]
@@ -126,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 39,
+          "end": 45,
           "type": "FULL"
         }
       ]
@@ -166,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 39,
+          "end": 45,
           "type": "FULL"
         }
       ]
@@ -206,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 32,
+          "end": 38,
           "type": "FULL"
         }
       ]
@@ -246,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 44,
           "type": "FULL"
         }
       ]
@@ -286,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 39,
+          "end": 45,
           "type": "FULL"
         }
       ]
@@ -326,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 39,
+          "end": 45,
           "type": "FULL"
         }
       ]
@@ -366,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 32,
+          "end": 38,
           "type": "FULL"
         }
       ]
@@ -406,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 32,
+          "end": 38,
           "type": "FULL"
         }
       ]
@@ -446,7 +926,87 @@
       "segments": [
         {
           "start": 20,
-          "end": 32,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Tasks_GetTask_sync",
+      "title": "Snippet for get_task in Tasks",
+      "description": "Basic snippet for get_task in Tasks",
+      "file": "tasks/get_task.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_task",
+        "full_name": "::Google::Cloud::Run::V2::Tasks::Client#get_task",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::GetTaskRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Run::V2::Task",
+        "client": {
+          "short_name": "Tasks::Client",
+          "full_name": "::Google::Cloud::Run::V2::Tasks::Client"
+        },
+        "method": {
+          "short_name": "GetTask",
+          "full_name": "google.cloud.run.v2.Tasks.GetTask",
+          "service": {
+            "short_name": "Tasks",
+            "full_name": "google.cloud.run.v2.Tasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_Tasks_ListTasks_sync",
+      "title": "Snippet for list_tasks in Tasks",
+      "description": "Basic snippet for list_tasks in Tasks",
+      "file": "tasks/list_tasks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tasks",
+        "full_name": "::Google::Cloud::Run::V2::Tasks::Client#list_tasks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::ListTasksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Run::V2::ListTasksResponse",
+        "client": {
+          "short_name": "Tasks::Client",
+          "full_name": "::Google::Cloud::Run::V2::Tasks::Client"
+        },
+        "method": {
+          "short_name": "ListTasks",
+          "full_name": "google.cloud.run.v2.Tasks.ListTasks",
+          "service": {
+            "short_name": "Tasks",
+            "full_name": "google.cloud.run.v2.Tasks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
           "type": "FULL"
         }
       ]

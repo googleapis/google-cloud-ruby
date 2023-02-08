@@ -19,15 +19,21 @@
 # [START apigeeregistry_v1_generated_Registry_CreateApi_sync]
 require "google/cloud/apigee_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ApigeeRegistry::V1::Registry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ApigeeRegistry::V1::Registry::Client#create_api
+#
+def create_api
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ApigeeRegistry::V1::Registry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ApigeeRegistry::V1::CreateApiRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ApigeeRegistry::V1::CreateApiRequest.new
 
-# Call the create_api method.
-result = client.create_api request
+  # Call the create_api method.
+  result = client.create_api request
 
-# The returned object is of type Google::Cloud::ApigeeRegistry::V1::Api.
-p result
+  # The returned object is of type Google::Cloud::ApigeeRegistry::V1::Api.
+  p result
+end
 # [END apigeeregistry_v1_generated_Registry_CreateApi_sync]

@@ -19,15 +19,21 @@
 # [START videostitcher_v1_generated_VideoStitcherService_DeleteCdnKey_sync]
 require "google/cloud/video/stitcher/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#delete_cdn_key
+#
+def delete_cdn_key
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Video::Stitcher::V1::DeleteCdnKeyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Video::Stitcher::V1::DeleteCdnKeyRequest.new
 
-# Call the delete_cdn_key method.
-result = client.delete_cdn_key request
+  # Call the delete_cdn_key method.
+  result = client.delete_cdn_key request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END videostitcher_v1_generated_VideoStitcherService_DeleteCdnKey_sync]

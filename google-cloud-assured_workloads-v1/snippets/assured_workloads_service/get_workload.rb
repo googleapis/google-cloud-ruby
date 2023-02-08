@@ -19,15 +19,21 @@
 # [START assuredworkloads_v1_generated_AssuredWorkloadsService_GetWorkload_sync]
 require "google/cloud/assured_workloads/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client#get_workload
+#
+def get_workload
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AssuredWorkloads::V1::GetWorkloadRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AssuredWorkloads::V1::GetWorkloadRequest.new
 
-# Call the get_workload method.
-result = client.get_workload request
+  # Call the get_workload method.
+  result = client.get_workload request
 
-# The returned object is of type Google::Cloud::AssuredWorkloads::V1::Workload.
-p result
+  # The returned object is of type Google::Cloud::AssuredWorkloads::V1::Workload.
+  p result
+end
 # [END assuredworkloads_v1_generated_AssuredWorkloadsService_GetWorkload_sync]

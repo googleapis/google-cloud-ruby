@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_ModelService_GetModel_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::ModelService::Client#get_model
+#
+def get_model
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::GetModelRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::GetModelRequest.new
 
-# Call the get_model method.
-result = client.get_model request
+  # Call the get_model method.
+  result = client.get_model request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::Model.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::Model.
+  p result
+end
 # [END aiplatform_v1_generated_ModelService_GetModel_sync]

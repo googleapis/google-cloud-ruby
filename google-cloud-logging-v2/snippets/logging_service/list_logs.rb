@@ -19,15 +19,21 @@
 # [START logging_v2_generated_LoggingService_ListLogs_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::LoggingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::LoggingService::Client#list_logs
+#
+def list_logs
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::LoggingService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::ListLogsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::ListLogsRequest.new
 
-# Call the list_logs method.
-result = client.list_logs request
+  # Call the list_logs method.
+  result = client.list_logs request
 
-# The returned object is of type Google::Cloud::Logging::V2::ListLogsResponse.
-p result
+  # The returned object is of type Google::Cloud::Logging::V2::ListLogsResponse.
+  p result
+end
 # [END logging_v2_generated_LoggingService_ListLogs_sync]

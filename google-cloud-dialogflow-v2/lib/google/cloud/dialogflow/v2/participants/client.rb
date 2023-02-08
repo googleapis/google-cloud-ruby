@@ -75,6 +75,8 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.streaming_analyze_content.timeout = 220.0
+
                 default_config
               end
               yield @configure if block_given?
@@ -648,6 +650,98 @@ module Google
             end
 
             ##
+            # Adds a text (chat, for example), or audio (phone recording, for example)
+            # message from a participant into the conversation.
+            # Note: This method is only available through the gRPC API (not REST).
+            #
+            # The top-level message sent to the client by the server is
+            # `StreamingAnalyzeContentResponse`. Multiple response messages can be
+            # returned in order. The first one or more messages contain the
+            # `recognition_result` field. Each result represents a more complete
+            # transcript of what the user said. The next message contains the
+            # `reply_text` field and potentially the `reply_audio` field. The message can
+            # also contain the `automated_agent_reply` field.
+            #
+            # Note: Always use agent versions for production traffic
+            # sent to virtual agents. See [Versions and
+            # environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
+            #
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
+            #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Participants::Client.new
+            #
+            #   # Create an input stream
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the streaming_analyze_content method to start streaming.
+            #   output = client.streaming_analyze_content input
+            #
+            #   # Send requests on the stream. For each request, pass in keyword
+            #   # arguments to set fields. Be sure to close the stream when done.
+            #   input << Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new
+            #   input << Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new
+            #   input.close
+            #
+            #   # Handle streamed responses. These may be interleaved with inputs.
+            #   # Each response is of type ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse.
+            #   output.each do |response|
+            #     p response
+            #   end
+            #
+            def streaming_analyze_content request, options = nil
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+                request = request.to_enum
+              end
+
+              request = request.lazy.map do |req|
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest
+              end
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.streaming_analyze_content.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.streaming_analyze_content.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.streaming_analyze_content.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @participants_stub.call_rpc :streaming_analyze_content, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Gets suggested articles for a participant based on specific historical
             # messages.
             #
@@ -1110,6 +1204,11 @@ module Google
                 #
                 attr_reader :analyze_content
                 ##
+                # RPC-specific configuration for `streaming_analyze_content`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :streaming_analyze_content
+                ##
                 # RPC-specific configuration for `suggest_articles`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1137,6 +1236,8 @@ module Google
                   @update_participant = ::Gapic::Config::Method.new update_participant_config
                   analyze_content_config = parent_rpcs.analyze_content if parent_rpcs.respond_to? :analyze_content
                   @analyze_content = ::Gapic::Config::Method.new analyze_content_config
+                  streaming_analyze_content_config = parent_rpcs.streaming_analyze_content if parent_rpcs.respond_to? :streaming_analyze_content
+                  @streaming_analyze_content = ::Gapic::Config::Method.new streaming_analyze_content_config
                   suggest_articles_config = parent_rpcs.suggest_articles if parent_rpcs.respond_to? :suggest_articles
                   @suggest_articles = ::Gapic::Config::Method.new suggest_articles_config
                   suggest_faq_answers_config = parent_rpcs.suggest_faq_answers if parent_rpcs.respond_to? :suggest_faq_answers

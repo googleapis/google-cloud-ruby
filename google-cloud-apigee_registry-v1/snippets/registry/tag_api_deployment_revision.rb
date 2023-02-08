@@ -19,15 +19,21 @@
 # [START apigeeregistry_v1_generated_Registry_TagApiDeploymentRevision_sync]
 require "google/cloud/apigee_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ApigeeRegistry::V1::Registry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ApigeeRegistry::V1::Registry::Client#tag_api_deployment_revision
+#
+def tag_api_deployment_revision
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ApigeeRegistry::V1::Registry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ApigeeRegistry::V1::TagApiDeploymentRevisionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ApigeeRegistry::V1::TagApiDeploymentRevisionRequest.new
 
-# Call the tag_api_deployment_revision method.
-result = client.tag_api_deployment_revision request
+  # Call the tag_api_deployment_revision method.
+  result = client.tag_api_deployment_revision request
 
-# The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
-p result
+  # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
+  p result
+end
 # [END apigeeregistry_v1_generated_Registry_TagApiDeploymentRevision_sync]

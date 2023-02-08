@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.5.0 (2022-11-09)
+
+#### Features
+
+* add crypto_key_name to channel 
+* add StateCondition to trigger and workflow to destination of trigger 
+* support filters for listing triggers 
+* support google_channel_config 
+
 ### 0.4.0 (2022-07-02)
 
 #### Features

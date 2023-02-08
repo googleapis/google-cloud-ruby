@@ -19,15 +19,21 @@
 # [START dataplex_v1_generated_MetadataService_CreatePartition_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::MetadataService::Client#create_partition
+#
+def create_partition
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::CreatePartitionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::CreatePartitionRequest.new
 
-# Call the create_partition method.
-result = client.create_partition request
+  # Call the create_partition method.
+  result = client.create_partition request
 
-# The returned object is of type Google::Cloud::Dataplex::V1::Partition.
-p result
+  # The returned object is of type Google::Cloud::Dataplex::V1::Partition.
+  p result
+end
 # [END dataplex_v1_generated_MetadataService_CreatePartition_sync]

@@ -19,21 +19,27 @@
 # [START speech_v1_generated_Adaptation_ListCustomClasses_sync]
 require "google/cloud/speech/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Speech::V1::Adaptation::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Speech::V1::Adaptation::Client#list_custom_classes
+#
+def list_custom_classes
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Speech::V1::Adaptation::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Speech::V1::ListCustomClassesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Speech::V1::ListCustomClassesRequest.new
 
-# Call the list_custom_classes method.
-result = client.list_custom_classes request
+  # Call the list_custom_classes method.
+  result = client.list_custom_classes request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Speech::V1::CustomClass.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Speech::V1::CustomClass.
+    p response
+  end
 end
 # [END speech_v1_generated_Adaptation_ListCustomClasses_sync]

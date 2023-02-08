@@ -19,21 +19,27 @@
 # [START datastream_v1_generated_Datastream_ListStreamObjects_sync]
 require "google/cloud/datastream/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Datastream::V1::Datastream::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Datastream::V1::Datastream::Client#list_stream_objects
+#
+def list_stream_objects
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Datastream::V1::Datastream::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Datastream::V1::ListStreamObjectsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Datastream::V1::ListStreamObjectsRequest.new
 
-# Call the list_stream_objects method.
-result = client.list_stream_objects request
+  # Call the list_stream_objects method.
+  result = client.list_stream_objects request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Datastream::V1::StreamObject.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Datastream::V1::StreamObject.
+    p response
+  end
 end
 # [END datastream_v1_generated_Datastream_ListStreamObjects_sync]

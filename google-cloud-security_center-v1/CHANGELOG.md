@@ -1,5 +1,12 @@
 # Release History
 
+### 0.23.0 (2022-11-15)
+
+#### Features
+
+* add files to finding and :DEFAULT_ACCOUNT to mitre_attack technique 
+* support service publishing and client libraries settings 
+
 ### 0.22.0 (2022-10-19)
 
 #### Features

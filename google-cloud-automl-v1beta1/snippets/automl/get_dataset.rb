@@ -19,15 +19,21 @@
 # [START automl_v1beta1_generated_AutoML_GetDataset_sync]
 require "google/cloud/automl/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AutoML::V1beta1::AutoML::Client#get_dataset
+#
+def get_dataset
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AutoML::V1beta1::GetDatasetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AutoML::V1beta1::GetDatasetRequest.new
 
-# Call the get_dataset method.
-result = client.get_dataset request
+  # Call the get_dataset method.
+  result = client.get_dataset request
 
-# The returned object is of type Google::Cloud::AutoML::V1beta1::Dataset.
-p result
+  # The returned object is of type Google::Cloud::AutoML::V1beta1::Dataset.
+  p result
+end
 # [END automl_v1beta1_generated_AutoML_GetDataset_sync]

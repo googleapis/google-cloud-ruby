@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_EntityTypes_UpdateEntityType_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#update_entity_type
+#
+def update_entity_type
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::UpdateEntityTypeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::UpdateEntityTypeRequest.new
 
-# Call the update_entity_type method.
-result = client.update_entity_type request
+  # Call the update_entity_type method.
+  result = client.update_entity_type request
 
-# The returned object is of type Google::Cloud::Dialogflow::CX::V3::EntityType.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::CX::V3::EntityType.
+  p result
+end
 # [END dialogflow_v3_generated_EntityTypes_UpdateEntityType_sync]

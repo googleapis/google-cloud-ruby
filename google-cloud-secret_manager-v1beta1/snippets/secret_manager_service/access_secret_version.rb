@@ -19,15 +19,21 @@
 # [START secretmanager_v1beta1_generated_SecretManagerService_AccessSecretVersion_sync]
 require "google/cloud/secret_manager/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client#access_secret_version
+#
+def access_secret_version
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecretManager::V1beta1::AccessSecretVersionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecretManager::V1beta1::AccessSecretVersionRequest.new
 
-# Call the access_secret_version method.
-result = client.access_secret_version request
+  # Call the access_secret_version method.
+  result = client.access_secret_version request
 
-# The returned object is of type Google::Cloud::SecretManager::V1beta1::AccessSecretVersionResponse.
-p result
+  # The returned object is of type Google::Cloud::SecretManager::V1beta1::AccessSecretVersionResponse.
+  p result
+end
 # [END secretmanager_v1beta1_generated_SecretManagerService_AccessSecretVersion_sync]

@@ -19,15 +19,21 @@
 # [START cloudfunctions_v2_generated_FunctionService_ListRuntimes_sync]
 require "google/cloud/functions/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Functions::V2::FunctionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Functions::V2::FunctionService::Client#list_runtimes
+#
+def list_runtimes
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Functions::V2::FunctionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Functions::V2::ListRuntimesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Functions::V2::ListRuntimesRequest.new
 
-# Call the list_runtimes method.
-result = client.list_runtimes request
+  # Call the list_runtimes method.
+  result = client.list_runtimes request
 
-# The returned object is of type Google::Cloud::Functions::V2::ListRuntimesResponse.
-p result
+  # The returned object is of type Google::Cloud::Functions::V2::ListRuntimesResponse.
+  p result
+end
 # [END cloudfunctions_v2_generated_FunctionService_ListRuntimes_sync]

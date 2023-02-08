@@ -19,15 +19,21 @@
 # [START run_v2_generated_Services_GetService_sync]
 require "google/cloud/run/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Run::V2::Services::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Run::V2::Services::Client#get_service
+#
+def get_service
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Run::V2::Services::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Run::V2::GetServiceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Run::V2::GetServiceRequest.new
 
-# Call the get_service method.
-result = client.get_service request
+  # Call the get_service method.
+  result = client.get_service request
 
-# The returned object is of type Google::Cloud::Run::V2::Service.
-p result
+  # The returned object is of type Google::Cloud::Run::V2::Service.
+  p result
+end
 # [END run_v2_generated_Services_GetService_sync]

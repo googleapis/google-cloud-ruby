@@ -65,6 +65,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :NETWORK_SERVICE_DISCOVERY, 32
       value :ACCESS_TOKEN_MANIPULATION, 33
       value :ABUSE_ELEVATION_CONTROL_MECHANISM, 34
+      value :DEFAULT_ACCOUNTS, 35
     end
   end
 end

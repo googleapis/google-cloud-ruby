@@ -24,16 +24,16 @@ module Google
         # Request message for creating a Service.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The location and project in which this service should be created.
-        #     Format: projects/\\{project}/locations/\\{location}
-        #     Only lowercase characters, digits, and hyphens.
+        #     Required. The location and project in which this service should be created.
+        #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
+        #     project id or number. Only lowercase characters, digits, and hyphens.
         # @!attribute [rw] service
         #   @return [::Google::Cloud::Run::V2::Service]
         #     Required. The Service instance to create.
         # @!attribute [rw] service_id
         #   @return [::String]
         #     Required. The unique identifier for the Service. It must begin with letter,
-        #     and may not end with hyphen; must contain fewer than 50 characters.
+        #     and cannot end with hyphen; must contain fewer than 50 characters.
         #     The name of the service becomes \\{parent}/services/\\{service_id}.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
@@ -66,8 +66,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location and project to list resources on.
-        #     Location must be a valid GCP region, and may not be the "-" wildcard.
-        #     Format: projects/\\{project}/locations/\\{location}
+        #     Location must be a valid GCP region, and cannot be the "-" wildcard.
+        #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
+        #     project id or number.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of Services to return in this call.
@@ -100,7 +101,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The full name of the Service.
-        #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}
+        #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}, where
+        #     \\{project} can be project id or number.
         class GetServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -110,7 +112,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The full name of the Service.
-        #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}
+        #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}, where
+        #     \\{project} can be project id or number.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Indicates that the request should be validated without actually

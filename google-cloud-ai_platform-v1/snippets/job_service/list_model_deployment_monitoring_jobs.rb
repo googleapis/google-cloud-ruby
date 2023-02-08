@@ -19,21 +19,27 @@
 # [START aiplatform_v1_generated_JobService_ListModelDeploymentMonitoringJobs_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::JobService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::JobService::Client#list_model_deployment_monitoring_jobs
+#
+def list_model_deployment_monitoring_jobs
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::JobService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::ListModelDeploymentMonitoringJobsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::ListModelDeploymentMonitoringJobsRequest.new
 
-# Call the list_model_deployment_monitoring_jobs method.
-result = client.list_model_deployment_monitoring_jobs request
+  # Call the list_model_deployment_monitoring_jobs method.
+  result = client.list_model_deployment_monitoring_jobs request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringJob.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringJob.
+    p response
+  end
 end
 # [END aiplatform_v1_generated_JobService_ListModelDeploymentMonitoringJobs_sync]

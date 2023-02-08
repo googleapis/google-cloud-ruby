@@ -19,21 +19,27 @@
 # [START storagetransfer_v1_generated_StorageTransferService_ListAgentPools_sync]
 require "google/cloud/storage_transfer/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#list_agent_pools
+#
+def list_agent_pools
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::StorageTransfer::V1::ListAgentPoolsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::StorageTransfer::V1::ListAgentPoolsRequest.new
 
-# Call the list_agent_pools method.
-result = client.list_agent_pools request
+  # Call the list_agent_pools method.
+  result = client.list_agent_pools request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::StorageTransfer::V1::AgentPool.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::StorageTransfer::V1::AgentPool.
+    p response
+  end
 end
 # [END storagetransfer_v1_generated_StorageTransferService_ListAgentPools_sync]

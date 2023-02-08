@@ -29,6 +29,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :model_parameters, :message, 5, "google.protobuf.Value"
       optional :output_config, :message, 6, "google.cloud.aiplatform.v1.BatchPredictionJob.OutputConfig"
       optional :dedicated_resources, :message, 7, "google.cloud.aiplatform.v1.BatchDedicatedResources"
+      optional :service_account, :string, 29
       optional :manual_batch_tuning_parameters, :message, 8, "google.cloud.aiplatform.v1.ManualBatchTuningParameters"
       optional :generate_explanation, :bool, 23
       optional :explanation_spec, :message, 25, "google.cloud.aiplatform.v1.ExplanationSpec"

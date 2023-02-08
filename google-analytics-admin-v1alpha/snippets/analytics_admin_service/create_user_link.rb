@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateUserLink_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_user_link
+#
+def create_user_link
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::CreateUserLinkRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::CreateUserLinkRequest.new
 
-# Call the create_user_link method.
-result = client.create_user_link request
+  # Call the create_user_link method.
+  result = client.create_user_link request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::UserLink.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::UserLink.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateUserLink_sync]

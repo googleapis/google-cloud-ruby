@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2022-11-17)
+
+#### Features
+
+* add :ENVIRONMENT_UNAVAILABLE to cloudshell error code 
+
 ### 0.2.0 (2022-07-08)
 
 #### Features

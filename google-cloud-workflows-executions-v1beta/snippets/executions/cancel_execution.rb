@@ -19,15 +19,21 @@
 # [START workflowexecutions_v1beta_generated_Executions_CancelExecution_sync]
 require "google/cloud/workflows/executions/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Workflows::Executions::V1beta::Executions::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Workflows::Executions::V1beta::Executions::Client#cancel_execution
+#
+def cancel_execution
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Workflows::Executions::V1beta::Executions::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Workflows::Executions::V1beta::CancelExecutionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Workflows::Executions::V1beta::CancelExecutionRequest.new
 
-# Call the cancel_execution method.
-result = client.cancel_execution request
+  # Call the cancel_execution method.
+  result = client.cancel_execution request
 
-# The returned object is of type Google::Cloud::Workflows::Executions::V1beta::Execution.
-p result
+  # The returned object is of type Google::Cloud::Workflows::Executions::V1beta::Execution.
+  p result
+end
 # [END workflowexecutions_v1beta_generated_Executions_CancelExecution_sync]

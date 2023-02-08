@@ -19,22 +19,28 @@
 # [START automl_v1_generated_AutoML_CreateDataset_sync]
 require "google/cloud/automl/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AutoML::V1::AutoML::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AutoML::V1::AutoML::Client#create_dataset
+#
+def create_dataset
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AutoML::V1::AutoML::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AutoML::V1::CreateDatasetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AutoML::V1::CreateDatasetRequest.new
 
-# Call the create_dataset method.
-result = client.create_dataset request
+  # Call the create_dataset method.
+  result = client.create_dataset request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END automl_v1_generated_AutoML_CreateDataset_sync]

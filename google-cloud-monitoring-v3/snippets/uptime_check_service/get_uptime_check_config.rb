@@ -19,15 +19,21 @@
 # [START monitoring_v3_generated_UptimeCheckService_GetUptimeCheckConfig_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::UptimeCheckService::Client#get_uptime_check_config
+#
+def get_uptime_check_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest.new
 
-# Call the get_uptime_check_config method.
-result = client.get_uptime_check_config request
+  # Call the get_uptime_check_config method.
+  result = client.get_uptime_check_config request
 
-# The returned object is of type Google::Cloud::Monitoring::V3::UptimeCheckConfig.
-p result
+  # The returned object is of type Google::Cloud::Monitoring::V3::UptimeCheckConfig.
+  p result
+end
 # [END monitoring_v3_generated_UptimeCheckService_GetUptimeCheckConfig_sync]

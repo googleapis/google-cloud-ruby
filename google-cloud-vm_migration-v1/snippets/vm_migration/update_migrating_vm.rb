@@ -19,22 +19,28 @@
 # [START vmmigration_v1_generated_VMMigration_UpdateMigratingVm_sync]
 require "google/cloud/vm_migration/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::VMMigration::V1::VMMigration::Client#update_migrating_vm
+#
+def update_migrating_vm
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::VMMigration::V1::UpdateMigratingVmRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::VMMigration::V1::UpdateMigratingVmRequest.new
 
-# Call the update_migrating_vm method.
-result = client.update_migrating_vm request
+  # Call the update_migrating_vm method.
+  result = client.update_migrating_vm request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END vmmigration_v1_generated_VMMigration_UpdateMigratingVm_sync]

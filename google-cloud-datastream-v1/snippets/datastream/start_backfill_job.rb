@@ -19,15 +19,21 @@
 # [START datastream_v1_generated_Datastream_StartBackfillJob_sync]
 require "google/cloud/datastream/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Datastream::V1::Datastream::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Datastream::V1::Datastream::Client#start_backfill_job
+#
+def start_backfill_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Datastream::V1::Datastream::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Datastream::V1::StartBackfillJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Datastream::V1::StartBackfillJobRequest.new
 
-# Call the start_backfill_job method.
-result = client.start_backfill_job request
+  # Call the start_backfill_job method.
+  result = client.start_backfill_job request
 
-# The returned object is of type Google::Cloud::Datastream::V1::StartBackfillJobResponse.
-p result
+  # The returned object is of type Google::Cloud::Datastream::V1::StartBackfillJobResponse.
+  p result
+end
 # [END datastream_v1_generated_Datastream_StartBackfillJob_sync]

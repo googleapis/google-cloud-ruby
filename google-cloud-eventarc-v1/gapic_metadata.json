@@ -89,6 +89,16 @@
               "methods": [
                 "delete_channel_connection"
               ]
+            },
+            "GetGoogleChannelConfig": {
+              "methods": [
+                "get_google_channel_config"
+              ]
+            },
+            "UpdateGoogleChannelConfig": {
+              "methods": [
+                "update_google_channel_config"
+              ]
             }
           }
         }

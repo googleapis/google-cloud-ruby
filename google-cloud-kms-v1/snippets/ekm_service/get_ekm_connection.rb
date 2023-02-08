@@ -19,15 +19,21 @@
 # [START cloudkms_v1_generated_EkmService_GetEkmConnection_sync]
 require "google/cloud/kms/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Kms::V1::EkmService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Kms::V1::EkmService::Client#get_ekm_connection
+#
+def get_ekm_connection
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Kms::V1::EkmService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Kms::V1::GetEkmConnectionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Kms::V1::GetEkmConnectionRequest.new
 
-# Call the get_ekm_connection method.
-result = client.get_ekm_connection request
+  # Call the get_ekm_connection method.
+  result = client.get_ekm_connection request
 
-# The returned object is of type Google::Cloud::Kms::V1::EkmConnection.
-p result
+  # The returned object is of type Google::Cloud::Kms::V1::EkmConnection.
+  p result
+end
 # [END cloudkms_v1_generated_EkmService_GetEkmConnection_sync]

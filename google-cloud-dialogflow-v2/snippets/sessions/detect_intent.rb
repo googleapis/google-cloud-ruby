@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Sessions_DetectIntent_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Sessions::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent
+#
+def detect_intent
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Sessions::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::DetectIntentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::DetectIntentRequest.new
 
-# Call the detect_intent method.
-result = client.detect_intent request
+  # Call the detect_intent method.
+  result = client.detect_intent request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::DetectIntentResponse.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::DetectIntentResponse.
+  p result
+end
 # [END dialogflow_v2_generated_Sessions_DetectIntent_sync]

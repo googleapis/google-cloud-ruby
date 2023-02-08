@@ -19,15 +19,21 @@
 # [START logging_v2_generated_ConfigService_CreateExclusion_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::ConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::ConfigService::Client#create_exclusion
+#
+def create_exclusion
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::ConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::CreateExclusionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::CreateExclusionRequest.new
 
-# Call the create_exclusion method.
-result = client.create_exclusion request
+  # Call the create_exclusion method.
+  result = client.create_exclusion request
 
-# The returned object is of type Google::Cloud::Logging::V2::LogExclusion.
-p result
+  # The returned object is of type Google::Cloud::Logging::V2::LogExclusion.
+  p result
+end
 # [END logging_v2_generated_ConfigService_CreateExclusion_sync]

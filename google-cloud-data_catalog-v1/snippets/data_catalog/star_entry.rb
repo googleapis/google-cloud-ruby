@@ -19,15 +19,21 @@
 # [START datacatalog_v1_generated_DataCatalog_StarEntry_sync]
 require "google/cloud/data_catalog/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::DataCatalog::Client#star_entry
+#
+def star_entry
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataCatalog::V1::StarEntryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataCatalog::V1::StarEntryRequest.new
 
-# Call the star_entry method.
-result = client.star_entry request
+  # Call the star_entry method.
+  result = client.star_entry request
 
-# The returned object is of type Google::Cloud::DataCatalog::V1::StarEntryResponse.
-p result
+  # The returned object is of type Google::Cloud::DataCatalog::V1::StarEntryResponse.
+  p result
+end
 # [END datacatalog_v1_generated_DataCatalog_StarEntry_sync]

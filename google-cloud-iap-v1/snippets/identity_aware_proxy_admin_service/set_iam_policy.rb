@@ -19,15 +19,21 @@
 # [START iap_v1_generated_IdentityAwareProxyAdminService_SetIamPolicy_sync]
 require "google/cloud/iap/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#set_iam_policy
+#
+def set_iam_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::V1::SetIamPolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::V1::SetIamPolicyRequest.new
 
-# Call the set_iam_policy method.
-result = client.set_iam_policy request
+  # Call the set_iam_policy method.
+  result = client.set_iam_policy request
 
-# The returned object is of type Google::Iam::V1::Policy.
-p result
+  # The returned object is of type Google::Iam::V1::Policy.
+  p result
+end
 # [END iap_v1_generated_IdentityAwareProxyAdminService_SetIamPolicy_sync]

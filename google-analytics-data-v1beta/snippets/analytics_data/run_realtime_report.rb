@@ -19,15 +19,21 @@
 # [START analyticsdata_v1beta_generated_AnalyticsData_RunRealtimeReport_sync]
 require "google/analytics/data/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Data::V1beta::AnalyticsData::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Data::V1beta::AnalyticsData::Client#run_realtime_report
+#
+def run_realtime_report
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Data::V1beta::AnalyticsData::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Data::V1beta::RunRealtimeReportRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Data::V1beta::RunRealtimeReportRequest.new
 
-# Call the run_realtime_report method.
-result = client.run_realtime_report request
+  # Call the run_realtime_report method.
+  result = client.run_realtime_report request
 
-# The returned object is of type Google::Analytics::Data::V1beta::RunRealtimeReportResponse.
-p result
+  # The returned object is of type Google::Analytics::Data::V1beta::RunRealtimeReportResponse.
+  p result
+end
 # [END analyticsdata_v1beta_generated_AnalyticsData_RunRealtimeReport_sync]

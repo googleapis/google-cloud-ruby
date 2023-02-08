@@ -13,6 +13,16 @@ require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/aiplatform/v1/featurestore_online_service.proto", :syntax => :proto3) do
+    add_message "google.cloud.aiplatform.v1.WriteFeatureValuesRequest" do
+      optional :entity_type, :string, 1
+      repeated :payloads, :message, 2, "google.cloud.aiplatform.v1.WriteFeatureValuesPayload"
+    end
+    add_message "google.cloud.aiplatform.v1.WriteFeatureValuesPayload" do
+      optional :entity_id, :string, 1
+      map :feature_values, :string, :message, 2, "google.cloud.aiplatform.v1.FeatureValue"
+    end
+    add_message "google.cloud.aiplatform.v1.WriteFeatureValuesResponse" do
+    end
     add_message "google.cloud.aiplatform.v1.ReadFeatureValuesRequest" do
       optional :entity_type, :string, 1
       optional :entity_id, :string, 2
@@ -71,6 +81,9 @@ module Google
   module Cloud
     module AIPlatform
       module V1
+        WriteFeatureValuesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.WriteFeatureValuesRequest").msgclass
+        WriteFeatureValuesPayload = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.WriteFeatureValuesPayload").msgclass
+        WriteFeatureValuesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.WriteFeatureValuesResponse").msgclass
         ReadFeatureValuesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ReadFeatureValuesRequest").msgclass
         ReadFeatureValuesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ReadFeatureValuesResponse").msgclass
         ReadFeatureValuesResponse::FeatureDescriptor = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ReadFeatureValuesResponse.FeatureDescriptor").msgclass

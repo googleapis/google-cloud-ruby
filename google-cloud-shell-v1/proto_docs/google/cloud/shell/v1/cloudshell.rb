@@ -319,6 +319,10 @@ module Google
             # The user has exhausted their weekly Cloud Shell quota, and Cloud Shell
             # will be disabled until the quota resets.
             QUOTA_EXCEEDED = 5
+
+            # The Cloud Shell environment is unavailable and cannot be connected to at
+            # the moment.
+            ENVIRONMENT_UNAVAILABLE = 6
           end
         end
       end

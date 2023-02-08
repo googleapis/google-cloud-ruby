@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Documents_GetDocument_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Documents::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Documents::Client#get_document
+#
+def get_document
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Documents::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::GetDocumentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::GetDocumentRequest.new
 
-# Call the get_document method.
-result = client.get_document request
+  # Call the get_document method.
+  result = client.get_document request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::Document.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::Document.
+  p result
+end
 # [END dialogflow_v2_generated_Documents_GetDocument_sync]

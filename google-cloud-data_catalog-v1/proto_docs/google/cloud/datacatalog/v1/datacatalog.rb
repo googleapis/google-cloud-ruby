@@ -479,14 +479,14 @@ module Google
         #   @return [::Google::Cloud::DataCatalog::V1::GcsFilesetSpec]
         #     Specification that applies to a Cloud Storage fileset. Valid only
         #     for entries with the `FILESET` type.
-        # @!attribute [rw] bigquery_table_spec
+        # @!attribute [r] bigquery_table_spec
         #   @return [::Google::Cloud::DataCatalog::V1::BigQueryTableSpec]
-        #     Specification that applies to a BigQuery table. Valid only for
-        #     entries with the `TABLE` type.
-        # @!attribute [rw] bigquery_date_sharded_spec
+        #     Output only. Specification that applies to a BigQuery table. Valid only
+        #     for entries with the `TABLE` type.
+        # @!attribute [r] bigquery_date_sharded_spec
         #   @return [::Google::Cloud::DataCatalog::V1::BigQueryDateShardedSpec]
-        #     Specification for a group of BigQuery tables with the `[prefix]YYYYMMDD`
-        #     name pattern.
+        #     Output only. Specification for a group of BigQuery tables with
+        #     the `[prefix]YYYYMMDD` name pattern.
         #
         #     For more information, see [Introduction to partitioned tables]
         #     (https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding).
@@ -535,12 +535,12 @@ module Google
         #     Timestamps from the underlying resource, not from the Data Catalog
         #     entry.
         #
-        #     Output only when the entry has a type listed in the `EntryType` enum.
-        #     For entries with `user_specified_type`, this field is optional and defaults
-        #     to an empty timestamp.
-        # @!attribute [r] usage_signal
+        #     Output only when the entry has a system listed in the `IntegratedSystem`
+        #     enum. For entries with `user_specified_system`, this field is optional
+        #     and defaults to an empty timestamp.
+        # @!attribute [rw] usage_signal
         #   @return [::Google::Cloud::DataCatalog::V1::UsageSignal]
-        #     Output only. Resource usage statistics.
+        #     Resource usage statistics.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Cloud labels attached to the entry.
@@ -573,10 +573,10 @@ module Google
         # @!attribute [rw] type
         #   @return [::Google::Cloud::DataCatalog::V1::DatabaseTableSpec::TableType]
         #     Type of this table.
-        # @!attribute [rw] dataplex_table
+        # @!attribute [r] dataplex_table
         #   @return [::Google::Cloud::DataCatalog::V1::DataplexTableSpec]
-        #     Fields specific to a Dataplex table and present only in the Dataplex table
-        #     entries.
+        #     Output only. Fields specific to a Dataplex table and present only in the
+        #     Dataplex table entries.
         class DatabaseTableSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -607,9 +607,11 @@ module Google
 
         # Specification that applies to a data source connection. Valid only for
         # entries with the `DATA_SOURCE_CONNECTION` type.
+        # Only one of internal specs can be set at the time, and cannot
+        # be changed later.
         # @!attribute [rw] bigquery_connection_spec
         #   @return [::Google::Cloud::DataCatalog::V1::BigQueryConnectionSpec]
-        #     Fields specific to BigQuery connections.
+        #     Output only. Fields specific to BigQuery connections.
         class DataSourceConnectionSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1119,7 +1121,7 @@ module Google
           # Default unknown type.
           ENTRY_TYPE_UNSPECIFIED = 0
 
-          # Output only. The entry type that has a GoogleSQL schema, including
+          # The entry type that has a GoogleSQL schema, including
           # logical views.
           TABLE = 2
 

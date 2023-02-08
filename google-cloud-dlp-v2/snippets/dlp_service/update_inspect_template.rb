@@ -19,15 +19,21 @@
 # [START dlp_v2_generated_DlpService_UpdateInspectTemplate_sync]
 require "google/cloud/dlp/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dlp::V2::DlpService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#update_inspect_template
+#
+def update_inspect_template
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dlp::V2::DlpService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest.new
 
-# Call the update_inspect_template method.
-result = client.update_inspect_template request
+  # Call the update_inspect_template method.
+  result = client.update_inspect_template request
 
-# The returned object is of type Google::Cloud::Dlp::V2::InspectTemplate.
-p result
+  # The returned object is of type Google::Cloud::Dlp::V2::InspectTemplate.
+  p result
+end
 # [END dlp_v2_generated_DlpService_UpdateInspectTemplate_sync]

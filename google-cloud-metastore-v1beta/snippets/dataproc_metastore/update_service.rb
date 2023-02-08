@@ -19,22 +19,28 @@
 # [START metastore_v1beta_generated_DataprocMetastore_UpdateService_sync]
 require "google/cloud/metastore/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#update_service
+#
+def update_service
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Metastore::V1beta::UpdateServiceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Metastore::V1beta::UpdateServiceRequest.new
 
-# Call the update_service method.
-result = client.update_service request
+  # Call the update_service method.
+  result = client.update_service request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END metastore_v1beta_generated_DataprocMetastore_UpdateService_sync]

@@ -19,15 +19,21 @@
 # [START container_v1beta1_generated_ClusterManager_RollbackNodePoolUpgrade_sync]
 require "google/cloud/container/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Container::V1beta1::ClusterManager::Client#rollback_node_pool_upgrade
+#
+def rollback_node_pool_upgrade
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest.new
 
-# Call the rollback_node_pool_upgrade method.
-result = client.rollback_node_pool_upgrade request
+  # Call the rollback_node_pool_upgrade method.
+  result = client.rollback_node_pool_upgrade request
 
-# The returned object is of type Google::Cloud::Container::V1beta1::Operation.
-p result
+  # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+  p result
+end
 # [END container_v1beta1_generated_ClusterManager_RollbackNodePoolUpgrade_sync]

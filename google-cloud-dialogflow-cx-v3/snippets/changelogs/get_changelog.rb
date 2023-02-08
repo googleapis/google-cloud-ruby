@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_Changelogs_GetChangelog_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::Changelogs::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Changelogs::Client#get_changelog
+#
+def get_changelog
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::Changelogs::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::GetChangelogRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::GetChangelogRequest.new
 
-# Call the get_changelog method.
-result = client.get_changelog request
+  # Call the get_changelog method.
+  result = client.get_changelog request
 
-# The returned object is of type Google::Cloud::Dialogflow::CX::V3::Changelog.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Changelog.
+  p result
+end
 # [END dialogflow_v3_generated_Changelogs_GetChangelog_sync]

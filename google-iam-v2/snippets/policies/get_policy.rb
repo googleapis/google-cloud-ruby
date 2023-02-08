@@ -19,15 +19,21 @@
 # [START iam_v2_generated_Policies_GetPolicy_sync]
 require "google/iam/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Iam::V2::Policies::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Iam::V2::Policies::Client#get_policy
+#
+def get_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Iam::V2::Policies::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::V2::GetPolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::V2::GetPolicyRequest.new
 
-# Call the get_policy method.
-result = client.get_policy request
+  # Call the get_policy method.
+  result = client.get_policy request
 
-# The returned object is of type Google::Iam::V2::Policy.
-p result
+  # The returned object is of type Google::Iam::V2::Policy.
+  p result
+end
 # [END iam_v2_generated_Policies_GetPolicy_sync]

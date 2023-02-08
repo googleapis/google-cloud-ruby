@@ -45,7 +45,7 @@ module Google
             rpc :DeleteNode, ::Google::Cloud::Tpu::V1::DeleteNodeRequest, ::Google::Longrunning::Operation
             # Reimages a node's OS.
             rpc :ReimageNode, ::Google::Cloud::Tpu::V1::ReimageNodeRequest, ::Google::Longrunning::Operation
-            # Stops a node.
+            # Stops a node, this operation is only available with single TPU nodes.
             rpc :StopNode, ::Google::Cloud::Tpu::V1::StopNodeRequest, ::Google::Longrunning::Operation
             # Starts a node.
             rpc :StartNode, ::Google::Cloud::Tpu::V1::StartNodeRequest, ::Google::Longrunning::Operation

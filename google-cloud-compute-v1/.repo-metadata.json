@@ -14,5 +14,5 @@
     "ruby-cloud-description": "google-cloud-compute-v1 is the official client library for the Google Cloud Compute V1 API.",
     "ruby-cloud-env-prefix": "COMPUTE",
     "ruby-cloud-product-url": "https://cloud.google.com/compute/",
-    "library_type": "GAPIC_AUTO"
+    "library_type": "GAPIC_COMBO"
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2022-11-09)
+
+#### Features
+
+* support IAM policies and permissions 
+
 ### 0.2.0 (2022-07-08)
 
 #### Features
