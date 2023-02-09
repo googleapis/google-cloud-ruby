@@ -749,12 +749,11 @@ module Google
             #     Required. The name of the schema revision to be deleted, with a revision ID
             #     explicitly included.
             #
-            #     Example: projects/123/schemas/my-schema@c7cfa2a8
+            #     Example: `projects/123/schemas/my-schema@c7cfa2a8`
             #   @param revision_id [::String]
-            #     Required. The revision ID to roll back to.
-            #     It must be a revision of the same schema.
-            #
-            #       Example: c7cfa2a8
+            #     Optional. This field is deprecated and should not be used for specifying
+            #     the revision ID. The revision ID should be specified via the `name`
+            #     parameter.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Schema]
