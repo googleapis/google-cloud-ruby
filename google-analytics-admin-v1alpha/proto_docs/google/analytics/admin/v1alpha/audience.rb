@@ -41,8 +41,8 @@ module Google
         #     Required. Immutable. The dimension name or metric name to filter.
         # @!attribute [rw] at_any_point_in_time
         #   @return [::Boolean]
-        #     Optional. Indicates whether this filter needs dynamic evaluation or not. If set to
-        #     true, users join the Audience if they ever met the condition (static
+        #     Optional. Indicates whether this filter needs dynamic evaluation or not. If
+        #     set to true, users join the Audience if they ever met the condition (static
         #     evaluation). If unset or set to false, user evaluation for an Audience is
         #     dynamic; users are added to an Audience when they meet the conditions and
         #     then removed when they no longer meet them.
@@ -50,9 +50,9 @@ module Google
         #     This can only be set when Audience scope is ACROSS_ALL_SESSIONS.
         # @!attribute [rw] in_any_n_day_period
         #   @return [::Integer]
-        #     Optional. If set, specifies the time window for which to evaluate data in number of
-        #     days. If not set, then audience data is evaluated against lifetime data
-        #     (i.e., infinite time window).
+        #     Optional. If set, specifies the time window for which to evaluate data in
+        #     number of days. If not set, then audience data is evaluated against
+        #     lifetime data (i.e., infinite time window).
         #
         #     For example, if set to 1 day, only the current day's data is evaluated. The
         #     reference point is the current day when at_any_point_in_time is unset or
@@ -98,16 +98,14 @@ module Google
 
               # Full regular expression matches with the string value.
               FULL_REGEXP = 5
-
-              # Partial regular expression matches with the string value.
-              PARTIAL_REGEXP = 6
             end
           end
 
           # A filter for a string dimension that matches a particular list of options.
           # @!attribute [rw] values
           #   @return [::Array<::String>]
-          #     Required. The list of possible string values to match against. Must be non-empty.
+          #     Required. The list of possible string values to match against. Must be
+          #     non-empty.
           # @!attribute [rw] case_sensitive
           #   @return [::Boolean]
           #     Optional. If true, the match is case-sensitive. If false, the match is
@@ -151,14 +149,8 @@ module Google
               # Less than.
               LESS_THAN = 2
 
-              # Less than or equal.
-              LESS_THAN_OR_EQUAL = 3
-
               # Greater than.
               GREATER_THAN = 4
-
-              # Greater than or equal.
-              GREATER_THAN_OR_EQUAL = 5
             end
           end
 
@@ -184,8 +176,8 @@ module Google
         #     Required. Immutable. The name of the event to match against.
         # @!attribute [rw] event_parameter_filter_expression
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceFilterExpression]
-        #     Optional. If specified, this filter matches events that match both the single
-        #     event name and the parameter filter expressions. AudienceEventFilter
+        #     Optional. If specified, this filter matches events that match both the
+        #     single event name and the parameter filter expressions. AudienceEventFilter
         #     inside the parameter filter expression cannot be set (i.e., nested
         #     event filters are not supported). This should be a single and_group of
         #     dimension_or_metric_filter or not_expression; ANDs of ORs are not
@@ -240,7 +232,8 @@ module Google
         #     Required. Immutable. Specifies the scope for this filter.
         # @!attribute [rw] filter_expression
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceFilterExpression]
-        #     Required. Immutable. A logical expression of Audience dimension, metric, or event filters.
+        #     Required. Immutable. A logical expression of Audience dimension, metric, or
+        #     event filters.
         class AudienceSimpleFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -256,8 +249,8 @@ module Google
         #     Optional. Defines the time period in which the whole sequence must occur.
         # @!attribute [rw] sequence_steps
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::AudienceSequenceFilter::AudienceSequenceStep>]
-        #     Required. An ordered sequence of steps. A user must complete each step in order to
-        #     join the sequence filter.
+        #     Required. An ordered sequence of steps. A user must complete each step in
+        #     order to join the sequence filter.
         class AudienceSequenceFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -269,21 +262,21 @@ module Google
           #     Required. Immutable. Specifies the scope for this step.
           # @!attribute [rw] immediately_follows
           #   @return [::Boolean]
-          #     Optional. If true, the event satisfying this step must be the very next event
-          #     after the event satisfying the last step. If unset or false, this
+          #     Optional. If true, the event satisfying this step must be the very next
+          #     event after the event satisfying the last step. If unset or false, this
           #     step indirectly follows the prior step; for example, there may be
           #     events between the prior step and this step. It is ignored for the
           #     first step.
           # @!attribute [rw] constraint_duration
           #   @return [::Google::Protobuf::Duration]
-          #     Optional. When set, this step must be satisfied within the constraint_duration of
-          #     the previous step (i.e., t[i] - t[i-1] <= constraint_duration). If not
-          #     set, there is no duration requirement (the duration is effectively
-          #     unlimited). It is ignored for the first step.
+          #     Optional. When set, this step must be satisfied within the
+          #     constraint_duration of the previous step (i.e., t[i] - t[i-1] <=
+          #     constraint_duration). If not set, there is no duration requirement (the
+          #     duration is effectively unlimited). It is ignored for the first step.
           # @!attribute [rw] filter_expression
           #   @return [::Google::Analytics::Admin::V1alpha::AudienceFilterExpression]
-          #     Required. Immutable. A logical expression of Audience dimension, metric, or event filters in
-          #     each step.
+          #     Required. Immutable. A logical expression of Audience dimension, metric,
+          #     or event filters in each step.
           class AudienceSequenceStep
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -359,25 +352,25 @@ module Google
         #     Required. The description of the Audience.
         # @!attribute [rw] membership_duration_days
         #   @return [::Integer]
-        #     Required. Immutable. The duration a user should stay in an Audience. It cannot be set to more
-        #     than 540 days.
+        #     Required. Immutable. The duration a user should stay in an Audience. It
+        #     cannot be set to more than 540 days.
         # @!attribute [r] ads_personalization_enabled
         #   @return [::Boolean]
-        #     Output only. It is automatically set by GA to false if this is an NPA Audience and is
-        #     excluded from ads personalization.
+        #     Output only. It is automatically set by GA to false if this is an NPA
+        #     Audience and is excluded from ads personalization.
         # @!attribute [rw] event_trigger
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceEventTrigger]
-        #     Optional. Specifies an event to log when a user joins the Audience. If not set, no
-        #     event is logged when a user joins the Audience.
+        #     Optional. Specifies an event to log when a user joins the Audience. If not
+        #     set, no event is logged when a user joins the Audience.
         # @!attribute [rw] exclusion_duration_mode
         #   @return [::Google::Analytics::Admin::V1alpha::Audience::AudienceExclusionDurationMode]
-        #     Immutable. Specifies how long an exclusion lasts for users that meet the exclusion
-        #     filter. It is applied to all EXCLUDE filter clauses and is ignored when
-        #     there is no EXCLUDE filter clause in the Audience.
+        #     Immutable. Specifies how long an exclusion lasts for users that meet the
+        #     exclusion filter. It is applied to all EXCLUDE filter clauses and is
+        #     ignored when there is no EXCLUDE filter clause in the Audience.
         # @!attribute [rw] filter_clauses
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::AudienceFilterClause>]
-        #     Required. Immutable. null Filter clauses that define the Audience. All clauses will be AND’ed
-        #     together.
+        #     Required. Immutable. Unordered list. Filter clauses that define the
+        #     Audience. All clauses will be AND’ed together.
         class Audience
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

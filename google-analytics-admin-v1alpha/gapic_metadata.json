@@ -390,6 +390,31 @@
                 "archive_audience"
               ]
             },
+            "GetSearchAds360Link": {
+              "methods": [
+                "get_search_ads360_link"
+              ]
+            },
+            "ListSearchAds360Links": {
+              "methods": [
+                "list_search_ads360_links"
+              ]
+            },
+            "CreateSearchAds360Link": {
+              "methods": [
+                "create_search_ads360_link"
+              ]
+            },
+            "DeleteSearchAds360Link": {
+              "methods": [
+                "delete_search_ads360_link"
+              ]
+            },
+            "UpdateSearchAds360Link": {
+              "methods": [
+                "update_search_ads360_link"
+              ]
+            },
             "GetAttributionSettings": {
               "methods": [
                 "get_attribution_settings"
@@ -403,6 +428,26 @@
             "RunAccessReport": {
               "methods": [
                 "run_access_report"
+              ]
+            },
+            "SetAutomatedGa4ConfigurationOptOut": {
+              "methods": [
+                "set_automated_ga4_configuration_opt_out"
+              ]
+            },
+            "FetchAutomatedGa4ConfigurationOptOut": {
+              "methods": [
+                "fetch_automated_ga4_configuration_opt_out"
+              ]
+            },
+            "GetBigQueryLink": {
+              "methods": [
+                "get_big_query_link"
+              ]
+            },
+            "ListBigQueryLinks": {
+              "methods": [
+                "list_big_query_links"
               ]
             }
           }

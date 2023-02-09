@@ -314,6 +314,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest" do
       optional :name, :string, 1
     end
+    add_message "google.analytics.admin.v1alpha.GetSearchAds360LinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListSearchAds360LinksRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListSearchAds360LinksResponse" do
+      repeated :search_ads_360_links, :message, 1, "google.analytics.admin.v1alpha.SearchAds360Link"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest" do
+      optional :parent, :string, 1
+      optional :search_ads_360_link, :message, 2, "google.analytics.admin.v1alpha.SearchAds360Link"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest" do
+      optional :search_ads_360_link, :message, 1, "google.analytics.admin.v1alpha.SearchAds360Link"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
     add_message "google.analytics.admin.v1alpha.CreateCustomDimensionRequest" do
       optional :parent, :string, 1
       optional :custom_dimension, :message, 2, "google.analytics.admin.v1alpha.CustomDimension"
@@ -420,6 +443,30 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :attribution_settings, :message, 1, "google.analytics.admin.v1alpha.AttributionSettings"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
+    add_message "google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest" do
+      optional :property, :string, 1
+      optional :opt_out, :bool, 2
+    end
+    add_message "google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse" do
+    end
+    add_message "google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest" do
+      optional :property, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse" do
+      optional :opt_out, :bool, 1
+    end
+    add_message "google.analytics.admin.v1alpha.GetBigQueryLinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListBigQueryLinksRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListBigQueryLinksResponse" do
+      repeated :bigquery_links, :message, 1, "google.analytics.admin.v1alpha.BigQueryLink"
+      optional :next_page_token, :string, 2
+    end
   end
 end
 
@@ -501,6 +548,12 @@ module Google
         ApproveDisplayVideo360AdvertiserLinkProposalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest").msgclass
         ApproveDisplayVideo360AdvertiserLinkProposalResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse").msgclass
         CancelDisplayVideo360AdvertiserLinkProposalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest").msgclass
+        GetSearchAds360LinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetSearchAds360LinkRequest").msgclass
+        ListSearchAds360LinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListSearchAds360LinksRequest").msgclass
+        ListSearchAds360LinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListSearchAds360LinksResponse").msgclass
+        CreateSearchAds360LinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest").msgclass
+        DeleteSearchAds360LinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest").msgclass
+        UpdateSearchAds360LinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest").msgclass
         CreateCustomDimensionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateCustomDimensionRequest").msgclass
         UpdateCustomDimensionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateCustomDimensionRequest").msgclass
         ListCustomDimensionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListCustomDimensionsRequest").msgclass
@@ -529,6 +582,13 @@ module Google
         ArchiveAudienceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ArchiveAudienceRequest").msgclass
         GetAttributionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAttributionSettingsRequest").msgclass
         UpdateAttributionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest").msgclass
+        SetAutomatedGa4ConfigurationOptOutRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest").msgclass
+        SetAutomatedGa4ConfigurationOptOutResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse").msgclass
+        FetchAutomatedGa4ConfigurationOptOutRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest").msgclass
+        FetchAutomatedGa4ConfigurationOptOutResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse").msgclass
+        GetBigQueryLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetBigQueryLinkRequest").msgclass
+        ListBigQueryLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListBigQueryLinksRequest").msgclass
+        ListBigQueryLinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListBigQueryLinksResponse").msgclass
       end
     end
   end

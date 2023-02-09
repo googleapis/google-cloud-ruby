@@ -4671,6 +4671,309 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     end
   end
 
+  def test_get_search_ads360_link
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SearchAds360Link.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_search_ads360_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_search_ads360_link, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetSearchAds360LinkRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_search_ads360_link_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_search_ads360_link({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_search_ads360_link name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_search_ads360_link ::Google::Analytics::Admin::V1alpha::GetSearchAds360LinkRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_search_ads360_link({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_search_ads360_link(::Google::Analytics::Admin::V1alpha::GetSearchAds360LinkRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_search_ads360_link_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_search_ads360_links
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_search_ads360_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_search_ads360_links, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_search_ads360_links_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_search_ads360_links({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_search_ads360_links parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_search_ads360_links ::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_search_ads360_links({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_search_ads360_links(::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_search_ads360_links_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_search_ads360_link
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SearchAds360Link.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    search_ads_360_link = {}
+
+    create_search_ads360_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_search_ads360_link, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateSearchAds360LinkRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::SearchAds360Link), request["search_ads_360_link"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_search_ads360_link_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_search_ads360_link({ parent: parent, search_ads_360_link: search_ads_360_link }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_search_ads360_link parent: parent, search_ads_360_link: search_ads_360_link do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_search_ads360_link ::Google::Analytics::Admin::V1alpha::CreateSearchAds360LinkRequest.new(parent: parent, search_ads_360_link: search_ads_360_link) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_search_ads360_link({ parent: parent, search_ads_360_link: search_ads_360_link }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_search_ads360_link(::Google::Analytics::Admin::V1alpha::CreateSearchAds360LinkRequest.new(parent: parent, search_ads_360_link: search_ads_360_link), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_search_ads360_link_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_search_ads360_link
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_search_ads360_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_search_ads360_link, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteSearchAds360LinkRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_search_ads360_link_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_search_ads360_link({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_search_ads360_link name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_search_ads360_link ::Google::Analytics::Admin::V1alpha::DeleteSearchAds360LinkRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_search_ads360_link({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_search_ads360_link(::Google::Analytics::Admin::V1alpha::DeleteSearchAds360LinkRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_search_ads360_link_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_search_ads360_link
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SearchAds360Link.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    search_ads_360_link = {}
+    update_mask = {}
+
+    update_search_ads360_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_search_ads360_link, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateSearchAds360LinkRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::SearchAds360Link), request["search_ads_360_link"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_search_ads360_link_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_search_ads360_link({ search_ads_360_link: search_ads_360_link, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_search_ads360_link search_ads_360_link: search_ads_360_link, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_search_ads360_link ::Google::Analytics::Admin::V1alpha::UpdateSearchAds360LinkRequest.new(search_ads_360_link: search_ads_360_link, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_search_ads360_link({ search_ads_360_link: search_ads_360_link, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_search_ads360_link(::Google::Analytics::Admin::V1alpha::UpdateSearchAds360LinkRequest.new(search_ads_360_link: search_ads_360_link, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_search_ads360_link_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_attribution_settings
     # Create GRPC objects.
     grpc_response = ::Google::Analytics::Admin::V1alpha::AttributionSettings.new
@@ -4864,6 +5167,249 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
 
       # Verify method calls
       assert_equal 5, run_access_report_client_stub.call_rpc_count
+    end
+  end
+
+  def test_set_automated_ga4_configuration_opt_out
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    property = "hello world"
+    opt_out = true
+
+    set_automated_ga4_configuration_opt_out_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :set_automated_ga4_configuration_opt_out, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest, request
+      assert_equal "hello world", request["property"]
+      assert_equal true, request["opt_out"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, set_automated_ga4_configuration_opt_out_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.set_automated_ga4_configuration_opt_out({ property: property, opt_out: opt_out }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.set_automated_ga4_configuration_opt_out property: property, opt_out: opt_out do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.set_automated_ga4_configuration_opt_out ::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest.new(property: property, opt_out: opt_out) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.set_automated_ga4_configuration_opt_out({ property: property, opt_out: opt_out }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.set_automated_ga4_configuration_opt_out(::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest.new(property: property, opt_out: opt_out), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, set_automated_ga4_configuration_opt_out_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_automated_ga4_configuration_opt_out
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    property = "hello world"
+
+    fetch_automated_ga4_configuration_opt_out_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_automated_ga4_configuration_opt_out, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest, request
+      assert_equal "hello world", request["property"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_automated_ga4_configuration_opt_out_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.fetch_automated_ga4_configuration_opt_out({ property: property }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.fetch_automated_ga4_configuration_opt_out property: property do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.fetch_automated_ga4_configuration_opt_out ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest.new(property: property) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.fetch_automated_ga4_configuration_opt_out({ property: property }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.fetch_automated_ga4_configuration_opt_out(::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest.new(property: property), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_automated_ga4_configuration_opt_out_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_big_query_link
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::BigQueryLink.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_big_query_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_big_query_link, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_big_query_link_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_big_query_link({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_big_query_link name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_big_query_link ::Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_big_query_link({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_big_query_link(::Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_big_query_link_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_big_query_links
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_big_query_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_big_query_links, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_big_query_links_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_big_query_links({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_big_query_links parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_big_query_links ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_big_query_links({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_big_query_links(::Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_big_query_links_client_stub.call_rpc_count
     end
   end
 

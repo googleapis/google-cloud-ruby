@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/analytics/admin/v1alpha/expanded_data_set_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
@@ -146,8 +147,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :custom_dimension, :message, 13, "google.analytics.admin.v1alpha.CustomDimension"
         optional :custom_metric, :message, 14, "google.analytics.admin.v1alpha.CustomMetric"
         optional :data_retention_settings, :message, 15, "google.analytics.admin.v1alpha.DataRetentionSettings"
+        optional :search_ads_360_link, :message, 16, "google.analytics.admin.v1alpha.SearchAds360Link"
         optional :data_stream, :message, 18, "google.analytics.admin.v1alpha.DataStream"
         optional :attribution_settings, :message, 20, "google.analytics.admin.v1alpha.AttributionSettings"
+        optional :expanded_data_set, :message, 21, "google.analytics.admin.v1alpha.ExpandedDataSet"
+        optional :bigquery_link, :message, 23, "google.analytics.admin.v1alpha.BigQueryLink"
       end
     end
     add_message "google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink" do
@@ -167,6 +171,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :ads_personalization_enabled, :message, 6, "google.protobuf.BoolValue"
       optional :campaign_data_sharing_enabled, :message, 7, "google.protobuf.BoolValue"
       optional :cost_data_sharing_enabled, :message, 8, "google.protobuf.BoolValue"
+    end
+    add_message "google.analytics.admin.v1alpha.SearchAds360Link" do
+      optional :name, :string, 1
+      optional :advertiser_id, :string, 2
+      optional :campaign_data_sharing_enabled, :message, 3, "google.protobuf.BoolValue"
+      optional :cost_data_sharing_enabled, :message, 4, "google.protobuf.BoolValue"
+      optional :advertiser_display_name, :string, 5
+      optional :ads_personalization_enabled, :message, 6, "google.protobuf.BoolValue"
+      optional :site_stats_sharing_enabled, :message, 7, "google.protobuf.BoolValue"
     end
     add_message "google.analytics.admin.v1alpha.LinkProposalStatusDetails" do
       optional :link_proposal_initiating_product, :enum, 1, "google.analytics.admin.v1alpha.LinkProposalInitiatingProduct"
@@ -269,6 +282,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CROSS_CHANNEL_TIME_DECAY, 6
       value :ADS_PREFERRED_LAST_CLICK, 7
     end
+    add_message "google.analytics.admin.v1alpha.BigQueryLink" do
+      optional :name, :string, 1
+      optional :project, :string, 2
+      optional :create_time, :message, 3, "google.protobuf.Timestamp"
+      optional :daily_export_enabled, :bool, 4
+      optional :streaming_export_enabled, :bool, 5
+      optional :include_advertising_id, :bool, 6
+      repeated :export_streams, :string, 7
+      repeated :excluded_events, :string, 8
+    end
     add_enum "google.analytics.admin.v1alpha.IndustryCategory" do
       value :INDUSTRY_CATEGORY_UNSPECIFIED, 0
       value :AUTOMOTIVE, 1
@@ -332,6 +355,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SEARCH_ADS_360_LINK, 16
       value :DATA_STREAM, 18
       value :ATTRIBUTION_SETTINGS, 20
+      value :EXPANDED_DATA_SET, 21
+      value :CHANNEL_GROUP, 22
     end
     add_enum "google.analytics.admin.v1alpha.GoogleSignalsState" do
       value :GOOGLE_SIGNALS_STATE_UNSPECIFIED, 0
@@ -391,6 +416,7 @@ module Google
         ChangeHistoryChange::ChangeHistoryResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource").msgclass
         DisplayVideo360AdvertiserLink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink").msgclass
         DisplayVideo360AdvertiserLinkProposal = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal").msgclass
+        SearchAds360Link = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SearchAds360Link").msgclass
         LinkProposalStatusDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.LinkProposalStatusDetails").msgclass
         ConversionEvent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ConversionEvent").msgclass
         GoogleSignalsSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GoogleSignalsSettings").msgclass
@@ -406,6 +432,7 @@ module Google
         AttributionSettings::AcquisitionConversionEventLookbackWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AttributionSettings.AcquisitionConversionEventLookbackWindow").enummodule
         AttributionSettings::OtherConversionEventLookbackWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AttributionSettings.OtherConversionEventLookbackWindow").enummodule
         AttributionSettings::ReportingAttributionModel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel").enummodule
+        BigQueryLink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BigQueryLink").msgclass
         IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IndustryCategory").enummodule
         ServiceLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ServiceLevel").enummodule
         ActorType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ActorType").enummodule

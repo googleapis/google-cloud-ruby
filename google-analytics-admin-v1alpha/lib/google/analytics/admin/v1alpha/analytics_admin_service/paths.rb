@@ -70,6 +70,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified BigQueryLink resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/bigQueryLinks/{bigquery_link}`
+            #
+            # @param property [String]
+            # @param bigquery_link [String]
+            #
+            # @return [::String]
+            def big_query_link_path property:, bigquery_link:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/bigQueryLinks/#{bigquery_link}"
+            end
+
+            ##
             # Create a fully-qualified ConversionEvent resource string.
             #
             # The resource will be in the following format:
@@ -295,6 +312,23 @@ module Google
             # @return [::String]
             def property_path property:
               "properties/#{property}"
+            end
+
+            ##
+            # Create a fully-qualified SearchAds360Link resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/searchAds360Links/{search_ads_360_link}`
+            #
+            # @param property [String]
+            # @param search_ads_360_link [String]
+            #
+            # @return [::String]
+            def search_ads360_link_path property:, search_ads_360_link:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/searchAds360Links/#{search_ads_360_link}"
             end
 
             ##
