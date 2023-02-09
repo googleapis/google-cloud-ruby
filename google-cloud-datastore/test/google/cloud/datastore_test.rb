@@ -32,7 +32,7 @@ describe Google::Cloud do
   describe "#datastore" do
     it "calls out to Google::Cloud.datastore" do
       gcloud = Google::Cloud.new
-      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, host: nil) {
+      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, host: nil, database_id: nil) {
         _(project).must_be :nil?
         _(keyfile).must_be :nil?
         _(scope).must_be :nil?
@@ -48,7 +48,7 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.datastore" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, host: nil) {
+      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, host: nil, database_id: nil) {
         _(project).must_equal "project-id"
         _(keyfile).must_equal "keyfile-path"
         _(scope).must_be :nil?
@@ -64,7 +64,7 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.datastore" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, host: nil) {
+      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, host: nil, database_id: nil) {
         _(project).must_equal "project-id"
         _(keyfile).must_equal "keyfile-path"
         _(scope).must_equal "http://example.com/scope"
@@ -110,7 +110,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, default_database, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_be :nil?
@@ -171,7 +171,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, default_database, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_be :nil?
@@ -202,7 +202,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, default_database, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_be :nil?
@@ -229,7 +229,7 @@ describe Google::Cloud do
 
     it "uses provided endpoint" do
       endpoint = "datastore-endpoint2.example.com"
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, default_database, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(timeout).must_be :nil?
@@ -289,7 +289,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, default_database, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_be_kind_of OpenStruct
         _(credentials.project_id).must_equal "project-id"
@@ -332,7 +332,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, default_database, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_be :nil?
@@ -369,7 +369,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, default_database, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_be :nil?
@@ -406,7 +406,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, default_database, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_equal 42
@@ -444,7 +444,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, default_database, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_equal 42
@@ -482,7 +482,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, default_database, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_be :nil?

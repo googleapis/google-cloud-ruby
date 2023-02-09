@@ -17,7 +17,8 @@ require "helper"
 describe "Aggregate Query", :mock_datastore do
   let(:project_id) { "my-todo-project" }
   let(:credentials) { OpenStruct.new }
-  let(:dataset) { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project_id, credentials)) }
+  let(:default_database) { "" }
+  let(:dataset) { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project_id, credentials, default_database)) }
   let(:query) { Google::Cloud::Datastore::Query.new.kind("User") }
   let(:expected_query) do
     Google::Cloud::Datastore::V1::Query.new(
