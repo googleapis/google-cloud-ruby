@@ -108,7 +108,7 @@ module Google
         #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         class GetAwsClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -123,7 +123,7 @@ module Google
         #     Location names are formatted as `projects/<project-id>/locations/<region>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of items to return.
@@ -147,7 +147,7 @@ module Google
         # @!attribute [rw] aws_clusters
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsCluster>]
         #     A list of {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resources
-        #     in the specified GCP project and region region.
+        #     in the specified Google Cloud Platform project and region region.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no more
@@ -167,7 +167,7 @@ module Google
         #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     If set, only validate the request, but do not actually delete the resource.

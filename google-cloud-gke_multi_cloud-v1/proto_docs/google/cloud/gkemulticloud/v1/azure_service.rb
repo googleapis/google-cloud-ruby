@@ -76,6 +76,9 @@ module Google
         #      *   `annotations`.
         #      *   `authorization.admin_users`.
         #      *   `control_plane.root_volume.size_gib`.
+        #      *   `azure_services_authentication`.
+        #      *   `azure_services_authentication.tenant_id`.
+        #      *   `azure_services_authentication.application_id`.
         #      *   `control_plane.proxy_config`.
         #      *   `control_plane.proxy_config.resource_group_id`.
         #      *   `control_plane.proxy_config.secret_id`.
@@ -98,7 +101,7 @@ module Google
         #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         class GetAzureClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -113,7 +116,7 @@ module Google
         #     Location names are formatted as `projects/<project-id>/locations/<region>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of items to return.
@@ -137,7 +140,7 @@ module Google
         # @!attribute [rw] azure_clusters
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureCluster>]
         #     A list of {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
-        #     resources in the specified GCP project and region region.
+        #     resources in the specified Google Cloud Platform project and region region.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no more
@@ -157,7 +160,7 @@ module Google
         #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     If set to true, and the
@@ -418,7 +421,7 @@ module Google
         #     Location names are formatted as `projects/<project-id>/locations/<region>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of items to return.

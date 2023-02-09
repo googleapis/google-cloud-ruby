@@ -37,7 +37,7 @@ module Google
 
             # Creates a new
             # [AttachedCluster][google.cloud.gkemulticloud.v1.AttachedCluster] resource
-            # on a given GCP project and region.
+            # on a given Google Cloud Platform project and region.
             #
             # If successful, the response contains a newly created
             # [Operation][google.longrunning.Operation] resource that can be

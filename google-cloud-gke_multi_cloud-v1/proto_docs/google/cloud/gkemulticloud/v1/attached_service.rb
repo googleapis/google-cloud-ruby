@@ -35,7 +35,7 @@ module Google
         #     for more details on Google Cloud resource names.
         # @!attribute [rw] attached_cluster_id
         #   @return [::String]
-        #     Required. A client provided ID the resource. Must be unique within the
+        #     Required. A client provided ID of the resource. Must be unique within the
         #     parent resource.
         #
         #     The provided ID will be part of the
@@ -48,7 +48,7 @@ module Google
         #     When generating an install manifest for importing an existing Membership
         #     resource, the attached_cluster_id field must be the Membership id.
         #
-        #     Membership names are formatted as `resource name formatted as
+        #     Membership names are formatted as
         #     `projects/<project-id>/locations/<region>/memberships/<membership-id>`.
         # @!attribute [rw] platform_version
         #   @return [::String]
@@ -179,7 +179,7 @@ module Google
         #     `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         class GetAttachedClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -194,7 +194,7 @@ module Google
         #     Location names are formatted as `projects/<project-id>/locations/<region>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of items to return.
@@ -218,7 +218,7 @@ module Google
         # @!attribute [rw] attached_clusters
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AttachedCluster>]
         #     A list of {::Google::Cloud::GkeMultiCloud::V1::AttachedCluster AttachedCluster}
-        #     resources in the specified GCP project and region region.
+        #     resources in the specified Google Cloud Platform project and region region.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no more
@@ -238,7 +238,7 @@ module Google
         #     `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     If set, only validate the request, but do not actually delete the resource.
