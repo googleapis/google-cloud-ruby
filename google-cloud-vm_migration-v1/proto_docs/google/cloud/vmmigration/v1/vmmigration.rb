@@ -58,6 +58,7 @@ module Google
 
           # Possible states of a replication cycle.
           module State
+
             # The state is unknown. This is used for API compatibility only and is not
             # used by the system.
             STATE_UNSPECIFIED = 0
@@ -226,6 +227,7 @@ module Google
 
           # The possible values of the state/health of source VM.
           module State
+
             # The state was not sampled by the health checks yet.
             STATE_UNSPECIFIED = 0
 
@@ -312,6 +314,7 @@ module Google
 
           # Possible states of the clone job.
           module State
+
             # The state is unknown. This is used for API compatibility only and is not
             # used by the system.
             STATE_UNSPECIFIED = 0
@@ -420,6 +423,7 @@ module Google
 
           # Possible states of the cutover job.
           module State
+
             # The state is unknown. This is used for API compatibility only and is not
             # used by the system.
             STATE_UNSPECIFIED = 0
@@ -706,6 +710,7 @@ module Google
 
           # The possible values of the state.
           module State
+
             # The state is unknown. This is used for API compatibility only and is not
             # used by the system.
             STATE_UNSPECIFIED = 0
@@ -787,6 +792,7 @@ module Google
 
           # The possible values of the state.
           module State
+
             # The state is unknown. This is used for API compatibility only and is not
             # used by the system.
             STATE_UNSPECIFIED = 0
@@ -829,6 +835,7 @@ module Google
 
           # The possible values of the state.
           module State
+
             # The state was not sampled by the health checks yet.
             STATE_UNSPECIFIED = 0
 
@@ -1075,6 +1082,7 @@ module Google
 
           # Possible values for the power state of the VM.
           module PowerState
+
             # Power state is not specified.
             POWER_STATE_UNSPECIFIED = 0
 
@@ -1090,6 +1098,7 @@ module Google
 
           # Possible values for vm boot option.
           module BootOption
+
             # The boot option is unknown.
             BOOT_OPTION_UNSPECIFIED = 0
 
@@ -1171,6 +1180,7 @@ module Google
 
           # Possible values for the power state of the VM.
           module PowerState
+
             # Power state is not specified.
             POWER_STATE_UNSPECIFIED = 0
 
@@ -1190,6 +1200,7 @@ module Google
 
           # The possible values for the vm boot option.
           module BootOption
+
             # The boot option is unknown.
             BOOT_OPTION_UNSPECIFIED = 0
 
@@ -1202,6 +1213,7 @@ module Google
 
           # Possible values for the virtualization types of the VM.
           module VmVirtualizationType
+
             # The virtualization type is unknown.
             VM_VIRTUALIZATION_TYPE_UNSPECIFIED = 0
 
@@ -1214,6 +1226,7 @@ module Google
 
           # Possible values for the architectures of the VM.
           module VmArchitecture
+
             # The architecture is unknown.
             VM_ARCHITECTURE_UNSPECIFIED = 0
 
@@ -1324,6 +1337,7 @@ module Google
 
           # Utilization report state.
           module State
+
             # The state is unknown. This value is not in use.
             STATE_UNSPECIFIED = 0
 
@@ -1339,6 +1353,7 @@ module Google
 
           # Report time frame options.
           module TimeFrame
+
             # The time frame was not specified and will default to WEEK.
             TIME_FRAME_UNSPECIFIED = 0
 
@@ -1855,6 +1870,7 @@ module Google
 
           # License types used in OS adaptation.
           module Type
+
             # Unspecified license for the OS.
             TYPE_UNSPECIFIED = 0
 
@@ -1889,6 +1905,7 @@ module Google
           # Possible types of node selection operators. Valid operators are IN for
           # affinity and NOT_IN for anti-affinity.
           module Operator
+
             # An unknown, unexpected behavior.
             OPERATOR_UNSPECIFIED = 0
 
@@ -1928,7 +1945,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           module OnHostMaintenance
-            # An unknown, unexpected behavior.
+          # An unknown, unexpected behavior.
             ON_HOST_MAINTENANCE_UNSPECIFIED = 0
 
             # Terminate the instance when the host machine undergoes maintenance.
@@ -1941,6 +1958,7 @@ module Google
           # Defines whether the Instance should be automatically restarted whenever
           # it is terminated by Compute Engine (not terminated by user).
           module RestartType
+
             # Unspecified behavior. This will use the default.
             RESTART_TYPE_UNSPECIFIED = 0
 
@@ -2668,6 +2686,7 @@ module Google
 
           # Represents resource error codes.
           module ErrorCode
+
             # Default value. This value is not used.
             ERROR_CODE_UNSPECIFIED = 0
 
@@ -2715,6 +2734,7 @@ module Google
 
           # Possible values for AWS VM firmware.
           module Firmware
+
             # The firmware is unknown.
             FIRMWARE_UNSPECIFIED = 0
 
@@ -2781,6 +2801,7 @@ module Google
 
         # Controls the level of details of a Utilization Report.
         module UtilizationReportView
+
           # The default / unset value.
           # The API will default to FULL on single report request and BASIC for
           # multiple reports request.
@@ -2796,6 +2817,7 @@ module Google
 
         # Controls the level of details of a Migrating VM.
         module MigratingVmView
+
           # View is unspecified. The API will fallback to the default value.
           MIGRATING_VM_VIEW_UNSPECIFIED = 0
 
@@ -2810,6 +2832,7 @@ module Google
 
         # Types of disks supported for Compute Engine VM.
         module ComputeEngineDiskType
+
           # An unspecified disk type. Will be used as STANDARD.
           COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED = 0
 
@@ -2826,6 +2849,7 @@ module Google
 
         # Types of licenses used in OS adaptation.
         module ComputeEngineLicenseType
+
           # The license type is the default for the OS.
           COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT = 0
 
@@ -2838,6 +2862,7 @@ module Google
 
         # Possible values for vm boot option.
         module ComputeEngineBootOption
+
           # The boot option is unknown.
           COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED = 0
 
@@ -2851,3 +2876,4 @@ module Google
     end
   end
 end
+

@@ -65,6 +65,7 @@ module Google
 
             # Enum to denote the type of break found. New line, space etc.
             module BreakType
+
               # Unknown break label type.
               UNKNOWN = 0
 
@@ -163,6 +164,7 @@ module Google
 
           # Type of a block (text, image etc) as identified by OCR.
           module BlockType
+
             # Unknown block type.
             UNKNOWN = 0
 
@@ -283,3 +285,4 @@ module Google
     end
   end
 end
+

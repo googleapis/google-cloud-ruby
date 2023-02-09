@@ -46,3 +46,4 @@ end
 
 helper_path = ::File.join __dir__, "streaming_video_intelligence_service", "helpers.rb"
 require "google/cloud/video_intelligence/v1p3beta1/streaming_video_intelligence_service/helpers" if ::File.file? helper_path
+

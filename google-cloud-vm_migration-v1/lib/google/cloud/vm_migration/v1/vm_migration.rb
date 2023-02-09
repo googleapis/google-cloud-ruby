@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "vm_migration", "helpers.rb"
 require "google/cloud/vm_migration/v1/vm_migration/helpers" if ::File.file? helper_path
+

@@ -35,6 +35,7 @@ module Google
 
             # Indicates how many of the companions should be displayed with the ad.
             module DisplayRequirement
+
               # Required companions are not specified. The default is ALL.
               DISPLAY_REQUIREMENT_UNSPECIFIED = 0
 
@@ -127,3 +128,4 @@ module Google
     end
   end
 end
+

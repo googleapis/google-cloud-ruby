@@ -54,3 +54,4 @@ end
 
 helper_path = ::File.join __dir__, "transcoder_service", "helpers.rb"
 require "google/cloud/video/transcoder/v1/transcoder_service/helpers" if ::File.file? helper_path
+

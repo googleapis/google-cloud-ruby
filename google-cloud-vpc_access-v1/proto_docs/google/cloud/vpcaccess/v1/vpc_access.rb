@@ -79,6 +79,7 @@ module Google
 
           # State of a connector.
           module State
+
             # Invalid state.
             STATE_UNSPECIFIED = 0
 
@@ -183,3 +184,4 @@ module Google
     end
   end
 end
+

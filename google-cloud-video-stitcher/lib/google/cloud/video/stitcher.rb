@@ -72,9 +72,9 @@ module Google
           require "google/cloud/video/stitcher/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Video::Stitcher
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Video::Stitcher.const_get(package_name).const_get(:VideoStitcherService)
           service_module.const_get(:Client).new(&block)
         end
@@ -119,3 +119,4 @@ end
 
 helper_path = ::File.join __dir__, "stitcher", "helpers.rb"
 require "google/cloud/video/stitcher/helpers" if ::File.file? helper_path
+

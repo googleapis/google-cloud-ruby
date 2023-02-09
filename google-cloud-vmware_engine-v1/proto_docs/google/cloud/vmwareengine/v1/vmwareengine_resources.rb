@@ -152,6 +152,7 @@ module Google
 
           # Enum State defines possible states of private clouds.
           module State
+
             # The default value. This value should never be used.
             STATE_UNSPECIFIED = 0
 
@@ -221,6 +222,7 @@ module Google
 
           # Enum State defines possible states of private cloud clusters.
           module State
+
             # The default value. This value should never be used.
             STATE_UNSPECIFIED = 0
 
@@ -272,6 +274,7 @@ module Google
 
           # Defines possible states of subnets.
           module State
+
             # The default value. This value should never be used.
             STATE_UNSPECIFIED = 0
 
@@ -370,6 +373,7 @@ module Google
 
           # State of HCX activation key
           module State
+
             # Unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -403,6 +407,7 @@ module Google
 
           # State of the appliance
           module State
+
             # Unspecified appliance state. This is the default value.
             STATE_UNSPECIFIED = 0
 
@@ -433,6 +438,7 @@ module Google
 
           # State of the appliance
           module State
+
             # Unspecified appliance state. This is the default value.
             STATE_UNSPECIFIED = 0
 
@@ -463,6 +469,7 @@ module Google
 
           # State of the appliance
           module State
+
             # Unspecified appliance state. This is the default value.
             STATE_UNSPECIFIED = 0
 
@@ -546,6 +553,7 @@ module Google
             # Enum State defines possible states of a network policy controlled
             # service.
             module State
+
               # Unspecified service state. This is the default value.
               STATE_UNSPECIFIED = 0
 
@@ -621,6 +629,7 @@ module Google
             # Enum Type defines possible types of a VMware Engine network controlled
             # service.
             module Type
+
               # The default value. This value should never be used.
               TYPE_UNSPECIFIED = 0
 
@@ -641,6 +650,7 @@ module Google
 
           # Enum State defines possible states of VMware Engine network.
           module State
+
             # The default value. This value is used if the state is omitted.
             STATE_UNSPECIFIED = 0
 
@@ -659,6 +669,7 @@ module Google
 
           # Enum Type defines possible types of VMware Engine network.
           module Type
+
             # The default value. This value should never be used.
             TYPE_UNSPECIFIED = 0
 
@@ -672,3 +683,4 @@ module Google
     end
   end
 end
+

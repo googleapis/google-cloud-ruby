@@ -70,26 +70,26 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.timeout = 60.0
-                  default_config.retry_policy = {
-                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.timeout = 60.0
+                    default_config.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
-                  default_config.rpcs.create_job.timeout = 60.0
+                      default_config.rpcs.create_job.timeout = 60.0
 
-                  default_config.rpcs.list_jobs.timeout = 60.0
+                      default_config.rpcs.list_jobs.timeout = 60.0
 
-                  default_config.rpcs.get_job.timeout = 60.0
+                      default_config.rpcs.get_job.timeout = 60.0
 
-                  default_config.rpcs.delete_job.timeout = 60.0
+                      default_config.rpcs.delete_job.timeout = 60.0
 
-                  default_config.rpcs.create_job_template.timeout = 60.0
+                      default_config.rpcs.create_job_template.timeout = 60.0
 
-                  default_config.rpcs.list_job_templates.timeout = 60.0
+                      default_config.rpcs.list_job_templates.timeout = 60.0
 
-                  default_config.rpcs.get_job_template.timeout = 60.0
+                      default_config.rpcs.get_job_template.timeout = 60.0
 
-                  default_config.rpcs.delete_job_template.timeout = 60.0
+                      default_config.rpcs.delete_job_template.timeout = 60.0
 
                   default_config
                 end
@@ -311,13 +311,11 @@ module Google
               #   # Call the list_jobs method.
               #   result = client.list_jobs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::Transcoder::V1::Job.
-              #     p response
+              #     p item
               #   end
               #
               def list_jobs request, options = nil
@@ -684,13 +682,11 @@ module Google
               #   # Call the list_job_templates method.
               #   result = client.list_job_templates request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::Transcoder::V1::JobTemplate.
-              #     p response
+              #     p item
               #   end
               #
               def list_job_templates request, options = nil
@@ -1002,7 +998,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+                config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -1117,3 +1113,4 @@ module Google
     end
   end
 end
+

@@ -53,3 +53,4 @@ end
 
 helper_path = ::File.join __dir__, "video_stitcher_service", "helpers.rb"
 require "google/cloud/video/stitcher/v1/video_stitcher_service/helpers" if ::File.file? helper_path
+

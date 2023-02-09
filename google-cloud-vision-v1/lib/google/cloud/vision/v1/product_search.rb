@@ -61,3 +61,4 @@ end
 
 helper_path = ::File.join __dir__, "product_search", "helpers.rb"
 require "google/cloud/vision/v1/product_search/helpers" if ::File.file? helper_path
+

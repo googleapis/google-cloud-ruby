@@ -67,9 +67,9 @@ module Google
         require "google/cloud/vm_migration/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::VMMigration
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::VMMigration.const_get(package_name).const_get(:VMMigration)
         service_module.const_get(:Client).new(&block)
       end
@@ -113,3 +113,4 @@ end
 
 helper_path = ::File.join __dir__, "vm_migration", "helpers.rb"
 require "google/cloud/vm_migration/helpers" if ::File.file? helper_path
+

@@ -41,6 +41,7 @@ module Google
 
             # Describes the event that occurred.
             module EventType
+
               # The event type is unspecified.
               EVENT_TYPE_UNSPECIFIED = 0
 
@@ -139,3 +140,4 @@ module Google
     end
   end
 end
+

@@ -95,6 +95,7 @@ module Google
 
             # The current state of the job.
             module ProcessingState
+
               # The processing state is not specified.
               PROCESSING_STATE_UNSPECIFIED = 0
 
@@ -322,6 +323,7 @@ module Google
 
             # The manifest type can be either `HLS` or `DASH`.
             module ManifestType
+
               # The manifest type is not specified.
               MANIFEST_TYPE_UNSPECIFIED = 0
 
@@ -528,6 +530,7 @@ module Google
 
             # Fade type for the overlay: `FADE_IN` or `FADE_OUT`.
             module FadeType
+
               # The fade type is not specified.
               FADE_TYPE_UNSPECIFIED = 0
 
@@ -1292,3 +1295,4 @@ module Google
     end
   end
 end
+

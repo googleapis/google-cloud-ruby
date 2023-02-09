@@ -919,6 +919,7 @@ module Google
 
         # Video annotation feature.
         module Feature
+
           # Unspecified.
           FEATURE_UNSPECIFIED = 0
 
@@ -952,6 +953,7 @@ module Google
 
         # Label detection mode.
         module LabelDetectionMode
+
           # Unspecified.
           LABEL_DETECTION_MODE_UNSPECIFIED = 0
 
@@ -967,6 +969,7 @@ module Google
 
         # Bucketized representation of likelihood.
         module Likelihood
+
           # Unspecified likelihood.
           LIKELIHOOD_UNSPECIFIED = 0
 
@@ -989,3 +992,4 @@ module Google
     end
   end
 end
+

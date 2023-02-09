@@ -224,6 +224,7 @@ module Google
             # Defines the stitcher behavior in case an ad does not align exactly with
             # the ad break boundaries. If not specified, the default is COMPLETE_AD.
             module StitchingPolicy
+
               # Stitching policy is not specified.
               STITCHING_POLICY_UNSPECIFIED = 0
 
@@ -259,6 +260,7 @@ module Google
 
             # Defines the ordering policy during manifest generation.
             module OrderPolicy
+
               # Ordering policy is not specified.
               ORDER_POLICY_UNSPECIFIED = 0
 
@@ -288,3 +290,4 @@ module Google
     end
   end
 end
+

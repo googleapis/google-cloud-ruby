@@ -43,6 +43,7 @@ module Google
 
           # Type of Google Cloud Vision API feature to be extracted.
           module Type
+
             # Unspecified feature type.
             TYPE_UNSPECIFIED = 0
 
@@ -223,6 +224,7 @@ module Google
             # without considering mirror projections typical of photos. So, `LEFT_EYE`,
             # typically, is the person's right eye.
             module Type
+
               # Unknown face landmark detected. Should not be filled.
               UNKNOWN_LANDMARK = 0
 
@@ -1004,6 +1006,7 @@ module Google
 
           # Batch operation states.
           module State
+
             # Invalid.
             STATE_UNSPECIFIED = 0
 
@@ -1024,6 +1027,7 @@ module Google
         # A bucketized representation of likelihood, which is intended to give clients
         # highly stable results across model upgrades.
         module Likelihood
+
           # Unknown likelihood.
           UNKNOWN = 0
 
@@ -1046,3 +1050,4 @@ module Google
     end
   end
 end
+

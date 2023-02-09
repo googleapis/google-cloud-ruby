@@ -618,6 +618,7 @@ module Google
 
           # Enumerates the possible states that the batch request can be in.
           module State
+
             # Invalid.
             STATE_UNSPECIFIED = 0
 
@@ -674,3 +675,4 @@ module Google
     end
   end
 end
+

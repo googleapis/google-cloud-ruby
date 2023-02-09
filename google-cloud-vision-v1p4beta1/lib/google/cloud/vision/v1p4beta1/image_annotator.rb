@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "image_annotator", "helpers.rb"
 require "google/cloud/vision/v1p4beta1/image_annotator/helpers" if ::File.file? helper_path
+
