@@ -58,3 +58,4 @@ end
 
 helper_path = ::File.join __dir__, "database_admin", "helpers.rb"
 require "google/cloud/spanner/admin/database/v1/database_admin/helpers" if ::File.file? helper_path
+

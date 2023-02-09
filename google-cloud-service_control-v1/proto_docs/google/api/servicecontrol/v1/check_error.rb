@@ -48,6 +48,7 @@ module Google
 
           # Error codes for Check responses.
           module Code
+
             # This is never used in `CheckResponse`.
             ERROR_CODE_UNSPECIFIED = 0
 
@@ -123,3 +124,4 @@ module Google
     end
   end
 end
+

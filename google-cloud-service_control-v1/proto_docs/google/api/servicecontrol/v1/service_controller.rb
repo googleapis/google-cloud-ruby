@@ -109,6 +109,7 @@ module Google
             # The type of the consumer as defined in
             # [Google Resource Manager](https://cloud.google.com/resource-manager/).
             module ConsumerType
+
               # This is never used.
               CONSUMER_TYPE_UNSPECIFIED = 0
 
@@ -210,3 +211,4 @@ module Google
     end
   end
 end
+

@@ -51,6 +51,7 @@ module Google
           # MITRE ATT&CK tactics that can be referenced by SCC findings.
           # See: https://attack.mitre.org/tactics/enterprise/
           module Tactic
+
             # Unspecified value.
             TACTIC_UNSPECIFIED = 0
 
@@ -100,6 +101,7 @@ module Google
           # MITRE ATT&CK techniques that can be referenced by SCC findings.
           # See: https://attack.mitre.org/techniques/enterprise/
           module Technique
+
             # Unspecified value.
             TECHNIQUE_UNSPECIFIED = 0
 
@@ -213,3 +215,4 @@ module Google
     end
   end
 end
+

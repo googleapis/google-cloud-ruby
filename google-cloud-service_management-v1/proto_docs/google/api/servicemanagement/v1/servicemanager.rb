@@ -128,7 +128,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           module ConfigView
-            # Server response includes all fields except SourceInfo.
+          # Server response includes all fields except SourceInfo.
             BASIC = 0
 
             # Server response includes all fields including SourceInfo.
@@ -323,3 +323,4 @@ module Google
     end
   end
 end
+

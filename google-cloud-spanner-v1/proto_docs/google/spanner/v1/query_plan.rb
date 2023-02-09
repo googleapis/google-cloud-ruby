@@ -116,6 +116,7 @@ module Google
           # The kind of {::Google::Cloud::Spanner::V1::PlanNode PlanNode}. Distinguishes between the two different kinds of
           # nodes that can appear in a query plan.
           module Kind
+
             # Not specified.
             KIND_UNSPECIFIED = 0
 
@@ -146,3 +147,4 @@ module Google
     end
   end
 end
+

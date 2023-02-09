@@ -70,6 +70,7 @@ module Google
     # Classifies set of possible modifications to an object in the service
     # configuration.
     module ChangeType
+
       # No value was provided.
       CHANGE_TYPE_UNSPECIFIED = 0
 
@@ -87,3 +88,4 @@ module Google
     end
   end
 end
+

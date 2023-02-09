@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "speech", "helpers.rb"
 require "google/cloud/speech/v2/speech/helpers" if ::File.file? helper_path
+

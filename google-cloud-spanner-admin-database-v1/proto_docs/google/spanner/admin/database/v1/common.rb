@@ -71,6 +71,7 @@ module Google
 
               # Possible encryption types.
               module Type
+
                 # Encryption type was not specified, though data at rest remains encrypted.
                 TYPE_UNSPECIFIED = 0
 
@@ -88,6 +89,7 @@ module Google
 
             # Indicates the dialect type of a database.
             module DatabaseDialect
+
               # Default value. This value will create a database with the
               # GOOGLE_STANDARD_SQL dialect.
               DATABASE_DIALECT_UNSPECIFIED = 0
@@ -104,3 +106,4 @@ module Google
     end
   end
 end
+

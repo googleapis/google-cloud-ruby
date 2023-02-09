@@ -232,6 +232,7 @@ module Google
 
           # The state of the finding.
           module State
+
             # Unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -245,6 +246,7 @@ module Google
 
           # The severity of the finding.
           module Severity
+
             # This value is used for findings when a source doesn't write a severity
             # value.
             SEVERITY_UNSPECIFIED = 0
@@ -304,6 +306,7 @@ module Google
 
           # Mute state a finding can be in.
           module Mute
+
             # Unspecified.
             MUTE_UNSPECIFIED = 0
 
@@ -319,6 +322,7 @@ module Google
 
           # Represents what kind of Finding it is.
           module FindingClass
+
             # Unspecified finding class.
             FINDING_CLASS_UNSPECIFIED = 0
 
@@ -344,3 +348,4 @@ module Google
     end
   end
 end
+

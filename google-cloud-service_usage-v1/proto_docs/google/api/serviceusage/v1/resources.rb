@@ -104,6 +104,7 @@ module Google
 
         # Whether or not a service has been enabled for use by a consumer.
         module State
+
           # The default value, which indicates that the enabled state of the service
           # is unspecified or not meaningful. Currently, all consumers other than
           # projects (such as folders and organizations) are always in this state.
@@ -120,3 +121,4 @@ module Google
     end
   end
 end
+

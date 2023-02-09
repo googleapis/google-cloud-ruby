@@ -106,6 +106,7 @@ module Google
 
             # Types of Kubernetes roles.
             module Kind
+
               # Role type is not specified.
               KIND_UNSPECIFIED = 0
 
@@ -152,6 +153,7 @@ module Google
 
             # Auth types that can be used for Subject's kind field.
             module AuthType
+
               # Authentication is not specified.
               AUTH_TYPE_UNSPECIFIED = 0
 
@@ -201,3 +203,4 @@ module Google
     end
   end
 end
+

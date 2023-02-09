@@ -78,6 +78,7 @@ module Google
           # Enum to determine if service usage should be checked when disabling a
           # service.
           module CheckIfServiceHasUsage
+
             # When unset, the default behavior is used, which is SKIP.
             CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED = 0
 
@@ -240,3 +241,4 @@ module Google
     end
   end
 end
+

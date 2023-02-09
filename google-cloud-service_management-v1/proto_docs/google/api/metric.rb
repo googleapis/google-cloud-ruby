@@ -205,6 +205,7 @@ module Google
       # For information on setting the start time and end time based on
       # the MetricKind, see [TimeInterval][google.monitoring.v3.TimeInterval].
       module MetricKind
+
         # Do not use this default value.
         METRIC_KIND_UNSPECIFIED = 0
 
@@ -224,6 +225,7 @@ module Google
 
       # The value type of a metric.
       module ValueType
+
         # Do not use this default value.
         VALUE_TYPE_UNSPECIFIED = 0
 
@@ -274,3 +276,4 @@ module Google
     end
   end
 end
+

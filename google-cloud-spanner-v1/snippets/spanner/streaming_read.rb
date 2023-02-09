@@ -20,8 +20,11 @@
 require "google/cloud/spanner/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Spanner::V1::Spanner::Client#streaming_read
+# Snippet for the streaming_read call in the Spanner service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Spanner::V1::Spanner::Client#streaming_read. It may require
+# modification in order to execute successfully.
 #
 def streaming_read
   # Create a client object. The client can be reused for multiple calls.
@@ -30,13 +33,13 @@ def streaming_read
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::Spanner::V1::ReadRequest.new
 
-  # Call the streaming_read method.
-  result = client.streaming_read request
+  # Call the streaming_read method to start streaming.
+  output = client.streaming_read request
 
-  # The returned object is a streamed enumerable yielding elements of
-  # type ::Google::Cloud::Spanner::V1::PartialResultSet.
-  result.each do |response|
-    p response
+  # The returned object is a streamed enumerable yielding elements of type
+  # ::Google::Cloud::Spanner::V1::PartialResultSet
+  output.each do |current_response|
+    p current_response
   end
 end
 # [END spanner_v1_generated_Spanner_StreamingRead_sync]

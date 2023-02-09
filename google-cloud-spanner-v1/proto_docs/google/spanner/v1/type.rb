@@ -87,6 +87,7 @@ module Google
         # be `null`, regardless of type; `null`s are always encoded as a JSON
         # `null`.
         module TypeCode
+
           # Not specified.
           TYPE_CODE_UNSPECIFIED = 0
 
@@ -157,6 +158,7 @@ module Google
         # different SQL types depending on SQL dialect. TypeAnnotationCode doesn't
         # affect the way value is serialized.
         module TypeAnnotationCode
+
           # Not specified.
           TYPE_ANNOTATION_CODE_UNSPECIFIED = 0
 
@@ -180,3 +182,4 @@ module Google
     end
   end
 end
+

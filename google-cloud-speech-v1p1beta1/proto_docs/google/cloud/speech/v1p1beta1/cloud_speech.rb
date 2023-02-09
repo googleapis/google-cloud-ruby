@@ -365,6 +365,7 @@ module Google
           # header; otherwise the request returns an
           # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT] error code.
           module AudioEncoding
+
             # Not specified.
             ENCODING_UNSPECIFIED = 0
 
@@ -490,6 +491,7 @@ module Google
           # Use case categories that the audio recognition request can be described
           # by.
           module InteractionType
+
             # Use case is either unknown or is something other than one of the other
             # values below.
             INTERACTION_TYPE_UNSPECIFIED = 0
@@ -527,6 +529,7 @@ module Google
 
           # Enumerates the types of capture settings describing an audio file.
           module MicrophoneDistance
+
             # Audio type is not known.
             MICROPHONE_DISTANCE_UNSPECIFIED = 0
 
@@ -544,6 +547,7 @@ module Google
 
           # The original media the speech was recorded on.
           module OriginalMediaType
+
             # Unknown original media type.
             ORIGINAL_MEDIA_TYPE_UNSPECIFIED = 0
 
@@ -556,6 +560,7 @@ module Google
 
           # The type of device the speech was recorded with.
           module RecordingDeviceType
+
             # The recording device is unknown.
             RECORDING_DEVICE_TYPE_UNSPECIFIED = 0
 
@@ -789,6 +794,7 @@ module Google
 
           # Indicates the type of speech event.
           module SpeechEventType
+
             # No speech event specified.
             SPEECH_EVENT_UNSPECIFIED = 0
 
@@ -954,3 +960,4 @@ module Google
     end
   end
 end
+

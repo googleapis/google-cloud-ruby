@@ -40,6 +40,7 @@ module Google
 
           # The type of action performed on a Binding in a policy.
           module Action
+
             # Unspecified.
             ACTION_UNSPECIFIED = 0
 
@@ -54,3 +55,4 @@ module Google
     end
   end
 end
+

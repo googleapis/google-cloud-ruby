@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "lookup_service", "helpers.rb"
 require "google/cloud/service_directory/v1beta1/lookup_service/helpers" if ::File.file? helper_path
+

@@ -110,6 +110,7 @@ module Google
 
           # The state of the finding.
           module State
+
             # Unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -124,6 +125,7 @@ module Google
           # The severity of the finding. This field is managed by the source that
           # writes the finding.
           module Severity
+
             # No severity specified. The default value.
             SEVERITY_UNSPECIFIED = 0
 
@@ -144,3 +146,4 @@ module Google
     end
   end
 end
+

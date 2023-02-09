@@ -360,6 +360,7 @@ module Google
 
           # Set of states that define the lifecycle of a Recognizer.
           module State
+
             # The default value. This value is used if the state is omitted.
             STATE_UNSPECIFIED = 0
 
@@ -414,6 +415,7 @@ module Google
 
           # Supported audio data encodings.
           module AudioEncoding
+
             # Default value. This value is unused.
             AUDIO_ENCODING_UNSPECIFIED = 0
 
@@ -508,6 +510,7 @@ module Google
 
           # Options for how to recognize multi-channel audio.
           module MultiChannelMode
+
             # Default value for the multi-channel mode. If the audio contains
             # multiple channels, only the first channel will be transcribed; other
             # channels will be ignored.
@@ -1099,6 +1102,7 @@ module Google
 
           # Indicates the type of speech event.
           module SpeechEventType
+
             # No speech event specified.
             SPEECH_EVENT_TYPE_UNSPECIFIED = 0
 
@@ -1259,6 +1263,7 @@ module Google
 
           # Set of states that define the lifecycle of a CustomClass.
           module State
+
             # Unspecified state.  This is only used/useful for distinguishing
             # unset values.
             STATE_UNSPECIFIED = 0
@@ -1379,6 +1384,7 @@ module Google
 
           # Set of states that define the lifecycle of a PhraseSet.
           module State
+
             # Unspecified state.  This is only used/useful for distinguishing
             # unset values.
             STATE_UNSPECIFIED = 0
@@ -1690,3 +1696,4 @@ module Google
     end
   end
 end
+

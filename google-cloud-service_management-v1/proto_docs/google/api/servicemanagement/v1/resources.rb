@@ -68,6 +68,7 @@ module Google
 
           # Code describes the status of the operation (or one of its steps).
           module Status
+
             # Unspecifed code.
             STATUS_UNSPECIFIED = 0
 
@@ -105,6 +106,7 @@ module Google
 
           # The kind of diagnostic information possible.
           module Kind
+
             # Warnings and errors
             WARNING = 0
 
@@ -144,7 +146,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           module FileType
-            # Unknown file type.
+          # Unknown file type.
             FILE_TYPE_UNSPECIFIED = 0
 
             # YAML-specification of service.
@@ -298,6 +300,7 @@ module Google
 
           # Status of a Rollout.
           module RolloutStatus
+
             # No status specified.
             ROLLOUT_STATUS_UNSPECIFIED = 0
 
@@ -326,3 +329,4 @@ module Google
     end
   end
 end
+

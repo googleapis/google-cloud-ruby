@@ -82,6 +82,7 @@ module Google
 
       # Basic field types.
       module Kind
+
         # Field type unknown.
         TYPE_UNKNOWN = 0
 
@@ -142,6 +143,7 @@ module Google
 
       # Whether a field is optional, required, or repeated.
       module Cardinality
+
         # For fields with unknown cardinality.
         CARDINALITY_UNKNOWN = 0
 
@@ -213,6 +215,7 @@ module Google
 
     # The syntax in which a protocol buffer element is defined.
     module Syntax
+
       # Syntax `proto2`.
       SYNTAX_PROTO2 = 0
 
@@ -221,3 +224,4 @@ module Google
     end
   end
 end
+

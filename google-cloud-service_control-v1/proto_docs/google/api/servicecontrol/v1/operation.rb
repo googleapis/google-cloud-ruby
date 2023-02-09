@@ -114,6 +114,7 @@ module Google
 
           # Defines the importance of the data contained in the operation.
           module Importance
+
             # Allows data caching, batching, and aggregation. It provides
             # higher performance with higher data loss risk.
             LOW = 0
@@ -128,3 +129,4 @@ module Google
     end
   end
 end
+

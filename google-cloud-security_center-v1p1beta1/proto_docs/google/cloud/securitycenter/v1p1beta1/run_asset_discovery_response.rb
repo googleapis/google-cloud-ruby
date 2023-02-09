@@ -34,6 +34,7 @@ module Google
 
           # The state of an asset discovery run.
           module State
+
             # Asset discovery run state was unspecified.
             STATE_UNSPECIFIED = 0
 
@@ -52,3 +53,4 @@ module Google
     end
   end
 end
+

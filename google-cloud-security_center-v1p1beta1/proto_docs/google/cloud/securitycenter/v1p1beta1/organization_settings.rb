@@ -66,6 +66,7 @@ module Google
             # all projects within the organization are discovered during asset
             # discovery.
             module InclusionMode
+
               # Unspecified. Setting the mode with this value will disable
               # inclusion/exclusion filtering for Asset Discovery.
               INCLUSION_MODE_UNSPECIFIED = 0
@@ -84,3 +85,4 @@ module Google
     end
   end
 end
+

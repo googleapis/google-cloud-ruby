@@ -691,6 +691,7 @@ module Google
             # If there was no compare_duration supplied in the request the state change
             # will be: UNUSED
             module StateChange
+
               # State change is unused, this is the canonical default for this enum.
               UNUSED = 0
 
@@ -913,6 +914,7 @@ module Google
             # at timestamp - compare_duration. If there was no compare_duration
             # supplied in the request the state change will be: UNUSED
             module StateChange
+
               # State change is unused, this is the canonical default for this enum.
               UNUSED = 0
 
@@ -1051,3 +1053,4 @@ module Google
     end
   end
 end
+

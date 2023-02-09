@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "adaptation", "helpers.rb"
 require "google/cloud/speech/v1p1beta1/adaptation/helpers" if ::File.file? helper_path
+

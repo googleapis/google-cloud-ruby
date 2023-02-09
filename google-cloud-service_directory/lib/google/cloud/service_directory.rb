@@ -67,9 +67,9 @@ module Google
         require "google/cloud/service_directory/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ServiceDirectory
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::ServiceDirectory.const_get(package_name).const_get(:LookupService)
         service_module.const_get(:Client).new(&block)
       end
@@ -111,9 +111,9 @@ module Google
         require "google/cloud/service_directory/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ServiceDirectory
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::ServiceDirectory.const_get(package_name).const_get(:RegistrationService)
         service_module.const_get(:Client).new(&block)
       end
@@ -157,3 +157,4 @@ end
 
 helper_path = ::File.join __dir__, "service_directory", "helpers.rb"
 require "google/cloud/service_directory/helpers" if ::File.file? helper_path
+

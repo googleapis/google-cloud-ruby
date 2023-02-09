@@ -67,9 +67,9 @@ module Google
         require "google/cloud/security_center/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::SecurityCenter
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::SecurityCenter.const_get(package_name).const_get(:SecurityCenter)
         service_module.const_get(:Client).new(&block)
       end
@@ -113,3 +113,4 @@ end
 
 helper_path = ::File.join __dir__, "security_center", "helpers.rb"
 require "google/cloud/security_center/helpers" if ::File.file? helper_path
+

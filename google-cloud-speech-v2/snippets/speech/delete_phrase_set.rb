@@ -20,8 +20,11 @@
 require "google/cloud/speech/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Speech::V2::Speech::Client#delete_phrase_set
+# Snippet for the delete_phrase_set call in the Speech service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Speech::V2::Speech::Client#delete_phrase_set. It may require
+# modification in order to execute successfully.
 #
 def delete_phrase_set
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def delete_phrase_set
   # Call the delete_phrase_set method.
   result = client.delete_phrase_set request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END speech_v2_generated_Speech_DeletePhraseSet_sync]

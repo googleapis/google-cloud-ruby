@@ -68,9 +68,9 @@ module Google
         require "google/cloud/service_management/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ServiceManagement
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::ServiceManagement.const_get(package_name).const_get(:ServiceManager)
         service_module.const_get(:Client).new(&block)
       end
@@ -114,3 +114,4 @@ end
 
 helper_path = ::File.join __dir__, "service_management", "helpers.rb"
 require "google/cloud/service_management/helpers" if ::File.file? helper_path
+

@@ -37,6 +37,7 @@ module Google
         # FINER, and FINEST levels to `LogSeverity.DEBUG`. You can preserve the
         # original severity level in the log entry payload if you wish.
         module LogSeverity
+
           # (0) The log entry has no assigned severity level.
           DEFAULT = 0
 
@@ -69,3 +70,4 @@ module Google
     end
   end
 end
+

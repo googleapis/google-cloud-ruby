@@ -20,8 +20,11 @@
 require "google/cloud/service_directory/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ServiceDirectory::V1::RegistrationService::Client#list_endpoints
+# Snippet for the list_endpoints call in the RegistrationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1::RegistrationService::Client#list_endpoints.
+# It may require modification in order to execute successfully.
 #
 def list_endpoints
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_endpoints
   # Call the list_endpoints method.
   result = client.list_endpoints request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::ServiceDirectory::V1::Endpoint.
-    p response
+    p item
   end
 end
 # [END servicedirectory_v1_generated_RegistrationService_ListEndpoints_sync]

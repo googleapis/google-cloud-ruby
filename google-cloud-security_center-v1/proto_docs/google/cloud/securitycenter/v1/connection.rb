@@ -45,6 +45,7 @@ module Google
 
           # IANA Internet Protocol Number such as TCP(6) and UDP(17).
           module Protocol
+
             # Unspecified protocol (not HOPOPT).
             PROTOCOL_UNSPECIFIED = 0
 
@@ -68,3 +69,4 @@ module Google
     end
   end
 end
+

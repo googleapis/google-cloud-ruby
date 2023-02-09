@@ -212,6 +212,7 @@ module Google
           #   operations first. There may be other constraints to satisfy, such as
           #   order of operations.
           module Priority
+
             # `PRIORITY_UNSPECIFIED` is equivalent to `PRIORITY_HIGH`.
             PRIORITY_UNSPECIFIED = 0
 
@@ -379,6 +380,7 @@ module Google
 
           # Mode in which the statement must be processed.
           module QueryMode
+
             # The default mode. Only the statement results are returned.
             NORMAL = 0
 
@@ -793,3 +795,4 @@ module Google
     end
   end
 end
+

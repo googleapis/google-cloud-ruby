@@ -20,8 +20,11 @@
 require "google/cloud/speech/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Speech::V1::Adaptation::Client#update_phrase_set
+# Snippet for the update_phrase_set call in the Adaptation service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Speech::V1::Adaptation::Client#update_phrase_set. It may
+# require modification in order to execute successfully.
 #
 def update_phrase_set
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/security_center/v1p1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_security_marks
+# Snippet for the update_security_marks call in the SecurityCenter service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_security_marks.
+# It may require modification in order to execute successfully.
 #
 def update_security_marks
   # Create a client object. The client can be reused for multiple calls.

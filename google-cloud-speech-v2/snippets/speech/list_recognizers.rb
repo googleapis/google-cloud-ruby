@@ -20,8 +20,11 @@
 require "google/cloud/speech/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Speech::V2::Speech::Client#list_recognizers
+# Snippet for the list_recognizers call in the Speech service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Speech::V2::Speech::Client#list_recognizers. It may require
+# modification in order to execute successfully.
 #
 def list_recognizers
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_recognizers
   # Call the list_recognizers method.
   result = client.list_recognizers request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Speech::V2::Recognizer.
-    p response
+    p item
   end
 end
 # [END speech_v2_generated_Speech_ListRecognizers_sync]

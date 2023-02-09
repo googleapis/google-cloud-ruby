@@ -72,6 +72,7 @@ module Google
 
           # Possible execution states for an environment.
           module State
+
             # The environment's states is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -190,6 +191,7 @@ module Google
           # through all of these states when starting. More states are likely to be
           # added in the future.
           module State
+
             # The environment's start state is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -301,6 +303,7 @@ module Google
 
           # Set of possible errors returned from API calls.
           module CloudShellErrorCode
+
             # An unknown error occurred.
             CLOUD_SHELL_ERROR_CODE_UNSPECIFIED = 0
 
@@ -329,3 +332,4 @@ module Google
     end
   end
 end
+

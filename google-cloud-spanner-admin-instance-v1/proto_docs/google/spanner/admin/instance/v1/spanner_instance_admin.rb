@@ -43,6 +43,7 @@ module Google
               # documentation](https://cloud.google.com/spanner/docs/replication#replica_types)
               # for more details.
               module ReplicaType
+
                 # Not specified.
                 TYPE_UNSPECIFIED = 0
 
@@ -163,6 +164,7 @@ module Google
 
               # The type of this configuration.
               module Type
+
                 # Unspecified.
                 TYPE_UNSPECIFIED = 0
 
@@ -175,6 +177,7 @@ module Google
 
               # Indicates the current state of the instance config.
               module State
+
                 # Not specified.
                 STATE_UNSPECIFIED = 0
 
@@ -277,6 +280,7 @@ module Google
 
               # Indicates the current state of the instance.
               module State
+
                 # Not specified.
                 STATE_UNSPECIFIED = 0
 
@@ -717,3 +721,4 @@ module Google
     end
   end
 end
+

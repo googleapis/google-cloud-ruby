@@ -70,18 +70,18 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.get_environment.timeout = 60.0
-                default_config.rpcs.get_environment.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                    default_config.rpcs.get_environment.timeout = 60.0
+                    default_config.rpcs.get_environment.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
                 }
 
-                default_config.rpcs.start_environment.timeout = 60.0
+                    default_config.rpcs.start_environment.timeout = 60.0
 
-                default_config.rpcs.authorize_environment.timeout = 60.0
+                    default_config.rpcs.authorize_environment.timeout = 60.0
 
-                default_config.rpcs.add_public_key.timeout = 60.0
+                    default_config.rpcs.add_public_key.timeout = 60.0
 
-                default_config.rpcs.remove_public_key.timeout = 60.0
+                    default_config.rpcs.remove_public_key.timeout = 60.0
 
                 default_config
               end
@@ -317,14 +317,14 @@ module Google
             #   # Call the start_environment method.
             #   result = client.start_environment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def start_environment request, options = nil
@@ -422,14 +422,14 @@ module Google
             #   # Call the authorize_environment method.
             #   result = client.authorize_environment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def authorize_environment request, options = nil
@@ -525,14 +525,14 @@ module Google
             #   # Call the add_public_key method.
             #   result = client.add_public_key request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def add_public_key request, options = nil
@@ -624,14 +624,14 @@ module Google
             #   # Call the remove_public_key method.
             #   result = client.remove_public_key request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def remove_public_key request, options = nil
@@ -767,7 +767,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -860,3 +860,4 @@ module Google
     end
   end
 end
+

@@ -109,6 +109,7 @@ module Google
 
           # Supported quota modes.
           module QuotaMode
+
             # Guard against implicit default. Must not be used.
             UNSPECIFIED = 0
 
@@ -205,6 +206,7 @@ module Google
           # these validations before calling the quota controller methods. These
           # methods check only for project deletion to be wipe out compliant.
           module Code
+
             # This is never used.
             UNSPECIFIED = 0
 
@@ -230,3 +232,4 @@ module Google
     end
   end
 end
+

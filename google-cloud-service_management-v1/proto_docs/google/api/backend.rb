@@ -117,6 +117,7 @@ module Google
       # do not accept requests over HTTP/HTTPS should leave `path_translation`
       # unspecified.
       module PathTranslation
+
         PATH_TRANSLATION_UNSPECIFIED = 0
 
         # Use the backend address as-is, with no modification to the path. If the
@@ -168,3 +169,4 @@ module Google
     end
   end
 end
+

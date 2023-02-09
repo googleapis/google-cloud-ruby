@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "spanner", "helpers.rb"
 require "google/cloud/spanner/v1/spanner/helpers" if ::File.file? helper_path
+

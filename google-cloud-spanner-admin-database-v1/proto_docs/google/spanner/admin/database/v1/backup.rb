@@ -108,6 +108,7 @@ module Google
 
               # Indicates the current state of the backup.
               module State
+
                 # Not specified.
                 STATE_UNSPECIFIED = 0
 
@@ -517,6 +518,7 @@ module Google
 
               # Encryption types for the backup.
               module EncryptionType
+
                 # Unspecified. Do not use.
                 ENCRYPTION_TYPE_UNSPECIFIED = 0
 
@@ -553,6 +555,7 @@ module Google
 
               # Encryption types for the backup.
               module EncryptionType
+
                 # Unspecified. Do not use.
                 ENCRYPTION_TYPE_UNSPECIFIED = 0
 
@@ -576,3 +579,4 @@ module Google
     end
   end
 end
+

@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "security_center", "helpers.rb"
 require "google/cloud/security_center/v1p1beta1/security_center/helpers" if ::File.file? helper_path
+

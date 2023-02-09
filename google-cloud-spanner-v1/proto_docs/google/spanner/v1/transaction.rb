@@ -382,6 +382,7 @@ module Google
             # `ReadLockMode` is used to set the read lock mode for read-write
             # transactions.
             module ReadLockMode
+
               # Default value.
               #
               # If the value is not specified, the pessimistic read lock is used.
@@ -529,3 +530,4 @@ module Google
     end
   end
 end
+

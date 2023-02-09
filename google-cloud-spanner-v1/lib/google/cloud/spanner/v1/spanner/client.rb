@@ -67,73 +67,73 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_session.timeout = 30.0
-                default_config.rpcs.create_session.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.create_session.timeout = 30.0
+                    default_config.rpcs.create_session.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.batch_create_sessions.timeout = 60.0
-                default_config.rpcs.batch_create_sessions.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.batch_create_sessions.timeout = 60.0
+                    default_config.rpcs.batch_create_sessions.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_session.timeout = 30.0
-                default_config.rpcs.get_session.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_session.timeout = 30.0
+                    default_config.rpcs.get_session.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_sessions.timeout = 3600.0
-                default_config.rpcs.list_sessions.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_sessions.timeout = 3600.0
+                    default_config.rpcs.list_sessions.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.delete_session.timeout = 30.0
-                default_config.rpcs.delete_session.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.delete_session.timeout = 30.0
+                    default_config.rpcs.delete_session.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.execute_sql.timeout = 30.0
-                default_config.rpcs.execute_sql.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.execute_sql.timeout = 30.0
+                    default_config.rpcs.execute_sql.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.execute_streaming_sql.timeout = 3600.0
+                    default_config.rpcs.execute_streaming_sql.timeout = 3600.0
 
-                default_config.rpcs.execute_batch_dml.timeout = 30.0
-                default_config.rpcs.execute_batch_dml.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.execute_batch_dml.timeout = 30.0
+                    default_config.rpcs.execute_batch_dml.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.read.timeout = 30.0
-                default_config.rpcs.read.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.read.timeout = 30.0
+                    default_config.rpcs.read.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.streaming_read.timeout = 3600.0
+                    default_config.rpcs.streaming_read.timeout = 3600.0
 
-                default_config.rpcs.begin_transaction.timeout = 30.0
-                default_config.rpcs.begin_transaction.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.begin_transaction.timeout = 30.0
+                    default_config.rpcs.begin_transaction.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.commit.timeout = 3600.0
-                default_config.rpcs.commit.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.commit.timeout = 3600.0
+                    default_config.rpcs.commit.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.rollback.timeout = 30.0
-                default_config.rpcs.rollback.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.rollback.timeout = 30.0
+                    default_config.rpcs.rollback.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.partition_query.timeout = 30.0
-                default_config.rpcs.partition_query.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.partition_query.timeout = 30.0
+                    default_config.rpcs.partition_query.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.partition_read.timeout = 30.0
-                default_config.rpcs.partition_read.retry_policy = {
-                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.partition_read.timeout = 30.0
+                    default_config.rpcs.partition_read.retry_policy ={
+                initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -563,13 +563,11 @@ module Google
             #   # Call the list_sessions method.
             #   result = client.list_sessions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Spanner::V1::Session.
-            #     p response
+            #     p item
             #   end
             #
             def list_sessions request, options = nil
@@ -972,13 +970,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Spanner::V1::ExecuteSqlRequest.new
             #
-            #   # Call the execute_streaming_sql method.
-            #   result = client.execute_streaming_sql request
+            #   # Call the execute_streaming_sql method to start streaming.
+            #   output = client.execute_streaming_sql request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Spanner::V1::PartialResultSet.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Spanner::V1::PartialResultSet
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def execute_streaming_sql request, options = nil
@@ -1366,13 +1364,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Spanner::V1::ReadRequest.new
             #
-            #   # Call the streaming_read method.
-            #   result = client.streaming_read request
+            #   # Call the streaming_read method to start streaming.
+            #   output = client.streaming_read request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Spanner::V1::PartialResultSet.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Spanner::V1::PartialResultSet
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def streaming_read request, options = nil
@@ -2069,7 +2067,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -2232,3 +2230,4 @@ module Google
     end
   end
 end
+
