@@ -108,6 +108,28 @@ describe "Aggregate Queries", :datastore do
       _(res.get).must_equal 1
     end
 
+    it "returns count on filter with and without read time" do
+
+      sleep(1)
+      read_time = Time.now
+      sleep(1)
+
+      arya["alive"] = false
+      dataset.transaction { |tx| tx.save arya }
+
+      query = Google::Cloud::Datastore.new
+                                      .query("Character")
+                                      .ancestor(book)
+                                      .where("alive", "=", false)
+      aggregate_query = query.aggregate_query
+                             .add_count
+
+      res = dataset.run_aggregation aggregate_query, read_time: read_time
+      _(res.get).must_equal 1
+      res = dataset.run_aggregation aggregate_query
+      _(res.get).must_equal 2
+    end
+
     it "returns count on limit" do
       query = Google::Cloud::Datastore.new
                 .query("Character")

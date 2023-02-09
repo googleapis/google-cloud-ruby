@@ -468,6 +468,8 @@ module Google
         # @param [Symbol] consistency The non-transactional read consistency to
         #   use. Cannot be set to `:strong` for global queries. Accepted values
         #   are `:eventual` and `:strong`.
+        # @param [Time] read_time Reads entities as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
         #
         #   The default consistency depends on the type of query used. See
         #   [Eventual Consistency in Google Cloud
@@ -531,14 +533,14 @@ module Google
         #                             done: false
         #   res = datastore.run_aggregation gql_query, namespace: "example-ns"
         #
-        def run_aggregation aggregate_query, namespace: nil, consistency: nil
+        def run_aggregation aggregate_query, namespace: nil, consistency: nil, read_time: nil
           ensure_service!
           unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
             raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
           end
           check_consistency! consistency
           aggregate_query_res = service.run_aggregation_query aggregate_query.to_grpc, namespace,
-                                                              consistency: consistency
+                                                              consistency: consistency, read_time: read_time
           AggregateQueryResults.from_grpc aggregate_query_res
         end
 
