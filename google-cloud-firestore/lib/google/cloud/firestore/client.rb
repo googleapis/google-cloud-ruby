@@ -69,7 +69,7 @@ module Google
         #
         # @return [String] database identifier.
         def database_id
-          "(default)"
+          service.database
         end
 
         ##
