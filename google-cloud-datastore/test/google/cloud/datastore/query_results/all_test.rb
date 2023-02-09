@@ -133,8 +133,8 @@ describe Google::Cloud::Datastore::Dataset, :all, :mock_datastore do
     next_run_query_res_dup = next_run_query_res.dup
     next_run_query_res_dup.batch.read_time = read_time
     dataset.service.mocked_service = Minitest::Mock.new
-    dataset.service.mocked_service.expect :run_query, first_run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: first_run_query, gql_query: nil
-    dataset.service.mocked_service.expect :run_query, next_run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: next_run_query, gql_query: nil
+    dataset.service.mocked_service.expect :run_query, first_run_query_res, project_id: project, partition_id: nil, database_id: default_database, read_options: read_options, query: first_run_query, gql_query: nil
+    dataset.service.mocked_service.expect :run_query, next_run_query_res, project_id: project, partition_id: nil, database_id: default_database, read_options: read_options, query: next_run_query, gql_query: nil
 
     first_entities = dataset.run dataset.query("Task"), read_time: read_time
     _(first_entities.count).must_equal 25

@@ -1251,7 +1251,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       read_only: Google::Cloud::Datastore::V1::TransactionOptions::ReadOnly.new(read_time: read_time_to_timestamp(read_time))
     )
     begin_tx_res = Google::Cloud::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
-    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, project_id: project, transaction_options: tx_options
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, project_id: project, database_id: default_database, transaction_options: tx_options
 
     tx = dataset.read_only_transaction read_time: read_time
     _(tx).must_be_kind_of Google::Cloud::Datastore::ReadOnlyTransaction

@@ -200,8 +200,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     first_lookup_res_dup.read_time = read_time
     second_lookup_res_dup = second_lookup_res.dup
     second_lookup_res_dup.read_time = read_time
-    dataset.service.mocked_service.expect :lookup, first_lookup_res_dup, project_id: project, keys: first_keys, read_options: read_options
-    dataset.service.mocked_service.expect :lookup, second_lookup_res_dup, project_id: project, keys: second_keys, read_options: read_options
+    dataset.service.mocked_service.expect :lookup, first_lookup_res_dup, project_id: project, database_id: default_database, keys: first_keys, read_options: read_options
+    dataset.service.mocked_service.expect :lookup, second_lookup_res_dup, project_id: project, database_id: default_database, keys: second_keys, read_options: read_options
 
     first_entities = dataset.find_all keys, read_time: read_time
     _(first_entities.next?).must_equal true

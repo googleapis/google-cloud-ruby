@@ -101,3 +101,12 @@ Minitest.after_run do
        "DATASTORE_MULTI_DB_DATABASE"
   end
 end
+
+Minitest.after_run do
+  unless $dataset_2
+    puts "The multiple database tests were not run. These tests require a secondary " \
+       "database which is not configured. To enable, ensure that the following " \
+       "is present in the environment: \n" \
+       "DATASTORE_MULTI_DB_DATABASE"
+  end
+end
