@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/protobuf/empty_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
