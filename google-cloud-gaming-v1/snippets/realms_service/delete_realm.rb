@@ -20,8 +20,11 @@
 require "google/cloud/gaming/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Gaming::V1::RealmsService::Client#delete_realm
+# Snippet for the delete_realm call in the RealmsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::RealmsService::Client#delete_realm. It may require
+# modification in order to execute successfully.
 #
 def delete_realm
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def delete_realm
   # Call the delete_realm method.
   result = client.delete_realm request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END gameservices_v1_generated_RealmsService_DeleteRealm_sync]

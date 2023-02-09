@@ -27,6 +27,7 @@ module Google
     # `OUT_OF_RANGE` over `FAILED_PRECONDITION` if both codes apply.
     # Similarly prefer `NOT_FOUND` or `ALREADY_EXISTS` over `FAILED_PRECONDITION`.
     module Code
+
       # Not an error; returned on success.
       #
       # HTTP Mapping: 200 OK
@@ -183,3 +184,4 @@ module Google
     end
   end
 end
+

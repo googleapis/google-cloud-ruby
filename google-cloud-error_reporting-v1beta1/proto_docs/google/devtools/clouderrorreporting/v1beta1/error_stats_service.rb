@@ -238,6 +238,7 @@ module Google
 
           # The supported time ranges.
           module Period
+
             # Do not use.
             PERIOD_UNSPECIFIED = 0
 
@@ -306,6 +307,7 @@ module Google
 
         # Specifies how the time periods of error group counts are aligned.
         module TimedCountAlignment
+
           # No alignment specified.
           ERROR_COUNT_ALIGNMENT_UNSPECIFIED = 0
 
@@ -328,6 +330,7 @@ module Google
 
         # A sorting order of error groups.
         module ErrorGroupOrder
+
           # No group order specified.
           GROUP_ORDER_UNSPECIFIED = 0
 
@@ -348,3 +351,4 @@ module Google
     end
   end
 end
+

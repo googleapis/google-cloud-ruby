@@ -20,8 +20,11 @@
 require "google/cloud/eventarc/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Eventarc::V1::Eventarc::Client#get_channel_connection
+# Snippet for the get_channel_connection call in the Eventarc service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Eventarc::V1::Eventarc::Client#get_channel_connection. It may
+# require modification in order to execute successfully.
 #
 def get_channel_connection
   # Create a client object. The client can be reused for multiple calls.

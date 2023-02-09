@@ -110,6 +110,7 @@ module Google
 
               # The state of applying the TTL configuration to all documents.
               module State
+
                 # The state is unspecified or unknown.
                 STATE_UNSPECIFIED = 0
 
@@ -136,3 +137,4 @@ module Google
     end
   end
 end
+

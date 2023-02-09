@@ -95,6 +95,7 @@ module Google
 
               # Specifies how the index is changing.
               module ChangeType
+
                 # The type of change is not specified or known.
                 CHANGE_TYPE_UNSPECIFIED = 0
 
@@ -116,6 +117,7 @@ module Google
 
               # Specifies how the TTL config is changing.
               module ChangeType
+
                 # The type of change is not specified or known.
                 CHANGE_TYPE_UNSPECIFIED = 0
 
@@ -213,6 +215,7 @@ module Google
 
           # Describes the state of the operation.
           module OperationState
+
             # Unspecified.
             OPERATION_STATE_UNSPECIFIED = 0
 
@@ -244,3 +247,4 @@ module Google
     end
   end
 end
+

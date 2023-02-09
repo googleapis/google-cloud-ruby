@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "essential_contacts_service", "helpers.rb"
 require "google/cloud/essential_contacts/v1/essential_contacts_service/helpers" if ::File.file? helper_path
+

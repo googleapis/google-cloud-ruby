@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "error_stats_service", "helpers.rb"
 require "google/cloud/error_reporting/v1beta1/error_stats_service/helpers" if ::File.file? helper_path
+

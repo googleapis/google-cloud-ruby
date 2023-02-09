@@ -276,6 +276,7 @@ module Google
           # This controls what traffic is diverted through the VPC Access Connector
           # resource. By default PRIVATE_RANGES_ONLY will be used.
           module VpcConnectorEgressSettings
+
             # Unspecified.
             VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED = 0
 
@@ -293,6 +294,7 @@ module Google
           #
           # If unspecified, ALLOW_ALL will be used.
           module IngressSettings
+
             # Unspecified.
             INGRESS_SETTINGS_UNSPECIFIED = 0
 
@@ -308,6 +310,7 @@ module Google
 
           # Docker Registry to use for storing function Docker images.
           module DockerRegistry
+
             # Unspecified.
             DOCKER_REGISTRY_UNSPECIFIED = 0
 
@@ -368,6 +371,7 @@ module Google
           #
           # If unspecified, SECURE_OPTIONAL will be used.
           module SecurityLevel
+
             # Unspecified.
             SECURITY_LEVEL_UNSPECIFIED = 0
 
@@ -712,6 +716,7 @@ module Google
 
         # Describes the current stage of a deployment.
         module CloudFunctionStatus
+
           # Not specified. Invalid state.
           CLOUD_FUNCTION_STATUS_UNSPECIFIED = 0
 
@@ -735,3 +740,4 @@ module Google
     end
   end
 end
+

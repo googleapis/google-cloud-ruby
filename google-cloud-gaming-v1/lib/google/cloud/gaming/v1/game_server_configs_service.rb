@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "game_server_configs_service", "helpers.rb"
 require "google/cloud/gaming/v1/game_server_configs_service/helpers" if ::File.file? helper_path
+

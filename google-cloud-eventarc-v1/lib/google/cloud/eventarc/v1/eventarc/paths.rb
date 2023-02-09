@@ -155,6 +155,8 @@ module Google
               "projects/#{project}/locations/#{location}/providers/#{provider}"
             end
 
+
+
             ##
             # Create a fully-qualified ServiceAccount resource string.
             #
@@ -217,3 +219,4 @@ module Google
     end
   end
 end
+

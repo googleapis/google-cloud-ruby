@@ -59,6 +59,7 @@ module Google
 
         # A type of an operation.
         module OperationType
+
           # Unknown operation type.
           OPERATION_UNSPECIFIED = 0
 
@@ -75,3 +76,4 @@ module Google
     end
   end
 end
+

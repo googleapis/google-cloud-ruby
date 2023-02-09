@@ -49,3 +49,4 @@ end
 
 helper_path = ::File.join __dir__, "realms_service", "helpers.rb"
 require "google/cloud/gaming/v1/realms_service/helpers" if ::File.file? helper_path
+

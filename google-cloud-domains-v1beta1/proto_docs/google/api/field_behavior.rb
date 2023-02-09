@@ -26,6 +26,7 @@ module Google
     #
     # Note: This enum **may** receive new values in the future.
     module FieldBehavior
+
       # Conventional default for enums. Do not use this.
       FIELD_BEHAVIOR_UNSPECIFIED = 0
 
@@ -69,3 +70,4 @@ module Google
     end
   end
 end
+

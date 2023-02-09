@@ -91,9 +91,9 @@ module Google
           require "google/cloud/eventarc/publishing/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Eventarc::Publishing
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Eventarc::Publishing.const_get(package_name).const_get(:Publisher)
           service_module.const_get(:Client).new(&block)
         end
@@ -138,3 +138,4 @@ end
 
 helper_path = ::File.join __dir__, "publishing", "helpers.rb"
 require "google/cloud/eventarc/publishing/helpers" if ::File.file? helper_path
+

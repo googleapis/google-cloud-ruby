@@ -154,6 +154,7 @@ module Google
 
             # A value that is calculated by the server.
             module ServerValue
+
               # Unspecified. This value must not be used.
               SERVER_VALUE_UNSPECIFIED = 0
 
@@ -270,3 +271,4 @@ module Google
     end
   end
 end
+

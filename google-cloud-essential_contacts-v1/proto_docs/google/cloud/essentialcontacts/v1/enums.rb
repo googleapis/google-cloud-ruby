@@ -26,6 +26,7 @@ module Google
         # categories. All contacts that are subscribed to that category will receive
         # the notification.
         module NotificationCategory
+
           # Notification category is unrecognized or unspecified.
           NOTIFICATION_CATEGORY_UNSPECIFIED = 0
 
@@ -64,6 +65,7 @@ module Google
         # A contact's validation state indicates whether or not it is the correct
         # contact to be receiving notifications for a particular resource.
         module ValidationState
+
           # The validation state is unknown or unspecified.
           VALIDATION_STATE_UNSPECIFIED = 0
 
@@ -79,3 +81,4 @@ module Google
     end
   end
 end
+

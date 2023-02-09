@@ -53,3 +53,4 @@ end
 
 helper_path = ::File.join __dir__, "function_service", "helpers.rb"
 require "google/cloud/functions/v2/function_service/helpers" if ::File.file? helper_path
+

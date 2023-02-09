@@ -72,6 +72,7 @@ module Google
 
           # State lists all the possible states of a Channel
           module State
+
             # Default value. This value is unused.
             STATE_UNSPECIFIED = 0
 
@@ -102,3 +103,4 @@ module Google
     end
   end
 end
+

@@ -53,3 +53,4 @@ end
 
 helper_path = ::File.join __dir__, "firestore", "helpers.rb"
 require "google/cloud/firestore/v1/firestore/helpers" if ::File.file? helper_path
+

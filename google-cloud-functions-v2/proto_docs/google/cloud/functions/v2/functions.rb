@@ -72,6 +72,7 @@ module Google
 
           # Describes the current state of the function.
           module State
+
             # Not specified. Invalid state.
             STATE_UNSPECIFIED = 0
 
@@ -109,6 +110,7 @@ module Google
 
           # Severity of the state message.
           module Severity
+
             # Not specified. Invalid severity.
             SEVERITY_UNSPECIFIED = 0
 
@@ -384,6 +386,7 @@ module Google
           # This controls what traffic is diverted through the VPC Access Connector
           # resource. By default PRIVATE_RANGES_ONLY will be used.
           module VpcConnectorEgressSettings
+
             # Unspecified.
             VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED = 0
 
@@ -401,6 +404,7 @@ module Google
           #
           # If unspecified, ALLOW_ALL will be used.
           module IngressSettings
+
             # Unspecified.
             INGRESS_SETTINGS_UNSPECIFIED = 0
 
@@ -536,6 +540,7 @@ module Google
           # Describes the retry policy in case of function's execution failure.
           # Retried execution is charged as any other execution.
           module RetryPolicy
+
             # Not specified.
             RETRY_POLICY_UNSPECIFIED = 0
 
@@ -764,6 +769,7 @@ module Google
 
           # The various stages that a runtime can be in.
           module RuntimeStage
+
             # Not specified.
             RUNTIME_STAGE_UNSPECIFIED = 0
 
@@ -848,6 +854,7 @@ module Google
 
           # Possible names for a Stage
           module Name
+
             # Not specified. Invalid name.
             NAME_UNSPECIFIED = 0
 
@@ -872,6 +879,7 @@ module Google
 
           # Possible states for a Stage
           module State
+
             # Not specified. Invalid state.
             STATE_UNSPECIFIED = 0
 
@@ -888,6 +896,7 @@ module Google
 
         # The environment the function is hosted on.
         module Environment
+
           # Unspecified
           ENVIRONMENT_UNSPECIFIED = 0
 
@@ -901,3 +910,4 @@ module Google
     end
   end
 end
+

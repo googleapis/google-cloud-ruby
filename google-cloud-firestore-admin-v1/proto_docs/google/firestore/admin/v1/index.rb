@@ -80,6 +80,7 @@ module Google
 
               # The supported orderings.
               module Order
+
                 # The ordering is unspecified. Not a valid option.
                 ORDER_UNSPECIFIED = 0
 
@@ -92,6 +93,7 @@ module Google
 
               # The supported array value configurations.
               module ArrayConfig
+
                 # The index does not support additional array queries.
                 ARRAY_CONFIG_UNSPECIFIED = 0
 
@@ -103,6 +105,7 @@ module Google
             # Query Scope defines the scope at which a query is run. This is specified on
             # a StructuredQuery's `from` field.
             module QueryScope
+
               # The query scope is unspecified. Not a valid option.
               QUERY_SCOPE_UNSPECIFIED = 0
 
@@ -122,6 +125,7 @@ module Google
             # to the `READY` state. If the index creation encounters a problem, the index
             # will transition to the `NEEDS_REPAIR` state.
             module State
+
               # The state is unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -152,3 +156,4 @@ module Google
     end
   end
 end
+

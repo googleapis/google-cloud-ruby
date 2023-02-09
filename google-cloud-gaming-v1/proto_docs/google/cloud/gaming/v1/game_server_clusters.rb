@@ -332,6 +332,7 @@ module Google
           # The state of the installed versions of Agones/Kubernetes. See also
           # https://cloud.google.com/game-servers/docs/versions-and-upgrades.
           module InstallationState
+
             # The default value. This value is used if the state is omitted.
             INSTALLATION_STATE_UNSPECIFIED = 0
 
@@ -368,6 +369,7 @@ module Google
 
         # A view for GameServerCluster objects.
         module GameServerClusterView
+
           # The default / unset value.
           # The API will default to the BASIC view.
           GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED = 0
@@ -384,3 +386,4 @@ module Google
     end
   end
 end
+

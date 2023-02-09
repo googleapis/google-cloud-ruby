@@ -167,6 +167,7 @@ module Google
 
             # A composite filter operator.
             module Operator
+
               # Unspecified. This value must not be used.
               OPERATOR_UNSPECIFIED = 0
 
@@ -191,6 +192,7 @@ module Google
 
             # A field filter operator.
             module Operator
+
               # Unspecified. This value must not be used.
               OPERATOR_UNSPECIFIED = 0
 
@@ -278,6 +280,7 @@ module Google
 
             # A unary operator.
             module Operator
+
               # Unspecified. This value must not be used.
               OPERATOR_UNSPECIFIED = 0
 
@@ -344,6 +347,7 @@ module Google
 
           # A sort direction.
           module Direction
+
             # Unspecified.
             DIRECTION_UNSPECIFIED = 0
 
@@ -461,3 +465,4 @@ module Google
     end
   end
 end
+

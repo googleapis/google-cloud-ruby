@@ -184,6 +184,7 @@ module Google
 
         # Resolution status of an error group.
         module ResolutionStatus
+
           # Status is unknown. When left unspecified in requests, it is treated like
           # OPEN.
           RESOLUTION_STATUS_UNSPECIFIED = 0
@@ -206,3 +207,4 @@ module Google
     end
   end
 end
+

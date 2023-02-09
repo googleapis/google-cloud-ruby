@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "report_errors_service", "helpers.rb"
 require "google/cloud/error_reporting/v1beta1/report_errors_service/helpers" if ::File.file? helper_path
+

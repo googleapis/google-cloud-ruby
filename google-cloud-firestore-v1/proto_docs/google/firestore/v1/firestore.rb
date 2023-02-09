@@ -747,6 +747,7 @@ module Google
 
           # The type of change.
           module TargetChangeType
+
             # No change has occurred. Used only to send an updated `resume_token`.
             NO_CHANGE = 0
 
@@ -860,3 +861,4 @@ module Google
     end
   end
 end
+

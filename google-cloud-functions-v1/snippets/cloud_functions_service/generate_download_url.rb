@@ -20,8 +20,11 @@
 require "google/cloud/functions/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Functions::V1::CloudFunctionsService::Client#generate_download_url
+# Snippet for the generate_download_url call in the CloudFunctionsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Functions::V1::CloudFunctionsService::Client#generate_download_url.
+# It may require modification in order to execute successfully.
 #
 def generate_download_url
   # Create a client object. The client can be reused for multiple calls.

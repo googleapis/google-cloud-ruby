@@ -65,9 +65,9 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 600.0
-                default_config.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  default_config.timeout = 600.0
+                  default_config.retry_policy = {
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -230,13 +230,11 @@ module Google
             #   # Call the list_group_stats method.
             #   result = client.list_group_stats request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupStats.
-            #     p response
+            #     p item
             #   end
             #
             def list_group_stats request, options = nil
@@ -341,13 +339,11 @@ module Google
             #   # Call the list_events method.
             #   result = client.list_events request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ErrorReporting::V1beta1::ErrorEvent.
-            #     p response
+            #     p item
             #   end
             #
             def list_events request, options = nil
@@ -573,7 +569,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -652,3 +648,4 @@ module Google
     end
   end
 end
+

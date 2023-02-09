@@ -103,6 +103,7 @@ module Google
 
           # Possible states of a `Registration`.
           module State
+
             # The state is undefined.
             STATE_UNSPECIFIED = 0
 
@@ -139,6 +140,7 @@ module Google
 
           # Possible issues with a `Registration` that require attention.
           module Issue
+
             # The issue is undefined.
             ISSUE_UNSPECIFIED = 0
 
@@ -170,6 +172,7 @@ module Google
 
           # Defines how the `Registration` is renewed.
           module RenewalMethod
+
             # The renewal method is undefined.
             RENEWAL_METHOD_UNSPECIFIED = 0
 
@@ -267,6 +270,7 @@ module Google
             # List of algorithms used to create a DNSKEY. Certain
             # algorithms are not supported for particular domains.
             module Algorithm
+
               # The algorithm is unspecified.
               ALGORITHM_UNSPECIFIED = 0
 
@@ -325,6 +329,7 @@ module Google
             # List of hash functions that may have been used to generate a digest of a
             # DNSKEY.
             module DigestType
+
               # The DigestType is unspecified.
               DIGEST_TYPE_UNSPECIFIED = 0
 
@@ -368,6 +373,7 @@ module Google
 
           # The publication state of DS records for a `Registration`.
           module DsState
+
             # DS state is unspecified.
             DS_STATE_UNSPECIFIED = 0
 
@@ -769,6 +775,7 @@ module Google
 
           # Possible availability states of a domain name.
           module Availability
+
             # The availability is unspecified.
             AVAILABILITY_UNSPECIFIED = 0
 
@@ -856,6 +863,7 @@ module Google
         # each domain name have an entry. Choose from these options to control how much
         # information in your `ContactSettings` is published.
         module ContactPrivacy
+
           # The contact privacy settings are undefined.
           CONTACT_PRIVACY_UNSPECIFIED = 0
 
@@ -880,6 +888,7 @@ module Google
 
         # Notices about special properties of certain domains.
         module DomainNotice
+
           # The notice is undefined.
           DOMAIN_NOTICE_UNSPECIFIED = 0
 
@@ -893,6 +902,7 @@ module Google
 
         # Notices related to contact information.
         module ContactNotice
+
           # The notice is undefined.
           CONTACT_NOTICE_UNSPECIFIED = 0
 
@@ -903,6 +913,7 @@ module Google
 
         # Possible states of a `Registration`'s transfer lock.
         module TransferLockState
+
           # The state is unspecified.
           TRANSFER_LOCK_STATE_UNSPECIFIED = 0
 
@@ -916,3 +927,4 @@ module Google
     end
   end
 end
+

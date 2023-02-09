@@ -68,6 +68,7 @@ module Google
             #
             # Mode changes are only allowed if the database is empty.
             module DatabaseType
+
               # The default value. This value is used if the database type is omitted.
               DATABASE_TYPE_UNSPECIFIED = 0
 
@@ -80,6 +81,7 @@ module Google
 
             # The type of concurrency control mode for transactions.
             module ConcurrencyMode
+
               # Not used.
               CONCURRENCY_MODE_UNSPECIFIED = 0
 
@@ -104,6 +106,7 @@ module Google
 
             # The type of App Engine integration mode.
             module AppEngineIntegrationMode
+
               # Not used.
               APP_ENGINE_INTEGRATION_MODE_UNSPECIFIED = 0
 
@@ -123,3 +126,4 @@ module Google
     end
   end
 end
+

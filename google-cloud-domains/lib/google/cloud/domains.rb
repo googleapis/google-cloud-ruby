@@ -67,9 +67,9 @@ module Google
         require "google/cloud/domains/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Domains
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Domains.const_get(package_name).const_get(:Domains)
         service_module.const_get(:Client).new(&block)
       end
@@ -113,3 +113,4 @@ end
 
 helper_path = ::File.join __dir__, "domains", "helpers.rb"
 require "google/cloud/domains/helpers" if ::File.file? helper_path
+

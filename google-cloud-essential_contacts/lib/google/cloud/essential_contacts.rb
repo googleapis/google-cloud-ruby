@@ -67,9 +67,9 @@ module Google
         require "google/cloud/essential_contacts/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::EssentialContacts
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::EssentialContacts.const_get(package_name).const_get(:EssentialContactsService)
         service_module.const_get(:Client).new(&block)
       end
@@ -113,3 +113,4 @@ end
 
 helper_path = ::File.join __dir__, "essential_contacts", "helpers.rb"
 require "google/cloud/essential_contacts/helpers" if ::File.file? helper_path
+

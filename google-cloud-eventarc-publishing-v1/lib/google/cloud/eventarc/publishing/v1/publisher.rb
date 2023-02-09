@@ -71,3 +71,4 @@ end
 
 helper_path = ::File.join __dir__, "publisher", "helpers.rb"
 require "google/cloud/eventarc/publishing/v1/publisher/helpers" if ::File.file? helper_path
+

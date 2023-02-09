@@ -70,9 +70,9 @@ module Google
         require "google/cloud/document_ai/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DocumentAI
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::DocumentAI.const_get(package_name).const_get(:DocumentProcessorService)
         service_module.const_get(:Client).new(&block)
       end
@@ -116,3 +116,4 @@ end
 
 helper_path = ::File.join __dir__, "document_ai", "helpers.rb"
 require "google/cloud/document_ai/helpers" if ::File.file? helper_path
+

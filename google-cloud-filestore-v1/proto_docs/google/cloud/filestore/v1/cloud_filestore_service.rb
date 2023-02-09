@@ -52,6 +52,7 @@ module Google
 
           # Internet protocol versions supported by Cloud Filestore.
           module AddressMode
+
             # Internet protocol not set.
             ADDRESS_MODE_UNSPECIFIED = 0
 
@@ -121,6 +122,7 @@ module Google
 
           # The access mode.
           module AccessMode
+
             # AccessMode not set.
             ACCESS_MODE_UNSPECIFIED = 0
 
@@ -133,6 +135,7 @@ module Google
 
           # The squash mode.
           module SquashMode
+
             # SquashMode not set.
             SQUASH_MODE_UNSPECIFIED = 0
 
@@ -197,6 +200,7 @@ module Google
 
           # The instance state.
           module State
+
             # State not set.
             STATE_UNSPECIFIED = 0
 
@@ -225,6 +229,7 @@ module Google
 
           # Available service tiers.
           module Tier
+
             # Not set.
             TIER_UNSPECIFIED = 0
 
@@ -433,6 +438,7 @@ module Google
 
           # The backup state.
           module State
+
             # State not set.
             STATE_UNSPECIFIED = 0
 
@@ -559,3 +565,4 @@ module Google
     end
   end
 end
+

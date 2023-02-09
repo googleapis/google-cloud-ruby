@@ -49,3 +49,4 @@ end
 
 helper_path = ::File.join __dir__, "eventarc", "helpers.rb"
 require "google/cloud/eventarc/v1/eventarc/helpers" if ::File.file? helper_path
+

@@ -85,9 +85,9 @@ module Google
         require "google/cloud/filestore/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Filestore
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Filestore.const_get(package_name).const_get(:CloudFilestoreManager)
         service_module.const_get(:Client).new(&block)
       end
@@ -131,3 +131,4 @@ end
 
 helper_path = ::File.join __dir__, "filestore", "helpers.rb"
 require "google/cloud/filestore/helpers" if ::File.file? helper_path
+

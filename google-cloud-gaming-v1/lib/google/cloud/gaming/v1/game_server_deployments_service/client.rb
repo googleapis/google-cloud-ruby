@@ -65,37 +65,37 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_game_server_deployments.timeout = 60.0
-                default_config.rpcs.list_game_server_deployments.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_game_server_deployments.timeout = 60.0
+                    default_config.rpcs.list_game_server_deployments.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_game_server_deployment.timeout = 60.0
-                default_config.rpcs.get_game_server_deployment.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_game_server_deployment.timeout = 60.0
+                    default_config.rpcs.get_game_server_deployment.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_game_server_deployment.timeout = 60.0
+                    default_config.rpcs.create_game_server_deployment.timeout = 60.0
 
-                default_config.rpcs.delete_game_server_deployment.timeout = 60.0
+                    default_config.rpcs.delete_game_server_deployment.timeout = 60.0
 
-                default_config.rpcs.update_game_server_deployment.timeout = 60.0
+                    default_config.rpcs.update_game_server_deployment.timeout = 60.0
 
-                default_config.rpcs.get_game_server_deployment_rollout.timeout = 60.0
-                default_config.rpcs.get_game_server_deployment_rollout.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_game_server_deployment_rollout.timeout = 60.0
+                    default_config.rpcs.get_game_server_deployment_rollout.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_game_server_deployment_rollout.timeout = 60.0
+                    default_config.rpcs.update_game_server_deployment_rollout.timeout = 60.0
 
-                default_config.rpcs.preview_game_server_deployment_rollout.timeout = 60.0
-                default_config.rpcs.preview_game_server_deployment_rollout.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.preview_game_server_deployment_rollout.timeout = 60.0
+                    default_config.rpcs.preview_game_server_deployment_rollout.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.fetch_deployment_state.timeout = 60.0
-                default_config.rpcs.fetch_deployment_state.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.fetch_deployment_state.timeout = 60.0
+                    default_config.rpcs.fetch_deployment_state.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -247,13 +247,11 @@ module Google
             #   # Call the list_game_server_deployments method.
             #   result = client.list_game_server_deployments request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Gaming::V1::GameServerDeployment.
-            #     p response
+            #     p item
             #   end
             #
             def list_game_server_deployments request, options = nil
@@ -430,14 +428,14 @@ module Google
             #   # Call the create_game_server_deployment method.
             #   result = client.create_game_server_deployment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_game_server_deployment request, options = nil
@@ -524,14 +522,14 @@ module Google
             #   # Call the delete_game_server_deployment method.
             #   result = client.delete_game_server_deployment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_game_server_deployment request, options = nil
@@ -622,14 +620,14 @@ module Google
             #   # Call the update_game_server_deployment method.
             #   result = client.update_game_server_deployment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_game_server_deployment request, options = nil
@@ -811,14 +809,14 @@ module Google
             #   # Call the update_game_server_deployment_rollout method.
             #   result = client.update_game_server_deployment_rollout request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_game_server_deployment_rollout request, options = nil
@@ -1136,7 +1134,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1257,3 +1255,4 @@ module Google
     end
   end
 end
+

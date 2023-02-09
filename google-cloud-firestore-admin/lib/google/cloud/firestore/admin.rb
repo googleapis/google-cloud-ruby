@@ -95,9 +95,9 @@ module Google
           require "google/cloud/firestore/admin/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Firestore::Admin
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Firestore::Admin.const_get(package_name).const_get(:FirestoreAdmin)
           service_module.const_get(:Client).new(&block)
         end
@@ -142,3 +142,4 @@ end
 
 helper_path = ::File.join __dir__, "admin", "helpers.rb"
 require "google/cloud/firestore/admin/helpers" if ::File.file? helper_path
+

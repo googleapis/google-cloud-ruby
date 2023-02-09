@@ -83,7 +83,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           module ErrorCode
-            ERROR_CODE_UNSPECIFIED = 0
+          ERROR_CODE_UNSPECIFIED = 0
 
             INTERNAL_ERROR = 1
 
@@ -300,3 +300,4 @@ module Google
     end
   end
 end
+
