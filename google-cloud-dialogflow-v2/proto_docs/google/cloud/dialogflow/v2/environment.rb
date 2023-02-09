@@ -85,6 +85,7 @@ module Google
           # the agent. After the new agent version is done loading, the environment is
           # set back to the `RUNNING` state.
           module State
+
             # Not specified. This value is not used.
             STATE_UNSPECIFIED = 0
 
@@ -309,3 +310,4 @@ module Google
     end
   end
 end
+

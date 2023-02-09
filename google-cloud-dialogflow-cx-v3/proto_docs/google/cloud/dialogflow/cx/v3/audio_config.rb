@@ -191,6 +191,7 @@ module Google
           # documentation](https://cloud.google.com/speech-to-text/docs/basics) for more
           # details.
           module AudioEncoding
+
             # Not specified.
             AUDIO_ENCODING_UNSPECIFIED = 0
 
@@ -243,6 +244,7 @@ module Google
           # has both a standard and an enhanced variant. When you use an enhanced model,
           # you will generally receive higher quality results than for a standard model.
           module SpeechModelVariant
+
             # No model variant specified. In this case Dialogflow defaults to
             # USE_BEST_AVAILABLE.
             SPEECH_MODEL_VARIANT_UNSPECIFIED = 0
@@ -281,6 +283,7 @@ module Google
           # Gender of the voice as described in
           # [SSML voice element](https://www.w3.org/TR/speech-synthesis11/#edef_voice).
           module SsmlVoiceGender
+
             # An unspecified gender, which means that the client doesn't care which
             # gender the selected voice will have.
             SSML_VOICE_GENDER_UNSPECIFIED = 0
@@ -297,6 +300,7 @@ module Google
 
           # Audio encoding of the output audio format in Text-To-Speech.
           module OutputAudioEncoding
+
             # Not specified.
             OUTPUT_AUDIO_ENCODING_UNSPECIFIED = 0
 
@@ -324,3 +328,4 @@ module Google
     end
   end
 end
+

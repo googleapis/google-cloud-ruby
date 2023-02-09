@@ -105,6 +105,7 @@ module Google
 
           # Enumeration of the roles a participant can play in a conversation.
           module Role
+
             # Participant role not set.
             ROLE_UNSPECIFIED = 0
 
@@ -716,6 +717,7 @@ module Google
 
           # Represents different automated agent reply types.
           module AutomatedAgentReplyType
+
             # Not specified. This should never happen.
             AUTOMATED_AGENT_REPLY_TYPE_UNSPECIFIED = 0
 
@@ -944,3 +946,4 @@ module Google
     end
   end
 end
+

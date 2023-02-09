@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "session_entity_types", "helpers.rb"
 require "google/cloud/dialogflow/cx/v3/session_entity_types/helpers" if ::File.file? helper_path
+

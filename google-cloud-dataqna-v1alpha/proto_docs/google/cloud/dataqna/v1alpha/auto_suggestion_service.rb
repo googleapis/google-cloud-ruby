@@ -125,6 +125,7 @@ module Google
 
         # The type of suggestion.
         module SuggestionType
+
           # No suggestiont type is specified.
           SUGGESTION_TYPE_UNSPECIFIED = 0
 
@@ -138,3 +139,4 @@ module Google
     end
   end
 end
+

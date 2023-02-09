@@ -51,3 +51,4 @@ end
 
 helper_path = ::File.join __dir__, "environments", "helpers.rb"
 require "google/cloud/dialogflow/cx/v3/environments/helpers" if ::File.file? helper_path
+

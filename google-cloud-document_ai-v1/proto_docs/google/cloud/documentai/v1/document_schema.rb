@@ -108,6 +108,7 @@ module Google
               # represents the number of instances of an entity types, not number of
               # mentions of a given entity instance.
               module OccurrenceType
+
                 # Unspecified occurrence type.
                 OCCURRENCE_TYPE_UNSPECIFIED = 0
 
@@ -153,3 +154,4 @@ module Google
     end
   end
 end
+

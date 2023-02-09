@@ -67,81 +67,81 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_delivery_pipelines.timeout = 60.0
-                default_config.rpcs.list_delivery_pipelines.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_delivery_pipelines.timeout = 60.0
+                    default_config.rpcs.list_delivery_pipelines.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_delivery_pipeline.timeout = 60.0
-                default_config.rpcs.get_delivery_pipeline.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_delivery_pipeline.timeout = 60.0
+                    default_config.rpcs.get_delivery_pipeline.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_delivery_pipeline.timeout = 60.0
+                    default_config.rpcs.create_delivery_pipeline.timeout = 60.0
 
-                default_config.rpcs.update_delivery_pipeline.timeout = 60.0
+                    default_config.rpcs.update_delivery_pipeline.timeout = 60.0
 
-                default_config.rpcs.delete_delivery_pipeline.timeout = 60.0
+                    default_config.rpcs.delete_delivery_pipeline.timeout = 60.0
 
-                default_config.rpcs.list_targets.timeout = 60.0
-                default_config.rpcs.list_targets.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_targets.timeout = 60.0
+                    default_config.rpcs.list_targets.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_target.timeout = 60.0
-                default_config.rpcs.get_target.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_target.timeout = 60.0
+                    default_config.rpcs.get_target.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_target.timeout = 60.0
+                    default_config.rpcs.create_target.timeout = 60.0
 
-                default_config.rpcs.update_target.timeout = 60.0
+                    default_config.rpcs.update_target.timeout = 60.0
 
-                default_config.rpcs.delete_target.timeout = 60.0
+                    default_config.rpcs.delete_target.timeout = 60.0
 
-                default_config.rpcs.list_releases.timeout = 60.0
-                default_config.rpcs.list_releases.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_releases.timeout = 60.0
+                    default_config.rpcs.list_releases.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_release.timeout = 60.0
-                default_config.rpcs.get_release.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_release.timeout = 60.0
+                    default_config.rpcs.get_release.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_release.timeout = 60.0
+                    default_config.rpcs.create_release.timeout = 60.0
 
-                default_config.rpcs.abandon_release.timeout = 60.0
+                    default_config.rpcs.abandon_release.timeout = 60.0
 
-                default_config.rpcs.approve_rollout.timeout = 60.0
+                    default_config.rpcs.approve_rollout.timeout = 60.0
 
-                default_config.rpcs.list_rollouts.timeout = 60.0
-                default_config.rpcs.list_rollouts.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_rollouts.timeout = 60.0
+                    default_config.rpcs.list_rollouts.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_rollout.timeout = 60.0
-                default_config.rpcs.get_rollout.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_rollout.timeout = 60.0
+                    default_config.rpcs.get_rollout.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_rollout.timeout = 60.0
+                    default_config.rpcs.create_rollout.timeout = 60.0
 
-                default_config.rpcs.retry_job.timeout = 60.0
+                    default_config.rpcs.retry_job.timeout = 60.0
 
-                default_config.rpcs.list_job_runs.timeout = 60.0
-                default_config.rpcs.list_job_runs.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_job_runs.timeout = 60.0
+                    default_config.rpcs.list_job_runs.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_job_run.timeout = 60.0
-                default_config.rpcs.get_job_run.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_job_run.timeout = 60.0
+                    default_config.rpcs.get_job_run.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_config.timeout = 60.0
-                default_config.rpcs.get_config.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_config.timeout = 60.0
+                    default_config.rpcs.get_config.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -321,13 +321,11 @@ module Google
             #   # Call the list_delivery_pipelines method.
             #   result = client.list_delivery_pipelines request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Deploy::V1::DeliveryPipeline.
-            #     p response
+            #     p item
             #   end
             #
             def list_delivery_pipelines request, options = nil
@@ -521,14 +519,14 @@ module Google
             #   # Call the create_delivery_pipeline method.
             #   result = client.create_delivery_pipeline request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_delivery_pipeline request, options = nil
@@ -640,14 +638,14 @@ module Google
             #   # Call the update_delivery_pipeline method.
             #   result = client.update_delivery_pipeline request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_delivery_pipeline request, options = nil
@@ -762,14 +760,14 @@ module Google
             #   # Call the delete_delivery_pipeline method.
             #   result = client.delete_delivery_pipeline request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_delivery_pipeline request, options = nil
@@ -871,13 +869,11 @@ module Google
             #   # Call the list_targets method.
             #   result = client.list_targets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Deploy::V1::Target.
-            #     p response
+            #     p item
             #   end
             #
             def list_targets request, options = nil
@@ -1072,14 +1068,14 @@ module Google
             #   # Call the create_target method.
             #   result = client.create_target request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_target request, options = nil
@@ -1191,14 +1187,14 @@ module Google
             #   # Call the update_target method.
             #   result = client.update_target request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_target request, options = nil
@@ -1309,14 +1305,14 @@ module Google
             #   # Call the delete_target method.
             #   result = client.delete_target request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_target request, options = nil
@@ -1417,13 +1413,11 @@ module Google
             #   # Call the list_releases method.
             #   result = client.list_releases request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Deploy::V1::Release.
-            #     p response
+            #     p item
             #   end
             #
             def list_releases request, options = nil
@@ -1618,14 +1612,14 @@ module Google
             #   # Call the create_release method.
             #   result = client.create_release request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_release request, options = nil
@@ -1902,13 +1896,11 @@ module Google
             #   # Call the list_rollouts method.
             #   result = client.list_rollouts request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Deploy::V1::Rollout.
-            #     p response
+            #     p item
             #   end
             #
             def list_rollouts request, options = nil
@@ -2103,14 +2095,14 @@ module Google
             #   # Call the create_rollout method.
             #   result = client.create_rollout request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_rollout request, options = nil
@@ -2302,13 +2294,11 @@ module Google
             #   # Call the list_job_runs method.
             #   result = client.list_job_runs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Deploy::V1::JobRun.
-            #     p response
+            #     p item
             #   end
             #
             def list_job_runs request, options = nil
@@ -2615,7 +2605,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -2827,3 +2817,4 @@ module Google
     end
   end
 end
+

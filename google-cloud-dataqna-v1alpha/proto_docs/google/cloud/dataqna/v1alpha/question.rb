@@ -137,6 +137,7 @@ module Google
           # The interpret error code provides an error category why the interpretation
           # failed.
           module InterpretErrorCode
+
             # No interpret error code was specified.
             INTERPRET_ERROR_CODE_UNSPECIFIED = 0
 
@@ -175,6 +176,7 @@ module Google
 
           # Enum of possible job execution statuses.
           module JobExecutionState
+
             # No job execution was specified.
             JOB_EXECUTION_STATE_UNSPECIFIED = 0
 
@@ -296,6 +298,7 @@ module Google
 
           # Enumeration of visualzation types to use for query response data.
           module VisualizationType
+
             # No visualization type was specified.
             VISUALIZATION_TYPE_UNSPECIFIED = 0
 
@@ -403,6 +406,7 @@ module Google
 
         # Query entities of an interpretation.
         module InterpretEntity
+
           # No interpret entity was specified.
           INTERPRET_ENTITY_UNSPECIFIED = 0
 
@@ -416,3 +420,4 @@ module Google
     end
   end
 end
+

@@ -20,8 +20,11 @@
 require "google/cloud/dlp/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dlp::V2::DlpService::Client#list_info_types
+# Snippet for the list_info_types call in the DlpService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#list_info_types. It may require
+# modification in order to execute successfully.
 #
 def list_info_types
   # Create a client object. The client can be reused for multiple calls.

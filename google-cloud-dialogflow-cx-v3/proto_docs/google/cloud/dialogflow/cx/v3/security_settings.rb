@@ -234,6 +234,7 @@ module Google
               # File format for exported audio file. Currently only in telephony
               # recordings.
               module AudioFormat
+
                 # Unspecified. Do not use.
                 AUDIO_FORMAT_UNSPECIFIED = 0
 
@@ -261,6 +262,7 @@ module Google
 
             # Defines how we redact data.
             module RedactionStrategy
+
               # Do not redact.
               REDACTION_STRATEGY_UNSPECIFIED = 0
 
@@ -270,6 +272,7 @@ module Google
 
             # Defines what types of data to redact.
             module RedactionScope
+
               # Don't redact any kind of data.
               REDACTION_SCOPE_UNSPECIFIED = 0
 
@@ -281,6 +284,7 @@ module Google
 
             # Type of data we purge after retention settings triggers purge.
             module PurgeDataType
+
               # Unspecified. Do not use.
               PURGE_DATA_TYPE_UNSPECIFIED = 0
 
@@ -294,3 +298,4 @@ module Google
     end
   end
 end
+

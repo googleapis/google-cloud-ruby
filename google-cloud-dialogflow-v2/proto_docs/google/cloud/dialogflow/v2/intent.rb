@@ -208,6 +208,7 @@ module Google
 
             # Represents different types of training phrases.
             module Type
+
               # Not specified. This value should never be used.
               TYPE_UNSPECIFIED = 0
 
@@ -602,6 +603,7 @@ module Google
 
               # Format of response media type.
               module ResponseMediaType
+
                 # Unspecified.
                 RESPONSE_MEDIA_TYPE_UNSPECIFIED = 0
 
@@ -660,6 +662,7 @@ module Google
 
                   # Type of the URI.
                   module UrlTypeHint
+
                     # Unspecified
                     URL_TYPE_HINT_UNSPECIFIED = 0
 
@@ -677,6 +680,7 @@ module Google
               # when the image's aspect ratio does not match the image container's
               # aspect ratio.
               module ImageDisplayOptions
+
                 # Fill the gaps between the image and the image container with gray
                 # bars.
                 IMAGE_DISPLAY_OPTIONS_UNSPECIFIED = 0
@@ -741,6 +745,7 @@ module Google
 
               # Text alignments within a cell.
               module HorizontalAlignment
+
                 # Text is aligned to the leading edge of the column.
                 HORIZONTAL_ALIGNMENT_UNSPECIFIED = 0
 
@@ -780,6 +785,7 @@ module Google
             # The rich response message integration platform. See
             # [Integrations](https://cloud.google.com/dialogflow/docs/integrations).
             module Platform
+
               # Default platform.
               PLATFORM_UNSPECIFIED = 0
 
@@ -830,6 +836,7 @@ module Google
 
           # Represents the different states that webhooks can be in.
           module WebhookState
+
             # Webhook is disabled in the agent and in the intent.
             WEBHOOK_STATE_UNSPECIFIED = 0
 
@@ -1041,6 +1048,7 @@ module Google
         # An intent can be a sizable object. Therefore, we provide a resource view that
         # does not return training phrases in the response by default.
         module IntentView
+
           # Training phrases field is not populated in the response.
           INTENT_VIEW_UNSPECIFIED = 0
 
@@ -1051,3 +1059,4 @@ module Google
     end
   end
 end
+

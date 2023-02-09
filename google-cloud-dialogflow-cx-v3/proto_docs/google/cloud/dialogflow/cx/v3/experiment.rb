@@ -178,6 +178,7 @@ module Google
 
               # Types of ratio-based metric for Dialogflow experiment.
               module MetricType
+
                 # Metric unspecified.
                 METRIC_UNSPECIFIED = 0
 
@@ -200,6 +201,7 @@ module Google
 
               # Types of count-based metric for Dialogflow experiment.
               module CountType
+
                 # Count type unspecified.
                 COUNT_TYPE_UNSPECIFIED = 0
 
@@ -216,6 +218,7 @@ module Google
 
             # The state of the experiment.
             module State
+
               # State unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -448,3 +451,4 @@ module Google
     end
   end
 end
+

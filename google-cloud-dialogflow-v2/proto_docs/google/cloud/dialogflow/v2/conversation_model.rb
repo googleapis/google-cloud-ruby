@@ -58,6 +58,7 @@ module Google
 
           # State of the model.
           module State
+
             # Should not be used, an un-set enum has this value by default.
             STATE_UNSPECIFIED = 0
 
@@ -90,6 +91,7 @@ module Google
 
           # Model type.
           module ModelType
+
             # ModelType unspecified.
             MODEL_TYPE_UNSPECIFIED = 0
 
@@ -425,6 +427,7 @@ module Google
 
           # State of CreateConversationModel operation.
           module State
+
             # Invalid.
             STATE_UNSPECIFIED = 0
 
@@ -524,6 +527,7 @@ module Google
 
           # State of CreateConversationModel operation.
           module State
+
             # Operation status not specified.
             STATE_UNSPECIFIED = 0
 
@@ -547,3 +551,4 @@ module Google
     end
   end
 end
+

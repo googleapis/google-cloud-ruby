@@ -50,6 +50,7 @@ module Google
 
           # Represents a level of severity.
           module Severity
+
             # Not specified. This value should never be used.
             SEVERITY_UNSPECIFIED = 0
 
@@ -79,3 +80,4 @@ module Google
     end
   end
 end
+

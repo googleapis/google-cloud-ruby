@@ -175,6 +175,7 @@ module Google
 
           # Private Connection state.
           module State
+
             STATE_UNSPECIFIED = 0
 
             # The private connection is in creation state - creating resources.
@@ -501,6 +502,7 @@ module Google
 
           # Json file compression.
           module JsonCompression
+
             # Unspecified json file compression.
             JSON_COMPRESSION_UNSPECIFIED = 0
 
@@ -617,6 +619,7 @@ module Google
 
           # Stream state.
           module State
+
             # Unspecified stream state.
             STATE_UNSPECIFIED = 0
 
@@ -709,6 +712,7 @@ module Google
 
           # Validation execution status.
           module Status
+
             # Unspecified status.
             STATUS_UNSPECIFIED = 0
 
@@ -751,6 +755,7 @@ module Google
 
           # Validation message level.
           module Level
+
             # Unspecified level.
             LEVEL_UNSPECIFIED = 0
 
@@ -764,6 +769,7 @@ module Google
 
         # File format in Cloud Storage.
         module GcsFileFormat
+
           # Unspecified Cloud Storage file format.
           GCS_FILE_FORMAT_UNSPECIFIED = 0
 
@@ -773,6 +779,7 @@ module Google
 
         # Schema file format.
         module SchemaFileFormat
+
           # Unspecified schema file format.
           SCHEMA_FILE_FORMAT_UNSPECIFIED = 0
 
@@ -786,3 +793,4 @@ module Google
     end
   end
 end
+

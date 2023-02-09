@@ -199,6 +199,7 @@ module Google
 
             # What part of the message replay differs from the test case.
             module DiffType
+
               # Should never be used.
               DIFF_TYPE_UNSPECIFIED = 0
 
@@ -354,6 +355,7 @@ module Google
 
             # The type of coverage score requested.
             module CoverageType
+
               # Should never be used.
               COVERAGE_TYPE_UNSPECIFIED = 0
 
@@ -411,6 +413,7 @@ module Google
 
             # Specifies how much test case information to include in the response.
             module TestCaseView
+
               # The default / unset value.
               # The API will default to the BASIC view.
               TEST_CASE_VIEW_UNSPECIFIED = 0
@@ -689,6 +692,7 @@ module Google
 
             # Data format of the exported test cases.
             module DataFormat
+
               # Unspecified format.
               DATA_FORMAT_UNSPECIFIED = 0
 
@@ -797,6 +801,7 @@ module Google
 
           # The test result for a test case and an agent environment.
           module TestResult
+
             # Not specified. Should never be used.
             TEST_RESULT_UNSPECIFIED = 0
 
@@ -811,3 +816,4 @@ module Google
     end
   end
 end
+

@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::Experiments::Client#delete_experiment
+# Snippet for the delete_experiment call in the Experiments service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Experiments::Client#delete_experiment. It
+# may require modification in order to execute successfully.
 #
 def delete_experiment
   # Create a client object. The client can be reused for multiple calls.

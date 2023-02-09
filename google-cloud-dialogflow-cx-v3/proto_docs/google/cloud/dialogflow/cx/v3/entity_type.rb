@@ -130,6 +130,7 @@ module Google
 
             # Represents kinds of entities.
             module Kind
+
               # Not specified. This value should be never used.
               KIND_UNSPECIFIED = 0
 
@@ -151,6 +152,7 @@ module Google
             # allows an agent to recognize values that have not been explicitly listed in
             # the entity (for example, new kinds of shopping list items).
             module AutoExpansionMode
+
               # Auto expansion disabled for the entity.
               AUTO_EXPANSION_MODE_UNSPECIFIED = 0
 
@@ -316,3 +318,4 @@ module Google
     end
   end
 end
+

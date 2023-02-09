@@ -23,6 +23,7 @@ module Google
       module V1
         # Type indicates the type of the log entry and can be used as a filter.
         module Type
+
           # Type is unspecified.
           TYPE_UNSPECIFIED = 0
 
@@ -36,3 +37,4 @@ module Google
     end
   end
 end
+

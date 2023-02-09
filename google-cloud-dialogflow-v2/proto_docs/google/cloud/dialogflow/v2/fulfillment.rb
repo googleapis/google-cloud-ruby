@@ -113,6 +113,7 @@ module Google
 
             # The type of the feature.
             module Type
+
               # Feature type not specified.
               TYPE_UNSPECIFIED = 0
 
@@ -150,3 +151,4 @@ module Google
     end
   end
 end
+

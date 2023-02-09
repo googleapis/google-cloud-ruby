@@ -276,6 +276,7 @@ module Google
 
           # The modes available for commits.
           module Mode
+
             # Unspecified. This value must not be used.
             MODE_UNSPECIFIED = 0
 
@@ -452,6 +453,7 @@ module Google
 
           # The possible values for read consistencies.
           module ReadConsistency
+
             # Unspecified. This value must not be used.
             READ_CONSISTENCY_UNSPECIFIED = 0
 
@@ -503,3 +505,4 @@ module Google
     end
   end
 end
+

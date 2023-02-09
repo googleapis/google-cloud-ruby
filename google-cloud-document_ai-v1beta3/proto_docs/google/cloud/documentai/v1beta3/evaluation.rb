@@ -170,6 +170,7 @@ module Google
 
             # A type that determines how metrics should be interpreted.
             module MetricsType
+
               # The metrics type is unspecified. By default, metrics without a
               # particular specification are for leaf entity types (i.e., top-level
               # entity types without child types, or child types which are not
@@ -197,3 +198,4 @@ module Google
     end
   end
 end
+

@@ -48,6 +48,7 @@ module Google
 
           # Various score levels for resources.
           module SensitivityScoreLevel
+
             # Unused.
             SENSITIVITY_SCORE_UNSPECIFIED = 0
 
@@ -275,7 +276,7 @@ module Google
           end
 
           module ExclusionType
-            # A finding of this custom info type will not be excluded from results.
+          # A finding of this custom info type will not be excluded from results.
             EXCLUSION_TYPE_UNSPECIFIED = 0
 
             # A finding of this custom info type will be excluded from final results,
@@ -456,6 +457,7 @@ module Google
           # in conjunction with bytes_limit_per_file. If not specified, scanning would
           # start from the top.
           module SampleMethod
+
             SAMPLE_METHOD_UNSPECIFIED = 0
 
             # Scan from the top (default).
@@ -528,6 +530,7 @@ module Google
           # in conjunction with either rows_limit or rows_limit_percent. If not
           # specified, rows are scanned in the order BigQuery reads them.
           module SampleMethod
+
             SAMPLE_METHOD_UNSPECIFIED = 0
 
             # Scan groups of rows in the order BigQuery provides (default). Multiple
@@ -817,6 +820,7 @@ module Google
         # Categorization of results based on how likely they are to represent a match,
         # based on the number of elements they contain which imply a match.
         module Likelihood
+
           # Default value; same as POSSIBLE.
           LIKELIHOOD_UNSPECIFIED = 0
 
@@ -837,6 +841,7 @@ module Google
         # Definitions of file type groups to scan. New types will be added to this
         # list.
         module FileType
+
           # Includes all files.
           FILE_TYPE_UNSPECIFIED = 0
 
@@ -898,3 +903,4 @@ module Google
     end
   end
 end
+

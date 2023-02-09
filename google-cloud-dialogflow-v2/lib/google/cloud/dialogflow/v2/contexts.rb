@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "contexts", "helpers.rb"
 require "google/cloud/dialogflow/v2/contexts/helpers" if ::File.file? helper_path
+

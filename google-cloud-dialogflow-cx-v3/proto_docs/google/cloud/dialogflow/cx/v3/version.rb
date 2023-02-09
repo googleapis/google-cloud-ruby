@@ -63,6 +63,7 @@ module Google
 
             # The state of the version.
             module State
+
               # Not specified. This value is not used.
               STATE_UNSPECIFIED = 0
 
@@ -233,3 +234,4 @@ module Google
     end
   end
 end
+

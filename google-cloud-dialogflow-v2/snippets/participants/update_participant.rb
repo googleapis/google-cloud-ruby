@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Participants::Client#update_participant
+# Snippet for the update_participant call in the Participants service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Participants::Client#update_participant. It may
+# require modification in order to execute successfully.
 #
 def update_participant
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/dlp/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dlp::V2::DlpService::Client#list_deidentify_templates
+# Snippet for the list_deidentify_templates call in the DlpService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#list_deidentify_templates. It may
+# require modification in order to execute successfully.
 #
 def list_deidentify_templates
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_deidentify_templates
   # Call the list_deidentify_templates method.
   result = client.list_deidentify_templates request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Dlp::V2::DeidentifyTemplate.
-    p response
+    p item
   end
 end
 # [END dlp_v2_generated_DlpService_ListDeidentifyTemplates_sync]

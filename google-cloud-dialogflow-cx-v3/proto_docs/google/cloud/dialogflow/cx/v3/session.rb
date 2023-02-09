@@ -93,6 +93,7 @@ module Google
 
             # Represents different DetectIntentResponse types.
             module ResponseType
+
               # Not specified. This should never happen.
               RESPONSE_TYPE_UNSPECIFIED = 0
 
@@ -305,6 +306,7 @@ module Google
 
             # Type of the response message.
             module MessageType
+
               # Not specified. Should never be used.
               MESSAGE_TYPE_UNSPECIFIED = 0
 
@@ -714,6 +716,7 @@ module Google
 
             # Type of a Match.
             module MatchType
+
               # Not specified. Should never be used.
               MATCH_TYPE_UNSPECIFIED = 0
 
@@ -862,3 +865,4 @@ module Google
     end
   end
 end
+

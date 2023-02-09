@@ -237,6 +237,7 @@ module Google
 
             # Data format of the exported agent.
             module DataFormat
+
               # Unspecified format.
               DATA_FORMAT_UNSPECIFIED = 0
 
@@ -292,6 +293,7 @@ module Google
 
             # Restore option.
             module RestoreOption
+
               # Unspecified. Treated as KEEP.
               RESTORE_OPTION_UNSPECIFIED = 0
 
@@ -354,3 +356,4 @@ module Google
     end
   end
 end
+

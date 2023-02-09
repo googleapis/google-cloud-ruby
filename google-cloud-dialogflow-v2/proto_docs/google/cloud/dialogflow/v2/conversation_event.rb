@@ -44,6 +44,7 @@ module Google
 
           # Enumeration of the types of events available.
           module Type
+
             # Type not set.
             TYPE_UNSPECIFIED = 0
 
@@ -81,3 +82,4 @@ module Google
     end
   end
 end
+

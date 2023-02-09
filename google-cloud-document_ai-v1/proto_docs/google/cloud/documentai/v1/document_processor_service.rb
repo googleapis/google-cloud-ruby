@@ -73,6 +73,7 @@ module Google
 
           # The final state of human review on a processed document.
           module State
+
             # Human review state is unspecified. Most likely due to an internal error.
             STATE_UNSPECIFIED = 0
 
@@ -181,6 +182,7 @@ module Google
 
           # Possible states of the batch processing operation.
           module State
+
             # The default value. This value is used if the state is omitted.
             STATE_UNSPECIFIED = 0
 
@@ -553,6 +555,7 @@ module Google
 
           # The priority level of the human review task.
           module Priority
+
             # The default priority level.
             DEFAULT = 0
 
@@ -579,6 +582,7 @@ module Google
 
           # Possible states of the review operation.
           module State
+
             # The default value. This value is used if the state is omitted.
             STATE_UNSPECIFIED = 0
 
@@ -605,3 +609,4 @@ module Google
     end
   end
 end
+

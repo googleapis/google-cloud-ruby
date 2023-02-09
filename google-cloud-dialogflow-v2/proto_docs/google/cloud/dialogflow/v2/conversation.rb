@@ -73,6 +73,7 @@ module Google
 
           # Enumeration of the completion status of the conversation.
           module LifecycleState
+
             # Unknown.
             LIFECYCLE_STATE_UNSPECIFIED = 0
 
@@ -87,6 +88,7 @@ module Google
           # Reference:
           # https://cloud.google.com/dialogflow/priv/docs/contact-center/basics#stages
           module ConversationStage
+
             # Unknown. Should never be used after a conversation is successfully
             # created.
             CONVERSATION_STAGE_UNSPECIFIED = 0
@@ -336,3 +338,4 @@ module Google
     end
   end
 end
+

@@ -51,3 +51,4 @@ end
 
 helper_path = ::File.join __dir__, "conversation_datasets", "helpers.rb"
 require "google/cloud/dialogflow/v2/conversation_datasets/helpers" if ::File.file? helper_path
+

@@ -109,3 +109,4 @@ end
 
 helper_path = ::File.join __dir__, "datastore_admin", "helpers.rb"
 require "google/cloud/datastore/admin/v1/datastore_admin/helpers" if ::File.file? helper_path
+

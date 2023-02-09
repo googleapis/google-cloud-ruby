@@ -121,6 +121,7 @@ module Google
 
           # The knowledge type of document content.
           module KnowledgeType
+
             # The type is unspecified or arbitrary.
             KNOWLEDGE_TYPE_UNSPECIFIED = 0
 
@@ -147,6 +148,7 @@ module Google
 
           # Possible states of the document
           module State
+
             # The document state is unspecified.
             STATE_UNSPECIFIED = 0
 
@@ -416,6 +418,7 @@ module Google
 
           # States of the operation.
           module State
+
             # State unspecified.
             STATE_UNSPECIFIED = 0
 
@@ -433,3 +436,4 @@ module Google
     end
   end
 end
+

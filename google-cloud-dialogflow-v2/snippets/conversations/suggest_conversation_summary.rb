@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Conversations::Client#suggest_conversation_summary
+# Snippet for the suggest_conversation_summary call in the Conversations service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Conversations::Client#suggest_conversation_summary.
+# It may require modification in order to execute successfully.
 #
 def suggest_conversation_summary
   # Create a client object. The client can be reused for multiple calls.

@@ -68,9 +68,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Pages)
           service_module.const_get(:Client).new(&block)
         end
@@ -98,9 +98,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Flows)
           service_module.const_get(:Client).new(&block)
         end
@@ -128,9 +128,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Agents)
           service_module.const_get(:Client).new(&block)
         end
@@ -158,9 +158,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Changelogs)
           service_module.const_get(:Client).new(&block)
         end
@@ -188,9 +188,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Deployments)
           service_module.const_get(:Client).new(&block)
         end
@@ -218,9 +218,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:EntityTypes)
           service_module.const_get(:Client).new(&block)
         end
@@ -248,9 +248,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Intents)
           service_module.const_get(:Client).new(&block)
         end
@@ -279,9 +279,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:SessionEntityTypes)
           service_module.const_get(:Client).new(&block)
         end
@@ -312,9 +312,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Sessions)
           service_module.const_get(:Client).new(&block)
         end
@@ -343,9 +343,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:TransitionRouteGroups)
           service_module.const_get(:Client).new(&block)
         end
@@ -374,9 +374,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:TestCases)
           service_module.const_get(:Client).new(&block)
         end
@@ -404,9 +404,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Webhooks)
           service_module.const_get(:Client).new(&block)
         end
@@ -435,9 +435,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Environments)
           service_module.const_get(:Client).new(&block)
         end
@@ -465,9 +465,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Experiments)
           service_module.const_get(:Client).new(&block)
         end
@@ -495,9 +495,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:SecuritySettingsService)
           service_module.const_get(:Client).new(&block)
         end
@@ -525,9 +525,9 @@ module Google
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Versions)
           service_module.const_get(:Client).new(&block)
         end
@@ -572,3 +572,4 @@ end
 
 helper_path = ::File.join __dir__, "cx", "helpers.rb"
 require "google/cloud/dialogflow/cx/helpers" if ::File.file? helper_path
+

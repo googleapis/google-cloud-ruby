@@ -56,6 +56,7 @@ module Google
           # (for example, in message `QueryResultBatch`, field `entity_result_type`
           # specifies a `ResultType` for all the values in field `entity_results`).
           module ResultType
+
             # Unspecified. This value is never used.
             RESULT_TYPE_UNSPECIFIED = 0
 
@@ -247,6 +248,7 @@ module Google
 
           # The sort direction.
           module Direction
+
             # Unspecified. This value must not be used.
             DIRECTION_UNSPECIFIED = 0
 
@@ -287,6 +289,7 @@ module Google
 
           # A composite filter operator.
           module Operator
+
             # Unspecified. This value must not be used.
             OPERATOR_UNSPECIFIED = 0
 
@@ -311,6 +314,7 @@ module Google
 
           # A property filter operator.
           module Operator
+
             # Unspecified. This value must not be used.
             OPERATOR_UNSPECIFIED = 0
 
@@ -481,6 +485,7 @@ module Google
 
           # The possible values for the `more_results` field.
           module MoreResultsType
+
             # Unspecified. This value is never used.
             MORE_RESULTS_TYPE_UNSPECIFIED = 0
 
@@ -502,3 +507,4 @@ module Google
     end
   end
 end
+

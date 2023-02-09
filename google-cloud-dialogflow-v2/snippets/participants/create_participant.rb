@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Participants::Client#create_participant
+# Snippet for the create_participant call in the Participants service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Participants::Client#create_participant. It may
+# require modification in order to execute successfully.
 #
 def create_participant
   # Create a client object. The client can be reused for multiple calls.

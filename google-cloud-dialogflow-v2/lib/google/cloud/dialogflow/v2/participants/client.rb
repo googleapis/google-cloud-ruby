@@ -65,17 +65,17 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 60.0
-                default_config.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  default_config.timeout = 60.0
+                  default_config.retry_policy = {
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.analyze_content.timeout = 220.0
-                default_config.rpcs.analyze_content.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.analyze_content.timeout = 220.0
+                    default_config.rpcs.analyze_content.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.streaming_analyze_content.timeout = 220.0
+                    default_config.rpcs.streaming_analyze_content.timeout = 220.0
 
                 default_config
               end
@@ -394,13 +394,11 @@ module Google
             #   # Call the list_participants method.
             #   result = client.list_participants request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Participant.
-            #     p response
+            #     p item
             #   end
             #
             def list_participants request, options = nil
@@ -685,22 +683,22 @@ module Google
             #   # Create a client object. The client can be reused for multiple calls.
             #   client = Google::Cloud::Dialogflow::V2::Participants::Client.new
             #
-            #   # Create an input stream
+            #   # Create an input stream.
             #   input = Gapic::StreamInput.new
             #
             #   # Call the streaming_analyze_content method to start streaming.
             #   output = client.streaming_analyze_content input
             #
-            #   # Send requests on the stream. For each request, pass in keyword
-            #   # arguments to set fields. Be sure to close the stream when done.
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
             #   input << Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new
             #   input << Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest.new
             #   input.close
             #
-            #   # Handle streamed responses. These may be interleaved with inputs.
-            #   # Each response is of type ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse.
-            #   output.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def streaming_analyze_content request, options = nil
@@ -1135,7 +1133,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1256,3 +1254,4 @@ module Google
     end
   end
 end
+

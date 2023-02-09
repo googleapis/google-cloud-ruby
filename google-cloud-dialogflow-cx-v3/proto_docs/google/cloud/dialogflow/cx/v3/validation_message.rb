@@ -44,6 +44,7 @@ module Google
 
             # Resource types.
             module ResourceType
+
               # Unspecified.
               RESOURCE_TYPE_UNSPECIFIED = 0
 
@@ -89,6 +90,7 @@ module Google
 
             # Severity level.
             module Severity
+
               # Unspecified.
               SEVERITY_UNSPECIFIED = 0
 
@@ -119,3 +121,4 @@ module Google
     end
   end
 end
+

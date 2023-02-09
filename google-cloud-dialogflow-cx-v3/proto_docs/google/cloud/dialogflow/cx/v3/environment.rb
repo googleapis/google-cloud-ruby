@@ -255,6 +255,7 @@ module Google
 
             # The overall result for a continuous test run in an agent environment.
             module AggregatedTestResult
+
               # Not specified. Should never be used.
               AGGREGATED_TEST_RESULT_UNSPECIFIED = 0
 
@@ -378,3 +379,4 @@ module Google
     end
   end
 end
+

@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client#delete_session_entity_type
+# Snippet for the delete_session_entity_type call in the SessionEntityTypes service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client#delete_session_entity_type.
+# It may require modification in order to execute successfully.
 #
 def delete_session_entity_type
   # Create a client object. The client can be reused for multiple calls.

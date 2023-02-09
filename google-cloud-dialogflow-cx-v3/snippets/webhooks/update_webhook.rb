@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#update_webhook
+# Snippet for the update_webhook call in the Webhooks service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#update_webhook. It may
+# require modification in order to execute successfully.
 #
 def update_webhook
   # Create a client object. The client can be reused for multiple calls.

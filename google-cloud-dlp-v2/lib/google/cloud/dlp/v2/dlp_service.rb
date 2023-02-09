@@ -55,3 +55,4 @@ end
 
 helper_path = ::File.join __dir__, "dlp_service", "helpers.rb"
 require "google/cloud/dlp/v2/dlp_service/helpers" if ::File.file? helper_path
+

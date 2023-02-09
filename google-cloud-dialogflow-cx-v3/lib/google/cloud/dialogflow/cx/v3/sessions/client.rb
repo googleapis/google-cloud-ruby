@@ -69,17 +69,17 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.timeout = 60.0
-                  default_config.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.timeout = 60.0
+                    default_config.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                   }
 
-                  default_config.rpcs.detect_intent.timeout = 220.0
-                  default_config.rpcs.detect_intent.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                      default_config.rpcs.detect_intent.timeout = 220.0
+                      default_config.rpcs.detect_intent.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                   }
 
-                  default_config.rpcs.streaming_detect_intent.timeout = 220.0
+                      default_config.rpcs.streaming_detect_intent.timeout = 220.0
 
                   default_config
                 end
@@ -315,22 +315,22 @@ module Google
               #   # Create a client object. The client can be reused for multiple calls.
               #   client = Google::Cloud::Dialogflow::CX::V3::Sessions::Client.new
               #
-              #   # Create an input stream
+              #   # Create an input stream.
               #   input = Gapic::StreamInput.new
               #
               #   # Call the streaming_detect_intent method to start streaming.
               #   output = client.streaming_detect_intent input
               #
-              #   # Send requests on the stream. For each request, pass in keyword
-              #   # arguments to set fields. Be sure to close the stream when done.
+              #   # Send requests on the stream. For each request object, set fields by
+              #   # passing keyword arguments. Be sure to close the stream when done.
               #   input << Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentRequest.new
               #   input << Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentRequest.new
               #   input.close
               #
-              #   # Handle streamed responses. These may be interleaved with inputs.
-              #   # Each response is of type ::Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentResponse.
-              #   output.each do |response|
-              #     p response
+              #   # The returned object is a streamed enumerable yielding elements of type
+              #   # ::Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentResponse
+              #   output.each do |current_response|
+              #     p current_response
               #   end
               #
               def streaming_detect_intent request, options = nil
@@ -659,7 +659,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+                config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -746,3 +746,4 @@ module Google
     end
   end
 end
+

@@ -51,3 +51,4 @@ end
 
 helper_path = ::File.join __dir__, "document_processor_service", "helpers.rb"
 require "google/cloud/document_ai/v1/document_processor_service/helpers" if ::File.file? helper_path
+

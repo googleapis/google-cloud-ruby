@@ -402,6 +402,7 @@ module Google
 
               # Defines merge behavior for `messages`.
               module MergeBehavior
+
                 # Not specified. `APPEND` will be used.
                 MERGE_BEHAVIOR_UNSPECIFIED = 0
 
@@ -500,6 +501,7 @@ module Google
 
                 # Represents the state of a parameter.
                 module ParameterState
+
                   # Not specified. This value should be never used.
                   PARAMETER_STATE_UNSPECIFIED = 0
 
@@ -559,3 +561,4 @@ module Google
     end
   end
 end
+

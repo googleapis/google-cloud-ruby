@@ -57,3 +57,4 @@ end
 
 helper_path = ::File.join __dir__, "debugger", "helpers.rb"
 require "google/cloud/debugger/v2/debugger/helpers" if ::File.file? helper_path
+

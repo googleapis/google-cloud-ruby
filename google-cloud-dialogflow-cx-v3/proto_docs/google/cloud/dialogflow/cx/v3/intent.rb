@@ -314,6 +314,7 @@ module Google
           # An intent can be a sizable object. Therefore, we provide a resource view that
           # does not return training phrases in the response.
           module IntentView
+
             # Not specified. Treated as INTENT_VIEW_FULL.
             INTENT_VIEW_UNSPECIFIED = 0
 
@@ -328,3 +329,4 @@ module Google
     end
   end
 end
+

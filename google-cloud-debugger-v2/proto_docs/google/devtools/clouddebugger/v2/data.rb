@@ -61,6 +61,7 @@ module Google
 
           # Enumerates references to which the message applies.
           module Reference
+
             # Status doesn't refer to any particular input.
             UNSPECIFIED = 0
 
@@ -389,6 +390,7 @@ module Google
           # Actions that can be taken when a breakpoint hits.
           # Agents should reject breakpoints with unsupported or unknown action values.
           module Action
+
             # Capture stack frame and variables and update the breakpoint.
             # The data is only captured once. After that the breakpoint is set
             # in a final state.
@@ -401,6 +403,7 @@ module Google
 
           # Log severity levels.
           module LogLevel
+
             # Information log message.
             INFO = 0
 
@@ -484,3 +487,4 @@ module Google
     end
   end
 end
+

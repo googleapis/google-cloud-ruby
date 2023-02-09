@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::Pages::Client#create_page
+# Snippet for the create_page call in the Pages service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Pages::Client#create_page. It may require
+# modification in order to execute successfully.
 #
 def create_page
   # Create a client object. The client can be reused for multiple calls.

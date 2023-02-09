@@ -82,6 +82,7 @@ module Google
 
           # Semantic markup types.
           module SemanticMarkupType
+
             # No markup type was specified.
             MARKUP_TYPE_UNSPECIFIED = 0
 
@@ -108,3 +109,4 @@ module Google
     end
   end
 end
+

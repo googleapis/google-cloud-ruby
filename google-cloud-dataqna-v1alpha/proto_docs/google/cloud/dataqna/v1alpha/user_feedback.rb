@@ -39,6 +39,7 @@ module Google
 
           # Enumeration of feedback ratings.
           module UserFeedbackRating
+
             # No rating was specified.
             USER_FEEDBACK_RATING_UNSPECIFIED = 0
 
@@ -53,3 +54,4 @@ module Google
     end
   end
 end
+

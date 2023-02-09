@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "intents", "helpers.rb"
 require "google/cloud/dialogflow/v2/intents/helpers" if ::File.file? helper_path
+

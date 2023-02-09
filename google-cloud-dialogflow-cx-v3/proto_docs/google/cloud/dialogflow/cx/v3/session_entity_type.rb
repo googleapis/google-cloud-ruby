@@ -58,6 +58,7 @@ module Google
 
             # The types of modifications for the session entity type.
             module EntityOverrideMode
+
               # Not specified. This value should be never used.
               ENTITY_OVERRIDE_MODE_UNSPECIFIED = 0
 
@@ -189,3 +190,4 @@ module Google
     end
   end
 end
+

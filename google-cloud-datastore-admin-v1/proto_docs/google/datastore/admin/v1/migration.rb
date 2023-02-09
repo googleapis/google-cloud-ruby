@@ -73,6 +73,7 @@ module Google
 
             # Concurrency modes for transactions in Cloud Firestore.
             module ConcurrencyMode
+
               # Unspecified.
               CONCURRENCY_MODE_UNSPECIFIED = 0
 
@@ -89,6 +90,7 @@ module Google
 
           # States for a migration.
           module MigrationState
+
             # Unspecified.
             MIGRATION_STATE_UNSPECIFIED = 0
 
@@ -104,6 +106,7 @@ module Google
 
           # Steps in a migration.
           module MigrationStep
+
             # Unspecified.
             MIGRATION_STEP_UNSPECIFIED = 0
 
@@ -134,3 +137,4 @@ module Google
     end
   end
 end
+

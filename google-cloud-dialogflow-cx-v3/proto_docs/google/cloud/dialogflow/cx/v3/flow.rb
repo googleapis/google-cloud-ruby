@@ -43,6 +43,7 @@ module Google
 
             # NLU model type.
             module ModelType
+
               # Not specified. `MODEL_TYPE_STANDARD` will be used.
               MODEL_TYPE_UNSPECIFIED = 0
 
@@ -55,6 +56,7 @@ module Google
 
             # NLU model training mode.
             module ModelTrainingMode
+
               # Not specified. `MODEL_TRAINING_MODE_AUTOMATIC` will be used.
               MODEL_TRAINING_MODE_UNSPECIFIED = 0
 
@@ -391,6 +393,7 @@ module Google
 
             # Import option.
             module ImportOption
+
               # Unspecified. Treated as `KEEP`.
               IMPORT_OPTION_UNSPECIFIED = 0
 
@@ -464,3 +467,4 @@ module Google
     end
   end
 end
+

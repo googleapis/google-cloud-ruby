@@ -73,6 +73,7 @@ module Google
 
           # The possible states of the processor version.
           module State
+
             # The processor version is in an unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -136,6 +137,7 @@ module Google
 
           # The possible states of the processor.
           module State
+
             # The processor is in an unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -173,3 +175,4 @@ module Google
     end
   end
 end
+

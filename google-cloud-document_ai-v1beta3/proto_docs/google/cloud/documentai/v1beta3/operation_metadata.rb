@@ -43,6 +43,7 @@ module Google
 
           # State of the longrunning operation.
           module State
+
             # Unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -66,3 +67,4 @@ module Google
     end
   end
 end
+

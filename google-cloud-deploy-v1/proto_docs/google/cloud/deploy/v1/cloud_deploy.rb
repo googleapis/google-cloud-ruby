@@ -496,6 +496,7 @@ module Google
 
           # Possible usages of this configuration.
           module ExecutionEnvironmentUsage
+
             # Default value. This value is unused.
             EXECUTION_ENVIRONMENT_USAGE_UNSPECIFIED = 0
 
@@ -867,6 +868,7 @@ module Google
 
             # Valid states of the render operation.
             module TargetRenderState
+
               # The render operation state is unspecified.
               TARGET_RENDER_STATE_UNSPECIFIED = 0
 
@@ -882,6 +884,7 @@ module Google
 
             # Well-known rendering failures.
             module FailureCause
+
               # No reason for failure is specified.
               FAILURE_CAUSE_UNSPECIFIED = 0
 
@@ -934,6 +937,7 @@ module Google
 
           # Valid states of the render operation.
           module RenderState
+
             # The render state is unspecified.
             RENDER_STATE_UNSPECIFIED = 0
 
@@ -1175,6 +1179,7 @@ module Google
 
           # Valid approval states of a `Rollout`.
           module ApprovalState
+
             # The `Rollout` has an unspecified approval state.
             APPROVAL_STATE_UNSPECIFIED = 0
 
@@ -1193,6 +1198,7 @@ module Google
 
           # Valid states of a `Rollout`.
           module State
+
             # The `Rollout` has an unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -1221,6 +1227,7 @@ module Google
 
           # Well-known rollout failures.
           module FailureCause
+
             # No reason for failure is specified.
             FAILURE_CAUSE_UNSPECIFIED = 0
 
@@ -1299,6 +1306,7 @@ module Google
 
           # Valid states of a Phase.
           module State
+
             # The Phase has an unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -1354,6 +1362,7 @@ module Google
 
           # Valid states of a Job.
           module State
+
             # The Job has an unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -1615,6 +1624,7 @@ module Google
 
           # Valid states of a `JobRun`.
           module State
+
             # The `JobRun` has an unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -1650,6 +1660,7 @@ module Google
 
           # Well-known deploy failures.
           module FailureCause
+
             # No reason for failure is specified.
             FAILURE_CAUSE_UNSPECIFIED = 0
 
@@ -1692,6 +1703,7 @@ module Google
 
           # Well-known verify failures.
           module FailureCause
+
             # No reason for failure is specified.
             FAILURE_CAUSE_UNSPECIFIED = 0
 
@@ -1806,3 +1818,4 @@ module Google
     end
   end
 end
+

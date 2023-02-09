@@ -60,6 +60,7 @@ module Google
             # For an ordered index, specifies whether each of the entity's ancestors
             # will be included.
             module AncestorMode
+
               # The ancestor mode is unspecified.
               ANCESTOR_MODE_UNSPECIFIED = 0
 
@@ -72,6 +73,7 @@ module Google
 
             # The direction determines how a property is indexed.
             module Direction
+
               # The direction is unspecified.
               DIRECTION_UNSPECIFIED = 0
 
@@ -86,6 +88,7 @@ module Google
 
             # The possible set of states of an index.
             module State
+
               # The state is unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -120,3 +123,4 @@ module Google
     end
   end
 end
+

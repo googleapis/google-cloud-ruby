@@ -38,3 +38,4 @@ end
 
 helper_path = ::File.join __dir__, "v1alpha1", "_helpers.rb"
 require "google/cloud/datastream/v1alpha1/_helpers" if ::File.file? helper_path
+

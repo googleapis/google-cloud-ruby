@@ -68,9 +68,9 @@ module Google
         require "google/cloud/deploy/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Deploy
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Deploy.const_get(package_name).const_get(:CloudDeploy)
         service_module.const_get(:Client).new(&block)
       end
@@ -114,3 +114,4 @@ end
 
 helper_path = ::File.join __dir__, "deploy", "helpers.rb"
 require "google/cloud/deploy/helpers" if ::File.file? helper_path
+

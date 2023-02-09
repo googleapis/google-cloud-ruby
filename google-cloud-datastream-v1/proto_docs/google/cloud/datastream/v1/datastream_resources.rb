@@ -196,6 +196,7 @@ module Google
 
           # Private Connection state.
           module State
+
             # Unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -651,6 +652,7 @@ module Google
 
           # Schema file format.
           module SchemaFileFormat
+
             # Unspecified schema file format.
             SCHEMA_FILE_FORMAT_UNSPECIFIED = 0
 
@@ -663,6 +665,7 @@ module Google
 
           # Json file compression.
           module JsonCompression
+
             # Unspecified json file compression.
             JSON_COMPRESSION_UNSPECIFIED = 0
 
@@ -849,6 +852,7 @@ module Google
 
           # Stream state.
           module State
+
             # Unspecified stream state.
             STATE_UNSPECIFIED = 0
 
@@ -982,6 +986,7 @@ module Google
 
           # State of the stream object's backfill job.
           module State
+
             # Default value.
             STATE_UNSPECIFIED = 0
 
@@ -1012,6 +1017,7 @@ module Google
 
           # Triggering reason for a backfill job.
           module Trigger
+
             # Default value.
             TRIGGER_UNSPECIFIED = 0
 
@@ -1084,6 +1090,7 @@ module Google
 
           # Validation execution state.
           module State
+
             # Unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -1126,6 +1133,7 @@ module Google
 
           # Validation message level.
           module Level
+
             # Unspecified level.
             LEVEL_UNSPECIFIED = 0
 
@@ -1140,3 +1148,4 @@ module Google
     end
   end
 end
+

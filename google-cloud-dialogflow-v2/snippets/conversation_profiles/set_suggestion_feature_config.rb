@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#set_suggestion_feature_config
+# Snippet for the set_suggestion_feature_config call in the ConversationProfiles service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#set_suggestion_feature_config.
+# It may require modification in order to execute successfully.
 #
 def set_suggestion_feature_config
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def set_suggestion_feature_config
   # Call the set_suggestion_feature_config method.
   result = client.set_suggestion_feature_config request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END dialogflow_v2_generated_ConversationProfiles_SetSuggestionFeatureConfig_sync]

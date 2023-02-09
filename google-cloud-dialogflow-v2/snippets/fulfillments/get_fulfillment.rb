@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Fulfillments::Client#get_fulfillment
+# Snippet for the get_fulfillment call in the Fulfillments service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Fulfillments::Client#get_fulfillment. It may
+# require modification in order to execute successfully.
 #
 def get_fulfillment
   # Create a client object. The client can be reused for multiple calls.

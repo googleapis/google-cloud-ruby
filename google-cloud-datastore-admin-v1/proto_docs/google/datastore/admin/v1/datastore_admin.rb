@@ -55,6 +55,7 @@ module Google
 
             # The various possible states for an ongoing Operation.
             module State
+
               # Unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -390,6 +391,7 @@ module Google
 
           # Operation types.
           module OperationType
+
             # Unspecified.
             OPERATION_TYPE_UNSPECIFIED = 0
 
@@ -410,3 +412,4 @@ module Google
     end
   end
 end
+

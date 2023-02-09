@@ -519,6 +519,7 @@ module Google
 
           # Format of cloud pub/sub message.
           module MessageFormat
+
             # If it is unspecified, PROTO will be used.
             MESSAGE_FORMAT_UNSPECIFIED = 0
 
@@ -554,6 +555,7 @@ module Google
 
           # Defines the type of Human Agent Assistant feature.
           module Type
+
             # Unspecified feature type.
             TYPE_UNSPECIFIED = 0
 
@@ -652,3 +654,4 @@ module Google
     end
   end
 end
+

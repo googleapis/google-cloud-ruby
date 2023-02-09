@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "fulfillments", "helpers.rb"
 require "google/cloud/dialogflow/v2/fulfillments/helpers" if ::File.file? helper_path
+

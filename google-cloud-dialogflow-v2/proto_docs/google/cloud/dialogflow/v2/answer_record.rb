@@ -157,6 +157,7 @@ module Google
 
           # The correctness level of an answer.
           module CorrectnessLevel
+
             # Correctness level unspecified.
             CORRECTNESS_LEVEL_UNSPECIFIED = 0
 
@@ -225,6 +226,7 @@ module Google
 
           # Relevance of an answer.
           module AnswerRelevance
+
             # Answer relevance unspecified.
             ANSWER_RELEVANCE_UNSPECIFIED = 0
 
@@ -237,6 +239,7 @@ module Google
 
           # Correctness of document.
           module DocumentCorrectness
+
             # Document correctness unspecified.
             DOCUMENT_CORRECTNESS_UNSPECIFIED = 0
 
@@ -249,6 +252,7 @@ module Google
 
           # Efficiency of document.
           module DocumentEfficiency
+
             # Document efficiency unspecified.
             DOCUMENT_EFFICIENCY_UNSPECIFIED = 0
 
@@ -275,3 +279,4 @@ module Google
     end
   end
 end
+

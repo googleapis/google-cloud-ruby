@@ -297,6 +297,7 @@ module Google
 
               # Detected human reading orientation.
               module Orientation
+
                 # Unspecified orientation.
                 ORIENTATION_UNSPECIFIED = 0
 
@@ -397,6 +398,7 @@ module Google
 
                 # Enum to denote the type of break found.
                 module Type
+
                   # Unspecified break type.
                   TYPE_UNSPECIFIED = 0
 
@@ -788,6 +790,7 @@ module Google
 
               # The type of layout that is being referenced.
               module LayoutType
+
                 # Layout Unspecified.
                 LAYOUT_TYPE_UNSPECIFIED = 0
 
@@ -866,6 +869,7 @@ module Google
 
             # If a processor or agent does an explicit operation on existing elements.
             module OperationType
+
               # Operation type unspecified. If no operation is specified a provenance
               # entry is simply used to match against a `parent`.
               OPERATION_TYPE_UNSPECIFIED = 0
@@ -961,3 +965,4 @@ module Google
     end
   end
 end
+

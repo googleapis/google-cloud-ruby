@@ -537,6 +537,7 @@ module Google
 
           # Type of the response message.
           module MessageType
+
             # Not specified. Should never be used.
             MESSAGE_TYPE_UNSPECIFIED = 0
 
@@ -668,3 +669,4 @@ module Google
     end
   end
 end
+

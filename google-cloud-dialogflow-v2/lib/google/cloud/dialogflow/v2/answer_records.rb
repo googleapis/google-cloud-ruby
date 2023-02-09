@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "answer_records", "helpers.rb"
 require "google/cloud/dialogflow/v2/answer_records/helpers" if ::File.file? helper_path
+

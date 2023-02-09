@@ -70,6 +70,7 @@ module Google
 
             # The state of the deployment.
             module State
+
               # State unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -138,3 +139,4 @@ module Google
     end
   end
 end
+

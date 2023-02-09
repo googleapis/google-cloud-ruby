@@ -68,9 +68,9 @@ module Google
         require "google/cloud/dataproc/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataproc
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:AutoscalingPolicyService)
         service_module.const_get(:Client).new(&block)
       end
@@ -98,9 +98,9 @@ module Google
         require "google/cloud/dataproc/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataproc
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:BatchController)
         service_module.const_get(:Client).new(&block)
       end
@@ -129,9 +129,9 @@ module Google
         require "google/cloud/dataproc/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataproc
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:ClusterController)
         service_module.const_get(:Client).new(&block)
       end
@@ -159,9 +159,9 @@ module Google
         require "google/cloud/dataproc/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataproc
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:JobController)
         service_module.const_get(:Client).new(&block)
       end
@@ -190,9 +190,9 @@ module Google
         require "google/cloud/dataproc/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataproc
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:WorkflowTemplateService)
         service_module.const_get(:Client).new(&block)
       end
@@ -221,9 +221,9 @@ module Google
         require "google/cloud/dataproc/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataproc
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:NodeGroupController)
         service_module.const_get(:Client).new(&block)
       end
@@ -267,3 +267,4 @@ end
 
 helper_path = ::File.join __dir__, "dataproc", "helpers.rb"
 require "google/cloud/dataproc/helpers" if ::File.file? helper_path
+

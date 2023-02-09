@@ -94,6 +94,7 @@ module Google
 
           # Match mode determines how intents are detected from user queries.
           module MatchMode
+
             # Not specified.
             MATCH_MODE_UNSPECIFIED = 0
 
@@ -108,6 +109,7 @@ module Google
 
           # API version for the agent.
           module ApiVersion
+
             # Not specified.
             API_VERSION_UNSPECIFIED = 0
 
@@ -123,6 +125,7 @@ module Google
 
           # Represents the agent tier.
           module Tier
+
             # Not specified. This value should never be used.
             TIER_UNSPECIFIED = 0
 
@@ -323,3 +326,4 @@ module Google
     end
   end
 end
+

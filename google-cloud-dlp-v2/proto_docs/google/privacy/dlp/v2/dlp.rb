@@ -218,6 +218,7 @@ module Google
           # [Supported file
           # types](https://cloud.google.com/dlp/docs/supported-file-types).
           module BytesType
+
             # Unused
             BYTES_TYPE_UNSPECIFIED = 0
 
@@ -930,6 +931,7 @@ module Google
           # Predefined schemas for storing findings.
           # Only for use with external storage.
           module OutputSchema
+
             # Unused.
             OUTPUT_SCHEMA_UNSPECIFIED = 0
 
@@ -1071,6 +1073,7 @@ module Google
           # Enum of the current locations.
           # We might add more locations in the future.
           module LocationCategory
+
             # Unused location
             LOCATION_UNSPECIFIED = 0
 
@@ -1202,6 +1205,7 @@ module Google
           # Enum of the current industries in the category.
           # We might add more industries in the future.
           module IndustryCategory
+
             # Unused industry
             INDUSTRY_UNSPECIFIED = 0
 
@@ -1218,6 +1222,7 @@ module Google
           # Enum of the current types in the category.
           # We might add more types in the future.
           module TypeCategory
+
             # Unused type
             TYPE_UNSPECIFIED = 0
 
@@ -2126,6 +2131,7 @@ module Google
 
           # Components that make up time.
           module TimePart
+
             # Unused
             TIME_PART_UNSPECIFIED = 0
 
@@ -2280,6 +2286,7 @@ module Google
 
           # Convenience enum for indicating common characters to not transform.
           module CommonCharsToIgnore
+
             # Unused.
             COMMON_CHARS_TO_IGNORE_UNSPECIFIED = 0
 
@@ -2510,6 +2517,7 @@ module Google
           # natively supports. In the algorithm, the alphabet is selected using
           # the "radix". Therefore each corresponds to a particular radix.
           module FfxCommonNativeAlphabet
+
             # Unused.
             FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED = 0
 
@@ -2770,6 +2778,7 @@ module Google
 
             # Logical operators for conditional checks.
             module LogicalOperator
+
               # Unused
               LOGICAL_OPERATOR_UNSPECIFIED = 0
 
@@ -2840,6 +2849,7 @@ module Google
 
           # Possible outcomes of transformations.
           module TransformationResultCode
+
             # Unused
             TRANSFORMATION_RESULT_CODE_UNSPECIFIED = 0
 
@@ -3134,6 +3144,7 @@ module Google
           # pause triggers experiencing frequent errors. To restart a job, set the
           # status to HEALTHY after correcting user errors.
           module Status
+
             # Unused.
             STATUS_UNSPECIFIED = 0
 
@@ -3774,6 +3785,7 @@ module Google
 
             # The levels of detail that can be included in the Pub/Sub message.
             module DetailLevel
+
               # Unused.
               DETAIL_LEVEL_UNSPECIFIED = 0
 
@@ -3787,6 +3799,7 @@ module Google
 
           # Types of event that can trigger an action.
           module EventType
+
             # Unused.
             EVENT_TYPE_UNSPECIFIED = 0
 
@@ -3901,6 +3914,7 @@ module Google
 
           # Possible states of a job. New items may be added.
           module JobState
+
             # Unused.
             JOB_STATE_UNSPECIFIED = 0
 
@@ -4576,6 +4590,7 @@ module Google
 
           # Various score levels for resources.
           module DataRiskLevelScore
+
             # Unused.
             RISK_SCORE_UNSPECIFIED = 0
 
@@ -4705,6 +4720,7 @@ module Google
 
           # Possible states of a profile. New items may be added.
           module State
+
             # Unused.
             STATE_UNSPECIFIED = 0
 
@@ -4788,6 +4804,7 @@ module Google
 
             # Logical operators for conditional checks.
             module PubSubLogicalOperator
+
               # Unused.
               LOGICAL_OPERATOR_UNSPECIFIED = 0
 
@@ -4801,6 +4818,7 @@ module Google
 
           # Various score levels for resources.
           module ProfileScoreBucket
+
             # Unused.
             PROFILE_SCORE_BUCKET_UNSPECIFIED = 0
 
@@ -4832,6 +4850,7 @@ module Google
         # storing of transformation was successful, otherwise, reason for not
         # transforming.
         module TransformationResultStatusType
+
           STATE_TYPE_UNSPECIFIED = 0
 
           # This will be set when a finding could not be transformed (i.e. outside user
@@ -4854,6 +4873,7 @@ module Google
 
         # Describes functionality of a given container in its original format.
         module TransformationContainerType
+
           TRANSFORM_UNKNOWN_CONTAINER = 0
 
           TRANSFORM_BODY = 1
@@ -4867,6 +4887,7 @@ module Google
         # record suppression, or one of the transformation rules specified under
         # `PrimitiveTransformation`.
         module TransformationType
+
           # Unused
           TRANSFORMATION_TYPE_UNSPECIFIED = 0
 
@@ -4915,6 +4936,7 @@ module Google
 
         # Operators available for comparing the value of fields.
         module RelationalOperator
+
           # Unused
           RELATIONAL_OPERATOR_UNSPECIFIED = 0
 
@@ -4944,6 +4966,7 @@ module Google
         # Dictionary, regular expression and intersecting with findings of another
         # info type.
         module MatchingType
+
           # Invalid.
           MATCHING_TYPE_UNSPECIFIED = 0
 
@@ -4971,6 +4994,7 @@ module Google
 
         # Deprecated and unused.
         module ContentOption
+
           # Includes entire content of a file or a data stream.
           CONTENT_UNSPECIFIED = 0
 
@@ -4983,6 +5007,7 @@ module Google
 
         # Type of metadata containing the finding.
         module MetadataType
+
           # Unused
           METADATATYPE_UNSPECIFIED = 0
 
@@ -4992,6 +5017,7 @@ module Google
 
         # Parts of the APIs which use certain infoTypes.
         module InfoTypeSupportedBy
+
           # Unused.
           ENUM_TYPE_UNSPECIFIED = 0
 
@@ -5004,6 +5030,7 @@ module Google
 
         # An enum to represent the various types of DLP jobs.
         module DlpJobType
+
           # Defaults to INSPECT_JOB.
           DLP_JOB_TYPE_UNSPECIFIED = 0
 
@@ -5016,6 +5043,7 @@ module Google
 
         # State of a StoredInfoType version.
         module StoredInfoTypeState
+
           # Unused
           STORED_INFO_TYPE_STATE_UNSPECIFIED = 0
 
@@ -5038,6 +5066,7 @@ module Google
         # How broadly a resource has been shared. New items may be added over time.
         # A higher number means more restricted.
         module ResourceVisibility
+
           # Unused.
           RESOURCE_VISIBILITY_UNSPECIFIED = 0
 
@@ -5050,6 +5079,7 @@ module Google
 
         # How a resource is encrypted.
         module EncryptionStatus
+
           # Unused.
           ENCRYPTION_STATUS_UNSPECIFIED = 0
 
@@ -5063,3 +5093,4 @@ module Google
     end
   end
 end
+

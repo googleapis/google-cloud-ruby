@@ -68,6 +68,7 @@ module Google
 
           # The status of a version.
           module VersionStatus
+
             # Not specified. This value is not used.
             VERSION_STATUS_UNSPECIFIED = 0
 
@@ -186,3 +187,4 @@ module Google
     end
   end
 end
+

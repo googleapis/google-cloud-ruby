@@ -75,6 +75,7 @@ module Google
 
           # The type of an Alias.
           module Kind
+
             # Do not use.
             ANY = 0
 
@@ -203,3 +204,4 @@ module Google
     end
   end
 end
+

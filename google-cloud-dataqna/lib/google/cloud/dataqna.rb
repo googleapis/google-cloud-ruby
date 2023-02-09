@@ -132,9 +132,9 @@ module Google
         require "google/cloud/dataqna/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DataQnA
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::DataQnA.const_get(package_name).const_get(:AutoSuggestionService)
         service_module.const_get(:Client).new(&block)
       end
@@ -176,9 +176,9 @@ module Google
         require "google/cloud/dataqna/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DataQnA
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::DataQnA.const_get(package_name).const_get(:QuestionService)
         service_module.const_get(:Client).new(&block)
       end
@@ -222,3 +222,4 @@ end
 
 helper_path = ::File.join __dir__, "dataqna", "helpers.rb"
 require "google/cloud/dataqna/helpers" if ::File.file? helper_path
+
