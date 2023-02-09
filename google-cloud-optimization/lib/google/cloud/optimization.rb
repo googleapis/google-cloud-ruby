@@ -83,9 +83,9 @@ module Google
         require "google/cloud/optimization/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Optimization
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Optimization.const_get(package_name).const_get(:FleetRouting)
         service_module.const_get(:Client).new(&block)
       end
@@ -129,3 +129,4 @@ end
 
 helper_path = ::File.join __dir__, "optimization", "helpers.rb"
 require "google/cloud/optimization/helpers" if ::File.file? helper_path
+

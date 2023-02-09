@@ -383,6 +383,7 @@ module Google
 
               # The size of the Cloud Composer environment.
               module EnvironmentSize
+
                 # The size of the environment is unspecified.
                 ENVIRONMENT_SIZE_UNSPECIFIED = 0
 
@@ -844,6 +845,7 @@ module Google
               # Project and the corresponding Tenant project, from a predefined list
               # of available connection modes.
               module ConnectionType
+
                 # No specific connection type was requested, so the environment uses
                 # the default value corresponding to the rest of its configuration.
                 CONNECTION_TYPE_UNSPECIFIED = 0
@@ -1109,6 +1111,7 @@ module Google
 
               # State of the environment.
               module State
+
                 # The state of the environment is unknown.
                 STATE_UNSPECIFIED = 0
 
@@ -1164,6 +1167,7 @@ module Google
 
               # Whether there were python modules conflict during image build.
               module ConflictResult
+
                 # It is unknown whether build had conflicts or not.
                 CONFLICT_RESULT_UNSPECIFIED = 0
 
@@ -1180,3 +1184,4 @@ module Google
     end
   end
 end
+

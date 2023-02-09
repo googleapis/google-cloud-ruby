@@ -397,6 +397,7 @@ module Google
         # The State enum represents the lifecycle of a Network Connectivity Center
         # resource.
         module State
+
           # No state information available
           STATE_UNSPECIFIED = 0
 
@@ -413,3 +414,4 @@ module Google
     end
   end
 end
+

@@ -281,6 +281,7 @@ module Google
           # Enumeration of the various states a patch job passes through as it
           # executes.
           module State
+
             # State must be specified.
             STATE_UNSPECIFIED = 0
 
@@ -346,6 +347,7 @@ module Google
 
           # Post-patch reboot settings.
           module RebootConfig
+
             # The default behavior is DEFAULT.
             REBOOT_CONFIG_UNSPECIFIED = 0
 
@@ -370,6 +372,7 @@ module Google
 
           # Patch state of an instance.
           module PatchState
+
             # Unspecified.
             PATCH_STATE_UNSPECIFIED = 0
 
@@ -452,6 +455,7 @@ module Google
 
           # Apt patch type.
           module Type
+
             # By default, upgrade will be performed.
             TYPE_UNSPECIFIED = 0
 
@@ -545,6 +549,7 @@ module Google
           # [1]
           # https://support.microsoft.com/en-us/help/824684/description-of-the-standard-terminology-that-is-used-to-describe-micro
           module Classification
+
             # Invalid. If classifications are included, they must be specified.
             CLASSIFICATION_UNSPECIFIED = 0
 
@@ -629,6 +634,7 @@ module Google
 
           # The interpreter used to execute the a file.
           module Interpreter
+
             # Invalid for a Windows ExecStepConfig. For a Linux ExecStepConfig, the
             # interpreter will be parsed from the shebang line of the script if
             # unspecified.
@@ -754,6 +760,7 @@ module Google
 
           # Type of the rollout.
           module Mode
+
             # Mode must be specified.
             MODE_UNSPECIFIED = 0
 
@@ -773,3 +780,4 @@ module Google
     end
   end
 end
+

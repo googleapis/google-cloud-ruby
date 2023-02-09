@@ -51,3 +51,4 @@ end
 
 helper_path = ::File.join __dir__, "os_config_zonal_service", "helpers.rb"
 require "google/cloud/os_config/v1alpha/os_config_zonal_service/helpers" if ::File.file? helper_path
+

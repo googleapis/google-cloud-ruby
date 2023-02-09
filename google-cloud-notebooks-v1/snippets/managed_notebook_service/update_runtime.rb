@@ -20,8 +20,11 @@
 require "google/cloud/notebooks/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#update_runtime
+# Snippet for the update_runtime call in the ManagedNotebookService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#update_runtime.
+# It may require modification in order to execute successfully.
 #
 def update_runtime
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def update_runtime
   # Call the update_runtime method.
   result = client.update_runtime request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END notebooks_v1_generated_ManagedNotebookService_UpdateRuntime_sync]

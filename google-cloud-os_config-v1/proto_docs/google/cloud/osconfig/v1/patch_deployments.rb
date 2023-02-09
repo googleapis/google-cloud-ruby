@@ -77,6 +77,7 @@ module Google
 
           # Represents state of patch peployment.
           module State
+
             # The default value. This value is used if the state is omitted.
             STATE_UNSPECIFIED = 0
 
@@ -136,6 +137,7 @@ module Google
 
           # Specifies the frequency of the recurring patch deployments.
           module Frequency
+
             # Invalid. A frequency must be specified.
             FREQUENCY_UNSPECIFIED = 0
 
@@ -309,3 +311,4 @@ module Google
     end
   end
 end
+

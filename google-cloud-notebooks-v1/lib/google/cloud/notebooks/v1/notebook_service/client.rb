@@ -66,74 +66,74 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 60.0
-                default_config.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  default_config.timeout = 60.0
+                  default_config.retry_policy = {
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_instances.timeout = 60.0
+                    default_config.rpcs.list_instances.timeout = 60.0
 
-                default_config.rpcs.get_instance.timeout = 60.0
+                    default_config.rpcs.get_instance.timeout = 60.0
 
-                default_config.rpcs.create_instance.timeout = 60.0
+                    default_config.rpcs.create_instance.timeout = 60.0
 
-                default_config.rpcs.register_instance.timeout = 60.0
+                    default_config.rpcs.register_instance.timeout = 60.0
 
-                default_config.rpcs.set_instance_accelerator.timeout = 60.0
+                    default_config.rpcs.set_instance_accelerator.timeout = 60.0
 
-                default_config.rpcs.set_instance_machine_type.timeout = 60.0
+                    default_config.rpcs.set_instance_machine_type.timeout = 60.0
 
-                default_config.rpcs.update_instance_config.timeout = 60.0
+                    default_config.rpcs.update_instance_config.timeout = 60.0
 
-                default_config.rpcs.update_shielded_instance_config.timeout = 60.0
+                    default_config.rpcs.update_shielded_instance_config.timeout = 60.0
 
-                default_config.rpcs.set_instance_labels.timeout = 60.0
+                    default_config.rpcs.set_instance_labels.timeout = 60.0
 
-                default_config.rpcs.delete_instance.timeout = 60.0
+                    default_config.rpcs.delete_instance.timeout = 60.0
 
-                default_config.rpcs.start_instance.timeout = 60.0
+                    default_config.rpcs.start_instance.timeout = 60.0
 
-                default_config.rpcs.stop_instance.timeout = 60.0
+                    default_config.rpcs.stop_instance.timeout = 60.0
 
-                default_config.rpcs.reset_instance.timeout = 60.0
+                    default_config.rpcs.reset_instance.timeout = 60.0
 
-                default_config.rpcs.report_instance_info.timeout = 60.0
+                    default_config.rpcs.report_instance_info.timeout = 60.0
 
-                default_config.rpcs.is_instance_upgradeable.timeout = 60.0
+                    default_config.rpcs.is_instance_upgradeable.timeout = 60.0
 
-                default_config.rpcs.get_instance_health.timeout = 60.0
+                    default_config.rpcs.get_instance_health.timeout = 60.0
 
-                default_config.rpcs.upgrade_instance.timeout = 60.0
+                    default_config.rpcs.upgrade_instance.timeout = 60.0
 
-                default_config.rpcs.rollback_instance.timeout = 60.0
+                    default_config.rpcs.rollback_instance.timeout = 60.0
 
-                default_config.rpcs.diagnose_instance.timeout = 60.0
+                    default_config.rpcs.diagnose_instance.timeout = 60.0
 
-                default_config.rpcs.upgrade_instance_internal.timeout = 60.0
+                    default_config.rpcs.upgrade_instance_internal.timeout = 60.0
 
-                default_config.rpcs.list_environments.timeout = 60.0
+                    default_config.rpcs.list_environments.timeout = 60.0
 
-                default_config.rpcs.get_environment.timeout = 60.0
+                    default_config.rpcs.get_environment.timeout = 60.0
 
-                default_config.rpcs.create_environment.timeout = 60.0
+                    default_config.rpcs.create_environment.timeout = 60.0
 
-                default_config.rpcs.delete_environment.timeout = 60.0
+                    default_config.rpcs.delete_environment.timeout = 60.0
 
-                default_config.rpcs.list_schedules.timeout = 60.0
+                    default_config.rpcs.list_schedules.timeout = 60.0
 
-                default_config.rpcs.get_schedule.timeout = 60.0
+                    default_config.rpcs.get_schedule.timeout = 60.0
 
-                default_config.rpcs.delete_schedule.timeout = 60.0
+                    default_config.rpcs.delete_schedule.timeout = 60.0
 
-                default_config.rpcs.create_schedule.timeout = 60.0
+                    default_config.rpcs.create_schedule.timeout = 60.0
 
-                default_config.rpcs.list_executions.timeout = 60.0
+                    default_config.rpcs.list_executions.timeout = 60.0
 
-                default_config.rpcs.get_execution.timeout = 60.0
+                    default_config.rpcs.get_execution.timeout = 60.0
 
-                default_config.rpcs.delete_execution.timeout = 60.0
+                    default_config.rpcs.delete_execution.timeout = 60.0
 
-                default_config.rpcs.create_execution.timeout = 60.0
+                    default_config.rpcs.create_execution.timeout = 60.0
 
                 default_config
               end
@@ -301,13 +301,11 @@ module Google
             #   # Call the list_instances method.
             #   result = client.list_instances request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Notebooks::V1::Instance.
-            #     p response
+            #     p item
             #   end
             #
             def list_instances request, options = nil
@@ -484,14 +482,14 @@ module Google
             #   # Call the create_instance method.
             #   result = client.create_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_instance request, options = nil
@@ -586,14 +584,14 @@ module Google
             #   # Call the register_instance method.
             #   result = client.register_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def register_instance request, options = nil
@@ -687,14 +685,14 @@ module Google
             #   # Call the set_instance_accelerator method.
             #   result = client.set_instance_accelerator request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def set_instance_accelerator request, options = nil
@@ -784,14 +782,14 @@ module Google
             #   # Call the set_instance_machine_type method.
             #   result = client.set_instance_machine_type request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def set_instance_machine_type request, options = nil
@@ -880,14 +878,14 @@ module Google
             #   # Call the update_instance_config method.
             #   result = client.update_instance_config request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_instance_config request, options = nil
@@ -976,14 +974,14 @@ module Google
             #   # Call the update_shielded_instance_config method.
             #   result = client.update_shielded_instance_config request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_shielded_instance_config request, options = nil
@@ -1073,14 +1071,14 @@ module Google
             #   # Call the set_instance_labels method.
             #   result = client.set_instance_labels request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def set_instance_labels request, options = nil
@@ -1255,14 +1253,14 @@ module Google
             #   # Call the delete_instance method.
             #   result = client.delete_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_instance request, options = nil
@@ -1349,14 +1347,14 @@ module Google
             #   # Call the start_instance method.
             #   result = client.start_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def start_instance request, options = nil
@@ -1443,14 +1441,14 @@ module Google
             #   # Call the stop_instance method.
             #   result = client.stop_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def stop_instance request, options = nil
@@ -1537,14 +1535,14 @@ module Google
             #   # Call the reset_instance method.
             #   result = client.reset_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def reset_instance request, options = nil
@@ -1640,14 +1638,14 @@ module Google
             #   # Call the report_instance_info method.
             #   result = client.report_instance_info request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def report_instance_info request, options = nil
@@ -1912,14 +1910,14 @@ module Google
             #   # Call the upgrade_instance method.
             #   result = client.upgrade_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def upgrade_instance request, options = nil
@@ -2009,14 +2007,14 @@ module Google
             #   # Call the rollback_instance method.
             #   result = client.rollback_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def rollback_instance request, options = nil
@@ -2105,14 +2103,14 @@ module Google
             #   # Call the diagnose_instance method.
             #   result = client.diagnose_instance request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def diagnose_instance request, options = nil
@@ -2206,14 +2204,14 @@ module Google
             #   # Call the upgrade_instance_internal method.
             #   result = client.upgrade_instance_internal request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def upgrade_instance_internal request, options = nil
@@ -2304,13 +2302,11 @@ module Google
             #   # Call the list_environments method.
             #   result = client.list_environments request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Notebooks::V1::Environment.
-            #     p response
+            #     p item
             #   end
             #
             def list_environments request, options = nil
@@ -2489,14 +2485,14 @@ module Google
             #   # Call the create_environment method.
             #   result = client.create_environment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_environment request, options = nil
@@ -2583,14 +2579,14 @@ module Google
             #   # Call the delete_environment method.
             #   result = client.delete_environment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_environment request, options = nil
@@ -2686,13 +2682,11 @@ module Google
             #   # Call the list_schedules method.
             #   result = client.list_schedules request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Notebooks::V1::Schedule.
-            #     p response
+            #     p item
             #   end
             #
             def list_schedules request, options = nil
@@ -2865,14 +2859,14 @@ module Google
             #   # Call the delete_schedule method.
             #   result = client.delete_schedule request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_schedule request, options = nil
@@ -2963,14 +2957,14 @@ module Google
             #   # Call the create_schedule method.
             #   result = client.create_schedule request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_schedule request, options = nil
@@ -3057,14 +3051,14 @@ module Google
             #   # Call the trigger_schedule method.
             #   result = client.trigger_schedule request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def trigger_schedule request, options = nil
@@ -3162,13 +3156,11 @@ module Google
             #   # Call the list_executions method.
             #   result = client.list_executions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Notebooks::V1::Execution.
-            #     p response
+            #     p item
             #   end
             #
             def list_executions request, options = nil
@@ -3341,14 +3333,14 @@ module Google
             #   # Call the delete_execution method.
             #   result = client.delete_execution request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_execution request, options = nil
@@ -3439,14 +3431,14 @@ module Google
             #   # Call the create_execution method.
             #   result = client.create_execution request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_execution request, options = nil
@@ -3582,7 +3574,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -3878,3 +3870,4 @@ module Google
     end
   end
 end
+

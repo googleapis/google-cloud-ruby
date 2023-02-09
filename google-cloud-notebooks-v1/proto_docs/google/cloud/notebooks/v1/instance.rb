@@ -37,6 +37,7 @@ module Google
 
           # Indicates whether to consume capacity from an reservation or not.
           module Type
+
             # Default type.
             TYPE_UNSPECIFIED = 0
 
@@ -395,6 +396,7 @@ module Google
 
             # The definition of the states of this upgrade history entry.
             module State
+
               # State is not specified.
               STATE_UNSPECIFIED = 0
 
@@ -410,6 +412,7 @@ module Google
 
             # The definition of operations of this upgrade history entry.
             module Action
+
               # Operation is not specified.
               ACTION_UNSPECIFIED = 0
 
@@ -442,6 +445,7 @@ module Google
           # Definition of the types of hardware accelerators that can be used on this
           # instance.
           module AcceleratorType
+
             # Accelerator type is not specified.
             ACCELERATOR_TYPE_UNSPECIFIED = 0
 
@@ -481,6 +485,7 @@ module Google
 
           # The definition of the states of this instance.
           module State
+
             # State is not specified.
             STATE_UNSPECIFIED = 0
 
@@ -521,6 +526,7 @@ module Google
 
           # Possible disk types for notebook instances.
           module DiskType
+
             # Disk type not set.
             DISK_TYPE_UNSPECIFIED = 0
 
@@ -539,6 +545,7 @@ module Google
 
           # Definition of the disk encryption options.
           module DiskEncryption
+
             # Disk encryption is not specified.
             DISK_ENCRYPTION_UNSPECIFIED = 0
 
@@ -552,6 +559,7 @@ module Google
           # The type of vNIC driver.
           # Default should be UNSPECIFIED_NIC_TYPE.
           module NicType
+
             # No type specified.
             UNSPECIFIED_NIC_TYPE = 0
 
@@ -566,3 +574,4 @@ module Google
     end
   end
 end
+

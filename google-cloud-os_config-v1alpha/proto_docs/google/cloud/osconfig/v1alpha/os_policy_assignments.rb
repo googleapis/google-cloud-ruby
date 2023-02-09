@@ -200,6 +200,7 @@ module Google
 
           # OS policy assignment rollout state
           module RolloutState
+
             # Invalid value
             ROLLOUT_STATE_UNSPECIFIED = 0
 
@@ -243,6 +244,7 @@ module Google
 
           # The OS policy assignment API method.
           module APIMethod
+
             # Invalid value
             API_METHOD_UNSPECIFIED = 0
 
@@ -258,6 +260,7 @@ module Google
 
           # State of the rollout
           module RolloutState
+
             # Invalid value
             ROLLOUT_STATE_UNSPECIFIED = 0
 
@@ -393,3 +396,4 @@ module Google
     end
   end
 end
+

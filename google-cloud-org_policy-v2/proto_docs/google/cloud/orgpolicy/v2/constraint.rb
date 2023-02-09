@@ -101,6 +101,7 @@ module Google
           #
           # Immutable after creation.
           module ConstraintDefault
+
             # This is only used for distinguishing unset values and should never be
             # used.
             CONSTRAINT_DEFAULT_UNSPECIFIED = 0
@@ -118,3 +119,4 @@ module Google
     end
   end
 end
+

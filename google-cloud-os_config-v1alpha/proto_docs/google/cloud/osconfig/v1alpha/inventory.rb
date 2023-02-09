@@ -111,6 +111,7 @@ module Google
 
             # The origin of a specific inventory item.
             module OriginType
+
               # Invalid. An origin type must be specified.
               ORIGIN_TYPE_UNSPECIFIED = 0
 
@@ -121,6 +122,7 @@ module Google
 
             # The different types of inventory that are tracked on a VM.
             module Type
+
               # Invalid. An type must be specified.
               TYPE_UNSPECIFIED = 0
 
@@ -387,6 +389,7 @@ module Google
 
         # The view for inventory objects.
         module InventoryView
+
           # The default value.
           # The API defaults to the BASIC view.
           INVENTORY_VIEW_UNSPECIFIED = 0
@@ -401,3 +404,4 @@ module Google
     end
   end
 end
+

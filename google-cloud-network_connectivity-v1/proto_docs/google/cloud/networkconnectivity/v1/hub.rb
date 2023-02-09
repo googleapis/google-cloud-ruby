@@ -525,6 +525,7 @@ module Google
 
         # Supported features for a location
         module LocationFeature
+
           # No publicly supported feature in this location
           LOCATION_FEATURE_UNSPECIFIED = 0
 
@@ -538,6 +539,7 @@ module Google
         # The State enum represents the lifecycle stage of a Network Connectivity
         # Center resource.
         module State
+
           # No state information available
           STATE_UNSPECIFIED = 0
 
@@ -557,3 +559,4 @@ module Google
     end
   end
 end
+

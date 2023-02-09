@@ -120,6 +120,7 @@ module Google
           # Type of states that are defined in the network state machine.
           # Each step in the packet trace is in a specific state.
           module State
+
             # Unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -290,6 +291,7 @@ module Google
 
           # The firewall rule's type.
           module FirewallRuleType
+
             # Unspecified type.
             FIREWALL_RULE_TYPE_UNSPECIFIED = 0
 
@@ -347,6 +349,7 @@ module Google
 
           # Type of route:
           module RouteType
+
             # Unspecified type. Default value.
             ROUTE_TYPE_UNSPECIFIED = 0
 
@@ -372,6 +375,7 @@ module Google
 
           # Type of next hop:
           module NextHopType
+
             # Unspecified type. Default value.
             NEXT_HOP_TYPE_UNSPECIFIED = 0
 
@@ -465,6 +469,7 @@ module Google
 
           # The type definition for a load balancer:
           module LoadBalancerType
+
             # Type is unspecified.
             LOAD_BALANCER_TYPE_UNSPECIFIED = 0
 
@@ -486,6 +491,7 @@ module Google
 
           # The type definition for a load balancer backend configuration:
           module BackendType
+
             # Type is unspecified.
             BACKEND_TYPE_UNSPECIFIED = 0
 
@@ -519,6 +525,7 @@ module Google
 
           # State of a health check firewall configuration:
           module HealthCheckFirewallState
+
             # State is unspecified. Default state if not populated.
             HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED = 0
 
@@ -596,6 +603,7 @@ module Google
           # Types of VPN routing policy. For details, refer to [Networks and Tunnel
           # routing](https://cloud.google.com/network-connectivity/docs/vpn/concepts/choosing-networks-routing/).
           module RoutingType
+
             # Unspecified type. Default value.
             ROUTING_TYPE_UNSPECIFIED = 0
 
@@ -652,6 +660,7 @@ module Google
 
           # Deliver target types:
           module Target
+
             # Target not specified.
             TARGET_UNSPECIFIED = 0
 
@@ -685,6 +694,7 @@ module Google
 
           # Forward target types.
           module Target
+
             # Target not specified.
             TARGET_UNSPECIFIED = 0
 
@@ -726,6 +736,7 @@ module Google
 
           # Abort cause types:
           module Cause
+
             # Cause is unspecified.
             CAUSE_UNSPECIFIED = 0
 
@@ -804,6 +815,7 @@ module Google
 
           # Drop cause types:
           module Cause
+
             # Cause is unspecified.
             CAUSE_UNSPECIFIED = 0
 
@@ -946,3 +958,4 @@ module Google
     end
   end
 end
+

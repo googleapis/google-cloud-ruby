@@ -240,6 +240,7 @@ module Google
           # {::Google::Cloud::Optimization::V1::OptimizeToursRequest#max_validation_errors max_validation_errors}
           # to cap the number of errors returned.
           module SolvingMode
+
             # Solve the model.
             DEFAULT_SOLVE = 0
 
@@ -261,6 +262,7 @@ module Google
           # Mode defining the behavior of the search, trading off latency versus
           # solution quality. In all modes, the global request deadline is enforced.
           module SearchMode
+
             # Unspecified search mode, equivalent to `RETURN_FAST`.
             SEARCH_MODE_UNSPECIFIED = 0
 
@@ -1039,6 +1041,7 @@ module Google
           # Modes defining how the appearance of incompatible shipments are restricted
           # on the same route.
           module IncompatibilityMode
+
             # Unspecified incompatibility mode. This value should never be used.
             INCOMPATIBILITY_MODE_UNSPECIFIED = 0
 
@@ -1081,6 +1084,7 @@ module Google
 
           # Modes defining the appearance of dependent shipments on a route.
           module RequirementMode
+
             # Unspecified requirement mode. This value should never be used.
             REQUIREMENT_MODE_UNSPECIFIED = 0
 
@@ -1453,6 +1457,7 @@ module Google
           # travel modes, see:
           # https://developers.google.com/maps/documentation/routes_preferred/reference/rest/Shared.Types/RouteTravelMode.
           module TravelMode
+
             # Unspecified travel mode, equivalent to `DRIVING`.
             TRAVEL_MODE_UNSPECIFIED = 0
 
@@ -1466,6 +1471,7 @@ module Google
           # Other shipments are free to occur anywhere on the route independent of
           # `unloading_policy`.
           module UnloadingPolicy
+
             # Unspecified unloading policy; deliveries must just occur after their
             # corresponding pickups.
             UNLOADING_POLICY_UNSPECIFIED = 0
@@ -2318,6 +2324,7 @@ module Google
             # particular, it gives no indication of whether a given reason will
             # appear before another in the solution, if both apply.
             module Code
+
               # This should never be used. If we are unable to understand why a
               # shipment was skipped, we simply return an empty set of reasons.
               CODE_UNSPECIFIED = 0
@@ -2550,6 +2557,7 @@ module Google
               #
               # The enumeration below is in order of increasing relaxation.
               module Level
+
                 # Implicit default relaxation level: no constraints are relaxed,
                 # i.e., all visits are fully constrained.
                 #
@@ -2875,3 +2883,4 @@ module Google
     end
   end
 end
+

@@ -20,8 +20,11 @@
 require "google/cloud/network_management/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#get_connectivity_test
+# Snippet for the get_connectivity_test call in the ReachabilityService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#get_connectivity_test.
+# It may require modification in order to execute successfully.
 #
 def get_connectivity_test
   # Create a client object. The client can be reused for multiple calls.

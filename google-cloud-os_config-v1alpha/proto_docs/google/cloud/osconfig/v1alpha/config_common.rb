@@ -39,6 +39,7 @@ module Google
 
           # Supported configuration step types
           module Type
+
             # Default value. This value is unused.
             TYPE_UNSPECIFIED = 0
 
@@ -63,6 +64,7 @@ module Google
 
           # Supported outcomes for a configuration step.
           module Outcome
+
             # Default value. This value is unused.
             OUTCOME_UNSPECIFIED = 0
 
@@ -105,6 +107,7 @@ module Google
 
         # Supported OSPolicy compliance states.
         module OSPolicyComplianceState
+
           # Default value. This value is unused.
           OS_POLICY_COMPLIANCE_STATE_UNSPECIFIED = 0
 
@@ -125,3 +128,4 @@ module Google
     end
   end
 end
+

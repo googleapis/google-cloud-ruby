@@ -158,6 +158,7 @@ module Google
           # The type definition of an endpoint's network. Use one of the
           # following choices:
           module NetworkType
+
             # Default type if unspecified.
             NETWORK_TYPE_UNSPECIFIED = 0
 
@@ -194,6 +195,7 @@ module Google
 
           # The overall result of the test's configuration analysis.
           module Result
+
             # No result was specified.
             RESULT_UNSPECIFIED = 0
 
@@ -230,3 +232,4 @@ module Google
     end
   end
 end
+

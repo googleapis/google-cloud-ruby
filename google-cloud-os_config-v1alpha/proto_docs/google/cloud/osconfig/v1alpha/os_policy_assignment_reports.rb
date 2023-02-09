@@ -215,6 +215,7 @@ module Google
 
                 # Supported configuration step types
                 module Type
+
                   # Default value. This value is unused.
                   TYPE_UNSPECIFIED = 0
 
@@ -251,6 +252,7 @@ module Google
 
               # Possible compliance states for a resource.
               module ComplianceState
+
                 # The resource is in an unknown compliance state.
                 #
                 # To get more details about why the policy is in this state, review
@@ -267,6 +269,7 @@ module Google
 
             # Possible compliance states for an os policy.
             module ComplianceState
+
               # The policy is in an unknown compliance state.
               #
               # Refer to the field `compliance_state_reason` to learn the exact reason
@@ -291,3 +294,4 @@ module Google
     end
   end
 end
+

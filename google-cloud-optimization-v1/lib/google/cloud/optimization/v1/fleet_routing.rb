@@ -63,3 +63,4 @@ end
 
 helper_path = ::File.join __dir__, "fleet_routing", "helpers.rb"
 require "google/cloud/optimization/v1/fleet_routing/helpers" if ::File.file? helper_path
+

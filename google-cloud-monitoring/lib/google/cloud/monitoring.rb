@@ -75,9 +75,9 @@ module Google
         require "google/cloud/monitoring/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Monitoring
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:AlertPolicyService)
         service_module.const_get(:Client).new(&block)
       end
@@ -116,9 +116,9 @@ module Google
         require "google/cloud/monitoring/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Monitoring
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:GroupService)
         service_module.const_get(:Client).new(&block)
       end
@@ -147,9 +147,9 @@ module Google
         require "google/cloud/monitoring/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Monitoring
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:MetricService)
         service_module.const_get(:Client).new(&block)
       end
@@ -178,9 +178,9 @@ module Google
         require "google/cloud/monitoring/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Monitoring
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:NotificationChannelService)
         service_module.const_get(:Client).new(&block)
       end
@@ -210,9 +210,9 @@ module Google
         require "google/cloud/monitoring/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Monitoring
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:QueryService)
         service_module.const_get(:Client).new(&block)
       end
@@ -243,9 +243,9 @@ module Google
         require "google/cloud/monitoring/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Monitoring
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:ServiceMonitoringService)
         service_module.const_get(:Client).new(&block)
       end
@@ -275,9 +275,9 @@ module Google
         require "google/cloud/monitoring/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Monitoring
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:SnoozeService)
         service_module.const_get(:Client).new(&block)
       end
@@ -312,9 +312,9 @@ module Google
         require "google/cloud/monitoring/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Monitoring
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Monitoring.const_get(package_name).const_get(:UptimeCheckService)
         service_module.const_get(:Client).new(&block)
       end
@@ -358,3 +358,4 @@ end
 
 helper_path = ::File.join __dir__, "monitoring", "helpers.rb"
 require "google/cloud/monitoring/helpers" if ::File.file? helper_path
+

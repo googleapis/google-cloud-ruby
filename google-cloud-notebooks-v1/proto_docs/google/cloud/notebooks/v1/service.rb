@@ -396,6 +396,7 @@ module Google
 
           # If an instance is healthy or not.
           module HealthState
+
             # The instance substate is unknown.
             HEALTH_STATE_UNSPECIFIED = 0
 
@@ -719,6 +720,7 @@ module Google
         # Definition of the types of upgrade that can be used on this
         # instance.
         module UpgradeType
+
           # Upgrade type is not specified.
           UPGRADE_TYPE_UNSPECIFIED = 0
 
@@ -738,3 +740,4 @@ module Google
     end
   end
 end
+

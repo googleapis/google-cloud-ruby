@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "notebook_service", "helpers.rb"
 require "google/cloud/notebooks/v1/notebook_service/helpers" if ::File.file? helper_path
+

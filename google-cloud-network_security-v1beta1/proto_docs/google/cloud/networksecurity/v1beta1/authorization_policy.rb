@@ -156,6 +156,7 @@ module Google
 
           # Possible values that define what action to take.
           module Action
+
             # Default value.
             ACTION_UNSPECIFIED = 0
 
@@ -261,3 +262,4 @@ module Google
     end
   end
 end
+

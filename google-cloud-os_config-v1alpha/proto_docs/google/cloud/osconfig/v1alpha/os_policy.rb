@@ -294,6 +294,7 @@ module Google
 
               # The desired state that the OS Config agent maintains on the VM.
               module DesiredState
+
                 # Unspecified is invalid.
                 DESIRED_STATE_UNSPECIFIED = 0
 
@@ -349,6 +350,7 @@ module Google
 
                 # Type of archive.
                 module ArchiveType
+
                   # Unspecified is invalid.
                   ARCHIVE_TYPE_UNSPECIFIED = 0
 
@@ -490,6 +492,7 @@ module Google
 
                 # The interpreter to use.
                 module Interpreter
+
                   # Invalid value, the request will return validation error.
                   INTERPRETER_UNSPECIFIED = 0
 
@@ -545,6 +548,7 @@ module Google
 
               # Desired state of the file.
               module DesiredState
+
                 # Unspecified is invalid.
                 DESIRED_STATE_UNSPECIFIED = 0
 
@@ -599,6 +603,7 @@ module Google
 
           # Policy mode
           module Mode
+
             # Invalid mode
             MODE_UNSPECIFIED = 0
 
@@ -616,3 +621,4 @@ module Google
     end
   end
 end
+

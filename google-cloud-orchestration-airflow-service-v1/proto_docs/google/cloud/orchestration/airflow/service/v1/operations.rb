@@ -50,6 +50,7 @@ module Google
 
               # An enum describing the overall state of an operation.
               module State
+
                 # Unused.
                 STATE_UNSPECIFIED = 0
 
@@ -70,6 +71,7 @@ module Google
 
               # Type of longrunning operation.
               module Type
+
                 # Unused.
                 TYPE_UNSPECIFIED = 0
 
@@ -98,3 +100,4 @@ module Google
     end
   end
 end
+

@@ -69,9 +69,9 @@ module Google
           require "google/cloud/monitoring/dashboard/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Monitoring::Dashboard
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Monitoring::Dashboard.const_get(package_name).const_get(:DashboardsService)
           service_module.const_get(:Client).new(&block)
         end
@@ -116,3 +116,4 @@ end
 
 helper_path = ::File.join __dir__, "dashboard", "helpers.rb"
 require "google/cloud/monitoring/dashboard/helpers" if ::File.file? helper_path
+

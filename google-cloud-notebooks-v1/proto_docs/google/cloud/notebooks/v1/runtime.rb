@@ -58,6 +58,7 @@ module Google
 
           # The definition of the states of this runtime.
           module State
+
             # State is not specified.
             STATE_UNSPECIFIED = 0
 
@@ -89,6 +90,7 @@ module Google
 
           # The runtime substate.
           module HealthState
+
             # The runtime substate is unknown.
             HEALTH_STATE_UNSPECIFIED = 0
 
@@ -136,6 +138,7 @@ module Google
 
           # Type of this accelerator.
           module AcceleratorType
+
             # Accelerator type is not specified.
             ACCELERATOR_TYPE_UNSPECIFIED = 0
 
@@ -333,6 +336,7 @@ module Google
 
           # Possible disk types.
           module DiskType
+
             # Disk type not set.
             DISK_TYPE_UNSPECIFIED = 0
 
@@ -368,6 +372,7 @@ module Google
           # Possible ways to access runtime. Authentication mode.
           # Currently supports: Single User only.
           module RuntimeAccessType
+
             # Unspecified access.
             RUNTIME_ACCESS_TYPE_UNSPECIFIED = 0
 
@@ -439,6 +444,7 @@ module Google
 
           # Behavior for the post startup script.
           module PostStartupScriptBehavior
+
             # Unspecified post startup script behavior. Will run only once at creation.
             POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED = 0
 
@@ -665,6 +671,7 @@ module Google
           # The type of vNIC driver.
           # Default should be UNSPECIFIED_NIC_TYPE.
           module NicType
+
             # No type specified.
             UNSPECIFIED_NIC_TYPE = 0
 
@@ -679,3 +686,4 @@ module Google
     end
   end
 end
+

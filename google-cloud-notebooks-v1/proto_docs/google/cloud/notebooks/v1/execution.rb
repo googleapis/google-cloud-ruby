@@ -214,6 +214,7 @@ module Google
           # Required. Specifies the machine types, the number of replicas for workers
           # and parameter servers.
           module ScaleTier
+
             # Unspecified Scale Tier.
             SCALE_TIER_UNSPECIFIED = 0
 
@@ -245,6 +246,7 @@ module Google
 
           # Hardware accelerator types for AI Platform Training jobs.
           module SchedulerAcceleratorType
+
             # Unspecified accelerator type. Default to no GPU.
             SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED = 0
 
@@ -275,6 +277,7 @@ module Google
 
           # The backend used for this execution.
           module JobType
+
             # No type specified.
             JOB_TYPE_UNSPECIFIED = 0
 
@@ -324,6 +327,7 @@ module Google
 
           # Enum description of the state of the underlying AIP job.
           module State
+
             # The job state is unspecified.
             STATE_UNSPECIFIED = 0
 
@@ -363,3 +367,4 @@ module Google
     end
   end
 end
+

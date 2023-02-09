@@ -46,6 +46,7 @@ module Google
 
           # The definition of the event types.
           module EventType
+
             # Event is not specified.
             EVENT_TYPE_UNSPECIFIED = 0
 
@@ -72,3 +73,4 @@ module Google
     end
   end
 end
+

@@ -20,8 +20,11 @@
 require "google/cloud/org_policy/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#update_policy
+# Snippet for the update_policy call in the OrgPolicy service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#update_policy. It may require
+# modification in order to execute successfully.
 #
 def update_policy
   # Create a client object. The client can be reused for multiple calls.

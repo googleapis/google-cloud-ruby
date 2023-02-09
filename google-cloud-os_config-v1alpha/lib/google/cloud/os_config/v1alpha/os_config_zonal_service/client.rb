@@ -67,9 +67,9 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 60.0
-                default_config.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  default_config.timeout = 60.0
+                  default_config.retry_policy = {
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -226,14 +226,14 @@ module Google
             #   # Call the create_os_policy_assignment method.
             #   result = client.create_os_policy_assignment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_os_policy_assignment request, options = nil
@@ -329,14 +329,14 @@ module Google
             #   # Call the update_os_policy_assignment method.
             #   result = client.update_os_policy_assignment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_os_policy_assignment request, options = nil
@@ -522,13 +522,11 @@ module Google
             #   # Call the list_os_policy_assignments method.
             #   result = client.list_os_policy_assignments request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OsConfig::V1alpha::OSPolicyAssignment.
-            #     p response
+            #     p item
             #   end
             #
             def list_os_policy_assignments request, options = nil
@@ -620,13 +618,11 @@ module Google
             #   # Call the list_os_policy_assignment_revisions method.
             #   result = client.list_os_policy_assignment_revisions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OsConfig::V1alpha::OSPolicyAssignment.
-            #     p response
+            #     p item
             #   end
             #
             def list_os_policy_assignment_revisions request, options = nil
@@ -723,14 +719,14 @@ module Google
             #   # Call the delete_os_policy_assignment method.
             #   result = client.delete_os_policy_assignment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_os_policy_assignment request, options = nil
@@ -929,13 +925,11 @@ module Google
             #   # Call the list_instance_os_policies_compliances method.
             #   result = client.list_instance_os_policies_compliances request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OsConfig::V1alpha::InstanceOSPoliciesCompliance.
-            #     p response
+            #     p item
             #   end
             #
             def list_instance_os_policies_compliances request, options = nil
@@ -1145,13 +1139,11 @@ module Google
             #   # Call the list_os_policy_assignment_reports method.
             #   result = client.list_os_policy_assignment_reports request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OsConfig::V1alpha::OSPolicyAssignmentReport.
-            #     p response
+            #     p item
             #   end
             #
             def list_os_policy_assignment_reports request, options = nil
@@ -1349,13 +1341,11 @@ module Google
             #   # Call the list_inventories method.
             #   result = client.list_inventories request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OsConfig::V1alpha::Inventory.
-            #     p response
+            #     p item
             #   end
             #
             def list_inventories request, options = nil
@@ -1547,13 +1537,11 @@ module Google
             #   # Call the list_vulnerability_reports method.
             #   result = client.list_vulnerability_reports request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OsConfig::V1alpha::VulnerabilityReport.
-            #     p response
+            #     p item
             #   end
             #
             def list_vulnerability_reports request, options = nil
@@ -1689,7 +1677,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1845,3 +1833,4 @@ module Google
     end
   end
 end
+

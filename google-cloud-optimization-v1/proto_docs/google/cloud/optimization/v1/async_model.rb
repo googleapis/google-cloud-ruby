@@ -84,6 +84,7 @@ module Google
 
           # Possible states of the operation.
           module State
+
             # The default value. This value is used if the state is omitted.
             STATE_UNSPECIFIED = 0
 
@@ -103,6 +104,7 @@ module Google
 
         # Data formats for input and output files.
         module DataFormat
+
           # Default value.
           DATA_FORMAT_UNSPECIFIED = 0
 
@@ -116,3 +118,4 @@ module Google
     end
   end
 end
+
