@@ -55,7 +55,7 @@ module Google
     # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
     # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
     # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
-    # @param [Integer] upload_chunk_size The chunk size of storage upload.
+    # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes. The default value is 100 MB.
     #
     # @return [Google::Cloud::Storage::Project]
     #
@@ -122,7 +122,7 @@ module Google
     # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
     # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
     # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
-    # @param [Integer] upload_chunk_size The chunk size of storage upload.
+    # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes. The default value is 100 MB.
     #
     # @return [Google::Cloud::Storage::Project]
     #

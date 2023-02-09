@@ -67,7 +67,7 @@ module Google
       # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
-      # @param [Integer] upload_chunk_size The chunk size of storage upload.
+      # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes. The default value is 100 MB.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -143,7 +143,7 @@ module Google
       # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
-      # @param [Integer] upload_chunk_size The chunk size of storage upload.
+      # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes. The default value is 100 MB.
       #
       # @return [Google::Cloud::Storage::Project]
       #
@@ -205,7 +205,7 @@ module Google
       # * `open_timeout` - (Integer) How long, in seconds, before failed connections time out.
       # * `read_timeout` - (Integer) How long, in seconds, before requests time out.
       # * `send_timeout` - (Integer) How long, in seconds, before receiving response from server times out.
-      # * `upload_chunk_size` - (Integer) The chunk size of storage upload.
+      # * `upload_chunk_size` - (Integer) The chunk size of storage upload, in bytes.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Storage library uses.
