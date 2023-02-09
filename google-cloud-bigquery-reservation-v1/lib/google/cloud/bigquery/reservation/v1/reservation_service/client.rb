@@ -79,73 +79,73 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.create_reservation.timeout = 300.0
+                      default_config.rpcs.create_reservation.timeout = 300.0
 
-                  default_config.rpcs.list_reservations.timeout = 300.0
-                  default_config.rpcs.list_reservations.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.list_reservations.timeout = 300.0
+                      default_config.rpcs.list_reservations.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_reservation.timeout = 300.0
-                  default_config.rpcs.get_reservation.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get_reservation.timeout = 300.0
+                      default_config.rpcs.get_reservation.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.delete_reservation.timeout = 300.0
-                  default_config.rpcs.delete_reservation.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.delete_reservation.timeout = 300.0
+                      default_config.rpcs.delete_reservation.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.update_reservation.timeout = 300.0
+                      default_config.rpcs.update_reservation.timeout = 300.0
 
-                  default_config.rpcs.create_capacity_commitment.timeout = 300.0
+                      default_config.rpcs.create_capacity_commitment.timeout = 300.0
 
-                  default_config.rpcs.list_capacity_commitments.timeout = 300.0
-                  default_config.rpcs.list_capacity_commitments.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.list_capacity_commitments.timeout = 300.0
+                      default_config.rpcs.list_capacity_commitments.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_capacity_commitment.timeout = 300.0
-                  default_config.rpcs.get_capacity_commitment.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get_capacity_commitment.timeout = 300.0
+                      default_config.rpcs.get_capacity_commitment.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.delete_capacity_commitment.timeout = 300.0
-                  default_config.rpcs.delete_capacity_commitment.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.delete_capacity_commitment.timeout = 300.0
+                      default_config.rpcs.delete_capacity_commitment.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.update_capacity_commitment.timeout = 300.0
+                      default_config.rpcs.update_capacity_commitment.timeout = 300.0
 
-                  default_config.rpcs.split_capacity_commitment.timeout = 300.0
+                      default_config.rpcs.split_capacity_commitment.timeout = 300.0
 
-                  default_config.rpcs.merge_capacity_commitments.timeout = 300.0
+                      default_config.rpcs.merge_capacity_commitments.timeout = 300.0
 
-                  default_config.rpcs.create_assignment.timeout = 300.0
+                      default_config.rpcs.create_assignment.timeout = 300.0
 
-                  default_config.rpcs.list_assignments.timeout = 300.0
-                  default_config.rpcs.list_assignments.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.list_assignments.timeout = 300.0
+                      default_config.rpcs.list_assignments.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.delete_assignment.timeout = 300.0
-                  default_config.rpcs.delete_assignment.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.delete_assignment.timeout = 300.0
+                      default_config.rpcs.delete_assignment.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.search_assignments.timeout = 300.0
-                  default_config.rpcs.search_assignments.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.search_assignments.timeout = 300.0
+                      default_config.rpcs.search_assignments.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.move_assignment.timeout = 300.0
+                      default_config.rpcs.move_assignment.timeout = 300.0
 
-                  default_config.rpcs.get_bi_reservation.timeout = 300.0
-                  default_config.rpcs.get_bi_reservation.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get_bi_reservation.timeout = 300.0
+                      default_config.rpcs.get_bi_reservation.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.update_bi_reservation.timeout = 300.0
+                      default_config.rpcs.update_bi_reservation.timeout = 300.0
 
                   default_config
                 end
@@ -365,13 +365,11 @@ module Google
               #   # Call the list_reservations method.
               #   result = client.list_reservations request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Reservation.
-              #     p response
+              #     p item
               #   end
               #
               def list_reservations request, options = nil
@@ -820,13 +818,11 @@ module Google
               #   # Call the list_capacity_commitments method.
               #   result = client.list_capacity_commitments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
-              #     p response
+              #     p item
               #   end
               #
               def list_capacity_commitments request, options = nil
@@ -1533,13 +1529,11 @@ module Google
               #   # Call the list_assignments method.
               #   result = client.list_assignments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
-              #     p response
+              #     p item
               #   end
               #
               def list_assignments request, options = nil
@@ -1763,13 +1757,11 @@ module Google
               #   # Call the search_assignments method.
               #   result = client.search_assignments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
-              #     p response
+              #     p item
               #   end
               #
               def search_assignments request, options = nil
@@ -1888,13 +1880,11 @@ module Google
               #   # Call the search_all_assignments method.
               #   result = client.search_all_assignments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
-              #     p response
+              #     p item
               #   end
               #
               def search_all_assignments request, options = nil
@@ -2393,7 +2383,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+                config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -2599,3 +2589,4 @@ module Google
     end
   end
 end
+

@@ -112,7 +112,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             module Type
-              # Illegal value
+            # Illegal value
               TYPE_UNSPECIFIED = 0
 
               # 64K, UTF8
@@ -162,7 +162,7 @@ module Google
             end
 
             module Mode
-              # Illegal value
+            # Illegal value
               MODE_UNSPECIFIED = 0
 
               NULLABLE = 1
@@ -177,3 +177,4 @@ module Google
     end
   end
 end
+

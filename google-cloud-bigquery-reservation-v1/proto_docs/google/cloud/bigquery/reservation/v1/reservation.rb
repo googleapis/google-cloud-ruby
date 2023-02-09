@@ -135,6 +135,7 @@ module Google
             # Commitment plan defines the current committed period. Capacity commitment
             # cannot be deleted during it's committed period.
             module CommitmentPlan
+
               # Invalid plan value. Requests with this value will be rejected with
               # error code `google.rpc.Code.INVALID_ARGUMENT`.
               COMMITMENT_PLAN_UNSPECIFIED = 0
@@ -164,6 +165,7 @@ module Google
             # Capacity commitment can either become ACTIVE right away or transition
             # from PENDING to ACTIVE or FAILED.
             module State
+
               # Invalid state value.
               STATE_UNSPECIFIED = 0
 
@@ -415,6 +417,7 @@ module Google
 
             # Types of job, which could be specified when using the reservation.
             module JobType
+
               # Invalid type. Requests with this value will be rejected with
               # error code `google.rpc.Code.INVALID_ARGUMENT`.
               JOB_TYPE_UNSPECIFIED = 0
@@ -434,6 +437,7 @@ module Google
             # present. It will become ACTIVE when some capacity commitment becomes
             # active.
             module State
+
               # Invalid state value.
               STATE_UNSPECIFIED = 0
 
@@ -694,3 +698,4 @@ module Google
     end
   end
 end
+

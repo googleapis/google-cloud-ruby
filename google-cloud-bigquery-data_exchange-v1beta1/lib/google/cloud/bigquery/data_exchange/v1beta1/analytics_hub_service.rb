@@ -54,3 +54,4 @@ end
 
 helper_path = ::File.join __dir__, "analytics_hub_service", "helpers.rb"
 require "google/cloud/bigquery/data_exchange/v1beta1/analytics_hub_service/helpers" if ::File.file? helper_path
+

@@ -123,6 +123,7 @@ module Google
 
             # The sub-dialect options for Teradata.
             module Mode
+
               # Unspecified mode.
               MODE_UNSPECIFIED = 0
 
@@ -243,6 +244,7 @@ module Google
 
             # The type of the object that is being mapped.
             module Type
+
               # Unspecified name mapping type.
               TYPE_UNSPECIFIED = 0
 
@@ -309,3 +311,4 @@ module Google
     end
   end
 end
+

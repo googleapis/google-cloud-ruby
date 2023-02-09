@@ -66,60 +66,60 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.get_data_source.timeout = 20.0
-                  default_config.rpcs.get_data_source.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                      default_config.rpcs.get_data_source.timeout = 20.0
+                      default_config.rpcs.get_data_source.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.list_data_sources.timeout = 20.0
-                  default_config.rpcs.list_data_sources.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                      default_config.rpcs.list_data_sources.timeout = 20.0
+                      default_config.rpcs.list_data_sources.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.create_transfer_config.timeout = 30.0
+                      default_config.rpcs.create_transfer_config.timeout = 30.0
 
-                  default_config.rpcs.update_transfer_config.timeout = 30.0
+                      default_config.rpcs.update_transfer_config.timeout = 30.0
 
-                  default_config.rpcs.delete_transfer_config.timeout = 20.0
-                  default_config.rpcs.delete_transfer_config.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                      default_config.rpcs.delete_transfer_config.timeout = 20.0
+                      default_config.rpcs.delete_transfer_config.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.get_transfer_config.timeout = 20.0
-                  default_config.rpcs.get_transfer_config.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                      default_config.rpcs.get_transfer_config.timeout = 20.0
+                      default_config.rpcs.get_transfer_config.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.list_transfer_configs.timeout = 20.0
-                  default_config.rpcs.list_transfer_configs.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                      default_config.rpcs.list_transfer_configs.timeout = 20.0
+                      default_config.rpcs.list_transfer_configs.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.schedule_transfer_runs.timeout = 30.0
+                      default_config.rpcs.schedule_transfer_runs.timeout = 30.0
 
-                  default_config.rpcs.get_transfer_run.timeout = 20.0
-                  default_config.rpcs.get_transfer_run.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                      default_config.rpcs.get_transfer_run.timeout = 20.0
+                      default_config.rpcs.get_transfer_run.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.delete_transfer_run.timeout = 20.0
-                  default_config.rpcs.delete_transfer_run.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                      default_config.rpcs.delete_transfer_run.timeout = 20.0
+                      default_config.rpcs.delete_transfer_run.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.list_transfer_runs.timeout = 20.0
-                  default_config.rpcs.list_transfer_runs.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                      default_config.rpcs.list_transfer_runs.timeout = 20.0
+                      default_config.rpcs.list_transfer_runs.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.list_transfer_logs.timeout = 20.0
-                  default_config.rpcs.list_transfer_logs.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                      default_config.rpcs.list_transfer_logs.timeout = 20.0
+                      default_config.rpcs.list_transfer_logs.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.check_valid_creds.timeout = 20.0
-                  default_config.rpcs.check_valid_creds.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                      default_config.rpcs.check_valid_creds.timeout = 20.0
+                      default_config.rpcs.check_valid_creds.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config
@@ -353,13 +353,11 @@ module Google
               #   # Call the list_data_sources method.
               #   result = client.list_data_sources request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::DataSource.
-              #     p response
+              #     p item
               #   end
               #
               def list_data_sources request, options = nil
@@ -892,13 +890,11 @@ module Google
               #   # Call the list_transfer_configs method.
               #   result = client.list_transfer_configs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig.
-              #     p response
+              #     p item
               #   end
               #
               def list_transfer_configs request, options = nil
@@ -1369,13 +1365,11 @@ module Google
               #   # Call the list_transfer_runs method.
               #   result = client.list_transfer_runs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::TransferRun.
-              #     p response
+              #     p item
               #   end
               #
               def list_transfer_runs request, options = nil
@@ -1474,13 +1468,11 @@ module Google
               #   # Call the list_transfer_logs method.
               #   result = client.list_transfer_logs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage.
-              #     p response
+              #     p item
               #   end
               #
               def list_transfer_logs request, options = nil
@@ -1799,7 +1791,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+                config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -1963,3 +1955,4 @@ module Google
     end
   end
 end
+

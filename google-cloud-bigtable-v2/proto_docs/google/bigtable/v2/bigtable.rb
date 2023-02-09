@@ -54,6 +54,7 @@ module Google
           #
           # See also: RequestStats message.
           module RequestStatsView
+
             # The default / unset value. The API will default to the NONE option below.
             REQUEST_STATS_VIEW_UNSPECIFIED = 0
 
@@ -400,3 +401,4 @@ module Google
     end
   end
 end
+

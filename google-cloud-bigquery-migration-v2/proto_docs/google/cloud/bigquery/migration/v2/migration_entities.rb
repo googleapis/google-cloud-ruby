@@ -63,6 +63,7 @@ module Google
 
             # Possible migration workflow states.
             module State
+
               # Workflow state is unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -120,6 +121,7 @@ module Google
 
             # Possible states of a migration task.
             module State
+
               # The state is unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -195,6 +197,7 @@ module Google
 
             # Possible states of a migration subtask.
             module State
+
               # The state is unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -220,3 +223,4 @@ module Google
     end
   end
 end
+

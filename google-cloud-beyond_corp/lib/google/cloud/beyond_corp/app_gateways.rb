@@ -81,9 +81,9 @@ module Google
           require "google/cloud/beyond_corp/app_gateways/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::BeyondCorp::AppGateways
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::BeyondCorp::AppGateways.const_get(package_name).const_get(:AppGatewaysService)
           service_module.const_get(:Client).new(&block)
         end
@@ -128,3 +128,4 @@ end
 
 helper_path = ::File.join __dir__, "app_gateways", "helpers.rb"
 require "google/cloud/beyond_corp/app_gateways/helpers" if ::File.file? helper_path
+

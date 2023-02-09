@@ -79,6 +79,7 @@ module Google
 
             # Parameter type.
             module Type
+
               # Type unspecified.
               TYPE_UNSPECIFIED = 0
 
@@ -178,6 +179,7 @@ module Google
 
             # The type of authorization needed for this data source.
             module AuthorizationType
+
               # Type unspecified.
               AUTHORIZATION_TYPE_UNSPECIFIED = 0
 
@@ -195,6 +197,7 @@ module Google
 
             # Represents how the data source supports data auto refresh.
             module DataRefreshType
+
               # The data source won't support data auto refresh, which is default value.
               DATA_REFRESH_TYPE_UNSPECIFIED = 0
 
@@ -492,6 +495,7 @@ module Google
 
             # Represents which runs should be pulled.
             module RunAttempt
+
               # All runs should be returned.
               RUN_ATTEMPT_UNSPECIFIED = 0
 
@@ -672,3 +676,4 @@ module Google
     end
   end
 end
+

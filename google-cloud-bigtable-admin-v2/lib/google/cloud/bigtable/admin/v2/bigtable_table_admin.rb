@@ -54,3 +54,4 @@ end
 
 helper_path = ::File.join __dir__, "bigtable_table_admin", "helpers.rb"
 require "google/cloud/bigtable/admin/v2/bigtable_table_admin/helpers" if ::File.file? helper_path
+

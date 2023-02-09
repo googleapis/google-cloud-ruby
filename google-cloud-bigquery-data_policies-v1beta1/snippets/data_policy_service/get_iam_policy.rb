@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/data_policies/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#get_iam_policy
+# Snippet for the get_iam_policy call in the DataPolicyService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#get_iam_policy.
+# It may require modification in order to execute successfully.
 #
 def get_iam_policy
   # Create a client object. The client can be reused for multiple calls.

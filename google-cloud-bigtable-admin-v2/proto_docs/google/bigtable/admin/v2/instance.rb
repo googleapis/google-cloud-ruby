@@ -78,6 +78,7 @@ module Google
 
             # Possible states of an instance.
             module State
+
               # The state of the instance could not be determined.
               STATE_NOT_KNOWN = 0
 
@@ -92,6 +93,7 @@ module Google
 
             # The type of the instance.
             module Type
+
               # The type of the instance is unspecified. If set when creating an
               # instance, a `PRODUCTION` instance will be created. If set when updating
               # an instance, the type will be left unchanged.
@@ -215,6 +217,7 @@ module Google
 
             # Possible states of a cluster.
             module State
+
               # The state of the cluster could not be determined.
               STATE_NOT_KNOWN = 0
 
@@ -339,3 +342,4 @@ module Google
     end
   end
 end
+

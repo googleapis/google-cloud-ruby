@@ -42,6 +42,7 @@ module Google
 
           # Storage media types for persisting Bigtable data.
           module StorageType
+
             # The user did not specify a storage type.
             STORAGE_TYPE_UNSPECIFIED = 0
 
@@ -56,3 +57,4 @@ module Google
     end
   end
 end
+

@@ -49,3 +49,4 @@ end
 
 helper_path = ::File.join __dir__, "data_policy_service", "helpers.rb"
 require "google/cloud/bigquery/data_policies/v1/data_policy_service/helpers" if ::File.file? helper_path
+

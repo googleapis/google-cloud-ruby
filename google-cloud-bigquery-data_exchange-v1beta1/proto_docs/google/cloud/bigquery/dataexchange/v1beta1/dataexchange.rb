@@ -220,6 +220,7 @@ module Google
 
             # State of the listing.
             module State
+
               # Default value. This value is unused.
               STATE_UNSPECIFIED = 0
 
@@ -230,6 +231,7 @@ module Google
 
             # Listing categories.
             module Category
+
               CATEGORY_UNSPECIFIED = 0
 
               CATEGORY_OTHERS = 1
@@ -495,3 +497,4 @@ module Google
     end
   end
 end
+

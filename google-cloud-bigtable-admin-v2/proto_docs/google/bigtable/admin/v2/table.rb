@@ -92,6 +92,7 @@ module Google
 
               # Table replication states.
               module ReplicationState
+
                 # The replication state of the table is unknown in this cluster.
                 STATE_NOT_KNOWN = 0
 
@@ -141,6 +142,7 @@ module Google
             # Possible timestamp granularities to use when keeping multiple versions
             # of data in a table.
             module TimestampGranularity
+
               # The user did not specify a granularity. Should not be returned.
               # When specified during table creation, MILLIS will be used.
               TIMESTAMP_GRANULARITY_UNSPECIFIED = 0
@@ -151,6 +153,7 @@ module Google
 
             # Defines a view over a table's fields.
             module View
+
               # Uses the default view for each method as documented in its request.
               VIEW_UNSPECIFIED = 0
 
@@ -245,6 +248,7 @@ module Google
 
             # Possible encryption types for a resource.
             module EncryptionType
+
               # Encryption type was not specified, though data at rest remains encrypted.
               ENCRYPTION_TYPE_UNSPECIFIED = 0
 
@@ -305,6 +309,7 @@ module Google
 
             # Possible states of a snapshot.
             module State
+
               # The state of the snapshot could not be determined.
               STATE_NOT_KNOWN = 0
 
@@ -368,6 +373,7 @@ module Google
 
             # Indicates the current state of the backup.
             module State
+
               # Not specified.
               STATE_UNSPECIFIED = 0
 
@@ -402,6 +408,7 @@ module Google
 
           # Indicates the type of the restore source.
           module RestoreSourceType
+
             # No restore associated.
             RESTORE_SOURCE_TYPE_UNSPECIFIED = 0
 
@@ -413,3 +420,4 @@ module Google
     end
   end
 end
+

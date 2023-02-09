@@ -68,9 +68,9 @@ module Google
           require "google/cloud/bigquery/data_policies/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Bigquery::DataPolicies
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Bigquery::DataPolicies.const_get(package_name).const_get(:DataPolicyService)
           service_module.const_get(:Client).new(&block)
         end
@@ -115,3 +115,4 @@ end
 
 helper_path = ::File.join __dir__, "data_policies", "helpers.rb"
 require "google/cloud/bigquery/data_policies/helpers" if ::File.file? helper_path
+

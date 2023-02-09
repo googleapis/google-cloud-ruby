@@ -60,6 +60,7 @@ module Google
 
             # Compression codec's supported by Arrow.
             module CompressionCodec
+
               # If unspecified no compression will be used.
               COMPRESSION_UNSPECIFIED = 0
 
@@ -75,3 +76,4 @@ module Google
     end
   end
 end
+

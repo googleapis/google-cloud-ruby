@@ -49,3 +49,4 @@ end
 
 helper_path = ::File.join __dir__, "connection_service", "helpers.rb"
 require "google/cloud/bigquery/connection/v1/connection_service/helpers" if ::File.file? helper_path
+

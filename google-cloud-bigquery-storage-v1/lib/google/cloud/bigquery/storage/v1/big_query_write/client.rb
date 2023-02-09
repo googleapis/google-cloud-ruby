@@ -70,34 +70,34 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.create_write_stream.timeout = 1200.0
-                  default_config.rpcs.create_write_stream.retry_policy = {
-                    initial_delay: 10.0, max_delay: 120.0, multiplier: 1.3, retry_codes: [4, 14, 8]
+                      default_config.rpcs.create_write_stream.timeout = 1200.0
+                      default_config.rpcs.create_write_stream.retry_policy ={
+                  initial_delay: 10.0, max_delay: 120.0, multiplier: 1.3, retry_codes: [4, 14, 8]
                   }
 
-                  default_config.rpcs.append_rows.timeout = 86_400.0
-                  default_config.rpcs.append_rows.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                      default_config.rpcs.append_rows.timeout = 86_400.0
+                      default_config.rpcs.append_rows.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                   }
 
-                  default_config.rpcs.get_write_stream.timeout = 600.0
-                  default_config.rpcs.get_write_stream.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get_write_stream.timeout = 600.0
+                      default_config.rpcs.get_write_stream.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.finalize_write_stream.timeout = 600.0
-                  default_config.rpcs.finalize_write_stream.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.finalize_write_stream.timeout = 600.0
+                      default_config.rpcs.finalize_write_stream.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.batch_commit_write_streams.timeout = 600.0
-                  default_config.rpcs.batch_commit_write_streams.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.batch_commit_write_streams.timeout = 600.0
+                      default_config.rpcs.batch_commit_write_streams.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.flush_rows.timeout = 600.0
-                  default_config.rpcs.flush_rows.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.flush_rows.timeout = 600.0
+                      default_config.rpcs.flush_rows.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config
@@ -325,22 +325,22 @@ module Google
               #   # Create a client object. The client can be reused for multiple calls.
               #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
               #
-              #   # Create an input stream
+              #   # Create an input stream.
               #   input = Gapic::StreamInput.new
               #
               #   # Call the append_rows method to start streaming.
               #   output = client.append_rows input
               #
-              #   # Send requests on the stream. For each request, pass in keyword
-              #   # arguments to set fields. Be sure to close the stream when done.
+              #   # Send requests on the stream. For each request object, set fields by
+              #   # passing keyword arguments. Be sure to close the stream when done.
               #   input << Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new
               #   input << Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new
               #   input.close
               #
-              #   # Handle streamed responses. These may be interleaved with inputs.
-              #   # Each response is of type ::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse.
-              #   output.each do |response|
-              #     p response
+              #   # The returned object is a streamed enumerable yielding elements of type
+              #   # ::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse
+              #   output.each do |current_response|
+              #     p current_response
               #   end
               #
               def append_rows request, options = nil
@@ -836,7 +836,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+                config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -937,3 +937,4 @@ module Google
     end
   end
 end
+

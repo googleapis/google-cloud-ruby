@@ -35,6 +35,7 @@ module Google
 
       # Value types that can be used as label values.
       module ValueType
+
         # A variable-length string. This is the default.
         STRING = 0
 
@@ -47,3 +48,4 @@ module Google
     end
   end
 end
+

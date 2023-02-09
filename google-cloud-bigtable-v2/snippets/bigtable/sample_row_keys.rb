@@ -20,8 +20,11 @@
 require "google/cloud/bigtable/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigtable::V2::Bigtable::Client#sample_row_keys
+# Snippet for the sample_row_keys call in the Bigtable service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigtable::V2::Bigtable::Client#sample_row_keys. It may require
+# modification in order to execute successfully.
 #
 def sample_row_keys
   # Create a client object. The client can be reused for multiple calls.
@@ -30,13 +33,13 @@ def sample_row_keys
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new
 
-  # Call the sample_row_keys method.
-  result = client.sample_row_keys request
+  # Call the sample_row_keys method to start streaming.
+  output = client.sample_row_keys request
 
-  # The returned object is a streamed enumerable yielding elements of
-  # type ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse.
-  result.each do |response|
-    p response
+  # The returned object is a streamed enumerable yielding elements of type
+  # ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse
+  output.each do |current_response|
+    p current_response
   end
 end
 # [END bigtable_v2_generated_Bigtable_SampleRowKeys_sync]

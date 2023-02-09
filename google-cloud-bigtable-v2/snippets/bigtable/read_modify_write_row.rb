@@ -20,8 +20,11 @@
 require "google/cloud/bigtable/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigtable::V2::Bigtable::Client#read_modify_write_row
+# Snippet for the read_modify_write_row call in the Bigtable service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigtable::V2::Bigtable::Client#read_modify_write_row. It may
+# require modification in order to execute successfully.
 #
 def read_modify_write_row
   # Create a client object. The client can be reused for multiple calls.

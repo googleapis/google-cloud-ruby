@@ -65,44 +65,44 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.create_data_policy.timeout = 60.0
-                  default_config.rpcs.create_data_policy.retry_policy = {
-                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                      default_config.rpcs.create_data_policy.timeout = 60.0
+                      default_config.rpcs.create_data_policy.retry_policy ={
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
-                  default_config.rpcs.update_data_policy.timeout = 60.0
-                  default_config.rpcs.update_data_policy.retry_policy = {
-                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                      default_config.rpcs.update_data_policy.timeout = 60.0
+                      default_config.rpcs.update_data_policy.retry_policy ={
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
-                  default_config.rpcs.delete_data_policy.timeout = 60.0
-                  default_config.rpcs.delete_data_policy.retry_policy = {
-                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                      default_config.rpcs.delete_data_policy.timeout = 60.0
+                      default_config.rpcs.delete_data_policy.retry_policy ={
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
-                  default_config.rpcs.get_data_policy.timeout = 60.0
-                  default_config.rpcs.get_data_policy.retry_policy = {
-                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                      default_config.rpcs.get_data_policy.timeout = 60.0
+                      default_config.rpcs.get_data_policy.retry_policy ={
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
-                  default_config.rpcs.list_data_policies.timeout = 60.0
-                  default_config.rpcs.list_data_policies.retry_policy = {
-                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                      default_config.rpcs.list_data_policies.timeout = 60.0
+                      default_config.rpcs.list_data_policies.retry_policy ={
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
-                  default_config.rpcs.get_iam_policy.timeout = 60.0
-                  default_config.rpcs.get_iam_policy.retry_policy = {
-                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                      default_config.rpcs.get_iam_policy.timeout = 60.0
+                      default_config.rpcs.get_iam_policy.retry_policy ={
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
-                  default_config.rpcs.set_iam_policy.timeout = 60.0
-                  default_config.rpcs.set_iam_policy.retry_policy = {
-                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                      default_config.rpcs.set_iam_policy.timeout = 60.0
+                      default_config.rpcs.set_iam_policy.retry_policy ={
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
-                  default_config.rpcs.test_iam_permissions.timeout = 60.0
-                  default_config.rpcs.test_iam_permissions.retry_policy = {
-                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                      default_config.rpcs.test_iam_permissions.timeout = 60.0
+                      default_config.rpcs.test_iam_permissions.retry_policy ={
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
                   default_config
@@ -592,13 +592,11 @@ module Google
               #   # Call the list_data_policies method.
               #   result = client.list_data_policies request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicy.
-              #     p response
+              #     p item
               #   end
               #
               def list_data_policies request, options = nil
@@ -1011,7 +1009,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+                config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -1126,3 +1124,4 @@ module Google
     end
   end
 end
+

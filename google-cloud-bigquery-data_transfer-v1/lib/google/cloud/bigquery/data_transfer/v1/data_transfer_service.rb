@@ -49,3 +49,4 @@ end
 
 helper_path = ::File.join __dir__, "data_transfer_service", "helpers.rb"
 require "google/cloud/bigquery/data_transfer/v1/data_transfer_service/helpers" if ::File.file? helper_path
+

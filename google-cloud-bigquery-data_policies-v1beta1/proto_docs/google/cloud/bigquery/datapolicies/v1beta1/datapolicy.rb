@@ -134,6 +134,7 @@ module Google
 
             # A list of supported data policy types.
             module DataPolicyType
+
               # Default value for the data policy type. This should not be used.
               DATA_POLICY_TYPE_UNSPECIFIED = 0
 
@@ -157,6 +158,7 @@ module Google
             # The available masking rules. Learn more here:
             # https://cloud.google.com/bigquery/docs/column-data-masking-intro#masking_options.
             module PredefinedExpression
+
               # Default, unspecified predefined expression. No masking will take place
               # since no expression is specified.
               PREDEFINED_EXPRESSION_UNSPECIFIED = 0
@@ -193,3 +195,4 @@ module Google
     end
   end
 end
+

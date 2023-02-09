@@ -279,6 +279,7 @@ module Google
             # represent a NULL or a column default value defined in BigQuery table
             # schema.
             module MissingValueInterpretation
+
               # Invalid missing value interpretation. Requests with this value will be
               # rejected.
               MISSING_VALUE_INTERPRETATION_UNSPECIFIED = 0
@@ -452,6 +453,7 @@ module Google
 
             # Error code for `StorageError`.
             module StorageErrorCode
+
               # Default error.
               STORAGE_ERROR_CODE_UNSPECIFIED = 0
 
@@ -504,6 +506,7 @@ module Google
 
             # Error code for `RowError`.
             module RowErrorCode
+
               # Default error.
               ROW_ERROR_CODE_UNSPECIFIED = 0
 
@@ -516,3 +519,4 @@ module Google
     end
   end
 end
+

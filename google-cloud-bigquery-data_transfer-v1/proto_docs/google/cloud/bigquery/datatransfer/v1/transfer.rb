@@ -251,6 +251,7 @@ module Google
 
             # Represents data transfer user facing message severity.
             module MessageSeverity
+
               # No severity specified.
               MESSAGE_SEVERITY_UNSPECIFIED = 0
 
@@ -267,6 +268,7 @@ module Google
 
           # DEPRECATED. Represents data transfer type.
           module TransferType
+
             # Invalid or Unknown transfer type placeholder.
             TRANSFER_TYPE_UNSPECIFIED = 0
 
@@ -280,6 +282,7 @@ module Google
 
           # Represents data transfer run state.
           module TransferState
+
             # State placeholder (0).
             TRANSFER_STATE_UNSPECIFIED = 0
 
@@ -304,3 +307,4 @@ module Google
     end
   end
 end
+

@@ -267,7 +267,7 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
               module State
-                STATE_UNSPECIFIED = 0
+              STATE_UNSPECIFIED = 0
 
                 # The table has not yet begun copying to the new cluster.
                 PENDING = 1
@@ -511,3 +511,4 @@ module Google
     end
   end
 end
+

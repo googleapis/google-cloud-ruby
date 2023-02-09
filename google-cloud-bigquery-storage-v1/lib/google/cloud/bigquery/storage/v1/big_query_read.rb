@@ -51,3 +51,4 @@ end
 
 helper_path = ::File.join __dir__, "big_query_read", "helpers.rb"
 require "google/cloud/bigquery/storage/v1/big_query_read/helpers" if ::File.file? helper_path
+

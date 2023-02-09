@@ -81,9 +81,9 @@ module Google
           require "google/cloud/beyond_corp/app_connectors/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::BeyondCorp::AppConnectors
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::BeyondCorp::AppConnectors.const_get(package_name).const_get(:AppConnectorsService)
           service_module.const_get(:Client).new(&block)
         end
@@ -128,3 +128,4 @@ end
 
 helper_path = ::File.join __dir__, "app_connectors", "helpers.rb"
 require "google/cloud/beyond_corp/app_connectors/helpers" if ::File.file? helper_path
+

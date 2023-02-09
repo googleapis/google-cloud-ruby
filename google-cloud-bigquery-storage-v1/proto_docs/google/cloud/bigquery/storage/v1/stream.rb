@@ -217,6 +217,7 @@ module Google
 
             # Type enum of the stream.
             module Type
+
               # Unknown type.
               TYPE_UNSPECIFIED = 0
 
@@ -233,6 +234,7 @@ module Google
 
             # Mode enum of the stream.
             module WriteMode
+
               # Unknown type.
               WRITE_MODE_UNSPECIFIED = 0
 
@@ -244,6 +246,7 @@ module Google
 
           # Data format for input or output data.
           module DataFormat
+
             # Data format is unspecified.
             DATA_FORMAT_UNSPECIFIED = 0
 
@@ -259,6 +262,7 @@ module Google
           # WriteStreamView is a view enum that controls what details about a write
           # stream should be returned.
           module WriteStreamView
+
             # The default / unset value.
             WRITE_STREAM_VIEW_UNSPECIFIED = 0
 
@@ -277,3 +281,4 @@ module Google
     end
   end
 end
+
