@@ -70,9 +70,9 @@ module Google
         require "google/cloud/channel/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Channel
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Channel.const_get(package_name).const_get(:CloudChannelReportsService)
         service_module.const_get(:Client).new(&block)
       end
@@ -119,9 +119,9 @@ module Google
         require "google/cloud/channel/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Channel
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Channel.const_get(package_name).const_get(:CloudChannelService)
         service_module.const_get(:Client).new(&block)
       end
@@ -165,3 +165,4 @@ end
 
 helper_path = ::File.join __dir__, "channel", "helpers.rb"
 require "google/cloud/channel/helpers" if ::File.file? helper_path
+

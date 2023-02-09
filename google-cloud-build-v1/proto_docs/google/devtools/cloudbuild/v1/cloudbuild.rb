@@ -570,6 +570,7 @@ module Google
 
             # The relative importance of this warning.
             module Priority
+
               # Should not be used.
               PRIORITY_UNSPECIFIED = 0
 
@@ -598,6 +599,7 @@ module Google
             # The name of a fatal problem encountered during the execution of the
             # build.
             module FailureType
+
               # Type unspecified
               FAILURE_TYPE_UNSPECIFIED = 0
 
@@ -641,6 +643,7 @@ module Google
 
           # Possible status of a build or build step.
           module Status
+
             # Status of the build is unknown.
             STATUS_UNKNOWN = 0
 
@@ -883,6 +886,7 @@ module Google
 
           # Specifies the hash algorithm, if any.
           module HashType
+
             # No hash requested.
             NONE = 0
 
@@ -1101,6 +1105,7 @@ module Google
 
           # Specifies the current state of a build's approval.
           module State
+
             # Default enum type. This should not be used.
             STATE_UNSPECIFIED = 0
 
@@ -1157,6 +1162,7 @@ module Google
           # Specifies whether or not this manual approval result is to approve
           # or reject a build.
           module Decision
+
             # Default enum type. This should not be used.
             DECISION_UNSPECIFIED = 0
 
@@ -1339,6 +1345,7 @@ module Google
           # Enumerates potential issues with the underlying Pub/Sub subscription
           # configuration.
           module State
+
             # The subscription configuration has not been checked.
             STATE_UNSPECIFIED = 0
 
@@ -1372,6 +1379,7 @@ module Google
           # Enumerates potential issues with the Secret Manager secret provided by the
           # user.
           module State
+
             # The webhook auth configuration not been checked.
             STATE_UNSPECIFIED = 0
 
@@ -1404,6 +1412,7 @@ module Google
 
           # Controls behavior of Pull Request comments.
           module CommentControl
+
             # Do not require comments on Pull Requests before builds are triggered.
             COMMENTS_DISABLED = 0
 
@@ -1631,6 +1640,7 @@ module Google
 
           # Specifies the manner in which the build should be verified, if at all.
           module VerifyOption
+
             # Not a verifiable build. (default)
             NOT_VERIFIED = 0
 
@@ -1642,6 +1652,7 @@ module Google
           # For more information, see [Machine
           # types](https://cloud.google.com/compute/docs/machine-types).
           module MachineType
+
             # Standard machine type.
             UNSPECIFIED = 0
 
@@ -1660,6 +1671,7 @@ module Google
 
           # Specifies the behavior when there is an error in the substitution checks.
           module SubstitutionOption
+
             # Fails the build if error in substitutions checks, like missing
             # a substitution in the template or in the map.
             MUST_MATCH = 0
@@ -1670,6 +1682,7 @@ module Google
 
           # Specifies the behavior when writing build logs to Google Cloud Storage.
           module LogStreamingOption
+
             # Service may automatically determine build log streaming behavior.
             STREAM_DEFAULT = 0
 
@@ -1683,6 +1696,7 @@ module Google
 
           # Specifies the logging mode.
           module LoggingMode
+
             # The service determines the logging mode. The default is `LEGACY`. Do not
             # rely on the default logging behavior as it may change in the future.
             LOGGING_UNSPECIFIED = 0
@@ -1805,6 +1819,7 @@ module Google
 
           # State of the `WorkerPool`.
           module State
+
             # State of the `WorkerPool` is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -1873,6 +1888,7 @@ module Google
 
             # Defines the egress option for the pool.
             module EgressOption
+
               # If set, defaults to PUBLIC_EGRESS.
               EGRESS_OPTION_UNSPECIFIED = 0
 
@@ -2049,3 +2065,4 @@ module Google
     end
   end
 end
+

@@ -93,6 +93,7 @@ module Google
 
           # Data type of the parameter.
           module ParameterType
+
             # Not used.
             PARAMETER_TYPE_UNSPECIFIED = 0
 
@@ -252,6 +253,7 @@ module Google
 
         # Constraints type for Promotional offers.
         module PromotionalOrderType
+
           # Not used.
           PROMOTIONAL_TYPE_UNSPECIFIED = 0
 
@@ -267,6 +269,7 @@ module Google
 
         # Describes how the reseller will be billed.
         module PaymentPlan
+
           # Not used.
           PAYMENT_PLAN_UNSPECIFIED = 0
 
@@ -288,6 +291,7 @@ module Google
 
         # Specifies when the payment needs to happen.
         module PaymentType
+
           # Not used.
           PAYMENT_TYPE_UNSPECIFIED = 0
 
@@ -302,6 +306,7 @@ module Google
         # happens). For example, this could be MINUTES for Google Voice and GB for
         # Google Drive. One SKU can map to multiple monetizable resources.
         module ResourceType
+
           # Not used.
           RESOURCE_TYPE_UNSPECIFIED = 0
 
@@ -333,6 +338,7 @@ module Google
 
         # Period Type.
         module PeriodType
+
           # Not used.
           PERIOD_TYPE_UNSPECIFIED = 0
 
@@ -349,3 +355,4 @@ module Google
     end
   end
 end
+

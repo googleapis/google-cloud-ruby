@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "system_policy", "helpers.rb"
 require "google/cloud/binary_authorization/v1/system_policy/helpers" if ::File.file? helper_path
+

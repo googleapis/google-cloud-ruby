@@ -70,36 +70,36 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.get_policy.timeout = 600.0
-                default_config.rpcs.get_policy.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_policy.timeout = 600.0
+                    default_config.rpcs.get_policy.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.update_policy.timeout = 600.0
-                default_config.rpcs.update_policy.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.update_policy.timeout = 600.0
+                    default_config.rpcs.update_policy.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.create_attestor.timeout = 600.0
+                    default_config.rpcs.create_attestor.timeout = 600.0
 
-                default_config.rpcs.get_attestor.timeout = 600.0
-                default_config.rpcs.get_attestor.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_attestor.timeout = 600.0
+                    default_config.rpcs.get_attestor.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.update_attestor.timeout = 600.0
-                default_config.rpcs.update_attestor.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.update_attestor.timeout = 600.0
+                    default_config.rpcs.update_attestor.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_attestors.timeout = 600.0
-                default_config.rpcs.list_attestors.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_attestors.timeout = 600.0
+                    default_config.rpcs.list_attestors.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.delete_attestor.timeout = 600.0
-                default_config.rpcs.delete_attestor.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.delete_attestor.timeout = 600.0
+                    default_config.rpcs.delete_attestor.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -684,13 +684,11 @@ module Google
             #   # Call the list_attestors method.
             #   result = client.list_attestors request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::BinaryAuthorization::V1::Attestor.
-            #     p response
+            #     p item
             #   end
             #
             def list_attestors request, options = nil
@@ -913,7 +911,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1020,3 +1018,4 @@ module Google
     end
   end
 end
+

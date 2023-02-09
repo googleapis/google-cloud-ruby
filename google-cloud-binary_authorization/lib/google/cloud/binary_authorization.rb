@@ -73,9 +73,9 @@ module Google
         require "google/cloud/binary_authorization/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::BinaryAuthorization
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::BinaryAuthorization.const_get(package_name).const_get(:BinauthzManagementService)
         service_module.const_get(:Client).new(&block)
       end
@@ -103,9 +103,9 @@ module Google
         require "google/cloud/binary_authorization/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::BinaryAuthorization
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::BinaryAuthorization.const_get(package_name).const_get(:SystemPolicy)
         service_module.const_get(:Client).new(&block)
       end
@@ -133,9 +133,9 @@ module Google
         require "google/cloud/binary_authorization/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::BinaryAuthorization
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::BinaryAuthorization.const_get(package_name).const_get(:ValidationHelper)
         service_module.const_get(:Client).new(&block)
       end
@@ -179,3 +179,4 @@ end
 
 helper_path = ::File.join __dir__, "binary_authorization", "helpers.rb"
 require "google/cloud/binary_authorization/helpers" if ::File.file? helper_path
+

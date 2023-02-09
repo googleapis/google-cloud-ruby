@@ -517,6 +517,7 @@ module Google
 
           # Specifies the action that occurs if the destination table already exists.
           module WriteDisposition
+
             # Write disposition is not specified. Defaults to WRITE_TRUNCATE.
             WRITE_DISPOSITION_UNSPECIFIED = 0
 
@@ -954,6 +955,7 @@ module Google
 
         # Represents the options for viewing a conversation.
         module ConversationView
+
           # The conversation view is not specified.
           #
           # * Defaults to `FULL` in `GetConversationRequest`.
@@ -970,3 +972,4 @@ module Google
     end
   end
 end
+

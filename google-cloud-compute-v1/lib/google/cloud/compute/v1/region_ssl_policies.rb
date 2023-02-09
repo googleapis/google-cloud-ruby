@@ -45,3 +45,4 @@ end
 
 helper_path = ::File.join __dir__, "region_ssl_policies", "helpers.rb"
 require "google/cloud/compute/v1/region_ssl_policies/helpers" if ::File.file? helper_path
+

@@ -58,6 +58,7 @@ module Google
         # {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} will
         # display.
         module ChannelPartnerLinkView
+
           # The default / unset value.
           # The API will default to the BASIC view.
           UNSPECIFIED = 0
@@ -72,6 +73,7 @@ module Google
 
         # ChannelPartnerLinkState represents state of a channel partner link.
         module ChannelPartnerLinkState
+
           # Not used.
           CHANNEL_PARTNER_LINK_STATE_UNSPECIFIED = 0
 
@@ -92,3 +94,4 @@ module Google
     end
   end
 end
+

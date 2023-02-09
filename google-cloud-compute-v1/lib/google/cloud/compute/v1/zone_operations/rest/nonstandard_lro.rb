@@ -46,17 +46,17 @@ module Google
                 #
                 def create_operation operation:, client:, request_values:, options:
                   Gapic::GenericLRO::Operation.new(operation,
-                                                   client: client,
-                                                   polling_method_name: "get",
-                                                   request_values: request_values,
-                                                   operation_status_field: "status",
-                                                   operation_name_field: "name",
-                                                   operation_err_code_field: "http_error_status_code",
-                                                   operation_err_msg_field: "http_error_message",
-                                                   operation_copy_fields: {
-                                                     "name" => "operation"
-                                                   },
-                                                   options: options)
+                    client: client,
+                    polling_method_name: "get",
+                    request_values: request_values,
+                    operation_status_field: "status",
+                    operation_name_field: "name",
+                    operation_err_code_field: "http_error_status_code",
+                    operation_err_msg_field: "http_error_message",
+                    operation_copy_fields: {
+                      "name" => "operation"
+                    },
+                    options: options)
                 end
               end
             end
@@ -66,3 +66,4 @@ module Google
     end
   end
 end
+

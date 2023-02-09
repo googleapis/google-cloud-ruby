@@ -93,27 +93,27 @@ class ::Google::Cloud::Compute::V1::TargetVpnGateways::Rest::ClientTest < Minite
 
         # Use hash object
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListTargetVpnGatewaysRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListTargetVpnGatewaysRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -150,27 +150,27 @@ class ::Google::Cloud::Compute::V1::TargetVpnGateways::Rest::ClientTest < Minite
 
         # Use hash object
         client.delete({ project: project, region: region, request_id: request_id, target_vpn_gateway: target_vpn_gateway }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete project: project, region: region, request_id: request_id, target_vpn_gateway: target_vpn_gateway do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteTargetVpnGatewayRequest.new(project: project, region: region, request_id: request_id, target_vpn_gateway: target_vpn_gateway) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ project: project, region: region, request_id: request_id, target_vpn_gateway: target_vpn_gateway }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteTargetVpnGatewayRequest.new(project: project, region: region, request_id: request_id, target_vpn_gateway: target_vpn_gateway), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -206,27 +206,27 @@ class ::Google::Cloud::Compute::V1::TargetVpnGateways::Rest::ClientTest < Minite
 
         # Use hash object
         client.get({ project: project, region: region, target_vpn_gateway: target_vpn_gateway }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get project: project, region: region, target_vpn_gateway: target_vpn_gateway do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetTargetVpnGatewayRequest.new(project: project, region: region, target_vpn_gateway: target_vpn_gateway) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ project: project, region: region, target_vpn_gateway: target_vpn_gateway }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetTargetVpnGatewayRequest.new(project: project, region: region, target_vpn_gateway: target_vpn_gateway), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -263,27 +263,27 @@ class ::Google::Cloud::Compute::V1::TargetVpnGateways::Rest::ClientTest < Minite
 
         # Use hash object
         client.insert({ project: project, region: region, request_id: request_id, target_vpn_gateway_resource: target_vpn_gateway_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert project: project, region: region, request_id: request_id, target_vpn_gateway_resource: target_vpn_gateway_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertTargetVpnGatewayRequest.new(project: project, region: region, request_id: request_id, target_vpn_gateway_resource: target_vpn_gateway_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ project: project, region: region, request_id: request_id, target_vpn_gateway_resource: target_vpn_gateway_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertTargetVpnGatewayRequest.new(project: project, region: region, request_id: request_id, target_vpn_gateway_resource: target_vpn_gateway_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -323,27 +323,27 @@ class ::Google::Cloud::Compute::V1::TargetVpnGateways::Rest::ClientTest < Minite
 
         # Use hash object
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list ::Google::Cloud::Compute::V1::ListTargetVpnGatewaysRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list(::Google::Cloud::Compute::V1::ListTargetVpnGatewaysRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -381,27 +381,27 @@ class ::Google::Cloud::Compute::V1::TargetVpnGateways::Rest::ClientTest < Minite
 
         # Use hash object
         client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_labels project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_labels ::Google::Cloud::Compute::V1::SetLabelsTargetVpnGatewayRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_labels(::Google::Cloud::Compute::V1::SetLabelsTargetVpnGatewayRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

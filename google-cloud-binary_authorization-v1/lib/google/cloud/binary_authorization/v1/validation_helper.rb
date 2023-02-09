@@ -46,3 +46,4 @@ end
 
 helper_path = ::File.join __dir__, "validation_helper", "helpers.rb"
 require "google/cloud/binary_authorization/v1/validation_helper/helpers" if ::File.file? helper_path
+

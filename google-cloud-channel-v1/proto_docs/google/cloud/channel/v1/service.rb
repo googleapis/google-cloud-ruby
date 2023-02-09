@@ -1199,6 +1199,7 @@ module Google
 
             # Change Type enum.
             module ChangeType
+
               # Not used.
               CHANGE_TYPE_UNSPECIFIED = 0
 
@@ -1395,3 +1396,4 @@ module Google
     end
   end
 end
+

@@ -45,3 +45,4 @@ end
 
 helper_path = ::File.join __dir__, "region_target_tcp_proxies", "helpers.rb"
 require "google/cloud/compute/v1/region_target_tcp_proxies/helpers" if ::File.file? helper_path
+

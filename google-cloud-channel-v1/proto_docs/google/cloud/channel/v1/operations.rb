@@ -32,6 +32,7 @@ module Google
 
           # RPCs that return a Long Running Operation.
           module OperationType
+
             # Not used.
             OPERATION_TYPE_UNSPECIFIED = 0
 
@@ -73,3 +74,4 @@ module Google
     end
   end
 end
+

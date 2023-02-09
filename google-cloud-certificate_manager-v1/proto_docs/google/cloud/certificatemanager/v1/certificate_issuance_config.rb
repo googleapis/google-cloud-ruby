@@ -170,6 +170,7 @@ module Google
 
           # The type of keypair to generate.
           module KeyAlgorithm
+
             # Unspecified key algorithm.
             KEY_ALGORITHM_UNSPECIFIED = 0
 
@@ -184,3 +185,4 @@ module Google
     end
   end
 end
+

@@ -53,3 +53,4 @@ end
 
 helper_path = ::File.join __dir__, "binauthz_management_service", "helpers.rb"
 require "google/cloud/binary_authorization/v1/binauthz_management_service/helpers" if ::File.file? helper_path
+

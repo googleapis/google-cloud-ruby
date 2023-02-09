@@ -73,3 +73,4 @@ end
 
 helper_path = ::File.join __dir__, "certificate_manager", "helpers.rb"
 require "google/cloud/certificate_manager/v1/certificate_manager/helpers" if ::File.file? helper_path
+

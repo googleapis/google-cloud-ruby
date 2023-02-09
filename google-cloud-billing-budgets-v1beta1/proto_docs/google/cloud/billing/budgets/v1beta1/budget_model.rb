@@ -133,6 +133,7 @@ module Google
 
             # The type of basis used to determine if spend has passed the threshold.
             module Basis
+
               # Unspecified threshold basis.
               BASIS_UNSPECIFIED = 0
 
@@ -268,6 +269,7 @@ module Google
             # [See the documentation for a list of credit
             # types](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#credits-type).
             module CreditTypesTreatment
+
               CREDIT_TYPES_TREATMENT_UNSPECIFIED = 0
 
               # All types of credit are subtracted from the gross cost to determine the
@@ -305,6 +307,7 @@ module Google
           # `CalendarPeriod`". All calendar times begin at 12 AM US and Canadian
           # Pacific Time (UTC-8).
           module CalendarPeriod
+
             # Calendar period is unset. This is the default if the budget is for a
             # custom time period (CustomPeriod).
             CALENDAR_PERIOD_UNSPECIFIED = 0
@@ -325,3 +328,4 @@ module Google
     end
   end
 end
+

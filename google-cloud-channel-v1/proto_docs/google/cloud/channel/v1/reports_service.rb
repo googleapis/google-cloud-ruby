@@ -232,6 +232,7 @@ module Google
           # Available data types for columns. Corresponds to the fields in the
           # ReportValue `oneof` field.
           module DataType
+
             # Not used.
             DATA_TYPE_UNSPECIFIED = 0
 
@@ -342,6 +343,7 @@ module Google
 
           # Available states of report generation.
           module State
+
             # Not used.
             STATE_UNSPECIFIED = 0
 
@@ -388,3 +390,4 @@ module Google
     end
   end
 end
+

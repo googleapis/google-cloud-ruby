@@ -204,6 +204,7 @@ module Google
 
           # Possible media for the conversation.
           module Medium
+
             # Default value, if unspecified will default to PHONE_CALL.
             MEDIUM_UNSPECIFIED = 0
 
@@ -486,6 +487,7 @@ module Google
           # below lists the associated fields for entities that have different
           # metadata.
           module Type
+
             # Unspecified.
             TYPE_UNSPECIFIED = 0
 
@@ -633,6 +635,7 @@ module Google
 
           # The supported types of mentions.
           module MentionType
+
             # Unspecified.
             MENTION_TYPE_UNSPECIFIED = 0
 
@@ -731,6 +734,7 @@ module Google
 
           # State of the model.
           module State
+
             # Unspecified.
             STATE_UNSPECIFIED = 0
 
@@ -869,6 +873,7 @@ module Google
           # Specifies how to combine each phrase match rule group to determine whether
           # there is a match.
           module PhraseMatcherType
+
             # Unspecified.
             PHRASE_MATCHER_TYPE_UNSPECIFIED = 0
 
@@ -894,6 +899,7 @@ module Google
           # Specifies how to combine each phrase match rule for whether there is a
           # match.
           module PhraseMatchRuleGroupType
+
             # Unspecified.
             PHRASE_MATCH_RULE_GROUP_TYPE_UNSPECIFIED = 0
 
@@ -1067,6 +1073,7 @@ module Google
 
           # The correctness level of an answer.
           module CorrectnessLevel
+
             # Correctness level unspecified.
             CORRECTNESS_LEVEL_UNSPECIFIED = 0
 
@@ -1264,6 +1271,7 @@ module Google
 
           # The role of the participant.
           module Role
+
             # Participant's role is not set.
             ROLE_UNSPECIFIED = 0
 
@@ -1349,3 +1357,4 @@ module Google
     end
   end
 end
+

@@ -93,27 +93,27 @@ class ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::ClientTes
 
         # Use hash object
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListNetworkEdgeSecurityServicesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListNetworkEdgeSecurityServicesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -150,27 +150,27 @@ class ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::ClientTes
 
         # Use hash object
         client.delete({ network_edge_security_service: network_edge_security_service, project: project, region: region, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete network_edge_security_service: network_edge_security_service, project: project, region: region, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteNetworkEdgeSecurityServiceRequest.new(network_edge_security_service: network_edge_security_service, project: project, region: region, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ network_edge_security_service: network_edge_security_service, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteNetworkEdgeSecurityServiceRequest.new(network_edge_security_service: network_edge_security_service, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -206,27 +206,27 @@ class ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::ClientTes
 
         # Use hash object
         client.get({ network_edge_security_service: network_edge_security_service, project: project, region: region }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get network_edge_security_service: network_edge_security_service, project: project, region: region do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetNetworkEdgeSecurityServiceRequest.new(network_edge_security_service: network_edge_security_service, project: project, region: region) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ network_edge_security_service: network_edge_security_service, project: project, region: region }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetNetworkEdgeSecurityServiceRequest.new(network_edge_security_service: network_edge_security_service, project: project, region: region), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -264,27 +264,27 @@ class ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::ClientTes
 
         # Use hash object
         client.insert({ network_edge_security_service_resource: network_edge_security_service_resource, project: project, region: region, request_id: request_id, validate_only: validate_only }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert network_edge_security_service_resource: network_edge_security_service_resource, project: project, region: region, request_id: request_id, validate_only: validate_only do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertNetworkEdgeSecurityServiceRequest.new(network_edge_security_service_resource: network_edge_security_service_resource, project: project, region: region, request_id: request_id, validate_only: validate_only) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ network_edge_security_service_resource: network_edge_security_service_resource, project: project, region: region, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertNetworkEdgeSecurityServiceRequest.new(network_edge_security_service_resource: network_edge_security_service_resource, project: project, region: region, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -324,27 +324,27 @@ class ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::ClientTes
 
         # Use hash object
         client.patch({ network_edge_security_service: network_edge_security_service, network_edge_security_service_resource: network_edge_security_service_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.patch network_edge_security_service: network_edge_security_service, network_edge_security_service_resource: network_edge_security_service_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.patch ::Google::Cloud::Compute::V1::PatchNetworkEdgeSecurityServiceRequest.new(network_edge_security_service: network_edge_security_service, network_edge_security_service_resource: network_edge_security_service_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.patch({ network_edge_security_service: network_edge_security_service, network_edge_security_service_resource: network_edge_security_service_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.patch(::Google::Cloud::Compute::V1::PatchNetworkEdgeSecurityServiceRequest.new(network_edge_security_service: network_edge_security_service, network_edge_security_service_resource: network_edge_security_service_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

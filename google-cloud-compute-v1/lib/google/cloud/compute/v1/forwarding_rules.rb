@@ -45,3 +45,4 @@ end
 
 helper_path = ::File.join __dir__, "forwarding_rules", "helpers.rb"
 require "google/cloud/compute/v1/forwarding_rules/helpers" if ::File.file? helper_path
+

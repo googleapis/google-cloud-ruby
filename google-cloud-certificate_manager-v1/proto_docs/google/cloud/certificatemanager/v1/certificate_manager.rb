@@ -537,6 +537,7 @@ module Google
 
               # Reason for provisioning failures.
               module Reason
+
                 # Reason is unspecified.
                 REASON_UNSPECIFIED = 0
 
@@ -575,6 +576,7 @@ module Google
 
               # State of the domain for managed certificate issuance.
               module State
+
                 # State is unspecified.
                 STATE_UNSPECIFIED = 0
 
@@ -593,6 +595,7 @@ module Google
 
               # Reason for failure of the authorization attempt for the domain.
               module FailureReason
+
                 # FailureReason is unspecified.
                 FAILURE_REASON_UNSPECIFIED = 0
 
@@ -612,6 +615,7 @@ module Google
 
             # State of the managed certificate resource.
             module State
+
               # State is unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -643,6 +647,7 @@ module Google
 
           # Certificate scope.
           module Scope
+
             # Certificates with default scope are served from core Google data centers.
             # If unsure, choose this option.
             DEFAULT = 0
@@ -772,6 +777,7 @@ module Google
           # Defines predefined cases other than SNI-hostname match when this
           # configuration should be applied.
           module Matcher
+
             # A matcher has't been recognized.
             MATCHER_UNSPECIFIED = 0
 
@@ -845,6 +851,7 @@ module Google
 
         # Defines set of serving states associated with a resource.
         module ServingState
+
           # The status is undefined.
           SERVING_STATE_UNSPECIFIED = 0
 
@@ -858,3 +865,4 @@ module Google
     end
   end
 end
+

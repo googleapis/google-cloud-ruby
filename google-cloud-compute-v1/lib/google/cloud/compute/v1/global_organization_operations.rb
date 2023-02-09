@@ -45,3 +45,4 @@ end
 
 helper_path = ::File.join __dir__, "global_organization_operations", "helpers.rb"
 require "google/cloud/compute/v1/global_organization_operations/helpers" if ::File.file? helper_path
+

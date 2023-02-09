@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_ListMigrationJobs_sync",
-      "title": "Snippet for list_migration_jobs in DataMigrationService",
-      "description": "Basic snippet for list_migration_jobs in DataMigrationService",
+      "title": "Snippet for the list_migration_jobs call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#list_migration_jobs. It may require modification in order to execute successfully.",
       "file": "data_migration_service/list_migration_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_GetMigrationJob_sync",
-      "title": "Snippet for get_migration_job in DataMigrationService",
-      "description": "Basic snippet for get_migration_job in DataMigrationService",
+      "title": "Snippet for the get_migration_job call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#get_migration_job. It may require modification in order to execute successfully.",
       "file": "data_migration_service/get_migration_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_CreateMigrationJob_sync",
-      "title": "Snippet for create_migration_job in DataMigrationService",
-      "description": "Basic snippet for create_migration_job in DataMigrationService",
+      "title": "Snippet for the create_migration_job call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#create_migration_job. It may require modification in order to execute successfully.",
       "file": "data_migration_service/create_migration_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_UpdateMigrationJob_sync",
-      "title": "Snippet for update_migration_job in DataMigrationService",
-      "description": "Basic snippet for update_migration_job in DataMigrationService",
+      "title": "Snippet for the update_migration_job call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#update_migration_job. It may require modification in order to execute successfully.",
       "file": "data_migration_service/update_migration_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_DeleteMigrationJob_sync",
-      "title": "Snippet for delete_migration_job in DataMigrationService",
-      "description": "Basic snippet for delete_migration_job in DataMigrationService",
+      "title": "Snippet for the delete_migration_job call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#delete_migration_job. It may require modification in order to execute successfully.",
       "file": "data_migration_service/delete_migration_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_StartMigrationJob_sync",
-      "title": "Snippet for start_migration_job in DataMigrationService",
-      "description": "Basic snippet for start_migration_job in DataMigrationService",
+      "title": "Snippet for the start_migration_job call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#start_migration_job. It may require modification in order to execute successfully.",
       "file": "data_migration_service/start_migration_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_StopMigrationJob_sync",
-      "title": "Snippet for stop_migration_job in DataMigrationService",
-      "description": "Basic snippet for stop_migration_job in DataMigrationService",
+      "title": "Snippet for the stop_migration_job call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#stop_migration_job. It may require modification in order to execute successfully.",
       "file": "data_migration_service/stop_migration_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_ResumeMigrationJob_sync",
-      "title": "Snippet for resume_migration_job in DataMigrationService",
-      "description": "Basic snippet for resume_migration_job in DataMigrationService",
+      "title": "Snippet for the resume_migration_job call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#resume_migration_job. It may require modification in order to execute successfully.",
       "file": "data_migration_service/resume_migration_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_PromoteMigrationJob_sync",
-      "title": "Snippet for promote_migration_job in DataMigrationService",
-      "description": "Basic snippet for promote_migration_job in DataMigrationService",
+      "title": "Snippet for the promote_migration_job call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#promote_migration_job. It may require modification in order to execute successfully.",
       "file": "data_migration_service/promote_migration_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_VerifyMigrationJob_sync",
-      "title": "Snippet for verify_migration_job in DataMigrationService",
-      "description": "Basic snippet for verify_migration_job in DataMigrationService",
+      "title": "Snippet for the verify_migration_job call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#verify_migration_job. It may require modification in order to execute successfully.",
       "file": "data_migration_service/verify_migration_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_RestartMigrationJob_sync",
-      "title": "Snippet for restart_migration_job in DataMigrationService",
-      "description": "Basic snippet for restart_migration_job in DataMigrationService",
+      "title": "Snippet for the restart_migration_job call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#restart_migration_job. It may require modification in order to execute successfully.",
       "file": "data_migration_service/restart_migration_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_GenerateSshScript_sync",
-      "title": "Snippet for generate_ssh_script in DataMigrationService",
-      "description": "Basic snippet for generate_ssh_script in DataMigrationService",
+      "title": "Snippet for the generate_ssh_script call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#generate_ssh_script. It may require modification in order to execute successfully.",
       "file": "data_migration_service/generate_ssh_script.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_ListConnectionProfiles_sync",
-      "title": "Snippet for list_connection_profiles in DataMigrationService",
-      "description": "Basic snippet for list_connection_profiles in DataMigrationService",
+      "title": "Snippet for the list_connection_profiles call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#list_connection_profiles. It may require modification in order to execute successfully.",
       "file": "data_migration_service/list_connection_profiles.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_GetConnectionProfile_sync",
-      "title": "Snippet for get_connection_profile in DataMigrationService",
-      "description": "Basic snippet for get_connection_profile in DataMigrationService",
+      "title": "Snippet for the get_connection_profile call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#get_connection_profile. It may require modification in order to execute successfully.",
       "file": "data_migration_service/get_connection_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_CreateConnectionProfile_sync",
-      "title": "Snippet for create_connection_profile in DataMigrationService",
-      "description": "Basic snippet for create_connection_profile in DataMigrationService",
+      "title": "Snippet for the create_connection_profile call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#create_connection_profile. It may require modification in order to execute successfully.",
       "file": "data_migration_service/create_connection_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_UpdateConnectionProfile_sync",
-      "title": "Snippet for update_connection_profile in DataMigrationService",
-      "description": "Basic snippet for update_connection_profile in DataMigrationService",
+      "title": "Snippet for the update_connection_profile call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#update_connection_profile. It may require modification in order to execute successfully.",
       "file": "data_migration_service/update_connection_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datamigration_v1_generated_DataMigrationService_DeleteConnectionProfile_sync",
-      "title": "Snippet for delete_connection_profile in DataMigrationService",
-      "description": "Basic snippet for delete_connection_profile in DataMigrationService",
+      "title": "Snippet for the delete_connection_profile call in the DataMigrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudDMS::V1::DataMigrationService::Client#delete_connection_profile. It may require modification in order to execute successfully.",
       "file": "data_migration_service/delete_connection_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

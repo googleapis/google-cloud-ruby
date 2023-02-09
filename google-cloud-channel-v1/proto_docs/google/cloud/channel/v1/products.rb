@@ -86,6 +86,7 @@ module Google
 
         # Type of media used.
         module MediaType
+
           # Not used.
           MEDIA_TYPE_UNSPECIFIED = 0
 
@@ -96,3 +97,4 @@ module Google
     end
   end
 end
+

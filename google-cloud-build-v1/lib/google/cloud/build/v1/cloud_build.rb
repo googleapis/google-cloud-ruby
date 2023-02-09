@@ -55,3 +55,4 @@ end
 
 helper_path = ::File.join __dir__, "cloud_build", "helpers.rb"
 require "google/cloud/build/v1/cloud_build/helpers" if ::File.file? helper_path
+

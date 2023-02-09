@@ -82,6 +82,7 @@ module Google
 
           # Indicates the current provisioning state of the entitlement.
           module ProvisioningState
+
             # Not used.
             PROVISIONING_STATE_UNSPECIFIED = 0
 
@@ -96,6 +97,7 @@ module Google
           # {::Google::Cloud::Channel::V1::Entitlement#provisioning_state provisioning_state}
           # = SUSPENDED.
           module SuspensionReason
+
             # Not used.
             SUSPENSION_REASON_UNSPECIFIED = 0
 
@@ -248,6 +250,7 @@ module Google
 
           # Reason of ineligibility.
           module Reason
+
             # Not used.
             REASON_UNSPECIFIED = 0
 
@@ -265,3 +268,4 @@ module Google
     end
   end
 end
+

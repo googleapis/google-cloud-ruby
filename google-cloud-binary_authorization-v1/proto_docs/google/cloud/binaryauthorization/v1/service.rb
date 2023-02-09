@@ -173,6 +173,7 @@ module Google
 
           # The enum returned in the "result" field.
           module Result
+
             # Unspecified.
             RESULT_UNSPECIFIED = 0
 
@@ -187,3 +188,4 @@ module Google
     end
   end
 end
+

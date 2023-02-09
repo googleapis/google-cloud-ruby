@@ -217,6 +217,7 @@ module Google
           # Example: "ACCOUNT" aggregation level indicates that usage for tiered
           # pricing is aggregated across all projects in a single account.
           module AggregationLevel
+
             AGGREGATION_LEVEL_UNSPECIFIED = 0
 
             ACCOUNT = 1
@@ -228,6 +229,7 @@ module Google
           # Example: "MONTHLY" aggregation interval indicates that usage for tiered
           # pricing is aggregated every month.
           module AggregationInterval
+
             AGGREGATION_INTERVAL_UNSPECIFIED = 0
 
             DAILY = 1
@@ -250,6 +252,7 @@ module Google
 
           # The type of Geo Taxonomy: GLOBAL, REGIONAL, or MULTI_REGIONAL.
           module Type
+
             # The type is not specified.
             TYPE_UNSPECIFIED = 0
 
@@ -350,3 +353,4 @@ module Google
     end
   end
 end
+

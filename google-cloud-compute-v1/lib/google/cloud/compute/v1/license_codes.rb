@@ -45,3 +45,4 @@ end
 
 helper_path = ::File.join __dir__, "license_codes", "helpers.rb"
 require "google/cloud/compute/v1/license_codes/helpers" if ::File.file? helper_path
+

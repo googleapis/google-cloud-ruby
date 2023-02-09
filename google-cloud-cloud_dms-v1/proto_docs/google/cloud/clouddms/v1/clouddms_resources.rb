@@ -47,6 +47,7 @@ module Google
 
           # Specifies The kind of ssl configuration used.
           module SslType
+
             # Unspecified.
             SSL_TYPE_UNSPECIFIED = 0
 
@@ -284,6 +285,7 @@ module Google
 
           # Specifies when the instance should be activated.
           module SqlActivationPolicy
+
             # unspecified policy.
             SQL_ACTIVATION_POLICY_UNSPECIFIED = 0
 
@@ -296,6 +298,7 @@ module Google
 
           # The storage options for Cloud SQL databases.
           module SqlDataDiskType
+
             # Unspecified.
             SQL_DATA_DISK_TYPE_UNSPECIFIED = 0
 
@@ -308,6 +311,7 @@ module Google
 
           # The database engine type and version.
           module SqlDatabaseVersion
+
             # Unspecified version.
             SQL_DATABASE_VERSION_UNSPECIFIED = 0
 
@@ -480,6 +484,7 @@ module Google
 
           # The current migration job states.
           module State
+
             # The state of the migration job is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -531,6 +536,7 @@ module Google
 
           # The current migration job phase.
           module Phase
+
             # The phase of the migration job is unknown.
             PHASE_UNSPECIFIED = 0
 
@@ -552,6 +558,7 @@ module Google
 
           # The type of migration job (one-time or continuous).
           module Type
+
             # The type of the migration job is unknown.
             TYPE_UNSPECIFIED = 0
 
@@ -621,6 +628,7 @@ module Google
 
           # The current connection profile state (e.g. DRAFT, READY, or FAILED).
           module State
+
             # The state of the connection profile is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -663,6 +671,7 @@ module Google
 
           # A general error code describing the type of error that occurred.
           module ErrorCode
+
             # An unknown error occurred
             ERROR_CODE_UNSPECIFIED = 0
 
@@ -730,6 +739,7 @@ module Google
 
         # The database engine types.
         module DatabaseEngine
+
           # The source database engine of the migration job is unknown.
           DATABASE_ENGINE_UNSPECIFIED = 0
 
@@ -742,6 +752,7 @@ module Google
 
         # The database providers.
         module DatabaseProvider
+
           # The database provider is unknown.
           DATABASE_PROVIDER_UNSPECIFIED = 0
 
@@ -755,3 +766,4 @@ module Google
     end
   end
 end
+

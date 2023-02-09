@@ -45,3 +45,4 @@ end
 
 helper_path = ::File.join __dir__, "subnetworks", "helpers.rb"
 require "google/cloud/compute/v1/subnetworks/helpers" if ::File.file? helper_path
+

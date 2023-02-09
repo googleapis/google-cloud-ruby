@@ -35,6 +35,7 @@ module Google
 
           # Type of customer event.
           module Type
+
             # Not used.
             TYPE_UNSPECIFIED = 0
 
@@ -60,6 +61,7 @@ module Google
 
           # Type of entitlement event.
           module Type
+
             # Not used.
             TYPE_UNSPECIFIED = 0
 
@@ -120,3 +122,4 @@ module Google
     end
   end
 end
+

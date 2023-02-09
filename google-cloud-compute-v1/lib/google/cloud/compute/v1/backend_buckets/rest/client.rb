@@ -65,29 +65,29 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.add_signed_url_key.timeout = 600.0
+                      default_config.rpcs.add_signed_url_key.timeout = 600.0
 
-                  default_config.rpcs.delete.timeout = 600.0
+                      default_config.rpcs.delete.timeout = 600.0
 
-                  default_config.rpcs.delete_signed_url_key.timeout = 600.0
+                      default_config.rpcs.delete_signed_url_key.timeout = 600.0
 
-                  default_config.rpcs.get.timeout = 600.0
-                  default_config.rpcs.get.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get.timeout = 600.0
+                      default_config.rpcs.get.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.insert.timeout = 600.0
+                      default_config.rpcs.insert.timeout = 600.0
 
-                  default_config.rpcs.list.timeout = 600.0
-                  default_config.rpcs.list.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.list.timeout = 600.0
+                      default_config.rpcs.list.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.patch.timeout = 600.0
+                      default_config.rpcs.patch.timeout = 600.0
 
-                  default_config.rpcs.set_edge_security_policy.timeout = 600.0
+                      default_config.rpcs.set_edge_security_policy.timeout = 600.0
 
-                  default_config.rpcs.update.timeout = 600.0
+                      default_config.rpcs.update.timeout = 600.0
 
                   default_config
                 end
@@ -197,9 +197,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param signed_url_key_resource [::Google::Cloud::Compute::V1::SignedUrlKey, ::Hash]
               #     The body resource for this request
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -271,9 +271,9 @@ module Google
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -347,9 +347,9 @@ module Google
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -419,9 +419,9 @@ module Google
               #     Name of the BackendBucket resource to return.
               #   @param project [::String]
               #     Project ID for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::BackendBucket]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::BackendBucket]
               #
@@ -453,8 +453,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @backend_buckets_stub.get request, options do |result, response|
-                  yield result, response if block_given?
+                @backend_buckets_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -485,9 +485,9 @@ module Google
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -565,9 +565,9 @@ module Google
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::BackendBucket>]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::BackendBucket>]
               #
@@ -599,9 +599,9 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @backend_buckets_stub.list request, options do |result, response|
+                @backend_buckets_stub.list request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @backend_buckets_stub, :list, "items", request, result, options
-                  yield result, response if block_given?
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -634,9 +634,9 @@ module Google
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -710,9 +710,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param security_policy_reference_resource [::Google::Cloud::Compute::V1::SecurityPolicyReference, ::Hash]
               #     The body resource for this request
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -786,9 +786,9 @@ module Google
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -1037,3 +1037,4 @@ module Google
     end
   end
 end
+

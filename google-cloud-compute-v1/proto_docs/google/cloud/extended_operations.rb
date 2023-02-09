@@ -24,6 +24,7 @@ module Google
     # different fields, but only few of them are essential to conduct a successful
     # polling process.
     module OperationResponseMapping
+
       # Do not use.
       UNDEFINED = 0
 
@@ -49,3 +50,4 @@ module Google
     end
   end
 end
+

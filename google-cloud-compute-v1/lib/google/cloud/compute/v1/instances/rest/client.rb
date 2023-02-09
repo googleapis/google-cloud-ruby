@@ -65,125 +65,125 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.add_access_config.timeout = 600.0
+                      default_config.rpcs.add_access_config.timeout = 600.0
 
-                  default_config.rpcs.add_resource_policies.timeout = 600.0
+                      default_config.rpcs.add_resource_policies.timeout = 600.0
 
-                  default_config.rpcs.aggregated_list.timeout = 600.0
-                  default_config.rpcs.aggregated_list.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.aggregated_list.timeout = 600.0
+                      default_config.rpcs.aggregated_list.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.attach_disk.timeout = 600.0
+                      default_config.rpcs.attach_disk.timeout = 600.0
 
-                  default_config.rpcs.bulk_insert.timeout = 600.0
+                      default_config.rpcs.bulk_insert.timeout = 600.0
 
-                  default_config.rpcs.delete.timeout = 600.0
+                      default_config.rpcs.delete.timeout = 600.0
 
-                  default_config.rpcs.delete_access_config.timeout = 600.0
+                      default_config.rpcs.delete_access_config.timeout = 600.0
 
-                  default_config.rpcs.detach_disk.timeout = 600.0
+                      default_config.rpcs.detach_disk.timeout = 600.0
 
-                  default_config.rpcs.get.timeout = 600.0
-                  default_config.rpcs.get.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get.timeout = 600.0
+                      default_config.rpcs.get.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_effective_firewalls.timeout = 600.0
-                  default_config.rpcs.get_effective_firewalls.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get_effective_firewalls.timeout = 600.0
+                      default_config.rpcs.get_effective_firewalls.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_guest_attributes.timeout = 600.0
-                  default_config.rpcs.get_guest_attributes.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get_guest_attributes.timeout = 600.0
+                      default_config.rpcs.get_guest_attributes.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_iam_policy.timeout = 600.0
-                  default_config.rpcs.get_iam_policy.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get_iam_policy.timeout = 600.0
+                      default_config.rpcs.get_iam_policy.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_screenshot.timeout = 600.0
-                  default_config.rpcs.get_screenshot.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get_screenshot.timeout = 600.0
+                      default_config.rpcs.get_screenshot.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_serial_port_output.timeout = 600.0
-                  default_config.rpcs.get_serial_port_output.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get_serial_port_output.timeout = 600.0
+                      default_config.rpcs.get_serial_port_output.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_shielded_instance_identity.timeout = 600.0
-                  default_config.rpcs.get_shielded_instance_identity.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get_shielded_instance_identity.timeout = 600.0
+                      default_config.rpcs.get_shielded_instance_identity.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.insert.timeout = 600.0
+                      default_config.rpcs.insert.timeout = 600.0
 
-                  default_config.rpcs.list.timeout = 600.0
-                  default_config.rpcs.list.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.list.timeout = 600.0
+                      default_config.rpcs.list.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.list_referrers.timeout = 600.0
-                  default_config.rpcs.list_referrers.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.list_referrers.timeout = 600.0
+                      default_config.rpcs.list_referrers.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.remove_resource_policies.timeout = 600.0
+                      default_config.rpcs.remove_resource_policies.timeout = 600.0
 
-                  default_config.rpcs.reset.timeout = 600.0
+                      default_config.rpcs.reset.timeout = 600.0
 
-                  default_config.rpcs.resume.timeout = 600.0
+                      default_config.rpcs.resume.timeout = 600.0
 
-                  default_config.rpcs.send_diagnostic_interrupt.timeout = 600.0
+                      default_config.rpcs.send_diagnostic_interrupt.timeout = 600.0
 
-                  default_config.rpcs.set_deletion_protection.timeout = 600.0
+                      default_config.rpcs.set_deletion_protection.timeout = 600.0
 
-                  default_config.rpcs.set_disk_auto_delete.timeout = 600.0
+                      default_config.rpcs.set_disk_auto_delete.timeout = 600.0
 
-                  default_config.rpcs.set_iam_policy.timeout = 600.0
+                      default_config.rpcs.set_iam_policy.timeout = 600.0
 
-                  default_config.rpcs.set_labels.timeout = 600.0
+                      default_config.rpcs.set_labels.timeout = 600.0
 
-                  default_config.rpcs.set_machine_resources.timeout = 600.0
+                      default_config.rpcs.set_machine_resources.timeout = 600.0
 
-                  default_config.rpcs.set_machine_type.timeout = 600.0
+                      default_config.rpcs.set_machine_type.timeout = 600.0
 
-                  default_config.rpcs.set_metadata.timeout = 600.0
+                      default_config.rpcs.set_metadata.timeout = 600.0
 
-                  default_config.rpcs.set_min_cpu_platform.timeout = 600.0
+                      default_config.rpcs.set_min_cpu_platform.timeout = 600.0
 
-                  default_config.rpcs.set_scheduling.timeout = 600.0
+                      default_config.rpcs.set_scheduling.timeout = 600.0
 
-                  default_config.rpcs.set_service_account.timeout = 600.0
+                      default_config.rpcs.set_service_account.timeout = 600.0
 
-                  default_config.rpcs.set_shielded_instance_integrity_policy.timeout = 600.0
+                      default_config.rpcs.set_shielded_instance_integrity_policy.timeout = 600.0
 
-                  default_config.rpcs.set_tags.timeout = 600.0
+                      default_config.rpcs.set_tags.timeout = 600.0
 
-                  default_config.rpcs.simulate_maintenance_event.timeout = 600.0
+                      default_config.rpcs.simulate_maintenance_event.timeout = 600.0
 
-                  default_config.rpcs.start.timeout = 600.0
+                      default_config.rpcs.start.timeout = 600.0
 
-                  default_config.rpcs.start_with_encryption_key.timeout = 600.0
+                      default_config.rpcs.start_with_encryption_key.timeout = 600.0
 
-                  default_config.rpcs.stop.timeout = 600.0
+                      default_config.rpcs.stop.timeout = 600.0
 
-                  default_config.rpcs.suspend.timeout = 600.0
+                      default_config.rpcs.suspend.timeout = 600.0
 
-                  default_config.rpcs.test_iam_permissions.timeout = 600.0
+                      default_config.rpcs.test_iam_permissions.timeout = 600.0
 
-                  default_config.rpcs.update.timeout = 600.0
+                      default_config.rpcs.update.timeout = 600.0
 
-                  default_config.rpcs.update_access_config.timeout = 600.0
+                      default_config.rpcs.update_access_config.timeout = 600.0
 
-                  default_config.rpcs.update_display_device.timeout = 600.0
+                      default_config.rpcs.update_display_device.timeout = 600.0
 
-                  default_config.rpcs.update_network_interface.timeout = 600.0
+                      default_config.rpcs.update_network_interface.timeout = 600.0
 
-                  default_config.rpcs.update_shielded_instance_config.timeout = 600.0
+                      default_config.rpcs.update_shielded_instance_config.timeout = 600.0
 
                   default_config
                 end
@@ -297,9 +297,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -376,9 +376,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -459,9 +459,9 @@ module Google
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::InstancesScopedList>]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::InstancesScopedList>]
               #
@@ -493,9 +493,9 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.aggregated_list request, options do |result, response|
+                @instances_stub.aggregated_list request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @instances_stub, :aggregated_list, "items", request, result, options
-                  yield result, response if block_given?
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -532,9 +532,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -609,9 +609,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -686,9 +686,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -767,9 +767,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -846,9 +846,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -921,9 +921,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Instance]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Instance]
               #
@@ -955,8 +955,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.get request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -989,9 +989,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponse]
               #
@@ -1023,8 +1023,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.get_effective_firewalls request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_effective_firewalls request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1059,9 +1059,9 @@ module Google
               #     Specifies the key for the guest attributes entry.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::GuestAttributes]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::GuestAttributes]
               #
@@ -1093,8 +1093,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.get_guest_attributes request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_guest_attributes request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1127,9 +1127,9 @@ module Google
               #     Name or id of the resource for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Policy]
               #
@@ -1161,8 +1161,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.get_iam_policy request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_iam_policy request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1193,9 +1193,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Screenshot]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Screenshot]
               #
@@ -1227,8 +1227,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.get_screenshot request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_screenshot request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1263,9 +1263,9 @@ module Google
               #     Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to `0`. If the output for that byte position is available, this field matches the `start` parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the `start` property value. You can also provide a negative start position, which translates to the most recent number of bytes written to the serial port. For example, -3 is interpreted as the most recent 3 bytes written to the serial console.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::SerialPortOutput]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::SerialPortOutput]
               #
@@ -1297,8 +1297,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.get_serial_port_output request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_serial_port_output request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1329,9 +1329,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::ShieldedInstanceIdentity]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::ShieldedInstanceIdentity]
               #
@@ -1363,8 +1363,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.get_shielded_instance_identity request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.get_shielded_instance_identity request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1401,9 +1401,9 @@ module Google
               #     Specifies the machine image to use to create the instance. This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to a machine image: - https://www.googleapis.com/compute/v1/projects/project/global/global /machineImages/machineImage - projects/project/global/global/machineImages/machineImage - global/machineImages/machineImage
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -1484,9 +1484,9 @@ module Google
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Instance>]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Instance>]
               #
@@ -1518,9 +1518,9 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.list request, options do |result, response|
+                @instances_stub.list request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @instances_stub, :list, "items", request, result, options
-                  yield result, response if block_given?
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1561,9 +1561,9 @@ module Google
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Reference>]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Reference>]
               #
@@ -1595,9 +1595,9 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.list_referrers request, options do |result, response|
+                @instances_stub.list_referrers request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @instances_stub, :list_referrers, "items", request, result, options
-                  yield result, response if block_given?
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1632,9 +1632,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -1709,9 +1709,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -1786,9 +1786,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -1861,9 +1861,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse]
               #
@@ -1895,8 +1895,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.send_diagnostic_interrupt request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.send_diagnostic_interrupt request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1931,9 +1931,9 @@ module Google
               #     Name or id of the resource for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2012,9 +2012,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2089,9 +2089,9 @@ module Google
               #     The name of the zone for this request.
               #   @param zone_set_policy_request_resource [::Google::Cloud::Compute::V1::ZoneSetPolicyRequest, ::Hash]
               #     The body resource for this request
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Policy]
               #
@@ -2123,8 +2123,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.set_iam_policy request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.set_iam_policy request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -2159,9 +2159,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2238,9 +2238,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2317,9 +2317,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2396,9 +2396,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2475,9 +2475,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2554,9 +2554,9 @@ module Google
               #     The body resource for this request
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2633,9 +2633,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2712,9 +2712,9 @@ module Google
               #     The body resource for this request
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2791,9 +2791,9 @@ module Google
               #     The body resource for this request
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2866,9 +2866,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -2943,9 +2943,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3022,9 +3022,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3101,9 +3101,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3180,9 +3180,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3257,9 +3257,9 @@ module Google
               #     The body resource for this request
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
               #
@@ -3291,8 +3291,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instances_stub.test_iam_permissions request, options do |result, response|
-                  yield result, response if block_given?
+                @instances_stub.test_iam_permissions request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -3333,9 +3333,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3414,9 +3414,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3493,9 +3493,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3574,9 +3574,9 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -3653,9 +3653,9 @@ module Google
               #     The body resource for this request
               #   @param zone [::String]
               #     The name of the zone for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -4157,3 +4157,4 @@ module Google
     end
   end
 end
+

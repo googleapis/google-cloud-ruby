@@ -64,19 +64,19 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.delete.timeout = 600.0
+                      default_config.rpcs.delete.timeout = 600.0
 
-                  default_config.rpcs.get.timeout = 600.0
-                  default_config.rpcs.get.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get.timeout = 600.0
+                      default_config.rpcs.get.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.list.timeout = 600.0
-                  default_config.rpcs.list.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.list.timeout = 600.0
+                      default_config.rpcs.list.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.wait.timeout = 600.0
+                      default_config.rpcs.wait.timeout = 600.0
 
                   default_config
                 end
@@ -171,9 +171,9 @@ module Google
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::DeleteRegionOperationResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::DeleteRegionOperationResponse]
               #
@@ -205,8 +205,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @region_operations_stub.delete request, options do |result, response|
-                  yield result, response if block_given?
+                @region_operations_stub.delete request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -237,9 +237,9 @@ module Google
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #
@@ -271,8 +271,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @region_operations_stub.get request, options do |result, response|
-                  yield result, response if block_given?
+                @region_operations_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -311,9 +311,9 @@ module Google
               #     Name of the region for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Operation>]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Operation>]
               #
@@ -345,9 +345,9 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @region_operations_stub.list request, options do |result, response|
+                @region_operations_stub.list request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @region_operations_stub, :list, "items", request, result, options
-                  yield result, response if block_given?
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -378,9 +378,9 @@ module Google
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #
@@ -412,8 +412,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @region_operations_stub.wait request, options do |result, response|
-                  yield result, response if block_given?
+                @region_operations_stub.wait request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -586,3 +586,4 @@ module Google
     end
   end
 end
+

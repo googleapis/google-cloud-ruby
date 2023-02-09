@@ -89,27 +89,27 @@ class ::Google::Cloud::Compute::V1::ImageFamilyViews::Rest::ClientTest < Minites
 
         # Use hash object
         client.get({ family: family, project: project, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get family: family, project: project, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetImageFamilyViewRequest.new(family: family, project: project, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ family: family, project: project, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetImageFamilyViewRequest.new(family: family, project: project, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

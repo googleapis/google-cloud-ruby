@@ -90,124 +90,124 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_certificates.timeout = 60.0
-                default_config.rpcs.list_certificates.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_certificates.timeout = 60.0
+                    default_config.rpcs.list_certificates.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_certificate.timeout = 60.0
-                default_config.rpcs.get_certificate.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_certificate.timeout = 60.0
+                    default_config.rpcs.get_certificate.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_certificate.timeout = 60.0
-                default_config.rpcs.create_certificate.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.create_certificate.timeout = 60.0
+                    default_config.rpcs.create_certificate.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_certificate.timeout = 60.0
-                default_config.rpcs.update_certificate.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.update_certificate.timeout = 60.0
+                    default_config.rpcs.update_certificate.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.delete_certificate.timeout = 60.0
-                default_config.rpcs.delete_certificate.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.delete_certificate.timeout = 60.0
+                    default_config.rpcs.delete_certificate.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_certificate_maps.timeout = 60.0
-                default_config.rpcs.list_certificate_maps.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_certificate_maps.timeout = 60.0
+                    default_config.rpcs.list_certificate_maps.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_certificate_map.timeout = 60.0
-                default_config.rpcs.get_certificate_map.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_certificate_map.timeout = 60.0
+                    default_config.rpcs.get_certificate_map.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_certificate_map.timeout = 60.0
-                default_config.rpcs.create_certificate_map.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.create_certificate_map.timeout = 60.0
+                    default_config.rpcs.create_certificate_map.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_certificate_map.timeout = 60.0
-                default_config.rpcs.update_certificate_map.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.update_certificate_map.timeout = 60.0
+                    default_config.rpcs.update_certificate_map.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.delete_certificate_map.timeout = 60.0
-                default_config.rpcs.delete_certificate_map.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.delete_certificate_map.timeout = 60.0
+                    default_config.rpcs.delete_certificate_map.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_certificate_map_entries.timeout = 60.0
-                default_config.rpcs.list_certificate_map_entries.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_certificate_map_entries.timeout = 60.0
+                    default_config.rpcs.list_certificate_map_entries.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_certificate_map_entry.timeout = 60.0
-                default_config.rpcs.get_certificate_map_entry.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_certificate_map_entry.timeout = 60.0
+                    default_config.rpcs.get_certificate_map_entry.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_certificate_map_entry.timeout = 60.0
-                default_config.rpcs.create_certificate_map_entry.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.create_certificate_map_entry.timeout = 60.0
+                    default_config.rpcs.create_certificate_map_entry.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_certificate_map_entry.timeout = 60.0
-                default_config.rpcs.update_certificate_map_entry.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.update_certificate_map_entry.timeout = 60.0
+                    default_config.rpcs.update_certificate_map_entry.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.delete_certificate_map_entry.timeout = 60.0
-                default_config.rpcs.delete_certificate_map_entry.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.delete_certificate_map_entry.timeout = 60.0
+                    default_config.rpcs.delete_certificate_map_entry.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_dns_authorizations.timeout = 60.0
-                default_config.rpcs.list_dns_authorizations.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_dns_authorizations.timeout = 60.0
+                    default_config.rpcs.list_dns_authorizations.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_dns_authorization.timeout = 60.0
-                default_config.rpcs.get_dns_authorization.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_dns_authorization.timeout = 60.0
+                    default_config.rpcs.get_dns_authorization.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_dns_authorization.timeout = 60.0
-                default_config.rpcs.create_dns_authorization.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.create_dns_authorization.timeout = 60.0
+                    default_config.rpcs.create_dns_authorization.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_dns_authorization.timeout = 60.0
-                default_config.rpcs.update_dns_authorization.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.update_dns_authorization.timeout = 60.0
+                    default_config.rpcs.update_dns_authorization.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.delete_dns_authorization.timeout = 60.0
-                default_config.rpcs.delete_dns_authorization.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.delete_dns_authorization.timeout = 60.0
+                    default_config.rpcs.delete_dns_authorization.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_certificate_issuance_configs.timeout = 60.0
-                default_config.rpcs.list_certificate_issuance_configs.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_certificate_issuance_configs.timeout = 60.0
+                    default_config.rpcs.list_certificate_issuance_configs.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_certificate_issuance_config.timeout = 60.0
-                default_config.rpcs.get_certificate_issuance_config.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_certificate_issuance_config.timeout = 60.0
+                    default_config.rpcs.get_certificate_issuance_config.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_certificate_issuance_config.timeout = 60.0
-                default_config.rpcs.create_certificate_issuance_config.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.create_certificate_issuance_config.timeout = 60.0
+                    default_config.rpcs.create_certificate_issuance_config.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.delete_certificate_issuance_config.timeout = 60.0
-                default_config.rpcs.delete_certificate_issuance_config.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.delete_certificate_issuance_config.timeout = 60.0
+                    default_config.rpcs.delete_certificate_issuance_config.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -370,13 +370,11 @@ module Google
             #   # Call the list_certificates method.
             #   result = client.list_certificates request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::CertificateManager::V1::Certificate.
-            #     p response
+            #     p item
             #   end
             #
             def list_certificates request, options = nil
@@ -553,14 +551,14 @@ module Google
             #   # Call the create_certificate method.
             #   result = client.create_certificate request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_certificate request, options = nil
@@ -650,14 +648,14 @@ module Google
             #   # Call the update_certificate method.
             #   result = client.update_certificate request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_certificate request, options = nil
@@ -744,14 +742,14 @@ module Google
             #   # Call the delete_certificate method.
             #   result = client.delete_certificate request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_certificate request, options = nil
@@ -850,13 +848,11 @@ module Google
             #   # Call the list_certificate_maps method.
             #   result = client.list_certificate_maps request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateMap.
-            #     p response
+            #     p item
             #   end
             #
             def list_certificate_maps request, options = nil
@@ -1033,14 +1029,14 @@ module Google
             #   # Call the create_certificate_map method.
             #   result = client.create_certificate_map request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_certificate_map request, options = nil
@@ -1130,14 +1126,14 @@ module Google
             #   # Call the update_certificate_map method.
             #   result = client.update_certificate_map request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_certificate_map request, options = nil
@@ -1226,14 +1222,14 @@ module Google
             #   # Call the delete_certificate_map method.
             #   result = client.delete_certificate_map request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_certificate_map request, options = nil
@@ -1337,13 +1333,11 @@ module Google
             #   # Call the list_certificate_map_entries method.
             #   result = client.list_certificate_map_entries request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateMapEntry.
-            #     p response
+            #     p item
             #   end
             #
             def list_certificate_map_entries request, options = nil
@@ -1520,14 +1514,14 @@ module Google
             #   # Call the create_certificate_map_entry method.
             #   result = client.create_certificate_map_entry request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_certificate_map_entry request, options = nil
@@ -1617,14 +1611,14 @@ module Google
             #   # Call the update_certificate_map_entry method.
             #   result = client.update_certificate_map_entry request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_certificate_map_entry request, options = nil
@@ -1711,14 +1705,14 @@ module Google
             #   # Call the delete_certificate_map_entry method.
             #   result = client.delete_certificate_map_entry request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_certificate_map_entry request, options = nil
@@ -1817,13 +1811,11 @@ module Google
             #   # Call the list_dns_authorizations method.
             #   result = client.list_dns_authorizations request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::CertificateManager::V1::DnsAuthorization.
-            #     p response
+            #     p item
             #   end
             #
             def list_dns_authorizations request, options = nil
@@ -2000,14 +1992,14 @@ module Google
             #   # Call the create_dns_authorization method.
             #   result = client.create_dns_authorization request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_dns_authorization request, options = nil
@@ -2097,14 +2089,14 @@ module Google
             #   # Call the update_dns_authorization method.
             #   result = client.update_dns_authorization request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_dns_authorization request, options = nil
@@ -2191,14 +2183,14 @@ module Google
             #   # Call the delete_dns_authorization method.
             #   result = client.delete_dns_authorization request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_dns_authorization request, options = nil
@@ -2298,13 +2290,11 @@ module Google
             #   # Call the list_certificate_issuance_configs method.
             #   result = client.list_certificate_issuance_configs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig.
-            #     p response
+            #     p item
             #   end
             #
             def list_certificate_issuance_configs request, options = nil
@@ -2481,14 +2471,14 @@ module Google
             #   # Call the create_certificate_issuance_config method.
             #   result = client.create_certificate_issuance_config request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_certificate_issuance_config request, options = nil
@@ -2575,14 +2565,14 @@ module Google
             #   # Call the delete_certificate_issuance_config method.
             #   result = client.delete_certificate_issuance_config request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_certificate_issuance_config request, options = nil
@@ -2718,7 +2708,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -2944,3 +2934,4 @@ module Google
     end
   end
 end
+

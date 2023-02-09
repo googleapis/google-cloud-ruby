@@ -45,3 +45,4 @@ end
 
 helper_path = ::File.join __dir__, "packet_mirrorings", "helpers.rb"
 require "google/cloud/compute/v1/packet_mirrorings/helpers" if ::File.file? helper_path
+

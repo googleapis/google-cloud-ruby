@@ -112,7 +112,7 @@ module Google
           end
 
           module GlobalPolicyEvaluationMode
-            # Not specified: DISABLE is assumed.
+          # Not specified: DISABLE is assumed.
             GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED = 0
 
             # Enables system policy evaluation.
@@ -164,7 +164,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           module EvaluationMode
-            # Do not use.
+          # Do not use.
             EVALUATION_MODE_UNSPECIFIED = 0
 
             # This rule allows all all pod creations.
@@ -182,6 +182,7 @@ module Google
           # Defines the possible actions when a pod creation is denied by an admission
           # rule.
           module EnforcementMode
+
             # Do not use.
             ENFORCEMENT_MODE_UNSPECIFIED = 0
 
@@ -281,6 +282,7 @@ module Google
           # See https://cloud.google.com/kms/docs/algorithms. In the future, BinAuthz
           # might support additional public key types independently of Tink and/or KMS.
           module SignatureAlgorithm
+
             # Not specified.
             SIGNATURE_ALGORITHM_UNSPECIFIED = 0
 
@@ -368,3 +370,4 @@ module Google
     end
   end
 end
+

@@ -148,6 +148,7 @@ module Grafeas
 
     # Kind represents the kinds of notes supported.
     module NoteKind
+
       # Default value. This value is unused.
       NOTE_KIND_UNSPECIFIED = 0
 
@@ -183,3 +184,4 @@ module Grafeas
     end
   end
 end
+

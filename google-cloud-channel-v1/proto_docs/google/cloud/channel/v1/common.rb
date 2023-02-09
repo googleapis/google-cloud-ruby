@@ -37,6 +37,7 @@ module Google
 
           # Enum to specify the institute type.
           module InstituteType
+
             # Not used.
             INSTITUTE_TYPE_UNSPECIFIED = 0
 
@@ -49,6 +50,7 @@ module Google
 
           # Number of students and staff the institute has.
           module InstituteSize
+
             # Not used.
             INSTITUTE_SIZE_UNSPECIFIED = 0
 
@@ -110,6 +112,7 @@ module Google
 
           # CustomerType of the customer
           module CustomerType
+
             # Not used.
             CUSTOMER_TYPE_UNSPECIFIED = 0
 
@@ -160,3 +163,4 @@ module Google
     end
   end
 end
+

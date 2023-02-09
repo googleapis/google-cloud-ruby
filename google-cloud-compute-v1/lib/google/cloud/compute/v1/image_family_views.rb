@@ -45,3 +45,4 @@ end
 
 helper_path = ::File.join __dir__, "image_family_views", "helpers.rb"
 require "google/cloud/compute/v1/image_family_views/helpers" if ::File.file? helper_path
+

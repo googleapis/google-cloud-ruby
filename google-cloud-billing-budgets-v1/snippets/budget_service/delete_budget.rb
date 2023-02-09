@@ -20,8 +20,11 @@
 require "google/cloud/billing/budgets/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Billing::Budgets::V1::BudgetService::Client#delete_budget
+# Snippet for the delete_budget call in the BudgetService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Billing::Budgets::V1::BudgetService::Client#delete_budget. It
+# may require modification in order to execute successfully.
 #
 def delete_budget
   # Create a client object. The client can be reused for multiple calls.

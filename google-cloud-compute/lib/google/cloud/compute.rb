@@ -68,9 +68,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:AcceleratorTypes)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -98,9 +98,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Addresses)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -128,9 +128,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Autoscalers)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -158,9 +158,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:BackendBuckets)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -188,9 +188,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:BackendServices)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -218,9 +218,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:DiskTypes)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -248,9 +248,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Disks)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -278,9 +278,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:ExternalVpnGateways)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -308,9 +308,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:FirewallPolicies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -338,9 +338,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Firewalls)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -368,9 +368,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:ForwardingRules)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -398,9 +398,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:GlobalAddresses)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -428,9 +428,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:GlobalForwardingRules)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -458,9 +458,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:GlobalNetworkEndpointGroups)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -488,9 +488,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:GlobalOperations)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -518,9 +518,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:GlobalOrganizationOperations)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -548,9 +548,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:GlobalPublicDelegatedPrefixes)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -578,9 +578,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:HealthChecks)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -608,9 +608,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:ImageFamilyViews)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -638,9 +638,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Images)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -668,9 +668,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:InstanceGroupManagers)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -698,9 +698,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:InstanceGroups)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -728,9 +728,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:InstanceTemplates)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -758,9 +758,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Instances)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -788,9 +788,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:InterconnectAttachments)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -818,9 +818,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:InterconnectLocations)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -848,9 +848,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Interconnects)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -878,9 +878,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:LicenseCodes)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -908,9 +908,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Licenses)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -938,9 +938,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:MachineImages)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -968,9 +968,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:MachineTypes)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -998,9 +998,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:NetworkAttachments)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1028,9 +1028,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:NetworkEdgeSecurityServices)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1058,9 +1058,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:NetworkEndpointGroups)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1088,9 +1088,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:NetworkFirewallPolicies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1118,9 +1118,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Networks)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1148,9 +1148,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:NodeGroups)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1178,9 +1178,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:NodeTemplates)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1208,9 +1208,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:NodeTypes)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1238,9 +1238,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:PacketMirrorings)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1268,9 +1268,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Projects)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1298,9 +1298,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:PublicAdvertisedPrefixes)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1328,9 +1328,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:PublicDelegatedPrefixes)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1358,9 +1358,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionAutoscalers)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1388,9 +1388,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionBackendServices)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1418,9 +1418,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionCommitments)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1448,9 +1448,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionDiskTypes)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1478,9 +1478,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionDisks)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1508,9 +1508,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionHealthCheckServices)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1538,9 +1538,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionHealthChecks)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1568,9 +1568,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionInstanceGroupManagers)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1598,9 +1598,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionInstanceGroups)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1628,9 +1628,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionInstances)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1658,9 +1658,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionNetworkEndpointGroups)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1688,9 +1688,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionNetworkFirewallPolicies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1718,9 +1718,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionNotificationEndpoints)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1748,9 +1748,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionOperations)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1778,9 +1778,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionSecurityPolicies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1808,9 +1808,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionSslCertificates)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1838,9 +1838,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionSslPolicies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1868,9 +1868,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionTargetHttpProxies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1898,9 +1898,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionTargetHttpsProxies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1928,9 +1928,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionTargetTcpProxies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1958,9 +1958,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionUrlMaps)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -1988,9 +1988,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Regions)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2018,9 +2018,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Reservations)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2048,9 +2048,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:ResourcePolicies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2078,9 +2078,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Routers)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2108,9 +2108,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Routes)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2138,9 +2138,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:SecurityPolicies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2168,9 +2168,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:ServiceAttachments)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2198,9 +2198,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Snapshots)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2228,9 +2228,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:SslCertificates)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2258,9 +2258,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:SslPolicies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2288,9 +2288,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Subnetworks)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2318,9 +2318,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:TargetGrpcProxies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2348,9 +2348,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:TargetHttpProxies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2378,9 +2378,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:TargetHttpsProxies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2408,9 +2408,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:TargetInstances)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2438,9 +2438,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:TargetPools)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2468,9 +2468,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:TargetSslProxies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2498,9 +2498,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:TargetTcpProxies)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2528,9 +2528,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:TargetVpnGateways)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2558,9 +2558,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:UrlMaps)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2588,9 +2588,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:VpnGateways)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2618,9 +2618,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:VpnTunnels)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2648,9 +2648,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:ZoneOperations)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2678,9 +2678,9 @@ module Google
         require "google/cloud/compute/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Compute
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:Zones)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
@@ -2722,3 +2722,4 @@ end
 
 helper_path = ::File.join __dir__, "compute", "helpers.rb"
 require "google/cloud/compute/helpers" if ::File.file? helper_path
+

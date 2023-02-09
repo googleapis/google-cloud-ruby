@@ -71,6 +71,7 @@ module Google
 
               # Result of the audit.
               module AuditResult
+
                 # Unspecified result. This is an error.
                 AUDIT_RESULT_UNSPECIFIED = 0
 
@@ -84,6 +85,7 @@ module Google
 
             # Audit time policy conformance verdict.
             module PolicyConformanceVerdict
+
               # We should always have a verdict. This is an error.
               POLICY_CONFORMANCE_VERDICT_UNSPECIFIED = 0
 
@@ -105,3 +107,4 @@ module Google
     end
   end
 end
+

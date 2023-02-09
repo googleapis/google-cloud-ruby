@@ -45,3 +45,4 @@ end
 
 helper_path = ::File.join __dir__, "external_vpn_gateways", "helpers.rb"
 require "google/cloud/compute/v1/external_vpn_gateways/helpers" if ::File.file? helper_path
+

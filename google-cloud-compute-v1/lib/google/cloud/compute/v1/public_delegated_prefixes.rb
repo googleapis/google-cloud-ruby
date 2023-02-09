@@ -45,3 +45,4 @@ end
 
 helper_path = ::File.join __dir__, "public_delegated_prefixes", "helpers.rb"
 require "google/cloud/compute/v1/public_delegated_prefixes/helpers" if ::File.file? helper_path
+

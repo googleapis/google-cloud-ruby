@@ -45,3 +45,4 @@ end
 
 helper_path = ::File.join __dir__, "region_disk_types", "helpers.rb"
 require "google/cloud/compute/v1/region_disk_types/helpers" if ::File.file? helper_path
+

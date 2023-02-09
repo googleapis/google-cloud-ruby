@@ -110,6 +110,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -169,6 +170,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] accelerator_types
         #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorType>]
         #     [Output Only] A list of accelerator types contained in this scope.
@@ -179,6 +181,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] guest_accelerator_count
         #   @return [::Integer]
@@ -227,6 +230,7 @@ module Google
 
           # This signifies the networking tier used for configuring this access configuration and can only take the following values: PREMIUM, STANDARD. If an AccessConfig is specified without a valid external IP address, an ephemeral IP will be created with this networkTier. If an AccessConfig with a valid external IP address is specified, it must match that of the networkTier associated with the Address resource owning that IP.
           module NetworkTier
+
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_TIER = 0
 
@@ -245,6 +249,7 @@ module Google
 
           # The type of configuration. The default and only option is ONE_TO_ONE_NAT.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -693,6 +698,7 @@ module Google
 
           # The type of address to reserve, either INTERNAL or EXTERNAL. If unspecified, defaults to EXTERNAL.
           module AddressType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ADDRESS_TYPE = 0
 
@@ -707,6 +713,7 @@ module Google
 
           # The IP version that will be used by this address. Valid options are IPV4 or IPV6. This can only be specified for a global address.
           module IpVersion
+
             # A value indicating that the enum field is not set.
             UNDEFINED_IP_VERSION = 0
 
@@ -719,6 +726,7 @@ module Google
 
           # The endpoint type of this address, which should be VM or NETLB. This is used for deciding which type of endpoint this address can be used after the external IPv6 address reservation.
           module Ipv6EndpointType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_IPV6_ENDPOINT_TYPE = 0
 
@@ -731,6 +739,7 @@ module Google
 
           # This signifies the networking tier used for configuring this address and can only take the following values: PREMIUM or STANDARD. Internal IP addresses are always Premium Tier; global external IP addresses are always Premium Tier; regional external IP addresses can be either Standard or Premium Tier. If this field is not specified, it is assumed to be PREMIUM.
           module NetworkTier
+
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_TIER = 0
 
@@ -749,6 +758,7 @@ module Google
 
           # The purpose of this resource, which can be one of the following values: - GCE_ENDPOINT for addresses that are used by VM instances, alias IP ranges, load balancers, and similar resources. - DNS_RESOLVER for a DNS resolver address in a subnetwork for a Cloud DNS inbound forwarder IP addresses (regional internal IP address in a subnet of a VPC network) - VPC_PEERING for global internal IP addresses used for private services access allocated ranges. - NAT_AUTO for the regional external IP addresses used by Cloud NAT when allocating addresses using automatic NAT IP address allocation. - IPSEC_INTERCONNECT for addresses created from a private IP range that are reserved for a VLAN attachment in an *HA VPN over Cloud Interconnect* configuration. These addresses are regional resources. - `SHARED_LOADBALANCER_VIP` for an internal IP address that is assigned to multiple internal forwarding rules. - `PRIVATE_SERVICE_CONNECT` for a private network address that is used to configure Private Service Connect. Only global internal addresses can use this purpose.
           module Purpose
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
 
@@ -779,6 +789,7 @@ module Google
 
           # [Output Only] The status of the address, which can be one of RESERVING, RESERVED, or IN_USE. An address that is RESERVING is currently in the process of being reserved. A RESERVED address is currently reserved and available to use. An IN_USE address is currently being used by another resource and is not available.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -792,6 +803,7 @@ module Google
             RESERVING = 514587225
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -851,6 +863,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] addresses
         #   @return [::Array<::Google::Cloud::Compute::V1::Address>]
@@ -1973,6 +1986,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] specific_sku_allocation
         #   @return [::Google::Cloud::Compute::V1::AllocationResourceStatusSpecificSKUAllocation]
         class AllocationResourceStatus
@@ -1980,12 +1994,14 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] source_instance_template_id
         #   @return [::String]
         class AllocationResourceStatusSpecificSKUAllocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] disk_size_gb
         #   @return [::Integer]
@@ -2000,6 +2016,7 @@ module Google
 
           # Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.
           module Interface
+
             # A value indicating that the enum field is not set.
             UNDEFINED_INTERFACE = 0
 
@@ -2050,6 +2067,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] I_p_protocol
         #   @return [::String]
@@ -2223,6 +2241,7 @@ module Google
 
           # [Output Only] The architecture of the attached disk. Valid values are ARM64 or X86_64.
           module Architecture
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ARCHITECTURE = 0
 
@@ -2238,6 +2257,7 @@ module Google
 
           # Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. For most machine types, the default is SCSI. Local SSDs can use either NVME or SCSI. In certain configurations, persistent disks can use NVMe. For more information, see About persistent disks.
           module Interface
+
             # A value indicating that the enum field is not set.
             UNDEFINED_INTERFACE = 0
 
@@ -2248,6 +2268,7 @@ module Google
 
           # The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If not specified, the default is to attach the disk in READ_WRITE mode.
           module Mode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MODE = 0
 
@@ -2260,6 +2281,7 @@ module Google
 
           # Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -2341,6 +2363,7 @@ module Google
 
           # The architecture of the attached disk. Valid values are arm64 or x86_64.
           module Architecture
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ARCHITECTURE = 0
 
@@ -2356,6 +2379,7 @@ module Google
 
           # Specifies which action to take on instance update with this disk. Default is to use the existing disk.
           module OnUpdateAction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ON_UPDATE_ACTION = 0
 
@@ -2402,6 +2426,7 @@ module Google
 
           # The log type that this config enables.
           module LogType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LOG_TYPE = 0
 
@@ -2430,6 +2455,7 @@ module Google
 
           # This is deprecated and has no effect. Do not use.
           module PermissionType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PERMISSION_TYPE = 0
 
@@ -2509,6 +2535,7 @@ module Google
 
           # [Output Only] The status of the autoscaler configuration. Current set of possible values: - PENDING: Autoscaler backend hasn't read new/updated configuration. - DELETING: Configuration is being deleted. - ACTIVE: Configuration is acknowledged to be effective. Some warnings might be present in the statusDetails field. - ERROR: Configuration has errors. Actionable for users. Details are present in the statusDetails field. New values might be added in the future.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -2525,6 +2552,7 @@ module Google
             PENDING = 35394935
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -2585,6 +2613,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] message
         #   @return [::String]
         #     The status message.
@@ -2598,6 +2627,7 @@ module Google
 
           # The type of error, warning, or notice returned. Current set of possible values: - ALL_INSTANCES_UNHEALTHY (WARNING): All instances in the instance group are unhealthy (not in RUNNING state). - BACKEND_SERVICE_DOES_NOT_EXIST (ERROR): There is no backend service attached to the instance group. - CAPPED_AT_MAX_NUM_REPLICAS (WARNING): Autoscaler recommends a size greater than maxNumReplicas. - CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE (WARNING): The custom metric samples are not exported often enough to be a credible base for autoscaling. - CUSTOM_METRIC_INVALID (ERROR): The custom metric that was specified does not exist or does not have the necessary labels. - MIN_EQUALS_MAX (WARNING): The minNumReplicas is equal to maxNumReplicas. This means the autoscaler cannot add or remove instances from the instance group. - MISSING_CUSTOM_METRIC_DATA_POINTS (WARNING): The autoscaler did not receive any data from the custom metric configured for autoscaling. - MISSING_LOAD_BALANCING_DATA_POINTS (WARNING): The autoscaler is configured to scale based on a load balancing signal but the instance group has not received any requests from the load balancer. - MODE_OFF (WARNING): Autoscaling is turned off. The number of instances in the group won't change automatically. The autoscaling configuration is preserved. - MODE_ONLY_UP (WARNING): Autoscaling is in the "Autoscale only out" mode. The autoscaler can add instances but not remove any. - MORE_THAN_ONE_BACKEND_SERVICE (ERROR): The instance group cannot be autoscaled because it has more than one backend service attached to it. - NOT_ENOUGH_QUOTA_AVAILABLE (ERROR): There is insufficient quota for the necessary resources, such as CPU or number of instances. - REGION_RESOURCE_STOCKOUT (ERROR): Shown only for regional autoscalers: there is a resource stockout in the chosen region. - SCALING_TARGET_DOES_NOT_EXIST (ERROR): The target to be scaled does not exist. - UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION (ERROR): Autoscaling does not work with an HTTP/S load balancer that has been configured for maxRate. - ZONE_RESOURCE_STOCKOUT (ERROR): For zonal autoscalers: there is a resource stockout in the chosen zone. For regional autoscalers: in at least one of the zones you're using there is a resource stockout. New values might be added in the future. Some of the values might not be available in all API versions.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -2662,6 +2692,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] autoscalers
         #   @return [::Array<::Google::Cloud::Compute::V1::Autoscaler>]
         #     [Output Only] A list of autoscalers contained in this scope.
@@ -2716,6 +2747,7 @@ module Google
 
           # Defines operating mode for this policy.
           module Mode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MODE = 0
 
@@ -2747,6 +2779,7 @@ module Google
 
           # Indicates whether predictive autoscaling based on CPU metric is enabled. Valid values are: * NONE (default). No predictive method is used. The autoscaler scales the group to meet current demand based on real-time metrics. * OPTIMIZE_AVAILABILITY. Predictive autoscaling improves availability by monitoring daily and weekly load patterns and scaling out ahead of anticipated demand.
           module PredictiveMethod
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PREDICTIVE_METHOD = 0
 
@@ -2781,6 +2814,7 @@ module Google
 
           # Defines how target utilization value is expressed for a Stackdriver Monitoring metric. Either GAUGE, DELTA_PER_SECOND, or DELTA_PER_MINUTE.
           module UtilizationTargetType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_UTILIZATION_TARGET_TYPE = 0
 
@@ -2884,6 +2918,7 @@ module Google
 
           # Specifies how to determine whether the backend of a load balancer can handle additional traffic or is fully loaded. For usage guidelines, see Connection balancing mode. Backends must use compatible balancing modes. For more information, see Supported balancing modes and target capacity settings and Restrictions and guidance for instance groups. Note: Currently, if you use the API to configure incompatible balancing modes, the configuration might be accepted even though it has no impact and is ignored. Specifically, Backend.maxUtilization is ignored when Backend.balancingMode is RATE. In the future, this incompatible combination will be rejected.
           module BalancingMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_BALANCING_MODE = 0
 
@@ -2942,6 +2977,7 @@ module Google
 
           # Compress text responses using Brotli or gzip compression, based on the client's Accept-Encoding header.
           module CompressionMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_COMPRESSION_MODE = 0
 
@@ -2997,6 +3033,7 @@ module Google
 
           # Specifies the cache setting for all responses from this backend. The possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
           module CacheMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CACHE_MODE = 0
 
@@ -3196,6 +3233,7 @@ module Google
 
           # Compress text responses using Brotli or gzip compression, based on the client's Accept-Encoding header.
           module CompressionMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_COMPRESSION_MODE = 0
 
@@ -3208,6 +3246,7 @@ module Google
 
           # Specifies the load balancer type. A backend service created for one type of load balancer cannot be used with another. For more information, refer to Choosing a load balancer.
           module LoadBalancingScheme
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LOAD_BALANCING_SCHEME = 0
 
@@ -3231,6 +3270,7 @@ module Google
 
           # The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING_HASH, session affinity settings will not take effect. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           module LocalityLbPolicy
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCALITY_LB_POLICY = 0
 
@@ -3257,6 +3297,7 @@ module Google
 
           # The protocol this BackendService uses to communicate with backends. Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, UDP or GRPC. depending on the chosen load balancer or Traffic Director configuration. Refer to the documentation for the load balancers or for Traffic Director for more information. Must be set to GRPC when the backend service is referenced by a URL map that is bound to target gRPC proxy.
           module Protocol
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROTOCOL = 0
 
@@ -3285,6 +3326,7 @@ module Google
 
           # Type of session affinity to use. The default is NONE. Only NONE and HEADER_FIELD are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. For more details, see: [Session Affinity](https://cloud.google.com/load-balancing/docs/backend-service#session_affinity).
           module SessionAffinity
+
             # A value indicating that the enum field is not set.
             UNDEFINED_SESSION_AFFINITY = 0
 
@@ -3394,6 +3436,7 @@ module Google
 
           # Specifies the cache setting for all responses from this backend. The possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
           module CacheMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CACHE_MODE = 0
 
@@ -3452,6 +3495,7 @@ module Google
 
           # Specifies connection persistence when backends are unhealthy. The default value is DEFAULT_FOR_PROTOCOL. If set to DEFAULT_FOR_PROTOCOL, the existing connections persist on unhealthy backends only for connection-oriented protocols (TCP and SCTP) and only if the Tracking Mode is PER_CONNECTION (default tracking mode) or the Session Affinity is configured for 5-tuple. They do not persist for UDP. If set to NEVER_PERSIST, after a backend becomes unhealthy, the existing connections on the unhealthy backend are never persisted on the unhealthy backend. They are always diverted to newly selected healthy backends (unless all backends are unhealthy). If set to ALWAYS_PERSIST, existing connections always persist on unhealthy backends regardless of protocol and session affinity. It is generally not recommended to use this mode overriding the default. For more details, see [Connection Persistence for Network Load Balancing](https://cloud.google.com/load-balancing/docs/network/networklb-backend-service#connection-persistence) and [Connection Persistence for Internal TCP/UDP Load Balancing](https://cloud.google.com/load-balancing/docs/internal#connection-persistence).
           module ConnectionPersistenceOnUnhealthyBackends
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CONNECTION_PERSISTENCE_ON_UNHEALTHY_BACKENDS = 0
 
@@ -3464,6 +3508,7 @@ module Google
 
           # Specifies the key used for connection tracking. There are two options: - PER_CONNECTION: This is the default mode. The Connection Tracking is performed as per the Connection Key (default Hash Method) for the specific protocol. - PER_SESSION: The Connection Tracking is performed as per the configured Session Affinity. It matches the configured Session Affinity. For more details, see [Tracking Mode for Network Load Balancing](https://cloud.google.com/load-balancing/docs/network/networklb-backend-service#tracking-mode) and [Tracking Mode for Internal TCP/UDP Load Balancing](https://cloud.google.com/load-balancing/docs/internal#tracking-mode).
           module TrackingMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TRACKING_MODE = 0
 
@@ -3489,6 +3534,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -3588,6 +3634,7 @@ module Google
 
           # The name of a locality load balancer policy to be used. The value should be one of the predefined ones as supported by localityLbPolicy, although at the moment only ROUND_ROBIN is supported. This field should only be populated when the customPolicy field is not used. Note that specifying the same policy more than once for a backend is not a valid configuration and will be rejected.
           module Name
+
             # A value indicating that the enum field is not set.
             UNDEFINED_NAME = 0
 
@@ -3625,12 +3672,14 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] backend_service
         #   @return [::String]
         class BackendServiceReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] backend_services
         #   @return [::Array<::Google::Cloud::Compute::V1::BackendService>]
@@ -3642,6 +3691,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] authentication_present
         #   @return [::Boolean]
@@ -3699,6 +3749,7 @@ module Google
 
           # The diagnostic code specifies the local system's reason for the last change in session state. This allows remote systems to determine the reason that the previous session failed, for example. These diagnostic codes are specified in section 4.1 of RFC5880
           module Diagnostic
+
             # A value indicating that the enum field is not set.
             UNDEFINED_DIAGNOSTIC = 0
 
@@ -3725,6 +3776,7 @@ module Google
 
           # The current BFD session state as seen by the transmitting system. These states are specified in section 4.1 of RFC5880
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -3780,6 +3832,7 @@ module Google
 
           # The BFD session initialization mode for this BGP peer. If set to ACTIVE, the Cloud Router will initiate the BFD session for this BGP peer. If set to PASSIVE, the Cloud Router will wait for the peer router to initiate the BFD session for this BGP peer. If set to DISABLED, BFD is disabled for this BGP peer.
           module BfdSessionInitializationMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_BFD_SESSION_INITIALIZATION_MODE = 0
 
@@ -3792,6 +3845,7 @@ module Google
 
           # The diagnostic code specifies the local system's reason for the last change in session state. This allows remote systems to determine the reason that the previous session failed, for example. These diagnostic codes are specified in section 4.1 of RFC5880
           module LocalDiagnostic
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCAL_DIAGNOSTIC = 0
 
@@ -3818,6 +3872,7 @@ module Google
 
           # The current BFD session state as seen by the transmitting system. These states are specified in section 4.1 of RFC5880
           module LocalState
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCAL_STATE = 0
 
@@ -3832,6 +3887,7 @@ module Google
             UP = 2715
           end
         end
+
 
         # @!attribute [rw] num_rx
         #   @return [::Integer]
@@ -3948,6 +4004,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] host
         #   @return [::String]
@@ -4132,6 +4189,7 @@ module Google
 
           # The category of the commitment. Category MACHINE specifies commitments composed of machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies commitments composed of software licenses, listed in licenseResources. Note that only MACHINE commitments should have a Type specified.
           module Category
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CATEGORY = 0
 
@@ -4144,6 +4202,7 @@ module Google
 
           # The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
           module Plan
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PLAN = 0
 
@@ -4156,6 +4215,7 @@ module Google
 
           # [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT_YET_ACTIVE, ACTIVE, EXPIRED.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -4172,6 +4232,7 @@ module Google
 
           # The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY_OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR_OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -4198,6 +4259,7 @@ module Google
             TYPE_UNSPECIFIED = 437714322
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -4258,6 +4320,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] commitments
         #   @return [::Array<::Google::Cloud::Compute::V1::Commitment>]
         #     [Output Only] A list of commitments contained in this scope.
@@ -4296,6 +4359,7 @@ module Google
           # Additional supported values which may be not listed in the enum directly due to technical reasons:
           # NO_ATTR
           module Iam
+
             # A value indicating that the enum field is not set.
             UNDEFINED_IAM = 0
 
@@ -4323,6 +4387,7 @@ module Google
 
           # This is deprecated and has no effect. Do not use.
           module Op
+
             # A value indicating that the enum field is not set.
             UNDEFINED_OP = 0
 
@@ -4349,6 +4414,7 @@ module Google
           # Additional supported values which may be not listed in the enum directly due to technical reasons:
           # NO_ATTR
           module Sys
+
             # A value indicating that the enum field is not set.
             UNDEFINED_SYS = 0
 
@@ -4531,6 +4597,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] kms_key_name
         #   @return [::String]
         #     The name of the encryption key that is stored in Google Cloud KMS. For example: "kmsKeyName": "projects/kms_project_id/locations/region/keyRings/ key_region/cryptoKeys/key
@@ -4551,6 +4618,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] disk_encryption_key
         #   @return [::Google::Cloud::Compute::V1::CustomerEncryptionKey]
         #     Decrypts data associated with the disk with a customer-supplied encryption key.
@@ -4561,6 +4629,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] key
         #   @return [::String]
@@ -5980,6 +6049,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] I_p_protocol
         #   @return [::String]
         #     The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp) or the IP protocol number.
@@ -6032,6 +6102,7 @@ module Google
 
           # The deprecation state of this resource. This can be ACTIVE, DEPRECATED, OBSOLETE, or DELETED. Operations which communicate the end of life date for an image, can use ACTIVE. Operations which create a new resource using a DEPRECATED resource will return successfully, but with a warning indicating the deprecated resource and recommending its replacement. Operations which use OBSOLETE or DELETED resources will be rejected and result in an error.
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -6264,6 +6335,7 @@ module Google
 
           # The architecture of the disk. Valid values are ARM64 or X86_64.
           module Architecture
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ARCHITECTURE = 0
 
@@ -6279,6 +6351,7 @@ module Google
 
           # [Output Only] The status of disk creation. - CREATING: Disk is provisioning. - RESTORING: Source data is being copied into the disk. - FAILED: Disk creation failed. - READY: Disk is ready for use. - DELETING: Disk is deleting.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -6298,6 +6371,7 @@ module Google
             RESTORING = 404263851
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -6354,6 +6428,7 @@ module Google
 
           # Specifies whether to include the disk and what image to use. Possible values are: - source-image: to use the same image that was used to create the source instance's corresponding disk. Applicable to the boot disk and additional read-write disks. - source-image-family: to use the same image family that was used to create the source instance's corresponding disk. Applicable to the boot disk and additional read-write disks. - custom-image: to use a user-provided image url for disk creation. Applicable to the boot disk and additional read-write disks. - attach-read-only: to attach a read-only disk. Applicable to read-only disks. - do-not-include: to exclude a disk from the template. Applicable to additional read-write disks, local SSDs, and read-only disks.
           module InstantiateFrom
+
             # A value indicating that the enum field is not set.
             UNDEFINED_INSTANTIATE_FROM = 0
 
@@ -6403,6 +6478,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] destination_zone
         #   @return [::String]
@@ -6472,6 +6548,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -6531,6 +6608,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] disk_types
         #   @return [::Array<::Google::Cloud::Compute::V1::DiskType>]
         #     [Output Only] A list of disk types contained in this scope.
@@ -6542,6 +6620,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Full or relative path to the resource policy to be added to this disk. You can only specify one resource policy.
@@ -6549,6 +6628,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
@@ -6558,6 +6638,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] size_gb
         #   @return [::Integer]
         #     The new size of the persistent disk, which is specified in GB.
@@ -6565,6 +6646,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] disks
         #   @return [::Array<::Google::Cloud::Compute::V1::Disk>]
@@ -6586,6 +6668,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] target_shape
         #   @return [::String]
         #     The distribution shape to which the group converges either proactively or on resize events (depending on the value set in updatePolicy.instanceRedistributionType).
@@ -6599,6 +6682,7 @@ module Google
 
           # The distribution shape to which the group converges either proactively or on resize events (depending on the value set in updatePolicy.instanceRedistributionType).
           module TargetShape
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TARGET_SHAPE = 0
 
@@ -6612,6 +6696,7 @@ module Google
             EVEN = 2140442
           end
         end
+
 
         # @!attribute [rw] zone
         #   @return [::String]
@@ -6669,6 +6754,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] error_info
         #   @return [::Google::Cloud::Compute::V1::ErrorInfo]
         # @!attribute [rw] help
@@ -6706,6 +6792,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] code
         #   @return [::String]
         #     [Output Only] The error type identifier for this error.
@@ -6722,6 +6809,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] dest_range
         #   @return [::String]
@@ -6745,6 +6833,7 @@ module Google
 
           # The type of the peering route.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -6758,6 +6847,7 @@ module Google
             SUBNET_PEERING_ROUTE = 465782504
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -6868,6 +6958,7 @@ module Google
 
           # Indicates the user-supplied redundancy type of this external VPN gateway.
           module RedundancyType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_REDUNDANCY_TYPE = 0
 
@@ -6920,6 +7011,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] content
         #   @return [::String]
         #     The raw content in the secure keys file.
@@ -6933,6 +7025,7 @@ module Google
 
           # The file type of source file.
           module FileType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_FILE_TYPE = 0
 
@@ -7009,6 +7102,7 @@ module Google
 
           # Direction of traffic to which this firewall applies, either `INGRESS` or `EGRESS`. The default is `INGRESS`. For `EGRESS` traffic, you cannot specify the sourceTags fields.
           module Direction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_DIRECTION = 0
 
@@ -7058,6 +7152,7 @@ module Google
 
           # This field can only be specified for a particular firewall rule if logging is enabled for that rule. This field denotes whether to include or exclude metadata for firewall logs.
           module Metadata
+
             # A value indicating that the enum field is not set.
             UNDEFINED_METADATA = 0
 
@@ -7066,6 +7161,7 @@ module Google
             INCLUDE_ALL_METADATA = 164619908
           end
         end
+
 
         # @!attribute [rw] associations
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyAssociation>]
@@ -7129,6 +7225,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] attachment_target
         #   @return [::String]
         #     The target that the firewall policy is attached to.
@@ -7148,6 +7245,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -7216,6 +7314,7 @@ module Google
 
           # The direction in which this rule applies.
           module Direction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_DIRECTION = 0
 
@@ -7243,6 +7342,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] ip_protocol
         #   @return [::String]
         #     The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp), or the IP protocol number.
@@ -7253,6 +7353,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] name
         #   @return [::String]
@@ -7267,6 +7368,7 @@ module Google
 
           # [Output Only] State of the secure tag, either `EFFECTIVE` or `INEFFECTIVE`. A secure tag is `INEFFECTIVE` when it is deleted or its network is deleted.
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -7404,6 +7506,7 @@ module Google
 
           # The IP protocol to which this rule applies. For protocol forwarding, valid options are TCP, UDP, ESP, AH, SCTP, ICMP and L3_DEFAULT. The valid IP protocols are different for different load balancing products as described in [Load balancing features](https://cloud.google.com/load-balancing/docs/features#protocols_from_the_load_balancer_to_the_backends).
           module IPProtocolEnum
+
             # A value indicating that the enum field is not set.
             UNDEFINED_I_P_PROTOCOL_ENUM = 0
 
@@ -7424,6 +7527,7 @@ module Google
 
           # The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6.
           module IpVersion
+
             # A value indicating that the enum field is not set.
             UNDEFINED_IP_VERSION = 0
 
@@ -7436,6 +7540,7 @@ module Google
 
           # Specifies the forwarding rule type. For more information about forwarding rules, refer to Forwarding rule concepts.
           module LoadBalancingScheme
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LOAD_BALANCING_SCHEME = 0
 
@@ -7454,6 +7559,7 @@ module Google
 
           # This signifies the networking tier used for configuring this load balancer and can only take the following values: PREMIUM, STANDARD. For regional ForwardingRule, the valid values are PREMIUM and STANDARD. For GlobalForwardingRule, the valid value is PREMIUM. If this field is not specified, it is assumed to be PREMIUM. If IPAddress is specified, this value must be equal to the networkTier of the Address.
           module NetworkTier
+
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_TIER = 0
 
@@ -7470,7 +7576,9 @@ module Google
             STANDARD_OVERRIDES_FIXED_STANDARD = 465847234
           end
 
+
           module PscConnectionStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PSC_CONNECTION_STATUS = 0
 
@@ -7492,6 +7600,7 @@ module Google
             STATUS_UNSPECIFIED = 42133066
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -7552,6 +7661,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] forwarding_rule
         #   @return [::String]
         class ForwardingRuleReference
@@ -7574,6 +7684,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] forwarding_rules
         #   @return [::Array<::Google::Cloud::Compute::V1::ForwardingRule>]
         #     A list of forwarding rules contained in this scope.
@@ -7584,6 +7695,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] grpc_service_name
         #   @return [::String]
@@ -7604,6 +7716,7 @@ module Google
 
           # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
@@ -9530,6 +9643,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] network_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpoint>]
         #     The list of network endpoints to be attached.
@@ -9538,6 +9652,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] network_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpoint>]
         #     The list of network endpoints to be detached.
@@ -9545,6 +9660,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] bindings
         #   @return [::Array<::Google::Cloud::Compute::V1::Binding>]
@@ -9559,6 +9675,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -9579,6 +9696,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
+
 
         # @!attribute [rw] bindings
         #   @return [::Array<::Google::Cloud::Compute::V1::Binding>]
@@ -9652,6 +9770,7 @@ module Google
 
           # The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE For more information, see Enabling guest operating system features.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -9674,6 +9793,7 @@ module Google
             WINDOWS = 456863331
           end
         end
+
 
         # @!attribute [rw] host
         #   @return [::String]
@@ -9704,6 +9824,7 @@ module Google
 
           # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
@@ -9719,6 +9840,7 @@ module Google
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
           module ProxyHeader
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
@@ -9727,6 +9849,7 @@ module Google
             PROXY_V1 = 334352940
           end
         end
+
 
         # @!attribute [rw] host
         #   @return [::String]
@@ -9757,6 +9880,7 @@ module Google
 
           # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Also supported in legacy HTTP health checks for target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
@@ -9772,6 +9896,7 @@ module Google
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
           module ProxyHeader
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
@@ -9780,6 +9905,7 @@ module Google
             PROXY_V1 = 334352940
           end
         end
+
 
         # @!attribute [rw] host
         #   @return [::String]
@@ -9810,6 +9936,7 @@ module Google
 
           # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
@@ -9825,6 +9952,7 @@ module Google
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
           module ProxyHeader
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
@@ -9893,6 +10021,7 @@ module Google
 
           # Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS, HTTP2 or GRPC. Exactly one of the protocol-specific health check fields must be specified, which must match type field.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -9997,6 +10126,7 @@ module Google
 
           # Optional. Policy for how the results from multiple health checks for the same endpoint are aggregated. Defaults to NO_AGGREGATION if unspecified. - NO_AGGREGATION. An EndpointHealth message is returned for each pair in the health check service. - AND. If any health check of an endpoint reports UNHEALTHY, then UNHEALTHY is the HealthState of the endpoint. If all health checks report HEALTHY, the HealthState of the endpoint is HEALTHY. . This is only allowed with regional HealthCheckService.
           module HealthStatusAggregationPolicy
+
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATUS_AGGREGATION_POLICY = 0
 
@@ -10015,6 +10145,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -10038,6 +10169,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -10074,6 +10206,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] health_checks
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthCheck>]
         #     A list of HealthChecks contained in this scope.
@@ -10084,6 +10217,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -10127,6 +10261,7 @@ module Google
 
           # Health state of the instance.
           module HealthState
+
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATE = 0
 
@@ -10135,7 +10270,9 @@ module Google
             UNHEALTHY = 462118084
           end
 
+
           module WeightError
+
             # A value indicating that the enum field is not set.
             UNDEFINED_WEIGHT_ERROR = 0
 
@@ -10152,6 +10289,7 @@ module Google
             WEIGHT_NONE = 502428831
           end
         end
+
 
         # @!attribute [rw] backend_service
         #   @return [::Google::Cloud::Compute::V1::BackendServiceReference]
@@ -10175,6 +10313,7 @@ module Google
 
           # Health state of the network endpoint determined based on the health checks configured.
           module HealthState
+
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATE = 0
 
@@ -10367,6 +10506,7 @@ module Google
 
           # The HTTP Status code to use for this RedirectAction. Supported values are: - MOVED_PERMANENTLY_DEFAULT, which is the default value and corresponds to 301. - FOUND, which corresponds to 302. - SEE_OTHER which corresponds to 303. - TEMPORARY_REDIRECT, which corresponds to 307. In this case, the request method is retained. - PERMANENT_REDIRECT, which corresponds to 308. In this case, the request method is retained.
           module RedirectResponseCode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_REDIRECT_RESPONSE_CODE = 0
 
@@ -10401,6 +10541,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] cors_policy
         #   @return [::Google::Cloud::Compute::V1::CorsPolicy]
@@ -10600,6 +10741,7 @@ module Google
 
           # The architecture of the image. Valid values are ARM64 or X86_64.
           module Architecture
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ARCHITECTURE = 0
 
@@ -10615,6 +10757,7 @@ module Google
 
           # The type of the image used to create this disk. The default and only valid value is RAW.
           module SourceType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_SOURCE_TYPE = 0
 
@@ -10623,6 +10766,7 @@ module Google
 
           # [Output Only] The status of the image. An image can be used to create other resources, such as instances, only after the image has been successfully created and the status is set to READY. Possible values are FAILED, PENDING, or READY.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -10639,6 +10783,7 @@ module Google
             READY = 77848963
           end
         end
+
 
         # @!attribute [rw] image
         #   @return [::Google::Cloud::Compute::V1::Image]
@@ -12061,6 +12206,7 @@ module Google
 
           # KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
           module KeyRevocationActionType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_KEY_REVOCATION_ACTION_TYPE = 0
 
@@ -12076,6 +12222,7 @@ module Google
 
           # The private IPv6 google access type for the VM. If not specified, use INHERIT_FROM_SUBNETWORK as default.
           module PrivateIpv6GoogleAccess
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
 
@@ -12091,6 +12238,7 @@ module Google
 
           # [Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. For more information about the status of the instance, see Instance life cycle.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -12125,6 +12273,7 @@ module Google
             TERMINATED = 250018339
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -12161,6 +12310,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] consumption_info
         #   @return [::Google::Cloud::Compute::V1::InstanceConsumptionInfo]
         #     Resources consumed by the instance.
@@ -12171,6 +12321,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] guest_cpus
         #   @return [::Integer]
@@ -12233,6 +12384,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -12370,6 +12522,7 @@ module Google
 
           # Pagination behavior of the listManagedInstances API method for this managed instance group.
           module ListManagedInstancesResults
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LIST_MANAGED_INSTANCES_RESULTS = 0
 
@@ -12380,6 +12533,7 @@ module Google
             PAGINATED = 40190637
           end
         end
+
 
         # @!attribute [rw] abandoning
         #   @return [::Integer]
@@ -12425,6 +12579,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -12459,6 +12614,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
+
 
         # @!attribute [rw] health_check
         #   @return [::String]
@@ -12495,6 +12651,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] autoscaler
         #   @return [::String]
         #     [Output Only] The URL of the Autoscaler that targets this instance group manager.
@@ -12512,6 +12669,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] has_stateful_config
         #   @return [::Boolean]
         #     [Output Only] A bit indicating whether the managed instance group has stateful configuration, that is, if you have configured any items in a stateful policy or in per-instance configs. The group might report that it has no stateful configuration even when there is still some preserved state on a managed instance, for example, if you have deleted all PICs but not yet applied those deletions.
@@ -12523,6 +12681,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] all_effective
         #   @return [::Boolean]
         #     A bit indicating if all of the group's per-instance configurations (listed in the output of a listPerInstanceConfigs API call) have status EFFECTIVE or there are no per-instance-configs.
@@ -12531,6 +12690,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] is_reached
         #   @return [::Boolean]
         #     [Output Only] A bit indicating whether version target has been reached in this managed instance group, i.e. all instances are in their target version. Instances' target version are specified by version field on Instance Group Manager.
@@ -12538,6 +12698,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] instance_redistribution_type
         #   @return [::String]
@@ -12574,6 +12735,7 @@ module Google
           # NONE
           # PROACTIVE
           module InstanceRedistributionType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_INSTANCE_REDISTRIBUTION_TYPE = 0
           end
@@ -12585,6 +12747,7 @@ module Google
           # REPLACE
           # RESTART
           module MinimalAction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MINIMAL_ACTION = 0
           end
@@ -12596,12 +12759,14 @@ module Google
           # REPLACE
           # RESTART
           module MostDisruptiveAllowedAction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MOST_DISRUPTIVE_ALLOWED_ACTION = 0
           end
 
           # What action should be used to replace instances. See minimal_action.REPLACE
           module ReplacementMethod
+
             # A value indicating that the enum field is not set.
             UNDEFINED_REPLACEMENT_METHOD = 0
 
@@ -12616,6 +12781,7 @@ module Google
           # Additional supported values which may be not listed in the enum directly due to technical reasons:
           # PROACTIVE
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -12623,6 +12789,7 @@ module Google
             OPPORTUNISTIC = 429530089
           end
         end
+
 
         # @!attribute [rw] instance_template
         #   @return [::String]
@@ -12637,6 +12804,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
@@ -12672,6 +12840,7 @@ module Google
           # REPLACE
           # RESTART
           module MinimalAction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MINIMAL_ACTION = 0
           end
@@ -12683,6 +12852,7 @@ module Google
           # REPLACE
           # RESTART
           module MostDisruptiveAllowedAction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MOST_DISRUPTIVE_ALLOWED_ACTION = 0
           end
@@ -12696,6 +12866,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
@@ -12717,6 +12888,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceManagedByIgmError>]
         #     [Output Only] The list of errors of the managed instance group.
@@ -12728,6 +12900,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] managed_instances
         #   @return [::Array<::Google::Cloud::Compute::V1::ManagedInstance>]
         #     [Output Only] The list of instances in the managed instance group.
@@ -12738,6 +12911,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::PerInstanceConfig>]
@@ -12762,6 +12936,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The URLs of one or more instances to recreate. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
@@ -12769,6 +12944,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] instance_group_managers
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroupManager>]
@@ -12781,6 +12957,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instance_template
         #   @return [::String]
         #     The URL of the instance template that is specified for this managed instance group. The group uses this template to create all new instances in the managed instance group. The templates for existing instances in the group do not change unless you run recreateInstances, run applyUpdatesToInstances, or set the group's updatePolicy.type to PROACTIVE.
@@ -12788,6 +12965,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] fingerprint
         #   @return [::String]
@@ -12809,6 +12987,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceReference>]
         #     The list of instances to add to the instance group.
@@ -12816,6 +12995,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -12840,6 +13020,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instance_state
         #   @return [::String]
         #     A filter for the state of the instances in the instance group. Valid options are ALL or RUNNING. If you do not specify this parameter the list includes all instances regardless of their state.
@@ -12850,6 +13031,7 @@ module Google
 
           # A filter for the state of the instances in the instance group. Valid options are ALL or RUNNING. If you do not specify this parameter the list includes all instances regardless of their state.
           module InstanceState
+
             # A value indicating that the enum field is not set.
             UNDEFINED_INSTANCE_STATE = 0
 
@@ -12861,6 +13043,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceReference>]
         #     The list of instances to remove from the instance group.
@@ -12868,6 +13051,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] instance_groups
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroup>]
@@ -12879,6 +13063,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] fingerprint
         #   @return [::String]
@@ -12939,6 +13124,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] error
         #   @return [::Google::Cloud::Compute::V1::InstanceManagedByIgmErrorManagedInstanceError]
         #     [Output Only] Contents of the error.
@@ -12952,6 +13138,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] action
         #   @return [::String]
@@ -12969,6 +13156,7 @@ module Google
 
           # [Output Only] Action that managed instance group was executing on the instance when the error occurred. Possible values:
           module Action
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ACTION = 0
 
@@ -13013,6 +13201,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] code
         #   @return [::String]
         #     [Output Only] Error code.
@@ -13023,6 +13212,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] destination_zone
         #   @return [::String]
@@ -13052,6 +13242,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
+
 
         # @!attribute [rw] advanced_machine_features
         #   @return [::Google::Cloud::Compute::V1::AdvancedMachineFeatures]
@@ -13142,6 +13333,7 @@ module Google
 
           # KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
           module KeyRevocationActionType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_KEY_REVOCATION_ACTION_TYPE = 0
 
@@ -13157,6 +13349,7 @@ module Google
 
           # The private IPv6 google access type for VMs. If not specified, use INHERIT_FROM_SUBNETWORK as default. Note that for MachineImage, this is not supported yet.
           module PrivateIpv6GoogleAccess
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
 
@@ -13170,6 +13363,7 @@ module Google
             INHERIT_FROM_SUBNETWORK = 530256959
           end
         end
+
 
         # @!attribute [rw] instance
         #   @return [::String]
@@ -13236,6 +13430,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instance
         #   @return [::String]
         #     [Output Only] The URL of the instance.
@@ -13252,6 +13447,7 @@ module Google
 
           # [Output Only] The status of the instance.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -13287,6 +13483,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies to be added to this instance.
@@ -13294,6 +13491,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] firewall_policys
         #   @return [::Array<::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy>]
@@ -13305,6 +13503,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] display_name
         #   @return [::String]
@@ -13328,6 +13527,7 @@ module Google
 
           # [Output Only] The type of the firewall policy. Can be one of HIERARCHY, NETWORK, NETWORK_REGIONAL.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -13341,6 +13541,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies to be removed from this instance.
@@ -13348,6 +13549,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::Instance>]
@@ -13359,6 +13561,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -13379,6 +13582,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] guest_accelerators
         #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorConfig>]
         #     A list of the type and count of accelerator cards attached to the instance.
@@ -13386,6 +13590,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] machine_type
         #   @return [::String]
@@ -13395,6 +13600,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] min_cpu_platform
         #   @return [::String]
         #     Minimum cpu/platform this instance should be started at.
@@ -13402,6 +13608,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] email
         #   @return [::String]
@@ -13413,6 +13620,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] disks
         #   @return [::Array<::Google::Cloud::Compute::V1::CustomerEncryptionKeyProtectedDisk>]
@@ -13514,6 +13722,7 @@ module Google
 
           # Type of interconnect, which can take one of the following values: - PARTNER: A partner-managed interconnection shared between customers though a partner. - DEDICATED: A dedicated physical interconnection with the customer. Note that a value IT_PRIVATE has been deprecated in favor of DEDICATED.
           module InterconnectType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_INTERCONNECT_TYPE = 0
 
@@ -13529,6 +13738,7 @@ module Google
 
           # Type of link requested, which can take one of the following values: - LINK_TYPE_ETHERNET_10G_LR: A 10G Ethernet with LR optics - LINK_TYPE_ETHERNET_100G_LR: A 100G Ethernet with LR optics. Note that this field indicates the speed of each of the links in the bundle, not the speed of the entire bundle.
           module LinkType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LINK_TYPE = 0
 
@@ -13541,6 +13751,7 @@ module Google
 
           # [Output Only] The current status of this Interconnect's functionality, which can take one of the following values: - OS_ACTIVE: A valid Interconnect, which is turned up and is ready to use. Attachments may be provisioned on this Interconnect. - OS_UNPROVISIONED: An Interconnect that has not completed turnup. No attachments may be provisioned on this Interconnect. - OS_UNDER_MAINTENANCE: An Interconnect that is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect.
           module OperationalStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_OPERATIONAL_STATUS = 0
 
@@ -13553,6 +13764,7 @@ module Google
 
           # [Output Only] The current state of Interconnect functionality, which can take one of the following values: - ACTIVE: The Interconnect is valid, turned up and ready to use. Attachments may be provisioned on this Interconnect. - UNPROVISIONED: The Interconnect has not completed turnup. No attachments may be provisioned on this Interconnect. - UNDER_MAINTENANCE: The Interconnect is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect.
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -13683,6 +13895,7 @@ module Google
 
           # Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED, and can take one of the following values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit/s - BPS_200M: 200 Mbit/s - BPS_300M: 300 Mbit/s - BPS_400M: 400 Mbit/s - BPS_500M: 500 Mbit/s - BPS_1G: 1 Gbit/s - BPS_2G: 2 Gbit/s - BPS_5G: 5 Gbit/s - BPS_10G: 10 Gbit/s - BPS_20G: 20 Gbit/s - BPS_50G: 50 Gbit/s
           module Bandwidth
+
             # A value indicating that the enum field is not set.
             UNDEFINED_BANDWIDTH = 0
 
@@ -13725,6 +13938,7 @@ module Google
 
           # Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY_DOMAIN_ANY - AVAILABILITY_DOMAIN_1 - AVAILABILITY_DOMAIN_2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY_DOMAIN_ANY.
           module EdgeAvailabilityDomain
+
             # A value indicating that the enum field is not set.
             UNDEFINED_EDGE_AVAILABILITY_DOMAIN = 0
 
@@ -13737,6 +13951,7 @@ module Google
 
           # Indicates the user-supplied encryption option of this VLAN attachment (interconnectAttachment). Can only be specified at attachment creation for PARTNER or DEDICATED attachments. Possible values are: - NONE - This is the default value, which means that the VLAN attachment carries unencrypted traffic. VMs are able to send traffic to, or receive traffic from, such a VLAN attachment. - IPSEC - The VLAN attachment carries only encrypted traffic that is encrypted by an IPsec device, such as an HA VPN gateway or third-party IPsec VPN. VMs cannot directly send traffic to, or receive traffic from, such a VLAN attachment. To use *HA VPN over Cloud Interconnect*, the VLAN attachment must be created with this option.
           module Encryption
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ENCRYPTION = 0
 
@@ -13749,6 +13964,7 @@ module Google
 
           # [Output Only] The current status of whether or not this interconnect attachment is functional, which can take one of the following values: - OS_ACTIVE: The attachment has been turned up and is ready to use. - OS_UNPROVISIONED: The attachment is not ready to use yet, because turnup is not complete.
           module OperationalStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_OPERATIONAL_STATUS = 0
 
@@ -13761,6 +13977,7 @@ module Google
 
           # The stack type for this interconnect attachment to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used. This field can be both set at interconnect attachments creation and update interconnect attachment operations.
           module StackType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STACK_TYPE = 0
 
@@ -13773,6 +13990,7 @@ module Google
 
           # [Output Only] The current state of this attachment's functionality. Enum values ACTIVE and UNPROVISIONED are shared by DEDICATED/PRIVATE, PARTNER, and PARTNER_PROVIDER interconnect attachments, while enum values PENDING_PARTNER, PARTNER_REQUEST_RECEIVED, and PENDING_CUSTOMER are used for only PARTNER and PARTNER_PROVIDER interconnect attachments. This state can take one of the following values: - ACTIVE: The attachment has been turned up and is ready to use. - UNPROVISIONED: The attachment is not ready to use yet, because turnup is not complete. - PENDING_PARTNER: A newly-created PARTNER attachment that has not yet been configured on the Partner side. - PARTNER_REQUEST_RECEIVED: A PARTNER attachment is in the process of provisioning after a PARTNER_PROVIDER attachment was created that references it. - PENDING_CUSTOMER: A PARTNER or PARTNER_PROVIDER attachment that is waiting for a customer to activate it. - DEFUNCT: The attachment was deleted externally and is no longer functional. This could be because the associated Interconnect was removed, or because the other side of a Partner attachment was deleted.
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -13799,6 +14017,7 @@ module Google
 
           # The type of interconnect attachment this is, which can take one of the following values: - DEDICATED: an attachment to a Dedicated Interconnect. - PARTNER: an attachment to a Partner Interconnect, created by the customer. - PARTNER_PROVIDER: an attachment to a Partner Interconnect, created by the partner.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -13812,6 +14031,7 @@ module Google
             PARTNER_PROVIDER = 483261352
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -13896,6 +14116,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] interconnect_attachments
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectAttachment>]
         #     A list of interconnect attachments contained in this scope.
@@ -13946,6 +14167,7 @@ module Google
 
           # The aggregation type of the bundle interface.
           module BundleAggregationType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_BUNDLE_AGGREGATION_TYPE = 0
 
@@ -13958,6 +14180,7 @@ module Google
 
           # The operational status of the bundle interface.
           module BundleOperationalStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_BUNDLE_OPERATIONAL_STATUS = 0
 
@@ -13981,6 +14204,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] google_system_id
         #   @return [::String]
         #     System ID of the port on Google's side of the LACP exchange.
@@ -13997,6 +14221,7 @@ module Google
 
           # The state of a LACP link, which can take one of the following values: - ACTIVE: The link is configured and active within the bundle. - DETACHED: The link is not configured within the bundle. This means that the rest of the object should be empty.
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -14007,6 +14232,7 @@ module Google
             DETACHED = 216562546
           end
         end
+
 
         # @!attribute [rw] state
         #   @return [::String]
@@ -14021,6 +14247,7 @@ module Google
 
           # The status of the current value when compared to the warning and alarm levels for the receiving or transmitting transceiver. Possible states include: - OK: The value has not crossed a warning threshold. - LOW_WARNING: The value has crossed below the low warning threshold. - HIGH_WARNING: The value has crossed above the high warning threshold. - LOW_ALARM: The value has crossed below the low alarm threshold. - HIGH_ALARM: The value has crossed above the high alarm threshold.
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -14040,6 +14267,7 @@ module Google
             OK = 2524
           end
         end
+
 
         # @!attribute [rw] arp_caches
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectDiagnosticsARPEntry>]
@@ -14068,6 +14296,7 @@ module Google
 
           # The operational status of the link.
           module OperationalStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_OPERATIONAL_STATUS = 0
 
@@ -14160,6 +14389,7 @@ module Google
 
           # [Output Only] Continent for this location, which can take one of the following values: - AFRICA - ASIA_PAC - EUROPE - NORTH_AMERICA - SOUTH_AMERICA
           module Continent
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CONTINENT = 0
 
@@ -14186,6 +14416,7 @@ module Google
 
           # [Output Only] The status of this InterconnectLocation, which can take one of the following values: - CLOSED: The InterconnectLocation is closed and is unavailable for provisioning new Interconnects. - AVAILABLE: The InterconnectLocation is available for provisioning new Interconnects.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -14238,6 +14469,7 @@ module Google
 
           # Identifies the network presence of this location.
           module LocationPresence
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCATION_PRESENCE = 0
 
@@ -14289,6 +14521,7 @@ module Google
 
           # Form this outage is expected to take, which can take one of the following values: - OUTAGE: The Interconnect may be completely out of service for some or all of the specified window. - PARTIAL_OUTAGE: Some circuits comprising the Interconnect as a whole should remain up, but with reduced bandwidth. Note that the versions of this enum prefixed with "IT_" have been deprecated in favor of the unprefixed values.
           module IssueType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ISSUE_TYPE = 0
 
@@ -14307,6 +14540,7 @@ module Google
 
           # The party that generated this notification, which can take the following value: - GOOGLE: this notification as generated by Google. Note that the value of NSRC_GOOGLE has been deprecated in favor of GOOGLE.
           module Source
+
             # A value indicating that the enum field is not set.
             UNDEFINED_SOURCE = 0
 
@@ -14319,6 +14553,7 @@ module Google
 
           # State of this notification, which can take one of the following values: - ACTIVE: This outage notification is active. The event could be in the past, present, or future. See start_time and end_time for scheduling. - CANCELLED: The outage associated with this notification was cancelled before the outage was due to start. - COMPLETED: The outage associated with this notification is complete. Note that the versions of this enum prefixed with "NS_" have been deprecated in favor of the unprefixed values.
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -14447,6 +14682,7 @@ module Google
 
           # [Output Only] Current state of this License Code.
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -14465,6 +14701,7 @@ module Google
             TERMINATED = 250018339
           end
         end
+
 
         # @!attribute [rw] description
         #   @return [::String]
@@ -14492,6 +14729,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] min_guest_cpu_count
         #   @return [::Integer]
         #     Minimum number of guest cpus required to use the Instance. Enforced at Instance creation and Instance start.
@@ -14502,6 +14740,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -15836,6 +16075,7 @@ module Google
 
           # The direction of the exchanged routes.
           module Direction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_DIRECTION = 0
 
@@ -17212,6 +17452,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] disk_count
         #   @return [::Integer]
         #     Specifies the number of such disks.
@@ -17261,6 +17502,7 @@ module Google
 
           # Strategy for distributing VMs across zones in a region.
           module TargetShape
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TARGET_SHAPE = 0
 
@@ -17275,6 +17517,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] constraints
         #   @return [::Google::Cloud::Compute::V1::LocationPolicyLocationConstraints]
         #     Constraints that the caller requires on the result distribution in this zone.
@@ -17288,6 +17531,7 @@ module Google
 
           # Preference for a given location. Set to either ALLOW or DENY.
           module Preference
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PREFERENCE = 0
 
@@ -17340,6 +17584,7 @@ module Google
 
           # This is deprecated and has no effect. Do not use.
           module LogName
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LOG_NAME = 0
 
@@ -17392,6 +17637,7 @@ module Google
 
           # This is deprecated and has no effect. Do not use.
           module LogMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LOG_MODE = 0
 
@@ -17462,6 +17708,7 @@ module Google
 
           # [Output Only] The status of the machine image. One of the following values: INVALID, CREATING, READY, DELETING, and UPLOADING.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -17555,6 +17802,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -17614,6 +17862,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] machine_types
         #   @return [::Array<::Google::Cloud::Compute::V1::MachineType>]
         #     [Output Only] A list of machine types contained in this scope.
@@ -17664,6 +17913,7 @@ module Google
           # STOPPING
           # SUSPENDING
           module CurrentAction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CURRENT_ACTION = 0
 
@@ -17706,6 +17956,7 @@ module Google
           # STOPPING
           # SUSPENDING
           module InstanceStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_INSTANCE_STATUS = 0
 
@@ -17739,6 +17990,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] detailed_health_state
         #   @return [::String]
         #     [Output Only] The current detailed instance health state.
@@ -17752,6 +18004,7 @@ module Google
 
           # [Output Only] The current detailed instance health state.
           module DetailedHealthState
+
             # A value indicating that the enum field is not set.
             UNDEFINED_DETAILED_HEALTH_STATE = 0
 
@@ -17772,6 +18025,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] errors
         #   @return [::Google::Cloud::Compute::V1::Errors]
         #     [Output Only] Encountered errors during the last attempt to create or delete the instance.
@@ -17779,6 +18033,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] instance_template
         #   @return [::String]
@@ -17820,6 +18075,7 @@ module Google
 
           # Specifies how individual filter label matches within the list of filterLabels and contributes toward the overall metadataFilter match. Supported values are: - MATCH_ANY: at least one of the filterLabels must have a matching label in the provided metadata. - MATCH_ALL: all filterLabels must have matching labels in the provided metadata.
           module FilterMatchCriteria
+
             # A value indicating that the enum field is not set.
             UNDEFINED_FILTER_MATCH_CRITERIA = 0
 
@@ -17965,6 +18221,7 @@ module Google
 
           # The network firewall policy enforcement order. Can be either AFTER_CLASSIC_FIREWALL or BEFORE_CLASSIC_FIREWALL. Defaults to AFTER_CLASSIC_FIREWALL if the field is not specified.
           module NetworkFirewallPolicyEnforcementOrder
+
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_FIREWALL_POLICY_ENFORCEMENT_ORDER = 0
 
@@ -18026,6 +18283,7 @@ module Google
 
 
           module ConnectionPreference
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CONNECTION_PREFERENCE = 0
 
@@ -18092,6 +18350,7 @@ module Google
 
           # The status of a connected endpoint to this network attachment.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -18114,6 +18373,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -18135,6 +18395,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] network_attachments
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkAttachment>]
@@ -18183,6 +18444,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] etag
         #   @return [::String]
         # @!attribute [rw] id
@@ -18219,6 +18481,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
+
 
         # @!attribute [rw] network_edge_security_services
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEdgeSecurityService>]
@@ -18334,6 +18597,7 @@ module Google
 
           # Type of network endpoints in this network endpoint group. Can be one of GCE_VM_IP, GCE_VM_IP_PORT, NON_GCP_PRIVATE_IP_PORT, INTERNET_FQDN_PORT, INTERNET_IP_PORT, SERVERLESS, PRIVATE_SERVICE_CONNECT.
           module NetworkEndpointType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_ENDPOINT_TYPE = 0
 
@@ -18359,6 +18623,7 @@ module Google
             SERVERLESS = 270492508
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -18437,6 +18702,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -18477,6 +18743,7 @@ module Google
 
           # [Output Only] The connection status of the PSC Forwarding Rule.
           module PscConnectionStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PSC_CONNECTION_STATUS = 0
 
@@ -18499,6 +18766,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] network_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpoint>]
         #     The list of network endpoints to be attached.
@@ -18507,6 +18775,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] network_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpoint>]
         #     The list of network endpoints to be detached.
@@ -18514,6 +18783,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] health_status
         #   @return [::String]
@@ -18525,6 +18795,7 @@ module Google
 
           # Optional query parameter for showing the health status of each network endpoint. Valid options are SKIP or SHOW. If you don't specify this parameter, the health status of network endpoints will not be provided.
           module HealthStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATUS = 0
 
@@ -18535,6 +18806,7 @@ module Google
             SKIP = 2547071
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -18556,6 +18828,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] network_endpoint_groups
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpointGroup>]
         #     [Output Only] The list of network endpoint groups that are contained in this scope.
@@ -18566,6 +18839,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] healths
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthStatusForNetworkEndpoint>]
@@ -18636,6 +18910,7 @@ module Google
 
           # [Output Only] One of EXTERNAL, INTERNAL to indicate whether the IP can be accessed from the Internet. This field is always inherited from its subnetwork. Valid only if stackType is IPV4_IPV6.
           module Ipv6AccessType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_IPV6_ACCESS_TYPE = 0
 
@@ -18650,6 +18925,7 @@ module Google
 
           # The type of vNIC to be used on this interface. This may be gVNIC or VirtioNet.
           module NicType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_NIC_TYPE = 0
 
@@ -18665,6 +18941,7 @@ module Google
 
           # The stack type for this network interface to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used. This field can be both set at instance creation and update network interface operations.
           module StackType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STACK_TYPE = 0
 
@@ -18747,6 +19024,7 @@ module Google
 
           # Which IP version(s) of traffic and routes are allowed to be imported or exported between peer networks. The default value is IPV4_ONLY.
           module StackType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STACK_TYPE = 0
 
@@ -18759,6 +19037,7 @@ module Google
 
           # [Output Only] State for the peering, either `ACTIVE` or `INACTIVE`. The peering is `ACTIVE` when there's a matching configuration in the peer network.
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -18770,6 +19049,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] total_egress_bandwidth_tier
         #   @return [::String]
         #     Check the TotalEgressBandwidthTier enum for the list of possible values.
@@ -18779,6 +19059,7 @@ module Google
 
 
           module TotalEgressBandwidthTier
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TOTAL_EGRESS_BANDWIDTH_TIER = 0
 
@@ -18799,6 +19080,7 @@ module Google
 
           # The network-wide routing mode to use. If set to REGIONAL, this network's Cloud Routers will only advertise routes with subnets of this network in the same region as the router. If set to GLOBAL, this network's Cloud Routers will advertise routes with all subnets of this network, across regions.
           module RoutingMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ROUTING_MODE = 0
 
@@ -18807,6 +19089,7 @@ module Google
             REGIONAL = 92288543
           end
         end
+
 
         # @!attribute [rw] auto_create_routes
         #   @return [::Boolean]
@@ -18825,6 +19108,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] firewall_policys
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy>]
         #     Effective firewalls from firewall policy.
@@ -18835,6 +19119,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] display_name
         #   @return [::String]
@@ -18858,6 +19143,7 @@ module Google
 
           # [Output Only] The type of the firewall policy.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -18869,6 +19155,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the peering, which should conform to RFC1035.
@@ -18876,6 +19163,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] network_peering
         #   @return [::Google::Cloud::Compute::V1::NetworkPeering]
@@ -18938,6 +19226,7 @@ module Google
 
           # Specifies how to handle instances when a node in the group undergoes maintenance. Set to one of: DEFAULT, RESTART_IN_PLACE, or MIGRATE_WITHIN_NODE_GROUP. The default value is DEFAULT. For more information, see Maintenance policies.
           module MaintenancePolicy
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MAINTENANCE_POLICY = 0
 
@@ -18953,7 +19242,9 @@ module Google
             RESTART_IN_PLACE = 228647325
           end
 
+
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -18966,6 +19257,7 @@ module Google
             READY = 77848963
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -19002,6 +19294,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] max_nodes
         #   @return [::Integer]
         #     The maximum number of nodes that the group should have. Must be set if autoscaling is enabled. Maximum value allowed is 100.
@@ -19018,6 +19311,7 @@ module Google
 
           # The autoscaling mode. Set to one of: ON, OFF, or ONLY_SCALE_OUT. For more information, see Autoscaler modes.
           module Mode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MODE = 0
 
@@ -19070,6 +19364,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] accelerators
         #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorConfig>]
         #     Accelerators for this node.
@@ -19116,6 +19411,7 @@ module Google
 
           # CPU overcommit.
           module CpuOvercommitType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CPU_OVERCOMMIT_TYPE = 0
 
@@ -19126,7 +19422,9 @@ module Google
             NONE = 2402104
           end
 
+
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -19142,6 +19440,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] additional_node_count
         #   @return [::Integer]
         #     Count of additional nodes to be added to the node group.
@@ -19150,6 +19449,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] nodes
         #   @return [::Array<::String>]
         #     Names of the nodes to delete.
@@ -19157,6 +19457,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -19181,6 +19482,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] node_groups
         #   @return [::Array<::Google::Cloud::Compute::V1::NodeGroup>]
         #     [Output Only] A list of node groups contained in this scope.
@@ -19191,6 +19493,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] node_template
         #   @return [::String]
@@ -19264,6 +19567,7 @@ module Google
 
           # CPU overcommit.
           module CpuOvercommitType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CPU_OVERCOMMIT_TYPE = 0
 
@@ -19276,6 +19580,7 @@ module Google
 
           # [Output Only] The status of the node template. One of the following values: CREATING, READY, and DELETING.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -19292,6 +19597,7 @@ module Google
             READY = 77848963
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -19352,6 +19658,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] cpus
         #   @return [::String]
         # @!attribute [rw] local_ssd
@@ -19362,6 +19669,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] node_templates
         #   @return [::Array<::Google::Cloud::Compute::V1::NodeTemplate>]
@@ -19415,6 +19723,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -19474,6 +19783,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] node_types
         #   @return [::Array<::Google::Cloud::Compute::V1::NodeType>]
@@ -19536,6 +19846,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -19639,6 +19950,7 @@ module Google
 
           # [Output Only] The status of the operation, which can be one of the following: `PENDING`, `RUNNING`, or `DONE`.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -19649,6 +19961,7 @@ module Google
             RUNNING = 121282975
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -19708,6 +20021,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] operations
         #   @return [::Array<::Google::Cloud::Compute::V1::Operation>]
@@ -19786,6 +20100,7 @@ module Google
 
           # From how long ago in the past these intervals were observed.
           module Duration
+
             # A value indicating that the enum field is not set.
             UNDEFINED_DURATION = 0
 
@@ -19801,6 +20116,7 @@ module Google
 
           # The type of packets for which inter-packet intervals were computed.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -19864,6 +20180,7 @@ module Google
 
           # Indicates whether or not this packet mirroring takes effect. If set to FALSE, this packet mirroring policy will not be enforced on the network. The default is TRUE.
           module Enable
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ENABLE = 0
 
@@ -19909,6 +20226,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] I_p_protocols
         #   @return [::Array<::String>]
         #     Protocols that apply as filter on mirrored traffic. If no protocols are specified, all traffic that matches the specified CIDR ranges is mirrored. If neither cidrRanges nor IPProtocols is specified, all traffic is mirrored.
@@ -19925,6 +20243,7 @@ module Google
 
           # Direction of traffic to mirror, either INGRESS, EGRESS, or BOTH. The default is BOTH.
           module Direction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_DIRECTION = 0
 
@@ -19938,6 +20257,7 @@ module Google
             INGRESS = 516931221
           end
         end
+
 
         # @!attribute [rw] canonical_url
         #   @return [::String]
@@ -19974,6 +20294,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::PacketMirroringMirroredResourceInfoInstanceInfo>]
         #     A set of virtual machine instances that are being mirrored. They must live in zones contained in the same region as this packetMirroring. Note that this config will apply only to those network interfaces of the Instances that belong to the network specified in this packetMirroring. You may specify a maximum of 50 Instances.
@@ -19988,6 +20309,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] canonical_url
         #   @return [::String]
         #     [Output Only] Unique identifier for the instance; defined by the server.
@@ -19998,6 +20320,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] canonical_url
         #   @return [::String]
@@ -20010,6 +20333,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] canonical_url
         #   @return [::String]
         #     [Output Only] Unique identifier for the network; defined by the server.
@@ -20020,6 +20344,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] packet_mirrorings
         #   @return [::Array<::Google::Cloud::Compute::V1::PacketMirroring>]
@@ -20976,6 +21301,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] fingerprint
         #   @return [::String]
         #     Fingerprint of this per-instance config. This field can be used in optimistic locking. It is ignored when inserting a per-instance config. An up-to-date fingerprint must be provided in order to update an existing per-instance configuration or the field needs to be unset.
@@ -20995,6 +21321,7 @@ module Google
 
           # The status of applying this per-instance configuration on the corresponding managed instance.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -21041,6 +21368,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] expression_sets
         #   @return [::Array<::Google::Cloud::Compute::V1::WafExpressionSet>]
         #     List of entities that are currently supported for WAF rules.
@@ -21079,6 +21407,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] auto_delete
         #   @return [::String]
         #     These stateful disks will never be deleted during autohealing, update, instance recreate operations. This flag is used to configure if the disk should be deleted after it is no longer used by the group, e.g. when the given instance or the whole MIG is deleted. Note: disks attached in READ_ONLY mode cannot be auto-deleted.
@@ -21096,6 +21425,7 @@ module Google
 
           # These stateful disks will never be deleted during autohealing, update, instance recreate operations. This flag is used to configure if the disk should be deleted after it is no longer used by the group, e.g. when the given instance or the whole MIG is deleted. Note: disks attached in READ_ONLY mode cannot be auto-deleted.
           module AutoDelete
+
             # A value indicating that the enum field is not set.
             UNDEFINED_AUTO_DELETE = 0
 
@@ -21106,6 +21436,7 @@ module Google
 
           # The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If not specified, the default is to attach the disk in READ_WRITE mode.
           module Mode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MODE = 0
 
@@ -21187,6 +21518,7 @@ module Google
 
           # This signifies the default network tier used for configuring resources of the project and can only take the following values: PREMIUM, STANDARD. Initially the default network tier is PREMIUM.
           module DefaultNetworkTier
+
             # A value indicating that the enum field is not set.
             UNDEFINED_DEFAULT_NETWORK_TIER = 0
 
@@ -21205,6 +21537,7 @@ module Google
 
           # [Output Only] Default internal DNS setting used by VMs running in this project.
           module VmDnsSetting
+
             # A value indicating that the enum field is not set.
             UNDEFINED_VM_DNS_SETTING = 0
 
@@ -21219,6 +21552,7 @@ module Google
 
           # [Output Only] The role this project has in a shared VPC configuration. Currently, only projects with the host role, which is specified by the value HOST, are differentiated.
           module XpnProjectStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_XPN_PROJECT_STATUS = 0
 
@@ -21228,6 +21562,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] xpn_resource
         #   @return [::Google::Cloud::Compute::V1::XpnResourceId]
         #     Service resource (a.k.a service project) ID.
@@ -21236,6 +21571,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] xpn_resource
         #   @return [::Google::Cloud::Compute::V1::XpnResourceId]
         #     Service resource (a.k.a service project) ID.
@@ -21243,6 +21579,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] kind
         #   @return [::String]
@@ -21258,6 +21595,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] organization
         #   @return [::String]
         #     Optional organization ID managed by Cloud Resource Manager, for which to list shared VPC host projects. If not specified, the organization will be inferred from the project.
@@ -21265,6 +21603,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] network_tier
         #   @return [::String]
@@ -21276,6 +21615,7 @@ module Google
 
           # Default network tier to be set.
           module NetworkTier
+
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_TIER = 0
 
@@ -21337,6 +21677,7 @@ module Google
 
           # The status of the public advertised prefix. Possible values include: - `INITIAL`: RPKI validation is complete. - `PTR_CONFIGURED`: User has configured the PTR. - `VALIDATED`: Reverse DNS lookup is successful. - `REVERSE_DNS_LOOKUP_FAILED`: Reverse DNS lookup failed. - `PREFIX_CONFIGURATION_IN_PROGRESS`: The prefix is being configured. - `PREFIX_CONFIGURATION_COMPLETE`: The prefix is fully configured. - `PREFIX_REMOVAL_IN_PROGRESS`: The prefix is being removed.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -21362,6 +21703,7 @@ module Google
             VALIDATED = 66197998
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -21454,6 +21796,7 @@ module Google
 
           # [Output Only] The status of the public delegated prefix, which can be one of following values: - `INITIALIZING` The public delegated prefix is being initialized and addresses cannot be created yet. - `READY_TO_ANNOUNCE` The public delegated prefix is a live migration prefix and is active. - `ANNOUNCED` The public delegated prefix is active. - `DELETING` The public delegated prefix is being deprovsioned.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -21470,6 +21813,7 @@ module Google
             READY_TO_ANNOUNCE = 64641265
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -21505,6 +21849,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -21558,6 +21903,7 @@ module Google
 
           # [Output Only] The status of the sub public delegated prefix.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -21566,6 +21912,7 @@ module Google
             INACTIVE = 270421099
           end
         end
+
 
         # @!attribute [rw] public_delegated_prefixes
         #   @return [::Array<::Google::Cloud::Compute::V1::PublicDelegatedPrefix>]
@@ -21598,6 +21945,7 @@ module Google
 
           # [Output Only] Name of the quota metric.
           module Metric
+
             # A value indicating that the enum field is not set.
             UNDEFINED_METRIC = 0
 
@@ -21931,6 +22279,7 @@ module Google
 
           # The format used to encode and transmit the block device, which should be TAR. This is just a container and transmission format and not a runtime format. Provided by the client when the disk image is created.
           module ContainerType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CONTAINER_TYPE = 0
 
@@ -22039,6 +22388,7 @@ module Google
 
           # [Output Only] Status of the region, either UP or DOWN.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -22072,6 +22422,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -22095,6 +22446,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies to be added to this disk.
@@ -22103,6 +22455,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies to be removed from this disk.
@@ -22110,6 +22463,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] size_gb
         #   @return [::Integer]
@@ -22194,6 +22548,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The URLs of one or more instances to abandon. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
@@ -22228,6 +22583,7 @@ module Google
           # REPLACE
           # RESTART
           module MinimalAction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MINIMAL_ACTION = 0
           end
@@ -22239,6 +22595,7 @@ module Google
           # REPLACE
           # RESTART
           module MostDisruptiveAllowedAction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MOST_DISRUPTIVE_ALLOWED_ACTION = 0
           end
@@ -22253,6 +22610,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The URLs of one or more instances to delete. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
@@ -22264,6 +22622,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceManagedByIgmError>]
         #     [Output Only] The list of errors of the managed instance group.
@@ -22274,6 +22633,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::PerInstanceConfig>]
@@ -22289,6 +22649,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] managed_instances
         #   @return [::Array<::Google::Cloud::Compute::V1::ManagedInstance>]
         #     A list of managed instances.
@@ -22300,6 +22661,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The URLs of one or more instances to recreate. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
@@ -22307,6 +22669,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] fingerprint
         #   @return [::String]
@@ -22319,6 +22682,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instance_template
         #   @return [::String]
         #     URL of the InstanceTemplate resource from which all new instances will be created.
@@ -22326,6 +22690,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -22350,6 +22715,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instance_state
         #   @return [::String]
         #     Instances in which state should be returned. Valid options are: 'ALL', 'RUNNING'. By default, it lists all instances.
@@ -22363,6 +22729,7 @@ module Google
 
           # Instances in which state should be returned. Valid options are: 'ALL', 'RUNNING'. By default, it lists all instances.
           module InstanceState
+
             # A value indicating that the enum field is not set.
             UNDEFINED_INSTANCE_STATE = 0
 
@@ -22373,6 +22740,7 @@ module Google
             RUNNING = 121282975
           end
         end
+
 
         # @!attribute [rw] fingerprint
         #   @return [::String]
@@ -22409,6 +22777,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] firewall_policys
         #   @return [::Array<::Google::Cloud::Compute::V1::RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy>]
         #     Effective firewalls from firewall policy.
@@ -22419,6 +22788,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] display_name
         #   @return [::String]
@@ -22439,6 +22809,7 @@ module Google
 
           # [Output Only] The type of the firewall policy. Can be one of HIERARCHY, NETWORK, NETWORK_REGIONAL.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -22451,6 +22822,7 @@ module Google
             UNSPECIFIED = 526786327
           end
         end
+
 
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -22472,6 +22844,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] bindings
         #   @return [::Array<::Google::Cloud::Compute::V1::Binding>]
         #     Flatten Policy to create a backwacd compatible wire-format. Deprecated. Use 'policy' to specify bindings.
@@ -22486,6 +22859,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::String>]
         #     New set of SslCertificate resources to associate with this TargetHttpsProxy resource.
@@ -22493,6 +22867,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::Compute::V1::UrlMap]
@@ -22839,6 +23214,7 @@ module Google
 
           # [Output Only] The status of the reservation.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -22875,6 +23251,7 @@ module Google
 
           # Specifies the type of reservation from which this instance can consume resources: ANY_RESERVATION (default), SPECIFIC_RESERVATION, or NO_RESERVATION. See Consuming reserved instances for examples.
           module ConsumeReservationType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CONSUME_RESERVATION_TYPE = 0
 
@@ -22927,6 +23304,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
@@ -22950,6 +23328,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] specific_sku_count
         #   @return [::Integer]
         #     Number of allocated resources can be resized with minimum = 1 and maximum = 1000.
@@ -22957,6 +23336,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] reservations
         #   @return [::Array<::Google::Cloud::Compute::V1::Reservation>]
@@ -23109,6 +23489,7 @@ module Google
 
           # Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -23124,6 +23505,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] group
         #   @return [::String]
         #     A URI referencing one of the instance groups or network endpoint groups listed in the backend service.
@@ -23131,6 +23513,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] resource_policies
         #   @return [::Array<::Google::Cloud::Compute::V1::ResourcePolicy>]
@@ -23185,6 +23568,7 @@ module Google
 
           # [Output Only] The status of resource policy creation.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -23274,6 +23658,7 @@ module Google
 
           # Specifies network collocation
           module Collocation
+
             # A value indicating that the enum field is not set.
             UNDEFINED_COLLOCATION = 0
 
@@ -23328,6 +23713,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] etag
         #   @return [::String]
         # @!attribute [rw] id
@@ -23361,6 +23747,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] last_run_start_time
         #   @return [::String]
@@ -23402,6 +23789,7 @@ module Google
 
           # Specifies the behavior to apply to scheduled snapshots when the source disk is deleted.
           module OnSourceDiskDelete
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ON_SOURCE_DISK_DELETE = 0
 
@@ -23461,6 +23849,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] day
         #   @return [::String]
         #     Defines a schedule that runs on specific days of the week. Specify one or more days. The following options are available: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY.
@@ -23477,6 +23866,7 @@ module Google
 
           # Defines a schedule that runs on specific days of the week. Specify one or more days. The following options are available: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY.
           module Day
+
             # A value indicating that the enum field is not set.
             UNDEFINED_DAY = 0
 
@@ -23597,6 +23987,7 @@ module Google
 
           # [Output only] The status of the route.
           module RouteStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ROUTE_STATUS = 0
 
@@ -23615,6 +24006,7 @@ module Google
 
           # [Output Only] The type of this route, which can be one of the following values: - 'TRANSIT' for a transit route that this router learned from another Cloud Router and will readvertise to one of its BGP peers - 'SUBNET' for a route from a subnet of the VPC - 'BGP' for a route learned from a BGP peer of this router - 'STATIC' for a static route
           module RouteType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ROUTE_TYPE = 0
 
@@ -23627,6 +24019,7 @@ module Google
             TRANSIT = 187793843
           end
         end
+
 
         # @!attribute [rw] as_lists
         #   @return [::Array<::Integer>]
@@ -23641,6 +24034,7 @@ module Google
 
           # [Output Only] The type of the AS Path, which can be one of the following values: - 'AS_SET': unordered set of autonomous systems that the route in has traversed - 'AS_SEQUENCE': ordered set of autonomous systems that the route has traversed - 'AS_CONFED_SEQUENCE': ordered set of Member Autonomous Systems in the local confederation that the route has traversed - 'AS_CONFED_SET': unordered set of Member Autonomous Systems in the local confederation that the route has traversed
           module PathSegmentType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PATH_SEGMENT_TYPE = 0
 
@@ -23774,6 +24168,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] advertise_mode
         #   @return [::String]
         #     User-specified flag to indicate which mode to use for advertisement. The options are DEFAULT or CUSTOM.
@@ -23797,6 +24192,7 @@ module Google
 
           # User-specified flag to indicate which mode to use for advertisement. The options are DEFAULT or CUSTOM.
           module AdvertiseMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ADVERTISE_MODE = 0
 
@@ -23805,7 +24201,9 @@ module Google
             DEFAULT = 115302945
           end
 
+
           module AdvertisedGroups
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ADVERTISED_GROUPS = 0
 
@@ -23813,6 +24211,7 @@ module Google
             ALL_SUBNETS = 3622872
           end
         end
+
 
         # @!attribute [rw] advertise_mode
         #   @return [::String]
@@ -23875,6 +24274,7 @@ module Google
 
           # User-specified flag to indicate which mode to use for advertisement.
           module AdvertiseMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ADVERTISE_MODE = 0
 
@@ -23883,7 +24283,9 @@ module Google
             DEFAULT = 115302945
           end
 
+
           module AdvertisedGroups
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ADVERTISED_GROUPS = 0
 
@@ -23893,6 +24295,7 @@ module Google
 
           # The status of the BGP peer connection. If set to FALSE, any active session with the peer is terminated and all associated routing information is removed. If set to TRUE, the peer connection can be established with routing information. The default is TRUE.
           module Enable
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ENABLE = 0
 
@@ -23903,6 +24306,7 @@ module Google
 
           # [Output Only] The resource that configures and manages this BGP peer. - MANAGED_BY_USER is the default value and can be managed by you or other users - MANAGED_BY_ATTACHMENT is a BGP peer that is configured and managed by Cloud Interconnect, specifically by an InterconnectAttachment of type PARTNER. Google automatically creates, updates, and deletes this type of BGP peer when the PARTNER InterconnectAttachment is created, updated, or deleted.
           module ManagementType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MANAGEMENT_TYPE = 0
 
@@ -23913,6 +24317,7 @@ module Google
             MANAGED_BY_USER = 317294067
           end
         end
+
 
         # @!attribute [rw] min_receive_interval
         #   @return [::Integer]
@@ -23933,6 +24338,7 @@ module Google
 
           # The BFD session initialization mode for this BGP peer. If set to ACTIVE, the Cloud Router will initiate the BFD session for this BGP peer. If set to PASSIVE, the Cloud Router will wait for the peer router to initiate the BFD session for this BGP peer. If set to DISABLED, BFD is disabled for this BGP peer. The default is DISABLED.
           module SessionInitializationMode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_SESSION_INITIALIZATION_MODE = 0
 
@@ -23943,6 +24349,7 @@ module Google
             PASSIVE = 462813959
           end
         end
+
 
         # @!attribute [rw] ip_range
         #   @return [::String]
@@ -23975,6 +24382,7 @@ module Google
 
           # [Output Only] The resource that configures and manages this interface. - MANAGED_BY_USER is the default value and can be managed directly by users. - MANAGED_BY_ATTACHMENT is an interface that is configured and managed by Cloud Interconnect, specifically, by an InterconnectAttachment of type PARTNER. Google automatically creates, updates, and deletes this type of interface when the PARTNER InterconnectAttachment is created, updated, or deleted.
           module ManagementType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MANAGEMENT_TYPE = 0
 
@@ -24009,6 +24417,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] key
         #   @return [::String]
@@ -24084,6 +24493,7 @@ module Google
 
 
           module EndpointTypes
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ENDPOINT_TYPES = 0
 
@@ -24096,6 +24506,7 @@ module Google
 
           # Specify the NatIpAllocateOption, which can take one of the following values: - MANUAL_ONLY: Uses only Nat IP addresses provided by customers. When there are not enough specified Nat IPs, the Nat service fails for new VMs. - AUTO_ONLY: Nat IPs are allocated by Google Cloud Platform; customers can't specify any Nat IPs. When choosing AUTO_ONLY, then nat_ip should be empty.
           module NatIpAllocateOption
+
             # A value indicating that the enum field is not set.
             UNDEFINED_NAT_IP_ALLOCATE_OPTION = 0
 
@@ -24108,6 +24519,7 @@ module Google
 
           # Specify the Nat option, which can take one of the following values: - ALL_SUBNETWORKS_ALL_IP_RANGES: All of the IP ranges in every Subnetwork are allowed to Nat. - ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES: All of the primary IP ranges in every Subnetwork are allowed to Nat. - LIST_OF_SUBNETWORKS: A list of Subnetworks are allowed to Nat (specified in the field subnetwork below) The default is SUBNETWORK_IP_RANGE_TO_NAT_OPTION_UNSPECIFIED. Note that if this field contains ALL_SUBNETWORKS_ALL_IP_RANGES or ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES, then there should not be any other Router.Nat section in any Router for this network in this region.
           module SourceSubnetworkIpRangesToNat
+
             # A value indicating that the enum field is not set.
             UNDEFINED_SOURCE_SUBNETWORK_IP_RANGES_TO_NAT = 0
 
@@ -24136,6 +24548,7 @@ module Google
 
           # Specify the desired filtering of logs on this NAT. If unspecified, logs are exported for all connections handled by this NAT. This option can take one of the following values: - ERRORS_ONLY: Export logs only for connection failures. - TRANSLATIONS_ONLY: Export logs only for successful connections. - ALL: Export logs for all connections, successful and unsuccessful.
           module Filter
+
             # A value indicating that the enum field is not set.
             UNDEFINED_FILTER = 0
 
@@ -24149,6 +24562,7 @@ module Google
             TRANSLATIONS_ONLY = 357212649
           end
         end
+
 
         # @!attribute [rw] action
         #   @return [::Google::Cloud::Compute::V1::RouterNatRuleAction]
@@ -24166,6 +24580,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] source_nat_active_ips
         #   @return [::Array<::String>]
@@ -24195,6 +24610,7 @@ module Google
 
 
           module SourceIpRangesToNat
+
             # A value indicating that the enum field is not set.
             UNDEFINED_SOURCE_IP_RANGES_TO_NAT = 0
 
@@ -24208,6 +24624,7 @@ module Google
             PRIMARY_IP_RANGE = 297109954
           end
         end
+
 
         # @!attribute [rw] best_routes
         #   @return [::Array<::Google::Cloud::Compute::V1::Route>]
@@ -24226,6 +24643,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] advertised_routes
         #   @return [::Array<::Google::Cloud::Compute::V1::Route>]
@@ -24285,6 +24703,7 @@ module Google
 
           # Status of the BGP peer: \\{UP, DOWN}
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -24297,6 +24716,7 @@ module Google
 
           # Indicates why particular status was returned.
           module StatusReason
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS_REASON = 0
 
@@ -24361,6 +24781,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] kind
         #   @return [::String]
         #     Type of resource.
@@ -24371,6 +24792,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::Compute::V1::Router]
         #     Preview of given router.
@@ -24378,6 +24800,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] routers
         #   @return [::Array<::Google::Cloud::Compute::V1::Router>]
@@ -24419,6 +24842,7 @@ module Google
 
           # This is deprecated and has no effect. Do not use.
           module Action
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ACTION = 0
 
@@ -24441,6 +24865,7 @@ module Google
             NO_ACTION = 260643444
           end
         end
+
 
         # @!attribute [rw] port
         #   @return [::Integer]
@@ -24468,6 +24893,7 @@ module Google
 
           # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
@@ -24483,6 +24909,7 @@ module Google
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
           module ProxyHeader
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
@@ -24551,6 +24978,7 @@ module Google
 
           # Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME.
           module Interface
+
             # A value indicating that the enum field is not set.
             UNDEFINED_INTERFACE = 0
 
@@ -24561,6 +24989,7 @@ module Google
 
           # The mode in which this disk is attached to the source instance, either READ_WRITE or READ_ONLY.
           module Mode
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MODE = 0
 
@@ -24573,6 +25002,7 @@ module Google
 
           # [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
           module StorageBytesStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STORAGE_BYTES_STATUS = 0
 
@@ -24583,6 +25013,7 @@ module Google
 
           # Specifies the type of the attached disk, either SCRATCH or PERSISTENT.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -24616,6 +25047,7 @@ module Google
 
           # [Output Only] The architecture of the attached disk.
           module Architecture
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ARCHITECTURE = 0
 
@@ -24631,6 +25063,7 @@ module Google
 
           # [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
           module StorageBytesStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STORAGE_BYTES_STATUS = 0
 
@@ -24639,6 +25072,7 @@ module Google
             UP_TO_DATE = 101306702
           end
         end
+
 
         # @!attribute [rw] last_start_time
         #   @return [::String]
@@ -24656,6 +25090,7 @@ module Google
 
           # [Output Only] The current state of a scaling schedule.
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -24707,6 +25142,7 @@ module Google
 
           # Specifies the termination action for the instance.
           module InstanceTerminationAction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_INSTANCE_TERMINATION_ACTION = 0
 
@@ -24722,6 +25158,7 @@ module Google
 
           # Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Set VM host maintenance policy.
           module OnHostMaintenance
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ON_HOST_MAINTENANCE = 0
 
@@ -24734,6 +25171,7 @@ module Google
 
           # Specifies the provisioning model of the instance.
           module ProvisioningModel
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROVISIONING_MODEL = 0
 
@@ -24762,6 +25200,7 @@ module Google
 
           # Defines the operation of node selection. Valid operators are IN for affinity and NOT_IN for anti-affinity.
           module Operator
+
             # A value indicating that the enum field is not set.
             UNDEFINED_OPERATOR = 0
 
@@ -24774,6 +25213,7 @@ module Google
             OPERATOR_UNSPECIFIED = 128892924
           end
         end
+
 
         # @!attribute [rw] disk_gb
         #   @return [::Integer]
@@ -24794,6 +25234,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] etag
         #   @return [::String]
@@ -24832,12 +25273,14 @@ module Google
           end
         end
 
+
         # @!attribute [rw] preconfigured_expression_sets
         #   @return [::Google::Cloud::Compute::V1::SecurityPoliciesWafConfig]
         class SecurityPoliciesListPreconfiguredExpressionSetsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] security_policies
         #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicy>]
@@ -24849,6 +25292,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] waf_rules
         #   @return [::Google::Cloud::Compute::V1::PreconfiguredWafSet]
@@ -24903,6 +25347,7 @@ module Google
 
           # The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. This field can be set only at resource creation time.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -24937,6 +25382,7 @@ module Google
 
           # Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules.
           module RuleVisibility
+
             # A value indicating that the enum field is not set.
             UNDEFINED_RULE_VISIBILITY = 0
 
@@ -24945,6 +25391,7 @@ module Google
             STANDARD = 484642493
           end
         end
+
 
         # @!attribute [rw] json_custom_config
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyAdvancedOptionsConfigJsonCustomConfig]
@@ -24961,6 +25408,7 @@ module Google
 
 
           module JsonParsing
+
             # A value indicating that the enum field is not set.
             UNDEFINED_JSON_PARSING = 0
 
@@ -24969,7 +25417,9 @@ module Google
             STANDARD = 484642493
           end
 
+
           module LogLevel
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LOG_LEVEL = 0
 
@@ -24979,6 +25429,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] content_types
         #   @return [::Array<::String>]
         #     A list of custom Content-Type header values to apply the JSON parsing. As per RFC 1341, a Content-Type header value has the following format: Content-Type := type "/" subtype *[";" parameter] When configuring a custom Content-Type header value, only the type/subtype needs to be specified, and the parameters should be excluded.
@@ -24986,6 +25437,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] ddos_protection
         #   @return [::String]
@@ -24996,6 +25448,7 @@ module Google
 
 
           module DdosProtection
+
             # A value indicating that the enum field is not set.
             UNDEFINED_DDOS_PROTECTION = 0
 
@@ -25004,6 +25457,7 @@ module Google
             STANDARD = 484642493
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -25025,6 +25479,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] redirect_site_key
         #   @return [::String]
         #     An optional field to supply a reCAPTCHA site key to be used for all the rules using the redirect action with the type of GOOGLE_RECAPTCHA under the security policy. The specified site key needs to be created from the reCAPTCHA API. The user is responsible for the validity of the specified site key. If not specified, a Google-managed site key is used.
@@ -25032,6 +25487,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] security_policy
         #   @return [::String]
@@ -25073,6 +25529,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] request_headers_to_adds
         #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRuleHttpHeaderActionHttpHeaderOption>]
         #     The list of request headers to add or overwrite if they're already present.
@@ -25080,6 +25537,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] header_name
         #   @return [::String]
@@ -25109,6 +25567,7 @@ module Google
 
           # Preconfigured versioned expression. If this field is specified, config must also be specified. Available preconfigured expressions along with their requirements are: SRC_IPS_V1 - must specify the corresponding src_ip_range field in config.
           module VersionedExpr
+
             # A value indicating that the enum field is not set.
             UNDEFINED_VERSIONED_EXPR = 0
 
@@ -25117,6 +25576,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] src_ip_ranges
         #   @return [::Array<::String>]
         #     CIDR IP address range. Maximum number of src_ip_ranges allowed is 10.
@@ -25124,6 +25584,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] ban_duration_sec
         #   @return [::Integer]
@@ -25156,6 +25617,7 @@ module Google
 
           # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKey" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates.
           module EnforceOnKey
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ENFORCE_ON_KEY = 0
 
@@ -25177,6 +25639,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] count
         #   @return [::Integer]
         #     Number of HTTP(S) requests for calculating the threshold.
@@ -25187,6 +25650,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] target
         #   @return [::String]
@@ -25201,6 +25665,7 @@ module Google
 
           # Type of the redirect action.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -25264,6 +25729,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] type
         #   @return [::String]
         #     Check the Type enum for the list of possible values.
@@ -25273,6 +25739,7 @@ module Google
 
 
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -25360,6 +25827,7 @@ module Google
 
           # The connection preference of service attachment. The value can be set to ACCEPT_AUTOMATIC. An ACCEPT_AUTOMATIC service attachment is one that always accepts the connection from consumer forwarding rules.
           module ConnectionPreference
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CONNECTION_PREFERENCE = 0
 
@@ -25424,6 +25892,7 @@ module Google
 
           # The status of a connected endpoint to this service attachment.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -25446,6 +25915,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] connection_limit
         #   @return [::Integer]
         #     The value of the limit to set.
@@ -25459,6 +25929,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -25482,6 +25953,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] service_attachments
         #   @return [::Array<::Google::Cloud::Compute::V1::ServiceAttachment>]
@@ -26984,6 +27456,7 @@ module Google
 
           # Type of sharing for this shared-reservation
           module ShareType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_SHARE_TYPE = 0
 
@@ -27195,6 +27668,7 @@ module Google
 
           # [Output Only] The architecture of the snapshot. Valid values are ARM64 or X86_64.
           module Architecture
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ARCHITECTURE = 0
 
@@ -27210,6 +27684,7 @@ module Google
 
           # Indicates the type of the snapshot.
           module SnapshotType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_SNAPSHOT_TYPE = 0
 
@@ -27220,6 +27695,7 @@ module Google
 
           # [Output Only] The status of the snapshot. This can be CREATING, DELETING, FAILED, READY, or UPLOADING.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -27241,6 +27717,7 @@ module Google
 
           # [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
           module StorageBytesStatus
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STORAGE_BYTES_STATUS = 0
 
@@ -27273,6 +27750,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] disk_encryption_key
         #   @return [::Google::Cloud::Compute::V1::CustomerEncryptionKey]
@@ -27353,6 +27831,7 @@ module Google
 
           # KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
           module KeyRevocationActionType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_KEY_REVOCATION_ACTION_TYPE = 0
 
@@ -27417,6 +27896,7 @@ module Google
 
           # (Optional) Specifies the type of SSL certificate, either "SELF_MANAGED" or "MANAGED". If not specified, the certificate is self-managed and the fields certificate and private_key are used.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -27429,6 +27909,7 @@ module Google
             TYPE_UNSPECIFIED = 437714322
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -27515,6 +27996,7 @@ module Google
 
           # [Output only] Status of the managed certificate resource.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -27549,6 +28031,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::Google::Cloud::Compute::V1::SslCertificate>]
         #     List of SslCertificates contained in this scope.
@@ -27559,6 +28042,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] etag
         #   @return [::String]
@@ -27597,6 +28081,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -27620,12 +28105,14 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] features
         #   @return [::Array<::String>]
         class SslPoliciesListAvailableFeaturesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] ssl_policies
         #   @return [::Array<::Google::Cloud::Compute::V1::SslPolicy>]
@@ -27686,6 +28173,7 @@ module Google
 
           # The minimum version of SSL protocol that can be used by the clients to establish a connection with the load balancer. This can be one of TLS_1_0, TLS_1_1, TLS_1_2.
           module MinTlsVersion
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MIN_TLS_VERSION = 0
 
@@ -27701,6 +28189,7 @@ module Google
 
           # Profile specifies the set of SSL features that can be used by the load balancer when negotiating SSL with clients. This can be one of COMPATIBLE, MODERN, RESTRICTED, or CUSTOM. If using CUSTOM, the set of SSL features to enable must be specified in the customFeatures field.
           module Profile
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROFILE = 0
 
@@ -27717,6 +28206,7 @@ module Google
             RESTRICTED = 261551195
           end
         end
+
 
         # @!attribute [rw] ssl_policy
         #   @return [::String]
@@ -27765,6 +28255,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] preserved_state
         #   @return [::Google::Cloud::Compute::V1::StatefulPolicyPreservedState]
         class StatefulPolicy
@@ -27790,6 +28281,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] auto_delete
         #   @return [::String]
         #     These stateful disks will never be deleted during autohealing, update or VM instance recreate operations. This flag is used to configure if the disk should be deleted after it is no longer used by the group, e.g. when the given instance or the whole group is deleted. Note: disks attached in READ_ONLY mode cannot be auto-deleted.
@@ -27800,6 +28292,7 @@ module Google
 
           # These stateful disks will never be deleted during autohealing, update or VM instance recreate operations. This flag is used to configure if the disk should be deleted after it is no longer used by the group, e.g. when the given instance or the whole group is deleted. Note: disks attached in READ_ONLY mode cannot be auto-deleted.
           module AutoDelete
+
             # A value indicating that the enum field is not set.
             UNDEFINED_AUTO_DELETE = 0
 
@@ -27915,6 +28408,7 @@ module Google
 
           # The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack.
           module Ipv6AccessType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_IPV6_ACCESS_TYPE = 0
 
@@ -27929,6 +28423,7 @@ module Google
 
           # This field is for internal use. This field can be both set at resource creation time and updated using patch.
           module PrivateIpv6GoogleAccess
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
 
@@ -27944,6 +28439,7 @@ module Google
 
           # The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
           module Purpose
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
 
@@ -27965,6 +28461,7 @@ module Google
 
           # The role of subnetwork. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
           module Role
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ROLE = 0
 
@@ -27977,6 +28474,7 @@ module Google
 
           # The stack type for the subnet. If set to IPV4_ONLY, new VMs in the subnet are assigned IPv4 addresses only. If set to IPV4_IPV6, new VMs in the subnet can be assigned both IPv4 and IPv6 addresses. If not specified, IPV4_ONLY is used. This field can be both set at resource creation time and updated using patch.
           module StackType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STACK_TYPE = 0
 
@@ -27991,6 +28489,7 @@ module Google
 
           # [Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -28001,6 +28500,7 @@ module Google
             READY = 77848963
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -28088,6 +28588,7 @@ module Google
 
           # Can only be specified if VPC flow logging for this subnetwork is enabled. Toggles the aggregation interval for collecting flow logs. Increasing the interval time will reduce the amount of generated flow logs for long lasting connections. Default is an interval of 5 seconds per connection.
           module AggregationInterval
+
             # A value indicating that the enum field is not set.
             UNDEFINED_AGGREGATION_INTERVAL = 0
 
@@ -28106,6 +28607,7 @@ module Google
 
           # Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is EXCLUDE_ALL_METADATA.
           module Metadata
+
             # A value indicating that the enum field is not set.
             UNDEFINED_METADATA = 0
 
@@ -28129,6 +28631,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
         #     The IP (in CIDR format or netmask) of internal addresses that are legal on this Subnetwork. This range should be disjoint from other subnetworks within this network. This range can only be larger than (i.e. a superset of) the range previously defined before the update.
@@ -28136,6 +28639,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] subnetworks
         #   @return [::Array<::Google::Cloud::Compute::V1::Subnetwork>]
@@ -28147,6 +28651,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] private_ip_google_access
         #   @return [::Boolean]
@@ -28165,6 +28670,7 @@ module Google
 
 
           module Policy
+
             # A value indicating that the enum field is not set.
             UNDEFINED_POLICY = 0
 
@@ -28212,6 +28718,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] port
         #   @return [::Integer]
         #     The TCP port number to which the health check prober sends packets. The default value is 80. Valid values are 1 through 65535.
@@ -28238,6 +28745,7 @@ module Google
 
           # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
@@ -28253,6 +28761,7 @@ module Google
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
           module ProxyHeader
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
@@ -28310,6 +28819,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -28332,6 +28842,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] target_http_proxies
         #   @return [::Array<::Google::Cloud::Compute::V1::TargetHttpProxy>]
@@ -28379,6 +28890,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -28436,6 +28948,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] target_https_proxies
         #   @return [::Array<::Google::Cloud::Compute::V1::TargetHttpsProxy>]
         #     A list of TargetHttpsProxies contained in this scope.
@@ -28447,6 +28960,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] certificate_map
         #   @return [::String]
         #     URL of the Certificate Map to associate with this TargetHttpsProxy.
@@ -28454,6 +28968,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] quic_override
         #   @return [::String]
@@ -28465,6 +28980,7 @@ module Google
 
           # QUIC policy for the TargetHttpsProxy resource.
           module QuicOverride
+
             # A value indicating that the enum field is not set.
             UNDEFINED_QUIC_OVERRIDE = 0
 
@@ -28478,6 +28994,7 @@ module Google
             NONE = 2402104
           end
         end
+
 
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::String>]
@@ -28543,6 +29060,7 @@ module Google
 
           # Specifies the QUIC override policy for this TargetHttpsProxy resource. This setting determines whether the load balancer attempts to negotiate QUIC with clients. You can specify NONE, ENABLE, or DISABLE. - When quic-override is set to NONE, Google manages whether QUIC is used. - When quic-override is set to ENABLE, the load balancer uses QUIC when possible. - When quic-override is set to DISABLE, the load balancer doesn't use QUIC. - If the quic-override flag is not specified, NONE is implied.
           module QuicOverride
+
             # A value indicating that the enum field is not set.
             UNDEFINED_QUIC_OVERRIDE = 0
 
@@ -28556,6 +29074,7 @@ module Google
             NONE = 2402104
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -28654,6 +29173,7 @@ module Google
 
           # Must have a value of NO_NAT. Protocol forwarding delivers packets while preserving the destination IP address of the forwarding rule referencing the target instance.
           module NatPolicy
+
             # A value indicating that the enum field is not set.
             UNDEFINED_NAT_POLICY = 0
 
@@ -28661,6 +29181,7 @@ module Google
             NO_NAT = 161455491
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -28721,6 +29242,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] target_instances
         #   @return [::Array<::Google::Cloud::Compute::V1::TargetInstance>]
         #     A list of target instances contained in this scope.
@@ -28776,6 +29298,7 @@ module Google
 
           # Session affinity option, must be one of the following values: NONE: Connections from the same client IP may go to any instance in the pool. CLIENT_IP: Connections from the same client IP will go to the same instance in the pool while that instance remains healthy. CLIENT_IP_PROTO: Connections from the same client IP with the same IP protocol will go to the same instance in the pool while that instance remains healthy.
           module SessionAffinity
+
             # A value indicating that the enum field is not set.
             UNDEFINED_SESSION_AFFINITY = 0
 
@@ -28804,6 +29327,7 @@ module Google
             NONE = 2402104
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -28840,6 +29364,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] health_status
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthStatus>]
         # @!attribute [rw] kind
@@ -28874,6 +29399,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] health_checks
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthCheckReference>]
         #     The HttpHealthCheck to add to the target pool.
@@ -28881,6 +29407,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceReference>]
@@ -28890,6 +29417,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] health_checks
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthCheckReference>]
         #     Health check URL to be removed. This can be a full or valid partial URL. For example, the following are valid URLs: - https://www.googleapis.com/compute/beta/projects/project /global/httpHealthChecks/health-check - projects/project/global/httpHealthChecks/health-check - global/httpHealthChecks/health-check
@@ -28898,6 +29426,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceReference>]
         #     URLs of the instances to be removed from target pool.
@@ -28905,6 +29434,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] target_pools
         #   @return [::Array<::Google::Cloud::Compute::V1::TargetPool>]
@@ -28917,12 +29447,14 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] target
         #   @return [::String]
         class TargetReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] service
         #   @return [::String]
@@ -28932,6 +29464,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] certificate_map
         #   @return [::String]
         #     URL of the Certificate Map to associate with this TargetSslProxy.
@@ -28939,6 +29472,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] proxy_header
         #   @return [::String]
@@ -28950,6 +29484,7 @@ module Google
 
           # The new type of proxy header to append before sending data to the backend. NONE or PROXY_V1 are allowed.
           module ProxyHeader
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
@@ -28958,6 +29493,7 @@ module Google
             PROXY_V1 = 334352940
           end
         end
+
 
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::String>]
@@ -29008,6 +29544,7 @@ module Google
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
           module ProxyHeader
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
@@ -29041,6 +29578,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] target_tcp_proxies
         #   @return [::Array<::Google::Cloud::Compute::V1::TargetTcpProxy>]
         #     A list of TargetTcpProxies contained in this scope.
@@ -29052,6 +29590,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] service
         #   @return [::String]
         #     The URL of the new BackendService resource for the targetTcpProxy.
@@ -29059,6 +29598,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] proxy_header
         #   @return [::String]
@@ -29070,6 +29610,7 @@ module Google
 
           # The new type of proxy header to append before sending data to the backend. NONE or PROXY_V1 are allowed.
           module ProxyHeader
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
@@ -29117,6 +29658,7 @@ module Google
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
           module ProxyHeader
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
@@ -29125,6 +29667,7 @@ module Google
             PROXY_V1 = 334352940
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -29226,6 +29769,7 @@ module Google
 
           # [Output Only] The status of the VPN gateway, which can be one of the following: CREATING, READY, FAILED, or DELETING.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -29238,6 +29782,7 @@ module Google
             READY = 77848963
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -29298,6 +29843,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] target_vpn_gateways
         #   @return [::Array<::Google::Cloud::Compute::V1::TargetVpnGateway>]
         #     [Output Only] A list of target VPN gateways contained in this scope.
@@ -29308,6 +29854,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] actual_output_url
         #   @return [::String]
@@ -29725,6 +30272,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] permissions
         #   @return [::Array<::String>]
         #     The set of permissions to check for the 'resource'. Permissions with wildcards (such as '*' or 'storage.*') are not allowed.
@@ -29733,6 +30281,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] permissions
         #   @return [::Array<::String>]
         #     A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
@@ -29740,6 +30289,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] high
         #   @return [::Integer]
@@ -29923,6 +30473,7 @@ module Google
           # REFRESH
           # RESTART
           module MinimalAction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MINIMAL_ACTION = 0
           end
@@ -29934,6 +30485,7 @@ module Google
           # REFRESH
           # RESTART
           module MostDisruptiveAllowedAction
+
             # A value indicating that the enum field is not set.
             UNDEFINED_MOST_DISRUPTIVE_ALLOWED_ACTION = 0
           end
@@ -30294,6 +30846,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] url_map
         #   @return [::String]
         class UrlMapReference
@@ -30356,6 +30909,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -30391,6 +30945,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] url_maps
         #   @return [::Array<::Google::Cloud::Compute::V1::UrlMap>]
         #     A list of UrlMaps contained in this scope.
@@ -30401,6 +30956,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] load_balancing_schemes
         #   @return [::Array<::String>]
@@ -30415,6 +30971,7 @@ module Google
 
 
           module LoadBalancingSchemes
+
             # A value indicating that the enum field is not set.
             UNDEFINED_LOAD_BALANCING_SCHEMES = 0
 
@@ -30428,6 +30985,7 @@ module Google
             LOAD_BALANCING_SCHEME_UNSPECIFIED = 526507452
           end
         end
+
 
         # @!attribute [rw] result
         #   @return [::Google::Cloud::Compute::V1::UrlMapValidationResult]
@@ -30489,6 +31047,7 @@ module Google
 
           # The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack.
           module Ipv6AccessType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_IPV6_ACCESS_TYPE = 0
 
@@ -30501,6 +31060,7 @@ module Google
 
           # The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
           module Purpose
+
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
 
@@ -30522,6 +31082,7 @@ module Google
 
           # The role of subnetwork. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
           module Role
+
             # A value indicating that the enum field is not set.
             UNDEFINED_ROLE = 0
 
@@ -30534,6 +31095,7 @@ module Google
 
           # The stack type for the subnet. If set to IPV4_ONLY, new VMs in the subnet are assigned IPv4 addresses only. If set to IPV4_IPV6, new VMs in the subnet can be assigned both IPv4 and IPv6 addresses. If not specified, IPV4_ONLY is used. This field can be both set at resource creation time and updated using patch.
           module StackType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STACK_TYPE = 0
 
@@ -30556,6 +31118,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -30761,6 +31324,7 @@ module Google
 
           # The stack type for this VPN gateway to identify the IP protocols that are enabled. Possible values are: IPV4_ONLY, IPV4_IPV6. If not specified, IPV4_ONLY will be used.
           module StackType
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STACK_TYPE = 0
 
@@ -30771,6 +31335,7 @@ module Google
             IPV4_ONLY = 22373798
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -30831,6 +31396,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] vpn_connections
         #   @return [::Array<::Google::Cloud::Compute::V1::VpnGatewayStatusVpnConnection>]
         #     List of VPN connection for this VpnGateway.
@@ -30854,6 +31420,7 @@ module Google
 
           # Indicates the high availability requirement state for the VPN connection. Valid values are CONNECTION_REDUNDANCY_MET, CONNECTION_REDUNDANCY_NOT_MET.
           module State
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
@@ -30866,6 +31433,7 @@ module Google
 
           # Indicates the reason why the VPN connection does not meet the high availability redundancy criteria/requirement. Valid values is INCOMPLETE_TUNNELS_COVERAGE.
           module UnsatisfiedReason
+
             # A value indicating that the enum field is not set.
             UNDEFINED_UNSATISFIED_REASON = 0
 
@@ -30921,12 +31489,14 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] result
         #   @return [::Google::Cloud::Compute::V1::VpnGatewayStatus]
         class VpnGatewaysGetStatusResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] vpn_gateways
         #   @return [::Array<::Google::Cloud::Compute::V1::VpnGateway>]
@@ -31013,6 +31583,7 @@ module Google
 
           # [Output Only] The status of the VPN tunnel, which can be one of the following: - PROVISIONING: Resource is being allocated for the VPN tunnel. - WAITING_FOR_FULL_CONFIG: Waiting to receive all VPN-related configs from the user. Network, TargetVpnGateway, VpnTunnel, ForwardingRule, and Route resources are needed to setup the VPN tunnel. - FIRST_HANDSHAKE: Successful first handshake with the peer VPN. - ESTABLISHED: Secure session is successfully established with the peer VPN. - NETWORK_ERROR: Deprecated, replaced by NO_INCOMING_PACKETS - AUTHORIZATION_ERROR: Auth error (for example, bad shared secret). - NEGOTIATION_FAILURE: Handshake failed. - DEPROVISIONING: Resources are being deallocated for the VPN tunnel. - FAILED: Tunnel creation has failed and the tunnel is not ready to be used. - NO_INCOMING_PACKETS: No incoming packets from peer. - REJECTED: Tunnel configuration was rejected, can be result of being denied access. - ALLOCATING_RESOURCES: Cloud VPN is in the process of allocating all required resources. - STOPPED: Tunnel is stopped due to its Forwarding Rules being deleted for Classic VPN tunnels or the project is in frozen state. - PEER_IDENTITY_MISMATCH: Peer identity does not match peer IP, probably behind NAT. - TS_NARROWING_NOT_ALLOWED: Traffic selector narrowing not allowed for an HA-VPN tunnel.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -31056,6 +31627,7 @@ module Google
             WAITING_FOR_FULL_CONFIG = 41640522
           end
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -31116,6 +31688,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] vpn_tunnels
         #   @return [::Array<::Google::Cloud::Compute::V1::VpnTunnel>]
         #     A list of VPN tunnels contained in this scope.
@@ -31126,6 +31699,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] aliases
         #   @return [::Array<::String>]
@@ -31140,6 +31714,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -31208,6 +31783,7 @@ module Google
 
           # [Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.
           module Code
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CODE = 0
 
@@ -31294,6 +31870,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] code
         #   @return [::String]
         #     [Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.
@@ -31310,6 +31887,7 @@ module Google
 
           # [Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.
           module Code
+
             # A value indicating that the enum field is not set.
             UNDEFINED_CODE = 0
 
@@ -31411,6 +31989,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -31448,6 +32027,7 @@ module Google
 
           # The type of the service resource.
           module Type
+
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
@@ -31498,6 +32078,7 @@ module Google
 
           # [Output Only] Status of the zone, either UP or DOWN.
           module Status
+
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
@@ -31531,6 +32112,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
         #     The fingerprint of the previous set of labels for this resource, used to detect conflicts. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels. Make a get() request to the resource to get the latest fingerprint.
@@ -31551,6 +32133,7 @@ module Google
           end
         end
 
+
         # @!attribute [rw] bindings
         #   @return [::Array<::Google::Cloud::Compute::V1::Binding>]
         #     Flatten Policy to create a backwacd compatible wire-format. Deprecated. Use 'policy' to specify bindings.
@@ -31568,3 +32151,4 @@ module Google
     end
   end
 end
+

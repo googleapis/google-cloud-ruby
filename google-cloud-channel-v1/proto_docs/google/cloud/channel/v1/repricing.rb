@@ -179,6 +179,7 @@ module Google
 
         # Specifies the different costs that the modified bill can be based on.
         module RebillingBasis
+
           # Not used.
           REBILLING_BASIS_UNSPECIFIED = 0
 
@@ -195,3 +196,4 @@ module Google
     end
   end
 end
+

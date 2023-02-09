@@ -20,8 +20,11 @@
 require "google/cloud/channel/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_repricing_config
+# Snippet for the update_channel_partner_repricing_config call in the CloudChannelService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_repricing_config.
+# It may require modification in order to execute successfully.
 #
 def update_channel_partner_repricing_config
   # Create a client object. The client can be reused for multiple calls.

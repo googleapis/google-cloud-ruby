@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "accelerator_types", "helpers.rb"
 require "google/cloud/compute/v1/accelerator_types/helpers" if ::File.file? helper_path
+

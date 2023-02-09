@@ -64,12 +64,12 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.get.timeout = 600.0
-                  default_config.rpcs.get.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                      default_config.rpcs.get.timeout = 600.0
+                      default_config.rpcs.get.retry_policy ={
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.test_iam_permissions.timeout = 600.0
+                      default_config.rpcs.test_iam_permissions.timeout = 600.0
 
                   default_config
                 end
@@ -162,9 +162,9 @@ module Google
               #     Number corresponding to the License code resource to return.
               #   @param project [::String]
               #     Project ID for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::LicenseCode]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::LicenseCode]
               #
@@ -196,8 +196,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @license_codes_stub.get request, options do |result, response|
-                  yield result, response if block_given?
+                @license_codes_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -228,9 +228,9 @@ module Google
               #     Name or id of the resource for this request.
               #   @param test_permissions_request_resource [::Google::Cloud::Compute::V1::TestPermissionsRequest, ::Hash]
               #     The body resource for this request
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
               #
@@ -262,8 +262,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @license_codes_stub.test_iam_permissions request, options do |result, response|
-                  yield result, response if block_given?
+                @license_codes_stub.test_iam_permissions request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -422,3 +422,4 @@ module Google
     end
   end
 end
+

@@ -20,8 +20,11 @@
 require "google/cloud/cloud_dms/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::CloudDMS::V1::DataMigrationService::Client#generate_ssh_script
+# Snippet for the generate_ssh_script call in the DataMigrationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::CloudDMS::V1::DataMigrationService::Client#generate_ssh_script.
+# It may require modification in order to execute successfully.
 #
 def generate_ssh_script
   # Create a client object. The client can be reused for multiple calls.
