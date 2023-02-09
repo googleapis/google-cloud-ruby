@@ -71,9 +71,9 @@ module Google
           require "google/cloud/data_catalog/lineage/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::DataCatalog::Lineage
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::DataCatalog::Lineage.const_get(package_name).const_get(:Lineage)
           service_module.const_get(:Client).new(&block)
         end
@@ -118,3 +118,4 @@ end
 
 helper_path = ::File.join __dir__, "lineage", "helpers.rb"
 require "google/cloud/data_catalog/lineage/helpers" if ::File.file? helper_path
+

@@ -183,6 +183,7 @@ module Google
 
             # Determines how often and when the job will run.
             module Type
+
               # Unspecified trigger type.
               TYPE_UNSPECIFIED = 0
 
@@ -369,7 +370,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           module Service
-            # Service used to run the job is unspecified.
+          # Service used to run the job is unspecified.
             SERVICE_UNSPECIFIED = 0
 
             # Dataproc service is used to run this job.
@@ -377,7 +378,7 @@ module Google
           end
 
           module State
-            # The job state is unknown.
+          # The job state is unknown.
             STATE_UNSPECIFIED = 0
 
             # The job is running.
@@ -403,3 +404,4 @@ module Google
     end
   end
 end
+

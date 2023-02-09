@@ -97,6 +97,7 @@ module Google
 
         # The resource types that can be returned in search results.
         module SearchResultType
+
           # Default unknown type.
           SEARCH_RESULT_TYPE_UNSPECIFIED = 0
 
@@ -113,3 +114,4 @@ module Google
     end
   end
 end
+

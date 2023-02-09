@@ -64,133 +64,133 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_dataset.timeout = 30.0
+                    default_config.rpcs.create_dataset.timeout = 30.0
 
-                default_config.rpcs.get_dataset.timeout = 30.0
-                default_config.rpcs.get_dataset.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_dataset.timeout = 30.0
+                    default_config.rpcs.get_dataset.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_datasets.timeout = 30.0
-                default_config.rpcs.list_datasets.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_datasets.timeout = 30.0
+                    default_config.rpcs.list_datasets.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.delete_dataset.timeout = 30.0
-                default_config.rpcs.delete_dataset.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.delete_dataset.timeout = 30.0
+                    default_config.rpcs.delete_dataset.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.import_data.timeout = 30.0
+                    default_config.rpcs.import_data.timeout = 30.0
 
-                default_config.rpcs.export_data.timeout = 30.0
-                default_config.rpcs.export_data.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.export_data.timeout = 30.0
+                    default_config.rpcs.export_data.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.get_data_item.timeout = 30.0
-                default_config.rpcs.get_data_item.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_data_item.timeout = 30.0
+                    default_config.rpcs.get_data_item.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_data_items.timeout = 30.0
-                default_config.rpcs.list_data_items.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_data_items.timeout = 30.0
+                    default_config.rpcs.list_data_items.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.get_annotated_dataset.timeout = 30.0
-                default_config.rpcs.get_annotated_dataset.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_annotated_dataset.timeout = 30.0
+                    default_config.rpcs.get_annotated_dataset.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_annotated_datasets.timeout = 30.0
-                default_config.rpcs.list_annotated_datasets.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_annotated_datasets.timeout = 30.0
+                    default_config.rpcs.list_annotated_datasets.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.label_image.timeout = 30.0
+                    default_config.rpcs.label_image.timeout = 30.0
 
-                default_config.rpcs.label_video.timeout = 30.0
+                    default_config.rpcs.label_video.timeout = 30.0
 
-                default_config.rpcs.label_text.timeout = 30.0
+                    default_config.rpcs.label_text.timeout = 30.0
 
-                default_config.rpcs.get_example.timeout = 30.0
-                default_config.rpcs.get_example.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_example.timeout = 30.0
+                    default_config.rpcs.get_example.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_examples.timeout = 30.0
-                default_config.rpcs.list_examples.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_examples.timeout = 30.0
+                    default_config.rpcs.list_examples.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.create_annotation_spec_set.timeout = 30.0
+                    default_config.rpcs.create_annotation_spec_set.timeout = 30.0
 
-                default_config.rpcs.get_annotation_spec_set.timeout = 30.0
-                default_config.rpcs.get_annotation_spec_set.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_annotation_spec_set.timeout = 30.0
+                    default_config.rpcs.get_annotation_spec_set.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_annotation_spec_sets.timeout = 30.0
-                default_config.rpcs.list_annotation_spec_sets.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_annotation_spec_sets.timeout = 30.0
+                    default_config.rpcs.list_annotation_spec_sets.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.delete_annotation_spec_set.timeout = 30.0
-                default_config.rpcs.delete_annotation_spec_set.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.delete_annotation_spec_set.timeout = 30.0
+                    default_config.rpcs.delete_annotation_spec_set.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.create_instruction.timeout = 30.0
+                    default_config.rpcs.create_instruction.timeout = 30.0
 
-                default_config.rpcs.get_instruction.timeout = 30.0
-                default_config.rpcs.get_instruction.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_instruction.timeout = 30.0
+                    default_config.rpcs.get_instruction.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_instructions.timeout = 30.0
-                default_config.rpcs.list_instructions.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_instructions.timeout = 30.0
+                    default_config.rpcs.list_instructions.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.delete_instruction.timeout = 30.0
-                default_config.rpcs.delete_instruction.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.delete_instruction.timeout = 30.0
+                    default_config.rpcs.delete_instruction.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.get_evaluation.timeout = 30.0
-                default_config.rpcs.get_evaluation.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_evaluation.timeout = 30.0
+                    default_config.rpcs.get_evaluation.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.search_evaluations.timeout = 30.0
-                default_config.rpcs.search_evaluations.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.search_evaluations.timeout = 30.0
+                    default_config.rpcs.search_evaluations.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.search_example_comparisons.timeout = 30.0
+                    default_config.rpcs.search_example_comparisons.timeout = 30.0
 
-                default_config.rpcs.create_evaluation_job.timeout = 30.0
+                    default_config.rpcs.create_evaluation_job.timeout = 30.0
 
-                default_config.rpcs.update_evaluation_job.timeout = 30.0
+                    default_config.rpcs.update_evaluation_job.timeout = 30.0
 
-                default_config.rpcs.get_evaluation_job.timeout = 30.0
-                default_config.rpcs.get_evaluation_job.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_evaluation_job.timeout = 30.0
+                    default_config.rpcs.get_evaluation_job.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.pause_evaluation_job.timeout = 30.0
+                    default_config.rpcs.pause_evaluation_job.timeout = 30.0
 
-                default_config.rpcs.resume_evaluation_job.timeout = 30.0
+                    default_config.rpcs.resume_evaluation_job.timeout = 30.0
 
-                default_config.rpcs.delete_evaluation_job.timeout = 30.0
-                default_config.rpcs.delete_evaluation_job.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.delete_evaluation_job.timeout = 30.0
+                    default_config.rpcs.delete_evaluation_job.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_evaluation_jobs.timeout = 30.0
-                default_config.rpcs.list_evaluation_jobs.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_evaluation_jobs.timeout = 30.0
+                    default_config.rpcs.list_evaluation_jobs.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -513,13 +513,11 @@ module Google
             #   # Call the list_datasets method.
             #   result = client.list_datasets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::Dataset.
-            #     p response
+            #     p item
             #   end
             #
             def list_datasets request, options = nil
@@ -701,14 +699,14 @@ module Google
             #   # Call the import_data method.
             #   result = client.import_data request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def import_data request, options = nil
@@ -808,14 +806,14 @@ module Google
             #   # Call the export_data method.
             #   result = client.export_data request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def export_data request, options = nil
@@ -1001,13 +999,11 @@ module Google
             #   # Call the list_data_items method.
             #   result = client.list_data_items request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::DataItem.
-            #     p response
+            #     p item
             #   end
             #
             def list_data_items request, options = nil
@@ -1192,13 +1188,11 @@ module Google
             #   # Call the list_annotated_datasets method.
             #   result = client.list_annotated_datasets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::AnnotatedDataset.
-            #     p response
+            #     p item
             #   end
             #
             def list_annotated_datasets request, options = nil
@@ -1393,14 +1387,14 @@ module Google
             #   # Call the label_image method.
             #   result = client.label_image request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def label_image request, options = nil
@@ -1508,14 +1502,14 @@ module Google
             #   # Call the label_video method.
             #   result = client.label_video request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def label_video request, options = nil
@@ -1615,14 +1609,14 @@ module Google
             #   # Call the label_text method.
             #   result = client.label_text request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def label_text request, options = nil
@@ -1813,13 +1807,11 @@ module Google
             #   # Call the list_examples method.
             #   result = client.list_examples request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::Example.
-            #     p response
+            #     p item
             #   end
             #
             def list_examples request, options = nil
@@ -2093,13 +2085,11 @@ module Google
             #   # Call the list_annotation_spec_sets method.
             #   result = client.list_annotation_spec_sets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::AnnotationSpecSet.
-            #     p response
+            #     p item
             #   end
             #
             def list_annotation_spec_sets request, options = nil
@@ -2274,14 +2264,14 @@ module Google
             #   # Call the create_instruction method.
             #   result = client.create_instruction request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_instruction request, options = nil
@@ -2465,13 +2455,11 @@ module Google
             #   # Call the list_instructions method.
             #   result = client.list_instructions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::Instruction.
-            #     p response
+            #     p item
             #   end
             #
             def list_instructions request, options = nil
@@ -2775,13 +2763,11 @@ module Google
             #   # Call the search_evaluations method.
             #   result = client.search_evaluations request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::Evaluation.
-            #     p response
+            #     p item
             #   end
             #
             def search_evaluations request, options = nil
@@ -2883,13 +2869,11 @@ module Google
             #   # Call the search_example_comparisons method.
             #   result = client.search_example_comparisons request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::SearchExampleComparisonsResponse::ExampleComparison.
-            #     p response
+            #     p item
             #   end
             #
             def search_example_comparisons request, options = nil
@@ -3533,13 +3517,11 @@ module Google
             #   # Call the list_evaluation_jobs method.
             #   result = client.list_evaluation_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::EvaluationJob.
-            #     p response
+            #     p item
             #   end
             #
             def list_evaluation_jobs request, options = nil
@@ -3675,7 +3657,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -3971,3 +3953,4 @@ module Google
     end
   end
 end
+

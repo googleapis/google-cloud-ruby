@@ -93,6 +93,7 @@ module Google
 
         # Table source type.
         module TableSourceType
+
           # Default unknown type.
           TABLE_SOURCE_TYPE_UNSPECIFIED = 0
 
@@ -109,3 +110,4 @@ module Google
     end
   end
 end
+

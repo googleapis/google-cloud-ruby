@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "autoscaling_policy_service", "helpers.rb"
 require "google/cloud/dataproc/v1/autoscaling_policy_service/helpers" if ::File.file? helper_path
+

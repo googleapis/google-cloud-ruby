@@ -38,6 +38,7 @@ module Google
 
           # The type of the BigQuery connection.
           module ConnectionType
+
             # Unspecified type.
             CONNECTION_TYPE_UNSPECIFIED = 0
 
@@ -62,6 +63,7 @@ module Google
 
           # Supported Cloud SQL database types.
           module DatabaseType
+
             # Unspecified database type.
             DATABASE_TYPE_UNSPECIFIED = 0
 
@@ -85,3 +87,4 @@ module Google
     end
   end
 end
+

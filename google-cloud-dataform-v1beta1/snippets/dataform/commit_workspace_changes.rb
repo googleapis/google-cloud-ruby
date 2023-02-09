@@ -20,8 +20,11 @@
 require "google/cloud/dataform/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataform::V1beta1::Dataform::Client#commit_workspace_changes
+# Snippet for the commit_workspace_changes call in the Dataform service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#commit_workspace_changes.
+# It may require modification in order to execute successfully.
 #
 def commit_workspace_changes
   # Create a client object. The client can be reused for multiple calls.

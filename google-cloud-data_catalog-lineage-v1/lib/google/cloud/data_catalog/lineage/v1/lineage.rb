@@ -53,3 +53,4 @@ end
 
 helper_path = ::File.join __dir__, "lineage", "helpers.rb"
 require "google/cloud/data_catalog/lineage/v1/lineage/helpers" if ::File.file? helper_path
+

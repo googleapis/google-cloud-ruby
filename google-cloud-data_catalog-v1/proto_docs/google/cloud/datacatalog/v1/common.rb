@@ -35,6 +35,7 @@ module Google
 
         # This enum lists all the systems that Data Catalog integrates with.
         module IntegratedSystem
+
           # Default unknown system.
           INTEGRATED_SYSTEM_UNSPECIFIED = 0
 
@@ -54,3 +55,4 @@ module Google
     end
   end
 end
+

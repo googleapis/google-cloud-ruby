@@ -243,6 +243,7 @@ module Google
           # VirtualCluster must have 'default' role, which is used to run all workloads
           # that are not associated with a NodePool.
           module Role
+
             # Role is unspecified.
             ROLE_UNSPECIFIED = 0
 
@@ -346,6 +347,7 @@ module Google
 
         # Cluster components that can be activated.
         module Component
+
           # Unspecified component. Specifying this will cause Cluster creation to fail.
           COMPONENT_UNSPECIFIED = 0
 
@@ -392,6 +394,7 @@ module Google
 
         # Actions in response to failure of a resource associated with a cluster.
         module FailureAction
+
           # When FailureAction is unspecified, failure action defaults to NO_ACTION.
           FAILURE_ACTION_UNSPECIFIED = 0
 
@@ -406,3 +409,4 @@ module Google
     end
   end
 end
+

@@ -285,6 +285,7 @@ module Google
     # The organization for which the client libraries are being published.
     # Affects the url where generated docs are published, etc.
     module ClientLibraryOrganization
+
       # Not useful.
       CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED = 0
 
@@ -303,6 +304,7 @@ module Google
 
     # To where should client libraries be published?
     module ClientLibraryDestination
+
       # Client libraries will neither be generated nor published to package
       # managers.
       CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0
@@ -316,3 +318,4 @@ module Google
     end
   end
 end
+

@@ -53,6 +53,7 @@ module Google
 
             # Indicates the status of a Git authentication token.
             module TokenStatus
+
               # Default value. This value is unused.
               TOKEN_STATUS_UNSPECIFIED = 0
 
@@ -349,6 +350,7 @@ module Google
 
             # Indicates the status of an uncommitted file change.
             module State
+
               # Default value. This value is unused.
               STATE_UNSPECIFIED = 0
 
@@ -978,6 +980,7 @@ module Google
 
             # Indicates the type of this relation.
             module RelationType
+
               # Default value. This value is unused.
               RELATION_TYPE_UNSPECIFIED = 0
 
@@ -1148,6 +1151,7 @@ module Google
 
           # Represents the current state of a workflow invocation.
           module State
+
             # Default value. This value is unused.
             STATE_UNSPECIFIED = 0
 
@@ -1286,6 +1290,7 @@ module Google
 
           # Represents the current state of an workflow invocation action.
           module State
+
             # The action has not yet been considered for invocation.
             PENDING = 0
 
@@ -1349,3 +1354,4 @@ module Google
     end
   end
 end
+

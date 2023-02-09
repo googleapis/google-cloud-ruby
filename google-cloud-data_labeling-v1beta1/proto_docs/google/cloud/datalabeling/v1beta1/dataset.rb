@@ -335,6 +335,7 @@ module Google
         end
 
         module DataType
+
           DATA_TYPE_UNSPECIFIED = 0
 
           # Allowed for continuous evaluation.
@@ -352,3 +353,4 @@ module Google
     end
   end
 end
+

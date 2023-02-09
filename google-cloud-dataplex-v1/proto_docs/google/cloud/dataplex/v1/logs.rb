@@ -123,6 +123,7 @@ module Google
 
           # The type of the event.
           module EventType
+
             # An unspecified event type.
             EVENT_TYPE_UNSPECIFIED = 0
 
@@ -150,6 +151,7 @@ module Google
 
           # The type of the entity.
           module EntityType
+
             # An unspecified event type.
             ENTITY_TYPE_UNSPECIFIED = 0
 
@@ -196,6 +198,7 @@ module Google
 
           # The type of the job.
           module Type
+
             # Unspecified job type.
             TYPE_UNSPECIFIED = 0
 
@@ -208,6 +211,7 @@ module Google
 
           # The completion status of the job.
           module State
+
             # Unspecified job state.
             STATE_UNSPECIFIED = 0
 
@@ -226,6 +230,7 @@ module Google
 
           # The service used to execute the job.
           module Service
+
             # Unspecified service.
             SERVICE_UNSPECIFIED = 0
 
@@ -291,6 +296,7 @@ module Google
 
             # Query Execution engine.
             module Engine
+
               # An unspecified Engine type.
               ENGINE_UNSPECIFIED = 0
 
@@ -304,6 +310,7 @@ module Google
 
           # The type of the event.
           module EventType
+
             # An unspecified event type.
             EVENT_TYPE_UNSPECIFIED = 0
 
@@ -402,6 +409,7 @@ module Google
 
           # The type of the data scan.
           module ScanType
+
             # An unspecified data scan type.
             SCAN_TYPE_UNSPECIFIED = 0
 
@@ -414,6 +422,7 @@ module Google
 
           # The job state of the data scan.
           module State
+
             # Unspecified job state.
             STATE_UNSPECIFIED = 0
 
@@ -432,6 +441,7 @@ module Google
 
           # The trigger type for the data scan.
           module Trigger
+
             # An unspecified trigger type.
             TRIGGER_UNSPECIFIED = 0
 
@@ -444,6 +454,7 @@ module Google
 
           # The scope of job for the data scan.
           module Scope
+
             # An unspecified scope type.
             SCOPE_UNSPECIFIED = 0
 
@@ -458,3 +469,4 @@ module Google
     end
   end
 end
+

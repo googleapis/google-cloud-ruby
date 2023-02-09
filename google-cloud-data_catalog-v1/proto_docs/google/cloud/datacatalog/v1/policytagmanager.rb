@@ -82,6 +82,7 @@ module Google
 
           # Defines policy types where the policy tags can be used for.
           module PolicyType
+
             # Unspecified policy type.
             POLICY_TYPE_UNSPECIFIED = 0
 
@@ -317,3 +318,4 @@ module Google
     end
   end
 end
+

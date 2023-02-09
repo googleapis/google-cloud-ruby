@@ -275,6 +275,7 @@ module Google
 
           # Image labeling task feature.
           module Feature
+
             FEATURE_UNSPECIFIED = 0
 
             # Label whole image with one or more of labels.
@@ -338,6 +339,7 @@ module Google
 
           # Video labeling task feature.
           module Feature
+
             FEATURE_UNSPECIFIED = 0
 
             # Label whole video or video segment with one or more labels.
@@ -381,6 +383,7 @@ module Google
 
           # Text labeling task feature.
           module Feature
+
             FEATURE_UNSPECIFIED = 0
 
             # Label text content to one of more labels.
@@ -837,3 +840,4 @@ module Google
     end
   end
 end
+

@@ -227,6 +227,7 @@ module Google
 
             # Query Engine Type of the SQL Script.
             module QueryEngine
+
               # Value was unspecified.
               QUERY_ENGINE_UNSPECIFIED = 0
 
@@ -245,6 +246,7 @@ module Google
 
             # Kernel Type of the Jupyter notebook.
             module KernelType
+
               # Kernel Type unspecified.
               KERNEL_TYPE_UNSPECIFIED = 0
 
@@ -284,3 +286,4 @@ module Google
     end
   end
 end
+

@@ -104,6 +104,7 @@ module Google
 
           # Entity views.
           module EntityView
+
             # The default unset value. Return both table and fileset entities
             # if unspecified.
             ENTITY_VIEW_UNSPECIFIED = 0
@@ -144,6 +145,7 @@ module Google
 
           # Entity views for get entity partial result.
           module EntityView
+
             # The API will default to the `BASIC` view.
             ENTITY_VIEW_UNSPECIFIED = 0
 
@@ -359,6 +361,7 @@ module Google
 
           # The type of entity.
           module Type
+
             # Type unspecified.
             TYPE_UNSPECIFIED = 0
 
@@ -470,6 +473,7 @@ module Google
 
           # Type information for fields in schemas and partition schemas.
           module Type
+
             # SchemaType unspecified.
             TYPE_UNSPECIFIED = 0
 
@@ -522,6 +526,7 @@ module Google
 
           # Additional qualifiers to define field semantics.
           module Mode
+
             # Mode unspecified.
             MODE_UNSPECIFIED = 0
 
@@ -537,6 +542,7 @@ module Google
 
           # The structure of paths within the entity, which represent partitions.
           module PartitionStyle
+
             # PartitionStyle unspecified
             PARTITION_STYLE_UNSPECIFIED = 0
 
@@ -632,6 +638,7 @@ module Google
 
           # The specific file format of the data.
           module Format
+
             # Format unspecified.
             FORMAT_UNSPECIFIED = 0
 
@@ -674,6 +681,7 @@ module Google
 
           # The specific compressed file format of the data.
           module CompressionFormat
+
             # CompressionFormat unspecified. Implies uncompressed data.
             COMPRESSION_FORMAT_UNSPECIFIED = 0
 
@@ -687,6 +695,7 @@ module Google
 
         # Identifies the cloud system that manages the data storage.
         module StorageSystem
+
           # Storage system unspecified.
           STORAGE_SYSTEM_UNSPECIFIED = 0
 
@@ -700,3 +709,4 @@ module Google
     end
   end
 end
+

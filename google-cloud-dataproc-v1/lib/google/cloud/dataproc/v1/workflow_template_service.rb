@@ -49,3 +49,4 @@ end
 
 helper_path = ::File.join __dir__, "workflow_template_service", "helpers.rb"
 require "google/cloud/dataproc/v1/workflow_template_service/helpers" if ::File.file? helper_path
+

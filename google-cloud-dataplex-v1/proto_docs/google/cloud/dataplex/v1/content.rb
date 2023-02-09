@@ -125,6 +125,7 @@ module Google
           # Specifies whether the request should return the full or the partial
           # representation.
           module ContentView
+
             # Content view not specified. Defaults to BASIC.
             # The API will default to the BASIC view.
             CONTENT_VIEW_UNSPECIFIED = 0
@@ -140,3 +141,4 @@ module Google
     end
   end
 end
+

@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "data_labeling_service", "helpers.rb"
 require "google/cloud/data_labeling/v1beta1/data_labeling_service/helpers" if ::File.file? helper_path
+

@@ -92,6 +92,7 @@ module Google
 
           # State of the job.
           module State
+
             STATE_UNSPECIFIED = 0
 
             # The job is scheduled to run at the {::Google::Cloud::DataLabeling::V1beta1::EvaluationJob#schedule configured interval}. You
@@ -278,3 +279,4 @@ module Google
     end
   end
 end
+

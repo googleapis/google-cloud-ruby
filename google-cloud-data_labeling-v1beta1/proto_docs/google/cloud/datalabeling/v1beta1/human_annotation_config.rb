@@ -231,6 +231,7 @@ module Google
         end
 
         module StringAggregationType
+
           STRING_AGGREGATION_TYPE_UNSPECIFIED = 0
 
           # Majority vote to aggregate answers.
@@ -246,3 +247,4 @@ module Google
     end
   end
 end
+

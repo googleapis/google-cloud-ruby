@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "cluster_manager", "helpers.rb"
 require "google/cloud/container/v1beta1/cluster_manager/helpers" if ::File.file? helper_path
+

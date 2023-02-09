@@ -67,9 +67,9 @@ module Google
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:Snapshots)
         service_module.const_get(:Client).new(&block)
       end
@@ -98,9 +98,9 @@ module Google
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:Jobs)
         service_module.const_get(:Client).new(&block)
       end
@@ -129,9 +129,9 @@ module Google
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:Messages)
         service_module.const_get(:Client).new(&block)
       end
@@ -160,9 +160,9 @@ module Google
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:Metrics)
         service_module.const_get(:Client).new(&block)
       end
@@ -190,9 +190,9 @@ module Google
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:TemplatesService)
         service_module.const_get(:Client).new(&block)
       end
@@ -220,9 +220,9 @@ module Google
         require "google/cloud/dataflow/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataflow
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataflow.const_get(package_name).const_get(:FlexTemplatesService)
         service_module.const_get(:Client).new(&block)
       end
@@ -266,3 +266,4 @@ end
 
 helper_path = ::File.join __dir__, "dataflow", "helpers.rb"
 require "google/cloud/dataflow/helpers" if ::File.file? helper_path
+

@@ -263,7 +263,7 @@ module Google
           end
 
           module PrimitiveType
-            # The default invalid value for a type.
+          # The default invalid value for a type.
             PRIMITIVE_TYPE_UNSPECIFIED = 0
 
             # A double precision number.
@@ -286,3 +286,4 @@ module Google
     end
   end
 end
+

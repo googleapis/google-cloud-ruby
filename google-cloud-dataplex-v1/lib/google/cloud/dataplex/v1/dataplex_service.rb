@@ -52,3 +52,4 @@ end
 
 helper_path = ::File.join __dir__, "dataplex_service", "helpers.rb"
 require "google/cloud/dataplex/v1/dataplex_service/helpers" if ::File.file? helper_path
+

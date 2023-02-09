@@ -87,6 +87,7 @@ module Google
 
           # DataScan view options.
           module DataScanView
+
             # The API will default to the `BASIC` view.
             DATA_SCAN_VIEW_UNSPECIFIED = 0
 
@@ -183,6 +184,7 @@ module Google
 
           # DataScanJob view options.
           module DataScanJobView
+
             # The API will default to the `BASIC` view.
             DATA_SCAN_JOB_VIEW_UNSPECIFIED = 0
 
@@ -386,6 +388,7 @@ module Google
 
           # Execution state for the DataScanJob.
           module State
+
             # The DataScanJob state is unspecified.
             STATE_UNSPECIFIED = 0
 
@@ -411,6 +414,7 @@ module Google
 
         # The type of DataScan.
         module DataScanType
+
           # The DataScan type is unspecified.
           DATA_SCAN_TYPE_UNSPECIFIED = 0
 
@@ -424,3 +428,4 @@ module Google
     end
   end
 end
+

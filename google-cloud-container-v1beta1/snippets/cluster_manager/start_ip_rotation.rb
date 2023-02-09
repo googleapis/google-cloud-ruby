@@ -20,8 +20,11 @@
 require "google/cloud/container/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Container::V1beta1::ClusterManager::Client#start_ip_rotation
+# Snippet for the start_ip_rotation call in the ClusterManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Container::V1beta1::ClusterManager::Client#start_ip_rotation.
+# It may require modification in order to execute successfully.
 #
 def start_ip_rotation
   # Create a client object. The client can be reused for multiple calls.

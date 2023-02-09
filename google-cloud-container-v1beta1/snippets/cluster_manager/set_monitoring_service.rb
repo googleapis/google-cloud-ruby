@@ -20,8 +20,11 @@
 require "google/cloud/container/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Container::V1beta1::ClusterManager::Client#set_monitoring_service
+# Snippet for the set_monitoring_service call in the ClusterManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Container::V1beta1::ClusterManager::Client#set_monitoring_service.
+# It may require modification in order to execute successfully.
 #
 def set_monitoring_service
   # Create a client object. The client can be reused for multiple calls.

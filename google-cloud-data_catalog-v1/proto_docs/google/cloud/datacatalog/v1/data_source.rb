@@ -42,6 +42,7 @@ module Google
 
           # Name of a service that stores the data.
           module Service
+
             # Default unknown service.
             SERVICE_UNSPECIFIED = 0
 
@@ -87,3 +88,4 @@ module Google
     end
   end
 end
+

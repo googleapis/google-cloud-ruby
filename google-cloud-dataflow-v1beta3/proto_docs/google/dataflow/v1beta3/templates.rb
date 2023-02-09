@@ -415,6 +415,7 @@ module Google
 
           # SDK Language.
           module Language
+
             # UNKNOWN Language.
             UNKNOWN = 0
 
@@ -498,6 +499,7 @@ module Google
 
           # The various views of a template that may be retrieved.
           module TemplateView
+
             # Template view that retrieves only the metadata associated with the
             # template.
             METADATA_ONLY = 0
@@ -525,6 +527,7 @@ module Google
 
           # Template Type.
           module TemplateType
+
             # Unknown Template Type.
             UNKNOWN = 0
 
@@ -655,6 +658,7 @@ module Google
 
         # ParameterType specifies what kind of input we need for this parameter.
         module ParameterType
+
           # Default input type.
           DEFAULT = 0
 
@@ -689,3 +693,4 @@ module Google
     end
   end
 end
+

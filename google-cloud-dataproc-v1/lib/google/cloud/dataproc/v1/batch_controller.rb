@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "batch_controller", "helpers.rb"
 require "google/cloud/dataproc/v1/batch_controller/helpers" if ::File.file? helper_path
+

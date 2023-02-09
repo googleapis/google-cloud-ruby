@@ -20,8 +20,11 @@
 require "google/cloud/data_fusion/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DataFusion::V1::DataFusion::Client#list_available_versions
+# Snippet for the list_available_versions call in the DataFusion service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DataFusion::V1::DataFusion::Client#list_available_versions. It
+# may require modification in order to execute successfully.
 #
 def list_available_versions
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_available_versions
   # Call the list_available_versions method.
   result = client.list_available_versions request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::DataFusion::V1::Version.
-    p response
+    p item
   end
 end
 # [END datafusion_v1_generated_DataFusion_ListAvailableVersions_sync]

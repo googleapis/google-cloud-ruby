@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "job_controller", "helpers.rb"
 require "google/cloud/dataproc/v1/job_controller/helpers" if ::File.file? helper_path
+

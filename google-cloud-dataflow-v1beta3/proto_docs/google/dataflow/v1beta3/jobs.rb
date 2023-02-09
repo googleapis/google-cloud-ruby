@@ -295,6 +295,7 @@ module Google
 
           # The support status of the SDK used to run the job.
           module SdkSupportStatus
+
             # Cloud Dataflow is unaware of this version.
             UNKNOWN = 0
 
@@ -703,6 +704,7 @@ module Google
           # order of data returned is determined by the filter used, and is subject to
           # change.
           module Filter
+
             # The filter isn't specified, or is unknown. This returns all jobs ordered
             # on descending `JobUuid`.
             UNKNOWN = 0
@@ -799,6 +801,7 @@ module Google
 
         # Type of transform or stage operation.
         module KindType
+
           # Unrecognized transform type.
           UNKNOWN_KIND = 0
 
@@ -829,6 +832,7 @@ module Google
 
         # Describes the overall state of a {::Google::Cloud::Dataflow::V1beta3::Job google.dataflow.v1beta3.Job}.
         module JobState
+
           # The job's run state isn't specified.
           JOB_STATE_UNKNOWN = 0
 
@@ -903,6 +907,7 @@ module Google
 
         # Selector for how much information is returned in Job responses.
         module JobView
+
           # The job view to return isn't specified, or is unknown.
           # Responses will contain at least the `JOB_VIEW_SUMMARY` information,
           # and may contain additional information.
@@ -924,3 +929,4 @@ module Google
     end
   end
 end
+

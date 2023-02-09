@@ -390,6 +390,7 @@ module Google
           # [Compute Engine Instance
           # fields](https://cloud.google.com/compute/docs/reference/rest/v1/instances).
           module PrivateIpv6GoogleAccess
+
             # If unspecified, Compute Engine default behavior will apply, which
             # is the same as
             # {::Google::Cloud::Dataproc::V1::GceClusterConfig::PrivateIpv6GoogleAccess::INHERIT_FROM_SUBNETWORK INHERIT_FROM_SUBNETWORK}.
@@ -542,6 +543,7 @@ module Google
 
           # Controls the use of preemptible instances within the group.
           module Preemptibility
+
             # Preemptibility is unspecified, the system will choose the
             # appropriate setting for each instance group.
             PREEMPTIBILITY_UNSPECIFIED = 0
@@ -699,6 +701,7 @@ module Google
 
           # Node group roles.
           module Role
+
             # Required unspecified role.
             ROLE_UNSPECIFIED = 0
 
@@ -747,6 +750,7 @@ module Google
 
           # The cluster state.
           module State
+
             # The cluster state is unknown.
             UNKNOWN = 0
 
@@ -785,6 +789,7 @@ module Google
 
           # The cluster substate.
           module Substate
+
             # The cluster substate is unknown.
             UNSPECIFIED = 0
 
@@ -1053,6 +1058,7 @@ module Google
           # metrics]
           # (https://cloud.google.com//dataproc/docs/guides/monitoring#available_oss_metrics)).
           module MetricSource
+
             # Required unspecified metric source.
             METRIC_SOURCE_UNSPECIFIED = 0
 
@@ -1457,6 +1463,7 @@ module Google
 
           # Indicates whether to consume capacity from an reservation or not.
           module Type
+
             TYPE_UNSPECIFIED = 0
 
             # Do not consume from any allocated capacity.
@@ -1474,3 +1481,4 @@ module Google
     end
   end
 end
+

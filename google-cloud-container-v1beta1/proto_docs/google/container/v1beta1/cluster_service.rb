@@ -58,6 +58,7 @@ module Google
 
           # Possible cgroup modes that can be used.
           module CgroupMode
+
             # CGROUP_MODE_UNSPECIFIED is when unspecified cgroup configuration is used.
             # The default for the GKE node OS image will be used.
             CGROUP_MODE_UNSPECIFIED = 0
@@ -84,6 +85,7 @@ module Google
 
           # Possible OS version that can be used.
           module OSVersion
+
             # When OSVersion is not specified
             OS_VERSION_UNSPECIFIED = 0
 
@@ -464,6 +466,7 @@ module Google
 
             # Node network tier
             module Tier
+
               # Default value
               TIER_UNSPECIFIED = 0
 
@@ -507,6 +510,7 @@ module Google
 
           # Possible types of sandboxes.
           module Type
+
             # Default value. This should not be used.
             UNSPECIFIED = 0
 
@@ -589,6 +593,7 @@ module Google
 
           # Indicates whether to consume capacity from a reservation or not.
           module Type
+
             # Default value. This should not be used.
             UNSPECIFIED = 0
 
@@ -625,6 +630,7 @@ module Google
 
           # Possible values for Effect in taint.
           module Effect
+
             # Not set
             EFFECT_UNSPECIFIED = 0
 
@@ -965,6 +971,7 @@ module Google
 
           # Istio auth mode, https://istio.io/docs/concepts/security/mutual-tls.html
           module IstioAuthMode
+
             # auth not enabled
             AUTH_NONE = 0
 
@@ -986,6 +993,7 @@ module Google
 
           # Load balancer type of ingress service of Cloud Run.
           module LoadBalancerType
+
             # Load balancer type for Cloud Run is unspecified.
             LOAD_BALANCER_TYPE_UNSPECIFIED = 0
 
@@ -1055,6 +1063,7 @@ module Google
 
           # Allowed Network Policy providers.
           module Provider
+
             # Not set
             PROVIDER_UNSPECIFIED = 0
 
@@ -1214,6 +1223,7 @@ module Google
 
           # Possible values for IP stack type
           module StackType
+
             # By default, the clusters will be IPV4 only
             STACK_TYPE_UNSPECIFIED = 0
 
@@ -1226,6 +1236,7 @@ module Google
 
           # IPv6 access type
           module IPv6AccessType
+
             # Default value, will be defaulted as type external.
             IPV6_ACCESS_TYPE_UNSPECIFIED = 0
 
@@ -1253,6 +1264,7 @@ module Google
 
           # Binary Authorization mode of operation.
           module EvaluationMode
+
             # Default value
             EVALUATION_MODE_UNSPECIFIED = 0
 
@@ -1300,6 +1312,7 @@ module Google
 
           # Type of the integration.
           module Type
+
             # Not set.
             UNSPECIFIED = 0
 
@@ -1684,6 +1697,7 @@ module Google
 
           # The current status of the cluster.
           module Status
+
             # Not set.
             STATUS_UNSPECIFIED = 0
 
@@ -1723,6 +1737,7 @@ module Google
 
           # Mode defines how to audit the workload configs.
           module Mode
+
             # Default value meaning that no mode has been specified.
             MODE_UNSPECIFIED = 0
 
@@ -1758,6 +1773,7 @@ module Google
 
           # WorkloadVulnerabilityMode defines mode to perform vulnerability scanning.
           module WorkloadVulnerabilityMode
+
             # Default value not specified.
             WORKLOAD_VULNERABILITY_MODE_UNSPECIFIED = 0
 
@@ -2079,6 +2095,7 @@ module Google
 
           # Current status of the operation.
           module Status
+
             # Not set.
             STATUS_UNSPECIFIED = 0
 
@@ -2097,6 +2114,7 @@ module Google
 
           # Operation type.
           module Type
+
             # Not set.
             TYPE_UNSPECIFIED = 0
 
@@ -2625,6 +2643,7 @@ module Google
 
           # Operation type: what type update to perform.
           module Action
+
             # Operation is unknown and will error out.
             UNKNOWN = 0
 
@@ -3238,6 +3257,7 @@ module Google
 
               # Phase represents the different stages blue-green upgrade is running in.
               module Phase
+
                 # Unspecified phase.
                 PHASE_UNSPECIFIED = 0
 
@@ -3275,6 +3295,7 @@ module Google
 
             # Type defines the type of placement policy.
             module Type
+
               # TYPE_UNSPECIFIED specifies no requirements on nodes
               # placement.
               TYPE_UNSPECIFIED = 0
@@ -3287,6 +3308,7 @@ module Google
 
           # The current status of the node pool instance.
           module Status
+
             # Not set.
             STATUS_UNSPECIFIED = 0
 
@@ -3420,6 +3442,7 @@ module Google
 
           # Scope of exclusion.
           module Scope
+
             # NO_UPGRADES excludes all upgrades, including patch upgrades and minor
             # upgrades across control planes and nodes. This is the default exclusion
             # behavior.
@@ -3646,6 +3669,7 @@ module Google
 
           # Defines possible options for autoscaling_profile field.
           module AutoscalingProfile
+
             # No change to autoscaling configuration.
             PROFILE_UNSPECIFIED = 0
 
@@ -3787,6 +3811,7 @@ module Google
           # Location policy specifies how zones are picked when scaling up the
           # nodepool.
           module LocationPolicy
+
             # Not set.
             LOCATION_POLICY_UNSPECIFIED = 0
 
@@ -3967,6 +3992,7 @@ module Google
 
           # The type of GPU sharing strategy currently provided.
           module GPUSharingStrategy
+
             # Default value.
             GPU_SHARING_STRATEGY_UNSPECIFIED = 0
 
@@ -4002,6 +4028,7 @@ module Google
           # NodeMetadata is the configuration for if and how to expose the node
           # metadata to the workload running on the node.
           module NodeMetadata
+
             # Not set.
             UNSPECIFIED = 0
 
@@ -4029,6 +4056,7 @@ module Google
           # Mode is the configuration for how to expose metadata to workloads running
           # on the node.
           module Mode
+
             # Not set.
             MODE_UNSPECIFIED = 0
 
@@ -4144,6 +4172,7 @@ module Google
 
           # LocationType is the type of GKE location, regional or zonal.
           module LocationType
+
             # LOCATION_TYPE_UNSPECIFIED means the location type was not determined.
             LOCATION_TYPE_UNSPECIFIED = 0
 
@@ -4173,6 +4202,7 @@ module Google
 
           # Code for each condition
           module Code
+
             # UNKNOWN indicates a generic condition.
             UNKNOWN = 0
 
@@ -4262,6 +4292,7 @@ module Google
           # Channel describes if/how Gateway API should be installed and implemented in
           # a cluster.
           module Channel
+
             # Default value.
             CHANNEL_UNSPECIFIED = 0
 
@@ -4345,6 +4376,7 @@ module Google
 
           # Status shows the current usage of a secondary IP range.
           module Status
+
             # UNKNOWN is the zero value of the Status enum. It's not a valid status.
             UNKNOWN = 0
 
@@ -4450,6 +4482,7 @@ module Google
 
           # Provider lists the various in-cluster DNS providers.
           module Provider
+
             # Default value
             PROVIDER_UNSPECIFIED = 0
 
@@ -4462,6 +4495,7 @@ module Google
 
           # DNSScope lists the various scopes of access to cluster DNS records.
           module DNSScope
+
             # Default value, will be inferred as cluster scope.
             DNS_SCOPE_UNSPECIFIED = 0
 
@@ -4560,6 +4594,7 @@ module Google
 
           # State of etcd encryption.
           module State
+
             # Should never be set
             UNKNOWN = 0
 
@@ -4745,6 +4780,7 @@ module Google
 
           # Possible values for 'channel'.
           module Channel
+
             # No channel specified.
             UNSPECIFIED = 0
 
@@ -4847,6 +4883,7 @@ module Google
           # Types of notifications currently supported. Can be used to filter what
           # notifications are sent.
           module EventType
+
             # Not set, will be ignored.
             EVENT_TYPE_UNSPECIFIED = 0
 
@@ -4995,6 +5032,7 @@ module Google
 
           # GKE components exposing logs
           module Component
+
             # Default value. This shouldn't be used.
             COMPONENT_UNSPECIFIED = 0
 
@@ -5047,6 +5085,7 @@ module Google
 
           # Logging component variants.
           module Variant
+
             # Default value. This shouldn't be used.
             VARIANT_UNSPECIFIED = 0
 
@@ -5069,6 +5108,7 @@ module Google
 
           # GKE components exposing metrics
           module Component
+
             # Default value. This shouldn't be used.
             COMPONENT_UNSPECIFIED = 0
 
@@ -5092,6 +5132,7 @@ module Google
         # PrivateIPv6GoogleAccess controls whether and how the pods can communicate
         # with Google Services through gRPC over IPv6.
         module PrivateIPv6GoogleAccess
+
           # Default value. Same as DISABLED
           PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED = 0
 
@@ -5108,6 +5149,7 @@ module Google
         # UpgradeResourceType is the resource type that is upgrading. It is used
         # in upgrade notifications.
         module UpgradeResourceType
+
           # Default value. This shouldn't be used.
           UPGRADE_RESOURCE_TYPE_UNSPECIFIED = 0
 
@@ -5120,6 +5162,7 @@ module Google
 
         # Strategy used for node pool update.
         module NodePoolUpdateStrategy
+
           # Default value if unset. GKE internally defaults the update strategy to
           # SURGE for unspecified strategies.
           NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED = 0
@@ -5135,6 +5178,7 @@ module Google
         # The datapath provider selects the implementation of the Kubernetes networking
         # model for service resolution and network policy enforcement.
         module DatapathProvider
+
           # Default value.
           DATAPATH_PROVIDER_UNSPECIFIED = 0
 
@@ -5150,6 +5194,7 @@ module Google
 
         # Possible values for IP stack type
         module StackType
+
           # By default, the clusters will be IPV4 only
           STACK_TYPE_UNSPECIFIED = 0
 
@@ -5163,3 +5208,4 @@ module Google
     end
   end
 end
+

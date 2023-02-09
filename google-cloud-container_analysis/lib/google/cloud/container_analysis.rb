@@ -79,9 +79,9 @@ module Google
         require "google/cloud/container_analysis/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ContainerAnalysis
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::ContainerAnalysis.const_get(package_name).const_get(:ContainerAnalysis)
         service_module.const_get(:Client).new(&block)
       end
@@ -125,3 +125,4 @@ end
 
 helper_path = ::File.join __dir__, "container_analysis", "helpers.rb"
 require "google/cloud/container_analysis/helpers" if ::File.file? helper_path
+

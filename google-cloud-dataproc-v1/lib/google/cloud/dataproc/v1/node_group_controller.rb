@@ -49,3 +49,4 @@ end
 
 helper_path = ::File.join __dir__, "node_group_controller", "helpers.rb"
 require "google/cloud/dataproc/v1/node_group_controller/helpers" if ::File.file? helper_path
+

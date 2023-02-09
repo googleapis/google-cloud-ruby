@@ -583,6 +583,7 @@ module Google
 
           # Type of the table.
           module TableType
+
             # Default unknown table type.
             TABLE_TYPE_UNSPECIFIED = 0
 
@@ -664,6 +665,7 @@ module Google
 
             # The input or output mode of the argument.
             module Mode
+
               # Unspecified mode.
               MODE_UNSPECIFIED = 0
 
@@ -680,6 +682,7 @@ module Google
 
           # The fine-grained type of the routine.
           module RoutineType
+
             # Unspecified type.
             ROUTINE_TYPE_UNSPECIFIED = 0
 
@@ -1118,6 +1121,7 @@ module Google
         # The enum field that lists all the types of entry resources in Data
         # Catalog. For example, a BigQuery table entry has the `TABLE` type.
         module EntryType
+
           # Default unknown type.
           ENTRY_TYPE_UNSPECIFIED = 0
 
@@ -1164,3 +1168,4 @@ module Google
     end
   end
 end
+

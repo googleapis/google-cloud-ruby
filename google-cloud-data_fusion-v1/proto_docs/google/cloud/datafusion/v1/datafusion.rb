@@ -63,6 +63,7 @@ module Google
 
           # Each type represents the release availability of a CDF version
           module Type
+
             # Version does not have availability yet
             TYPE_UNSPECIFIED = 0
 
@@ -88,6 +89,7 @@ module Google
           # Each type represents an Accelerator (Add-On) supported by Cloud Data Fusion
           # service.
           module AcceleratorType
+
             # Default value, if unspecified.
             ACCELERATOR_TYPE_UNSPECIFIED = 0
 
@@ -106,6 +108,7 @@ module Google
 
           # Different values possible for the state of an accelerator
           module State
+
             # Default value, do not use
             STATE_UNSPECIFIED = 0
 
@@ -258,6 +261,7 @@ module Google
           # Represents the type of Data Fusion instance. Each type is configured with
           # the default settings for processing and memory.
           module Type
+
             # No type specified. The instance creation will fail.
             TYPE_UNSPECIFIED = 0
 
@@ -281,6 +285,7 @@ module Google
 
           # Represents the state of a Data Fusion instance
           module State
+
             # Instance does not have a state yet
             STATE_UNSPECIFIED = 0
 
@@ -318,6 +323,7 @@ module Google
 
           # The reason for disabling the instance if the state is DISABLED.
           module DisabledReason
+
             # This is an unknown reason for disabling.
             DISABLED_REASON_UNSPECIFIED = 0
 
@@ -517,3 +523,4 @@ module Google
     end
   end
 end
+

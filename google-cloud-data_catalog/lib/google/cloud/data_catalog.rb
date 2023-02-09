@@ -68,9 +68,9 @@ module Google
         require "google/cloud/data_catalog/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DataCatalog
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::DataCatalog.const_get(package_name).const_get(:DataCatalog)
         service_module.const_get(:Client).new(&block)
       end
@@ -103,9 +103,9 @@ module Google
         require "google/cloud/data_catalog/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DataCatalog
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::DataCatalog.const_get(package_name).const_get(:PolicyTagManager)
         service_module.const_get(:Client).new(&block)
       end
@@ -136,9 +136,9 @@ module Google
         require "google/cloud/data_catalog/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DataCatalog
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::DataCatalog.const_get(package_name).const_get(:PolicyTagManagerSerialization)
         service_module.const_get(:Client).new(&block)
       end
@@ -182,3 +182,4 @@ end
 
 helper_path = ::File.join __dir__, "data_catalog", "helpers.rb"
 require "google/cloud/data_catalog/helpers" if ::File.file? helper_path
+

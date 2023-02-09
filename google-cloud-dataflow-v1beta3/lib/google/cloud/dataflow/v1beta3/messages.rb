@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "messages", "helpers.rb"
 require "google/cloud/dataflow/v1beta3/messages/helpers" if ::File.file? helper_path
+

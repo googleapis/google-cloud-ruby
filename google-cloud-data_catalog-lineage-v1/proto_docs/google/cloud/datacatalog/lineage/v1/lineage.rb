@@ -98,6 +98,7 @@ module Google
 
             # The current state of the run.
             module State
+
               # The state is unknown. The true state may be any of the below or a
               # different state that is not supported here explicitly.
               UNKNOWN = 0
@@ -202,6 +203,7 @@ module Google
 
             # An enum with the state of the operation.
             module State
+
               # Unused.
               STATE_UNSPECIFIED = 0
 
@@ -220,6 +222,7 @@ module Google
 
             # Type of the long running operation.
             module Type
+
               # Unused.
               TYPE_UNSPECIFIED = 0
 
@@ -681,6 +684,7 @@ module Google
 
             # Type of the source of a process.
             module SourceType
+
               # Source is Unspecified
               SOURCE_TYPE_UNSPECIFIED = 0
 
@@ -705,3 +709,4 @@ module Google
     end
   end
 end
+

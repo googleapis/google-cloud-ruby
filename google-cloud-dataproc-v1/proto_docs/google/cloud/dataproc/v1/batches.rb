@@ -192,6 +192,7 @@ module Google
 
           # The batch state.
           module State
+
             # The batch state is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -337,3 +338,4 @@ module Google
     end
   end
 end
+

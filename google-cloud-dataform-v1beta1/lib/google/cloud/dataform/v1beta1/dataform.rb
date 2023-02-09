@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "dataform", "helpers.rb"
 require "google/cloud/dataform/v1beta1/dataform/helpers" if ::File.file? helper_path
+

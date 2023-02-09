@@ -21,6 +21,7 @@ module Grafeas
   module V1
     # Note provider assigned severity/impact ranking.
     module Severity
+
       # Unknown.
       SEVERITY_UNSPECIFIED = 0
 
@@ -41,3 +42,4 @@ module Grafeas
     end
   end
 end
+

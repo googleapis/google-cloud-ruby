@@ -98,6 +98,7 @@ module Google
 
           # Indicates the type of autoscaling event.
           module AutoscalingEventType
+
             # Default type for the enum.  Value should never be returned.
             TYPE_UNKNOWN = 0
 
@@ -183,6 +184,7 @@ module Google
 
         # Indicates the importance of the message.
         module JobMessageImportance
+
           # The message importance isn't specified, or is unknown.
           JOB_MESSAGE_IMPORTANCE_UNKNOWN = 0
 
@@ -223,3 +225,4 @@ module Google
     end
   end
 end
+

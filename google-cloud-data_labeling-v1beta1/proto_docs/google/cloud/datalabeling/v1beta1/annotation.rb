@@ -341,6 +341,7 @@ module Google
         # Specifies where the annotation comes from (whether it was provided by a
         # human labeler or a different source).
         module AnnotationSource
+
           ANNOTATION_SOURCE_UNSPECIFIED = 0
 
           # Answer is provided by a human contributor.
@@ -348,6 +349,7 @@ module Google
         end
 
         module AnnotationSentiment
+
           ANNOTATION_SENTIMENT_UNSPECIFIED = 0
 
           # This annotation describes negatively about the data.
@@ -358,6 +360,7 @@ module Google
         end
 
         module AnnotationType
+
           ANNOTATION_TYPE_UNSPECIFIED = 0
 
           # Classification annotations in an image. Allowed for continuous evaluation.
@@ -405,3 +408,4 @@ module Google
     end
   end
 end
+

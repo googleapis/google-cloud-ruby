@@ -232,7 +232,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             module ColumnStatistic
-              # Unspecified statistic type
+            # Unspecified statistic type
               STATISTIC_UNDEFINED = 0
 
               # Evaluate the column mean
@@ -272,3 +272,4 @@ module Google
     end
   end
 end
+

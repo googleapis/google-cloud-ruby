@@ -343,6 +343,7 @@ module Google
 
         # The state of some component of job execution.
         module ExecutionState
+
           # The component state is unknown or unspecified.
           EXECUTION_STATE_UNKNOWN = 0
 
@@ -365,3 +366,4 @@ module Google
     end
   end
 end
+

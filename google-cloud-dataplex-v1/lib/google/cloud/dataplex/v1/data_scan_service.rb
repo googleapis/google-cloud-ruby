@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "data_scan_service", "helpers.rb"
 require "google/cloud/dataplex/v1/data_scan_service/helpers" if ::File.file? helper_path
+

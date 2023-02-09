@@ -89,8 +89,10 @@ module Google
     #
     #  The JSON representation for `NullValue` is JSON `null`.
     module NullValue
+
       # Null value.
       NULL_VALUE = 0
     end
   end
 end
+

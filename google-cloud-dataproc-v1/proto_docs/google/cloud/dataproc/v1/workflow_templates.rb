@@ -435,6 +435,7 @@ module Google
 
           # The operation state.
           module State
+
             # Unused.
             UNKNOWN = 0
 
@@ -495,6 +496,7 @@ module Google
 
           # The workflow node state.
           module NodeState
+
             # State is unspecified.
             NODE_STATE_UNSPECIFIED = 0
 
@@ -721,3 +723,4 @@ module Google
     end
   end
 end
+

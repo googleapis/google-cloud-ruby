@@ -67,9 +67,9 @@ module Google
         require "google/cloud/dataplex/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataplex
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:ContentService)
         service_module.const_get(:Client).new(&block)
       end
@@ -99,9 +99,9 @@ module Google
         require "google/cloud/dataplex/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataplex
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:DataScanService)
         service_module.const_get(:Client).new(&block)
       end
@@ -130,9 +130,9 @@ module Google
         require "google/cloud/dataplex/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataplex
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:MetadataService)
         service_module.const_get(:Client).new(&block)
       end
@@ -164,9 +164,9 @@ module Google
         require "google/cloud/dataplex/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataplex
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:DataplexService)
         service_module.const_get(:Client).new(&block)
       end
@@ -210,3 +210,4 @@ end
 
 helper_path = ::File.join __dir__, "dataplex", "helpers.rb"
 require "google/cloud/dataplex/helpers" if ::File.file? helper_path
+

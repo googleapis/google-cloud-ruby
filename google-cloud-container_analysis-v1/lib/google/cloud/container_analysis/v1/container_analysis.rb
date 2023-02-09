@@ -59,3 +59,4 @@ end
 
 helper_path = ::File.join __dir__, "container_analysis", "helpers.rb"
 require "google/cloud/container_analysis/v1/container_analysis/helpers" if ::File.file? helper_path
+

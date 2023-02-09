@@ -68,9 +68,9 @@ module Google
         require "google/cloud/dataform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataform
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Dataform.const_get(package_name).const_get(:Dataform)
         service_module.const_get(:Client).new(&block)
       end
@@ -114,3 +114,4 @@ end
 
 helper_path = ::File.join __dir__, "dataform", "helpers.rb"
 require "google/cloud/dataform/helpers" if ::File.file? helper_path
+

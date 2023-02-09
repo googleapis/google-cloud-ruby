@@ -20,8 +20,11 @@
 require "google/cloud/dataflow/v1beta3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_job_execution_details
+# Snippet for the get_job_execution_details call in the Metrics service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_job_execution_details.
+# It may require modification in order to execute successfully.
 #
 def get_job_execution_details
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def get_job_execution_details
   # Call the get_job_execution_details method.
   result = client.get_job_execution_details request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Dataflow::V1beta3::StageSummary.
-    p response
+    p item
   end
 end
 # [END dataflow_v1beta3_generated_Metrics_GetJobExecutionDetails_sync]

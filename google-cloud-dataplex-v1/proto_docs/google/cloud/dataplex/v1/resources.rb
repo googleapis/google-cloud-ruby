@@ -105,6 +105,7 @@ module Google
 
             # Current state of association.
             module State
+
               # Unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -207,6 +208,7 @@ module Google
 
             # Location type of the resources attached to a zone.
             module LocationType
+
               # Unspecified location type.
               LOCATION_TYPE_UNSPECIFIED = 0
 
@@ -303,6 +305,7 @@ module Google
 
           # Type of zone.
           module Type
+
             # Zone type not specified.
             TYPE_UNSPECIFIED = 0
 
@@ -451,6 +454,7 @@ module Google
 
             # Whether the action relates to a schema that is incompatible or modified.
             module SchemaChange
+
               # Schema change unspecified.
               SCHEMA_CHANGE_UNSPECIFIED = 0
 
@@ -473,6 +477,7 @@ module Google
 
             # The expected partition structure.
             module PartitionStructure
+
               # PartitionStructure unspecified.
               PARTITION_STRUCTURE_UNSPECIFIED = 0
 
@@ -498,6 +503,7 @@ module Google
 
           # The category of issues.
           module Category
+
             # Unspecified category.
             CATEGORY_UNSPECIFIED = 0
 
@@ -582,6 +588,7 @@ module Google
 
             # The state of the security policy.
             module State
+
               # State unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -688,6 +695,7 @@ module Google
 
             # Type of resource.
             module Type
+
               # Type not specified.
               TYPE_UNSPECIFIED = 0
 
@@ -715,6 +723,7 @@ module Google
 
             # The state of a resource.
             module State
+
               # State unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -769,6 +778,7 @@ module Google
 
             # Current state of discovery.
             module State
+
               # State is unspecified.
               STATE_UNSPECIFIED = 0
 
@@ -799,6 +809,7 @@ module Google
 
         # State of a resource.
         module State
+
           # State is not specified.
           STATE_UNSPECIFIED = 0
 
@@ -818,3 +829,4 @@ module Google
     end
   end
 end
+

@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "data_catalog", "helpers.rb"
 require "google/cloud/data_catalog/v1/data_catalog/helpers" if ::File.file? helper_path
+

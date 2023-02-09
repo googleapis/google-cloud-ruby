@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "policy_tag_manager_serialization", "helpers.rb"
 require "google/cloud/data_catalog/v1/policy_tag_manager_serialization/helpers" if ::File.file? helper_path
+

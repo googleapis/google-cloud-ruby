@@ -46,3 +46,4 @@ end
 
 helper_path = ::File.join __dir__, "flex_templates_service", "helpers.rb"
 require "google/cloud/dataflow/v1beta3/flex_templates_service/helpers" if ::File.file? helper_path
+

@@ -135,6 +135,7 @@ module Google
 
         # Snapshot state.
         module SnapshotState
+
           # Unknown state.
           UNKNOWN_SNAPSHOT_STATE = 0
 
@@ -158,3 +159,4 @@ module Google
     end
   end
 end
+

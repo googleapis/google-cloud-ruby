@@ -70,111 +70,111 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_lake.timeout = 60.0
+                    default_config.rpcs.create_lake.timeout = 60.0
 
-                default_config.rpcs.update_lake.timeout = 60.0
+                    default_config.rpcs.update_lake.timeout = 60.0
 
-                default_config.rpcs.delete_lake.timeout = 60.0
+                    default_config.rpcs.delete_lake.timeout = 60.0
 
-                default_config.rpcs.list_lakes.timeout = 60.0
-                default_config.rpcs.list_lakes.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_lakes.timeout = 60.0
+                    default_config.rpcs.list_lakes.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_lake.timeout = 60.0
-                default_config.rpcs.get_lake.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_lake.timeout = 60.0
+                    default_config.rpcs.get_lake.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_lake_actions.timeout = 60.0
-                default_config.rpcs.list_lake_actions.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_lake_actions.timeout = 60.0
+                    default_config.rpcs.list_lake_actions.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_zone.timeout = 60.0
+                    default_config.rpcs.create_zone.timeout = 60.0
 
-                default_config.rpcs.update_zone.timeout = 60.0
+                    default_config.rpcs.update_zone.timeout = 60.0
 
-                default_config.rpcs.delete_zone.timeout = 60.0
+                    default_config.rpcs.delete_zone.timeout = 60.0
 
-                default_config.rpcs.list_zones.timeout = 60.0
-                default_config.rpcs.list_zones.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_zones.timeout = 60.0
+                    default_config.rpcs.list_zones.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_zone.timeout = 60.0
-                default_config.rpcs.get_zone.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_zone.timeout = 60.0
+                    default_config.rpcs.get_zone.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_zone_actions.timeout = 60.0
-                default_config.rpcs.list_zone_actions.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_zone_actions.timeout = 60.0
+                    default_config.rpcs.list_zone_actions.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_asset.timeout = 60.0
+                    default_config.rpcs.create_asset.timeout = 60.0
 
-                default_config.rpcs.update_asset.timeout = 60.0
+                    default_config.rpcs.update_asset.timeout = 60.0
 
-                default_config.rpcs.delete_asset.timeout = 60.0
+                    default_config.rpcs.delete_asset.timeout = 60.0
 
-                default_config.rpcs.list_assets.timeout = 60.0
-                default_config.rpcs.list_assets.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_assets.timeout = 60.0
+                    default_config.rpcs.list_assets.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_asset.timeout = 60.0
-                default_config.rpcs.get_asset.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_asset.timeout = 60.0
+                    default_config.rpcs.get_asset.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_asset_actions.timeout = 60.0
-                default_config.rpcs.list_asset_actions.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_asset_actions.timeout = 60.0
+                    default_config.rpcs.list_asset_actions.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_task.timeout = 60.0
+                    default_config.rpcs.create_task.timeout = 60.0
 
-                default_config.rpcs.update_task.timeout = 60.0
+                    default_config.rpcs.update_task.timeout = 60.0
 
-                default_config.rpcs.delete_task.timeout = 60.0
+                    default_config.rpcs.delete_task.timeout = 60.0
 
-                default_config.rpcs.list_tasks.timeout = 60.0
-                default_config.rpcs.list_tasks.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_tasks.timeout = 60.0
+                    default_config.rpcs.list_tasks.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_task.timeout = 60.0
-                default_config.rpcs.get_task.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_task.timeout = 60.0
+                    default_config.rpcs.get_task.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_jobs.timeout = 60.0
-                default_config.rpcs.list_jobs.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_jobs.timeout = 60.0
+                    default_config.rpcs.list_jobs.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_job.timeout = 60.0
-                default_config.rpcs.get_job.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_job.timeout = 60.0
+                    default_config.rpcs.get_job.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.cancel_job.timeout = 60.0
+                    default_config.rpcs.cancel_job.timeout = 60.0
 
-                default_config.rpcs.create_environment.timeout = 60.0
+                    default_config.rpcs.create_environment.timeout = 60.0
 
-                default_config.rpcs.update_environment.timeout = 60.0
+                    default_config.rpcs.update_environment.timeout = 60.0
 
-                default_config.rpcs.delete_environment.timeout = 60.0
+                    default_config.rpcs.delete_environment.timeout = 60.0
 
-                default_config.rpcs.list_environments.timeout = 60.0
-                default_config.rpcs.list_environments.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_environments.timeout = 60.0
+                    default_config.rpcs.list_environments.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_environment.timeout = 60.0
-                default_config.rpcs.get_environment.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_environment.timeout = 60.0
+                    default_config.rpcs.get_environment.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -353,14 +353,14 @@ module Google
             #   # Call the create_lake method.
             #   result = client.create_lake request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_lake request, options = nil
@@ -452,14 +452,14 @@ module Google
             #   # Call the update_lake method.
             #   result = client.update_lake request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_lake request, options = nil
@@ -547,14 +547,14 @@ module Google
             #   # Call the delete_lake method.
             #   result = client.delete_lake request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_lake request, options = nil
@@ -654,13 +654,11 @@ module Google
             #   # Call the list_lakes method.
             #   result = client.list_lakes request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Lake.
-            #     p response
+            #     p item
             #   end
             #
             def list_lakes request, options = nil
@@ -842,13 +840,11 @@ module Google
             #   # Call the list_lake_actions method.
             #   result = client.list_lake_actions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Action.
-            #     p response
+            #     p item
             #   end
             #
             def list_lake_actions request, options = nil
@@ -950,14 +946,14 @@ module Google
             #   # Call the create_zone method.
             #   result = client.create_zone request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_zone request, options = nil
@@ -1049,14 +1045,14 @@ module Google
             #   # Call the update_zone method.
             #   result = client.update_zone request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_zone request, options = nil
@@ -1144,14 +1140,14 @@ module Google
             #   # Call the delete_zone method.
             #   result = client.delete_zone request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_zone request, options = nil
@@ -1250,13 +1246,11 @@ module Google
             #   # Call the list_zones method.
             #   result = client.list_zones request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Zone.
-            #     p response
+            #     p item
             #   end
             #
             def list_zones request, options = nil
@@ -1438,13 +1432,11 @@ module Google
             #   # Call the list_zone_actions method.
             #   result = client.list_zone_actions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Action.
-            #     p response
+            #     p item
             #   end
             #
             def list_zone_actions request, options = nil
@@ -1545,14 +1537,14 @@ module Google
             #   # Call the create_asset method.
             #   result = client.create_asset request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_asset request, options = nil
@@ -1644,14 +1636,14 @@ module Google
             #   # Call the update_asset method.
             #   result = client.update_asset request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_asset request, options = nil
@@ -1739,14 +1731,14 @@ module Google
             #   # Call the delete_asset method.
             #   result = client.delete_asset request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_asset request, options = nil
@@ -1846,13 +1838,11 @@ module Google
             #   # Call the list_assets method.
             #   result = client.list_assets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Asset.
-            #     p response
+            #     p item
             #   end
             #
             def list_assets request, options = nil
@@ -2034,13 +2024,11 @@ module Google
             #   # Call the list_asset_actions method.
             #   result = client.list_asset_actions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Action.
-            #     p response
+            #     p item
             #   end
             #
             def list_asset_actions request, options = nil
@@ -2134,14 +2122,14 @@ module Google
             #   # Call the create_task method.
             #   result = client.create_task request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_task request, options = nil
@@ -2233,14 +2221,14 @@ module Google
             #   # Call the update_task method.
             #   result = client.update_task request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_task request, options = nil
@@ -2327,14 +2315,14 @@ module Google
             #   # Call the delete_task method.
             #   result = client.delete_task request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_task request, options = nil
@@ -2433,13 +2421,11 @@ module Google
             #   # Call the list_tasks method.
             #   result = client.list_tasks request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Task.
-            #     p response
+            #     p item
             #   end
             #
             def list_tasks request, options = nil
@@ -2621,13 +2607,11 @@ module Google
             #   # Call the list_jobs method.
             #   result = client.list_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Job.
-            #     p response
+            #     p item
             #   end
             #
             def list_jobs request, options = nil
@@ -2898,14 +2882,14 @@ module Google
             #   # Call the create_environment method.
             #   result = client.create_environment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_environment request, options = nil
@@ -2997,14 +2981,14 @@ module Google
             #   # Call the update_environment method.
             #   result = client.update_environment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_environment request, options = nil
@@ -3092,14 +3076,14 @@ module Google
             #   # Call the delete_environment method.
             #   result = client.delete_environment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_environment request, options = nil
@@ -3200,13 +3184,11 @@ module Google
             #   # Call the list_environments method.
             #   result = client.list_environments request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Environment.
-            #     p response
+            #     p item
             #   end
             #
             def list_environments request, options = nil
@@ -3398,13 +3380,11 @@ module Google
             #   # Call the list_sessions method.
             #   result = client.list_sessions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataplex::V1::Session.
-            #     p response
+            #     p item
             #   end
             #
             def list_sessions request, options = nil
@@ -3540,7 +3520,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -3822,3 +3802,4 @@ module Google
     end
   end
 end
+

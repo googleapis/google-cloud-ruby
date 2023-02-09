@@ -20,8 +20,11 @@
 require "google/cloud/dataform/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_remote_branches
+# Snippet for the fetch_remote_branches call in the Dataform service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_remote_branches. It
+# may require modification in order to execute successfully.
 #
 def fetch_remote_branches
   # Create a client object. The client can be reused for multiple calls.

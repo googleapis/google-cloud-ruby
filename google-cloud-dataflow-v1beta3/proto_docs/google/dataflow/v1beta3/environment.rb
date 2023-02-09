@@ -482,6 +482,7 @@ module Google
         # managed by the Cloud Dataflow service (how workers are scheduled, how
         # inputs are sharded, etc).
         module JobType
+
           # The type of the job is unspecified, or unknown.
           JOB_TYPE_UNKNOWN = 0
 
@@ -496,6 +497,7 @@ module Google
 
         # Specifies the resource to optimize for in Flexible Resource Scheduling.
         module FlexResourceSchedulingGoal
+
           # Run in the default mode.
           FLEXRS_UNSPECIFIED = 0
 
@@ -509,6 +511,7 @@ module Google
         # Specifies what happens to a resource when a Cloud Dataflow
         # {::Google::Cloud::Dataflow::V1beta3::Job google.dataflow.v1beta3.Job} has completed.
         module TeardownPolicy
+
           # The teardown policy isn't specified, or is unknown.
           TEARDOWN_POLICY_UNKNOWN = 0
 
@@ -526,6 +529,7 @@ module Google
 
         # The default set of packages to be staged on a pool of workers.
         module DefaultPackageSet
+
           # The default set of packages to stage is unknown, or unspecified.
           DEFAULT_PACKAGE_SET_UNKNOWN = 0
 
@@ -545,6 +549,7 @@ module Google
         # data left to process, the number of workers, and how quickly
         # existing workers are processing data.
         module AutoscalingAlgorithm
+
           # The algorithm is unknown, or unspecified.
           AUTOSCALING_ALGORITHM_UNKNOWN = 0
 
@@ -557,6 +562,7 @@ module Google
 
         # Specifies how IP addresses should be allocated to the worker machines.
         module WorkerIPAddressConfiguration
+
           # The configuration is unknown, or unspecified.
           WORKER_IP_UNSPECIFIED = 0
 
@@ -572,6 +578,7 @@ module Google
         # during processing. More details in:
         # https://cloud.google.com/dataflow/docs/guides/deploying-a-pipeline#dataflow-shuffle
         module ShuffleMode
+
           # Shuffle mode information is not available.
           SHUFFLE_MODE_UNSPECIFIED = 0
 
@@ -585,3 +592,4 @@ module Google
     end
   end
 end
+

@@ -69,9 +69,9 @@ module Google
         require "google/cloud/data_fusion/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DataFusion
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::DataFusion.const_get(package_name).const_get(:DataFusion)
         service_module.const_get(:Client).new(&block)
       end
@@ -115,3 +115,4 @@ end
 
 helper_path = ::File.join __dir__, "data_fusion", "helpers.rb"
 require "google/cloud/data_fusion/helpers" if ::File.file? helper_path
+

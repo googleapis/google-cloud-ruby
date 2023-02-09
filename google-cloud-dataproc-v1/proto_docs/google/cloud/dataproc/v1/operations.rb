@@ -61,6 +61,7 @@ module Google
 
           # Operation type for Batch resources
           module BatchOperationType
+
             # Batch operation type is unknown.
             BATCH_OPERATION_TYPE_UNSPECIFIED = 0
 
@@ -88,6 +89,7 @@ module Google
 
           # The operation state.
           module State
+
             # Unused.
             UNKNOWN = 0
 
@@ -181,6 +183,7 @@ module Google
 
           # Operation type for node group resources.
           module NodeGroupOperationType
+
             # Node group operation type is unknown.
             NODE_GROUP_OPERATION_TYPE_UNSPECIFIED = 0
 
@@ -201,3 +204,4 @@ module Google
     end
   end
 end
+

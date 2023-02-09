@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "data_fusion", "helpers.rb"
 require "google/cloud/data_fusion/v1/data_fusion/helpers" if ::File.file? helper_path
+

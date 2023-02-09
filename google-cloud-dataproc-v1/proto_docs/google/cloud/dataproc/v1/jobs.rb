@@ -45,6 +45,7 @@ module Google
           # [Apache Hive](https://hive.apache.org/) job, Cloud
           # Dataproc configures the Hive client to an equivalent verbosity level.
           module Level
+
             # Level is unspecified. Use default level for log4j.
             LEVEL_UNSPECIFIED = 0
 
@@ -544,6 +545,7 @@ module Google
 
           # The job state.
           module State
+
             # The job state is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -582,6 +584,7 @@ module Google
 
           # The job substate.
           module Substate
+
             # The job substate is unknown.
             UNSPECIFIED = 0
 
@@ -651,6 +654,7 @@ module Google
           # The application state, corresponding to
           # <code>YarnProtos.YarnApplicationStateProto</code>.
           module State
+
             # Status is unspecified.
             STATE_UNSPECIFIED = 0
 
@@ -933,6 +937,7 @@ module Google
 
           # A matcher that specifies categories of job states.
           module JobStateMatcher
+
             # Match all jobs, regardless of state.
             ALL = 0
 
@@ -1021,3 +1026,4 @@ module Google
     end
   end
 end
+
