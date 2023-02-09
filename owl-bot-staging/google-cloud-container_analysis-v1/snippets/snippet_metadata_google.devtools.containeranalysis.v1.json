@@ -1,0 +1,175 @@
+{
+  "client_library": {
+    "name": "google-cloud-container_analysis-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.devtools.containeranalysis.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "containeranalysis_v1_generated_ContainerAnalysis_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the ContainerAnalysis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "file": "container_analysis/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "ContainerAnalysis::Client",
+          "full_name": "::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.devtools.containeranalysis.v1.ContainerAnalysis.SetIamPolicy",
+          "service": {
+            "short_name": "ContainerAnalysis",
+            "full_name": "google.devtools.containeranalysis.v1.ContainerAnalysis"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "containeranalysis_v1_generated_ContainerAnalysis_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the ContainerAnalysis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "file": "container_analysis/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "ContainerAnalysis::Client",
+          "full_name": "::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.devtools.containeranalysis.v1.ContainerAnalysis.GetIamPolicy",
+          "service": {
+            "short_name": "ContainerAnalysis",
+            "full_name": "google.devtools.containeranalysis.v1.ContainerAnalysis"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "containeranalysis_v1_generated_ContainerAnalysis_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the ContainerAnalysis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "file": "container_analysis/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "ContainerAnalysis::Client",
+          "full_name": "::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.devtools.containeranalysis.v1.ContainerAnalysis.TestIamPermissions",
+          "service": {
+            "short_name": "ContainerAnalysis",
+            "full_name": "google.devtools.containeranalysis.v1.ContainerAnalysis"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "containeranalysis_v1_generated_ContainerAnalysis_GetVulnerabilityOccurrencesSummary_sync",
+      "title": "Snippet for the get_vulnerability_occurrences_summary call in the ContainerAnalysis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#get_vulnerability_occurrences_summary. It may require modification in order to execute successfully.",
+      "file": "container_analysis/get_vulnerability_occurrences_summary.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_vulnerability_occurrences_summary",
+        "full_name": "::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#get_vulnerability_occurrences_summary",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContainerAnalysis::V1::GetVulnerabilityOccurrencesSummaryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContainerAnalysis::V1::VulnerabilityOccurrencesSummary",
+        "client": {
+          "short_name": "ContainerAnalysis::Client",
+          "full_name": "::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client"
+        },
+        "method": {
+          "short_name": "GetVulnerabilityOccurrencesSummary",
+          "full_name": "google.devtools.containeranalysis.v1.ContainerAnalysis.GetVulnerabilityOccurrencesSummary",
+          "service": {
+            "short_name": "ContainerAnalysis",
+            "full_name": "google.devtools.containeranalysis.v1.ContainerAnalysis"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
