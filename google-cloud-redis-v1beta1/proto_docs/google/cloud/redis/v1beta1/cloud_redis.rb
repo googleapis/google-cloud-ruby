@@ -229,6 +229,7 @@ module Google
 
           # Represents the different states of a Redis instance.
           module State
+
             # Not set.
             STATE_UNSPECIFIED = 0
 
@@ -261,6 +262,7 @@ module Google
 
           # Available service tiers to choose from
           module Tier
+
             # Not set.
             TIER_UNSPECIFIED = 0
 
@@ -273,6 +275,7 @@ module Google
 
           # Available connection modes.
           module ConnectMode
+
             # Not set.
             CONNECT_MODE_UNSPECIFIED = 0
 
@@ -287,6 +290,7 @@ module Google
 
           # Available TLS modes.
           module TransitEncryptionMode
+
             # Not set.
             TRANSIT_ENCRYPTION_MODE_UNSPECIFIED = 0
 
@@ -299,6 +303,7 @@ module Google
 
           # Read replicas mode.
           module ReadReplicasMode
+
             # If not set, Memorystore Redis backend will default to
             # READ_REPLICAS_DISABLED.
             READ_REPLICAS_MODE_UNSPECIFIED = 0
@@ -340,6 +345,7 @@ module Google
 
           # Available Persistence modes.
           module PersistenceMode
+
             # Not set.
             PERSISTENCE_MODE_UNSPECIFIED = 0
 
@@ -353,6 +359,7 @@ module Google
 
           # Available snapshot periods for scheduling.
           module SnapshotPeriod
+
             # Not set.
             SNAPSHOT_PERIOD_UNSPECIFIED = 0
 
@@ -390,6 +397,7 @@ module Google
 
           # Reschedule options.
           module RescheduleType
+
             # Not set.
             RESCHEDULE_TYPE_UNSPECIFIED = 0
 
@@ -694,6 +702,7 @@ module Google
 
           # Specifies different modes of operation in relation to the data retention.
           module DataProtectionMode
+
             # Defaults to LIMITED_DATA_LOSS if a data protection mode is not
             # specified.
             DATA_PROTECTION_MODE_UNSPECIFIED = 0
@@ -768,3 +777,4 @@ module Google
     end
   end
 end
+

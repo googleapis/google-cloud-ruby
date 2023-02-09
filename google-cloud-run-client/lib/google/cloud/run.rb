@@ -67,9 +67,9 @@ module Google
         require "google/cloud/run/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Run
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Run.const_get(package_name).const_get(:Executions)
         service_module.const_get(:Client).new(&block)
       end
@@ -97,9 +97,9 @@ module Google
         require "google/cloud/run/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Run
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Run.const_get(package_name).const_get(:Jobs)
         service_module.const_get(:Client).new(&block)
       end
@@ -127,9 +127,9 @@ module Google
         require "google/cloud/run/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Run
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Run.const_get(package_name).const_get(:Revisions)
         service_module.const_get(:Client).new(&block)
       end
@@ -157,9 +157,9 @@ module Google
         require "google/cloud/run/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Run
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Run.const_get(package_name).const_get(:Services)
         service_module.const_get(:Client).new(&block)
       end
@@ -187,9 +187,9 @@ module Google
         require "google/cloud/run/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Run
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Run.const_get(package_name).const_get(:Tasks)
         service_module.const_get(:Client).new(&block)
       end
@@ -233,3 +233,4 @@ end
 
 helper_path = ::File.join __dir__, "run", "helpers.rb"
 require "google/cloud/run/helpers" if ::File.file? helper_path
+

@@ -375,6 +375,7 @@ module Google
 
         # The HTTP method used to execute the job.
         module HttpMethod
+
           # HTTP method unspecified. Defaults to POST.
           HTTP_METHOD_UNSPECIFIED = 0
 
@@ -403,3 +404,4 @@ module Google
     end
   end
 end
+

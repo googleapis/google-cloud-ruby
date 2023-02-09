@@ -517,6 +517,7 @@ module Google
 
           # The type of this product.
           module Type
+
             # Default value. Default to
             # {::Google::Cloud::Retail::V2::ProductLevelConfig#ingestion_product_type Catalog.product_level_config.ingestion_product_type}
             # if unset.
@@ -553,6 +554,7 @@ module Google
           # Product availability. If this field is unspecified, the product is
           # assumed to be in stock.
           module Availability
+
             # Default product availability. Default to
             # {::Google::Cloud::Retail::V2::Product::Availability::IN_STOCK Availability.IN_STOCK}
             # if unset.
@@ -575,3 +577,4 @@ module Google
     end
   end
 end
+

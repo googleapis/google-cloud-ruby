@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "cloud_scheduler", "helpers.rb"
 require "google/cloud/scheduler/v1beta1/cloud_scheduler/helpers" if ::File.file? helper_path
+

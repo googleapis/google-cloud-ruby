@@ -143,6 +143,7 @@ module Google
 
             # The type of a {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}, indicating its issuing chain.
             module Type
+
               # Not specified.
               TYPE_UNSPECIFIED = 0
 
@@ -156,6 +157,7 @@ module Google
 
             # The state of a {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}, indicating if it can be used.
             module State
+
               # Not specified.
               STATE_UNSPECIFIED = 0
 
@@ -198,6 +200,7 @@ module Google
             # recommendations, see
             # https://cloud.google.com/kms/docs/algorithms#algorithm_recommendations.
             module SignHashAlgorithm
+
               # Not specified.
               SIGN_HASH_ALGORITHM_UNSPECIFIED = 0
 
@@ -372,6 +375,7 @@ module Google
                   # Describes an elliptic curve-based signature algorithm that may be
                   # used in a {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate} issued from a {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}.
                   module EcSignatureAlgorithm
+
                     # Not specified. Signifies that any signature algorithm may be used.
                     EC_SIGNATURE_ALGORITHM_UNSPECIFIED = 0
 
@@ -419,6 +423,7 @@ module Google
             # The tier of a {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}, indicating its supported functionality and/or
             # billing SKU.
             module Tier
+
               # Not specified.
               TIER_UNSPECIFIED = 0
 
@@ -499,6 +504,7 @@ module Google
 
             # The state of a {::Google::Cloud::Security::PrivateCA::V1::CertificateRevocationList CertificateRevocationList}, indicating if it is current.
             module State
+
               # Not specified.
               STATE_UNSPECIFIED = 0
 
@@ -739,6 +745,7 @@ module Google
             # Types of public keys formats that are supported. Currently, only `PEM`
             # format is supported.
             module KeyFormat
+
               # Default unspecified value.
               KEY_FORMAT_UNSPECIFIED = 0
 
@@ -1088,6 +1095,7 @@ module Google
             # Describes well-known X.509 extensions that can appear in a {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate},
             # not including the {::Google::Cloud::Security::PrivateCA::V1::SubjectAltNames SubjectAltNames} extension.
             module KnownCertificateExtension
+
               # Not specified.
               KNOWN_CERTIFICATE_EXTENSION_UNSPECIFIED = 0
 
@@ -1129,6 +1137,7 @@ module Google
           # definition are not the same ASN.1 values defined in RFC 5280. These values
           # will be translated to the correct ASN.1 values when a CRL is created.
           module RevocationReason
+
             # Default unspecified value. This value does indicate that a {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate}
             # has been revoked, but that a reason has not been recorded.
             REVOCATION_REASON_UNSPECIFIED = 0
@@ -1166,6 +1175,7 @@ module Google
           # Describes the way in which a {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate}'s {::Google::Cloud::Security::PrivateCA::V1::Subject Subject} and/or
           # {::Google::Cloud::Security::PrivateCA::V1::SubjectAltNames SubjectAltNames} will be resolved.
           module SubjectRequestMode
+
             # Not specified.
             SUBJECT_REQUEST_MODE_UNSPECIFIED = 0
 
@@ -1188,3 +1198,4 @@ module Google
     end
   end
 end
+

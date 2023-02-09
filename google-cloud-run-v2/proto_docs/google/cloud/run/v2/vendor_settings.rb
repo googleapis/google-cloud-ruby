@@ -39,6 +39,7 @@ module Google
 
           # Egress options for VPC access.
           module VpcEgress
+
             # Unspecified
             VPC_EGRESS_UNSPECIFIED = 0
 
@@ -80,6 +81,7 @@ module Google
 
         # Allowed ingress traffic for the Container.
         module IngressTraffic
+
           # Unspecified
           INGRESS_TRAFFIC_UNSPECIFIED = 0
 
@@ -95,6 +97,7 @@ module Google
 
         # Alternatives for execution environments.
         module ExecutionEnvironment
+
           # Unspecified
           EXECUTION_ENVIRONMENT_UNSPECIFIED = 0
 
@@ -107,6 +110,7 @@ module Google
 
         # Specifies behavior if an encryption key used by a resource is revoked.
         module EncryptionKeyRevocationAction
+
           # Unspecified
           ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED = 0
 
@@ -120,3 +124,4 @@ module Google
     end
   end
 end
+

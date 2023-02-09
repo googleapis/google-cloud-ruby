@@ -64,19 +64,19 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 5.0
-                default_config.retry_policy = {
-                  initial_delay: 0.1, max_delay: 5.0, multiplier: 1.3, retry_codes: [14, 4]
+                  default_config.timeout = 5.0
+                  default_config.retry_policy = {
+                initial_delay: 0.1, max_delay: 5.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.purge_user_events.timeout = 30.0
-                default_config.rpcs.purge_user_events.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14, 4]
+                    default_config.rpcs.purge_user_events.timeout = 30.0
+                    default_config.rpcs.purge_user_events.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.import_user_events.timeout = 600.0
-                default_config.rpcs.import_user_events.retry_policy = {
-                  initial_delay: 0.1, max_delay: 300.0, multiplier: 1.3, retry_codes: [14, 4]
+                    default_config.rpcs.import_user_events.timeout = 600.0
+                    default_config.rpcs.import_user_events.retry_policy ={
+                initial_delay: 0.1, max_delay: 300.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -449,14 +449,14 @@ module Google
             #   # Call the purge_user_events method.
             #   result = client.purge_user_events request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def purge_user_events request, options = nil
@@ -553,14 +553,14 @@ module Google
             #   # Call the import_user_events method.
             #   result = client.import_user_events request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def import_user_events request, options = nil
@@ -659,14 +659,14 @@ module Google
             #   # Call the rejoin_user_events method.
             #   result = client.rejoin_user_events request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def rejoin_user_events request, options = nil
@@ -802,7 +802,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -895,3 +895,4 @@ module Google
     end
   end
 end
+

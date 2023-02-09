@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "control_service", "helpers.rb"
 require "google/cloud/retail/v2/control_service/helpers" if ::File.file? helper_path
+

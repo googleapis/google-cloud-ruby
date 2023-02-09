@@ -62,3 +62,4 @@ end
 
 helper_path = ::File.join __dir__, "cloud_redis", "helpers.rb"
 require "google/cloud/redis/v1beta1/cloud_redis/helpers" if ::File.file? helper_path
+

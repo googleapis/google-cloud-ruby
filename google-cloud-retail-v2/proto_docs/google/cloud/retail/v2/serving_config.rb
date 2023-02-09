@@ -239,6 +239,7 @@ module Google
 
           # What type of diversity - data or rule based.
           module DiversityType
+
             # Default value.
             DIVERSITY_TYPE_UNSPECIFIED = 0
 
@@ -253,3 +254,4 @@ module Google
     end
   end
 end
+

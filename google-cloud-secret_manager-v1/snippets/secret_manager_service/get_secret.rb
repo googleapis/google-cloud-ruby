@@ -20,8 +20,11 @@
 require "google/cloud/secret_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecretManager::V1::SecretManagerService::Client#get_secret
+# Snippet for the get_secret call in the SecretManagerService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecretManager::V1::SecretManagerService::Client#get_secret. It
+# may require modification in order to execute successfully.
 #
 def get_secret
   # Create a client object. The client can be reused for multiple calls.

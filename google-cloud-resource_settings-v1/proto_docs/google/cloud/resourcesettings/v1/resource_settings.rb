@@ -92,6 +92,7 @@ module Google
           # The data type for setting values of this setting. See {::Google::Cloud::ResourceSettings::V1::Value Value} for more
           # details on the available data types.
           module DataType
+
             # Unspecified data type.
             DATA_TYPE_UNSPECIFIED = 0
 
@@ -209,6 +210,7 @@ module Google
 
         # View options for Settings.
         module SettingView
+
           # The default / unset value.
           # The API will default to the SETTING_VIEW_BASIC view.
           SETTING_VIEW_UNSPECIFIED = 0
@@ -227,3 +229,4 @@ module Google
     end
   end
 end
+

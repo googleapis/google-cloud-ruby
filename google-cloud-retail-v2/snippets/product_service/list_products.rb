@@ -20,8 +20,11 @@
 require "google/cloud/retail/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Retail::V2::ProductService::Client#list_products
+# Snippet for the list_products call in the ProductService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ProductService::Client#list_products. It may
+# require modification in order to execute successfully.
 #
 def list_products
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_products
   # Call the list_products method.
   result = client.list_products request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Retail::V2::Product.
-    p response
+    p item
   end
 end
 # [END retail_v2_generated_ProductService_ListProducts_sync]

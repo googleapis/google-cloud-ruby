@@ -98,6 +98,7 @@ module Google
           # If all events needs to be rejoined, set `UserEventRejoinScope` to
           # `USER_EVENT_REJOIN_SCOPE_UNSPECIFIED`.
           module UserEventRejoinScope
+
             # Rejoin all events with the latest product catalog, including both joined
             # events and unjoined events.
             USER_EVENT_REJOIN_SCOPE_UNSPECIFIED = 0
@@ -128,3 +129,4 @@ module Google
     end
   end
 end
+

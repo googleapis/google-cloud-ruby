@@ -58,3 +58,4 @@ end
 
 helper_path = ::File.join __dir__, "resource_settings_service", "helpers.rb"
 require "google/cloud/resource_settings/v1/resource_settings_service/helpers" if ::File.file? helper_path
+

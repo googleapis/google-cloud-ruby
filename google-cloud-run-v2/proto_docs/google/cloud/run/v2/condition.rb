@@ -56,6 +56,7 @@ module Google
 
           # Represents the possible Condition states.
           module State
+
             # The default value. This value is used if the state is omitted.
             STATE_UNSPECIFIED = 0
 
@@ -74,6 +75,7 @@ module Google
 
           # Represents the severity of the condition failures.
           module Severity
+
             # Unspecified severity
             SEVERITY_UNSPECIFIED = 0
 
@@ -89,6 +91,7 @@ module Google
 
           # Reasons common to all types of conditions.
           module CommonReason
+
             # Default value.
             COMMON_REASON_UNDEFINED = 0
 
@@ -137,6 +140,7 @@ module Google
 
           # Reasons specific to Revision resource.
           module RevisionReason
+
             # Default value.
             REVISION_REASON_UNDEFINED = 0
 
@@ -186,6 +190,7 @@ module Google
 
           # Reasons specific to Execution resource.
           module ExecutionReason
+
             # Default value.
             EXECUTION_REASON_UNDEFINED = 0
 
@@ -204,3 +209,4 @@ module Google
     end
   end
 end
+

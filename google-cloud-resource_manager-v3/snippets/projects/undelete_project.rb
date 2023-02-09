@@ -20,8 +20,11 @@
 require "google/cloud/resource_manager/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ResourceManager::V3::Projects::Client#undelete_project
+# Snippet for the undelete_project call in the Projects service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::Projects::Client#undelete_project. It may
+# require modification in order to execute successfully.
 #
 def undelete_project
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def undelete_project
   # Call the undelete_project method.
   result = client.undelete_project request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END cloudresourcemanager_v3_generated_Projects_UndeleteProject_sync]

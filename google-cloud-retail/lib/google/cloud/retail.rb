@@ -67,9 +67,9 @@ module Google
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:CatalogService)
         service_module.const_get(:Client).new(&block)
       end
@@ -100,9 +100,9 @@ module Google
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:CompletionService)
         service_module.const_get(:Client).new(&block)
       end
@@ -130,9 +130,9 @@ module Google
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:ControlService)
         service_module.const_get(:Client).new(&block)
       end
@@ -160,9 +160,9 @@ module Google
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:PredictionService)
         service_module.const_get(:Client).new(&block)
       end
@@ -191,9 +191,9 @@ module Google
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:ProductService)
         service_module.const_get(:Client).new(&block)
       end
@@ -224,9 +224,9 @@ module Google
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:SearchService)
         service_module.const_get(:Client).new(&block)
       end
@@ -254,9 +254,9 @@ module Google
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:ServingConfigService)
         service_module.const_get(:Client).new(&block)
       end
@@ -284,9 +284,9 @@ module Google
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:UserEventService)
         service_module.const_get(:Client).new(&block)
       end
@@ -330,3 +330,4 @@ end
 
 helper_path = ::File.join __dir__, "retail", "helpers.rb"
 require "google/cloud/retail/helpers" if ::File.file? helper_path
+

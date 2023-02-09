@@ -53,3 +53,4 @@ end
 
 helper_path = ::File.join __dir__, "secret_manager_service", "helpers.rb"
 require "google/cloud/secret_manager/v1beta1/secret_manager_service/helpers" if ::File.file? helper_path
+

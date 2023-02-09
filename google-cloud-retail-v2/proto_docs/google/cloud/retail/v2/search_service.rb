@@ -519,6 +519,7 @@ module Google
 
             # Enum to control DynamicFacet mode
             module Mode
+
               # Default value.
               MODE_UNSPECIFIED = 0
 
@@ -606,6 +607,7 @@ module Google
 
             # Enum describing under which condition query expansion should occur.
             module Condition
+
               # Unspecified query expansion condition. In this case, server behavior
               # defaults to
               # {::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec::Condition::DISABLED Condition.DISABLED}.
@@ -632,6 +634,7 @@ module Google
 
             # The personalization mode of each search request.
             module Mode
+
               # Default value. In this case, server behavior defaults to
               # {::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec::Mode::AUTO Mode.AUTO}.
               MODE_UNSPECIFIED = 0
@@ -657,6 +660,7 @@ module Google
 
             # Enum describing under which mode spell correction should occur.
             module Mode
+
               # Unspecified spell correction mode. In this case, server behavior
               # defaults to
               # {::Google::Cloud::Retail::V2::SearchRequest::SpellCorrectionSpec::Mode::AUTO Mode.AUTO}.
@@ -685,6 +689,7 @@ module Google
 
           # The search mode of each search request.
           module SearchMode
+
             # Default value. In this case both product search and faceted search will
             # be performed. Both
             # {::Google::Cloud::Retail::V2::SearchResponse::SearchResult SearchResponse.SearchResult}
@@ -951,3 +956,4 @@ module Google
     end
   end
 end
+

@@ -20,8 +20,11 @@
 require "google/cloud/resource_manager/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ResourceManager::V3::TagValues::Client#update_tag_value
+# Snippet for the update_tag_value call in the TagValues service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::TagValues::Client#update_tag_value. It may
+# require modification in order to execute successfully.
 #
 def update_tag_value
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def update_tag_value
   # Call the update_tag_value method.
   result = client.update_tag_value request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END cloudresourcemanager_v3_generated_TagValues_UpdateTagValue_sync]

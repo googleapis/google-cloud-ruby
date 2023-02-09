@@ -60,6 +60,7 @@ module Google
 
           # Organization lifecycle states.
           module State
+
             # Unspecified state.  This is only useful for distinguishing unset values.
             STATE_UNSPECIFIED = 0
 
@@ -151,3 +152,4 @@ module Google
     end
   end
 end
+

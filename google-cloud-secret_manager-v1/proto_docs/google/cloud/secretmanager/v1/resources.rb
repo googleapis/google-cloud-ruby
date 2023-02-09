@@ -185,6 +185,7 @@ module Google
           # {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}, indicating if
           # it can be accessed.
           module State
+
             # Not specified. This value is unused and invalid.
             STATE_UNSPECIFIED = 0
 
@@ -459,3 +460,4 @@ module Google
     end
   end
 end
+

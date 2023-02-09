@@ -20,8 +20,11 @@
 require "google/cloud/scheduler/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#resume_job
+# Snippet for the resume_job call in the CloudScheduler service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#resume_job. It may
+# require modification in order to execute successfully.
 #
 def resume_job
   # Create a client object. The client can be reused for multiple calls.

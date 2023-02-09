@@ -20,8 +20,11 @@
 require "google/cloud/resource_manager/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ResourceManager::V3::Organizations::Client#get_organization
+# Snippet for the get_organization call in the Organizations service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::Organizations::Client#get_organization. It
+# may require modification in order to execute successfully.
 #
 def get_organization
   # Create a client object. The client can be reused for multiple calls.

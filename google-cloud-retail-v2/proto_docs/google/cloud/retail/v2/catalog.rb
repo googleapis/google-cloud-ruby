@@ -164,6 +164,7 @@ module Google
 
           # The type of an attribute.
           module AttributeType
+
             # The type of the attribute is unknown.
             #
             # Used when type cannot be derived from attribute that is not
@@ -179,6 +180,7 @@ module Google
 
           # The status of the indexable option of a catalog attribute.
           module IndexableOption
+
             # Value used when unset.
             INDEXABLE_OPTION_UNSPECIFIED = 0
 
@@ -191,6 +193,7 @@ module Google
 
           # The status of the dynamic facetable option of a catalog attribute.
           module DynamicFacetableOption
+
             # Value used when unset.
             DYNAMIC_FACETABLE_OPTION_UNSPECIFIED = 0
 
@@ -203,6 +206,7 @@ module Google
 
           # The status of the searchable option of a catalog attribute.
           module SearchableOption
+
             # Value used when unset.
             SEARCHABLE_OPTION_UNSPECIFIED = 0
 
@@ -215,6 +219,7 @@ module Google
 
           # The status of the exact-searchable option of a catalog attribute.
           module ExactSearchableOption
+
             # Value used when unset. Defaults to
             # {::Google::Cloud::Retail::V2::CatalogAttribute::ExactSearchableOption::EXACT_SEARCHABLE_DISABLED EXACT_SEARCHABLE_DISABLED}.
             EXACT_SEARCHABLE_OPTION_UNSPECIFIED = 0
@@ -228,6 +233,7 @@ module Google
 
           # The status of the retrievable option of a catalog attribute.
           module RetrievableOption
+
             # Value used when unset. Defaults to
             # {::Google::Cloud::Retail::V2::CatalogAttribute::RetrievableOption::RETRIEVABLE_DISABLED RETRIEVABLE_DISABLED}.
             RETRIEVABLE_OPTION_UNSPECIFIED = 0
@@ -370,3 +376,4 @@ module Google
     end
   end
 end
+

@@ -98,6 +98,7 @@ module Google
 
           # Project lifecycle states.
           module State
+
             # Unspecified state.  This is only used/useful for distinguishing
             # unset values.
             STATE_UNSPECIFIED = 0
@@ -397,3 +398,4 @@ module Google
     end
   end
 end
+

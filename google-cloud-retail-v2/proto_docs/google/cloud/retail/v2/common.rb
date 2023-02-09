@@ -780,6 +780,7 @@ module Google
 
         # At which level we offer configuration for attributes.
         module AttributeConfigLevel
+
           # Value used when unset. In this case, server behavior defaults to
           # {::Google::Cloud::Retail::V2::AttributeConfigLevel::CATALOG_LEVEL_ATTRIBUTE_CONFIG CATALOG_LEVEL_ATTRIBUTE_CONFIG}.
           ATTRIBUTE_CONFIG_LEVEL_UNSPECIFIED = 0
@@ -795,6 +796,7 @@ module Google
 
         # The type of solution.
         module SolutionType
+
           # Default value.
           SOLUTION_TYPE_UNSPECIFIED = 0
 
@@ -807,6 +809,7 @@ module Google
 
         # The use case of Cloud Retail Search.
         module SearchSolutionUseCase
+
           # The value when it's unspecified. In this case, server behavior defaults to
           # {::Google::Cloud::Retail::V2::SearchSolutionUseCase::SEARCH_SOLUTION_USE_CASE_SEARCH SEARCH_SOLUTION_USE_CASE_SEARCH}.
           SEARCH_SOLUTION_USE_CASE_UNSPECIFIED = 0
@@ -823,3 +826,4 @@ module Google
     end
   end
 end
+

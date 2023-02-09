@@ -81,9 +81,9 @@ module Google
         require "google/cloud/redis/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Redis
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Redis.const_get(package_name).const_get(:CloudRedis)
         service_module.const_get(:Client).new(&block)
       end
@@ -127,3 +127,4 @@ end
 
 helper_path = ::File.join __dir__, "redis", "helpers.rb"
 require "google/cloud/redis/helpers" if ::File.file? helper_path
+

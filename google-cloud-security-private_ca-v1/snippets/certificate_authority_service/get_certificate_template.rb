@@ -20,8 +20,11 @@
 require "google/cloud/security/private_ca/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#get_certificate_template
+# Snippet for the get_certificate_template call in the CertificateAuthorityService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#get_certificate_template.
+# It may require modification in order to execute successfully.
 #
 def get_certificate_template
   # Create a client object. The client can be reused for multiple calls.

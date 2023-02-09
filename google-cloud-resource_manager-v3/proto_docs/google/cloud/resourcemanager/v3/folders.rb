@@ -67,6 +67,7 @@ module Google
 
           # Folder lifecycle states.
           module State
+
             # Unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -307,3 +308,4 @@ module Google
     end
   end
 end
+

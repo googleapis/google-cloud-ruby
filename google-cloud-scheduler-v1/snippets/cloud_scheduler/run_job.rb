@@ -20,8 +20,11 @@
 require "google/cloud/scheduler/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Scheduler::V1::CloudScheduler::Client#run_job
+# Snippet for the run_job call in the CloudScheduler service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Scheduler::V1::CloudScheduler::Client#run_job. It may require
+# modification in order to execute successfully.
 #
 def run_job
   # Create a client object. The client can be reused for multiple calls.

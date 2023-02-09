@@ -70,9 +70,9 @@ module Google
           require "google/cloud/security/public_ca/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Security::PublicCA
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
+                          .constants
+                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                          .first
           service_module = Google::Cloud::Security::PublicCA.const_get(package_name).const_get(:PublicCertificateAuthorityService)
           service_module.const_get(:Client).new(&block)
         end
@@ -117,3 +117,4 @@ end
 
 helper_path = ::File.join __dir__, "public_ca", "helpers.rb"
 require "google/cloud/security/public_ca/helpers" if ::File.file? helper_path
+

@@ -66,6 +66,7 @@ module Google
 
         # The type of instance allocation.
         module TrafficTargetAllocationType
+
           # Unspecified instance allocation type.
           TRAFFIC_TARGET_ALLOCATION_TYPE_UNSPECIFIED = 0
 
@@ -79,3 +80,4 @@ module Google
     end
   end
 end
+

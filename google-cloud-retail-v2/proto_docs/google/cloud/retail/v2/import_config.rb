@@ -201,6 +201,7 @@ module Google
           # Indicates how imported products are reconciled with the existing products
           # created or imported before.
           module ReconciliationMode
+
             # Defaults to INCREMENTAL.
             RECONCILIATION_MODE_UNSPECIFIED = 0
 
@@ -385,3 +386,4 @@ module Google
     end
   end
 end
+

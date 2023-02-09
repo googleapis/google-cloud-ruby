@@ -274,6 +274,7 @@ module Google
 
             # The type of a {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority CertificateAuthority}, indicating its issuing chain.
             module Type
+
               # Not specified.
               TYPE_UNSPECIFIED = 0
 
@@ -288,6 +289,7 @@ module Google
             # The tier of a {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority CertificateAuthority}, indicating its supported
             # functionality and/or billing SKU.
             module Tier
+
               # Not specified.
               TIER_UNSPECIFIED = 0
 
@@ -300,6 +302,7 @@ module Google
 
             # The state of a {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority CertificateAuthority}, indicating if it can be used.
             module State
+
               # Not specified.
               STATE_UNSPECIFIED = 0
 
@@ -327,6 +330,7 @@ module Google
             # recommandations, see
             # https://cloud.google.com/kms/docs/algorithms#algorithm_recommendations.
             module SignHashAlgorithm
+
               # Not specified.
               SIGN_HASH_ALGORITHM_UNSPECIFIED = 0
 
@@ -420,6 +424,7 @@ module Google
 
             # The state of a {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateRevocationList CertificateRevocationList}, indicating if it is current.
             module State
+
               # Not specified.
               STATE_UNSPECIFIED = 0
 
@@ -639,6 +644,7 @@ module Google
             # At a minimum, we support RSA and ECDSA, for the key sizes or curves listed:
             # https://cloud.google.com/kms/docs/algorithms#asymmetric_signing_algorithms
             module KeyType
+
               # Default unspecified value.
               KEY_TYPE_UNSPECIFIED = 0
 
@@ -941,6 +947,7 @@ module Google
           # definition are not the same ASN.1 values defined in RFC 5280. These values
           # will be translated to the correct ASN.1 values when a CRL is created.
           module RevocationReason
+
             # Default unspecified value. This value does indicate that a {::Google::Cloud::Security::PrivateCA::V1beta1::Certificate Certificate}
             # has been revoked, but that a reason has not been recorded.
             REVOCATION_REASON_UNSPECIFIED = 0
@@ -979,3 +986,4 @@ module Google
     end
   end
 end
+
