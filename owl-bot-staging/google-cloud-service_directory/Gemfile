@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-service_directory-v1", path: "../google-cloud-service_directory-v1"
+gem "google-cloud-service_directory-v1beta1", path: "../google-cloud-service_directory-v1beta1"
