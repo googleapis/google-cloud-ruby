@@ -1,5 +1,11 @@
 # Release History
 
+### 2.10.0 (2023-02-09)
+
+#### Features
+
+* Added support for multiple databases ([#20029](https://github.com/googleapis/google-cloud-ruby/issues/20029)) 
+
 ### 2.9.1 (2023-02-03)
 
 #### Bug Fixes
