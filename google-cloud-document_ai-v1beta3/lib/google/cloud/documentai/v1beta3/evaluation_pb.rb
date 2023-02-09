@@ -8,6 +8,12 @@ require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/documentai/v1beta3/evaluation.proto", :syntax => :proto3) do
+    add_message "google.cloud.documentai.v1beta3.EvaluationReference" do
+      optional :operation, :string, 1
+      optional :evaluation, :string, 2
+      optional :aggregate_metrics, :message, 4, "google.cloud.documentai.v1beta3.Evaluation.Metrics"
+      optional :aggregate_metrics_exact, :message, 5, "google.cloud.documentai.v1beta3.Evaluation.Metrics"
+    end
     add_message "google.cloud.documentai.v1beta3.Evaluation" do
       optional :name, :string, 1
       optional :create_time, :message, 2, "google.protobuf.Timestamp"
@@ -60,6 +66,7 @@ module Google
   module Cloud
     module DocumentAI
       module V1beta3
+        EvaluationReference = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.EvaluationReference").msgclass
         Evaluation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.Evaluation").msgclass
         Evaluation::Counters = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.Evaluation.Counters").msgclass
         Evaluation::Metrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.Evaluation.Metrics").msgclass
