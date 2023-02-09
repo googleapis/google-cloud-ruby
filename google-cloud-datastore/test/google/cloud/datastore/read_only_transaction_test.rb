@@ -18,7 +18,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   let(:service) do
     s = dataset.service
     s.mocked_service = Minitest::Mock.new
-    s.mocked_service.expect :begin_transaction, begin_tx_res, project_id: project, transaction_options: Google::Cloud::Datastore::V1::TransactionOptions.new(read_write: nil, read_only: Google::Cloud::Datastore::V1::TransactionOptions::ReadOnly.new)
+    s.mocked_service.expect :begin_transaction, begin_tx_res, project_id: project, database_id: default_database, transaction_options: Google::Cloud::Datastore::V1::TransactionOptions.new(read_write: nil, read_only: Google::Cloud::Datastore::V1::TransactionOptions::ReadOnly.new)
     s
   end
   let(:transaction) { Google::Cloud::Datastore::ReadOnlyTransaction.new service }
@@ -129,7 +129,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   it "find can take a key" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc]
     read_options = Google::Cloud::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    transaction.service.mocked_service.expect :lookup, lookup_res, project_id: project, keys: keys, read_options: read_options
+    transaction.service.mocked_service.expect :lookup, lookup_res, project_id: project,  keys: keys, read_options: read_options, database_id: default_database
 
     key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
     entity = transaction.find key
@@ -140,7 +140,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
              Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
     read_options = Google::Cloud::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    transaction.service.mocked_service.expect :lookup, lookup_res, project_id: project, keys: keys, read_options: read_options
+    transaction.service.mocked_service.expect :lookup, lookup_res, project_id: project, database_id: default_database, keys: keys, read_options: read_options
 
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -154,7 +154,8 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   end
 
   it "run will fulfill a query" do
-    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: query_grpc, gql_query: nil
+    query_grpc = Google::Cloud::Datastore::Query.new.kind("User").to_grpc
+    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: query_grpc, gql_query: nil, database_id: default_database
 
     query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = transaction.run query
@@ -172,7 +173,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   end
 
   it "run will fulfill a gql query" do
-    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: nil, gql_query: gql_query_grpc
+    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: nil, gql_query: gql_query_grpc, database_id: default_database
 
     gql = transaction.gql "SELECT * FROM Task"
     entities = transaction.run gql

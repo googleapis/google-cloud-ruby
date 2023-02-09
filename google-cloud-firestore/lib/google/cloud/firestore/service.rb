@@ -30,14 +30,16 @@ module Google
         attr_accessor :credentials
         attr_accessor :timeout
         attr_accessor :host
+        attr_accessor :database
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil
+        def initialize project, credentials, host: nil, timeout: nil, database: nil
           @project = project
           @credentials = credentials
           @host = host
           @timeout = timeout
+          @database = database
         end
 
         def firestore
@@ -48,7 +50,7 @@ module Google
               config.endpoint = host if host
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::Firestore::VERSION
-              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/(default)" }
+              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/#{@database}" }
             end
         end
 
@@ -181,18 +183,18 @@ module Google
           )
         end
 
-        def database_path project_id: project, database_id: "(default)"
+        def database_path project_id: project, database_id: database
           # Originally used V1::FirestoreClient.database_root_path until it was removed in #5405.
           "projects/#{project_id}/databases/#{database_id}"
         end
 
-        def documents_path project_id: project, database_id: "(default)"
+        def documents_path project_id: project, database_id: database
           # Originally used V1::FirestoreClient.document_root_path until it was removed in #5405.
           "projects/#{project_id}/databases/#{database_id}/documents"
         end
 
         def inspect
-          "#{self.class}(#{@project})"
+          "#{self.class}(#{@project})(#{@database})"
         end
 
         def read_time_to_timestamp read_time

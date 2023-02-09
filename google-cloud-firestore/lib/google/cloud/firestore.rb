@@ -59,6 +59,8 @@ module Google
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Firestore emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
+      # @param [String] database_id Identifier for a Firestore database. If not
+      #   present, the default database of the project is used.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -76,19 +78,22 @@ module Google
                    timeout: nil,
                    endpoint: nil,
                    emulator_host: nil,
+                   database_id: nil,
                    project: nil,
                    keyfile: nil
-        project_id    ||= (project || default_project_id)
-        scope         ||= configure.scope
-        timeout       ||= configure.timeout
-        endpoint      ||= configure.endpoint
+        project_id ||= (project || default_project_id)
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        endpoint ||= configure.endpoint
         emulator_host ||= configure.emulator_host
+        database_id ||= configure.database_id
 
         if emulator_host
           project_id = project_id.to_s
           raise ArgumentError, "project_id is missing" if project_id.empty?
 
-          service = Firestore::Service.new project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout
+          service = Firestore::Service.new project_id, :this_channel_is_insecure, host: emulator_host,
+                                           timeout: timeout, database: database_id
           return Firestore::Client.new service
         end
 
@@ -103,7 +108,8 @@ module Google
         project_id = project_id.to_s
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        service = Firestore::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        service = Firestore::Service.new project_id, credentials, host: endpoint,
+                                         timeout: timeout, database: database_id
         Firestore::Client.new service
       end
 

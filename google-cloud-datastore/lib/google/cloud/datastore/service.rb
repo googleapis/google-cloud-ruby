@@ -29,14 +29,16 @@ module Google
         attr_accessor :credentials
         attr_accessor :host
         attr_accessor :timeout
+        attr_accessor :database
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil
+        def initialize project, credentials, database, host: nil, timeout: nil
           @project = project
           @credentials = credentials
           @host = host
           @timeout = timeout
+          @database = database
         end
 
         def service
@@ -47,7 +49,7 @@ module Google
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::Datastore::VERSION
-            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/#{database}" }
           end
         end
 
@@ -57,14 +59,14 @@ module Google
         # Allocate IDs for incomplete keys.
         # (This is useful for referencing an entity before it is inserted.)
         def allocate_ids *incomplete_keys
-          service.allocate_ids project_id: project, keys: incomplete_keys
+          service.allocate_ids project_id: project, database_id: database, keys: incomplete_keys
         end
 
         ##
         # Look up entities by keys.
         def lookup *keys, consistency: nil, transaction: nil, read_time: nil
           read_options = generate_read_options consistency, transaction, read_time
-          service.lookup project_id: project, keys: keys, read_options: read_options
+          service.lookup project_id: project, database_id: database, keys: keys, read_options: read_options
         end
 
         # Query for entities.
@@ -82,6 +84,7 @@ module Google
           end
 
           service.run_query project_id: project,
+                            database_id: database,
                             partition_id: partition_id,
                             read_options: read_options,
                             query: query,
@@ -127,7 +130,7 @@ module Google
             )
             transaction_options.read_write = rw
           end
-          service.begin_transaction project_id: project, transaction_options: transaction_options
+          service.begin_transaction project_id: project, database_id: database, transaction_options: transaction_options
         end
 
         ##
@@ -135,17 +138,18 @@ module Google
         # some entities.
         def commit mutations, transaction: nil
           mode = transaction.nil? ? :NON_TRANSACTIONAL : :TRANSACTIONAL
-          service.commit project_id: project, mode: mode, mutations: mutations, transaction: transaction
+          service.commit project_id: project, database_id: database, mode: mode,
+                         mutations: mutations, transaction: transaction
         end
 
         ##
         # Roll back a transaction.
         def rollback transaction
-          service.rollback project_id: project, transaction: transaction
+          service.rollback project_id: project, database_id: database, transaction: transaction
         end
 
         def inspect
-          "#{self.class}(#{@project})"
+          "#{self.class}(#{@project})(#{database})"
         end
 
         protected

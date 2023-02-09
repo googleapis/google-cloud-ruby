@@ -22,11 +22,12 @@ require "google/cloud/datastore"
 
 class MockDatastore < Minitest::Spec
   let(:project) { "my-todo-project" }
+  let(:default_database) { "" }
+  let(:database_sec) { "my-secondary-project" }
   let(:credentials) { OpenStruct.new }
-  let(:dataset) { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials)) }
-  let (:read_time_to_timestamp) do
+  let(:dataset) { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials, default_database)) }
+  let(:secondary_dataset) { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials, database_sec)) }
 
-  end
   # Register this spec type for when :dns is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_datastore

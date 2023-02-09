@@ -206,6 +206,46 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 0
     end
 
+    it "should save/find/delete multiple entities at once on multiple database" do
+      skip "Don't have secondary database to run the test" unless dataset_2
+      post.key  = Google::Cloud::Datastore::Key.new "Post"
+      post2.key = Google::Cloud::Datastore::Key.new "Post"
+
+      _(post.key).must_be :incomplete?
+      _(post2.key).must_be :incomplete?
+
+      dataset.save post
+      dataset_2.save post2
+
+      _(post.key).wont_be :incomplete?
+      _(post2.key).wont_be :incomplete?
+
+      entities = dataset.find_all post.key
+      _(entities.count).must_equal 1
+      entities = dataset_2.find_all post2.key
+      _(entities.count).must_equal 1
+
+      error = assert_raises Google::Cloud::InvalidArgumentError do
+        dataset.find_all post2.key
+      end
+      _(error).wont_be :nil?
+      _(error.message).must_include "mismatched databases within request"
+      error = assert_raises Google::Cloud::InvalidArgumentError do
+        dataset_2.find_all post.key
+      end
+      _(error).wont_be :nil?
+      _(error.message).must_include "mismatched databases within request"
+
+
+      dataset.delete post
+      dataset_2.delete post2
+
+      entities = dataset.find_all post.key
+      _(entities.count).must_equal 0
+      entities = dataset_2.find_all post2.key
+      _(entities.count).must_equal 0
+    end
+
     it "should save/find/delete multiple entities with commit" do
       post.key  = Google::Cloud::Datastore::Key.new "Post"
       post2.key = Google::Cloud::Datastore::Key.new "Post"
