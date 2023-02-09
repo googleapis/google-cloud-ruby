@@ -23,6 +23,7 @@ module Google
     # a canonical start. Grammatically, "the start of the current
     # `CalendarPeriod`." All calendar times begin at midnight UTC.
     module CalendarPeriod
+
       # Undefined period, raises an error.
       CALENDAR_PERIOD_UNSPECIFIED = 0
 
@@ -53,3 +54,4 @@ module Google
     end
   end
 end
+

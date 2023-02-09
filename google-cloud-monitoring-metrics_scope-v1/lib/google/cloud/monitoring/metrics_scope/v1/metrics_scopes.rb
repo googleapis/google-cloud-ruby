@@ -51,3 +51,4 @@ end
 
 helper_path = ::File.join __dir__, "metrics_scopes", "helpers.rb"
 require "google/cloud/monitoring/metrics_scope/v1/metrics_scopes/helpers" if ::File.file? helper_path
+

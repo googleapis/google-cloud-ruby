@@ -64,34 +64,34 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.delete_log.timeout = 60.0
-                default_config.rpcs.delete_log.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.delete_log.timeout = 60.0
+                    default_config.rpcs.delete_log.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
-                default_config.rpcs.write_log_entries.timeout = 60.0
-                default_config.rpcs.write_log_entries.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.write_log_entries.timeout = 60.0
+                    default_config.rpcs.write_log_entries.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
-                default_config.rpcs.list_log_entries.timeout = 60.0
-                default_config.rpcs.list_log_entries.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.list_log_entries.timeout = 60.0
+                    default_config.rpcs.list_log_entries.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
-                default_config.rpcs.list_monitored_resource_descriptors.timeout = 60.0
-                default_config.rpcs.list_monitored_resource_descriptors.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.list_monitored_resource_descriptors.timeout = 60.0
+                    default_config.rpcs.list_monitored_resource_descriptors.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
-                default_config.rpcs.list_logs.timeout = 60.0
-                default_config.rpcs.list_logs.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.list_logs.timeout = 60.0
+                    default_config.rpcs.list_logs.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
-                default_config.rpcs.tail_log_entries.timeout = 3600.0
-                default_config.rpcs.tail_log_entries.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.tail_log_entries.timeout = 3600.0
+                    default_config.rpcs.tail_log_entries.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config
@@ -506,13 +506,11 @@ module Google
             #   # Call the list_log_entries method.
             #   result = client.list_log_entries request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Logging::V2::LogEntry.
-            #     p response
+            #     p item
             #   end
             #
             def list_log_entries request, options = nil
@@ -597,13 +595,11 @@ module Google
             #   # Call the list_monitored_resource_descriptors method.
             #   result = client.list_monitored_resource_descriptors request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Api::MonitoredResourceDescriptor.
-            #     p response
+            #     p item
             #   end
             #
             def list_monitored_resource_descriptors request, options = nil
@@ -777,22 +773,22 @@ module Google
             #   # Create a client object. The client can be reused for multiple calls.
             #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
             #
-            #   # Create an input stream
+            #   # Create an input stream.
             #   input = Gapic::StreamInput.new
             #
             #   # Call the tail_log_entries method to start streaming.
             #   output = client.tail_log_entries input
             #
-            #   # Send requests on the stream. For each request, pass in keyword
-            #   # arguments to set fields. Be sure to close the stream when done.
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
             #   input << Google::Cloud::Logging::V2::TailLogEntriesRequest.new
             #   input << Google::Cloud::Logging::V2::TailLogEntriesRequest.new
             #   input.close
             #
-            #   # Handle streamed responses. These may be interleaved with inputs.
-            #   # Each response is of type ::Google::Cloud::Logging::V2::TailLogEntriesResponse.
-            #   output.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Logging::V2::TailLogEntriesResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def tail_log_entries request, options = nil
@@ -924,7 +920,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1024,3 +1020,4 @@ module Google
     end
   end
 end
+

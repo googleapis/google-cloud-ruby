@@ -104,6 +104,7 @@ module Google
 
             # Batch operation states.
             module State
+
               # Invalid.
               STATE_UNSPECIFIED = 0
 
@@ -125,3 +126,4 @@ module Google
     end
   end
 end
+

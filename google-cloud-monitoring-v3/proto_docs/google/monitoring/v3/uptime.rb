@@ -57,6 +57,7 @@ module Google
 
           # Operational states for an internal checker.
           module State
+
             # An internal checker should never be in the unspecified state.
             UNSPECIFIED = 0
 
@@ -272,6 +273,7 @@ module Google
 
             # The HTTP request method options.
             module RequestMethod
+
               # No request method specified.
               METHOD_UNSPECIFIED = 0
 
@@ -284,6 +286,7 @@ module Google
 
             # Header options corresponding to the content type of a HTTP request body.
             module ContentType
+
               # No content type specified.
               TYPE_UNSPECIFIED = 0
 
@@ -323,6 +326,7 @@ module Google
 
             # Options to perform content matching.
             module ContentMatcherOption
+
               # No content matcher type specified (maintained for backward
               # compatibility, but deprecated for future use).
               # Treated as `CONTAINS_STRING`.
@@ -376,6 +380,7 @@ module Google
 
         # The regions from which an Uptime check can be run.
         module UptimeCheckRegion
+
           # Default value if no region is specified. Will result in Uptime checks
           # running from all regions.
           REGION_UNSPECIFIED = 0
@@ -401,6 +406,7 @@ module Google
         # The resource types `gae_app` and `uptime_url` are not valid here because
         # group checks on App Engine modules and URLs are not allowed.
         module GroupResourceType
+
           # Default value (not valid).
           RESOURCE_TYPE_UNSPECIFIED = 0
 
@@ -415,3 +421,4 @@ module Google
     end
   end
 end
+

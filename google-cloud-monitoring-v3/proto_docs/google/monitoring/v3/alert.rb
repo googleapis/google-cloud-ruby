@@ -414,6 +414,7 @@ module Google
             # are evaluated when data stops arriving.
             # This control doesn't affect metric-absence policies.
             module EvaluationMissingData
+
               # An unspecified evaluation missing data option.  Equivalent to
               # EVALUATION_MISSING_DATA_NO_OP.
               EVALUATION_MISSING_DATA_UNSPECIFIED = 0
@@ -468,6 +469,7 @@ module Google
 
           # Operators for combining conditions.
           module ConditionCombinerType
+
             # An unspecified combiner.
             COMBINE_UNSPECIFIED = 0
 
@@ -491,3 +493,4 @@ module Google
     end
   end
 end
+

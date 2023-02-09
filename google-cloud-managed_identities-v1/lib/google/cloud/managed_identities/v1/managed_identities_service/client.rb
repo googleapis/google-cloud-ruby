@@ -95,25 +95,25 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_microsoft_ad_domain.timeout = 60.0
+                    default_config.rpcs.create_microsoft_ad_domain.timeout = 60.0
 
-                default_config.rpcs.reset_admin_password.timeout = 60.0
+                    default_config.rpcs.reset_admin_password.timeout = 60.0
 
-                default_config.rpcs.list_domains.timeout = 60.0
+                    default_config.rpcs.list_domains.timeout = 60.0
 
-                default_config.rpcs.get_domain.timeout = 60.0
+                    default_config.rpcs.get_domain.timeout = 60.0
 
-                default_config.rpcs.update_domain.timeout = 60.0
+                    default_config.rpcs.update_domain.timeout = 60.0
 
-                default_config.rpcs.delete_domain.timeout = 60.0
+                    default_config.rpcs.delete_domain.timeout = 60.0
 
-                default_config.rpcs.attach_trust.timeout = 60.0
+                    default_config.rpcs.attach_trust.timeout = 60.0
 
-                default_config.rpcs.reconfigure_trust.timeout = 60.0
+                    default_config.rpcs.reconfigure_trust.timeout = 60.0
 
-                default_config.rpcs.detach_trust.timeout = 60.0
+                    default_config.rpcs.detach_trust.timeout = 60.0
 
-                default_config.rpcs.validate_trust.timeout = 60.0
+                    default_config.rpcs.validate_trust.timeout = 60.0
 
                 default_config
               end
@@ -265,14 +265,14 @@ module Google
             #   # Call the create_microsoft_ad_domain method.
             #   result = client.create_microsoft_ad_domain request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_microsoft_ad_domain request, options = nil
@@ -463,13 +463,11 @@ module Google
             #   # Call the list_domains method.
             #   result = client.list_domains request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ManagedIdentities::V1::Domain.
-            #     p response
+            #     p item
             #   end
             #
             def list_domains request, options = nil
@@ -649,14 +647,14 @@ module Google
             #   # Call the update_domain method.
             #   result = client.update_domain request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_domain request, options = nil
@@ -743,14 +741,14 @@ module Google
             #   # Call the delete_domain method.
             #   result = client.delete_domain request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_domain request, options = nil
@@ -839,14 +837,14 @@ module Google
             #   # Call the attach_trust method.
             #   result = client.attach_trust request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def attach_trust request, options = nil
@@ -939,14 +937,14 @@ module Google
             #   # Call the reconfigure_trust method.
             #   result = client.reconfigure_trust request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def reconfigure_trust request, options = nil
@@ -1035,14 +1033,14 @@ module Google
             #   # Call the detach_trust method.
             #   result = client.detach_trust request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def detach_trust request, options = nil
@@ -1132,14 +1130,14 @@ module Google
             #   # Call the validate_trust method.
             #   result = client.validate_trust request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def validate_trust request, options = nil
@@ -1275,7 +1273,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1403,3 +1401,4 @@ module Google
     end
   end
 end
+

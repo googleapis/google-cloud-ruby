@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#delete_service_level_objective
+# Snippet for the delete_service_level_objective call in the ServiceMonitoringService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#delete_service_level_objective.
+# It may require modification in order to execute successfully.
 #
 def delete_service_level_objective
   # Create a client object. The client can be reused for multiple calls.

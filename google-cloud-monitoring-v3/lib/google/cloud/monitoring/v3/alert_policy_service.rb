@@ -55,3 +55,4 @@ end
 
 helper_path = ::File.join __dir__, "alert_policy_service", "helpers.rb"
 require "google/cloud/monitoring/v3/alert_policy_service/helpers" if ::File.file? helper_path
+

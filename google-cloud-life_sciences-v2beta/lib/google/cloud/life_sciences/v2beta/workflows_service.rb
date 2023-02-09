@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "workflows_service", "helpers.rb"
 require "google/cloud/life_sciences/v2beta/workflows_service/helpers" if ::File.file? helper_path
+

@@ -64,3 +64,4 @@ end
 
 helper_path = ::File.join __dir__, "dataproc_metastore", "helpers.rb"
 require "google/cloud/metastore/v1/dataproc_metastore/helpers" if ::File.file? helper_path
+

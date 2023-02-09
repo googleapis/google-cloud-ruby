@@ -85,6 +85,7 @@ module Google
 
           # The current state of the federation.
           module State
+
             # The state of the metastore federation is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -129,6 +130,7 @@ module Google
 
           # The type of the backend metastore.
           module MetastoreType
+
             # The metastore type is not set.
             METASTORE_TYPE_UNSPECIFIED = 0
 
@@ -300,3 +302,4 @@ module Google
     end
   end
 end
+

@@ -89,6 +89,7 @@ module Google
 
           # Represents the different states of a managed domain.
           module State
+
             # Not set.
             STATE_UNSPECIFIED = 0
 
@@ -163,6 +164,7 @@ module Google
 
           # Represents the different states of a domain trust.
           module State
+
             # Not set.
             STATE_UNSPECIFIED = 0
 
@@ -184,6 +186,7 @@ module Google
 
           # Represents the different inter-forest trust types.
           module TrustType
+
             # Not set.
             TRUST_TYPE_UNSPECIFIED = 0
 
@@ -199,6 +202,7 @@ module Google
           # [System.DirectoryServices.ActiveDirectory.TrustDirection](https://docs.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectory.trustdirection?view=netframework-4.7.2)
           # for more information.
           module TrustDirection
+
             # Not set.
             TRUST_DIRECTION_UNSPECIFIED = 0
 
@@ -216,3 +220,4 @@ module Google
     end
   end
 end
+

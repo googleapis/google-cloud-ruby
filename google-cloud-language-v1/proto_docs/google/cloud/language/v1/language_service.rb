@@ -52,6 +52,7 @@ module Google
 
           # The document types enum.
           module Type
+
             # The content type is not specified.
             TYPE_UNSPECIFIED = 0
 
@@ -129,6 +130,7 @@ module Google
           # below lists the associated fields for entities that have different
           # metadata.
           module Type
+
             # Unknown
             UNKNOWN = 0
 
@@ -283,6 +285,7 @@ module Google
 
           # The part of speech tags enum.
           module Tag
+
             # Unknown
             UNKNOWN = 0
 
@@ -328,6 +331,7 @@ module Google
 
           # The characteristic of a verb that expresses time flow during an event.
           module Aspect
+
             # Aspect is not applicable in the analyzed language or is not predicted.
             ASPECT_UNKNOWN = 0
 
@@ -345,6 +349,7 @@ module Google
           # clause, or sentence. In some languages, other parts of speech, such as
           # adjective and determiner, take case inflection in agreement with the noun.
           module Case
+
             # Case is not applicable in the analyzed language or is not predicted.
             CASE_UNKNOWN = 0
 
@@ -396,6 +401,7 @@ module Google
           # endings of verbs and adjectives or distinguishing between short and long
           # forms of adjectives and participles
           module Form
+
             # Form is not applicable in the analyzed language or is not predicted.
             FORM_UNKNOWN = 0
 
@@ -435,6 +441,7 @@ module Google
 
           # Gender classes of nouns reflected in the behaviour of associated words.
           module Gender
+
             # Gender is not applicable in the analyzed language or is not predicted.
             GENDER_UNKNOWN = 0
 
@@ -450,6 +457,7 @@ module Google
 
           # The grammatical feature of verbs, used for showing modality and attitude.
           module Mood
+
             # Mood is not applicable in the analyzed language or is not predicted.
             MOOD_UNKNOWN = 0
 
@@ -474,6 +482,7 @@ module Google
 
           # Count distinctions.
           module Number
+
             # Number is not applicable in the analyzed language or is not predicted.
             NUMBER_UNKNOWN = 0
 
@@ -489,6 +498,7 @@ module Google
 
           # The distinction between the speaker, second person, third person, etc.
           module Person
+
             # Person is not applicable in the analyzed language or is not predicted.
             PERSON_UNKNOWN = 0
 
@@ -507,6 +517,7 @@ module Google
 
           # This category shows if the token is part of a proper name.
           module Proper
+
             # Proper is not applicable in the analyzed language or is not predicted.
             PROPER_UNKNOWN = 0
 
@@ -519,6 +530,7 @@ module Google
 
           # Reciprocal features of a pronoun.
           module Reciprocity
+
             # Reciprocity is not applicable in the analyzed language or is not
             # predicted.
             RECIPROCITY_UNKNOWN = 0
@@ -532,6 +544,7 @@ module Google
 
           # Time reference.
           module Tense
+
             # Tense is not applicable in the analyzed language or is not predicted.
             TENSE_UNKNOWN = 0
 
@@ -557,6 +570,7 @@ module Google
           # The relationship between the action that a verb expresses and the
           # participants identified by its arguments.
           module Voice
+
             # Voice is not applicable in the analyzed language or is not predicted.
             VOICE_UNKNOWN = 0
 
@@ -590,6 +604,7 @@ module Google
 
           # The parse label enum for the token.
           module Label
+
             # Unknown
             UNKNOWN = 0
 
@@ -861,6 +876,7 @@ module Google
 
           # The supported types of mentions.
           module Type
+
             # Unknown
             TYPE_UNKNOWN = 0
 
@@ -929,6 +945,7 @@ module Google
 
             # The content categories used for classification.
             module ContentCategoriesVersion
+
               # If `ContentCategoriesVersion` is not specified, this option will
               # default to `V1`.
               CONTENT_CATEGORIES_VERSION_UNSPECIFIED = 0
@@ -1154,6 +1171,7 @@ module Google
         # languages that natively use different text encodings may access offsets
         # differently.
         module EncodingType
+
           # If `EncodingType` is not specified, encoding-dependent information (such as
           # `begin_offset`) will be set at `-1`.
           NONE = 0
@@ -1177,3 +1195,4 @@ module Google
     end
   end
 end
+

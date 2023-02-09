@@ -154,6 +154,7 @@ module Google
 
           # Logging API version.
           module ApiVersion
+
             # Logging API v2.
             V2 = 0
 
@@ -258,3 +259,4 @@ module Google
     end
   end
 end
+

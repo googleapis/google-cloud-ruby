@@ -21,6 +21,7 @@ module Google
   module Type
     # Represents a day of the week.
     module DayOfWeek
+
       # The day of the week is unspecified.
       DAY_OF_WEEK_UNSPECIFIED = 0
 
@@ -47,3 +48,4 @@ module Google
     end
   end
 end
+

@@ -118,6 +118,7 @@ module Google
 
           # The current state of the metastore service.
           module State
+
             # The state of the metastore service is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -148,6 +149,7 @@ module Google
 
           # Available service tiers.
           module Tier
+
             # The tier is not set.
             TIER_UNSPECIFIED = 0
 
@@ -164,6 +166,7 @@ module Google
           # features may be introduced initially into less stable release channels and
           # can be automatically promoted into more stable release channels.
           module ReleaseChannel
+
             # Release channel is not specified.
             RELEASE_CHANNEL_UNSPECIFIED = 0
 
@@ -179,6 +182,7 @@ module Google
 
           # The backend database type for the metastore service.
           module DatabaseType
+
             # The DATABASE_TYPE is not set.
             DATABASE_TYPE_UNSPECIFIED = 0
 
@@ -315,6 +319,7 @@ module Google
 
           # Protocols available for serving the metastore service endpoint.
           module EndpointProtocol
+
             # The protocol is not set.
             ENDPOINT_PROTOCOL_UNSPECIFIED = 0
 
@@ -439,7 +444,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           module LogFormat
-            # The LOG_FORMAT is not set.
+          # The LOG_FORMAT is not set.
             LOG_FORMAT_UNSPECIFIED = 0
 
             # Logging output uses the legacy `textPayload` format.
@@ -512,6 +517,7 @@ module Google
 
             # The type of the database.
             module DatabaseType
+
               # The type of the source database is unknown.
               DATABASE_TYPE_UNSPECIFIED = 0
 
@@ -522,6 +528,7 @@ module Google
 
           # The current state of the metadata import.
           module State
+
             # The state of the metadata import is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -565,6 +572,7 @@ module Google
 
           # The current state of the metadata export.
           module State
+
             # The state of the metadata export is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -612,6 +620,7 @@ module Google
 
           # The current state of the backup.
           module State
+
             # The state of the backup is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -661,6 +670,7 @@ module Google
 
           # The current state of the restore.
           module State
+
             # The state of the metadata restore is unknown.
             STATE_UNSPECIFIED = 0
 
@@ -679,6 +689,7 @@ module Google
 
           # The type of restore. If unspecified, defaults to `METADATA_ONLY`.
           module RestoreType
+
             # The restore type is unknown.
             RESTORE_TYPE_UNSPECIFIED = 0
 
@@ -1266,6 +1277,7 @@ module Google
 
           # The type of the database dump.
           module Type
+
             # The type of the database dump is unknown.
             TYPE_UNSPECIFIED = 0
 
@@ -1400,3 +1412,4 @@ module Google
     end
   end
 end
+

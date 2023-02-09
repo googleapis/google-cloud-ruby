@@ -129,6 +129,7 @@ module Google
             # `value_type` in the original time series is `BOOLEAN`, but the `value_type`
             # in the aligned result is `INT64`.
             module Aligner
+
               # No alignment. Raw data is returned. Not valid if cross-series reduction
               # is requested. The `value_type` of the result is the same as the
               # `value_type` of the input.
@@ -280,6 +281,7 @@ module Google
             # in the resulting series is a function of all the already aligned values in
             # the input time series.
             module Reducer
+
               # No cross-time series reduction. The output of the `Aligner` is
               # returned.
               REDUCE_NONE = 0
@@ -395,6 +397,7 @@ module Google
 
             # The value reducers that can be applied to a `PickTimeSeriesFilter`.
             module Method
+
               # Not allowed. You must specify a different `Method` if you specify a
               # `PickTimeSeriesFilter`.
               METHOD_UNSPECIFIED = 0
@@ -417,6 +420,7 @@ module Google
 
             # Describes the ranking directions.
             module Direction
+
               # Not allowed. You must specify a different `Direction` if you specify a
               # `PickTimeSeriesFilter`.
               DIRECTION_UNSPECIFIED = 0
@@ -448,6 +452,7 @@ module Google
 
             # The filter methods that can be applied to a stream.
             module Method
+
               # Not allowed in well-formed requests.
               METHOD_UNSPECIFIED = 0
 
@@ -460,3 +465,4 @@ module Google
     end
   end
 end
+

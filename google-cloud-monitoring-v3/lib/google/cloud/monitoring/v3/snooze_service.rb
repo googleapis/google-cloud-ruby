@@ -49,3 +49,4 @@ end
 
 helper_path = ::File.join __dir__, "snooze_service", "helpers.rb"
 require "google/cloud/monitoring/v3/snooze_service/helpers" if ::File.file? helper_path
+

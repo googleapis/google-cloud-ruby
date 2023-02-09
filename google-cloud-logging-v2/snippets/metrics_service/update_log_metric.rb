@@ -20,8 +20,11 @@
 require "google/cloud/logging/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Logging::V2::MetricsService::Client#update_log_metric
+# Snippet for the update_log_metric call in the MetricsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Logging::V2::MetricsService::Client#update_log_metric. It may
+# require modification in order to execute successfully.
 #
 def update_log_metric
   # Create a client object. The client can be reused for multiple calls.

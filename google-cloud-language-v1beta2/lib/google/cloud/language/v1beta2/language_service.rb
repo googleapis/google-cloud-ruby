@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "language_service", "helpers.rb"
 require "google/cloud/language/v1beta2/language_service/helpers" if ::File.file? helper_path
+

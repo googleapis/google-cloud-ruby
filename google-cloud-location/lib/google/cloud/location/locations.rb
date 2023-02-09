@@ -52,3 +52,4 @@ end
 
 helper_path = ::File.join __dir__, "locations", "helpers.rb"
 require "google/cloud/location/locations/helpers" if ::File.file? helper_path
+

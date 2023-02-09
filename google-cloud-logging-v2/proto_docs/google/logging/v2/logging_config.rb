@@ -232,6 +232,7 @@ module Google
 
           # Deprecated. This is unused.
           module VersionFormat
+
             # An unspecified format version that will default to V2.
             VERSION_FORMAT_UNSPECIFIED = 0
 
@@ -1208,6 +1209,7 @@ module Google
 
         # LogBucket lifecycle states.
         module LifecycleState
+
           # Unspecified state. This is only used/useful for distinguishing unset
           # values.
           LIFECYCLE_STATE_UNSPECIFIED = 0
@@ -1226,6 +1228,7 @@ module Google
         # the current state of the operation can be queried even before the
         # operation is finished and the final result is available.
         module OperationState
+
           # Should not be used.
           OPERATION_STATE_UNSPECIFIED = 0
 
@@ -1251,3 +1254,4 @@ module Google
     end
   end
 end
+

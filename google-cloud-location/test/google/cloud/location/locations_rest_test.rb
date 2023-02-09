@@ -90,27 +90,27 @@ class ::Google::Cloud::Location::Locations::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.list_locations({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list_locations name: name, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list_locations ::Google::Cloud::Location::ListLocationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list_locations({ name: name, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list_locations(::Google::Cloud::Location::ListLocationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -144,27 +144,27 @@ class ::Google::Cloud::Location::Locations::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.get_location({ name: name }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get_location name: name do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get_location ::Google::Cloud::Location::GetLocationRequest.new(name: name) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get_location({ name: name }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get_location(::Google::Cloud::Location::GetLocationRequest.new(name: name), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

@@ -67,42 +67,42 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_service.timeout = 30.0
+                    default_config.rpcs.create_service.timeout = 30.0
 
-                default_config.rpcs.get_service.timeout = 30.0
-                default_config.rpcs.get_service.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_service.timeout = 30.0
+                    default_config.rpcs.get_service.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_services.timeout = 30.0
-                default_config.rpcs.list_services.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_services.timeout = 30.0
+                    default_config.rpcs.list_services.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_service.timeout = 30.0
+                    default_config.rpcs.update_service.timeout = 30.0
 
-                default_config.rpcs.delete_service.timeout = 30.0
-                default_config.rpcs.delete_service.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.delete_service.timeout = 30.0
+                    default_config.rpcs.delete_service.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_service_level_objective.timeout = 30.0
+                    default_config.rpcs.create_service_level_objective.timeout = 30.0
 
-                default_config.rpcs.get_service_level_objective.timeout = 30.0
-                default_config.rpcs.get_service_level_objective.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_service_level_objective.timeout = 30.0
+                    default_config.rpcs.get_service_level_objective.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_service_level_objectives.timeout = 30.0
-                default_config.rpcs.list_service_level_objectives.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_service_level_objectives.timeout = 30.0
+                    default_config.rpcs.list_service_level_objectives.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_service_level_objective.timeout = 30.0
+                    default_config.rpcs.update_service_level_objective.timeout = 30.0
 
-                default_config.rpcs.delete_service_level_objective.timeout = 30.0
-                default_config.rpcs.delete_service_level_objective.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.delete_service_level_objective.timeout = 30.0
+                    default_config.rpcs.delete_service_level_objective.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -438,13 +438,11 @@ module Google
             #   # Call the list_services method.
             #   result = client.list_services request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Monitoring::V3::Service.
-            #     p response
+            #     p item
             #   end
             #
             def list_services request, options = nil
@@ -910,13 +908,11 @@ module Google
             #   # Call the list_service_level_objectives method.
             #   result = client.list_service_level_objectives request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Monitoring::V3::ServiceLevelObjective.
-            #     p response
+            #     p item
             #   end
             #
             def list_service_level_objectives request, options = nil
@@ -1227,7 +1223,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1355,3 +1351,4 @@ module Google
     end
   end
 end
+

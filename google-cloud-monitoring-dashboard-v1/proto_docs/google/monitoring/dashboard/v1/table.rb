@@ -77,6 +77,7 @@ module Google
 
             # Enum for metric metric_visualization
             module MetricVisualization
+
               # Unspecified state
               METRIC_VISUALIZATION_UNSPECIFIED = 0
 
@@ -92,3 +93,4 @@ module Google
     end
   end
 end
+

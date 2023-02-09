@@ -62,3 +62,4 @@ end
 
 helper_path = ::File.join __dir__, "cloud_memcache", "helpers.rb"
 require "google/cloud/memcache/v1beta2/cloud_memcache/helpers" if ::File.file? helper_path
+

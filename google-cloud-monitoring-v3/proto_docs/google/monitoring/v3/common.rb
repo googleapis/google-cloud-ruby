@@ -193,6 +193,7 @@ module Google
           # `value_type` in the original time series is `BOOLEAN`, but the `value_type`
           # in the aligned result is `INT64`.
           module Aligner
+
             # No alignment. Raw data is returned. Not valid if cross-series reduction
             # is requested. The `value_type` of the result is the same as the
             # `value_type` of the input.
@@ -344,6 +345,7 @@ module Google
           # in the resulting series is a function of all the already aligned values in
           # the input time series.
           module Reducer
+
             # No cross-time series reduction. The output of the `Aligner` is
             # returned.
             REDUCE_NONE = 0
@@ -438,6 +440,7 @@ module Google
         # Specifies an ordering relationship on two arguments, called `left` and
         # `right`.
         module ComparisonType
+
           # No ordering relationship is specified.
           COMPARISON_UNSPECIFIED = 0
 
@@ -465,6 +468,7 @@ module Google
         # documentation](https://cloud.google.com/monitoring/workspaces/tiers) for more
         # details.
         module ServiceTier
+
           # An invalid sentinel value, used to indicate that a tier has not
           # been provided explicitly.
           SERVICE_TIER_UNSPECIFIED = 0
@@ -487,3 +491,4 @@ module Google
     end
   end
 end
+

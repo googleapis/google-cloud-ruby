@@ -81,6 +81,7 @@ module Google
 
               # The types of plotting strategies for data sets.
               module PlotType
+
                 # Plot type is unspecified. The view will default to `LINE`.
                 PLOT_TYPE_UNSPECIFIED = 0
 
@@ -108,6 +109,7 @@ module Google
 
               # An axis identifier.
               module TargetAxis
+
                 # The target axis was not specified. Defaults to Y1.
                 TARGET_AXIS_UNSPECIFIED = 0
 
@@ -132,6 +134,7 @@ module Google
 
               # Types of scales used in axes.
               module Scale
+
                 # Scale is unspecified. The view will default to `LINEAR`.
                 SCALE_UNSPECIFIED = 0
 
@@ -154,6 +157,7 @@ module Google
 
             # Chart mode options.
             module Mode
+
               # Mode is unspecified. The view will default to `COLOR`.
               MODE_UNSPECIFIED = 0
 
@@ -175,3 +179,4 @@ module Google
     end
   end
 end
+

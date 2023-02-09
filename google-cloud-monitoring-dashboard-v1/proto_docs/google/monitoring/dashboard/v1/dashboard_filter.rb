@@ -43,6 +43,7 @@ module Google
 
             # The type for the dashboard filter
             module FilterType
+
               # Filter type is unspecified. This is not valid in a well-formed request.
               FILTER_TYPE_UNSPECIFIED = 0
 
@@ -67,3 +68,4 @@ module Google
     end
   end
 end
+

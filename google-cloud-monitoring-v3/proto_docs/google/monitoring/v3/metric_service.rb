@@ -226,6 +226,7 @@ module Google
 
           # Controls which fields are returned by `ListTimeSeries`.
           module TimeSeriesView
+
             # Returns the identity of the metric(s), the time series,
             # and the time series data.
             FULL = 0
@@ -385,3 +386,4 @@ module Google
     end
   end
 end
+

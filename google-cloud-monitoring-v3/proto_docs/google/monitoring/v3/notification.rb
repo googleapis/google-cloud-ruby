@@ -172,6 +172,7 @@ module Google
           # {::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#update_notification_channel `UpdateNotificationChannel`}
           # operation.
           module VerificationStatus
+
             # Sentinel value used to indicate that the state is unknown, omitted, or
             # is not applicable (as in the case of channels that neither support
             # nor require verification in order to function).
@@ -193,3 +194,4 @@ module Google
     end
   end
 end
+

@@ -35,6 +35,7 @@ module Google
 
             # The format type of the text content.
             module Format
+
               # Format is unspecified. Defaults to MARKDOWN.
               FORMAT_UNSPECIFIED = 0
 
@@ -50,3 +51,4 @@ module Google
     end
   end
 end
+

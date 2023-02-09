@@ -83,9 +83,9 @@ module Google
         require "google/cloud/metastore/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Metastore
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Metastore.const_get(package_name).const_get(:DataprocMetastore)
         service_module.const_get(:Client).new(&block)
       end
@@ -125,9 +125,9 @@ module Google
         require "google/cloud/metastore/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Metastore
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Metastore.const_get(package_name).const_get(:DataprocMetastoreFederation)
         service_module.const_get(:Client).new(&block)
       end
@@ -171,3 +171,4 @@ end
 
 helper_path = ::File.join __dir__, "metastore", "helpers.rb"
 require "google/cloud/metastore/helpers" if ::File.file? helper_path
+

@@ -151,6 +151,7 @@ module Google
 
             # Different states of a Memcached node.
             module State
+
               # Node state is not set.
               STATE_UNSPECIFIED = 0
 
@@ -179,7 +180,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             module Code
-              # Message Code not set.
+            # Message Code not set.
               CODE_UNSPECIFIED = 0
 
               # Memcached nodes are distributed unevenly.
@@ -198,6 +199,7 @@ module Google
 
           # Different states of a Memcached instance.
           module State
+
             # State not set.
             STATE_UNSPECIFIED = 0
 
@@ -404,6 +406,7 @@ module Google
 
           # Reschedule options.
           module RescheduleType
+
             # Not set.
             RESCHEDULE_TYPE_UNSPECIFIED = 0
 
@@ -553,6 +556,7 @@ module Google
 
         # Memcached versions supported by our service.
         module MemcacheVersion
+
           MEMCACHE_VERSION_UNSPECIFIED = 0
 
           # Memcached 1.5 version.
@@ -562,3 +566,4 @@ module Google
     end
   end
 end
+

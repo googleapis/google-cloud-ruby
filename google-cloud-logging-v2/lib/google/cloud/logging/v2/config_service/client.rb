@@ -64,45 +64,45 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_sinks.timeout = 60.0
-                default_config.rpcs.list_sinks.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.list_sinks.timeout = 60.0
+                    default_config.rpcs.list_sinks.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
-                default_config.rpcs.get_sink.timeout = 60.0
-                default_config.rpcs.get_sink.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.get_sink.timeout = 60.0
+                    default_config.rpcs.get_sink.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
-                default_config.rpcs.create_sink.timeout = 120.0
+                    default_config.rpcs.create_sink.timeout = 120.0
 
-                default_config.rpcs.update_sink.timeout = 60.0
-                default_config.rpcs.update_sink.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.update_sink.timeout = 60.0
+                    default_config.rpcs.update_sink.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
-                default_config.rpcs.delete_sink.timeout = 60.0
-                default_config.rpcs.delete_sink.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.delete_sink.timeout = 60.0
+                    default_config.rpcs.delete_sink.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
-                default_config.rpcs.list_exclusions.timeout = 60.0
-                default_config.rpcs.list_exclusions.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.list_exclusions.timeout = 60.0
+                    default_config.rpcs.list_exclusions.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
-                default_config.rpcs.get_exclusion.timeout = 60.0
-                default_config.rpcs.get_exclusion.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.get_exclusion.timeout = 60.0
+                    default_config.rpcs.get_exclusion.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
-                default_config.rpcs.create_exclusion.timeout = 120.0
+                    default_config.rpcs.create_exclusion.timeout = 120.0
 
-                default_config.rpcs.update_exclusion.timeout = 120.0
+                    default_config.rpcs.update_exclusion.timeout = 120.0
 
-                default_config.rpcs.delete_exclusion.timeout = 60.0
-                default_config.rpcs.delete_exclusion.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
+                    default_config.rpcs.delete_exclusion.timeout = 60.0
+                    default_config.rpcs.delete_exclusion.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config
@@ -257,13 +257,11 @@ module Google
             #   # Call the list_buckets method.
             #   result = client.list_buckets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Logging::V2::LogBucket.
-            #     p response
+            #     p item
             #   end
             #
             def list_buckets request, options = nil
@@ -862,13 +860,11 @@ module Google
             #   # Call the list_views method.
             #   result = client.list_views request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Logging::V2::LogView.
-            #     p response
+            #     p item
             #   end
             #
             def list_views request, options = nil
@@ -1355,13 +1351,11 @@ module Google
             #   # Call the list_sinks method.
             #   result = client.list_sinks request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Logging::V2::LogSink.
-            #     p response
+            #     p item
             #   end
             #
             def list_sinks request, options = nil
@@ -1895,13 +1889,11 @@ module Google
             #   # Call the list_exclusions method.
             #   result = client.list_exclusions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Logging::V2::LogExclusion.
-            #     p response
+            #     p item
             #   end
             #
             def list_exclusions request, options = nil
@@ -2856,14 +2848,14 @@ module Google
             #   # Call the copy_log_entries method.
             #   result = client.copy_log_entries request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def copy_log_entries request, options = nil
@@ -2991,7 +2983,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -3231,3 +3223,4 @@ module Google
     end
   end
 end
+

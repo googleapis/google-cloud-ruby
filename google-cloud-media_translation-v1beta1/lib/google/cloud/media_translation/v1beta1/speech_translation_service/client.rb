@@ -62,12 +62,12 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 400.0
-                default_config.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2, 4]
+                  default_config.timeout = 400.0
+                  default_config.retry_policy = {
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2, 4]
                 }
 
-                default_config.rpcs.streaming_translate_speech.timeout = 400.0
+                    default_config.rpcs.streaming_translate_speech.timeout = 400.0
 
                 default_config
               end
@@ -172,22 +172,22 @@ module Google
             #   # Create a client object. The client can be reused for multiple calls.
             #   client = Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new
             #
-            #   # Create an input stream
+            #   # Create an input stream.
             #   input = Gapic::StreamInput.new
             #
             #   # Call the streaming_translate_speech method to start streaming.
             #   output = client.streaming_translate_speech input
             #
-            #   # Send requests on the stream. For each request, pass in keyword
-            #   # arguments to set fields. Be sure to close the stream when done.
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
             #   input << Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechRequest.new
             #   input << Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechRequest.new
             #   input.close
             #
-            #   # Handle streamed responses. These may be interleaved with inputs.
-            #   # Each response is of type ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechResponse.
-            #   output.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def streaming_translate_speech request, options = nil
@@ -319,7 +319,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -384,3 +384,4 @@ module Google
     end
   end
 end
+

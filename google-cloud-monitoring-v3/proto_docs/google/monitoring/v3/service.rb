@@ -244,6 +244,7 @@ module Google
           # `ServiceLevelObjective` is returned from `GetServiceLevelObjective`,
           # `ListServiceLevelObjectives`, and `ListServiceLevelObjectiveVersions` RPCs.
           module View
+
             # Same as FULL.
             VIEW_UNSPECIFIED = 0
 
@@ -485,3 +486,4 @@ module Google
     end
   end
 end
+

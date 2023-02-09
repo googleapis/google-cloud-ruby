@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "dashboards_service", "helpers.rb"
 require "google/cloud/monitoring/dashboard/v1/dashboards_service/helpers" if ::File.file? helper_path
+

@@ -79,3 +79,4 @@ end
 
 helper_path = ::File.join __dir__, "managed_identities_service", "helpers.rb"
 require "google/cloud/managed_identities/v1/managed_identities_service/helpers" if ::File.file? helper_path
+

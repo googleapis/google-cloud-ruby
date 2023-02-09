@@ -65,39 +65,39 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_monitored_resource_descriptors.timeout = 30.0
-                default_config.rpcs.list_monitored_resource_descriptors.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_monitored_resource_descriptors.timeout = 30.0
+                    default_config.rpcs.list_monitored_resource_descriptors.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_monitored_resource_descriptor.timeout = 30.0
-                default_config.rpcs.get_monitored_resource_descriptor.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_monitored_resource_descriptor.timeout = 30.0
+                    default_config.rpcs.get_monitored_resource_descriptor.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_metric_descriptors.timeout = 30.0
-                default_config.rpcs.list_metric_descriptors.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_metric_descriptors.timeout = 30.0
+                    default_config.rpcs.list_metric_descriptors.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_metric_descriptor.timeout = 30.0
-                default_config.rpcs.get_metric_descriptor.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_metric_descriptor.timeout = 30.0
+                    default_config.rpcs.get_metric_descriptor.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_metric_descriptor.timeout = 12.0
+                    default_config.rpcs.create_metric_descriptor.timeout = 12.0
 
-                default_config.rpcs.delete_metric_descriptor.timeout = 30.0
-                default_config.rpcs.delete_metric_descriptor.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.delete_metric_descriptor.timeout = 30.0
+                    default_config.rpcs.delete_metric_descriptor.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_time_series.timeout = 90.0
-                default_config.rpcs.list_time_series.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_time_series.timeout = 90.0
+                    default_config.rpcs.list_time_series.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_time_series.timeout = 12.0
+                    default_config.rpcs.create_time_series.timeout = 12.0
 
                 default_config
               end
@@ -236,13 +236,11 @@ module Google
             #   # Call the list_monitored_resource_descriptors method.
             #   result = client.list_monitored_resource_descriptors request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Api::MonitoredResourceDescriptor.
-            #     p response
+            #     p item
             #   end
             #
             def list_monitored_resource_descriptors request, options = nil
@@ -436,13 +434,11 @@ module Google
             #   # Call the list_metric_descriptors method.
             #   result = client.list_metric_descriptors request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Api::MetricDescriptor.
-            #     p response
+            #     p item
             #   end
             #
             def list_metric_descriptors request, options = nil
@@ -846,13 +842,11 @@ module Google
             #   # Call the list_time_series method.
             #   result = client.list_time_series request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Monitoring::V3::TimeSeries.
-            #     p response
+            #     p item
             #   end
             #
             def list_time_series request, options = nil
@@ -1191,7 +1185,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1312,3 +1306,4 @@ module Google
     end
   end
 end
+

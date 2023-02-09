@@ -145,6 +145,7 @@ module Google
             # the threshold. Comments on each color provide UX guidance on how users can
             # be expected to interpret a given state color.
             module Color
+
               # Color is unspecified. Not allowed in well-formed requests.
               COLOR_UNSPECIFIED = 0
 
@@ -158,6 +159,7 @@ module Google
             # Whether the threshold is considered crossed by an actual value above or
             # below its threshold value.
             module Direction
+
               # Not allowed in well-formed requests.
               DIRECTION_UNSPECIFIED = 0
 
@@ -172,6 +174,7 @@ module Google
 
             # An axis identifier.
             module TargetAxis
+
               # The target axis was not specified. Defaults to Y1.
               TARGET_AXIS_UNSPECIFIED = 0
 
@@ -185,6 +188,7 @@ module Google
 
           # Defines the possible types of spark chart supported by the `Scorecard`.
           module SparkChartType
+
             # Not allowed in well-formed requests.
             SPARK_CHART_TYPE_UNSPECIFIED = 0
 
@@ -199,3 +203,4 @@ module Google
     end
   end
 end
+

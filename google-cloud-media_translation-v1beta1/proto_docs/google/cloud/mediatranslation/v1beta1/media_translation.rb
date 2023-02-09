@@ -179,6 +179,7 @@ module Google
 
           # Indicates the type of speech event.
           module SpeechEventType
+
             # No speech event specified.
             SPEECH_EVENT_TYPE_UNSPECIFIED = 0
 
@@ -199,3 +200,4 @@ module Google
     end
   end
 end
+

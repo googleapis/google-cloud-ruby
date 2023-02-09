@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::V3::GroupService::Client#get_group
+# Snippet for the get_group call in the GroupService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::GroupService::Client#get_group. It may require
+# modification in order to execute successfully.
 #
 def get_group
   # Create a client object. The client can be reused for multiple calls.

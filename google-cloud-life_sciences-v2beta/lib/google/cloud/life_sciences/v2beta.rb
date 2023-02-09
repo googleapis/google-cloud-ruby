@@ -38,3 +38,4 @@ end
 
 helper_path = ::File.join __dir__, "v2beta", "_helpers.rb"
 require "google/cloud/life_sciences/v2beta/_helpers" if ::File.file? helper_path
+

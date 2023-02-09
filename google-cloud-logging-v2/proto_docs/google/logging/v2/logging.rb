@@ -388,6 +388,7 @@ module Google
 
             # An indicator of why entries were omitted.
             module Reason
+
               # Unexpected default.
               REASON_UNSPECIFIED = 0
 
@@ -407,3 +408,4 @@ module Google
     end
   end
 end
+

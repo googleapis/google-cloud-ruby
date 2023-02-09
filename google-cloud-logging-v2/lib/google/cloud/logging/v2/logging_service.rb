@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "logging_service", "helpers.rb"
 require "google/cloud/logging/v2/logging_service/helpers" if ::File.file? helper_path
+
