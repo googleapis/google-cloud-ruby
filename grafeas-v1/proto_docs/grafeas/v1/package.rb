@@ -174,6 +174,7 @@ module Grafeas
 
       # Whether this is an ordinary package version or a sentinel MIN/MAX version.
       module VersionKind
+
         # Unknown.
         VERSION_KIND_UNSPECIFIED = 0
 
@@ -190,6 +191,7 @@ module Grafeas
 
     # Instruction set architectures supported by various package managers.
     module Architecture
+
       # Unknown architecture.
       ARCHITECTURE_UNSPECIFIED = 0
 
@@ -201,3 +203,4 @@ module Grafeas
     end
   end
 end
+

@@ -57,6 +57,7 @@ module Grafeas
 
       # Types of platforms.
       module Platform
+
         # Unknown.
         PLATFORM_UNSPECIFIED = 0
 
@@ -72,3 +73,4 @@ module Grafeas
     end
   end
 end
+

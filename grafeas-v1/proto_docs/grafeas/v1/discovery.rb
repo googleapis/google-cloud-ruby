@@ -73,6 +73,7 @@ module Grafeas
 
       # Whether the resource is continuously analyzed.
       module ContinuousAnalysis
+
         # Unknown.
         CONTINUOUS_ANALYSIS_UNSPECIFIED = 0
 
@@ -86,6 +87,7 @@ module Grafeas
       # Analysis status for a resource. Currently for initial analysis only (not
       # updated in continuous analysis).
       module AnalysisStatus
+
         # Unknown.
         ANALYSIS_STATUS_UNSPECIFIED = 0
 
@@ -111,3 +113,4 @@ module Grafeas
     end
   end
 end
+

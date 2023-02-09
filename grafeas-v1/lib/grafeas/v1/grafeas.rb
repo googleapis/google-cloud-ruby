@@ -55,3 +55,4 @@ end
 
 helper_path = ::File.join __dir__, "grafeas", "helpers.rb"
 require "grafeas/v1/grafeas/helpers" if ::File.file? helper_path
+

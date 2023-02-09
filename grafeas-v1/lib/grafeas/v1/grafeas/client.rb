@@ -75,56 +75,56 @@ module Grafeas
                             end
             default_config = Client::Configuration.new parent_config
 
-            default_config.rpcs.get_occurrence.timeout = 30.0
-            default_config.rpcs.get_occurrence.retry_policy = {
-              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                default_config.rpcs.get_occurrence.timeout = 30.0
+                default_config.rpcs.get_occurrence.retry_policy ={
+            initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
-            default_config.rpcs.list_occurrences.timeout = 30.0
-            default_config.rpcs.list_occurrences.retry_policy = {
-              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                default_config.rpcs.list_occurrences.timeout = 30.0
+                default_config.rpcs.list_occurrences.retry_policy ={
+            initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
-            default_config.rpcs.delete_occurrence.timeout = 30.0
-            default_config.rpcs.delete_occurrence.retry_policy = {
-              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                default_config.rpcs.delete_occurrence.timeout = 30.0
+                default_config.rpcs.delete_occurrence.retry_policy ={
+            initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
-            default_config.rpcs.create_occurrence.timeout = 30.0
+                default_config.rpcs.create_occurrence.timeout = 30.0
 
-            default_config.rpcs.batch_create_occurrences.timeout = 30.0
+                default_config.rpcs.batch_create_occurrences.timeout = 30.0
 
-            default_config.rpcs.update_occurrence.timeout = 30.0
+                default_config.rpcs.update_occurrence.timeout = 30.0
 
-            default_config.rpcs.get_occurrence_note.timeout = 30.0
-            default_config.rpcs.get_occurrence_note.retry_policy = {
-              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                default_config.rpcs.get_occurrence_note.timeout = 30.0
+                default_config.rpcs.get_occurrence_note.retry_policy ={
+            initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
-            default_config.rpcs.get_note.timeout = 30.0
-            default_config.rpcs.get_note.retry_policy = {
-              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                default_config.rpcs.get_note.timeout = 30.0
+                default_config.rpcs.get_note.retry_policy ={
+            initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
-            default_config.rpcs.list_notes.timeout = 30.0
-            default_config.rpcs.list_notes.retry_policy = {
-              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                default_config.rpcs.list_notes.timeout = 30.0
+                default_config.rpcs.list_notes.retry_policy ={
+            initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
-            default_config.rpcs.delete_note.timeout = 30.0
-            default_config.rpcs.delete_note.retry_policy = {
-              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                default_config.rpcs.delete_note.timeout = 30.0
+                default_config.rpcs.delete_note.retry_policy ={
+            initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
-            default_config.rpcs.create_note.timeout = 30.0
+                default_config.rpcs.create_note.timeout = 30.0
 
-            default_config.rpcs.batch_create_notes.timeout = 30.0
+                default_config.rpcs.batch_create_notes.timeout = 30.0
 
-            default_config.rpcs.update_note.timeout = 30.0
+                default_config.rpcs.update_note.timeout = 30.0
 
-            default_config.rpcs.list_note_occurrences.timeout = 30.0
-            default_config.rpcs.list_note_occurrences.retry_policy = {
-              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                default_config.rpcs.list_note_occurrences.timeout = 30.0
+                default_config.rpcs.list_note_occurrences.retry_policy ={
+            initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
             default_config
@@ -333,13 +333,11 @@ module Grafeas
         #   # Call the list_occurrences method.
         #   result = client.list_occurrences request
         #
-        #   # The returned object is of type Gapic::PagedEnumerable. You can
-        #   # iterate over all elements by calling #each, and the enumerable
-        #   # will lazily make API calls to fetch subsequent pages. Other
-        #   # methods are also available for managing paging directly.
-        #   result.each do |response|
+        #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+        #   # over elements, and API calls will be issued to fetch pages as needed.
+        #   result.each do |item|
         #     # Each element is of type ::Grafeas::V1::Occurrence.
-        #     p response
+        #     p item
         #   end
         #
         def list_occurrences request, options = nil
@@ -960,13 +958,11 @@ module Grafeas
         #   # Call the list_notes method.
         #   result = client.list_notes request
         #
-        #   # The returned object is of type Gapic::PagedEnumerable. You can
-        #   # iterate over all elements by calling #each, and the enumerable
-        #   # will lazily make API calls to fetch subsequent pages. Other
-        #   # methods are also available for managing paging directly.
-        #   result.each do |response|
+        #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+        #   # over elements, and API calls will be issued to fetch pages as needed.
+        #   result.each do |item|
         #     # Each element is of type ::Grafeas::V1::Note.
-        #     p response
+        #     p item
         #   end
         #
         def list_notes request, options = nil
@@ -1415,13 +1411,11 @@ module Grafeas
         #   # Call the list_note_occurrences method.
         #   result = client.list_note_occurrences request
         #
-        #   # The returned object is of type Gapic::PagedEnumerable. You can
-        #   # iterate over all elements by calling #each, and the enumerable
-        #   # will lazily make API calls to fetch subsequent pages. Other
-        #   # methods are also available for managing paging directly.
-        #   result.each do |response|
+        #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+        #   # over elements, and API calls will be issued to fetch pages as needed.
+        #   result.each do |item|
         #     # Each element is of type ::Grafeas::V1::Occurrence.
-        #     p response
+        #     p item
         #   end
         #
         def list_note_occurrences request, options = nil
@@ -1557,7 +1551,7 @@ module Grafeas
           config_attr :scope,         nil, ::String, ::Array, nil
           config_attr :lib_name,      nil, ::String, nil
           config_attr :lib_version,   nil, ::String, nil
-          config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+          config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
           config_attr :interceptors,  nil, ::Array, nil
           config_attr :timeout,       nil, ::Numeric, nil
           config_attr :metadata,      nil, ::Hash, nil
@@ -1711,3 +1705,4 @@ module Grafeas
     end
   end
 end
+

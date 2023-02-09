@@ -226,6 +226,7 @@ module Grafeas
 
       # The type of an alias.
       module Kind
+
         # Unknown.
         KIND_UNSPECIFIED = 0
 
@@ -316,3 +317,4 @@ module Grafeas
     end
   end
 end
+

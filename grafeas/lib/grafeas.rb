@@ -61,9 +61,9 @@ module Grafeas
     require "grafeas/#{version.to_s.downcase}"
 
     package_name = Grafeas
-                   .constants
-                   .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                   .first
+                    .constants
+                    .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                    .first
     service_module = Grafeas.const_get(package_name).const_get(:Grafeas)
     service_module.const_get(:Client).new(&block)
   end
@@ -71,3 +71,4 @@ end
 
 helper_path = ::File.join __dir__, "grafeas", "helpers.rb"
 require "grafeas/helpers" if ::File.file? helper_path
+

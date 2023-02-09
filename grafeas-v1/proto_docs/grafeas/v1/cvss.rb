@@ -52,7 +52,7 @@ module Grafeas
       extend ::Google::Protobuf::MessageExts::ClassMethods
 
       module AttackVector
-        ATTACK_VECTOR_UNSPECIFIED = 0
+      ATTACK_VECTOR_UNSPECIFIED = 0
 
         ATTACK_VECTOR_NETWORK = 1
 
@@ -64,7 +64,7 @@ module Grafeas
       end
 
       module AttackComplexity
-        ATTACK_COMPLEXITY_UNSPECIFIED = 0
+      ATTACK_COMPLEXITY_UNSPECIFIED = 0
 
         ATTACK_COMPLEXITY_LOW = 1
 
@@ -72,7 +72,7 @@ module Grafeas
       end
 
       module PrivilegesRequired
-        PRIVILEGES_REQUIRED_UNSPECIFIED = 0
+      PRIVILEGES_REQUIRED_UNSPECIFIED = 0
 
         PRIVILEGES_REQUIRED_NONE = 1
 
@@ -82,7 +82,7 @@ module Grafeas
       end
 
       module UserInteraction
-        USER_INTERACTION_UNSPECIFIED = 0
+      USER_INTERACTION_UNSPECIFIED = 0
 
         USER_INTERACTION_NONE = 1
 
@@ -90,7 +90,7 @@ module Grafeas
       end
 
       module Scope
-        SCOPE_UNSPECIFIED = 0
+      SCOPE_UNSPECIFIED = 0
 
         SCOPE_UNCHANGED = 1
 
@@ -98,7 +98,7 @@ module Grafeas
       end
 
       module Impact
-        IMPACT_UNSPECIFIED = 0
+      IMPACT_UNSPECIFIED = 0
 
         IMPACT_HIGH = 1
 
@@ -145,7 +145,7 @@ module Grafeas
       extend ::Google::Protobuf::MessageExts::ClassMethods
 
       module AttackVector
-        ATTACK_VECTOR_UNSPECIFIED = 0
+      ATTACK_VECTOR_UNSPECIFIED = 0
 
         ATTACK_VECTOR_NETWORK = 1
 
@@ -157,7 +157,7 @@ module Grafeas
       end
 
       module AttackComplexity
-        ATTACK_COMPLEXITY_UNSPECIFIED = 0
+      ATTACK_COMPLEXITY_UNSPECIFIED = 0
 
         ATTACK_COMPLEXITY_LOW = 1
 
@@ -165,7 +165,7 @@ module Grafeas
       end
 
       module Authentication
-        AUTHENTICATION_UNSPECIFIED = 0
+      AUTHENTICATION_UNSPECIFIED = 0
 
         AUTHENTICATION_MULTIPLE = 1
 
@@ -175,7 +175,7 @@ module Grafeas
       end
 
       module PrivilegesRequired
-        PRIVILEGES_REQUIRED_UNSPECIFIED = 0
+      PRIVILEGES_REQUIRED_UNSPECIFIED = 0
 
         PRIVILEGES_REQUIRED_NONE = 1
 
@@ -185,7 +185,7 @@ module Grafeas
       end
 
       module UserInteraction
-        USER_INTERACTION_UNSPECIFIED = 0
+      USER_INTERACTION_UNSPECIFIED = 0
 
         USER_INTERACTION_NONE = 1
 
@@ -193,7 +193,7 @@ module Grafeas
       end
 
       module Scope
-        SCOPE_UNSPECIFIED = 0
+      SCOPE_UNSPECIFIED = 0
 
         SCOPE_UNCHANGED = 1
 
@@ -201,7 +201,7 @@ module Grafeas
       end
 
       module Impact
-        IMPACT_UNSPECIFIED = 0
+      IMPACT_UNSPECIFIED = 0
 
         IMPACT_HIGH = 1
 
@@ -213,6 +213,7 @@ module Grafeas
 
     # CVSS Version.
     module CVSSVersion
+
       CVSS_VERSION_UNSPECIFIED = 0
 
       CVSS_VERSION_2 = 1
@@ -221,3 +222,4 @@ module Grafeas
     end
   end
 end
+
