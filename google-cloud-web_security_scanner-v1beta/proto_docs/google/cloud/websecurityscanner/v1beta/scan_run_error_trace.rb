@@ -44,6 +44,7 @@ module Google
           # Defines an error reason code.
           # Next id: 7
           module Code
+
             # Default value is never used.
             CODE_UNSPECIFIED = 0
 
@@ -75,3 +76,4 @@ module Google
     end
   end
 end
+

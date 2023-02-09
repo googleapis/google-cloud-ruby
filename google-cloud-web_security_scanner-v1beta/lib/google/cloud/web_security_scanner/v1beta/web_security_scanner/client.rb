@@ -66,57 +66,57 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_scan_config.timeout = 600.0
+                    default_config.rpcs.create_scan_config.timeout = 600.0
 
-                default_config.rpcs.delete_scan_config.timeout = 600.0
-                default_config.rpcs.delete_scan_config.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.delete_scan_config.timeout = 600.0
+                    default_config.rpcs.delete_scan_config.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.get_scan_config.timeout = 600.0
-                default_config.rpcs.get_scan_config.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_scan_config.timeout = 600.0
+                    default_config.rpcs.get_scan_config.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_scan_configs.timeout = 600.0
-                default_config.rpcs.list_scan_configs.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_scan_configs.timeout = 600.0
+                    default_config.rpcs.list_scan_configs.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.update_scan_config.timeout = 600.0
+                    default_config.rpcs.update_scan_config.timeout = 600.0
 
-                default_config.rpcs.start_scan_run.timeout = 600.0
+                    default_config.rpcs.start_scan_run.timeout = 600.0
 
-                default_config.rpcs.get_scan_run.timeout = 600.0
-                default_config.rpcs.get_scan_run.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_scan_run.timeout = 600.0
+                    default_config.rpcs.get_scan_run.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_scan_runs.timeout = 600.0
-                default_config.rpcs.list_scan_runs.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_scan_runs.timeout = 600.0
+                    default_config.rpcs.list_scan_runs.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.stop_scan_run.timeout = 600.0
+                    default_config.rpcs.stop_scan_run.timeout = 600.0
 
-                default_config.rpcs.list_crawled_urls.timeout = 600.0
-                default_config.rpcs.list_crawled_urls.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_crawled_urls.timeout = 600.0
+                    default_config.rpcs.list_crawled_urls.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.get_finding.timeout = 600.0
-                default_config.rpcs.get_finding.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.get_finding.timeout = 600.0
+                    default_config.rpcs.get_finding.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_findings.timeout = 600.0
-                default_config.rpcs.list_findings.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_findings.timeout = 600.0
+                    default_config.rpcs.list_findings.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.list_finding_type_stats.timeout = 600.0
-                default_config.rpcs.list_finding_type_stats.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    default_config.rpcs.list_finding_type_stats.timeout = 600.0
+                    default_config.rpcs.list_finding_type_stats.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -509,13 +509,11 @@ module Google
             #   # Call the list_scan_configs method.
             #   result = client.list_scan_configs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::WebSecurityScanner::V1beta::ScanConfig.
-            #     p response
+            #     p item
             #   end
             #
             def list_scan_configs request, options = nil
@@ -875,13 +873,11 @@ module Google
             #   # Call the list_scan_runs method.
             #   result = client.list_scan_runs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::WebSecurityScanner::V1beta::ScanRun.
-            #     p response
+            #     p item
             #   end
             #
             def list_scan_runs request, options = nil
@@ -1064,13 +1060,11 @@ module Google
             #   # Call the list_crawled_urls method.
             #   result = client.list_crawled_urls request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::WebSecurityScanner::V1beta::CrawledUrl.
-            #     p response
+            #     p item
             #   end
             #
             def list_crawled_urls request, options = nil
@@ -1258,13 +1252,11 @@ module Google
             #   # Call the list_findings method.
             #   result = client.list_findings request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::WebSecurityScanner::V1beta::Finding.
-            #     p response
+            #     p item
             #   end
             #
             def list_findings request, options = nil
@@ -1487,7 +1479,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1636,3 +1628,4 @@ module Google
     end
   end
 end
+

@@ -522,6 +522,7 @@ module Google
 
         # The format used in an `AccessLevel`.
         module LevelFormat
+
           # The format was not specified.
           LEVEL_FORMAT_UNSPECIFIED = 0
 
@@ -537,3 +538,4 @@ module Google
     end
   end
 end
+

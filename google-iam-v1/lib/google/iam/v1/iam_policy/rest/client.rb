@@ -192,9 +192,9 @@ module Google
             #     following default mask is used:
             #
             #     `paths: "bindings, etag"`
-            # @yield [result, response] Access the result along with the Faraday response object
+            # @yield [result, operation] Access the result along with the TransportOperation object
             # @yieldparam result [::Google::Iam::V1::Policy]
-            # @yieldparam response [::Faraday::Response]
+            # @yieldparam operation [::Gapic::Rest::TransportOperation]
             #
             # @return [::Google::Iam::V1::Policy]
             #
@@ -226,10 +226,10 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              bindings_override = @config.bindings_override["google.iam.v1.IAMPolicy.SetIamPolicy"]
+            bindings_override = @config.bindings_override["google.iam.v1.IAMPolicy.SetIamPolicy"]
 
-              @iam_policy_stub.set_iam_policy request, options, bindings_override: bindings_override do |result, response|
-                yield result, response if block_given?
+              @iam_policy_stub.set_iam_policy request, options, bindings_override: bindings_override do |result, operation|
+                yield result, operation if block_given?
                 return result
               end
             rescue ::Gapic::Rest::Error => e
@@ -262,9 +262,9 @@ module Google
             #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
             #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
             #     `GetIamPolicy`.
-            # @yield [result, response] Access the result along with the Faraday response object
+            # @yield [result, operation] Access the result along with the TransportOperation object
             # @yieldparam result [::Google::Iam::V1::Policy]
-            # @yieldparam response [::Faraday::Response]
+            # @yieldparam operation [::Gapic::Rest::TransportOperation]
             #
             # @return [::Google::Iam::V1::Policy]
             #
@@ -296,10 +296,10 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              bindings_override = @config.bindings_override["google.iam.v1.IAMPolicy.GetIamPolicy"]
+            bindings_override = @config.bindings_override["google.iam.v1.IAMPolicy.GetIamPolicy"]
 
-              @iam_policy_stub.get_iam_policy request, options, bindings_override: bindings_override do |result, response|
-                yield result, response if block_given?
+              @iam_policy_stub.get_iam_policy request, options, bindings_override: bindings_override do |result, operation|
+                yield result, operation if block_given?
                 return result
               end
             rescue ::Gapic::Rest::Error => e
@@ -338,9 +338,9 @@ module Google
             #     wildcards (such as '*' or 'storage.*') are not allowed. For more
             #     information see
             #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-            # @yield [result, response] Access the result along with the Faraday response object
+            # @yield [result, operation] Access the result along with the TransportOperation object
             # @yieldparam result [::Google::Iam::V1::TestIamPermissionsResponse]
-            # @yieldparam response [::Faraday::Response]
+            # @yieldparam operation [::Gapic::Rest::TransportOperation]
             #
             # @return [::Google::Iam::V1::TestIamPermissionsResponse]
             #
@@ -372,10 +372,10 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              bindings_override = @config.bindings_override["google.iam.v1.IAMPolicy.TestIamPermissions"]
+            bindings_override = @config.bindings_override["google.iam.v1.IAMPolicy.TestIamPermissions"]
 
-              @iam_policy_stub.test_iam_permissions request, options, bindings_override: bindings_override do |result, response|
-                yield result, response if block_given?
+              @iam_policy_stub.test_iam_permissions request, options, bindings_override: bindings_override do |result, operation|
+                yield result, operation if block_given?
                 return result
               end
             rescue ::Gapic::Rest::Error => e
@@ -547,3 +547,4 @@ module Google
     end
   end
 end
+

@@ -101,6 +101,7 @@ module Google
           # with many independent perimeters that need to share some data with a common
           # perimeter, but should not be able to share data among themselves.
           module PerimeterType
+
             # Regular Perimeter.
             PERIMETER_TYPE_REGULAR = 0
 
@@ -473,6 +474,7 @@ module Google
           # [google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom]
           # rules.
           module IdentityType
+
             # No blanket identity group specified.
             IDENTITY_TYPE_UNSPECIFIED = 0
 
@@ -490,3 +492,4 @@ module Google
     end
   end
 end
+

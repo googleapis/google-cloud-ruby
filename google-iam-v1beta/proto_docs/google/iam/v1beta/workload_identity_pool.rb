@@ -45,6 +45,7 @@ module Google
 
         # The current state of the pool.
         module State
+
           # State unspecified.
           STATE_UNSPECIFIED = 0
 
@@ -245,6 +246,7 @@ module Google
 
         # The current state of the provider.
         module State
+
           # State unspecified.
           STATE_UNSPECIFIED = 0
 
@@ -461,3 +463,4 @@ module Google
     end
   end
 end
+

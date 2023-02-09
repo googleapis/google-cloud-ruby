@@ -69,9 +69,9 @@ module Google
         require "google/cloud/workflows/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Workflows
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Workflows.const_get(package_name).const_get(:Workflows)
         service_module.const_get(:Client).new(&block)
       end
@@ -115,3 +115,4 @@ end
 
 helper_path = ::File.join __dir__, "workflows", "helpers.rb"
 require "google/cloud/workflows/helpers" if ::File.file? helper_path
+

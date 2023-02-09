@@ -75,3 +75,4 @@ end
 
 helper_path = ::File.join __dir__, "iam_policy", "helpers.rb"
 require "google/iam/v1/iam_policy/helpers" if ::File.file? helper_path
+

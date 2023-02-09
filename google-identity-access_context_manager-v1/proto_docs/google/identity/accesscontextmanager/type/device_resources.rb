@@ -23,6 +23,7 @@ module Google
       module Type
         # The encryption state of the device.
         module DeviceEncryptionStatus
+
           # The encryption status of the device is not specified or not known.
           ENCRYPTION_UNSPECIFIED = 0
 
@@ -39,6 +40,7 @@ module Google
         # The operating system type of the device.
         # Next id: 7
         module OsType
+
           # The operating system of the device is not specified or not known.
           OS_UNSPECIFIED = 0
 
@@ -63,6 +65,7 @@ module Google
 
         # The degree to which the device is managed by the Cloud organization.
         module DeviceManagementLevel
+
           # The device's management level is not specified or not known.
           MANAGEMENT_UNSPECIFIED = 0
 
@@ -82,3 +85,4 @@ module Google
     end
   end
 end
+

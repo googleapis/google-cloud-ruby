@@ -46,3 +46,4 @@ end
 
 helper_path = ::File.join __dir__, "workload_identity_pools", "helpers.rb"
 require "google/iam/v1beta/workload_identity_pools/helpers" if ::File.file? helper_path
+

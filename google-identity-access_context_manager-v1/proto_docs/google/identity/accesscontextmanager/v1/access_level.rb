@@ -71,6 +71,7 @@ module Google
           # Options for how the `conditions` list should be combined to determine if
           # this `AccessLevel` is applied. Default is AND.
           module ConditionCombiningFunction
+
             # All `Conditions` must be true for the `BasicLevel` to be true.
             AND = 0
 
@@ -195,3 +196,4 @@ module Google
     end
   end
 end
+

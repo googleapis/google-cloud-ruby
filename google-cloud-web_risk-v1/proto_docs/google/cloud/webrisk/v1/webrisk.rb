@@ -105,6 +105,7 @@ module Google
 
           # The type of response sent to the client.
           module ResponseType
+
             # Unknown.
             RESPONSE_TYPE_UNSPECIFIED = 0
 
@@ -309,6 +310,7 @@ module Google
         # The type of threat. This maps directly to the threat list a threat may
         # belong to.
         module ThreatType
+
           # No entries should match this threat type. This threat type is unused.
           THREAT_TYPE_UNSPECIFIED = 0
 
@@ -328,6 +330,7 @@ module Google
 
         # The ways in which threat entry sets can be compressed.
         module CompressionType
+
           # Unknown.
           COMPRESSION_TYPE_UNSPECIFIED = 0
 
@@ -341,3 +344,4 @@ module Google
     end
   end
 end
+

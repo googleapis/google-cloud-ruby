@@ -58,3 +58,4 @@ end
 
 helper_path = ::File.join __dir__, "access_context_manager", "helpers.rb"
 require "google/identity/access_context_manager/v1/access_context_manager/helpers" if ::File.file? helper_path
+

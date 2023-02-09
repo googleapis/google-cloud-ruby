@@ -95,6 +95,7 @@ module Google
           # Describes the current state of workflow deployment. More states may be
           # added in the future.
           module State
+
             # Invalid state.
             STATE_UNSPECIFIED = 0
 
@@ -242,3 +243,4 @@ module Google
     end
   end
 end
+

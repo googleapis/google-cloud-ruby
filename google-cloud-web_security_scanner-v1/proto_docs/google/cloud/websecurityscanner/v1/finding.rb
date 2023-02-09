@@ -95,6 +95,7 @@ module Google
 
           # The severity level of a vulnerability.
           module Severity
+
             # No severity specified. The default value.
             SEVERITY_UNSPECIFIED = 0
 
@@ -115,3 +116,4 @@ module Google
     end
   end
 end
+

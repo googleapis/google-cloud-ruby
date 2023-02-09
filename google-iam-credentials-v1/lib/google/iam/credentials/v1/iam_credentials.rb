@@ -55,3 +55,4 @@ end
 
 helper_path = ::File.join __dir__, "iam_credentials", "helpers.rb"
 require "google/iam/credentials/v1/iam_credentials/helpers" if ::File.file? helper_path
+

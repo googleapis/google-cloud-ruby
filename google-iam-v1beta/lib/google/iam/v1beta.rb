@@ -36,3 +36,4 @@ end
 
 helper_path = ::File.join __dir__, "v1beta", "_helpers.rb"
 require "google/iam/v1beta/_helpers" if ::File.file? helper_path
+

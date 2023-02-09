@@ -20,8 +20,11 @@
 require "google/identity/access_context_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#replace_service_perimeters
+# Snippet for the replace_service_perimeters call in the AccessContextManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#replace_service_perimeters.
+# It may require modification in order to execute successfully.
 #
 def replace_service_perimeters
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def replace_service_perimeters
   # Call the replace_service_perimeters method.
   result = client.replace_service_perimeters request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END accesscontextmanager_v1_generated_AccessContextManager_ReplaceServicePerimeters_sync]

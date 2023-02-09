@@ -60,9 +60,9 @@ module Google
         require "google/identity/access_context_manager/#{version.to_s.downcase}"
 
         package_name = Google::Identity::AccessContextManager
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Identity::AccessContextManager.const_get(package_name).const_get(:AccessContextManager)
         service_module.const_get(:Client).new(&block)
       end
@@ -72,3 +72,4 @@ end
 
 helper_path = ::File.join __dir__, "access_context_manager", "helpers.rb"
 require "google/identity/access_context_manager/helpers" if ::File.file? helper_path
+

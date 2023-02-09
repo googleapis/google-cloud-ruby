@@ -74,6 +74,7 @@ module Google
 
           # Types of ScanRun execution state.
           module ExecutionState
+
             # Represents an invalid state caused by internal server error. This value
             # should never be returned.
             EXECUTION_STATE_UNSPECIFIED = 0
@@ -90,6 +91,7 @@ module Google
 
           # Types of ScanRun result state.
           module ResultState
+
             # Default value. This value is returned when the ScanRun is not yet
             # finished.
             RESULT_STATE_UNSPECIFIED = 0
@@ -108,3 +110,4 @@ module Google
     end
   end
 end
+

@@ -129,6 +129,7 @@ module Google
 
           # Type of user agents used for scanning.
           module UserAgent
+
             # The user agent is unknown. Service will default to CHROME_LINUX.
             USER_AGENT_UNSPECIFIED = 0
 
@@ -144,6 +145,7 @@ module Google
 
           # Cloud platforms supported by Cloud Web Security Scanner.
           module TargetPlatform
+
             # The target platform is unknown. Requests with this enum value will be
             # rejected with INVALID_ARGUMENT error.
             TARGET_PLATFORM_UNSPECIFIED = 0
@@ -159,6 +161,7 @@ module Google
           # scanning will minimize requests with the potential to modify data. To
           # achieve the maximum scan coverage, NORMAL risk level is recommended.
           module RiskLevel
+
             # Use default, which is NORMAL.
             RISK_LEVEL_UNSPECIFIED = 0
 
@@ -172,6 +175,7 @@ module Google
           # Controls export of scan configurations and results to Cloud Security
           # Command Center.
           module ExportToSecurityCommandCenter
+
             # Use default, which is ENABLED.
             EXPORT_TO_SECURITY_COMMAND_CENTER_UNSPECIFIED = 0
 
@@ -186,3 +190,4 @@ module Google
     end
   end
 end
+

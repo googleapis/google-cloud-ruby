@@ -125,6 +125,7 @@ module Google
             # Describes the current state of the execution. More states might be added
             # in the future.
             module State
+
               # Invalid state.
               STATE_UNSPECIFIED = 0
 
@@ -144,6 +145,7 @@ module Google
             # Describes the level of platform logging to apply to calls and call
             # responses during workflow executions.
             module CallLogLevel
+
               # No call logging specified.
               CALL_LOG_LEVEL_UNSPECIFIED = 0
 
@@ -249,6 +251,7 @@ module Google
 
           # Defines possible views for execution resource.
           module ExecutionView
+
             # The default / unset value.
             EXECUTION_VIEW_UNSPECIFIED = 0
 
@@ -265,3 +268,4 @@ module Google
     end
   end
 end
+

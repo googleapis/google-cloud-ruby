@@ -35,6 +35,7 @@ module Google
           # Defines a warning message code.
           # Next id: 6
           module Code
+
             # Default value is never used.
             CODE_UNSPECIFIED = 0
 
@@ -60,3 +61,4 @@ module Google
     end
   end
 end
+

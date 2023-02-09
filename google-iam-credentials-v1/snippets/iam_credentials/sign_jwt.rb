@@ -20,8 +20,11 @@
 require "google/iam/credentials/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Iam::Credentials::V1::IAMCredentials::Client#sign_jwt
+# Snippet for the sign_jwt call in the IAMCredentials service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Iam::Credentials::V1::IAMCredentials::Client#sign_jwt. It may require
+# modification in order to execute successfully.
 #
 def sign_jwt
   # Create a client object. The client can be reused for multiple calls.

@@ -1,6 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-workflows-v1", path: "../google-cloud-workflows-v1"
-gem "google-cloud-workflows-v1beta", path: "../google-cloud-workflows-v1beta"

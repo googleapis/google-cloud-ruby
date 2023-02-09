@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "web_risk_service", "helpers.rb"
 require "google/cloud/web_risk/v1beta1/web_risk_service/helpers" if ::File.file? helper_path
+

@@ -113,6 +113,7 @@ module Google
 
           # Types of XSS attack vector.
           module AttackVector
+
             # Unknown attack vector.
             ATTACK_VECTOR_UNSPECIFIED = 0
 
@@ -178,6 +179,7 @@ module Google
 
           # Locations within a request where XML was substituted.
           module Location
+
             # Unknown Location.
             LOCATION_UNSPECIFIED = 0
 
@@ -189,3 +191,4 @@ module Google
     end
   end
 end
+

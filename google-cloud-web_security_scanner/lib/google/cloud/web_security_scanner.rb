@@ -69,9 +69,9 @@ module Google
         require "google/cloud/web_security_scanner/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::WebSecurityScanner
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::WebSecurityScanner.const_get(package_name).const_get(:WebSecurityScanner)
         service_module.const_get(:Client).new(&block)
       end
@@ -115,3 +115,4 @@ end
 
 helper_path = ::File.join __dir__, "web_security_scanner", "helpers.rb"
 require "google/cloud/web_security_scanner/helpers" if ::File.file? helper_path
+

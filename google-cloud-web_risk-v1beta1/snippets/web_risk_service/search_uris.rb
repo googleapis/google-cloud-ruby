@@ -20,8 +20,11 @@
 require "google/cloud/web_risk/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::WebRisk::V1beta1::WebRiskService::Client#search_uris
+# Snippet for the search_uris call in the WebRiskService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::WebRisk::V1beta1::WebRiskService::Client#search_uris. It may
+# require modification in order to execute successfully.
 #
 def search_uris
   # Create a client object. The client can be reused for multiple calls.

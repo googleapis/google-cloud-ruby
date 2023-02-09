@@ -49,9 +49,9 @@ module Google
       require "google/iam/#{version.to_s.downcase}"
 
       package_name = Google::Iam
-                     .constants
-                     .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                     .first
+                      .constants
+                      .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                      .first
       service_module = Google::Iam.const_get(package_name).const_get(:Policies)
       service_module.const_get(:Client).new(&block)
     end
@@ -60,3 +60,4 @@ end
 
 helper_path = ::File.join __dir__, "iam", "helpers.rb"
 require "google/iam/helpers" if ::File.file? helper_path
+
