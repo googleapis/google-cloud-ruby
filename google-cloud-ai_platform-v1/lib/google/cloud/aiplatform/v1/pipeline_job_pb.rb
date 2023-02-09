@@ -106,6 +106,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.PipelineTaskExecutorDetail.CustomJobDetail" do
       optional :job, :string, 1
+      repeated :failed_jobs, :string, 3
     end
   end
 end

@@ -78,7 +78,7 @@ module Google
         #     this key.
         # @!attribute [rw] network
         #   @return [::String]
-        #     The full name of the Google Compute Engine
+        #     Optional. The full name of the Google Compute Engine
         #     [network](https://cloud.google.com//compute/docs/networks-and-firewalls#networks)
         #     to which the Endpoint should be peered.
         #
@@ -206,6 +206,8 @@ module Google
         #     User can disable container logging by setting this flag to true.
         # @!attribute [rw] enable_access_logging
         #   @return [::Boolean]
+        #     If true, online prediction access logs are sent to StackDriver
+        #     Logging.
         #     These logs are like standard server access logs, containing
         #     information like timestamp and latency for each prediction request.
         #

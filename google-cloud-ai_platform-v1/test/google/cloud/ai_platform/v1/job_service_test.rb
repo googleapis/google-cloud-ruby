@@ -979,6 +979,441 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
     end
   end
 
+  def test_create_nas_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::NasJob.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    nas_job = {}
+
+    create_nas_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_nas_job, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::CreateNasJobRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::NasJob), request["nas_job"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_nas_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_nas_job({ parent: parent, nas_job: nas_job }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_nas_job parent: parent, nas_job: nas_job do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_nas_job ::Google::Cloud::AIPlatform::V1::CreateNasJobRequest.new(parent: parent, nas_job: nas_job) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_nas_job({ parent: parent, nas_job: nas_job }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_nas_job(::Google::Cloud::AIPlatform::V1::CreateNasJobRequest.new(parent: parent, nas_job: nas_job), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_nas_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_nas_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::NasJob.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_nas_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_nas_job, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::GetNasJobRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_nas_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_nas_job({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_nas_job name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_nas_job ::Google::Cloud::AIPlatform::V1::GetNasJobRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_nas_job({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_nas_job(::Google::Cloud::AIPlatform::V1::GetNasJobRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_nas_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_nas_jobs
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::ListNasJobsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    read_mask = {}
+
+    list_nas_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_nas_jobs, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::ListNasJobsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["read_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_nas_jobs_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_nas_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_nas_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_nas_jobs ::Google::Cloud::AIPlatform::V1::ListNasJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_nas_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_nas_jobs(::Google::Cloud::AIPlatform::V1::ListNasJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_nas_jobs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_nas_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_nas_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_nas_job, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_nas_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_nas_job({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_nas_job name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_nas_job ::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_nas_job({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_nas_job(::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_nas_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_cancel_nas_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    cancel_nas_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :cancel_nas_job, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::CancelNasJobRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, cancel_nas_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.cancel_nas_job({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.cancel_nas_job name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.cancel_nas_job ::Google::Cloud::AIPlatform::V1::CancelNasJobRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.cancel_nas_job({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.cancel_nas_job(::Google::Cloud::AIPlatform::V1::CancelNasJobRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, cancel_nas_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_nas_trial_detail
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::NasTrialDetail.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_nas_trial_detail_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_nas_trial_detail, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_nas_trial_detail_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_nas_trial_detail({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_nas_trial_detail name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_nas_trial_detail ::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_nas_trial_detail({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_nas_trial_detail(::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_nas_trial_detail_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_nas_trial_details
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_nas_trial_details_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_nas_trial_details, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_nas_trial_details_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_nas_trial_details({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_nas_trial_details parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_nas_trial_details ::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_nas_trial_details({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_nas_trial_details(::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_nas_trial_details_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_batch_prediction_job
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AIPlatform::V1::BatchPredictionJob.new

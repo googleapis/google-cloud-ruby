@@ -131,6 +131,30 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientPathsTest < Minitest::T
     end
   end
 
+  def test_nas_job_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.nas_job_path project: "value0", location: "value1", nas_job: "value2"
+      assert_equal "projects/value0/locations/value1/nasJobs/value2", path
+    end
+  end
+
+  def test_nas_trial_detail_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.nas_trial_detail_path project: "value0", location: "value1", nas_job: "value2", nas_trial_detail: "value3"
+      assert_equal "projects/value0/locations/value1/nasJobs/value2/nasTrialDetails/value3", path
+    end
+  end
+
   def test_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

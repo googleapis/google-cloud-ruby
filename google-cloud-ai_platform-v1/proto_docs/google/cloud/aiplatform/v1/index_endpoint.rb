@@ -69,7 +69,7 @@ module Google
         #     unspecified, the Endpoint is not peered with any network.
         #
         #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#network network} and
-        #     [private_service_connect_config][google.cloud.aiplatform.v1.IndexEndpoint.private_service_connect_config]
+        #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#private_service_connect_config private_service_connect_config}
         #     are mutually exclusive.
         #
         #     [Format](https://cloud.google.com/compute/docs/reference/rest/v1/networks/insert):
@@ -85,6 +85,13 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#network network} or
         #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#enable_private_service_connect enable_private_service_connect},
         #     can be set.
+        # @!attribute [rw] private_service_connect_config
+        #   @return [::Google::Cloud::AIPlatform::V1::PrivateServiceConnectConfig]
+        #     Optional. Configuration for private service connect.
+        #
+        #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#network network} and
+        #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#private_service_connect_config private_service_connect_config}
+        #     are mutually exclusive.
         class IndexEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -164,10 +171,10 @@ module Google
         #     e2-standard-16 and all machine types available for LARGE shard.
         #
         #     Available machine types for LARGE shard:
-        #     e2-standard-32, e2-highmem-16, n2d-standard-32.
+        #     e2-highmem-16, n2d-standard-32.
         #
         #     n1-standard-16 and n1-standard-32 are still available, but we recommend
-        #     e2-standard-16 and e2-standard-32 for cost efficiency.
+        #     e2-standard-16 and e2-highmem-16 for cost efficiency.
         # @!attribute [rw] enable_access_logging
         #   @return [::Boolean]
         #     Optional. If true, private endpoint's access logs are sent to StackDriver
