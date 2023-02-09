@@ -92,6 +92,246 @@
       ]
     },
     {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_ListMavenArtifacts_sync",
+      "title": "Snippet for list_maven_artifacts in ArtifactRegistry",
+      "description": "Basic snippet for list_maven_artifacts in ArtifactRegistry",
+      "file": "artifact_registry/list_maven_artifacts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_maven_artifacts",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#list_maven_artifacts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::ListMavenArtifactsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::ListMavenArtifactsResponse",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListMavenArtifacts",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.ListMavenArtifacts",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_GetMavenArtifact_sync",
+      "title": "Snippet for get_maven_artifact in ArtifactRegistry",
+      "description": "Basic snippet for get_maven_artifact in ArtifactRegistry",
+      "file": "artifact_registry/get_maven_artifact.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_maven_artifact",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_maven_artifact",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::GetMavenArtifactRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::MavenArtifact",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetMavenArtifact",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.GetMavenArtifact",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_ListNpmPackages_sync",
+      "title": "Snippet for list_npm_packages in ArtifactRegistry",
+      "description": "Basic snippet for list_npm_packages in ArtifactRegistry",
+      "file": "artifact_registry/list_npm_packages.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_npm_packages",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#list_npm_packages",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::ListNpmPackagesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::ListNpmPackagesResponse",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListNpmPackages",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.ListNpmPackages",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_GetNpmPackage_sync",
+      "title": "Snippet for get_npm_package in ArtifactRegistry",
+      "description": "Basic snippet for get_npm_package in ArtifactRegistry",
+      "file": "artifact_registry/get_npm_package.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_npm_package",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_npm_package",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::GetNpmPackageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::NpmPackage",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetNpmPackage",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.GetNpmPackage",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_ListPythonPackages_sync",
+      "title": "Snippet for list_python_packages in ArtifactRegistry",
+      "description": "Basic snippet for list_python_packages in ArtifactRegistry",
+      "file": "artifact_registry/list_python_packages.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_python_packages",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#list_python_packages",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::ListPythonPackagesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::ListPythonPackagesResponse",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListPythonPackages",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.ListPythonPackages",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_GetPythonPackage_sync",
+      "title": "Snippet for get_python_package in ArtifactRegistry",
+      "description": "Basic snippet for get_python_package in ArtifactRegistry",
+      "file": "artifact_registry/get_python_package.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_python_package",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_python_package",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::GetPythonPackageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::PythonPackage",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetPythonPackage",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.GetPythonPackage",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_ImportAptArtifacts_sync",
       "title": "Snippet for import_apt_artifacts in ArtifactRegistry",
       "description": "Basic snippet for import_apt_artifacts in ArtifactRegistry",
@@ -1075,6 +1315,86 @@
         "method": {
           "short_name": "UpdateProjectSettings",
           "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.UpdateProjectSettings",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_GetVPCSCConfig_sync",
+      "title": "Snippet for get_vpcsc_config in ArtifactRegistry",
+      "description": "Basic snippet for get_vpcsc_config in ArtifactRegistry",
+      "file": "artifact_registry/get_vpcsc_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_vpcsc_config",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_vpcsc_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::GetVPCSCConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::VPCSCConfig",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetVPCSCConfig",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.GetVPCSCConfig",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_UpdateVPCSCConfig_sync",
+      "title": "Snippet for update_vpcsc_config in ArtifactRegistry",
+      "description": "Basic snippet for update_vpcsc_config in ArtifactRegistry",
+      "file": "artifact_registry/update_vpcsc_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_vpcsc_config",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#update_vpcsc_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::UpdateVPCSCConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::VPCSCConfig",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "UpdateVPCSCConfig",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.UpdateVPCSCConfig",
           "service": {
             "short_name": "ArtifactRegistry",
             "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"

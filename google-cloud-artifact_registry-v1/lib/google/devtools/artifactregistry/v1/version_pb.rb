@@ -38,6 +38,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :force, :bool, 2
     end
+    add_message "google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata" do
+      repeated :failed_versions, :string, 2
+    end
     add_enum "google.devtools.artifactregistry.v1.VersionView" do
       value :VERSION_VIEW_UNSPECIFIED, 0
       value :BASIC, 1
@@ -55,6 +58,7 @@ module Google
         ListVersionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.ListVersionsResponse").msgclass
         GetVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.GetVersionRequest").msgclass
         DeleteVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.DeleteVersionRequest").msgclass
+        BatchDeleteVersionsMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata").msgclass
         VersionView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.VersionView").enummodule
       end
     end

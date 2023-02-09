@@ -57,15 +57,19 @@ module Google
         # @!attribute [rw] hashes
         #   @return [::Array<::Google::Cloud::ArtifactRegistry::V1::Hash>]
         #     The hashes of the file content.
-        # @!attribute [rw] create_time
+        # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time when the File was created.
-        # @!attribute [rw] update_time
+        #     Output only. The time when the File was created.
+        # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time when the File was last updated.
+        #     Output only. The time when the File was last updated.
         # @!attribute [rw] owner
         #   @return [::String]
         #     The name of the Package or Version that owns this file, if any.
+        # @!attribute [r] fetch_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the last attempt to refresh the file's data was
+        #     made. Only set when the repository is remote.
         class File
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -74,8 +78,8 @@ module Google
         # The request to list files.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The name of the repository whose files will be listed. For example:
-        #     "projects/p1/locations/us-central1/repositories/repo1
+        #     Required. The name of the repository whose files will be listed. For
+        #     example: "projects/p1/locations/us-central1/repositories/repo1
         # @!attribute [rw] filter
         #   @return [::String]
         #     An expression for filtering the results of the request. Filter rules are
@@ -120,7 +124,7 @@ module Google
         # The request to retrieve a file.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the file to retrieve.
+        #     Required. The name of the file to retrieve.
         class GetFileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

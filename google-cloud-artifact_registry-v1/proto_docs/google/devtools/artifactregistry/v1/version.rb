@@ -47,8 +47,9 @@ module Google
         #   @return [::Google::Protobuf::Struct]
         #     Output only. Repository-specific Metadata stored against this version.
         #     The fields returned are defined by the underlying repository-specific
-        #     resource. Currently, the only resource in use is
+        #     resource. Currently, the resources could be:
         #     {::Google::Cloud::ArtifactRegistry::V1::DockerImage DockerImage}
+        #     {::Google::Cloud::ArtifactRegistry::V1::MavenArtifact MavenArtifact}
         class Version
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -109,6 +110,15 @@ module Google
         #     By default, a version that is tagged may not be deleted. If force=true, the
         #     version and any tags pointing to the version are deleted.
         class DeleteVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The metadata of an LRO from deleting multiple versions.
+        # @!attribute [rw] failed_versions
+        #   @return [::Array<::String>]
+        #     The versions the operation failed to delete.
+        class BatchDeleteVersionsMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
