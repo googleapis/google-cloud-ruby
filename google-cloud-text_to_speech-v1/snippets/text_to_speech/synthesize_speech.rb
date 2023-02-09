@@ -20,8 +20,11 @@
 require "google/cloud/text_to_speech/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::TextToSpeech::V1::TextToSpeech::Client#synthesize_speech
+# Snippet for the synthesize_speech call in the TextToSpeech service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::TextToSpeech::V1::TextToSpeech::Client#synthesize_speech. It
+# may require modification in order to execute successfully.
 #
 def synthesize_speech
   # Create a client object. The client can be reused for multiple calls.

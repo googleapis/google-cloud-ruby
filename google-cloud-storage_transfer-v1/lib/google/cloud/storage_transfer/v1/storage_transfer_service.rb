@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "storage_transfer_service", "helpers.rb"
 require "google/cloud/storage_transfer/v1/storage_transfer_service/helpers" if ::File.file? helper_path
+

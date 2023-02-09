@@ -378,6 +378,7 @@ module Google
 
         # The HTTP method used to execute the task.
         module HttpMethod
+
           # HTTP method unspecified
           HTTP_METHOD_UNSPECIFIED = 0
 
@@ -400,3 +401,4 @@ module Google
     end
   end
 end
+

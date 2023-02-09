@@ -64,6 +64,7 @@ module Google
 
           # An enum which represents the type of a location.
           module LocationType
+
             # Default value if the type isn't specified.
             LOCATION_TYPE_UNSPECIFIED = 0
 
@@ -204,6 +205,7 @@ module Google
 
           # An enumeration describing an API access portal and exposure mechanism.
           module DeviceType
+
             # The device type isn't specified.
             DEVICE_TYPE_UNSPECIFIED = 0
 
@@ -435,6 +437,7 @@ module Google
           # {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry.description}
           # field.
           module CompensationType
+
             # Default value.
             COMPENSATION_TYPE_UNSPECIFIED = 0
 
@@ -468,6 +471,7 @@ module Google
 
           # Pay frequency.
           module CompensationUnit
+
             # Default value.
             COMPENSATION_UNIT_UNSPECIFIED = 0
 
@@ -530,7 +534,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           module State
-            # Default value.
+          # Default value.
             STATE_UNSPECIFIED = 0
 
             # The batch operation is being prepared for processing.
@@ -561,6 +565,7 @@ module Google
 
         # An enum that represents the size of the company.
         module CompanySize
+
           # Default value if the size isn't specified.
           COMPANY_SIZE_UNSPECIFIED = 0
 
@@ -588,6 +593,7 @@ module Google
 
         # An enum that represents employee benefits included with the job.
         module JobBenefit
+
           # Default value if the type isn't specified.
           JOB_BENEFIT_UNSPECIFIED = 0
 
@@ -634,6 +640,7 @@ module Google
         # Educational degree level defined in International Standard Classification
         # of Education (ISCED).
         module DegreeType
+
           # Default value. Represents no degree, or early childhood education.
           # Maps to ISCED code 0.
           # Ex) Kindergarten
@@ -688,6 +695,7 @@ module Google
 
         # An enum that represents the employment type of a job.
         module EmploymentType
+
           # The default value if the employment type isn't specified.
           EMPLOYMENT_TYPE_UNSPECIFIED = 0
 
@@ -738,6 +746,7 @@ module Google
 
         # An enum that represents the required experience level required for the job.
         module JobLevel
+
           # The default value if the level isn't specified.
           JOB_LEVEL_UNSPECIFIED = 0
 
@@ -763,6 +772,7 @@ module Google
         # role. This value is different than the "industry" associated with a role,
         # which is related to the categorization of the company listing the job.
         module JobCategory
+
           # The default value if the category isn't specified.
           JOB_CATEGORY_UNSPECIFIED = 0
 
@@ -862,6 +872,7 @@ module Google
         # don't need to specify a region. If a region is given, jobs are
         # eligible for searches in the specified region.
         module PostingRegion
+
           # If the region is unspecified, the job is only returned if it
           # matches the {::Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter}.
           POSTING_REGION_UNSPECIFIED = 0
@@ -896,6 +907,7 @@ module Google
         #
         # An enum that represents who has view access to the resource.
         module Visibility
+
           # Default value.
           VISIBILITY_UNSPECIFIED = 0
 
@@ -915,6 +927,7 @@ module Google
         # description. By setting this option, user can determine whether and how
         # sanitization is performed on these fields.
         module HtmlSanitization
+
           # Default value.
           HTML_SANITIZATION_UNSPECIFIED = 0
 
@@ -928,6 +941,7 @@ module Google
 
         # Method for commute.
         module CommuteMethod
+
           # Commute method isn't specified.
           COMMUTE_METHOD_UNSPECIFIED = 0
 
@@ -948,3 +962,4 @@ module Google
     end
   end
 end
+

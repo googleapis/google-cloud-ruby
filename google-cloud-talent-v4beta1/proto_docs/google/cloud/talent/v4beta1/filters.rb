@@ -269,6 +269,7 @@ module Google
 
           # Specify whether to include telecommute jobs.
           module TelecommutePreference
+
             # Default value if the telecommute preference isn't specified.
             TELECOMMUTE_PREFERENCE_UNSPECIFIED = 0
 
@@ -305,6 +306,7 @@ module Google
 
           # Specify the type of filtering.
           module FilterType
+
             # Filter type unspecified. Position holder, INVALID, should never be used.
             FILTER_TYPE_UNSPECIFIED = 0
 
@@ -384,6 +386,7 @@ module Google
 
           # The traffic density to use when calculating commute time.
           module RoadTraffic
+
             # Road traffic situation isn't specified.
             ROAD_TRAFFIC_UNSPECIFIED = 0
 
@@ -398,3 +401,4 @@ module Google
     end
   end
 end
+

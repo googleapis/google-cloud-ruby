@@ -384,6 +384,7 @@ module Google
 
           # The authentication and authorization method used by the storage service.
           module AuthMethod
+
             # AuthMethod is not specified.
             AUTH_METHOD_UNSPECIFIED = 0
 
@@ -396,6 +397,7 @@ module Google
 
           # The request model of the API.
           module RequestModel
+
             # RequestModel is not specified.
             REQUEST_MODEL_UNSPECIFIED = 0
 
@@ -410,6 +412,7 @@ module Google
 
           # The agent network protocol to access the storage service.
           module NetworkProtocol
+
             # NetworkProtocol is not specified.
             NETWORK_PROTOCOL_UNSPECIFIED = 0
 
@@ -424,6 +427,7 @@ module Google
 
           # The Listing API to use for discovering objects.
           module ListApi
+
             # ListApi is not specified.
             LIST_API_UNSPECIFIED = 0
 
@@ -467,6 +471,7 @@ module Google
 
           # The state of an AgentPool.
           module State
+
             # Default value. This value is unused.
             STATE_UNSPECIFIED = 0
 
@@ -519,6 +524,7 @@ module Google
           # Specifies when to overwrite an object in the sink when an object with
           # matching name is found in the source.
           module OverwriteWhen
+
             # Overwrite behavior is unspecified.
             OVERWRITE_WHEN_UNSPECIFIED = 0
 
@@ -649,6 +655,7 @@ module Google
 
           # Whether symlinks should be skipped or preserved during a transfer job.
           module Symlink
+
             # Symlink behavior is unspecified.
             SYMLINK_UNSPECIFIED = 0
 
@@ -661,6 +668,7 @@ module Google
 
           # Options for handling file mode attribute.
           module Mode
+
             # Mode behavior is unspecified.
             MODE_UNSPECIFIED = 0
 
@@ -673,6 +681,7 @@ module Google
 
           # Options for handling file GID attribute.
           module GID
+
             # GID behavior is unspecified.
             GID_UNSPECIFIED = 0
 
@@ -685,6 +694,7 @@ module Google
 
           # Options for handling file UID attribute.
           module UID
+
             # UID behavior is unspecified.
             UID_UNSPECIFIED = 0
 
@@ -697,6 +707,7 @@ module Google
 
           # Options for handling Cloud Storage object ACLs.
           module Acl
+
             # ACL behavior is unspecified.
             ACL_UNSPECIFIED = 0
 
@@ -713,6 +724,7 @@ module Google
 
           # Options for handling Google Cloud Storage object storage class.
           module StorageClass
+
             # Storage class behavior is unspecified.
             STORAGE_CLASS_UNSPECIFIED = 0
 
@@ -738,6 +750,7 @@ module Google
 
           # Options for handling temporary holds for Google Cloud Storage objects.
           module TemporaryHold
+
             # Temporary hold behavior is unspecified.
             TEMPORARY_HOLD_UNSPECIFIED = 0
 
@@ -750,6 +763,7 @@ module Google
 
           # Options for handling the KmsKey setting for Google Cloud Storage objects.
           module KmsKey
+
             # KmsKey behavior is unspecified.
             KMS_KEY_UNSPECIFIED = 0
 
@@ -765,6 +779,7 @@ module Google
           # Options for handling `timeCreated` metadata for Google Cloud Storage
           # objects.
           module TimeCreated
+
             # TimeCreated behavior is unspecified.
             TIME_CREATED_UNSPECIFIED = 0
 
@@ -937,6 +952,7 @@ module Google
 
           # The status of the transfer job.
           module Status
+
             # Zero is an illegal value.
             STATUS_UNSPECIFIED = 0
 
@@ -1115,6 +1131,7 @@ module Google
           # safely ignore unrecognized event types or explicitly specify which event
           # types they are prepared to accept.
           module EventType
+
             # Illegal value, to avoid allowing a default.
             EVENT_TYPE_UNSPECIFIED = 0
 
@@ -1133,6 +1150,7 @@ module Google
 
           # Enum for specifying the format of a notification message's payload.
           module PayloadFormat
+
             # Illegal value, to avoid allowing a default.
             PAYLOAD_FORMAT_UNSPECIFIED = 0
 
@@ -1178,6 +1196,7 @@ module Google
 
           # Loggable actions.
           module LoggableAction
+
             # Default value. This value is unused.
             LOGGABLE_ACTION_UNSPECIFIED = 0
 
@@ -1193,6 +1212,7 @@ module Google
 
           # Loggable action states.
           module LoggableActionState
+
             # Default value. This value is unused.
             LOGGABLE_ACTION_STATE_UNSPECIFIED = 0
 
@@ -1243,6 +1263,7 @@ module Google
 
           # The status of a TransferOperation.
           module Status
+
             # Zero is an illegal value.
             STATUS_UNSPECIFIED = 0
 
@@ -1269,3 +1290,4 @@ module Google
     end
   end
 end
+

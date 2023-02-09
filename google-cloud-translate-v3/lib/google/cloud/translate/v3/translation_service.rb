@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "translation_service", "helpers.rb"
 require "google/cloud/translate/v3/translation_service/helpers" if ::File.file? helper_path
+

@@ -20,8 +20,11 @@
 require "google/cloud/translate/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Translate::V3::TranslationService::Client#get_supported_languages
+# Snippet for the get_supported_languages call in the TranslationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Translate::V3::TranslationService::Client#get_supported_languages.
+# It may require modification in order to execute successfully.
 #
 def get_supported_languages
   # Create a client object. The client can be reused for multiple calls.

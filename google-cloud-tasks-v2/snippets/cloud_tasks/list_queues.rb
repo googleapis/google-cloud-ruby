@@ -20,8 +20,11 @@
 require "google/cloud/tasks/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Tasks::V2::CloudTasks::Client#list_queues
+# Snippet for the list_queues call in the CloudTasks service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Tasks::V2::CloudTasks::Client#list_queues. It may require
+# modification in order to execute successfully.
 #
 def list_queues
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_queues
   # Call the list_queues method.
   result = client.list_queues request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Tasks::V2::Queue.
-    p response
+    p item
   end
 end
 # [END cloudtasks_v2_generated_CloudTasks_ListQueues_sync]

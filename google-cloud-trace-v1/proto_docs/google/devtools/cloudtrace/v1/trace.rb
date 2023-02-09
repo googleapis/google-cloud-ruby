@@ -134,6 +134,7 @@ module Google
           # Type of span. Can be used to specify additional relationships between spans
           # in addition to a parent/child relationship.
           module SpanKind
+
             # Unspecified.
             SPAN_KIND_UNSPECIFIED = 0
 
@@ -226,6 +227,7 @@ module Google
 
           # Type of data returned for traces in the list.
           module ViewType
+
             # Default is `MINIMAL` if unspecified.
             VIEW_TYPE_UNSPECIFIED = 0
 
@@ -285,3 +287,4 @@ module Google
     end
   end
 end
+

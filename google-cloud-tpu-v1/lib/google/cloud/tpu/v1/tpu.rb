@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "tpu", "helpers.rb"
 require "google/cloud/tpu/v1/tpu/helpers" if ::File.file? helper_path
+

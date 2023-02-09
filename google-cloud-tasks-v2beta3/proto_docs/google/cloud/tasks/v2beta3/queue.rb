@@ -159,6 +159,7 @@ module Google
 
           # State of the queue.
           module State
+
             # Unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -196,6 +197,7 @@ module Google
 
           # The type of the queue.
           module Type
+
             # Default value.
             TYPE_UNSPECIFIED = 0
 
@@ -437,3 +439,4 @@ module Google
     end
   end
 end
+

@@ -54,3 +54,4 @@ end
 
 helper_path = ::File.join __dir__, "livestream_service", "helpers.rb"
 require "google/cloud/video/live_stream/v1/livestream_service/helpers" if ::File.file? helper_path
+

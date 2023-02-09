@@ -532,6 +532,7 @@ module Google
             # The importance level for
             # {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo.ranking_expression}.
             module ImportanceLevel
+
               # Default value if the importance level isn't specified.
               IMPORTANCE_LEVEL_UNSPECIFIED = 0
 
@@ -570,6 +571,7 @@ module Google
           # A string-represented enumeration of the job search mode. The service
           # operate differently for different modes of service.
           module SearchMode
+
             # The mode of the search method isn't specified. The default search
             # behavior is identical to JOB_SEARCH search behavior.
             SEARCH_MODE_UNSPECIFIED = 0
@@ -593,6 +595,7 @@ module Google
           # displayed to the job seeker higher up in the results, with the other jobs
           # being displayed lower down in the results.
           module DiversificationLevel
+
             # The diversification level isn't specified.
             DIVERSIFICATION_LEVEL_UNSPECIFIED = 0
 
@@ -628,6 +631,7 @@ module Google
           # are needed. Enabling keyword match improves recall of subsequent search
           # requests.
           module KeywordMatchMode
+
             # The keyword match option isn't specified. Defaults to
             # {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}
             # behavior.
@@ -847,6 +851,7 @@ module Google
         # or {::Google::Cloud::Talent::V4beta1::ListJobsResponse#jobs ListJobsResponse.jobs}
         # fields.
         module JobView
+
           # Default value.
           JOB_VIEW_UNSPECIFIED = 0
 
@@ -883,3 +888,4 @@ module Google
     end
   end
 end
+

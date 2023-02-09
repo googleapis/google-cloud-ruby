@@ -91,6 +91,7 @@ module Google
 
             # The type of the input.
             module Type
+
               # Input type is not specified.
               TYPE_UNSPECIFIED = 0
 
@@ -103,6 +104,7 @@ module Google
 
             # Tier of the input specification.
             module Tier
+
               # Tier is not specified.
               TIER_UNSPECIFIED = 0
 
@@ -195,6 +197,7 @@ module Google
 
             # State of streaming operation that the channel is running.
             module StreamingState
+
               # Streaming state is not specified.
               STREAMING_STATE_UNSPECIFIED = 0
 
@@ -246,6 +249,7 @@ module Google
             # [LogSeverity](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#logseverity)
             # for more information.
             module LogSeverity
+
               # Log severity is not specified. This is the same as log severity is OFF.
               LOG_SEVERITY_UNSPECIFIED = 0
 
@@ -424,6 +428,7 @@ module Google
 
             # State of the event
             module State
+
               # Event state is not specified.
               STATE_UNSPECIFIED = 0
 
@@ -451,3 +456,4 @@ module Google
     end
   end
 end
+

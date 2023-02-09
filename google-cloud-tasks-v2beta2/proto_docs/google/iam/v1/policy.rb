@@ -313,6 +313,7 @@ module Google
         # The list of valid permission types for which logging can be configured.
         # Admin writes are always logged, and are not configurable.
         module LogType
+
           # Default case. Should never be this.
           LOG_TYPE_UNSPECIFIED = 0
 
@@ -364,6 +365,7 @@ module Google
 
         # The type of action performed on a Binding in a policy.
         module Action
+
           # Unspecified.
           ACTION_UNSPECIFIED = 0
 
@@ -403,6 +405,7 @@ module Google
 
         # The type of action performed on an audit configuration in a policy.
         module Action
+
           # Unspecified.
           ACTION_UNSPECIFIED = 0
 
@@ -416,3 +419,4 @@ module Google
     end
   end
 end
+

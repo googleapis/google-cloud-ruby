@@ -20,8 +20,11 @@
 require "google/cloud/tasks/v2beta3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Tasks::V2beta3::CloudTasks::Client#delete_queue
+# Snippet for the delete_queue call in the CloudTasks service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Tasks::V2beta3::CloudTasks::Client#delete_queue. It may require
+# modification in order to execute successfully.
 #
 def delete_queue
   # Create a client object. The client can be reused for multiple calls.

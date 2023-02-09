@@ -20,8 +20,11 @@
 require "google/cloud/talent/v4beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Talent::V4beta1::CompanyService::Client#delete_company
+# Snippet for the delete_company call in the CompanyService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Talent::V4beta1::CompanyService::Client#delete_company. It may
+# require modification in order to execute successfully.
 #
 def delete_company
   # Create a client object. The client can be reused for multiple calls.

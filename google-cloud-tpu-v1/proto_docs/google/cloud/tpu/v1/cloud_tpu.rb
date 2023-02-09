@@ -140,6 +140,7 @@ module Google
 
           # Represents the different states of a TPU node during its lifecycle.
           module State
+
             # TPU node state is not known/set.
             STATE_UNSPECIFIED = 0
 
@@ -191,6 +192,7 @@ module Google
           # Health defines the status of a TPU node as reported by
           # Health Monitor.
           module Health
+
             # Health status is unknown: not initialized or failed to retrieve.
             HEALTH_UNSPECIFIED = 0
 
@@ -213,6 +215,7 @@ module Google
 
           # TPU API Version.
           module ApiVersion
+
             # API version is unknown.
             API_VERSION_UNSPECIFIED = 0
 
@@ -487,6 +490,7 @@ module Google
           # SymptomType represents the different types of Symptoms that a TPU can be
           # at.
           module SymptomType
+
             # Unspecified symptom.
             SYMPTOM_TYPE_UNSPECIFIED = 0
 
@@ -514,3 +518,4 @@ module Google
     end
   end
 end
+

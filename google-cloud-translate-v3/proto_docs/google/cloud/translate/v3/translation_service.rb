@@ -795,6 +795,7 @@ module Google
 
           # State of the job.
           module State
+
             # Invalid.
             STATE_UNSPECIFIED = 0
 
@@ -1027,6 +1028,7 @@ module Google
 
           # Enumerates the possible states that the creation request can be in.
           module State
+
             # Invalid.
             STATE_UNSPECIFIED = 0
 
@@ -1066,6 +1068,7 @@ module Google
 
           # Enumerates the possible states that the creation request can be in.
           module State
+
             # Invalid.
             STATE_UNSPECIFIED = 0
 
@@ -1374,6 +1377,7 @@ module Google
 
           # State of the job.
           module State
+
             # Invalid.
             STATE_UNSPECIFIED = 0
 
@@ -1400,3 +1404,4 @@ module Google
     end
   end
 end
+

@@ -70,14 +70,14 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.batch_write_spans.timeout = 120.0
-                default_config.rpcs.batch_write_spans.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 2, retry_codes: [14, 4]
+                    default_config.rpcs.batch_write_spans.timeout = 120.0
+                    default_config.rpcs.batch_write_spans.retry_policy ={
+                initial_delay: 0.1, max_delay: 30.0, multiplier: 2, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.create_span.timeout = 120.0
-                default_config.rpcs.create_span.retry_policy = {
-                  initial_delay: 0.1, max_delay: 1.0, multiplier: 1.2, retry_codes: [14, 4]
+                    default_config.rpcs.create_span.timeout = 120.0
+                    default_config.rpcs.create_span.retry_policy ={
+                initial_delay: 0.1, max_delay: 1.0, multiplier: 1.2, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -482,7 +482,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -554,3 +554,4 @@ module Google
     end
   end
 end
+

@@ -73,6 +73,7 @@ module Google
 
           # Enum to specify the scope of completion.
           module CompletionScope
+
             # Default value.
             COMPLETION_SCOPE_UNSPECIFIED = 0
 
@@ -86,6 +87,7 @@ module Google
 
           # Enum to specify auto-completion topics.
           module CompletionType
+
             # Default value.
             COMPLETION_TYPE_UNSPECIFIED = 0
 
@@ -152,3 +154,4 @@ module Google
     end
   end
 end
+

@@ -85,6 +85,7 @@ module Google
           # An enumeration of an event attributed to the behavior of the end user,
           # such as a job seeker.
           module JobEventType
+
             # The event is unspecified by other provided values.
             JOB_EVENT_TYPE_UNSPECIFIED = 0
 
@@ -186,3 +187,4 @@ module Google
     end
   end
 end
+

@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "completion", "helpers.rb"
 require "google/cloud/talent/v4beta1/completion/helpers" if ::File.file? helper_path
+

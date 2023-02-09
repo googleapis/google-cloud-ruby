@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "text_to_speech_long_audio_synthesize", "helpers.rb"
 require "google/cloud/text_to_speech/v1/text_to_speech_long_audio_synthesize/helpers" if ::File.file? helper_path
+

@@ -20,8 +20,11 @@
 require "google/cloud/video/live_stream/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_inputs
+# Snippet for the list_inputs call in the LivestreamService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_inputs.
+# It may require modification in order to execute successfully.
 #
 def list_inputs
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_inputs
   # Call the list_inputs method.
   result = client.list_inputs request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Input.
-    p response
+    p item
   end
 end
 # [END livestream_v1_generated_LivestreamService_ListInputs_sync]

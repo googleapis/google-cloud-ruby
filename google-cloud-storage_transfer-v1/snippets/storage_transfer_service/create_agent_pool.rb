@@ -20,8 +20,11 @@
 require "google/cloud/storage_transfer/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#create_agent_pool
+# Snippet for the create_agent_pool call in the StorageTransferService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#create_agent_pool.
+# It may require modification in order to execute successfully.
 #
 def create_agent_pool
   # Create a client object. The client can be reused for multiple calls.

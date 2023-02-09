@@ -63,6 +63,7 @@ module Google
 
           # Enum that represents how user data owned by the tenant is used.
           module DataUsageType
+
             # Default value.
             DATA_USAGE_TYPE_UNSPECIFIED = 0
 
@@ -79,3 +80,4 @@ module Google
     end
   end
 end
+

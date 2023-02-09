@@ -107,6 +107,7 @@ module Google
 
             # The manifest type can be either `HLS` or `DASH`.
             module ManifestType
+
               # The manifest type is not specified.
               MANIFEST_TYPE_UNSPECIFIED = 0
 
@@ -425,3 +426,4 @@ module Google
     end
   end
 end
+

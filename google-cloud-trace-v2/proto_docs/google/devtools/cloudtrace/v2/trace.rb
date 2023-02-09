@@ -185,6 +185,7 @@ module Google
 
               # Indicates whether the message was sent or received.
               module Type
+
                 # Unknown event type.
                 TYPE_UNSPECIFIED = 0
 
@@ -240,6 +241,7 @@ module Google
             # The relationship of the current span relative to the linked span: child,
             # parent, or unspecified.
             module Type
+
               # The relationship of the two spans is unknown.
               TYPE_UNSPECIFIED = 0
 
@@ -268,6 +270,7 @@ module Google
           # Type of span. Can be used to specify additional relationships between spans
           # in addition to a parent/child relationship.
           module SpanKind
+
             # Unspecified. Do NOT use as default.
             # Implementations MAY assume SpanKind.INTERNAL to be default.
             SPAN_KIND_UNSPECIFIED = 0
@@ -415,3 +418,4 @@ module Google
     end
   end
 end
+

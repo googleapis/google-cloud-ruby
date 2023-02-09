@@ -197,6 +197,7 @@ module Google
           # correct usage of the service as it's regulated by contract and will cause
           # significant difference in billing.
           module ReportedUsage
+
             # Request with reported usage unspecified will be rejected.
             REPORTED_USAGE_UNSPECIFIED = 0
 
@@ -227,6 +228,7 @@ module Google
         # Gender of the voice as described in
         # [SSML voice element](https://www.w3.org/TR/speech-synthesis11/#edef_voice).
         module SsmlVoiceGender
+
           # An unspecified gender.
           # In VoiceSelectionParams, this means that the client doesn't care which
           # gender the selected voice will have. In the Voice field of
@@ -247,6 +249,7 @@ module Google
         # Configuration to set up audio encoder. The encoding determines the output
         # audio format that we'd like.
         module AudioEncoding
+
           # Not specified. Will return result
           # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
           AUDIO_ENCODING_UNSPECIFIED = 0
@@ -276,3 +279,4 @@ module Google
     end
   end
 end
+

@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "text_to_speech", "helpers.rb"
 require "google/cloud/text_to_speech/v1/text_to_speech/helpers" if ::File.file? helper_path
+

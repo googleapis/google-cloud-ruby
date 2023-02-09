@@ -142,6 +142,7 @@ module Google
           # of its large size or because of the sensitivity of data that it
           # contains.
           module View
+
             # Unspecified. Defaults to BASIC.
             VIEW_UNSPECIFIED = 0
 
@@ -194,3 +195,4 @@ module Google
     end
   end
 end
+
