@@ -31,6 +31,7 @@ module Google
 
           # The Widget type. DEFAULT is the basic widget set.
           module WidgetType
+
             # The default widget set.
             WIDGET_TYPE_UNSPECIFIED = 0
 
@@ -60,3 +61,4 @@ module Google
     end
   end
 end
+

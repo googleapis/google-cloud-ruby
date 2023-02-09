@@ -65,46 +65,46 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_aws_cluster.timeout = 60.0
+                    default_config.rpcs.create_aws_cluster.timeout = 60.0
 
-                default_config.rpcs.update_aws_cluster.timeout = 60.0
+                    default_config.rpcs.update_aws_cluster.timeout = 60.0
 
-                default_config.rpcs.get_aws_cluster.timeout = 60.0
-                default_config.rpcs.get_aws_cluster.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_aws_cluster.timeout = 60.0
+                    default_config.rpcs.get_aws_cluster.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_aws_clusters.timeout = 60.0
-                default_config.rpcs.list_aws_clusters.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_aws_clusters.timeout = 60.0
+                    default_config.rpcs.list_aws_clusters.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.delete_aws_cluster.timeout = 60.0
+                    default_config.rpcs.delete_aws_cluster.timeout = 60.0
 
-                default_config.rpcs.generate_aws_access_token.timeout = 60.0
-                default_config.rpcs.generate_aws_access_token.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.generate_aws_access_token.timeout = 60.0
+                    default_config.rpcs.generate_aws_access_token.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_aws_node_pool.timeout = 60.0
+                    default_config.rpcs.create_aws_node_pool.timeout = 60.0
 
-                default_config.rpcs.update_aws_node_pool.timeout = 60.0
+                    default_config.rpcs.update_aws_node_pool.timeout = 60.0
 
-                default_config.rpcs.get_aws_node_pool.timeout = 60.0
-                default_config.rpcs.get_aws_node_pool.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_aws_node_pool.timeout = 60.0
+                    default_config.rpcs.get_aws_node_pool.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_aws_node_pools.timeout = 60.0
-                default_config.rpcs.list_aws_node_pools.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_aws_node_pools.timeout = 60.0
+                    default_config.rpcs.list_aws_node_pools.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.delete_aws_node_pool.timeout = 60.0
+                    default_config.rpcs.delete_aws_node_pool.timeout = 60.0
 
-                default_config.rpcs.get_aws_server_config.timeout = 60.0
-                default_config.rpcs.get_aws_server_config.retry_policy = {
-                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_aws_server_config.timeout = 60.0
+                    default_config.rpcs.get_aws_server_config.retry_policy ={
+                initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -268,14 +268,14 @@ module Google
             #   # Call the create_aws_cluster method.
             #   result = client.create_aws_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_aws_cluster request, options = nil
@@ -392,14 +392,14 @@ module Google
             #   # Call the update_aws_cluster method.
             #   result = client.update_aws_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_aws_cluster request, options = nil
@@ -598,13 +598,11 @@ module Google
             #   # Call the list_aws_clusters method.
             #   result = client.list_aws_clusters request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AwsCluster.
-            #     p response
+            #     p item
             #   end
             #
             def list_aws_clusters request, options = nil
@@ -722,14 +720,14 @@ module Google
             #   # Call the delete_aws_cluster method.
             #   result = client.delete_aws_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_aws_cluster request, options = nil
@@ -937,14 +935,14 @@ module Google
             #   # Call the create_aws_node_pool method.
             #   result = client.create_aws_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_aws_node_pool request, options = nil
@@ -1060,14 +1058,14 @@ module Google
             #   # Call the update_aws_node_pool method.
             #   result = client.update_aws_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_aws_node_pool request, options = nil
@@ -1268,13 +1266,11 @@ module Google
             #   # Call the list_aws_node_pools method.
             #   result = client.list_aws_node_pools request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AwsNodePool.
-            #     p response
+            #     p item
             #   end
             #
             def list_aws_node_pools request, options = nil
@@ -1390,14 +1386,14 @@ module Google
             #   # Call the delete_aws_node_pool method.
             #   result = client.delete_aws_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_aws_node_pool request, options = nil
@@ -1627,7 +1623,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1769,3 +1765,4 @@ module Google
     end
   end
 end
+

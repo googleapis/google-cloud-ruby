@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "device_manager", "helpers.rb"
 require "google/cloud/iot/v1/device_manager/helpers" if ::File.file? helper_path
+

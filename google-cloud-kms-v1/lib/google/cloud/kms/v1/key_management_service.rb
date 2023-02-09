@@ -58,3 +58,4 @@ end
 
 helper_path = ::File.join __dir__, "key_management_service", "helpers.rb"
 require "google/cloud/kms/v1/key_management_service/helpers" if ::File.file? helper_path
+

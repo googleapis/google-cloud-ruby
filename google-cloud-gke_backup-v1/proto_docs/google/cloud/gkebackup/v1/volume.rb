@@ -85,6 +85,7 @@ module Google
 
           # Identifies the format used for the volume backup.
           module VolumeBackupFormat
+
             # Default value, not specified.
             VOLUME_BACKUP_FORMAT_UNSPECIFIED = 0
 
@@ -94,6 +95,7 @@ module Google
 
           # The current state of a VolumeBackup
           module State
+
             # This is an illegal state and should not be encountered.
             STATE_UNSPECIFIED = 0
 
@@ -179,6 +181,7 @@ module Google
 
           # Supported volume types.
           module VolumeType
+
             # Default
             VOLUME_TYPE_UNSPECIFIED = 0
 
@@ -188,6 +191,7 @@ module Google
 
           # The current state of a VolumeRestore
           module State
+
             # This is an illegal state and should not be encountered.
             STATE_UNSPECIFIED = 0
 
@@ -212,3 +216,4 @@ module Google
     end
   end
 end
+

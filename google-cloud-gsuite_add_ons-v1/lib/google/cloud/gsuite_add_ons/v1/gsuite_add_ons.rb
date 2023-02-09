@@ -74,3 +74,4 @@ end
 
 helper_path = ::File.join __dir__, "gsuite_add_ons", "helpers.rb"
 require "google/cloud/gsuite_add_ons/v1/gsuite_add_ons/helpers" if ::File.file? helper_path
+

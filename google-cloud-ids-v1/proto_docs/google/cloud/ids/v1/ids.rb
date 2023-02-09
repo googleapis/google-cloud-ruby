@@ -72,6 +72,7 @@ module Google
 
           # Threat severity levels.
           module Severity
+
             # Not set.
             SEVERITY_UNSPECIFIED = 0
 
@@ -93,6 +94,7 @@ module Google
 
           # Endpoint state
           module State
+
             # Not set.
             STATE_UNSPECIFIED = 0
 
@@ -248,3 +250,4 @@ module Google
     end
   end
 end
+

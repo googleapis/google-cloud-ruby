@@ -198,6 +198,7 @@ module Google
 
           # State
           module State
+
             # The Backup resource is in the process of being created.
             STATE_UNSPECIFIED = 0
 
@@ -224,3 +225,4 @@ module Google
     end
   end
 end
+

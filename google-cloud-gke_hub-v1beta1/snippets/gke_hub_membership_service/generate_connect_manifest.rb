@@ -20,8 +20,11 @@
 require "google/cloud/gke_hub/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#generate_connect_manifest
+# Snippet for the generate_connect_manifest call in the GkeHubMembershipService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#generate_connect_manifest.
+# It may require modification in order to execute successfully.
 #
 def generate_connect_manifest
   # Create a client object. The client can be reused for multiple calls.

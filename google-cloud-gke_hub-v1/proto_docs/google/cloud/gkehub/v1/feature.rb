@@ -123,6 +123,7 @@ module Google
 
           # State describes the lifecycle status of a Feature.
           module State
+
             # State is unknown or not set.
             STATE_UNSPECIFIED = 0
 
@@ -164,6 +165,7 @@ module Google
 
           # Code represents a machine-readable, high-level status of the Feature.
           module Code
+
             # Unknown or not set.
             CODE_UNSPECIFIED = 0
 
@@ -228,3 +230,4 @@ module Google
     end
   end
 end
+

@@ -20,8 +20,11 @@
 require "google/cloud/iot/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Iot::V1::DeviceManager::Client#delete_device_registry
+# Snippet for the delete_device_registry call in the DeviceManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#delete_device_registry. It may
+# require modification in order to execute successfully.
 #
 def delete_device_registry
   # Create a client object. The client can be reused for multiple calls.

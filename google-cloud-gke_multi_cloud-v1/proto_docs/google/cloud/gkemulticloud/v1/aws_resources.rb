@@ -121,6 +121,7 @@ module Google
 
           # The lifecycle state of the cluster.
           module State
+
             # Not set.
             STATE_UNSPECIFIED = 0
 
@@ -317,6 +318,7 @@ module Google
           # See https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
           # for more information.
           module VolumeType
+
             # Not set.
             VOLUME_TYPE_UNSPECIFIED = 0
 
@@ -436,6 +438,7 @@ module Google
 
           # The lifecycle state of the node pool.
           module State
+
             # Not set.
             STATE_UNSPECIFIED = 0
 
@@ -636,6 +639,7 @@ module Google
 
           # Tenancy defines how EC2 instances are distributed across physical hardware.
           module Tenancy
+
             # Not set.
             TENANCY_UNSPECIFIED = 0
 
@@ -688,3 +692,4 @@ module Google
     end
   end
 end
+

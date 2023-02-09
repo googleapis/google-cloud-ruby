@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "attached_clusters", "helpers.rb"
 require "google/cloud/gke_multi_cloud/v1/attached_clusters/helpers" if ::File.file? helper_path
+

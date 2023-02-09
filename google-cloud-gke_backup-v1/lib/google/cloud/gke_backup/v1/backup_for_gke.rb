@@ -49,3 +49,4 @@ end
 
 helper_path = ::File.join __dir__, "backup_for_gke", "helpers.rb"
 require "google/cloud/gke_backup/v1/backup_for_gke/helpers" if ::File.file? helper_path
+

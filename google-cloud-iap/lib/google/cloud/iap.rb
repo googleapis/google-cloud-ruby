@@ -67,9 +67,9 @@ module Google
         require "google/cloud/iap/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Iap
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Iap.const_get(package_name).const_get(:IdentityAwareProxyAdminService)
         service_module.const_get(:Client).new(&block)
       end
@@ -99,9 +99,9 @@ module Google
         require "google/cloud/iap/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Iap
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Iap.const_get(package_name).const_get(:IdentityAwareProxyOAuthService)
         service_module.const_get(:Client).new(&block)
       end
@@ -145,3 +145,4 @@ end
 
 helper_path = ::File.join __dir__, "iap", "helpers.rb"
 require "google/cloud/iap/helpers" if ::File.file? helper_path
+

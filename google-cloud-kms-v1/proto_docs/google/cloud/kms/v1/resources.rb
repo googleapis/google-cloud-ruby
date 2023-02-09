@@ -156,6 +156,7 @@ module Google
           # for the operations allowed by its purpose. For more information, see [Key
           # purposes](https://cloud.google.com/kms/docs/algorithms#key_purposes).
           module CryptoKeyPurpose
+
             # Not specified.
             CRYPTO_KEY_PURPOSE_UNSPECIFIED = 0
 
@@ -249,6 +250,7 @@ module Google
 
           # Attestation formats provided by the HSM.
           module AttestationFormat
+
             # Not specified.
             ATTESTATION_FORMAT_UNSPECIFIED = 0
 
@@ -404,6 +406,7 @@ module Google
           # For more information, see [Key purposes and algorithms]
           # (https://cloud.google.com/kms/docs/algorithms).
           module CryptoKeyVersionAlgorithm
+
             # Not specified.
             CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED = 0
 
@@ -496,6 +499,7 @@ module Google
           # The state of a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
           # indicating if it can be used.
           module CryptoKeyVersionState
+
             # Not specified.
             CRYPTO_KEY_VERSION_STATE_UNSPECIFIED = 0
 
@@ -553,6 +557,7 @@ module Google
           # and
           # {::Google::Cloud::Kms::V1::KeyManagementService::Client#list_crypto_keys KeyManagementService.ListCryptoKeys}.
           module CryptoKeyVersionView
+
             # Default view for each
             # {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not
             # include the
@@ -721,6 +726,7 @@ module Google
           # key wrapping method chosen for this
           # {::Google::Cloud::Kms::V1::ImportJob ImportJob}.
           module ImportMethod
+
             # Not specified.
             IMPORT_METHOD_UNSPECIFIED = 0
 
@@ -772,6 +778,7 @@ module Google
           # The state of the {::Google::Cloud::Kms::V1::ImportJob ImportJob}, indicating if
           # it can be used.
           module ImportJobState
+
             # Not specified.
             IMPORT_JOB_STATE_UNSPECIFIED = 0
 
@@ -818,6 +825,7 @@ module Google
         # cryptographic operations are performed. For more information, see [Protection
         # levels] (https://cloud.google.com/kms/docs/algorithms#protection_levels).
         module ProtectionLevel
+
           # Not specified.
           PROTECTION_LEVEL_UNSPECIFIED = 0
 
@@ -837,3 +845,4 @@ module Google
     end
   end
 end
+

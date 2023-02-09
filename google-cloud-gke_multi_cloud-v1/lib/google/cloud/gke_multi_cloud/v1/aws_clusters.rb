@@ -49,3 +49,4 @@ end
 
 helper_path = ::File.join __dir__, "aws_clusters", "helpers.rb"
 require "google/cloud/gke_multi_cloud/v1/aws_clusters/helpers" if ::File.file? helper_path
+

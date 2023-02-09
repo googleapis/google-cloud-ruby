@@ -93,6 +93,7 @@ module Google
 
             # An enum defining the level of data access this compose trigger requires.
             module DraftAccess
+
               # Default value when nothing is set for DraftAccess.
               UNSPECIFIED = 0
 
@@ -132,3 +133,4 @@ module Google
     end
   end
 end
+

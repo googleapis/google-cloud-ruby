@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "identity_aware_proxy_admin_service", "helpers.rb"
 require "google/cloud/iap/v1/identity_aware_proxy_admin_service/helpers" if ::File.file? helper_path
+

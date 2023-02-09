@@ -20,8 +20,11 @@
 require "google/cloud/kms/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Kms::V1::EkmService::Client#get_ekm_connection
+# Snippet for the get_ekm_connection call in the EkmService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Kms::V1::EkmService::Client#get_ekm_connection. It may require
+# modification in order to execute successfully.
 #
 def get_ekm_connection
   # Create a client object. The client can be reused for multiple calls.

@@ -147,6 +147,7 @@ module Google
 
           # The lifecycle state of the cluster.
           module State
+
             # Not set.
             STATE_UNSPECIFIED = 0
 
@@ -582,6 +583,7 @@ module Google
 
           # The lifecycle state of the node pool.
           module State
+
             # Not set.
             STATE_UNSPECIFIED = 0
 
@@ -773,3 +775,4 @@ module Google
     end
   end
 end
+

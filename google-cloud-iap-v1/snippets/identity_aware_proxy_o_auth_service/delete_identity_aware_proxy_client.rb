@@ -20,8 +20,11 @@
 require "google/cloud/iap/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#delete_identity_aware_proxy_client
+# Snippet for the delete_identity_aware_proxy_client call in the IdentityAwareProxyOAuthService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#delete_identity_aware_proxy_client.
+# It may require modification in order to execute successfully.
 #
 def delete_identity_aware_proxy_client
   # Create a client object. The client can be reused for multiple calls.

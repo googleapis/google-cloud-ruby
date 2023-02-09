@@ -389,6 +389,7 @@ module Google
         # Indicates whether an MQTT connection is enabled or disabled. See the field
         # description for details.
         module MqttState
+
           # No MQTT state specified. If not specified, MQTT will be enabled by default.
           MQTT_STATE_UNSPECIFIED = 0
 
@@ -402,6 +403,7 @@ module Google
         # Indicates whether DeviceService (HTTP) is enabled or disabled for the
         # registry. See the field description for details.
         module HttpState
+
           # No HTTP state specified. If not specified, DeviceService will be
           # enabled by default.
           HTTP_STATE_UNSPECIFIED = 0
@@ -420,6 +422,7 @@ module Google
         # terminate in errors will be logged. LogLevel is inclusive; enabling INFO
         # logging will also enable ERROR logging.
         module LogLevel
+
           # No logging specified. If not specified, logging will be disabled.
           LOG_LEVEL_UNSPECIFIED = 0
 
@@ -439,6 +442,7 @@ module Google
 
         # Gateway type.
         module GatewayType
+
           # If unspecified, the device is considered a non-gateway device.
           GATEWAY_TYPE_UNSPECIFIED = 0
 
@@ -452,6 +456,7 @@ module Google
         # The gateway authorization/authentication method. This setting determines how
         # Cloud IoT Core authorizes/authenticate devices to access the gateway.
         module GatewayAuthMethod
+
           # No authentication/authorization method specified. No devices are allowed to
           # access the gateway.
           GATEWAY_AUTH_METHOD_UNSPECIFIED = 0
@@ -472,6 +477,7 @@ module Google
 
         # The supported formats for the public key.
         module PublicKeyCertificateFormat
+
           # The format has not been specified. This is an invalid default value and
           # must not be used.
           UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT = 0
@@ -484,6 +490,7 @@ module Google
 
         # The supported formats for the public key.
         module PublicKeyFormat
+
           # The format has not been specified. This is an invalid default value and
           # must not be used.
           UNSPECIFIED_PUBLIC_KEY_FORMAT = 0
@@ -515,3 +522,4 @@ module Google
     end
   end
 end
+

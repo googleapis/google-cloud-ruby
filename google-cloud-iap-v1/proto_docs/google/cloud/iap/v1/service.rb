@@ -259,6 +259,7 @@ module Google
 
           # Types of reauthentication methods supported by IAP.
           module Method
+
             # Reauthentication disabled.
             METHOD_UNSPECIFIED = 0
 
@@ -274,6 +275,7 @@ module Google
 
           # Type of policy in the case of hierarchial policies.
           module PolicyType
+
             # Default value. This value is unused.
             POLICY_TYPE_UNSPECIFIED = 0
 
@@ -395,6 +397,7 @@ module Google
           # credential maps to a "field" in the response. For example, selecting JWT
           # will propagate all attributes in the IAP JWT, header in the headers, etc.
           module OutputCredentials
+
             # No output credential. This is an unsupported default.
             OUTPUT_CREDENTIALS_UNSPECIFIED = 0
 
@@ -578,3 +581,4 @@ module Google
     end
   end
 end
+

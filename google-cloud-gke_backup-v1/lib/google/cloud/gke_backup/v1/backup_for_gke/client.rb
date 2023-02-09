@@ -65,88 +65,88 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_backup_plan.timeout = 300.0
+                    default_config.rpcs.create_backup_plan.timeout = 300.0
 
-                default_config.rpcs.list_backup_plans.timeout = 60.0
-                default_config.rpcs.list_backup_plans.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_backup_plans.timeout = 60.0
+                    default_config.rpcs.list_backup_plans.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_backup_plan.timeout = 60.0
-                default_config.rpcs.get_backup_plan.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_backup_plan.timeout = 60.0
+                    default_config.rpcs.get_backup_plan.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_backup_plan.timeout = 60.0
+                    default_config.rpcs.update_backup_plan.timeout = 60.0
 
-                default_config.rpcs.delete_backup_plan.timeout = 60.0
+                    default_config.rpcs.delete_backup_plan.timeout = 60.0
 
-                default_config.rpcs.create_backup.timeout = 120.0
+                    default_config.rpcs.create_backup.timeout = 120.0
 
-                default_config.rpcs.list_backups.timeout = 60.0
-                default_config.rpcs.list_backups.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_backups.timeout = 60.0
+                    default_config.rpcs.list_backups.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_backup.timeout = 60.0
-                default_config.rpcs.get_backup.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_backup.timeout = 60.0
+                    default_config.rpcs.get_backup.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_backup.timeout = 60.0
+                    default_config.rpcs.update_backup.timeout = 60.0
 
-                default_config.rpcs.delete_backup.timeout = 300.0
+                    default_config.rpcs.delete_backup.timeout = 300.0
 
-                default_config.rpcs.list_volume_backups.timeout = 60.0
-                default_config.rpcs.list_volume_backups.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_volume_backups.timeout = 60.0
+                    default_config.rpcs.list_volume_backups.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_volume_backup.timeout = 60.0
-                default_config.rpcs.get_volume_backup.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_volume_backup.timeout = 60.0
+                    default_config.rpcs.get_volume_backup.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_restore_plan.timeout = 120.0
+                    default_config.rpcs.create_restore_plan.timeout = 120.0
 
-                default_config.rpcs.list_restore_plans.timeout = 60.0
-                default_config.rpcs.list_restore_plans.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_restore_plans.timeout = 60.0
+                    default_config.rpcs.list_restore_plans.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_restore_plan.timeout = 60.0
-                default_config.rpcs.get_restore_plan.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_restore_plan.timeout = 60.0
+                    default_config.rpcs.get_restore_plan.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_restore_plan.timeout = 60.0
+                    default_config.rpcs.update_restore_plan.timeout = 60.0
 
-                default_config.rpcs.delete_restore_plan.timeout = 60.0
+                    default_config.rpcs.delete_restore_plan.timeout = 60.0
 
-                default_config.rpcs.create_restore.timeout = 120.0
+                    default_config.rpcs.create_restore.timeout = 120.0
 
-                default_config.rpcs.list_restores.timeout = 60.0
-                default_config.rpcs.list_restores.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_restores.timeout = 60.0
+                    default_config.rpcs.list_restores.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_restore.timeout = 60.0
-                default_config.rpcs.get_restore.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_restore.timeout = 60.0
+                    default_config.rpcs.get_restore.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_restore.timeout = 60.0
+                    default_config.rpcs.update_restore.timeout = 60.0
 
-                default_config.rpcs.delete_restore.timeout = 60.0
+                    default_config.rpcs.delete_restore.timeout = 60.0
 
-                default_config.rpcs.list_volume_restores.timeout = 60.0
-                default_config.rpcs.list_volume_restores.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.list_volume_restores.timeout = 60.0
+                    default_config.rpcs.list_volume_restores.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.get_volume_restore.timeout = 60.0
-                default_config.rpcs.get_volume_restore.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.get_volume_restore.timeout = 60.0
+                    default_config.rpcs.get_volume_restore.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -295,14 +295,14 @@ module Google
             #   # Call the create_backup_plan method.
             #   result = client.create_backup_plan request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_backup_plan request, options = nil
@@ -407,13 +407,11 @@ module Google
             #   # Call the list_backup_plans method.
             #   result = client.list_backup_plans request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeBackup::V1::BackupPlan.
-            #     p response
+            #     p item
             #   end
             #
             def list_backup_plans request, options = nil
@@ -596,14 +594,14 @@ module Google
             #   # Call the update_backup_plan method.
             #   result = client.update_backup_plan request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_backup_plan request, options = nil
@@ -694,14 +692,14 @@ module Google
             #   # Call the delete_backup_plan method.
             #   result = client.delete_backup_plan request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_backup_plan request, options = nil
@@ -799,14 +797,14 @@ module Google
             #   # Call the create_backup method.
             #   result = client.create_backup request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_backup request, options = nil
@@ -911,13 +909,11 @@ module Google
             #   # Call the list_backups method.
             #   result = client.list_backups request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeBackup::V1::Backup.
-            #     p response
+            #     p item
             #   end
             #
             def list_backups request, options = nil
@@ -1099,14 +1095,14 @@ module Google
             #   # Call the update_backup method.
             #   result = client.update_backup request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_backup request, options = nil
@@ -1201,14 +1197,14 @@ module Google
             #   # Call the delete_backup method.
             #   result = client.delete_backup request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_backup request, options = nil
@@ -1313,13 +1309,11 @@ module Google
             #   # Call the list_volume_backups method.
             #   result = client.list_volume_backups request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeBackup::V1::VolumeBackup.
-            #     p response
+            #     p item
             #   end
             #
             def list_volume_backups request, options = nil
@@ -1503,14 +1497,14 @@ module Google
             #   # Call the create_restore_plan method.
             #   result = client.create_restore_plan request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_restore_plan request, options = nil
@@ -1615,13 +1609,11 @@ module Google
             #   # Call the list_restore_plans method.
             #   result = client.list_restore_plans request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeBackup::V1::RestorePlan.
-            #     p response
+            #     p item
             #   end
             #
             def list_restore_plans request, options = nil
@@ -1803,14 +1795,14 @@ module Google
             #   # Call the update_restore_plan method.
             #   result = client.update_restore_plan request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_restore_plan request, options = nil
@@ -1905,14 +1897,14 @@ module Google
             #   # Call the delete_restore_plan method.
             #   result = client.delete_restore_plan request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_restore_plan request, options = nil
@@ -2010,14 +2002,14 @@ module Google
             #   # Call the create_restore method.
             #   result = client.create_restore request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_restore request, options = nil
@@ -2122,13 +2114,11 @@ module Google
             #   # Call the list_restores method.
             #   result = client.list_restores request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeBackup::V1::Restore.
-            #     p response
+            #     p item
             #   end
             #
             def list_restores request, options = nil
@@ -2310,14 +2300,14 @@ module Google
             #   # Call the update_restore method.
             #   result = client.update_restore request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_restore request, options = nil
@@ -2412,14 +2402,14 @@ module Google
             #   # Call the delete_restore method.
             #   result = client.delete_restore request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_restore request, options = nil
@@ -2524,13 +2514,11 @@ module Google
             #   # Call the list_volume_restores method.
             #   result = client.list_volume_restores request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeBackup::V1::VolumeRestore.
-            #     p response
+            #     p item
             #   end
             #
             def list_volume_restores request, options = nil
@@ -2752,7 +2740,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -2978,3 +2966,4 @@ module Google
     end
   end
 end
+

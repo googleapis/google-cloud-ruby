@@ -93,6 +93,7 @@ module Google
 
         # Authorization header sent in add-on HTTP requests
         module HttpAuthorizationHeader
+
           # Default value, equivalent to `SYSTEM_ID_TOKEN`
           HTTP_AUTHORIZATION_HEADER_UNSPECIFIED = 0
 
@@ -110,3 +111,4 @@ module Google
     end
   end
 end
+

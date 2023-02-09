@@ -71,9 +71,9 @@ module Google
         require "google/cloud/kms/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Kms
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Kms.const_get(package_name).const_get(:EkmService)
         service_module.const_get(:Client).new(&block)
       end
@@ -112,9 +112,9 @@ module Google
         require "google/cloud/kms/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Kms
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Kms.const_get(package_name).const_get(:KeyManagementService)
         service_module.const_get(:Client).new(&block)
       end
@@ -158,3 +158,4 @@ end
 
 helper_path = ::File.join __dir__, "kms", "helpers.rb"
 require "google/cloud/kms/helpers" if ::File.file? helper_path
+

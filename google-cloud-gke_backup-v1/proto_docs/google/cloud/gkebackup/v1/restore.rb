@@ -111,6 +111,7 @@ module Google
 
           # Possible values for state of the Restore.
           module State
+
             # The Restore resource is in the process of being created.
             STATE_UNSPECIFIED = 0
 
@@ -260,6 +261,7 @@ module Google
 
           # Defines how volume data should be restored
           module VolumeDataRestorePolicy
+
             # Unspecified (illegal).
             VOLUME_DATA_RESTORE_POLICY_UNSPECIFIED = 0
 
@@ -282,6 +284,7 @@ module Google
           # Defines the behavior for handling the situation where cluster-scoped
           # resources being restored already exist in the target cluster.
           module ClusterResourceConflictPolicy
+
             # Unspecified. Only allowed if no cluster-scoped resources will be
             # restored.
             CLUSTER_RESOURCE_CONFLICT_POLICY_UNSPECIFIED = 0
@@ -299,6 +302,7 @@ module Google
           # Defines the behavior for handling the situation where sets of namespaced
           # resources being restored already exist in the target cluster.
           module NamespacedResourceRestoreMode
+
             # Unspecified (invalid).
             NAMESPACED_RESOURCE_RESTORE_MODE_UNSPECIFIED = 0
 
@@ -323,3 +327,4 @@ module Google
     end
   end
 end
+

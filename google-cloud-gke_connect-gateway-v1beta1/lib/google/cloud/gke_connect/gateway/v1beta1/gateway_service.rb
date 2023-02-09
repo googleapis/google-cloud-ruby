@@ -52,3 +52,4 @@ end
 
 helper_path = ::File.join __dir__, "gateway_service", "helpers.rb"
 require "google/cloud/gke_connect/gateway/v1beta1/gateway_service/helpers" if ::File.file? helper_path
+

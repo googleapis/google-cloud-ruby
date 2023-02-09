@@ -53,6 +53,7 @@ module Google
 
             # An enum defining the level of data access event triggers require.
             module EventAccess
+
               # Default value when nothing is set for EventAccess.
               UNSPECIFIED = 0
 
@@ -112,3 +113,4 @@ module Google
     end
   end
 end
+

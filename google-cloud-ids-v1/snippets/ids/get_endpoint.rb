@@ -20,8 +20,11 @@
 require "google/cloud/ids/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::IDS::V1::IDS::Client#get_endpoint
+# Snippet for the get_endpoint call in the IDS service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::IDS::V1::IDS::Client#get_endpoint. It may require modification
+# in order to execute successfully.
 #
 def get_endpoint
   # Create a client object. The client can be reused for multiple calls.

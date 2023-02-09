@@ -95,6 +95,7 @@ module Google
 
           # The taint effect.
           module Effect
+
             # Not set.
             EFFECT_UNSPECIFIED = 0
 
@@ -162,6 +163,7 @@ module Google
 
           # The components of the logging configuration;
           module Component
+
             # No component is specified
             COMPONENT_UNSPECIFIED = 0
 
@@ -195,3 +197,4 @@ module Google
     end
   end
 end
+

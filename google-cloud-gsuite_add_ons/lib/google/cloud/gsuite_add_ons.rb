@@ -94,9 +94,9 @@ module Google
         require "google/cloud/gsuite_add_ons/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::GSuiteAddOns
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::GSuiteAddOns.const_get(package_name).const_get(:GSuiteAddOns)
         service_module.const_get(:Client).new(&block)
       end
@@ -140,3 +140,4 @@ end
 
 helper_path = ::File.join __dir__, "gsuite_add_ons", "helpers.rb"
 require "google/cloud/gsuite_add_ons/helpers" if ::File.file? helper_path
+

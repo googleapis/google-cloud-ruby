@@ -253,6 +253,7 @@ module Google
 
           # Code describes the state of a Membership resource.
           module Code
+
             # The code is not set.
             CODE_UNSPECIFIED = 0
 
@@ -315,3 +316,4 @@ module Google
     end
   end
 end
+

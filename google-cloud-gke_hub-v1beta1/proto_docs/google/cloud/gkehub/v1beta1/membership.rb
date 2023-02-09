@@ -106,6 +106,7 @@ module Google
           # automatically, but Attached Clusters customers should specify a type
           # during registration.
           module InfrastructureType
+
             # No type was specified. Some Hub functionality may require a type be
             # specified, and will not support Memberships with this value.
             INFRASTRUCTURE_TYPE_UNSPECIFIED = 0
@@ -275,6 +276,7 @@ module Google
 
           # ClusterType describes on prem cluster's type.
           module ClusterType
+
             # The ClusterType is not set.
             CLUSTERTYPE_UNSPECIFIED = 0
 
@@ -421,6 +423,7 @@ module Google
 
           # Code describes the state of a Membership resource.
           module Code
+
             # The code is not set.
             CODE_UNSPECIFIED = 0
 
@@ -806,3 +809,4 @@ module Google
     end
   end
 end
+

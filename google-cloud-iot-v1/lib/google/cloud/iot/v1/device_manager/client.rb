@@ -64,73 +64,73 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_device_registry.timeout = 120.0
+                    default_config.rpcs.create_device_registry.timeout = 120.0
 
-                default_config.rpcs.get_device_registry.timeout = 120.0
-                default_config.rpcs.get_device_registry.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                    default_config.rpcs.get_device_registry.timeout = 120.0
+                    default_config.rpcs.get_device_registry.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.update_device_registry.timeout = 120.0
+                    default_config.rpcs.update_device_registry.timeout = 120.0
 
-                default_config.rpcs.delete_device_registry.timeout = 120.0
-                default_config.rpcs.delete_device_registry.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                    default_config.rpcs.delete_device_registry.timeout = 120.0
+                    default_config.rpcs.delete_device_registry.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.list_device_registries.timeout = 120.0
-                default_config.rpcs.list_device_registries.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                    default_config.rpcs.list_device_registries.timeout = 120.0
+                    default_config.rpcs.list_device_registries.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.create_device.timeout = 120.0
+                    default_config.rpcs.create_device.timeout = 120.0
 
-                default_config.rpcs.get_device.timeout = 120.0
-                default_config.rpcs.get_device.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                    default_config.rpcs.get_device.timeout = 120.0
+                    default_config.rpcs.get_device.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.update_device.timeout = 120.0
+                    default_config.rpcs.update_device.timeout = 120.0
 
-                default_config.rpcs.delete_device.timeout = 120.0
-                default_config.rpcs.delete_device.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                    default_config.rpcs.delete_device.timeout = 120.0
+                    default_config.rpcs.delete_device.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.list_devices.timeout = 120.0
-                default_config.rpcs.list_devices.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                    default_config.rpcs.list_devices.timeout = 120.0
+                    default_config.rpcs.list_devices.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.modify_cloud_to_device_config.timeout = 120.0
-                default_config.rpcs.modify_cloud_to_device_config.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4, 8]
+                    default_config.rpcs.modify_cloud_to_device_config.timeout = 120.0
+                    default_config.rpcs.modify_cloud_to_device_config.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4, 8]
                 }
 
-                default_config.rpcs.list_device_config_versions.timeout = 120.0
-                default_config.rpcs.list_device_config_versions.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                    default_config.rpcs.list_device_config_versions.timeout = 120.0
+                    default_config.rpcs.list_device_config_versions.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.list_device_states.timeout = 120.0
-                default_config.rpcs.list_device_states.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                    default_config.rpcs.list_device_states.timeout = 120.0
+                    default_config.rpcs.list_device_states.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.set_iam_policy.timeout = 120.0
+                    default_config.rpcs.set_iam_policy.timeout = 120.0
 
-                default_config.rpcs.get_iam_policy.timeout = 120.0
+                    default_config.rpcs.get_iam_policy.timeout = 120.0
 
-                default_config.rpcs.test_iam_permissions.timeout = 120.0
+                    default_config.rpcs.test_iam_permissions.timeout = 120.0
 
-                default_config.rpcs.send_command_to_device.timeout = 120.0
-                default_config.rpcs.send_command_to_device.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4, 8]
+                    default_config.rpcs.send_command_to_device.timeout = 120.0
+                    default_config.rpcs.send_command_to_device.retry_policy ={
+                initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4, 8]
                 }
 
-                default_config.rpcs.bind_device_to_gateway.timeout = 120.0
+                    default_config.rpcs.bind_device_to_gateway.timeout = 120.0
 
-                default_config.rpcs.unbind_device_from_gateway.timeout = 120.0
+                    default_config.rpcs.unbind_device_from_gateway.timeout = 120.0
 
                 default_config
               end
@@ -618,13 +618,11 @@ module Google
             #   # Call the list_device_registries method.
             #   result = client.list_device_registries request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Iot::V1::DeviceRegistry.
-            #     p response
+            #     p item
             #   end
             #
             def list_device_registries request, options = nil
@@ -1095,13 +1093,11 @@ module Google
             #   # Call the list_devices method.
             #   result = client.list_devices request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Iot::V1::Device.
-            #     p response
+            #     p item
             #   end
             #
             def list_devices request, options = nil
@@ -2093,7 +2089,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -2284,3 +2280,4 @@ module Google
     end
   end
 end
+

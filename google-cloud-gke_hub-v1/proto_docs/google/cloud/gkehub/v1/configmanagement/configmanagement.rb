@@ -316,6 +316,7 @@ module Google
 
             # An enum representing an ACM's status syncing configs to a cluster
             module SyncCode
+
               # ACM cannot determine a sync code
               SYNC_CODE_UNSPECIFIED = 0
 
@@ -427,6 +428,7 @@ module Google
 
           # Enum representing the state of an ACM's deployment on a cluster
           module DeploymentState
+
             # Deployment's state cannot be determined
             DEPLOYMENT_STATE_UNSPECIFIED = 0
 
@@ -444,3 +446,4 @@ module Google
     end
   end
 end
+

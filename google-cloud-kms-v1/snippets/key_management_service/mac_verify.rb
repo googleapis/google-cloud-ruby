@@ -20,8 +20,11 @@
 require "google/cloud/kms/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Kms::V1::KeyManagementService::Client#mac_verify
+# Snippet for the mac_verify call in the KeyManagementService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Kms::V1::KeyManagementService::Client#mac_verify. It may
+# require modification in order to execute successfully.
 #
 def mac_verify
   # Create a client object. The client can be reused for multiple calls.
