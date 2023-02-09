@@ -790,9 +790,6 @@ module Google
             #     to identify valid sources or targets for network firewalls. Each tag within
             #     the list must comply with [RFC1035](https://www.ietf.org/rfc/rfc1035.txt).
             #     Cannot be updated.
-            #
-            #     This field is supported for Cloud Composer environments in versions
-            #     composer-1.*.*-airflow-*.*.*.
             # @!attribute [rw] ip_allocation_policy
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::IPAllocationPolicy]
             #     Optional. The configuration for controlling how IPs are allocated in the
