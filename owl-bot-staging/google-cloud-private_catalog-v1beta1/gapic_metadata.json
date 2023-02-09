@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.privatecatalog.v1beta1",
+  "libraryPackage": "::Google::Cloud::PrivateCatalog::V1beta1",
+  "services": {
+    "PrivateCatalog": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client",
+          "rpcs": {
+            "SearchCatalogs": {
+              "methods": [
+                "search_catalogs"
+              ]
+            },
+            "SearchProducts": {
+              "methods": [
+                "search_products"
+              ]
+            },
+            "SearchVersions": {
+              "methods": [
+                "search_versions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
