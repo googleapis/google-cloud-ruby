@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Dataplex
-      VERSION = "0.4.0"
+      VERSION = "0.4.1"
     end
   end
 end
