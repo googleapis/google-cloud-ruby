@@ -97,6 +97,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :end_time, :message, 2, "google.protobuf.Timestamp"
       optional :request, :message, 3, "google.cloud.contactcenterinsights.v1.IngestConversationsRequest"
       repeated :partial_errors, :message, 4, "google.rpc.Status"
+      optional :ingest_conversations_stats, :message, 5, "google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats"
+    end
+    add_message "google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats" do
+      optional :processed_object_count, :int32, 1
+      optional :duplicates_skipped_count, :int32, 2
+      optional :successful_ingest_count, :int32, 3
+      optional :failed_ingest_count, :int32, 4
     end
     add_message "google.cloud.contactcenterinsights.v1.IngestConversationsResponse" do
     end
@@ -319,6 +326,7 @@ module Google
         IngestConversationsRequest::TranscriptObjectConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig").msgclass
         IngestConversationsRequest::ConversationConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig").msgclass
         IngestConversationsMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IngestConversationsMetadata").msgclass
+        IngestConversationsMetadata::IngestConversationsStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats").msgclass
         IngestConversationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.IngestConversationsResponse").msgclass
         CreateAnalysisRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.CreateAnalysisRequest").msgclass
         ListAnalysesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ListAnalysesRequest").msgclass

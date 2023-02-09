@@ -200,6 +200,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :display_name, :string, 2
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :update_time, :message, 4, "google.protobuf.Timestamp"
+      optional :issue_count, :int64, 8
       optional :state, :enum, 5, "google.cloud.contactcenterinsights.v1.IssueModel.State"
       optional :input_data_config, :message, 6, "google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig"
       optional :training_stats, :message, 7, "google.cloud.contactcenterinsights.v1.IssueModelLabelStats"
