@@ -67,9 +67,9 @@ module Google
         require "google/cloud/recommendation_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::RecommendationEngine
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::RecommendationEngine.const_get(package_name).const_get(:CatalogService)
         service_module.const_get(:Client).new(&block)
       end
@@ -101,9 +101,9 @@ module Google
         require "google/cloud/recommendation_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::RecommendationEngine
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::RecommendationEngine.const_get(package_name).const_get(:PredictionApiKeyRegistry)
         service_module.const_get(:Client).new(&block)
       end
@@ -131,9 +131,9 @@ module Google
         require "google/cloud/recommendation_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::RecommendationEngine
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::RecommendationEngine.const_get(package_name).const_get(:PredictionService)
         service_module.const_get(:Client).new(&block)
       end
@@ -161,9 +161,9 @@ module Google
         require "google/cloud/recommendation_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::RecommendationEngine
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::RecommendationEngine.const_get(package_name).const_get(:UserEventService)
         service_module.const_get(:Client).new(&block)
       end
@@ -207,3 +207,4 @@ end
 
 helper_path = ::File.join __dir__, "recommendation_engine", "helpers.rb"
 require "google/cloud/recommendation_engine/helpers" if ::File.file? helper_path
+

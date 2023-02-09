@@ -83,6 +83,7 @@ module Google
 
         # The operating system options for account entries.
         module OperatingSystemType
+
           # The operating system type associated with the user account information is
           # unspecified.
           OPERATING_SYSTEM_TYPE_UNSPECIFIED = 0
@@ -97,3 +98,4 @@ module Google
     end
   end
 end
+

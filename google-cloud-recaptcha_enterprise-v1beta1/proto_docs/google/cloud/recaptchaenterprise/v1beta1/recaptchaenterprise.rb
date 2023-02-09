@@ -60,6 +60,7 @@ module Google
 
           # Enum that represents the types of annotations.
           module Annotation
+
             # Default unspecified type.
             ANNOTATION_UNSPECIFIED = 0
 
@@ -82,6 +83,7 @@ module Google
 
           # Enum that represents potential reasons for annotating an assessment.
           module Reason
+
             # Default unspecified reason.
             REASON_UNSPECIFIED = 0
 
@@ -184,6 +186,7 @@ module Google
 
           # Reasons contributing to the risk analysis verdict.
           module ClassificationReason
+
             # Default unspecified type.
             CLASSIFICATION_REASON_UNSPECIFIED = 0
 
@@ -260,6 +263,7 @@ module Google
 
           # Enum that represents the types of invalid token reasons.
           module InvalidReason
+
             # Default unspecified type.
             INVALID_REASON_UNSPECIFIED = 0
 
@@ -300,6 +304,7 @@ module Google
 
           # Labels returned by Account Defender for this request.
           module AccountDefenderLabel
+
             # Default unspecified type.
             ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = 0
 
@@ -324,3 +329,4 @@ module Google
     end
   end
 end
+

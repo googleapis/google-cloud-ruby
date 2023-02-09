@@ -20,8 +20,11 @@
 require "google/cloud/recommendation_engine/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#write_user_event
+# Snippet for the write_user_event call in the UserEventService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#write_user_event.
+# It may require modification in order to execute successfully.
 #
 def write_user_event
   # Create a client object. The client can be reused for multiple calls.

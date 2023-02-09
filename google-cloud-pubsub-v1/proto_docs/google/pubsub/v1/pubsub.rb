@@ -491,6 +491,7 @@ module Google
 
           # Possible states for a subscription.
           module State
+
             # Default value. This value is unused.
             STATE_UNSPECIFIED = 0
 
@@ -681,6 +682,7 @@ module Google
 
           # Possible states for a BigQuery subscription.
           module State
+
             # Default value. This value is unused.
             STATE_UNSPECIFIED = 0
 
@@ -1205,3 +1207,4 @@ module Google
     end
   end
 end
+

@@ -66,3 +66,4 @@ end
 
 helper_path = ::File.join __dir__, "private_catalog", "helpers.rb"
 require "google/cloud/private_catalog/v1beta1/private_catalog/helpers" if ::File.file? helper_path
+

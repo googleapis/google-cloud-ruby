@@ -187,6 +187,7 @@ module Google
 
           # Whether a role includes a specific permission.
           module RolePermission
+
             # Reserved for future use.
             ROLE_PERMISSION_UNSPECIFIED = 0
 
@@ -202,6 +203,7 @@ module Google
 
           # Whether the binding includes the member.
           module Membership
+
             # Reserved for future use.
             MEMBERSHIP_UNSPECIFIED = 0
 
@@ -227,6 +229,7 @@ module Google
 
         # Whether a member has a permission for a resource.
         module AccessState
+
           # Reserved for future use.
           ACCESS_STATE_UNSPECIFIED = 0
 
@@ -248,6 +251,7 @@ module Google
         # The extent to which a single data point contributes to an overall
         # determination.
         module HeuristicRelevance
+
           # Reserved for future use.
           HEURISTIC_RELEVANCE_UNSPECIFIED = 0
 
@@ -263,3 +267,4 @@ module Google
     end
   end
 end
+

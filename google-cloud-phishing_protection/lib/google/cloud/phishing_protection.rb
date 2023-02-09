@@ -67,9 +67,9 @@ module Google
         require "google/cloud/phishing_protection/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::PhishingProtection
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::PhishingProtection.const_get(package_name).const_get(:PhishingProtectionService)
         service_module.const_get(:Client).new(&block)
       end
@@ -113,3 +113,4 @@ end
 
 helper_path = ::File.join __dir__, "phishing_protection", "helpers.rb"
 require "google/cloud/phishing_protection/helpers" if ::File.file? helper_path
+

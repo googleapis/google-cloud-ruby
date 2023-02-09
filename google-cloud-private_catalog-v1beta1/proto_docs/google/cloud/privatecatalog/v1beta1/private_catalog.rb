@@ -396,6 +396,7 @@ module Google
 
           # Possible validation steates of an asset reference.
           module AssetValidationState
+
             # Unknown state.
             ASSET_VALIDATION_STATE_UNSPECIFIED = 0
 
@@ -490,3 +491,4 @@ module Google
     end
   end
 end
+

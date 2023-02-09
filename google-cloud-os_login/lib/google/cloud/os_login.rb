@@ -70,9 +70,9 @@ module Google
         require "google/cloud/os_login/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::OsLogin
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::OsLogin.const_get(package_name).const_get(:OsLoginService)
         service_module.const_get(:Client).new(&block)
       end
@@ -116,3 +116,4 @@ end
 
 helper_path = ::File.join __dir__, "os_login", "helpers.rb"
 require "google/cloud/os_login/helpers" if ::File.file? helper_path
+

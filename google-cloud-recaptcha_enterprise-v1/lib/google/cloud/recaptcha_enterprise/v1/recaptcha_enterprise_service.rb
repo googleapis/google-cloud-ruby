@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "recaptcha_enterprise_service", "helpers.rb"
 require "google/cloud/recaptcha_enterprise/v1/recaptcha_enterprise_service/helpers" if ::File.file? helper_path
+

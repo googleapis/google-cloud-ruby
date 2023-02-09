@@ -156,6 +156,7 @@ module Google
         # NOTE: the enumeration member names are used (in lowercase) as unique string
         # identifiers of profile types, so they must not be renamed.
         module ProfileType
+
           # Unspecified profile type.
           PROFILE_TYPE_UNSPECIFIED = 0
 
@@ -190,3 +191,4 @@ module Google
     end
   end
 end
+

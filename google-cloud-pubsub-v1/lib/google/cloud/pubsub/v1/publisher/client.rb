@@ -66,49 +66,49 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_topic.timeout = 60.0
-                default_config.rpcs.create_topic.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.create_topic.timeout = 60.0
+                    default_config.rpcs.create_topic.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.update_topic.timeout = 60.0
-                default_config.rpcs.update_topic.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.update_topic.timeout = 60.0
+                    default_config.rpcs.update_topic.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.publish.timeout = 60.0
-                default_config.rpcs.publish.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 13, 8, 2, 14, 4]
+                    default_config.rpcs.publish.timeout = 60.0
+                    default_config.rpcs.publish.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 13, 8, 2, 14, 4]
                 }
 
-                default_config.rpcs.get_topic.timeout = 60.0
-                default_config.rpcs.get_topic.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
+                    default_config.rpcs.get_topic.timeout = 60.0
+                    default_config.rpcs.get_topic.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
-                default_config.rpcs.list_topics.timeout = 60.0
-                default_config.rpcs.list_topics.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
+                    default_config.rpcs.list_topics.timeout = 60.0
+                    default_config.rpcs.list_topics.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
-                default_config.rpcs.list_topic_subscriptions.timeout = 60.0
-                default_config.rpcs.list_topic_subscriptions.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
+                    default_config.rpcs.list_topic_subscriptions.timeout = 60.0
+                    default_config.rpcs.list_topic_subscriptions.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
-                default_config.rpcs.list_topic_snapshots.timeout = 60.0
-                default_config.rpcs.list_topic_snapshots.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
+                    default_config.rpcs.list_topic_snapshots.timeout = 60.0
+                    default_config.rpcs.list_topic_snapshots.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
-                default_config.rpcs.delete_topic.timeout = 60.0
-                default_config.rpcs.delete_topic.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.delete_topic.timeout = 60.0
+                    default_config.rpcs.delete_topic.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.detach_subscription.timeout = 60.0
-                default_config.rpcs.detach_subscription.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                    default_config.rpcs.detach_subscription.timeout = 60.0
+                    default_config.rpcs.detach_subscription.retry_policy ={
+                initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -636,13 +636,11 @@ module Google
             #   # Call the list_topics method.
             #   result = client.list_topics request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::PubSub::V1::Topic.
-            #     p response
+            #     p item
             #   end
             #
             def list_topics request, options = nil
@@ -1145,7 +1143,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1266,3 +1264,4 @@ module Google
     end
   end
 end
+

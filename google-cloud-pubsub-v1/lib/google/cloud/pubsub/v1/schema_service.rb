@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "schema_service", "helpers.rb"
 require "google/cloud/pubsub/v1/schema_service/helpers" if ::File.file? helper_path
+

@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "publisher", "helpers.rb"
 require "google/cloud/pubsub/v1/publisher/helpers" if ::File.file? helper_path
+

@@ -92,6 +92,7 @@ module Google
 
           # Recommendation priority levels.
           module Priority
+
             # Recommendation has unspecified priority.
             PRIORITY_UNSPECIFIED = 0
 
@@ -294,6 +295,7 @@ module Google
 
           # The category of the impact.
           module Category
+
             # Default unspecified category. Don't use directly.
             CATEGORY_UNSPECIFIED = 0
 
@@ -333,6 +335,7 @@ module Google
 
           # Represents Recommendation State.
           module State
+
             # Default state. Don't use directly.
             STATE_UNSPECIFIED = 0
 
@@ -371,3 +374,4 @@ module Google
     end
   end
 end
+

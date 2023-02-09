@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "recommender", "helpers.rb"
 require "google/cloud/recommender/v1/recommender/helpers" if ::File.file? helper_path
+

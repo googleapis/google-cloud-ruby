@@ -46,6 +46,7 @@ module Google
 
           # Possible schema definition types.
           module Type
+
             # Default value. This value is unused.
             TYPE_UNSPECIFIED = 0
 
@@ -273,6 +274,7 @@ module Google
 
         # View of Schema object fields to be returned by GetSchema and ListSchemas.
         module SchemaView
+
           # The default / unset value.
           # The API will default to the BASIC view.
           SCHEMA_VIEW_UNSPECIFIED = 0
@@ -286,6 +288,7 @@ module Google
 
         # Possible encoding types for messages.
         module Encoding
+
           # Unspecified
           ENCODING_UNSPECIFIED = 0
 
@@ -300,3 +303,4 @@ module Google
     end
   end
 end
+

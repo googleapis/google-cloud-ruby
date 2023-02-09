@@ -20,8 +20,11 @@
 require "google/cloud/recommender/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Recommender::V1::Recommender::Client#list_recommendations
+# Snippet for the list_recommendations call in the Recommender service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Recommender::V1::Recommender::Client#list_recommendations. It
+# may require modification in order to execute successfully.
 #
 def list_recommendations
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_recommendations
   # Call the list_recommendations method.
   result = client.list_recommendations request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Recommender::V1::Recommendation.
-    p response
+    p item
   end
 end
 # [END recommender_v1_generated_Recommender_ListRecommendations_sync]

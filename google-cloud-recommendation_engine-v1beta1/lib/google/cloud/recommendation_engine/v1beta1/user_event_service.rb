@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "user_event_service", "helpers.rb"
 require "google/cloud/recommendation_engine/v1beta1/user_event_service/helpers" if ::File.file? helper_path
+

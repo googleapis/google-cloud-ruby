@@ -80,6 +80,7 @@ module Google
 
           # Insight category.
           module Category
+
             # Unspecified category.
             CATEGORY_UNSPECIFIED = 0
 
@@ -98,6 +99,7 @@ module Google
 
           # Insight severity levels.
           module Severity
+
             # Insight has unspecified severity.
             SEVERITY_UNSPECIFIED = 0
 
@@ -137,6 +139,7 @@ module Google
 
           # Represents insight state.
           module State
+
             # Unspecified state.
             STATE_UNSPECIFIED = 0
 
@@ -160,3 +163,4 @@ module Google
     end
   end
 end
+

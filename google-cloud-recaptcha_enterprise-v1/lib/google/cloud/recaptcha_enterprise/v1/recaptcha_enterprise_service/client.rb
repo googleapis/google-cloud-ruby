@@ -64,19 +64,19 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_assessment.timeout = 600.0
+                    default_config.rpcs.create_assessment.timeout = 600.0
 
-                default_config.rpcs.annotate_assessment.timeout = 600.0
+                    default_config.rpcs.annotate_assessment.timeout = 600.0
 
-                default_config.rpcs.create_key.timeout = 600.0
+                    default_config.rpcs.create_key.timeout = 600.0
 
-                default_config.rpcs.list_keys.timeout = 600.0
+                    default_config.rpcs.list_keys.timeout = 600.0
 
-                default_config.rpcs.get_key.timeout = 600.0
+                    default_config.rpcs.get_key.timeout = 600.0
 
-                default_config.rpcs.update_key.timeout = 600.0
+                    default_config.rpcs.update_key.timeout = 600.0
 
-                default_config.rpcs.delete_key.timeout = 600.0
+                    default_config.rpcs.delete_key.timeout = 600.0
 
                 default_config
               end
@@ -482,13 +482,11 @@ module Google
             #   # Call the list_keys method.
             #   result = client.list_keys request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::Key.
-            #     p response
+            #     p item
             #   end
             #
             def list_keys request, options = nil
@@ -1121,13 +1119,11 @@ module Google
             #   # Call the list_related_account_groups method.
             #   result = client.list_related_account_groups request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroup.
-            #     p response
+            #     p item
             #   end
             #
             def list_related_account_groups request, options = nil
@@ -1225,13 +1221,11 @@ module Google
             #   # Call the list_related_account_group_memberships method.
             #   result = client.list_related_account_group_memberships request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership.
-            #     p response
+            #     p item
             #   end
             #
             def list_related_account_group_memberships request, options = nil
@@ -1335,13 +1329,11 @@ module Google
             #   # Call the search_related_account_group_memberships method.
             #   result = client.search_related_account_group_memberships request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership.
-            #     p response
+            #     p item
             #   end
             #
             def search_related_account_group_memberships request, options = nil
@@ -1477,7 +1469,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
+              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1626,3 +1618,4 @@ module Google
     end
   end
 end
+

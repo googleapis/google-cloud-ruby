@@ -61,6 +61,7 @@ module Google
 
           # Enum that represents the types of annotations.
           module Annotation
+
             # Default unspecified type.
             ANNOTATION_UNSPECIFIED = 0
 
@@ -83,6 +84,7 @@ module Google
 
           # Enum that represents potential reasons for annotating an assessment.
           module Reason
+
             # Default unspecified reason.
             REASON_UNSPECIFIED = 0
 
@@ -196,6 +198,7 @@ module Google
           # Result of the account verification as contained in the verdict token issued
           # at the end of the verification flow.
           module Result
+
             # No information about the latest account verification.
             RESULT_UNSPECIFIED = 0
 
@@ -339,6 +342,7 @@ module Google
 
           # Reasons contributing to the risk analysis verdict.
           module ClassificationReason
+
             # Default unspecified type.
             CLASSIFICATION_REASON_UNSPECIFIED = 0
 
@@ -394,6 +398,7 @@ module Google
 
           # Enum that represents the types of invalid token reasons.
           module InvalidReason
+
             # Default unspecified type.
             INVALID_REASON_UNSPECIFIED = 0
 
@@ -428,6 +433,7 @@ module Google
 
           # Labels returned by account defender for this request.
           module AccountDefenderLabel
+
             # Default unspecified type.
             ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = 0
 
@@ -663,6 +669,7 @@ module Google
           # Enum that represents the challenge option for challenge-based (CHECKBOX,
           # INVISIBLE) testing keys.
           module TestingChallenge
+
             # Perform the normal risk analysis and return either nocaptcha or a
             # challenge depending on risk and trust factors.
             TESTING_CHALLENGE_UNSPECIFIED = 0
@@ -705,6 +712,7 @@ module Google
 
           # Enum that represents the integration types for web keys.
           module IntegrationType
+
             # Default type that indicates this enum hasn't been specified. This is not
             # a valid IntegrationType, one of the other types must be specified
             # instead.
@@ -726,6 +734,7 @@ module Google
           # Enum that represents the possible challenge frequency and difficulty
           # configurations for a web key.
           module ChallengeSecurityPreference
+
             # Default type that indicates this enum hasn't been specified.
             CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED = 0
 
@@ -985,6 +994,7 @@ module Google
           # Supported WAF features. For more information, see
           # https://cloud.google.com/recaptcha-enterprise/docs/usecase#comparison_of_features.
           module WafFeature
+
             # Undefined feature.
             WAF_FEATURE_UNSPECIFIED = 0
 
@@ -1001,6 +1011,7 @@ module Google
 
           # Web Application Firewalls supported by reCAPTCHA Enterprise.
           module WafService
+
             # Undefined WAF
             WAF_SERVICE_UNSPECIFIED = 0
 
@@ -1012,3 +1023,4 @@ module Google
     end
   end
 end
+

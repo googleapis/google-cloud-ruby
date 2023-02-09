@@ -72,9 +72,9 @@ module Google
         require "google/cloud/profiler/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Profiler
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Profiler.const_get(package_name).const_get(:ProfilerService)
         service_module.const_get(:Client).new(&block)
       end
@@ -118,3 +118,4 @@ end
 
 helper_path = ::File.join __dir__, "profiler", "helpers.rb"
 require "google/cloud/profiler/helpers" if ::File.file? helper_path
+

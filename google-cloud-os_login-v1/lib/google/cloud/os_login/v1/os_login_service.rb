@@ -50,3 +50,4 @@ end
 
 helper_path = ::File.join __dir__, "os_login_service", "helpers.rb"
 require "google/cloud/os_login/v1/os_login_service/helpers" if ::File.file? helper_path
+

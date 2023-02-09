@@ -198,6 +198,7 @@ module Google
 
         # The login profile view limits the user content retrieved.
         module LoginProfileView
+
           # The default login profile view. The API defaults to the BASIC view.
           LOGIN_PROFILE_VIEW_UNSPECIFIED = 0
 
@@ -211,3 +212,4 @@ module Google
     end
   end
 end
+

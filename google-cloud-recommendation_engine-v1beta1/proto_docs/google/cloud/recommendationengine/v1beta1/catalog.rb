@@ -177,6 +177,7 @@ module Google
           # Item stock state. If this field is unspecified, the item is
           # assumed to be in stock.
           module StockState
+
             # Default item stock status. Should never be used.
             STOCK_STATE_UNSPECIFIED = 0
 
@@ -212,3 +213,4 @@ module Google
     end
   end
 end
+

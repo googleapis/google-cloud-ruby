@@ -90,6 +90,7 @@ module Google
 
           # User event source.
           module EventSource
+
             # Unspecified event source.
             EVENT_SOURCE_UNSPECIFIED = 0
 
@@ -365,3 +366,4 @@ module Google
     end
   end
 end
+

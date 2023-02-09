@@ -48,3 +48,4 @@ end
 
 helper_path = ::File.join __dir__, "iam_checker", "helpers.rb"
 require "google/cloud/policy_troubleshooter/v1/iam_checker/helpers" if ::File.file? helper_path
+

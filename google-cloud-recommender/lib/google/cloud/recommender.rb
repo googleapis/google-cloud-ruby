@@ -70,9 +70,9 @@ module Google
         require "google/cloud/recommender/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Recommender
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
+                        .constants
+                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                        .first
         service_module = Google::Cloud::Recommender.const_get(package_name).const_get(:Recommender)
         service_module.const_get(:Client).new(&block)
       end
@@ -116,3 +116,4 @@ end
 
 helper_path = ::File.join __dir__, "recommender", "helpers.rb"
 require "google/cloud/recommender/helpers" if ::File.file? helper_path
+

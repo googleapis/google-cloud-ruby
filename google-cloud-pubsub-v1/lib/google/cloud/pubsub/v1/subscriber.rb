@@ -49,3 +49,4 @@ end
 
 helper_path = ::File.join __dir__, "subscriber", "helpers.rb"
 require "google/cloud/pubsub/v1/subscriber/helpers" if ::File.file? helper_path
+

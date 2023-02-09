@@ -47,3 +47,4 @@ end
 
 helper_path = ::File.join __dir__, "phishing_protection_service", "helpers.rb"
 require "google/cloud/phishing_protection/v1beta1/phishing_protection_service/helpers" if ::File.file? helper_path
+

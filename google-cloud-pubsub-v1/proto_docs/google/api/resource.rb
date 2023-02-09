@@ -147,6 +147,7 @@ module Google
       # A description of the historical or future-looking state of the
       # resource pattern.
       module History
+
         # The "unset" value.
         HISTORY_UNSPECIFIED = 0
 
@@ -162,6 +163,7 @@ module Google
 
       # A flag representing a specific style that a resource claims to conform to.
       module Style
+
         # The unspecified value. Do not use.
         STYLE_UNSPECIFIED = 0
 
@@ -220,3 +222,4 @@ module Google
     end
   end
 end
+

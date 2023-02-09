@@ -51,3 +51,4 @@ end
 
 helper_path = ::File.join __dir__, "prediction_api_key_registry", "helpers.rb"
 require "google/cloud/recommendation_engine/v1beta1/prediction_api_key_registry/helpers" if ::File.file? helper_path
+
