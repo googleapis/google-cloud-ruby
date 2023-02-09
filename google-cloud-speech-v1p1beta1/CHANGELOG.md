@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.2 (2023-02-09)
+
+#### Documentation
+
+* Clarify boost usage ([#20106](https://github.com/googleapis/google-cloud-ruby/issues/20106)) 
+
 ### 0.15.1 (2023-01-26)
 
 #### Documentation
