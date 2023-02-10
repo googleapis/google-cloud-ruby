@@ -20,11 +20,8 @@
 require "google/cloud/bigtable/v2"
 
 ##
-# Snippet for the mutate_row call in the Bigtable service
-#
-# This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Bigtable::V2::Bigtable::Client#mutate_row. It may require
-# modification in order to execute successfully.
+# Example demonstrating basic usage of
+# Google::Cloud::Bigtable::V2::Bigtable::Client#mutate_row
 #
 def mutate_row
   # Create a client object. The client can be reused for multiple calls.

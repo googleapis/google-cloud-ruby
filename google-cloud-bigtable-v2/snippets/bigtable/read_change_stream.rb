@@ -20,11 +20,8 @@
 require "google/cloud/bigtable/v2"
 
 ##
-# Snippet for the read_change_stream call in the Bigtable service
-#
-# This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Bigtable::V2::Bigtable::Client#read_change_stream. It may
-# require modification in order to execute successfully.
+# Example demonstrating basic usage of
+# Google::Cloud::Bigtable::V2::Bigtable::Client#read_change_stream
 #
 def read_change_stream
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +30,13 @@ def read_change_stream
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::Bigtable::V2::ReadChangeStreamRequest.new
 
-  # Call the read_change_stream method to start streaming.
-  output = client.read_change_stream request
+  # Call the read_change_stream method.
+  result = client.read_change_stream request
 
-  # The returned object is a streamed enumerable yielding elements of type
-  # ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse
-  output.each do |current_response|
-    p current_response
+  # The returned object is a streamed enumerable yielding elements of
+  # type ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse.
+  result.each do |response|
+    p response
   end
 end
 # [END bigtable_v2_generated_Bigtable_ReadChangeStream_sync]

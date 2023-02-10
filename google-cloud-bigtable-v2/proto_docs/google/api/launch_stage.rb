@@ -22,7 +22,6 @@ module Google
     # The launch stage as defined by [Google Cloud Platform
     # Launch Stages](https://cloud.google.com/terms/launch-stages).
     module LaunchStage
-
       # Do not use this default value.
       LAUNCH_STAGE_UNSPECIFIED = 0
 
@@ -70,4 +69,3 @@ module Google
     end
   end
 end
-

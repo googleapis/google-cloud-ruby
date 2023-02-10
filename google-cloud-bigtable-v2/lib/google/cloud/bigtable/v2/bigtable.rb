@@ -47,4 +47,3 @@ end
 
 helper_path = ::File.join __dir__, "bigtable", "helpers.rb"
 require "google/cloud/bigtable/v2/bigtable/helpers" if ::File.file? helper_path
-

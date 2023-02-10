@@ -64,24 +64,24 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                    default_config.rpcs.read_rows.timeout = 43_200.0
+                default_config.rpcs.read_rows.timeout = 43_200.0
 
-                    default_config.rpcs.sample_row_keys.timeout = 60.0
+                default_config.rpcs.sample_row_keys.timeout = 60.0
 
-                    default_config.rpcs.mutate_row.timeout = 60.0
-                    default_config.rpcs.mutate_row.retry_policy ={
-                initial_delay: 0.01, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
+                default_config.rpcs.mutate_row.timeout = 60.0
+                default_config.rpcs.mutate_row.retry_policy = {
+                  initial_delay: 0.01, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
                 }
 
-                    default_config.rpcs.mutate_rows.timeout = 600.0
+                default_config.rpcs.mutate_rows.timeout = 600.0
 
-                    default_config.rpcs.check_and_mutate_row.timeout = 20.0
+                default_config.rpcs.check_and_mutate_row.timeout = 20.0
 
-                    default_config.rpcs.read_modify_write_row.timeout = 20.0
+                default_config.rpcs.read_modify_write_row.timeout = 20.0
 
-                    default_config.rpcs.generate_initial_change_stream_partitions.timeout = 60.0
+                default_config.rpcs.generate_initial_change_stream_partitions.timeout = 60.0
 
-                    default_config.rpcs.read_change_stream.timeout = 43_200.0
+                default_config.rpcs.read_change_stream.timeout = 43_200.0
 
                 default_config
               end
@@ -221,13 +221,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::ReadRowsRequest.new
             #
-            #   # Call the read_rows method to start streaming.
-            #   output = client.read_rows request
+            #   # Call the read_rows method.
+            #   result = client.read_rows request
             #
-            #   # The returned object is a streamed enumerable yielding elements of type
-            #   # ::Google::Cloud::Bigtable::V2::ReadRowsResponse
-            #   output.each do |current_response|
-            #     p current_response
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Bigtable::V2::ReadRowsResponse.
+            #   result.each do |response|
+            #     p response
             #   end
             #
             def read_rows request, options = nil
@@ -249,7 +249,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               if request.app_profile_id && !request.app_profile_id.empty?
@@ -321,13 +321,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new
             #
-            #   # Call the sample_row_keys method to start streaming.
-            #   output = client.sample_row_keys request
+            #   # Call the sample_row_keys method.
+            #   result = client.sample_row_keys request
             #
-            #   # The returned object is a streamed enumerable yielding elements of type
-            #   # ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse
-            #   output.each do |current_response|
-            #     p current_response
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse.
+            #   result.each do |response|
+            #     p response
             #   end
             #
             def sample_row_keys request, options = nil
@@ -349,7 +349,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               if request.app_profile_id && !request.app_profile_id.empty?
@@ -450,7 +450,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               if request.app_profile_id && !request.app_profile_id.empty?
@@ -526,13 +526,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::MutateRowsRequest.new
             #
-            #   # Call the mutate_rows method to start streaming.
-            #   output = client.mutate_rows request
+            #   # Call the mutate_rows method.
+            #   result = client.mutate_rows request
             #
-            #   # The returned object is a streamed enumerable yielding elements of type
-            #   # ::Google::Cloud::Bigtable::V2::MutateRowsResponse
-            #   output.each do |current_response|
-            #     p current_response
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Bigtable::V2::MutateRowsResponse.
+            #   result.each do |response|
+            #     p response
             #   end
             #
             def mutate_rows request, options = nil
@@ -554,7 +554,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               if request.app_profile_id && !request.app_profile_id.empty?
@@ -668,7 +668,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               if request.app_profile_id && !request.app_profile_id.empty?
@@ -763,7 +763,7 @@ module Google
 
               header_params = {}
               if request.name &&
-                %r{^projects/[^/]+/instances/[^/]+/?$}.match?(request.name)
+                 %r{^projects/[^/]+/instances/[^/]+/?$}.match?(request.name)
                 header_params["name"] = request.name
               end
               if request.app_profile_id && !request.app_profile_id.empty?
@@ -868,7 +868,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               if request.app_profile_id && !request.app_profile_id.empty?
@@ -942,13 +942,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest.new
             #
-            #   # Call the generate_initial_change_stream_partitions method to start streaming.
-            #   output = client.generate_initial_change_stream_partitions request
+            #   # Call the generate_initial_change_stream_partitions method.
+            #   result = client.generate_initial_change_stream_partitions request
             #
-            #   # The returned object is a streamed enumerable yielding elements of type
-            #   # ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse
-            #   output.each do |current_response|
-            #     p current_response
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse.
+            #   result.each do |response|
+            #     p response
             #   end
             #
             def generate_initial_change_stream_partitions request, options = nil
@@ -1065,13 +1065,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::ReadChangeStreamRequest.new
             #
-            #   # Call the read_change_stream method to start streaming.
-            #   output = client.read_change_stream request
+            #   # Call the read_change_stream method.
+            #   result = client.read_change_stream request
             #
-            #   # The returned object is a streamed enumerable yielding elements of type
-            #   # ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse
-            #   output.each do |current_response|
-            #     p current_response
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse.
+            #   result.each do |response|
+            #     p response
             #   end
             #
             def read_change_stream request, options = nil
@@ -1206,7 +1206,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  {"grpc.service_config_disable_resolution"=>1}, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1327,4 +1327,3 @@ module Google
     end
   end
 end
-
