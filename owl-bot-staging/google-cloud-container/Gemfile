@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-container-v1", path: "../google-cloud-container-v1"
+gem "google-cloud-container-v1beta1", path: "../google-cloud-container-v1beta1"

@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-container_analysis-v1", path: "../google-cloud-container_analysis-v1"
