@@ -16,6 +16,7 @@ require "helper"
 
 describe "Aggregate Query", :mock_datastore do
   let(:project_id) { "my-todo-project" }
+  let(:read_time) { Time.now }
   let(:credentials) { OpenStruct.new }
   let(:default_database) { "" }
   let(:dataset) { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project_id, credentials, default_database)) }
@@ -48,6 +49,20 @@ describe "Aggregate Query", :mock_datastore do
     aq = query.aggregate_query
               .add_count
     res = dataset.run_aggregation aq
+
+    _(res.get).must_equal 4
+    _(res.get('count')).must_equal 4
+  end
+
+  it "creates an aggregate query with default alias and read time" do
+    read_options = Google::Cloud::Datastore::V1::ReadOptions.new read_time: read_time_to_timestamp(read_time)
+    expected_aggregation_query = aggregation_query_factory('count')
+    aggr_resp = aggregation_query_response_factory('count': 4)
+    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, aggregation_query: expected_aggregation_query, read_options: read_options)
+
+    aq = query.aggregate_query
+              .add_count
+    res = dataset.run_aggregation aq, read_time: read_time
 
     _(res.get).must_equal 4
     _(res.get('count')).must_equal 4

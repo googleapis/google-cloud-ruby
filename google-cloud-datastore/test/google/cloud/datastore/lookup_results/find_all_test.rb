@@ -26,7 +26,7 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
   let(:keys) { [key1, key2, key3, key4, key5, key6] }
   let(:first_keys) { keys.map(&:to_grpc) }
   let(:second_keys) { [key3, key4].map(&:to_grpc) }
-
+  let(:read_time) { Time.now }
   let(:first_lookup_res) do
     Google::Cloud::Datastore::V1::LookupResponse.new(
       found: (1..2).map do |i|
@@ -170,6 +170,40 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, second_lookup_res, project_id: project, keys: second_keys, read_options: nil, database_id: default_database
 
     first_entities = dataset.find_all keys
+    _(first_entities.next?).must_equal true
+    _(first_entities.count).must_equal 2
+    _(first_entities.deferred.count).must_equal 2
+    _(first_entities.missing.count).must_equal 2
+    first_entities.each do |entity|
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+    end
+    first_entities.deferred.each do |deferred_key|
+      _(deferred_key).must_be_kind_of Google::Cloud::Datastore::Key
+    end
+    first_entities.missing.each do |entity|
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+    end
+
+    second_entities = first_entities.next
+    _(second_entities.next?).must_equal false
+    _(second_entities.count).must_equal 2
+    _(second_entities.deferred.count).must_equal 0
+    _(second_entities.missing.count).must_equal 0
+    second_entities.each do |entity|
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+    end
+  end
+
+  it "paginates with read_time set" do
+    read_options = Google::Cloud::Datastore::V1::ReadOptions.new read_time: read_time_to_timestamp(read_time)
+    first_lookup_res_dup = first_lookup_res.dup
+    first_lookup_res_dup.read_time = read_time
+    second_lookup_res_dup = second_lookup_res.dup
+    second_lookup_res_dup.read_time = read_time
+    dataset.service.mocked_service.expect :lookup, first_lookup_res_dup, project_id: project, database_id: default_database, keys: first_keys, read_options: read_options
+    dataset.service.mocked_service.expect :lookup, second_lookup_res_dup, project_id: project, database_id: default_database, keys: second_keys, read_options: read_options
+
+    first_entities = dataset.find_all keys, read_time: read_time
     _(first_entities.next?).must_equal true
     _(first_entities.count).must_equal 2
     _(first_entities.deferred.count).must_equal 2

@@ -73,6 +73,24 @@ module Google
           attr_reader :more_results
 
           ##
+          # Read timestamp this batch was returned from.
+          # This applies to the range of results from the query's `start_cursor` (or
+          # the beginning of the query if no cursor was given) to this batch's
+          # `end_cursor` (not the query's `end_cursor`).
+          #
+          # In a single transaction, subsequent query result batches for the same query
+          # can have a greater timestamp. Each batch's read timestamp
+          # is valid for all preceding batches.
+          # This value will not be set for eventually consistent queries in Cloud
+          # Datastore.
+          attr_reader :batch_read_time
+
+          ##
+          # Time at which the entities are being read. This would not be
+          # older than 270 seconds.
+          attr_reader :read_time
+
+          ##
           # @private
           attr_accessor :service, :namespace, :cursors, :query
 
@@ -162,8 +180,8 @@ module Google
               # Reduce the limit by the number of entities returned in the current batch
               query.limit.value -= count
             end
-            query_res = service.run_query query, namespace
-            self.class.from_grpc query_res, service, namespace, query
+            query_res = service.run_query query, namespace, read_time: read_time
+            self.class.from_grpc query_res, service, namespace, query, read_time
           end
 
           ##
@@ -360,7 +378,7 @@ module Google
           ##
           # @private New Dataset::QueryResults from a
           # Google::Dataset::V1::RunQueryResponse object.
-          def self.from_grpc query_res, service, namespace, query
+          def self.from_grpc query_res, service, namespace, query, read_time = nil
             r, c = Array(query_res.batch.entity_results).map do |result|
               [Entity.from_grpc(result.entity), Cursor.from_grpc(result.cursor)]
             end.transpose
@@ -373,6 +391,8 @@ module Google
               qr.service = service
               qr.namespace = namespace
               qr.query = query_res.query || query
+              qr.instance_variable_set :@read_time, read_time
+              qr.instance_variable_set :@batch_read_time, query_res.batch.read_time
             end
           end
 

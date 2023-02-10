@@ -54,6 +54,15 @@ module Google
         #
         class LookupResults < DelegateClass(::Array)
           ##
+          # The time at which these entities were read or found missing.
+          attr_reader :response_read_time
+
+          ##
+          # Time at which the entities are being read. This would not be
+          # older than 270 seconds.
+          attr_reader :read_time
+
+          ##
           # Keys that were not looked up due to resource constraints.
           attr_accessor :deferred
 
@@ -110,9 +119,9 @@ module Google
             ensure_service!
             lookup_res = @service.lookup(
               *Array(@deferred).flatten.map(&:to_grpc),
-              consistency: @consistency, transaction: @transaction
+              consistency: @consistency, transaction: @transaction, read_time: @read_time
             )
-            self.class.from_grpc lookup_res, @service, @consistency
+            self.class.from_grpc lookup_res, @service, @consistency, nil, @read_time
           end
 
           ##
@@ -187,7 +196,7 @@ module Google
           ##
           # @private New Dataset::LookupResults from a
           # Google::Dataset::V1::LookupResponse object.
-          def self.from_grpc lookup_res, service, consistency = nil, transaction = nil
+          def self.from_grpc lookup_res, service, consistency = nil, transaction = nil, read_time = nil
             entities = to_gcloud_entities lookup_res.found
             deferred = to_gcloud_keys lookup_res.deferred
             missing  = to_gcloud_entities lookup_res.missing
@@ -195,6 +204,8 @@ module Google
               lr.instance_variable_set :@service,     service
               lr.instance_variable_set :@consistency, consistency
               lr.instance_variable_set :@transaction, transaction
+              lr.instance_variable_set :@read_time, read_time
+              lr.instance_variable_set :@response_read_time, lookup_res.read_time
               lr.instance_variable_set :@deferred,    deferred
               lr.instance_variable_set :@missing,     missing
             end
