@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-vmware_engine-v1", path: "../google-cloud-vmware_engine-v1"
