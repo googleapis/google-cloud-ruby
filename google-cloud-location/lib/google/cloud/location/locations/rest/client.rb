@@ -160,9 +160,9 @@ module Google
             #     The standard list page size.
             #   @param page_token [::String]
             #     The standard list page token.
-            # @yield [result, response] Access the result along with the Faraday response object
+            # @yield [result, operation] Access the result along with the TransportOperation object
             # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Location::Location>]
-            # @yieldparam response [::Faraday::Response]
+            # @yieldparam operation [::Gapic::Rest::TransportOperation]
             #
             # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Location::Location>]
             #
@@ -194,11 +194,11 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              bindings_override = @config.bindings_override["google.cloud.location.Locations.ListLocations"]
+            bindings_override = @config.bindings_override["google.cloud.location.Locations.ListLocations"]
 
-              @locations_stub.list_locations request, options, bindings_override: bindings_override do |result, response|
+              @locations_stub.list_locations request, options, bindings_override: bindings_override do |result, operation|
                 result = ::Gapic::Rest::PagedEnumerable.new @locations_stub, :list_locations, "locations", request, result, options
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 return result
               end
             rescue ::Gapic::Rest::Error => e
@@ -225,9 +225,9 @@ module Google
             #
             #   @param name [::String]
             #     Resource name for the location.
-            # @yield [result, response] Access the result along with the Faraday response object
+            # @yield [result, operation] Access the result along with the TransportOperation object
             # @yieldparam result [::Google::Cloud::Location::Location]
-            # @yieldparam response [::Faraday::Response]
+            # @yieldparam operation [::Gapic::Rest::TransportOperation]
             #
             # @return [::Google::Cloud::Location::Location]
             #
@@ -259,10 +259,10 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              bindings_override = @config.bindings_override["google.cloud.location.Locations.GetLocation"]
+            bindings_override = @config.bindings_override["google.cloud.location.Locations.GetLocation"]
 
-              @locations_stub.get_location request, options, bindings_override: bindings_override do |result, response|
-                yield result, response if block_given?
+              @locations_stub.get_location request, options, bindings_override: bindings_override do |result, operation|
+                yield result, operation if block_given?
                 return result
               end
             rescue ::Gapic::Rest::Error => e
@@ -427,3 +427,4 @@ module Google
     end
   end
 end
+

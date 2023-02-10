@@ -20,8 +20,11 @@
 require "google/cloud/location"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Location::Locations::Client#get_location
+# Snippet for the get_location call in the Locations service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Location::Locations::Client#get_location. It may require
+# modification in order to execute successfully.
 #
 def get_location
   # Create a client object. The client can be reused for multiple calls.
