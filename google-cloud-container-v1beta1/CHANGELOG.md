@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.2 (2023-02-13)
+
+#### Documentation
+
+* Improve documentation for NodePool ([#20114](https://github.com/googleapis/google-cloud-ruby/issues/20114)) 
+
 ### 0.16.1 (2023-01-31)
 
 #### Documentation
