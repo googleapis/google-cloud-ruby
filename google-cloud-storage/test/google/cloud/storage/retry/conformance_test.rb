@@ -20,6 +20,7 @@ require_relative "./utils.rb"
 class ConformanceTest < MockStorage
 
   HOST = "http://localhost:9000/"
+  Google::Apis.logger.level = Logger::DEBUG
 
   def setup
     storage.service.service.root_url = HOST
