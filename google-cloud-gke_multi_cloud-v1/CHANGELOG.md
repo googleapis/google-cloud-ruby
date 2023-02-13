@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 (2023-02-13)
+
+#### Features
+
+* Added reconciling and update_time output fields to Azure Client resource 
+* Added support for Azure workload identity federation ([#20113](https://github.com/googleapis/google-cloud-ruby/issues/20113)) 
+
 ### 0.3.0 (2023-01-05)
 
 #### Features
