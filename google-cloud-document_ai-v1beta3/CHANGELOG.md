@@ -1,5 +1,12 @@
 # Release History
 
+### 0.19.0 (2023-02-13)
+
+#### Features
+
+* Support for ProcessorVersion#latest_evaluation ([#20134](https://github.com/googleapis/google-cloud-ruby/issues/20134)) 
+* Support for the UPDATE OperationType 
+
 ### 0.18.0 (2023-01-28)
 
 #### Features
