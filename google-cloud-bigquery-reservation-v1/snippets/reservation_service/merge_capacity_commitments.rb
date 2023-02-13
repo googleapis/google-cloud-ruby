@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/reservation/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#merge_capacity_commitments
+# Snippet for the merge_capacity_commitments call in the ReservationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#merge_capacity_commitments.
+# It may require modification in order to execute successfully.
 #
 def merge_capacity_commitments
   # Create a client object. The client can be reused for multiple calls.

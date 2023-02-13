@@ -20,8 +20,11 @@
 require "google/cloud/bigtable/admin/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_cluster
+# Snippet for the delete_cluster call in the BigtableInstanceAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_cluster.
+# It may require modification in order to execute successfully.
 #
 def delete_cluster
   # Create a client object. The client can be reused for multiple calls.

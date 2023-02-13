@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/analytics_hub/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#subscribe_listing
+# Snippet for the subscribe_listing call in the AnalyticsHubService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#subscribe_listing.
+# It may require modification in order to execute successfully.
 #
 def subscribe_listing
   # Create a client object. The client can be reused for multiple calls.

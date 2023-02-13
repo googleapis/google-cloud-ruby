@@ -20,8 +20,11 @@
 require "google/cloud/beyond_corp/app_gateways/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#list_app_gateways
+# Snippet for the list_app_gateways call in the AppGatewaysService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#list_app_gateways.
+# It may require modification in order to execute successfully.
 #
 def list_app_gateways
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_app_gateways
   # Call the list_app_gateways method.
   result = client.list_app_gateways request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::BeyondCorp::AppGateways::V1::AppGateway.
-    p response
+    p item
   end
 end
 # [END beyondcorp_v1_generated_AppGatewaysService_ListAppGateways_sync]

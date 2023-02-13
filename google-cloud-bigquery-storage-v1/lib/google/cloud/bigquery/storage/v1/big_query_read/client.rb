@@ -336,13 +336,13 @@ module Google
               #   # Create a request. To set request fields, pass in keyword arguments.
               #   request = Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new
               #
-              #   # Call the read_rows method.
-              #   result = client.read_rows request
+              #   # Call the read_rows method to start streaming.
+              #   output = client.read_rows request
               #
-              #   # The returned object is a streamed enumerable yielding elements of
-              #   # type ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse.
-              #   result.each do |response|
-              #     p response
+              #   # The returned object is a streamed enumerable yielding elements of type
+              #   # ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse
+              #   output.each do |current_response|
+              #     p current_response
               #   end
               #
               def read_rows request, options = nil

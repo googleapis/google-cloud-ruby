@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/storage/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#finalize_write_stream
+# Snippet for the finalize_write_stream call in the BigQueryWrite service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#finalize_write_stream.
+# It may require modification in order to execute successfully.
 #
 def finalize_write_stream
   # Create a client object. The client can be reused for multiple calls.

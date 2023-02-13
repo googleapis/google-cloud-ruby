@@ -365,13 +365,11 @@ module Google
               #   # Call the list_reservations method.
               #   result = client.list_reservations request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Reservation.
-              #     p response
+              #     p item
               #   end
               #
               def list_reservations request, options = nil
@@ -820,13 +818,11 @@ module Google
               #   # Call the list_capacity_commitments method.
               #   result = client.list_capacity_commitments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
-              #     p response
+              #     p item
               #   end
               #
               def list_capacity_commitments request, options = nil
@@ -1533,13 +1529,11 @@ module Google
               #   # Call the list_assignments method.
               #   result = client.list_assignments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
-              #     p response
+              #     p item
               #   end
               #
               def list_assignments request, options = nil
@@ -1763,13 +1757,11 @@ module Google
               #   # Call the search_assignments method.
               #   result = client.search_assignments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
-              #     p response
+              #     p item
               #   end
               #
               def search_assignments request, options = nil
@@ -1888,13 +1880,11 @@ module Google
               #   # Call the search_all_assignments method.
               #   result = client.search_all_assignments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
-              #     p response
+              #     p item
               #   end
               #
               def search_all_assignments request, options = nil

@@ -20,8 +20,11 @@
 require "google/cloud/binary_authorization/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#get_attestor
+# Snippet for the get_attestor call in the BinauthzManagementService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#get_attestor.
+# It may require modification in order to execute successfully.
 #
 def get_attestor
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/billing/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Billing::V1::CloudBilling::Client#update_project_billing_info
+# Snippet for the update_project_billing_info call in the CloudBilling service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Billing::V1::CloudBilling::Client#update_project_billing_info.
+# It may require modification in order to execute successfully.
 #
 def update_project_billing_info
   # Create a client object. The client can be reused for multiple calls.

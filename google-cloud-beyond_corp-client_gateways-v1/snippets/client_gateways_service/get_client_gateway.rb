@@ -20,8 +20,11 @@
 require "google/cloud/beyond_corp/client_gateways/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client#get_client_gateway
+# Snippet for the get_client_gateway call in the ClientGatewaysService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client#get_client_gateway.
+# It may require modification in order to execute successfully.
 #
 def get_client_gateway
   # Create a client object. The client can be reused for multiple calls.

@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "beyondcorp_v1_generated_AppConnectorsService_ListAppConnectors_sync",
-      "title": "Snippet for list_app_connectors in AppConnectorsService",
-      "description": "Basic snippet for list_app_connectors in AppConnectorsService",
+      "title": "Snippet for the list_app_connectors call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#list_app_connectors. It may require modification in order to execute successfully.",
       "file": "app_connectors_service/list_app_connectors.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "beyondcorp_v1_generated_AppConnectorsService_GetAppConnector_sync",
-      "title": "Snippet for get_app_connector in AppConnectorsService",
-      "description": "Basic snippet for get_app_connector in AppConnectorsService",
+      "title": "Snippet for the get_app_connector call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#get_app_connector. It may require modification in order to execute successfully.",
       "file": "app_connectors_service/get_app_connector.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "beyondcorp_v1_generated_AppConnectorsService_CreateAppConnector_sync",
-      "title": "Snippet for create_app_connector in AppConnectorsService",
-      "description": "Basic snippet for create_app_connector in AppConnectorsService",
+      "title": "Snippet for the create_app_connector call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#create_app_connector. It may require modification in order to execute successfully.",
       "file": "app_connectors_service/create_app_connector.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "beyondcorp_v1_generated_AppConnectorsService_UpdateAppConnector_sync",
-      "title": "Snippet for update_app_connector in AppConnectorsService",
-      "description": "Basic snippet for update_app_connector in AppConnectorsService",
+      "title": "Snippet for the update_app_connector call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#update_app_connector. It may require modification in order to execute successfully.",
       "file": "app_connectors_service/update_app_connector.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "beyondcorp_v1_generated_AppConnectorsService_DeleteAppConnector_sync",
-      "title": "Snippet for delete_app_connector in AppConnectorsService",
-      "description": "Basic snippet for delete_app_connector in AppConnectorsService",
+      "title": "Snippet for the delete_app_connector call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#delete_app_connector. It may require modification in order to execute successfully.",
       "file": "app_connectors_service/delete_app_connector.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "beyondcorp_v1_generated_AppConnectorsService_ReportStatus_sync",
-      "title": "Snippet for report_status in AppConnectorsService",
-      "description": "Basic snippet for report_status in AppConnectorsService",
+      "title": "Snippet for the report_status call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#report_status. It may require modification in order to execute successfully.",
       "file": "app_connectors_service/report_status.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

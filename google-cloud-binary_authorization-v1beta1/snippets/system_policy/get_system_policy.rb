@@ -20,8 +20,11 @@
 require "google/cloud/binary_authorization/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Client#get_system_policy
+# Snippet for the get_system_policy call in the SystemPolicy service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Client#get_system_policy.
+# It may require modification in order to execute successfully.
 #
 def get_system_policy
   # Create a client object. The client can be reused for multiple calls.

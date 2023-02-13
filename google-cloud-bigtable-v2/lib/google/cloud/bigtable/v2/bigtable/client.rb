@@ -221,13 +221,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::ReadRowsRequest.new
             #
-            #   # Call the read_rows method.
-            #   result = client.read_rows request
+            #   # Call the read_rows method to start streaming.
+            #   output = client.read_rows request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Bigtable::V2::ReadRowsResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::ReadRowsResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def read_rows request, options = nil
@@ -321,13 +321,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new
             #
-            #   # Call the sample_row_keys method.
-            #   result = client.sample_row_keys request
+            #   # Call the sample_row_keys method to start streaming.
+            #   output = client.sample_row_keys request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def sample_row_keys request, options = nil
@@ -526,13 +526,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::MutateRowsRequest.new
             #
-            #   # Call the mutate_rows method.
-            #   result = client.mutate_rows request
+            #   # Call the mutate_rows method to start streaming.
+            #   output = client.mutate_rows request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Bigtable::V2::MutateRowsResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::MutateRowsResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def mutate_rows request, options = nil
@@ -942,13 +942,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest.new
             #
-            #   # Call the generate_initial_change_stream_partitions method.
-            #   result = client.generate_initial_change_stream_partitions request
+            #   # Call the generate_initial_change_stream_partitions method to start streaming.
+            #   output = client.generate_initial_change_stream_partitions request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def generate_initial_change_stream_partitions request, options = nil
@@ -1065,13 +1065,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::ReadChangeStreamRequest.new
             #
-            #   # Call the read_change_stream method.
-            #   result = client.read_change_stream request
+            #   # Call the read_change_stream method to start streaming.
+            #   output = client.read_change_stream request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def read_change_stream request, options = nil

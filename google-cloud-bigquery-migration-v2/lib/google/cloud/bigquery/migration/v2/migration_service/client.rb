@@ -393,13 +393,11 @@ module Google
               #   # Call the list_migration_workflows method.
               #   result = client.list_migration_workflows request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Migration::V2::MigrationWorkflow.
-              #     p response
+              #     p item
               #   end
               #
               def list_migration_workflows request, options = nil
@@ -764,13 +762,11 @@ module Google
               #   # Call the list_migration_subtasks method.
               #   result = client.list_migration_subtasks request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Migration::V2::MigrationSubtask.
-              #     p response
+              #     p item
               #   end
               #
               def list_migration_subtasks request, options = nil

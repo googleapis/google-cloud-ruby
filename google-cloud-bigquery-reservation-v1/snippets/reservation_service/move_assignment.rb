@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/reservation/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#move_assignment
+# Snippet for the move_assignment call in the ReservationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#move_assignment.
+# It may require modification in order to execute successfully.
 #
 def move_assignment
   # Create a client object. The client can be reused for multiple calls.

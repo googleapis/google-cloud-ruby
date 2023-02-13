@@ -20,8 +20,11 @@
 require "google/cloud/beyond_corp/client_connector_services/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorServicesService::Client#update_client_connector_service
+# Snippet for the update_client_connector_service call in the ClientConnectorServicesService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorServicesService::Client#update_client_connector_service.
+# It may require modification in order to execute successfully.
 #
 def update_client_connector_service
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def update_client_connector_service
   # Call the update_client_connector_service method.
   result = client.update_client_connector_service request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END beyondcorp_v1_generated_ClientConnectorServicesService_UpdateClientConnectorService_sync]
