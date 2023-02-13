@@ -20,8 +20,11 @@
 require "google/cloud/contact_center_insights/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#calculate_issue_model_stats
+# Snippet for the calculate_issue_model_stats call in the ContactCenterInsights service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#calculate_issue_model_stats.
+# It may require modification in order to execute successfully.
 #
 def calculate_issue_model_stats
   # Create a client object. The client can be reused for multiple calls.

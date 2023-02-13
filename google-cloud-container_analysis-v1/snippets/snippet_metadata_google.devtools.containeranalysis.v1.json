@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "containeranalysis_v1_generated_ContainerAnalysis_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in ContainerAnalysis",
-      "description": "Basic snippet for set_iam_policy in ContainerAnalysis",
+      "title": "Snippet for the set_iam_policy call in the ContainerAnalysis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "container_analysis/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "containeranalysis_v1_generated_ContainerAnalysis_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in ContainerAnalysis",
-      "description": "Basic snippet for get_iam_policy in ContainerAnalysis",
+      "title": "Snippet for the get_iam_policy call in the ContainerAnalysis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "container_analysis/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "containeranalysis_v1_generated_ContainerAnalysis_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in ContainerAnalysis",
-      "description": "Basic snippet for test_iam_permissions in ContainerAnalysis",
+      "title": "Snippet for the test_iam_permissions call in the ContainerAnalysis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "container_analysis/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "containeranalysis_v1_generated_ContainerAnalysis_GetVulnerabilityOccurrencesSummary_sync",
-      "title": "Snippet for get_vulnerability_occurrences_summary in ContainerAnalysis",
-      "description": "Basic snippet for get_vulnerability_occurrences_summary in ContainerAnalysis",
+      "title": "Snippet for the get_vulnerability_occurrences_summary call in the ContainerAnalysis service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#get_vulnerability_occurrences_summary. It may require modification in order to execute successfully.",
       "file": "container_analysis/get_vulnerability_occurrences_summary.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

@@ -20,8 +20,11 @@
 require "google/cloud/data_catalog/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_overview
+# Snippet for the modify_entry_overview call in the DataCatalog service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_overview. It
+# may require modification in order to execute successfully.
 #
 def modify_entry_overview
   # Create a client object. The client can be reused for multiple calls.

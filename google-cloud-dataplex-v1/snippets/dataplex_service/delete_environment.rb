@@ -20,8 +20,11 @@
 require "google/cloud/dataplex/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::DataplexService::Client#delete_environment
+# Snippet for the delete_environment call in the DataplexService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::DataplexService::Client#delete_environment. It
+# may require modification in order to execute successfully.
 #
 def delete_environment
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def delete_environment
   # Call the delete_environment method.
   result = client.delete_environment request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END dataplex_v1_generated_DataplexService_DeleteEnvironment_sync]

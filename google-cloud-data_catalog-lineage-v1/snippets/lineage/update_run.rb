@@ -20,8 +20,11 @@
 require "google/cloud/data_catalog/lineage/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#update_run
+# Snippet for the update_run call in the Lineage service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#update_run. It may
+# require modification in order to execute successfully.
 #
 def update_run
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/datastore/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Datastore::V1::Datastore::Client#run_query
+# Snippet for the run_query call in the Datastore service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Datastore::V1::Datastore::Client#run_query. It may require
+# modification in order to execute successfully.
 #
 def run_query
   # Create a client object. The client can be reused for multiple calls.

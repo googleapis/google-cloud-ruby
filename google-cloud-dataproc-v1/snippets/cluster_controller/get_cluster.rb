@@ -20,8 +20,11 @@
 require "google/cloud/dataproc/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataproc::V1::ClusterController::Client#get_cluster
+# Snippet for the get_cluster call in the ClusterController service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataproc::V1::ClusterController::Client#get_cluster. It may
+# require modification in order to execute successfully.
 #
 def get_cluster
   # Create a client object. The client can be reused for multiple calls.
