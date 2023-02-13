@@ -38,7 +38,7 @@ HEADER = [
   "ElapsedTimeUs",
   "CpuTimeUs",
   "Status",
-  "RunID",
+  "RunID"
 ]
 
 desc "Run performance benchmark"
@@ -82,13 +82,14 @@ end
 include :exec
 include :terminal, styled: true
 include :fileutils
+include :bundler
 
 def run
-  require "json"
   require "set"
   require "google/cloud/storage"
-  require "concurrent"
   require "securerandom"
+  require "csv"
+  
 
   # Create a storage bucket to run benchmarking
   storage = Google::Cloud::Storage.new
@@ -101,7 +102,11 @@ def run
     w1r3_benchmark_runner
   end
 
-  puts "results: #{@results.inspect}"
+  # Output to CSV file
+  output_to_csv
+  puts "Succesfully ran benchmarking. Please find your output log at #{output}", :bold, :cyan
+
+  cleanup_resources
 end
 
 def w1r3_benchmark_runner
@@ -140,9 +145,9 @@ def write object_name, size, checksum
   # Clean up local file
   cleanup_file file_path
 
-  { elapsed_time: elapsed_time, status: SUCCESS_STATUS }
+  elapsed_time
 rescue Exception => e
-  { elapsed_time: NOT_SUPPORTED, status: FAILURE_STATUS }
+  NOT_SUPPORTED
 end
 
 def read object_name, checksum
@@ -166,9 +171,36 @@ def read object_name, checksum
   # Clean up local file
   cleanup_file file_path
 
-  { elapsed_time: elapsed_time, status: SUCCESS_STATUS }
+  elapsed_time
 rescue Exception => e
-  { elapsed_time: NOT_SUPPORTED, status: FAILURE_STATUS }
+  NOT_SUPPORTED
+end
+
+def log_performance operation, size, checksum, elapsed_time
+  puts "Log latency and throughput output per operation call.", :bold, :blue
+  # Holds benchmarking results for each operation
+  res = [
+    operation, #Op
+    size, #ObjectSize
+    NOT_SUPPORTED, #AppBufferSize
+    DEFAULT_LIB_BUFFER_SIZE, #LibBufferSize
+    checksum.eql?("crc32c"), #Crc32cEnabled
+    checksum.eql?("md5"), #MD5Enabled
+    DEFAULT_API, #ApiName
+    elapsed_time, #ElapsedTimeUs
+    NOT_SUPPORTED, #CpuTimeUs
+    elapsed_time.eql?(NOT_SUPPORTED) ? FAILURE_STATUS : SUCCESS_STATUS, #Status
+    TIMESTAMP #RunID
+  ]
+end
+
+def output_to_csv
+  CSV.open(output, "w") do |csv|
+    csv << HEADER
+    @results.each do |res|
+      csv << res
+    end
+  end
 end
 
 def cleanup_file file_path
@@ -176,22 +208,14 @@ def cleanup_file file_path
   File.delete file_path
 end
 
-def log_performance operation, size, checksum, **kwargs
-  puts "Log latency and throughput output per operation call.", :bold, :cyan
-  # Holds benchmarking results for each operation
-  res = {
-    "ApiName": DEFAULT_API,
-    "RunID": TIMESTAMP,
-    "CpuTimeUs": NOT_SUPPORTED,
-    "AppBufferSize": NOT_SUPPORTED,
-    "LibBufferSize": DEFAULT_LIB_BUFFER_SIZE,
-    "Status": kwargs[:status],
-    "ElapsedTimeUs": kwargs[:elapsed_time],
-    "ObjectSize": size,
-    "Crc32cEnabled": checksum.eql?("crc32c"),
-    "MD5Enabled": checksum.eql?("md5"),
-    "Op": operation
-  }
+def cleanup_resources
+  # Cleanup and delete bucket
+  puts "Cleaning up resources", :bold, :blue
+  files = @bucket.files rescue []
+  files.each { |f| f.delete }
+  @bucket.delete
+rescue Exception => e
+  puts "Caught an exception while deleting bucket: #{e}", :bold, :red
 end
 
 def get_time_in_ms
