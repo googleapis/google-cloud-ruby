@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.1 (2023-02-13)
+
+#### Documentation
+
+* Deprecated the revision_id parameter to commit_schema_revision and delete_schema_revision ([#20139](https://github.com/googleapis/google-cloud-ruby/issues/20139)) 
+
 ### 0.13.0 (2023-01-12)
 
 #### Features
