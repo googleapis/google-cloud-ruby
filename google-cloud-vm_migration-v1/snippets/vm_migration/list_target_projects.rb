@@ -20,8 +20,11 @@
 require "google/cloud/vm_migration/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::VMMigration::V1::VMMigration::Client#list_target_projects
+# Snippet for the list_target_projects call in the VMMigration service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::VMMigration::V1::VMMigration::Client#list_target_projects. It
+# may require modification in order to execute successfully.
 #
 def list_target_projects
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_target_projects
   # Call the list_target_projects method.
   result = client.list_target_projects request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::VMMigration::V1::TargetProject.
-    p response
+    p item
   end
 end
 # [END vmmigration_v1_generated_VMMigration_ListTargetProjects_sync]

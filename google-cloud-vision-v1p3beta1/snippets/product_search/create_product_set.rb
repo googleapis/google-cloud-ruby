@@ -20,8 +20,11 @@
 require "google/cloud/vision/v1p3beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Vision::V1p3beta1::ProductSearch::Client#create_product_set
+# Snippet for the create_product_set call in the ProductSearch service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Vision::V1p3beta1::ProductSearch::Client#create_product_set. It
+# may require modification in order to execute successfully.
 #
 def create_product_set
   # Create a client object. The client can be reused for multiple calls.

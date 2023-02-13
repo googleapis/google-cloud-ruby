@@ -20,8 +20,11 @@
 require "google/cloud/vm_migration/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_inventory
+# Snippet for the fetch_inventory call in the VMMigration service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_inventory. It may
+# require modification in order to execute successfully.
 #
 def fetch_inventory
   # Create a client object. The client can be reused for multiple calls.

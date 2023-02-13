@@ -20,8 +20,11 @@
 require "google/cloud/vmware_engine/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_vmware_engine_network
+# Snippet for the get_vmware_engine_network call in the VmwareEngine service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_vmware_engine_network.
+# It may require modification in order to execute successfully.
 #
 def get_vmware_engine_network
   # Create a client object. The client can be reused for multiple calls.

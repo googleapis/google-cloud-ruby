@@ -20,8 +20,11 @@
 require "google/cloud/vmware_engine/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_subnets
+# Snippet for the list_subnets call in the VmwareEngine service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_subnets. It may
+# require modification in order to execute successfully.
 #
 def list_subnets
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_subnets
   # Call the list_subnets method.
   result = client.list_subnets request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::VmwareEngine::V1::Subnet.
-    p response
+    p item
   end
 end
 # [END vmwareengine_v1_generated_VmwareEngine_ListSubnets_sync]

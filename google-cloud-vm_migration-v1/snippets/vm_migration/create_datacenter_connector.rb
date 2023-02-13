@@ -20,8 +20,11 @@
 require "google/cloud/vm_migration/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::VMMigration::V1::VMMigration::Client#create_datacenter_connector
+# Snippet for the create_datacenter_connector call in the VMMigration service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::VMMigration::V1::VMMigration::Client#create_datacenter_connector.
+# It may require modification in order to execute successfully.
 #
 def create_datacenter_connector
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_datacenter_connector
   # Call the create_datacenter_connector method.
   result = client.create_datacenter_connector request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END vmmigration_v1_generated_VMMigration_CreateDatacenterConnector_sync]

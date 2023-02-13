@@ -275,14 +275,14 @@ module Google
               #   # Call the create_channel method.
               #   result = client.create_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def create_channel request, options = nil
@@ -382,13 +382,11 @@ module Google
               #   # Call the list_channels method.
               #   result = client.list_channels request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Channel.
-              #     p response
+              #     p item
               #   end
               #
               def list_channels request, options = nil
@@ -580,14 +578,14 @@ module Google
               #   # Call the delete_channel method.
               #   result = client.delete_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def delete_channel request, options = nil
@@ -700,14 +698,14 @@ module Google
               #   # Call the update_channel method.
               #   result = client.update_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def update_channel request, options = nil
@@ -809,14 +807,14 @@ module Google
               #   # Call the start_channel method.
               #   result = client.start_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def start_channel request, options = nil
@@ -918,14 +916,14 @@ module Google
               #   # Call the stop_channel method.
               #   result = client.stop_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def stop_channel request, options = nil
@@ -1032,14 +1030,14 @@ module Google
               #   # Call the create_input method.
               #   result = client.create_input request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def create_input request, options = nil
@@ -1139,13 +1137,11 @@ module Google
               #   # Call the list_inputs method.
               #   result = client.list_inputs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Input.
-              #     p response
+              #     p item
               #   end
               #
               def list_inputs request, options = nil
@@ -1332,14 +1328,14 @@ module Google
               #   # Call the delete_input method.
               #   result = client.delete_input request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def delete_input request, options = nil
@@ -1448,14 +1444,14 @@ module Google
               #   # Call the update_input method.
               #   result = client.update_input request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def update_input request, options = nil
@@ -1661,13 +1657,11 @@ module Google
               #   # Call the list_events method.
               #   result = client.list_events request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Event.
-              #     p response
+              #     p item
               #   end
               #
               def list_events request, options = nil
