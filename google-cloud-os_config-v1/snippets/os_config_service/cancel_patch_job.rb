@@ -20,8 +20,11 @@
 require "google/cloud/os_config/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::OsConfig::V1::OsConfigService::Client#cancel_patch_job
+# Snippet for the cancel_patch_job call in the OsConfigService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::OsConfig::V1::OsConfigService::Client#cancel_patch_job. It may
+# require modification in order to execute successfully.
 #
 def cancel_patch_job
   # Create a client object. The client can be reused for multiple calls.

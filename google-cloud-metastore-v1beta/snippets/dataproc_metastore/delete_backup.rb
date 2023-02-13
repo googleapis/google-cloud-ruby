@@ -20,8 +20,11 @@
 require "google/cloud/metastore/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#delete_backup
+# Snippet for the delete_backup call in the DataprocMetastore service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#delete_backup. It
+# may require modification in order to execute successfully.
 #
 def delete_backup
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def delete_backup
   # Call the delete_backup method.
   result = client.delete_backup request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END metastore_v1beta_generated_DataprocMetastore_DeleteBackup_sync]

@@ -20,8 +20,11 @@
 require "google/cloud/notebooks/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Notebooks::V1::NotebookService::Client#update_instance_metadata_items
+# Snippet for the update_instance_metadata_items call in the NotebookService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1::NotebookService::Client#update_instance_metadata_items.
+# It may require modification in order to execute successfully.
 #
 def update_instance_metadata_items
   # Create a client object. The client can be reused for multiple calls.

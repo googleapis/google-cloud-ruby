@@ -226,14 +226,14 @@ module Google
             #   # Call the create_os_policy_assignment method.
             #   result = client.create_os_policy_assignment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_os_policy_assignment request, options = nil
@@ -330,14 +330,14 @@ module Google
             #   # Call the update_os_policy_assignment method.
             #   result = client.update_os_policy_assignment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_os_policy_assignment request, options = nil
@@ -523,13 +523,11 @@ module Google
             #   # Call the list_os_policy_assignments method.
             #   result = client.list_os_policy_assignments request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OsConfig::V1::OSPolicyAssignment.
-            #     p response
+            #     p item
             #   end
             #
             def list_os_policy_assignments request, options = nil
@@ -621,13 +619,11 @@ module Google
             #   # Call the list_os_policy_assignment_revisions method.
             #   result = client.list_os_policy_assignment_revisions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OsConfig::V1::OSPolicyAssignment.
-            #     p response
+            #     p item
             #   end
             #
             def list_os_policy_assignment_revisions request, options = nil
@@ -724,14 +720,14 @@ module Google
             #   # Call the delete_os_policy_assignment method.
             #   result = client.delete_os_policy_assignment request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_os_policy_assignment request, options = nil
@@ -941,13 +937,11 @@ module Google
             #   # Call the list_os_policy_assignment_reports method.
             #   result = client.list_os_policy_assignment_reports request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OsConfig::V1::OSPolicyAssignmentReport.
-            #     p response
+            #     p item
             #   end
             #
             def list_os_policy_assignment_reports request, options = nil
@@ -1145,13 +1139,11 @@ module Google
             #   # Call the list_inventories method.
             #   result = client.list_inventories request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OsConfig::V1::Inventory.
-            #     p response
+            #     p item
             #   end
             #
             def list_inventories request, options = nil
@@ -1343,13 +1335,11 @@ module Google
             #   # Call the list_vulnerability_reports method.
             #   result = client.list_vulnerability_reports request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::OsConfig::V1::VulnerabilityReport.
-            #     p response
+            #     p item
             #   end
             #
             def list_vulnerability_reports request, options = nil

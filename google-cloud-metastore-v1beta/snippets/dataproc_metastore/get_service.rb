@@ -20,8 +20,11 @@
 require "google/cloud/metastore/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#get_service
+# Snippet for the get_service call in the DataprocMetastore service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#get_service. It
+# may require modification in order to execute successfully.
 #
 def get_service
   # Create a client object. The client can be reused for multiple calls.

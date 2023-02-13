@@ -20,8 +20,11 @@
 require "google/cloud/os_login/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::OsLogin::V1beta::OsLoginService::Client#get_login_profile
+# Snippet for the get_login_profile call in the OsLoginService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::OsLogin::V1beta::OsLoginService::Client#get_login_profile. It
+# may require modification in order to execute successfully.
 #
 def get_login_profile
   # Create a client object. The client can be reused for multiple calls.

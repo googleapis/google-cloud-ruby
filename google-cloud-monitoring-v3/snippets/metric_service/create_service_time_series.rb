@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::V3::MetricService::Client#create_service_time_series
+# Snippet for the create_service_time_series call in the MetricService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::MetricService::Client#create_service_time_series.
+# It may require modification in order to execute successfully.
 #
 def create_service_time_series
   # Create a client object. The client can be reused for multiple calls.

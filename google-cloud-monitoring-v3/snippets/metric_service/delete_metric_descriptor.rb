@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::V3::MetricService::Client#delete_metric_descriptor
+# Snippet for the delete_metric_descriptor call in the MetricService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::MetricService::Client#delete_metric_descriptor.
+# It may require modification in order to execute successfully.
 #
 def delete_metric_descriptor
   # Create a client object. The client can be reused for multiple calls.
