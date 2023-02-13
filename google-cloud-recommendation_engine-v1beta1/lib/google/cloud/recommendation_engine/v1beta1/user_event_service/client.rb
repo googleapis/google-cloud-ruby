@@ -451,13 +451,11 @@ module Google
             #   # Call the list_user_events method.
             #   result = client.list_user_events request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecommendationEngine::V1beta1::UserEvent.
-            #     p response
+            #     p item
             #   end
             #
             def list_user_events request, options = nil
@@ -571,14 +569,14 @@ module Google
             #   # Call the purge_user_events method.
             #   result = client.purge_user_events request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def purge_user_events request, options = nil
@@ -682,14 +680,14 @@ module Google
             #   # Call the import_user_events method.
             #   result = client.import_user_events request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def import_user_events request, options = nil

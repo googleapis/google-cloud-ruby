@@ -20,8 +20,11 @@
 require "google/cloud/pubsub/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::PubSub::V1::Publisher::Client#detach_subscription
+# Snippet for the detach_subscription call in the Publisher service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Publisher::Client#detach_subscription. It may
+# require modification in order to execute successfully.
 #
 def detach_subscription
   # Create a client object. The client can be reused for multiple calls.

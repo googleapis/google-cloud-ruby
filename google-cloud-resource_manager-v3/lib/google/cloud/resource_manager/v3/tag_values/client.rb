@@ -229,13 +229,11 @@ module Google
             #   # Call the list_tag_values method.
             #   result = client.list_tag_values request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ResourceManager::V3::TagValue.
-            #     p response
+            #     p item
             #   end
             #
             def list_tag_values request, options = nil
@@ -407,14 +405,14 @@ module Google
             #   # Call the create_tag_value method.
             #   result = client.create_tag_value request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_tag_value request, options = nil
@@ -500,14 +498,14 @@ module Google
             #   # Call the update_tag_value method.
             #   result = client.update_tag_value request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_tag_value request, options = nil
@@ -600,14 +598,14 @@ module Google
             #   # Call the delete_tag_value method.
             #   result = client.delete_tag_value request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_tag_value request, options = nil

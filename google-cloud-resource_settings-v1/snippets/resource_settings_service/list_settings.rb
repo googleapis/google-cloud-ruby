@@ -20,8 +20,11 @@
 require "google/cloud/resource_settings/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client#list_settings
+# Snippet for the list_settings call in the ResourceSettingsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client#list_settings.
+# It may require modification in order to execute successfully.
 #
 def list_settings
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_settings
   # Call the list_settings method.
   result = client.list_settings request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::ResourceSettings::V1::Setting.
-    p response
+    p item
   end
 end
 # [END resourcesettings_v1_generated_ResourceSettingsService_ListSettings_sync]

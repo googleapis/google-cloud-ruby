@@ -20,8 +20,11 @@
 require "google/cloud/retail/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Retail::V2::ProductService::Client#import_products
+# Snippet for the import_products call in the ProductService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ProductService::Client#import_products. It may
+# require modification in order to execute successfully.
 #
 def import_products
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def import_products
   # Call the import_products method.
   result = client.import_products request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END retail_v2_generated_ProductService_ImportProducts_sync]

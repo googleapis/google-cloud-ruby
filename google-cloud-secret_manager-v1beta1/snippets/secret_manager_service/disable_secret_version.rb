@@ -20,8 +20,11 @@
 require "google/cloud/secret_manager/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client#disable_secret_version
+# Snippet for the disable_secret_version call in the SecretManagerService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client#disable_secret_version.
+# It may require modification in order to execute successfully.
 #
 def disable_secret_version
   # Create a client object. The client can be reused for multiple calls.

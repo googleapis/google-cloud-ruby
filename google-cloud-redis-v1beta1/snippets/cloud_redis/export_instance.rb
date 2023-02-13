@@ -20,8 +20,11 @@
 require "google/cloud/redis/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Redis::V1beta1::CloudRedis::Client#export_instance
+# Snippet for the export_instance call in the CloudRedis service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Redis::V1beta1::CloudRedis::Client#export_instance. It may
+# require modification in order to execute successfully.
 #
 def export_instance
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def export_instance
   # Call the export_instance method.
   result = client.export_instance request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END redis_v1beta1_generated_CloudRedis_ExportInstance_sync]

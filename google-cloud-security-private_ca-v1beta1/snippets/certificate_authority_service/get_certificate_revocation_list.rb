@@ -20,8 +20,11 @@
 require "google/cloud/security/private_ca/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#get_certificate_revocation_list
+# Snippet for the get_certificate_revocation_list call in the CertificateAuthorityService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#get_certificate_revocation_list.
+# It may require modification in order to execute successfully.
 #
 def get_certificate_revocation_list
   # Create a client object. The client can be reused for multiple calls.

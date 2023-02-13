@@ -20,8 +20,11 @@
 require "google/cloud/pubsub/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::PubSub::V1::SchemaService::Client#list_schema_revisions
+# Snippet for the list_schema_revisions call in the SchemaService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::SchemaService::Client#list_schema_revisions. It may
+# require modification in order to execute successfully.
 #
 def list_schema_revisions
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_schema_revisions
   # Call the list_schema_revisions method.
   result = client.list_schema_revisions request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::PubSub::V1::Schema.
-    p response
+    p item
   end
 end
 # [END pubsub_v1_generated_SchemaService_ListSchemaRevisions_sync]
