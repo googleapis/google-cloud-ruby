@@ -17,8 +17,7 @@
 CHECKSUM = ["md5", "crc32c", nil]
 DEFAULT_MIN_SIZE = 5120 #5 KiB
 DEFAULT_MAX_SIZE = 10 * 1024 # 2 GiB
-DEFAULT_NUM_SAMPLES = 1
-DEFAULT_NUM_PROCESSES = 16
+DEFAULT_NUM_SAMPLES = 1000
 DEFAULT_BUCKET_LOCATION = "US"
 DEFAULT_API = "JSON"
 DEFAULT_LIB_BUFFER_SIZE = 100 * 1024 * 1024 #TODO Add github link of upload_chunk_size
@@ -53,15 +52,10 @@ flag :max_size, "--max-size=PATH" do |f|
   f.accept Integer
   f.desc "Maximum object size in bytes."
 end
-flag :num_samples, "--num-samples=COMMIT" do |f|
+flag :num_samples, "--num_samples=COMMIT" do |f|
   f.default DEFAULT_NUM_SAMPLES
   f.accept Integer
   f.desc "Number of iterations."
-end
-flag :num_processes, "--p=COMMIT" do |f|
-  f.default DEFAULT_NUM_PROCESSES
-  f.accept Integer
-  f.desc "Number of processes - multiprocessing enabled."
 end
 flag :bucket_location, "--r=NAMES" do |f|
   f.accept Array
@@ -79,21 +73,18 @@ flag :bucket_name, "--b=NAME" do |f|
   f.desc "Storage bucket name."
 end
 
-include :exec
 include :terminal, styled: true
-include :fileutils
 include :bundler
+include :fileutils
 
 def run
-  require "set"
   require "google/cloud/storage"
   require "securerandom"
   require "csv"
   
-
   # Create a storage bucket to run benchmarking
   storage = Google::Cloud::Storage.new
-  @bucket = storage.bucket(bucket_name) rescue s
+  @bucket = storage.bucket(bucket_name) rescue nil
   @bucket = storage.create_bucket(bucket_name, location: bucket_location) if @bucket.nil?
 
   @results = []
@@ -126,7 +117,7 @@ def w1r3_benchmark_runner
 end
 
 def write object_name, size, checksum
-  puts "Perform an upload and return latency.", :bold
+  puts "Perform an upload and return latency.", :bold, :blue
   object = @bucket.file object_name
   file_path = "#{Dir.getwd}/#{SecureRandom.uuid}"
 
@@ -144,14 +135,13 @@ def write object_name, size, checksum
 
   # Clean up local file
   cleanup_file file_path
-
   elapsed_time
 rescue Exception => e
   NOT_SUPPORTED
 end
 
 def read object_name, checksum
-  puts "Perform a download and return latency.", :bold
+  puts "Perform a download and return latency.", :bold, :blue
   object = @bucket.file object_name
   unless object.exists?
     puts "Object does not exist. Previous write failed.", :bold, :red
@@ -170,14 +160,13 @@ def read object_name, checksum
 
   # Clean up local file
   cleanup_file file_path
-
   elapsed_time
 rescue Exception => e
   NOT_SUPPORTED
 end
 
 def log_performance operation, size, checksum, elapsed_time
-  puts "Log latency and throughput output per operation call.", :bold, :blue
+  puts "Log latency and throughput output per operation call.", :bold
   # Holds benchmarking results for each operation
   res = [
     operation, #Op
