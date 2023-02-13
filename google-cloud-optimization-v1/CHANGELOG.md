@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2023-02-13)
+
+#### Documentation
+
+* Improve documentation for deprecated fields ([#20115](https://github.com/googleapis/google-cloud-ruby/issues/20115)) 
+
 ### 0.2.0 (2022-07-06)
 
 #### Features
