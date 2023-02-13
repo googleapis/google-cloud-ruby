@@ -90,27 +90,27 @@ class ::Google::Cloud::Compute::V1::RegionTargetHttpProxies::Rest::ClientTest < 
 
         # Use hash object
         client.delete({ project: project, region: region, request_id: request_id, target_http_proxy: target_http_proxy }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete project: project, region: region, request_id: request_id, target_http_proxy: target_http_proxy do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteRegionTargetHttpProxyRequest.new(project: project, region: region, request_id: request_id, target_http_proxy: target_http_proxy) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ project: project, region: region, request_id: request_id, target_http_proxy: target_http_proxy }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteRegionTargetHttpProxyRequest.new(project: project, region: region, request_id: request_id, target_http_proxy: target_http_proxy), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -146,27 +146,27 @@ class ::Google::Cloud::Compute::V1::RegionTargetHttpProxies::Rest::ClientTest < 
 
         # Use hash object
         client.get({ project: project, region: region, target_http_proxy: target_http_proxy }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get project: project, region: region, target_http_proxy: target_http_proxy do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetRegionTargetHttpProxyRequest.new(project: project, region: region, target_http_proxy: target_http_proxy) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ project: project, region: region, target_http_proxy: target_http_proxy }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetRegionTargetHttpProxyRequest.new(project: project, region: region, target_http_proxy: target_http_proxy), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -203,27 +203,27 @@ class ::Google::Cloud::Compute::V1::RegionTargetHttpProxies::Rest::ClientTest < 
 
         # Use hash object
         client.insert({ project: project, region: region, request_id: request_id, target_http_proxy_resource: target_http_proxy_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert project: project, region: region, request_id: request_id, target_http_proxy_resource: target_http_proxy_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertRegionTargetHttpProxyRequest.new(project: project, region: region, request_id: request_id, target_http_proxy_resource: target_http_proxy_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ project: project, region: region, request_id: request_id, target_http_proxy_resource: target_http_proxy_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertRegionTargetHttpProxyRequest.new(project: project, region: region, request_id: request_id, target_http_proxy_resource: target_http_proxy_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -263,27 +263,27 @@ class ::Google::Cloud::Compute::V1::RegionTargetHttpProxies::Rest::ClientTest < 
 
         # Use hash object
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list ::Google::Cloud::Compute::V1::ListRegionTargetHttpProxiesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list(::Google::Cloud::Compute::V1::ListRegionTargetHttpProxiesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -321,27 +321,27 @@ class ::Google::Cloud::Compute::V1::RegionTargetHttpProxies::Rest::ClientTest < 
 
         # Use hash object
         client.set_url_map({ project: project, region: region, request_id: request_id, target_http_proxy: target_http_proxy, url_map_reference_resource: url_map_reference_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_url_map project: project, region: region, request_id: request_id, target_http_proxy: target_http_proxy, url_map_reference_resource: url_map_reference_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_url_map ::Google::Cloud::Compute::V1::SetUrlMapRegionTargetHttpProxyRequest.new(project: project, region: region, request_id: request_id, target_http_proxy: target_http_proxy, url_map_reference_resource: url_map_reference_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_url_map({ project: project, region: region, request_id: request_id, target_http_proxy: target_http_proxy, url_map_reference_resource: url_map_reference_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_url_map(::Google::Cloud::Compute::V1::SetUrlMapRegionTargetHttpProxyRequest.new(project: project, region: region, request_id: request_id, target_http_proxy: target_http_proxy, url_map_reference_resource: url_map_reference_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

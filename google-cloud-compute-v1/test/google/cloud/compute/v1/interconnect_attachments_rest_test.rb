@@ -93,27 +93,27 @@ class ::Google::Cloud::Compute::V1::InterconnectAttachments::Rest::ClientTest < 
 
         # Use hash object
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListInterconnectAttachmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListInterconnectAttachmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -150,27 +150,27 @@ class ::Google::Cloud::Compute::V1::InterconnectAttachments::Rest::ClientTest < 
 
         # Use hash object
         client.delete({ interconnect_attachment: interconnect_attachment, project: project, region: region, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete interconnect_attachment: interconnect_attachment, project: project, region: region, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteInterconnectAttachmentRequest.new(interconnect_attachment: interconnect_attachment, project: project, region: region, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ interconnect_attachment: interconnect_attachment, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteInterconnectAttachmentRequest.new(interconnect_attachment: interconnect_attachment, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -206,27 +206,27 @@ class ::Google::Cloud::Compute::V1::InterconnectAttachments::Rest::ClientTest < 
 
         # Use hash object
         client.get({ interconnect_attachment: interconnect_attachment, project: project, region: region }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get interconnect_attachment: interconnect_attachment, project: project, region: region do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetInterconnectAttachmentRequest.new(interconnect_attachment: interconnect_attachment, project: project, region: region) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ interconnect_attachment: interconnect_attachment, project: project, region: region }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetInterconnectAttachmentRequest.new(interconnect_attachment: interconnect_attachment, project: project, region: region), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -264,27 +264,27 @@ class ::Google::Cloud::Compute::V1::InterconnectAttachments::Rest::ClientTest < 
 
         # Use hash object
         client.insert({ interconnect_attachment_resource: interconnect_attachment_resource, project: project, region: region, request_id: request_id, validate_only: validate_only }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert interconnect_attachment_resource: interconnect_attachment_resource, project: project, region: region, request_id: request_id, validate_only: validate_only do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertInterconnectAttachmentRequest.new(interconnect_attachment_resource: interconnect_attachment_resource, project: project, region: region, request_id: request_id, validate_only: validate_only) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ interconnect_attachment_resource: interconnect_attachment_resource, project: project, region: region, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertInterconnectAttachmentRequest.new(interconnect_attachment_resource: interconnect_attachment_resource, project: project, region: region, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -324,27 +324,27 @@ class ::Google::Cloud::Compute::V1::InterconnectAttachments::Rest::ClientTest < 
 
         # Use hash object
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list ::Google::Cloud::Compute::V1::ListInterconnectAttachmentsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list(::Google::Cloud::Compute::V1::ListInterconnectAttachmentsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -382,27 +382,27 @@ class ::Google::Cloud::Compute::V1::InterconnectAttachments::Rest::ClientTest < 
 
         # Use hash object
         client.patch({ interconnect_attachment: interconnect_attachment, interconnect_attachment_resource: interconnect_attachment_resource, project: project, region: region, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.patch interconnect_attachment: interconnect_attachment, interconnect_attachment_resource: interconnect_attachment_resource, project: project, region: region, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.patch ::Google::Cloud::Compute::V1::PatchInterconnectAttachmentRequest.new(interconnect_attachment: interconnect_attachment, interconnect_attachment_resource: interconnect_attachment_resource, project: project, region: region, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.patch({ interconnect_attachment: interconnect_attachment, interconnect_attachment_resource: interconnect_attachment_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.patch(::Google::Cloud::Compute::V1::PatchInterconnectAttachmentRequest.new(interconnect_attachment: interconnect_attachment, interconnect_attachment_resource: interconnect_attachment_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -440,27 +440,27 @@ class ::Google::Cloud::Compute::V1::InterconnectAttachments::Rest::ClientTest < 
 
         # Use hash object
         client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_labels project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_labels ::Google::Cloud::Compute::V1::SetLabelsInterconnectAttachmentRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_labels(::Google::Cloud::Compute::V1::SetLabelsInterconnectAttachmentRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

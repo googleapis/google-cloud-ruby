@@ -90,27 +90,27 @@ class ::Google::Cloud::Compute::V1::BackendBuckets::Rest::ClientTest < Minitest:
 
         # Use hash object
         client.add_signed_url_key({ backend_bucket: backend_bucket, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.add_signed_url_key backend_bucket: backend_bucket, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.add_signed_url_key ::Google::Cloud::Compute::V1::AddSignedUrlKeyBackendBucketRequest.new(backend_bucket: backend_bucket, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.add_signed_url_key({ backend_bucket: backend_bucket, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.add_signed_url_key(::Google::Cloud::Compute::V1::AddSignedUrlKeyBackendBucketRequest.new(backend_bucket: backend_bucket, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -146,27 +146,27 @@ class ::Google::Cloud::Compute::V1::BackendBuckets::Rest::ClientTest < Minitest:
 
         # Use hash object
         client.delete({ backend_bucket: backend_bucket, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete backend_bucket: backend_bucket, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteBackendBucketRequest.new(backend_bucket: backend_bucket, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ backend_bucket: backend_bucket, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteBackendBucketRequest.new(backend_bucket: backend_bucket, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -203,27 +203,27 @@ class ::Google::Cloud::Compute::V1::BackendBuckets::Rest::ClientTest < Minitest:
 
         # Use hash object
         client.delete_signed_url_key({ backend_bucket: backend_bucket, key_name: key_name, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete_signed_url_key backend_bucket: backend_bucket, key_name: key_name, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete_signed_url_key ::Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendBucketRequest.new(backend_bucket: backend_bucket, key_name: key_name, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete_signed_url_key({ backend_bucket: backend_bucket, key_name: key_name, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete_signed_url_key(::Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendBucketRequest.new(backend_bucket: backend_bucket, key_name: key_name, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -258,27 +258,27 @@ class ::Google::Cloud::Compute::V1::BackendBuckets::Rest::ClientTest < Minitest:
 
         # Use hash object
         client.get({ backend_bucket: backend_bucket, project: project }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get backend_bucket: backend_bucket, project: project do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetBackendBucketRequest.new(backend_bucket: backend_bucket, project: project) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ backend_bucket: backend_bucket, project: project }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetBackendBucketRequest.new(backend_bucket: backend_bucket, project: project), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -314,27 +314,27 @@ class ::Google::Cloud::Compute::V1::BackendBuckets::Rest::ClientTest < Minitest:
 
         # Use hash object
         client.insert({ backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertBackendBucketRequest.new(backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertBackendBucketRequest.new(backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -373,27 +373,27 @@ class ::Google::Cloud::Compute::V1::BackendBuckets::Rest::ClientTest < Minitest:
 
         # Use hash object
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list ::Google::Cloud::Compute::V1::ListBackendBucketsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list(::Google::Cloud::Compute::V1::ListBackendBucketsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -430,27 +430,27 @@ class ::Google::Cloud::Compute::V1::BackendBuckets::Rest::ClientTest < Minitest:
 
         # Use hash object
         client.patch({ backend_bucket: backend_bucket, backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.patch backend_bucket: backend_bucket, backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.patch ::Google::Cloud::Compute::V1::PatchBackendBucketRequest.new(backend_bucket: backend_bucket, backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.patch({ backend_bucket: backend_bucket, backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.patch(::Google::Cloud::Compute::V1::PatchBackendBucketRequest.new(backend_bucket: backend_bucket, backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -487,27 +487,27 @@ class ::Google::Cloud::Compute::V1::BackendBuckets::Rest::ClientTest < Minitest:
 
         # Use hash object
         client.set_edge_security_policy({ backend_bucket: backend_bucket, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_edge_security_policy backend_bucket: backend_bucket, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_edge_security_policy ::Google::Cloud::Compute::V1::SetEdgeSecurityPolicyBackendBucketRequest.new(backend_bucket: backend_bucket, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_edge_security_policy({ backend_bucket: backend_bucket, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_edge_security_policy(::Google::Cloud::Compute::V1::SetEdgeSecurityPolicyBackendBucketRequest.new(backend_bucket: backend_bucket, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -544,27 +544,27 @@ class ::Google::Cloud::Compute::V1::BackendBuckets::Rest::ClientTest < Minitest:
 
         # Use hash object
         client.update({ backend_bucket: backend_bucket, backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.update backend_bucket: backend_bucket, backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.update ::Google::Cloud::Compute::V1::UpdateBackendBucketRequest.new(backend_bucket: backend_bucket, backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.update({ backend_bucket: backend_bucket, backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.update(::Google::Cloud::Compute::V1::UpdateBackendBucketRequest.new(backend_bucket: backend_bucket, backend_bucket_resource: backend_bucket_resource, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

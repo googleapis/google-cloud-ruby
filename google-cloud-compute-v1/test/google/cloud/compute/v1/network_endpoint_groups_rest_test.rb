@@ -93,27 +93,27 @@ class ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::ClientTest < Mi
 
         # Use hash object
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListNetworkEndpointGroupsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListNetworkEndpointGroupsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -151,27 +151,27 @@ class ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::ClientTest < Mi
 
         # Use hash object
         client.attach_network_endpoints({ network_endpoint_group: network_endpoint_group, network_endpoint_groups_attach_endpoints_request_resource: network_endpoint_groups_attach_endpoints_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.attach_network_endpoints network_endpoint_group: network_endpoint_group, network_endpoint_groups_attach_endpoints_request_resource: network_endpoint_groups_attach_endpoints_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.attach_network_endpoints ::Google::Cloud::Compute::V1::AttachNetworkEndpointsNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, network_endpoint_groups_attach_endpoints_request_resource: network_endpoint_groups_attach_endpoints_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.attach_network_endpoints({ network_endpoint_group: network_endpoint_group, network_endpoint_groups_attach_endpoints_request_resource: network_endpoint_groups_attach_endpoints_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.attach_network_endpoints(::Google::Cloud::Compute::V1::AttachNetworkEndpointsNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, network_endpoint_groups_attach_endpoints_request_resource: network_endpoint_groups_attach_endpoints_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -208,27 +208,27 @@ class ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::ClientTest < Mi
 
         # Use hash object
         client.delete({ network_endpoint_group: network_endpoint_group, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete network_endpoint_group: network_endpoint_group, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ network_endpoint_group: network_endpoint_group, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -266,27 +266,27 @@ class ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::ClientTest < Mi
 
         # Use hash object
         client.detach_network_endpoints({ network_endpoint_group: network_endpoint_group, network_endpoint_groups_detach_endpoints_request_resource: network_endpoint_groups_detach_endpoints_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.detach_network_endpoints network_endpoint_group: network_endpoint_group, network_endpoint_groups_detach_endpoints_request_resource: network_endpoint_groups_detach_endpoints_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.detach_network_endpoints ::Google::Cloud::Compute::V1::DetachNetworkEndpointsNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, network_endpoint_groups_detach_endpoints_request_resource: network_endpoint_groups_detach_endpoints_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.detach_network_endpoints({ network_endpoint_group: network_endpoint_group, network_endpoint_groups_detach_endpoints_request_resource: network_endpoint_groups_detach_endpoints_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.detach_network_endpoints(::Google::Cloud::Compute::V1::DetachNetworkEndpointsNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, network_endpoint_groups_detach_endpoints_request_resource: network_endpoint_groups_detach_endpoints_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -322,27 +322,27 @@ class ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::ClientTest < Mi
 
         # Use hash object
         client.get({ network_endpoint_group: network_endpoint_group, project: project, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get network_endpoint_group: network_endpoint_group, project: project, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ network_endpoint_group: network_endpoint_group, project: project, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetNetworkEndpointGroupRequest.new(network_endpoint_group: network_endpoint_group, project: project, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -379,27 +379,27 @@ class ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::ClientTest < Mi
 
         # Use hash object
         client.insert({ network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertNetworkEndpointGroupRequest.new(network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertNetworkEndpointGroupRequest.new(network_endpoint_group_resource: network_endpoint_group_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -439,27 +439,27 @@ class ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::ClientTest < Mi
 
         # Use hash object
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list ::Google::Cloud::Compute::V1::ListNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list(::Google::Cloud::Compute::V1::ListNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -501,27 +501,27 @@ class ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::ClientTest < Mi
 
         # Use hash object
         client.list_network_endpoints({ filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, network_endpoint_groups_list_endpoints_request_resource: network_endpoint_groups_list_endpoints_request_resource, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list_network_endpoints filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, network_endpoint_groups_list_endpoints_request_resource: network_endpoint_groups_list_endpoints_request_resource, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list_network_endpoints ::Google::Cloud::Compute::V1::ListNetworkEndpointsNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, network_endpoint_groups_list_endpoints_request_resource: network_endpoint_groups_list_endpoints_request_resource, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list_network_endpoints({ filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, network_endpoint_groups_list_endpoints_request_resource: network_endpoint_groups_list_endpoints_request_resource, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list_network_endpoints(::Google::Cloud::Compute::V1::ListNetworkEndpointsNetworkEndpointGroupsRequest.new(filter: filter, max_results: max_results, network_endpoint_group: network_endpoint_group, network_endpoint_groups_list_endpoints_request_resource: network_endpoint_groups_list_endpoints_request_resource, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -558,27 +558,27 @@ class ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::ClientTest < Mi
 
         # Use hash object
         client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsNetworkEndpointGroupRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsNetworkEndpointGroupRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

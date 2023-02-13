@@ -89,27 +89,27 @@ class ::Google::Cloud::Compute::V1::Firewalls::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.delete({ firewall: firewall, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete firewall: firewall, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteFirewallRequest.new(firewall: firewall, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ firewall: firewall, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteFirewallRequest.new(firewall: firewall, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -144,27 +144,27 @@ class ::Google::Cloud::Compute::V1::Firewalls::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.get({ firewall: firewall, project: project }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get firewall: firewall, project: project do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetFirewallRequest.new(firewall: firewall, project: project) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ firewall: firewall, project: project }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetFirewallRequest.new(firewall: firewall, project: project), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -200,27 +200,27 @@ class ::Google::Cloud::Compute::V1::Firewalls::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.insert({ firewall_resource: firewall_resource, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert firewall_resource: firewall_resource, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertFirewallRequest.new(firewall_resource: firewall_resource, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ firewall_resource: firewall_resource, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertFirewallRequest.new(firewall_resource: firewall_resource, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -259,27 +259,27 @@ class ::Google::Cloud::Compute::V1::Firewalls::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list ::Google::Cloud::Compute::V1::ListFirewallsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list(::Google::Cloud::Compute::V1::ListFirewallsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -316,27 +316,27 @@ class ::Google::Cloud::Compute::V1::Firewalls::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.patch({ firewall: firewall, firewall_resource: firewall_resource, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.patch firewall: firewall, firewall_resource: firewall_resource, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.patch ::Google::Cloud::Compute::V1::PatchFirewallRequest.new(firewall: firewall, firewall_resource: firewall_resource, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.patch({ firewall: firewall, firewall_resource: firewall_resource, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.patch(::Google::Cloud::Compute::V1::PatchFirewallRequest.new(firewall: firewall, firewall_resource: firewall_resource, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -373,27 +373,27 @@ class ::Google::Cloud::Compute::V1::Firewalls::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.update({ firewall: firewall, firewall_resource: firewall_resource, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.update firewall: firewall, firewall_resource: firewall_resource, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.update ::Google::Cloud::Compute::V1::UpdateFirewallRequest.new(firewall: firewall, firewall_resource: firewall_resource, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.update({ firewall: firewall, firewall_resource: firewall_resource, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.update(::Google::Cloud::Compute::V1::UpdateFirewallRequest.new(firewall: firewall, firewall_resource: firewall_resource, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

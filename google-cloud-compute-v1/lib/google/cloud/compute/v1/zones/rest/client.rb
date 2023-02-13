@@ -165,9 +165,9 @@ module Google
               #     Project ID for this request.
               #   @param zone [::String]
               #     Name of the zone resource to return.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Zone]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::Zone]
               #
@@ -199,8 +199,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @zones_stub.get request, options do |result, response|
-                  yield result, response if block_given?
+                @zones_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -237,9 +237,9 @@ module Google
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Zone>]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Zone>]
               #
@@ -271,9 +271,9 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @zones_stub.list request, options do |result, response|
+                @zones_stub.list request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @zones_stub, :list, "items", request, result, options
-                  yield result, response if block_given?
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e

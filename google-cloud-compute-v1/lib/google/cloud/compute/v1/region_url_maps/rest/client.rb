@@ -193,9 +193,9 @@ module Google
               #     begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.
               #   @param url_map [::String]
               #     Name of the UrlMap resource to delete.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -268,9 +268,9 @@ module Google
               #     Name of the region scoping this request.
               #   @param url_map [::String]
               #     Name of the UrlMap resource to return.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::UrlMap]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::UrlMap]
               #
@@ -302,8 +302,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @region_url_maps_stub.get request, options do |result, response|
-                  yield result, response if block_given?
+                @region_url_maps_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -336,9 +336,9 @@ module Google
               #     begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.
               #   @param url_map_resource [::Google::Cloud::Compute::V1::UrlMap, ::Hash]
               #     The body resource for this request
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -419,9 +419,9 @@ module Google
               #     Name of the region scoping this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::UrlMap>]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::UrlMap>]
               #
@@ -453,9 +453,9 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @region_url_maps_stub.list request, options do |result, response|
+                @region_url_maps_stub.list request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @region_url_maps_stub, :list, "items", request, result, options
-                  yield result, response if block_given?
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -490,9 +490,9 @@ module Google
               #     Name of the UrlMap resource to patch.
               #   @param url_map_resource [::Google::Cloud::Compute::V1::UrlMap, ::Hash]
               #     The body resource for this request
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -569,9 +569,9 @@ module Google
               #     Name of the UrlMap resource to update.
               #   @param url_map_resource [::Google::Cloud::Compute::V1::UrlMap, ::Hash]
               #     The body resource for this request
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Gapic::GenericLRO::Operation]
               #
@@ -646,9 +646,9 @@ module Google
               #     The body resource for this request
               #   @param url_map [::String]
               #     Name of the UrlMap resource to be validated as.
-              # @yield [result, response] Access the result along with the Faraday response object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::UrlMapsValidateResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::UrlMapsValidateResponse]
               #
@@ -680,8 +680,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @region_url_maps_stub.validate request, options do |result, response|
-                  yield result, response if block_given?
+                @region_url_maps_stub.validate request, options do |result, operation|
+                  yield result, operation if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
