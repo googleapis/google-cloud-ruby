@@ -20,8 +20,11 @@
 require "google/cloud/talent/v4"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Talent::V4::TenantService::Client#get_tenant
+# Snippet for the get_tenant call in the TenantService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Talent::V4::TenantService::Client#get_tenant. It may require
+# modification in order to execute successfully.
 #
 def get_tenant
   # Create a client object. The client can be reused for multiple calls.

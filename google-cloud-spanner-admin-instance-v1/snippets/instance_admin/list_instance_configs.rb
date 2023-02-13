@@ -20,8 +20,11 @@
 require "google/cloud/spanner/admin/instance/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_configs
+# Snippet for the list_instance_configs call in the InstanceAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_configs.
+# It may require modification in order to execute successfully.
 #
 def list_instance_configs
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_instance_configs
   # Call the list_instance_configs method.
   result = client.list_instance_configs request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig.
-    p response
+    p item
   end
 end
 # [END spanner_v1_generated_InstanceAdmin_ListInstanceConfigs_sync]

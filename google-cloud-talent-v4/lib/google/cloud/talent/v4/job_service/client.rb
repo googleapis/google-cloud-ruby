@@ -326,14 +326,14 @@ module Google
             #   # Call the batch_create_jobs method.
             #   result = client.batch_create_jobs request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def batch_create_jobs request, options = nil
@@ -630,14 +630,14 @@ module Google
             #   # Call the batch_update_jobs method.
             #   result = client.batch_update_jobs request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def batch_update_jobs request, options = nil
@@ -827,14 +827,14 @@ module Google
             #   # Call the batch_delete_jobs method.
             #   result = client.batch_delete_jobs request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def batch_delete_jobs request, options = nil
@@ -963,13 +963,11 @@ module Google
             #   # Call the list_jobs method.
             #   result = client.list_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Talent::V4::Job.
-            #     p response
+            #     p item
             #   end
             #
             def list_jobs request, options = nil

@@ -20,8 +20,11 @@
 require "google/cloud/service_directory/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ServiceDirectory::V1::LookupService::Client#resolve_service
+# Snippet for the resolve_service call in the LookupService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1::LookupService::Client#resolve_service. It
+# may require modification in order to execute successfully.
 #
 def resolve_service
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/security_center/v1p1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#create_source
+# Snippet for the create_source call in the SecurityCenter service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#create_source.
+# It may require modification in order to execute successfully.
 #
 def create_source
   # Create a client object. The client can be reused for multiple calls.

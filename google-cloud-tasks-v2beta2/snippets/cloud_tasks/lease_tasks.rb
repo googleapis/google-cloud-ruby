@@ -20,8 +20,11 @@
 require "google/cloud/tasks/v2beta2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks
+# Snippet for the lease_tasks call in the CloudTasks service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks. It may require
+# modification in order to execute successfully.
 #
 def lease_tasks
   # Create a client object. The client can be reused for multiple calls.

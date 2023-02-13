@@ -20,8 +20,11 @@
 require "google/cloud/service_management/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ServiceManagement::V1::ServiceManager::Client#undelete_service
+# Snippet for the undelete_service call in the ServiceManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ServiceManagement::V1::ServiceManager::Client#undelete_service.
+# It may require modification in order to execute successfully.
 #
 def undelete_service
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def undelete_service
   # Call the undelete_service method.
   result = client.undelete_service request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END servicemanagement_v1_generated_ServiceManager_UndeleteService_sync]

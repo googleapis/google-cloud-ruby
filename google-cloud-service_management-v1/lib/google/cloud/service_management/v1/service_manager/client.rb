@@ -215,13 +215,11 @@ module Google
             #   # Call the list_services method.
             #   result = client.list_services request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ServiceManagement::V1::ManagedService.
-            #     p response
+            #     p item
             #   end
             #
             def list_services request, options = nil
@@ -396,14 +394,14 @@ module Google
             #   # Call the create_service method.
             #   result = client.create_service request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_service request, options = nil
@@ -490,14 +488,14 @@ module Google
             #   # Call the delete_service method.
             #   result = client.delete_service request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_service request, options = nil
@@ -590,14 +588,14 @@ module Google
             #   # Call the undelete_service method.
             #   result = client.undelete_service request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def undelete_service request, options = nil
@@ -691,13 +689,11 @@ module Google
             #   # Call the list_service_configs method.
             #   result = client.list_service_configs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Api::Service.
-            #     p response
+            #     p item
             #   end
             #
             def list_service_configs request, options = nil
@@ -998,14 +994,14 @@ module Google
             #   # Call the submit_config_source method.
             #   result = client.submit_config_source request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def submit_config_source request, options = nil
@@ -1108,13 +1104,11 @@ module Google
             #   # Call the list_service_rollouts method.
             #   result = client.list_service_rollouts request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::ServiceManagement::V1::Rollout.
-            #     p response
+            #     p item
             #   end
             #
             def list_service_rollouts request, options = nil
@@ -1310,14 +1304,14 @@ module Google
             #   # Call the create_service_rollout method.
             #   result = client.create_service_rollout request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_service_rollout request, options = nil
