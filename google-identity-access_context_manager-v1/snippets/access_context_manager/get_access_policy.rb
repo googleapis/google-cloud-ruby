@@ -20,8 +20,11 @@
 require "google/identity/access_context_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_access_policy
+# Snippet for the get_access_policy call in the AccessContextManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_access_policy.
+# It may require modification in order to execute successfully.
 #
 def get_access_policy
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/identity/access_context_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#list_gcp_user_access_bindings
+# Snippet for the list_gcp_user_access_bindings call in the AccessContextManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#list_gcp_user_access_bindings.
+# It may require modification in order to execute successfully.
 #
 def list_gcp_user_access_bindings
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_gcp_user_access_bindings
   # Call the list_gcp_user_access_bindings method.
   result = client.list_gcp_user_access_bindings request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Identity::AccessContextManager::V1::GcpUserAccessBinding.
-    p response
+    p item
   end
 end
 # [END accesscontextmanager_v1_generated_AccessContextManager_ListGcpUserAccessBindings_sync]

@@ -20,8 +20,11 @@
 require "google/identity/access_context_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#list_service_perimeters
+# Snippet for the list_service_perimeters call in the AccessContextManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#list_service_perimeters.
+# It may require modification in order to execute successfully.
 #
 def list_service_perimeters
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_service_perimeters
   # Call the list_service_perimeters method.
   result = client.list_service_perimeters request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Identity::AccessContextManager::V1::ServicePerimeter.
-    p response
+    p item
   end
 end
 # [END accesscontextmanager_v1_generated_AccessContextManager_ListServicePerimeters_sync]

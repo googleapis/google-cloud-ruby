@@ -20,8 +20,11 @@
 require "google/cloud/workflows/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Workflows::V1::Workflows::Client#get_workflow
+# Snippet for the get_workflow call in the Workflows service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Workflows::V1::Workflows::Client#get_workflow. It may require
+# modification in order to execute successfully.
 #
 def get_workflow
   # Create a client object. The client can be reused for multiple calls.

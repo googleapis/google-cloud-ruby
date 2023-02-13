@@ -20,8 +20,11 @@
 require "google/iam/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Iam::V1beta::WorkloadIdentityPools::Client#list_workload_identity_pool_providers
+# Snippet for the list_workload_identity_pool_providers call in the WorkloadIdentityPools service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Iam::V1beta::WorkloadIdentityPools::Client#list_workload_identity_pool_providers.
+# It may require modification in order to execute successfully.
 #
 def list_workload_identity_pool_providers
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_workload_identity_pool_providers
   # Call the list_workload_identity_pool_providers method.
   result = client.list_workload_identity_pool_providers request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Iam::V1beta::WorkloadIdentityPoolProvider.
-    p response
+    p item
   end
 end
 # [END iam_v1beta_generated_WorkloadIdentityPools_ListWorkloadIdentityPoolProviders_sync]
