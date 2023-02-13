@@ -269,13 +269,11 @@ module Google
           #   # Call the list_workload_identity_pools method.
           #   result = client.list_workload_identity_pools request
           #
-          #   # The returned object is of type Gapic::PagedEnumerable. You can
-          #   # iterate over all elements by calling #each, and the enumerable
-          #   # will lazily make API calls to fetch subsequent pages. Other
-          #   # methods are also available for managing paging directly.
-          #   result.each do |response|
+          #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+          #   # over elements, and API calls will be issued to fetch pages as needed.
+          #   result.each do |item|
           #     # Each element is of type ::Google::Iam::V1beta::WorkloadIdentityPool.
-          #     p response
+          #     p item
           #   end
           #
           def list_workload_identity_pools request, options = nil
@@ -458,14 +456,14 @@ module Google
           #   # Call the create_workload_identity_pool method.
           #   result = client.create_workload_identity_pool request
           #
-          #   # The returned object is of type Gapic::Operation. You can use this
-          #   # object to check the status of an operation, cancel it, or wait
-          #   # for results. Here is how to block until completion:
+          #   # The returned object is of type Gapic::Operation. You can use it to
+          #   # check the status of an operation, cancel it, or wait for results.
+          #   # Here is how to wait for a response.
           #   result.wait_until_done! timeout: 60
           #   if result.response?
           #     p result.response
           #   else
-          #     puts "Error!"
+          #     puts "No response received."
           #   end
           #
           def create_workload_identity_pool request, options = nil
@@ -554,14 +552,14 @@ module Google
           #   # Call the update_workload_identity_pool method.
           #   result = client.update_workload_identity_pool request
           #
-          #   # The returned object is of type Gapic::Operation. You can use this
-          #   # object to check the status of an operation, cancel it, or wait
-          #   # for results. Here is how to block until completion:
+          #   # The returned object is of type Gapic::Operation. You can use it to
+          #   # check the status of an operation, cancel it, or wait for results.
+          #   # Here is how to wait for a response.
           #   result.wait_until_done! timeout: 60
           #   if result.response?
           #     p result.response
           #   else
-          #     puts "Error!"
+          #     puts "No response received."
           #   end
           #
           def update_workload_identity_pool request, options = nil
@@ -658,14 +656,14 @@ module Google
           #   # Call the delete_workload_identity_pool method.
           #   result = client.delete_workload_identity_pool request
           #
-          #   # The returned object is of type Gapic::Operation. You can use this
-          #   # object to check the status of an operation, cancel it, or wait
-          #   # for results. Here is how to block until completion:
+          #   # The returned object is of type Gapic::Operation. You can use it to
+          #   # check the status of an operation, cancel it, or wait for results.
+          #   # Here is how to wait for a response.
           #   result.wait_until_done! timeout: 60
           #   if result.response?
           #     p result.response
           #   else
-          #     puts "Error!"
+          #     puts "No response received."
           #   end
           #
           def delete_workload_identity_pool request, options = nil
@@ -752,14 +750,14 @@ module Google
           #   # Call the undelete_workload_identity_pool method.
           #   result = client.undelete_workload_identity_pool request
           #
-          #   # The returned object is of type Gapic::Operation. You can use this
-          #   # object to check the status of an operation, cancel it, or wait
-          #   # for results. Here is how to block until completion:
+          #   # The returned object is of type Gapic::Operation. You can use it to
+          #   # check the status of an operation, cancel it, or wait for results.
+          #   # Here is how to wait for a response.
           #   result.wait_until_done! timeout: 60
           #   if result.response?
           #     p result.response
           #   else
-          #     puts "Error!"
+          #     puts "No response received."
           #   end
           #
           def undelete_workload_identity_pool request, options = nil
@@ -858,13 +856,11 @@ module Google
           #   # Call the list_workload_identity_pool_providers method.
           #   result = client.list_workload_identity_pool_providers request
           #
-          #   # The returned object is of type Gapic::PagedEnumerable. You can
-          #   # iterate over all elements by calling #each, and the enumerable
-          #   # will lazily make API calls to fetch subsequent pages. Other
-          #   # methods are also available for managing paging directly.
-          #   result.each do |response|
+          #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+          #   # over elements, and API calls will be issued to fetch pages as needed.
+          #   result.each do |item|
           #     # Each element is of type ::Google::Iam::V1beta::WorkloadIdentityPoolProvider.
-          #     p response
+          #     p item
           #   end
           #
           def list_workload_identity_pool_providers request, options = nil
@@ -1048,14 +1044,14 @@ module Google
           #   # Call the create_workload_identity_pool_provider method.
           #   result = client.create_workload_identity_pool_provider request
           #
-          #   # The returned object is of type Gapic::Operation. You can use this
-          #   # object to check the status of an operation, cancel it, or wait
-          #   # for results. Here is how to block until completion:
+          #   # The returned object is of type Gapic::Operation. You can use it to
+          #   # check the status of an operation, cancel it, or wait for results.
+          #   # Here is how to wait for a response.
           #   result.wait_until_done! timeout: 60
           #   if result.response?
           #     p result.response
           #   else
-          #     puts "Error!"
+          #     puts "No response received."
           #   end
           #
           def create_workload_identity_pool_provider request, options = nil
@@ -1144,14 +1140,14 @@ module Google
           #   # Call the update_workload_identity_pool_provider method.
           #   result = client.update_workload_identity_pool_provider request
           #
-          #   # The returned object is of type Gapic::Operation. You can use this
-          #   # object to check the status of an operation, cancel it, or wait
-          #   # for results. Here is how to block until completion:
+          #   # The returned object is of type Gapic::Operation. You can use it to
+          #   # check the status of an operation, cancel it, or wait for results.
+          #   # Here is how to wait for a response.
           #   result.wait_until_done! timeout: 60
           #   if result.response?
           #     p result.response
           #   else
-          #     puts "Error!"
+          #     puts "No response received."
           #   end
           #
           def update_workload_identity_pool_provider request, options = nil
@@ -1243,14 +1239,14 @@ module Google
           #   # Call the delete_workload_identity_pool_provider method.
           #   result = client.delete_workload_identity_pool_provider request
           #
-          #   # The returned object is of type Gapic::Operation. You can use this
-          #   # object to check the status of an operation, cancel it, or wait
-          #   # for results. Here is how to block until completion:
+          #   # The returned object is of type Gapic::Operation. You can use it to
+          #   # check the status of an operation, cancel it, or wait for results.
+          #   # Here is how to wait for a response.
           #   result.wait_until_done! timeout: 60
           #   if result.response?
           #     p result.response
           #   else
-          #     puts "Error!"
+          #     puts "No response received."
           #   end
           #
           def delete_workload_identity_pool_provider request, options = nil
@@ -1338,14 +1334,14 @@ module Google
           #   # Call the undelete_workload_identity_pool_provider method.
           #   result = client.undelete_workload_identity_pool_provider request
           #
-          #   # The returned object is of type Gapic::Operation. You can use this
-          #   # object to check the status of an operation, cancel it, or wait
-          #   # for results. Here is how to block until completion:
+          #   # The returned object is of type Gapic::Operation. You can use it to
+          #   # check the status of an operation, cancel it, or wait for results.
+          #   # Here is how to wait for a response.
           #   result.wait_until_done! timeout: 60
           #   if result.response?
           #     p result.response
           #   else
-          #     puts "Error!"
+          #     puts "No response received."
           #   end
           #
           def undelete_workload_identity_pool_provider request, options = nil

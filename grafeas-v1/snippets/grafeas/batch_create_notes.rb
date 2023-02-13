@@ -20,8 +20,11 @@
 require "grafeas/v1"
 
 ##
-# Example demonstrating basic usage of
-# Grafeas::V1::Grafeas::Client#batch_create_notes
+# Snippet for the batch_create_notes call in the Grafeas service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Grafeas::V1::Grafeas::Client#batch_create_notes. It may require modification
+# in order to execute successfully.
 #
 def batch_create_notes
   # Create a client object. The client can be reused for multiple calls.

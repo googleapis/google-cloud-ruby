@@ -20,8 +20,11 @@
 require "google/identity/access_context_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#delete_service_perimeter
+# Snippet for the delete_service_perimeter call in the AccessContextManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#delete_service_perimeter.
+# It may require modification in order to execute successfully.
 #
 def delete_service_perimeter
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def delete_service_perimeter
   # Call the delete_service_perimeter method.
   result = client.delete_service_perimeter request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END accesscontextmanager_v1_generated_AccessContextManager_DeleteServicePerimeter_sync]

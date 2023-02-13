@@ -20,8 +20,11 @@
 require "google/cloud/workflows/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Workflows::V1beta::Workflows::Client#list_workflows
+# Snippet for the list_workflows call in the Workflows service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Workflows::V1beta::Workflows::Client#list_workflows. It may
+# require modification in order to execute successfully.
 #
 def list_workflows
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_workflows
   # Call the list_workflows method.
   result = client.list_workflows request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Workflows::V1beta::Workflow.
-    p response
+    p item
   end
 end
 # [END workflows_v1beta_generated_Workflows_ListWorkflows_sync]

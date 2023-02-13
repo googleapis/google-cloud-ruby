@@ -20,8 +20,11 @@
 require "google/cloud/web_security_scanner/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#get_finding
+# Snippet for the get_finding call in the WebSecurityScanner service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#get_finding.
+# It may require modification in order to execute successfully.
 #
 def get_finding
   # Create a client object. The client can be reused for multiple calls.

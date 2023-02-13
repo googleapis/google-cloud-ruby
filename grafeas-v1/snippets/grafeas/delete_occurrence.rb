@@ -20,8 +20,11 @@
 require "grafeas/v1"
 
 ##
-# Example demonstrating basic usage of
-# Grafeas::V1::Grafeas::Client#delete_occurrence
+# Snippet for the delete_occurrence call in the Grafeas service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Grafeas::V1::Grafeas::Client#delete_occurrence. It may require modification in
+# order to execute successfully.
 #
 def delete_occurrence
   # Create a client object. The client can be reused for multiple calls.
