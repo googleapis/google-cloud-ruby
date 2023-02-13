@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.0 (2023-02-13)
+
+#### Features
+
+* Added default_value_expression field to TableFieldSchema ([#20334](https://github.com/googleapis/google-cloud-ruby/issues/20334)) 
+
 ### 0.17.0 (2022-12-14)
 
 #### Features
