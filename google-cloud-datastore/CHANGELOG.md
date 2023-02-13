@@ -1,5 +1,11 @@
 # Release History
 
+### 2.6.0 (2023-02-13)
+
+#### Features
+
+* Added support for snapshot read ([#19422](https://github.com/googleapis/google-cloud-ruby/issues/19422)) 
+
 ### 2.5.0 (2023-02-09)
 
 #### Features
