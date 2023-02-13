@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.2 (2023-02-13)
+
+#### Documentation
+
+* Add clarification on whether NodePool.version is a required field ([#20118](https://github.com/googleapis/google-cloud-ruby/issues/20118)) 
+
 ### 0.16.1 (2023-01-31)
 
 #### Documentation
