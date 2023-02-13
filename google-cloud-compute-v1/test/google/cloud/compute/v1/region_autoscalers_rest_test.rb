@@ -90,27 +90,27 @@ class ::Google::Cloud::Compute::V1::RegionAutoscalers::Rest::ClientTest < Minite
 
         # Use hash object
         client.delete({ autoscaler: autoscaler, project: project, region: region, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete autoscaler: autoscaler, project: project, region: region, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteRegionAutoscalerRequest.new(autoscaler: autoscaler, project: project, region: region, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ autoscaler: autoscaler, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteRegionAutoscalerRequest.new(autoscaler: autoscaler, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -146,27 +146,27 @@ class ::Google::Cloud::Compute::V1::RegionAutoscalers::Rest::ClientTest < Minite
 
         # Use hash object
         client.get({ autoscaler: autoscaler, project: project, region: region }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get autoscaler: autoscaler, project: project, region: region do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetRegionAutoscalerRequest.new(autoscaler: autoscaler, project: project, region: region) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ autoscaler: autoscaler, project: project, region: region }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetRegionAutoscalerRequest.new(autoscaler: autoscaler, project: project, region: region), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -203,27 +203,27 @@ class ::Google::Cloud::Compute::V1::RegionAutoscalers::Rest::ClientTest < Minite
 
         # Use hash object
         client.insert({ autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertRegionAutoscalerRequest.new(autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertRegionAutoscalerRequest.new(autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -263,27 +263,27 @@ class ::Google::Cloud::Compute::V1::RegionAutoscalers::Rest::ClientTest < Minite
 
         # Use hash object
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list ::Google::Cloud::Compute::V1::ListRegionAutoscalersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list(::Google::Cloud::Compute::V1::ListRegionAutoscalersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -321,27 +321,27 @@ class ::Google::Cloud::Compute::V1::RegionAutoscalers::Rest::ClientTest < Minite
 
         # Use hash object
         client.patch({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.patch autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.patch ::Google::Cloud::Compute::V1::PatchRegionAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.patch({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.patch(::Google::Cloud::Compute::V1::PatchRegionAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -379,27 +379,27 @@ class ::Google::Cloud::Compute::V1::RegionAutoscalers::Rest::ClientTest < Minite
 
         # Use hash object
         client.update({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.update autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.update ::Google::Cloud::Compute::V1::UpdateRegionAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.update({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.update(::Google::Cloud::Compute::V1::UpdateRegionAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
