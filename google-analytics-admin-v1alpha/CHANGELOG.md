@@ -1,5 +1,25 @@
 # Release History
 
+### 0.14.0 (2023-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed the PARTIAL_REGEXP match type for StringFilter
+* Removed the LESS_THAN_OR_EQUAL and GREATER_THAN_OR_EQUAL operation types for NumericFilter
+
+#### Features
+
+* Support for AccessQuota#tokens_per_project_per_hour 
+* Support for RPCs for getting and listing BigQueryLink resources 
+* Support for RPCs for managing SearchAds360Link resources ([#20137](https://github.com/googleapis/google-cloud-ruby/issues/20137)) 
+* Support for RPCs for setting and fetching AutomatedGa4ConfigurationOptOut resources 
+* Support for search_ads_360_link, bigquery_link and expanded_data_set fields in ChangeHistoryResource 
+* Support for the EXPANDED_DATA_SET and CHANNEL_GROUP values for ChangeHistoryResourceType 
+#### Bug Fixes
+
+* Removed the LESS_THAN_OR_EQUAL and GREATER_THAN_OR_EQUAL operation types for NumericFilter 
+* Removed the PARTIAL_REGEXP match type for StringFilter 
+
 ### 0.13.0 (2022-08-09)
 
 #### Features
