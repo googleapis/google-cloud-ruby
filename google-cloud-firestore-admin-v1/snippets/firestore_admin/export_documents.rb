@@ -20,8 +20,11 @@
 require "google/cloud/firestore/admin/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#export_documents
+# Snippet for the export_documents call in the FirestoreAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#export_documents.
+# It may require modification in order to execute successfully.
 #
 def export_documents
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def export_documents
   # Call the export_documents method.
   result = client.export_documents request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END firestore_v1_generated_FirestoreAdmin_ExportDocuments_sync]

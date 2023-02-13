@@ -409,13 +409,11 @@ module Google
             #   # Call the list_documents method.
             #   result = client.list_documents request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Firestore::V1::Document.
-            #     p response
+            #     p item
             #   end
             #
             def list_documents request, options = nil
@@ -716,13 +714,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new
             #
-            #   # Call the batch_get_documents method.
-            #   result = client.batch_get_documents request
+            #   # Call the batch_get_documents method to start streaming.
+            #   output = client.batch_get_documents request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def batch_get_documents request, options = nil
@@ -1092,13 +1090,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Firestore::V1::RunQueryRequest.new
             #
-            #   # Call the run_query method.
-            #   result = client.run_query request
+            #   # Call the run_query method to start streaming.
+            #   output = client.run_query request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Firestore::V1::RunQueryResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::RunQueryResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def run_query request, options = nil
@@ -1213,13 +1211,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new
             #
-            #   # Call the run_aggregation_query method.
-            #   result = client.run_aggregation_query request
+            #   # Call the run_aggregation_query method to start streaming.
+            #   output = client.run_aggregation_query request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def run_aggregation_query request, options = nil
@@ -1348,13 +1346,11 @@ module Google
             #   # Call the partition_query method.
             #   result = client.partition_query request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Firestore::V1::Cursor.
-            #     p response
+            #     p item
             #   end
             #
             def partition_query request, options = nil
@@ -1421,22 +1417,22 @@ module Google
             #   # Create a client object. The client can be reused for multiple calls.
             #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
             #
-            #   # Create an input stream
+            #   # Create an input stream.
             #   input = Gapic::StreamInput.new
             #
             #   # Call the write method to start streaming.
             #   output = client.write input
             #
-            #   # Send requests on the stream. For each request, pass in keyword
-            #   # arguments to set fields. Be sure to close the stream when done.
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
             #   input << Google::Cloud::Firestore::V1::WriteRequest.new
             #   input << Google::Cloud::Firestore::V1::WriteRequest.new
             #   input.close
             #
-            #   # Handle streamed responses. These may be interleaved with inputs.
-            #   # Each response is of type ::Google::Cloud::Firestore::V1::WriteResponse.
-            #   output.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::WriteResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def write request, options = nil
@@ -1499,22 +1495,22 @@ module Google
             #   # Create a client object. The client can be reused for multiple calls.
             #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
             #
-            #   # Create an input stream
+            #   # Create an input stream.
             #   input = Gapic::StreamInput.new
             #
             #   # Call the listen method to start streaming.
             #   output = client.listen input
             #
-            #   # Send requests on the stream. For each request, pass in keyword
-            #   # arguments to set fields. Be sure to close the stream when done.
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
             #   input << Google::Cloud::Firestore::V1::ListenRequest.new
             #   input << Google::Cloud::Firestore::V1::ListenRequest.new
             #   input.close
             #
-            #   # Handle streamed responses. These may be interleaved with inputs.
-            #   # Each response is of type ::Google::Cloud::Firestore::V1::ListenResponse.
-            #   output.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::ListenResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def listen request, options = nil

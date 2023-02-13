@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Conversations::Client#get_conversation
+# Snippet for the get_conversation call in the Conversations service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Conversations::Client#get_conversation. It may
+# require modification in order to execute successfully.
 #
 def get_conversation
   # Create a client object. The client can be reused for multiple calls.

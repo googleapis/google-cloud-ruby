@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::Environments::Client#run_continuous_test
+# Snippet for the run_continuous_test call in the Environments service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Environments::Client#run_continuous_test.
+# It may require modification in order to execute successfully.
 #
 def run_continuous_test
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def run_continuous_test
   # Call the run_continuous_test method.
   result = client.run_continuous_test request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END dialogflow_v3_generated_Environments_RunContinuousTest_sync]

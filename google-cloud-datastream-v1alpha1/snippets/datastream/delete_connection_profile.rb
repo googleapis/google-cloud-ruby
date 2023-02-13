@@ -20,8 +20,11 @@
 require "google/cloud/datastream/v1alpha1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Datastream::V1alpha1::Datastream::Client#delete_connection_profile
+# Snippet for the delete_connection_profile call in the Datastream service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Datastream::V1alpha1::Datastream::Client#delete_connection_profile.
+# It may require modification in order to execute successfully.
 #
 def delete_connection_profile
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def delete_connection_profile
   # Call the delete_connection_profile method.
   result = client.delete_connection_profile request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END datastream_v1alpha1_generated_Datastream_DeleteConnectionProfile_sync]

@@ -20,8 +20,11 @@
 require "google/cloud/debugger/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Debugger::V2::Debugger::Client#delete_breakpoint
+# Snippet for the delete_breakpoint call in the Debugger service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Debugger::V2::Debugger::Client#delete_breakpoint. It may
+# require modification in order to execute successfully.
 #
 def delete_breakpoint
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/dlp/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dlp::V2::DlpService::Client#get_job_trigger
+# Snippet for the get_job_trigger call in the DlpService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#get_job_trigger. It may require
+# modification in order to execute successfully.
 #
 def get_job_trigger
   # Create a client object. The client can be reused for multiple calls.

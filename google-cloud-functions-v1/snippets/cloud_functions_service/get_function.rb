@@ -20,8 +20,11 @@
 require "google/cloud/functions/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Functions::V1::CloudFunctionsService::Client#get_function
+# Snippet for the get_function call in the CloudFunctionsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Functions::V1::CloudFunctionsService::Client#get_function. It
+# may require modification in order to execute successfully.
 #
 def get_function
   # Create a client object. The client can be reused for multiple calls.

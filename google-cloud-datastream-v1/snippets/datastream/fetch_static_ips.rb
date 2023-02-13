@@ -20,8 +20,11 @@
 require "google/cloud/datastream/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Datastream::V1::Datastream::Client#fetch_static_ips
+# Snippet for the fetch_static_ips call in the Datastream service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Datastream::V1::Datastream::Client#fetch_static_ips. It may
+# require modification in order to execute successfully.
 #
 def fetch_static_ips
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/domains/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Domains::V1::Domains::Client#retrieve_register_parameters
+# Snippet for the retrieve_register_parameters call in the Domains service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Domains::V1::Domains::Client#retrieve_register_parameters. It
+# may require modification in order to execute successfully.
 #
 def retrieve_register_parameters
   # Create a client object. The client can be reused for multiple calls.

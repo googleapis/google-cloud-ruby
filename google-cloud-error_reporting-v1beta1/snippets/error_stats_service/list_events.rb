@@ -20,8 +20,11 @@
 require "google/cloud/error_reporting/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client#list_events
+# Snippet for the list_events call in the ErrorStatsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client#list_events.
+# It may require modification in order to execute successfully.
 #
 def list_events
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_events
   # Call the list_events method.
   result = client.list_events request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::ErrorReporting::V1beta1::ErrorEvent.
-    p response
+    p item
   end
 end
 # [END clouderrorreporting_v1beta1_generated_ErrorStatsService_ListEvents_sync]

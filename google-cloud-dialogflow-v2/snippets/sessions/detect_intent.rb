@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent
+# Snippet for the detect_intent call in the Sessions service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent. It may require
+# modification in order to execute successfully.
 #
 def detect_intent
   # Create a client object. The client can be reused for multiple calls.

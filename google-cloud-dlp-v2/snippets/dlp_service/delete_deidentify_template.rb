@@ -20,8 +20,11 @@
 require "google/cloud/dlp/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dlp::V2::DlpService::Client#delete_deidentify_template
+# Snippet for the delete_deidentify_template call in the DlpService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#delete_deidentify_template. It may
+# require modification in order to execute successfully.
 #
 def delete_deidentify_template
   # Create a client object. The client can be reused for multiple calls.

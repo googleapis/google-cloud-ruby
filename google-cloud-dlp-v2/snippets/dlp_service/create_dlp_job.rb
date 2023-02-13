@@ -20,8 +20,11 @@
 require "google/cloud/dlp/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dlp::V2::DlpService::Client#create_dlp_job
+# Snippet for the create_dlp_job call in the DlpService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#create_dlp_job. It may require
+# modification in order to execute successfully.
 #
 def create_dlp_job
   # Create a client object. The client can be reused for multiple calls.

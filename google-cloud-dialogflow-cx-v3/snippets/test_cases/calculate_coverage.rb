@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::TestCases::Client#calculate_coverage
+# Snippet for the calculate_coverage call in the TestCases service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::TestCases::Client#calculate_coverage. It
+# may require modification in order to execute successfully.
 #
 def calculate_coverage
   # Create a client object. The client can be reused for multiple calls.

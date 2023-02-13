@@ -20,8 +20,11 @@
 require "google/cloud/debugger/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Debugger::V2::Controller::Client#update_active_breakpoint
+# Snippet for the update_active_breakpoint call in the Controller service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Debugger::V2::Controller::Client#update_active_breakpoint. It
+# may require modification in order to execute successfully.
 #
 def update_active_breakpoint
   # Create a client object. The client can be reused for multiple calls.

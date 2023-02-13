@@ -20,8 +20,11 @@
 require "google/cloud/debugger/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Debugger::V2::Controller::Client#register_debuggee
+# Snippet for the register_debuggee call in the Controller service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Debugger::V2::Controller::Client#register_debuggee. It may
+# require modification in order to execute successfully.
 #
 def register_debuggee
   # Create a client object. The client can be reused for multiple calls.

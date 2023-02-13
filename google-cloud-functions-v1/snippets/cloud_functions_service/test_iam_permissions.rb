@@ -20,8 +20,11 @@
 require "google/cloud/functions/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Functions::V1::CloudFunctionsService::Client#test_iam_permissions
+# Snippet for the test_iam_permissions call in the CloudFunctionsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Functions::V1::CloudFunctionsService::Client#test_iam_permissions.
+# It may require modification in order to execute successfully.
 #
 def test_iam_permissions
   # Create a client object. The client can be reused for multiple calls.
