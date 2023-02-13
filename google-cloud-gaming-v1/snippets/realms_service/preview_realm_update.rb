@@ -20,8 +20,11 @@
 require "google/cloud/gaming/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Gaming::V1::RealmsService::Client#preview_realm_update
+# Snippet for the preview_realm_update call in the RealmsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::RealmsService::Client#preview_realm_update. It may
+# require modification in order to execute successfully.
 #
 def preview_realm_update
   # Create a client object. The client can be reused for multiple calls.

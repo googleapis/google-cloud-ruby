@@ -20,8 +20,11 @@
 require "google/cloud/gsuite_add_ons/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#get_authorization
+# Snippet for the get_authorization call in the GSuiteAddOns service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#get_authorization. It
+# may require modification in order to execute successfully.
 #
 def get_authorization
   # Create a client object. The client can be reused for multiple calls.

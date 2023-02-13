@@ -20,8 +20,11 @@
 require "google/cloud/gke_hub/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeHub::V1::GkeHub::Client#get_feature
+# Snippet for the get_feature call in the GkeHub service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeHub::V1::GkeHub::Client#get_feature. It may require
+# modification in order to execute successfully.
 #
 def get_feature
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/gke_backup/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeBackup::V1::BackupForGKE::Client#create_backup
+# Snippet for the create_backup call in the BackupForGKE service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeBackup::V1::BackupForGKE::Client#create_backup. It may
+# require modification in order to execute successfully.
 #
 def create_backup
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_backup
   # Call the create_backup method.
   result = client.create_backup request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END gkebackup_v1_generated_BackupForGKE_CreateBackup_sync]

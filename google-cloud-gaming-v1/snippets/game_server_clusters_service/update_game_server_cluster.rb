@@ -20,8 +20,11 @@
 require "google/cloud/gaming/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Gaming::V1::GameServerClustersService::Client#update_game_server_cluster
+# Snippet for the update_game_server_cluster call in the GameServerClustersService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::GameServerClustersService::Client#update_game_server_cluster.
+# It may require modification in order to execute successfully.
 #
 def update_game_server_cluster
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def update_game_server_cluster
   # Call the update_game_server_cluster method.
   result = client.update_game_server_cluster request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END gameservices_v1_generated_GameServerClustersService_UpdateGameServerCluster_sync]

@@ -20,8 +20,11 @@
 require "google/cloud/iap/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#create_tunnel_dest_group
+# Snippet for the create_tunnel_dest_group call in the IdentityAwareProxyAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#create_tunnel_dest_group.
+# It may require modification in order to execute successfully.
 #
 def create_tunnel_dest_group
   # Create a client object. The client can be reused for multiple calls.

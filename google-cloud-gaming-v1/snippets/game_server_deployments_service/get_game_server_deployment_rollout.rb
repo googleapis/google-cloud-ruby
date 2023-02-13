@@ -20,8 +20,11 @@
 require "google/cloud/gaming/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#get_game_server_deployment_rollout
+# Snippet for the get_game_server_deployment_rollout call in the GameServerDeploymentsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#get_game_server_deployment_rollout.
+# It may require modification in order to execute successfully.
 #
 def get_game_server_deployment_rollout
   # Create a client object. The client can be reused for multiple calls.

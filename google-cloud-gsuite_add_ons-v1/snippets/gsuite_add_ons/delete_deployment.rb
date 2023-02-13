@@ -20,8 +20,11 @@
 require "google/cloud/gsuite_add_ons/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#delete_deployment
+# Snippet for the delete_deployment call in the GSuiteAddOns service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#delete_deployment. It
+# may require modification in order to execute successfully.
 #
 def delete_deployment
   # Create a client object. The client can be reused for multiple calls.
