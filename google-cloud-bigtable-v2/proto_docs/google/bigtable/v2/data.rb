@@ -550,6 +550,42 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # NOTE: This API is intended to be used by Apache Beam BigtableIO.
+        # A partition of a change stream.
+        # @!attribute [rw] row_range
+        #   @return [::Google::Cloud::Bigtable::V2::RowRange]
+        #     The row range covered by this partition and is specified by
+        #     [`start_key_closed`, `end_key_open`).
+        class StreamPartition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # NOTE: This API is intended to be used by Apache Beam BigtableIO.
+        # The information required to continue reading the data from multiple
+        # `StreamPartitions` from where a previous read left off.
+        # @!attribute [rw] tokens
+        #   @return [::Array<::Google::Cloud::Bigtable::V2::StreamContinuationToken>]
+        #     List of continuation tokens.
+        class StreamContinuationTokens
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # NOTE: This API is intended to be used by Apache Beam BigtableIO.
+        # The information required to continue reading the data from a
+        # `StreamPartition` from where a previous read left off.
+        # @!attribute [rw] partition
+        #   @return [::Google::Cloud::Bigtable::V2::StreamPartition]
+        #     The partition that this token applies to.
+        # @!attribute [rw] token
+        #   @return [::String]
+        #     An encoded position in the stream to restart reading from.
+        class StreamContinuationToken
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
