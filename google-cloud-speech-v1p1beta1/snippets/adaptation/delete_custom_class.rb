@@ -20,8 +20,11 @@
 require "google/cloud/speech/v1p1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Speech::V1p1beta1::Adaptation::Client#delete_custom_class
+# Snippet for the delete_custom_class call in the Adaptation service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Speech::V1p1beta1::Adaptation::Client#delete_custom_class. It
+# may require modification in order to execute successfully.
 #
 def delete_custom_class
   # Create a client object. The client can be reused for multiple calls.

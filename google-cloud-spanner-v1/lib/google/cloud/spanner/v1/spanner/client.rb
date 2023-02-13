@@ -563,13 +563,11 @@ module Google
             #   # Call the list_sessions method.
             #   result = client.list_sessions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Spanner::V1::Session.
-            #     p response
+            #     p item
             #   end
             #
             def list_sessions request, options = nil
@@ -972,13 +970,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Spanner::V1::ExecuteSqlRequest.new
             #
-            #   # Call the execute_streaming_sql method.
-            #   result = client.execute_streaming_sql request
+            #   # Call the execute_streaming_sql method to start streaming.
+            #   output = client.execute_streaming_sql request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Spanner::V1::PartialResultSet.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Spanner::V1::PartialResultSet
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def execute_streaming_sql request, options = nil
@@ -1366,13 +1364,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Spanner::V1::ReadRequest.new
             #
-            #   # Call the streaming_read method.
-            #   result = client.streaming_read request
+            #   # Call the streaming_read method to start streaming.
+            #   output = client.streaming_read request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Spanner::V1::PartialResultSet.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Spanner::V1::PartialResultSet
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def streaming_read request, options = nil

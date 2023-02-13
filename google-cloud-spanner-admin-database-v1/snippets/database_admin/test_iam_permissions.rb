@@ -20,8 +20,11 @@
 require "google/cloud/spanner/admin/database/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#test_iam_permissions
+# Snippet for the test_iam_permissions call in the DatabaseAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#test_iam_permissions.
+# It may require modification in order to execute successfully.
 #
 def test_iam_permissions
   # Create a client object. The client can be reused for multiple calls.

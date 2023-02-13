@@ -279,13 +279,11 @@ module Google
             #   # Call the list_queues method.
             #   result = client.list_queues request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Tasks::V2beta3::Queue.
-            #     p response
+            #     p item
             #   end
             #
             def list_queues request, options = nil
@@ -1397,13 +1395,11 @@ module Google
             #   # Call the list_tasks method.
             #   result = client.list_tasks request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Tasks::V2beta3::Task.
-            #     p response
+            #     p item
             #   end
             #
             def list_tasks request, options = nil

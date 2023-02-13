@@ -20,8 +20,11 @@
 require "google/cloud/spanner/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql
+# Snippet for the execute_streaming_sql call in the Spanner service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql. It may
+# require modification in order to execute successfully.
 #
 def execute_streaming_sql
   # Create a client object. The client can be reused for multiple calls.
@@ -30,13 +33,13 @@ def execute_streaming_sql
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::Spanner::V1::ExecuteSqlRequest.new
 
-  # Call the execute_streaming_sql method.
-  result = client.execute_streaming_sql request
+  # Call the execute_streaming_sql method to start streaming.
+  output = client.execute_streaming_sql request
 
-  # The returned object is a streamed enumerable yielding elements of
-  # type ::Google::Cloud::Spanner::V1::PartialResultSet.
-  result.each do |response|
-    p response
+  # The returned object is a streamed enumerable yielding elements of type
+  # ::Google::Cloud::Spanner::V1::PartialResultSet
+  output.each do |current_response|
+    p current_response
   end
 end
 # [END spanner_v1_generated_Spanner_ExecuteStreamingSql_sync]

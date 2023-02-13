@@ -20,8 +20,11 @@
 require "google/cloud/spanner/admin/database/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database_ddl
+# Snippet for the get_database_ddl call in the DatabaseAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database_ddl.
+# It may require modification in order to execute successfully.
 #
 def get_database_ddl
   # Create a client object. The client can be reused for multiple calls.
