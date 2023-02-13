@@ -20,8 +20,11 @@
 require "google/cloud/video/transcoder/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Video::Transcoder::V1::TranscoderService::Client#create_job_template
+# Snippet for the create_job_template call in the TranscoderService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Video::Transcoder::V1::TranscoderService::Client#create_job_template.
+# It may require modification in order to execute successfully.
 #
 def create_job_template
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/tpu/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Tpu::V1::Tpu::Client#stop_node
+# Snippet for the stop_node call in the Tpu service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Tpu::V1::Tpu::Client#stop_node. It may require modification in
+# order to execute successfully.
 #
 def stop_node
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def stop_node
   # Call the stop_node method.
   result = client.stop_node request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END tpu_v1_generated_Tpu_StopNode_sync]

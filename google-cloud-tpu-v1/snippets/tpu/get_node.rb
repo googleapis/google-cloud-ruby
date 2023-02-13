@@ -20,8 +20,11 @@
 require "google/cloud/tpu/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Tpu::V1::Tpu::Client#get_node
+# Snippet for the get_node call in the Tpu service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Tpu::V1::Tpu::Client#get_node. It may require modification in
+# order to execute successfully.
 #
 def get_node
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/trace/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Trace::V1::TraceService::Client#patch_traces
+# Snippet for the patch_traces call in the TraceService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Trace::V1::TraceService::Client#patch_traces. It may require
+# modification in order to execute successfully.
 #
 def patch_traces
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/translate/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Translate::V3::TranslationService::Client#batch_translate_document
+# Snippet for the batch_translate_document call in the TranslationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Translate::V3::TranslationService::Client#batch_translate_document.
+# It may require modification in order to execute successfully.
 #
 def batch_translate_document
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def batch_translate_document
   # Call the batch_translate_document method.
   result = client.batch_translate_document request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END translate_v3_generated_TranslationService_BatchTranslateDocument_sync]
