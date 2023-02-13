@@ -20,8 +20,11 @@
 require "google/cloud/pubsub/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::PubSub::V1::Subscriber::Client#acknowledge
+# Snippet for the acknowledge call in the Subscriber service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Subscriber::Client#acknowledge. It may require
+# modification in order to execute successfully.
 #
 def acknowledge
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/retail/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Retail::V2::CatalogService::Client#update_catalog
+# Snippet for the update_catalog call in the CatalogService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Retail::V2::CatalogService::Client#update_catalog. It may
+# require modification in order to execute successfully.
 #
 def update_catalog
   # Create a client object. The client can be reused for multiple calls.

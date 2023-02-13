@@ -20,8 +20,11 @@
 require "google/cloud/resource_manager/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ResourceManager::V3::Projects::Client#get_project
+# Snippet for the get_project call in the Projects service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::Projects::Client#get_project. It may
+# require modification in order to execute successfully.
 #
 def get_project
   # Create a client object. The client can be reused for multiple calls.

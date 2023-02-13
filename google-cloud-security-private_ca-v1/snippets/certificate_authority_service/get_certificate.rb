@@ -20,8 +20,11 @@
 require "google/cloud/security/private_ca/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#get_certificate
+# Snippet for the get_certificate call in the CertificateAuthorityService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#get_certificate.
+# It may require modification in order to execute successfully.
 #
 def get_certificate
   # Create a client object. The client can be reused for multiple calls.

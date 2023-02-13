@@ -20,8 +20,11 @@
 require "google/cloud/security/private_ca/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#update_certificate
+# Snippet for the update_certificate call in the CertificateAuthorityService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#update_certificate.
+# It may require modification in order to execute successfully.
 #
 def update_certificate
   # Create a client object. The client can be reused for multiple calls.

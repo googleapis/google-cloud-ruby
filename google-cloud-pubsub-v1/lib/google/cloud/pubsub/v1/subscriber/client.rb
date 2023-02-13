@@ -668,13 +668,11 @@ module Google
             #   # Call the list_subscriptions method.
             #   result = client.list_subscriptions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::PubSub::V1::Subscription.
-            #     p response
+            #     p item
             #   end
             #
             def list_subscriptions request, options = nil
@@ -1134,22 +1132,22 @@ module Google
             #   # Create a client object. The client can be reused for multiple calls.
             #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
             #
-            #   # Create an input stream
+            #   # Create an input stream.
             #   input = Gapic::StreamInput.new
             #
             #   # Call the streaming_pull method to start streaming.
             #   output = client.streaming_pull input
             #
-            #   # Send requests on the stream. For each request, pass in keyword
-            #   # arguments to set fields. Be sure to close the stream when done.
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
             #   input << Google::Cloud::PubSub::V1::StreamingPullRequest.new
             #   input << Google::Cloud::PubSub::V1::StreamingPullRequest.new
             #   input.close
             #
-            #   # Handle streamed responses. These may be interleaved with inputs.
-            #   # Each response is of type ::Google::Cloud::PubSub::V1::StreamingPullResponse.
-            #   output.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::PubSub::V1::StreamingPullResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def streaming_pull request, options = nil
@@ -1430,13 +1428,11 @@ module Google
             #   # Call the list_snapshots method.
             #   result = client.list_snapshots request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::PubSub::V1::Snapshot.
-            #     p response
+            #     p item
             #   end
             #
             def list_snapshots request, options = nil

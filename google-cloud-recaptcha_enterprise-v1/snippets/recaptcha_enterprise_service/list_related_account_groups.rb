@@ -20,8 +20,11 @@
 require "google/cloud/recaptcha_enterprise/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_related_account_groups
+# Snippet for the list_related_account_groups call in the RecaptchaEnterpriseService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_related_account_groups.
+# It may require modification in order to execute successfully.
 #
 def list_related_account_groups
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_related_account_groups
   # Call the list_related_account_groups method.
   result = client.list_related_account_groups request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroup.
-    p response
+    p item
   end
 end
 # [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroups_sync]
