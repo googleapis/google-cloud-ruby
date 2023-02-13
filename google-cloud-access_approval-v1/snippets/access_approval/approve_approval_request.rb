@@ -20,8 +20,11 @@
 require "google/cloud/access_approval/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AccessApproval::V1::AccessApproval::Client#approve_approval_request
+# Snippet for the approve_approval_request call in the AccessApproval service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AccessApproval::V1::AccessApproval::Client#approve_approval_request.
+# It may require modification in order to execute successfully.
 #
 def approve_approval_request
   # Create a client object. The client can be reused for multiple calls.

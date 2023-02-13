@@ -20,8 +20,11 @@
 require "google/analytics/admin/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#fetch_automated_ga4_configuration_opt_out
+# Snippet for the fetch_automated_ga4_configuration_opt_out call in the AnalyticsAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#fetch_automated_ga4_configuration_opt_out.
+# It may require modification in order to execute successfully.
 #
 def fetch_automated_ga4_configuration_opt_out
   # Create a client object. The client can be reused for multiple calls.

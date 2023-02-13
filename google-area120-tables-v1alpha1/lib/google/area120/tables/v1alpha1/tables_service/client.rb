@@ -321,13 +321,11 @@ module Google
             #   # Call the list_tables method.
             #   result = client.list_tables request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Area120::Tables::V1alpha1::Table.
-            #     p response
+            #     p item
             #   end
             #
             def list_tables request, options = nil
@@ -501,13 +499,11 @@ module Google
             #   # Call the list_workspaces method.
             #   result = client.list_workspaces request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Area120::Tables::V1alpha1::Workspace.
-            #     p response
+            #     p item
             #   end
             #
             def list_workspaces request, options = nil
@@ -694,13 +690,11 @@ module Google
             #   # Call the list_rows method.
             #   result = client.list_rows request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Area120::Tables::V1alpha1::Row.
-            #     p response
+            #     p item
             #   end
             #
             def list_rows request, options = nil

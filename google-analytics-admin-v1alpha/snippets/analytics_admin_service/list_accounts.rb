@@ -20,8 +20,11 @@
 require "google/analytics/admin/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_accounts
+# Snippet for the list_accounts call in the AnalyticsAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_accounts.
+# It may require modification in order to execute successfully.
 #
 def list_accounts
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_accounts
   # Call the list_accounts method.
   result = client.list_accounts request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Analytics::Admin::V1alpha::Account.
-    p response
+    p item
   end
 end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAccounts_sync]

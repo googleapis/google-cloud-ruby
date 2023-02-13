@@ -20,8 +20,11 @@
 require "google/cloud/artifact_registry/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_project_settings
+# Snippet for the get_project_settings call in the ArtifactRegistry service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_project_settings.
+# It may require modification in order to execute successfully.
 #
 def get_project_settings
   # Create a client object. The client can be reused for multiple calls.

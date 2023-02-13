@@ -20,8 +20,11 @@
 require "google/cloud/apigee_registry/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ApigeeRegistry::V1::Registry::Client#update_api_deployment
+# Snippet for the update_api_deployment call in the Registry service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ApigeeRegistry::V1::Registry::Client#update_api_deployment. It
+# may require modification in order to execute successfully.
 #
 def update_api_deployment
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/automl/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AutoML::V1beta1::AutoML::Client#create_dataset
+# Snippet for the create_dataset call in the AutoML service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AutoML::V1beta1::AutoML::Client#create_dataset. It may require
+# modification in order to execute successfully.
 #
 def create_dataset
   # Create a client object. The client can be reused for multiple calls.

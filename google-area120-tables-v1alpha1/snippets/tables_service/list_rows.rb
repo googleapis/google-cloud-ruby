@@ -20,8 +20,11 @@
 require "google/area120/tables/v1alpha1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Area120::Tables::V1alpha1::TablesService::Client#list_rows
+# Snippet for the list_rows call in the TablesService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Area120::Tables::V1alpha1::TablesService::Client#list_rows. It may
+# require modification in order to execute successfully.
 #
 def list_rows
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_rows
   # Call the list_rows method.
   result = client.list_rows request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Area120::Tables::V1alpha1::Row.
-    p response
+    p item
   end
 end
 # [END area120tables_v1alpha1_generated_TablesService_ListRows_sync]

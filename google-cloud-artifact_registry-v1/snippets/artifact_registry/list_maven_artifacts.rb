@@ -20,8 +20,11 @@
 require "google/cloud/artifact_registry/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#list_maven_artifacts
+# Snippet for the list_maven_artifacts call in the ArtifactRegistry service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#list_maven_artifacts.
+# It may require modification in order to execute successfully.
 #
 def list_maven_artifacts
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_maven_artifacts
   # Call the list_maven_artifacts method.
   result = client.list_maven_artifacts request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1::MavenArtifact.
-    p response
+    p item
   end
 end
 # [END artifactregistry_v1_generated_ArtifactRegistry_ListMavenArtifacts_sync]

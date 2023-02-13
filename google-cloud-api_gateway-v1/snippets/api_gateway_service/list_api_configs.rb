@@ -20,8 +20,11 @@
 require "google/cloud/api_gateway/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#list_api_configs
+# Snippet for the list_api_configs call in the ApiGatewayService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#list_api_configs. It
+# may require modification in order to execute successfully.
 #
 def list_api_configs
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_api_configs
   # Call the list_api_configs method.
   result = client.list_api_configs request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::ApiGateway::V1::ApiConfig.
-    p response
+    p item
   end
 end
 # [END apigateway_v1_generated_ApiGatewayService_ListApiConfigs_sync]

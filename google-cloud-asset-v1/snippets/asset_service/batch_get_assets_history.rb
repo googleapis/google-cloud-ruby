@@ -20,8 +20,11 @@
 require "google/cloud/asset/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Asset::V1::AssetService::Client#batch_get_assets_history
+# Snippet for the batch_get_assets_history call in the AssetService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Asset::V1::AssetService::Client#batch_get_assets_history. It
+# may require modification in order to execute successfully.
 #
 def batch_get_assets_history
   # Create a client object. The client can be reused for multiple calls.

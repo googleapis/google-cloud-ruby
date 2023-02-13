@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::VizierService::Client#delete_study
+# Snippet for the delete_study call in the VizierService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::VizierService::Client#delete_study. It may
+# require modification in order to execute successfully.
 #
 def delete_study
   # Create a client object. The client can be reused for multiple calls.

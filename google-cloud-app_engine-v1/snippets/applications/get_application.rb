@@ -20,8 +20,11 @@
 require "google/cloud/app_engine/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AppEngine::V1::Applications::Client#get_application
+# Snippet for the get_application call in the Applications service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::Applications::Client#get_application. It may
+# require modification in order to execute successfully.
 #
 def get_application
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::ModelService::Client#get_model_evaluation_slice
+# Snippet for the get_model_evaluation_slice call in the ModelService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::ModelService::Client#get_model_evaluation_slice.
+# It may require modification in order to execute successfully.
 #
 def get_model_evaluation_slice
   # Create a client object. The client can be reused for multiple calls.

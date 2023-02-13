@@ -20,8 +20,11 @@
 require "google/cloud/artifact_registry/v1beta2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_tag
+# Snippet for the get_tag call in the ArtifactRegistry service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_tag. It
+# may require modification in order to execute successfully.
 #
 def get_tag
   # Create a client object. The client can be reused for multiple calls.

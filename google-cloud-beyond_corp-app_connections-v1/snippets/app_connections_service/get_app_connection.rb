@@ -20,8 +20,11 @@
 require "google/cloud/beyond_corp/app_connections/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#get_app_connection
+# Snippet for the get_app_connection call in the AppConnectionsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#get_app_connection.
+# It may require modification in order to execute successfully.
 #
 def get_app_connection
   # Create a client object. The client can be reused for multiple calls.

@@ -262,13 +262,11 @@ module Google
             #   # Call the list_approval_requests method.
             #   result = client.list_approval_requests request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AccessApproval::V1::ApprovalRequest.
-            #     p response
+            #     p item
             #   end
             #
             def list_approval_requests request, options = nil

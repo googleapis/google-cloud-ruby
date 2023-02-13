@@ -20,8 +20,11 @@
 require "google/cloud/bare_metal_solution/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_nfs_share
+# Snippet for the get_nfs_share call in the BareMetalSolution service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_nfs_share.
+# It may require modification in order to execute successfully.
 #
 def get_nfs_share
   # Create a client object. The client can be reused for multiple calls.

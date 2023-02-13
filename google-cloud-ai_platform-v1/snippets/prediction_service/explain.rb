@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::PredictionService::Client#explain
+# Snippet for the explain call in the PredictionService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::PredictionService::Client#explain. It may
+# require modification in order to execute successfully.
 #
 def explain
   # Create a client object. The client can be reused for multiple calls.

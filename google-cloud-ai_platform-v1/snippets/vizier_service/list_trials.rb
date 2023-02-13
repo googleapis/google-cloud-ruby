@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::VizierService::Client#list_trials
+# Snippet for the list_trials call in the VizierService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::VizierService::Client#list_trials. It may
+# require modification in order to execute successfully.
 #
 def list_trials
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_trials
   # Call the list_trials method.
   result = client.list_trials request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::AIPlatform::V1::Trial.
-    p response
+    p item
   end
 end
 # [END aiplatform_v1_generated_VizierService_ListTrials_sync]
