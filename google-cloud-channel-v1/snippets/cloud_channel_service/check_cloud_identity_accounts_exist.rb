@@ -20,8 +20,11 @@
 require "google/cloud/channel/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Channel::V1::CloudChannelService::Client#check_cloud_identity_accounts_exist
+# Snippet for the check_cloud_identity_accounts_exist call in the CloudChannelService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#check_cloud_identity_accounts_exist.
+# It may require modification in order to execute successfully.
 #
 def check_cloud_identity_accounts_exist
   # Create a client object. The client can be reused for multiple calls.

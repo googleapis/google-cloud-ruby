@@ -20,8 +20,11 @@
 require "google/cloud/dataflow/v1beta3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataflow::V1beta3::Jobs::Client#check_active_jobs
+# Snippet for the check_active_jobs call in the Jobs service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::Jobs::Client#check_active_jobs. It may
+# require modification in order to execute successfully.
 #
 def check_active_jobs
   # Create a client object. The client can be reused for multiple calls.

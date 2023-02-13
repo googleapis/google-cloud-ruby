@@ -20,8 +20,11 @@
 require "google/cloud/data_catalog/lineage/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#batch_search_link_processes
+# Snippet for the batch_search_link_processes call in the Lineage service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#batch_search_link_processes.
+# It may require modification in order to execute successfully.
 #
 def batch_search_link_processes
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def batch_search_link_processes
   # Call the batch_search_link_processes method.
   result = client.batch_search_link_processes request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::DataCatalog::Lineage::V1::ProcessLinks.
-    p response
+    p item
   end
 end
 # [END datalineage_v1_generated_Lineage_BatchSearchLinkProcesses_sync]

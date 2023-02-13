@@ -20,8 +20,11 @@
 require "google/cloud/dataproc/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataproc::V1::JobController::Client#submit_job_as_operation
+# Snippet for the submit_job_as_operation call in the JobController service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataproc::V1::JobController::Client#submit_job_as_operation. It
+# may require modification in order to execute successfully.
 #
 def submit_job_as_operation
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def submit_job_as_operation
   # Call the submit_job_as_operation method.
   result = client.submit_job_as_operation request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END dataproc_v1_generated_JobController_SubmitJobAsOperation_sync]

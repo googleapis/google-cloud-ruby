@@ -20,8 +20,11 @@
 require "google/cloud/dataform/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataform::V1beta1::Dataform::Client#query_directory_contents
+# Snippet for the query_directory_contents call in the Dataform service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#query_directory_contents.
+# It may require modification in order to execute successfully.
 #
 def query_directory_contents
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def query_directory_contents
   # Call the query_directory_contents method.
   result = client.query_directory_contents request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsResponse::DirectoryEntry.
-    p response
+    p item
   end
 end
 # [END dataform_v1beta1_generated_Dataform_QueryDirectoryContents_sync]

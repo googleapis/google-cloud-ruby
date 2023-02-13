@@ -20,8 +20,11 @@
 require "google/cloud/data_labeling/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#list_evaluation_jobs
+# Snippet for the list_evaluation_jobs call in the DataLabelingService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#list_evaluation_jobs.
+# It may require modification in order to execute successfully.
 #
 def list_evaluation_jobs
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_evaluation_jobs
   # Call the list_evaluation_jobs method.
   result = client.list_evaluation_jobs request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::EvaluationJob.
-    p response
+    p item
   end
 end
 # [END datalabeling_v1beta1_generated_DataLabelingService_ListEvaluationJobs_sync]

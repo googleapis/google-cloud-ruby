@@ -20,8 +20,11 @@
 require "google/cloud/dataplex/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::DataplexService::Client#list_lake_actions
+# Snippet for the list_lake_actions call in the DataplexService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::DataplexService::Client#list_lake_actions. It may
+# require modification in order to execute successfully.
 #
 def list_lake_actions
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_lake_actions
   # Call the list_lake_actions method.
   result = client.list_lake_actions request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Dataplex::V1::Action.
-    p response
+    p item
   end
 end
 # [END dataplex_v1_generated_DataplexService_ListLakeActions_sync]

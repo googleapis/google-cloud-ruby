@@ -20,8 +20,11 @@
 require "google/cloud/certificate_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_dns_authorization
+# Snippet for the get_dns_authorization call in the CertificateManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_dns_authorization.
+# It may require modification in order to execute successfully.
 #
 def get_dns_authorization
   # Create a client object. The client can be reused for multiple calls.

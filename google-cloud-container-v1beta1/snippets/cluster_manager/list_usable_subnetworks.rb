@@ -20,8 +20,11 @@
 require "google/cloud/container/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Container::V1beta1::ClusterManager::Client#list_usable_subnetworks
+# Snippet for the list_usable_subnetworks call in the ClusterManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Container::V1beta1::ClusterManager::Client#list_usable_subnetworks.
+# It may require modification in order to execute successfully.
 #
 def list_usable_subnetworks
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_usable_subnetworks
   # Call the list_usable_subnetworks method.
   result = client.list_usable_subnetworks request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Container::V1beta1::UsableSubnetwork.
-    p response
+    p item
   end
 end
 # [END container_v1beta1_generated_ClusterManager_ListUsableSubnetworks_sync]
