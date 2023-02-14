@@ -170,11 +170,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :ca_options, :message, 2, "google.cloud.security.privateca.v1.X509Parameters.CaOptions"
       repeated :policy_ids, :message, 3, "google.cloud.security.privateca.v1.ObjectId"
       repeated :aia_ocsp_servers, :string, 4
+      optional :name_constraints, :message, 6, "google.cloud.security.privateca.v1.X509Parameters.NameConstraints"
       repeated :additional_extensions, :message, 5, "google.cloud.security.privateca.v1.X509Extension"
     end
     add_message "google.cloud.security.privateca.v1.X509Parameters.CaOptions" do
       proto3_optional :is_ca, :bool, 1
       proto3_optional :max_issuer_path_length, :int32, 2
+    end
+    add_message "google.cloud.security.privateca.v1.X509Parameters.NameConstraints" do
+      optional :critical, :bool, 1
+      repeated :permitted_dns_names, :string, 2
+      repeated :excluded_dns_names, :string, 3
+      repeated :permitted_ip_ranges, :string, 4
+      repeated :excluded_ip_ranges, :string, 5
+      repeated :permitted_email_addresses, :string, 6
+      repeated :excluded_email_addresses, :string, 7
+      repeated :permitted_uris, :string, 8
+      repeated :excluded_uris, :string, 9
     end
     add_message "google.cloud.security.privateca.v1.SubordinateConfig" do
       oneof :subordinate_config do
@@ -291,6 +303,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CA_OPTIONS, 3
       value :POLICY_IDS, 4
       value :AIA_OCSP_SERVERS, 5
+      value :NAME_CONSTRAINTS, 6
     end
     add_enum "google.cloud.security.privateca.v1.RevocationReason" do
       value :REVOCATION_REASON_UNSPECIFIED, 0
@@ -339,6 +352,7 @@ module Google
           CertificateTemplate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.security.privateca.v1.CertificateTemplate").msgclass
           X509Parameters = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.security.privateca.v1.X509Parameters").msgclass
           X509Parameters::CaOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.security.privateca.v1.X509Parameters.CaOptions").msgclass
+          X509Parameters::NameConstraints = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.security.privateca.v1.X509Parameters.NameConstraints").msgclass
           SubordinateConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.security.privateca.v1.SubordinateConfig").msgclass
           SubordinateConfig::SubordinateConfigChain = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.security.privateca.v1.SubordinateConfig.SubordinateConfigChain").msgclass
           PublicKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.security.privateca.v1.PublicKey").msgclass
