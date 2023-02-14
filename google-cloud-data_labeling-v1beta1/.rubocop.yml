@@ -13,9 +13,6 @@ AllCops:
 
 Layout/LineLength:
   Enabled: false
-Lint/Debugger:
-  Exclude:
-    - "snippets/**/*.rb"
 Metrics/AbcSize:
   Enabled: false
 Metrics/ClassLength:
