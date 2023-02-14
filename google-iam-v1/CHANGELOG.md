@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2023-02-14)
+
+#### Features
+
+* Properly yield a TransportOperation object to REST call blocks ([#20403](https://github.com/googleapis/google-cloud-ruby/issues/20403)) 
+
 ### 0.3.0 (2023-01-17)
 
 #### Features
