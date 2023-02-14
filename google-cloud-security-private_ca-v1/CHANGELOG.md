@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2023-02-14)
+
+#### Features
+
+* Support for X.509 name constraints ([#20406](https://github.com/googleapis/google-cloud-ruby/issues/20406)) 
+
 ### 0.4.0 (2022-07-07)
 
 #### Features
