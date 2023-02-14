@@ -1,5 +1,15 @@
 # Release History
 
+### 2.0.0 (2023-02-14)
+
+### ⚠ BREAKING CHANGES
+
+* Calling an RPC with a block yields a TransportOperation rather than a Faraday object ([#20404](https://github.com/googleapis/google-cloud-ruby/issues/20404))
+
+#### Features
+
+* Calling an RPC with a block yields a TransportOperation rather than a Faraday object ([#20404](https://github.com/googleapis/google-cloud-ruby/issues/20404)) 
+
 ### 1.10.0 (2023-01-26)
 
 #### Features
