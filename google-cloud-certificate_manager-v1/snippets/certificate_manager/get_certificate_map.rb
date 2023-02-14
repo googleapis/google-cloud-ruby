@@ -20,8 +20,11 @@
 require "google/cloud/certificate_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate_map
+# Snippet for the get_certificate_map call in the CertificateManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate_map.
+# It may require modification in order to execute successfully.
 #
 def get_certificate_map
   # Create a client object. The client can be reused for multiple calls.

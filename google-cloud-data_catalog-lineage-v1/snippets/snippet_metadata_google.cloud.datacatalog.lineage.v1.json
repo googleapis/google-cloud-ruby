@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "datalineage_v1_generated_Lineage_CreateProcess_sync",
-      "title": "Snippet for create_process in Lineage",
-      "description": "Basic snippet for create_process in Lineage",
+      "title": "Snippet for the create_process call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#create_process. It may require modification in order to execute successfully.",
       "file": "lineage/create_process.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_UpdateProcess_sync",
-      "title": "Snippet for update_process in Lineage",
-      "description": "Basic snippet for update_process in Lineage",
+      "title": "Snippet for the update_process call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#update_process. It may require modification in order to execute successfully.",
       "file": "lineage/update_process.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_GetProcess_sync",
-      "title": "Snippet for get_process in Lineage",
-      "description": "Basic snippet for get_process in Lineage",
+      "title": "Snippet for the get_process call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#get_process. It may require modification in order to execute successfully.",
       "file": "lineage/get_process.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_ListProcesses_sync",
-      "title": "Snippet for list_processes in Lineage",
-      "description": "Basic snippet for list_processes in Lineage",
+      "title": "Snippet for the list_processes call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_processes. It may require modification in order to execute successfully.",
       "file": "lineage/list_processes.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_DeleteProcess_sync",
-      "title": "Snippet for delete_process in Lineage",
-      "description": "Basic snippet for delete_process in Lineage",
+      "title": "Snippet for the delete_process call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#delete_process. It may require modification in order to execute successfully.",
       "file": "lineage/delete_process.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_CreateRun_sync",
-      "title": "Snippet for create_run in Lineage",
-      "description": "Basic snippet for create_run in Lineage",
+      "title": "Snippet for the create_run call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#create_run. It may require modification in order to execute successfully.",
       "file": "lineage/create_run.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_UpdateRun_sync",
-      "title": "Snippet for update_run in Lineage",
-      "description": "Basic snippet for update_run in Lineage",
+      "title": "Snippet for the update_run call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#update_run. It may require modification in order to execute successfully.",
       "file": "lineage/update_run.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_GetRun_sync",
-      "title": "Snippet for get_run in Lineage",
-      "description": "Basic snippet for get_run in Lineage",
+      "title": "Snippet for the get_run call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#get_run. It may require modification in order to execute successfully.",
       "file": "lineage/get_run.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_ListRuns_sync",
-      "title": "Snippet for list_runs in Lineage",
-      "description": "Basic snippet for list_runs in Lineage",
+      "title": "Snippet for the list_runs call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_runs. It may require modification in order to execute successfully.",
       "file": "lineage/list_runs.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_DeleteRun_sync",
-      "title": "Snippet for delete_run in Lineage",
-      "description": "Basic snippet for delete_run in Lineage",
+      "title": "Snippet for the delete_run call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#delete_run. It may require modification in order to execute successfully.",
       "file": "lineage/delete_run.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_CreateLineageEvent_sync",
-      "title": "Snippet for create_lineage_event in Lineage",
-      "description": "Basic snippet for create_lineage_event in Lineage",
+      "title": "Snippet for the create_lineage_event call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#create_lineage_event. It may require modification in order to execute successfully.",
       "file": "lineage/create_lineage_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_GetLineageEvent_sync",
-      "title": "Snippet for get_lineage_event in Lineage",
-      "description": "Basic snippet for get_lineage_event in Lineage",
+      "title": "Snippet for the get_lineage_event call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#get_lineage_event. It may require modification in order to execute successfully.",
       "file": "lineage/get_lineage_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_ListLineageEvents_sync",
-      "title": "Snippet for list_lineage_events in Lineage",
-      "description": "Basic snippet for list_lineage_events in Lineage",
+      "title": "Snippet for the list_lineage_events call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#list_lineage_events. It may require modification in order to execute successfully.",
       "file": "lineage/list_lineage_events.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_DeleteLineageEvent_sync",
-      "title": "Snippet for delete_lineage_event in Lineage",
-      "description": "Basic snippet for delete_lineage_event in Lineage",
+      "title": "Snippet for the delete_lineage_event call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#delete_lineage_event. It may require modification in order to execute successfully.",
       "file": "lineage/delete_lineage_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_SearchLinks_sync",
-      "title": "Snippet for search_links in Lineage",
-      "description": "Basic snippet for search_links in Lineage",
+      "title": "Snippet for the search_links call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#search_links. It may require modification in order to execute successfully.",
       "file": "lineage/search_links.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "datalineage_v1_generated_Lineage_BatchSearchLinkProcesses_sync",
-      "title": "Snippet for batch_search_link_processes in Lineage",
-      "description": "Basic snippet for batch_search_link_processes in Lineage",
+      "title": "Snippet for the batch_search_link_processes call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#batch_search_link_processes. It may require modification in order to execute successfully.",
       "file": "lineage/batch_search_link_processes.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

@@ -472,13 +472,11 @@ module Google
             #   # Call the list_taxonomies method.
             #   result = client.list_taxonomies request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DataCatalog::V1::Taxonomy.
-            #     p response
+            #     p item
             #   end
             #
             def list_taxonomies request, options = nil
@@ -931,13 +929,11 @@ module Google
             #   # Call the list_policy_tags method.
             #   result = client.list_policy_tags request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::DataCatalog::V1::PolicyTag.
-            #     p response
+            #     p item
             #   end
             #
             def list_policy_tags request, options = nil

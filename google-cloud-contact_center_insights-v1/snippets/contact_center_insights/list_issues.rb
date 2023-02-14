@@ -20,8 +20,11 @@
 require "google/cloud/contact_center_insights/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_issues
+# Snippet for the list_issues call in the ContactCenterInsights service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_issues.
+# It may require modification in order to execute successfully.
 #
 def list_issues
   # Create a client object. The client can be reused for multiple calls.

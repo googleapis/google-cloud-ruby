@@ -20,8 +20,11 @@
 require "google/cloud/dataplex/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::DataScanService::Client#run_data_scan
+# Snippet for the run_data_scan call in the DataScanService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::DataScanService::Client#run_data_scan. It may
+# require modification in order to execute successfully.
 #
 def run_data_scan
   # Create a client object. The client can be reused for multiple calls.

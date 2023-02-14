@@ -20,8 +20,11 @@
 require "google/cloud/dataform/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataform::V1beta1::Dataform::Client#move_directory
+# Snippet for the move_directory call in the Dataform service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#move_directory. It may
+# require modification in order to execute successfully.
 #
 def move_directory
   # Create a client object. The client can be reused for multiple calls.

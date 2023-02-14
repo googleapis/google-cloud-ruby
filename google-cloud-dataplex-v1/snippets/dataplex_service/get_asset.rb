@@ -20,8 +20,11 @@
 require "google/cloud/dataplex/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::DataplexService::Client#get_asset
+# Snippet for the get_asset call in the DataplexService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::DataplexService::Client#get_asset. It may require
+# modification in order to execute successfully.
 #
 def get_asset
   # Create a client object. The client can be reused for multiple calls.
