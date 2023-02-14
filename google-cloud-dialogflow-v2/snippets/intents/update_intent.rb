@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Intents::Client#update_intent
+# Snippet for the update_intent call in the Intents service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Intents::Client#update_intent. It may require
+# modification in order to execute successfully.
 #
 def update_intent
   # Create a client object. The client can be reused for multiple calls.

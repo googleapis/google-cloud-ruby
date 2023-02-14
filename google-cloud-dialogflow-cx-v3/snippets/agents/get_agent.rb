@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::Agents::Client#get_agent
+# Snippet for the get_agent call in the Agents service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Agents::Client#get_agent. It may require
+# modification in order to execute successfully.
 #
 def get_agent
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/deploy/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Deploy::V1::CloudDeploy::Client#create_target
+# Snippet for the create_target call in the CloudDeploy service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Deploy::V1::CloudDeploy::Client#create_target. It may require
+# modification in order to execute successfully.
 #
 def create_target
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_target
   # Call the create_target method.
   result = client.create_target request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END clouddeploy_v1_generated_CloudDeploy_CreateTarget_sync]

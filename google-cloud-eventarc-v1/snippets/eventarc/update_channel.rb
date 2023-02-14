@@ -20,8 +20,11 @@
 require "google/cloud/eventarc/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Eventarc::V1::Eventarc::Client#update_channel
+# Snippet for the update_channel call in the Eventarc service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Eventarc::V1::Eventarc::Client#update_channel. It may require
+# modification in order to execute successfully.
 #
 def update_channel
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def update_channel
   # Call the update_channel method.
   result = client.update_channel request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END eventarc_v1_generated_Eventarc_UpdateChannel_sync]

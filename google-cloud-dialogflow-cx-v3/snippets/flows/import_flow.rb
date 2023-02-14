@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::Flows::Client#import_flow
+# Snippet for the import_flow call in the Flows service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Flows::Client#import_flow. It may require
+# modification in order to execute successfully.
 #
 def import_flow
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def import_flow
   # Call the import_flow method.
   result = client.import_flow request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END dialogflow_v3_generated_Flows_ImportFlow_sync]

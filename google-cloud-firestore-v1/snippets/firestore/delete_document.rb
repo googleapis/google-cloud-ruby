@@ -20,8 +20,11 @@
 require "google/cloud/firestore/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Firestore::V1::Firestore::Client#delete_document
+# Snippet for the delete_document call in the Firestore service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Firestore::V1::Firestore::Client#delete_document. It may
+# require modification in order to execute successfully.
 #
 def delete_document
   # Create a client object. The client can be reused for multiple calls.

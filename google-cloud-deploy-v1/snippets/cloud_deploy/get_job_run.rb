@@ -20,8 +20,11 @@
 require "google/cloud/deploy/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Deploy::V1::CloudDeploy::Client#get_job_run
+# Snippet for the get_job_run call in the CloudDeploy service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Deploy::V1::CloudDeploy::Client#get_job_run. It may require
+# modification in order to execute successfully.
 #
 def get_job_run
   # Create a client object. The client can be reused for multiple calls.

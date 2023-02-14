@@ -20,8 +20,11 @@
 require "google/cloud/debugger/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Debugger::V2::Debugger::Client#list_debuggees
+# Snippet for the list_debuggees call in the Debugger service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Debugger::V2::Debugger::Client#list_debuggees. It may require
+# modification in order to execute successfully.
 #
 def list_debuggees
   # Create a client object. The client can be reused for multiple calls.

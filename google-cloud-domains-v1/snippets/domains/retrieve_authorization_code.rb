@@ -20,8 +20,11 @@
 require "google/cloud/domains/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Domains::V1::Domains::Client#retrieve_authorization_code
+# Snippet for the retrieve_authorization_code call in the Domains service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Domains::V1::Domains::Client#retrieve_authorization_code. It
+# may require modification in order to execute successfully.
 #
 def retrieve_authorization_code
   # Create a client object. The client can be reused for multiple calls.

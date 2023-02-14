@@ -315,22 +315,22 @@ module Google
               #   # Create a client object. The client can be reused for multiple calls.
               #   client = Google::Cloud::Dialogflow::CX::V3::Sessions::Client.new
               #
-              #   # Create an input stream
+              #   # Create an input stream.
               #   input = Gapic::StreamInput.new
               #
               #   # Call the streaming_detect_intent method to start streaming.
               #   output = client.streaming_detect_intent input
               #
-              #   # Send requests on the stream. For each request, pass in keyword
-              #   # arguments to set fields. Be sure to close the stream when done.
+              #   # Send requests on the stream. For each request object, set fields by
+              #   # passing keyword arguments. Be sure to close the stream when done.
               #   input << Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentRequest.new
               #   input << Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentRequest.new
               #   input.close
               #
-              #   # Handle streamed responses. These may be interleaved with inputs.
-              #   # Each response is of type ::Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentResponse.
-              #   output.each do |response|
-              #     p response
+              #   # The returned object is a streamed enumerable yielding elements of type
+              #   # ::Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentResponse
+              #   output.each do |current_response|
+              #     p current_response
               #   end
               #
               def streaming_detect_intent request, options = nil

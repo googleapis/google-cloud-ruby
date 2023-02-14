@@ -20,8 +20,11 @@
 require "google/cloud/firestore/admin/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_databases
+# Snippet for the list_databases call in the FirestoreAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_databases. It
+# may require modification in order to execute successfully.
 #
 def list_databases
   # Create a client object. The client can be reused for multiple calls.

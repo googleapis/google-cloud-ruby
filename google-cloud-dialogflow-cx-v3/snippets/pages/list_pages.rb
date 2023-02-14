@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::Pages::Client#list_pages
+# Snippet for the list_pages call in the Pages service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Pages::Client#list_pages. It may require
+# modification in order to execute successfully.
 #
 def list_pages
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_pages
   # Call the list_pages method.
   result = client.list_pages request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Page.
-    p response
+    p item
   end
 end
 # [END dialogflow_v3_generated_Pages_ListPages_sync]
