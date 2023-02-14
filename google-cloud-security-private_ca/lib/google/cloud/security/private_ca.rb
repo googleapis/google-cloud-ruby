@@ -58,8 +58,9 @@ module Google
         #
         # ## About CertificateAuthorityService
         #
-        # Certificate Authority Service manages private
-        # certificate authorities and issued certificates.
+        # [Certificate Authority
+        # Service][google.cloud.security.privateca.v1.CertificateAuthorityService]
+        # manages private certificate authorities and issued certificates.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1`.
