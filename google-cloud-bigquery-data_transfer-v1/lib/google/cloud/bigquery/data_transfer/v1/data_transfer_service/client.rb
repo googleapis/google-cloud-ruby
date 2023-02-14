@@ -353,13 +353,11 @@ module Google
               #   # Call the list_data_sources method.
               #   result = client.list_data_sources request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::DataSource.
-              #     p response
+              #     p item
               #   end
               #
               def list_data_sources request, options = nil
@@ -892,13 +890,11 @@ module Google
               #   # Call the list_transfer_configs method.
               #   result = client.list_transfer_configs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig.
-              #     p response
+              #     p item
               #   end
               #
               def list_transfer_configs request, options = nil
@@ -1369,13 +1365,11 @@ module Google
               #   # Call the list_transfer_runs method.
               #   result = client.list_transfer_runs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::TransferRun.
-              #     p response
+              #     p item
               #   end
               #
               def list_transfer_runs request, options = nil
@@ -1474,13 +1468,11 @@ module Google
               #   # Call the list_transfer_logs method.
               #   result = client.list_transfer_logs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage.
-              #     p response
+              #     p item
               #   end
               #
               def list_transfer_logs request, options = nil

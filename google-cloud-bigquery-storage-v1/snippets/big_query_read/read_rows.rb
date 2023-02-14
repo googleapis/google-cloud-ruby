@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/storage/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client#read_rows
+# Snippet for the read_rows call in the BigQueryRead service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client#read_rows. It may
+# require modification in order to execute successfully.
 #
 def read_rows
   # Create a client object. The client can be reused for multiple calls.
@@ -30,13 +33,13 @@ def read_rows
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new
 
-  # Call the read_rows method.
-  result = client.read_rows request
+  # Call the read_rows method to start streaming.
+  output = client.read_rows request
 
-  # The returned object is a streamed enumerable yielding elements of
-  # type ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse.
-  result.each do |response|
-    p response
+  # The returned object is a streamed enumerable yielding elements of type
+  # ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse
+  output.each do |current_response|
+    p current_response
   end
 end
 # [END bigquerystorage_v1_generated_BigQueryRead_ReadRows_sync]

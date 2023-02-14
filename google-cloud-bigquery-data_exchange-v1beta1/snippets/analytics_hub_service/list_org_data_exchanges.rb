@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/data_exchange/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#list_org_data_exchanges
+# Snippet for the list_org_data_exchanges call in the AnalyticsHubService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#list_org_data_exchanges.
+# It may require modification in order to execute successfully.
 #
 def list_org_data_exchanges
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_org_data_exchanges
   # Call the list_org_data_exchanges method.
   result = client.list_org_data_exchanges request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange.
-    p response
+    p item
   end
 end
 # [END analyticshub_v1beta1_generated_AnalyticsHubService_ListOrgDataExchanges_sync]

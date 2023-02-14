@@ -20,8 +20,11 @@
 require "google/cloud/bigtable/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigtable::V2::Bigtable::Client#ping_and_warm
+# Snippet for the ping_and_warm call in the Bigtable service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigtable::V2::Bigtable::Client#ping_and_warm. It may require
+# modification in order to execute successfully.
 #
 def ping_and_warm
   # Create a client object. The client can be reused for multiple calls.

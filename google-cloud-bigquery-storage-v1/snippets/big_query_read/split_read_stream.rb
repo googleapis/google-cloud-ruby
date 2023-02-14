@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/storage/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client#split_read_stream
+# Snippet for the split_read_stream call in the BigQueryRead service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client#split_read_stream.
+# It may require modification in order to execute successfully.
 #
 def split_read_stream
   # Create a client object. The client can be reused for multiple calls.
