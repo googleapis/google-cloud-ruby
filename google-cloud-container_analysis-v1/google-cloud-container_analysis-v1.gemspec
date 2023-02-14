@@ -28,7 +28,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "grafeas-v1", ">= 0.4", "< 2.a"
   gem.add_dependency "grpc-google-iam-v1", "~> 1.1"
 
-  gem.add_development_dependency "google-style", "~> 1.26.1"
+  gem.add_development_dependency "google-style", "~> 1.26.3"
   gem.add_development_dependency "minitest", "~> 5.16"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
