@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::V3::SnoozeService::Client#get_snooze
+# Snippet for the get_snooze call in the SnoozeService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::SnoozeService::Client#get_snooze. It may
+# require modification in order to execute successfully.
 #
 def get_snooze
   # Create a client object. The client can be reused for multiple calls.

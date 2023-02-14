@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/metrics_scope/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#list_metrics_scopes_by_monitored_project
+# Snippet for the list_metrics_scopes_by_monitored_project call in the MetricsScopes service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#list_metrics_scopes_by_monitored_project.
+# It may require modification in order to execute successfully.
 #
 def list_metrics_scopes_by_monitored_project
   # Create a client object. The client can be reused for multiple calls.

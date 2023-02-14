@@ -20,8 +20,11 @@
 require "google/cloud/network_security/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#get_authorization_policy
+# Snippet for the get_authorization_policy call in the NetworkSecurity service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#get_authorization_policy.
+# It may require modification in order to execute successfully.
 #
 def get_authorization_policy
   # Create a client object. The client can be reused for multiple calls.

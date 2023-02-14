@@ -20,8 +20,11 @@
 require "google/cloud/notebooks/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Notebooks::V1beta1::NotebookService::Client#set_instance_machine_type
+# Snippet for the set_instance_machine_type call in the NotebookService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1beta1::NotebookService::Client#set_instance_machine_type.
+# It may require modification in order to execute successfully.
 #
 def set_instance_machine_type
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def set_instance_machine_type
   # Call the set_instance_machine_type method.
   result = client.set_instance_machine_type request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END notebooks_v1beta1_generated_NotebookService_SetInstanceMachineType_sync]
