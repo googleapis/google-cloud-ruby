@@ -321,13 +321,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::AIPlatform::V1::StreamingReadFeatureValuesRequest.new
             #
-            #   # Call the streaming_read_feature_values method.
-            #   result = client.streaming_read_feature_values request
+            #   # Call the streaming_read_feature_values method to start streaming.
+            #   output = client.streaming_read_feature_values request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::AIPlatform::V1::ReadFeatureValuesResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def streaming_read_feature_values request, options = nil

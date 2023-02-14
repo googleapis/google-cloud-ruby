@@ -20,8 +20,11 @@
 require "google/cloud/app_engine/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AppEngine::V1::Firewall::Client#list_ingress_rules
+# Snippet for the list_ingress_rules call in the Firewall service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::Firewall::Client#list_ingress_rules. It may
+# require modification in order to execute successfully.
 #
 def list_ingress_rules
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_ingress_rules
   # Call the list_ingress_rules method.
   result = client.list_ingress_rules request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::AppEngine::V1::FirewallRule.
-    p response
+    p item
   end
 end
 # [END appengine_v1_generated_Firewall_ListIngressRules_sync]

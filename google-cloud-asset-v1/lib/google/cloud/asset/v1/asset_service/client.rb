@@ -335,14 +335,14 @@ module Google
             #   # Call the export_assets method.
             #   result = client.export_assets request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def export_assets request, options = nil
@@ -484,13 +484,11 @@ module Google
             #   # Call the list_assets method.
             #   result = client.list_assets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::Asset.
-            #     p response
+            #     p item
             #   end
             #
             def list_assets request, options = nil
@@ -1307,13 +1305,11 @@ module Google
             #   # Call the search_all_resources method.
             #   result = client.search_all_resources request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::ResourceSearchResult.
-            #     p response
+            #     p item
             #   end
             #
             def search_all_resources request, options = nil
@@ -1496,13 +1492,11 @@ module Google
             #   # Call the search_all_iam_policies method.
             #   result = client.search_all_iam_policies request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::IamPolicySearchResult.
-            #     p response
+            #     p item
             #   end
             #
             def search_all_iam_policies request, options = nil
@@ -1732,14 +1726,14 @@ module Google
             #   # Call the analyze_iam_policy_longrunning method.
             #   result = client.analyze_iam_policy_longrunning request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def analyze_iam_policy_longrunning request, options = nil
@@ -2290,13 +2284,11 @@ module Google
             #   # Call the list_saved_queries method.
             #   result = client.list_saved_queries request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::SavedQuery.
-            #     p response
+            #     p item
             #   end
             #
             def list_saved_queries request, options = nil
@@ -2689,13 +2681,11 @@ module Google
             #   # Call the analyze_org_policies method.
             #   result = client.analyze_org_policies request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse::OrgPolicyResult.
-            #     p response
+            #     p item
             #   end
             #
             def analyze_org_policies request, options = nil
@@ -2805,13 +2795,11 @@ module Google
             #   # Call the analyze_org_policy_governed_containers method.
             #   result = client.analyze_org_policy_governed_containers request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse::GovernedContainer.
-            #     p response
+            #     p item
             #   end
             #
             def analyze_org_policy_governed_containers request, options = nil
@@ -2943,13 +2931,11 @@ module Google
             #   # Call the analyze_org_policy_governed_assets method.
             #   result = client.analyze_org_policy_governed_assets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedAsset.
-            #     p response
+            #     p item
             #   end
             #
             def analyze_org_policy_governed_assets request, options = nil

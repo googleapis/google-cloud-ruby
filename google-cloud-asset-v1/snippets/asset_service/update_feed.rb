@@ -20,8 +20,11 @@
 require "google/cloud/asset/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Asset::V1::AssetService::Client#update_feed
+# Snippet for the update_feed call in the AssetService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Asset::V1::AssetService::Client#update_feed. It may require
+# modification in order to execute successfully.
 #
 def update_feed
   # Create a client object. The client can be reused for multiple calls.

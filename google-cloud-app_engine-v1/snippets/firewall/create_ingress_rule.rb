@@ -20,8 +20,11 @@
 require "google/cloud/app_engine/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AppEngine::V1::Firewall::Client#create_ingress_rule
+# Snippet for the create_ingress_rule call in the Firewall service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::Firewall::Client#create_ingress_rule. It may
+# require modification in order to execute successfully.
 #
 def create_ingress_rule
   # Create a client object. The client can be reused for multiple calls.

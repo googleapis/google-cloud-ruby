@@ -20,8 +20,11 @@
 require "google/cloud/asset/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Asset::V1::AssetService::Client#list_feeds
+# Snippet for the list_feeds call in the AssetService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Asset::V1::AssetService::Client#list_feeds. It may require
+# modification in order to execute successfully.
 #
 def list_feeds
   # Create a client object. The client can be reused for multiple calls.

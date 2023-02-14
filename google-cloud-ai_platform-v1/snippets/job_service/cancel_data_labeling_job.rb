@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::JobService::Client#cancel_data_labeling_job
+# Snippet for the cancel_data_labeling_job call in the JobService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::JobService::Client#cancel_data_labeling_job. It
+# may require modification in order to execute successfully.
 #
 def cancel_data_labeling_job
   # Create a client object. The client can be reused for multiple calls.

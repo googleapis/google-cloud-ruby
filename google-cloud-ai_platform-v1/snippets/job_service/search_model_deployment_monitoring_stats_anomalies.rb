@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::JobService::Client#search_model_deployment_monitoring_stats_anomalies
+# Snippet for the search_model_deployment_monitoring_stats_anomalies call in the JobService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::JobService::Client#search_model_deployment_monitoring_stats_anomalies.
+# It may require modification in order to execute successfully.
 #
 def search_model_deployment_monitoring_stats_anomalies
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def search_model_deployment_monitoring_stats_anomalies
   # Call the search_model_deployment_monitoring_stats_anomalies method.
   result = client.search_model_deployment_monitoring_stats_anomalies request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::AIPlatform::V1::ModelMonitoringStatsAnomalies.
-    p response
+    p item
   end
 end
 # [END aiplatform_v1_generated_JobService_SearchModelDeploymentMonitoringStatsAnomalies_sync]

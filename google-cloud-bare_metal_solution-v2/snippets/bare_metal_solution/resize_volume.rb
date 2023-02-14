@@ -20,8 +20,11 @@
 require "google/cloud/bare_metal_solution/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#resize_volume
+# Snippet for the resize_volume call in the BareMetalSolution service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#resize_volume.
+# It may require modification in order to execute successfully.
 #
 def resize_volume
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def resize_volume
   # Call the resize_volume method.
   result = client.resize_volume request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END baremetalsolution_v2_generated_BareMetalSolution_ResizeVolume_sync]

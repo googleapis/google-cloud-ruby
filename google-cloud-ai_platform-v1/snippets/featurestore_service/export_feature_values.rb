@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#export_feature_values
+# Snippet for the export_feature_values call in the FeaturestoreService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#export_feature_values.
+# It may require modification in order to execute successfully.
 #
 def export_feature_values
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def export_feature_values
   # Call the export_feature_values method.
   result = client.export_feature_values request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END aiplatform_v1_generated_FeaturestoreService_ExportFeatureValues_sync]

@@ -20,8 +20,11 @@
 require "google/cloud/automl/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AutoML::V1::AutoML::Client#import_data
+# Snippet for the import_data call in the AutoML service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AutoML::V1::AutoML::Client#import_data. It may require
+# modification in order to execute successfully.
 #
 def import_data
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def import_data
   # Call the import_data method.
   result = client.import_data request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END automl_v1_generated_AutoML_ImportData_sync]

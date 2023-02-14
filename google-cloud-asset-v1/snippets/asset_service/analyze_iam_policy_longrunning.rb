@@ -20,8 +20,11 @@
 require "google/cloud/asset/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning
+# Snippet for the analyze_iam_policy_longrunning call in the AssetService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning.
+# It may require modification in order to execute successfully.
 #
 def analyze_iam_policy_longrunning
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def analyze_iam_policy_longrunning
   # Call the analyze_iam_policy_longrunning method.
   result = client.analyze_iam_policy_longrunning request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END cloudasset_v1_generated_AssetService_AnalyzeIamPolicyLongrunning_sync]

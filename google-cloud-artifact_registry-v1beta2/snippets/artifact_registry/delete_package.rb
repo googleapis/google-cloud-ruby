@@ -20,8 +20,11 @@
 require "google/cloud/artifact_registry/v1beta2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#delete_package
+# Snippet for the delete_package call in the ArtifactRegistry service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#delete_package.
+# It may require modification in order to execute successfully.
 #
 def delete_package
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def delete_package
   # Call the delete_package method.
   result = client.delete_package request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END artifactregistry_v1beta2_generated_ArtifactRegistry_DeletePackage_sync]

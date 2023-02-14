@@ -20,8 +20,11 @@
 require "google/area120/tables/v1alpha1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Area120::Tables::V1alpha1::TablesService::Client#create_row
+# Snippet for the create_row call in the TablesService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Area120::Tables::V1alpha1::TablesService::Client#create_row. It may
+# require modification in order to execute successfully.
 #
 def create_row
   # Create a client object. The client can be reused for multiple calls.

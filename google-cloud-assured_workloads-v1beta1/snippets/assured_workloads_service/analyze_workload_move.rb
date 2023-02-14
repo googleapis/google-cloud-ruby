@@ -20,8 +20,11 @@
 require "google/cloud/assured_workloads/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#analyze_workload_move
+# Snippet for the analyze_workload_move call in the AssuredWorkloadsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#analyze_workload_move.
+# It may require modification in order to execute successfully.
 #
 def analyze_workload_move
   # Create a client object. The client can be reused for multiple calls.

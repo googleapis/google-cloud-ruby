@@ -20,8 +20,11 @@
 require "google/analytics/admin/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_firebase_link
+# Snippet for the delete_firebase_link call in the AnalyticsAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_firebase_link.
+# It may require modification in order to execute successfully.
 #
 def delete_firebase_link
   # Create a client object. The client can be reused for multiple calls.

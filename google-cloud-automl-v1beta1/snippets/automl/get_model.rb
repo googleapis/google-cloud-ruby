@@ -20,8 +20,11 @@
 require "google/cloud/automl/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AutoML::V1beta1::AutoML::Client#get_model
+# Snippet for the get_model call in the AutoML service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AutoML::V1beta1::AutoML::Client#get_model. It may require
+# modification in order to execute successfully.
 #
 def get_model
   # Create a client object. The client can be reused for multiple calls.

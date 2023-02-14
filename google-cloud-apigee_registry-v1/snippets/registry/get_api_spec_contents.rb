@@ -20,8 +20,11 @@
 require "google/cloud/apigee_registry/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_api_spec_contents
+# Snippet for the get_api_spec_contents call in the Registry service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_api_spec_contents. It
+# may require modification in order to execute successfully.
 #
 def get_api_spec_contents
   # Create a client object. The client can be reused for multiple calls.

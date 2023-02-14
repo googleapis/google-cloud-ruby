@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices
+# Snippet for the list_model_evaluation_slices call in the ModelService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluation_slices.
+# It may require modification in order to execute successfully.
 #
 def list_model_evaluation_slices
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_model_evaluation_slices
   # Call the list_model_evaluation_slices method.
   result = client.list_model_evaluation_slices request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::AIPlatform::V1::ModelEvaluationSlice.
-    p response
+    p item
   end
 end
 # [END aiplatform_v1_generated_ModelService_ListModelEvaluationSlices_sync]

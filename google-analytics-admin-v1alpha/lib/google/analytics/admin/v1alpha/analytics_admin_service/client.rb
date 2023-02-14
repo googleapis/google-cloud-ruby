@@ -349,13 +349,11 @@ module Google
             #   # Call the list_accounts method.
             #   result = client.list_accounts request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::Account.
-            #     p response
+            #     p item
             #   end
             #
             def list_accounts request, options = nil
@@ -709,13 +707,11 @@ module Google
             #   # Call the list_account_summaries method.
             #   result = client.list_account_summaries request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AccountSummary.
-            #     p response
+            #     p item
             #   end
             #
             def list_account_summaries request, options = nil
@@ -914,13 +910,11 @@ module Google
             #   # Call the list_properties method.
             #   result = client.list_properties request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::Property.
-            #     p response
+            #     p item
             #   end
             #
             def list_properties request, options = nil
@@ -1452,13 +1446,11 @@ module Google
             #   # Call the list_user_links method.
             #   result = client.list_user_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::UserLink.
-            #     p response
+            #     p item
             #   end
             #
             def list_user_links request, options = nil
@@ -1562,13 +1554,11 @@ module Google
             #   # Call the audit_user_links method.
             #   result = client.audit_user_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AuditUserLink.
-            #     p response
+            #     p item
             #   end
             #
             def audit_user_links request, options = nil
@@ -2386,13 +2376,11 @@ module Google
             #   # Call the list_firebase_links method.
             #   result = client.list_firebase_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::FirebaseLink.
-            #     p response
+            #     p item
             #   end
             #
             def list_firebase_links request, options = nil
@@ -2839,13 +2827,11 @@ module Google
             #   # Call the list_google_ads_links method.
             #   result = client.list_google_ads_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::GoogleAdsLink.
-            #     p response
+            #     p item
             #   end
             #
             def list_google_ads_links request, options = nil
@@ -3118,13 +3104,11 @@ module Google
             #   # Call the list_measurement_protocol_secrets method.
             #   result = client.list_measurement_protocol_secrets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
-            #     p response
+            #     p item
             #   end
             #
             def list_measurement_protocol_secrets request, options = nil
@@ -3598,13 +3582,11 @@ module Google
             #   # Call the search_change_history_events method.
             #   result = client.search_change_history_events request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ChangeHistoryEvent.
-            #     p response
+            #     p item
             #   end
             #
             def search_change_history_events request, options = nil
@@ -4141,13 +4123,11 @@ module Google
             #   # Call the list_conversion_events method.
             #   result = client.list_conversion_events request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ConversionEvent.
-            #     p response
+            #     p item
             #   end
             #
             def list_conversion_events request, options = nil
@@ -4330,13 +4310,11 @@ module Google
             #   # Call the list_display_video360_advertiser_links method.
             #   result = client.list_display_video360_advertiser_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
-            #     p response
+            #     p item
             #   end
             #
             def list_display_video360_advertiser_links request, options = nil
@@ -4786,13 +4764,11 @@ module Google
             #   # Call the list_display_video360_advertiser_link_proposals method.
             #   result = client.list_display_video360_advertiser_link_proposals request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
-            #     p response
+            #     p item
             #   end
             #
             def list_display_video360_advertiser_link_proposals request, options = nil
@@ -5416,13 +5392,11 @@ module Google
             #   # Call the list_custom_dimensions method.
             #   result = client.list_custom_dimensions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::CustomDimension.
-            #     p response
+            #     p item
             #   end
             #
             def list_custom_dimensions request, options = nil
@@ -5866,13 +5840,11 @@ module Google
             #   # Call the list_custom_metrics method.
             #   result = client.list_custom_metrics request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::CustomMetric.
-            #     p response
+            #     p item
             #   end
             #
             def list_custom_metrics request, options = nil
@@ -6581,13 +6553,11 @@ module Google
             #   # Call the list_data_streams method.
             #   result = client.list_data_streams request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::DataStream.
-            #     p response
+            #     p item
             #   end
             #
             def list_data_streams request, options = nil
@@ -6859,13 +6829,11 @@ module Google
             #   # Call the list_audiences method.
             #   result = client.list_audiences request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::Audience.
-            #     p response
+            #     p item
             #   end
             #
             def list_audiences request, options = nil
@@ -7311,13 +7279,11 @@ module Google
             #   # Call the list_search_ads360_links method.
             #   result = client.list_search_ads360_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::SearchAds360Link.
-            #     p response
+            #     p item
             #   end
             #
             def list_search_ads360_links request, options = nil
@@ -8262,13 +8228,11 @@ module Google
             #   # Call the list_big_query_links method.
             #   result = client.list_big_query_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::BigQueryLink.
-            #     p response
+            #     p item
             #   end
             #
             def list_big_query_links request, options = nil

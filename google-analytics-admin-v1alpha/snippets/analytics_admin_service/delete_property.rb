@@ -20,8 +20,11 @@
 require "google/analytics/admin/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_property
+# Snippet for the delete_property call in the AnalyticsAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_property.
+# It may require modification in order to execute successfully.
 #
 def delete_property
   # Create a client object. The client can be reused for multiple calls.

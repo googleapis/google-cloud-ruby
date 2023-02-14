@@ -20,8 +20,11 @@
 require "google/analytics/data/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Analytics::Data::V1beta::AnalyticsData::Client#get_metadata
+# Snippet for the get_metadata call in the AnalyticsData service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Analytics::Data::V1beta::AnalyticsData::Client#get_metadata. It may
+# require modification in order to execute successfully.
 #
 def get_metadata
   # Create a client object. The client can be reused for multiple calls.

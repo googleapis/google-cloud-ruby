@@ -20,8 +20,11 @@
 require "google/cloud/bare_metal_solution/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_network
+# Snippet for the get_network call in the BareMetalSolution service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_network.
+# It may require modification in order to execute successfully.
 #
 def get_network
   # Create a client object. The client can be reused for multiple calls.

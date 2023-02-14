@@ -20,8 +20,11 @@
 require "google/cloud/artifact_registry/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_repository
+# Snippet for the get_repository call in the ArtifactRegistry service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_repository.
+# It may require modification in order to execute successfully.
 #
 def get_repository
   # Create a client object. The client can be reused for multiple calls.

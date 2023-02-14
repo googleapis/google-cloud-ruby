@@ -435,13 +435,11 @@ module Google
             #   # Call the list_custom_jobs method.
             #   result = client.list_custom_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::CustomJob.
-            #     p response
+            #     p item
             #   end
             #
             def list_custom_jobs request, options = nil
@@ -529,14 +527,14 @@ module Google
             #   # Call the delete_custom_job method.
             #   result = client.delete_custom_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_custom_job request, options = nil
@@ -931,13 +929,11 @@ module Google
             #   # Call the list_data_labeling_jobs method.
             #   result = client.list_data_labeling_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::DataLabelingJob.
-            #     p response
+            #     p item
             #   end
             #
             def list_data_labeling_jobs request, options = nil
@@ -1025,14 +1021,14 @@ module Google
             #   # Call the delete_data_labeling_job method.
             #   result = client.delete_data_labeling_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_data_labeling_job request, options = nil
@@ -1415,13 +1411,11 @@ module Google
             #   # Call the list_hyperparameter_tuning_jobs method.
             #   result = client.list_hyperparameter_tuning_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob.
-            #     p response
+            #     p item
             #   end
             #
             def list_hyperparameter_tuning_jobs request, options = nil
@@ -1509,14 +1503,14 @@ module Google
             #   # Call the delete_hyperparameter_tuning_job method.
             #   result = client.delete_hyperparameter_tuning_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_hyperparameter_tuning_job request, options = nil
@@ -1910,13 +1904,11 @@ module Google
             #   # Call the list_nas_jobs method.
             #   result = client.list_nas_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::NasJob.
-            #     p response
+            #     p item
             #   end
             #
             def list_nas_jobs request, options = nil
@@ -2004,14 +1996,14 @@ module Google
             #   # Call the delete_nas_job method.
             #   result = client.delete_nas_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_nas_job request, options = nil
@@ -2294,13 +2286,11 @@ module Google
             #   # Call the list_nas_trial_details method.
             #   result = client.list_nas_trial_details request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::NasTrialDetail.
-            #     p response
+            #     p item
             #   end
             #
             def list_nas_trial_details request, options = nil
@@ -2596,13 +2586,11 @@ module Google
             #   # Call the list_batch_prediction_jobs method.
             #   result = client.list_batch_prediction_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::BatchPredictionJob.
-            #     p response
+            #     p item
             #   end
             #
             def list_batch_prediction_jobs request, options = nil
@@ -2691,14 +2679,14 @@ module Google
             #   # Call the delete_batch_prediction_job method.
             #   result = client.delete_batch_prediction_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_batch_prediction_job request, options = nil
@@ -2995,13 +2983,11 @@ module Google
             #   # Call the search_model_deployment_monitoring_stats_anomalies method.
             #   result = client.search_model_deployment_monitoring_stats_anomalies request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::ModelMonitoringStatsAnomalies.
-            #     p response
+            #     p item
             #   end
             #
             def search_model_deployment_monitoring_stats_anomalies request, options = nil
@@ -3202,13 +3188,11 @@ module Google
             #   # Call the list_model_deployment_monitoring_jobs method.
             #   result = client.list_model_deployment_monitoring_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringJob.
-            #     p response
+            #     p item
             #   end
             #
             def list_model_deployment_monitoring_jobs request, options = nil
@@ -3322,14 +3306,14 @@ module Google
             #   # Call the update_model_deployment_monitoring_job method.
             #   result = client.update_model_deployment_monitoring_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_model_deployment_monitoring_job request, options = nil
@@ -3417,14 +3401,14 @@ module Google
             #   # Call the delete_model_deployment_monitoring_job method.
             #   result = client.delete_model_deployment_monitoring_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_model_deployment_monitoring_job request, options = nil

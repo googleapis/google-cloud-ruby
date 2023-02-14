@@ -20,8 +20,11 @@
 require "google/cloud/app_engine/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#delete_authorized_certificate
+# Snippet for the delete_authorized_certificate call in the AuthorizedCertificates service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#delete_authorized_certificate.
+# It may require modification in order to execute successfully.
 #
 def delete_authorized_certificate
   # Create a client object. The client can be reused for multiple calls.

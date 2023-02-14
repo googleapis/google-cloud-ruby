@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::JobService::Client#resume_model_deployment_monitoring_job
+# Snippet for the resume_model_deployment_monitoring_job call in the JobService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::JobService::Client#resume_model_deployment_monitoring_job.
+# It may require modification in order to execute successfully.
 #
 def resume_model_deployment_monitoring_job
   # Create a client object. The client can be reused for multiple calls.
