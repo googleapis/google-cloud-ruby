@@ -20,8 +20,11 @@
 require "google/cloud/ids/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::IDS::V1::IDS::Client#delete_endpoint
+# Snippet for the delete_endpoint call in the IDS service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::IDS::V1::IDS::Client#delete_endpoint. It may require
+# modification in order to execute successfully.
 #
 def delete_endpoint
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def delete_endpoint
   # Call the delete_endpoint method.
   result = client.delete_endpoint request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END ids_v1_generated_IDS_DeleteEndpoint_sync]

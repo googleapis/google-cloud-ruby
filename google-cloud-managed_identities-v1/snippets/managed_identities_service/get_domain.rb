@@ -20,8 +20,11 @@
 require "google/cloud/managed_identities/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#get_domain
+# Snippet for the get_domain call in the ManagedIdentitiesService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#get_domain.
+# It may require modification in order to execute successfully.
 #
 def get_domain
   # Create a client object. The client can be reused for multiple calls.

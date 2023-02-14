@@ -20,8 +20,11 @@
 require "google/cloud/gke_multi_cloud/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clients
+# Snippet for the list_azure_clients call in the AzureClusters service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clients. It
+# may require modification in order to execute successfully.
 #
 def list_azure_clients
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_azure_clients
   # Call the list_azure_clients method.
   result = client.list_azure_clients request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AzureClient.
-    p response
+    p item
   end
 end
 # [END gkemulticloud_v1_generated_AzureClusters_ListAzureClients_sync]

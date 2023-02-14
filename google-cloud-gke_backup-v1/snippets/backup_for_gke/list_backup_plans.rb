@@ -20,8 +20,11 @@
 require "google/cloud/gke_backup/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeBackup::V1::BackupForGKE::Client#list_backup_plans
+# Snippet for the list_backup_plans call in the BackupForGKE service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeBackup::V1::BackupForGKE::Client#list_backup_plans. It may
+# require modification in order to execute successfully.
 #
 def list_backup_plans
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_backup_plans
   # Call the list_backup_plans method.
   result = client.list_backup_plans request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::GkeBackup::V1::BackupPlan.
-    p response
+    p item
   end
 end
 # [END gkebackup_v1_generated_BackupForGKE_ListBackupPlans_sync]

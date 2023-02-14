@@ -20,8 +20,11 @@
 require "google/cloud/kms/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Kms::V1::KeyManagementService::Client#create_crypto_key_version
+# Snippet for the create_crypto_key_version call in the KeyManagementService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Kms::V1::KeyManagementService::Client#create_crypto_key_version.
+# It may require modification in order to execute successfully.
 #
 def create_crypto_key_version
   # Create a client object. The client can be reused for multiple calls.

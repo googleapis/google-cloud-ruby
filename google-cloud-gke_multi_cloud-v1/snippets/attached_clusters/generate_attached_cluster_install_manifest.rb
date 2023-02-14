@@ -20,8 +20,11 @@
 require "google/cloud/gke_multi_cloud/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#generate_attached_cluster_install_manifest
+# Snippet for the generate_attached_cluster_install_manifest call in the AttachedClusters service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#generate_attached_cluster_install_manifest.
+# It may require modification in order to execute successfully.
 #
 def generate_attached_cluster_install_manifest
   # Create a client object. The client can be reused for multiple calls.

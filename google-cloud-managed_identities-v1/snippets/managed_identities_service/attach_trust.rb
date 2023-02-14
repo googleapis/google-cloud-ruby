@@ -20,8 +20,11 @@
 require "google/cloud/managed_identities/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#attach_trust
+# Snippet for the attach_trust call in the ManagedIdentitiesService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client#attach_trust.
+# It may require modification in order to execute successfully.
 #
 def attach_trust
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def attach_trust
   # Call the attach_trust method.
   result = client.attach_trust request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END managedidentities_v1_generated_ManagedIdentitiesService_AttachTrust_sync]
