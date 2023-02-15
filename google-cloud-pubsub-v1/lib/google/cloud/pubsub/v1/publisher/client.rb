@@ -255,7 +255,7 @@ module Google
             #     timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
             #     that is up to `message_retention_duration` in the past. If this field is
             #     not set, message retention is controlled by settings on individual
-            #     subscriptions. Cannot be more than 7 days or less than 10 minutes.
+            #     subscriptions. Cannot be more than 31 days or less than 10 minutes.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Topic]
