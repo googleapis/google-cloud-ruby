@@ -281,19 +281,15 @@ module Google
             #     field will be `_deleted-topic_` if the topic has been deleted.
             #   @param push_config [::Google::Cloud::PubSub::V1::PushConfig, ::Hash]
             #     If push delivery is used with this subscription, this field is
-            #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
-            #     but not both. If both are empty, then the subscriber will pull and ack
-            #     messages using API methods.
+            #     used to configure it.
             #   @param bigquery_config [::Google::Cloud::PubSub::V1::BigQueryConfig, ::Hash]
             #     If delivery to BigQuery is used with this subscription, this field is
-            #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
-            #     but not both. If both are empty, then the subscriber will pull and ack
-            #     messages using API methods.
+            #     used to configure it.
             #   @param ack_deadline_seconds [::Integer]
             #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
             #     the subscriber to acknowledge receipt before resending the message. In the
             #     interval after the message is delivered and before it is acknowledged, it
-            #     is considered to be <i>outstanding</i>. During that time period, the
+            #     is considered to be _outstanding_. During that time period, the
             #     message will not be redelivered (on a best-effort basis).
             #
             #     For pull subscriptions, this value is used as the initial value for the ack
@@ -325,8 +321,8 @@ module Google
             #     can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
             #     minutes.
             #   @param labels [::Hash{::String => ::String}]
-            #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-            #     managing labels</a>.
+            #     See [Creating and managing
+            #     labels](https://cloud.google.com/pubsub/docs/labels).
             #   @param enable_message_ordering [::Boolean]
             #     If true, messages published with the same `ordering_key` in `PubsubMessage`
             #     will be delivered to the subscribers in the order in which they
@@ -1005,9 +1001,7 @@ module Google
             end
 
             ##
-            # Pulls messages from the server. The server may return `UNAVAILABLE` if
-            # there are too many concurrent pull requests pending for the given
-            # subscription.
+            # Pulls messages from the server.
             #
             # @overload pull(request, options = nil)
             #   Pass arguments to `pull` via a request object, either of type
@@ -1288,10 +1282,10 @@ module Google
 
             ##
             # Gets the configuration details of a snapshot. Snapshots are used in
-            # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-            # operations, which allow you to manage message acknowledgments in bulk. That
-            # is, you can set the acknowledgment state of messages in an existing
-            # subscription to the state captured by a snapshot.
+            # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
+            # which allow you to manage message acknowledgments in bulk. That is, you can
+            # set the acknowledgment state of messages in an existing subscription to the
+            # state captured by a snapshot.
             #
             # @overload get_snapshot(request, options = nil)
             #   Pass arguments to `get_snapshot` via a request object, either of type
@@ -1514,9 +1508,9 @@ module Google
             #     Required. User-provided name for this snapshot. If the name is not provided
             #     in the request, the server will assign a random name for this snapshot on
             #     the same project as the subscription. Note that for REST API requests, you
-            #     must specify a name.  See the <a
-            #     href="https://cloud.google.com/pubsub/docs/admin#resource_names"> resource
-            #     name rules</a>. Format is `projects/{project}/snapshots/{snap}`.
+            #     must specify a name.  See the [resource name
+            #     rules](https://cloud.google.com/pubsub/docs/admin#resource_names). Format
+            #     is `projects/{project}/snapshots/{snap}`.
             #   @param subscription [::String]
             #     Required. The subscription whose backlog the snapshot retains.
             #     Specifically, the created snapshot is guaranteed to retain:
@@ -1528,8 +1522,8 @@ module Google
             #          successful completion of the CreateSnapshot request.
             #     Format is `projects/{project}/subscriptions/{sub}`.
             #   @param labels [::Hash{::String => ::String}]
-            #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-            #     managing labels</a>.
+            #     See [Creating and managing
+            #     labels](https://cloud.google.com/pubsub/docs/labels).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Snapshot]
@@ -1597,11 +1591,10 @@ module Google
 
             ##
             # Updates an existing snapshot. Snapshots are used in
-            # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-            # operations, which allow
-            # you to manage message acknowledgments in bulk. That is, you can set the
-            # acknowledgment state of messages in an existing subscription to the state
-            # captured by a snapshot.
+            # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
+            # which allow you to manage message acknowledgments in bulk. That is, you can
+            # set the acknowledgment state of messages in an existing subscription to the
+            # state captured by a snapshot.
             #
             # @overload update_snapshot(request, options = nil)
             #   Pass arguments to `update_snapshot` via a request object, either of type
