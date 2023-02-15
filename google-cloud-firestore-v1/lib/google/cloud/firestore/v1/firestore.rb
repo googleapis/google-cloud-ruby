@@ -36,8 +36,8 @@ module Google
         # document database that simplifies storing, syncing, and querying data for
         # your mobile, web, and IoT apps at global scale. Its client libraries provide
         # live synchronization and offline support, while its security features and
-        # integrations with Firebase and Google Cloud Platform (GCP) accelerate
-        # building truly serverless apps.
+        # integrations with Firebase and Google Cloud Platform accelerate building
+        # truly serverless apps.
         #
         # @example Load this service and instantiate a gRPC client
         #
