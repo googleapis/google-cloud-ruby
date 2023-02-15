@@ -121,9 +121,7 @@ module Google
             # but such a message may be redelivered later. Acknowledging a message more
             # than once will not result in an error.
             rpc :Acknowledge, ::Google::Cloud::PubSub::V1::AcknowledgeRequest, ::Google::Protobuf::Empty
-            # Pulls messages from the server. The server may return `UNAVAILABLE` if
-            # there are too many concurrent pull requests pending for the given
-            # subscription.
+            # Pulls messages from the server.
             rpc :Pull, ::Google::Cloud::PubSub::V1::PullRequest, ::Google::Cloud::PubSub::V1::PullResponse
             # Establishes a stream with the server, which sends messages down to the
             # client. The client streams acknowledgements and ack deadline modifications
@@ -141,10 +139,10 @@ module Google
             # continuously through the call regardless of changes to the `PushConfig`.
             rpc :ModifyPushConfig, ::Google::Cloud::PubSub::V1::ModifyPushConfigRequest, ::Google::Protobuf::Empty
             # Gets the configuration details of a snapshot. Snapshots are used in
-            # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-            # operations, which allow you to manage message acknowledgments in bulk. That
-            # is, you can set the acknowledgment state of messages in an existing
-            # subscription to the state captured by a snapshot.
+            # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
+            # which allow you to manage message acknowledgments in bulk. That is, you can
+            # set the acknowledgment state of messages in an existing subscription to the
+            # state captured by a snapshot.
             rpc :GetSnapshot, ::Google::Cloud::PubSub::V1::GetSnapshotRequest, ::Google::Cloud::PubSub::V1::Snapshot
             # Lists the existing snapshots. Snapshots are used in [Seek](
             # https://cloud.google.com/pubsub/docs/replay-overview) operations, which
@@ -170,11 +168,10 @@ module Google
             # REST API requests, you must specify a name in the request.
             rpc :CreateSnapshot, ::Google::Cloud::PubSub::V1::CreateSnapshotRequest, ::Google::Cloud::PubSub::V1::Snapshot
             # Updates an existing snapshot. Snapshots are used in
-            # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-            # operations, which allow
-            # you to manage message acknowledgments in bulk. That is, you can set the
-            # acknowledgment state of messages in an existing subscription to the state
-            # captured by a snapshot.
+            # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
+            # which allow you to manage message acknowledgments in bulk. That is, you can
+            # set the acknowledgment state of messages in an existing subscription to the
+            # state captured by a snapshot.
             rpc :UpdateSnapshot, ::Google::Cloud::PubSub::V1::UpdateSnapshotRequest, ::Google::Cloud::PubSub::V1::Snapshot
             # Removes an existing snapshot. Snapshots are used in [Seek]
             # (https://cloud.google.com/pubsub/docs/replay-overview) operations, which

@@ -367,7 +367,7 @@ module Google
         #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
         #     the subscriber to acknowledge receipt before resending the message. In the
         #     interval after the message is delivered and before it is acknowledged, it
-        #     is considered to be <i>outstanding</i>. During that time period, the
+        #     is considered to be _outstanding_. During that time period, the
         #     message will not be redelivered (on a best-effort basis).
         #
         #     For pull subscriptions, this value is used as the initial value for the ack
@@ -402,8 +402,8 @@ module Google
         #     minutes.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-        #     managing labels</a>.
+        #     See [Creating and managing
+        #     labels](https://cloud.google.com/pubsub/docs/labels).
         # @!attribute [rw] enable_message_ordering
         #   @return [::Boolean]
         #     If true, messages published with the same `ordering_key` in `PubsubMessage`
@@ -606,7 +606,7 @@ module Google
         #     * `v1` or `v1beta2`: uses the push format defined in the v1 Pub/Sub API.
         #
         #     For example:
-        #     <pre><code>attributes { "x-goog-version": "v1" } </code></pre>
+        #     `attributes { "x-goog-version": "v1" }`
         # @!attribute [rw] oidc_token
         #   @return [::Google::Cloud::PubSub::V1::PushConfig::OidcToken]
         #     If specified, Pub/Sub will generate and attach an OIDC JWT token as an
@@ -839,7 +839,8 @@ module Google
         # @!attribute [rw] received_messages
         #   @return [::Array<::Google::Cloud::PubSub::V1::ReceivedMessage>]
         #     Received Pub/Sub messages. The list will be empty if there are no more
-        #     messages available in the backlog. For JSON, the response can be entirely
+        #     messages available in the backlog, or if no messages could be returned
+        #     before the request timeout. For JSON, the response can be entirely
         #     empty. The Pub/Sub system may return fewer than the `maxMessages` requested
         #     even if there are more messages available in the backlog.
         class PullResponse
@@ -1032,9 +1033,9 @@ module Google
         #     Required. User-provided name for this snapshot. If the name is not provided
         #     in the request, the server will assign a random name for this snapshot on
         #     the same project as the subscription. Note that for REST API requests, you
-        #     must specify a name.  See the <a
-        #     href="https://cloud.google.com/pubsub/docs/admin#resource_names"> resource
-        #     name rules</a>. Format is `projects/{project}/snapshots/{snap}`.
+        #     must specify a name.  See the [resource name
+        #     rules](https://cloud.google.com/pubsub/docs/admin#resource_names). Format
+        #     is `projects/{project}/snapshots/{snap}`.
         # @!attribute [rw] subscription
         #   @return [::String]
         #     Required. The subscription whose backlog the snapshot retains.
@@ -1048,8 +1049,8 @@ module Google
         #     Format is `projects/{project}/subscriptions/{sub}`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-        #     managing labels</a>.
+        #     See [Creating and managing
+        #     labels](https://cloud.google.com/pubsub/docs/labels).
         class CreateSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
