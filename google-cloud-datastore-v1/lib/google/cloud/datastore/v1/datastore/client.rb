@@ -610,8 +610,7 @@ module Google
             #   @param single_use_transaction [::Google::Cloud::Datastore::V1::TransactionOptions, ::Hash]
             #     Options for beginning a new transaction for this request.
             #     The transaction is committed when the request completes. If specified,
-            #     [TransactionOptions.mode][google.datastore.v1.TransactionOptions.mode]
-            #     must be
+            #     {::Google::Cloud::Datastore::V1::TransactionOptions TransactionOptions.mode} must be
             #     {::Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite TransactionOptions.ReadWrite}.
             #   @param mutations [::Array<::Google::Cloud::Datastore::V1::Mutation, ::Hash>]
             #     The mutations to perform.

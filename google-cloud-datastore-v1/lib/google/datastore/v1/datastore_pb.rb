@@ -122,6 +122,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.datastore.v1.MutationResult" do
       optional :key, :message, 3, "google.datastore.v1.Key"
       optional :version, :int64, 4
+      optional :create_time, :message, 7, "google.protobuf.Timestamp"
       optional :update_time, :message, 6, "google.protobuf.Timestamp"
       optional :conflict_detected, :bool, 5
     end
