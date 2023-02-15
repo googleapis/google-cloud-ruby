@@ -63,7 +63,9 @@ module Google
         #     The identifier of the transaction that was started as part of this Lookup
         #     request.
         #
-        #     Set only when [ReadOptions.begin_transaction][] was set in
+        #     Set only when
+        #     {::Google::Cloud::Datastore::V1::ReadOptions#new_transaction ReadOptions.new_transaction}
+        #     was set in
         #     {::Google::Cloud::Datastore::V1::LookupRequest#read_options LookupRequest.read_options}.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -116,7 +118,9 @@ module Google
         #     The identifier of the transaction that was started as part of this
         #     RunQuery request.
         #
-        #     Set only when [ReadOptions.begin_transaction][] was set in
+        #     Set only when
+        #     {::Google::Cloud::Datastore::V1::ReadOptions#new_transaction ReadOptions.new_transaction}
+        #     was set in
         #     {::Google::Cloud::Datastore::V1::RunQueryRequest#read_options RunQueryRequest.read_options}.
         class RunQueryResponse
           include ::Google::Protobuf::MessageExts
@@ -167,7 +171,9 @@ module Google
         #     The identifier of the transaction that was started as part of this
         #     RunAggregationQuery request.
         #
-        #     Set only when [ReadOptions.begin_transaction][] was set in
+        #     Set only when
+        #     {::Google::Cloud::Datastore::V1::ReadOptions#new_transaction ReadOptions.new_transaction}
+        #     was set in
         #     {::Google::Cloud::Datastore::V1::RunAggregationQueryRequest#read_options RunAggregationQueryRequest.read_options}.
         class RunAggregationQueryResponse
           include ::Google::Protobuf::MessageExts
@@ -252,8 +258,7 @@ module Google
         #   @return [::Google::Cloud::Datastore::V1::TransactionOptions]
         #     Options for beginning a new transaction for this request.
         #     The transaction is committed when the request completes. If specified,
-        #     [TransactionOptions.mode][google.datastore.v1.TransactionOptions.mode]
-        #     must be
+        #     {::Google::Cloud::Datastore::V1::TransactionOptions TransactionOptions.mode} must be
         #     {::Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite TransactionOptions.ReadWrite}.
         # @!attribute [rw] mutations
         #   @return [::Array<::Google::Cloud::Datastore::V1::Mutation>]
@@ -408,6 +413,9 @@ module Google
         #     be the version of the current entity or, if no entity is present, a version
         #     that is strictly greater than the version of any previous entity and less
         #     than the version of any possible future entity.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The create time of the entity. This field will not be set after a 'delete'.
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The update time of the entity on the server after processing the mutation.

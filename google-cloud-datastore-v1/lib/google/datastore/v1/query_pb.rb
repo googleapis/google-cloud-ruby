@@ -13,6 +13,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.datastore.v1.EntityResult" do
       optional :entity, :message, 1, "google.datastore.v1.Entity"
       optional :version, :int64, 4
+      optional :create_time, :message, 6, "google.protobuf.Timestamp"
       optional :update_time, :message, 5, "google.protobuf.Timestamp"
       optional :cursor, :bytes, 3
     end
@@ -79,6 +80,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.datastore.v1.CompositeFilter.Operator" do
       value :OPERATOR_UNSPECIFIED, 0
       value :AND, 1
+      value :OR, 2
     end
     add_message "google.datastore.v1.PropertyFilter" do
       optional :property, :message, 1, "google.datastore.v1.PropertyReference"
