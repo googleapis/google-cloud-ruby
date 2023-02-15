@@ -281,14 +281,10 @@ module Google
             #     field will be `_deleted-topic_` if the topic has been deleted.
             #   @param push_config [::Google::Cloud::PubSub::V1::PushConfig, ::Hash]
             #     If push delivery is used with this subscription, this field is
-            #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
-            #     but not both. If both are empty, then the subscriber will pull and ack
-            #     messages using API methods.
+            #     used to configure it.
             #   @param bigquery_config [::Google::Cloud::PubSub::V1::BigQueryConfig, ::Hash]
             #     If delivery to BigQuery is used with this subscription, this field is
-            #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
-            #     but not both. If both are empty, then the subscriber will pull and ack
-            #     messages using API methods.
+            #     used to configure it.
             #   @param ack_deadline_seconds [::Integer]
             #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
             #     the subscriber to acknowledge receipt before resending the message. In the

@@ -336,7 +336,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A subscription resource.
+        # A subscription resource. If none of `push_config` or `bigquery_config` is
+        # set, then the subscriber will pull and ack messages using API methods. At
+        # most one of these fields may be set.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the subscription. It must have the format
@@ -353,15 +355,11 @@ module Google
         # @!attribute [rw] push_config
         #   @return [::Google::Cloud::PubSub::V1::PushConfig]
         #     If push delivery is used with this subscription, this field is
-        #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
-        #     but not both. If both are empty, then the subscriber will pull and ack
-        #     messages using API methods.
+        #     used to configure it.
         # @!attribute [rw] bigquery_config
         #   @return [::Google::Cloud::PubSub::V1::BigQueryConfig]
         #     If delivery to BigQuery is used with this subscription, this field is
-        #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
-        #     but not both. If both are empty, then the subscriber will pull and ack
-        #     messages using API methods.
+        #     used to configure it.
         # @!attribute [rw] ack_deadline_seconds
         #   @return [::Integer]
         #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
@@ -995,6 +993,9 @@ module Google
           # @!attribute [rw] unordered_ack_ids
           #   @return [::Array<::String>]
           #     List of acknowledgement IDs that were out of order.
+          # @!attribute [rw] temporary_failed_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that failed processing with temporary issues.
           class AcknowledgeConfirmation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
