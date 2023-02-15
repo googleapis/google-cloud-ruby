@@ -1,5 +1,15 @@
 # Changelog
 
+### 1.0.0 (2023-02-15)
+
+### ⚠ BREAKING CHANGES
+
+* Calling an RPC with a block yields a TransportOperation rather than a Faraday object
+
+#### Features
+
+* Calling an RPC with a block yields a TransportOperation rather than a Faraday object 
+
 ### 0.6.0 (2023-01-12)
 
 #### Features
