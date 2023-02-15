@@ -650,7 +650,7 @@ module Google
         # @!attribute [rw] table
         #   @return [::String]
         #     The name of the table to which to write data, of the form
-        #     \\{projectId}:\\{datasetId}.\\{tableId}
+        #     \\{projectId}.\\{datasetId}.\\{tableId}
         # @!attribute [rw] use_topic_schema
         #   @return [::Boolean]
         #     When true, use the topic's schema as the columns to write to in BigQuery,
@@ -686,6 +686,11 @@ module Google
             ACTIVE = 1
 
             # Cannot write to the BigQuery table because of permission denied errors.
+            # This can happen if
+            # - Pub/Sub SA has not been granted the [appropriate BigQuery IAM
+            # permissions](https://cloud.google.com/pubsub/docs/create-subscription#assign_bigquery_service_account)
+            # - bigquery.googleapis.com API is not enabled for the project
+            # ([instructions](https://cloud.google.com/service-usage/docs/enable-disable))
             PERMISSION_DENIED = 2
 
             # Cannot write to the BigQuery table because it does not exist.
