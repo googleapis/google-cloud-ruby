@@ -1,5 +1,12 @@
 # Release History
 
+### 0.10.0 (2023-02-16)
+
+#### Features
+
+* Added creation time to EntityResult and MutationResult 
+* Added support for OR queries ([#20432](https://github.com/googleapis/google-cloud-ruby/issues/20432)) 
+
 ### 0.9.0 (2023-01-19)
 
 #### Features
