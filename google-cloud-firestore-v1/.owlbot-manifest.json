@@ -17,6 +17,10 @@
     "lib/google/cloud/firestore/v1/firestore.rb",
     "lib/google/cloud/firestore/v1/firestore/client.rb",
     "lib/google/cloud/firestore/v1/firestore/credentials.rb",
+    "lib/google/cloud/firestore/v1/firestore/rest.rb",
+    "lib/google/cloud/firestore/v1/firestore/rest/client.rb",
+    "lib/google/cloud/firestore/v1/firestore/rest/service_stub.rb",
+    "lib/google/cloud/firestore/v1/rest.rb",
     "lib/google/cloud/firestore/v1/version.rb",
     "lib/google/firestore/v1/aggregation_result_pb.rb",
     "lib/google/firestore/v1/common_pb.rb",
@@ -62,6 +66,7 @@
     "snippets/firestore/update_document.rb",
     "snippets/firestore/write.rb",
     "snippets/snippet_metadata_google.firestore.v1.json",
+    "test/google/cloud/firestore/v1/firestore_rest_test.rb",
     "test/google/cloud/firestore/v1/firestore_test.rb",
     "test/helper.rb"
   ],
