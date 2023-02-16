@@ -24,6 +24,7 @@ require "google/cloud/firestore/v1/version"
 
 require "google/cloud/firestore/v1/firestore/credentials"
 require "google/cloud/firestore/v1/firestore/client"
+require "google/cloud/firestore/v1/firestore/rest"
 
 module Google
   module Cloud
@@ -43,6 +44,11 @@ module Google
         #
         #     require "google/cloud/firestore/v1/firestore"
         #     client = ::Google::Cloud::Firestore::V1::Firestore::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/firestore/v1/firestore/rest"
+        #     client = ::Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
         #
         module Firestore
         end
