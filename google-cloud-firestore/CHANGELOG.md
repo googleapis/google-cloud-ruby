@@ -1,5 +1,11 @@
 # Release History
 
+### 2.10.1 (2023-02-16)
+
+#### Bug Fixes
+
+* update version of firestore-v1 in gemspec ([#20433](https://github.com/googleapis/google-cloud-ruby/issues/20433)) 
+
 ### 2.10.0 (2023-02-09)
 
 #### Features
