@@ -69,6 +69,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :conversation, :string, 1
       optional :latest_message, :string, 3
       optional :context_size, :int32, 4
+      optional :assist_query_params, :message, 5, "google.cloud.dialogflow.v2.AssistQueryParameters"
     end
     add_message "google.cloud.dialogflow.v2.SuggestConversationSummaryResponse" do
       optional :summary, :message, 1, "google.cloud.dialogflow.v2.SuggestConversationSummaryResponse.Summary"
