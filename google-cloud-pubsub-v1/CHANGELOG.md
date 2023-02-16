@@ -1,5 +1,14 @@
 # Release History
 
+### 0.14.0 (2023-02-16)
+
+#### Features
+
+* AcknowledgeConfirmation includes a list of ack IDs that failed with temporary issues ([#20431](https://github.com/googleapis/google-cloud-ruby/issues/20431)) 
+#### Documentation
+
+* Various fixes and clarifications in reference documentation 
+
 ### 0.13.1 (2023-02-13)
 
 #### Documentation
