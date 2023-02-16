@@ -78,6 +78,12 @@ module Google
         #     Name of the CX SecuritySettings reference for the agent.
         #     Format: `projects/<Project ID>/locations/<Location
         #     ID>/securitySettings/<Security Settings ID>`.
+        # @!attribute [rw] tts_config
+        #   @return [::Google::Cloud::Dialogflow::V2::SynthesizeSpeechConfig]
+        #     Configuration for Text-to-Speech synthesization.
+        #
+        #     Used by Phone Gateway to specify synthesization options. If agent defines
+        #     synthesization options as well, agent settings overrides the option here.
         class ConversationProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
