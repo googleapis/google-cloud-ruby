@@ -62,16 +62,6 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_workflow_template_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Dataproc.workflow_template_service do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client, client
-    end
-  end
-
   def test_node_group_controller_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
@@ -79,6 +69,16 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Dataproc::V1::NodeGroupController::Client, client
+    end
+  end
+
+  def test_workflow_template_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dataproc.workflow_template_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client, client
     end
   end
 end
