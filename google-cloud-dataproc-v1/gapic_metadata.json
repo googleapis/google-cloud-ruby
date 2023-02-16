@@ -161,6 +161,30 @@
         }
       }
     },
+    "NodeGroupController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client",
+          "rpcs": {
+            "CreateNodeGroup": {
+              "methods": [
+                "create_node_group"
+              ]
+            },
+            "ResizeNodeGroup": {
+              "methods": [
+                "resize_node_group"
+              ]
+            },
+            "GetNodeGroup": {
+              "methods": [
+                "get_node_group"
+              ]
+            }
+          }
+        }
+      }
+    },
     "WorkflowTemplateService": {
       "clients": {
         "grpc": {
@@ -199,30 +223,6 @@
             "DeleteWorkflowTemplate": {
               "methods": [
                 "delete_workflow_template"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "NodeGroupController": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client",
-          "rpcs": {
-            "CreateNodeGroup": {
-              "methods": [
-                "create_node_group"
-              ]
-            },
-            "ResizeNodeGroup": {
-              "methods": [
-                "resize_node_group"
-              ]
-            },
-            "GetNodeGroup": {
-              "methods": [
-                "get_node_group"
               ]
             }
           }
