@@ -1015,6 +1015,9 @@ module Google
           #   @return [::Array<::String>]
           #     List of acknowledgement IDs that were malformed or whose acknowledgement
           #     deadline has expired.
+          # @!attribute [rw] temporary_failed_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that failed processing with temporary issues.
           class ModifyAckDeadlineConfirmation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
