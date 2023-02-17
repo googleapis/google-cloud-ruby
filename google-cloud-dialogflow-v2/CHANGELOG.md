@@ -1,5 +1,12 @@
 # Release History
 
+### 0.22.0 (2023-02-17)
+
+#### Features
+
+* Support for text-to-speech configuration in ConversationProfile 
+* Support for the assist_query_params argument to the suggest_conversation_summary RPC ([#20437](https://github.com/googleapis/google-cloud-ruby/issues/20437)) 
+
 ### 0.21.0 (2023-01-15)
 
 #### Features
