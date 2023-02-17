@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 (2023-02-17)
+
+#### Features
+
+* Include the iam_policy mixin client ([#20454](https://github.com/googleapis/google-cloud-ruby/issues/20454)) 
+
 ### 0.12.1 (2022-11-09)
 
 #### Documentation
