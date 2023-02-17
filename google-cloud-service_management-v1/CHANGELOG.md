@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.1 (2023-02-17)
+
+#### Bug Fixes
+
+* Fixed routing headers sent with long-running operation calls ([#20450](https://github.com/googleapis/google-cloud-ruby/issues/20450)) 
+
 ### 0.4.0 (2022-07-08)
 
 #### Features
