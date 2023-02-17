@@ -1038,6 +1038,39 @@ module Google
           end
         end
 
+        # A binding of a user to a set of roles.
+        # @!attribute [rw] user
+        #   @return [::String]
+        #     If set, the email address of the user to set roles for.
+        #     Format: "someuser@gmail.com"
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this binding.
+        #
+        #     Format: accounts/\\{account}/accessBindings/\\{access_binding} or
+        #     properties/\\{property}/accessBindings/\\{access_binding}
+        #
+        #     Example:
+        #     "accounts/100/accessBindings/200"
+        # @!attribute [rw] roles
+        #   @return [::Array<::String>]
+        #     A list of roles for to grant to the parent resource.
+        #
+        #     Valid values:
+        #     predefinedRoles/viewer
+        #     predefinedRoles/analyst
+        #     predefinedRoles/editor
+        #     predefinedRoles/admin
+        #     predefinedRoles/no-cost-data
+        #     predefinedRoles/no-revenue-data
+        #
+        #     For users, if an empty list of roles is set, this AccessBinding will be
+        #     deleted.
+        class AccessBinding
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A link between a GA4 Property and BigQuery project.
         # @!attribute [r] name
         #   @return [::String]
