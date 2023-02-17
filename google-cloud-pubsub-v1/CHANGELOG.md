@@ -1,5 +1,14 @@
 # Release History
 
+### 0.15.0 (2023-02-17)
+
+#### Features
+
+* ModifyAckDeadlineConfirmation includes a list of ack IDs that failed with temporary issues ([#20445](https://github.com/googleapis/google-cloud-ruby/issues/20445)) 
+#### Bug Fixes
+
+* Make INTERNAL a retryable error for the pull RPC 
+
 ### 0.14.0 (2023-02-16)
 
 #### Features
