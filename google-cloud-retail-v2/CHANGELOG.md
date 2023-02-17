@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 (2023-02-17)
+
+#### Features
+
+* Include the location mixin client ([#20459](https://github.com/googleapis/google-cloud-ruby/issues/20459)) 
+
 ### 0.12.0 (2023-01-05)
 
 #### Features
