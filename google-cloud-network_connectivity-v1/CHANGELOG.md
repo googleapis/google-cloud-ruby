@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2023-02-17)
+
+#### Features
+
+* Include the location and iam_policy mixin clients ([#20458](https://github.com/googleapis/google-cloud-ruby/issues/20458)) 
+
 ### 0.4.1 (2023-02-01)
 
 #### Bug Fixes
