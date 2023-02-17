@@ -27,6 +27,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      optional :filter, :string, 4
+      optional :order_by, :string, 5
     end
     add_message "google.cloud.dataproc.v1.ListBatchesResponse" do
       repeated :batches, :message, 1, "google.cloud.dataproc.v1.Batch"
