@@ -53,7 +53,7 @@ module Google
       # @attr_reader [Boolean] message_ordering Whether message ordering has
       #   been enabled.
       # @attr_reader [Integer] streams The number of concurrent streams to open
-      #   to pull messages from the subscription. Default is 4.
+      #   to pull messages from the subscription. Default is 2.
       # @attr_reader [Integer] callback_threads The number of threads used to
       #   handle the received messages. Default is 8.
       # @attr_reader [Integer] push_threads The number of threads to handle
