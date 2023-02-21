@@ -937,7 +937,7 @@ module Google
         #   the default message_ordering value for the subscription when this
         #   argument is not provided. See {#reference?}.
         # @param [Integer] streams The number of concurrent streams to open to
-        #   pull messages from the subscription. Default is 4. Optional.
+        #   pull messages from the subscription. Default is 2. Optional.
         # @param [Hash, Integer] inventory The settings to control how received messages are to be handled by the
         #   subscriber. When provided as an Integer instead of a Hash only `max_outstanding_messages` will be set.
         #   Optional.
