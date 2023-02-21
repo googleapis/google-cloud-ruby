@@ -282,6 +282,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CROSS_CHANNEL_TIME_DECAY, 6
       value :ADS_PREFERRED_LAST_CLICK, 7
     end
+    add_message "google.analytics.admin.v1alpha.AccessBinding" do
+      optional :name, :string, 1
+      repeated :roles, :string, 3
+      oneof :access_target do
+        optional :user, :string, 2
+      end
+    end
     add_message "google.analytics.admin.v1alpha.BigQueryLink" do
       optional :name, :string, 1
       optional :project, :string, 2
@@ -432,6 +439,7 @@ module Google
         AttributionSettings::AcquisitionConversionEventLookbackWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AttributionSettings.AcquisitionConversionEventLookbackWindow").enummodule
         AttributionSettings::OtherConversionEventLookbackWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AttributionSettings.OtherConversionEventLookbackWindow").enummodule
         AttributionSettings::ReportingAttributionModel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel").enummodule
+        AccessBinding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AccessBinding").msgclass
         BigQueryLink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BigQueryLink").msgclass
         IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IndustryCategory").enummodule
         ServiceLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ServiceLevel").enummodule

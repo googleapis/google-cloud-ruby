@@ -156,7 +156,8 @@ module Google
             # Acknowledges the terms of user data collection for the specified property.
             #
             # This acknowledgement must be completed (either in the Google Analytics UI
-            # or via this API) before MeasurementProtocolSecret resources may be created.
+            # or through this API) before MeasurementProtocolSecret resources may be
+            # created.
             rpc :AcknowledgeUserDataCollection, ::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionRequest, ::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionResponse
             # Searches through all changes to an account or its children given the
             # specified set of filters.
@@ -284,6 +285,39 @@ module Google
             # property's time zone. For configuration change history, see
             # [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
             rpc :RunAccessReport, ::Google::Analytics::Admin::V1alpha::RunAccessReportRequest, ::Google::Analytics::Admin::V1alpha::RunAccessReportResponse
+            # Creates an access binding on an account or property.
+            rpc :CreateAccessBinding, ::Google::Analytics::Admin::V1alpha::CreateAccessBindingRequest, ::Google::Analytics::Admin::V1alpha::AccessBinding
+            # Gets information about an access binding.
+            rpc :GetAccessBinding, ::Google::Analytics::Admin::V1alpha::GetAccessBindingRequest, ::Google::Analytics::Admin::V1alpha::AccessBinding
+            # Updates an access binding on an account or property.
+            rpc :UpdateAccessBinding, ::Google::Analytics::Admin::V1alpha::UpdateAccessBindingRequest, ::Google::Analytics::Admin::V1alpha::AccessBinding
+            # Deletes an access binding on an account or property.
+            rpc :DeleteAccessBinding, ::Google::Analytics::Admin::V1alpha::DeleteAccessBindingRequest, ::Google::Protobuf::Empty
+            # Lists all access bindings on an account or property.
+            rpc :ListAccessBindings, ::Google::Analytics::Admin::V1alpha::ListAccessBindingsRequest, ::Google::Analytics::Admin::V1alpha::ListAccessBindingsResponse
+            # Creates information about multiple access bindings to an account or
+            # property.
+            #
+            # This method is transactional. If any AccessBinding cannot be created, none
+            # of the AccessBindings will be created.
+            rpc :BatchCreateAccessBindings, ::Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsRequest, ::Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsResponse
+            # Gets information about multiple access bindings to an account or property.
+            rpc :BatchGetAccessBindings, ::Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsRequest, ::Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsResponse
+            # Updates information about multiple access bindings to an account or
+            # property.
+            rpc :BatchUpdateAccessBindings, ::Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsRequest, ::Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsResponse
+            # Deletes information about multiple users' links to an account or property.
+            rpc :BatchDeleteAccessBindings, ::Google::Analytics::Admin::V1alpha::BatchDeleteAccessBindingsRequest, ::Google::Protobuf::Empty
+            # Lookup for a single ExpandedDataSet.
+            rpc :GetExpandedDataSet, ::Google::Analytics::Admin::V1alpha::GetExpandedDataSetRequest, ::Google::Analytics::Admin::V1alpha::ExpandedDataSet
+            # Lists ExpandedDataSets on a property.
+            rpc :ListExpandedDataSets, ::Google::Analytics::Admin::V1alpha::ListExpandedDataSetsRequest, ::Google::Analytics::Admin::V1alpha::ListExpandedDataSetsResponse
+            # Creates a ExpandedDataSet.
+            rpc :CreateExpandedDataSet, ::Google::Analytics::Admin::V1alpha::CreateExpandedDataSetRequest, ::Google::Analytics::Admin::V1alpha::ExpandedDataSet
+            # Updates a ExpandedDataSet on a property.
+            rpc :UpdateExpandedDataSet, ::Google::Analytics::Admin::V1alpha::UpdateExpandedDataSetRequest, ::Google::Analytics::Admin::V1alpha::ExpandedDataSet
+            # Deletes a ExpandedDataSet on a property.
+            rpc :DeleteExpandedDataSet, ::Google::Analytics::Admin::V1alpha::DeleteExpandedDataSetRequest, ::Google::Protobuf::Empty
             # Sets the opt out status for the automated GA4 setup process for a UA
             # property.
             # Note: this has no effect on GA4 property.

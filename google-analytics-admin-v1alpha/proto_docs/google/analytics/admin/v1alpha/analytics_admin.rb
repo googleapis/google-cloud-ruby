@@ -44,7 +44,7 @@ module Google
         #     to 2 date ranges.
         # @!attribute [rw] dimension_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AccessFilterExpression]
-        #     Dimension filters allow you to restrict report response to specific
+        #     Dimension filters let you restrict report response to specific
         #     dimension values which match the filter. For example, filtering on access
         #     records of a single user. To learn more, see [Fundamentals of Dimension
         #     Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
@@ -196,8 +196,8 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The list of fields to be updated. Field names must be in snake
-        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
-        #     replace the entire entity, use one path with the string "*" to match all
+        #     case (for example, "field_to_update"). Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match all
         #     fields.
         class UpdateAccountRequest
           include ::Google::Protobuf::MessageExts
@@ -211,7 +211,7 @@ module Google
         # @!attribute [rw] redirect_uri
         #   @return [::String]
         #     Redirect URI where the user will be sent after accepting Terms of Service.
-        #     Must be configured in Developers Console as a Redirect URI
+        #     Must be configured in Developers Console as a Redirect URI.
         class ProvisionAccountTicketRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1620,6 +1620,270 @@ module Google
         #     replace the entire entity, use one path with the string "*" to match all
         #     fields.
         class UpdateAttributionSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetAccessBinding RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the access binding to retrieve.
+        #     Formats:
+        #     - accounts/\\{account}/accessBindings/\\{accessBinding}
+        #     - properties/\\{property}/accessBindings/\\{accessBinding}
+        class GetAccessBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for BatchGetAccessBindings RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The account or property that owns the access bindings. The parent
+        #     of all provided values for the 'names' field must match this field.
+        #     Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the access bindings to retrieve.
+        #     A maximum of 1000 access bindings can be retrieved in a batch.
+        #     Formats:
+        #     - accounts/\\{account}/accessBindings/\\{accessBinding}
+        #     - properties/\\{property}/accessBindings/\\{accessBinding}
+        class BatchGetAccessBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for BatchGetAccessBindings RPC.
+        # @!attribute [rw] access_bindings
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessBinding>]
+        #     The requested access bindings.
+        class BatchGetAccessBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListAccessBindings RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of access bindings to return.
+        #     The service may return fewer than this value.
+        #     If unspecified, at most 200 access bindings will be returned.
+        #     The maximum value is 500; values above 500 will be coerced to 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListAccessBindings` call.
+        #     Provide this to retrieve the subsequent page.
+        #     When paginating, all other parameters provided to `ListAccessBindings` must
+        #     match the call that provided the page token.
+        class ListAccessBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListAccessBindings RPC.
+        # @!attribute [rw] access_bindings
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessBinding>]
+        #     List of AccessBindings. These will be ordered stably, but in an arbitrary
+        #     order.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListAccessBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateAccessBinding RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] access_binding
+        #   @return [::Google::Analytics::Admin::V1alpha::AccessBinding]
+        #     Required. The access binding to create.
+        class CreateAccessBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for BatchCreateAccessBindings RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The account or property that owns the access bindings. The parent
+        #     field in the CreateAccessBindingRequest messages must either be empty or
+        #     match this field. Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::CreateAccessBindingRequest>]
+        #     Required. The requests specifying the access bindings to create.
+        #     A maximum of 1000 access bindings can be created in a batch.
+        class BatchCreateAccessBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for BatchCreateAccessBindings RPC.
+        # @!attribute [rw] access_bindings
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessBinding>]
+        #     The access bindings created.
+        class BatchCreateAccessBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateAccessBinding RPC.
+        # @!attribute [rw] access_binding
+        #   @return [::Google::Analytics::Admin::V1alpha::AccessBinding]
+        #     Required. The access binding to update.
+        class UpdateAccessBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for BatchUpdateAccessBindings RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The account or property that owns the access bindings. The parent
+        #     field in the UpdateAccessBindingRequest messages must either be empty or
+        #     match this field. Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::UpdateAccessBindingRequest>]
+        #     Required. The requests specifying the access bindings to update.
+        #     A maximum of 1000 access bindings can be updated in a batch.
+        class BatchUpdateAccessBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for BatchUpdateAccessBindings RPC.
+        # @!attribute [rw] access_bindings
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessBinding>]
+        #     The access bindings updated.
+        class BatchUpdateAccessBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteAccessBinding RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Formats:
+        #     - accounts/\\{account}/accessBindings/\\{accessBinding}
+        #     - properties/\\{property}/accessBindings/\\{accessBinding}
+        class DeleteAccessBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for BatchDeleteAccessBindings RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The account or property that owns the access bindings. The parent
+        #     field in the DeleteAccessBindingRequest messages must either be empty or
+        #     match this field. Formats:
+        #     - accounts/\\{account}
+        #     - properties/\\{property}
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::DeleteAccessBindingRequest>]
+        #     Required. The requests specifying the access bindings to delete.
+        #     A maximum of 1000 access bindings can be deleted in a batch.
+        class BatchDeleteAccessBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateExpandedDataSet RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] expanded_data_set
+        #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
+        #     Required. The ExpandedDataSet to create.
+        class CreateExpandedDataSetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateExpandedDataSet RPC.
+        # @!attribute [rw] expanded_data_set
+        #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
+        #     Required. The ExpandedDataSet to update.
+        #     The resource's `name` field is used to identify the ExpandedDataSet to be
+        #     updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateExpandedDataSetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteExpandedDataSet RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Example format: properties/1234/expandedDataSets/5678
+        class DeleteExpandedDataSetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetExpandedDataSet RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Audience to get.
+        #     Example format: properties/1234/expandedDataSets/5678
+        class GetExpandedDataSetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListExpandedDataSets RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListExpandedDataSets` call. Provide
+        #     this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListExpandedDataSet`
+        #     must match the call that provided the page token.
+        class ListExpandedDataSetsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListExpandedDataSets RPC.
+        # @!attribute [rw] expanded_data_sets
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ExpandedDataSet>]
+        #     List of ExpandedDataSet. These will be ordered stably, but in an arbitrary
+        #     order.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListExpandedDataSetsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

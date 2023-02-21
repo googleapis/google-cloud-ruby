@@ -430,6 +430,76 @@
                 "run_access_report"
               ]
             },
+            "CreateAccessBinding": {
+              "methods": [
+                "create_access_binding"
+              ]
+            },
+            "GetAccessBinding": {
+              "methods": [
+                "get_access_binding"
+              ]
+            },
+            "UpdateAccessBinding": {
+              "methods": [
+                "update_access_binding"
+              ]
+            },
+            "DeleteAccessBinding": {
+              "methods": [
+                "delete_access_binding"
+              ]
+            },
+            "ListAccessBindings": {
+              "methods": [
+                "list_access_bindings"
+              ]
+            },
+            "BatchCreateAccessBindings": {
+              "methods": [
+                "batch_create_access_bindings"
+              ]
+            },
+            "BatchGetAccessBindings": {
+              "methods": [
+                "batch_get_access_bindings"
+              ]
+            },
+            "BatchUpdateAccessBindings": {
+              "methods": [
+                "batch_update_access_bindings"
+              ]
+            },
+            "BatchDeleteAccessBindings": {
+              "methods": [
+                "batch_delete_access_bindings"
+              ]
+            },
+            "GetExpandedDataSet": {
+              "methods": [
+                "get_expanded_data_set"
+              ]
+            },
+            "ListExpandedDataSets": {
+              "methods": [
+                "list_expanded_data_sets"
+              ]
+            },
+            "CreateExpandedDataSet": {
+              "methods": [
+                "create_expanded_data_set"
+              ]
+            },
+            "UpdateExpandedDataSet": {
+              "methods": [
+                "update_expanded_data_set"
+              ]
+            },
+            "DeleteExpandedDataSet": {
+              "methods": [
+                "delete_expanded_data_set"
+              ]
+            },
             "SetAutomatedGa4ConfigurationOptOut": {
               "methods": [
                 "set_automated_ga4_configuration_opt_out"
