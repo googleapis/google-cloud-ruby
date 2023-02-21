@@ -530,6 +530,90 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for the create processor version method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project, location and processor) to create the new
+        #     version for. Format:
+        #     `projects/{project}/locations/{location}/processors/{processor}`.
+        # @!attribute [rw] processor_version
+        #   @return [::Google::Cloud::DocumentAI::V1::ProcessorVersion]
+        #     Required. The processor version to be created.
+        # @!attribute [rw] document_schema
+        #   @return [::Google::Cloud::DocumentAI::V1::DocumentSchema]
+        #     Optional. The schema the processor version will be trained with.
+        # @!attribute [rw] input_data
+        #   @return [::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest::InputData]
+        #     Optional. The input data used to train the `ProcessorVersion`.
+        # @!attribute [rw] base_processor_version
+        #   @return [::String]
+        #     Optional. The processor version to use as a base for training. This
+        #     processor version must be a child of `parent`. Format:
+        #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
+        class TrainProcessorVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The input data used to train a new `ProcessorVersion`.
+          # @!attribute [rw] training_documents
+          #   @return [::Google::Cloud::DocumentAI::V1::BatchDocumentsInputConfig]
+          #     The documents used for training the new version.
+          # @!attribute [rw] test_documents
+          #   @return [::Google::Cloud::DocumentAI::V1::BatchDocumentsInputConfig]
+          #     The documents used for testing the trained version.
+          class InputData
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The response for the TrainProcessorVersion method.
+        # @!attribute [rw] processor_version
+        #   @return [::String]
+        #     The resource name of the processor version produced by training.
+        class TrainProcessorVersionResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The metadata that represents a processor version being created.
+        # @!attribute [rw] common_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1::CommonOperationMetadata]
+        #     The basic metadata of the long running operation.
+        # @!attribute [rw] training_dataset_validation
+        #   @return [::Google::Cloud::DocumentAI::V1::TrainProcessorVersionMetadata::DatasetValidation]
+        #     The training dataset validation information.
+        # @!attribute [rw] test_dataset_validation
+        #   @return [::Google::Cloud::DocumentAI::V1::TrainProcessorVersionMetadata::DatasetValidation]
+        #     The test dataset validation information.
+        class TrainProcessorVersionMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The dataset validation information.
+          # This includes any and all errors with documents and the dataset.
+          # @!attribute [rw] document_error_count
+          #   @return [::Integer]
+          #     The total number of document errors.
+          # @!attribute [rw] dataset_error_count
+          #   @return [::Integer]
+          #     The total number of dataset errors.
+          # @!attribute [rw] document_errors
+          #   @return [::Array<::Google::Rpc::Status>]
+          #     Error information pertaining to specific documents. A maximum of 10
+          #     document errors will be returned.
+          #     Any document with errors will not be used throughout training.
+          # @!attribute [rw] dataset_errors
+          #   @return [::Array<::Google::Rpc::Status>]
+          #     Error information for the dataset as a whole. A maximum of 10 dataset
+          #     errors will be returned.
+          #     A single dataset error is terminal for training.
+          class DatasetValidation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Request message for review document method.
         # @!attribute [rw] inline_document
         #   @return [::Google::Cloud::DocumentAI::V1::Document]
@@ -598,6 +682,85 @@ module Google
         #   @return [::String]
         #     The Crowd Compute question ID.
         class ReviewDocumentOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Evaluates the given ProcessorVersion against the supplied documents.
+        # @!attribute [rw] processor_version
+        #   @return [::String]
+        #     Required. The resource name of the
+        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to
+        #     evaluate.
+        #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+        # @!attribute [rw] evaluation_documents
+        #   @return [::Google::Cloud::DocumentAI::V1::BatchDocumentsInputConfig]
+        #     Optional. The documents used in the evaluation. If unspecified, use the
+        #     processor's dataset as evaluation input.
+        class EvaluateProcessorVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata of the EvaluateProcessorVersion method.
+        # @!attribute [rw] common_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1::CommonOperationMetadata]
+        #     The basic metadata of the long running operation.
+        class EvaluateProcessorVersionMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata of the EvaluateProcessorVersion method.
+        # @!attribute [rw] evaluation
+        #   @return [::String]
+        #     The resource name of the created evaluation.
+        class EvaluateProcessorVersionResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Retrieves a specific Evaluation.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the
+        #     {::Google::Cloud::DocumentAI::V1::Evaluation Evaluation} to get.
+        #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}/evaluations/{evaluation}`
+        class GetEvaluationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Retrieves a list of evaluations for a given ProcessorVersion.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the
+        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to list
+        #     evaluations for.
+        #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The standard list page size.
+        #     If unspecified, at most 5 evaluations will be returned.
+        #     The maximum value is 100; values above 100 will be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListEvaluations` call.
+        #     Provide this to retrieve the subsequent page.
+        class ListEvaluationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response from ListEvaluations.
+        # @!attribute [rw] evaluations
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1::Evaluation>]
+        #     The evaluations requested.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListEvaluationsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

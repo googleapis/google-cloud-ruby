@@ -43,6 +43,9 @@ module Google
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time the processor version was created.
+        # @!attribute [rw] latest_evaluation
+        #   @return [::Google::Cloud::DocumentAI::V1::EvaluationReference]
+        #     The most recently invoked evaluation for the processor version.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
         #     The KMS key name used for encryption.

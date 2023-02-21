@@ -52,6 +52,10 @@ module Google
             rpc :ListProcessors, ::Google::Cloud::DocumentAI::V1::ListProcessorsRequest, ::Google::Cloud::DocumentAI::V1::ListProcessorsResponse
             # Gets a processor detail.
             rpc :GetProcessor, ::Google::Cloud::DocumentAI::V1::GetProcessorRequest, ::Google::Cloud::DocumentAI::V1::Processor
+            # Trains a new processor version.
+            # Operation metadata is returned as
+            # cloud_documentai_core.TrainProcessorVersionMetadata.
+            rpc :TrainProcessorVersion, ::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest, ::Google::Longrunning::Operation
             # Gets a processor version detail.
             rpc :GetProcessorVersion, ::Google::Cloud::DocumentAI::V1::GetProcessorVersionRequest, ::Google::Cloud::DocumentAI::V1::ProcessorVersion
             # Lists all versions of a processor.
@@ -82,6 +86,13 @@ module Google
             # Send a document for Human Review. The input document should be processed by
             # the specified processor.
             rpc :ReviewDocument, ::Google::Cloud::DocumentAI::V1::ReviewDocumentRequest, ::Google::Longrunning::Operation
+            # Evaluates a ProcessorVersion against annotated documents, producing an
+            # Evaluation.
+            rpc :EvaluateProcessorVersion, ::Google::Cloud::DocumentAI::V1::EvaluateProcessorVersionRequest, ::Google::Longrunning::Operation
+            # Retrieves a specific evaluation.
+            rpc :GetEvaluation, ::Google::Cloud::DocumentAI::V1::GetEvaluationRequest, ::Google::Cloud::DocumentAI::V1::Evaluation
+            # Retrieves a set of evaluations for a given processor version.
+            rpc :ListEvaluations, ::Google::Cloud::DocumentAI::V1::ListEvaluationsRequest, ::Google::Cloud::DocumentAI::V1::ListEvaluationsResponse
           end
 
           Stub = Service.rpc_stub_class

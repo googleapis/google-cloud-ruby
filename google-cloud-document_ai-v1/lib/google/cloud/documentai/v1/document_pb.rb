@@ -254,6 +254,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :OPERATION_TYPE_UNSPECIFIED, 0
       value :ADD, 1
       value :REMOVE, 2
+      value :UPDATE, 7
       value :REPLACE, 3
       value :EVAL_REQUESTED, 4
       value :EVAL_APPROVED, 5

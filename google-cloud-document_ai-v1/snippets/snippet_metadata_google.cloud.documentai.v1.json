@@ -292,6 +292,46 @@
       ]
     },
     {
+      "region_tag": "documentai_v1_generated_DocumentProcessorService_TrainProcessorVersion_sync",
+      "title": "Snippet for the train_processor_version call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#train_processor_version. It may require modification in order to execute successfully.",
+      "file": "document_processor_service/train_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "train_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#train_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "TrainProcessorVersion",
+          "full_name": "google.cloud.documentai.v1.DocumentProcessorService.TrainProcessorVersion",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_GetProcessorVersion_sync",
       "title": "Snippet for the get_processor_version call in the DocumentProcessorService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_processor_version. It may require modification in order to execute successfully.",
@@ -727,6 +767,126 @@
         {
           "start": 20,
           "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1_generated_DocumentProcessorService_EvaluateProcessorVersion_sync",
+      "title": "Snippet for the evaluate_processor_version call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#evaluate_processor_version. It may require modification in order to execute successfully.",
+      "file": "document_processor_service/evaluate_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "evaluate_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#evaluate_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1::EvaluateProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "EvaluateProcessorVersion",
+          "full_name": "google.cloud.documentai.v1.DocumentProcessorService.EvaluateProcessorVersion",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1_generated_DocumentProcessorService_GetEvaluation_sync",
+      "title": "Snippet for the get_evaluation call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_evaluation. It may require modification in order to execute successfully.",
+      "file": "document_processor_service/get_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_evaluation",
+        "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1::GetEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DocumentAI::V1::Evaluation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "GetEvaluation",
+          "full_name": "google.cloud.documentai.v1.DocumentProcessorService.GetEvaluation",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1_generated_DocumentProcessorService_ListEvaluations_sync",
+      "title": "Snippet for the list_evaluations call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_evaluations. It may require modification in order to execute successfully.",
+      "file": "document_processor_service/list_evaluations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_evaluations",
+        "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_evaluations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1::ListEvaluationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DocumentAI::V1::ListEvaluationsResponse",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "ListEvaluations",
+          "full_name": "google.cloud.documentai.v1.DocumentProcessorService.ListEvaluations",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
           "type": "FULL"
         }
       ]
