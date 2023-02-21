@@ -1189,6 +1189,64 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     end
   end
 
+  def test_get_json_web_keys
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    get_json_web_keys_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_json_web_keys, name
+      assert_kind_of ::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest, request
+      assert_equal "hello world", request["parent"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_json_web_keys_client_stub do
+      # Create client
+      client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_json_web_keys({ parent: parent }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_json_web_keys parent: parent do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_json_web_keys ::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest.new(parent: parent) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_json_web_keys({ parent: parent }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_json_web_keys(::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest.new(parent: parent), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_json_web_keys_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_node_pools
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Container::V1beta1::ListNodePoolsResponse.new
@@ -1250,64 +1308,6 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, list_node_pools_client_stub.call_rpc_count
-    end
-  end
-
-  def test_get_json_web_keys
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-
-    get_json_web_keys_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_json_web_keys, name
-      assert_kind_of ::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest, request
-      assert_equal "hello world", request["parent"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, get_json_web_keys_client_stub do
-      # Create client
-      client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.get_json_web_keys({ parent: parent }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.get_json_web_keys parent: parent do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.get_json_web_keys ::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest.new(parent: parent) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.get_json_web_keys({ parent: parent }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.get_json_web_keys(::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest.new(parent: parent), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, get_json_web_keys_client_stub.call_rpc_count
     end
   end
 

@@ -692,46 +692,6 @@
       ]
     },
     {
-      "region_tag": "container_v1beta1_generated_ClusterManager_ListNodePools_sync",
-      "title": "Snippet for the list_node_pools call in the ClusterManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Container::V1beta1::ClusterManager::Client#list_node_pools. It may require modification in order to execute successfully.",
-      "file": "cluster_manager/list_node_pools.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_node_pools",
-        "full_name": "::Google::Cloud::Container::V1beta1::ClusterManager::Client#list_node_pools",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Container::V1beta1::ListNodePoolsRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Container::V1beta1::ListNodePoolsResponse",
-        "client": {
-          "short_name": "ClusterManager::Client",
-          "full_name": "::Google::Cloud::Container::V1beta1::ClusterManager::Client"
-        },
-        "method": {
-          "short_name": "ListNodePools",
-          "full_name": "google.container.v1beta1.ClusterManager.ListNodePools",
-          "service": {
-            "short_name": "ClusterManager",
-            "full_name": "google.container.v1beta1.ClusterManager"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "container_v1beta1_generated_ClusterManager_GetJSONWebKeys_sync",
       "title": "Snippet for the get_json_web_keys call in the ClusterManager service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Container::V1beta1::ClusterManager::Client#get_json_web_keys. It may require modification in order to execute successfully.",
@@ -755,6 +715,46 @@
         "method": {
           "short_name": "GetJSONWebKeys",
           "full_name": "google.container.v1beta1.ClusterManager.GetJSONWebKeys",
+          "service": {
+            "short_name": "ClusterManager",
+            "full_name": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "container_v1beta1_generated_ClusterManager_ListNodePools_sync",
+      "title": "Snippet for the list_node_pools call in the ClusterManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Container::V1beta1::ClusterManager::Client#list_node_pools. It may require modification in order to execute successfully.",
+      "file": "cluster_manager/list_node_pools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_node_pools",
+        "full_name": "::Google::Cloud::Container::V1beta1::ClusterManager::Client#list_node_pools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Container::V1beta1::ListNodePoolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Container::V1beta1::ListNodePoolsResponse",
+        "client": {
+          "short_name": "ClusterManager::Client",
+          "full_name": "::Google::Cloud::Container::V1beta1::ClusterManager::Client"
+        },
+        "method": {
+          "short_name": "ListNodePools",
+          "full_name": "google.container.v1beta1.ClusterManager.ListNodePools",
           "service": {
             "short_name": "ClusterManager",
             "full_name": "google.container.v1beta1.ClusterManager"
