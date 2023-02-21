@@ -264,6 +264,9 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     model = "hello world"
     glossary_config = {}
     labels = {}
+    customized_attribution = "hello world"
+    is_translate_native_pdf_only = true
+    enable_shadow_removal_native_pdf = true
 
     translate_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :translate_document, name
@@ -276,6 +279,9 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       assert_equal "hello world", request["model"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig), request["glossary_config"]
       assert_equal({}, request["labels"].to_h)
+      assert_equal "hello world", request["customized_attribution"]
+      assert_equal true, request["is_translate_native_pdf_only"]
+      assert_equal true, request["enable_shadow_removal_native_pdf"]
       refute_nil options
     end
 
@@ -286,31 +292,31 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       end
 
       # Use hash object
-      client.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels }) do |response, operation|
+      client.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.translate_document parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels do |response, operation|
+      client.translate_document parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.translate_document ::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels) do |response, operation|
+      client.translate_document ::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels }, grpc_options) do |response, operation|
+      client.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.translate_document(::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels), grpc_options) do |response, operation|
+      client.translate_document(::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -413,6 +419,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     models = {}
     glossaries = {}
     format_conversions = {}
+    customized_attribution = "hello world"
 
     batch_translate_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_translate_document, name
@@ -425,6 +432,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       assert_equal({}, request["models"].to_h)
       assert_equal({}, request["glossaries"].to_h)
       assert_equal({}, request["format_conversions"].to_h)
+      assert_equal "hello world", request["customized_attribution"]
       refute_nil options
     end
 
@@ -435,35 +443,35 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       end
 
       # Use hash object
-      client.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions }) do |response, operation|
+      client.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_translate_document parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions do |response, operation|
+      client.batch_translate_document parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_translate_document ::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions) do |response, operation|
+      client.batch_translate_document ::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions }, grpc_options) do |response, operation|
+      client.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_translate_document(::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions), grpc_options) do |response, operation|
+      client.batch_translate_document(::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

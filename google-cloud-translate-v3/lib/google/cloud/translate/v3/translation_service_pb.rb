@@ -105,6 +105,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :model, :string, 6
       optional :glossary_config, :message, 7, "google.cloud.translation.v3.TranslateTextGlossaryConfig"
       map :labels, :string, :string, 8
+      optional :customized_attribution, :string, 10
+      optional :is_translate_native_pdf_only, :bool, 11
+      optional :enable_shadow_removal_native_pdf, :bool, 12
     end
     add_message "google.cloud.translation.v3.DocumentTranslation" do
       repeated :byte_stream_outputs, :bytes, 1
@@ -160,6 +163,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :entry_count, :int32, 6
       optional :submit_time, :message, 7, "google.protobuf.Timestamp"
       optional :end_time, :message, 8, "google.protobuf.Timestamp"
+      optional :display_name, :string, 9
       oneof :languages do
         optional :language_pair, :message, 3, "google.cloud.translation.v3.Glossary.LanguageCodePair"
         optional :language_codes_set, :message, 4, "google.cloud.translation.v3.Glossary.LanguageCodesSet"
@@ -232,6 +236,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :models, :string, :string, 6
       map :glossaries, :string, :message, 7, "google.cloud.translation.v3.TranslateTextGlossaryConfig"
       map :format_conversions, :string, :string, 8
+      optional :customized_attribution, :string, 10
     end
     add_message "google.cloud.translation.v3.BatchDocumentInputConfig" do
       oneof :source do

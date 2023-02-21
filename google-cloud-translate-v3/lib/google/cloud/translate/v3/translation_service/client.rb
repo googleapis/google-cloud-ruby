@@ -209,20 +209,19 @@ module Google
             #
             #   @param contents [::Array<::String>]
             #     Required. The content of the input in string format.
-            #     We recommend the total content be less than 30k codepoints. The max length
-            #     of this field is 1024.
-            #     Use BatchTranslateText for larger text.
+            #     We recommend the total content be less than 30,000 codepoints. The max
+            #     length of this field is 1024. Use BatchTranslateText for larger text.
             #   @param mime_type [::String]
             #     Optional. The format of the source text, for example, "text/html",
             #      "text/plain". If left blank, the MIME type defaults to "text/html".
             #   @param source_language_code [::String]
-            #     Optional. The BCP-47 language code of the input text if
+            #     Optional. The ISO-639 language code of the input text if
             #     known, for example, "en-US" or "sr-Latn". Supported language codes are
             #     listed in Language Support. If the source language isn't specified, the API
             #     attempts to identify the source language automatically and returns the
             #     source language within the response.
             #   @param target_language_code [::String]
-            #     Required. The BCP-47 language code to use for translation of the input
+            #     Required. The ISO-639 language code to use for translation of the input
             #     text, set to one of the language codes listed in Language Support.
             #   @param parent [::String]
             #     Required. Project or location to make a call. Must refer to a caller's
@@ -583,7 +582,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload translate_document(parent: nil, source_language_code: nil, target_language_code: nil, document_input_config: nil, document_output_config: nil, model: nil, glossary_config: nil, labels: nil)
+            # @overload translate_document(parent: nil, source_language_code: nil, target_language_code: nil, document_input_config: nil, document_output_config: nil, model: nil, glossary_config: nil, labels: nil, customized_attribution: nil, is_translate_native_pdf_only: nil, enable_shadow_removal_native_pdf: nil)
             #   Pass arguments to `translate_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -602,14 +601,14 @@ module Google
             #     Models and glossaries must be within the same region (have the same
             #     location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
             #   @param source_language_code [::String]
-            #     Optional. The BCP-47 language code of the input document if known, for
+            #     Optional. The ISO-639 language code of the input document if known, for
             #     example, "en-US" or "sr-Latn". Supported language codes are listed in
             #     Language Support. If the source language isn't specified, the API attempts
             #     to identify the source language automatically and returns the source
             #     language within the response. Source language must be specified if the
             #     request contains a glossary or a custom model.
             #   @param target_language_code [::String]
-            #     Required. The BCP-47 language code to use for translation of the input
+            #     Required. The ISO-639 language code to use for translation of the input
             #     document, set to one of the language codes listed in Language Support.
             #   @param document_input_config [::Google::Cloud::Translate::V3::DocumentInputConfig, ::Hash]
             #     Required. Input configurations.
@@ -647,6 +646,19 @@ module Google
             #
             #     See https://cloud.google.com/translate/docs/advanced/labels for more
             #     information.
+            #   @param customized_attribution [::String]
+            #     Optional. This flag is to support user customized attribution.
+            #     If not provided, the default is `Machine Translated by Google`.
+            #     Customized attribution should follow rules in
+            #     https://cloud.google.com/translate/attribution#attribution_and_logos
+            #   @param is_translate_native_pdf_only [::Boolean]
+            #     Optional. If true, the page limit of online native pdf translation is 300
+            #     and only native pdf pages will be translated.
+            #   @param enable_shadow_removal_native_pdf [::Boolean]
+            #     Optional. If true, use the text removal to remove the shadow text on
+            #     background image for native pdf translation.
+            #     Shadow removal feature can only be enabled when
+            #     is_translate_native_pdf_only is false
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Translate::V3::TranslateDocumentResponse]
@@ -880,7 +892,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_translate_document(parent: nil, source_language_code: nil, target_language_codes: nil, input_configs: nil, output_config: nil, models: nil, glossaries: nil, format_conversions: nil)
+            # @overload batch_translate_document(parent: nil, source_language_code: nil, target_language_codes: nil, input_configs: nil, output_config: nil, models: nil, glossaries: nil, format_conversions: nil, customized_attribution: nil)
             #   Pass arguments to `batch_translate_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -896,11 +908,11 @@ module Google
             #     the same location-id) can be used, otherwise an INVALID_ARGUMENT (400)
             #     error is returned.
             #   @param source_language_code [::String]
-            #     Required. The BCP-47 language code of the input document if known, for
+            #     Required. The ISO-639 language code of the input document if known, for
             #     example, "en-US" or "sr-Latn". Supported language codes are listed in
-            #     Language Support (https://cloud.google.com/translate/docs/languages).
+            #     [Language Support](https://cloud.google.com/translate/docs/languages).
             #   @param target_language_codes [::Array<::String>]
-            #     Required. The BCP-47 language code to use for translation of the input
+            #     Required. The ISO-639 language code to use for translation of the input
             #     document. Specify up to 10 language codes here.
             #   @param input_configs [::Array<::Google::Cloud::Translate::V3::BatchDocumentInputConfig, ::Hash>]
             #     Required. Input configurations.
@@ -940,6 +952,11 @@ module Google
             #
             #     If nothing specified, output files will be in the same format as the
             #     original file.
+            #   @param customized_attribution [::String]
+            #     Optional. This flag is to support user customized attribution.
+            #     If not provided, the default is `Machine Translated by Google`.
+            #     Customized attribution should follow rules in
+            #     https://cloud.google.com/translate/attribution#attribution_and_logos
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
