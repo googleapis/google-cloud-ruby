@@ -270,6 +270,7 @@ describe "Document", :firestore_acceptance do
   end
 
   it "has collections method" do
+    skip if Google::Cloud.configure.firestore.transport == :rest
     collections_doc_ref = root_col.add
 
     collections = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
@@ -294,6 +295,7 @@ describe "Document", :firestore_acceptance do
   end
 
   it "has collections method with read time" do
+    skip if Google::Cloud.configure.firestore.transport == :rest
     collections_doc_ref = root_col.add
 
     collections = ["a", "b", "c", "d", "e"]

@@ -14,7 +14,16 @@
 
 require "rake/testtask"
 
-Rake::TestTask.new "test" do |t|
+namespace :test do
+  ["grpc", "rest"].each do |transport|
+    Rake::TestTask.new transport do |t|
+      t.test_files = FileList["acceptance/init_#{transport}.rb", "**/*_test.rb"]
+      t.warning = false
+    end
+  end
+end
+
+task :test do
   project = ENV["FIRESTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = ENV["FIRESTORE_TEST_KEYFILE"] || ENV["FIRESTORE_TEST_KEYFILE_JSON"] ||
             ENV["GCLOUD_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
@@ -32,6 +41,6 @@ Rake::TestTask.new "test" do |t|
   ENV["FIRESTORE_PROJECT"] = project
   ENV["FIRESTORE_KEYFILE_JSON"] = keyfile
 
-  t.test_files = FileList["**/*_test.rb"]
-  t.warning = false
+  Rake::Task["test:grpc"].invoke
+  Rake::Task["test:rest"].invoke
 end
