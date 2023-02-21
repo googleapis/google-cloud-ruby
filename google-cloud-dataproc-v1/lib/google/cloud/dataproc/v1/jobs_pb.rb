@@ -114,17 +114,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :query_list, :message, 2, "google.cloud.dataproc.v1.QueryList"
       end
     end
-    add_message "google.cloud.dataproc.v1.TrinoJob" do
-      optional :continue_on_failure, :bool, 3
-      optional :output_format, :string, 4
-      repeated :client_tags, :string, 5
-      map :properties, :string, :string, 6
-      optional :logging_config, :message, 7, "google.cloud.dataproc.v1.LoggingConfig"
-      oneof :queries do
-        optional :query_file_uri, :string, 1
-        optional :query_list, :message, 2, "google.cloud.dataproc.v1.QueryList"
-      end
-    end
     add_message "google.cloud.dataproc.v1.JobPlacement" do
       optional :cluster_name, :string, 1
       optional :cluster_uuid, :string, 2
@@ -197,7 +186,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :spark_r_job, :message, 21, "google.cloud.dataproc.v1.SparkRJob"
         optional :spark_sql_job, :message, 12, "google.cloud.dataproc.v1.SparkSqlJob"
         optional :presto_job, :message, 23, "google.cloud.dataproc.v1.PrestoJob"
-        optional :trino_job, :message, 28, "google.cloud.dataproc.v1.TrinoJob"
       end
     end
     add_message "google.cloud.dataproc.v1.DriverSchedulingConfig" do
@@ -278,7 +266,6 @@ module Google
         PigJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.PigJob").msgclass
         SparkRJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SparkRJob").msgclass
         PrestoJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.PrestoJob").msgclass
-        TrinoJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.TrinoJob").msgclass
         JobPlacement = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.JobPlacement").msgclass
         JobStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.JobStatus").msgclass
         JobStatus::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.JobStatus.State").enummodule

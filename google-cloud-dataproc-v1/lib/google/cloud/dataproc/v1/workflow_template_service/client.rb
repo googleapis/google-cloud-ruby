@@ -18,7 +18,6 @@
 
 require "google/cloud/errors"
 require "google/cloud/dataproc/v1/workflow_templates_pb"
-require "google/iam/v1"
 
 module Google
   module Cloud
@@ -176,12 +175,6 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-              end
-
               @workflow_template_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Stub,
                 credentials:  credentials,
@@ -197,13 +190,6 @@ module Google
             # @return [::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Operations]
             #
             attr_reader :operations_client
-
-            ##
-            # Get the associated client for mix-in of the IAMPolicy.
-            #
-            # @return [Google::Iam::V1::IAMPolicy::Client]
-            #
-            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -550,8 +536,7 @@ module Google
             # Instantiates a template and begins execution.
             #
             # This method is equivalent to executing the sequence
-            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template CreateWorkflowTemplate},
-            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template InstantiateWorkflowTemplate},
+            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template CreateWorkflowTemplate}, {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template InstantiateWorkflowTemplate},
             # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#delete_workflow_template DeleteWorkflowTemplate}.
             #
             # The returned Operation can be used to track execution of

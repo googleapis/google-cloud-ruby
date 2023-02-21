@@ -18,7 +18,6 @@
 
 require "google/cloud/errors"
 require "google/cloud/dataproc/v1/jobs_pb"
-require "google/iam/v1"
 
 module Google
   module Cloud
@@ -173,12 +172,6 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-              end
-
               @job_controller_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dataproc::V1::JobController::Stub,
                 credentials:  credentials,
@@ -194,13 +187,6 @@ module Google
             # @return [::Google::Cloud::Dataproc::V1::JobController::Operations]
             #
             attr_reader :operations_client
-
-            ##
-            # Get the associated client for mix-in of the IAMPolicy.
-            #
-            # @return [Google::Iam::V1::IAMPolicy::Client]
-            #
-            attr_reader :iam_policy_client
 
             # Service calls
 
