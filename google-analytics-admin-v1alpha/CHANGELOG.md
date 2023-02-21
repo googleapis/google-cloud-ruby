@@ -1,5 +1,12 @@
 # Release History
 
+### 0.15.0 (2023-02-21)
+
+#### Features
+
+* Added support for access bindings ([#20481](https://github.com/googleapis/google-cloud-ruby/issues/20481)) 
+* Added support for expanded data sets 
+
 ### 0.14.0 (2023-02-13)
 
 ### ⚠ BREAKING CHANGES
