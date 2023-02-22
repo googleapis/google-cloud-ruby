@@ -4,10 +4,12 @@
 require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
+require 'google/cloud/dialogflow/cx/v3/gcs_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/cx/v3/advanced_settings.proto", :syntax => :proto3) do
     add_message "google.cloud.dialogflow.cx.v3.AdvancedSettings" do
+      optional :audio_export_gcs_destination, :message, 2, "google.cloud.dialogflow.cx.v3.GcsDestination"
       optional :logging_settings, :message, 6, "google.cloud.dialogflow.cx.v3.AdvancedSettings.LoggingSettings"
     end
     add_message "google.cloud.dialogflow.cx.v3.AdvancedSettings.LoggingSettings" do
