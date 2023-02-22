@@ -25,6 +25,7 @@ require "google/cloud/video_intelligence/v1p2beta1/version"
 require "google/cloud/video_intelligence/v1p2beta1/video_intelligence_service/credentials"
 require "google/cloud/video_intelligence/v1p2beta1/video_intelligence_service/operations"
 require "google/cloud/video_intelligence/v1p2beta1/video_intelligence_service/client"
+require "google/cloud/video_intelligence/v1p2beta1/video_intelligence_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/video_intelligence/v1p2beta1/video_intelligence_service"
         #     client = ::Google::Cloud::VideoIntelligence::V1p2beta1::VideoIntelligenceService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/video_intelligence/v1p2beta1/video_intelligence_service/rest"
+        #     client = ::Google::Cloud::VideoIntelligence::V1p2beta1::VideoIntelligenceService::Rest::Client.new
         #
         module VideoIntelligenceService
         end

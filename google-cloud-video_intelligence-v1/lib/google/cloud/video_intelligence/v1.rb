@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/video_intelligence/v1"
       #     client = ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/video_intelligence/v1"
+      #     client = ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Rest::Client.new
+      #
       module V1
       end
     end

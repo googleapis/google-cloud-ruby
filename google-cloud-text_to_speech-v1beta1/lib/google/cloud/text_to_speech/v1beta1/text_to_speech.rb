@@ -25,6 +25,7 @@ require "google/cloud/text_to_speech/v1beta1/version"
 require "google/cloud/text_to_speech/v1beta1/text_to_speech/credentials"
 require "google/cloud/text_to_speech/v1beta1/text_to_speech/paths"
 require "google/cloud/text_to_speech/v1beta1/text_to_speech/client"
+require "google/cloud/text_to_speech/v1beta1/text_to_speech/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/text_to_speech/v1beta1/text_to_speech"
         #     client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/text_to_speech/v1beta1/text_to_speech/rest"
+        #     client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::Client.new
         #
         module TextToSpeech
         end

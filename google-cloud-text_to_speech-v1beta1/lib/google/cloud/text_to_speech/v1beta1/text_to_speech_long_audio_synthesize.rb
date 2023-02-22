@@ -26,6 +26,7 @@ require "google/cloud/text_to_speech/v1beta1/text_to_speech_long_audio_synthesiz
 require "google/cloud/text_to_speech/v1beta1/text_to_speech_long_audio_synthesize/paths"
 require "google/cloud/text_to_speech/v1beta1/text_to_speech_long_audio_synthesize/operations"
 require "google/cloud/text_to_speech/v1beta1/text_to_speech_long_audio_synthesize/client"
+require "google/cloud/text_to_speech/v1beta1/text_to_speech_long_audio_synthesize/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/text_to_speech/v1beta1/text_to_speech_long_audio_synthesize"
         #     client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/text_to_speech/v1beta1/text_to_speech_long_audio_synthesize/rest"
+        #     client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Rest::Client.new
         #
         module TextToSpeechLongAudioSynthesize
         end
