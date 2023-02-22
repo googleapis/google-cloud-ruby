@@ -10,10 +10,12 @@ require 'google/api/resource_pb'
 require 'google/cloud/documentai/v1/document_pb'
 require 'google/cloud/documentai/v1/document_io_pb'
 require 'google/cloud/documentai/v1/document_schema_pb'
+require 'google/cloud/documentai/v1/evaluation_pb'
 require 'google/cloud/documentai/v1/operation_metadata_pb'
 require 'google/cloud/documentai/v1/processor_pb'
 require 'google/cloud/documentai/v1/processor_type_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
@@ -174,6 +176,31 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.documentai.v1.SetDefaultProcessorVersionMetadata" do
       optional :common_metadata, :message, 1, "google.cloud.documentai.v1.CommonOperationMetadata"
     end
+    add_message "google.cloud.documentai.v1.TrainProcessorVersionRequest" do
+      optional :parent, :string, 1
+      optional :processor_version, :message, 2, "google.cloud.documentai.v1.ProcessorVersion"
+      optional :document_schema, :message, 10, "google.cloud.documentai.v1.DocumentSchema"
+      optional :input_data, :message, 4, "google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData"
+      optional :base_processor_version, :string, 8
+    end
+    add_message "google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData" do
+      optional :training_documents, :message, 3, "google.cloud.documentai.v1.BatchDocumentsInputConfig"
+      optional :test_documents, :message, 4, "google.cloud.documentai.v1.BatchDocumentsInputConfig"
+    end
+    add_message "google.cloud.documentai.v1.TrainProcessorVersionResponse" do
+      optional :processor_version, :string, 1
+    end
+    add_message "google.cloud.documentai.v1.TrainProcessorVersionMetadata" do
+      optional :common_metadata, :message, 1, "google.cloud.documentai.v1.CommonOperationMetadata"
+      optional :training_dataset_validation, :message, 2, "google.cloud.documentai.v1.TrainProcessorVersionMetadata.DatasetValidation"
+      optional :test_dataset_validation, :message, 3, "google.cloud.documentai.v1.TrainProcessorVersionMetadata.DatasetValidation"
+    end
+    add_message "google.cloud.documentai.v1.TrainProcessorVersionMetadata.DatasetValidation" do
+      optional :document_error_count, :int32, 3
+      optional :dataset_error_count, :int32, 4
+      repeated :document_errors, :message, 1, "google.rpc.Status"
+      repeated :dataset_errors, :message, 2, "google.rpc.Status"
+    end
     add_message "google.cloud.documentai.v1.ReviewDocumentRequest" do
       optional :human_review_config, :string, 1
       optional :enable_schema_validation, :bool, 3
@@ -200,6 +227,28 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.documentai.v1.ReviewDocumentOperationMetadata" do
       optional :common_metadata, :message, 5, "google.cloud.documentai.v1.CommonOperationMetadata"
       optional :question_id, :string, 6
+    end
+    add_message "google.cloud.documentai.v1.EvaluateProcessorVersionRequest" do
+      optional :processor_version, :string, 1
+      optional :evaluation_documents, :message, 3, "google.cloud.documentai.v1.BatchDocumentsInputConfig"
+    end
+    add_message "google.cloud.documentai.v1.EvaluateProcessorVersionMetadata" do
+      optional :common_metadata, :message, 1, "google.cloud.documentai.v1.CommonOperationMetadata"
+    end
+    add_message "google.cloud.documentai.v1.EvaluateProcessorVersionResponse" do
+      optional :evaluation, :string, 2
+    end
+    add_message "google.cloud.documentai.v1.GetEvaluationRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.documentai.v1.ListEvaluationsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.cloud.documentai.v1.ListEvaluationsResponse" do
+      repeated :evaluations, :message, 1, "google.cloud.documentai.v1.Evaluation"
+      optional :next_page_token, :string, 2
     end
   end
 end
@@ -248,11 +297,22 @@ module Google
         SetDefaultProcessorVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.SetDefaultProcessorVersionRequest").msgclass
         SetDefaultProcessorVersionResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.SetDefaultProcessorVersionResponse").msgclass
         SetDefaultProcessorVersionMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.SetDefaultProcessorVersionMetadata").msgclass
+        TrainProcessorVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.TrainProcessorVersionRequest").msgclass
+        TrainProcessorVersionRequest::InputData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData").msgclass
+        TrainProcessorVersionResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.TrainProcessorVersionResponse").msgclass
+        TrainProcessorVersionMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.TrainProcessorVersionMetadata").msgclass
+        TrainProcessorVersionMetadata::DatasetValidation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.TrainProcessorVersionMetadata.DatasetValidation").msgclass
         ReviewDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ReviewDocumentRequest").msgclass
         ReviewDocumentRequest::Priority = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ReviewDocumentRequest.Priority").enummodule
         ReviewDocumentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ReviewDocumentResponse").msgclass
         ReviewDocumentResponse::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ReviewDocumentResponse.State").enummodule
         ReviewDocumentOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ReviewDocumentOperationMetadata").msgclass
+        EvaluateProcessorVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.EvaluateProcessorVersionRequest").msgclass
+        EvaluateProcessorVersionMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.EvaluateProcessorVersionMetadata").msgclass
+        EvaluateProcessorVersionResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.EvaluateProcessorVersionResponse").msgclass
+        GetEvaluationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.GetEvaluationRequest").msgclass
+        ListEvaluationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ListEvaluationsRequest").msgclass
+        ListEvaluationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ListEvaluationsResponse").msgclass
       end
     end
   end
