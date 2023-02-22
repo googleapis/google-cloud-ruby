@@ -150,6 +150,8 @@ module Google
         #     delivered to subscribers in the order in which they are received by the
         #     Pub/Sub system. All `PubsubMessage`s published in a given `PublishRequest`
         #     must specify the same `ordering_key` value.
+        #     For more information, see [ordering
+        #     messages](https://cloud.google.com/pubsub/docs/ordering).
         class PubsubMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -415,7 +417,8 @@ module Google
         #     successfully consuming messages from the subscription or is issuing
         #     operations on the subscription. If `expiration_policy` is not set, a
         #     *default policy* with `ttl` of 31 days will be used. The minimum allowed
-        #     value for `expiration_policy.ttl` is 1 day.
+        #     value for `expiration_policy.ttl` is 1 day. If `expiration_policy` is set,
+        #     but `expiration_policy.ttl` is not set, the subscription never expires.
         # @!attribute [rw] filter
         #   @return [::String]
         #     An expression written in the Pub/Sub [filter
