@@ -127,6 +127,9 @@ module Google
         # @!attribute [r] warnings
         #   @return [::Array<::String>]
         #     Output only. Errors encountered during operation execution.
+        # @!attribute [r] child_operation_ids
+        #   @return [::Array<::String>]
+        #     Output only. Child operation ids
         class ClusterOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
