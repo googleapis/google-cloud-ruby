@@ -73,6 +73,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.bigquery.connection.v1.CloudSpannerProperties" do
       optional :database, :string, 1
       optional :use_parallelism, :bool, 2
+      optional :use_serverless_analytics, :bool, 3
+      optional :database_role, :string, 4
     end
     add_message "google.cloud.bigquery.connection.v1.AwsProperties" do
       oneof :authentication_method do
