@@ -37,7 +37,7 @@ module Google
 
         def initialize write, document_reference, operation_type
           @write = write
-          @completion_event = Concurrent::Event.new
+          @completion_event = Google::Cloud::Firestore::Concurrent::Event.new
           @status = nil
           @result = nil
           @operation_type = operation_type

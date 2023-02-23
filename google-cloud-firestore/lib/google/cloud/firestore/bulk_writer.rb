@@ -43,7 +43,7 @@ class BulkWriter
     @pending_batch_count = 0
     @rate_limiter = RateLimiter.new
     @doc_refs = Set
-    Concurrent::Promises.future_on @thread_pool do
+    Google::Cloud::Firestore::Concurrent::Promises.future_on @thread_pool do
       schedule_operations
     end
   end
@@ -106,7 +106,7 @@ class BulkWriter
   end
 
   def commit_batch operations
-    Concurrent::Promises.future_on @thread_pool do
+    Google::Cloud::Firestore::Concurrent::Promises.future_on @thread_pool do
       pre_commit_batch
       bulk_commit_batch = BulkCommitBatch.new operations, @service
       failed_operations = bulk_commit_batch.commit
@@ -131,7 +131,7 @@ class BulkWriter
     @mutex.lock
     @buffered_operations << operation
     @mutex.unlock
-    Concurrent::Promises.future_on @thread_pool do
+    Google::Cloud::Firestore::Concurrent::Promises.future_on @thread_pool do
       operation.completion_event.wait
       # based on the status of operation either raise an error or return the result
     end
