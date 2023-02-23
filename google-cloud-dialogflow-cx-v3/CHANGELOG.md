@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.13.0 (2023-02-23)
+
+#### Features
+
+* Support for audio export destination in Google Cloud Storage ([#20493](https://github.com/googleapis/google-cloud-ruby/issues/20493)) 
+* Support for text-to-speech settings for an Agent 
+
 ### 0.12.0 (2023-01-26)
 
 #### Features
