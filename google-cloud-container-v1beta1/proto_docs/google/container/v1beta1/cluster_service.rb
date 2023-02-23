@@ -604,7 +604,7 @@ module Google
           end
         end
 
-        # Kubernetes taint is comprised of three fields: key, value, and effect. Effect
+        # Kubernetes taint is composed of three fields: key, value, and effect. Effect
         # can only be one of three types:  NoSchedule, PreferNoSchedule or NoExecute.
         #
         # See
