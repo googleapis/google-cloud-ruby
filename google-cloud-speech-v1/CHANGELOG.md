@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 (2023-02-23)
+
+#### Features
+
+* Added support for REST transport ([#20498](https://github.com/googleapis/google-cloud-ruby/issues/20498)) 
+
 ### 0.10.2 (2023-02-17)
 
 #### Bug Fixes
