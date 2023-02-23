@@ -122,9 +122,30 @@ module Google
         #     returned as they become available (these interim results are indicated with
         #     the `is_final=false` flag).
         #     If `false` or omitted, only `is_final=true` result(s) are returned.
+        # @!attribute [rw] enable_voice_activity_events
+        #   @return [::Boolean]
+        #     If `true`, responses with voice activity speech events will be returned as
+        #     they are detected.
+        # @!attribute [rw] voice_activity_timeout
+        #   @return [::Google::Cloud::Speech::V1p1beta1::StreamingRecognitionConfig::VoiceActivityTimeout]
+        #     If set, the server will automatically close the stream after the specified
+        #     duration has elapsed after the last VOICE_ACTIVITY speech event has been
+        #     sent. The field `voice_activity_events` must also be set to true.
         class StreamingRecognitionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Events that a timeout can be set on for voice activity.
+          # @!attribute [rw] speech_start_timeout
+          #   @return [::Google::Protobuf::Duration]
+          #     Duration to timeout the stream if no speech begins.
+          # @!attribute [rw] speech_end_timeout
+          #   @return [::Google::Protobuf::Duration]
+          #     Duration to timeout the stream after speech ends.
+          class VoiceActivityTimeout
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Provides information to the recognizer that specifies how to process the
@@ -133,7 +154,8 @@ module Google
         #   @return [::Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding]
         #     Encoding of audio data sent in all `RecognitionAudio` messages.
         #     This field is optional for `FLAC` and `WAV` audio files and required
-        #     for all other audio formats. For details, see {::Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
+        #     for all other audio formats. For details, see
+        #     {::Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
         # @!attribute [rw] sample_rate_hertz
         #   @return [::Integer]
         #     Sample rate in Hertz of the audio data sent in all
@@ -142,7 +164,8 @@ module Google
         #     source to 16000 Hz. If that's not possible, use the native sample rate of
         #     the audio source (instead of re-sampling).
         #     This field is optional for FLAC and WAV audio files, but is
-        #     required for all other audio formats. For details, see {::Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
+        #     required for all other audio formats. For details, see
+        #     {::Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
         # @!attribute [rw] audio_channel_count
         #   @return [::Integer]
         #     The number of channels in the input audio data.
@@ -363,7 +386,8 @@ module Google
           # an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
           # encoding configuration must match the encoding described in the audio
           # header; otherwise the request returns an
-          # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT] error code.
+          # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT] error
+          # code.
           module AudioEncoding
             # Not specified.
             ENCODING_UNSPECIFIED = 0
@@ -612,8 +636,8 @@ module Google
 
         # Contains audio data in the encoding specified in the `RecognitionConfig`.
         # Either `content` or `uri` must be supplied. Supplying both or neither
-        # returns [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. See
-        # [content limits](https://cloud.google.com/speech-to-text/quotas#content).
+        # returns [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
+        # See [content limits](https://cloud.google.com/speech-to-text/quotas#content).
         # @!attribute [rw] content
         #   @return [::String]
         #     The audio data bytes encoded as specified in
@@ -626,8 +650,9 @@ module Google
         #     Currently, only Google Cloud Storage URIs are
         #     supported, which must be specified in the following format:
         #     `gs://bucket_name/object_name` (other URI formats return
-        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see
-        #     [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]).
+        #     For more information, see [Request
+        #     URIs](https://cloud.google.com/storage/docs/reference-uris).
         class RecognitionAudio
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -700,11 +725,12 @@ module Google
         #     Time of the most recent processing update.
         # @!attribute [r] uri
         #   @return [::String]
-        #     Output only. The URI of the audio file being transcribed. Empty if the audio was sent
-        #     as byte content.
+        #     Output only. The URI of the audio file being transcribed. Empty if the
+        #     audio was sent as byte content.
         # @!attribute [r] output_config
         #   @return [::Google::Cloud::Speech::V1p1beta1::TranscriptOutputConfig]
-        #     Output only. A copy of the TranscriptOutputConfig if it was set in the request.
+        #     Output only. A copy of the TranscriptOutputConfig if it was set in the
+        #     request.
         class LongRunningRecognizeMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -772,6 +798,9 @@ module Google
         # @!attribute [rw] speech_event_type
         #   @return [::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse::SpeechEventType]
         #     Indicates the type of speech event.
+        # @!attribute [rw] speech_event_time
+        #   @return [::Google::Protobuf::Duration]
+        #     Time offset between the beginning of the audio and event emission.
         # @!attribute [rw] total_billed_time
         #   @return [::Google::Protobuf::Duration]
         #     When available, billed audio seconds for the stream.
@@ -800,6 +829,23 @@ module Google
             # until the server closes the gRPC connection. This event is only sent if
             # `single_utterance` was set to `true`, and is not used otherwise.
             END_OF_SINGLE_UTTERANCE = 1
+
+            # This event indicates that the server has detected the beginning of human
+            # voice activity in the stream. This event can be returned multiple times
+            # if speech starts and stops repeatedly throughout the stream. This event
+            # is only sent if `voice_activity_events` is set to true.
+            SPEECH_ACTIVITY_BEGIN = 2
+
+            # This event indicates that the server has detected the end of human voice
+            # activity in the stream. This event can be returned multiple times if
+            # speech starts and stops repeatedly throughout the stream. This event is
+            # only sent if `voice_activity_events` is set to true.
+            SPEECH_ACTIVITY_END = 3
+
+            # This event indicates that the user-set timeout for speech activity begin
+            # or end has exceeded. Upon receiving this event, the client is expected to
+            # send a half close. Further audio will not be processed.
+            SPEECH_ACTIVITY_TIMEOUT = 4
           end
         end
 
@@ -836,9 +882,9 @@ module Google
         #     For audio_channel_count = N, its output values can range from '1' to 'N'.
         # @!attribute [r] language_code
         #   @return [::String]
-        #     Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag
-        #     of the language in this result. This language code was detected to have
-        #     the most likelihood of being spoken in the audio.
+        #     Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+        #     language tag of the language in this result. This language code was
+        #     detected to have the most likelihood of being spoken in the audio.
         class StreamingRecognitionResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -862,9 +908,9 @@ module Google
         #     beginning of the audio.
         # @!attribute [r] language_code
         #   @return [::String]
-        #     Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag
-        #     of the language in this result. This language code was detected to have
-        #     the most likelihood of being spoken in the audio.
+        #     Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+        #     language tag of the language in this result. This language code was
+        #     detected to have the most likelihood of being spoken in the audio.
         class SpeechRecognitionResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
