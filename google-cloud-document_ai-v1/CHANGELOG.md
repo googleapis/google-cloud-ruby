@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.10.0 (2023-02-23)
+
+#### Features
+
+* Support for getting the most recently invoked evaluation for a processor version 
+* Support for the evaluate_processor_version RPC 
+* Support for the get_evaluation RPC 
+* Support for the list_evaluations RPC 
+* Support for the train_processor_version RPC ([#20491](https://github.com/googleapis/google-cloud-ruby/issues/20491)) 
+#### Documentation
+
+* Marked the EVAL_REQUESTED, EVAL_APPROVED, and EVAL_SKIPPED operation types as deprecated. 
+
 ### 0.9.0 (2023-01-19)
 
 #### Features
