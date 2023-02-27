@@ -1,6 +1,6 @@
 # Ruby Client for the Workflows V1 API
 
-API Client library for the Workflows V1 API
+Manage workflow definitions. To execute workflows and manage executions, see the Workflows Executions API.
 
 Workflows link series of serverless tasks together in an order you define. Combine the power of Google Cloud's APIs, serverless products like Cloud Functions and Cloud Run, and calls to external APIs to create flexible serverless applications. Workflows requires no infrastructure management and scales seamlessly with demand, including scaling down to zero..
 

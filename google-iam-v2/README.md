@@ -1,6 +1,6 @@
 # Ruby Client for the IAM V2 API
 
-API Client library for the IAM V2 API
+Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.
 
 Manages identity and access control policies for Google Cloud Platform resources.
 

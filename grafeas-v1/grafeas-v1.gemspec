@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "The Grafeas API stores, and enables querying and retrieval of, critical metadata about all of your software artifacts. Note that grafeas-v1 is a version-specific client library. For most uses, we recommend installing the main client library grafeas instead. See the readme for more details."
-  gem.summary       = "API Client library for the Grafeas V1 API"
+  gem.summary       = "An implementation of the Grafeas API, which stores, and enables querying and retrieval of critical metadata about all of your software artifacts."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

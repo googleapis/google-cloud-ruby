@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Google Cloud VMware Engine is a fully managed service that lets you run the VMware platform in Google Cloud. VMware Engine provides you with VMware operational continuity so you can benefit from a cloud consumption model and lower your total cost of ownership. VMware Engine also offers on-demand provisioning, pay-as-you-grow, and capacity optimization. Note that google-cloud-vmware_engine-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-vmware_engine instead. See the readme for more details."
-  gem.summary       = "API Client library for the Google Cloud VMware Engine V1 API"
+  gem.summary       = "The Google VMware Engine API lets you programmatically manage VMware environments."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
