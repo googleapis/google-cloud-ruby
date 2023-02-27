@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "The Cloud Domains API provides registration, management and configuration of domain names. Note that google-cloud-domains-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-domains instead. See the readme for more details."
-  gem.summary       = "API Client library for the Cloud Domains V1 API"
+  gem.summary       = "Enables management and configuration of domain names."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

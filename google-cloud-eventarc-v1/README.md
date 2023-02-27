@@ -1,6 +1,6 @@
 # Ruby Client for the Eventarc V1 API
 
-API Client library for the Eventarc V1 API
+Build event-driven applications on Google Cloud Platform.
 
 Eventarc lets you asynchronously deliver events from Google services, SaaS, and your own apps using loosely coupled services that react to state changes. Eventarc requires no infrastructure management — you can optimize productivity and costs while building a modern, event-driven solution.
 

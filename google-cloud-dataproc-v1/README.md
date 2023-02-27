@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Dataproc V1 API
 
-API Client library for the Cloud Dataproc V1 API
+Manages Hadoop-based clusters and jobs on Google Cloud Platform.
 
 Manages Hadoop-based clusters and jobs on Google Cloud Platform.
 

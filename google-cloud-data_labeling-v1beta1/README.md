@@ -1,6 +1,6 @@
 # Ruby Client for the AI Platform Data Labeling Service V1beta1 API
 
-API Client library for the AI Platform Data Labeling Service V1beta1 API
+Public API for Google Cloud AI Data Labeling Service.
 
 AI Platform Data Labeling Service lets you work with human labelers to generate highly accurate labels for a collection of data that you can use in machine learning models.
 

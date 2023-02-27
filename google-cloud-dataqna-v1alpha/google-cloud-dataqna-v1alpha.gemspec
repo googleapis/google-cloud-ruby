@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Data QnA is a natural language question and answer service for BigQuery data. Note that google-cloud-dataqna-v1alpha is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-dataqna instead. See the readme for more details."
-  gem.summary       = "API Client library for the BigQuery Data QnA V1alpha API"
+  gem.summary       = "Data QnA is a natural language question and answer service for BigQuery data."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
