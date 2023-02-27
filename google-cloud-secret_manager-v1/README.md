@@ -1,6 +1,6 @@
 # Ruby Client for the Secret Manager V1 API
 
-API Client library for the Secret Manager V1 API
+Stores sensitive data such as API keys, passwords, and certificates. Provides convenience while improving security.
 
 Secret Manager is a secure and convenient storage system for API keys, passwords, certificates, and other sensitive data. Secret Manager provides a central place and single source of truth to manage, access, and audit secrets across Google Cloud.
 

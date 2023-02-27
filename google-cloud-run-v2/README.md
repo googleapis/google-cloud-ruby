@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Run V2 API
 
-API Client library for the Cloud Run V2 API
+Deploy and manage user provided container images that scale automatically based on incoming requests. The Cloud Run Admin API v1 follows the Knative Serving API specification, while v2 is aligned with Google Cloud AIP-based API standards, as described in https://google.aip.dev/.
 
 Cloud Run deploys and manages user provided container images that scale automatically based on incoming requests.
 

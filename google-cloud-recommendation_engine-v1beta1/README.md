@@ -1,6 +1,6 @@
 # Ruby Client for the Recommendations AI V1beta1 API
 
-API Client library for the Recommendations AI V1beta1 API
+Recommendations AI service enables customers to build end-to-end personalized recommendation systems without requiring a high level of expertise in machine learning, recommendation system, or Google Cloud.
 
 Recommendations AI enables you to build an end-to-end personalized recommendation system based on state-of-the-art deep learning ML models, without a need for expertise in ML or recommendation systems.
 
