@@ -1,9 +1,9 @@
 {
     "api_id": "orgpolicy.googleapis.com",
     "api_shortname": "orgpolicy",
-    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-org_policy-v2/latest",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-org_policy-v2/latest",
     "distribution_name": "google-cloud-org_policy-v2",
-    "is_cloud": true,
+    "is_cloud": false,
     "language": "ruby",
     "name": "orgpolicy",
     "name_pretty": "Organization Policy V2 API",

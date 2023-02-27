@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Cloud Profiler is a statistical, low-overhead profiler that continuously gathers CPU usage and memory-allocation information from your production applications. It attributes that information to the application's source code, helping you identify the parts of the application consuming the most resources, and otherwise illuminating the performance characteristics of the code. Note that google-cloud-profiler-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-profiler instead. See the readme for more details."
-  gem.summary       = "API Client library for the Cloud Profiler V2 API"
+  gem.summary       = "Manages continuous profiling information."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Pub/Sub V1 API
 
-API Client library for the Cloud Pub/Sub V1 API
+Provides reliable, many-to-many, asynchronous messaging between applications.
 
 Cloud Pub/Sub is a fully-managed real-time messaging service that allows you to send and receive messages between independent applications.
 

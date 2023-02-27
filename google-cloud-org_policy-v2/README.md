@@ -1,6 +1,6 @@
 # Ruby Client for the Organization Policy V2 API
 
-API Client library for the Organization Policy V2 API
+The Organization Policy API allows users to configure governance rules on their Google Cloud resources across the resource hierarchy.
 
 The Cloud Org Policy service provides a simple mechanism for organizations to restrict the allowed configurations across their entire Cloud Resource hierarchy.
 
@@ -37,7 +37,7 @@ request = ::Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new # (request 
 response = client.list_constraints request
 ```
 
-View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-org_policy-v2/latest)
+View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-org_policy-v2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/resource-manager/docs/organization-policy/overview)

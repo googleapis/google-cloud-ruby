@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "AI Platform Notebooks makes it easy to manage JupyterLab instances through a protected, publicly available notebook instance URL. A JupyterLab instance is a Deep Learning virtual machine instance with the latest machine learning and data science libraries pre-installed. Note that google-cloud-notebooks-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-notebooks instead. See the readme for more details."
-  gem.summary       = "API Client library for the AI Platform Notebooks V1 API"
+  gem.summary       = "Notebooks API is used to manage notebook resources in Google Cloud."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
