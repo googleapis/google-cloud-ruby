@@ -1,0 +1,135 @@
+{
+  "client_library": {
+    "name": "google-cloud-text_to_speech-v1beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.texttospeech.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "texttospeech_v1beta1_generated_TextToSpeech_ListVoices_sync",
+      "title": "Snippet for the list_voices call in the TextToSpeech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client#list_voices. It may require modification in order to execute successfully.",
+      "file": "text_to_speech/list_voices.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_voices",
+        "full_name": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client#list_voices",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TextToSpeech::V1beta1::ListVoicesResponse",
+        "client": {
+          "short_name": "TextToSpeech::Client",
+          "full_name": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client"
+        },
+        "method": {
+          "short_name": "ListVoices",
+          "full_name": "google.cloud.texttospeech.v1beta1.TextToSpeech.ListVoices",
+          "service": {
+            "short_name": "TextToSpeech",
+            "full_name": "google.cloud.texttospeech.v1beta1.TextToSpeech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "texttospeech_v1beta1_generated_TextToSpeech_SynthesizeSpeech_sync",
+      "title": "Snippet for the synthesize_speech call in the TextToSpeech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client#synthesize_speech. It may require modification in order to execute successfully.",
+      "file": "text_to_speech/synthesize_speech.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "synthesize_speech",
+        "full_name": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client#synthesize_speech",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechResponse",
+        "client": {
+          "short_name": "TextToSpeech::Client",
+          "full_name": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client"
+        },
+        "method": {
+          "short_name": "SynthesizeSpeech",
+          "full_name": "google.cloud.texttospeech.v1beta1.TextToSpeech.SynthesizeSpeech",
+          "service": {
+            "short_name": "TextToSpeech",
+            "full_name": "google.cloud.texttospeech.v1beta1.TextToSpeech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "texttospeech_v1beta1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_sync",
+      "title": "Snippet for the synthesize_long_audio call in the TextToSpeechLongAudioSynthesize service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client#synthesize_long_audio. It may require modification in order to execute successfully.",
+      "file": "text_to_speech_long_audio_synthesize/synthesize_long_audio.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "synthesize_long_audio",
+        "full_name": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client#synthesize_long_audio",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TextToSpeech::V1beta1::SynthesizeLongAudioRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TextToSpeechLongAudioSynthesize::Client",
+          "full_name": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client"
+        },
+        "method": {
+          "short_name": "SynthesizeLongAudio",
+          "full_name": "google.cloud.texttospeech.v1beta1.TextToSpeechLongAudioSynthesize.SynthesizeLongAudio",
+          "service": {
+            "short_name": "TextToSpeechLongAudioSynthesize",
+            "full_name": "google.cloud.texttospeech.v1beta1.TextToSpeechLongAudioSynthesize"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
