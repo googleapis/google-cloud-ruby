@@ -1,6 +1,6 @@
 # Ruby Client for the Billing V1 API
 
-API Client library for the Billing V1 API
+Allows developers to manage billing for their Google Cloud Platform projects programmatically.
 
 Allows developers to manage billing for their Google Cloud Platform projects programmatically.
 

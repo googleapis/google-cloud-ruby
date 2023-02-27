@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "The BigQuery Migration Service is a comprehensive solution for migrating your data warehouse to BigQuery. Note that google-cloud-bigquery-migration-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-migration instead. See the readme for more details."
-  gem.summary       = "API Client library for the BigQuery Migration V2 API"
+  gem.summary       = "The migration service, exposing apis for migration jobs operations, and agent management."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

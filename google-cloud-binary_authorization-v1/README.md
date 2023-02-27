@@ -1,6 +1,6 @@
 # Ruby Client for the Binary Authorization V1 API
 
-API Client library for the Binary Authorization V1 API
+The management interface for Binary Authorization, a system providing policy control for images deployed to Kubernetes Engine clusters, Anthos clusters on VMware, and Cloud Run.
 
 Binary Authorization is a service on Google Cloud that provides centralized software supply-chain security for applications that run on Google Kubernetes Engine (GKE) and GKE on-prem.
 
