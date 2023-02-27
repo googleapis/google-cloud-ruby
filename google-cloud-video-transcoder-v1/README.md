@@ -1,6 +1,6 @@
 # Ruby Client for the Transcoder V1 API
 
-API Client library for the Transcoder V1 API
+This API converts video files into formats suitable for consumer distribution. For more information, see the <a href="https://cloud.google.com/transcoder/docs/concepts/overview">Transcoder API overview</a>.
 
 The Transcoder API allows you to convert video files and package them for optimized delivery to web, mobile and connected TVs.
 

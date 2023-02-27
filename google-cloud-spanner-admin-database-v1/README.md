@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Spanner Database Admin V1 API
 
-API Client library for the Cloud Spanner Database Admin V1 API
+Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.
 
 Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.
 
