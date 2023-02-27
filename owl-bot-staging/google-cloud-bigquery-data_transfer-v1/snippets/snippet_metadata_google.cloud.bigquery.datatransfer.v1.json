@@ -1,0 +1,615 @@
+{
+  "client_library": {
+    "name": "google-cloud-bigquery-data_transfer-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.bigquery.datatransfer.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_GetDataSource_sync",
+      "title": "Snippet for the get_data_source call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#get_data_source. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/get_data_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_source",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#get_data_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::DataSource",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "GetDataSource",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.GetDataSource",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_ListDataSources_sync",
+      "title": "Snippet for the list_data_sources call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#list_data_sources. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/list_data_sources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_data_sources",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#list_data_sources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "ListDataSources",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListDataSources",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_CreateTransferConfig_sync",
+      "title": "Snippet for the create_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#create_transfer_config. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/create_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_transfer_config",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#create_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "CreateTransferConfig",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.CreateTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_UpdateTransferConfig_sync",
+      "title": "Snippet for the update_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#update_transfer_config. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/update_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_transfer_config",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#update_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "UpdateTransferConfig",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.UpdateTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_DeleteTransferConfig_sync",
+      "title": "Snippet for the delete_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#delete_transfer_config. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/delete_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_transfer_config",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#delete_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "DeleteTransferConfig",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_GetTransferConfig_sync",
+      "title": "Snippet for the get_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#get_transfer_config. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/get_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_transfer_config",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#get_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "GetTransferConfig",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_ListTransferConfigs_sync",
+      "title": "Snippet for the list_transfer_configs call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#list_transfer_configs. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/list_transfer_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_transfer_configs",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#list_transfer_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "ListTransferConfigs",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferConfigs",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_ScheduleTransferRuns_sync",
+      "title": "Snippet for the schedule_transfer_runs call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#schedule_transfer_runs. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/schedule_transfer_runs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "schedule_transfer_runs",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#schedule_transfer_runs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "ScheduleTransferRuns",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ScheduleTransferRuns",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_StartManualTransferRuns_sync",
+      "title": "Snippet for the start_manual_transfer_runs call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#start_manual_transfer_runs. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/start_manual_transfer_runs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_manual_transfer_runs",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#start_manual_transfer_runs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "StartManualTransferRuns",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.StartManualTransferRuns",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_GetTransferRun_sync",
+      "title": "Snippet for the get_transfer_run call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#get_transfer_run. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/get_transfer_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_transfer_run",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#get_transfer_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::TransferRun",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "GetTransferRun",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferRun",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_DeleteTransferRun_sync",
+      "title": "Snippet for the delete_transfer_run call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#delete_transfer_run. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/delete_transfer_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_transfer_run",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#delete_transfer_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "DeleteTransferRun",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferRun",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_ListTransferRuns_sync",
+      "title": "Snippet for the list_transfer_runs call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#list_transfer_runs. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/list_transfer_runs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_transfer_runs",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#list_transfer_runs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "ListTransferRuns",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferRuns",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_ListTransferLogs_sync",
+      "title": "Snippet for the list_transfer_logs call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#list_transfer_logs. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/list_transfer_logs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_transfer_logs",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#list_transfer_logs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "ListTransferLogs",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferLogs",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_CheckValidCreds_sync",
+      "title": "Snippet for the check_valid_creds call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#check_valid_creds. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/check_valid_creds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "check_valid_creds",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#check_valid_creds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "CheckValidCreds",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.CheckValidCreds",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_EnrollDataSources_sync",
+      "title": "Snippet for the enroll_data_sources call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#enroll_data_sources. It may require modification in order to execute successfully.",
+      "file": "data_transfer_service/enroll_data_sources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "enroll_data_sources",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#enroll_data_sources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "EnrollDataSources",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSources",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
