@@ -1,6 +1,6 @@
 # Ruby Client for the Backup for GKE V1 API
 
-API Client library for the Backup for GKE V1 API
+Backup for GKE is a managed Kubernetes workload backup and restore service for GKE clusters.
 
 Backup for GKE lets you protect, manage, and restore your containerized applications and data for stateful workloads running on Google Kubernetes Engine clusters.
 

@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data. It also enables advanced insights and operational workflows using highly scalable and compliant infrastructure. Note that google-cloud-life_sciences-v2beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-life_sciences instead. See the readme for more details."
-  gem.summary       = "API Client library for the Cloud Life Sciences V2beta API"
+  gem.summary       = "Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

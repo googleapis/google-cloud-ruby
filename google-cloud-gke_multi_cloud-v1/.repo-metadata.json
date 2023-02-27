@@ -1,9 +1,9 @@
 {
     "api_id": "gkemulticloud.googleapis.com",
     "api_shortname": "gkemulticloud",
-    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-gke_multi_cloud-v1/latest",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-gke_multi_cloud-v1/latest",
     "distribution_name": "google-cloud-gke_multi_cloud-v1",
-    "is_cloud": true,
+    "is_cloud": false,
     "language": "ruby",
     "name": "gkemulticloud",
     "name_pretty": "Anthos Multi-Cloud V1 API",

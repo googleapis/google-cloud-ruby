@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Gaming V1 API
 
-API Client library for the Cloud Gaming V1 API
+Deploy and manage infrastructure for global multiplayer gaming experiences.
 
 With Game Servers, studios and publishers can deploy and manage their game server infrastructure hosted on multiple Agones clusters around the world through a single interface.
 

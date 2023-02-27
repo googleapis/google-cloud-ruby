@@ -1,6 +1,6 @@
 # Ruby Client for the Identity-Aware Proxy V1 API
 
-API Client library for the Identity-Aware Proxy V1 API
+Controls access to cloud applications running on Google Cloud Platform.
 
 IAP lets you establish a central authorization layer for applications accessed by HTTPS, so you can use an application-level access control model instead of relying on network-level firewalls.
 
