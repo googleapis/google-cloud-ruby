@@ -1,6 +1,6 @@
 # Ruby Client for the Service Control API V1 API
 
-API Client library for the Service Control API V1 API
+Provides admission control and telemetry reporting for services integrated with Service Infrastructure.
 
 The Service Control API provides control plane functionality to managed services, such as logging, monitoring, and status checks.
 

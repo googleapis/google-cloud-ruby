@@ -1,6 +1,6 @@
 # Ruby Client for the Resource Manager V3 API
 
-API Client library for the Resource Manager V3 API
+Creates, reads, and updates metadata for Google Cloud Platform resource containers.
 
 Google Cloud provides container resources such as organizations and projects that allow you to group and hierarchically organize other Google Cloud resources. This hierarchical organization helps you manage common aspects of your resources, such as access control and configuration settings. The Resource Manager API enables you to programmatically manage these container resources.
 
