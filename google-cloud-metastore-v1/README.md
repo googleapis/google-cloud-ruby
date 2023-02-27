@@ -1,6 +1,6 @@
 # Ruby Client for the Dataproc Metastore V1 API
 
-API Client library for the Dataproc Metastore V1 API
+The Dataproc Metastore API is used to manage the lifecycle and configuration of metastore services.
 
 Dataproc Metastore is a fully managed, highly available within a region, autohealing serverless Apache Hive metastore (HMS) on Google Cloud for data analytics products. It supports HMS and serves as a critical component for managing the metadata of relational entities and provides interoperability between data processing applications in the open source data ecosystem.
 

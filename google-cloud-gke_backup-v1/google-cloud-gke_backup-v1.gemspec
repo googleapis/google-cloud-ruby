@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Backup for GKE lets you protect, manage, and restore your containerized applications and data for stateful workloads running on Google Kubernetes Engine clusters. Note that google-cloud-gke_backup-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-gke_backup instead. See the readme for more details."
-  gem.summary       = "API Client library for the Backup for GKE V1 API"
+  gem.summary       = "Backup for GKE is a managed Kubernetes workload backup and restore service for GKE clusters."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

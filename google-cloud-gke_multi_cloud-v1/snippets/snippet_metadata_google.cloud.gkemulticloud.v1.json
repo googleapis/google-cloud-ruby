@@ -12,7 +12,7 @@
   },
   "snippets": [
     {
-      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_CreateAttachedCluster_sync",
+      "region_tag": "_v1_generated_AttachedClusters_CreateAttachedCluster_sync",
       "title": "Snippet for the create_attached_cluster call in the AttachedClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#create_attached_cluster. It may require modification in order to execute successfully.",
       "file": "attached_clusters/create_attached_cluster.rb",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_UpdateAttachedCluster_sync",
+      "region_tag": "_v1_generated_AttachedClusters_UpdateAttachedCluster_sync",
       "title": "Snippet for the update_attached_cluster call in the AttachedClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#update_attached_cluster. It may require modification in order to execute successfully.",
       "file": "attached_clusters/update_attached_cluster.rb",
@@ -92,7 +92,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_ImportAttachedCluster_sync",
+      "region_tag": "_v1_generated_AttachedClusters_ImportAttachedCluster_sync",
       "title": "Snippet for the import_attached_cluster call in the AttachedClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#import_attached_cluster. It may require modification in order to execute successfully.",
       "file": "attached_clusters/import_attached_cluster.rb",
@@ -132,7 +132,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_GetAttachedCluster_sync",
+      "region_tag": "_v1_generated_AttachedClusters_GetAttachedCluster_sync",
       "title": "Snippet for the get_attached_cluster call in the AttachedClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_cluster. It may require modification in order to execute successfully.",
       "file": "attached_clusters/get_attached_cluster.rb",
@@ -172,7 +172,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_ListAttachedClusters_sync",
+      "region_tag": "_v1_generated_AttachedClusters_ListAttachedClusters_sync",
       "title": "Snippet for the list_attached_clusters call in the AttachedClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#list_attached_clusters. It may require modification in order to execute successfully.",
       "file": "attached_clusters/list_attached_clusters.rb",
@@ -212,7 +212,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_DeleteAttachedCluster_sync",
+      "region_tag": "_v1_generated_AttachedClusters_DeleteAttachedCluster_sync",
       "title": "Snippet for the delete_attached_cluster call in the AttachedClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#delete_attached_cluster. It may require modification in order to execute successfully.",
       "file": "attached_clusters/delete_attached_cluster.rb",
@@ -252,7 +252,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_GetAttachedServerConfig_sync",
+      "region_tag": "_v1_generated_AttachedClusters_GetAttachedServerConfig_sync",
       "title": "Snippet for the get_attached_server_config call in the AttachedClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_server_config. It may require modification in order to execute successfully.",
       "file": "attached_clusters/get_attached_server_config.rb",
@@ -292,7 +292,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterInstallManifest_sync",
+      "region_tag": "_v1_generated_AttachedClusters_GenerateAttachedClusterInstallManifest_sync",
       "title": "Snippet for the generate_attached_cluster_install_manifest call in the AttachedClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#generate_attached_cluster_install_manifest. It may require modification in order to execute successfully.",
       "file": "attached_clusters/generate_attached_cluster_install_manifest.rb",
@@ -332,7 +332,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_sync",
+      "region_tag": "_v1_generated_AwsClusters_CreateAwsCluster_sync",
       "title": "Snippet for the create_aws_cluster call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#create_aws_cluster. It may require modification in order to execute successfully.",
       "file": "aws_clusters/create_aws_cluster.rb",
@@ -372,7 +372,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_UpdateAwsCluster_sync",
+      "region_tag": "_v1_generated_AwsClusters_UpdateAwsCluster_sync",
       "title": "Snippet for the update_aws_cluster call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#update_aws_cluster. It may require modification in order to execute successfully.",
       "file": "aws_clusters/update_aws_cluster.rb",
@@ -412,7 +412,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_GetAwsCluster_sync",
+      "region_tag": "_v1_generated_AwsClusters_GetAwsCluster_sync",
       "title": "Snippet for the get_aws_cluster call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_cluster. It may require modification in order to execute successfully.",
       "file": "aws_clusters/get_aws_cluster.rb",
@@ -452,7 +452,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_ListAwsClusters_sync",
+      "region_tag": "_v1_generated_AwsClusters_ListAwsClusters_sync",
       "title": "Snippet for the list_aws_clusters call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_clusters. It may require modification in order to execute successfully.",
       "file": "aws_clusters/list_aws_clusters.rb",
@@ -492,7 +492,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_DeleteAwsCluster_sync",
+      "region_tag": "_v1_generated_AwsClusters_DeleteAwsCluster_sync",
       "title": "Snippet for the delete_aws_cluster call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#delete_aws_cluster. It may require modification in order to execute successfully.",
       "file": "aws_clusters/delete_aws_cluster.rb",
@@ -532,7 +532,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_GenerateAwsAccessToken_sync",
+      "region_tag": "_v1_generated_AwsClusters_GenerateAwsAccessToken_sync",
       "title": "Snippet for the generate_aws_access_token call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#generate_aws_access_token. It may require modification in order to execute successfully.",
       "file": "aws_clusters/generate_aws_access_token.rb",
@@ -572,7 +572,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_CreateAwsNodePool_sync",
+      "region_tag": "_v1_generated_AwsClusters_CreateAwsNodePool_sync",
       "title": "Snippet for the create_aws_node_pool call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#create_aws_node_pool. It may require modification in order to execute successfully.",
       "file": "aws_clusters/create_aws_node_pool.rb",
@@ -612,7 +612,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_UpdateAwsNodePool_sync",
+      "region_tag": "_v1_generated_AwsClusters_UpdateAwsNodePool_sync",
       "title": "Snippet for the update_aws_node_pool call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#update_aws_node_pool. It may require modification in order to execute successfully.",
       "file": "aws_clusters/update_aws_node_pool.rb",
@@ -652,7 +652,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_GetAwsNodePool_sync",
+      "region_tag": "_v1_generated_AwsClusters_GetAwsNodePool_sync",
       "title": "Snippet for the get_aws_node_pool call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_node_pool. It may require modification in order to execute successfully.",
       "file": "aws_clusters/get_aws_node_pool.rb",
@@ -692,7 +692,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_ListAwsNodePools_sync",
+      "region_tag": "_v1_generated_AwsClusters_ListAwsNodePools_sync",
       "title": "Snippet for the list_aws_node_pools call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_node_pools. It may require modification in order to execute successfully.",
       "file": "aws_clusters/list_aws_node_pools.rb",
@@ -732,7 +732,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_DeleteAwsNodePool_sync",
+      "region_tag": "_v1_generated_AwsClusters_DeleteAwsNodePool_sync",
       "title": "Snippet for the delete_aws_node_pool call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#delete_aws_node_pool. It may require modification in order to execute successfully.",
       "file": "aws_clusters/delete_aws_node_pool.rb",
@@ -772,7 +772,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_sync",
+      "region_tag": "_v1_generated_AwsClusters_GetAwsServerConfig_sync",
       "title": "Snippet for the get_aws_server_config call in the AwsClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_server_config. It may require modification in order to execute successfully.",
       "file": "aws_clusters/get_aws_server_config.rb",
@@ -812,7 +812,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_sync",
+      "region_tag": "_v1_generated_AzureClusters_CreateAzureClient_sync",
       "title": "Snippet for the create_azure_client call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#create_azure_client. It may require modification in order to execute successfully.",
       "file": "azure_clusters/create_azure_client.rb",
@@ -852,7 +852,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GetAzureClient_sync",
+      "region_tag": "_v1_generated_AzureClusters_GetAzureClient_sync",
       "title": "Snippet for the get_azure_client call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_client. It may require modification in order to execute successfully.",
       "file": "azure_clusters/get_azure_client.rb",
@@ -892,7 +892,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_ListAzureClients_sync",
+      "region_tag": "_v1_generated_AzureClusters_ListAzureClients_sync",
       "title": "Snippet for the list_azure_clients call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clients. It may require modification in order to execute successfully.",
       "file": "azure_clusters/list_azure_clients.rb",
@@ -932,7 +932,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_DeleteAzureClient_sync",
+      "region_tag": "_v1_generated_AzureClusters_DeleteAzureClient_sync",
       "title": "Snippet for the delete_azure_client call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#delete_azure_client. It may require modification in order to execute successfully.",
       "file": "azure_clusters/delete_azure_client.rb",
@@ -972,7 +972,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_CreateAzureCluster_sync",
+      "region_tag": "_v1_generated_AzureClusters_CreateAzureCluster_sync",
       "title": "Snippet for the create_azure_cluster call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#create_azure_cluster. It may require modification in order to execute successfully.",
       "file": "azure_clusters/create_azure_cluster.rb",
@@ -1012,7 +1012,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_UpdateAzureCluster_sync",
+      "region_tag": "_v1_generated_AzureClusters_UpdateAzureCluster_sync",
       "title": "Snippet for the update_azure_cluster call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#update_azure_cluster. It may require modification in order to execute successfully.",
       "file": "azure_clusters/update_azure_cluster.rb",
@@ -1052,7 +1052,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GetAzureCluster_sync",
+      "region_tag": "_v1_generated_AzureClusters_GetAzureCluster_sync",
       "title": "Snippet for the get_azure_cluster call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_cluster. It may require modification in order to execute successfully.",
       "file": "azure_clusters/get_azure_cluster.rb",
@@ -1092,7 +1092,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_ListAzureClusters_sync",
+      "region_tag": "_v1_generated_AzureClusters_ListAzureClusters_sync",
       "title": "Snippet for the list_azure_clusters call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clusters. It may require modification in order to execute successfully.",
       "file": "azure_clusters/list_azure_clusters.rb",
@@ -1132,7 +1132,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_sync",
+      "region_tag": "_v1_generated_AzureClusters_DeleteAzureCluster_sync",
       "title": "Snippet for the delete_azure_cluster call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#delete_azure_cluster. It may require modification in order to execute successfully.",
       "file": "azure_clusters/delete_azure_cluster.rb",
@@ -1172,7 +1172,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GenerateAzureAccessToken_sync",
+      "region_tag": "_v1_generated_AzureClusters_GenerateAzureAccessToken_sync",
       "title": "Snippet for the generate_azure_access_token call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#generate_azure_access_token. It may require modification in order to execute successfully.",
       "file": "azure_clusters/generate_azure_access_token.rb",
@@ -1212,7 +1212,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_sync",
+      "region_tag": "_v1_generated_AzureClusters_CreateAzureNodePool_sync",
       "title": "Snippet for the create_azure_node_pool call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#create_azure_node_pool. It may require modification in order to execute successfully.",
       "file": "azure_clusters/create_azure_node_pool.rb",
@@ -1252,7 +1252,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_sync",
+      "region_tag": "_v1_generated_AzureClusters_UpdateAzureNodePool_sync",
       "title": "Snippet for the update_azure_node_pool call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#update_azure_node_pool. It may require modification in order to execute successfully.",
       "file": "azure_clusters/update_azure_node_pool.rb",
@@ -1292,7 +1292,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GetAzureNodePool_sync",
+      "region_tag": "_v1_generated_AzureClusters_GetAzureNodePool_sync",
       "title": "Snippet for the get_azure_node_pool call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_node_pool. It may require modification in order to execute successfully.",
       "file": "azure_clusters/get_azure_node_pool.rb",
@@ -1332,7 +1332,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_ListAzureNodePools_sync",
+      "region_tag": "_v1_generated_AzureClusters_ListAzureNodePools_sync",
       "title": "Snippet for the list_azure_node_pools call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_node_pools. It may require modification in order to execute successfully.",
       "file": "azure_clusters/list_azure_node_pools.rb",
@@ -1372,7 +1372,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_DeleteAzureNodePool_sync",
+      "region_tag": "_v1_generated_AzureClusters_DeleteAzureNodePool_sync",
       "title": "Snippet for the delete_azure_node_pool call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#delete_azure_node_pool. It may require modification in order to execute successfully.",
       "file": "azure_clusters/delete_azure_node_pool.rb",
@@ -1412,7 +1412,7 @@
       ]
     },
     {
-      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GetAzureServerConfig_sync",
+      "region_tag": "_v1_generated_AzureClusters_GetAzureServerConfig_sync",
       "title": "Snippet for the get_azure_server_config call in the AzureClusters service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_server_config. It may require modification in order to execute successfully.",
       "file": "azure_clusters/get_azure_server_config.rb",

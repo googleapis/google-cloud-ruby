@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Logging V2 API
 
-API Client library for the Cloud Logging V2 API
+Writes log entries and manages your Cloud Logging configuration.
 
 The Cloud Logging API lets you programmatically read and write log entries, set up exclusions, create logs-based metrics, and manage export sinks.
 
