@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Channel V1 API
 
-API Client library for the Cloud Channel V1 API
+The Cloud Channel API enables Google Cloud partners to have a single unified resale platform and APIs across all of Google Cloud including GCP, Workspace, Maps and Chrome.
 
 You can use Channel Services to manage your relationships with your partners and your customers. Channel Services include a console and APIs to view and provision links between distributors and resellers, customers and entitlements.
 

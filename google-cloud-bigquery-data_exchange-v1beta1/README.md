@@ -1,6 +1,6 @@
 # Ruby Client for the Analytics Hub V1beta1 API
 
-API Client library for the Analytics Hub V1beta1 API
+Exchange data and analytics assets securely and efficiently.
 
 Analytics Hub is a data exchange that allows you to efficiently and securely exchange data assets across organizations to address challenges of data reliability and cost. Curate a library of internal and external assets, including unique datasets like Google Trends, backed by the power of BigQuery.
 

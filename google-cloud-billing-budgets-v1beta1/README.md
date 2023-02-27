@@ -1,6 +1,6 @@
 # Ruby Client for the Billing Budgets V1beta1 API
 
-API Client library for the Billing Budgets V1beta1 API
+The Cloud Billing Budget API stores Cloud Billing budgets, which define a budget plan and the rules to execute as spend is tracked against that plan.
 
 Provides methods to view, create, and manage Cloud Billing budgets programmatically at scale.
 

@@ -1,9 +1,9 @@
 {
     "api_id": "datalineage.googleapis.com",
     "api_shortname": "datalineage",
-    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-data_catalog-lineage-v1/latest",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-data_catalog-lineage-v1/latest",
     "distribution_name": "google-cloud-data_catalog-lineage-v1",
-    "is_cloud": true,
+    "is_cloud": false,
     "language": "ruby",
     "name": "datalineage",
     "name_pretty": "Data Lineage V1 API",

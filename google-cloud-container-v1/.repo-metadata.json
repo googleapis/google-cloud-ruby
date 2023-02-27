@@ -1,9 +1,9 @@
 {
     "api_id": "container.googleapis.com",
     "api_shortname": "container",
-    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-container-v1/latest",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-container-v1/latest",
     "distribution_name": "google-cloud-container-v1",
-    "is_cloud": true,
+    "is_cloud": false,
     "language": "ruby",
     "name": "container",
     "name_pretty": "Kubernetes Engine V1 API",

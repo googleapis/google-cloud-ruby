@@ -1,6 +1,6 @@
 # Ruby Client for the BigQuery Data Policy Service V1 API
 
-API Client library for the BigQuery Data Policy Service V1 API
+Allows users to manage BigQuery data policies.
 
 The Data Policy Service provides APIs for managing the BigQuery label-policy bindings.
 

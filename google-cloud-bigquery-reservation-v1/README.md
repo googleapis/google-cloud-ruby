@@ -1,6 +1,6 @@
 # Ruby Client for the BigQuery Reservation V1 API
 
-API Client library for the BigQuery Reservation V1 API
+A service to modify your BigQuery flat-rate reservations.
 
 The BigQuery Reservation API provides the mechanisms by which enterprise users can provision and manage dedicated resources such as slots and BigQuery BI Engine memory allocations.
 
