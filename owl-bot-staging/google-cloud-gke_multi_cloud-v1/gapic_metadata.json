@@ -1,0 +1,216 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.gkemulticloud.v1",
+  "libraryPackage": "::Google::Cloud::GkeMultiCloud::V1",
+  "services": {
+    "AttachedClusters": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client",
+          "rpcs": {
+            "CreateAttachedCluster": {
+              "methods": [
+                "create_attached_cluster"
+              ]
+            },
+            "UpdateAttachedCluster": {
+              "methods": [
+                "update_attached_cluster"
+              ]
+            },
+            "ImportAttachedCluster": {
+              "methods": [
+                "import_attached_cluster"
+              ]
+            },
+            "GetAttachedCluster": {
+              "methods": [
+                "get_attached_cluster"
+              ]
+            },
+            "ListAttachedClusters": {
+              "methods": [
+                "list_attached_clusters"
+              ]
+            },
+            "DeleteAttachedCluster": {
+              "methods": [
+                "delete_attached_cluster"
+              ]
+            },
+            "GetAttachedServerConfig": {
+              "methods": [
+                "get_attached_server_config"
+              ]
+            },
+            "GenerateAttachedClusterInstallManifest": {
+              "methods": [
+                "generate_attached_cluster_install_manifest"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AwsClusters": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client",
+          "rpcs": {
+            "CreateAwsCluster": {
+              "methods": [
+                "create_aws_cluster"
+              ]
+            },
+            "UpdateAwsCluster": {
+              "methods": [
+                "update_aws_cluster"
+              ]
+            },
+            "GetAwsCluster": {
+              "methods": [
+                "get_aws_cluster"
+              ]
+            },
+            "ListAwsClusters": {
+              "methods": [
+                "list_aws_clusters"
+              ]
+            },
+            "DeleteAwsCluster": {
+              "methods": [
+                "delete_aws_cluster"
+              ]
+            },
+            "GenerateAwsAccessToken": {
+              "methods": [
+                "generate_aws_access_token"
+              ]
+            },
+            "CreateAwsNodePool": {
+              "methods": [
+                "create_aws_node_pool"
+              ]
+            },
+            "UpdateAwsNodePool": {
+              "methods": [
+                "update_aws_node_pool"
+              ]
+            },
+            "GetAwsNodePool": {
+              "methods": [
+                "get_aws_node_pool"
+              ]
+            },
+            "ListAwsNodePools": {
+              "methods": [
+                "list_aws_node_pools"
+              ]
+            },
+            "DeleteAwsNodePool": {
+              "methods": [
+                "delete_aws_node_pool"
+              ]
+            },
+            "GetAwsServerConfig": {
+              "methods": [
+                "get_aws_server_config"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AzureClusters": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client",
+          "rpcs": {
+            "CreateAzureClient": {
+              "methods": [
+                "create_azure_client"
+              ]
+            },
+            "GetAzureClient": {
+              "methods": [
+                "get_azure_client"
+              ]
+            },
+            "ListAzureClients": {
+              "methods": [
+                "list_azure_clients"
+              ]
+            },
+            "DeleteAzureClient": {
+              "methods": [
+                "delete_azure_client"
+              ]
+            },
+            "CreateAzureCluster": {
+              "methods": [
+                "create_azure_cluster"
+              ]
+            },
+            "UpdateAzureCluster": {
+              "methods": [
+                "update_azure_cluster"
+              ]
+            },
+            "GetAzureCluster": {
+              "methods": [
+                "get_azure_cluster"
+              ]
+            },
+            "ListAzureClusters": {
+              "methods": [
+                "list_azure_clusters"
+              ]
+            },
+            "DeleteAzureCluster": {
+              "methods": [
+                "delete_azure_cluster"
+              ]
+            },
+            "GenerateAzureAccessToken": {
+              "methods": [
+                "generate_azure_access_token"
+              ]
+            },
+            "CreateAzureNodePool": {
+              "methods": [
+                "create_azure_node_pool"
+              ]
+            },
+            "UpdateAzureNodePool": {
+              "methods": [
+                "update_azure_node_pool"
+              ]
+            },
+            "GetAzureNodePool": {
+              "methods": [
+                "get_azure_node_pool"
+              ]
+            },
+            "ListAzureNodePools": {
+              "methods": [
+                "list_azure_node_pools"
+              ]
+            },
+            "DeleteAzureNodePool": {
+              "methods": [
+                "delete_azure_node_pool"
+              ]
+            },
+            "GetAzureServerConfig": {
+              "methods": [
+                "get_azure_server_config"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
