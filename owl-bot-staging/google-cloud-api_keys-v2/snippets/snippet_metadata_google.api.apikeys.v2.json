@@ -1,0 +1,335 @@
+{
+  "client_library": {
+    "name": "google-cloud-api_keys-v2",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.api.apikeys.v2",
+        "version": "v2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "apikeys_v2_generated_ApiKeys_CreateKey_sync",
+      "title": "Snippet for the create_key call in the ApiKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#create_key. It may require modification in order to execute successfully.",
+      "file": "api_keys/create_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_key",
+        "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client#create_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiKeys::V2::CreateKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ApiKeys::Client",
+          "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client"
+        },
+        "method": {
+          "short_name": "CreateKey",
+          "full_name": "google.api.apikeys.v2.ApiKeys.CreateKey",
+          "service": {
+            "short_name": "ApiKeys",
+            "full_name": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apikeys_v2_generated_ApiKeys_ListKeys_sync",
+      "title": "Snippet for the list_keys call in the ApiKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#list_keys. It may require modification in order to execute successfully.",
+      "file": "api_keys/list_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_keys",
+        "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client#list_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiKeys::V2::ListKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiKeys::V2::ListKeysResponse",
+        "client": {
+          "short_name": "ApiKeys::Client",
+          "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client"
+        },
+        "method": {
+          "short_name": "ListKeys",
+          "full_name": "google.api.apikeys.v2.ApiKeys.ListKeys",
+          "service": {
+            "short_name": "ApiKeys",
+            "full_name": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apikeys_v2_generated_ApiKeys_GetKey_sync",
+      "title": "Snippet for the get_key call in the ApiKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#get_key. It may require modification in order to execute successfully.",
+      "file": "api_keys/get_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_key",
+        "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client#get_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiKeys::V2::GetKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiKeys::V2::Key",
+        "client": {
+          "short_name": "ApiKeys::Client",
+          "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client"
+        },
+        "method": {
+          "short_name": "GetKey",
+          "full_name": "google.api.apikeys.v2.ApiKeys.GetKey",
+          "service": {
+            "short_name": "ApiKeys",
+            "full_name": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apikeys_v2_generated_ApiKeys_GetKeyString_sync",
+      "title": "Snippet for the get_key_string call in the ApiKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#get_key_string. It may require modification in order to execute successfully.",
+      "file": "api_keys/get_key_string.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_key_string",
+        "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client#get_key_string",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiKeys::V2::GetKeyStringRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiKeys::V2::GetKeyStringResponse",
+        "client": {
+          "short_name": "ApiKeys::Client",
+          "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client"
+        },
+        "method": {
+          "short_name": "GetKeyString",
+          "full_name": "google.api.apikeys.v2.ApiKeys.GetKeyString",
+          "service": {
+            "short_name": "ApiKeys",
+            "full_name": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apikeys_v2_generated_ApiKeys_UpdateKey_sync",
+      "title": "Snippet for the update_key call in the ApiKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#update_key. It may require modification in order to execute successfully.",
+      "file": "api_keys/update_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_key",
+        "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client#update_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiKeys::V2::UpdateKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ApiKeys::Client",
+          "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client"
+        },
+        "method": {
+          "short_name": "UpdateKey",
+          "full_name": "google.api.apikeys.v2.ApiKeys.UpdateKey",
+          "service": {
+            "short_name": "ApiKeys",
+            "full_name": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apikeys_v2_generated_ApiKeys_DeleteKey_sync",
+      "title": "Snippet for the delete_key call in the ApiKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#delete_key. It may require modification in order to execute successfully.",
+      "file": "api_keys/delete_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_key",
+        "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client#delete_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiKeys::V2::DeleteKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ApiKeys::Client",
+          "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client"
+        },
+        "method": {
+          "short_name": "DeleteKey",
+          "full_name": "google.api.apikeys.v2.ApiKeys.DeleteKey",
+          "service": {
+            "short_name": "ApiKeys",
+            "full_name": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apikeys_v2_generated_ApiKeys_UndeleteKey_sync",
+      "title": "Snippet for the undelete_key call in the ApiKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#undelete_key. It may require modification in order to execute successfully.",
+      "file": "api_keys/undelete_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undelete_key",
+        "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client#undelete_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiKeys::V2::UndeleteKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ApiKeys::Client",
+          "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client"
+        },
+        "method": {
+          "short_name": "UndeleteKey",
+          "full_name": "google.api.apikeys.v2.ApiKeys.UndeleteKey",
+          "service": {
+            "short_name": "ApiKeys",
+            "full_name": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apikeys_v2_generated_ApiKeys_LookupKey_sync",
+      "title": "Snippet for the lookup_key call in the ApiKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#lookup_key. It may require modification in order to execute successfully.",
+      "file": "api_keys/lookup_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "lookup_key",
+        "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client#lookup_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiKeys::V2::LookupKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiKeys::V2::LookupKeyResponse",
+        "client": {
+          "short_name": "ApiKeys::Client",
+          "full_name": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client"
+        },
+        "method": {
+          "short_name": "LookupKey",
+          "full_name": "google.api.apikeys.v2.ApiKeys.LookupKey",
+          "service": {
+            "short_name": "ApiKeys",
+            "full_name": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
