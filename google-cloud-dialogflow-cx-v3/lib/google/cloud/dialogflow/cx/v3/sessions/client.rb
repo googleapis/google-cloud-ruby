@@ -385,7 +385,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload match_intent(session: nil, query_params: nil, query_input: nil)
+              # @overload match_intent(session: nil, query_params: nil, query_input: nil, persist_parameter_changes: nil)
               #   Pass arguments to `match_intent` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -407,6 +407,8 @@ module Google
               #     The parameters of this query.
               #   @param query_input [::Google::Cloud::Dialogflow::CX::V3::QueryInput, ::Hash]
               #     Required. The input specification.
+              #   @param persist_parameter_changes [::Boolean]
+              #     Persist session parameter changes from `query_params`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Dialogflow::CX::V3::MatchIntentResponse]

@@ -758,6 +758,9 @@ module Google
           # @!attribute [rw] query_input
           #   @return [::Google::Cloud::Dialogflow::CX::V3::QueryInput]
           #     Required. The input specification.
+          # @!attribute [rw] persist_parameter_changes
+          #   @return [::Boolean]
+          #     Persist session parameter changes from `query_params`.
           class MatchIntentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
