@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Data Loss Prevention (DLP) V2 API
 
-API Client library for the Cloud Data Loss Prevention (DLP) V2 API
+Provides methods for detection, risk analysis, and de-identification of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.
 
 Provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.
 

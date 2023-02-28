@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Firestore V1 API
 
-API Client library for the Cloud Firestore V1 API
+Accesses the NoSQL document database built for automatic scaling, high performance, and ease of application development.
 
 Cloud Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development.
 

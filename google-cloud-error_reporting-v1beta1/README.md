@@ -1,6 +1,6 @@
 # Ruby Client for the Error Reporting V1beta1 API
 
-API Client library for the Error Reporting V1beta1 API
+Groups and counts similar errors from cloud services and applications, reports new errors, and provides access to error groups and their associated errors.
 
 The Error Reporting API provides a simple endpoint to report errors from your running service, and read access to error groups and their associated errors.
 

@@ -1,6 +1,6 @@
 # Ruby Client for the Document AI V1beta3 API
 
-API Client library for the Document AI V1beta3 API
+Service to parse structured information from unstructured or semi-structured documents using state-of-the-art Google AI such as natural language, computer vision, translation, and AutoML.
 
 Document AI uses machine learning on a single cloud-based platform to automatically classify, extract, and enrich data within your documents to unlock insights.
 

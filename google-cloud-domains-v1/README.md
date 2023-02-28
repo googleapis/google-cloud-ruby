@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Domains V1 API
 
-API Client library for the Cloud Domains V1 API
+Enables management and configuration of domain names.
 
 The Cloud Domains API provides registration, management and configuration of domain names.
 

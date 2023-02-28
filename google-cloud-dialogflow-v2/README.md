@@ -1,6 +1,6 @@
 # Ruby Client for the Dialogflow V2 API
 
-API Client library for the Dialogflow V2 API
+Builds conversational interfaces (for example, chatbots, and voice-powered apps and devices).
 
 Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business. This client is for Dialogflow ES, providing the standard agent type suitable for small and simple agents.
 

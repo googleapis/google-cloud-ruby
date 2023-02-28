@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Functions V1 API
 
-API Client library for the Cloud Functions V1 API
+Manages lightweight user-provided functions executed in response to events.
 
 The Cloud Functions API manages lightweight user-provided functions executed in response to events.
 
