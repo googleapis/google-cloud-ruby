@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.0 (2023-02-28)
+
+#### Features
+
+* Support the persist_parameter_changes parameter to match_intent ([#20546](https://github.com/googleapis/google-cloud-ruby/issues/20546)) 
+
 ### 0.13.0 (2023-02-23)
 
 #### Features
