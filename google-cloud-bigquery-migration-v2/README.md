@@ -1,6 +1,6 @@
 # Ruby Client for the BigQuery Migration V2 API
 
-API Client library for the BigQuery Migration V2 API
+The migration service, exposing apis for migration jobs operations, and agent management.
 
 The BigQuery Migration Service is a comprehensive solution for migrating your data warehouse to BigQuery.
 

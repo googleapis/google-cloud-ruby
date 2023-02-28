@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Bigtable Admin V2 API
 
-API Client library for the Cloud Bigtable Admin V2 API
+Administer your Cloud Bigtable tables and instances.
 
 Cloud Bigtable is a fully managed, scalable NoSQL database service for large analytical and operational workloads.
 
