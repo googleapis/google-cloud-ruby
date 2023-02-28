@@ -1,5 +1,12 @@
 # Release History
 
+### 0.11.0 (2023-02-28)
+
+#### Features
+
+* Support for Serverless Analytics Service when reading from Cloud Spanner ([#20519](https://github.com/googleapis/google-cloud-ruby/issues/20519)) 
+* Support for setting the Cloud Spanner database role 
+
 ### 0.10.0 (2022-08-03)
 
 #### Features
