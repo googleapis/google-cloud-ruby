@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Translation V3 API
 
-API Client library for the Cloud Translation V3 API
+Integrates text translation into your website or application.
 
 Cloud Translation can dynamically translate text between thousands of language pairs. Translation lets websites and programs programmatically integrate with the translation service.
 

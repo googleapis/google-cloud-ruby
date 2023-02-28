@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud TPU V1 API
 
-API Client library for the Cloud TPU V1 API
+TPU API provides customers with access to Google TPU technology.
 
 Tensor Processing Units (TPUs) are Google's custom-developed application-specific integrated circuits (ASICs) used to accelerate machine learning workloads. Cloud TPUs allow you to access TPUs from Compute Engine, Google Kubernetes Engine and AI Platform.
 
