@@ -47,6 +47,14 @@
       "component": "google-cloud-access_approval-v1",
       "version_file": "lib/google/cloud/access_approval/v1/version.rb"
     },
+    "google-cloud-advisory_notifications": {
+      "component": "google-cloud-advisory_notifications",
+      "version_file": "lib/google/cloud/advisory_notifications/version.rb"
+    },
+    "google-cloud-advisory_notifications-v1": {
+      "component": "google-cloud-advisory_notifications-v1",
+      "version_file": "lib/google/cloud/advisory_notifications/v1/version.rb"
+    },
     "google-cloud-ai_platform": {
       "component": "google-cloud-ai_platform",
       "version_file": "lib/google/cloud/ai_platform/version.rb"
