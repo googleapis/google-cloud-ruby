@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.1 (2023-02-28)
+
+#### Documentation
+
+* Clarify service account name description ([#20536](https://github.com/googleapis/google-cloud-ruby/issues/20536)) 
+
 ### 0.7.0 (2023-01-05)
 
 #### Features
