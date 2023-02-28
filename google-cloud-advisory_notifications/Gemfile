@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-advisory_notifications-v1", path: "../google-cloud-advisory_notifications-v1"
