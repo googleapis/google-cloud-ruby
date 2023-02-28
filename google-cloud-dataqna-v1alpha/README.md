@@ -1,6 +1,6 @@
 # Ruby Client for the BigQuery Data QnA V1alpha API
 
-API Client library for the BigQuery Data QnA V1alpha API
+Data QnA is a natural language question and answer service for BigQuery data.
 
 Data QnA is a natural language question and answer service for BigQuery data.
 

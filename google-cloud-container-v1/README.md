@@ -1,6 +1,6 @@
 # Ruby Client for the Kubernetes Engine V1 API
 
-API Client library for the Kubernetes Engine V1 API
+Builds and manages container-based applications, powered by the open source Kubernetes technology.
 
 Builds and manages container-based applications, powered by the open source Kubernetes technology.
 
