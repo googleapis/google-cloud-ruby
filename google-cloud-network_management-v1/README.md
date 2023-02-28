@@ -1,6 +1,6 @@
 # Ruby Client for the Network Management V1 API
 
-API Client library for the Network Management V1 API
+The Network Management API provides a collection of network performance monitoring and diagnostic capabilities.
 
 The Network Management API provides a collection of network performance monitoring and diagnostic capabilities.
 

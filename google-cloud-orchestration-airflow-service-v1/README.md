@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Composer V1 API
 
-API Client library for the Cloud Composer V1 API
+Manages Apache Airflow environments on Google Cloud Platform.
 
 The client library for the Cloud Composer API, built on the popular Apache Airflow open source project. Cloud Composer is a fully managed workflow orchestration service, enabling you to create, schedule, monitor, and manage workflows that span across clouds and on-premises data centers.
 
