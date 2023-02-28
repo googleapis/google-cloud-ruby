@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Video Intelligence V1p2beta1 API
 
-API Client library for the Cloud Video Intelligence V1p2beta1 API
+Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API.
 
 Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API.
 

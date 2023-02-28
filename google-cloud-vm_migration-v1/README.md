@@ -1,6 +1,6 @@
 # Ruby Client for the Migrate for Compute Engine V1 API
 
-API Client library for the Migrate for Compute Engine V1 API
+Use the Migrate to Virtual Machines API to programmatically migrate workloads.
 
 Migrate for Compute Engine enables you to migrate (Lift and Shift) your virtual machines (VMs), with minor automatic modifications, from your source environment to Google Compute Engine.
 

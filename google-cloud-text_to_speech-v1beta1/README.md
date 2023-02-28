@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Text-to-Speech V1beta1 API
 
-API Client library for the Cloud Text-to-Speech V1beta1 API
+Synthesizes natural-sounding speech by applying powerful neural network models.
 
 Text-to-Speech converts text or Speech Synthesis Markup Language (SSML) input into audio data of natural human speech.
 
