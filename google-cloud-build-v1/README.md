@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Build V1 API
 
-API Client library for the Cloud Build V1 API
+Creates and manages builds on Google Cloud Platform.
 
 Cloud Build is a service that executes your builds on Google Cloud Platform infrastructure. Cloud Build can import source code from Google Cloud Storage, Cloud Source Repositories, GitHub, or Bitbucket, execute a build to your specifications, and produce artifacts such as Docker containers or Java archives.
 

@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Database Migration Service V1 API
 
-API Client library for the Cloud Database Migration Service V1 API
+Manage Cloud Database Migration Service resources on Google Cloud Platform.
 
 Database Migration Service makes it easier for you to migrate your data to Google Cloud. Database Migration Service helps you lift and shift your MySQL and PostgreSQL workloads into Cloud SQL. Database Migration Service streamlines networking workflow, manages the initial snapshot and ongoing replication, and provides a status of the migration operation.
 
