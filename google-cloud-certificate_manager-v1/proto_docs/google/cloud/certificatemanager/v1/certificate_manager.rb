@@ -751,7 +751,7 @@ module Google
         # @!attribute [rw] certificates
         #   @return [::Array<::String>]
         #     A set of Certificates defines for the given `hostname`. There can be
-        #     defined up to fifteen certificates in each Certificate Map Entry. Each
+        #     defined up to four certificates in each Certificate Map Entry. Each
         #     certificate must match pattern `projects/*/locations/*/certificates/*`.
         # @!attribute [r] state
         #   @return [::Google::Cloud::CertificateManager::V1::ServingState]
