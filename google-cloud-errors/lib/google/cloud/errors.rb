@@ -234,7 +234,7 @@ module Google
       ##
       # gRPC error code for CANCELLED
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         1
       end
@@ -250,7 +250,7 @@ module Google
       ##
       # gRPC error code for UNKNOWN
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         2
       end
@@ -265,7 +265,7 @@ module Google
       ##
       # gRPC error code for INVALID_ARGUMENT
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         3
       end
@@ -281,7 +281,7 @@ module Google
       ##
       # gRPC error code for DEADLINE_EXCEEDED
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         4
       end
@@ -294,7 +294,7 @@ module Google
       ##
       # gRPC error code for NOT_FOUND
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         5
       end
@@ -307,7 +307,7 @@ module Google
       ##
       # gRPC error code for ALREADY_EXISTS
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         6
       end
@@ -324,7 +324,7 @@ module Google
       ##
       # gRPC error code for PERMISSION_DENIED
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         7
       end
@@ -337,7 +337,7 @@ module Google
       ##
       # gRPC error code for RESOURCE_EXHAUSTED
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         8
       end
@@ -367,7 +367,7 @@ module Google
       ##
       # gRPC error code for FAILED_PRECONDITION
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         9
       end
@@ -384,7 +384,7 @@ module Google
       ##
       # gRPC error code for ABORTED
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         10
       end
@@ -410,7 +410,7 @@ module Google
       ##
       # gRPC error code for OUT_OF_RANGE
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         11
       end
@@ -423,7 +423,7 @@ module Google
       ##
       # gRPC error code for UNIMPLEMENTED
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         12
       end
@@ -437,7 +437,7 @@ module Google
       ##
       # gRPC error code for INTERNAL
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         13
       end
@@ -454,7 +454,7 @@ module Google
       ##
       # gRPC error code for UNAVAILABLE
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         14
       end
@@ -466,7 +466,7 @@ module Google
       ##
       # gRPC error code for DATA_LOSS
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         15
       end
@@ -479,7 +479,7 @@ module Google
       ##
       # gRPC error code for UNAUTHENTICATED
       #
-      # @return [Int]
+      # @return [Integer]
       def code
         16
       end
