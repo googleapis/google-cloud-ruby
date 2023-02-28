@@ -1,6 +1,6 @@
 # Ruby Client for the Artifact Registry V1beta2 API
 
-API Client library for the Artifact Registry V1beta2 API
+Store and manage build artifacts in a scalable and integrated service built on Google infrastructure.
 
 Artifact Registry stores and manages build artifacts in a scalable and integrated service built on Google infrastructure.
 

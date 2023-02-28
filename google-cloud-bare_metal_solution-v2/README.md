@@ -1,6 +1,6 @@
 # Ruby Client for the Bare Metal Solution V2 API
 
-API Client library for the Bare Metal Solution V2 API
+Provides ways to manage Bare Metal Solution hardware installed in a regional extension located near a Google Cloud data center.
 
 Bare Metal Solution is a managed solution that provides purpose-built HPE or Atos bare-metal servers in regional extensions that are connected to Google Cloud by a managed, high-performance connection with a low-latency network fabric.
 
