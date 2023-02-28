@@ -1,6 +1,6 @@
 # Ruby Client for the App Engine Admin V1 API
 
-API Client library for the App Engine Admin V1 API
+Provisions and manages developers' App Engine applications.
 
 The App Engine Admin API provisions and manages your App Engine applications.
 

@@ -1,6 +1,6 @@
 # Ruby Client for the Google Analytics Data V1beta API
 
-API Client library for the Google Analytics Data V1beta API
+Accesses report data in Google Analytics.
 
 The Google Analytics Data API provides programmatic methods to access report data in Google Analytics 4 (GA4) properties. Google Analytics 4 helps you understand how people use your web, iOS, or Android app.
 

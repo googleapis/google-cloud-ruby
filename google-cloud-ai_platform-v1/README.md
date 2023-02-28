@@ -1,6 +1,6 @@
 # Ruby Client for the Vertex AI V1 API
 
-API Client library for the Vertex AI V1 API
+Train high-quality custom machine learning models with minimal machine learning expertise and effort.
 
 Vertex AI enables data scientists, developers, and AI newcomers to create custom machine learning models specific to their business needs by leveraging Google's state-of-the-art transfer learning and innovative AI research.
 

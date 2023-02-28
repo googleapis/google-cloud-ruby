@@ -1,6 +1,6 @@
 # Ruby Client for the API Keys V2 API
 
-API Client library for the API Keys V2 API
+Manages the API keys associated with developer projects.
 
 An API key is a simple encrypted string that you can use when calling Google Cloud APIs. The API Keys service manages the API keys associated with developer projects.
 

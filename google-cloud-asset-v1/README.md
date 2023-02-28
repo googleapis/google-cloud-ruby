@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Asset V1 API
 
-API Client library for the Cloud Asset V1 API
+The Cloud Asset API manages the history and inventory of Google Cloud resources.
 
 A metadata inventory service that allows you to view, monitor, and analyze all your GCP and Anthos assets across projects and services.
 

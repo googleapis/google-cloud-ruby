@@ -1,6 +1,6 @@
 # Ruby Client for the Access Approval V1 API
 
-API Client library for the Access Approval V1 API
+An API for controlling access to data by Google personnel.
 
 An API for controlling access to data by Google personnel.
 
