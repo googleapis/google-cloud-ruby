@@ -1,6 +1,6 @@
 # Ruby Client for the Access Context Manager V1 API
 
-API Client library for the Access Context Manager V1 API
+An API for setting attribute based access control to requests to GCP services.
 
 Access Context Manager allows enterprises to configure access levels which map to a policy defined on request attributes.
 

@@ -1,6 +1,6 @@
 # Ruby Client for the Web Security Scanner V1beta API
 
-API Client library for the Web Security Scanner V1beta API
+Scans your Compute and App Engine apps for common web vulnerabilities.
 
 Web Security Scanner scans your Compute and App Engine apps for common web vulnerabilities.
 

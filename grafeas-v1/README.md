@@ -1,6 +1,6 @@
 # Ruby Client for the Grafeas V1 API
 
-API Client library for the Grafeas V1 API
+An implementation of the Grafeas API, which stores, and enables querying and retrieval of critical metadata about all of your software artifacts.
 
 The Grafeas API stores, and enables querying and retrieval of, critical metadata about all of your software artifacts.
 

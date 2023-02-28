@@ -1,6 +1,6 @@
 # Ruby Client for the IAM Service Account Credentials V1 API
 
-API Client library for the IAM Service Account Credentials V1 API
+Creates short-lived, limited-privilege credentials for IAM service accounts.
 
 The Service Account Credentials API creates short-lived credentials for Identity and Access Management (IAM) service accounts. You can also use this API to sign JSON Web Tokens (JWTs), as well as blobs of binary data that contain other types of tokens.
 
