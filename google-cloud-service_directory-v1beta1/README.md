@@ -1,6 +1,6 @@
 # Ruby Client for the Service Directory V1beta1 API
 
-API Client library for the Service Directory V1beta1 API
+Service Directory is a platform for discovering, publishing, and connecting services.
 
 Service directory is the single place to register, browse, and resolve application services.
 

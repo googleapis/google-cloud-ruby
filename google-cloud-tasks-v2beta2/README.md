@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Tasks V2beta2 API
 
-API Client library for the Cloud Tasks V2beta2 API
+Manages the execution of large numbers of distributed requests.
 
 Cloud Tasks is a fully managed service that allows you to manage the execution, dispatch and delivery of a large number of distributed tasks. You can asynchronously perform work outside of a user request. Your tasks can be executed on App Engine or any arbitrary HTTP endpoint.
 

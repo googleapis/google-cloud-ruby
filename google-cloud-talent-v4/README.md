@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Talent Solution V4 API
 
-API Client library for the Cloud Talent Solution V4 API
+Cloud Talent Solution provides the capability to create, read, update, and delete job postings, as well as search jobs based on keywords and filters.
 
 Transform your job search and candidate matching capabilities with Cloud Talent Solution, designed to support enterprise talent acquisition technology and evolve with your growing needs. This AI solution includes features such as Job Search and Profile Search to provide candidates and employers with an enhanced talent acquisition experience.
 
