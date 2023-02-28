@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Life Sciences V2beta API
 
-API Client library for the Cloud Life Sciences V2beta API
+Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data.
 
 Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data. It also enables advanced insights and operational workflows using highly scalable and compliant infrastructure.
 

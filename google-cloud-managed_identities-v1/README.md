@@ -1,6 +1,6 @@
 # Ruby Client for the Managed Service for Microsoft Active Directory API V1 API
 
-API Client library for the Managed Service for Microsoft Active Directory API V1 API
+The Managed Service for Microsoft Active Directory API is used for managing a highly available, hardened service running Microsoft Active Directory (AD).
 
 The Managed Service for Microsoft Active Directory API is used for managing a highly available, hardened service running Microsoft Active Directory.
 

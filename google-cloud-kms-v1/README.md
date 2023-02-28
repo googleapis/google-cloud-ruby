@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Key Management Service (KMS) V1 API
 
-API Client library for the Cloud Key Management Service (KMS) V1 API
+Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications.
 
 Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications.
 
