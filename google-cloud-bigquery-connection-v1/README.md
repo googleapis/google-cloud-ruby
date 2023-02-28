@@ -1,6 +1,6 @@
 # Ruby Client for the BigQuery Connection V1 API
 
-API Client library for the BigQuery Connection V1 API
+Allows users to manage BigQuery connections to external data sources.
 
 The BigQuery Connection API allows users to manage BigQuery connections to external data sources.
 
