@@ -1,6 +1,6 @@
 # Ruby Client for the Dataflow V1beta3 API
 
-API Client library for the Dataflow V1beta3 API
+Manages Google Cloud Dataflow projects on Google Cloud Platform.
 
 Dataflow is a managed service for executing a wide variety of data processing patterns.
 

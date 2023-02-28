@@ -1,6 +1,6 @@
 # Ruby Client for the Firestore in Datastore mode V1 API
 
-API Client library for the Firestore in Datastore mode V1 API
+Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application.
 
 Firestore in Datastore mode is a NoSQL document database built for automatic scaling, high performance, and ease of application development.
 
