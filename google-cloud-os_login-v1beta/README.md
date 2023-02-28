@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud OS Login V1beta API
 
-API Client library for the Cloud OS Login V1beta API
+You can use OS Login to manage access to your VM instances using IAM roles.
 
 Use OS Login to manage SSH access to your instances using IAM without having to create and manage individual SSH keys. OS Login maintains a consistent Linux user identity across VM instances and is the recommended way to manage many users across multiple instances or projects.
 

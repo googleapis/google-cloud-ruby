@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Monitoring V3 API
 
-API Client library for the Cloud Monitoring V3 API
+Manages your Cloud Monitoring data and configurations.
 
 Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation.
 

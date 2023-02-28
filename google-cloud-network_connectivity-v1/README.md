@@ -1,6 +1,6 @@
 # Ruby Client for the Network Connectivity V1 API
 
-API Client library for the Network Connectivity V1 API
+This API enables connectivity with and between Google Cloud resources.
 
 Network Connectivity is Google's suite of products that provide enterprise connectivity from your on-premises network or from another cloud provider to your Virtual Private Cloud (VPC) network.
 

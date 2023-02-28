@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud OS Config V1 API
 
-API Client library for the Cloud OS Config V1 API
+OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances.
 
 Cloud OS Config provides OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances.
 
