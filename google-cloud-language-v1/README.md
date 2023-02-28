@@ -1,6 +1,6 @@
 # Ruby Client for the Natural Language V1 API
 
-API Client library for the Natural Language V1 API
+Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations, to developers.
 
 Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations.
 

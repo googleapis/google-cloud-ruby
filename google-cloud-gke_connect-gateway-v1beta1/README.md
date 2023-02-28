@@ -1,6 +1,6 @@
 # Ruby Client for the Connect Gateway V1beta1 API
 
-API Client library for the Connect Gateway V1beta1 API
+The Connect Gateway service allows connectivity from external parties to connected Kubernetes clusters.
 
 The Connect gateway builds on the power of fleets to let Anthos users connect to and run commands against registered Anthos clusters in a simple, consistent, and secured way, whether the clusters are on Google Cloud, other public clouds, or on premises, and makes it easier to automate DevOps processes across all your clusters.
 
