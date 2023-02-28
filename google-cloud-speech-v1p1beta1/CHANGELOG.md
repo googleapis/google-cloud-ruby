@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.0 (2023-02-28)
+
+#### Features
+
+* Support for voice activity events during streaming recognition ([#20520](https://github.com/googleapis/google-cloud-ruby/issues/20520)) 
+
 ### 0.16.0 (2023-02-23)
 
 #### Features
