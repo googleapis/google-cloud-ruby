@@ -1,6 +1,6 @@
 # Ruby Client for the Resource Settings V1 API
 
-API Client library for the Resource Settings V1 API
+The Resource Settings API allows users to control and modify the behavior of their GCP resources (e.g., VM, firewall, Project, etc.) across the Cloud Resource Hierarchy.
 
 You can use Resource Settings to centrally configure settings for your Google Cloud projects, folders, and organization. These settings are inherited by their descendants in the resource hierarchy. Each setting is created and managed by Google.
 
