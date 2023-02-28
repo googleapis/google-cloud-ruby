@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Debugger V2 API
 
-API Client library for the Cloud Debugger V2 API
+Examines the call stack and variables of a running application without stopping or slowing it down.
 
 The Cloud Debugger API allows applications to interact with the Google Cloud Debugger backends. It provides two interfaces: the Debugger interface and the Controller interface. The Controller interface allows you to implement an agent that sends state data -- for example, the value of program variables and the call stack -- to Cloud Debugger when the application is running. The Debugger interface allows you to implement a Cloud Debugger client that allows users to set and delete the breakpoints at which the state data is collected, as well as read the data that is captured.
 
