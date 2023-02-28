@@ -1,9 +1,11 @@
 {
-    "api_shortname": "unknown",
+    "api_id": "containeranalysis.googleapis.com",
+    "api_shortname": "containeranalysis",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/grafeas-v1/latest",
     "distribution_name": "grafeas-v1",
     "is_cloud": true,
     "language": "ruby",
+    "name": "containeranalysis",
     "name_pretty": "Grafeas V1 API",
     "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",

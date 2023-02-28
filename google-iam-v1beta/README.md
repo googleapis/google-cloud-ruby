@@ -1,6 +1,6 @@
 # Ruby Client for the Google IAM V1beta API
 
-API Client library for the Google IAM V1beta API
+<p>Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.</p> <aside class="note"><b>Note:</b> This API is tied to the <a href="/iam/docs/reference/credentials/rest">IAM service account credentials API</a> (<code>iamcredentials.googleapis.com</code>). Enabling or disabling this API will also enable or disable the IAM service account credentials API.</aside>
 
 Pre-release client for the WorkloadIdentityPools service.
 
