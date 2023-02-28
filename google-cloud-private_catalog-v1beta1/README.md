@@ -1,6 +1,6 @@
 # Ruby Client for the Private Catalog V1beta1 API
 
-API Client library for the Private Catalog V1beta1 API
+Enable cloud users to discover private catalogs and products in their organizations.
 
 With Private Catalog, developers and cloud admins can make their solutions discoverable to their internal enterprise users. Cloud admins can manage their solutions and ensure their users are always launching the latest versions.
 

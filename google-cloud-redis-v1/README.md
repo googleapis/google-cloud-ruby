@@ -1,6 +1,6 @@
 # Ruby Client for the Google Cloud Memorystore for Redis V1 API
 
-API Client library for the Google Cloud Memorystore for Redis V1 API
+Creates and manages Redis instances on the Google Cloud Platform.
 
 Creates and manages Redis instances on the Google Cloud Platform.
 

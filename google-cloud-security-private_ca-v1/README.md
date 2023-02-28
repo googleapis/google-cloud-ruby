@@ -1,6 +1,6 @@
 # Ruby Client for the Ceritificate Authority Service V1 API
 
-API Client library for the Ceritificate Authority Service V1 API
+The Certificate Authority Service API is a highly-available, scalable service that enables you to simplify and automate the management of private certificate authorities (CAs) while staying in control of your private keys.
 
 Certificate Authority Service is a highly available, scalable Google Cloud service that enables you to simplify, automate, and customize the deployment, management, and security of private certificate authorities (CA).
 

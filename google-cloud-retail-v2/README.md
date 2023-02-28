@@ -1,6 +1,6 @@
 # Ruby Client for the Retail V2 API
 
-API Client library for the Retail V2 API
+Cloud Retail service enables customers to build end-to-end personalized recommendation systems without requiring a high level of expertise in machine learning, recommendation system, or Google Cloud.
 
 Retail enables you to build an end-to-end personalized recommendation system based on state-of-the-art deep learning ML models, without a need for expertise in ML or recommendation systems.
 
