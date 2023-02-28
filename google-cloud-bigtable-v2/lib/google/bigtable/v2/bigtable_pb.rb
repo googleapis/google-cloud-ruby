@@ -164,6 +164,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.bigtable.v2.ReadChangeStreamResponse.CloseStream" do
       optional :status, :message, 1, "google.rpc.Status"
       repeated :continuation_tokens, :message, 2, "google.bigtable.v2.StreamContinuationToken"
+      repeated :new_partitions, :message, 3, "google.bigtable.v2.StreamPartition"
     end
   end
 end
