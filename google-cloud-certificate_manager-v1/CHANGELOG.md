@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.2 (2023-03-01)
+
+#### Documentation
+
+* Corrected max number of certificates in a Certificate Map Entry ([#20572](https://github.com/googleapis/google-cloud-ruby/issues/20572)) 
+
 ### 0.4.1 (2023-01-26)
 
 #### Documentation
