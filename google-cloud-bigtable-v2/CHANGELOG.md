@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2023-03-01)
+
+#### Features
+
+* Support for CloseStream#new_partitions ([#20571](https://github.com/googleapis/google-cloud-ruby/issues/20571)) 
+
 ### 0.8.0 (2023-02-23)
 
 #### Features
