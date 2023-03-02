@@ -29,23 +29,23 @@ module Google
           #     Format: `projects/{project_number}/locations/{location}/jobs/{job}`
           # @!attribute [rw] input_uri
           #   @return [::String]
-          #     Input only. Specify the `input_uri` to populate empty `uri` fields in each element of
-          #     `Job.config.inputs` or `JobTemplate.config.inputs` when using template.
-          #     URI of the media. Input files must be at least 5 seconds in duration and
-          #     stored in Cloud Storage (for example, `gs://bucket/inputs/file.mp4`). See
-          #     [Supported input and output
+          #     Input only. Specify the `input_uri` to populate empty `uri` fields in each
+          #     element of `Job.config.inputs` or `JobTemplate.config.inputs` when using
+          #     template. URI of the media. Input files must be at least 5 seconds in
+          #     duration and stored in Cloud Storage (for example,
+          #     `gs://bucket/inputs/file.mp4`). See [Supported input and output
           #     formats](https://cloud.google.com/transcoder/docs/concepts/supported-input-and-output-formats).
           # @!attribute [rw] output_uri
           #   @return [::String]
-          #     Input only. Specify the `output_uri` to populate an empty `Job.config.output.uri` or
-          #     `JobTemplate.config.output.uri` when using template.
-          #     URI for the output file(s). For example, `gs://my-bucket/outputs/`. See
-          #     [Supported input and output
+          #     Input only. Specify the `output_uri` to populate an empty
+          #     `Job.config.output.uri` or `JobTemplate.config.output.uri` when using
+          #     template. URI for the output file(s). For example,
+          #     `gs://my-bucket/outputs/`. See [Supported input and output
           #     formats](https://cloud.google.com/transcoder/docs/concepts/supported-input-and-output-formats).
           # @!attribute [rw] template_id
           #   @return [::String]
-          #     Input only. Specify the `template_id` to use for populating `Job.config`. The default
-          #     is `preset/web-hd`.
+          #     Input only. Specify the `template_id` to use for populating `Job.config`.
+          #     The default is `preset/web-hd`.
           #
           #     Preset Transcoder templates:
           #     - `preset/{preset_id}`
@@ -311,7 +311,8 @@ module Google
           #     Required. Type of the manifest, can be `HLS` or `DASH`.
           # @!attribute [rw] mux_streams
           #   @return [::Array<::String>]
-          #     Required. List of user given `MuxStream.key`s that should appear in this manifest.
+          #     Required. List of user given `MuxStream.key`s that should appear in this
+          #     manifest.
           #
           #     When `Manifest.type` is `HLS`, a media manifest with name `MuxStream.key`
           #     and `.m3u8` extension is generated for each element of the
@@ -359,10 +360,13 @@ module Google
           #     from 0 before the extension, such as `sprite_sheet0000000123.jpeg`.
           # @!attribute [rw] sprite_width_pixels
           #   @return [::Integer]
-          #     Required. The width of sprite in pixels. Must be an even integer. To preserve the
-          #     source aspect ratio, set the {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_width_pixels SpriteSheet.sprite_width_pixels} field or
-          #     the {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_height_pixels SpriteSheet.sprite_height_pixels} field, but not both (the API will
-          #     automatically calculate the missing field).
+          #     Required. The width of sprite in pixels. Must be an even integer. To
+          #     preserve the source aspect ratio, set the
+          #     {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_width_pixels SpriteSheet.sprite_width_pixels}
+          #     field or the
+          #     {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_height_pixels SpriteSheet.sprite_height_pixels}
+          #     field, but not both (the API will automatically calculate the missing
+          #     field).
           #
           #     For portrait videos that contain horizontal ASR and rotation metadata,
           #     provide the width, in pixels, per the horizontal ASR. The API calculates
@@ -370,10 +374,13 @@ module Google
           #     and swaps the requested height and width for the output.
           # @!attribute [rw] sprite_height_pixels
           #   @return [::Integer]
-          #     Required. The height of sprite in pixels. Must be an even integer. To preserve the
-          #     source aspect ratio, set the {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_height_pixels SpriteSheet.sprite_height_pixels} field or
-          #     the {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_width_pixels SpriteSheet.sprite_width_pixels} field, but not both (the API will
-          #     automatically calculate the missing field).
+          #     Required. The height of sprite in pixels. Must be an even integer. To
+          #     preserve the source aspect ratio, set the
+          #     {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_height_pixels SpriteSheet.sprite_height_pixels}
+          #     field or the
+          #     {::Google::Cloud::Video::Transcoder::V1::SpriteSheet#sprite_width_pixels SpriteSheet.sprite_width_pixels}
+          #     field, but not both (the API will automatically calculate the missing
+          #     field).
           #
           #     For portrait videos that contain horizontal ASR and rotation metadata,
           #     provide the height, in pixels, per the horizontal ASR. The API calculates
@@ -799,17 +806,17 @@ module Google
             #     and swaps the requested height and width for the output.
             # @!attribute [rw] frame_rate
             #   @return [::Float]
-            #     Required. The target video frame rate in frames per second (FPS). Must be less than
-            #     or equal to 120. Will default to the input frame rate if larger than the
-            #     input frame rate. The API will generate an output FPS that is divisible
-            #     by the input FPS, and smaller or equal to the target FPS. See
+            #     Required. The target video frame rate in frames per second (FPS). Must be
+            #     less than or equal to 120. Will default to the input frame rate if larger
+            #     than the input frame rate. The API will generate an output FPS that is
+            #     divisible by the input FPS, and smaller or equal to the target FPS. See
             #     [Calculating frame
             #     rate](https://cloud.google.com/transcoder/docs/concepts/frame-rate) for
             #     more information.
             # @!attribute [rw] bitrate_bps
             #   @return [::Integer]
-            #     Required. The video bitrate in bits per second. The minimum value is 1,000.
-            #     The maximum value is 800,000,000.
+            #     Required. The video bitrate in bits per second. The minimum value is
+            #     1,000. The maximum value is 800,000,000.
             # @!attribute [rw] pixel_format
             #   @return [::String]
             #     Pixel format to use. The default is `yuv420p`.
@@ -944,17 +951,17 @@ module Google
             #     and swaps the requested height and width for the output.
             # @!attribute [rw] frame_rate
             #   @return [::Float]
-            #     Required. The target video frame rate in frames per second (FPS). Must be less than
-            #     or equal to 120. Will default to the input frame rate if larger than the
-            #     input frame rate. The API will generate an output FPS that is divisible
-            #     by the input FPS, and smaller or equal to the target FPS. See
+            #     Required. The target video frame rate in frames per second (FPS). Must be
+            #     less than or equal to 120. Will default to the input frame rate if larger
+            #     than the input frame rate. The API will generate an output FPS that is
+            #     divisible by the input FPS, and smaller or equal to the target FPS. See
             #     [Calculating frame
             #     rate](https://cloud.google.com/transcoder/docs/concepts/frame-rate) for
             #     more information.
             # @!attribute [rw] bitrate_bps
             #   @return [::Integer]
-            #     Required. The video bitrate in bits per second. The minimum value is 1,000.
-            #     The maximum value is 800,000,000.
+            #     Required. The video bitrate in bits per second. The minimum value is
+            #     1,000. The maximum value is 800,000,000.
             # @!attribute [rw] pixel_format
             #   @return [::String]
             #     Pixel format to use. The default is `yuv420p`.
@@ -1096,17 +1103,17 @@ module Google
             #     and swaps the requested height and width for the output.
             # @!attribute [rw] frame_rate
             #   @return [::Float]
-            #     Required. The target video frame rate in frames per second (FPS). Must be less than
-            #     or equal to 120. Will default to the input frame rate if larger than the
-            #     input frame rate. The API will generate an output FPS that is divisible
-            #     by the input FPS, and smaller or equal to the target FPS. See
+            #     Required. The target video frame rate in frames per second (FPS). Must be
+            #     less than or equal to 120. Will default to the input frame rate if larger
+            #     than the input frame rate. The API will generate an output FPS that is
+            #     divisible by the input FPS, and smaller or equal to the target FPS. See
             #     [Calculating frame
             #     rate](https://cloud.google.com/transcoder/docs/concepts/frame-rate) for
             #     more information.
             # @!attribute [rw] bitrate_bps
             #   @return [::Integer]
-            #     Required. The video bitrate in bits per second. The minimum value is 1,000.
-            #     The maximum value is 480,000,000.
+            #     Required. The video bitrate in bits per second. The minimum value is
+            #     1,000. The maximum value is 480,000,000.
             # @!attribute [rw] pixel_format
             #   @return [::String]
             #     Pixel format to use. The default is `yuv420p`.
@@ -1182,7 +1189,8 @@ module Google
           #     - `eac3`
           # @!attribute [rw] bitrate_bps
           #   @return [::Integer]
-          #     Required. Audio bitrate in bits per second. Must be between 1 and 10,000,000.
+          #     Required. Audio bitrate in bits per second. Must be between 1 and
+          #     10,000,000.
           # @!attribute [rw] channel_count
           #   @return [::Integer]
           #     Number of audio channels. Must be between 1 and 6. The default is 2.
@@ -1206,6 +1214,15 @@ module Google
           # @!attribute [rw] sample_rate_hertz
           #   @return [::Integer]
           #     The audio sample rate in Hertz. The default is 48000 Hertz.
+          # @!attribute [rw] language_code
+          #   @return [::String]
+          #     The BCP-47 language code, such as `en-US` or `sr-Latn`. For more
+          #     information, see
+          #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     The name for this particular audio stream that
+          #     will be added to the HLS/DASH manifest.
           class AudioStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1213,8 +1230,8 @@ module Google
             # The mapping for the `Job.edit_list` atoms with audio `EditAtom.inputs`.
             # @!attribute [rw] atom_key
             #   @return [::String]
-            #     Required. The `EditAtom.key` that references the atom with audio inputs in the
-            #     `Job.edit_list`.
+            #     Required. The `EditAtom.key` that references the atom with audio inputs
+            #     in the `Job.edit_list`.
             # @!attribute [rw] input_key
             #   @return [::String]
             #     Required. The `Input.key` that identifies the input file.
@@ -1249,9 +1266,18 @@ module Google
           #     - `cea608`
           #     - `cea708`
           #     - `webvtt`
+          # @!attribute [rw] language_code
+          #   @return [::String]
+          #     The BCP-47 language code, such as `en-US` or `sr-Latn`. For more
+          #     information, see
+          #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
           # @!attribute [rw] mapping
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::TextStream::TextMapping>]
           #     The mapping for the `Job.edit_list` atoms with text `EditAtom.inputs`.
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     The name for this particular text stream that
+          #     will be added to the HLS/DASH manifest.
           class TextStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

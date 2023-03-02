@@ -559,8 +559,8 @@ module Google
               #   @param job_template [::Google::Cloud::Video::Transcoder::V1::JobTemplate, ::Hash]
               #     Required. Parameters for creating job template.
               #   @param job_template_id [::String]
-              #     Required. The ID to use for the job template, which will become the final component
-              #     of the job template's resource name.
+              #     Required. The ID to use for the job template, which will become the final
+              #     component of the job template's resource name.
               #
               #     This value should be 4-63 characters, and valid characters must match the
               #     regular expression `[a-zA-Z][a-zA-Z0-9_-]*`.
@@ -648,8 +648,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent location from which to retrieve the collection of job templates.
-              #     Format: `projects/{project}/locations/{location}`
+              #     Required. The parent location from which to retrieve the collection of job
+              #     templates. Format: `projects/{project}/locations/{location}`
               #   @param page_size [::Integer]
               #     The maximum number of items to return.
               #   @param page_token [::String]

@@ -109,8 +109,8 @@ module Google
           #     Required. Parameters for creating job template.
           # @!attribute [rw] job_template_id
           #   @return [::String]
-          #     Required. The ID to use for the job template, which will become the final component
-          #     of the job template's resource name.
+          #     Required. The ID to use for the job template, which will become the final
+          #     component of the job template's resource name.
           #
           #     This value should be 4-63 characters, and valid characters must match the
           #     regular expression `[a-zA-Z][a-zA-Z0-9_-]*`.
@@ -122,8 +122,8 @@ module Google
           # Request message for `TranscoderService.ListJobTemplates`.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The parent location from which to retrieve the collection of job templates.
-          #     Format: `projects/{project}/locations/{location}`
+          #     Required. The parent location from which to retrieve the collection of job
+          #     templates. Format: `projects/{project}/locations/{location}`
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of items to return.
