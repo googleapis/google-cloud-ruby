@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/kms/inventory/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-kms-inventory-v1/$1
