@@ -102,7 +102,7 @@ end
 
 def w1r3_benchmark_runner
   puts "Generate Write-1-Read-3 workload.", :bold
-  # generate randmon size in bytes using a uniform distribution
+  # generate random size in bytes using a uniform distribution
   size = rand(min_size..max_size)
   object_name = "#{TIMESTAMP}-#{SecureRandom.uuid}"
 
