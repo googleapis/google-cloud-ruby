@@ -19,7 +19,6 @@
 require "google/cloud/errors"
 require "google/cloud/batch/v1/batch_pb"
 require "google/cloud/location"
-require "google/iam/v1"
 
 module Google
   module Cloud
@@ -173,12 +172,6 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-              end
-
               @batch_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Batch::V1::BatchService::Stub,
                 credentials:  credentials,
@@ -201,13 +194,6 @@ module Google
             # @return [Google::Cloud::Location::Locations::Client]
             #
             attr_reader :location_client
-
-            ##
-            # Get the associated client for mix-in of the IAMPolicy.
-            #
-            # @return [Google::Iam::V1::IAMPolicy::Client]
-            #
-            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -250,8 +236,8 @@ module Google
             #     ignore the request if it has already been completed. The server will
             #     guarantee that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -436,8 +422,8 @@ module Google
             #     ignore the request if it has already been completed. The server will
             #     guarantee that for at least 60 minutes after the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
