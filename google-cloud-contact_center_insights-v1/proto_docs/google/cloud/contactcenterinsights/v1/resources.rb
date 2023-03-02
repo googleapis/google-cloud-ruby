@@ -992,6 +992,10 @@ module Google
           #   @return [::Float]
           #     Percentage of conversations created using Dialogflow runtime integration
           #     to analyze automatically, between [0, 100].
+          # @!attribute [rw] upload_conversation_analysis_percentage
+          #   @return [::Float]
+          #     Percentage of conversations created using the UploadConversation endpoint
+          #     to analyze automatically, between [0, 100].
           # @!attribute [rw] annotator_selector
           #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector]
           #     To select the annotators to run and the phrase matchers to use

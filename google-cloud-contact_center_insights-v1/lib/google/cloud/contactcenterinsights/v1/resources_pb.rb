@@ -286,6 +286,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig" do
       optional :runtime_integration_analysis_percentage, :double, 1
+      optional :upload_conversation_analysis_percentage, :double, 6
       optional :annotator_selector, :message, 5, "google.cloud.contactcenterinsights.v1.AnnotatorSelector"
     end
     add_message "google.cloud.contactcenterinsights.v1.RuntimeAnnotation" do
