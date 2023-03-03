@@ -242,6 +242,11 @@
                 "export_feature_values"
               ]
             },
+            "DeleteFeatureValues": {
+              "methods": [
+                "delete_feature_values"
+              ]
+            },
             "SearchFeatures": {
               "methods": [
                 "search_features"
@@ -779,6 +784,11 @@
             "BatchImportModelEvaluationSlices": {
               "methods": [
                 "batch_import_model_evaluation_slices"
+              ]
+            },
+            "BatchImportEvaluatedAnnotations": {
+              "methods": [
+                "batch_import_evaluated_annotations"
               ]
             },
             "GetModelEvaluation": {

@@ -14,8 +14,10 @@ require 'google/cloud/aiplatform/v1/featurestore_pb'
 require 'google/cloud/aiplatform/v1/io_pb'
 require 'google/cloud/aiplatform/v1/operation_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/type/interval_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/aiplatform/v1/featurestore_service.proto", :syntax => :proto3) do
@@ -219,6 +221,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.BatchReadFeatureValuesOperationMetadata" do
       optional :generic_metadata, :message, 1, "google.cloud.aiplatform.v1.GenericOperationMetadata"
     end
+    add_message "google.cloud.aiplatform.v1.DeleteFeatureValuesOperationMetadata" do
+      optional :generic_metadata, :message, 1, "google.cloud.aiplatform.v1.GenericOperationMetadata"
+    end
     add_message "google.cloud.aiplatform.v1.CreateEntityTypeOperationMetadata" do
       optional :generic_metadata, :message, 1, "google.cloud.aiplatform.v1.GenericOperationMetadata"
     end
@@ -227,6 +232,42 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.BatchCreateFeaturesOperationMetadata" do
       optional :generic_metadata, :message, 1, "google.cloud.aiplatform.v1.GenericOperationMetadata"
+    end
+    add_message "google.cloud.aiplatform.v1.DeleteFeatureValuesRequest" do
+      optional :entity_type, :string, 1
+      oneof :DeleteOption do
+        optional :select_entity, :message, 2, "google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectEntity"
+        optional :select_time_range_and_feature, :message, 3, "google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectTimeRangeAndFeature"
+      end
+    end
+    add_message "google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectEntity" do
+      optional :entity_id_selector, :message, 1, "google.cloud.aiplatform.v1.EntityIdSelector"
+    end
+    add_message "google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectTimeRangeAndFeature" do
+      optional :time_range, :message, 1, "google.type.Interval"
+      optional :feature_selector, :message, 2, "google.cloud.aiplatform.v1.FeatureSelector"
+      optional :skip_online_storage_delete, :bool, 3
+    end
+    add_message "google.cloud.aiplatform.v1.DeleteFeatureValuesResponse" do
+      oneof :response do
+        optional :select_entity, :message, 1, "google.cloud.aiplatform.v1.DeleteFeatureValuesResponse.SelectEntity"
+        optional :select_time_range_and_feature, :message, 2, "google.cloud.aiplatform.v1.DeleteFeatureValuesResponse.SelectTimeRangeAndFeature"
+      end
+    end
+    add_message "google.cloud.aiplatform.v1.DeleteFeatureValuesResponse.SelectEntity" do
+      optional :offline_storage_deleted_entity_row_count, :int64, 1
+      optional :online_storage_deleted_entity_count, :int64, 2
+    end
+    add_message "google.cloud.aiplatform.v1.DeleteFeatureValuesResponse.SelectTimeRangeAndFeature" do
+      optional :impacted_feature_count, :int64, 1
+      optional :offline_storage_modified_entity_row_count, :int64, 2
+      optional :online_storage_modified_entity_count, :int64, 3
+    end
+    add_message "google.cloud.aiplatform.v1.EntityIdSelector" do
+      optional :entity_id_field, :string, 5
+      oneof :EntityIdsSource do
+        optional :csv_source, :message, 3, "google.cloud.aiplatform.v1.CsvSource"
+      end
     end
   end
 end
@@ -275,9 +316,17 @@ module Google
         ImportFeatureValuesOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ImportFeatureValuesOperationMetadata").msgclass
         ExportFeatureValuesOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportFeatureValuesOperationMetadata").msgclass
         BatchReadFeatureValuesOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchReadFeatureValuesOperationMetadata").msgclass
+        DeleteFeatureValuesOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteFeatureValuesOperationMetadata").msgclass
         CreateEntityTypeOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.CreateEntityTypeOperationMetadata").msgclass
         CreateFeatureOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.CreateFeatureOperationMetadata").msgclass
         BatchCreateFeaturesOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchCreateFeaturesOperationMetadata").msgclass
+        DeleteFeatureValuesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteFeatureValuesRequest").msgclass
+        DeleteFeatureValuesRequest::SelectEntity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectEntity").msgclass
+        DeleteFeatureValuesRequest::SelectTimeRangeAndFeature = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectTimeRangeAndFeature").msgclass
+        DeleteFeatureValuesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteFeatureValuesResponse").msgclass
+        DeleteFeatureValuesResponse::SelectEntity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteFeatureValuesResponse.SelectEntity").msgclass
+        DeleteFeatureValuesResponse::SelectTimeRangeAndFeature = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteFeatureValuesResponse.SelectTimeRangeAndFeature").msgclass
+        EntityIdSelector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.EntityIdSelector").msgclass
       end
     end
   end

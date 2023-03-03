@@ -5,8 +5,10 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/aiplatform/v1/explanation_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/protobuf/wrappers_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/aiplatform/v1/model_evaluation_slice.proto", :syntax => :proto3) do
@@ -16,10 +18,32 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :metrics_schema_uri, :string, 3
       optional :metrics, :message, 4, "google.protobuf.Value"
       optional :create_time, :message, 5, "google.protobuf.Timestamp"
+      optional :model_explanation, :message, 6, "google.cloud.aiplatform.v1.ModelExplanation"
     end
     add_message "google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice" do
       optional :dimension, :string, 1
       optional :value, :string, 2
+      optional :slice_spec, :message, 3, "google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec"
+    end
+    add_message "google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec" do
+      map :configs, :string, :message, 1, "google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.SliceConfig"
+    end
+    add_message "google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.SliceConfig" do
+      oneof :kind do
+        optional :value, :message, 1, "google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.Value"
+        optional :range, :message, 2, "google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.Range"
+        optional :all_values, :message, 3, "google.protobuf.BoolValue"
+      end
+    end
+    add_message "google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.Range" do
+      optional :low, :float, 1
+      optional :high, :float, 2
+    end
+    add_message "google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.Value" do
+      oneof :kind do
+        optional :string_value, :string, 1
+        optional :float_value, :float, 2
+      end
     end
   end
 end
@@ -30,6 +54,10 @@ module Google
       module V1
         ModelEvaluationSlice = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelEvaluationSlice").msgclass
         ModelEvaluationSlice::Slice = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice").msgclass
+        ModelEvaluationSlice::Slice::SliceSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec").msgclass
+        ModelEvaluationSlice::Slice::SliceSpec::SliceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.SliceConfig").msgclass
+        ModelEvaluationSlice::Slice::SliceSpec::Range = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.Range").msgclass
+        ModelEvaluationSlice::Slice::SliceSpec::Value = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelEvaluationSlice.Slice.SliceSpec.Value").msgclass
       end
     end
   end

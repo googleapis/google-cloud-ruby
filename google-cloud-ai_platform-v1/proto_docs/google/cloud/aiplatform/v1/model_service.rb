@@ -501,6 +501,31 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_evaluated_annotations ModelService.BatchImportEvaluatedAnnotations}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the parent ModelEvaluationSlice resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}`
+        # @!attribute [rw] evaluated_annotations
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::EvaluatedAnnotation>]
+        #     Required. Evaluated annotations resource to be imported.
+        class BatchImportEvaluatedAnnotationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_evaluated_annotations ModelService.BatchImportEvaluatedAnnotations}
+        # @!attribute [r] imported_evaluated_annotations_count
+        #   @return [::Integer]
+        #     Output only. Number of EvaluatedAnnotations imported.
+        class BatchImportEvaluatedAnnotationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::ModelService::Client#get_model_evaluation ModelService.GetModelEvaluation}.
         # @!attribute [rw] name
         #   @return [::String]

@@ -54,8 +54,9 @@ module Google
             rpc :DeleteModel, ::Google::Cloud::AIPlatform::V1::DeleteModelRequest, ::Google::Longrunning::Operation
             # Deletes a Model version.
             #
-            # Model version can only be deleted if there are no [DeployedModels][]
-            # created from it. Deleting the only version in the Model is not allowed. Use
+            # Model version can only be deleted if there are no
+            # [DeployedModels][google.cloud.aiplatform.v1.DeployedModel] created from it.
+            # Deleting the only version in the Model is not allowed. Use
             # [DeleteModel][google.cloud.aiplatform.v1.ModelService.DeleteModel] for
             # deleting the Model instead.
             rpc :DeleteModelVersion, ::Google::Cloud::AIPlatform::V1::DeleteModelVersionRequest, ::Google::Longrunning::Operation
@@ -77,6 +78,8 @@ module Google
             rpc :ImportModelEvaluation, ::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest, ::Google::Cloud::AIPlatform::V1::ModelEvaluation
             # Imports a list of externally generated ModelEvaluationSlice.
             rpc :BatchImportModelEvaluationSlices, ::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest, ::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesResponse
+            # Imports a list of externally generated EvaluatedAnnotations.
+            rpc :BatchImportEvaluatedAnnotations, ::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsRequest, ::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsResponse
             # Gets a ModelEvaluation.
             rpc :GetModelEvaluation, ::Google::Cloud::AIPlatform::V1::GetModelEvaluationRequest, ::Google::Cloud::AIPlatform::V1::ModelEvaluation
             # Lists ModelEvaluations in a Model.

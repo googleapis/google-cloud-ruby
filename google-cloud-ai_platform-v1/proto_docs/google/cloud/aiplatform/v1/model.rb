@@ -98,11 +98,11 @@ module Google
         #     deploying this Model. The specification is ingested upon
         #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel},
         #     and all binaries it contains are copied and stored internally by Vertex AI.
-        #     Not present for AutoML Models.
+        #     Not present for AutoML Models or Large Models.
         # @!attribute [rw] artifact_uri
         #   @return [::String]
         #     Immutable. The path to the directory containing the Model artifact and any
-        #     of its supporting files. Not present for AutoML Models.
+        #     of its supporting files. Not present for AutoML Models or Large Models.
         # @!attribute [r] supported_deployment_resources_types
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Model::DeploymentResourcesType>]
         #     Output only. When this Model is deployed, its prediction resources are
@@ -224,11 +224,13 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::ExplanationSpec]
         #     The default explanation specification for this Model.
         #
-        #     The Model can be used for [requesting
-        #     explanation][PredictionService.Explain] after being
-        #     {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model deployed} if it is
-        #     populated. The Model can be used for [batch
-        #     explanation][BatchPredictionJob.generate_explanation] if it is populated.
+        #     The Model can be used for
+        #     [requesting
+        #     explanation][google.cloud.aiplatform.v1.PredictionService.Explain] after
+        #     being {::Google::Cloud::AIPlatform::V1::EndpointService::Client#deploy_model deployed} if
+        #     it is populated. The Model can be used for [batch
+        #     explanation][google.cloud.aiplatform.v1.BatchPredictionJob.generate_explanation]
+        #     if it is populated.
         #
         #     All fields of the explanation_spec can be overridden by
         #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
@@ -239,13 +241,16 @@ module Google
         #     of {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}.
         #
         #     If the default explanation specification is not set for this Model, this
-        #     Model can still be used for [requesting
-        #     explanation][PredictionService.Explain] by setting
+        #     Model can still be used for
+        #     [requesting
+        #     explanation][google.cloud.aiplatform.v1.PredictionService.Explain] by
+        #     setting
         #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
         #     of
         #     {::Google::Cloud::AIPlatform::V1::DeployModelRequest#deployed_model DeployModelRequest.deployed_model}
-        #     and for [batch explanation][BatchPredictionJob.generate_explanation] by
-        #     setting
+        #     and for [batch
+        #     explanation][google.cloud.aiplatform.v1.BatchPredictionJob.generate_explanation]
+        #     by setting
         #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob#explanation_spec explanation_spec}
         #     of {::Google::Cloud::AIPlatform::V1::BatchPredictionJob BatchPredictionJob}.
         # @!attribute [rw] etag

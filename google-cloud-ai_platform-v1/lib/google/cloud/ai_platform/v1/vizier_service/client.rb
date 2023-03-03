@@ -1292,7 +1292,7 @@ module Google
             # Checks  whether a Trial should stop or not. Returns a
             # long-running operation. When the operation is successful,
             # it will contain a
-            # [CheckTrialEarlyStoppingStateResponse][google.cloud.ml.v1.CheckTrialEarlyStoppingStateResponse].
+            # {::Google::Cloud::AIPlatform::V1::CheckTrialEarlyStoppingStateResponse CheckTrialEarlyStoppingStateResponse}.
             #
             # @overload check_trial_early_stopping_state(request, options = nil)
             #   Pass arguments to `check_trial_early_stopping_state` via a request object, either of type
