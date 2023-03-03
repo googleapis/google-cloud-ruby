@@ -23,17 +23,17 @@ class Google::Cloud::Language::LanguageServiceSmokeTestBase < Minitest::Test
   # A basic smoke test for a simple non-error operation (GRPC)
   def test_language_sentiment_grpc
     language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :grpc
-    language_sentiment_verify language_service_client
+    verify_language_sentiment language_service_client
   end
 
   ##
   # A basic smoke test for a simple non-error operation (REST)
   def test_language_sentiment_rest
     language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :rest
-    language_sentiment_verify language_service_client
+    verify_language_sentiment language_service_client
   end
 
-  def language_sentiment_verify language_service_client
+  def verify_language_sentiment language_service_client
     document = { content: "Hello, world!", type: :PLAIN_TEXT }
     response = language_service_client.analyze_sentiment document: document
 
@@ -45,17 +45,17 @@ class Google::Cloud::Language::LanguageServiceSmokeTestBase < Minitest::Test
   # Test that the error code and details are surfaced (GRPC)
   def test_error_code_details_grpc
     language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :grpc
-    error_code_details_verify language_service_client
+    verify_error_code_details language_service_client
   end
 
   ##
   # Test that the error code and details are surfaced (REST)
   def test_error_code_details_rest
     language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :rest
-    error_code_details_verify language_service_client
+    verify_error_code_details language_service_client
   end
 
-  def error_code_details_verify language_service_client
+  def verify_error_code_details language_service_client
     document = { content: "This is a test", type: :PLAIN_TEXT, language: "zz" }
 
     err = assert_raises(::Google::Cloud::Error) do
@@ -81,7 +81,7 @@ class Google::Cloud::Language::LanguageServiceSmokeTestBase < Minitest::Test
     language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :grpc do |config|
       config.quota_project = "this_project_does_not_exist"
     end
-    error_code_errorinfo_verify language_service_client
+    verify_error_code_errorinfo language_service_client
   end
 
   ##
@@ -90,10 +90,10 @@ class Google::Cloud::Language::LanguageServiceSmokeTestBase < Minitest::Test
     language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :rest do |config|
       config.quota_project = "this_project_does_not_exist"
     end
-    error_code_errorinfo_verify language_service_client
+    verify_error_code_errorinfo language_service_client
   end
 
-  def error_code_errorinfo_verify language_service_client
+  def verify_error_code_errorinfo language_service_client
     document = { content: "This is a test", type: :PLAIN_TEXT, language: "zz" }
 
     err = assert_raises(::Google::Cloud::Error) do
