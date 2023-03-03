@@ -2286,6 +2286,115 @@ module Google
             end
 
             ##
+            # Delete Feature values from Featurestore.
+            #
+            # The progress of the deletion is tracked by the returned operation. The
+            # deleted feature values are guaranteed to be invisible to subsequent read
+            # operations after the operation is marked as successfully done.
+            #
+            # If a delete feature values operation fails, the feature values
+            # returned from reads and exports may be inconsistent. If consistency is
+            # required, the caller must retry the same delete request again and wait till
+            # the new operation returned is marked as successfully done.
+            #
+            # @overload delete_feature_values(request, options = nil)
+            #   Pass arguments to `delete_feature_values` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_feature_values(select_entity: nil, select_time_range_and_feature: nil, entity_type: nil)
+            #   Pass arguments to `delete_feature_values` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param select_entity [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest::SelectEntity, ::Hash]
+            #     Select feature values to be deleted by specifying entities.
+            #   @param select_time_range_and_feature [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest::SelectTimeRangeAndFeature, ::Hash]
+            #     Select feature values to be deleted by specifying time range and
+            #     features.
+            #   @param entity_type [::String]
+            #     Required. The resource name of the EntityType grouping the Features for
+            #     which values are being deleted from. Format:
+            #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::FeaturestoreService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest.new
+            #
+            #   # Call the delete_feature_values method.
+            #   result = client.delete_feature_values request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_feature_values request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_feature_values.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.entity_type
+                header_params["entity_type"] = request.entity_type
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_feature_values.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_feature_values.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @featurestore_service_stub.call_rpc :delete_feature_values, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Searches Features matching a query in a given project.
             #
             # @overload search_features(request, options = nil)
@@ -2681,6 +2790,11 @@ module Google
                 #
                 attr_reader :export_feature_values
                 ##
+                # RPC-specific configuration for `delete_feature_values`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_feature_values
+                ##
                 # RPC-specific configuration for `search_features`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2726,6 +2840,8 @@ module Google
                   @batch_read_feature_values = ::Gapic::Config::Method.new batch_read_feature_values_config
                   export_feature_values_config = parent_rpcs.export_feature_values if parent_rpcs.respond_to? :export_feature_values
                   @export_feature_values = ::Gapic::Config::Method.new export_feature_values_config
+                  delete_feature_values_config = parent_rpcs.delete_feature_values if parent_rpcs.respond_to? :delete_feature_values
+                  @delete_feature_values = ::Gapic::Config::Method.new delete_feature_values_config
                   search_features_config = parent_rpcs.search_features if parent_rpcs.respond_to? :search_features
                   @search_features = ::Gapic::Config::Method.new search_features_config
 

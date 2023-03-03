@@ -27,6 +27,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.Featurestore.OnlineServingConfig.Scaling" do
       optional :min_node_count, :int32, 1
       optional :max_node_count, :int32, 2
+      optional :cpu_utilization_target, :int32, 3
     end
     add_enum "google.cloud.aiplatform.v1.Featurestore.State" do
       value :STATE_UNSPECIFIED, 0

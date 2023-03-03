@@ -97,6 +97,17 @@ module Google
             rpc :BatchReadFeatureValues, ::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest, ::Google::Longrunning::Operation
             # Exports Feature values from all the entities of a target EntityType.
             rpc :ExportFeatureValues, ::Google::Cloud::AIPlatform::V1::ExportFeatureValuesRequest, ::Google::Longrunning::Operation
+            # Delete Feature values from Featurestore.
+            #
+            # The progress of the deletion is tracked by the returned operation. The
+            # deleted feature values are guaranteed to be invisible to subsequent read
+            # operations after the operation is marked as successfully done.
+            #
+            # If a delete feature values operation fails, the feature values
+            # returned from reads and exports may be inconsistent. If consistency is
+            # required, the caller must retry the same delete request again and wait till
+            # the new operation returned is marked as successfully done.
+            rpc :DeleteFeatureValues, ::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest, ::Google::Longrunning::Operation
             # Searches Features matching a query in a given project.
             rpc :SearchFeatures, ::Google::Cloud::AIPlatform::V1::SearchFeaturesRequest, ::Google::Cloud::AIPlatform::V1::SearchFeaturesResponse
           end

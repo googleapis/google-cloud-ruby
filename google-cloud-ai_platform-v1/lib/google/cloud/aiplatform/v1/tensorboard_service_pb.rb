@@ -14,6 +14,7 @@ require 'google/cloud/aiplatform/v1/tensorboard_experiment_pb'
 require 'google/cloud/aiplatform/v1/tensorboard_run_pb'
 require 'google/cloud/aiplatform/v1/tensorboard_time_series_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

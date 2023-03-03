@@ -58,7 +58,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for [TensorboardService.GetTensorboardUsage][].
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage TensorboardService.ReadTensorboardUsage}.
         # @!attribute [rw] monthly_usage_data
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerMonthUsageData}]
         #     Maps year-month (YYYYMM) string to per month usage data.

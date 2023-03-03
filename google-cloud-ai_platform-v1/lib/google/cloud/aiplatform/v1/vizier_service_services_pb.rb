@@ -71,7 +71,7 @@ module Google
             # Checks  whether a Trial should stop or not. Returns a
             # long-running operation. When the operation is successful,
             # it will contain a
-            # [CheckTrialEarlyStoppingStateResponse][google.cloud.ml.v1.CheckTrialEarlyStoppingStateResponse].
+            # [CheckTrialEarlyStoppingStateResponse][google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateResponse].
             rpc :CheckTrialEarlyStoppingState, ::Google::Cloud::AIPlatform::V1::CheckTrialEarlyStoppingStateRequest, ::Google::Longrunning::Operation
             # Stops a Trial.
             rpc :StopTrial, ::Google::Cloud::AIPlatform::V1::StopTrialRequest, ::Google::Cloud::AIPlatform::V1::Trial

@@ -16,6 +16,7 @@ require 'google/cloud/aiplatform/v1/metadata_schema_pb'
 require 'google/cloud/aiplatform/v1/metadata_store_pb'
 require 'google/cloud/aiplatform/v1/operation_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

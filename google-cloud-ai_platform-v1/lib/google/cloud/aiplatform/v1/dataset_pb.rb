@@ -40,6 +40,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :destination do
         optional :gcs_destination, :message, 1, "google.cloud.aiplatform.v1.GcsDestination"
       end
+      oneof :split do
+        optional :fraction_split, :message, 5, "google.cloud.aiplatform.v1.ExportFractionSplit"
+      end
+    end
+    add_message "google.cloud.aiplatform.v1.ExportFractionSplit" do
+      optional :training_fraction, :double, 1
+      optional :validation_fraction, :double, 2
+      optional :test_fraction, :double, 3
     end
   end
 end
@@ -51,6 +59,7 @@ module Google
         Dataset = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Dataset").msgclass
         ImportDataConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ImportDataConfig").msgclass
         ExportDataConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportDataConfig").msgclass
+        ExportFractionSplit = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportFractionSplit").msgclass
       end
     end
   end

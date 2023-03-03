@@ -22,6 +22,7 @@ module Google
     module AIPlatform
       module V1
         # Represents a hardware accelerator type.
+        # NEXT ID: 11.
         module AcceleratorType
           # Unspecified accelerator type, which means no accelerator.
           ACCELERATOR_TYPE_UNSPECIFIED = 0
@@ -49,6 +50,9 @@ module Google
 
           # TPU v3.
           TPU_V3 = 7
+
+          # TPU v4.
+          TPU_V4_POD = 10
         end
       end
     end

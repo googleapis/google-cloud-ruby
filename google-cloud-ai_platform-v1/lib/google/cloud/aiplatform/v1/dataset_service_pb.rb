@@ -14,6 +14,7 @@ require 'google/cloud/aiplatform/v1/dataset_pb'
 require 'google/cloud/aiplatform/v1/operation_pb'
 require 'google/cloud/aiplatform/v1/saved_query_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

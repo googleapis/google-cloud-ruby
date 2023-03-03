@@ -156,7 +156,11 @@ module Google
         #     Endpoint.
         #
         #     The resource name may contain version id or version alias to specify the
-        #     version, if no version is specified, the default version will be deployed.
+        #     version.
+        #      Example: `projects/{project}/locations/{location}/models/{model}@2`
+        #                  or
+        #                `projects/{project}/locations/{location}/models/{model}@golden`
+        #     if no version is specified, the default version will be deployed.
         # @!attribute [r] model_version_id
         #   @return [::String]
         #     Output only. The version ID of the model that is deployed.
