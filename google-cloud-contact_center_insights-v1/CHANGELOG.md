@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.11.0 (2023-03-03)
+
+#### Features
+
+* add upload_conversation_analysis_percentage in AnalysisConfig ([#20588](https://github.com/googleapis/google-cloud-ruby/issues/20588)) 
+
 ### 0.10.0 (2023-02-13)
 
 #### Features
