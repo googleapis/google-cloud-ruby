@@ -201,6 +201,15 @@ module Google
         #     Customer-managed encryption key options for a BatchPredictionJob. If this
         #     is set, then all resources created by the BatchPredictionJob will be
         #     encrypted with the provided encryption key.
+        # @!attribute [rw] disable_container_logging
+        #   @return [::Boolean]
+        #     For custom-trained Models and AutoML Tabular Models, the container of the
+        #     DeployedModel instances will send `stderr` and `stdout` streams to
+        #     Stackdriver Logging by default. Please note that the logs incur cost,
+        #     which are subject to [Cloud Logging
+        #     pricing](https://cloud.google.com/stackdriver/pricing).
+        #
+        #     User can disable container logging by setting this flag to true.
         class BatchPredictionJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
