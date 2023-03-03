@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.20.0 (2023-03-03)
+
+#### Features
+
+* add support for batch_import_evaluated_annotations in model_service 
+* add support for delete_feature_values in feature_store ([#20601](https://github.com/googleapis/google-cloud-ruby/issues/20601)) 
+* add support for evaluated_annotation 
+
 ### 0.19.0 (2023-02-13)
 
 #### Features
