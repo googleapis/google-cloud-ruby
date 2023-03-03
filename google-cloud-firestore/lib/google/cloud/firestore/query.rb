@@ -18,6 +18,7 @@ require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/query_listener"
 require "google/cloud/firestore/convert"
 require "google/cloud/firestore/aggregate_query"
+require "google/cloud/firestore/filter"
 require "json"
 
 module Google
@@ -251,7 +252,7 @@ module Google
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
-        def where field, operator, value
+        def where filter_or_field, operator, value
           if query_has_cursors?
             raise "cannot call where after calling " \
                   "start_at, start_after, end_before, or end_at"
@@ -260,10 +261,12 @@ module Google
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
-          field = FieldPath.parse field unless field.is_a? FieldPath
-
-          new_filter = filter field.formatted_string, operator, value
-          add_filters_to_query new_query, new_filter
+          if filter_or_field.is_a? Google::Cloud::Firestore::Filter
+            new_query.where = filter_or_field.filter
+          else
+            new_filter = Google::Cloud::Firestore::Filter.create filter_or_field, operator, value
+            add_filters_to_query new_query, new_filter.filter
+          end
 
           Query.start new_query, parent_path, client, limit_type: limit_type
         end
