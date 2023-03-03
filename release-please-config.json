@@ -703,6 +703,10 @@
       "component": "google-cloud-kms",
       "version_file": "lib/google/cloud/kms/version.rb"
     },
+    "google-cloud-kms-inventory-v1": {
+      "component": "google-cloud-kms-inventory-v1",
+      "version_file": "lib/google/cloud/kms/inventory/v1/version.rb"
+    },
     "google-cloud-kms-v1": {
       "component": "google-cloud-kms-v1",
       "version_file": "lib/google/cloud/kms/v1/version.rb"
