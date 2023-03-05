@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 (2023-03-05)
+
+#### Features
+
+* add support for data_boost_enabled ([#20592](https://github.com/googleapis/google-cloud-ruby/issues/20592)) 
+
 ### 0.13.0 (2022-10-24)
 
 #### Features
