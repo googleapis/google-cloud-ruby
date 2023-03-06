@@ -25,6 +25,23 @@ module Google
           # Path helper methods for the EkmService API.
           module Paths
             ##
+            # Create a fully-qualified EkmConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/ekmConfig`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def ekm_config_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/ekmConfig"
+            end
+
+            ##
             # Create a fully-qualified EkmConnection resource string.
             #
             # The resource will be in the following format:

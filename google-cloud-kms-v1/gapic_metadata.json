@@ -29,6 +29,16 @@
               "methods": [
                 "update_ekm_connection"
               ]
+            },
+            "GetEkmConfig": {
+              "methods": [
+                "get_ekm_config"
+              ]
+            },
+            "UpdateEkmConfig": {
+              "methods": [
+                "update_ekm_config"
+              ]
             }
           }
         }
