@@ -1,8 +1,8 @@
 # Ruby Client for the Cloud Trace V1 API
 
-Sends application trace data to Stackdriver Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Trace API directly. If you are looking to instrument your application for Stackdriver Trace, we recommend using OpenCensus.
+Sends application trace data to Stackdriver Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Trace API directly. If you are looking to instrument your application for Stackdriver Trace, we recommend using OpenTelemetry.
 
-The Cloud Trace API lets you send and retrieve latency data to and from Cloud Trace. This API provides low-level interfaces for interacting directly with the feature. For some languages, you can use OpenCensus, a set of open source tracing and stats instrumentation libraries that work with multiple backends.
+The Cloud Trace API lets you send and retrieve latency data to and from Cloud Trace. This API provides low-level interfaces for interacting directly with the feature. For some languages, you can use OpenTelemetry, a set of open source tracing and stats instrumentation libraries that work with multiple backends.
 
 https://github.com/googleapis/google-cloud-ruby
 
