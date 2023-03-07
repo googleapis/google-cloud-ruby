@@ -14,58 +14,108 @@
 
 require "simplecov"
 require "minitest/autorun"
-require "minitest/spec"
+require "minitest/focus"
 
 require "google/cloud/language"
 
-describe "LanguageServiceSmokeTest v1" do
-  it "runs one smoke test with analyze_sentiment" do
-    language_service_client = Google::Cloud::Language.language_service version: :v1
+class Google::Cloud::Language::LanguageServiceSmokeTestBase < Minitest::Test
+  ##
+  # A basic smoke test for a simple non-error operation (GRPC)
+  def test_language_sentiment_grpc
+    language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :grpc
+    verify_language_sentiment language_service_client
+  end
+
+  ##
+  # A basic smoke test for a simple non-error operation (REST)
+  def test_language_sentiment_rest
+    language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :rest
+    verify_language_sentiment language_service_client
+  end
+
+  def verify_language_sentiment language_service_client
     document = { content: "Hello, world!", type: :PLAIN_TEXT }
     response = language_service_client.analyze_sentiment document: document
-    response.document_sentiment.score.must_be_kind_of Numeric
-    response.language.must_equal "en"
+
+    assert_kind_of ::Numeric, response.document_sentiment.score
+    assert_equal "en", response.language
   end
 
-  it "surfaces error code, message, and status details" do
-    language_service_client = Google::Cloud::Language.language_service version: :v1
+  ##
+  # Test that the error code and details are surfaced (GRPC)
+  def test_error_code_details_grpc
+    language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :grpc
+    verify_error_code_details language_service_client
+  end
+
+  ##
+  # Test that the error code and details are surfaced (REST)
+  def test_error_code_details_rest
+    language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :rest
+    verify_error_code_details language_service_client
+  end
+
+  def verify_error_code_details language_service_client
     document = { content: "This is a test", type: :PLAIN_TEXT, language: "zz" }
-    err = ->{ language_service_client.analyze_sentiment(document: document) }.must_raise ::Google::Cloud::Error
-    err.code.must_equal 3
-    err.details.must_match /document.language is not valid/
-    
+
+    err = assert_raises(::Google::Cloud::Error) do
+      language_service_client.analyze_sentiment(document: document)
+    end
+
+    assert_equal 3, err.code
+    assert_match /document.language is not valid/, err.message
+
     # Decoding BadRequest.FieldViolation from RPC error metadata
-    err.status_details[0].field_violations[0].field.must_equal "document.language"
-    err.status_details[0].field_violations[0].description.must_match /document language is not valid/
+    assert_equal "document.language", err.status_details[0].field_violations[0].field
+    assert_match /document.language is not valid/, err.status_details[0].field_violations[0].description
 
     # Since ErrorInfo is not present, the fields surfaced from it should be nil
-    err.reason.must_be_nil
-    err.domain.must_be_nil
-    err.error_metadata.must_be_nil
+    assert_nil err.reason
+    assert_nil err.domain
+    assert_nil err.error_metadata
   end
 
-  it "surfaces ErrorInfo fields if present" do
-    language_service_client = Google::Cloud::Language.language_service version: :v1 do |config|
+  ##
+  # Test that ErrorInfo fields get surfaced (GRPC)
+  def test_error_code_errorinfo_grpc
+    language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :grpc do |config|
       config.quota_project = "this_project_does_not_exist"
     end
+    verify_error_code_errorinfo language_service_client
+  end
+
+  ##
+  # Test that ErrorInfo fields get surfaced (REST)
+  def test_error_code_errorinfo_rest
+    language_service_client = Google::Cloud::Language.language_service version: :v1, transport: :rest do |config|
+      config.quota_project = "this_project_does_not_exist"
+    end
+    verify_error_code_errorinfo language_service_client
+  end
+
+  def verify_error_code_errorinfo language_service_client
     document = { content: "This is a test", type: :PLAIN_TEXT, language: "zz" }
-    err = ->{ language_service_client.analyze_sentiment(document: document) }.must_raise ::Google::Cloud::Error
-    err.status_details.wont_be_nil
-    
+
+    err = assert_raises(::Google::Cloud::Error) do
+      language_service_client.analyze_sentiment(document: document)
+    end
+
+    refute_nil err.status_details
+
     err_infos = err.status_details.find_all { |status| status.is_a? ::Google::Rpc::ErrorInfo }
-    err_infos.length.must_equal 1
+    assert err_infos.one?
 
     # Since ErrorInfo is present, its fields should be surfaced to the wrapper
     err_info = err_infos[0]
-    err_info.reason.must_match /PROJECT_DENIED/
+    assert_match /PROJECT_DENIED/, err_info.reason
     
-    err.reason.must_match err_info.reason
-    err.domain.must_match err_info.domain
-    err.error_metadata.must_be_kind_of Hash
+    assert_match err_info.reason, err.reason
+    assert_match err_info.domain, err.domain
+    assert_kind_of ::Hash, err.error_metadata
 
     err_info.metadata.each do |key, value|
-      err.error_metadata.key?(key).must_equal true
-      err.error_metadata[key].must_equal value
+      assert err.error_metadata.key? key
+      assert_equal value, err.error_metadata[key]
     end
   end
 end
