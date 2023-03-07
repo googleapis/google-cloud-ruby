@@ -35,6 +35,11 @@ module Google
       #     require "google/cloud/dataproc/v1"
       #     client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/dataproc/v1"
+      #     client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new
+      #
       module V1
       end
     end

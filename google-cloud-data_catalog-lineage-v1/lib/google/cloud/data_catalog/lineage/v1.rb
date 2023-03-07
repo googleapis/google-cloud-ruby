@@ -31,6 +31,11 @@ module Google
         #     require "google/cloud/data_catalog/lineage/v1"
         #     client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/data_catalog/lineage/v1"
+        #     client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+        #
         module V1
         end
       end

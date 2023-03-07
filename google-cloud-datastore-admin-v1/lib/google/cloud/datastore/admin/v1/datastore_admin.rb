@@ -25,6 +25,7 @@ require "google/cloud/datastore/admin/v1/version"
 require "google/cloud/datastore/admin/v1/datastore_admin/credentials"
 require "google/cloud/datastore/admin/v1/datastore_admin/operations"
 require "google/cloud/datastore/admin/v1/datastore_admin/client"
+require "google/cloud/datastore/admin/v1/datastore_admin/rest"
 
 module Google
   module Cloud
@@ -98,6 +99,11 @@ module Google
           #
           #     require "google/cloud/datastore/admin/v1/datastore_admin"
           #     client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/datastore/admin/v1/datastore_admin/rest"
+          #     client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new
           #
           module DatastoreAdmin
           end

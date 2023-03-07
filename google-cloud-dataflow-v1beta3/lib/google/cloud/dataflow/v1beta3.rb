@@ -35,6 +35,11 @@ module Google
       #     require "google/cloud/dataflow/v1beta3"
       #     client = ::Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/dataflow/v1beta3"
+      #     client = ::Google::Cloud::Dataflow::V1beta3::Snapshots::Rest::Client.new
+      #
       module V1beta3
       end
     end
