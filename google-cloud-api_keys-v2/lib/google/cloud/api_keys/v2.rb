@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/api_keys/v2"
       #     client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/api_keys/v2"
+      #     client = ::Google::Cloud::ApiKeys::V2::ApiKeys::Rest::Client.new
+      #
       module V2
       end
     end

@@ -31,6 +31,11 @@ module Google
         #     require "google/cloud/bigquery/data_policies/v1"
         #     client = ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/bigquery/data_policies/v1"
+        #     client = ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Client.new
+        #
         module V1
         end
       end

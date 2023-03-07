@@ -25,6 +25,7 @@ require "google/area120/tables/v1alpha1/version"
 require "google/area120/tables/v1alpha1/tables_service/credentials"
 require "google/area120/tables/v1alpha1/tables_service/paths"
 require "google/area120/tables/v1alpha1/tables_service/client"
+require "google/area120/tables/v1alpha1/tables_service/rest"
 
 module Google
   module Area120
@@ -48,6 +49,11 @@ module Google
         #
         #     require "google/area120/tables/v1alpha1/tables_service"
         #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/area120/tables/v1alpha1/tables_service/rest"
+        #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new
         #
         module TablesService
         end

@@ -24,6 +24,7 @@ require "google/cloud/batch/v1/version"
 
 require "google/iam/v1/iam_policy/credentials"
 require "google/iam/v1/iam_policy/client"
+require "google/iam/v1/iam_policy/rest"
 
 module Google
   module Iam
@@ -60,6 +61,11 @@ module Google
       #
       #     require "google/iam/v1/iam_policy"
       #     client = ::Google::Iam::V1::IAMPolicy::Client.new
+      #
+      # @example Load this service and instantiate a REST client
+      #
+      #     require "google/iam/v1/iam_policy/rest"
+      #     client = ::Google::Iam::V1::IAMPolicy::Rest::Client.new
       #
       module IAMPolicy
       end

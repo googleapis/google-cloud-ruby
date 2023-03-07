@@ -26,6 +26,7 @@ require "google/cloud/bare_metal_solution/v2/bare_metal_solution/credentials"
 require "google/cloud/bare_metal_solution/v2/bare_metal_solution/paths"
 require "google/cloud/bare_metal_solution/v2/bare_metal_solution/operations"
 require "google/cloud/bare_metal_solution/v2/bare_metal_solution/client"
+require "google/cloud/bare_metal_solution/v2/bare_metal_solution/rest"
 
 module Google
   module Cloud
@@ -45,6 +46,11 @@ module Google
         #
         #     require "google/cloud/bare_metal_solution/v2/bare_metal_solution"
         #     client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/bare_metal_solution/v2/bare_metal_solution/rest"
+        #     client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
         #
         module BareMetalSolution
         end

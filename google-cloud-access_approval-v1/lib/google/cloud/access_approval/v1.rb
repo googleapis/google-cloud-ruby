@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/access_approval/v1"
       #     client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/access_approval/v1"
+      #     client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new
+      #
       module V1
       end
     end
