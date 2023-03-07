@@ -1,0 +1,615 @@
+{
+  "client_library": {
+    "name": "google-cloud-domains-v1beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.domains.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_SearchDomains_sync",
+      "title": "Snippet for the search_domains call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#search_domains. It may require modification in order to execute successfully.",
+      "file": "domains/search_domains.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_domains",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#search_domains",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::SearchDomainsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Domains::V1beta1::SearchDomainsResponse",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "SearchDomains",
+          "full_name": "google.cloud.domains.v1beta1.Domains.SearchDomains",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_RetrieveRegisterParameters_sync",
+      "title": "Snippet for the retrieve_register_parameters call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#retrieve_register_parameters. It may require modification in order to execute successfully.",
+      "file": "domains/retrieve_register_parameters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_register_parameters",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#retrieve_register_parameters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::RetrieveRegisterParametersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Domains::V1beta1::RetrieveRegisterParametersResponse",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "RetrieveRegisterParameters",
+          "full_name": "google.cloud.domains.v1beta1.Domains.RetrieveRegisterParameters",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_RegisterDomain_sync",
+      "title": "Snippet for the register_domain call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#register_domain. It may require modification in order to execute successfully.",
+      "file": "domains/register_domain.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "register_domain",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#register_domain",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::RegisterDomainRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "RegisterDomain",
+          "full_name": "google.cloud.domains.v1beta1.Domains.RegisterDomain",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_RetrieveTransferParameters_sync",
+      "title": "Snippet for the retrieve_transfer_parameters call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#retrieve_transfer_parameters. It may require modification in order to execute successfully.",
+      "file": "domains/retrieve_transfer_parameters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_transfer_parameters",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#retrieve_transfer_parameters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersResponse",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "RetrieveTransferParameters",
+          "full_name": "google.cloud.domains.v1beta1.Domains.RetrieveTransferParameters",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_TransferDomain_sync",
+      "title": "Snippet for the transfer_domain call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#transfer_domain. It may require modification in order to execute successfully.",
+      "file": "domains/transfer_domain.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "transfer_domain",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#transfer_domain",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::TransferDomainRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "TransferDomain",
+          "full_name": "google.cloud.domains.v1beta1.Domains.TransferDomain",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_ListRegistrations_sync",
+      "title": "Snippet for the list_registrations call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#list_registrations. It may require modification in order to execute successfully.",
+      "file": "domains/list_registrations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_registrations",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#list_registrations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::ListRegistrationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Domains::V1beta1::ListRegistrationsResponse",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "ListRegistrations",
+          "full_name": "google.cloud.domains.v1beta1.Domains.ListRegistrations",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_GetRegistration_sync",
+      "title": "Snippet for the get_registration call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#get_registration. It may require modification in order to execute successfully.",
+      "file": "domains/get_registration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_registration",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#get_registration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::GetRegistrationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Domains::V1beta1::Registration",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "GetRegistration",
+          "full_name": "google.cloud.domains.v1beta1.Domains.GetRegistration",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_UpdateRegistration_sync",
+      "title": "Snippet for the update_registration call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#update_registration. It may require modification in order to execute successfully.",
+      "file": "domains/update_registration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_registration",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#update_registration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::UpdateRegistrationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "UpdateRegistration",
+          "full_name": "google.cloud.domains.v1beta1.Domains.UpdateRegistration",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_ConfigureManagementSettings_sync",
+      "title": "Snippet for the configure_management_settings call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#configure_management_settings. It may require modification in order to execute successfully.",
+      "file": "domains/configure_management_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "configure_management_settings",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#configure_management_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::ConfigureManagementSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "ConfigureManagementSettings",
+          "full_name": "google.cloud.domains.v1beta1.Domains.ConfigureManagementSettings",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_ConfigureDnsSettings_sync",
+      "title": "Snippet for the configure_dns_settings call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#configure_dns_settings. It may require modification in order to execute successfully.",
+      "file": "domains/configure_dns_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "configure_dns_settings",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#configure_dns_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::ConfigureDnsSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "ConfigureDnsSettings",
+          "full_name": "google.cloud.domains.v1beta1.Domains.ConfigureDnsSettings",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_ConfigureContactSettings_sync",
+      "title": "Snippet for the configure_contact_settings call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#configure_contact_settings. It may require modification in order to execute successfully.",
+      "file": "domains/configure_contact_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "configure_contact_settings",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#configure_contact_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::ConfigureContactSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "ConfigureContactSettings",
+          "full_name": "google.cloud.domains.v1beta1.Domains.ConfigureContactSettings",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_ExportRegistration_sync",
+      "title": "Snippet for the export_registration call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#export_registration. It may require modification in order to execute successfully.",
+      "file": "domains/export_registration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_registration",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#export_registration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::ExportRegistrationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "ExportRegistration",
+          "full_name": "google.cloud.domains.v1beta1.Domains.ExportRegistration",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_DeleteRegistration_sync",
+      "title": "Snippet for the delete_registration call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#delete_registration. It may require modification in order to execute successfully.",
+      "file": "domains/delete_registration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_registration",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#delete_registration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::DeleteRegistrationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "DeleteRegistration",
+          "full_name": "google.cloud.domains.v1beta1.Domains.DeleteRegistration",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_RetrieveAuthorizationCode_sync",
+      "title": "Snippet for the retrieve_authorization_code call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#retrieve_authorization_code. It may require modification in order to execute successfully.",
+      "file": "domains/retrieve_authorization_code.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_authorization_code",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#retrieve_authorization_code",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::RetrieveAuthorizationCodeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Domains::V1beta1::AuthorizationCode",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "RetrieveAuthorizationCode",
+          "full_name": "google.cloud.domains.v1beta1.Domains.RetrieveAuthorizationCode",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "domains_v1beta1_generated_Domains_ResetAuthorizationCode_sync",
+      "title": "Snippet for the reset_authorization_code call in the Domains service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Domains::V1beta1::Domains::Client#reset_authorization_code. It may require modification in order to execute successfully.",
+      "file": "domains/reset_authorization_code.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reset_authorization_code",
+        "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client#reset_authorization_code",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Domains::V1beta1::ResetAuthorizationCodeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Domains::V1beta1::AuthorizationCode",
+        "client": {
+          "short_name": "Domains::Client",
+          "full_name": "::Google::Cloud::Domains::V1beta1::Domains::Client"
+        },
+        "method": {
+          "short_name": "ResetAuthorizationCode",
+          "full_name": "google.cloud.domains.v1beta1.Domains.ResetAuthorizationCode",
+          "service": {
+            "short_name": "Domains",
+            "full_name": "google.cloud.domains.v1beta1.Domains"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
