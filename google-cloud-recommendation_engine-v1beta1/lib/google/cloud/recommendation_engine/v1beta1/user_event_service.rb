@@ -26,6 +26,7 @@ require "google/cloud/recommendation_engine/v1beta1/user_event_service/credentia
 require "google/cloud/recommendation_engine/v1beta1/user_event_service/paths"
 require "google/cloud/recommendation_engine/v1beta1/user_event_service/operations"
 require "google/cloud/recommendation_engine/v1beta1/user_event_service/client"
+require "google/cloud/recommendation_engine/v1beta1/user_event_service/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/recommendation_engine/v1beta1/user_event_service"
         #     client = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/recommendation_engine/v1beta1/user_event_service/rest"
+        #     client = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client.new
         #
         module UserEventService
         end

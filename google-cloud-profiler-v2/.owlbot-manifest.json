@@ -17,6 +17,10 @@
     "lib/google/cloud/profiler/v2/profiler_service.rb",
     "lib/google/cloud/profiler/v2/profiler_service/client.rb",
     "lib/google/cloud/profiler/v2/profiler_service/credentials.rb",
+    "lib/google/cloud/profiler/v2/profiler_service/rest.rb",
+    "lib/google/cloud/profiler/v2/profiler_service/rest/client.rb",
+    "lib/google/cloud/profiler/v2/profiler_service/rest/service_stub.rb",
+    "lib/google/cloud/profiler/v2/rest.rb",
     "lib/google/cloud/profiler/v2/version.rb",
     "lib/google/devtools/cloudprofiler/v2/profiler_pb.rb",
     "lib/google/devtools/cloudprofiler/v2/profiler_services_pb.rb",
@@ -32,6 +36,7 @@
     "snippets/profiler_service/create_profile.rb",
     "snippets/profiler_service/update_profile.rb",
     "snippets/snippet_metadata_google.devtools.cloudprofiler.v2.json",
+    "test/google/cloud/profiler/v2/profiler_service_rest_test.rb",
     "test/google/cloud/profiler/v2/profiler_service_test.rb",
     "test/helper.rb"
   ],

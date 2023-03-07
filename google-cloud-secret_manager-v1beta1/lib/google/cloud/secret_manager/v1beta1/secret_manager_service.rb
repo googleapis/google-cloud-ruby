@@ -25,6 +25,7 @@ require "google/cloud/secret_manager/v1beta1/version"
 require "google/cloud/secret_manager/v1beta1/secret_manager_service/credentials"
 require "google/cloud/secret_manager/v1beta1/secret_manager_service/paths"
 require "google/cloud/secret_manager/v1beta1/secret_manager_service/client"
+require "google/cloud/secret_manager/v1beta1/secret_manager_service/rest"
 
 module Google
   module Cloud
@@ -43,6 +44,11 @@ module Google
         #
         #     require "google/cloud/secret_manager/v1beta1/secret_manager_service"
         #     client = ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/secret_manager/v1beta1/secret_manager_service/rest"
+        #     client = ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Rest::Client.new
         #
         module SecretManagerService
         end

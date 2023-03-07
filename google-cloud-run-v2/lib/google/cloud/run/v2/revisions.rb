@@ -26,6 +26,7 @@ require "google/cloud/run/v2/revisions/credentials"
 require "google/cloud/run/v2/revisions/paths"
 require "google/cloud/run/v2/revisions/operations"
 require "google/cloud/run/v2/revisions/client"
+require "google/cloud/run/v2/revisions/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/run/v2/revisions"
         #     client = ::Google::Cloud::Run::V2::Revisions::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/run/v2/revisions/rest"
+        #     client = ::Google::Cloud::Run::V2::Revisions::Rest::Client.new
         #
         module Revisions
         end

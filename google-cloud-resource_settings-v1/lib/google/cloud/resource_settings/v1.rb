@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/resource_settings/v1"
       #     client = ::Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/resource_settings/v1"
+      #     client = ::Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Rest::Client.new
+      #
       module V1
       end
     end

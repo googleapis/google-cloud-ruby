@@ -25,6 +25,7 @@ require "google/cloud/recommender/v1/version"
 require "google/cloud/recommender/v1/recommender/credentials"
 require "google/cloud/recommender/v1/recommender/paths"
 require "google/cloud/recommender/v1/recommender/client"
+require "google/cloud/recommender/v1/recommender/rest"
 
 module Google
   module Cloud
@@ -40,6 +41,11 @@ module Google
         #
         #     require "google/cloud/recommender/v1/recommender"
         #     client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/recommender/v1/recommender/rest"
+        #     client = ::Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
         #
         module Recommender
         end

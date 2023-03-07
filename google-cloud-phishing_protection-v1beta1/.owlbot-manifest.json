@@ -18,6 +18,10 @@
     "lib/google/cloud/phishing_protection/v1beta1/phishing_protection_service/client.rb",
     "lib/google/cloud/phishing_protection/v1beta1/phishing_protection_service/credentials.rb",
     "lib/google/cloud/phishing_protection/v1beta1/phishing_protection_service/paths.rb",
+    "lib/google/cloud/phishing_protection/v1beta1/phishing_protection_service/rest.rb",
+    "lib/google/cloud/phishing_protection/v1beta1/phishing_protection_service/rest/client.rb",
+    "lib/google/cloud/phishing_protection/v1beta1/phishing_protection_service/rest/service_stub.rb",
+    "lib/google/cloud/phishing_protection/v1beta1/rest.rb",
     "lib/google/cloud/phishing_protection/v1beta1/version.rb",
     "lib/google/cloud/phishingprotection/v1beta1/phishingprotection_pb.rb",
     "lib/google/cloud/phishingprotection/v1beta1/phishingprotection_services_pb.rb",
@@ -32,6 +36,7 @@
     "snippets/phishing_protection_service/report_phishing.rb",
     "snippets/snippet_metadata_google.cloud.phishingprotection.v1beta1.json",
     "test/google/cloud/phishing_protection/v1beta1/phishing_protection_service_paths_test.rb",
+    "test/google/cloud/phishing_protection/v1beta1/phishing_protection_service_rest_test.rb",
     "test/google/cloud/phishing_protection/v1beta1/phishing_protection_service_test.rb",
     "test/helper.rb"
   ],

@@ -26,6 +26,7 @@ require "google/cloud/recommendation_engine/v1beta1/catalog_service/credentials"
 require "google/cloud/recommendation_engine/v1beta1/catalog_service/paths"
 require "google/cloud/recommendation_engine/v1beta1/catalog_service/operations"
 require "google/cloud/recommendation_engine/v1beta1/catalog_service/client"
+require "google/cloud/recommendation_engine/v1beta1/catalog_service/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/recommendation_engine/v1beta1/catalog_service"
         #     client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/recommendation_engine/v1beta1/catalog_service/rest"
+        #     client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client.new
         #
         module CatalogService
         end
