@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/tasks/v2"
       #     client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/tasks/v2"
+      #     client = ::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client.new
+      #
       module V2
       end
     end

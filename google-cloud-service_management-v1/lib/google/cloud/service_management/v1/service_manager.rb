@@ -25,6 +25,7 @@ require "google/cloud/service_management/v1/version"
 require "google/cloud/service_management/v1/service_manager/credentials"
 require "google/cloud/service_management/v1/service_manager/operations"
 require "google/cloud/service_management/v1/service_manager/client"
+require "google/cloud/service_management/v1/service_manager/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/service_management/v1/service_manager"
         #     client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/service_management/v1/service_manager/rest"
+        #     client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new
         #
         module ServiceManager
         end

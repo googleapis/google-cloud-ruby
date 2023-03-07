@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/storage_transfer/v1"
       #     client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/storage_transfer/v1"
+      #     client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new
+      #
       module V1
       end
     end

@@ -25,6 +25,7 @@ require "google/cloud/service_directory/v1beta1/version"
 require "google/cloud/service_directory/v1beta1/registration_service/credentials"
 require "google/cloud/service_directory/v1beta1/registration_service/paths"
 require "google/cloud/service_directory/v1beta1/registration_service/client"
+require "google/cloud/service_directory/v1beta1/registration_service/rest"
 
 module Google
   module Cloud
@@ -51,6 +52,11 @@ module Google
         #
         #     require "google/cloud/service_directory/v1beta1/registration_service"
         #     client = ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/service_directory/v1beta1/registration_service/rest"
+        #     client = ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Rest::Client.new
         #
         module RegistrationService
         end

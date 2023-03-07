@@ -26,6 +26,7 @@ require "google/cloud/talent/v4beta1/job_service/credentials"
 require "google/cloud/talent/v4beta1/job_service/paths"
 require "google/cloud/talent/v4beta1/job_service/operations"
 require "google/cloud/talent/v4beta1/job_service/client"
+require "google/cloud/talent/v4beta1/job_service/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/talent/v4beta1/job_service"
         #     client = ::Google::Cloud::Talent::V4beta1::JobService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/talent/v4beta1/job_service/rest"
+        #     client = ::Google::Cloud::Talent::V4beta1::JobService::Rest::Client.new
         #
         module JobService
         end
