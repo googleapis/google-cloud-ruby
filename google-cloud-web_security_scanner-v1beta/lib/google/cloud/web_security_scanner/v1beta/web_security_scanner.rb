@@ -25,6 +25,7 @@ require "google/cloud/web_security_scanner/v1beta/version"
 require "google/cloud/web_security_scanner/v1beta/web_security_scanner/credentials"
 require "google/cloud/web_security_scanner/v1beta/web_security_scanner/paths"
 require "google/cloud/web_security_scanner/v1beta/web_security_scanner/client"
+require "google/cloud/web_security_scanner/v1beta/web_security_scanner/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/web_security_scanner/v1beta/web_security_scanner"
         #     client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/web_security_scanner/v1beta/web_security_scanner/rest"
+        #     client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Rest::Client.new
         #
         module WebSecurityScanner
         end
