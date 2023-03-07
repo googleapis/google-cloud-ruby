@@ -24,6 +24,7 @@ require "google/cloud/eventarc/publishing/v1/version"
 
 require "google/cloud/eventarc/publishing/v1/publisher/credentials"
 require "google/cloud/eventarc/publishing/v1/publisher/client"
+require "google/cloud/eventarc/publishing/v1/publisher/rest"
 
 module Google
   module Cloud
@@ -60,6 +61,11 @@ module Google
           #
           #     require "google/cloud/eventarc/publishing/v1/publisher"
           #     client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/eventarc/publishing/v1/publisher/rest"
+          #     client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client.new
           #
           module Publisher
           end

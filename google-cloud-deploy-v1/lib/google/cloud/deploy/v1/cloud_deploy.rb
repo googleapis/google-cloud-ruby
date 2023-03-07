@@ -26,6 +26,7 @@ require "google/cloud/deploy/v1/cloud_deploy/credentials"
 require "google/cloud/deploy/v1/cloud_deploy/paths"
 require "google/cloud/deploy/v1/cloud_deploy/operations"
 require "google/cloud/deploy/v1/cloud_deploy/client"
+require "google/cloud/deploy/v1/cloud_deploy/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/deploy/v1/cloud_deploy"
         #     client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/deploy/v1/cloud_deploy/rest"
+        #     client = ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::Client.new
         #
         module CloudDeploy
         end

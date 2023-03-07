@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/document_ai/v1beta3"
       #     client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/document_ai/v1beta3"
+      #     client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Rest::Client.new
+      #
       module V1beta3
       end
     end

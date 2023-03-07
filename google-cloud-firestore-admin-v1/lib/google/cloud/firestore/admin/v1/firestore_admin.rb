@@ -26,6 +26,7 @@ require "google/cloud/firestore/admin/v1/firestore_admin/credentials"
 require "google/cloud/firestore/admin/v1/firestore_admin/paths"
 require "google/cloud/firestore/admin/v1/firestore_admin/operations"
 require "google/cloud/firestore/admin/v1/firestore_admin/client"
+require "google/cloud/firestore/admin/v1/firestore_admin/rest"
 
 module Google
   module Cloud
@@ -66,6 +67,11 @@ module Google
           #
           #     require "google/cloud/firestore/admin/v1/firestore_admin"
           #     client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/firestore/admin/v1/firestore_admin/rest"
+          #     client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
           #
           module FirestoreAdmin
           end

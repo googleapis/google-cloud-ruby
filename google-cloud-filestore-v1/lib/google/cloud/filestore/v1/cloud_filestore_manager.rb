@@ -26,6 +26,7 @@ require "google/cloud/filestore/v1/cloud_filestore_manager/credentials"
 require "google/cloud/filestore/v1/cloud_filestore_manager/paths"
 require "google/cloud/filestore/v1/cloud_filestore_manager/operations"
 require "google/cloud/filestore/v1/cloud_filestore_manager/client"
+require "google/cloud/filestore/v1/cloud_filestore_manager/rest"
 
 module Google
   module Cloud
@@ -56,6 +57,11 @@ module Google
         #
         #     require "google/cloud/filestore/v1/cloud_filestore_manager"
         #     client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/filestore/v1/cloud_filestore_manager/rest"
+        #     client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new
         #
         module CloudFilestoreManager
         end

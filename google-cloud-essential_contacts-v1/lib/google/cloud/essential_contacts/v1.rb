@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/essential_contacts/v1"
       #     client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/essential_contacts/v1"
+      #     client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new
+      #
       module V1
       end
     end

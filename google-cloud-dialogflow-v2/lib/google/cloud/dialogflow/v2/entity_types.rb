@@ -26,6 +26,7 @@ require "google/cloud/dialogflow/v2/entity_types/credentials"
 require "google/cloud/dialogflow/v2/entity_types/paths"
 require "google/cloud/dialogflow/v2/entity_types/operations"
 require "google/cloud/dialogflow/v2/entity_types/client"
+require "google/cloud/dialogflow/v2/entity_types/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/dialogflow/v2/entity_types"
         #     client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/entity_types/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Rest::Client.new
         #
         module EntityTypes
         end

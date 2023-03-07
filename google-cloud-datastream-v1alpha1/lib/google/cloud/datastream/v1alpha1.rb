@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/datastream/v1alpha1"
       #     client = ::Google::Cloud::Datastream::V1alpha1::Datastream::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/datastream/v1alpha1"
+      #     client = ::Google::Cloud::Datastream::V1alpha1::Datastream::Rest::Client.new
+      #
       module V1alpha1
       end
     end

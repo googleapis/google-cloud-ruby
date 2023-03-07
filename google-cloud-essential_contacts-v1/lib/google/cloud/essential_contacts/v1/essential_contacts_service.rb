@@ -25,6 +25,7 @@ require "google/cloud/essential_contacts/v1/version"
 require "google/cloud/essential_contacts/v1/essential_contacts_service/credentials"
 require "google/cloud/essential_contacts/v1/essential_contacts_service/paths"
 require "google/cloud/essential_contacts/v1/essential_contacts_service/client"
+require "google/cloud/essential_contacts/v1/essential_contacts_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/essential_contacts/v1/essential_contacts_service"
         #     client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/essential_contacts/v1/essential_contacts_service/rest"
+        #     client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client.new
         #
         module EssentialContactsService
         end

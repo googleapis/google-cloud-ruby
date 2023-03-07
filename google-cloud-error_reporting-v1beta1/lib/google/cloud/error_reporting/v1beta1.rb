@@ -32,6 +32,11 @@ module Google
       #     require "google/cloud/error_reporting/v1beta1"
       #     client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/error_reporting/v1beta1"
+      #     client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::Client.new
+      #
       module V1beta1
       end
     end
