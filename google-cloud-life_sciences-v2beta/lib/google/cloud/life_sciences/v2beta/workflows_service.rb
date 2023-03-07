@@ -25,6 +25,7 @@ require "google/cloud/life_sciences/v2beta/version"
 require "google/cloud/life_sciences/v2beta/workflows_service/credentials"
 require "google/cloud/life_sciences/v2beta/workflows_service/operations"
 require "google/cloud/life_sciences/v2beta/workflows_service/client"
+require "google/cloud/life_sciences/v2beta/workflows_service/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/life_sciences/v2beta/workflows_service"
         #     client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/life_sciences/v2beta/workflows_service/rest"
+        #     client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Rest::Client.new
         #
         module WorkflowsService
         end

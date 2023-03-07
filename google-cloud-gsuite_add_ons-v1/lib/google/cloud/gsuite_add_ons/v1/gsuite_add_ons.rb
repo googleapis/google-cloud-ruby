@@ -25,6 +25,7 @@ require "google/cloud/gsuite_add_ons/v1/version"
 require "google/cloud/gsuite_add_ons/v1/gsuite_add_ons/credentials"
 require "google/cloud/gsuite_add_ons/v1/gsuite_add_ons/paths"
 require "google/cloud/gsuite_add_ons/v1/gsuite_add_ons/client"
+require "google/cloud/gsuite_add_ons/v1/gsuite_add_ons/rest"
 
 module Google
   module Cloud
@@ -64,6 +65,11 @@ module Google
         #
         #     require "google/cloud/gsuite_add_ons/v1/gsuite_add_ons"
         #     client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/gsuite_add_ons/v1/gsuite_add_ons/rest"
+        #     client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new
         #
         module GSuiteAddOns
         end

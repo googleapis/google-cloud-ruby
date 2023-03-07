@@ -31,6 +31,11 @@ module Google
       #     require "google/cloud/os_config/v1"
       #     client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/os_config/v1"
+      #     client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new
+      #
       module V1
       end
     end

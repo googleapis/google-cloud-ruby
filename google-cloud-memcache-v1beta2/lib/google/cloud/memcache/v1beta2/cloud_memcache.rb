@@ -26,6 +26,7 @@ require "google/cloud/memcache/v1beta2/cloud_memcache/credentials"
 require "google/cloud/memcache/v1beta2/cloud_memcache/paths"
 require "google/cloud/memcache/v1beta2/cloud_memcache/operations"
 require "google/cloud/memcache/v1beta2/cloud_memcache/client"
+require "google/cloud/memcache/v1beta2/cloud_memcache/rest"
 
 module Google
   module Cloud
@@ -52,6 +53,11 @@ module Google
         #
         #     require "google/cloud/memcache/v1beta2/cloud_memcache"
         #     client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/memcache/v1beta2/cloud_memcache/rest"
+        #     client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Rest::Client.new
         #
         module CloudMemcache
         end

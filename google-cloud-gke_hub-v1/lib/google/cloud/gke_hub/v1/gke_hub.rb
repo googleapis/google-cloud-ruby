@@ -26,6 +26,7 @@ require "google/cloud/gke_hub/v1/gke_hub/credentials"
 require "google/cloud/gke_hub/v1/gke_hub/paths"
 require "google/cloud/gke_hub/v1/gke_hub/operations"
 require "google/cloud/gke_hub/v1/gke_hub/client"
+require "google/cloud/gke_hub/v1/gke_hub/rest"
 
 module Google
   module Cloud
@@ -51,6 +52,11 @@ module Google
         #
         #     require "google/cloud/gke_hub/v1/gke_hub"
         #     client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/gke_hub/v1/gke_hub/rest"
+        #     client = ::Google::Cloud::GkeHub::V1::GkeHub::Rest::Client.new
         #
         module GkeHub
         end

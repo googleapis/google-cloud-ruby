@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/gke_hub/v1beta1"
       #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/gke_hub/v1beta1"
+      #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new
+      #
       module V1beta1
       end
     end

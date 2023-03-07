@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/network_management/v1"
       #     client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/network_management/v1"
+      #     client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new
+      #
       module V1
       end
     end

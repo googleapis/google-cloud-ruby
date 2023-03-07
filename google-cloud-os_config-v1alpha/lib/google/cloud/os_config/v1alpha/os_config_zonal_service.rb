@@ -26,6 +26,7 @@ require "google/cloud/os_config/v1alpha/os_config_zonal_service/credentials"
 require "google/cloud/os_config/v1alpha/os_config_zonal_service/paths"
 require "google/cloud/os_config/v1alpha/os_config_zonal_service/operations"
 require "google/cloud/os_config/v1alpha/os_config_zonal_service/client"
+require "google/cloud/os_config/v1alpha/os_config_zonal_service/rest"
 
 module Google
   module Cloud
@@ -41,6 +42,11 @@ module Google
         #
         #     require "google/cloud/os_config/v1alpha/os_config_zonal_service"
         #     client = ::Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/os_config/v1alpha/os_config_zonal_service/rest"
+        #     client = ::Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Rest::Client.new
         #
         module OsConfigZonalService
         end

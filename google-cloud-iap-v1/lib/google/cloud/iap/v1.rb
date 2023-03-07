@@ -31,6 +31,11 @@ module Google
       #     require "google/cloud/iap/v1"
       #     client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/iap/v1"
+      #     client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Rest::Client.new
+      #
       module V1
       end
     end

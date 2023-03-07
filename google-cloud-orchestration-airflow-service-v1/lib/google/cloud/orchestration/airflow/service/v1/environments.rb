@@ -26,6 +26,7 @@ require "google/cloud/orchestration/airflow/service/v1/environments/credentials"
 require "google/cloud/orchestration/airflow/service/v1/environments/paths"
 require "google/cloud/orchestration/airflow/service/v1/environments/operations"
 require "google/cloud/orchestration/airflow/service/v1/environments/client"
+require "google/cloud/orchestration/airflow/service/v1/environments/rest"
 
 module Google
   module Cloud
@@ -40,6 +41,11 @@ module Google
             #
             #     require "google/cloud/orchestration/airflow/service/v1/environments"
             #     client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+            #
+            # @example Load this service and instantiate a REST client
+            #
+            #     require "google/cloud/orchestration/airflow/service/v1/environments/rest"
+            #     client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new
             #
             module Environments
             end
