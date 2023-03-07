@@ -46,6 +46,11 @@ module Google
         #     require "google/cloud/dialogflow/cx/v3"
         #     client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/cx/v3"
+        #     client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Rest::Client.new
+        #
         module V3
         end
       end

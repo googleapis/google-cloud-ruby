@@ -26,6 +26,7 @@ require "google/cloud/functions/v2/function_service/credentials"
 require "google/cloud/functions/v2/function_service/paths"
 require "google/cloud/functions/v2/function_service/operations"
 require "google/cloud/functions/v2/function_service/client"
+require "google/cloud/functions/v2/function_service/rest"
 
 module Google
   module Cloud
@@ -43,6 +44,11 @@ module Google
         #
         #     require "google/cloud/functions/v2/function_service"
         #     client = ::Google::Cloud::Functions::V2::FunctionService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/functions/v2/function_service/rest"
+        #     client = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new
         #
         module FunctionService
         end

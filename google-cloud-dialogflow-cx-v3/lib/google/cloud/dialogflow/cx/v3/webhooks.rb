@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/cx/v3/version"
 require "google/cloud/dialogflow/cx/v3/webhooks/credentials"
 require "google/cloud/dialogflow/cx/v3/webhooks/paths"
 require "google/cloud/dialogflow/cx/v3/webhooks/client"
+require "google/cloud/dialogflow/cx/v3/webhooks/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
           #
           #     require "google/cloud/dialogflow/cx/v3/webhooks"
           #     client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/dialogflow/cx/v3/webhooks/rest"
+          #     client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::Client.new
           #
           module Webhooks
           end

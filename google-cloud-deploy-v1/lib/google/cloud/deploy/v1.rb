@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/deploy/v1"
       #     client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/deploy/v1"
+      #     client = ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::Client.new
+      #
       module V1
       end
     end

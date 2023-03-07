@@ -33,6 +33,11 @@ module Google
       #     require "google/cloud/gaming/v1"
       #     client = ::Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/gaming/v1"
+      #     client = ::Google::Cloud::Gaming::V1::GameServerClustersService::Rest::Client.new
+      #
       module V1
       end
     end

@@ -24,6 +24,7 @@ require "google/cloud/debugger/v2/version"
 
 require "google/cloud/debugger/v2/debugger/credentials"
 require "google/cloud/debugger/v2/debugger/client"
+require "google/cloud/debugger/v2/debugger/rest"
 
 module Google
   module Cloud
@@ -47,6 +48,11 @@ module Google
         #
         #     require "google/cloud/debugger/v2/debugger"
         #     client = ::Google::Cloud::Debugger::V2::Debugger::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/debugger/v2/debugger/rest"
+        #     client = ::Google::Cloud::Debugger::V2::Debugger::Rest::Client.new
         #
         module Debugger
         end

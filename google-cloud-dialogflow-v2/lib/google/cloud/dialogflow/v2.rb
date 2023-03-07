@@ -46,6 +46,11 @@ module Google
       #     require "google/cloud/dialogflow/v2"
       #     client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/dialogflow/v2"
+      #     client = ::Google::Cloud::Dialogflow::V2::Agents::Rest::Client.new
+      #
       module V2
       end
     end

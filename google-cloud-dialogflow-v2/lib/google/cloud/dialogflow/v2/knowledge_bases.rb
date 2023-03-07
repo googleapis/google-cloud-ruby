@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/v2/version"
 require "google/cloud/dialogflow/v2/knowledge_bases/credentials"
 require "google/cloud/dialogflow/v2/knowledge_bases/paths"
 require "google/cloud/dialogflow/v2/knowledge_bases/client"
+require "google/cloud/dialogflow/v2/knowledge_bases/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/dialogflow/v2/knowledge_bases"
         #     client = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/knowledge_bases/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Rest::Client.new
         #
         module KnowledgeBases
         end

@@ -31,6 +31,11 @@ module Google
         #     require "google/cloud/firestore/admin/v1"
         #     client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/firestore/admin/v1"
+        #     client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+        #
         module V1
         end
       end
