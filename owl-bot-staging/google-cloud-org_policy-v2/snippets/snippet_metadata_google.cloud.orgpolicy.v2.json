@@ -1,0 +1,295 @@
+{
+  "client_library": {
+    "name": "google-cloud-org_policy-v2",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.orgpolicy.v2",
+        "version": "v2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_ListConstraints_sync",
+      "title": "Snippet for the list_constraints call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_constraints. It may require modification in order to execute successfully.",
+      "file": "org_policy/list_constraints.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_constraints",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_constraints",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::ListConstraintsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OrgPolicy::V2::ListConstraintsResponse",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "ListConstraints",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.ListConstraints",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_ListPolicies_sync",
+      "title": "Snippet for the list_policies call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_policies. It may require modification in order to execute successfully.",
+      "file": "org_policy/list_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_policies",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::ListPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OrgPolicy::V2::ListPoliciesResponse",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "ListPolicies",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.ListPolicies",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_GetPolicy_sync",
+      "title": "Snippet for the get_policy call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#get_policy. It may require modification in order to execute successfully.",
+      "file": "org_policy/get_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_policy",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#get_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::GetPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OrgPolicy::V2::Policy",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "GetPolicy",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.GetPolicy",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_GetEffectivePolicy_sync",
+      "title": "Snippet for the get_effective_policy call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#get_effective_policy. It may require modification in order to execute successfully.",
+      "file": "org_policy/get_effective_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_effective_policy",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#get_effective_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::GetEffectivePolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OrgPolicy::V2::Policy",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "GetEffectivePolicy",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.GetEffectivePolicy",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_CreatePolicy_sync",
+      "title": "Snippet for the create_policy call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#create_policy. It may require modification in order to execute successfully.",
+      "file": "org_policy/create_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_policy",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#create_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::CreatePolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OrgPolicy::V2::Policy",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "CreatePolicy",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.CreatePolicy",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_UpdatePolicy_sync",
+      "title": "Snippet for the update_policy call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#update_policy. It may require modification in order to execute successfully.",
+      "file": "org_policy/update_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_policy",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#update_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OrgPolicy::V2::Policy",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "UpdatePolicy",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.UpdatePolicy",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_DeletePolicy_sync",
+      "title": "Snippet for the delete_policy call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#delete_policy. It may require modification in order to execute successfully.",
+      "file": "org_policy/delete_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_policy",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#delete_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "DeletePolicy",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.DeletePolicy",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

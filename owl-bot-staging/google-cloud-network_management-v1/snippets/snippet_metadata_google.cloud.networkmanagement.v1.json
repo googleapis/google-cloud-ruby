@@ -1,0 +1,255 @@
+{
+  "client_library": {
+    "name": "google-cloud-network_management-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.networkmanagement.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "networkmanagement_v1_generated_ReachabilityService_ListConnectivityTests_sync",
+      "title": "Snippet for the list_connectivity_tests call in the ReachabilityService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#list_connectivity_tests. It may require modification in order to execute successfully.",
+      "file": "reachability_service/list_connectivity_tests.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_connectivity_tests",
+        "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#list_connectivity_tests",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkManagement::V1::ListConnectivityTestsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkManagement::V1::ListConnectivityTestsResponse",
+        "client": {
+          "short_name": "ReachabilityService::Client",
+          "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client"
+        },
+        "method": {
+          "short_name": "ListConnectivityTests",
+          "full_name": "google.cloud.networkmanagement.v1.ReachabilityService.ListConnectivityTests",
+          "service": {
+            "short_name": "ReachabilityService",
+            "full_name": "google.cloud.networkmanagement.v1.ReachabilityService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkmanagement_v1_generated_ReachabilityService_GetConnectivityTest_sync",
+      "title": "Snippet for the get_connectivity_test call in the ReachabilityService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#get_connectivity_test. It may require modification in order to execute successfully.",
+      "file": "reachability_service/get_connectivity_test.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_connectivity_test",
+        "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#get_connectivity_test",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkManagement::V1::GetConnectivityTestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkManagement::V1::ConnectivityTest",
+        "client": {
+          "short_name": "ReachabilityService::Client",
+          "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client"
+        },
+        "method": {
+          "short_name": "GetConnectivityTest",
+          "full_name": "google.cloud.networkmanagement.v1.ReachabilityService.GetConnectivityTest",
+          "service": {
+            "short_name": "ReachabilityService",
+            "full_name": "google.cloud.networkmanagement.v1.ReachabilityService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkmanagement_v1_generated_ReachabilityService_CreateConnectivityTest_sync",
+      "title": "Snippet for the create_connectivity_test call in the ReachabilityService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#create_connectivity_test. It may require modification in order to execute successfully.",
+      "file": "reachability_service/create_connectivity_test.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_connectivity_test",
+        "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#create_connectivity_test",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkManagement::V1::CreateConnectivityTestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ReachabilityService::Client",
+          "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client"
+        },
+        "method": {
+          "short_name": "CreateConnectivityTest",
+          "full_name": "google.cloud.networkmanagement.v1.ReachabilityService.CreateConnectivityTest",
+          "service": {
+            "short_name": "ReachabilityService",
+            "full_name": "google.cloud.networkmanagement.v1.ReachabilityService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkmanagement_v1_generated_ReachabilityService_UpdateConnectivityTest_sync",
+      "title": "Snippet for the update_connectivity_test call in the ReachabilityService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#update_connectivity_test. It may require modification in order to execute successfully.",
+      "file": "reachability_service/update_connectivity_test.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_connectivity_test",
+        "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#update_connectivity_test",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkManagement::V1::UpdateConnectivityTestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ReachabilityService::Client",
+          "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client"
+        },
+        "method": {
+          "short_name": "UpdateConnectivityTest",
+          "full_name": "google.cloud.networkmanagement.v1.ReachabilityService.UpdateConnectivityTest",
+          "service": {
+            "short_name": "ReachabilityService",
+            "full_name": "google.cloud.networkmanagement.v1.ReachabilityService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkmanagement_v1_generated_ReachabilityService_RerunConnectivityTest_sync",
+      "title": "Snippet for the rerun_connectivity_test call in the ReachabilityService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#rerun_connectivity_test. It may require modification in order to execute successfully.",
+      "file": "reachability_service/rerun_connectivity_test.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rerun_connectivity_test",
+        "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#rerun_connectivity_test",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkManagement::V1::RerunConnectivityTestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ReachabilityService::Client",
+          "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client"
+        },
+        "method": {
+          "short_name": "RerunConnectivityTest",
+          "full_name": "google.cloud.networkmanagement.v1.ReachabilityService.RerunConnectivityTest",
+          "service": {
+            "short_name": "ReachabilityService",
+            "full_name": "google.cloud.networkmanagement.v1.ReachabilityService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkmanagement_v1_generated_ReachabilityService_DeleteConnectivityTest_sync",
+      "title": "Snippet for the delete_connectivity_test call in the ReachabilityService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#delete_connectivity_test. It may require modification in order to execute successfully.",
+      "file": "reachability_service/delete_connectivity_test.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_connectivity_test",
+        "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#delete_connectivity_test",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkManagement::V1::DeleteConnectivityTestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ReachabilityService::Client",
+          "full_name": "::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client"
+        },
+        "method": {
+          "short_name": "DeleteConnectivityTest",
+          "full_name": "google.cloud.networkmanagement.v1.ReachabilityService.DeleteConnectivityTest",
+          "service": {
+            "short_name": "ReachabilityService",
+            "full_name": "google.cloud.networkmanagement.v1.ReachabilityService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
