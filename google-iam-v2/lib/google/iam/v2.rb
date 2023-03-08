@@ -29,6 +29,11 @@ module Google
     #     require "google/iam/v2"
     #     client = ::Google::Iam::V2::Policies::Client.new
     #
+    # @example Load this package, including all its services, and instantiate a REST client
+    #
+    #     require "google/iam/v2"
+    #     client = ::Google::Iam::V2::Policies::Rest::Client.new
+    #
     module V2
     end
   end

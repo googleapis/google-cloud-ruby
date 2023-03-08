@@ -25,6 +25,7 @@ require "google/iam/credentials/v1/version"
 require "google/iam/credentials/v1/iam_credentials/credentials"
 require "google/iam/credentials/v1/iam_credentials/paths"
 require "google/iam/credentials/v1/iam_credentials/client"
+require "google/iam/credentials/v1/iam_credentials/rest"
 
 module Google
   module Iam
@@ -45,6 +46,11 @@ module Google
         #
         #     require "google/iam/credentials/v1/iam_credentials"
         #     client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/iam/credentials/v1/iam_credentials/rest"
+        #     client = ::Google::Iam::Credentials::V1::IAMCredentials::Rest::Client.new
         #
         module IAMCredentials
         end

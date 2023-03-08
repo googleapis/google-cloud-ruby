@@ -26,6 +26,7 @@ require "google/cloud/workflows/v1beta/workflows/credentials"
 require "google/cloud/workflows/v1beta/workflows/paths"
 require "google/cloud/workflows/v1beta/workflows/operations"
 require "google/cloud/workflows/v1beta/workflows/client"
+require "google/cloud/workflows/v1beta/workflows/rest"
 
 module Google
   module Cloud
@@ -40,6 +41,11 @@ module Google
         #
         #     require "google/cloud/workflows/v1beta/workflows"
         #     client = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/workflows/v1beta/workflows/rest"
+        #     client = ::Google::Cloud::Workflows::V1beta::Workflows::Rest::Client.new
         #
         module Workflows
         end
