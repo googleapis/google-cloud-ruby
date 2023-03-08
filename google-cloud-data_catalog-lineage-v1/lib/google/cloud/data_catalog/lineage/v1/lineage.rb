@@ -26,6 +26,7 @@ require "google/cloud/data_catalog/lineage/v1/lineage/credentials"
 require "google/cloud/data_catalog/lineage/v1/lineage/paths"
 require "google/cloud/data_catalog/lineage/v1/lineage/operations"
 require "google/cloud/data_catalog/lineage/v1/lineage/client"
+require "google/cloud/data_catalog/lineage/v1/lineage/rest"
 
 module Google
   module Cloud
@@ -42,6 +43,11 @@ module Google
           #
           #     require "google/cloud/data_catalog/lineage/v1/lineage"
           #     client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/data_catalog/lineage/v1/lineage/rest"
+          #     client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
           #
           module Lineage
           end

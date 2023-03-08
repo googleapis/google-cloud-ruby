@@ -26,6 +26,7 @@ require "google/cloud/certificate_manager/v1/certificate_manager/credentials"
 require "google/cloud/certificate_manager/v1/certificate_manager/paths"
 require "google/cloud/certificate_manager/v1/certificate_manager/operations"
 require "google/cloud/certificate_manager/v1/certificate_manager/client"
+require "google/cloud/certificate_manager/v1/certificate_manager/rest"
 
 module Google
   module Cloud
@@ -63,6 +64,11 @@ module Google
         #
         #     require "google/cloud/certificate_manager/v1/certificate_manager"
         #     client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/certificate_manager/v1/certificate_manager/rest"
+        #     client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
         #
         module CertificateManager
         end

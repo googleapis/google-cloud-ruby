@@ -25,6 +25,7 @@ require "google/cloud/billing/v1/version"
 require "google/cloud/billing/v1/cloud_billing/credentials"
 require "google/cloud/billing/v1/cloud_billing/paths"
 require "google/cloud/billing/v1/cloud_billing/client"
+require "google/cloud/billing/v1/cloud_billing/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/billing/v1/cloud_billing"
         #     client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/billing/v1/cloud_billing/rest"
+        #     client = ::Google::Cloud::Billing::V1::CloudBilling::Rest::Client.new
         #
         module CloudBilling
         end

@@ -31,6 +31,11 @@ module Google
         #     require "google/cloud/bigquery/data_transfer/v1"
         #     client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/bigquery/data_transfer/v1"
+        #     client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new
+        #
         module V1
         end
       end

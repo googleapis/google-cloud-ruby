@@ -26,6 +26,7 @@ require "google/cloud/contact_center_insights/v1/contact_center_insights/credent
 require "google/cloud/contact_center_insights/v1/contact_center_insights/paths"
 require "google/cloud/contact_center_insights/v1/contact_center_insights/operations"
 require "google/cloud/contact_center_insights/v1/contact_center_insights/client"
+require "google/cloud/contact_center_insights/v1/contact_center_insights/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/contact_center_insights/v1/contact_center_insights"
         #     client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/contact_center_insights/v1/contact_center_insights/rest"
+        #     client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
         #
         module ContactCenterInsights
         end

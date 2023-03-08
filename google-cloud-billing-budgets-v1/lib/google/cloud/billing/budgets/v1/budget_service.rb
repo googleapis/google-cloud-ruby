@@ -25,6 +25,7 @@ require "google/cloud/billing/budgets/v1/version"
 require "google/cloud/billing/budgets/v1/budget_service/credentials"
 require "google/cloud/billing/budgets/v1/budget_service/paths"
 require "google/cloud/billing/budgets/v1/budget_service/client"
+require "google/cloud/billing/budgets/v1/budget_service/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
           #
           #     require "google/cloud/billing/budgets/v1/budget_service"
           #     client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/billing/budgets/v1/budget_service/rest"
+          #     client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
           #
           module BudgetService
           end

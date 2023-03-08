@@ -26,6 +26,7 @@ require "google/cloud/channel/v1/cloud_channel_service/credentials"
 require "google/cloud/channel/v1/cloud_channel_service/paths"
 require "google/cloud/channel/v1/cloud_channel_service/operations"
 require "google/cloud/channel/v1/cloud_channel_service/client"
+require "google/cloud/channel/v1/cloud_channel_service/rest"
 
 module Google
   module Cloud
@@ -57,6 +58,11 @@ module Google
         #
         #     require "google/cloud/channel/v1/cloud_channel_service"
         #     client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/channel/v1/cloud_channel_service/rest"
+        #     client = ::Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new
         #
         module CloudChannelService
         end

@@ -31,6 +31,11 @@ module Google
         #     require "google/cloud/billing/budgets/v1"
         #     client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/billing/budgets/v1"
+        #     client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new
+        #
         module V1
         end
       end

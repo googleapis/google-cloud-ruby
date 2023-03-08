@@ -26,6 +26,7 @@ require "google/cloud/build/v1/cloud_build/credentials"
 require "google/cloud/build/v1/cloud_build/paths"
 require "google/cloud/build/v1/cloud_build/operations"
 require "google/cloud/build/v1/cloud_build/client"
+require "google/cloud/build/v1/cloud_build/rest"
 
 module Google
   module Cloud
@@ -45,6 +46,11 @@ module Google
         #
         #     require "google/cloud/build/v1/cloud_build"
         #     client = ::Google::Cloud::Build::V1::CloudBuild::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/build/v1/cloud_build/rest"
+        #     client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new
         #
         module CloudBuild
         end
