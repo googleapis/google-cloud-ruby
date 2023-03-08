@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/assured_workloads/v1beta1"
       #     client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/assured_workloads/v1beta1"
+      #     client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::Client.new
+      #
       module V1beta1
       end
     end

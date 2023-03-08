@@ -37,6 +37,11 @@ module Google
       #     require "google/cloud/app_engine/v1"
       #     client = ::Google::Cloud::AppEngine::V1::Applications::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/app_engine/v1"
+      #     client = ::Google::Cloud::AppEngine::V1::Applications::Rest::Client.new
+      #
       module V1
       end
     end

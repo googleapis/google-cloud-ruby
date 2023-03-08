@@ -31,6 +31,11 @@ module Google
       #     require "google/cloud/automl/v1"
       #     client = ::Google::Cloud::AutoML::V1::PredictionService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/automl/v1"
+      #     client = ::Google::Cloud::AutoML::V1::PredictionService::Rest::Client.new
+      #
       module V1
       end
     end

@@ -31,6 +31,11 @@ module Google
       #     require "google/cloud/apigee_connect/v1"
       #     client = ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/apigee_connect/v1"
+      #     client = ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Rest::Client.new
+      #
       module V1
       end
     end

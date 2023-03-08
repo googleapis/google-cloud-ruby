@@ -25,6 +25,7 @@ require "google/cloud/bigquery/data_policies/v1/version"
 require "google/cloud/bigquery/data_policies/v1/data_policy_service/credentials"
 require "google/cloud/bigquery/data_policies/v1/data_policy_service/paths"
 require "google/cloud/bigquery/data_policies/v1/data_policy_service/client"
+require "google/cloud/bigquery/data_policies/v1/data_policy_service/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
           #
           #     require "google/cloud/bigquery/data_policies/v1/data_policy_service"
           #     client = ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/bigquery/data_policies/v1/data_policy_service/rest"
+          #     client = ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Client.new
           #
           module DataPolicyService
           end

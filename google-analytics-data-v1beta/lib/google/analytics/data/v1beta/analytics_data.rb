@@ -25,6 +25,7 @@ require "google/analytics/data/v1beta/version"
 require "google/analytics/data/v1beta/analytics_data/credentials"
 require "google/analytics/data/v1beta/analytics_data/paths"
 require "google/analytics/data/v1beta/analytics_data/client"
+require "google/analytics/data/v1beta/analytics_data/rest"
 
 module Google
   module Analytics
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/analytics/data/v1beta/analytics_data"
         #     client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/analytics/data/v1beta/analytics_data/rest"
+        #     client = ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
         #
         module AnalyticsData
         end

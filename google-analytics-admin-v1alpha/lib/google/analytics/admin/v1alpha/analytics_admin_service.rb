@@ -25,6 +25,7 @@ require "google/analytics/admin/v1alpha/version"
 require "google/analytics/admin/v1alpha/analytics_admin_service/credentials"
 require "google/analytics/admin/v1alpha/analytics_admin_service/paths"
 require "google/analytics/admin/v1alpha/analytics_admin_service/client"
+require "google/analytics/admin/v1alpha/analytics_admin_service/rest"
 
 module Google
   module Analytics
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/analytics/admin/v1alpha/analytics_admin_service"
         #     client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/analytics/admin/v1alpha/analytics_admin_service/rest"
+        #     client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
         #
         module AnalyticsAdminService
         end

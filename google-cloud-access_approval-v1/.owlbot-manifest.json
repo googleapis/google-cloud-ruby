@@ -18,6 +18,10 @@
     "lib/google/cloud/access_approval/v1/access_approval/client.rb",
     "lib/google/cloud/access_approval/v1/access_approval/credentials.rb",
     "lib/google/cloud/access_approval/v1/access_approval/paths.rb",
+    "lib/google/cloud/access_approval/v1/access_approval/rest.rb",
+    "lib/google/cloud/access_approval/v1/access_approval/rest/client.rb",
+    "lib/google/cloud/access_approval/v1/access_approval/rest/service_stub.rb",
+    "lib/google/cloud/access_approval/v1/rest.rb",
     "lib/google/cloud/access_approval/v1/version.rb",
     "lib/google/cloud/accessapproval/v1/accessapproval_pb.rb",
     "lib/google/cloud/accessapproval/v1/accessapproval_services_pb.rb",
@@ -43,6 +47,7 @@
     "snippets/access_approval/update_access_approval_settings.rb",
     "snippets/snippet_metadata_google.cloud.accessapproval.v1.json",
     "test/google/cloud/access_approval/v1/access_approval_paths_test.rb",
+    "test/google/cloud/access_approval/v1/access_approval_rest_test.rb",
     "test/google/cloud/access_approval/v1/access_approval_test.rb",
     "test/helper.rb"
   ],

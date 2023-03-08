@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/bare_metal_solution/v2"
       #     client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/bare_metal_solution/v2"
+      #     client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::Client.new
+      #
       module V2
       end
     end
