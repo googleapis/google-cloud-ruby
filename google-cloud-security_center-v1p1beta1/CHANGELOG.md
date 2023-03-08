@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.10.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20629](https://github.com/googleapis/google-cloud-ruby/issues/20629)) 
+
 ### 0.9.0 (2022-07-07)
 
 #### Features
