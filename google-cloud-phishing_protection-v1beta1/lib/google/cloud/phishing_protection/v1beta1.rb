@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/phishing_protection/v1beta1"
       #     client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/phishing_protection/v1beta1"
+      #     client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Rest::Client.new
+      #
       module V1beta1
       end
     end

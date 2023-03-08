@@ -37,6 +37,11 @@ module Google
       #     require "google/cloud/retail/v2"
       #     client = ::Google::Cloud::Retail::V2::CatalogService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/retail/v2"
+      #     client = ::Google::Cloud::Retail::V2::CatalogService::Rest::Client.new
+      #
       module V2
       end
     end

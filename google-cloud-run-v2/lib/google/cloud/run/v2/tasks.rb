@@ -25,6 +25,7 @@ require "google/cloud/run/v2/version"
 require "google/cloud/run/v2/tasks/credentials"
 require "google/cloud/run/v2/tasks/paths"
 require "google/cloud/run/v2/tasks/client"
+require "google/cloud/run/v2/tasks/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/run/v2/tasks"
         #     client = ::Google::Cloud::Run::V2::Tasks::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/run/v2/tasks/rest"
+        #     client = ::Google::Cloud::Run::V2::Tasks::Rest::Client.new
         #
         module Tasks
         end

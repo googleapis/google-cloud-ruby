@@ -26,6 +26,7 @@ require "google/cloud/retail/v2/product_service/credentials"
 require "google/cloud/retail/v2/product_service/paths"
 require "google/cloud/retail/v2/product_service/operations"
 require "google/cloud/retail/v2/product_service/client"
+require "google/cloud/retail/v2/product_service/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/retail/v2/product_service"
         #     client = ::Google::Cloud::Retail::V2::ProductService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/retail/v2/product_service/rest"
+        #     client = ::Google::Cloud::Retail::V2::ProductService::Rest::Client.new
         #
         module ProductService
         end

@@ -26,6 +26,7 @@ require "google/cloud/run/v2/services/credentials"
 require "google/cloud/run/v2/services/paths"
 require "google/cloud/run/v2/services/operations"
 require "google/cloud/run/v2/services/client"
+require "google/cloud/run/v2/services/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/run/v2/services"
         #     client = ::Google::Cloud::Run::V2::Services::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/run/v2/services/rest"
+        #     client = ::Google::Cloud::Run::V2::Services::Rest::Client.new
         #
         module Services
         end

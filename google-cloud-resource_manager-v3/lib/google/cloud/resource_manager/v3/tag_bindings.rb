@@ -26,6 +26,7 @@ require "google/cloud/resource_manager/v3/tag_bindings/credentials"
 require "google/cloud/resource_manager/v3/tag_bindings/paths"
 require "google/cloud/resource_manager/v3/tag_bindings/operations"
 require "google/cloud/resource_manager/v3/tag_bindings/client"
+require "google/cloud/resource_manager/v3/tag_bindings/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/resource_manager/v3/tag_bindings"
         #     client = ::Google::Cloud::ResourceManager::V3::TagBindings::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/resource_manager/v3/tag_bindings/rest"
+        #     client = ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::Client.new
         #
         module TagBindings
         end

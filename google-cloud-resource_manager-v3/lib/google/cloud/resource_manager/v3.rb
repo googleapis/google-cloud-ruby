@@ -35,6 +35,11 @@ module Google
       #     require "google/cloud/resource_manager/v3"
       #     client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/resource_manager/v3"
+      #     client = ::Google::Cloud::ResourceManager::V3::Folders::Rest::Client.new
+      #
       module V3
       end
     end

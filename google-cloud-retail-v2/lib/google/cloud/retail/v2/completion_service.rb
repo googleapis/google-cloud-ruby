@@ -26,6 +26,7 @@ require "google/cloud/retail/v2/completion_service/credentials"
 require "google/cloud/retail/v2/completion_service/paths"
 require "google/cloud/retail/v2/completion_service/operations"
 require "google/cloud/retail/v2/completion_service/client"
+require "google/cloud/retail/v2/completion_service/rest"
 
 module Google
   module Cloud
@@ -41,6 +42,11 @@ module Google
         #
         #     require "google/cloud/retail/v2/completion_service"
         #     client = ::Google::Cloud::Retail::V2::CompletionService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/retail/v2/completion_service/rest"
+        #     client = ::Google::Cloud::Retail::V2::CompletionService::Rest::Client.new
         #
         module CompletionService
         end

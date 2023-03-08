@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/scheduler/v1beta1"
       #     client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/scheduler/v1beta1"
+      #     client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new
+      #
       module V1beta1
       end
     end
