@@ -23,6 +23,7 @@ describe "smoke test" do
                                      target_language_code: "fr"
     assert_equal "Bonjour le monde!", response.translations.first.translated_text
   end
+
   it "translates hello world into french (REST)" do
     client = Google::Cloud::Translate.translation_service transport: :rest
     parent = client.location_path project: ENV["GOOGLE_CLOUD_PROJECT"], location: "global"
