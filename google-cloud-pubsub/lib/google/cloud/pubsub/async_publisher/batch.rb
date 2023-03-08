@@ -189,12 +189,6 @@ module Google
               if @items.empty?
                 @publishing = false
                 return false
-              else
-                return true if stopping?
-                if @queue.empty?
-                  @publishing = false
-                  return false
-                end
               end
             end
             true

@@ -61,18 +61,20 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
 
     assert_equal true, batch.publishing?
     assert_equal 10, batch.rebalance!.count
+    assert_equal true, batch.reset!
+    assert_equal true, batch.publishing?
     assert_equal false, batch.reset!
     assert_equal false, batch.publishing?
 
     assert_equal :added, batch.add(msg.dup, nil)
     assert_equal :added, batch.add(msg.dup, nil)
     assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
+    assert_equal :added, batch.add(msg.dup, nil)
 
     assert_equal false, batch.publishing?
     assert_equal true, batch.publish!
     assert_equal true, batch.publishing?
-    assert_equal 10, batch.rebalance!.count
+    assert_equal 4, batch.rebalance!.count
     assert_equal false, batch.reset!
     assert_equal false, batch.publishing?
 
@@ -85,7 +87,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
     assert_equal :added, batch.add(msg.dup, nil)
     assert_equal :added, batch.add(msg.dup, nil)
     assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
+    assert_equal :added, batch.add(msg.dup, nil)
     assert_equal :full, batch.add(msg.dup, nil)
     assert_equal :full, batch.add(msg.dup, nil)
     assert_equal :full, batch.add(msg.dup, nil)
@@ -153,7 +155,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
     assert_equal true, batch.publishing?
     assert_equal false, batch.publish!
     assert_equal true, batch.publishing?
-    assert_equal 8, batch.rebalance!.count
+    assert_equal 7, batch.rebalance!.count
     assert_equal false, batch.reset!
     assert_equal false, batch.publishing?
   end
@@ -190,18 +192,20 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
 
     assert_equal true, batch.publishing?
     assert_equal 10, batch.rebalance!.count
+    assert_equal true, batch.reset!
+    assert_equal true, batch.publishing?
     assert_equal false, batch.reset!
     assert_equal false, batch.publishing?
 
     assert_equal :added, batch.add(msg.dup, nil)
     assert_equal :added, batch.add(msg.dup, nil)
     assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
+    assert_equal :added, batch.add(msg.dup, nil)
 
     assert_equal false, batch.publishing?
     assert_equal true, batch.publish!
     assert_equal true, batch.publishing?
-    assert_equal 10, batch.rebalance!.count
+    assert_equal 4, batch.rebalance!.count
     assert_equal false, batch.reset!
     assert_equal false, batch.publishing?
 
@@ -214,7 +218,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
     assert_equal :added, batch.add(msg.dup, nil)
     assert_equal :added, batch.add(msg.dup, nil)
     assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
+    assert_equal :added, batch.add(msg.dup, nil)
     assert_equal :full, batch.add(msg.dup, nil)
     assert_equal :full, batch.add(msg.dup, nil)
     assert_equal :full, batch.add(msg.dup, nil)
@@ -282,7 +286,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
     assert_equal true, batch.publishing?
     assert_equal false, batch.publish!
     assert_equal true, batch.publishing?
-    assert_equal 8, batch.rebalance!.count
+    assert_equal 7, batch.rebalance!.count
     assert_equal false, batch.reset!
     assert_equal false, batch.publishing?
   end
