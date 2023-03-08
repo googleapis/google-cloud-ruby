@@ -26,6 +26,7 @@ require "google/cloud/security_center/v1/security_center/credentials"
 require "google/cloud/security_center/v1/security_center/paths"
 require "google/cloud/security_center/v1/security_center/operations"
 require "google/cloud/security_center/v1/security_center/client"
+require "google/cloud/security_center/v1/security_center/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/security_center/v1/security_center"
         #     client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/security_center/v1/security_center/rest"
+        #     client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client.new
         #
         module SecurityCenter
         end

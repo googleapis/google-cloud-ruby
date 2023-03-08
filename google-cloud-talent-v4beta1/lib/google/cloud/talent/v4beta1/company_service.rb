@@ -25,6 +25,7 @@ require "google/cloud/talent/v4beta1/version"
 require "google/cloud/talent/v4beta1/company_service/credentials"
 require "google/cloud/talent/v4beta1/company_service/paths"
 require "google/cloud/talent/v4beta1/company_service/client"
+require "google/cloud/talent/v4beta1/company_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/talent/v4beta1/company_service"
         #     client = ::Google::Cloud::Talent::V4beta1::CompanyService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/talent/v4beta1/company_service/rest"
+        #     client = ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new
         #
         module CompanyService
         end

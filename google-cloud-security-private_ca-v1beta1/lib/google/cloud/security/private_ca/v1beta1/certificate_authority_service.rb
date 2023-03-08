@@ -26,6 +26,7 @@ require "google/cloud/security/private_ca/v1beta1/certificate_authority_service/
 require "google/cloud/security/private_ca/v1beta1/certificate_authority_service/paths"
 require "google/cloud/security/private_ca/v1beta1/certificate_authority_service/operations"
 require "google/cloud/security/private_ca/v1beta1/certificate_authority_service/client"
+require "google/cloud/security/private_ca/v1beta1/certificate_authority_service/rest"
 
 module Google
   module Cloud
@@ -40,6 +41,11 @@ module Google
           #
           #     require "google/cloud/security/private_ca/v1beta1/certificate_authority_service"
           #     client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/security/private_ca/v1beta1/certificate_authority_service/rest"
+          #     client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Rest::Client.new
           #
           module CertificateAuthorityService
           end

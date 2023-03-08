@@ -24,6 +24,7 @@ require "google/cloud/service_control/v1/version"
 
 require "google/cloud/service_control/v1/service_controller/credentials"
 require "google/cloud/service_control/v1/service_controller/client"
+require "google/cloud/service_control/v1/service_controller/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/service_control/v1/service_controller"
         #     client = ::Google::Cloud::ServiceControl::V1::ServiceController::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/service_control/v1/service_controller/rest"
+        #     client = ::Google::Cloud::ServiceControl::V1::ServiceController::Rest::Client.new
         #
         module ServiceController
         end

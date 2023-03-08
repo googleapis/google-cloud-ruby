@@ -25,6 +25,7 @@ require "google/cloud/talent/v4/version"
 require "google/cloud/talent/v4/tenant_service/credentials"
 require "google/cloud/talent/v4/tenant_service/paths"
 require "google/cloud/talent/v4/tenant_service/client"
+require "google/cloud/talent/v4/tenant_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/talent/v4/tenant_service"
         #     client = ::Google::Cloud::Talent::V4::TenantService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/talent/v4/tenant_service/rest"
+        #     client = ::Google::Cloud::Talent::V4::TenantService::Rest::Client.new
         #
         module TenantService
         end
