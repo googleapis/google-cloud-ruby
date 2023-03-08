@@ -69,6 +69,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :import_job, :string, 14
       optional :import_time, :message, 15, "google.protobuf.Timestamp"
       optional :import_failure_reason, :string, 16
+      optional :generation_failure_reason, :string, 19
+      optional :external_destruction_failure_reason, :string, 20
       optional :external_protection_level_options, :message, 17, "google.cloud.kms.v1.ExternalProtectionLevelOptions"
       optional :reimport_eligible, :bool, 18
     end
@@ -112,6 +114,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DESTROY_SCHEDULED, 4
       value :PENDING_IMPORT, 6
       value :IMPORT_FAILED, 7
+      value :GENERATION_FAILED, 8
+      value :PENDING_EXTERNAL_DESTRUCTION, 9
+      value :EXTERNAL_DESTRUCTION_FAILED, 10
     end
     add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView" do
       value :CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED, 0

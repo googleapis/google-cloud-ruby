@@ -476,6 +476,135 @@ module Google
               end
 
               ##
+              # Returns the {::Google::Cloud::Kms::V1::EkmConfig EkmConfig} singleton resource
+              # for a given project and location.
+              #
+              # @overload get_ekm_config(request, options = nil)
+              #   Pass arguments to `get_ekm_config` via a request object, either of type
+              #   {::Google::Cloud::Kms::V1::GetEkmConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Kms::V1::GetEkmConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_ekm_config(name: nil)
+              #   Pass arguments to `get_ekm_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The {::Google::Cloud::Kms::V1::EkmConfig#name name} of the
+              #     {::Google::Cloud::Kms::V1::EkmConfig EkmConfig} to get.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Kms::V1::EkmConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Kms::V1::EkmConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_ekm_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::GetEkmConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_ekm_config.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Kms::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_ekm_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_ekm_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ekm_service_stub.get_ekm_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the {::Google::Cloud::Kms::V1::EkmConfig EkmConfig} singleton resource
+              # for a given project and location.
+              #
+              # @overload update_ekm_config(request, options = nil)
+              #   Pass arguments to `update_ekm_config` via a request object, either of type
+              #   {::Google::Cloud::Kms::V1::UpdateEkmConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Kms::V1::UpdateEkmConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_ekm_config(ekm_config: nil, update_mask: nil)
+              #   Pass arguments to `update_ekm_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param ekm_config [::Google::Cloud::Kms::V1::EkmConfig, ::Hash]
+              #     Required. {::Google::Cloud::Kms::V1::EkmConfig EkmConfig} with updated values.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. List of fields to be updated in this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Kms::V1::EkmConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Kms::V1::EkmConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def update_ekm_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::UpdateEkmConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_ekm_config.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Kms::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_ekm_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_ekm_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ekm_service_stub.update_ekm_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the EkmService REST API.
               #
               # This class represents the configuration for EkmService REST,
@@ -625,6 +754,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_ekm_connection
+                  ##
+                  # RPC-specific configuration for `get_ekm_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_ekm_config
+                  ##
+                  # RPC-specific configuration for `update_ekm_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_ekm_config
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -636,6 +775,10 @@ module Google
                     @create_ekm_connection = ::Gapic::Config::Method.new create_ekm_connection_config
                     update_ekm_connection_config = parent_rpcs.update_ekm_connection if parent_rpcs.respond_to? :update_ekm_connection
                     @update_ekm_connection = ::Gapic::Config::Method.new update_ekm_connection_config
+                    get_ekm_config_config = parent_rpcs.get_ekm_config if parent_rpcs.respond_to? :get_ekm_config
+                    @get_ekm_config = ::Gapic::Config::Method.new get_ekm_config_config
+                    update_ekm_config_config = parent_rpcs.update_ekm_config if parent_rpcs.respond_to? :update_ekm_config
+                    @update_ekm_config = ::Gapic::Config::Method.new update_ekm_config_config
 
                     yield self if block_given?
                   end
