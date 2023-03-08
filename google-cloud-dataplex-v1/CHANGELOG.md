@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
 ### 0.6.1 (2023-02-03)
 
 #### Documentation
