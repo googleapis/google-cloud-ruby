@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/cx/v3/version"
 require "google/cloud/dialogflow/cx/v3/transition_route_groups/credentials"
 require "google/cloud/dialogflow/cx/v3/transition_route_groups/paths"
 require "google/cloud/dialogflow/cx/v3/transition_route_groups/client"
+require "google/cloud/dialogflow/cx/v3/transition_route_groups/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
           #
           #     require "google/cloud/dialogflow/cx/v3/transition_route_groups"
           #     client = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/dialogflow/cx/v3/transition_route_groups/rest"
+          #     client = ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Rest::Client.new
           #
           module TransitionRouteGroups
           end

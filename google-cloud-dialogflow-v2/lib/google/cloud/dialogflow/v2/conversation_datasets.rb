@@ -26,6 +26,7 @@ require "google/cloud/dialogflow/v2/conversation_datasets/credentials"
 require "google/cloud/dialogflow/v2/conversation_datasets/paths"
 require "google/cloud/dialogflow/v2/conversation_datasets/operations"
 require "google/cloud/dialogflow/v2/conversation_datasets/client"
+require "google/cloud/dialogflow/v2/conversation_datasets/rest"
 
 module Google
   module Cloud
@@ -41,6 +42,11 @@ module Google
         #
         #     require "google/cloud/dialogflow/v2/conversation_datasets"
         #     client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/conversation_datasets/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new
         #
         module ConversationDatasets
         end
