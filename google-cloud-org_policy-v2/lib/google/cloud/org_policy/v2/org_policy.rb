@@ -25,6 +25,7 @@ require "google/cloud/org_policy/v2/version"
 require "google/cloud/org_policy/v2/org_policy/credentials"
 require "google/cloud/org_policy/v2/org_policy/paths"
 require "google/cloud/org_policy/v2/org_policy/client"
+require "google/cloud/org_policy/v2/org_policy/rest"
 
 module Google
   module Cloud
@@ -56,6 +57,11 @@ module Google
         #
         #     require "google/cloud/org_policy/v2/org_policy"
         #     client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/org_policy/v2/org_policy/rest"
+        #     client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
         #
         module OrgPolicy
         end

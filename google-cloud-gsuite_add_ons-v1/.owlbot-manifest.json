@@ -18,6 +18,10 @@
     "lib/google/cloud/gsuite_add_ons/v1/gsuite_add_ons/client.rb",
     "lib/google/cloud/gsuite_add_ons/v1/gsuite_add_ons/credentials.rb",
     "lib/google/cloud/gsuite_add_ons/v1/gsuite_add_ons/paths.rb",
+    "lib/google/cloud/gsuite_add_ons/v1/gsuite_add_ons/rest.rb",
+    "lib/google/cloud/gsuite_add_ons/v1/gsuite_add_ons/rest/client.rb",
+    "lib/google/cloud/gsuite_add_ons/v1/gsuite_add_ons/rest/service_stub.rb",
+    "lib/google/cloud/gsuite_add_ons/v1/rest.rb",
     "lib/google/cloud/gsuite_add_ons/v1/version.rb",
     "lib/google/cloud/gsuiteaddons/v1/gsuiteaddons_pb.rb",
     "lib/google/cloud/gsuiteaddons/v1/gsuiteaddons_services_pb.rb",
@@ -52,6 +56,7 @@
     "snippets/gsuite_add_ons/uninstall_deployment.rb",
     "snippets/snippet_metadata_google.cloud.gsuiteaddons.v1.json",
     "test/google/cloud/gsuite_add_ons/v1/gsuite_add_ons_paths_test.rb",
+    "test/google/cloud/gsuite_add_ons/v1/gsuite_add_ons_rest_test.rb",
     "test/google/cloud/gsuite_add_ons/v1/gsuite_add_ons_test.rb",
     "test/helper.rb"
   ],

@@ -26,6 +26,7 @@ require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/credentials"
 require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/paths"
 require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/operations"
 require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/client"
+require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/rest"
 
 module Google
   module Cloud
@@ -45,6 +46,11 @@ module Google
         #
         #     require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service"
         #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/rest"
+        #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new
         #
         module GkeHubMembershipService
         end

@@ -18,6 +18,10 @@
     "lib/google/cloud/monitoring/dashboard/v1/dashboards_service/client.rb",
     "lib/google/cloud/monitoring/dashboard/v1/dashboards_service/credentials.rb",
     "lib/google/cloud/monitoring/dashboard/v1/dashboards_service/paths.rb",
+    "lib/google/cloud/monitoring/dashboard/v1/dashboards_service/rest.rb",
+    "lib/google/cloud/monitoring/dashboard/v1/dashboards_service/rest/client.rb",
+    "lib/google/cloud/monitoring/dashboard/v1/dashboards_service/rest/service_stub.rb",
+    "lib/google/cloud/monitoring/dashboard/v1/rest.rb",
     "lib/google/cloud/monitoring/dashboard/v1/version.rb",
     "lib/google/monitoring/dashboard/v1/alertchart_pb.rb",
     "lib/google/monitoring/dashboard/v1/collapsible_group_pb.rb",
@@ -67,6 +71,7 @@
     "snippets/dashboards_service/update_dashboard.rb",
     "snippets/snippet_metadata_google.monitoring.dashboard.v1.json",
     "test/google/cloud/monitoring/dashboard/v1/dashboards_service_paths_test.rb",
+    "test/google/cloud/monitoring/dashboard/v1/dashboards_service_rest_test.rb",
     "test/google/cloud/monitoring/dashboard/v1/dashboards_service_test.rb",
     "test/helper.rb"
   ],

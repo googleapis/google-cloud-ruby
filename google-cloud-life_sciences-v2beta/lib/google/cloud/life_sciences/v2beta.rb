@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/life_sciences/v2beta"
       #     client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/life_sciences/v2beta"
+      #     client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Rest::Client.new
+      #
       module V2beta
       end
     end

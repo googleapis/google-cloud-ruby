@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/memcache/v1beta2"
       #     client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/memcache/v1beta2"
+      #     client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Rest::Client.new
+      #
       module V1beta2
       end
     end

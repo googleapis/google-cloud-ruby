@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/ids/v1"
       #     client = ::Google::Cloud::IDS::V1::IDS::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/ids/v1"
+      #     client = ::Google::Cloud::IDS::V1::IDS::Rest::Client.new
+      #
       module V1
       end
     end

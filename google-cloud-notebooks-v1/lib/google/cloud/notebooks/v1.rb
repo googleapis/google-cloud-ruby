@@ -31,6 +31,11 @@ module Google
       #     require "google/cloud/notebooks/v1"
       #     client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/notebooks/v1"
+      #     client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new
+      #
       module V1
       end
     end
