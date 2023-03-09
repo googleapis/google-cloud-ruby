@@ -39,7 +39,7 @@ def quickstart project_id:, location_id:, processor_id:, file_path:, mime_type:
   content = File.binread file_path
 
   # Create request
-  request = Google::Cloud::DocumentAI::ProcessRequest.new(
+  request = Google::Cloud::DocumentAI::V1::ProcessRequest.new(
     skip_human_review: true,
     name: name,
     raw_document: {
