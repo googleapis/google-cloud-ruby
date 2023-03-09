@@ -1,0 +1,18 @@
+{
+    "api_id": "area120tables.googleapis.com",
+    "api_shortname": "area120tables",
+    "client_documentation": "https://rubydoc.info/gems/google-area120-tables",
+    "distribution_name": "google-area120-tables",
+    "is_cloud": false,
+    "language": "ruby",
+    "name": "area120tables",
+    "name_pretty": "Area 120 Tables API",
+    "product_documentation": "https://tables.area120.google.com/u/0/about#/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Using the Area 120 Tables API, you can query for tables, and update/create/delete rows within tables programmatically.",
+    "ruby-cloud-env-prefix": "AREA120_TABLES",
+    "ruby-cloud-product-url": "https://tables.area120.google.com/u/0/about#/",
+    "library_type": "GAPIC_AUTO"
+}
