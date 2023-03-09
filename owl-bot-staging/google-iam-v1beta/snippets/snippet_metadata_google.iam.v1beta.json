@@ -1,0 +1,495 @@
+{
+  "client_library": {
+    "name": "google-iam-v1beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.iam.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_ListWorkloadIdentityPools_sync",
+      "title": "Snippet for the list_workload_identity_pools call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#list_workload_identity_pools. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/list_workload_identity_pools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workload_identity_pools",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#list_workload_identity_pools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1beta::ListWorkloadIdentityPoolsResponse",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "ListWorkloadIdentityPools",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.ListWorkloadIdentityPools",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_GetWorkloadIdentityPool_sync",
+      "title": "Snippet for the get_workload_identity_pool call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#get_workload_identity_pool. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/get_workload_identity_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_workload_identity_pool",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#get_workload_identity_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::GetWorkloadIdentityPoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1beta::WorkloadIdentityPool",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "GetWorkloadIdentityPool",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.GetWorkloadIdentityPool",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_CreateWorkloadIdentityPool_sync",
+      "title": "Snippet for the create_workload_identity_pool call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#create_workload_identity_pool. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/create_workload_identity_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_workload_identity_pool",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#create_workload_identity_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::CreateWorkloadIdentityPoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "CreateWorkloadIdentityPool",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.CreateWorkloadIdentityPool",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_UpdateWorkloadIdentityPool_sync",
+      "title": "Snippet for the update_workload_identity_pool call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#update_workload_identity_pool. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/update_workload_identity_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_workload_identity_pool",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#update_workload_identity_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::UpdateWorkloadIdentityPoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "UpdateWorkloadIdentityPool",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.UpdateWorkloadIdentityPool",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_DeleteWorkloadIdentityPool_sync",
+      "title": "Snippet for the delete_workload_identity_pool call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#delete_workload_identity_pool. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/delete_workload_identity_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_workload_identity_pool",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#delete_workload_identity_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::DeleteWorkloadIdentityPoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "DeleteWorkloadIdentityPool",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.DeleteWorkloadIdentityPool",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_UndeleteWorkloadIdentityPool_sync",
+      "title": "Snippet for the undelete_workload_identity_pool call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#undelete_workload_identity_pool. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/undelete_workload_identity_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undelete_workload_identity_pool",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#undelete_workload_identity_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "UndeleteWorkloadIdentityPool",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.UndeleteWorkloadIdentityPool",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_ListWorkloadIdentityPoolProviders_sync",
+      "title": "Snippet for the list_workload_identity_pool_providers call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#list_workload_identity_pool_providers. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/list_workload_identity_pool_providers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workload_identity_pool_providers",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#list_workload_identity_pool_providers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::ListWorkloadIdentityPoolProvidersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1beta::ListWorkloadIdentityPoolProvidersResponse",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "ListWorkloadIdentityPoolProviders",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.ListWorkloadIdentityPoolProviders",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_GetWorkloadIdentityPoolProvider_sync",
+      "title": "Snippet for the get_workload_identity_pool_provider call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#get_workload_identity_pool_provider. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/get_workload_identity_pool_provider.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_workload_identity_pool_provider",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#get_workload_identity_pool_provider",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::GetWorkloadIdentityPoolProviderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1beta::WorkloadIdentityPoolProvider",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "GetWorkloadIdentityPoolProvider",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.GetWorkloadIdentityPoolProvider",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_CreateWorkloadIdentityPoolProvider_sync",
+      "title": "Snippet for the create_workload_identity_pool_provider call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#create_workload_identity_pool_provider. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/create_workload_identity_pool_provider.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_workload_identity_pool_provider",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#create_workload_identity_pool_provider",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::CreateWorkloadIdentityPoolProviderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "CreateWorkloadIdentityPoolProvider",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.CreateWorkloadIdentityPoolProvider",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_UpdateWorkloadIdentityPoolProvider_sync",
+      "title": "Snippet for the update_workload_identity_pool_provider call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#update_workload_identity_pool_provider. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/update_workload_identity_pool_provider.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_workload_identity_pool_provider",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#update_workload_identity_pool_provider",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::UpdateWorkloadIdentityPoolProviderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "UpdateWorkloadIdentityPoolProvider",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.UpdateWorkloadIdentityPoolProvider",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_DeleteWorkloadIdentityPoolProvider_sync",
+      "title": "Snippet for the delete_workload_identity_pool_provider call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#delete_workload_identity_pool_provider. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/delete_workload_identity_pool_provider.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_workload_identity_pool_provider",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#delete_workload_identity_pool_provider",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::DeleteWorkloadIdentityPoolProviderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "DeleteWorkloadIdentityPoolProvider",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.DeleteWorkloadIdentityPoolProvider",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v1beta_generated_WorkloadIdentityPools_UndeleteWorkloadIdentityPoolProvider_sync",
+      "title": "Snippet for the undelete_workload_identity_pool_provider call in the WorkloadIdentityPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V1beta::WorkloadIdentityPools::Client#undelete_workload_identity_pool_provider. It may require modification in order to execute successfully.",
+      "file": "workload_identity_pools/undelete_workload_identity_pool_provider.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undelete_workload_identity_pool_provider",
+        "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client#undelete_workload_identity_pool_provider",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolProviderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadIdentityPools::Client",
+          "full_name": "::Google::Iam::V1beta::WorkloadIdentityPools::Client"
+        },
+        "method": {
+          "short_name": "UndeleteWorkloadIdentityPoolProvider",
+          "full_name": "google.iam.v1beta.WorkloadIdentityPools.UndeleteWorkloadIdentityPoolProvider",
+          "service": {
+            "short_name": "WorkloadIdentityPools",
+            "full_name": "google.iam.v1beta.WorkloadIdentityPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
