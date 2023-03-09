@@ -54,6 +54,8 @@ module Google
       # `version` parameter. If the Provisioning service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Provisioning
       #
@@ -62,9 +64,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.provisioning version: :v1, &block
+      def self.provisioning version: :v1, transport: :grpc, &block
         require "google/cloud/apigee_registry/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ApigeeRegistry
@@ -72,6 +75,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ApigeeRegistry.const_get(package_name).const_get(:Provisioning)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -85,6 +89,8 @@ module Google
       # `version` parameter. If the Registry service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Registry
       #
@@ -92,9 +98,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.registry version: :v1, &block
+      def self.registry version: :v1, transport: :grpc, &block
         require "google/cloud/apigee_registry/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ApigeeRegistry
@@ -102,6 +109,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ApigeeRegistry.const_get(package_name).const_get(:Registry)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 

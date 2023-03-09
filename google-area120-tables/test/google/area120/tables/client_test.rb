@@ -20,15 +20,25 @@ require "helper"
 require "google/area120/tables"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Area120::Tables::ClientConstructionMinitest < Minitest::Test
   def test_tables_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Area120::Tables.tables_service do |config|
+      client = Google::Area120::Tables.tables_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Area120::Tables::V1alpha1::TablesService::Client, client
+    end
+  end
+
+  def test_tables_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Area120::Tables.tables_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Area120::Tables::V1alpha1::TablesService::Rest::Client, client
     end
   end
 end

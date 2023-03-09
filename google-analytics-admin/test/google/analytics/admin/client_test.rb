@@ -20,15 +20,25 @@ require "helper"
 require "google/analytics/admin"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Analytics::Admin::ClientConstructionMinitest < Minitest::Test
   def test_analytics_admin_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Analytics::Admin.analytics_admin_service do |config|
+      client = Google::Analytics::Admin.analytics_admin_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client, client
+    end
+  end
+
+  def test_analytics_admin_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Analytics::Admin.analytics_admin_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client, client
     end
   end
 end

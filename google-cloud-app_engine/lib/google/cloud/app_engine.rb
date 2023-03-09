@@ -54,6 +54,8 @@ module Google
       # `version` parameter. If the Applications service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Applications
       #
@@ -61,9 +63,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.applications version: :v1, &block
+      def self.applications version: :v1, transport: :grpc, &block
         require "google/cloud/app_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AppEngine
@@ -71,6 +74,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AppEngine.const_get(package_name).const_get(:Applications)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -84,6 +88,8 @@ module Google
       # `version` parameter. If the Services service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Services
       #
@@ -91,9 +97,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.services version: :v1, &block
+      def self.services version: :v1, transport: :grpc, &block
         require "google/cloud/app_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AppEngine
@@ -101,6 +108,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AppEngine.const_get(package_name).const_get(:Services)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -114,6 +122,8 @@ module Google
       # `version` parameter. If the Versions service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Versions
       #
@@ -121,9 +131,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.versions version: :v1, &block
+      def self.versions version: :v1, transport: :grpc, &block
         require "google/cloud/app_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AppEngine
@@ -131,6 +142,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AppEngine.const_get(package_name).const_get(:Versions)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -144,6 +156,8 @@ module Google
       # `version` parameter. If the Instances service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Instances
       #
@@ -151,9 +165,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.instances version: :v1, &block
+      def self.instances version: :v1, transport: :grpc, &block
         require "google/cloud/app_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AppEngine
@@ -161,6 +176,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AppEngine.const_get(package_name).const_get(:Instances)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -174,6 +190,8 @@ module Google
       # `version` parameter. If the Firewall service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Firewall
       #
@@ -190,9 +208,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.firewall version: :v1, &block
+      def self.firewall version: :v1, transport: :grpc, &block
         require "google/cloud/app_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AppEngine
@@ -200,6 +219,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AppEngine.const_get(package_name).const_get(:Firewall)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -213,6 +233,8 @@ module Google
       # `version` parameter. If the AuthorizedDomains service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About AuthorizedDomains
       #
@@ -222,9 +244,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.authorized_domains version: :v1, &block
+      def self.authorized_domains version: :v1, transport: :grpc, &block
         require "google/cloud/app_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AppEngine
@@ -232,6 +255,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AppEngine.const_get(package_name).const_get(:AuthorizedDomains)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -245,6 +269,8 @@ module Google
       # `version` parameter. If the AuthorizedCertificates service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About AuthorizedCertificates
       #
@@ -253,9 +279,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.authorized_certificates version: :v1, &block
+      def self.authorized_certificates version: :v1, transport: :grpc, &block
         require "google/cloud/app_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AppEngine
@@ -263,6 +290,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AppEngine.const_get(package_name).const_get(:AuthorizedCertificates)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -276,6 +304,8 @@ module Google
       # `version` parameter. If the DomainMappings service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About DomainMappings
       #
@@ -283,9 +313,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.domain_mappings version: :v1, &block
+      def self.domain_mappings version: :v1, transport: :grpc, &block
         require "google/cloud/app_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AppEngine
@@ -293,6 +324,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AppEngine.const_get(package_name).const_get(:DomainMappings)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
