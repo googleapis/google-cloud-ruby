@@ -1,0 +1,18 @@
+{
+    "api_id": "dataqna.googleapis.com",
+    "api_shortname": "dataqna",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-dataqna/latest",
+    "distribution_name": "google-cloud-dataqna",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "dataqna",
+    "name_pretty": "BigQuery Data QnA API",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Data QnA is a natural language question and answer service for BigQuery data.",
+    "ruby-cloud-env-prefix": "BIGQUERY_DATAQNA",
+    "ruby-cloud-path-override": "data_qn_a=dataqna",
+    "ruby-cloud-namespace-override": "Dataqna=DataQnA",
+    "library_type": "GAPIC_AUTO"
+}
