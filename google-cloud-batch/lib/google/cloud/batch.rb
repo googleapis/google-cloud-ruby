@@ -48,7 +48,7 @@ module Google
       # Create a new client object for BatchService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Batch::V1::BatchService::Client](https://googleapis.dev/ruby/google-cloud-batch-v1/latest/Google/Cloud/Batch/V1/BatchService/Client.html)
+      # [Google::Cloud::Batch::V1::BatchService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-batch-v1/latest/Google-Cloud-Batch-V1-BatchService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the BatchService service is

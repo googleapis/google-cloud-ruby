@@ -48,7 +48,7 @@ module Google
       # Create a new client object for ArtifactRegistry.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client](https://googleapis.dev/ruby/google-cloud-artifact_registry-v1/latest/Google/Cloud/ArtifactRegistry/V1/ArtifactRegistry/Client.html)
+      # [Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-artifact_registry-v1/latest/Google-Cloud-ArtifactRegistry-V1-ArtifactRegistry-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ArtifactRegistry service is

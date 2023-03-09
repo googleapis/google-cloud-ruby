@@ -48,7 +48,7 @@ module Google
       # Create a new client object for BareMetalSolution.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client](https://googleapis.dev/ruby/google-cloud-bare_metal_solution-v2/latest/Google/Cloud/BareMetalSolution/V2/BareMetalSolution/Client.html)
+      # [Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-bare_metal_solution-v2/latest/Google-Cloud-BareMetalSolution-V2-BareMetalSolution-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the BareMetalSolution service is
