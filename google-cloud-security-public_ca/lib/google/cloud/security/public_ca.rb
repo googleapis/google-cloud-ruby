@@ -55,6 +55,8 @@ module Google
         # `version` parameter. If the PublicCertificateAuthorityService service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About PublicCertificateAuthorityService
         #
@@ -64,9 +66,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1beta1`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.public_certificate_authority_service version: :v1beta1, &block
+        def self.public_certificate_authority_service version: :v1beta1, transport: :grpc, &block
           require "google/cloud/security/public_ca/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Security::PublicCA
@@ -74,6 +77,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Security::PublicCA.const_get(package_name).const_get(:PublicCertificateAuthorityService)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
