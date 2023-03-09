@@ -48,7 +48,7 @@ module Google
       # Create a new client object for OrgPolicy.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::OrgPolicy::V2::OrgPolicy::Client](https://googleapis.dev/ruby/google-cloud-org_policy-v2/latest/Google/Cloud/OrgPolicy/V2/OrgPolicy/Client.html)
+      # [Google::Cloud::OrgPolicy::V2::OrgPolicy::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-org_policy-v2/latest/Google-Cloud-OrgPolicy-V2-OrgPolicy-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the OrgPolicy service is

@@ -48,7 +48,7 @@ module Google
       # Create a new client object for OsLoginService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::OsLogin::V1::OsLoginService::Client](https://googleapis.dev/ruby/google-cloud-os_login-v1/latest/Google/Cloud/OsLogin/V1/OsLoginService/Client.html)
+      # [Google::Cloud::OsLogin::V1::OsLoginService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-os_login-v1/latest/Google-Cloud-OsLogin-V1-OsLoginService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the OsLoginService service is
