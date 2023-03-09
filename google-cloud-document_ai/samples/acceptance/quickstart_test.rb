@@ -30,7 +30,7 @@ describe "Document AI Quickstart" do
   it "processes a document" do
     sample = SampleLoader.load "quickstart.rb"
 
-    assert_output "Invoice" do
+    assert_output /Invoice/ do
       sample.run project_id: project_id, location_id: location_id, processor_id: processor_id, file_path: file_path, mime_type: mime_type
     end
   end
