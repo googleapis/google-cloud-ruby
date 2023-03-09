@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-vm_migration-v1", path: "../google-cloud-vm_migration-v1"
