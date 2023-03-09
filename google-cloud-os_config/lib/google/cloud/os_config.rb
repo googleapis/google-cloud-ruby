@@ -48,7 +48,7 @@ module Google
       # Create a new client object for OsConfigService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::OsConfig::V1::OsConfigService::Client](https://googleapis.dev/ruby/google-cloud-os_config-v1/latest/Google/Cloud/OsConfig/V1/OsConfigService/Client.html)
+      # [Google::Cloud::OsConfig::V1::OsConfigService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-os_config-v1/latest/Google-Cloud-OsConfig-V1-OsConfigService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the OsConfigService service is
@@ -85,7 +85,7 @@ module Google
       # Create a new client object for OsConfigZonalService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::OsConfig::V1::OsConfigZonalService::Client](https://googleapis.dev/ruby/google-cloud-os_config-v1/latest/Google/Cloud/OsConfig/V1/OsConfigZonalService/Client.html)
+      # [Google::Cloud::OsConfig::V1::OsConfigZonalService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-os_config-v1/latest/Google-Cloud-OsConfig-V1-OsConfigZonalService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the OsConfigZonalService service is

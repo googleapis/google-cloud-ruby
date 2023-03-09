@@ -48,7 +48,7 @@ module Google
       # Create a new client object for PrivateCatalog.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client](https://googleapis.dev/ruby/google-cloud-private_catalog-v1beta1/latest/Google/Cloud/PrivateCatalog/V1beta1/PrivateCatalog/Client.html)
+      # [Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-private_catalog-v1beta1/latest/Google-Cloud-PrivateCatalog-V1beta1-PrivateCatalog-Client)
       # for a gRPC client for version V1beta1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PrivateCatalog service is

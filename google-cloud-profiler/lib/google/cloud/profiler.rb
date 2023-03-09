@@ -48,7 +48,7 @@ module Google
       # Create a new client object for ProfilerService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Profiler::V2::ProfilerService::Client](https://googleapis.dev/ruby/google-cloud-profiler-v2/latest/Google/Cloud/Profiler/V2/ProfilerService/Client.html)
+      # [Google::Cloud::Profiler::V2::ProfilerService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-profiler-v2/latest/Google-Cloud-Profiler-V2-ProfilerService-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ProfilerService service is

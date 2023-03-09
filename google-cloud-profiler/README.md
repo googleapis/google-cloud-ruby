@@ -16,7 +16,7 @@ for this library, google-cloud-profiler, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-profiler-v2](https://googleapis.dev/ruby/google-cloud-profiler-v2/latest).
+[google-cloud-profiler-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-profiler-v2/latest).
 
 See also the [Product Documentation](https://cloud.google.com/profiler/)
 for more usage information.
