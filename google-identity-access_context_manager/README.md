@@ -16,7 +16,7 @@ for this library, google-identity-access_context_manager, to see the convenience
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-identity-access_context_manager-v1](https://googleapis.dev/ruby/google-identity-access_context_manager-v1/latest).
+[google-identity-access_context_manager-v1](https://cloud.google.com/ruby/docs/reference/google-identity-access_context_manager-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/access-context-manager/)
 for more usage information.
