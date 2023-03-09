@@ -1,5 +1,13 @@
 # Release History
 
+### 0.21.0 (2023-03-09)
+
+#### Features
+
+* Support hints for the OCR model ([#20764](https://github.com/googleapis/google-cloud-ruby/issues/20764)) 
+* Support OCR image quality scores 
+* Support symbol level OCR information 
+
 ### 0.20.0 (2023-03-08)
 
 #### Features
