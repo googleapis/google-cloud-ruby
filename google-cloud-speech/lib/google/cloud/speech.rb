@@ -48,7 +48,7 @@ module Google
       # Create a new client object for Speech.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Speech::V1::Speech::Client](https://googleapis.dev/ruby/google-cloud-speech-v1/latest/Google/Cloud/Speech/V1/Speech/Client.html)
+      # [Google::Cloud::Speech::V1::Speech::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-speech-v1/latest/Google-Cloud-Speech-V1-Speech-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Speech service is
@@ -82,7 +82,7 @@ module Google
       # Create a new client object for Adaptation.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Speech::V1::Adaptation::Client](https://googleapis.dev/ruby/google-cloud-speech-v1/latest/Google/Cloud/Speech/V1/Adaptation/Client.html)
+      # [Google::Cloud::Speech::V1::Adaptation::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-speech-v1/latest/Google-Cloud-Speech-V1-Adaptation-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Adaptation service is
