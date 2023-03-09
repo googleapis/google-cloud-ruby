@@ -1,0 +1,103 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.clouddms.v1",
+  "libraryPackage": "::Google::Cloud::CloudDMS::V1",
+  "services": {
+    "DataMigrationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudDMS::V1::DataMigrationService::Client",
+          "rpcs": {
+            "ListMigrationJobs": {
+              "methods": [
+                "list_migration_jobs"
+              ]
+            },
+            "GetMigrationJob": {
+              "methods": [
+                "get_migration_job"
+              ]
+            },
+            "CreateMigrationJob": {
+              "methods": [
+                "create_migration_job"
+              ]
+            },
+            "UpdateMigrationJob": {
+              "methods": [
+                "update_migration_job"
+              ]
+            },
+            "DeleteMigrationJob": {
+              "methods": [
+                "delete_migration_job"
+              ]
+            },
+            "StartMigrationJob": {
+              "methods": [
+                "start_migration_job"
+              ]
+            },
+            "StopMigrationJob": {
+              "methods": [
+                "stop_migration_job"
+              ]
+            },
+            "ResumeMigrationJob": {
+              "methods": [
+                "resume_migration_job"
+              ]
+            },
+            "PromoteMigrationJob": {
+              "methods": [
+                "promote_migration_job"
+              ]
+            },
+            "VerifyMigrationJob": {
+              "methods": [
+                "verify_migration_job"
+              ]
+            },
+            "RestartMigrationJob": {
+              "methods": [
+                "restart_migration_job"
+              ]
+            },
+            "GenerateSshScript": {
+              "methods": [
+                "generate_ssh_script"
+              ]
+            },
+            "ListConnectionProfiles": {
+              "methods": [
+                "list_connection_profiles"
+              ]
+            },
+            "GetConnectionProfile": {
+              "methods": [
+                "get_connection_profile"
+              ]
+            },
+            "CreateConnectionProfile": {
+              "methods": [
+                "create_connection_profile"
+              ]
+            },
+            "UpdateConnectionProfile": {
+              "methods": [
+                "update_connection_profile"
+              ]
+            },
+            "DeleteConnectionProfile": {
+              "methods": [
+                "delete_connection_profile"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
