@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/datastore/admin"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Datastore::Admin::ClientConstructionMinitest < Minitest::Test
   def test_datastore_admin_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Datastore::Admin.datastore_admin do |config|
+      client = Google::Cloud::Datastore::Admin.datastore_admin transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client, client
+    end
+  end
+
+  def test_datastore_admin_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Datastore::Admin.datastore_admin transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client, client
     end
   end
 end

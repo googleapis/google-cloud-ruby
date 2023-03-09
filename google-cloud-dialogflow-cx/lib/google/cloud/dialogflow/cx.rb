@@ -55,6 +55,8 @@ module Google
         # `version` parameter. If the Pages service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About Pages
         #
@@ -62,9 +64,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.pages version: :v3, &block
+        def self.pages version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -72,6 +75,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Pages)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -85,6 +89,8 @@ module Google
         # `version` parameter. If the Flows service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About Flows
         #
@@ -92,9 +98,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.flows version: :v3, &block
+        def self.flows version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -102,6 +109,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Flows)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -115,6 +123,8 @@ module Google
         # `version` parameter. If the Agents service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About Agents
         #
@@ -122,9 +132,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.agents version: :v3, &block
+        def self.agents version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -132,6 +143,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Agents)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -145,6 +157,8 @@ module Google
         # `version` parameter. If the Changelogs service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About Changelogs
         #
@@ -152,9 +166,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.changelogs version: :v3, &block
+        def self.changelogs version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -162,6 +177,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Changelogs)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -175,6 +191,8 @@ module Google
         # `version` parameter. If the Deployments service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About Deployments
         #
@@ -182,9 +200,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.deployments version: :v3, &block
+        def self.deployments version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -192,6 +211,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Deployments)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -205,6 +225,8 @@ module Google
         # `version` parameter. If the EntityTypes service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About EntityTypes
         #
@@ -212,9 +234,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.entity_types version: :v3, &block
+        def self.entity_types version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -222,6 +245,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:EntityTypes)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -235,6 +259,8 @@ module Google
         # `version` parameter. If the Intents service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About Intents
         #
@@ -242,9 +268,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.intents version: :v3, &block
+        def self.intents version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -252,6 +279,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Intents)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -265,6 +293,8 @@ module Google
         # `version` parameter. If the SessionEntityTypes service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About SessionEntityTypes
         #
@@ -273,9 +303,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.session_entity_types version: :v3, &block
+        def self.session_entity_types version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -283,6 +314,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:SessionEntityTypes)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -296,6 +328,8 @@ module Google
         # `version` parameter. If the Sessions service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About Sessions
         #
@@ -306,9 +340,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.sessions version: :v3, &block
+        def self.sessions version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -316,6 +351,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Sessions)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -329,6 +365,8 @@ module Google
         # `version` parameter. If the TransitionRouteGroups service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About TransitionRouteGroups
         #
@@ -337,9 +375,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.transition_route_groups version: :v3, &block
+        def self.transition_route_groups version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -347,6 +386,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:TransitionRouteGroups)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -360,6 +400,8 @@ module Google
         # `version` parameter. If the TestCases service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About TestCases
         #
@@ -368,9 +410,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.test_cases version: :v3, &block
+        def self.test_cases version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -378,6 +421,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:TestCases)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -391,6 +435,8 @@ module Google
         # `version` parameter. If the Webhooks service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About Webhooks
         #
@@ -398,9 +444,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.webhooks version: :v3, &block
+        def self.webhooks version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -408,6 +455,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Webhooks)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -421,6 +469,8 @@ module Google
         # `version` parameter. If the Environments service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About Environments
         #
@@ -429,9 +479,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.environments version: :v3, &block
+        def self.environments version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -439,6 +490,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Environments)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -452,6 +504,8 @@ module Google
         # `version` parameter. If the Experiments service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About Experiments
         #
@@ -459,9 +513,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.experiments version: :v3, &block
+        def self.experiments version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -469,6 +524,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Experiments)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -482,6 +538,8 @@ module Google
         # `version` parameter. If the SecuritySettingsService service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About SecuritySettingsService
         #
@@ -489,9 +547,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.security_settings_service version: :v3, &block
+        def self.security_settings_service version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -499,6 +558,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:SecuritySettingsService)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -512,6 +572,8 @@ module Google
         # `version` parameter. If the Versions service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About Versions
         #
@@ -519,9 +581,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.versions version: :v3, &block
+        def self.versions version: :v3, transport: :grpc, &block
           require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Dialogflow::CX
@@ -529,6 +592,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Versions)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
