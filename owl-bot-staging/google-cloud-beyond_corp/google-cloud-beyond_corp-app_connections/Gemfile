@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-beyond_corp-app_connections-v1", path: "../google-cloud-beyond_corp-app_connections-v1"

@@ -49,7 +49,7 @@ module Google
         # Create a new client object for ClientConnectorServicesService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorServicesService::Client](https://googleapis.dev/ruby/google-cloud-beyond_corp-client_connector_services-v1/latest/Google/Cloud/BeyondCorp/ClientConnectorServices/V1/ClientConnectorServicesService/Client.html)
+        # [Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorServicesService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-client_connector_services-v1/latest/Google-Cloud-BeyondCorp-ClientConnectorServices-V1-ClientConnectorServicesService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the ClientConnectorServicesService service is

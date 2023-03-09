@@ -49,7 +49,7 @@ module Google
         # Create a new client object for MigrationService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Bigquery::Migration::V2::MigrationService::Client](https://googleapis.dev/ruby/google-cloud-bigquery-migration-v2/latest/Google/Cloud/Bigquery/Migration/V2/MigrationService/Client.html)
+        # [Google::Cloud::Bigquery::Migration::V2::MigrationService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-migration-v2/latest/Google-Cloud-Bigquery-Migration-V2-MigrationService-Client)
         # for a gRPC client for version V2 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the MigrationService service is

@@ -16,7 +16,7 @@ for this library, google-cloud-bigquery-data_transfer, to see the convenience me
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-bigquery-data_transfer-v1](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer-v1/latest).
+[google-cloud-bigquery-data_transfer-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_transfer-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/bigquery/transfer)
 for more usage information.

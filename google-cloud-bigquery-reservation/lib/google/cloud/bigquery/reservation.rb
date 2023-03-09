@@ -49,7 +49,7 @@ module Google
         # Create a new client object for ReservationService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client](https://googleapis.dev/ruby/google-cloud-bigquery-reservation-v1/latest/Google/Cloud/Bigquery/Reservation/V1/ReservationService/Client.html)
+        # [Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-reservation-v1/latest/Google-Cloud-Bigquery-Reservation-V1-ReservationService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the ReservationService service is
