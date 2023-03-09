@@ -48,7 +48,7 @@ module Google
       # Create a new client object for DeviceManager.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Iot::V1::DeviceManager::Client](https://googleapis.dev/ruby/google-cloud-iot-v1/latest/Google/Cloud/Iot/V1/DeviceManager/Client.html)
+      # [Google::Cloud::Iot::V1::DeviceManager::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-iot-v1/latest/Google-Cloud-Iot-V1-DeviceManager-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DeviceManager service is

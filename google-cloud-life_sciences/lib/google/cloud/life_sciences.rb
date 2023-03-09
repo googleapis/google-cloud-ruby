@@ -48,7 +48,7 @@ module Google
       # Create a new client object for WorkflowsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client](https://googleapis.dev/ruby/google-cloud-life_sciences-v2beta/latest/Google/Cloud/LifeSciences/V2beta/WorkflowsService/Client.html)
+      # [Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-life_sciences-v2beta/latest/Google-Cloud-LifeSciences-V2beta-WorkflowsService-Client)
       # for a gRPC client for version V2beta of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the WorkflowsService service is

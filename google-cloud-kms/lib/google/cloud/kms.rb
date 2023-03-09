@@ -48,7 +48,7 @@ module Google
       # Create a new client object for EkmService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Kms::V1::EkmService::Client](https://googleapis.dev/ruby/google-cloud-kms-v1/latest/Google/Cloud/Kms/V1/EkmService/Client.html)
+      # [Google::Cloud::Kms::V1::EkmService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-kms-v1/latest/Google-Cloud-Kms-V1-EkmService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the EkmService service is
@@ -86,7 +86,7 @@ module Google
       # Create a new client object for KeyManagementService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Kms::V1::KeyManagementService::Client](https://googleapis.dev/ruby/google-cloud-kms-v1/latest/Google/Cloud/Kms/V1/KeyManagementService/Client.html)
+      # [Google::Cloud::Kms::V1::KeyManagementService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-kms-v1/latest/Google-Cloud-Kms-V1-KeyManagementService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the KeyManagementService service is

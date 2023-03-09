@@ -48,7 +48,7 @@ module Google
       # Create a new client object for LanguageService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Language::V1::LanguageService::Client](https://googleapis.dev/ruby/google-cloud-language-v1/latest/Google/Cloud/Language/V1/LanguageService/Client.html)
+      # [Google::Cloud::Language::V1::LanguageService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v1/latest/Google-Cloud-Language-V1-LanguageService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the LanguageService service is

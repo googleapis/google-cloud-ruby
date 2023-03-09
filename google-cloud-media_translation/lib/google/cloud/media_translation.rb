@@ -48,7 +48,7 @@ module Google
       # Create a new client object for SpeechTranslationService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client](https://googleapis.dev/ruby/google-cloud-media_translation-v1beta1/latest/Google/Cloud/MediaTranslation/V1beta1/SpeechTranslationService/Client.html)
+      # [Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-media_translation-v1beta1/latest/Google-Cloud-MediaTranslation-V1beta1-SpeechTranslationService-Client)
       # for a gRPC client for version V1beta1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SpeechTranslationService service is

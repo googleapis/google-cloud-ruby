@@ -1,6 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-language-v1", path: "../google-cloud-language-v1"
-gem "google-cloud-language-v1beta2", path: "../google-cloud-language-v1beta2"
