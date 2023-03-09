@@ -16,7 +16,7 @@ for this library, google-cloud-certificate_manager, to see the convenience metho
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-certificate_manager-v1](https://googleapis.dev/ruby/google-cloud-certificate_manager-v1/latest).
+[google-cloud-certificate_manager-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-certificate_manager-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/certificate-manager)
 for more usage information.

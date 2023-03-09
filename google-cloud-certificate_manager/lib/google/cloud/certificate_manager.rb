@@ -48,7 +48,7 @@ module Google
       # Create a new client object for CertificateManager.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::CertificateManager::V1::CertificateManager::Client](https://googleapis.dev/ruby/google-cloud-certificate_manager-v1/latest/Google/Cloud/CertificateManager/V1/CertificateManager/Client.html)
+      # [Google::Cloud::CertificateManager::V1::CertificateManager::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-certificate_manager-v1/latest/Google-Cloud-CertificateManager-V1-CertificateManager-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CertificateManager service is
