@@ -54,6 +54,8 @@ module Google
       # `version` parameter. If the DataCatalog service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About DataCatalog
       #
@@ -62,9 +64,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.data_catalog version: :v1, &block
+      def self.data_catalog version: :v1, transport: :grpc, &block
         require "google/cloud/data_catalog/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DataCatalog
@@ -72,6 +75,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::DataCatalog.const_get(package_name).const_get(:DataCatalog)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -85,6 +89,8 @@ module Google
       # `version` parameter. If the PolicyTagManager service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About PolicyTagManager
       #
@@ -97,9 +103,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.policy_tag_manager version: :v1, &block
+      def self.policy_tag_manager version: :v1, transport: :grpc, &block
         require "google/cloud/data_catalog/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DataCatalog
@@ -107,6 +114,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::DataCatalog.const_get(package_name).const_get(:PolicyTagManager)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -120,6 +128,8 @@ module Google
       # `version` parameter. If the PolicyTagManagerSerialization service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About PolicyTagManagerSerialization
       #
@@ -130,9 +140,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.policy_tag_manager_serialization version: :v1, &block
+      def self.policy_tag_manager_serialization version: :v1, transport: :grpc, &block
         require "google/cloud/data_catalog/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DataCatalog
@@ -140,6 +151,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::DataCatalog.const_get(package_name).const_get(:PolicyTagManagerSerialization)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
