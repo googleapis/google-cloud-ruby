@@ -49,7 +49,7 @@ module Google
         # Create a new client object for DataPolicyService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Client](https://googleapis.dev/ruby/google-cloud-bigquery-data_policies-v1/latest/Google/Cloud/Bigquery/DataPolicies/V1/DataPolicyService/Client.html)
+        # [Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_policies-v1/latest/Google-Cloud-Bigquery-DataPolicies-V1-DataPolicyService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the DataPolicyService service is

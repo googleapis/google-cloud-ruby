@@ -49,7 +49,7 @@ module Google
         # Create a new client object for BigQueryRead.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client](https://googleapis.dev/ruby/google-cloud-bigquery-storage-v1/latest/Google/Cloud/Bigquery/Storage/V1/BigQueryRead/Client.html)
+        # [Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-storage-v1/latest/Google-Cloud-Bigquery-Storage-V1-BigQueryRead-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the BigQueryRead service is
@@ -81,7 +81,7 @@ module Google
         # Create a new client object for BigQueryWrite.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client](https://googleapis.dev/ruby/google-cloud-bigquery-storage-v1/latest/Google/Cloud/Bigquery/Storage/V1/BigQueryWrite/Client.html)
+        # [Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-storage-v1/latest/Google-Cloud-Bigquery-Storage-V1-BigQueryWrite-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the BigQueryWrite service is

@@ -49,7 +49,7 @@ module Google
         # Create a new client object for DataTransferService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer-v1/latest/Google/Cloud/Bigquery/DataTransfer/V1/DataTransferService/Client.html)
+        # [Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_transfer-v1/latest/Google-Cloud-Bigquery-DataTransfer-V1-DataTransferService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the DataTransferService service is

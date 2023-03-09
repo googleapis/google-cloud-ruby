@@ -49,7 +49,7 @@ module Google
         # Create a new client object for AppGatewaysService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client](https://googleapis.dev/ruby/google-cloud-beyond_corp-app_gateways-v1/latest/Google/Cloud/BeyondCorp/AppGateways/V1/AppGatewaysService/Client.html)
+        # [Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_gateways-v1/latest/Google-Cloud-BeyondCorp-AppGateways-V1-AppGatewaysService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the AppGatewaysService service is
