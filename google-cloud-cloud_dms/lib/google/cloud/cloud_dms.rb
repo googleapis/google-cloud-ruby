@@ -48,7 +48,7 @@ module Google
       # Create a new client object for DataMigrationService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::CloudDMS::V1::DataMigrationService::Client](https://googleapis.dev/ruby/google-cloud-cloud_dms-v1/latest/Google/Cloud/CloudDMS/V1/DataMigrationService/Client.html)
+      # [Google::Cloud::CloudDMS::V1::DataMigrationService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_dms-v1/latest/Google-Cloud-CloudDMS-V1-DataMigrationService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DataMigrationService service is

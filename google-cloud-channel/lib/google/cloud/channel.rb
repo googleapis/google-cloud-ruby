@@ -48,7 +48,7 @@ module Google
       # Create a new client object for CloudChannelReportsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Channel::V1::CloudChannelReportsService::Client](https://googleapis.dev/ruby/google-cloud-channel-v1/latest/Google/Cloud/Channel/V1/CloudChannelReportsService/Client.html)
+      # [Google::Cloud::Channel::V1::CloudChannelReportsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-channel-v1/latest/Google-Cloud-Channel-V1-CloudChannelReportsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CloudChannelReportsService service is
@@ -85,7 +85,7 @@ module Google
       # Create a new client object for CloudChannelService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Channel::V1::CloudChannelService::Client](https://googleapis.dev/ruby/google-cloud-channel-v1/latest/Google/Cloud/Channel/V1/CloudChannelService/Client.html)
+      # [Google::Cloud::Channel::V1::CloudChannelService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-channel-v1/latest/Google-Cloud-Channel-V1-CloudChannelService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CloudChannelService service is
