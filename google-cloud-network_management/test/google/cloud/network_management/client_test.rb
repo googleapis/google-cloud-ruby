@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/network_management"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::NetworkManagement::ClientConstructionMinitest < Minitest::Test
   def test_reachability_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::NetworkManagement.reachability_service do |config|
+      client = Google::Cloud::NetworkManagement.reachability_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::NetworkManagement::V1::ReachabilityService::Client, client
+    end
+  end
+
+  def test_reachability_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::NetworkManagement.reachability_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client, client
     end
   end
 end
