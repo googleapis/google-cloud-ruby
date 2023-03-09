@@ -48,7 +48,7 @@ module Google
       # Create a new client object for DatasetService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::DatasetService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/DatasetService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::DatasetService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-DatasetService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DatasetService service is
@@ -79,7 +79,7 @@ module Google
       # Create a new client object for EndpointService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::EndpointService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/EndpointService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::EndpointService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-EndpointService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the EndpointService service is
@@ -109,7 +109,7 @@ module Google
       # Create a new client object for FeaturestoreOnlineServingService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/FeaturestoreOnlineServingService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-FeaturestoreOnlineServingService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the FeaturestoreOnlineServingService service is
@@ -139,7 +139,7 @@ module Google
       # Create a new client object for FeaturestoreService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::FeaturestoreService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/FeaturestoreService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::FeaturestoreService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-FeaturestoreService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the FeaturestoreService service is
@@ -169,7 +169,7 @@ module Google
       # Create a new client object for IndexEndpointService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::IndexEndpointService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/IndexEndpointService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::IndexEndpointService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-IndexEndpointService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the IndexEndpointService service is
@@ -199,7 +199,7 @@ module Google
       # Create a new client object for IndexService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::IndexService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/IndexService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::IndexService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-IndexService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the IndexService service is
@@ -229,7 +229,7 @@ module Google
       # Create a new client object for JobService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::JobService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/JobService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::JobService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-JobService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the JobService service is
@@ -259,7 +259,7 @@ module Google
       # Create a new client object for MetadataService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::MetadataService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/MetadataService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::MetadataService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-MetadataService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the MetadataService service is
@@ -289,7 +289,7 @@ module Google
       # Create a new client object for MigrationService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::MigrationService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/MigrationService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::MigrationService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-MigrationService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the MigrationService service is
@@ -320,7 +320,7 @@ module Google
       # Create a new client object for ModelService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::ModelService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/ModelService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::ModelService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-ModelService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ModelService service is
@@ -350,7 +350,7 @@ module Google
       # Create a new client object for PipelineService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::PipelineService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/PipelineService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::PipelineService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-PipelineService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PipelineService service is
@@ -382,7 +382,7 @@ module Google
       # Create a new client object for PredictionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::PredictionService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/PredictionService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::PredictionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-PredictionService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PredictionService service is
@@ -412,7 +412,7 @@ module Google
       # Create a new client object for SpecialistPoolService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/SpecialistPoolService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-SpecialistPoolService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SpecialistPoolService service is
@@ -447,7 +447,7 @@ module Google
       # Create a new client object for TensorboardService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::TensorboardService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/TensorboardService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::TensorboardService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-TensorboardService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TensorboardService service is
@@ -477,7 +477,7 @@ module Google
       # Create a new client object for VizierService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AIPlatform::V1::VizierService::Client](https://googleapis.dev/ruby/google-cloud-ai_platform-v1/latest/Google/Cloud/AIPlatform/V1/VizierService/Client.html)
+      # [Google::Cloud::AIPlatform::V1::VizierService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-VizierService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the VizierService service is

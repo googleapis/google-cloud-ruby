@@ -31,7 +31,7 @@ module Google
       # Create a new client object for AnalyticsAdminService.
       #
       # By default, this returns an instance of
-      # [Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client](https://googleapis.dev/ruby/google-analytics-admin-v1alpha/latest/Google/Analytics/Admin/V1alpha/AnalyticsAdminService/Client.html)
+      # [Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client](https://rubydoc.info/gems/google-analytics-admin-v1alpha/Google/Analytics/Admin/V1alpha/AnalyticsAdminService/Client)
       # for a gRPC client for version V1alpha of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AnalyticsAdminService service is

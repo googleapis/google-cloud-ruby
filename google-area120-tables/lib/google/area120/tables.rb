@@ -31,7 +31,7 @@ module Google
       # Create a new client object for TablesService.
       #
       # By default, this returns an instance of
-      # [Google::Area120::Tables::V1alpha1::TablesService::Client](https://googleapis.dev/ruby/google-area120-tables-v1alpha1/latest/Google/Area120/Tables/V1alpha1/TablesService/Client.html)
+      # [Google::Area120::Tables::V1alpha1::TablesService::Client](https://rubydoc.info/gems/google-area120-tables-v1alpha1/Google/Area120/Tables/V1alpha1/TablesService/Client)
       # for a gRPC client for version V1alpha1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TablesService service is

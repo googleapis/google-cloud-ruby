@@ -16,7 +16,7 @@ for this library, google-cloud-api_keys, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-api_keys-v2](https://googleapis.dev/ruby/google-cloud-api_keys-v2/latest).
+[google-cloud-api_keys-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-api_keys-v2/latest).
 
 See also the [Product Documentation](https://cloud.google.com/api-keys/)
 for more usage information.

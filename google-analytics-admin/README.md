@@ -11,12 +11,12 @@ verisoned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-analytics-admin/latest)
+View the [Client Library Documentation](https://rubydoc.info/gems/google-analytics-admin)
 for this library, google-analytics-admin, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-analytics-admin-v1alpha](https://googleapis.dev/ruby/google-analytics-admin-v1alpha/latest).
+[google-analytics-admin-v1alpha](https://rubydoc.info/gems/google-analytics-admin-v1alpha).
 
 ## Quick Start
 

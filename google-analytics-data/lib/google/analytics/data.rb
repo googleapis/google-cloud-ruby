@@ -31,7 +31,7 @@ module Google
       # Create a new client object for AnalyticsData.
       #
       # By default, this returns an instance of
-      # [Google::Analytics::Data::V1beta::AnalyticsData::Client](https://googleapis.dev/ruby/google-analytics-data-v1beta/latest/Google/Analytics/Data/V1beta/AnalyticsData/Client.html)
+      # [Google::Analytics::Data::V1beta::AnalyticsData::Client](https://rubydoc.info/gems/google-analytics-data-v1beta/Google/Analytics/Data/V1beta/AnalyticsData/Client)
       # for a gRPC client for version V1beta of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AnalyticsData service is

@@ -11,12 +11,12 @@ verisoned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-area120-tables/latest)
+View the [Client Library Documentation](https://rubydoc.info/gems/google-area120-tables)
 for this library, google-area120-tables, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-area120-tables-v1alpha1](https://googleapis.dev/ruby/google-area120-tables-v1alpha1/latest).
+[google-area120-tables-v1alpha1](https://rubydoc.info/gems/google-area120-tables-v1alpha1).
 
 See also the [Product Documentation](https://tables.area120.google.com/u/0/about#/)
 for more usage information.

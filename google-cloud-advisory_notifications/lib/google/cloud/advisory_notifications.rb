@@ -48,7 +48,7 @@ module Google
       # Create a new client object for AdvisoryNotificationsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client](https://googleapis.dev/ruby/google-cloud-advisory_notifications-v1/latest/Google/Cloud/AdvisoryNotifications/V1/AdvisoryNotificationsService/Client.html)
+      # [Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-advisory_notifications-v1/latest/Google-Cloud-AdvisoryNotifications-V1-AdvisoryNotificationsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AdvisoryNotificationsService service is

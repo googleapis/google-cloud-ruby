@@ -48,7 +48,7 @@ module Google
       # Create a new client object for AccessApproval.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AccessApproval::V1::AccessApproval::Client](https://googleapis.dev/ruby/google-cloud-access_approval-v1/latest/Google/Cloud/AccessApproval/V1/AccessApproval/Client.html)
+      # [Google::Cloud::AccessApproval::V1::AccessApproval::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-access_approval-v1/latest/Google-Cloud-AccessApproval-V1-AccessApproval-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AccessApproval service is
