@@ -1,6 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-security-private_ca-v1", path: "../google-cloud-security-private_ca-v1"
-gem "google-cloud-security-private_ca-v1beta1", path: "../google-cloud-security-private_ca-v1beta1"

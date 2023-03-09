@@ -16,7 +16,7 @@ for this library, google-cloud-security-public_ca, to see the convenience method
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-security-public_ca-v1beta1](https://googleapis.dev/ruby/google-cloud-security-public_ca-v1beta1/latest).
+[google-cloud-security-public_ca-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-security-public_ca-v1beta1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/certificate-manager/docs/public-ca/)
 for more usage information.
