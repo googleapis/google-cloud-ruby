@@ -16,10 +16,10 @@ for this library, google-cloud-video_intelligence, to see the convenience method
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-video_intelligence-v1](https://googleapis.dev/ruby/google-cloud-video_intelligence-v1/latest),
-[google-cloud-video_intelligence-v1beta2](https://googleapis.dev/ruby/google-cloud-video_intelligence-v1beta2/latest),
-[google-cloud-video_intelligence-v1p1beta1](https://googleapis.dev/ruby/google-cloud-video_intelligence-v1p1beta1/latest),
-[google-cloud-video_intelligence-v1p2beta1](https://googleapis.dev/ruby/google-cloud-video_intelligence-v1p2beta1/latest).
+[google-cloud-video_intelligence-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-video_intelligence-v1/latest),
+[google-cloud-video_intelligence-v1beta2](https://cloud.google.com/ruby/docs/reference/google-cloud-video_intelligence-v1beta2/latest),
+[google-cloud-video_intelligence-v1p1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-video_intelligence-v1p1beta1/latest),
+[google-cloud-video_intelligence-v1p2beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-video_intelligence-v1p2beta1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/video-intelligence)
 for more usage information.

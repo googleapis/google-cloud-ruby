@@ -16,8 +16,8 @@ for this library, google-cloud-translate, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-translate-v2](https://googleapis.dev/ruby/google-cloud-translate-v2/latest),
-[google-cloud-translate-v3](https://googleapis.dev/ruby/google-cloud-translate-v3/latest).
+[google-cloud-translate-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-translate-v2/latest),
+[google-cloud-translate-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-translate-v3/latest).
 
 See also the [Product Documentation](https://cloud.google.com/translate)
 for more usage information.

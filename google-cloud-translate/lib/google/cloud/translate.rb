@@ -48,7 +48,7 @@ module Google
       # Create a new client object for TranslationService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Translate::V3::TranslationService::Client](https://googleapis.dev/ruby/google-cloud-translate-v3/latest/Google/Cloud/Translate/V3/TranslationService/Client.html)
+      # [Google::Cloud::Translate::V3::TranslationService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-translate-v3/latest/Google-Cloud-Translate-V3-TranslationService-Client)
       # for a gRPC client for version V3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TranslationService service is

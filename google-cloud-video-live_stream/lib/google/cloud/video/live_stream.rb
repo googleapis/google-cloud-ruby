@@ -49,7 +49,7 @@ module Google
         # Create a new client object for LivestreamService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Video::LiveStream::V1::LivestreamService::Client](https://googleapis.dev/ruby/google-cloud-video-live_stream-v1/latest/Google/Cloud/Video/LiveStream/V1/LivestreamService/Client.html)
+        # [Google::Cloud::Video::LiveStream::V1::LivestreamService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-video-live_stream-v1/latest/Google-Cloud-Video-LiveStream-V1-LivestreamService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the LivestreamService service is

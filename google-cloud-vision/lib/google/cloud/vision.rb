@@ -48,7 +48,7 @@ module Google
       # Create a new client object for ProductSearch.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Vision::V1::ProductSearch::Client](https://googleapis.dev/ruby/google-cloud-vision-v1/latest/Google/Cloud/Vision/V1/ProductSearch/Client.html)
+      # [Google::Cloud::Vision::V1::ProductSearch::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-vision-v1/latest/Google-Cloud-Vision-V1-ProductSearch-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ProductSearch service is
@@ -95,7 +95,7 @@ module Google
       # Create a new client object for ImageAnnotator.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Vision::V1::ImageAnnotator::Client](https://googleapis.dev/ruby/google-cloud-vision-v1/latest/Google/Cloud/Vision/V1/ImageAnnotator/Client.html)
+      # [Google::Cloud::Vision::V1::ImageAnnotator::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-vision-v1/latest/Google-Cloud-Vision-V1-ImageAnnotator-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ImageAnnotator service is

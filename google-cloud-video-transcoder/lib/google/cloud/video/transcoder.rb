@@ -49,7 +49,7 @@ module Google
         # Create a new client object for TranscoderService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Video::Transcoder::V1::TranscoderService::Client](https://googleapis.dev/ruby/google-cloud-video-transcoder-v1/latest/Google/Cloud/Video/Transcoder/V1/TranscoderService/Client.html)
+        # [Google::Cloud::Video::Transcoder::V1::TranscoderService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-video-transcoder-v1/latest/Google-Cloud-Video-Transcoder-V1-TranscoderService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the TranscoderService service is
