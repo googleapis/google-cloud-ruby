@@ -48,7 +48,7 @@ module Google
       # Create a new client object for AutoscalingPolicyService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest/Google/Cloud/Dataproc/V1/AutoscalingPolicyService/Client.html)
+      # [Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-AutoscalingPolicyService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AutoscalingPolicyService service is
@@ -83,7 +83,7 @@ module Google
       # Create a new client object for BatchController.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataproc::V1::BatchController::Client](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest/Google/Cloud/Dataproc/V1/BatchController/Client.html)
+      # [Google::Cloud::Dataproc::V1::BatchController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-BatchController-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the BatchController service is
@@ -117,7 +117,7 @@ module Google
       # Create a new client object for ClusterController.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataproc::V1::ClusterController::Client](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest/Google/Cloud/Dataproc/V1/ClusterController/Client.html)
+      # [Google::Cloud::Dataproc::V1::ClusterController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-ClusterController-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ClusterController service is
@@ -152,7 +152,7 @@ module Google
       # Create a new client object for JobController.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataproc::V1::JobController::Client](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest/Google/Cloud/Dataproc/V1/JobController/Client.html)
+      # [Google::Cloud::Dataproc::V1::JobController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-JobController-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the JobController service is
@@ -186,7 +186,7 @@ module Google
       # Create a new client object for NodeGroupController.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataproc::V1::NodeGroupController::Client](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest/Google/Cloud/Dataproc/V1/NodeGroupController/Client.html)
+      # [Google::Cloud::Dataproc::V1::NodeGroupController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-NodeGroupController-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NodeGroupController service is
@@ -221,7 +221,7 @@ module Google
       # Create a new client object for WorkflowTemplateService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest/Google/Cloud/Dataproc/V1/WorkflowTemplateService/Client.html)
+      # [Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-WorkflowTemplateService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the WorkflowTemplateService service is
