@@ -16,7 +16,7 @@ for this library, google-cloud-storage_transfer, to see the convenience methods 
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-storage_transfer-v1](https://googleapis.dev/ruby/google-cloud-storage_transfer-v1/latest).
+[google-cloud-storage_transfer-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-storage_transfer-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/storage-transfer-service/)
 for more usage information.

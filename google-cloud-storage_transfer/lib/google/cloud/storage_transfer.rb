@@ -48,7 +48,7 @@ module Google
       # Create a new client object for StorageTransferService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::StorageTransfer::V1::StorageTransferService::Client](https://googleapis.dev/ruby/google-cloud-storage_transfer-v1/latest/Google/Cloud/StorageTransfer/V1/StorageTransferService/Client.html)
+      # [Google::Cloud::StorageTransfer::V1::StorageTransferService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-storage_transfer-v1/latest/Google-Cloud-StorageTransfer-V1-StorageTransferService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the StorageTransferService service is

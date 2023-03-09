@@ -48,7 +48,7 @@ module Google
       # Create a new client object for TextToSpeech.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::TextToSpeech::V1::TextToSpeech::Client](https://googleapis.dev/ruby/google-cloud-text_to_speech-v1/latest/Google/Cloud/TextToSpeech/V1/TextToSpeech/Client.html)
+      # [Google::Cloud::TextToSpeech::V1::TextToSpeech::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-text_to_speech-v1/latest/Google-Cloud-TextToSpeech-V1-TextToSpeech-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TextToSpeech service is
@@ -82,7 +82,7 @@ module Google
       # Create a new client object for TextToSpeechLongAudioSynthesize.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::TextToSpeech::V1::TextToSpeechLongAudioSynthesize::Client](https://googleapis.dev/ruby/google-cloud-text_to_speech-v1/latest/Google/Cloud/TextToSpeech/V1/TextToSpeechLongAudioSynthesize/Client.html)
+      # [Google::Cloud::TextToSpeech::V1::TextToSpeechLongAudioSynthesize::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-text_to_speech-v1/latest/Google-Cloud-TextToSpeech-V1-TextToSpeechLongAudioSynthesize-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TextToSpeechLongAudioSynthesize service is

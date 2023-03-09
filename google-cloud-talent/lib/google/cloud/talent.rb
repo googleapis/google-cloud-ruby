@@ -48,7 +48,7 @@ module Google
       # Create a new client object for CompanyService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4::CompanyService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/CompanyService/Client.html)
+      # [Google::Cloud::Talent::V4::CompanyService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4/latest/Google-Cloud-Talent-V4-CompanyService-Client)
       # for a gRPC client for version V4 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CompanyService service is
@@ -82,7 +82,7 @@ module Google
       # Create a new client object for Completion.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4::Completion::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/Completion/Client.html)
+      # [Google::Cloud::Talent::V4::Completion::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4/latest/Google-Cloud-Talent-V4-Completion-Client)
       # for a gRPC client for version V4 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Completion service is
@@ -116,7 +116,7 @@ module Google
       # Create a new client object for EventService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4::EventService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/EventService/Client.html)
+      # [Google::Cloud::Talent::V4::EventService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4/latest/Google-Cloud-Talent-V4-EventService-Client)
       # for a gRPC client for version V4 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the EventService service is
@@ -150,7 +150,7 @@ module Google
       # Create a new client object for JobService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4::JobService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/JobService/Client.html)
+      # [Google::Cloud::Talent::V4::JobService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4/latest/Google-Cloud-Talent-V4-JobService-Client)
       # for a gRPC client for version V4 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the JobService service is
@@ -184,7 +184,7 @@ module Google
       # Create a new client object for TenantService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4::TenantService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/TenantService/Client.html)
+      # [Google::Cloud::Talent::V4::TenantService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4/latest/Google-Cloud-Talent-V4-TenantService-Client)
       # for a gRPC client for version V4 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TenantService service is
