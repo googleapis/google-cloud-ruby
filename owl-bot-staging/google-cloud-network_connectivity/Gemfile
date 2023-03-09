@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-network_connectivity-v1", path: "../google-cloud-network_connectivity-v1"
+gem "google-cloud-network_connectivity-v1alpha1", path: "../google-cloud-network_connectivity-v1alpha1"
