@@ -1,0 +1,18 @@
+{
+    "api_id": "datacatalog.googleapis.com",
+    "api_shortname": "datacatalog",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-data_catalog/latest",
+    "distribution_name": "google-cloud-data_catalog",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "datacatalog",
+    "name_pretty": "Data Catalog API",
+    "product_documentation": "https://cloud.google.com/data-catalog",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Data Catalog is a centralized and unified data catalog service for all your Cloud resources, where users and systems can discover data, explore and curate its semantics, understand how to act on it, and help govern its usage.",
+    "ruby-cloud-env-prefix": "DATA_CATALOG",
+    "ruby-cloud-product-url": "https://cloud.google.com/data-catalog",
+    "library_type": "GAPIC_AUTO"
+}
