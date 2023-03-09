@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "google/cloud/document_ai"
+
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
@@ -32,6 +34,5 @@ describe "Document AI Quickstart" do
     assert_output "Invoice" do
       sample.run project_id: project_id, location_id: location_id, processor_id: processor_id, file_path: file_path, mime_type: mime_type
     end
-
   end
 end
