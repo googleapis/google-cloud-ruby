@@ -24,7 +24,7 @@ describe "Document AI Quickstart" do
   let(:client) { Google::Cloud::DocumentAI.document_processor_service }
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
   let(:location_id) { "us" }
-  let(:processor_id) { "aaaaaaaa" }
+  let(:processor_id) { "e894aff43df677e0" }
   let(:file_path) { "acceptance/data/invoice.pdf" }
   let(:mime_type) { "application/pdf" }
 
