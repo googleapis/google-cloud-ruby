@@ -49,7 +49,7 @@ module Google
         # Create a new client object for KeyDashboardService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Client](https://googleapis.dev/ruby/google-cloud-kms-inventory-v1/latest/Google/Cloud/Kms/Inventory/V1/KeyDashboardService/Client.html)
+        # [Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-kms-inventory-v1/latest/Google-Cloud-Kms-Inventory-V1-KeyDashboardService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the KeyDashboardService service is
@@ -83,7 +83,7 @@ module Google
         # Create a new client object for KeyTrackingService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client](https://googleapis.dev/ruby/google-cloud-kms-inventory-v1/latest/Google/Cloud/Kms/Inventory/V1/KeyTrackingService/Client.html)
+        # [Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-kms-inventory-v1/latest/Google-Cloud-Kms-Inventory-V1-KeyTrackingService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the KeyTrackingService service is

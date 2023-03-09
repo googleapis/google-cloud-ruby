@@ -48,7 +48,7 @@ module Google
       # Create a new client object for ManagedIdentitiesService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client](https://googleapis.dev/ruby/google-cloud-managed_identities-v1/latest/Google/Cloud/ManagedIdentities/V1/ManagedIdentitiesService/Client.html)
+      # [Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-managed_identities-v1/latest/Google-Cloud-ManagedIdentities-V1-ManagedIdentitiesService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ManagedIdentitiesService service is

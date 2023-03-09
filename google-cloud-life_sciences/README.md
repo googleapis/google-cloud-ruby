@@ -16,7 +16,7 @@ for this library, google-cloud-life_sciences, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-life_sciences-v2beta](https://googleapis.dev/ruby/google-cloud-life_sciences-v2beta/latest).
+[google-cloud-life_sciences-v2beta](https://cloud.google.com/ruby/docs/reference/google-cloud-life_sciences-v2beta/latest).
 
 See also the [Product Documentation](https://cloud.google.com/life-sciences/)
 for more usage information.

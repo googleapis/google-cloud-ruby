@@ -16,8 +16,8 @@ for this library, google-cloud-language, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-language-v1](https://googleapis.dev/ruby/google-cloud-language-v1/latest),
-[google-cloud-language-v1beta2](https://googleapis.dev/ruby/google-cloud-language-v1beta2/latest).
+[google-cloud-language-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v1/latest),
+[google-cloud-language-v1beta2](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v1beta2/latest).
 
 See also the [Product Documentation](https://cloud.google.com/natural-language)
 for more usage information.

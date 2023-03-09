@@ -48,7 +48,7 @@ module Google
       # Create a new client object for CloudMemcache.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Memcache::V1::CloudMemcache::Client](https://googleapis.dev/ruby/google-cloud-memcache-v1/latest/Google/Cloud/Memcache/V1/CloudMemcache/Client.html)
+      # [Google::Cloud::Memcache::V1::CloudMemcache::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-memcache-v1/latest/Google-Cloud-Memcache-V1-CloudMemcache-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CloudMemcache service is
