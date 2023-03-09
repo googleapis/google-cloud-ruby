@@ -323,18 +323,19 @@ def run_in_dir dir
 end
 
 def run_linkinator dir
+  allowed_http_codes = ["200", "202"]
   dir_without_version = dir.sub(/-v\d\w*$/, "")
+  gem_name_pattern = dir == dir_without_version ? "#{dir}-v\\d\\w*" : dir
   skip_regexes = [
     "\\w+\\.md$",
-    "^https://googleapis\\.dev/ruby/#{dir}/latest$",
-    "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}/latest$",
-    "^https://rubygems.org/gems/#{dir_without_version}"
+    "^https://cloud\\.google\\.com/ruby/docs/reference/#{gem_name_pattern}/latest$",
+    "^https://rubygems\\.org/gems/#{dir_without_version}"
   ]
   linkinator_cmd = ["npx", "linkinator", "./doc", "--retry-errors", "--skip", skip_regexes.join(" ")]
   result = exec linkinator_cmd, out: :capture, err: [:child, :out]
   puts result.captured_out
   checked_links = result.captured_out.split "\n"
-  checked_links.select! { |link| link =~ /^\[(\d+)\]/ && ::Regexp.last_match[1] != "200" }
+  checked_links.select! { |link| link =~ /^\[(\d+)\]/ && !allowed_http_codes.include?(::Regexp.last_match[1]) }
   checked_links.each do |link|
     puts link, :yellow
   end
