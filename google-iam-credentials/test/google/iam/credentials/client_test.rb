@@ -20,15 +20,25 @@ require "helper"
 require "google/iam/credentials"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Iam::Credentials::ClientConstructionMinitest < Minitest::Test
   def test_iam_credentials_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Iam::Credentials.iam_credentials do |config|
+      client = Google::Iam::Credentials.iam_credentials transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Iam::Credentials::V1::IAMCredentials::Client, client
+    end
+  end
+
+  def test_iam_credentials_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Iam::Credentials.iam_credentials transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Iam::Credentials::V1::IAMCredentials::Rest::Client, client
     end
   end
 end
