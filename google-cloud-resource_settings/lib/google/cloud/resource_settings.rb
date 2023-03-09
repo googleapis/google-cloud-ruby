@@ -48,7 +48,7 @@ module Google
       # Create a new client object for ResourceSettingsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client](https://googleapis.dev/ruby/google-cloud-resource_settings-v1/latest/Google/Cloud/ResourceSettings/V1/ResourceSettingsService/Client.html)
+      # [Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-resource_settings-v1/latest/Google-Cloud-ResourceSettings-V1-ResourceSettingsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ResourceSettingsService service is

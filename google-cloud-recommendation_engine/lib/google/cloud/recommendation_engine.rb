@@ -48,7 +48,7 @@ module Google
       # Create a new client object for CatalogService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client](https://googleapis.dev/ruby/google-cloud-recommendation_engine-v1beta1/latest/Google/Cloud/RecommendationEngine/V1beta1/CatalogService/Client.html)
+      # [Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest/Google-Cloud-RecommendationEngine-V1beta1-CatalogService-Client)
       # for a gRPC client for version V1beta1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CatalogService service is
@@ -82,7 +82,7 @@ module Google
       # Create a new client object for PredictionApiKeyRegistry.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client](https://googleapis.dev/ruby/google-cloud-recommendation_engine-v1beta1/latest/Google/Cloud/RecommendationEngine/V1beta1/PredictionApiKeyRegistry/Client.html)
+      # [Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest/Google-Cloud-RecommendationEngine-V1beta1-PredictionApiKeyRegistry-Client)
       # for a gRPC client for version V1beta1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PredictionApiKeyRegistry service is
@@ -120,7 +120,7 @@ module Google
       # Create a new client object for PredictionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client](https://googleapis.dev/ruby/google-cloud-recommendation_engine-v1beta1/latest/Google/Cloud/RecommendationEngine/V1beta1/PredictionService/Client.html)
+      # [Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest/Google-Cloud-RecommendationEngine-V1beta1-PredictionService-Client)
       # for a gRPC client for version V1beta1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PredictionService service is
@@ -154,7 +154,7 @@ module Google
       # Create a new client object for UserEventService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client](https://googleapis.dev/ruby/google-cloud-recommendation_engine-v1beta1/latest/Google/Cloud/RecommendationEngine/V1beta1/UserEventService/Client.html)
+      # [Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest/Google-Cloud-RecommendationEngine-V1beta1-UserEventService-Client)
       # for a gRPC client for version V1beta1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the UserEventService service is

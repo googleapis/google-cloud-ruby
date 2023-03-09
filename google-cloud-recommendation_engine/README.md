@@ -16,7 +16,7 @@ for this library, google-cloud-recommendation_engine, to see the convenience met
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-recommendation_engine-v1beta1](https://googleapis.dev/ruby/google-cloud-recommendation_engine-v1beta1/latest).
+[google-cloud-recommendation_engine-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/recommendations-ai/)
 for more usage information.

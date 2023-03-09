@@ -48,7 +48,7 @@ module Google
       # Create a new client object for CloudScheduler.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Scheduler::V1::CloudScheduler::Client](https://googleapis.dev/ruby/google-cloud-scheduler-v1/latest/Google/Cloud/Scheduler/V1/CloudScheduler/Client.html)
+      # [Google::Cloud::Scheduler::V1::CloudScheduler::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-scheduler-v1/latest/Google-Cloud-Scheduler-V1-CloudScheduler-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CloudScheduler service is
