@@ -48,7 +48,7 @@ module Google
       # Create a new client object for Applications.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AppEngine::V1::Applications::Client](https://googleapis.dev/ruby/google-cloud-app_engine-v1/latest/Google/Cloud/AppEngine/V1/Applications/Client.html)
+      # [Google::Cloud::AppEngine::V1::Applications::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine-v1/latest/Google-Cloud-AppEngine-V1-Applications-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Applications service is
@@ -82,7 +82,7 @@ module Google
       # Create a new client object for Services.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AppEngine::V1::Services::Client](https://googleapis.dev/ruby/google-cloud-app_engine-v1/latest/Google/Cloud/AppEngine/V1/Services/Client.html)
+      # [Google::Cloud::AppEngine::V1::Services::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine-v1/latest/Google-Cloud-AppEngine-V1-Services-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Services service is
@@ -116,7 +116,7 @@ module Google
       # Create a new client object for Versions.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AppEngine::V1::Versions::Client](https://googleapis.dev/ruby/google-cloud-app_engine-v1/latest/Google/Cloud/AppEngine/V1/Versions/Client.html)
+      # [Google::Cloud::AppEngine::V1::Versions::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine-v1/latest/Google-Cloud-AppEngine-V1-Versions-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Versions service is
@@ -150,7 +150,7 @@ module Google
       # Create a new client object for Instances.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AppEngine::V1::Instances::Client](https://googleapis.dev/ruby/google-cloud-app_engine-v1/latest/Google/Cloud/AppEngine/V1/Instances/Client.html)
+      # [Google::Cloud::AppEngine::V1::Instances::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine-v1/latest/Google-Cloud-AppEngine-V1-Instances-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Instances service is
@@ -184,7 +184,7 @@ module Google
       # Create a new client object for Firewall.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AppEngine::V1::Firewall::Client](https://googleapis.dev/ruby/google-cloud-app_engine-v1/latest/Google/Cloud/AppEngine/V1/Firewall/Client.html)
+      # [Google::Cloud::AppEngine::V1::Firewall::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine-v1/latest/Google-Cloud-AppEngine-V1-Firewall-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Firewall service is
@@ -227,7 +227,7 @@ module Google
       # Create a new client object for AuthorizedDomains.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AppEngine::V1::AuthorizedDomains::Client](https://googleapis.dev/ruby/google-cloud-app_engine-v1/latest/Google/Cloud/AppEngine/V1/AuthorizedDomains/Client.html)
+      # [Google::Cloud::AppEngine::V1::AuthorizedDomains::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine-v1/latest/Google-Cloud-AppEngine-V1-AuthorizedDomains-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AuthorizedDomains service is
@@ -263,7 +263,7 @@ module Google
       # Create a new client object for AuthorizedCertificates.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client](https://googleapis.dev/ruby/google-cloud-app_engine-v1/latest/Google/Cloud/AppEngine/V1/AuthorizedCertificates/Client.html)
+      # [Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine-v1/latest/Google-Cloud-AppEngine-V1-AuthorizedCertificates-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AuthorizedCertificates service is
@@ -298,7 +298,7 @@ module Google
       # Create a new client object for DomainMappings.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AppEngine::V1::DomainMappings::Client](https://googleapis.dev/ruby/google-cloud-app_engine-v1/latest/Google/Cloud/AppEngine/V1/DomainMappings/Client.html)
+      # [Google::Cloud::AppEngine::V1::DomainMappings::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine-v1/latest/Google-Cloud-AppEngine-V1-DomainMappings-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DomainMappings service is

@@ -16,7 +16,7 @@ for this library, google-cloud-bare_metal_solution, to see the convenience metho
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-bare_metal_solution-v2](https://googleapis.dev/ruby/google-cloud-bare_metal_solution-v2/latest).
+[google-cloud-bare_metal_solution-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-bare_metal_solution-v2/latest).
 
 See also the [Product Documentation](https://cloud.google.com/bare-metal/)
 for more usage information.

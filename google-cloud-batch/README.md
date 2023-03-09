@@ -16,7 +16,7 @@ for this library, google-cloud-batch, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-batch-v1](https://googleapis.dev/ruby/google-cloud-batch-v1/latest).
+[google-cloud-batch-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-batch-v1/latest).
 
 ## Quick Start
 

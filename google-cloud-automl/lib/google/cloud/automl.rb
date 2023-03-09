@@ -48,7 +48,7 @@ module Google
       # Create a new client object for PredictionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AutoML::V1::PredictionService::Client](https://googleapis.dev/ruby/google-cloud-automl-v1/latest/Google/Cloud/AutoML/V1/PredictionService/Client.html)
+      # [Google::Cloud::AutoML::V1::PredictionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-automl-v1/latest/Google-Cloud-AutoML-V1-PredictionService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PredictionService service is
@@ -85,7 +85,7 @@ module Google
       # Create a new client object for AutoML.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AutoML::V1::AutoML::Client](https://googleapis.dev/ruby/google-cloud-automl-v1/latest/Google/Cloud/AutoML/V1/AutoML/Client.html)
+      # [Google::Cloud::AutoML::V1::AutoML::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-automl-v1/latest/Google-Cloud-AutoML-V1-AutoML-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AutoML service is
@@ -116,7 +116,7 @@ module Google
       # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.auto_ml version: :v1, transport: :grpc, &block
+      def self.automl version: :v1, transport: :grpc, &block
         require "google/cloud/automl/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AutoML

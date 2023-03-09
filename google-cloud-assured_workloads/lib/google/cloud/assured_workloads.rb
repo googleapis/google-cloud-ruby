@@ -48,7 +48,7 @@ module Google
       # Create a new client object for AssuredWorkloadsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client](https://googleapis.dev/ruby/google-cloud-assured_workloads-v1/latest/Google/Cloud/AssuredWorkloads/V1/AssuredWorkloadsService/Client.html)
+      # [Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-assured_workloads-v1/latest/Google-Cloud-AssuredWorkloads-V1-AssuredWorkloadsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AssuredWorkloadsService service is
