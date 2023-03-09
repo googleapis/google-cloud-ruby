@@ -48,7 +48,7 @@ module Google
       # Create a new client object for Domains.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Domains::V1::Domains::Client](https://googleapis.dev/ruby/google-cloud-domains-v1/latest/Google/Cloud/Domains/V1/Domains/Client.html)
+      # [Google::Cloud::Domains::V1::Domains::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-domains-v1/latest/Google-Cloud-Domains-V1-Domains-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Domains service is

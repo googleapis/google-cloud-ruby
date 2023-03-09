@@ -48,7 +48,7 @@ module Google
       # Create a new client object for DlpService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dlp::V2::DlpService::Client](https://googleapis.dev/ruby/google-cloud-dlp-v2/latest/Google/Cloud/Dlp/V2/DlpService/Client.html)
+      # [Google::Cloud::Dlp::V2::DlpService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dlp-v2/latest/Google-Cloud-Dlp-V2-DlpService-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DlpService service is

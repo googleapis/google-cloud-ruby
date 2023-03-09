@@ -48,7 +48,7 @@ module Google
       # Create a new client object for EssentialContactsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client](https://googleapis.dev/ruby/google-cloud-essential_contacts-v1/latest/Google/Cloud/EssentialContacts/V1/EssentialContactsService/Client.html)
+      # [Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-essential_contacts-v1/latest/Google-Cloud-EssentialContacts-V1-EssentialContactsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the EssentialContactsService service is
