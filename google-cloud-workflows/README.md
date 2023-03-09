@@ -16,10 +16,10 @@ for this library, google-cloud-workflows, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-workflows-v1](https://googleapis.dev/ruby/google-cloud-workflows-v1/latest),
-[google-cloud-workflows-v1beta](https://googleapis.dev/ruby/google-cloud-workflows-v1beta/latest),
-[google-cloud-workflows-executions-v1](https://googleapis.dev/ruby/google-cloud-workflows-executions-v1/latest),
-[google-cloud-workflows-executions-v1beta](https://googleapis.dev/ruby/google-cloud-workflows-executions-v1beta/latest).
+[google-cloud-workflows-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1/latest),
+[google-cloud-workflows-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1beta/latest),
+[google-cloud-workflows-executions-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-executions-v1/latest),
+[google-cloud-workflows-executions-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-executions-v1beta/latest).
 
 See also the [Product Documentation](https://cloud.google.com/workflows/)
 for more usage information.

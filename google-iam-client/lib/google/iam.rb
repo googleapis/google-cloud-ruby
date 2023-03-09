@@ -30,7 +30,7 @@ module Google
     # Create a new client object for Policies.
     #
     # By default, this returns an instance of
-    # [Google::Iam::V2::Policies::Client](https://googleapis.dev/ruby/google-iam-v2/latest/Google/Iam/V2/Policies/Client.html)
+    # [Google::Iam::V2::Policies::Client](https://rubydoc.info/gems/google-iam-v2/Google/Iam/V2/Policies/Client)
     # for a gRPC client for version V2 of the API.
     # However, you can specify a different API version by passing it in the
     # `version` parameter. If the Policies service is

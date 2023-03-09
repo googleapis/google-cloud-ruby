@@ -16,8 +16,8 @@ for this library, google-cloud-web_security_scanner, to see the convenience meth
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-web_security_scanner-v1](https://googleapis.dev/ruby/google-cloud-web_security_scanner-v1/latest),
-[google-cloud-web_security_scanner-v1beta](https://googleapis.dev/ruby/google-cloud-web_security_scanner-v1beta/latest).
+[google-cloud-web_security_scanner-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-web_security_scanner-v1/latest),
+[google-cloud-web_security_scanner-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-web_security_scanner-v1beta/latest).
 
 See also the [Product Documentation](https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/)
 for more usage information.

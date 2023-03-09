@@ -16,7 +16,7 @@ for this library, google-iam-credentials, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-iam-credentials-v1](https://googleapis.dev/ruby/google-iam-credentials-v1/latest).
+[google-iam-credentials-v1](https://cloud.google.com/ruby/docs/reference/google-iam-credentials-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/iam)
 for more usage information.

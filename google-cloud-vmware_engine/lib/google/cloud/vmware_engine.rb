@@ -48,7 +48,7 @@ module Google
       # Create a new client object for VmwareEngine.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::VmwareEngine::V1::VmwareEngine::Client](https://googleapis.dev/ruby/google-cloud-vmware_engine-v1/latest/Google/Cloud/VmwareEngine/V1/VmwareEngine/Client.html)
+      # [Google::Cloud::VmwareEngine::V1::VmwareEngine::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-vmware_engine-v1/latest/Google-Cloud-VmwareEngine-V1-VmwareEngine-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the VmwareEngine service is

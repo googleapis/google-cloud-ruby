@@ -48,7 +48,7 @@ module Google
       # Create a new client object for Workflows.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Workflows::V1::Workflows::Client](https://googleapis.dev/ruby/google-cloud-workflows-v1/latest/Google/Cloud/Workflows/V1/Workflows/Client.html)
+      # [Google::Cloud::Workflows::V1::Workflows::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1/latest/Google-Cloud-Workflows-V1-Workflows-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Workflows service is

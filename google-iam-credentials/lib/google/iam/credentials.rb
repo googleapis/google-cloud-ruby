@@ -31,7 +31,7 @@ module Google
       # Create a new client object for IAMCredentials.
       #
       # By default, this returns an instance of
-      # [Google::Iam::Credentials::V1::IAMCredentials::Client](https://googleapis.dev/ruby/google-iam-credentials-v1/latest/Google/Iam/Credentials/V1/IAMCredentials/Client.html)
+      # [Google::Iam::Credentials::V1::IAMCredentials::Client](https://cloud.google.com/ruby/docs/reference/google-iam-credentials-v1/latest/Google-Iam-Credentials-V1-IAMCredentials-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the IAMCredentials service is

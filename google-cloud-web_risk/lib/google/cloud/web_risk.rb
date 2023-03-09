@@ -48,7 +48,7 @@ module Google
       # Create a new client object for WebRiskService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::WebRisk::V1::WebRiskService::Client](https://googleapis.dev/ruby/google-cloud-web_risk-v1/latest/Google/Cloud/WebRisk/V1/WebRiskService/Client.html)
+      # [Google::Cloud::WebRisk::V1::WebRiskService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-web_risk-v1/latest/Google-Cloud-WebRisk-V1-WebRiskService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the WebRiskService service is

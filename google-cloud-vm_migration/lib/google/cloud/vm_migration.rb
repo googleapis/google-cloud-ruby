@@ -48,7 +48,7 @@ module Google
       # Create a new client object for VMMigration.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::VMMigration::V1::VMMigration::Client](https://googleapis.dev/ruby/google-cloud-vm_migration-v1/latest/Google/Cloud/VMMigration/V1/VMMigration/Client.html)
+      # [Google::Cloud::VMMigration::V1::VMMigration::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-vm_migration-v1/latest/Google-Cloud-VMMigration-V1-VMMigration-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the VMMigration service is

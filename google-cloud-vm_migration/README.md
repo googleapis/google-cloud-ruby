@@ -16,7 +16,7 @@ for this library, google-cloud-vm_migration, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-vm_migration-v1](https://googleapis.dev/ruby/google-cloud-vm_migration-v1/latest).
+[google-cloud-vm_migration-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-vm_migration-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/migrate/compute-engine/)
 for more usage information.
