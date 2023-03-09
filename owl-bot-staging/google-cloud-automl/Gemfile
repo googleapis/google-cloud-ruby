@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-automl-v1", path: "../google-cloud-automl-v1"
+gem "google-cloud-automl-v1beta1", path: "../google-cloud-automl-v1beta1"
