@@ -4,9 +4,11 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/api/client_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/cloudprofiler/v2/profiler.proto", :syntax => :proto3) do

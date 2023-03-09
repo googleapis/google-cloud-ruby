@@ -35,6 +35,8 @@ module Google
           # * Profiles can be created in either online or offline mode, see below.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :profiler_service_stub
 
@@ -67,12 +69,12 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 30.0
+                default_config.timeout = 60.0
                 default_config.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.create_profile.timeout = 3600.0
+                default_config.rpcs.create_profile.timeout = 3610.0
 
                 default_config.rpcs.create_offline_profile.timeout = 30.0
 
@@ -370,7 +372,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param profile [::Google::Cloud::Profiler::V2::Profile, ::Hash]
-            #     Profile to update
+            #     Profile to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Field mask used to specify the fields to be overwritten. Currently only
             #     profile_bytes and labels fields are supported by UpdateProfile, so only
