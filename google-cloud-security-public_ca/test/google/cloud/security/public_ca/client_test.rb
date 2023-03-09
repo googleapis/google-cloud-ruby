@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/security/public_ca"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Security::PublicCA::ClientConstructionMinitest < Minitest::Test
   def test_public_certificate_authority_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Security::PublicCA.public_certificate_authority_service do |config|
+      client = Google::Cloud::Security::PublicCA.public_certificate_authority_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Client, client
+    end
+  end
+
+  def test_public_certificate_authority_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Security::PublicCA.public_certificate_authority_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Rest::Client, client
     end
   end
 end

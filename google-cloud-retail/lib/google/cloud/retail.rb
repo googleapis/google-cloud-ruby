@@ -54,6 +54,8 @@ module Google
       # `version` parameter. If the CatalogService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About CatalogService
       #
@@ -61,9 +63,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.catalog_service version: :v2, &block
+      def self.catalog_service version: :v2, transport: :grpc, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
@@ -71,6 +74,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:CatalogService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -84,6 +88,8 @@ module Google
       # `version` parameter. If the CompletionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About CompletionService
       #
@@ -94,9 +100,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.completion_service version: :v2, &block
+      def self.completion_service version: :v2, transport: :grpc, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
@@ -104,6 +111,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:CompletionService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -117,6 +125,8 @@ module Google
       # `version` parameter. If the ControlService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About ControlService
       #
@@ -124,9 +134,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.control_service version: :v2, &block
+      def self.control_service version: :v2, transport: :grpc, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
@@ -134,6 +145,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:ControlService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -147,6 +159,8 @@ module Google
       # `version` parameter. If the PredictionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About PredictionService
       #
@@ -154,9 +168,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.prediction_service version: :v2, &block
+      def self.prediction_service version: :v2, transport: :grpc, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
@@ -164,6 +179,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:PredictionService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -177,6 +193,8 @@ module Google
       # `version` parameter. If the ProductService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About ProductService
       #
@@ -185,9 +203,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.product_service version: :v2, &block
+      def self.product_service version: :v2, transport: :grpc, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
@@ -195,6 +214,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:ProductService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -208,6 +228,8 @@ module Google
       # `version` parameter. If the SearchService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About SearchService
       #
@@ -218,9 +240,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.search_service version: :v2, &block
+      def self.search_service version: :v2, transport: :grpc, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
@@ -228,6 +251,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:SearchService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -241,6 +265,8 @@ module Google
       # `version` parameter. If the ServingConfigService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About ServingConfigService
       #
@@ -248,9 +274,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.serving_config_service version: :v2, &block
+      def self.serving_config_service version: :v2, transport: :grpc, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
@@ -258,6 +285,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:ServingConfigService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -271,6 +299,8 @@ module Google
       # `version` parameter. If the UserEventService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About UserEventService
       #
@@ -278,9 +308,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.user_event_service version: :v2, &block
+      def self.user_event_service version: :v2, transport: :grpc, &block
         require "google/cloud/retail/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Retail
@@ -288,6 +319,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Retail.const_get(package_name).const_get(:UserEventService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
