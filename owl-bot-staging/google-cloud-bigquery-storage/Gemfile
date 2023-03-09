@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-bigquery-storage-v1", path: "../google-cloud-bigquery-storage-v1"
