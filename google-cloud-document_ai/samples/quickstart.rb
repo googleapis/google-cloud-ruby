@@ -38,7 +38,7 @@ def quickstart project_id:, location_id:, processor_id:, file_path:, mime_type:
   response = client.process_document(
     skip_human_review: true,
     name: name,
-    inline_document: {
+    raw_document: {
       content: content,
       mime_type: mime_type
     }
