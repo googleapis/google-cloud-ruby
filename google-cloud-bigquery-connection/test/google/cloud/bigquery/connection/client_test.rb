@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/bigquery/connection"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Bigquery::Connection::ClientConstructionMinitest < Minitest::Test
   def test_connection_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Bigquery::Connection.connection_service do |config|
+      client = Google::Cloud::Bigquery::Connection.connection_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client, client
+    end
+  end
+
+  def test_connection_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Bigquery::Connection.connection_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client, client
     end
   end
 end
