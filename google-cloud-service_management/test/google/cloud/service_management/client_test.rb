@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/service_management"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::ServiceManagement::ClientConstructionMinitest < Minitest::Test
   def test_service_manager_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::ServiceManagement.service_manager do |config|
+      client = Google::Cloud::ServiceManagement.service_manager transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::ServiceManagement::V1::ServiceManager::Client, client
+    end
+  end
+
+  def test_service_manager_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::ServiceManagement.service_manager transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client, client
     end
   end
 end
