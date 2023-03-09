@@ -16,7 +16,7 @@ for this library, google-cloud-data_catalog-lineage, to see the convenience meth
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-data_catalog-lineage-v1](https://googleapis.dev/ruby/google-cloud-data_catalog-lineage-v1/latest).
+[google-cloud-data_catalog-lineage-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-data_catalog-lineage-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/data-catalog/docs/reference/data-lineage/rpc)
 for more usage information.

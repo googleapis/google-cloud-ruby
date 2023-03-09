@@ -48,7 +48,7 @@ module Google
       # Create a new client object for ContactCenterInsights.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client](https://googleapis.dev/ruby/google-cloud-contact_center_insights-v1/latest/Google/Cloud/ContactCenterInsights/V1/ContactCenterInsights/Client.html)
+      # [Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-contact_center_insights-v1/latest/Google-Cloud-ContactCenterInsights-V1-ContactCenterInsights-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ContactCenterInsights service is

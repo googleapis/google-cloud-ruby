@@ -48,7 +48,7 @@ module Google
       # Create a new client object for DataLabelingService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client](https://googleapis.dev/ruby/google-cloud-data_labeling-v1beta1/latest/Google/Cloud/DataLabeling/V1beta1/DataLabelingService/Client.html)
+      # [Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-data_labeling-v1beta1/latest/Google-Cloud-DataLabeling-V1beta1-DataLabelingService-Client)
       # for a gRPC client for version V1beta1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DataLabelingService service is
