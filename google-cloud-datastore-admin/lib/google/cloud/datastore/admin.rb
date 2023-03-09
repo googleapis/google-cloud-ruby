@@ -49,7 +49,7 @@ module Google
         # Create a new client object for DatastoreAdmin.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client](https://googleapis.dev/ruby/google-cloud-datastore-admin-v1/latest/Google/Cloud/Datastore/Admin/V1/DatastoreAdmin/Client.html)
+        # [Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-datastore-admin-v1/latest/Google-Cloud-Datastore-Admin-V1-DatastoreAdmin-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the DatastoreAdmin service is

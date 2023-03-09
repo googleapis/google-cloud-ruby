@@ -49,7 +49,7 @@ module Google
         # Create a new client object for Pages.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Pages::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Pages/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::Pages::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Pages-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Pages service is
@@ -83,7 +83,7 @@ module Google
         # Create a new client object for Flows.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Flows::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Flows/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::Flows::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Flows-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Flows service is
@@ -117,7 +117,7 @@ module Google
         # Create a new client object for Agents.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Agents::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Agents/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::Agents::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Agents-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Agents service is
@@ -151,7 +151,7 @@ module Google
         # Create a new client object for Changelogs.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Changelogs::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Changelogs/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::Changelogs::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Changelogs-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Changelogs service is
@@ -185,7 +185,7 @@ module Google
         # Create a new client object for Deployments.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Deployments::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Deployments/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::Deployments::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Deployments-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Deployments service is
@@ -219,7 +219,7 @@ module Google
         # Create a new client object for EntityTypes.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/EntityTypes/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-EntityTypes-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the EntityTypes service is
@@ -253,7 +253,7 @@ module Google
         # Create a new client object for Intents.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Intents::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Intents/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::Intents::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Intents-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Intents service is
@@ -287,7 +287,7 @@ module Google
         # Create a new client object for SessionEntityTypes.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/SessionEntityTypes/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-SessionEntityTypes-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the SessionEntityTypes service is
@@ -322,7 +322,7 @@ module Google
         # Create a new client object for Sessions.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Sessions::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Sessions/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::Sessions::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Sessions-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Sessions service is
@@ -359,7 +359,7 @@ module Google
         # Create a new client object for TransitionRouteGroups.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/TransitionRouteGroups/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-TransitionRouteGroups-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the TransitionRouteGroups service is
@@ -394,7 +394,7 @@ module Google
         # Create a new client object for TestCases.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::TestCases::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/TestCases/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::TestCases::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-TestCases-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the TestCases service is
@@ -429,7 +429,7 @@ module Google
         # Create a new client object for Webhooks.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Webhooks::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Webhooks/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::Webhooks::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Webhooks-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Webhooks service is
@@ -463,7 +463,7 @@ module Google
         # Create a new client object for Environments.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Environments::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Environments/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::Environments::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Environments-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Environments service is
@@ -498,7 +498,7 @@ module Google
         # Create a new client object for Experiments.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Experiments::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Experiments/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::Experiments::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Experiments-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Experiments service is
@@ -532,7 +532,7 @@ module Google
         # Create a new client object for SecuritySettingsService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/SecuritySettingsService/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-SecuritySettingsService-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the SecuritySettingsService service is
@@ -566,7 +566,7 @@ module Google
         # Create a new client object for Versions.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Versions::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Versions/Client.html)
+        # [Google::Cloud::Dialogflow::CX::V3::Versions::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Versions-Client)
         # for a gRPC client for version V3 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Versions service is

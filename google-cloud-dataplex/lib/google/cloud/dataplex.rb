@@ -48,7 +48,7 @@ module Google
       # Create a new client object for ContentService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataplex::V1::ContentService::Client](https://googleapis.dev/ruby/google-cloud-dataplex-v1/latest/Google/Cloud/Dataplex/V1/ContentService/Client.html)
+      # [Google::Cloud::Dataplex::V1::ContentService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataplex-v1/latest/Google-Cloud-Dataplex-V1-ContentService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ContentService service is
@@ -82,7 +82,7 @@ module Google
       # Create a new client object for DataScanService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataplex::V1::DataScanService::Client](https://googleapis.dev/ruby/google-cloud-dataplex-v1/latest/Google/Cloud/Dataplex/V1/DataScanService/Client.html)
+      # [Google::Cloud::Dataplex::V1::DataScanService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataplex-v1/latest/Google-Cloud-Dataplex-V1-DataScanService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DataScanService service is
@@ -118,7 +118,7 @@ module Google
       # Create a new client object for MetadataService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataplex::V1::MetadataService::Client](https://googleapis.dev/ruby/google-cloud-dataplex-v1/latest/Google/Cloud/Dataplex/V1/MetadataService/Client.html)
+      # [Google::Cloud::Dataplex::V1::MetadataService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataplex-v1/latest/Google-Cloud-Dataplex-V1-MetadataService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the MetadataService service is
@@ -153,7 +153,7 @@ module Google
       # Create a new client object for DataplexService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataplex::V1::DataplexService::Client](https://googleapis.dev/ruby/google-cloud-dataplex-v1/latest/Google/Cloud/Dataplex/V1/DataplexService/Client.html)
+      # [Google::Cloud::Dataplex::V1::DataplexService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataplex-v1/latest/Google-Cloud-Dataplex-V1-DataplexService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DataplexService service is

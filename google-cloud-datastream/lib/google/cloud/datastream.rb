@@ -48,7 +48,7 @@ module Google
       # Create a new client object for Datastream.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Datastream::V1::Datastream::Client](https://googleapis.dev/ruby/google-cloud-datastream-v1/latest/Google/Cloud/Datastream/V1/Datastream/Client.html)
+      # [Google::Cloud::Datastream::V1::Datastream::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-datastream-v1/latest/Google-Cloud-Datastream-V1-Datastream-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Datastream service is
