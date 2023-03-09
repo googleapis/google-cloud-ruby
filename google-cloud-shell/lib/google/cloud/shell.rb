@@ -48,7 +48,7 @@ module Google
       # Create a new client object for CloudShellService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Shell::V1::CloudShellService::Client](https://googleapis.dev/ruby/google-cloud-shell-v1/latest/Google/Cloud/Shell/V1/CloudShellService/Client.html)
+      # [Google::Cloud::Shell::V1::CloudShellService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-shell-v1/latest/Google-Cloud-Shell-V1-CloudShellService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CloudShellService service is

@@ -49,7 +49,7 @@ module Google
         # Create a new client object for CertificateAuthorityService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client](https://googleapis.dev/ruby/google-cloud-security-private_ca-v1/latest/Google/Cloud/Security/PrivateCA/V1/CertificateAuthorityService/Client.html)
+        # [Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-security-private_ca-v1/latest/Google-Cloud-Security-PrivateCA-V1-CertificateAuthorityService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the CertificateAuthorityService service is

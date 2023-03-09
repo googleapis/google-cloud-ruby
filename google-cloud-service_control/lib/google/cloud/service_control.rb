@@ -48,7 +48,7 @@ module Google
       # Create a new client object for QuotaController.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ServiceControl::V1::QuotaController::Client](https://googleapis.dev/ruby/google-cloud-service_control-v1/latest/Google/Cloud/ServiceControl/V1/QuotaController/Client.html)
+      # [Google::Cloud::ServiceControl::V1::QuotaController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-service_control-v1/latest/Google-Cloud-ServiceControl-V1-QuotaController-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the QuotaController service is
@@ -85,7 +85,7 @@ module Google
       # Create a new client object for ServiceController.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ServiceControl::V1::ServiceController::Client](https://googleapis.dev/ruby/google-cloud-service_control-v1/latest/Google/Cloud/ServiceControl/V1/ServiceController/Client.html)
+      # [Google::Cloud::ServiceControl::V1::ServiceController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-service_control-v1/latest/Google-Cloud-ServiceControl-V1-ServiceController-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ServiceController service is
