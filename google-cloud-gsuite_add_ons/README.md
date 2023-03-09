@@ -16,7 +16,7 @@ for this library, google-cloud-gsuite_add_ons, to see the convenience methods fo
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-gsuite_add_ons-v1](https://googleapis.dev/ruby/google-cloud-gsuite_add_ons-v1/latest).
+[google-cloud-gsuite_add_ons-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-gsuite_add_ons-v1/latest).
 
 See also the [Product Documentation](https://developers.google.com/workspace/add-ons/)
 for more usage information.

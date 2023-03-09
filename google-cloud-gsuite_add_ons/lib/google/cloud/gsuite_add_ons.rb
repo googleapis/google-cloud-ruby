@@ -48,7 +48,7 @@ module Google
       # Create a new client object for GSuiteAddOns.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client](https://googleapis.dev/ruby/google-cloud-gsuite_add_ons-v1/latest/Google/Cloud/GSuiteAddOns/V1/GSuiteAddOns/Client.html)
+      # [Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gsuite_add_ons-v1/latest/Google-Cloud-GSuiteAddOns-V1-GSuiteAddOns-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GSuiteAddOns service is

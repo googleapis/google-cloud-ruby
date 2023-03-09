@@ -48,7 +48,7 @@ module Google
       # Create a new client object for AttachedClusters.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client](https://googleapis.dev/ruby/google-cloud-gke_multi_cloud-v1/latest/Google/Cloud/GkeMultiCloud/V1/AttachedClusters/Client.html)
+      # [Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_multi_cloud-v1/latest/Google-Cloud-GkeMultiCloud-V1-AttachedClusters-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AttachedClusters service is
@@ -80,7 +80,7 @@ module Google
       # Create a new client object for AwsClusters.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client](https://googleapis.dev/ruby/google-cloud-gke_multi_cloud-v1/latest/Google/Cloud/GkeMultiCloud/V1/AwsClusters/Client.html)
+      # [Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_multi_cloud-v1/latest/Google-Cloud-GkeMultiCloud-V1-AwsClusters-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AwsClusters service is
@@ -111,7 +111,7 @@ module Google
       # Create a new client object for AzureClusters.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client](https://googleapis.dev/ruby/google-cloud-gke_multi_cloud-v1/latest/Google/Cloud/GkeMultiCloud/V1/AzureClusters/Client.html)
+      # [Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_multi_cloud-v1/latest/Google-Cloud-GkeMultiCloud-V1-AzureClusters-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AzureClusters service is

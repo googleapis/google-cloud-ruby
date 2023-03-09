@@ -48,7 +48,7 @@ module Google
       # Create a new client object for IdentityAwareProxyAdminService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client](https://googleapis.dev/ruby/google-cloud-iap-v1/latest/Google/Cloud/Iap/V1/IdentityAwareProxyAdminService/Client.html)
+      # [Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-iap-v1/latest/Google-Cloud-Iap-V1-IdentityAwareProxyAdminService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the IdentityAwareProxyAdminService service is
@@ -82,7 +82,7 @@ module Google
       # Create a new client object for IdentityAwareProxyOAuthService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client](https://googleapis.dev/ruby/google-cloud-iap-v1/latest/Google/Cloud/Iap/V1/IdentityAwareProxyOAuthService/Client.html)
+      # [Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-iap-v1/latest/Google-Cloud-Iap-V1-IdentityAwareProxyOAuthService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the IdentityAwareProxyOAuthService service is

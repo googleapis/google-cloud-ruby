@@ -49,7 +49,7 @@ module Google
         # Create a new client object for GatewayService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client](https://googleapis.dev/ruby/google-cloud-gke_connect-gateway-v1beta1/latest/Google/Cloud/GkeConnect/Gateway/V1beta1/GatewayService/Client.html)
+        # [Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_connect-gateway-v1beta1/latest/Google-Cloud-GkeConnect-Gateway-V1beta1-GatewayService-Client)
         # for a gRPC client for version V1beta1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the GatewayService service is
