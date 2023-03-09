@@ -22,7 +22,7 @@ require "google/cloud/document_ai"
 # @param location_id [String] Your Processor Location (e.g. "us")
 # @param processor_id [String] Your Processor ID (e.g. "a14dae8f043b60bd")
 # @param file_path [String] Path to Local File (e.g. "invoice.pdf")
-# @param mime_type [String] Refer to https://cloud.google.com/document-ai/docs/file-types(e.g. "application/pdf")
+# @param mime_type [String] Refer to https://cloud.google.com/document-ai/docs/file-types (e.g. "application/pdf")
 #
 def quickstart project_id:, location_id:, processor_id:, file_path:, mime_type:
   # Create the Document AI client.
@@ -36,8 +36,9 @@ def quickstart project_id:, location_id:, processor_id:, file_path:, mime_type:
 
   # Process document
   response = client.process_document(
+    skip_human_review: true,
     name: name,
-    raw_document: {
+    inline_document: {
       content: content,
       mime_type: mime_type
     }
