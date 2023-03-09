@@ -48,7 +48,7 @@ module Google
       # Create a new client object for NetworkSecurity.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client](https://googleapis.dev/ruby/google-cloud-network_security-v1beta1/latest/Google/Cloud/NetworkSecurity/V1beta1/NetworkSecurity/Client.html)
+      # [Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-network_security-v1beta1/latest/Google-Cloud-NetworkSecurity-V1beta1-NetworkSecurity-Client)
       # for a gRPC client for version V1beta1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NetworkSecurity service is

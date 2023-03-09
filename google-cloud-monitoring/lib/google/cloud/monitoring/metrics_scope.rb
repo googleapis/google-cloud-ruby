@@ -49,7 +49,7 @@ module Google
         # Create a new client object for MetricsScopes.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client](https://googleapis.dev/ruby/google-cloud-monitoring-metrics_scope-v1/latest/Google/Cloud/Monitoring/MetricsScope/V1/MetricsScopes/Client.html)
+        # [Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-metrics_scope-v1/latest/Google-Cloud-Monitoring-MetricsScope-V1-MetricsScopes-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the MetricsScopes service is

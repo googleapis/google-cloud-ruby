@@ -48,7 +48,7 @@ module Google
       # Create a new client object for FleetRouting.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Optimization::V1::FleetRouting::Client](https://googleapis.dev/ruby/google-cloud-optimization-v1/latest/Google/Cloud/Optimization/V1/FleetRouting/Client.html)
+      # [Google::Cloud::Optimization::V1::FleetRouting::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-optimization-v1/latest/Google-Cloud-Optimization-V1-FleetRouting-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the FleetRouting service is

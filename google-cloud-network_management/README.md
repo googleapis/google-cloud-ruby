@@ -16,7 +16,7 @@ for this library, google-cloud-network_management, to see the convenience method
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-network_management-v1](https://googleapis.dev/ruby/google-cloud-network_management-v1/latest).
+[google-cloud-network_management-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-network_management-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest)
 for more usage information.

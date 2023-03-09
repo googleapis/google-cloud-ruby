@@ -48,7 +48,7 @@ module Google
       # Create a new client object for AlertPolicyService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Monitoring::V3::AlertPolicyService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/AlertPolicyService/Client.html)
+      # [Google::Cloud::Monitoring::V3::AlertPolicyService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest/Google-Cloud-Monitoring-V3-AlertPolicyService-Client)
       # for a gRPC client for version V3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AlertPolicyService service is
@@ -86,7 +86,7 @@ module Google
       # Create a new client object for GroupService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Monitoring::V3::GroupService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/GroupService/Client.html)
+      # [Google::Cloud::Monitoring::V3::GroupService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest/Google-Cloud-Monitoring-V3-GroupService-Client)
       # for a gRPC client for version V3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GroupService service is
@@ -127,7 +127,7 @@ module Google
       # Create a new client object for MetricService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Monitoring::V3::MetricService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/MetricService/Client.html)
+      # [Google::Cloud::Monitoring::V3::MetricService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest/Google-Cloud-Monitoring-V3-MetricService-Client)
       # for a gRPC client for version V3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the MetricService service is
@@ -158,7 +158,7 @@ module Google
       # Create a new client object for NotificationChannelService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Monitoring::V3::NotificationChannelService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/NotificationChannelService/Client.html)
+      # [Google::Cloud::Monitoring::V3::NotificationChannelService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest/Google-Cloud-Monitoring-V3-NotificationChannelService-Client)
       # for a gRPC client for version V3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NotificationChannelService service is
@@ -189,7 +189,7 @@ module Google
       # Create a new client object for QueryService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Monitoring::V3::QueryService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/QueryService/Client.html)
+      # [Google::Cloud::Monitoring::V3::QueryService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest/Google-Cloud-Monitoring-V3-QueryService-Client)
       # for a gRPC client for version V3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the QueryService service is
@@ -221,7 +221,7 @@ module Google
       # Create a new client object for ServiceMonitoringService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/ServiceMonitoringService/Client.html)
+      # [Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest/Google-Cloud-Monitoring-V3-ServiceMonitoringService-Client)
       # for a gRPC client for version V3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ServiceMonitoringService service is
@@ -254,7 +254,7 @@ module Google
       # Create a new client object for SnoozeService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Monitoring::V3::SnoozeService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/SnoozeService/Client.html)
+      # [Google::Cloud::Monitoring::V3::SnoozeService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest/Google-Cloud-Monitoring-V3-SnoozeService-Client)
       # for a gRPC client for version V3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SnoozeService service is
@@ -286,7 +286,7 @@ module Google
       # Create a new client object for UptimeCheckService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Monitoring::V3::UptimeCheckService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/UptimeCheckService/Client.html)
+      # [Google::Cloud::Monitoring::V3::UptimeCheckService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest/Google-Cloud-Monitoring-V3-UptimeCheckService-Client)
       # for a gRPC client for version V3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the UptimeCheckService service is

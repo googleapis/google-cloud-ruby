@@ -48,7 +48,7 @@ module Google
       # Create a new client object for NotebookService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Notebooks::V1::NotebookService::Client](https://googleapis.dev/ruby/google-cloud-notebooks-v1/latest/Google/Cloud/Notebooks/V1/NotebookService/Client.html)
+      # [Google::Cloud::Notebooks::V1::NotebookService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-notebooks-v1/latest/Google-Cloud-Notebooks-V1-NotebookService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NotebookService service is

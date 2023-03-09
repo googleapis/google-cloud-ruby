@@ -48,7 +48,7 @@ module Google
       # Create a new client object for HubService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::NetworkConnectivity::V1::HubService::Client](https://googleapis.dev/ruby/google-cloud-network_connectivity-v1/latest/Google/Cloud/NetworkConnectivity/V1/HubService/Client.html)
+      # [Google::Cloud::NetworkConnectivity::V1::HubService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-network_connectivity-v1/latest/Google-Cloud-NetworkConnectivity-V1-HubService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the HubService service is

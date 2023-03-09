@@ -50,7 +50,7 @@ module Google
           # Create a new client object for Environments.
           #
           # By default, this returns an instance of
-          # [Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client](https://googleapis.dev/ruby/google-cloud-orchestration-airflow-service-v1/latest/Google/Cloud/Orchestration/Airflow/Service/V1/Environments/Client.html)
+          # [Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-orchestration-airflow-service-v1/latest/Google-Cloud-Orchestration-Airflow-Service-V1-Environments-Client)
           # for a gRPC client for version V1 of the API.
           # However, you can specify a different API version by passing it in the
           # `version` parameter. If the Environments service is
@@ -84,7 +84,7 @@ module Google
           # Create a new client object for ImageVersions.
           #
           # By default, this returns an instance of
-          # [Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client](https://googleapis.dev/ruby/google-cloud-orchestration-airflow-service-v1/latest/Google/Cloud/Orchestration/Airflow/Service/V1/ImageVersions/Client.html)
+          # [Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-orchestration-airflow-service-v1/latest/Google-Cloud-Orchestration-Airflow-Service-V1-ImageVersions-Client)
           # for a gRPC client for version V1 of the API.
           # However, you can specify a different API version by passing it in the
           # `version` parameter. If the ImageVersions service is
