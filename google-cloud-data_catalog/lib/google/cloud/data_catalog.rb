@@ -48,7 +48,7 @@ module Google
       # Create a new client object for DataCatalog.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::DataCatalog::V1::DataCatalog::Client](https://googleapis.dev/ruby/google-cloud-data_catalog-v1/latest/Google/Cloud/DataCatalog/V1/DataCatalog/Client.html)
+      # [Google::Cloud::DataCatalog::V1::DataCatalog::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-data_catalog-v1/latest/Google-Cloud-DataCatalog-V1-DataCatalog-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DataCatalog service is
@@ -83,7 +83,7 @@ module Google
       # Create a new client object for PolicyTagManager.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::DataCatalog::V1::PolicyTagManager::Client](https://googleapis.dev/ruby/google-cloud-data_catalog-v1/latest/Google/Cloud/DataCatalog/V1/PolicyTagManager/Client.html)
+      # [Google::Cloud::DataCatalog::V1::PolicyTagManager::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-data_catalog-v1/latest/Google-Cloud-DataCatalog-V1-PolicyTagManager-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PolicyTagManager service is
@@ -122,7 +122,7 @@ module Google
       # Create a new client object for PolicyTagManagerSerialization.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client](https://googleapis.dev/ruby/google-cloud-data_catalog-v1/latest/Google/Cloud/DataCatalog/V1/PolicyTagManagerSerialization/Client.html)
+      # [Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-data_catalog-v1/latest/Google-Cloud-DataCatalog-V1-PolicyTagManagerSerialization-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PolicyTagManagerSerialization service is

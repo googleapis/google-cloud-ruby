@@ -16,7 +16,7 @@ for this library, google-cloud-data_labeling, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-data_labeling-v1beta1](https://googleapis.dev/ruby/google-cloud-data_labeling-v1beta1/latest).
+[google-cloud-data_labeling-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-data_labeling-v1beta1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/ai-platform/data-labeling/docs)
 for more usage information.
@@ -38,7 +38,7 @@ In order to use this library, you first need to go through the following steps:
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
 The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/current/stdlibs/logger/Logger.html) as shown below,
-or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
+or a [`Google::Cloud::Logging::Logger`](https://cloud.google.com/ruby/docs/reference/google-cloud-logging/latest)
 that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 

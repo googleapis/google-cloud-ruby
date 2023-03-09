@@ -48,7 +48,7 @@ module Google
       # Create a new client object for Snapshots.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::Snapshots::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/Snapshots/Client.html)
+      # [Google::Cloud::Dataflow::V1beta3::Snapshots::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-Snapshots-Client)
       # for a gRPC client for version V1beta3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Snapshots service is
@@ -82,7 +82,7 @@ module Google
       # Create a new client object for Jobs.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::Jobs::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/Jobs/Client.html)
+      # [Google::Cloud::Dataflow::V1beta3::Jobs::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-Jobs-Client)
       # for a gRPC client for version V1beta3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Jobs service is
@@ -117,7 +117,7 @@ module Google
       # Create a new client object for Messages.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::Messages::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/Messages/Client.html)
+      # [Google::Cloud::Dataflow::V1beta3::Messages::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-Messages-Client)
       # for a gRPC client for version V1beta3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Messages service is
@@ -152,7 +152,7 @@ module Google
       # Create a new client object for Metrics.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::Metrics::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/Metrics/Client.html)
+      # [Google::Cloud::Dataflow::V1beta3::Metrics::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-Metrics-Client)
       # for a gRPC client for version V1beta3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Metrics service is
@@ -187,7 +187,7 @@ module Google
       # Create a new client object for TemplatesService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::TemplatesService::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/TemplatesService/Client.html)
+      # [Google::Cloud::Dataflow::V1beta3::TemplatesService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-TemplatesService-Client)
       # for a gRPC client for version V1beta3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TemplatesService service is
@@ -221,7 +221,7 @@ module Google
       # Create a new client object for FlexTemplatesService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest/Google/Cloud/Dataflow/V1beta3/FlexTemplatesService/Client.html)
+      # [Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest/Google-Cloud-Dataflow-V1beta3-FlexTemplatesService-Client)
       # for a gRPC client for version V1beta3 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the FlexTemplatesService service is
