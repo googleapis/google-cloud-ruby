@@ -48,7 +48,7 @@ module Google
       # Create a new client object for BackupForGKE.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::GkeBackup::V1::BackupForGKE::Client](https://googleapis.dev/ruby/google-cloud-gke_backup-v1/latest/Google/Cloud/GkeBackup/V1/BackupForGKE/Client.html)
+      # [Google::Cloud::GkeBackup::V1::BackupForGKE::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_backup-v1/latest/Google-Cloud-GkeBackup-V1-BackupForGKE-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the BackupForGKE service is

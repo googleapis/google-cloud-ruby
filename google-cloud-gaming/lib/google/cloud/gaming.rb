@@ -48,7 +48,7 @@ module Google
       # Create a new client object for GameServerClustersService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Gaming::V1::GameServerClustersService::Client](https://googleapis.dev/ruby/google-cloud-gaming-v1/latest/Google/Cloud/Gaming/V1/GameServerClustersService/Client.html)
+      # [Google::Cloud::Gaming::V1::GameServerClustersService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gaming-v1/latest/Google-Cloud-Gaming-V1-GameServerClustersService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GameServerClustersService service is
@@ -83,7 +83,7 @@ module Google
       # Create a new client object for GameServerConfigsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Gaming::V1::GameServerConfigsService::Client](https://googleapis.dev/ruby/google-cloud-gaming-v1/latest/Google/Cloud/Gaming/V1/GameServerConfigsService/Client.html)
+      # [Google::Cloud::Gaming::V1::GameServerConfigsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gaming-v1/latest/Google-Cloud-Gaming-V1-GameServerConfigsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GameServerConfigsService service is
@@ -117,7 +117,7 @@ module Google
       # Create a new client object for GameServerDeploymentsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client](https://googleapis.dev/ruby/google-cloud-gaming-v1/latest/Google/Cloud/Gaming/V1/GameServerDeploymentsService/Client.html)
+      # [Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gaming-v1/latest/Google-Cloud-Gaming-V1-GameServerDeploymentsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GameServerDeploymentsService service is
@@ -152,7 +152,7 @@ module Google
       # Create a new client object for RealmsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Gaming::V1::RealmsService::Client](https://googleapis.dev/ruby/google-cloud-gaming-v1/latest/Google/Cloud/Gaming/V1/RealmsService/Client.html)
+      # [Google::Cloud::Gaming::V1::RealmsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gaming-v1/latest/Google-Cloud-Gaming-V1-RealmsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RealmsService service is

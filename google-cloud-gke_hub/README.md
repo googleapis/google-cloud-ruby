@@ -16,8 +16,8 @@ for this library, google-cloud-gke_hub, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-gke_hub-v1](https://googleapis.dev/ruby/google-cloud-gke_hub-v1/latest),
-[google-cloud-gke_hub-v1beta1](https://googleapis.dev/ruby/google-cloud-gke_hub-v1beta1/latest).
+[google-cloud-gke_hub-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_hub-v1/latest),
+[google-cloud-gke_hub-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_hub-v1beta1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/anthos/clusters/docs)
 for more usage information.

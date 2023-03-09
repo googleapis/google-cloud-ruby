@@ -48,7 +48,7 @@ module Google
       # Create a new client object for GkeHub.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::GkeHub::V1::GkeHub::Client](https://googleapis.dev/ruby/google-cloud-gke_hub-v1/latest/Google/Cloud/GkeHub/V1/GkeHub/Client.html)
+      # [Google::Cloud::GkeHub::V1::GkeHub::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_hub-v1/latest/Google-Cloud-GkeHub-V1-GkeHub-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GkeHub service is
