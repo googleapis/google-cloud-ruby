@@ -48,7 +48,7 @@ module Google
       # Create a new client object for CatalogService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Retail::V2::CatalogService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/CatalogService/Client.html)
+      # [Google::Cloud::Retail::V2::CatalogService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-retail-v2/latest/Google-Cloud-Retail-V2-CatalogService-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CatalogService service is
@@ -82,7 +82,7 @@ module Google
       # Create a new client object for CompletionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Retail::V2::CompletionService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/CompletionService/Client.html)
+      # [Google::Cloud::Retail::V2::CompletionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-retail-v2/latest/Google-Cloud-Retail-V2-CompletionService-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CompletionService service is
@@ -119,7 +119,7 @@ module Google
       # Create a new client object for ControlService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Retail::V2::ControlService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/ControlService/Client.html)
+      # [Google::Cloud::Retail::V2::ControlService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-retail-v2/latest/Google-Cloud-Retail-V2-ControlService-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ControlService service is
@@ -153,7 +153,7 @@ module Google
       # Create a new client object for PredictionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Retail::V2::PredictionService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/PredictionService/Client.html)
+      # [Google::Cloud::Retail::V2::PredictionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-retail-v2/latest/Google-Cloud-Retail-V2-PredictionService-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PredictionService service is
@@ -187,7 +187,7 @@ module Google
       # Create a new client object for ProductService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Retail::V2::ProductService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/ProductService/Client.html)
+      # [Google::Cloud::Retail::V2::ProductService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-retail-v2/latest/Google-Cloud-Retail-V2-ProductService-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ProductService service is
@@ -222,7 +222,7 @@ module Google
       # Create a new client object for SearchService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Retail::V2::SearchService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/SearchService/Client.html)
+      # [Google::Cloud::Retail::V2::SearchService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-retail-v2/latest/Google-Cloud-Retail-V2-SearchService-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SearchService service is
@@ -259,7 +259,7 @@ module Google
       # Create a new client object for ServingConfigService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Retail::V2::ServingConfigService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/ServingConfigService/Client.html)
+      # [Google::Cloud::Retail::V2::ServingConfigService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-retail-v2/latest/Google-Cloud-Retail-V2-ServingConfigService-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ServingConfigService service is
@@ -293,7 +293,7 @@ module Google
       # Create a new client object for UserEventService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Retail::V2::UserEventService::Client](https://googleapis.dev/ruby/google-cloud-retail-v2/latest/Google/Cloud/Retail/V2/UserEventService/Client.html)
+      # [Google::Cloud::Retail::V2::UserEventService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-retail-v2/latest/Google-Cloud-Retail-V2-UserEventService-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the UserEventService service is

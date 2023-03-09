@@ -16,8 +16,8 @@ for this library, google-cloud-scheduler, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-scheduler-v1](https://googleapis.dev/ruby/google-cloud-scheduler-v1/latest),
-[google-cloud-scheduler-v1beta1](https://googleapis.dev/ruby/google-cloud-scheduler-v1beta1/latest).
+[google-cloud-scheduler-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-scheduler-v1/latest),
+[google-cloud-scheduler-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-scheduler-v1beta1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/scheduler)
 for more usage information.

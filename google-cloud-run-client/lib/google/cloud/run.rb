@@ -48,7 +48,7 @@ module Google
       # Create a new client object for Executions.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Run::V2::Executions::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Executions/Client.html)
+      # [Google::Cloud::Run::V2::Executions::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-run-v2/latest/Google-Cloud-Run-V2-Executions-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Executions service is
@@ -82,7 +82,7 @@ module Google
       # Create a new client object for Jobs.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Run::V2::Jobs::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Jobs/Client.html)
+      # [Google::Cloud::Run::V2::Jobs::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-run-v2/latest/Google-Cloud-Run-V2-Jobs-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Jobs service is
@@ -116,7 +116,7 @@ module Google
       # Create a new client object for Revisions.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Run::V2::Revisions::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Revisions/Client.html)
+      # [Google::Cloud::Run::V2::Revisions::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-run-v2/latest/Google-Cloud-Run-V2-Revisions-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Revisions service is
@@ -150,7 +150,7 @@ module Google
       # Create a new client object for Services.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Run::V2::Services::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Services/Client.html)
+      # [Google::Cloud::Run::V2::Services::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-run-v2/latest/Google-Cloud-Run-V2-Services-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Services service is
@@ -184,7 +184,7 @@ module Google
       # Create a new client object for Tasks.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Run::V2::Tasks::Client](https://googleapis.dev/ruby/google-cloud-run-v2/latest/Google/Cloud/Run/V2/Tasks/Client.html)
+      # [Google::Cloud::Run::V2::Tasks::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-run-v2/latest/Google-Cloud-Run-V2-Tasks-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Tasks service is
