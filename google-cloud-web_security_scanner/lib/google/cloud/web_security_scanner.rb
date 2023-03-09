@@ -48,7 +48,7 @@ module Google
       # Create a new client object for WebSecurityScanner.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client](https://googleapis.dev/ruby/google-cloud-web_security_scanner-v1/latest/Google/Cloud/WebSecurityScanner/V1/WebSecurityScanner/Client.html)
+      # [Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-web_security_scanner-v1/latest/Google-Cloud-WebSecurityScanner-V1-WebSecurityScanner-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the WebSecurityScanner service is

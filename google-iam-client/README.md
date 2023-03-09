@@ -11,12 +11,12 @@ verisoned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-iam-client/latest)
+View the [Client Library Documentation](https://rubydoc.info/gems/google-iam-client)
 for this library, google-iam-client, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-iam-v2](https://googleapis.dev/ruby/google-iam-v2/latest).
+[google-iam-v2](https://rubydoc.info/gems/google-iam-v2).
 
 See also the [Product Documentation](https://cloud.google.com/iam)
 for more usage information.

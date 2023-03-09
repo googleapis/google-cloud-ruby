@@ -16,7 +16,7 @@ for this library, google-cloud-vpc_access, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-vpc_access-v1](https://googleapis.dev/ruby/google-cloud-vpc_access-v1/latest).
+[google-cloud-vpc_access-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-vpc_access-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/vpc/docs/serverless-vpc-access)
 for more usage information.
