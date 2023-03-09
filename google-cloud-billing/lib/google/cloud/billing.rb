@@ -48,7 +48,7 @@ module Google
       # Create a new client object for CloudBilling.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Billing::V1::CloudBilling::Client](https://googleapis.dev/ruby/google-cloud-billing-v1/latest/Google/Cloud/Billing/V1/CloudBilling/Client.html)
+      # [Google::Cloud::Billing::V1::CloudBilling::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-billing-v1/latest/Google-Cloud-Billing-V1-CloudBilling-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CloudBilling service is
@@ -83,7 +83,7 @@ module Google
       # Create a new client object for CloudCatalog.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Billing::V1::CloudCatalog::Client](https://googleapis.dev/ruby/google-cloud-billing-v1/latest/Google/Cloud/Billing/V1/CloudCatalog/Client.html)
+      # [Google::Cloud::Billing::V1::CloudCatalog::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-billing-v1/latest/Google-Cloud-Billing-V1-CloudCatalog-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CloudCatalog service is

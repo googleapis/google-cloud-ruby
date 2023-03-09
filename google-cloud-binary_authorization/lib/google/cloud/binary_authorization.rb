@@ -48,7 +48,7 @@ module Google
       # Create a new client object for BinauthzManagementService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client](https://googleapis.dev/ruby/google-cloud-binary_authorization-v1/latest/Google/Cloud/BinaryAuthorization/V1/BinauthzManagementService/Client.html)
+      # [Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-binary_authorization-v1/latest/Google-Cloud-BinaryAuthorization-V1-BinauthzManagementService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the BinauthzManagementService service is
@@ -88,7 +88,7 @@ module Google
       # Create a new client object for SystemPolicy.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client](https://googleapis.dev/ruby/google-cloud-binary_authorization-v1/latest/Google/Cloud/BinaryAuthorization/V1/SystemPolicy/Client.html)
+      # [Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-binary_authorization-v1/latest/Google-Cloud-BinaryAuthorization-V1-SystemPolicy-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SystemPolicy service is
@@ -122,7 +122,7 @@ module Google
       # Create a new client object for ValidationHelper.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client](https://googleapis.dev/ruby/google-cloud-binary_authorization-v1/latest/Google/Cloud/BinaryAuthorization/V1/ValidationHelper/Client.html)
+      # [Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-binary_authorization-v1/latest/Google-Cloud-BinaryAuthorization-V1-ValidationHelper-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ValidationHelper service is
