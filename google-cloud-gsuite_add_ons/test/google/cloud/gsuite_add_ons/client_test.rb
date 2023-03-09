@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/gsuite_add_ons"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::GSuiteAddOns::ClientConstructionMinitest < Minitest::Test
   def test_gsuite_add_ons_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::GSuiteAddOns.gsuite_add_ons do |config|
+      client = Google::Cloud::GSuiteAddOns.gsuite_add_ons transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client, client
+    end
+  end
+
+  def test_gsuite_add_ons_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::GSuiteAddOns.gsuite_add_ons transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client, client
     end
   end
 end

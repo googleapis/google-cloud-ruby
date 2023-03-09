@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/firestore/admin"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Firestore::Admin::ClientConstructionMinitest < Minitest::Test
   def test_firestore_admin_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Firestore::Admin.firestore_admin do |config|
+      client = Google::Cloud::Firestore::Admin.firestore_admin transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client, client
+    end
+  end
+
+  def test_firestore_admin_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Firestore::Admin.firestore_admin transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client, client
     end
   end
 end
