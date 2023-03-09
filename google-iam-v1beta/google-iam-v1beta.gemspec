@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Pre-release client for the WorkloadIdentityPools service. Note that google-iam-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-iam instead. See the readme for more details."
-  gem.summary       = "<p>Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.</p> <aside class=\"note\"><b>Note:</b> This API is tied to the <a href=\"/iam/docs/reference/credentials/rest\">IAM service account credentials API</a> (<code>iamcredentials.googleapis.com</code>). Enabling or disabling this API will also enable or disable the IAM service account credentials API.</aside>"
+  gem.summary       = "Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls. Note: This API is tied to the IAM service account credentials API (iamcredentials.googleapis.com). Enabling or disabling this API will also enable or disable the IAM service account credentials API."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

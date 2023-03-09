@@ -31,7 +31,7 @@ module Google
       # Create a new client object for AccessContextManager.
       #
       # By default, this returns an instance of
-      # [Google::Identity::AccessContextManager::V1::AccessContextManager::Client](https://googleapis.dev/ruby/google-identity-access_context_manager-v1/latest/Google/Identity/AccessContextManager/V1/AccessContextManager/Client.html)
+      # [Google::Identity::AccessContextManager::V1::AccessContextManager::Client](https://cloud.google.com/ruby/docs/reference/google-identity-access_context_manager-v1/latest/Google-Identity-AccessContextManager-V1-AccessContextManager-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AccessContextManager service is
