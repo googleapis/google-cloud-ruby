@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-gsuite_add_ons-v1", path: "../google-cloud-gsuite_add_ons-v1"
