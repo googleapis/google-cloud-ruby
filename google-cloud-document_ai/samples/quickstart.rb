@@ -32,19 +32,19 @@ def quickstart project_id:, location_id:, processor_id:, file_path:, mime_type:
   name = "projects/#{project_id}/locations/#{location_id}/#{processor_id}"
 
   # Read the bytes into memory
-  content = File.open(file_path, 'rb').read
+  content = File.open(file_path, "rb").read
 
   # Process document
   response = client.process_document(
     skip_human_review: true,
     name: name,
     raw_document: {
-        content: content,
-        mime_type: mime_type
+      content: content,
+      mime_type: mime_type
     }
   )
 
   # Handle response
-  print(response.document.text)
+  puts response.document.text
 end
 # [END documentai_quickstart]
