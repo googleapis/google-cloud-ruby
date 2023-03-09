@@ -32,7 +32,7 @@ def quickstart project_id:, location_id:, processor_id:, file_path:, mime_type:
   name = "projects/#{project_id}/locations/#{location_id}/#{processor_id}"
 
   # Read the bytes into memory
-  content = File.open(file_path, "rb").binread
+  content = File.binread(file_path)
 
   # Process document
   response = client.process_document(
