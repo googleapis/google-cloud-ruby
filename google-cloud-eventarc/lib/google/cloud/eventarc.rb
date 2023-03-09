@@ -48,7 +48,7 @@ module Google
       # Create a new client object for Eventarc.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Eventarc::V1::Eventarc::Client](https://googleapis.dev/ruby/google-cloud-eventarc-v1/latest/Google/Cloud/Eventarc/V1/Eventarc/Client.html)
+      # [Google::Cloud::Eventarc::V1::Eventarc::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-eventarc-v1/latest/Google-Cloud-Eventarc-V1-Eventarc-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Eventarc service is

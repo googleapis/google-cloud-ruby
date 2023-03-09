@@ -49,7 +49,7 @@ module Google
         # Create a new client object for Publisher.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Eventarc::Publishing::V1::Publisher::Client](https://googleapis.dev/ruby/google-cloud-eventarc-publishing-v1/latest/Google/Cloud/Eventarc/Publishing/V1/Publisher/Client.html)
+        # [Google::Cloud::Eventarc::Publishing::V1::Publisher::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-eventarc-publishing-v1/latest/Google-Cloud-Eventarc-Publishing-V1-Publisher-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Publisher service is

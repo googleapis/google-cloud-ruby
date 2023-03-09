@@ -49,7 +49,7 @@ module Google
         # Create a new client object for FirestoreAdmin.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client](https://googleapis.dev/ruby/google-cloud-firestore-admin-v1/latest/Google/Cloud/Firestore/Admin/V1/FirestoreAdmin/Client.html)
+        # [Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-firestore-admin-v1/latest/Google-Cloud-Firestore-Admin-V1-FirestoreAdmin-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the FirestoreAdmin service is
