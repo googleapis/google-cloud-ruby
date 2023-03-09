@@ -16,7 +16,7 @@ for this library, google-cloud-network_security, to see the convenience methods 
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-network_security-v1beta1](https://googleapis.dev/ruby/google-cloud-network_security-v1beta1/latest).
+[google-cloud-network_security-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-network_security-v1beta1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/traffic-director/docs/reference/network-security/rest/)
 for more usage information.

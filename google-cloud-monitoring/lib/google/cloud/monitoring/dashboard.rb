@@ -49,7 +49,7 @@ module Google
         # Create a new client object for DashboardsService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-dashboard-v1/latest/Google/Cloud/Monitoring/Dashboard/V1/DashboardsService/Client.html)
+        # [Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-dashboard-v1/latest/Google-Cloud-Monitoring-Dashboard-V1-DashboardsService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the DashboardsService service is

@@ -48,7 +48,7 @@ module Google
       # Create a new client object for DataprocMetastore.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Metastore::V1::DataprocMetastore::Client](https://googleapis.dev/ruby/google-cloud-metastore-v1/latest/Google/Cloud/Metastore/V1/DataprocMetastore/Client.html)
+      # [Google::Cloud::Metastore::V1::DataprocMetastore::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-metastore-v1/latest/Google-Cloud-Metastore-V1-DataprocMetastore-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DataprocMetastore service is
@@ -98,7 +98,7 @@ module Google
       # Create a new client object for DataprocMetastoreFederation.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client](https://googleapis.dev/ruby/google-cloud-metastore-v1/latest/Google/Cloud/Metastore/V1/DataprocMetastoreFederation/Client.html)
+      # [Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-metastore-v1/latest/Google-Cloud-Metastore-V1-DataprocMetastoreFederation-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DataprocMetastoreFederation service is
