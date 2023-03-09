@@ -16,7 +16,7 @@ for this library, google-cloud-access_approval, to see the convenience methods f
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-access_approval-v1](https://googleapis.dev/ruby/google-cloud-access_approval-v1/latest).
+[google-cloud-access_approval-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-access_approval-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/access-approval/)
 for more usage information.
