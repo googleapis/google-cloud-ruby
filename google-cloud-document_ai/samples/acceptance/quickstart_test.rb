@@ -21,8 +21,7 @@ require "minitest/rg"
 require_relative "../../../.toys/.lib/sample_loader"
 
 describe "Document AI Quickstart" do
-  # let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
-  let(:project_id) { "542339357638" }
+  let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
   let(:location_id) { "us" }
   let(:processor_id) { "e894aff43df677e0" }
   let(:file_path) { "acceptance/data/invoice.pdf" }

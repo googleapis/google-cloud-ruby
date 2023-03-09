@@ -29,13 +29,17 @@ def quickstart project_id:, location_id:, processor_id:, file_path:, mime_type:
   client = Google::Cloud::DocumentAI.document_processor_service
 
   # Build the resource name from the project.
-  name = "projects/#{project_id}/locations/#{location_id}/#{processor_id}"
+  name = client.processor_path(
+    project: project_id,
+    location: location_id,
+    processor: processor_id
+  )
 
   # Read the bytes into memory
   content = File.binread file_path
 
-  # Process document
-  response = client.process_document(
+  # Create request
+  request = Google::Cloud::DocumentAI::V1::ProcessRequest.new(
     skip_human_review: true,
     name: name,
     raw_document: {
@@ -43,6 +47,9 @@ def quickstart project_id:, location_id:, processor_id:, file_path:, mime_type:
       mime_type: mime_type
     }
   )
+
+  # Process document
+  response = client.process_document request
 
   # Handle response
   puts response.document.text
