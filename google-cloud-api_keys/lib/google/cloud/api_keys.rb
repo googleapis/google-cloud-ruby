@@ -48,7 +48,7 @@ module Google
       # Create a new client object for ApiKeys.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApiKeys::V2::ApiKeys::Client](https://googleapis.dev/ruby/google-cloud-api_keys-v2/latest/Google/Cloud/ApiKeys/V2/ApiKeys/Client.html)
+      # [Google::Cloud::ApiKeys::V2::ApiKeys::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_keys-v2/latest/Google-Cloud-ApiKeys-V2-ApiKeys-Client)
       # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ApiKeys service is

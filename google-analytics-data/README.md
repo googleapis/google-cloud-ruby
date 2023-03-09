@@ -11,12 +11,12 @@ verisoned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-analytics-data/latest)
+View the [Client Library Documentation](https://rubydoc.info/gems/google-analytics-data)
 for this library, google-analytics-data, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-analytics-data-v1beta](https://googleapis.dev/ruby/google-analytics-data-v1beta/latest).
+[google-analytics-data-v1beta](https://rubydoc.info/gems/google-analytics-data-v1beta).
 
 See also the [Product Documentation](https://developers.google.com/analytics/devguides/reporting/data/v1)
 for more usage information.

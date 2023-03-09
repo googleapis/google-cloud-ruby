@@ -1,7 +1,7 @@
 {
     "api_id": "analyticsdata.googleapis.com",
     "api_shortname": "analyticsdata",
-    "client_documentation": "https://googleapis.dev/ruby/google-analytics-data-v1beta/latest",
+    "client_documentation": "https://rubydoc.info/gems/google-analytics-data-v1beta",
     "distribution_name": "google-analytics-data-v1beta",
     "is_cloud": false,
     "language": "ruby",

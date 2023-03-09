@@ -48,7 +48,7 @@ module Google
       # Create a new client object for ConnectionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApigeeConnect::V1::ConnectionService::Client](https://googleapis.dev/ruby/google-cloud-apigee_connect-v1/latest/Google/Cloud/ApigeeConnect/V1/ConnectionService/Client.html)
+      # [Google::Cloud::ApigeeConnect::V1::ConnectionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-apigee_connect-v1/latest/Google-Cloud-ApigeeConnect-V1-ConnectionService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ConnectionService service is
@@ -82,7 +82,7 @@ module Google
       # Create a new client object for Tether.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApigeeConnect::V1::Tether::Client](https://googleapis.dev/ruby/google-cloud-apigee_connect-v1/latest/Google/Cloud/ApigeeConnect/V1/Tether/Client.html)
+      # [Google::Cloud::ApigeeConnect::V1::Tether::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-apigee_connect-v1/latest/Google-Cloud-ApigeeConnect-V1-Tether-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Tether service is

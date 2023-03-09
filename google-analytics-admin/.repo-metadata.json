@@ -1,7 +1,7 @@
 {
     "api_id": "analyticsadmin.googleapis.com",
     "api_shortname": "analyticsadmin",
-    "client_documentation": "https://googleapis.dev/ruby/google-analytics-admin/latest",
+    "client_documentation": "https://rubydoc.info/gems/google-analytics-admin",
     "distribution_name": "google-analytics-admin",
     "is_cloud": false,
     "language": "ruby",

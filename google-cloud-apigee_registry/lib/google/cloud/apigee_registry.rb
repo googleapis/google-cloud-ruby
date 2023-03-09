@@ -48,7 +48,7 @@ module Google
       # Create a new client object for Provisioning.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApigeeRegistry::V1::Provisioning::Client](https://googleapis.dev/ruby/google-cloud-apigee_registry-v1/latest/Google/Cloud/ApigeeRegistry/V1/Provisioning/Client.html)
+      # [Google::Cloud::ApigeeRegistry::V1::Provisioning::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-apigee_registry-v1/latest/Google-Cloud-ApigeeRegistry-V1-Provisioning-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Provisioning service is
@@ -83,7 +83,7 @@ module Google
       # Create a new client object for Registry.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApigeeRegistry::V1::Registry::Client](https://googleapis.dev/ruby/google-cloud-apigee_registry-v1/latest/Google/Cloud/ApigeeRegistry/V1/Registry/Client.html)
+      # [Google::Cloud::ApigeeRegistry::V1::Registry::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-apigee_registry-v1/latest/Google-Cloud-ApigeeRegistry-V1-Registry-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Registry service is
