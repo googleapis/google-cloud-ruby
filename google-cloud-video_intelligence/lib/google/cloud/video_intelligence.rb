@@ -48,7 +48,7 @@ module Google
       # Create a new client object for VideoIntelligenceService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client](https://googleapis.dev/ruby/google-cloud-video_intelligence-v1/latest/Google/Cloud/VideoIntelligence/V1/VideoIntelligenceService/Client.html)
+      # [Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-video_intelligence-v1/latest/Google-Cloud-VideoIntelligence-V1-VideoIntelligenceService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the VideoIntelligenceService service is
