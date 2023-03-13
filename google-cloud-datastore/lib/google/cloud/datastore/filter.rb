@@ -6,7 +6,7 @@ module Google
       class Filter
         ##
         # @private Object of type
-        # Google::Cloud::Firestore::V1::StructuredQuery::Filter
+        # Google::Cloud::Datastore::V1::Filter
         attr_accessor :filter
 
         ##
