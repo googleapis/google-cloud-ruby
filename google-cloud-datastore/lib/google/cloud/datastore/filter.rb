@@ -4,7 +4,6 @@ module Google
   module Cloud
     module Datastore
       class Filter
-
         ##
         # @private Object of type
         # Google::Cloud::Firestore::V1::StructuredQuery::Filter
@@ -32,7 +31,7 @@ module Google
         def or filter
         end
 
-        def self.create_filter(name, operator, value)
+        def self.create_filter name, operator, value
           Google::Cloud::Datastore::V1::Filter.new(
             property_filter: Google::Cloud::Datastore::V1::PropertyFilter.new(
               property: Google::Cloud::Datastore::V1::PropertyReference.new(
@@ -43,8 +42,6 @@ module Google
             )
           )
         end
-
-
       end
     end
   end
