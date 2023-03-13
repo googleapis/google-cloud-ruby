@@ -2561,6 +2561,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
     page_token = "hello world"
     filter = "hello world"
     language_code = "hello world"
+    show_future_offers = true
 
     list_offers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_offers, name
@@ -2570,6 +2571,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
       assert_equal "hello world", request["language_code"]
+      assert_equal true, request["show_future_offers"]
       refute_nil options
     end
 
@@ -2580,35 +2582,35 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.list_offers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code }) do |response, operation|
+      client.list_offers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code, show_future_offers: show_future_offers }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_offers parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code do |response, operation|
+      client.list_offers parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code, show_future_offers: show_future_offers do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_offers ::Google::Cloud::Channel::V1::ListOffersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code) do |response, operation|
+      client.list_offers ::Google::Cloud::Channel::V1::ListOffersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code, show_future_offers: show_future_offers) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_offers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code }, grpc_options) do |response, operation|
+      client.list_offers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code, show_future_offers: show_future_offers }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_offers(::Google::Cloud::Channel::V1::ListOffersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code), grpc_options) do |response, operation|
+      client.list_offers(::Google::Cloud::Channel::V1::ListOffersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code, show_future_offers: show_future_offers), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2942,6 +2944,75 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
 
       # Verify method calls
       assert_equal 5, list_subscribers_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_entitlement_changes
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Channel::V1::ListEntitlementChangesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_entitlement_changes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_entitlement_changes, name
+      assert_kind_of ::Google::Cloud::Channel::V1::ListEntitlementChangesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_entitlement_changes_client_stub do
+      # Create client
+      client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_entitlement_changes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_entitlement_changes parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_entitlement_changes ::Google::Cloud::Channel::V1::ListEntitlementChangesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_entitlement_changes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_entitlement_changes(::Google::Cloud::Channel::V1::ListEntitlementChangesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_entitlement_changes_client_stub.call_rpc_count
     end
   end
 

@@ -4844,7 +4844,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_offers(parent: nil, page_size: nil, page_token: nil, filter: nil, language_code: nil)
+            # @overload list_offers(parent: nil, page_size: nil, page_token: nil, filter: nil, language_code: nil, show_future_offers: nil)
             #   Pass arguments to `list_offers` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -4868,6 +4868,11 @@ module Google
             #     Optional. The BCP-47 language code. For example, "en-US". The
             #     response will localize in the corresponding language code, if specified.
             #     The default value is "en-US".
+            #   @param show_future_offers [::Boolean]
+            #     Optional. A boolean flag that determines if a response returns future
+            #     offers 30 days from now. If the show_future_offers is true, the response
+            #     will only contain offers that are scheduled to be available 30 days from
+            #     now.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::Offer>]
@@ -5490,6 +5495,131 @@ module Google
             end
 
             ##
+            # List entitlement history.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The reseller account making the request and the
+            # provided reseller account are different.
+            # * INVALID_ARGUMENT: Missing or invalid required fields in the request.
+            # * NOT_FOUND: The parent resource doesn't exist. Usually the result of an
+            # invalid name parameter.
+            # * INTERNAL: Any non-user error related to a technical issue in the backend.
+            # In this case, contact CloudChannel support.
+            # * UNKNOWN: Any non-user error related to a technical issue in the backend.
+            # In this case, contact Cloud Channel support.
+            #
+            # Return value:
+            # List of {::Google::Cloud::Channel::V1::EntitlementChange EntitlementChange}s.
+            #
+            # @overload list_entitlement_changes(request, options = nil)
+            #   Pass arguments to `list_entitlement_changes` via a request object, either of type
+            #   {::Google::Cloud::Channel::V1::ListEntitlementChangesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Channel::V1::ListEntitlementChangesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_entitlement_changes(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            #   Pass arguments to `list_entitlement_changes` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the entitlement for which to list
+            #     entitlement changes. The `-` wildcard may be used to match entitlements
+            #     across a customer. Formats:
+            #
+            #       * accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
+            #       * accounts/\\{account_id}/customers/\\{customer_id}/entitlements/-
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of entitlement changes to return. The service
+            #     may return fewer than this value. If unspecified, returns at most 10
+            #     entitlement changes. The maximum value is 50; the server will coerce values
+            #     above 50.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+            #     must match the call that provided the page token.
+            #   @param filter [::String]
+            #     Optional. Filters applied to the list results.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::EntitlementChange>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::EntitlementChange>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListEntitlementChangesRequest.new
+            #
+            #   # Call the list_entitlement_changes method.
+            #   result = client.list_entitlement_changes request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::EntitlementChange.
+            #     p item
+            #   end
+            #
+            def list_entitlement_changes request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Channel::V1::ListEntitlementChangesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_entitlement_changes.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Channel::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_entitlement_changes.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_entitlement_changes.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_channel_service_stub.call_rpc :list_entitlement_changes, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @cloud_channel_service_stub, :list_entitlement_changes, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the CloudChannelService API.
             #
             # This class represents the configuration for CloudChannelService,
@@ -5849,6 +5979,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_subscribers
+                ##
+                # RPC-specific configuration for `list_entitlement_changes`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_entitlement_changes
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -5942,6 +6077,8 @@ module Google
                   @unregister_subscriber = ::Gapic::Config::Method.new unregister_subscriber_config
                   list_subscribers_config = parent_rpcs.list_subscribers if parent_rpcs.respond_to? :list_subscribers
                   @list_subscribers = ::Gapic::Config::Method.new list_subscribers_config
+                  list_entitlement_changes_config = parent_rpcs.list_entitlement_changes if parent_rpcs.respond_to? :list_entitlement_changes
+                  @list_entitlement_changes = ::Gapic::Config::Method.new list_entitlement_changes_config
 
                   yield self if block_given?
                 end

@@ -2249,6 +2249,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_token = "hello world"
     filter = "hello world"
     language_code = "hello world"
+    show_future_offers = true
 
     list_offers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -2264,27 +2265,27 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
         end
 
         # Use hash object
-        client.list_offers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code }) do |_result, response|
+        client.list_offers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code, show_future_offers: show_future_offers }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_offers parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code do |_result, response|
+        client.list_offers parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code, show_future_offers: show_future_offers do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_offers ::Google::Cloud::Channel::V1::ListOffersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code) do |_result, response|
+        client.list_offers ::Google::Cloud::Channel::V1::ListOffersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code, show_future_offers: show_future_offers) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_offers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code }, call_options) do |_result, response|
+        client.list_offers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code, show_future_offers: show_future_offers }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_offers(::Google::Cloud::Channel::V1::ListOffersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code), call_options) do |_result, response|
+        client.list_offers(::Google::Cloud::Channel::V1::ListOffersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code, show_future_offers: show_future_offers), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2572,6 +2573,63 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
 
         # Verify method calls
         assert_equal 5, list_subscribers_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_entitlement_changes
+    # Create test objects.
+    client_result = ::Google::Cloud::Channel::V1::ListEntitlementChangesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_entitlement_changes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ServiceStub.stub :transcode_list_entitlement_changes_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_entitlement_changes_client_stub do
+        # Create client
+        client = ::Google::Cloud::Channel::V1::CloudChannelService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_entitlement_changes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_entitlement_changes parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_entitlement_changes ::Google::Cloud::Channel::V1::ListEntitlementChangesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_entitlement_changes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_entitlement_changes(::Google::Cloud::Channel::V1::ListEntitlementChangesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_entitlement_changes_client_stub.call_count
       end
     end
   end

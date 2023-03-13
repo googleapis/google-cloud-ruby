@@ -258,6 +258,11 @@
               "methods": [
                 "list_subscribers"
               ]
+            },
+            "ListEntitlementChanges": {
+              "methods": [
+                "list_entitlement_changes"
+              ]
             }
           }
         }

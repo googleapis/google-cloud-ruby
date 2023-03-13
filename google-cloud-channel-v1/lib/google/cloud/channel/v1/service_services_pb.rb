@@ -967,6 +967,23 @@ module Google
             # Return value:
             # A list of service email addresses.
             rpc :ListSubscribers, ::Google::Cloud::Channel::V1::ListSubscribersRequest, ::Google::Cloud::Channel::V1::ListSubscribersResponse
+            # List entitlement history.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The reseller account making the request and the
+            # provided reseller account are different.
+            # * INVALID_ARGUMENT: Missing or invalid required fields in the request.
+            # * NOT_FOUND: The parent resource doesn't exist. Usually the result of an
+            # invalid name parameter.
+            # * INTERNAL: Any non-user error related to a technical issue in the backend.
+            # In this case, contact CloudChannel support.
+            # * UNKNOWN: Any non-user error related to a technical issue in the backend.
+            # In this case, contact Cloud Channel support.
+            #
+            # Return value:
+            # List of [EntitlementChange][google.cloud.channel.v1.EntitlementChange]s.
+            rpc :ListEntitlementChanges, ::Google::Cloud::Channel::V1::ListEntitlementChangesRequest, ::Google::Cloud::Channel::V1::ListEntitlementChangesResponse
           end
 
           Stub = Service.rpc_stub_class
