@@ -32,6 +32,12 @@ These samples show how to use the [Google Document AI API](https://cloud.google.
     $ export GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID"
     ```
 
+1. **Run samples**
+
+    ```text
+    bundle exec rake test
+    ```
+
 ## Contributing changes
 
 * See [CONTRIBUTING.md](../CONTRIBUTING.md)
