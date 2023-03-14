@@ -18,28 +18,30 @@ module Google
             @filter = create_property_filter(name_or_filter, operator, value)
           end
         end
-        # def initialize filter
-        #   @filter = filter
-        # end
-        
 
-        # def self.create name, operator, value
-        #   new create_property_filter(name, operator, value)
-        # end
-
-        def and f1
-          combine_filters composite_filter_and, f1
+        def and *args
+          combine_filters composite_filter_and, args
         end
 
-        def or f1
-          combine_filters composite_filter_or, f1
+        def or *args
+          combine_filters composite_filter_or, args
         end
 
-        def combine_filters(composite_filter, f1)
+        private
+
+        def combine_filters(composite_filter, args)
           composite_filter.composite_filter.filters << filter
-          composite_filter.composite_filter.filters << f1.filter
+          if args[0].is_a? Google::Cloud::Datastore::Filter
+            args.each do |f|
+              composite_filter.composite_filter.filters << f.filter
+            end
+          else
+            name, operator, value = args
+            composite_filter.composite_filter.filters << create_property_filter(name, operator, value)
+          end
           self.class.new composite_filter
         end
+
 
         def composite_filter_and
           Google::Cloud::Datastore::V1::Filter.new(

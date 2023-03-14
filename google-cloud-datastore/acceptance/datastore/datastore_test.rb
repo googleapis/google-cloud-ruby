@@ -554,7 +554,8 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 4
     end
 
-    focus; it "should fetch entities filtered by = operator" do
+    focus;
+    it "should fetch entities filtered by = operator" do
       filter = Google::Cloud::Datastore::Filter.new("alive", "=", true)
       datastore = Google::Cloud::Datastore.new
       query = datastore.query("Character").
@@ -564,10 +565,12 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 4
     end
 
-    focus; it "should fetch entities filtered by AND operator" do
-      f1 = Google::Cloud::Datastore::Filter.new("alive", "=", true)
-      f2 = Google::Cloud::Datastore::Filter.new("appearances", "=", 33)
-      f = f1.and(f2)
+    focus;
+    it "should fetch entities filtered by AND operator" do
+      f1 = Google::Cloud::Datastore::Filter.new("name", "=", "Arya")
+      f2 = Google::Cloud::Datastore::Filter.new("alive", "=", true)
+      f3 = Google::Cloud::Datastore::Filter.new("appearances", "=", 33)
+      f = f1.and(f2, f3)
       datastore = Google::Cloud::Datastore.new
       query = datastore.query("Character").
         ancestor(book).
@@ -576,16 +579,44 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 1
     end
 
-    focus; it "should fetch entities filtered by OR operator" do
-      f1 = Google::Cloud::Datastore::Filter.new("name", "=", "Rickard")
-      f2 = Google::Cloud::Datastore::Filter.new("appearances", "=", 33)
-      f = f1.or(f2)
+    focus;
+    it "should fetch entities filtered by AND operator through property filter" do
+      f = Google::Cloud::Datastore::Filter.new("appearances", "=", 33)
+                                           .and("name", "=", "Arya")
+                                           .and("alive", "=", true)
       datastore = Google::Cloud::Datastore.new
       query = datastore.query("Character").
         ancestor(book).
         where(f)
       entities = datastore.run query
-      _(entities.count).must_equal 2
+      _(entities.count).must_equal 1
+    end
+
+    focus;
+    it "should fetch entities filtered by OR operator" do
+      f1 = Google::Cloud::Datastore::Filter.new("name", "=", "Rickard")
+      f2 = Google::Cloud::Datastore::Filter.new("appearances", "=", 33)
+      f3 = Google::Cloud::Datastore::Filter.new("family", "=", "Targaryen")
+      f = f1.or(f2, f3)
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where(f)
+      entities = datastore.run query
+      _(entities.count).must_equal 3
+    end
+
+    focus;
+    it "should fetch entities filtered by AND operator through property filter" do
+      f = Google::Cloud::Datastore::Filter.new("name", "=", "Rickard")
+                                           .or("appearances", "=", 33)
+                                           .or("family", "=", "Targaryen")
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where(f)
+      entities = datastore.run query
+      _(entities.count).must_equal 3
     end
 
     it "should fetch zero entities filtered by = operator" do
