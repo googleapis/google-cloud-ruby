@@ -443,8 +443,11 @@ module Google
               #     resource.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     The field mask specifying which IAP settings should be updated.
-              #     If omitted, the all of the settings are updated. See
-              #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+              #     If omitted, then all of the settings are updated. See
+              #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+              #
+              #     Note: All IAP reauth settings must always be set together, using the
+              #     field mask: `iapSettings.accessSettings.reauthSettings`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Iap::V1::IapSettings]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

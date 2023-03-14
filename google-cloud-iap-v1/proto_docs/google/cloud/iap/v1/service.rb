@@ -154,8 +154,11 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The field mask specifying which IAP settings should be updated.
-        #     If omitted, the all of the settings are updated. See
-        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+        #     If omitted, then all of the settings are updated. See
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+        #
+        #     Note: All IAP reauth settings must always be set together, using the
+        #     field mask: `iapSettings.accessSettings.reauthSettings`.
         class UpdateIapSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -270,6 +273,9 @@ module Google
 
             # User must use their secure key 2nd factor device.
             SECURE_KEY = 3
+
+            # User can use any enabled 2nd factor.
+            ENROLLED_SECOND_FACTORS = 4
           end
 
           # Type of policy in the case of hierarchial policies.
