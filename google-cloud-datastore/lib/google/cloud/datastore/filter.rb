@@ -11,27 +11,49 @@ module Google
 
         ##
         # @private Creates a new Filter.
-        def initialize filter
-          @filter = filter
+        def initialize name_or_filter, operator = nil, value = nil
+          if name_or_filter.is_a? Google::Cloud::Datastore::V1::Filter
+            @filter = name_or_filter
+          else
+            @filter = create_property_filter(name_or_filter, operator, value)
+          end
+        end
+        # def initialize filter
+        #   @filter = filter
+        # end
+        
+
+        # def self.create name, operator, value
+        #   new create_property_filter(name, operator, value)
+        # end
+
+        def and f1
+          combine_filters composite_filter_and, f1
         end
 
-        def self.create name, operator, value
-          new create_filter(name, operator, value)
+        def or f1
+          combine_filters composite_filter_or, f1
         end
 
-        def self.and filter
+        def combine_filters(composite_filter, f1)
+          composite_filter.composite_filter.filters << filter
+          composite_filter.composite_filter.filters << f1.filter
+          self.class.new composite_filter
         end
 
-        def self.or filter
+        def composite_filter_and
+          Google::Cloud::Datastore::V1::Filter.new(
+            composite_filter: Google::Cloud::Datastore::V1::CompositeFilter.new(op: :AND)
+          )
         end
 
-        def and filter
+        def composite_filter_or
+          Google::Cloud::Datastore::V1::Filter.new(
+            composite_filter: Google::Cloud::Datastore::V1::CompositeFilter.new(op: :OR)
+          )
         end
 
-        def or filter
-        end
-
-        def self.create_filter name, operator, value
+        def create_property_filter name, operator, value
           Google::Cloud::Datastore::V1::Filter.new(
             property_filter: Google::Cloud::Datastore::V1::PropertyFilter.new(
               property: Google::Cloud::Datastore::V1::PropertyReference.new(

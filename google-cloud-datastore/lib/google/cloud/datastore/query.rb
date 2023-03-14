@@ -178,17 +178,17 @@ module Google
         #
         #   tasks = datastore.run query
         #
-        def where name_or_filter, operator, value
+        def where name_or_filter, operator = nil, value = nil
           @grpc.filter ||= Google::Cloud::Datastore::V1::Filter.new(
             composite_filter: Google::Cloud::Datastore::V1::CompositeFilter.new(
               op: :AND
             )
           )
           if name_or_filter.is_a? Google::Cloud::Datastore::Filter
-            @grpc.filter.composite_filter.filters << name_or_filter
+            @grpc.filter.composite_filter.filters << name_or_filter.filter
           else
             @grpc.filter.composite_filter.filters << \
-              Google::Cloud::Datastore::Filter.create(name_or_filter, operator, value).filter
+              Google::Cloud::Datastore::Filter.new(name_or_filter, operator, value).filter
           end
 
           self
