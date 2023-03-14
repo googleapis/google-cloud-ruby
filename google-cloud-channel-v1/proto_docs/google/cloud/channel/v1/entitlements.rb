@@ -69,13 +69,22 @@ module Google
         #     parameter names and values are defined in the
         #     {::Google::Cloud::Channel::V1::Offer#parameter_definitions Offer.parameter_definitions}.
         #
-        #     The response may include the following output-only Parameters:
+        #     For Google Workspace, the following Parameters may be accepted as input:
+        #
+        #     - max_units: The maximum assignable units for a flexible offer
+        #
+        #     OR
+        #
+        #     - num_units: The total commitment for commitment-based offers
+        #
+        #     The response may additionally include the following output-only Parameters:
         #
         #     - assigned_units: The number of licenses assigned to users.
         #
-        #     - max_units: The maximum assignable units for a flexible offer.
+        #     For GCP billing subaccounts, the following Parameter may be accepted as
+        #     input:
         #
-        #     - num_units: The total commitment for commitment-based offers.
+        #     - display_name: The display name of the billing subaccount.
         class Entitlement
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

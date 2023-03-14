@@ -10,8 +10,10 @@ require 'google/api/resource_pb'
 require 'google/cloud/channel/v1/channel_partner_links_pb'
 require 'google/cloud/channel/v1/common_pb'
 require 'google/cloud/channel/v1/customers_pb'
+require 'google/cloud/channel/v1/entitlement_changes_pb'
 require 'google/cloud/channel/v1/entitlements_pb'
 require 'google/cloud/channel/v1/offers_pb'
+require 'google/cloud/channel/v1/operations_pb'
 require 'google/cloud/channel/v1/products_pb'
 require 'google/cloud/channel/v1/repricing_pb'
 require 'google/longrunning/operations_pb'
@@ -271,6 +273,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_token, :string, 3
       optional :filter, :string, 4
       optional :language_code, :string, 5
+      optional :show_future_offers, :bool, 7
     end
     add_message "google.cloud.channel.v1.ListOffersResponse" do
       repeated :offers, :message, 1, "google.cloud.channel.v1.Offer"
@@ -353,6 +356,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :service_accounts, :string, 2
       optional :next_page_token, :string, 3
     end
+    add_message "google.cloud.channel.v1.ListEntitlementChangesRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+      optional :filter, :string, 4
+    end
+    add_message "google.cloud.channel.v1.ListEntitlementChangesResponse" do
+      repeated :entitlement_changes, :message, 1, "google.cloud.channel.v1.EntitlementChange"
+      optional :next_page_token, :string, 2
+    end
   end
 end
 
@@ -431,6 +444,8 @@ module Google
         UnregisterSubscriberResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.UnregisterSubscriberResponse").msgclass
         ListSubscribersRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListSubscribersRequest").msgclass
         ListSubscribersResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListSubscribersResponse").msgclass
+        ListEntitlementChangesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListEntitlementChangesRequest").msgclass
+        ListEntitlementChangesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListEntitlementChangesResponse").msgclass
       end
     end
   end
