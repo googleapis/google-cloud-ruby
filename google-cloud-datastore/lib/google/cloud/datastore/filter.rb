@@ -7,16 +7,28 @@ module Google
         ##
         # @private Object of type
         # Google::Cloud::Datastore::V1::Filter
-        attr_accessor :filter
+        attr_reader :grpc
 
         ##
-        # @private Creates a new Filter.
+        # Creates a new Filter.
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   filter = Google::Cloud::Datastore::Filter.new("done", "=", "false")
+        #
+        #   query = Google::Cloud::Datastore::Query.new
+        #   query.kind("Task")
+        #        .where(filter)
+        #
+        #   tasks = datastore.run query
+        #
         def initialize name_or_filter, operator = nil, value = nil
-          @filter = if name_or_filter.is_a? Google::Cloud::Datastore::V1::Filter
-                      name_or_filter
-                    else
-                      create_property_filter name_or_filter, operator, value
-                    end
+          @grpc = if name_or_filter.is_a? Google::Cloud::Datastore::V1::Filter
+                    name_or_filter
+                  else
+                    create_property_filter name_or_filter, operator, value
+                  end
         end
 
         def and *args
@@ -27,14 +39,16 @@ module Google
           combine_filters composite_filter_or, args
         end
 
+        def to_grpc
+          @grpc
+        end
+
         private
 
         def combine_filters composite_filter, args
-          composite_filter.composite_filter.filters << filter
-          if args[0].is_a? Google::Cloud::Datastore::Filter
-            args.each do |f|
-              composite_filter.composite_filter.filters << f.filter
-            end
+          composite_filter.composite_filter.filters << to_grpc
+          if args.all? { |arg| arg.is_a? Google::Cloud::Datastore::Filter }
+            composite_filter.composite_filter.filters.concat args.map(&:to_grpc)
           else
             name, operator, value = args
             composite_filter.composite_filter.filters << create_property_filter(name, operator, value)
