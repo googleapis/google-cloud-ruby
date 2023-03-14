@@ -20,6 +20,7 @@ require 'grafeas/v1/dsse_attestation_pb'
 require 'grafeas/v1/image_pb'
 require 'grafeas/v1/package_pb'
 require 'grafeas/v1/upgrade_pb'
+require 'grafeas/v1/vex_pb'
 require 'grafeas/v1/vulnerability_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -67,6 +68,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :upgrade, :message, 17, "grafeas.v1.UpgradeNote"
         optional :compliance, :message, 18, "grafeas.v1.ComplianceNote"
         optional :dsse_attestation, :message, 19, "grafeas.v1.DSSEAttestationNote"
+        optional :vulnerability_assessment, :message, 20, "grafeas.v1.VulnerabilityAssessmentNote"
       end
     end
     add_message "grafeas.v1.GetOccurrenceRequest" do
