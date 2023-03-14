@@ -12,11 +12,11 @@ module Google
         ##
         # @private Creates a new Filter.
         def initialize name_or_filter, operator = nil, value = nil
-          if name_or_filter.is_a? Google::Cloud::Datastore::V1::Filter
-            @filter = name_or_filter
-          else
-            @filter = create_property_filter(name_or_filter, operator, value)
-          end
+          @filter = if name_or_filter.is_a? Google::Cloud::Datastore::V1::Filter
+                      name_or_filter
+                    else
+                      create_property_filter name_or_filter, operator, value
+                    end
         end
 
         def and *args
@@ -29,7 +29,7 @@ module Google
 
         private
 
-        def combine_filters(composite_filter, args)
+        def combine_filters composite_filter, args
           composite_filter.composite_filter.filters << filter
           if args[0].is_a? Google::Cloud::Datastore::Filter
             args.each do |f|
@@ -41,7 +41,6 @@ module Google
           end
           self.class.new composite_filter
         end
-
 
         def composite_filter_and
           Google::Cloud::Datastore::V1::Filter.new(
