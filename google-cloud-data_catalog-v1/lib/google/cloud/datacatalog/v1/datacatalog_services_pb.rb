@@ -228,6 +228,20 @@ module Google
             # The [columns][google.cloud.datacatalog.v1.Tag.column] in the response are
             # lowercased.
             rpc :ListTags, ::Google::Cloud::DataCatalog::V1::ListTagsRequest, ::Google::Cloud::DataCatalog::V1::ListTagsResponse
+            # `ReconcileTags` creates or updates a list of tags on the entry.
+            # If the
+            # [ReconcileTagsRequest.force_delete_missing][google.cloud.datacatalog.v1.ReconcileTagsRequest.force_delete_missing]
+            # parameter is set, the operation deletes tags not included in the input tag
+            # list.
+            #
+            # `ReconcileTags` returns a [long-running operation]
+            # [google.longrunning.Operation] resource that can be queried with
+            # [Operations.GetOperation][google.longrunning.Operations.GetOperation]
+            # to return [ReconcileTagsMetadata]
+            # [google.cloud.datacatalog.v1.ReconcileTagsMetadata] and
+            # a [ReconcileTagsResponse]
+            # [google.cloud.datacatalog.v1.ReconcileTagsResponse] message.
+            rpc :ReconcileTags, ::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest, ::Google::Longrunning::Operation
             # Marks an [Entry][google.cloud.datacatalog.v1.Entry] as starred by
             # the current user. Starring information is private to each user.
             rpc :StarEntry, ::Google::Cloud::DataCatalog::V1::StarEntryRequest, ::Google::Cloud::DataCatalog::V1::StarEntryResponse
@@ -289,6 +303,25 @@ module Google
             #
             # No Google IAM permissions are required to call this method.
             rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+            # Imports entries from a source, such as data previously dumped into a
+            # Cloud Storage bucket, into Data Catalog. Import of entries
+            # is a sync operation that reconciles the state of the third-party system
+            # with the Data Catalog.
+            #
+            # `ImportEntries` accepts source data snapshots of a third-party system.
+            # Snapshot should be delivered as a .wire or base65-encoded .txt file
+            # containing a sequence of Protocol Buffer messages of
+            # [DumpItem][google.cloud.datacatalog.v1.DumpItem] type.
+            #
+            # `ImportEntries` returns a [long-running operation]
+            # [google.longrunning.Operation] resource that can be queried with
+            # [Operations.GetOperation][google.longrunning.Operations.GetOperation]
+            # to return
+            # [ImportEntriesMetadata][google.cloud.datacatalog.v1.ImportEntriesMetadata]
+            # and an
+            # [ImportEntriesResponse][google.cloud.datacatalog.v1.ImportEntriesResponse]
+            # message.
+            rpc :ImportEntries, ::Google::Cloud::DataCatalog::V1::ImportEntriesRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

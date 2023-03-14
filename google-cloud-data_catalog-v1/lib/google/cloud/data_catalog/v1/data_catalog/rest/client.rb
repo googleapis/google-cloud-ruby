@@ -110,6 +110,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.import_entries.timeout = 60.0
+                  default_config.rpcs.import_entries.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -174,6 +179,12 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @operations_client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Operations.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
@@ -182,6 +193,13 @@ module Google
 
                 @data_catalog_stub = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for long-running operations.
+              #
+              # @return [::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Operations]
+              #
+              attr_reader :operations_client
 
               ##
               # Get the associated client for mix-in of the IAMPolicy.
@@ -231,9 +249,8 @@ module Google
               #     empty AND `include_gcp_public_datasets` is set to `false`. In this case,
               #     the request returns an error.
               #   @param query [::String]
-              #     Optional. The query string with a minimum of 3 characters and specific syntax.
-              #     For more information, see
-              #     [Data Catalog search
+              #     Optional. The query string with a minimum of 3 characters and specific
+              #     syntax. For more information, see [Data Catalog search
               #     syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference).
               #
               #     An empty query string returns all data assets (in the specified scope)
@@ -251,10 +268,11 @@ module Google
               #     The maximum number is 1000. If exceeded, throws an "invalid argument"
               #     exception.
               #   @param page_token [::String]
-              #     Optional. Pagination token that, if specified, returns the next page of search
-              #     results. If empty, returns the first page.
+              #     Optional. Pagination token that, if specified, returns the next page of
+              #     search results. If empty, returns the first page.
               #
-              #     This token is returned in the {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}
+              #     This token is returned in the
+              #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}
               #     field of the response to a previous
               #     {::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client#search_catalog SearchCatalogRequest}
               #     call.
@@ -355,7 +373,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The names of the project and location that the new entry group belongs to.
+              #     Required. The names of the project and location that the new entry group
+              #     belongs to.
               #
               #     Note: The entry group itself and its child resources might not be
               #     stored in the location specified in its name.
@@ -1715,8 +1734,8 @@ module Google
               #   @param tag_template_field [::Google::Cloud::DataCatalog::V1::TagTemplateField, ::Hash]
               #     Required. The template to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Optional. Names of fields whose values to overwrite on an individual field of a tag
-              #     template. The following fields are modifiable:
+              #     Optional. Names of fields whose values to overwrite on an individual field
+              #     of a tag template. The following fields are modifiable:
               #
               #     * `display_name`
               #     * `type.enum_type`
@@ -1798,7 +1817,8 @@ module Google
               #   @param name [::String]
               #     Required. The name of the tag template field.
               #   @param new_tag_template_field_id [::String]
-              #     Required. The new ID of this tag template field. For example, `my_new_field`.
+              #     Required. The new ID of this tag template field. For example,
+              #     `my_new_field`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DataCatalog::V1::TagTemplateField]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1864,7 +1884,8 @@ module Google
               #   @param name [::String]
               #     Required. The name of the enum field value.
               #   @param new_enum_value_display_name [::String]
-              #     Required. The new display name of the enum value. For example, `my_new_enum_value`.
+              #     Required. The new display name of the enum value. For example,
+              #     `my_new_enum_value`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DataCatalog::V1::TagTemplateField]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2265,6 +2286,92 @@ module Google
               end
 
               ##
+              # `ReconcileTags` creates or updates a list of tags on the entry.
+              # If the
+              # {::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest#force_delete_missing ReconcileTagsRequest.force_delete_missing}
+              # parameter is set, the operation deletes tags not included in the input tag
+              # list.
+              #
+              # `ReconcileTags` returns a [long-running operation]
+              # [google.longrunning.Operation] resource that can be queried with
+              # Operations.GetOperation
+              # to return [ReconcileTagsMetadata]
+              # [google.cloud.datacatalog.v1.ReconcileTagsMetadata] and
+              # a [ReconcileTagsResponse]
+              # [google.cloud.datacatalog.v1.ReconcileTagsResponse] message.
+              #
+              # @overload reconcile_tags(request, options = nil)
+              #   Pass arguments to `reconcile_tags` via a request object, either of type
+              #   {::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload reconcile_tags(parent: nil, tag_template: nil, force_delete_missing: nil, tags: nil)
+              #   Pass arguments to `reconcile_tags` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Name of {::Google::Cloud::DataCatalog::V1::Entry Entry} to be tagged.
+              #   @param tag_template [::String]
+              #     Required. The name of the tag template, which is used for reconciliation.
+              #   @param force_delete_missing [::Boolean]
+              #     If set to `true`, deletes entry tags related to a tag template
+              #     not listed in the tags source from an entry. If set to `false`,
+              #     unlisted tags are retained.
+              #   @param tags [::Array<::Google::Cloud::DataCatalog::V1::Tag, ::Hash>]
+              #     A list of tags to apply to an entry. A tag can specify a
+              #     tag template, which must be the template specified in the
+              #     `ReconcileTagsRequest`.
+              #     The sole entry and each of its columns must be mentioned at most once.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def reconcile_tags request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.reconcile_tags.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.reconcile_tags.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.reconcile_tags.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @data_catalog_stub.reconcile_tags request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Marks an {::Google::Cloud::DataCatalog::V1::Entry Entry} as starred by
               # the current user. Starring information is private to each user.
               #
@@ -2648,6 +2755,88 @@ module Google
               end
 
               ##
+              # Imports entries from a source, such as data previously dumped into a
+              # Cloud Storage bucket, into Data Catalog. Import of entries
+              # is a sync operation that reconciles the state of the third-party system
+              # with the Data Catalog.
+              #
+              # `ImportEntries` accepts source data snapshots of a third-party system.
+              # Snapshot should be delivered as a .wire or base65-encoded .txt file
+              # containing a sequence of Protocol Buffer messages of
+              # {::Google::Cloud::DataCatalog::V1::DumpItem DumpItem} type.
+              #
+              # `ImportEntries` returns a [long-running operation]
+              # [google.longrunning.Operation] resource that can be queried with
+              # Operations.GetOperation
+              # to return
+              # {::Google::Cloud::DataCatalog::V1::ImportEntriesMetadata ImportEntriesMetadata}
+              # and an
+              # {::Google::Cloud::DataCatalog::V1::ImportEntriesResponse ImportEntriesResponse}
+              # message.
+              #
+              # @overload import_entries(request, options = nil)
+              #   Pass arguments to `import_entries` via a request object, either of type
+              #   {::Google::Cloud::DataCatalog::V1::ImportEntriesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DataCatalog::V1::ImportEntriesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload import_entries(parent: nil, gcs_bucket_path: nil)
+              #   Pass arguments to `import_entries` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Target entry group for ingested entries.
+              #   @param gcs_bucket_path [::String]
+              #     Path to a Cloud Storage bucket that contains a dump ready for ingestion.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def import_entries request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DataCatalog::V1::ImportEntriesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.import_entries.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.import_entries.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.import_entries.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @data_catalog_stub.import_entries request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the DataCatalog REST API.
               #
               # This class represents the configuration for DataCatalog REST,
@@ -2906,6 +3095,11 @@ module Google
                   #
                   attr_reader :list_tags
                   ##
+                  # RPC-specific configuration for `reconcile_tags`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :reconcile_tags
+                  ##
                   # RPC-specific configuration for `star_entry`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2930,6 +3124,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :test_iam_permissions
+                  ##
+                  # RPC-specific configuration for `import_entries`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :import_entries
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2987,6 +3186,8 @@ module Google
                     @delete_tag = ::Gapic::Config::Method.new delete_tag_config
                     list_tags_config = parent_rpcs.list_tags if parent_rpcs.respond_to? :list_tags
                     @list_tags = ::Gapic::Config::Method.new list_tags_config
+                    reconcile_tags_config = parent_rpcs.reconcile_tags if parent_rpcs.respond_to? :reconcile_tags
+                    @reconcile_tags = ::Gapic::Config::Method.new reconcile_tags_config
                     star_entry_config = parent_rpcs.star_entry if parent_rpcs.respond_to? :star_entry
                     @star_entry = ::Gapic::Config::Method.new star_entry_config
                     unstar_entry_config = parent_rpcs.unstar_entry if parent_rpcs.respond_to? :unstar_entry
@@ -2997,6 +3198,8 @@ module Google
                     @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                    import_entries_config = parent_rpcs.import_entries if parent_rpcs.respond_to? :import_entries
+                    @import_entries = ::Gapic::Config::Method.new import_entries_config
 
                     yield self if block_given?
                   end

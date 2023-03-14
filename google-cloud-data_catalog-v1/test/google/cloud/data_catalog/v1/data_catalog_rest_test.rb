@@ -1554,6 +1554,63 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     end
   end
 
+  def test_reconcile_tags
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    tag_template = "hello world"
+    force_delete_missing = true
+    tags = [{}]
+
+    reconcile_tags_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_reconcile_tags_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, reconcile_tags_client_stub do
+        # Create client
+        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.reconcile_tags({ parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.reconcile_tags parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.reconcile_tags ::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest.new(parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.reconcile_tags({ parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.reconcile_tags(::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest.new(parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, reconcile_tags_client_stub.call_count
+      end
+    end
+  end
+
   def test_star_entry
     # Create test objects.
     client_result = ::Google::Cloud::DataCatalog::V1::StarEntryResponse.new
@@ -1824,6 +1881,61 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
 
         # Verify method calls
         assert_equal 5, test_iam_permissions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_import_entries
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    gcs_bucket_path = "hello world"
+
+    import_entries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_import_entries_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, import_entries_client_stub do
+        # Create client
+        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.import_entries({ parent: parent, gcs_bucket_path: gcs_bucket_path }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.import_entries parent: parent, gcs_bucket_path: gcs_bucket_path do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.import_entries ::Google::Cloud::DataCatalog::V1::ImportEntriesRequest.new(parent: parent, gcs_bucket_path: gcs_bucket_path) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.import_entries({ parent: parent, gcs_bucket_path: gcs_bucket_path }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.import_entries(::Google::Cloud::DataCatalog::V1::ImportEntriesRequest.new(parent: parent, gcs_bucket_path: gcs_bucket_path), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, import_entries_client_stub.call_count
       end
     end
   end

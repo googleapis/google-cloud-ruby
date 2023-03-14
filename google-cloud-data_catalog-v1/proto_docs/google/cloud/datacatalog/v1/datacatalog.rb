@@ -32,9 +32,8 @@ module Google
         #     the request returns an error.
         # @!attribute [rw] query
         #   @return [::String]
-        #     Optional. The query string with a minimum of 3 characters and specific syntax.
-        #     For more information, see
-        #     [Data Catalog search
+        #     Optional. The query string with a minimum of 3 characters and specific
+        #     syntax. For more information, see [Data Catalog search
         #     syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference).
         #
         #     An empty query string returns all data assets (in the specified scope)
@@ -54,10 +53,11 @@ module Google
         #     exception.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Pagination token that, if specified, returns the next page of search
-        #     results. If empty, returns the first page.
+        #     Optional. Pagination token that, if specified, returns the next page of
+        #     search results. If empty, returns the first page.
         #
-        #     This token is returned in the {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}
+        #     This token is returned in the
+        #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}
         #     field of the response to a previous
         #     {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalogRequest}
         #     call.
@@ -92,15 +92,15 @@ module Google
           #     numbers, see [Projects](/docs/overview/#projects).
           # @!attribute [rw] include_gcp_public_datasets
           #   @return [::Boolean]
-          #     If `true`, include Google Cloud Platform (GCP) public datasets in
+          #     If `true`, include Google Cloud public datasets in
           #     search results. By default, they are excluded.
           #
           #     See [Google Cloud Public Datasets](/public-datasets) for more
           #     information.
           # @!attribute [rw] restricted_locations
           #   @return [::Array<::String>]
-          #     Optional. The list of locations to search within. If empty, all locations are
-          #     searched.
+          #     Optional. The list of locations to search within. If empty, all locations
+          #     are searched.
           #
           #     Returns an error if any location in the list isn't one of the [Supported
           #     regions](https://cloud.google.com/data-catalog/docs/concepts/regions#supported_regions).
@@ -116,8 +116,8 @@ module Google
           #     By default, all results are returned, starred or not.
           # @!attribute [rw] include_public_tag_templates
           #   @return [::Boolean]
-          #     Optional. This field is deprecated. The search mechanism for public and private tag
-          #     templates is the same.
+          #     Optional. This field is deprecated. The search mechanism for public and
+          #     private tag templates is the same.
           class Scope
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -150,7 +150,8 @@ module Google
         # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry_group CreateEntryGroup}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The names of the project and location that the new entry group belongs to.
+        #     Required. The names of the project and location that the new entry group
+        #     belongs to.
         #
         #     Note: The entry group itself and its child resources might not be
         #     stored in the location specified in its name.
@@ -475,6 +476,14 @@ module Google
         #     * Must begin with a letter or underscore.
         #     * Can only contain letters, numbers, and underscores.
         #     * Must be at least 1 character and at most 64 characters long.
+        # @!attribute [rw] sql_database_system_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::SqlDatabaseSystemSpec]
+        #     Specification that applies to a relational database system. Only settable
+        #     when `user_specified_system` is equal to `SQL_DATABASE`
+        # @!attribute [rw] looker_system_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::LookerSystemSpec]
+        #     Specification that applies to Looker sysstem. Only settable when
+        #     `user_specified_system` is equal to `LOOKER`
         # @!attribute [rw] gcs_fileset_spec
         #   @return [::Google::Cloud::DataCatalog::V1::GcsFilesetSpec]
         #     Specification that applies to a Cloud Storage fileset. Valid only
@@ -493,7 +502,7 @@ module Google
         # @!attribute [rw] database_table_spec
         #   @return [::Google::Cloud::DataCatalog::V1::DatabaseTableSpec]
         #     Specification that applies to a table resource. Valid only
-        #     for entries with the `TABLE` type.
+        #     for entries with the `TABLE` or `EXPLORE` type.
         # @!attribute [rw] data_source_connection_spec
         #   @return [::Google::Cloud::DataCatalog::V1::DataSourceConnectionSpec]
         #     Specification that applies to a data source connection. Valid only
@@ -510,9 +519,7 @@ module Google
         #   @return [::String]
         #     Display name of an entry.
         #
-        #     The name must contain only Unicode letters, numbers (0-9), underscores (_),
-        #     dashes (-), spaces ( ), and can't start or end with spaces.
-        #     The maximum size is 200 bytes when encoded in UTF-8.
+        #     The maximum size is 500 bytes when encoded in UTF-8.
         #     Default value is an empty string.
         # @!attribute [rw] description
         #   @return [::String]
@@ -553,7 +560,8 @@ module Google
         #     Output only. Physical location of the entry.
         # @!attribute [r] personal_details
         #   @return [::Google::Cloud::DataCatalog::V1::PersonalDetails]
-        #     Output only. Additional information related to the entry. Private to the current user.
+        #     Output only. Additional information related to the entry. Private to the
+        #     current user.
         class Entry
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -577,9 +585,40 @@ module Google
         #   @return [::Google::Cloud::DataCatalog::V1::DataplexTableSpec]
         #     Output only. Fields specific to a Dataplex table and present only in the
         #     Dataplex table entries.
+        # @!attribute [rw] database_view_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::DatabaseTableSpec::DatabaseViewSpec]
+        #     Spec what aplies to tables that are actually views.
+        #     Not set for "real" tables.
         class DatabaseTableSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specification that applies to database view.
+          # @!attribute [rw] view_type
+          #   @return [::Google::Cloud::DataCatalog::V1::DatabaseTableSpec::DatabaseViewSpec::ViewType]
+          #     Type of this view.
+          # @!attribute [rw] base_table
+          #   @return [::String]
+          #     Name of a singular table this view reflects one to one.
+          # @!attribute [rw] sql_query
+          #   @return [::String]
+          #     SQL query used to generate this view.
+          class DatabaseViewSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Concrete type of the view.
+            module ViewType
+              # Default unknown view type.
+              VIEW_TYPE_UNSPECIFIED = 0
+
+              # Standard view.
+              STANDARD_VIEW = 1
+
+              # Materialized view.
+              MATERIALIZED_VIEW = 2
+            end
+          end
 
           # Type of the table.
           module TableType
@@ -689,6 +728,65 @@ module Google
             # Stored procedure.
             PROCEDURE = 2
           end
+        end
+
+        # Specification that applies to
+        # entries that are part `SQL_DATABASE` system
+        # (user_specified_type)
+        # @!attribute [rw] sql_engine
+        #   @return [::String]
+        #     SQL Database Engine.
+        #     enum SqlEngine {
+        #      UNDEFINED = 0;
+        #      MY_SQL = 1;
+        #      POSTGRE_SQL = 2;
+        #      SQL_SERVER = 3;
+        #     }
+        #     Engine of the enclosing database instance.
+        # @!attribute [rw] database_version
+        #   @return [::String]
+        #     Version of the database engine.
+        # @!attribute [rw] instance_host
+        #   @return [::String]
+        #     Host of the SQL database
+        #     enum InstanceHost {
+        #      UNDEFINED = 0;
+        #      SELF_HOSTED = 1;
+        #      CLOUD_SQL = 2;
+        #      AMAZON_RDS = 3;
+        #      AZURE_SQL = 4;
+        #     }
+        #     Host of the enclousing database instance.
+        class SqlDatabaseSystemSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specification that applies to
+        # entries that are part `LOOKER` system
+        # (user_specified_type)
+        # @!attribute [rw] parent_instance_id
+        #   @return [::String]
+        #     ID of the parent Looker Instance. Empty if it does not exist.
+        #     Example value: `someinstance.looker.com`
+        # @!attribute [rw] parent_instance_display_name
+        #   @return [::String]
+        #     Name of the parent Looker Instance. Empty if it does not exist.
+        # @!attribute [rw] parent_model_id
+        #   @return [::String]
+        #     ID of the parent Model. Empty if it does not exist.
+        # @!attribute [rw] parent_model_display_name
+        #   @return [::String]
+        #     Name of the parent Model. Empty if it does not exist.
+        # @!attribute [rw] parent_view_id
+        #   @return [::String]
+        #     ID of the parent View. Empty if it does not exist.
+        # @!attribute [rw] parent_view_display_name
+        #   @return [::String]
+        #     Name of the parent View. Empty if it does not exist.
+        class LookerSystemSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Business Context of the entry.
@@ -915,8 +1013,8 @@ module Google
         #     Required. The template to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. Names of fields whose values to overwrite on an individual field of a tag
-        #     template. The following fields are modifiable:
+        #     Optional. Names of fields whose values to overwrite on an individual field
+        #     of a tag template. The following fields are modifiable:
         #
         #     * `display_name`
         #     * `type.enum_type`
@@ -943,7 +1041,8 @@ module Google
         #     Required. The name of the tag template field.
         # @!attribute [rw] new_tag_template_field_id
         #   @return [::String]
-        #     Required. The new ID of this tag template field. For example, `my_new_field`.
+        #     Required. The new ID of this tag template field. For example,
+        #     `my_new_field`.
         class RenameTagTemplateFieldRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -956,7 +1055,8 @@ module Google
         #     Required. The name of the enum field value.
         # @!attribute [rw] new_enum_value_display_name
         #   @return [::String]
-        #     Required. The new display name of the enum value. For example, `my_new_enum_value`.
+        #     Required. The new display name of the enum value. For example,
+        #     `my_new_enum_value`.
         class RenameTagTemplateFieldEnumValueRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1010,6 +1110,86 @@ module Google
         class ListTagsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#reconcile_tags ReconcileTags}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of {::Google::Cloud::DataCatalog::V1::Entry Entry} to be tagged.
+        # @!attribute [rw] tag_template
+        #   @return [::String]
+        #     Required. The name of the tag template, which is used for reconciliation.
+        # @!attribute [rw] force_delete_missing
+        #   @return [::Boolean]
+        #     If set to `true`, deletes entry tags related to a tag template
+        #     not listed in the tags source from an entry. If set to `false`,
+        #     unlisted tags are retained.
+        # @!attribute [rw] tags
+        #   @return [::Array<::Google::Cloud::DataCatalog::V1::Tag>]
+        #     A list of tags to apply to an entry. A tag can specify a
+        #     tag template, which must be the template specified in the
+        #     `ReconcileTagsRequest`.
+        #     The sole entry and each of its columns must be mentioned at most once.
+        class ReconcileTagsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # {::Google::Longrunning::Operation Long-running operation}
+        # response message returned by
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#reconcile_tags ReconcileTags}.
+        # @!attribute [rw] created_tags_count
+        #   @return [::Integer]
+        #     Number of tags created in the request.
+        # @!attribute [rw] updated_tags_count
+        #   @return [::Integer]
+        #     Number of tags updated in the request.
+        # @!attribute [rw] deleted_tags_count
+        #   @return [::Integer]
+        #     Number of tags deleted in the request.
+        class ReconcileTagsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # {::Google::Longrunning::Operation Long-running operation}
+        # metadata message returned by the
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#reconcile_tags ReconcileTags}.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::DataCatalog::V1::ReconcileTagsMetadata::ReconciliationState]
+        #     State of the reconciliation operation.
+        # @!attribute [rw] errors
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Rpc::Status}]
+        #     Maps the name of each tagged column (or empty string for a
+        #     sole entry) to tagging operation {::Google::Rpc::Status status}.
+        class ReconcileTagsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Rpc::Status]
+          class ErrorsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Enum holding possible states of the reconciliation operation.
+          module ReconciliationState
+            # Default value. This value is unused.
+            RECONCILIATION_STATE_UNSPECIFIED = 0
+
+            # The reconciliation has been queued and awaits for execution.
+            RECONCILIATION_QUEUED = 1
+
+            # The reconciliation is in progress.
+            RECONCILIATION_IN_PROGRESS = 2
+
+            # The reconciliation has been finished.
+            RECONCILIATION_DONE = 3
+          end
         end
 
         # Request message for
@@ -1090,6 +1270,70 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#import_entries ImportEntries}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Target entry group for ingested entries.
+        # @!attribute [rw] gcs_bucket_path
+        #   @return [::String]
+        #     Path to a Cloud Storage bucket that contains a dump ready for ingestion.
+        class ImportEntriesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for {::Google::Longrunning::Operation long-running operation}
+        # returned by the
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#import_entries ImportEntries}.
+        # @!attribute [rw] upserted_entries_count
+        #   @return [::Integer]
+        #     Cumulative number of entries created and entries updated as a result of
+        #     import operation.
+        # @!attribute [rw] deleted_entries_count
+        #   @return [::Integer]
+        #     Number of entries deleted as a result of import operation.
+        class ImportEntriesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata message for {::Google::Longrunning::Operation long-running operation}
+        # returned by the
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#import_entries ImportEntries}.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::DataCatalog::V1::ImportEntriesMetadata::ImportState]
+        #     State of the import operation.
+        # @!attribute [rw] errors
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Partial errors that are encountered during the ImportEntries operation.
+        #     There is no guarantee that all the encountered errors are reported.
+        #     However, if no errors are reported, it means that no errors were
+        #     encountered.
+        class ImportEntriesMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum holding possible states of the import operation.
+          module ImportState
+            # Default value. This value is unused.
+            IMPORT_STATE_UNSPECIFIED = 0
+
+            # The dump with entries has been queued for import.
+            IMPORT_QUEUED = 1
+
+            # The import of entries is in progress.
+            IMPORT_IN_PROGRESS = 2
+
+            # The import of entries has been finished.
+            IMPORT_DONE = 3
+
+            # The import of entries has been abandoned in favor of a newer request.
+            IMPORT_OBSOLETE = 4
+          end
+        end
+
+        # Request message for
         # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_overview ModifyEntryOverview}.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1159,6 +1403,24 @@ module Google
 
           # A service, for example, a Dataproc Metastore service.
           SERVICE = 14
+
+          # Schema within a relational database.
+          DATABASE_SCHEMA = 15
+
+          # A Dashboard, for example from Looker.
+          DASHBOARD = 16
+
+          # A Looker Explore.
+          #
+          # For more information, see [Looker Explore API]
+          # (https://developers.looker.com/api/explorer/4.0/methods/LookmlModel/lookml_model_explore).
+          EXPLORE = 17
+
+          # A Looker Look.
+          #
+          # For more information, see [Looker Look API]
+          # (https://developers.looker.com/api/explorer/4.0/methods/Look).
+          LOOK = 18
         end
       end
     end

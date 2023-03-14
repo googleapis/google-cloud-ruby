@@ -26,7 +26,8 @@ module Google
         # export.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Required. Display name of the taxonomy. At most 200 bytes when encoded in UTF-8.
+        #     Required. Display name of the taxonomy. At most 200 bytes when encoded in
+        #     UTF-8.
         # @!attribute [rw] description
         #   @return [::String]
         #     Description of the serialized taxonomy. At most 2000 bytes when
@@ -83,7 +84,8 @@ module Google
         # {::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#import_taxonomies ImportTaxonomies}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Resource name of project that the imported taxonomies will belong to.
+        #     Required. Resource name of project that the imported taxonomies will belong
+        #     to.
         # @!attribute [rw] inline_source
         #   @return [::Google::Cloud::DataCatalog::V1::InlineSource]
         #     Inline source taxonomy to import.
@@ -128,7 +130,8 @@ module Google
         # {::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#export_taxonomies ExportTaxonomies}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Resource name of the project that the exported taxonomies belong to.
+        #     Required. Resource name of the project that the exported taxonomies belong
+        #     to.
         # @!attribute [rw] taxonomies
         #   @return [::Array<::String>]
         #     Required. Resource names of the taxonomies to export.

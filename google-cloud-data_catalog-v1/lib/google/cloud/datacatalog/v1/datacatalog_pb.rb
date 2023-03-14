@@ -20,8 +20,10 @@ require 'google/cloud/datacatalog/v1/timestamps_pb'
 require 'google/cloud/datacatalog/v1/usage_pb'
 require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
+require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+require 'google/rpc/status_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/datacatalog/v1/datacatalog.proto", :syntax => :proto3) do
@@ -114,6 +116,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :integrated_system, :enum, 17, "google.cloud.datacatalog.v1.IntegratedSystem"
         optional :user_specified_system, :string, 18
       end
+      oneof :system_spec do
+        optional :sql_database_system_spec, :message, 39, "google.cloud.datacatalog.v1.SqlDatabaseSystemSpec"
+        optional :looker_system_spec, :message, 40, "google.cloud.datacatalog.v1.LookerSystemSpec"
+      end
       oneof :type_spec do
         optional :gcs_fileset_spec, :message, 6, "google.cloud.datacatalog.v1.GcsFilesetSpec"
         optional :bigquery_table_spec, :message, 12, "google.cloud.datacatalog.v1.BigQueryTableSpec"
@@ -129,6 +135,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.datacatalog.v1.DatabaseTableSpec" do
       optional :type, :enum, 1, "google.cloud.datacatalog.v1.DatabaseTableSpec.TableType"
       optional :dataplex_table, :message, 2, "google.cloud.datacatalog.v1.DataplexTableSpec"
+      optional :database_view_spec, :message, 3, "google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec"
+    end
+    add_message "google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec" do
+      optional :view_type, :enum, 1, "google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec.ViewType"
+      oneof :source_definition do
+        optional :base_table, :string, 2
+        optional :sql_query, :string, 3
+      end
+    end
+    add_enum "google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec.ViewType" do
+      value :VIEW_TYPE_UNSPECIFIED, 0
+      value :STANDARD_VIEW, 1
+      value :MATERIALIZED_VIEW, 2
     end
     add_enum "google.cloud.datacatalog.v1.DatabaseTableSpec.TableType" do
       value :TABLE_TYPE_UNSPECIFIED, 0
@@ -166,6 +185,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ROUTINE_TYPE_UNSPECIFIED, 0
       value :SCALAR_FUNCTION, 1
       value :PROCEDURE, 2
+    end
+    add_message "google.cloud.datacatalog.v1.SqlDatabaseSystemSpec" do
+      optional :sql_engine, :string, 1
+      optional :database_version, :string, 2
+      optional :instance_host, :string, 3
+    end
+    add_message "google.cloud.datacatalog.v1.LookerSystemSpec" do
+      optional :parent_instance_id, :string, 1
+      optional :parent_instance_display_name, :string, 2
+      optional :parent_model_id, :string, 3
+      optional :parent_model_display_name, :string, 4
+      optional :parent_view_id, :string, 5
+      optional :parent_view_display_name, :string, 6
     end
     add_message "google.cloud.datacatalog.v1.BusinessContext" do
       optional :entry_overview, :message, 1, "google.cloud.datacatalog.v1.EntryOverview"
@@ -245,6 +277,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :tags, :message, 1, "google.cloud.datacatalog.v1.Tag"
       optional :next_page_token, :string, 2
     end
+    add_message "google.cloud.datacatalog.v1.ReconcileTagsRequest" do
+      optional :parent, :string, 1
+      optional :tag_template, :string, 2
+      optional :force_delete_missing, :bool, 3
+      repeated :tags, :message, 4, "google.cloud.datacatalog.v1.Tag"
+    end
+    add_message "google.cloud.datacatalog.v1.ReconcileTagsResponse" do
+      optional :created_tags_count, :int64, 1
+      optional :updated_tags_count, :int64, 2
+      optional :deleted_tags_count, :int64, 3
+    end
+    add_message "google.cloud.datacatalog.v1.ReconcileTagsMetadata" do
+      optional :state, :enum, 1, "google.cloud.datacatalog.v1.ReconcileTagsMetadata.ReconciliationState"
+      map :errors, :string, :message, 2, "google.rpc.Status"
+    end
+    add_enum "google.cloud.datacatalog.v1.ReconcileTagsMetadata.ReconciliationState" do
+      value :RECONCILIATION_STATE_UNSPECIFIED, 0
+      value :RECONCILIATION_QUEUED, 1
+      value :RECONCILIATION_IN_PROGRESS, 2
+      value :RECONCILIATION_DONE, 3
+    end
     add_message "google.cloud.datacatalog.v1.ListEntriesRequest" do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
@@ -264,6 +317,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
     end
     add_message "google.cloud.datacatalog.v1.UnstarEntryResponse" do
+    end
+    add_message "google.cloud.datacatalog.v1.ImportEntriesRequest" do
+      optional :parent, :string, 1
+      oneof :source do
+        optional :gcs_bucket_path, :string, 2
+      end
+    end
+    add_message "google.cloud.datacatalog.v1.ImportEntriesResponse" do
+      proto3_optional :upserted_entries_count, :int64, 5
+      proto3_optional :deleted_entries_count, :int64, 6
+    end
+    add_message "google.cloud.datacatalog.v1.ImportEntriesMetadata" do
+      optional :state, :enum, 1, "google.cloud.datacatalog.v1.ImportEntriesMetadata.ImportState"
+      repeated :errors, :message, 2, "google.rpc.Status"
+    end
+    add_enum "google.cloud.datacatalog.v1.ImportEntriesMetadata.ImportState" do
+      value :IMPORT_STATE_UNSPECIFIED, 0
+      value :IMPORT_QUEUED, 1
+      value :IMPORT_IN_PROGRESS, 2
+      value :IMPORT_DONE, 3
+      value :IMPORT_OBSOLETE, 4
     end
     add_message "google.cloud.datacatalog.v1.ModifyEntryOverviewRequest" do
       optional :name, :string, 1
@@ -286,6 +360,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :LAKE, 10
       value :ZONE, 11
       value :SERVICE, 14
+      value :DATABASE_SCHEMA, 15
+      value :DASHBOARD, 16
+      value :EXPLORE, 17
+      value :LOOK, 18
     end
   end
 end
@@ -310,6 +388,8 @@ module Google
         LookupEntryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.LookupEntryRequest").msgclass
         Entry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.Entry").msgclass
         DatabaseTableSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DatabaseTableSpec").msgclass
+        DatabaseTableSpec::DatabaseViewSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec").msgclass
+        DatabaseTableSpec::DatabaseViewSpec::ViewType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec.ViewType").enummodule
         DatabaseTableSpec::TableType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DatabaseTableSpec.TableType").enummodule
         FilesetSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.FilesetSpec").msgclass
         DataSourceConnectionSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DataSourceConnectionSpec").msgclass
@@ -317,6 +397,8 @@ module Google
         RoutineSpec::Argument = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.RoutineSpec.Argument").msgclass
         RoutineSpec::Argument::Mode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.RoutineSpec.Argument.Mode").enummodule
         RoutineSpec::RoutineType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.RoutineSpec.RoutineType").enummodule
+        SqlDatabaseSystemSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.SqlDatabaseSystemSpec").msgclass
+        LookerSystemSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.LookerSystemSpec").msgclass
         BusinessContext = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.BusinessContext").msgclass
         EntryOverview = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.EntryOverview").msgclass
         Contacts = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.Contacts").msgclass
@@ -336,12 +418,20 @@ module Google
         DeleteTagTemplateFieldRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest").msgclass
         ListTagsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ListTagsRequest").msgclass
         ListTagsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ListTagsResponse").msgclass
+        ReconcileTagsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ReconcileTagsRequest").msgclass
+        ReconcileTagsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ReconcileTagsResponse").msgclass
+        ReconcileTagsMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ReconcileTagsMetadata").msgclass
+        ReconcileTagsMetadata::ReconciliationState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ReconcileTagsMetadata.ReconciliationState").enummodule
         ListEntriesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ListEntriesRequest").msgclass
         ListEntriesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ListEntriesResponse").msgclass
         StarEntryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.StarEntryRequest").msgclass
         StarEntryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.StarEntryResponse").msgclass
         UnstarEntryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.UnstarEntryRequest").msgclass
         UnstarEntryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.UnstarEntryResponse").msgclass
+        ImportEntriesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ImportEntriesRequest").msgclass
+        ImportEntriesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ImportEntriesResponse").msgclass
+        ImportEntriesMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ImportEntriesMetadata").msgclass
+        ImportEntriesMetadata::ImportState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ImportEntriesMetadata.ImportState").enummodule
         ModifyEntryOverviewRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ModifyEntryOverviewRequest").msgclass
         ModifyEntryContactsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ModifyEntryContactsRequest").msgclass
         EntryType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.EntryType").enummodule

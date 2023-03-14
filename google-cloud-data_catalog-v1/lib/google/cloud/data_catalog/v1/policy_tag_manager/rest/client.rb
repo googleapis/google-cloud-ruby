@@ -372,7 +372,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_taxonomies(parent: nil, page_size: nil, page_token: nil)
+              # @overload list_taxonomies(parent: nil, page_size: nil, page_token: nil, filter: nil)
               #   Pass arguments to `list_taxonomies` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -387,6 +387,9 @@ module Google
               #     the first page is returned.
               #
               #     The token is returned in the response to a previous list request.
+              #   @param filter [::String]
+              #     Supported field for filter is 'service' and value is 'dataplex'.
+              #     Eg: service=dataplex.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::V1::Taxonomy>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

@@ -145,6 +145,11 @@
                 "list_tags"
               ]
             },
+            "ReconcileTags": {
+              "methods": [
+                "reconcile_tags"
+              ]
+            },
             "StarEntry": {
               "methods": [
                 "star_entry"
@@ -168,6 +173,11 @@
             "TestIamPermissions": {
               "methods": [
                 "test_iam_permissions"
+              ]
+            },
+            "ImportEntries": {
+              "methods": [
+                "import_entries"
               ]
             }
           }
