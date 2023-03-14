@@ -30,7 +30,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
   end
 
   it "adds messsages and indicates batch status using message count" do
-    fake_publisher = OpenStruct.new topic_name: topic_name, max_messages: 10, max_bytes: 10000
+    fake_publisher = OpenStruct.new topic_name: topic_name, max_messages: 10, max_bytes: 10000, interval: 0.01
     ordering_key = ""
     batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher, ordering_key
 
@@ -159,7 +159,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
   end
 
   it "adds messsages and indicates batch status using message size" do
-    fake_publisher = OpenStruct.new topic_name: topic_name, max_messages: 1000, max_bytes: 175
+    fake_publisher = OpenStruct.new topic_name: topic_name, max_messages: 1000, max_bytes: 175, interval: 0.01
     ordering_key = ""
     batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher, ordering_key
 
