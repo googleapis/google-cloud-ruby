@@ -40,7 +40,7 @@ module Google
         end
 
         # CreateOfflineProfileRequest describes a profile resource offline creation
-        # request. Profile field must be set.
+        # request.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Parent project to create the profile in.
@@ -55,7 +55,7 @@ module Google
         # UpdateProfileRequest contains the profile to update.
         # @!attribute [rw] profile
         #   @return [::Google::Cloud::Profiler::V2::Profile]
-        #     Profile to update
+        #     Profile to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Field mask used to specify the fields to be overwritten. Currently only
@@ -68,7 +68,7 @@ module Google
         end
 
         # Profile resource.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
         #     Output only. Opaque, server-assigned, unique ID for this profile.
         # @!attribute [rw] profile_type
@@ -94,7 +94,7 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Input only. Labels associated to this specific profile. These labels will
-        #     get merged with the deployment labels for the final data set.  See
+        #     get merged with the deployment labels for the final data set. See
         #     documentation on deployment labels for validation rules and limits.
         class Profile
           include ::Google::Protobuf::MessageExts
@@ -118,11 +118,11 @@ module Google
         # @!attribute [rw] target
         #   @return [::String]
         #     Target is the service name used to group related deployments:
-        #     * Service name for GAE Flex / Standard.
+        #     * Service name for App Engine Flex / Standard.
         #     * Cluster and container name for GKE.
-        #     * User-specified string for direct GCE profiling (e.g. Java).
+        #     * User-specified string for direct Compute Engine profiling (e.g. Java).
         #     * Job name for Dataflow.
-        #     Validation regex: `^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$`.
+        #     Validation regex: `^[a-z0-9]([-a-z0-9_.]{0,253}[a-z0-9])?$`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels identify the deployment within the user universe and same target.
