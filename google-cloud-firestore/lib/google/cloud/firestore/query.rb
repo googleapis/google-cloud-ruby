@@ -211,29 +211,37 @@ module Google
         end
 
         ##
-        # Filters the query on a field.
+        # Adds filter to the where clause
         #
-        # @param [FieldPath, String, Symbol] field A field path to filter
-        #   results with.
+        # @overload where(filter_or_field)
+        #   Pass Firestore::Filter to `where` via field_or_filter argument.
         #
-        #   If a {FieldPath} object is not provided then the field will be
-        #   treated as a dotted string, meaning the string represents individual
-        #   fields joined by ".". Fields containing `~`, `*`, `/`, `[`, `]`, and
-        #   `.` cannot be in a dotted string, and should provided using a
-        #   {FieldPath} object instead.
-        # @param [String, Symbol] operator The operation to compare the field
-        #   to. Acceptable values include:
+        #   @param [::Google::Cloud::Firestore::Filter] filter_or_field
         #
-        #   * less than: `<`, `lt`
-        #   * less than or equal: `<=`, `lte`
-        #   * greater than: `>`, `gt`
-        #   * greater than or equal: `>=`, `gte`
-        #   * equal: `=`, `==`, `eq`, `eql`, `is`
-        #   * not equal: `!=`
-        #   * in: `in`
-        #   * not in: `not-in`, `not_in`
-        #   * array contains: `array-contains`, `array_contains`
-        # @param [Object] value A value the field is compared to.
+        # @overload where(filter_or_field, operator, value)
+        #   Pass arguments to `where` via positional arguments.
+        #
+        #    @param [FieldPath, String, Symbol] filter_or_field A field path to filter
+        #     results with.
+        #
+        #     If a {FieldPath} object is not provided then the field will be
+        #     treated as a dotted string, meaning the string represents individual
+        #     fields joined by ".". Fields containing `~`, `*`, `/`, `[`, `]`, and
+        #     `.` cannot be in a dotted string, and should provided using a
+        #     {FieldPath} object instead.
+        #    @param [String, Symbol] operator The operation to compare the field
+        #     to. Acceptable values include:
+        #
+        #     * less than: `<`, `lt`
+        #     * less than or equal: `<=`, `lte`
+        #     * greater than: `>`, `gt`
+        #     * greater than or equal: `>=`, `gte`
+        #     * equal: `=`, `==`, `eq`, `eql`, `is`
+        #     * not equal: `!=`
+        #     * in: `in`
+        #     * not in: `not-in`, `not_in`
+        #     * array contains: `array-contains`, `array_contains`
+        #    @param [Object] value A value the field is compared to.
         #
         # @return [Query] New query with `where` called on it.
         #
@@ -252,7 +260,25 @@ module Google
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
-        def where filter_or_field, operator, value
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #
+        #   # Create a filter
+        #   filter = Filter.create(:population, :>=, 1000000)
+        #
+        #   # Add filter to where clause
+        #   query = query.where filter
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def where filter_or_field = nil, operator = nil, value = nil
           if query_has_cursors?
             raise "cannot call where after calling " \
                   "start_at, start_after, end_before, or end_at"

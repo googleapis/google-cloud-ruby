@@ -144,11 +144,21 @@ describe "Query", :firestore_acceptance do
     _(result_snp[:foo]).must_equal "bar"
   end
 
-  it "supports NULL with not equal" do
+  focus; it "supports NULL with not equal" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     doc_ref = rand_query_col.add({foo: "bar"})
 
     result_snp = rand_query_col.where(:foo, :!=, nil).get.first
+    _(result_snp).wont_be :nil?
+    _(result_snp[:foo]).must_equal "bar"
+  end
+
+  focus; it "has where method with a basic filter object as input" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.add({foo: "bar"})
+
+    filter = Google::Cloud::Firestore::Filter.create(:foo, :!=, nil)
+    result_snp = rand_query_col.where(filter).get.first
     _(result_snp).wont_be :nil?
     _(result_snp[:foo]).must_equal "bar"
   end
