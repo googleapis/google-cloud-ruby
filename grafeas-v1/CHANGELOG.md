@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2023-03-15)
+
+#### Features
+
+* Add vulnerability assessment options ([#20892](https://github.com/googleapis/google-cloud-ruby/issues/20892)) 
+
 ### 0.8.0 (2023-03-05)
 
 #### Features
