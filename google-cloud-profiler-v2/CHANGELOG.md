@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 (2023-03-15)
+
+#### Features
+
+* Add path methods for ProfilerService ([#20890](https://github.com/googleapis/google-cloud-ruby/issues/20890)) 
+
 ### 0.4.0 (2023-03-08)
 
 #### Features
