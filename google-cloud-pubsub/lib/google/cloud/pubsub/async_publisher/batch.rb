@@ -193,7 +193,8 @@ module Google
                 return false
               else
                 return true if stopping?
-                return true if Time.now - min_create_time > @publisher.interval
+                return true if (Time.now - min_create_time > @publisher.interval) || 
+                               (total_message_count == @publisher.max_messages)
                 if @queue.empty?
                   @publishing = false
                   return false

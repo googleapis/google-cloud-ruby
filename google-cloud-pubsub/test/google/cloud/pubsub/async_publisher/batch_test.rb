@@ -391,4 +391,91 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
       assert_equal false, batch.empty?
     end
   end
+
+  describe :reset! do
+
+    let(:fake_publisher) { OpenStruct.new topic_name: topic_name, max_messages: 10, max_bytes: 10000, interval: 0.01 }
+
+    # true signifies publishing can continue in async_publisher and false the otherway 
+    it "returns false if not already publishing" do
+      batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher, ""
+      
+      assert_equal false, batch.publishing?
+      assert_equal false, batch.reset!
+    end
+
+    it "returns false if batch is cancelled" do 
+      batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher, ""
+      
+      batch.cancel!
+      assert_equal false, batch.reset!
+    end
+    
+    it "returns false if items array is empty after reset" do
+      batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher, ""
+      msg = pubsub_message "hello world", {}, ""
+      
+      batch.add msg.dup, nil
+      batch.publish!
+      assert_equal false, batch.reset!
+    end
+
+    it "return false if items is partially full" do
+      fake_publisher_with_large_interval = OpenStruct.new topic_name: topic_name, max_messages: 10, max_bytes: 10000, interval: 1
+      batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher_with_large_interval, ""
+      msg = pubsub_message "hello world", {}, ""
+      
+      batch.add msg.dup, nil
+      batch.publish!
+      batch.add msg.dup, nil
+      assert_equal false, batch.reset!
+    end
+
+    it "returns true if items is not empty and batch is stopping" do
+      batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher, ""
+      msg = pubsub_message "hello world", {}, ""
+      
+      12.times do
+        batch.add msg.dup, nil
+      end
+      batch.publish! stop: true
+      assert_equal true, batch.reset!
+    end
+
+    it "returns true if items first message's create_time is greater than the publish interval" do
+      batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher, ""
+      msg = pubsub_message "hello world", {}, ""
+      
+      batch.add msg.dup, nil
+      batch.publish! 
+      batch.add msg.dup, nil
+      sleep 0.01 # wait for max_interval
+      assert_equal true, batch.reset!
+    end
+
+    it "returns true if items is full by message count" do
+      batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher, ""
+      msg = pubsub_message "hello world", {}, ""
+      
+      batch.add msg.dup, nil
+      batch.publish! 
+      10.times do
+        batch.add msg.dup, nil
+      end
+      assert_equal true, batch.reset!
+    end
+
+    it "returns true if items and queue are not empty (indicates item is full by bytes)" do
+      fake_publisher_with_max_bytes = OpenStruct.new topic_name: topic_name, max_messages: 1000, max_bytes: 175, interval: 0.01
+      batch = Google::Cloud::PubSub::AsyncPublisher::Batch.new fake_publisher_with_max_bytes, ""
+      msg = pubsub_message "hello world", {}, ""
+      
+      batch.add msg.dup, nil
+      batch.publish! 
+      11.times do
+        batch.add msg.dup, nil
+      end
+      assert_equal true, batch.reset!
+    end 
+  end
 end
