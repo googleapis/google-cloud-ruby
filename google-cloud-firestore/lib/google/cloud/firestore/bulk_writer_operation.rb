@@ -27,42 +27,57 @@ require "google/cloud/firestore/transaction"
 module Google
   module Cloud
     module Firestore
-      class BulkWriterOperation
 
-        attr_reader :retry_time
-        attr_reader :result
-        attr_reader :completion_event
+##
+# @private
+class BulkWriterOperation
 
-        MAX_RETRY_ATTEMPTS = 10
+  attr_reader :retry_time
+  attr_reader :result
+  attr_reader :completion_event
 
-        def initialize write, document_reference, operation_type
-          @write = write
-          @completion_event = Google::Cloud::Firestore::Concurrent::Event.new
-          @status = nil
-          @result = nil
-          @operation_type = operation_type
-          @failed_attempts = 0
-          @document_reference = document_reference
-          @retry_time = Time.now
-          @failure_message = nil
-        end
+  MAX_RETRY_ATTEMPTS = 10
 
-        def on_success status, values
-          # Updates @status, @result and marks the operation complete by setting the event.
-        end
+  ##
+  # Initialize the object
+  def initialize write, document_reference, operation_type
+    @write = write
+    @completion_event = Google::Cloud::Firestore::Concurrent::Event.new
+    @status = nil
+    @result = nil
+    @operation_type = operation_type
+    @failed_attempts = 0
+    @document_reference = document_reference
+    @retry_time = Time.now
+    @failure_message = nil
+  end
 
-        def on_failure status, message
-          # Updates various attributes like @failed_attempts, @status, @result and @failure_message
-          # and update the @retry_time based on the backoff algorithm.
-          # If this was last attempt then @result will be set as BulkWriter Exception and the operation
-          # will be marked as complete by setting the event.
-        end
+  ##
+  # Processing to be done when the response is a failure.
+  # Updates the result and set the completion event.
+  #
+  # @param [String] status The status in the response.
+  # @param [] value The value returned in the response.
+  def on_success status, value
+  end
 
-        def backoff_duration
-          # Provides the time to wait before next attempt
-        end
+  ##
+  # Processing to be done when the response is a success.
+  # Updates the failure attempts. If the retry count reaches
+  # the upper threshold, operations will be marked
+  # as failure and the completion event will be set.
+  #
+  # @param [String] status The status in the response.
+  # @param [] value The value returned in the response.
+  def on_failure status, message
+  end
 
-      end
+  ##
+  # Exponentially increases the waiting time for retry.
+  def backoff_duration
+    # Provides the time to wait before next attempt
+  end
+end
     end
   end
 end

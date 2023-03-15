@@ -27,13 +27,22 @@ require "google/cloud/firestore/transaction"
 module Google
   module Cloud
     module Firestore
+##
+# @private
 class BulkCommitBatch
 
+  ##
+  # Initialize the object
   def initialize service, operations
     @service = service
     @operations = operations
   end
 
+  ##
+  # Process the result received for each operation and calls the appropriate callback.
+  # Incase of failures, adds the operation to the retry array.
+  #
+  # @return [Array<bulkWriterOperation>] failed_operations
   def parse_results responses
     failed_operations = []
     responses.each_with_index do |response, idx|
@@ -48,6 +57,10 @@ class BulkCommitBatch
     failed_operations
   end
 
+  ##
+  # Makes the API request with all the operations in the batch and returns the response after processing.
+  #
+  # @return [Array<bulkWriterOperation>] failed_operations
   def commit
     writes = []
     @operations.each do |operation|

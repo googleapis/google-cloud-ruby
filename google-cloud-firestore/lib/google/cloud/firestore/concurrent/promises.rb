@@ -17,18 +17,7 @@ module Google
     module Firestore
       module Concurrent
         module Promise
-
-          def future_on default_executor, *args, &task
-            Future.new Google::Cloud::Firestore::Concurrent::Promises.future_on default_executor, *args, &task
-          end
-
-
-        private
-
           class Future
-
-            attr_reader :future
-
             def initialize future
               @future = future
             end

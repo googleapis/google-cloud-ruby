@@ -27,34 +27,46 @@ require "google/cloud/firestore/transaction"
 module Google
   module Cloud
     module Firestore
-      class RateLimiter
+##
+# @private
+class RateLimiter
 
-        DEFAULT_STARTING_MAXIMUM_OPS_PER_SECOND = 500
+  DEFAULT_STARTING_MAXIMUM_OPS_PER_SECOND = 500
 
-        def initialize
-          @start_time = Time.now
-          @last_fetched = Time.now
-          @bandwidth = 500
-        end
+  ##
+  # Initialize the object
+  def initialize
+    @start_time = Time.now
+    @last_fetched = Time.now
+    @bandwidth = 500
+  end
 
-        ##
-        # Increase the bandwidth as per 555 rule
-        def increase_bandwidth
-          intervals = (Time.now - @start_time) / 5
-          @bandwidth *= (1.5**intervals.floor)
-        end
+  ##
+  # Increase the bandwidth as per 555 rule
+  # Updates the @bandwidth attribute.
+  #
+  # @return [nil]
+  def increase_bandwidth
+    intervals = (Time.now - @start_time) / 5
+    @bandwidth *= (1.5**intervals.floor)
+  end
 
-        ##
-        # Wait till the number of tokens is available
-        # Assumes that the bandwidth is distributed evenly across the entire second.
-        def get_tokens size
-          available_time = @last_fetched + (size / @bandwidth)
-          waiting_time = max 0, available_time - Time.now
-          sleep waiting_time
-          @last_fetched = Time.now
-          increase_bandwidth
-        end
-      end
+  ##
+  # Wait till the number of tokens is available
+  # Assumes that the bandwidth is distributed evenly across the entire second.
+  #
+  # Example - If the limit is 500 qps, then it has been further broken down to 2e+6 nsec
+  # per query
+  #
+  # @return [nil]
+  def get_tokens size
+    available_time = @last_fetched + (size / @bandwidth)
+    waiting_time = max 0, available_time - Time.now
+    sleep waiting_time
+    @last_fetched = Time.now
+    increase_bandwidth
+  end
+end
     end
   end
 end

@@ -173,6 +173,10 @@ class Service
     )
   end
 
+  ##
+  # Makes the BatchWrite API call. Contains the list of write operations to be processed.
+  #
+  # @return [::Google::Cloud::Firestore::V1::BatchWriteResponse]
   def batch_write writes
     firestore.batch_write(
       {
