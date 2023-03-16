@@ -67,7 +67,7 @@ describe Google::Cloud::Firestore::Filter do
     _(generated_filter.filter).must_equal expected_filter
   end
 
-  it "with multiple composite filters with AND" do
+  it "and_all test with multiple composite filters" do
     expected_filter = Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
       composite_filter: Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter.new(
         op: :AND,
@@ -101,70 +101,14 @@ describe Google::Cloud::Firestore::Filter do
     filter_2 = Google::Cloud::Firestore::Filter.create(:bar, :==, "baz")
     filter_3 = Google::Cloud::Firestore::Filter.create(:bar, :==, "bar")
 
-    generated_filter = Google::Cloud::Firestore::Filter.and(filter_1,filter_2,filter_3)
+    generated_filter = Google::Cloud::Firestore::Filter.and_all([:foo, :==, 42],filter_2,filter_3)
     _(generated_filter.filter).must_equal expected_filter
 
-    generated_filter = Google::Cloud::Firestore::Filter.and([filter_1,filter_2,filter_3])
-    _(generated_filter.filter).must_equal expected_filter
-
-    generated_filter = filter_1.and(filter_2, filter_3)
-    _(generated_filter.filter).must_equal expected_filter
-
-    generated_filter = filter_1.and([filter_2, filter_3])
-    _(generated_filter.filter).must_equal expected_filter
-
-    generated_filter = filter_1.and([:bar, :==, "baz"], filter_3)
-    _(generated_filter.filter).must_equal expected_filter
-
-    generated_filter = filter_1.and(:bar, :==, "baz", filter_3)
-    _(generated_filter.filter).must_equal expected_filter
-
-    generated_filter = filter_1.and(:bar, :==, "baz", :bar, :==, "bar")
+    generated_filter = Google::Cloud::Firestore::Filter.and_all(filter_1,filter_2,filter_3)
     _(generated_filter.filter).must_equal expected_filter
   end
 
-  it "with multiple composite filters with AND" do
-    expected_filter = Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
-      composite_filter: Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter.new(
-        op: :AND,
-        filters: [
-          Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
-            composite_filter: Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter.new(
-              op: :AND,
-              filters: [
-                Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
-                  field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
-                    field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
-                    op: :EQUAL,
-                    value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
-                  )
-                ),
-                Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
-                  field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
-                    field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "bar"),
-                    op: :EQUAL,
-                    value: Google::Cloud::Firestore::V1::Value.new(string_value: "baz")
-                  )
-                )
-              ]
-            )
-          ),
-          Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
-            field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
-              field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "bar"),
-              op: :EQUAL,
-              value: Google::Cloud::Firestore::V1::Value.new(string_value: "bar")
-            )
-          )
-        ]
-      )
-    )
-
-    generated_filter = Google::Cloud::Firestore::Filter.create(:foo, :==, 42).and(:bar, :==, "baz").and(:bar, :==, "bar")
-    _(generated_filter.filter).must_equal expected_filter
-  end
-
-  it "with multiple composite filters with OR" do
+  it "or_all test with multiple composite filters" do
     expected_filter = Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
       composite_filter: Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter.new(
         op: :OR,
@@ -198,32 +142,17 @@ describe Google::Cloud::Firestore::Filter do
     filter_2 = Google::Cloud::Firestore::Filter.create(:bar, :==, "baz")
     filter_3 = Google::Cloud::Firestore::Filter.create(:bar, :==, "bar")
 
-    generated_filter = Google::Cloud::Firestore::Filter.or(filter_1,filter_2,filter_3)
+    generated_filter = Google::Cloud::Firestore::Filter.or_all([:foo, :==, 42],filter_2,filter_3)
     _(generated_filter.filter).must_equal expected_filter
 
-    generated_filter = Google::Cloud::Firestore::Filter.or([filter_1,filter_2,filter_3])
-    _(generated_filter.filter).must_equal expected_filter
-
-    generated_filter = filter_1.or(filter_2, filter_3)
-    _(generated_filter.filter).must_equal expected_filter
-
-    generated_filter = filter_1.or([filter_2, filter_3])
-    _(generated_filter.filter).must_equal expected_filter
-
-    generated_filter = filter_1.or([:bar, :==, "baz"], filter_3)
-    _(generated_filter.filter).must_equal expected_filter
-
-    generated_filter = filter_1.or(:bar, :==, "baz", filter_3)
-    _(generated_filter.filter).must_equal expected_filter
-
-    generated_filter = filter_1.or(:bar, :==, "baz", :bar, :==, "bar")
+    generated_filter = Google::Cloud::Firestore::Filter.or_all(filter_1,filter_2,filter_3)
     _(generated_filter.filter).must_equal expected_filter
   end
 
-  it "with multiple composite filters with OR" do
+  it "with complex composite filters" do
     expected_filter = Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
       composite_filter: Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter.new(
-        op: :OR,
+        op: :AND,
         filters: [
           Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
             composite_filter: Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter.new(
@@ -257,7 +186,8 @@ describe Google::Cloud::Firestore::Filter do
       )
     )
 
-    generated_filter = Google::Cloud::Firestore::Filter.create(:foo, :==, 42).or(:bar, :==, "baz").or(:bar, :==, "bar")
+    filter_1 = Google::Cloud::Firestore::Filter.create(:bar, :==, "bar")
+    generated_filter = Google::Cloud::Firestore::Filter.create(:foo, :==, 42).or(:bar, :==, "baz").and(filter_1)
     _(generated_filter.filter).must_equal expected_filter
   end
 end

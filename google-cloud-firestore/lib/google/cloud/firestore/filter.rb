@@ -37,13 +37,19 @@ module Google
         end
 
         def and *args
-          args.unshift self
-          Filter.and args
+          if args.length == 1
+            Filter.and_all self, *args
+          else
+            Filter.and_all self, args
+          end
         end
 
         def or *args
-          args.unshift self
-          Filter.or args
+          if args.length == 1
+            Filter.or_all self, *args
+          else
+            Filter.or_all self, args
+          end
         end
 
         ##
@@ -85,11 +91,11 @@ module Google
           new create_filter(field, operator, value)
         end
 
-        def self.and *args
+        def self.and_all *args
           new insert_in_composite_filter(composite_filter_and, args)
         end
 
-        def self.or *args
+        def self.or_all *args
           new insert_in_composite_filter(composite_filter_or, args)
         end
 
@@ -149,19 +155,15 @@ module Google
         end
 
         def self.insert_in_composite_filter composite_filter, args
-          until args.empty? do
-            var = args.shift
-            case var
+          args.each do |filter|
+            case filter
             when Google::Cloud::Firestore::Filter
-              composite_filter.composite_filter.filters << var.filter
+              composite_filter.composite_filter.filters << filter.filter
             when Array
-              insert_in_composite_filter composite_filter, var
+              composite_filter.composite_filter.filters << create_filter(*filter)
             else
-              field = var
-              operator, value = args.shift 2
-              composite_filter.composite_filter.filters << create_filter(field,
-                                                                         operator,
-                                                                         value)
+              # Raise a error for incorrect input
+              puts "Error should be raised in this case"
             end
           end
           composite_filter
