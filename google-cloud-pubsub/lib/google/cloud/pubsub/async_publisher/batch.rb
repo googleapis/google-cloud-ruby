@@ -186,8 +186,7 @@ module Google
                 return false
               else
                 return true if stopping?
-                return true if (Time.now - min_create_time > @publisher.interval) ||
-                               (total_message_count == @publisher.max_messages)
+                return true if interval_met?(min_create_time) || batch_full_by_count?
                 if @queue.empty?
                   @publishing = false
                   return false
@@ -257,6 +256,14 @@ module Google
           end
 
           protected
+
+          def interval_met? create_time
+            Time.now - create_time > @publisher.interval
+          end
+
+          def batch_full_by_count?
+            total_message_count == @publisher.max_messages
+          end
 
           def refill_items
             min_create_time = nil
