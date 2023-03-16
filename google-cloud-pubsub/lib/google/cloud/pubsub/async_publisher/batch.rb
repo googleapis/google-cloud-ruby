@@ -178,14 +178,7 @@ module Google
                 return false
               end
 
-              min_create_time = nil
-              until @queue.empty?
-                item = @queue.first
-                min_create_time = item.create_time if min_create_time.nil?
-                added = try_add item.msg, item.callback, item.create_time
-                break unless added
-                @queue.shift
-              end
+              min_create_time = refill_items
 
               return false unless @publishing
               if @items.empty?
@@ -193,7 +186,7 @@ module Google
                 return false
               else
                 return true if stopping?
-                return true if (Time.now - min_create_time > @publisher.interval) || 
+                return true if (Time.now - min_create_time > @publisher.interval) ||
                                (total_message_count == @publisher.max_messages)
                 if @queue.empty?
                   @publishing = false
@@ -264,6 +257,18 @@ module Google
           end
 
           protected
+
+          def refill_items
+            min_create_time = nil
+            until @queue.empty?
+              item = @queue.first
+              min_create_time = item.create_time if min_create_time.nil?
+              added = try_add item.msg, item.callback, item.create_time
+              break unless added
+              @queue.shift
+            end
+            min_create_time
+          end
 
           def items_add msg, callback, create_time
             item = Item.new msg, callback, (create_time || Time.now)
