@@ -305,16 +305,15 @@ def handle_suppress *args
     end
   end
   omit = Omit.new "All changes match given regexes" do |file|
-    adds.all? do |regex|
-      file.reduce_hunks true do |val, hunk|
-        val && hunk.all? do |line|
-          !line.start_with?("+") || regex.match?(line[1..-1])
-        end
-      end
-    end && removes.all? do |regex|
-      file.reduce_hunks true do |val, hunk|
-        val && hunk.all? do |line|
-          !line.start_with?("-") || regex.match?(line[1..-1])
+    file.reduce_hunks true do |val, hunk|
+      val && hunk.all? do |line|
+        line_without_mark = line[1..-1]
+        if line.start_with? "+"
+          adds.any? { |regex| regex.match? line_without_mark }
+        elsif line.start_with? "-"
+          removes.any? { |regex| regex.match? line_without_mark }
+        else
+          true
         end
       end
     end
