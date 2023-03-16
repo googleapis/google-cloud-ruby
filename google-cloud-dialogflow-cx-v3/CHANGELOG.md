@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.15.1 (2023-03-15)
+
+#### Documentation
+
+* Update quota usage information ([#20894](https://github.com/googleapis/google-cloud-ruby/issues/20894)) 
+
 ### 0.15.0 (2023-03-08)
 
 #### Features
