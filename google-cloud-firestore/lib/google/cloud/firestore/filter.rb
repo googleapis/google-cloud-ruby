@@ -24,7 +24,6 @@ module Google
   module Cloud
     module Firestore
       class Filter
-
         ##
         # @private Object of type
         # Google::Cloud::Firestore::V1::StructuredQuery::Filter
@@ -98,8 +97,6 @@ module Google
         def self.or_all *args
           new insert_in_composite_filter(composite_filter_or, args)
         end
-
-        protected
 
         ##
         # @private

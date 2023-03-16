@@ -463,6 +463,7 @@ module Google
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
+              puts metadata
 
               options.apply_defaults timeout:      @config.rpcs.list_documents.timeout,
                                      metadata:     metadata,
@@ -1143,6 +1144,7 @@ module Google
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
+              puts metadata
 
               options.apply_defaults timeout:      @config.rpcs.run_query.timeout,
                                      metadata:     metadata,
