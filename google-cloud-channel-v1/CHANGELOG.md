@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.0 (2023-03-15)
+
+#### Features
+
+* Add EntitlementChange to record event history for Entitlement orders ([#20898](https://github.com/googleapis/google-cloud-ruby/issues/20898)) 
+
 ### 0.16.0 (2023-03-08)
 
 #### Features
