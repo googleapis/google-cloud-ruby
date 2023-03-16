@@ -242,7 +242,7 @@ module Google
               end
 
               ##
-              # Returns the specified commitment resource. Gets a list of available commitments by making a list() request.
+              # Returns the specified commitment resource.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

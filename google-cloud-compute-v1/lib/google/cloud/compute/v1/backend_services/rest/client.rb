@@ -489,7 +489,7 @@ module Google
               end
 
               ##
-              # Returns the specified BackendService resource. Gets a list of available backend services.
+              # Returns the specified BackendService resource.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

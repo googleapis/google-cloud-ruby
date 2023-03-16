@@ -328,7 +328,7 @@ module Google
               end
 
               ##
-              # Returns the specified VPN gateway. Gets a list of available VPN gateways by making a list() request.
+              # Returns the specified VPN gateway.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

@@ -144,7 +144,7 @@ module Google
               # Service calls
 
               ##
-              # Returns the specified Zone resource. Gets a list of available zones by making a list() request.
+              # Returns the specified Zone resource.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

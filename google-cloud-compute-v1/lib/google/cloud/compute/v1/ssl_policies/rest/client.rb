@@ -387,7 +387,7 @@ module Google
               end
 
               ##
-              # Returns the specified SSL policy resource. Gets a list of available SSL policies by making a list() request.
+              # Returns the specified SSL policy resource.
               #
               # @overload insert(request, options = nil)
               #   Pass arguments to `insert` via a request object, either of type

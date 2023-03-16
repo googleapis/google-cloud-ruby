@@ -224,7 +224,7 @@ module Google
               end
 
               ##
-              # Returns the specified node type. Gets a list of available node types by making a list() request.
+              # Returns the specified node type.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

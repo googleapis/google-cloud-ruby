@@ -332,7 +332,7 @@ module Google
               end
 
               ##
-              # Returns the specified image. Gets a list of available images by making a list() request.
+              # Returns the specified image.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
@@ -396,7 +396,7 @@ module Google
               end
 
               ##
-              # Returns the latest image that is part of an image family and is not deprecated.
+              # Returns the latest image that is part of an image family and is not deprecated. For more information on image families, see Public image families documentation.
               #
               # @overload get_from_family(request, options = nil)
               #   Pass arguments to `get_from_family` via a request object, either of type
@@ -416,7 +416,7 @@ module Google
               #   @param family [::String]
               #     Name of the image family to search for.
               #   @param project [::String]
-              #     Project ID for this request.
+              #     The image project that the image belongs to. For example, to get a CentOS image, specify centos-cloud as the image project.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Image]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

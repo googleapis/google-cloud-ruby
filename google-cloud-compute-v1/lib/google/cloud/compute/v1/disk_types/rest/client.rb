@@ -224,7 +224,7 @@ module Google
               end
 
               ##
-              # Returns the specified disk type. Gets a list of available disk types by making a list() request.
+              # Returns the specified disk type.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

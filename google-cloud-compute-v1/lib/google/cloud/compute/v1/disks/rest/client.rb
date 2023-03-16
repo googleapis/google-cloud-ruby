@@ -103,6 +103,8 @@ module Google
 
                   default_config.rpcs.test_iam_permissions.timeout = 600.0
 
+                  default_config.rpcs.update.timeout = 600.0
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -498,7 +500,7 @@ module Google
               end
 
               ##
-              # Returns a specified persistent disk. Gets a list of available persistent disks by making a list() request.
+              # Returns the specified persistent disk.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
@@ -1159,6 +1161,88 @@ module Google
               end
 
               ##
+              # Updates the specified disk with the data included in the request. The update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: user_license.
+              #
+              # @overload update(request, options = nil)
+              #   Pass arguments to `update` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::UpdateDiskRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::UpdateDiskRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update(disk: nil, disk_resource: nil, paths: nil, project: nil, request_id: nil, update_mask: nil, zone: nil)
+              #   Pass arguments to `update` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param disk [::String]
+              #     The disk name for this request.
+              #   @param disk_resource [::Google::Cloud::Compute::V1::Disk, ::Hash]
+              #     The body resource for this request
+              #   @param paths [::String]
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param update_mask [::String]
+              #     update_mask indicates fields to be updated as part of this request.
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def update request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::UpdateDiskRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @disks_stub.update request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Disks REST API.
               #
               # This class represents the configuration for Disks REST,
@@ -1346,6 +1430,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :test_iam_permissions
+                  ##
+                  # RPC-specific configuration for `update`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1375,6 +1464,8 @@ module Google
                     @set_labels = ::Gapic::Config::Method.new set_labels_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                    update_config = parent_rpcs.update if parent_rpcs.respond_to? :update
+                    @update = ::Gapic::Config::Method.new update_config
 
                     yield self if block_given?
                   end

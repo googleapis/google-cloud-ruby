@@ -743,7 +743,7 @@ module Google
               end
 
               ##
-              # Returns all of the details about the specified managed instance group. Gets a list of available managed instance groups by making a list() request.
+              # Returns all of the details about the specified managed instance group.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

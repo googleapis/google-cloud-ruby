@@ -320,7 +320,7 @@ module Google
               end
 
               ##
-              # Returns the specified TargetTcpProxy resource. Gets a list of available target TCP proxies by making a list() request.
+              # Returns the specified TargetTcpProxy resource.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
