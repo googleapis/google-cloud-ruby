@@ -310,7 +310,7 @@ module Google
         #     Common options for this request.
         # @!attribute [rw] data_boost_enabled
         #   @return [::Boolean]
-        #     If this is for a partitioned read and this field is set to `true`, the
+        #     If this is for a partitioned query and this field is set to `true`, the
         #     request will be executed via Spanner independent compute resources.
         #
         #     If the field is set to `true` but the request does not set
@@ -727,7 +727,7 @@ module Google
         #     Common options for this request.
         # @!attribute [rw] data_boost_enabled
         #   @return [::Boolean]
-        #     If this is for a partitioned query and this field is set to `true`, the
+        #     If this is for a partitioned read and this field is set to `true`, the
         #     request will be executed via Spanner independent compute resources.
         #
         #     If the field is set to `true` but the request does not set
