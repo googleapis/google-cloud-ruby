@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/any_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 
@@ -25,6 +26,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :update_time, :message, 7, "google.protobuf.Timestamp"
       map :labels, :string, :string, 8
       repeated :state_messages, :message, 9, "google.cloud.functions.v2.StateMessage"
+      optional :kms_key_name, :string, 25
+      optional :url, :string, 14
     end
     add_enum "google.cloud.functions.v2.Function.State" do
       value :STATE_UNSPECIFIED, 0
@@ -79,12 +82,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :source_provenance, :message, 8, "google.cloud.functions.v2.SourceProvenance"
       optional :worker_pool, :string, 5
       map :environment_variables, :string, :string, 6
+      optional :docker_registry, :enum, 10, "google.cloud.functions.v2.BuildConfig.DockerRegistry"
       optional :docker_repository, :string, 7
+    end
+    add_enum "google.cloud.functions.v2.BuildConfig.DockerRegistry" do
+      value :DOCKER_REGISTRY_UNSPECIFIED, 0
+      value :CONTAINER_REGISTRY, 1
+      value :ARTIFACT_REGISTRY, 2
     end
     add_message "google.cloud.functions.v2.ServiceConfig" do
       optional :service, :string, 1
       optional :timeout_seconds, :int32, 2
       optional :available_memory, :string, 13
+      optional :available_cpu, :string, 22
       map :environment_variables, :string, :string, 4
       optional :max_instance_count, :int32, 5
       optional :min_instance_count, :int32, 12
@@ -97,6 +107,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :secret_environment_variables, :message, 17, "google.cloud.functions.v2.SecretEnvVar"
       repeated :secret_volumes, :message, 19, "google.cloud.functions.v2.SecretVolume"
       optional :revision, :string, 18
+      optional :max_instance_request_concurrency, :int32, 20
+      optional :security_level, :enum, 21, "google.cloud.functions.v2.ServiceConfig.SecurityLevel"
     end
     add_enum "google.cloud.functions.v2.ServiceConfig.VpcConnectorEgressSettings" do
       value :VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED, 0
@@ -108,6 +120,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ALLOW_ALL, 1
       value :ALLOW_INTERNAL_ONLY, 2
       value :ALLOW_INTERNAL_AND_GCLB, 3
+    end
+    add_enum "google.cloud.functions.v2.ServiceConfig.SecurityLevel" do
+      value :SECURITY_LEVEL_UNSPECIFIED, 0
+      value :SECURE_ALWAYS, 1
+      value :SECURE_OPTIONAL, 2
     end
     add_message "google.cloud.functions.v2.SecretEnvVar" do
       optional :key, :string, 1
@@ -174,6 +191,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.functions.v2.GenerateUploadUrlRequest" do
       optional :parent, :string, 1
+      optional :kms_key_name, :string, 2
     end
     add_message "google.cloud.functions.v2.GenerateUploadUrlResponse" do
       optional :upload_url, :string, 1
@@ -263,9 +281,11 @@ module Google
         Source = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v2.Source").msgclass
         SourceProvenance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v2.SourceProvenance").msgclass
         BuildConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v2.BuildConfig").msgclass
+        BuildConfig::DockerRegistry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v2.BuildConfig.DockerRegistry").enummodule
         ServiceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v2.ServiceConfig").msgclass
         ServiceConfig::VpcConnectorEgressSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v2.ServiceConfig.VpcConnectorEgressSettings").enummodule
         ServiceConfig::IngressSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v2.ServiceConfig.IngressSettings").enummodule
+        ServiceConfig::SecurityLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v2.ServiceConfig.SecurityLevel").enummodule
         SecretEnvVar = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v2.SecretEnvVar").msgclass
         SecretVolume = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v2.SecretVolume").msgclass
         SecretVolume::SecretVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v2.SecretVolume.SecretVersion").msgclass
