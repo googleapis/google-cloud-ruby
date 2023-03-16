@@ -129,6 +129,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService:
     annotation = :ANNOTATION_UNSPECIFIED
     reasons = [:REASON_UNSPECIFIED]
     hashed_account_id = "hello world"
+    transaction_event = {}
 
     annotate_assessment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -144,27 +145,27 @@ class ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService:
         end
 
         # Use hash object
-        client.annotate_assessment({ name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id }) do |_result, response|
+        client.annotate_assessment({ name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.annotate_assessment name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id do |_result, response|
+        client.annotate_assessment name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.annotate_assessment ::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id) do |_result, response|
+        client.annotate_assessment ::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.annotate_assessment({ name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id }, call_options) do |_result, response|
+        client.annotate_assessment({ name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.annotate_assessment(::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id), call_options) do |_result, response|
+        client.annotate_assessment(::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
