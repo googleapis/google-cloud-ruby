@@ -797,7 +797,7 @@ module Google
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
             #   @param data_boost_enabled [::Boolean]
-            #     If this is for a partitioned read and this field is set to `true`, the
+            #     If this is for a partitioned query and this field is set to `true`, the
             #     request will be executed via Spanner independent compute resources.
             #
             #     If the field is set to `true` but the request does not set
@@ -959,7 +959,7 @@ module Google
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
             #   @param data_boost_enabled [::Boolean]
-            #     If this is for a partitioned read and this field is set to `true`, the
+            #     If this is for a partitioned query and this field is set to `true`, the
             #     request will be executed via Spanner independent compute resources.
             #
             #     If the field is set to `true` but the request does not set
@@ -1227,7 +1227,7 @@ module Google
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
             #   @param data_boost_enabled [::Boolean]
-            #     If this is for a partitioned query and this field is set to `true`, the
+            #     If this is for a partitioned read and this field is set to `true`, the
             #     request will be executed via Spanner independent compute resources.
             #
             #     If the field is set to `true` but the request does not set
@@ -1365,7 +1365,7 @@ module Google
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
             #   @param data_boost_enabled [::Boolean]
-            #     If this is for a partitioned query and this field is set to `true`, the
+            #     If this is for a partitioned read and this field is set to `true`, the
             #     request will be executed via Spanner independent compute resources.
             #
             #     If the field is set to `true` but the request does not set
