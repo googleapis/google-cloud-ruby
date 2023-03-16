@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2023-03-15)
+
+#### Features
+
+* Extend options for ReauthSettings ([#20900](https://github.com/googleapis/google-cloud-ruby/issues/20900)) 
+
 ### 0.6.0 (2023-03-08)
 
 #### Features
