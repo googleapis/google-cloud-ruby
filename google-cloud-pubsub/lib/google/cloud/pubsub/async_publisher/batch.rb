@@ -178,7 +178,7 @@ module Google
                 return false
               end
 
-              min_create_time = refill_items
+              refill_items
 
               return false unless @publishing
               if @items.empty?
@@ -186,7 +186,7 @@ module Google
                 return false
               else
                 return true if stopping?
-                return true if interval_met?(min_create_time) || batch_full_by_count?
+                return true if interval_met?(@items.first.create_time) || batch_full_by_count?
                 if @queue.empty?
                   @publishing = false
                   return false
@@ -266,15 +266,12 @@ module Google
           end
 
           def refill_items
-            min_create_time = nil
             until @queue.empty?
               item = @queue.first
-              min_create_time = item.create_time if min_create_time.nil?
               added = try_add item.msg, item.callback, item.create_time
               break unless added
               @queue.shift
             end
-            min_create_time
           end
 
           def items_add msg, callback, create_time
