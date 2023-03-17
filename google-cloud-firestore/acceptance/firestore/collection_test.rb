@@ -90,7 +90,7 @@ describe "Collection", :firestore_acceptance do
   end
 
   describe "Multiple database tests" do
-    focus; it "lists the documents of multiple databases" do
+    it "lists the documents of multiple databases" do
       skip "Don't have secondary database to run the test" unless firestore_2
       col_id = "#{root_path}/query/#{SecureRandom.hex(4)}"
 

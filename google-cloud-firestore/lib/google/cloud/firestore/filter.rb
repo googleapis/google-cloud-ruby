@@ -35,6 +35,40 @@ module Google
           @filter = filter
         end
 
+        ##
+        # Filters the query on a field.
+        #
+        # @param [Object] args
+        #
+        #   If a {FieldPath} object is not provided then the field will be
+        #   treated as a dotted string, meaning the string represents individual
+        #   fields joined by ".". Fields containing `~`, `*`, `/`, `[`, `]`, and
+        #   `.` cannot be in a dotted string, and should provided using a
+        #   {FieldPath} object instead.
+        # @param [String, Symbol] operator The operation to compare the field
+        #   to. Acceptable values include:
+        #
+        #   * less than: `<`, `lt`
+        #   * less than or equal: `<=`, `lte`
+        #   * greater than: `>`, `gt`
+        #   * greater than or equal: `>=`, `gte`
+        #   * equal: `=`, `==`, `eq`, `eql`, `is`
+        #   * not equal: `!=`
+        #   * in: `in`
+        #   * not in: `not-in`, `not_in`
+        #   * array contains: `array-contains`, `array_contains`
+        # @param [Object] value A value the field is compared to.
+        #
+        # @return [Google::Cloud::Firestore::Filter] New filter for the given condition
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Create a Filter
+        #   Google::Cloud::Firestore::Filter.create(:population, :>=, 1000000)
+        #
         def and *args
           if args.length == 1
             Filter.and_all self, *args
@@ -52,7 +86,7 @@ module Google
         end
 
         ##
-        # Filters the query on a field.
+        # Create a Filter object.
         #
         # @param [FieldPath, String, Symbol] field A field path to filter
         #   results with.
