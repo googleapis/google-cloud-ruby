@@ -174,9 +174,10 @@ module Google
     #   @return [::Array<::String>]
     #     Read-only. If present, then a [time
     #     series][google.monitoring.v3.TimeSeries], which is identified partially by
-    #     a metric type and a {::Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor}, that is associated
-    #     with this metric type can only be associated with one of the monitored
-    #     resource types listed here.
+    #     a metric type and a
+    #     {::Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor}, that
+    #     is associated with this metric type can only be associated with one of the
+    #     monitored resource types listed here.
     class MetricDescriptor
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -184,7 +185,9 @@ module Google
       # Additional annotations that can be used to guide the usage of a metric.
       # @!attribute [rw] launch_stage
       #   @return [::Google::Api::LaunchStage]
-      #     Deprecated. Must use the {::Google::Api::MetricDescriptor#launch_stage MetricDescriptor.launch_stage} instead.
+      #     Deprecated. Must use the
+      #     {::Google::Api::MetricDescriptor#launch_stage MetricDescriptor.launch_stage}
+      #     instead.
       # @!attribute [rw] sample_period
       #   @return [::Google::Protobuf::Duration]
       #     The sampling period of metric data points. For metrics which are written
@@ -253,8 +256,9 @@ module Google
     # labels of a {::Google::Api::MetricDescriptor `MetricDescriptor`}.
     # @!attribute [rw] type
     #   @return [::String]
-    #     An existing metric type, see {::Google::Api::MetricDescriptor google.api.MetricDescriptor}.
-    #     For example, `custom.googleapis.com/invoice/paid/amount`.
+    #     An existing metric type, see
+    #     {::Google::Api::MetricDescriptor google.api.MetricDescriptor}. For example,
+    #     `custom.googleapis.com/invoice/paid/amount`.
     # @!attribute [rw] labels
     #   @return [::Google::Protobuf::Map{::String => ::String}]
     #     The set of label values that uniquely identify this metric. All
