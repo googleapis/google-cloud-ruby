@@ -163,7 +163,7 @@ describe "Query", :firestore_acceptance do
     _(result_snp[:foo]).must_equal "bar"
   end
 
-  focus; it "has where method with a complex filter object as input" do
+  it "has where method with a complex filter object as input" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "bar"})
     rand_query_col.add({foo: "baz"})
