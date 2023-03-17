@@ -68,7 +68,8 @@ module Google
     #     Selects the methods to which this rule applies. Use '*' to indicate all
     #     methods in all APIs.
     #
-    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax details.
+    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax
+    #     details.
     # @!attribute [rw] parameters
     #   @return [::Array<::Google::Api::SystemParameter>]
     #     Define parameters. Multiple names may be defined for a parameter.

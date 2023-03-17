@@ -96,11 +96,13 @@ module Google
       # @!attribute [rw] monitored_resource
       #   @return [::String]
       #     The monitored resource type. The type must be defined in
-      #     {::Google::Api::Service#monitored_resources Service.monitored_resources} section.
+      #     {::Google::Api::Service#monitored_resources Service.monitored_resources}
+      #     section.
       # @!attribute [rw] metrics
       #   @return [::Array<::String>]
       #     Types of the metrics to report to this monitoring destination.
-      #     Each type must be defined in {::Google::Api::Service#metrics Service.metrics} section.
+      #     Each type must be defined in
+      #     {::Google::Api::Service#metrics Service.metrics} section.
       class MonitoringDestination
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
