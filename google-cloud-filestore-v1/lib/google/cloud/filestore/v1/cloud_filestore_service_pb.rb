@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/common/operation_metadata_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
@@ -20,10 +21,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :modes, :enum, 3, "google.cloud.filestore.v1.NetworkConfig.AddressMode"
       optional :reserved_ip_range, :string, 4
       repeated :ip_addresses, :string, 5
+      optional :connect_mode, :enum, 6, "google.cloud.filestore.v1.NetworkConfig.ConnectMode"
     end
     add_enum "google.cloud.filestore.v1.NetworkConfig.AddressMode" do
       value :ADDRESS_MODE_UNSPECIFIED, 0
       value :MODE_IPV4, 1
+    end
+    add_enum "google.cloud.filestore.v1.NetworkConfig.ConnectMode" do
+      value :CONNECT_MODE_UNSPECIFIED, 0
+      value :DIRECT_PEERING, 1
+      value :PRIVATE_SERVICE_ACCESS, 2
     end
     add_message "google.cloud.filestore.v1.FileShareConfig" do
       optional :name, :string, 1
@@ -62,6 +69,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :networks, :message, 11, "google.cloud.filestore.v1.NetworkConfig"
       optional :etag, :string, 12
       optional :satisfies_pzs, :message, 13, "google.protobuf.BoolValue"
+      optional :kms_key_name, :string, 14
+      repeated :suspension_reasons, :enum, 15, "google.cloud.filestore.v1.Instance.SuspensionReason"
     end
     add_enum "google.cloud.filestore.v1.Instance.State" do
       value :STATE_UNSPECIFIED, 0
@@ -71,6 +80,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DELETING, 4
       value :ERROR, 6
       value :RESTORING, 7
+      value :SUSPENDED, 8
+      value :SUSPENDING, 9
+      value :RESUMING, 10
     end
     add_enum "google.cloud.filestore.v1.Instance.Tier" do
       value :TIER_UNSPECIFIED, 0
@@ -79,6 +91,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :BASIC_HDD, 3
       value :BASIC_SSD, 4
       value :HIGH_SCALE_SSD, 5
+      value :ENTERPRISE, 6
+    end
+    add_enum "google.cloud.filestore.v1.Instance.SuspensionReason" do
+      value :SUSPENSION_REASON_UNSPECIFIED, 0
+      value :KMS_KEY_ISSUE, 1
     end
     add_message "google.cloud.filestore.v1.CreateInstanceRequest" do
       optional :parent, :string, 1
@@ -101,6 +118,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.filestore.v1.DeleteInstanceRequest" do
       optional :name, :string, 1
+      optional :force, :bool, 2
     end
     add_message "google.cloud.filestore.v1.ListInstancesRequest" do
       optional :parent, :string, 1
@@ -113,6 +131,46 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :instances, :message, 1, "google.cloud.filestore.v1.Instance"
       optional :next_page_token, :string, 2
       repeated :unreachable, :string, 3
+    end
+    add_message "google.cloud.filestore.v1.Snapshot" do
+      optional :name, :string, 1
+      optional :description, :string, 2
+      optional :state, :enum, 3, "google.cloud.filestore.v1.Snapshot.State"
+      optional :create_time, :message, 4, "google.protobuf.Timestamp"
+      map :labels, :string, :string, 5
+      optional :filesystem_used_bytes, :int64, 6
+    end
+    add_enum "google.cloud.filestore.v1.Snapshot.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :CREATING, 1
+      value :READY, 2
+      value :DELETING, 3
+    end
+    add_message "google.cloud.filestore.v1.CreateSnapshotRequest" do
+      optional :parent, :string, 1
+      optional :snapshot_id, :string, 2
+      optional :snapshot, :message, 3, "google.cloud.filestore.v1.Snapshot"
+    end
+    add_message "google.cloud.filestore.v1.GetSnapshotRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.filestore.v1.DeleteSnapshotRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.filestore.v1.UpdateSnapshotRequest" do
+      optional :update_mask, :message, 1, "google.protobuf.FieldMask"
+      optional :snapshot, :message, 2, "google.cloud.filestore.v1.Snapshot"
+    end
+    add_message "google.cloud.filestore.v1.ListSnapshotsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+      optional :order_by, :string, 4
+      optional :filter, :string, 5
+    end
+    add_message "google.cloud.filestore.v1.ListSnapshotsResponse" do
+      repeated :snapshots, :message, 1, "google.cloud.filestore.v1.Snapshot"
+      optional :next_page_token, :string, 2
     end
     add_message "google.cloud.filestore.v1.Backup" do
       optional :name, :string, 1
@@ -127,6 +185,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :source_instance_tier, :enum, 10, "google.cloud.filestore.v1.Instance.Tier"
       optional :download_bytes, :int64, 11
       optional :satisfies_pzs, :message, 12, "google.protobuf.BoolValue"
+      optional :kms_key, :string, 13
     end
     add_enum "google.cloud.filestore.v1.Backup.State" do
       value :STATE_UNSPECIFIED, 0
@@ -171,6 +230,7 @@ module Google
       module V1
         NetworkConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.NetworkConfig").msgclass
         NetworkConfig::AddressMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.NetworkConfig.AddressMode").enummodule
+        NetworkConfig::ConnectMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.NetworkConfig.ConnectMode").enummodule
         FileShareConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.FileShareConfig").msgclass
         NfsExportOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.NfsExportOptions").msgclass
         NfsExportOptions::AccessMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.NfsExportOptions.AccessMode").enummodule
@@ -178,6 +238,7 @@ module Google
         Instance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.Instance").msgclass
         Instance::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.Instance.State").enummodule
         Instance::Tier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.Instance.Tier").enummodule
+        Instance::SuspensionReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.Instance.SuspensionReason").enummodule
         CreateInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.CreateInstanceRequest").msgclass
         GetInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.GetInstanceRequest").msgclass
         UpdateInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.UpdateInstanceRequest").msgclass
@@ -185,6 +246,14 @@ module Google
         DeleteInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.DeleteInstanceRequest").msgclass
         ListInstancesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.ListInstancesRequest").msgclass
         ListInstancesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.ListInstancesResponse").msgclass
+        Snapshot = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.Snapshot").msgclass
+        Snapshot::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.Snapshot.State").enummodule
+        CreateSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.CreateSnapshotRequest").msgclass
+        GetSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.GetSnapshotRequest").msgclass
+        DeleteSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.DeleteSnapshotRequest").msgclass
+        UpdateSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.UpdateSnapshotRequest").msgclass
+        ListSnapshotsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.ListSnapshotsRequest").msgclass
+        ListSnapshotsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.ListSnapshotsResponse").msgclass
         Backup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.Backup").msgclass
         Backup::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.Backup.State").enummodule
         CreateBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.filestore.v1.CreateBackupRequest").msgclass

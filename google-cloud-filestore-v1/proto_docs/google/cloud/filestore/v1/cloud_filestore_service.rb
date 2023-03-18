@@ -33,30 +33,59 @@ module Google
         #     assigned. For this version, only MODE_IPV4 is supported.
         # @!attribute [rw] reserved_ip_range
         #   @return [::String]
-        #     A /29 CIDR block in one of the
-        #     [internal IP address
+        #     Optional, reserved_ip_range can have one of the following two types of
+        #     values.
+        #
+        #     * CIDR range value when using DIRECT_PEERING connect mode.
+        #     * [Allocated IP address
+        #     range](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-internal-ip-address)
+        #     when using PRIVATE_SERVICE_ACCESS connect mode.
+        #
+        #     When the name of an allocated IP address range is specified, it must be one
+        #     of the ranges associated with the private service access connection.
+        #     When specified as a direct CIDR value, it must be a /29 CIDR block for
+        #     Basic tier, a /24 CIDR block for High Scale tier, or a /26 CIDR block for
+        #     Enterprise tier in one of the [internal IP address
         #     ranges](https://www.arin.net/reference/research/statistics/address_filters/)
         #     that identifies the range of IP addresses reserved for this instance. For
-        #     example, 10.0.0.0/29 or 192.168.0.0/29. The range you specify can't overlap
-        #     with either existing subnets or assigned IP address ranges for other Cloud
-        #     Filestore instances in the selected VPC network.
+        #     example, 10.0.0.0/29, 192.168.0.0/24 or 192.168.0.0/26, respectively. The
+        #     range you specify can't overlap with either existing subnets or assigned IP
+        #     address ranges for other Filestore instances in the selected VPC
+        #     network.
         # @!attribute [r] ip_addresses
         #   @return [::Array<::String>]
         #     Output only. IPv4 addresses in the format
-        #     IPv4 addresses in the format `{octet1}.{octet2}.{octet3}.{octet4}` or
-        #     IPv6 addresses in the format
+        #     `{octet1}.{octet2}.{octet3}.{octet4}` or IPv6 addresses in the format
         #     `{block1}:{block2}:{block3}:{block4}:{block5}:{block6}:{block7}:{block8}`.
+        # @!attribute [rw] connect_mode
+        #   @return [::Google::Cloud::Filestore::V1::NetworkConfig::ConnectMode]
+        #     The network connect mode of the Filestore instance.
+        #     If not provided, the connect mode defaults to DIRECT_PEERING.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Internet protocol versions supported by Cloud Filestore.
+          # Internet protocol versions supported by Filestore.
           module AddressMode
             # Internet protocol not set.
             ADDRESS_MODE_UNSPECIFIED = 0
 
             # Use the IPv4 internet protocol.
             MODE_IPV4 = 1
+          end
+
+          # Available connection modes.
+          module ConnectMode
+            # Not set.
+            CONNECT_MODE_UNSPECIFIED = 0
+
+            # Connect via direct peering to the Filestore service.
+            DIRECT_PEERING = 1
+
+            # Connect to your Filestore instance using Private Service
+            # Access. Private services access provides an IP address range for multiple
+            # Google Cloud services, including Filestore.
+            PRIVATE_SERVICE_ACCESS = 2
           end
         end
 
@@ -67,7 +96,7 @@ module Google
         # @!attribute [rw] capacity_gb
         #   @return [::Integer]
         #     File share capacity in gigabytes (GB).
-        #     Cloud Filestore defines 1 GB as 1024^3 bytes.
+        #     Filestore defines 1 GB as 1024^3 bytes.
         # @!attribute [rw] source_backup
         #   @return [::String]
         #     The resource name of the backup, in the format
@@ -144,7 +173,7 @@ module Google
           end
         end
 
-        # A Cloud Filestore instance.
+        # A Filestore instance.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of the instance, in the format
@@ -182,6 +211,13 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Google::Protobuf::BoolValue]
         #     Output only. Reserved for future use.
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     KMS key name used for data encryption.
+        # @!attribute [r] suspension_reasons
+        #   @return [::Array<::Google::Cloud::Filestore::V1::Instance::SuspensionReason>]
+        #     Output only. Field indicates all the reasons the instance is in "SUSPENDED"
+        #     state.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -221,6 +257,16 @@ module Google
             # The instance is restoring a backup to an existing file share and may be
             # unusable during this time.
             RESTORING = 7
+
+            # The instance is suspended. You can get further details from
+            # the `suspension_reasons` field of the `Instance` resource.
+            SUSPENDED = 8
+
+            # The instance is in the process of becoming suspended.
+            SUSPENDING = 9
+
+            # The instance is in the process of becoming active.
+            RESUMING = 10
           end
 
           # Available service tiers.
@@ -228,10 +274,10 @@ module Google
             # Not set.
             TIER_UNSPECIFIED = 0
 
-            # STANDARD tier.
+            # STANDARD tier. BASIC_HDD is the preferred term for this tier.
             STANDARD = 1
 
-            # PREMIUM tier.
+            # PREMIUM tier. BASIC_SSD is the preferred term for this tier.
             PREMIUM = 2
 
             # BASIC instances offer a maximum capacity of 63.9 TB.
@@ -247,6 +293,19 @@ module Google
             # HIGH_SCALE instances offer expanded capacity and performance scaling
             # capabilities.
             HIGH_SCALE_SSD = 5
+
+            # ENTERPRISE instances offer the features and availability needed for
+            # mission-critical workloads.
+            ENTERPRISE = 6
+          end
+
+          # SuspensionReason contains the possible reasons for a suspension.
+          module SuspensionReason
+            # Not set.
+            SUSPENSION_REASON_UNSPECIFIED = 0
+
+            # The KMS key used by the instance is either revoked or denied access to.
+            KMS_KEY_ISSUE = 1
           end
         end
 
@@ -254,8 +313,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The instance's project and location, in the format
-        #     `projects/{project_id}/locations/{location}`. In Cloud Filestore,
-        #     locations map to GCP zones, for example **us-west1-b**.
+        #     `projects/{project_id}/locations/{location}`. In Filestore,
+        #     locations map to Google Cloud zones, for example **us-west1-b**.
         # @!attribute [rw] instance_id
         #   @return [::String]
         #     Required. The name of the instance to create.
@@ -296,7 +355,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # RestoreInstanceRequest restores an existing instances's file share from a
+        # RestoreInstanceRequest restores an existing instance's file share from a
         # backup.
         # @!attribute [rw] name
         #   @return [::String]
@@ -304,8 +363,8 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
         # @!attribute [rw] file_share
         #   @return [::String]
-        #     Required. Name of the file share in the Cloud Filestore instance that the
-        #     backup is being restored to.
+        #     Required. Name of the file share in the Filestore instance that the backup
+        #     is being restored to.
         # @!attribute [rw] source_backup
         #   @return [::String]
         #     The resource name of the backup, in the format
@@ -320,6 +379,10 @@ module Google
         #   @return [::String]
         #     Required. The instance resource name, in the format
         #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     If set to true, all snapshots of the instance will also be deleted.
+        #     (Otherwise, the request will only work if the instance has no snapshots.)
         class DeleteInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -330,8 +393,9 @@ module Google
         #   @return [::String]
         #     Required. The project and location for which to retrieve instance
         #     information, in the format `projects/{project_id}/locations/{location}`. In
-        #     Cloud Filestore, locations map to GCP zones, for example **us-west1-b**. To
-        #     retrieve instance information for all locations, use "-" for the
+        #     Cloud Filestore, locations map to Google Cloud zones, for example
+        #     **us-west1-b**. To retrieve instance information for all locations, use "-"
+        #     for the
         #     `{location}` value.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -372,7 +436,148 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A Cloud Filestore backup.
+        # A Filestore snapshot.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of the snapshot, in the format
+        #     `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     A description of the snapshot with 2048 characters or less.
+        #     Requests with longer descriptions will be rejected.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Filestore::V1::Snapshot::State]
+        #     Output only. The snapshot state.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the snapshot was created.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Resource labels to represent user provided metadata.
+        # @!attribute [r] filesystem_used_bytes
+        #   @return [::Integer]
+        #     Output only. The amount of bytes needed to allocate a full copy of the
+        #     snapshot content
+        class Snapshot
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The snapshot state.
+          module State
+            # State not set.
+            STATE_UNSPECIFIED = 0
+
+            # Snapshot is being created.
+            CREATING = 1
+
+            # Snapshot is available for use.
+            READY = 2
+
+            # Snapshot is being deleted.
+            DELETING = 3
+          end
+        end
+
+        # CreateSnapshotRequest creates a snapshot.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The Filestore Instance to create the snapshots of, in the format
+        #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+        # @!attribute [rw] snapshot_id
+        #   @return [::String]
+        #     Required. The ID to use for the snapshot.
+        #     The ID must be unique within the specified instance.
+        #
+        #     This value must start with a lowercase letter followed by up to 62
+        #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+        # @!attribute [rw] snapshot
+        #   @return [::Google::Cloud::Filestore::V1::Snapshot]
+        #     Required. A snapshot resource.
+        class CreateSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GetSnapshotRequest gets the state of a snapshot.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The snapshot resource name, in the format
+        #     `projects/{project_id}/locations/{location}/instances/{instance_id}/snapshots/{snapshot_id}`
+        class GetSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # DeleteSnapshotRequest deletes a snapshot.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The snapshot resource name, in the format
+        #     `projects/{project_id}/locations/{location}/instances/{instance_id}/snapshots/{snapshot_id}`
+        class DeleteSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # UpdateSnapshotRequest updates description and/or labels for a snapshot.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Mask of fields to update. At least one path must be supplied in
+        #     this field.
+        # @!attribute [rw] snapshot
+        #   @return [::Google::Cloud::Filestore::V1::Snapshot]
+        #     Required. A snapshot resource.
+        class UpdateSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListSnapshotsRequest lists snapshots.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The instance for which to retrieve snapshot information,
+        #     in the format
+        #     `projects/{project_id}/locations/{location}/instances/{instance_id}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of items to return.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The next_page_token value to use if there are additional
+        #     results to retrieve for this list request.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sort results. Supported values are "name", "name desc" or "" (unsorted).
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     List filter.
+        class ListSnapshotsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListSnapshotsResponse is the result of ListSnapshotsRequest.
+        # @!attribute [rw] snapshots
+        #   @return [::Array<::Google::Cloud::Filestore::V1::Snapshot>]
+        #     A list of snapshots in the project for the specified instance.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The token you can use to retrieve the next page of results. Not returned
+        #     if there are no more results in the list.
+        class ListSnapshotsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Filestore backup.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of the backup, in the format
@@ -399,17 +604,17 @@ module Google
         #     storage, this number is expected to change with backup creation/deletion.
         # @!attribute [rw] source_instance
         #   @return [::String]
-        #     The resource name of the source Cloud Filestore instance, in the format
+        #     The resource name of the source Filestore instance, in the format
         #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`,
         #     used to create this backup.
         # @!attribute [rw] source_file_share
         #   @return [::String]
-        #     Name of the file share in the source Cloud Filestore instance that the
+        #     Name of the file share in the source Filestore instance that the
         #     backup is created from.
         # @!attribute [r] source_instance_tier
         #   @return [::Google::Cloud::Filestore::V1::Instance::Tier]
-        #     Output only. The service tier of the source Cloud Filestore instance that
-        #     this backup is created from.
+        #     Output only. The service tier of the source Filestore instance that this
+        #     backup is created from.
         # @!attribute [r] download_bytes
         #   @return [::Integer]
         #     Output only. Amount of bytes that will be downloaded if the backup is
@@ -418,6 +623,9 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Google::Protobuf::BoolValue]
         #     Output only. Reserved for future use.
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     Immutable. KMS key name used for data encryption.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -455,8 +663,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The backup's project and location, in the format
-        #     `projects/{project_number}/locations/{location}`. In Cloud Filestore,
-        #     backup locations map to GCP regions, for example **us-west1**.
+        #     `projects/{project_number}/locations/{location}`. In Filestore,
+        #     backup locations map to Google Cloud regions, for example **us-west1**.
         # @!attribute [rw] backup
         #   @return [::Google::Cloud::Filestore::V1::Backup]
         #     Required. A {::Google::Cloud::Filestore::V1::Backup backup resource}
@@ -512,9 +720,9 @@ module Google
         #   @return [::String]
         #     Required. The project and location for which to retrieve backup
         #     information, in the format
-        #     `projects/{project_number}/locations/{location}`. In Cloud Filestore,
-        #     backup locations map to GCP regions, for example **us-west1**. To retrieve
-        #     backup information for all locations, use "-" for the
+        #     `projects/{project_number}/locations/{location}`. In Filestore, backup
+        #     locations map to Google Cloud regions, for example **us-west1**. To
+        #     retrieve backup information for all locations, use "-" for the
         #     `{location}` value.
         # @!attribute [rw] page_size
         #   @return [::Integer]
