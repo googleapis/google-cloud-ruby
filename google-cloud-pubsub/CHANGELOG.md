@@ -1,5 +1,11 @@
 # Release History
 
+### 2.15.2 (2023-03-19)
+
+#### Bug Fixes
+
+* make batch handle publish interval ([#20913](https://github.com/googleapis/google-cloud-ruby/issues/20913)) 
+
 ### 2.15.1 (2023-02-23)
 
 #### Documentation
