@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.1 (2023-03-20)
+
+#### Bug Fixes
+
+* Correct the proto ID for the data_boost_enabled field ([#20922](https://github.com/googleapis/google-cloud-ruby/issues/20922)) 
+
 ### 0.14.0 (2023-03-05)
 
 #### Features
