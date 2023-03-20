@@ -59,7 +59,7 @@ module Google
         #     Immutable. The property type for this Property resource. When creating a
         #     property, if the type is "PROPERTY_TYPE_UNSPECIFIED", then
         #     "ORDINARY_PROPERTY" will be implied. "SUBPROPERTY" and "ROLLUP_PROPERTY"
-        #     types cannot yet be created via Google Analytics Admin API.
+        #     types cannot yet be created with the Google Analytics Admin API.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the entity was originally created.
@@ -552,6 +552,9 @@ module Google
           # @!attribute [rw] bigquery_link
           #   @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
           #     A snapshot of a BigQuery link resource in change history.
+          # @!attribute [rw] enhanced_measurement_settings
+          #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+          #     A snapshot of EnhancedMeasurementSettings resource in change history.
           class ChangeHistoryResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -713,7 +716,7 @@ module Google
         #     Output only. Time when this conversion event was created in the property.
         # @!attribute [r] deletable
         #   @return [::Boolean]
-        #     Output only. If set, this event can currently be deleted via
+        #     Output only. If set, this event can currently be deleted with
         #     DeleteConversionEvent.
         # @!attribute [r] custom
         #   @return [::Boolean]
@@ -1094,6 +1097,9 @@ module Google
         # @!attribute [rw] streaming_export_enabled
         #   @return [::Boolean]
         #     If set true, enables streaming export to the linked Google Cloud project.
+        # @!attribute [rw] intraday_export_enabled
+        #   @return [::Boolean]
+        #     If set true, enables intraday export to the linked Google Cloud project.
         # @!attribute [rw] include_advertising_id
         #   @return [::Boolean]
         #     If set true, exported data will include advertising identifiers for mobile
@@ -1108,6 +1114,77 @@ module Google
         #   @return [::Array<::String>]
         #     The list of event names that will be excluded from exports.
         class BigQueryLink
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Singleton resource under a WebDataStream, configuring measurement of
+        # additional site interactions and content.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of the Enhanced Measurement Settings.
+        #     Format:
+        #     properties/\\{property_id}/dataStreams/\\{data_stream}/enhancedMeasurementSettings
+        #     Example: "properties/1000/dataStreams/2000/enhancedMeasurementSettings"
+        # @!attribute [rw] stream_enabled
+        #   @return [::Boolean]
+        #     Indicates whether Enhanced Measurement Settings will be used to
+        #     automatically measure interactions and content on this web stream.
+        #
+        #     Changing this value does not affect the settings themselves, but determines
+        #     whether they are respected.
+        # @!attribute [rw] scrolls_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture scroll events each time a visitor gets to the bottom of
+        #     a page.
+        # @!attribute [rw] outbound_clicks_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture an outbound click event each time a visitor clicks a
+        #     link that leads them away from your domain.
+        # @!attribute [rw] site_search_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture a view search results event each time a visitor
+        #     performs a search on your site (based on a query parameter).
+        # @!attribute [rw] video_engagement_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture video play, progress, and complete events as visitors
+        #     view embedded videos on your site.
+        # @!attribute [rw] file_downloads_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture a file download event each time a link is clicked with
+        #     a common document, compressed file, application, video, or audio extension.
+        # @!attribute [rw] page_changes_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture a page view event each time the website changes the
+        #     browser history state.
+        # @!attribute [rw] form_interactions_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture a form interaction event each time a visitor interacts
+        #     with a form on your website.
+        #     False by default.
+        # @!attribute [rw] search_query_parameter
+        #   @return [::String]
+        #     Required. URL query parameters to interpret as site search parameters.
+        #     Max length is 1024 characters. Must not be empty.
+        # @!attribute [rw] uri_query_parameter
+        #   @return [::String]
+        #     Additional URL query parameters.
+        #     Max length is 1024 characters.
+        class EnhancedMeasurementSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for a specific Connected Site Tag.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. User-provided display name for the connected site tag. Must be
+        #     less than 256 characters.
+        # @!attribute [rw] tag_id
+        #   @return [::String]
+        #     Required. "Tag ID to forward events to. Also known as the Measurement ID,
+        #     or the "G-ID"  (For example: G-12345).
+        class ConnectedSiteTag
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1294,10 +1371,12 @@ module Google
 
           # ChannelGroup resource
           CHANNEL_GROUP = 22
+
+          # EnhancedMeasurementSettings resource
+          ENHANCED_MEASUREMENT_SETTINGS = 24
         end
 
-        # Status of the Google Signals settings (i.e., whether this feature has been
-        # enabled for the property).
+        # Status of the Google Signals settings.
         module GoogleSignalsState
           # Google Signals status defaults to GOOGLE_SIGNALS_STATE_UNSPECIFIED to
           # represent that the user has not made an explicit choice.
@@ -1310,8 +1389,7 @@ module Google
           GOOGLE_SIGNALS_DISABLED = 2
         end
 
-        # Consent field of the Google Signals settings (i.e., whether the user has
-        # consented to the Google Signals terms of service.)
+        # Consent field of the Google Signals settings.
         module GoogleSignalsConsent
           # Google Signals consent value defaults to
           # GOOGLE_SIGNALS_CONSENT_UNSPECIFIED.  This will be treated as

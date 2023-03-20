@@ -330,6 +330,25 @@ module Google
             rpc :GetBigQueryLink, ::Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest, ::Google::Analytics::Admin::V1alpha::BigQueryLink
             # Lists BigQuery Links on a property.
             rpc :ListBigQueryLinks, ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest, ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksResponse
+            # Returns the enhanced measurement settings for this data stream.
+            # Note that the stream must enable enhanced measurement for these settings to
+            # take effect.
+            rpc :GetEnhancedMeasurementSettings, ::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest, ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings
+            # Updates the enhanced measurement settings for this data stream.
+            # Note that the stream must enable enhanced measurement for these settings to
+            # take effect.
+            rpc :UpdateEnhancedMeasurementSettings, ::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest, ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings
+            # Creates a connected site tag for a Universal Analytics property. You can
+            # create a maximum of 20 connected site tags per property.
+            # Note: This API cannot be used on GA4 properties.
+            rpc :CreateConnectedSiteTag, ::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest, ::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse
+            # Deletes a connected site tag for a Universal Analytics property.
+            # Note: this has no effect on GA4 properties.
+            rpc :DeleteConnectedSiteTag, ::Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest, ::Google::Protobuf::Empty
+            # Lists the connected site tags for a Universal Analytics property. A maximum
+            # of 20 connected site tags will be returned. Note: this has no effect on GA4
+            # property.
+            rpc :ListConnectedSiteTags, ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest, ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse
           end
 
           Stub = Service.rpc_stub_class

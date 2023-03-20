@@ -152,6 +152,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :attribution_settings, :message, 20, "google.analytics.admin.v1alpha.AttributionSettings"
         optional :expanded_data_set, :message, 21, "google.analytics.admin.v1alpha.ExpandedDataSet"
         optional :bigquery_link, :message, 23, "google.analytics.admin.v1alpha.BigQueryLink"
+        optional :enhanced_measurement_settings, :message, 24, "google.analytics.admin.v1alpha.EnhancedMeasurementSettings"
       end
     end
     add_message "google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink" do
@@ -295,9 +296,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :daily_export_enabled, :bool, 4
       optional :streaming_export_enabled, :bool, 5
+      optional :intraday_export_enabled, :bool, 9
       optional :include_advertising_id, :bool, 6
       repeated :export_streams, :string, 7
       repeated :excluded_events, :string, 8
+    end
+    add_message "google.analytics.admin.v1alpha.EnhancedMeasurementSettings" do
+      optional :name, :string, 1
+      optional :stream_enabled, :bool, 2
+      optional :scrolls_enabled, :bool, 3
+      optional :outbound_clicks_enabled, :bool, 4
+      optional :site_search_enabled, :bool, 5
+      optional :video_engagement_enabled, :bool, 6
+      optional :file_downloads_enabled, :bool, 7
+      optional :page_changes_enabled, :bool, 8
+      optional :form_interactions_enabled, :bool, 9
+      optional :search_query_parameter, :string, 10
+      optional :uri_query_parameter, :string, 11
+    end
+    add_message "google.analytics.admin.v1alpha.ConnectedSiteTag" do
+      optional :display_name, :string, 1
+      optional :tag_id, :string, 2
     end
     add_enum "google.analytics.admin.v1alpha.IndustryCategory" do
       value :INDUSTRY_CATEGORY_UNSPECIFIED, 0
@@ -364,6 +383,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ATTRIBUTION_SETTINGS, 20
       value :EXPANDED_DATA_SET, 21
       value :CHANNEL_GROUP, 22
+      value :ENHANCED_MEASUREMENT_SETTINGS, 24
     end
     add_enum "google.analytics.admin.v1alpha.GoogleSignalsState" do
       value :GOOGLE_SIGNALS_STATE_UNSPECIFIED, 0
@@ -441,6 +461,8 @@ module Google
         AttributionSettings::ReportingAttributionModel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel").enummodule
         AccessBinding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AccessBinding").msgclass
         BigQueryLink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BigQueryLink").msgclass
+        EnhancedMeasurementSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.EnhancedMeasurementSettings").msgclass
+        ConnectedSiteTag = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ConnectedSiteTag").msgclass
         IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IndustryCategory").enummodule
         ServiceLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ServiceLevel").enummodule
         ActorType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ActorType").enummodule

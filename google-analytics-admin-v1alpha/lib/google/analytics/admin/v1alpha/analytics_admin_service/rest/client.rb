@@ -127,6 +127,10 @@ module Google
 
                   default_config.rpcs.list_google_ads_links.timeout = 60.0
 
+                  default_config.rpcs.get_enhanced_measurement_settings.timeout = 60.0
+
+                  default_config.rpcs.update_enhanced_measurement_settings.timeout = 60.0
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -503,7 +507,7 @@ module Google
               #     The account to create.
               #   @param redirect_uri [::String]
               #     Redirect URI where the user will be sent after accepting Terms of Service.
-              #     Must be configured in Developers Console as a Redirect URI.
+              #     Must be configured in Cloud Console as a Redirect URI.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Analytics::Admin::V1alpha::ProvisionAccountTicketResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -5853,9 +5857,14 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param entity [::String]
-              #     The Data Access Report is requested for this property.
-              #     For example if "123" is your GA4 property ID, then entity should be
-              #     "properties/123".
+              #     The Data Access Report supports requesting at the property level or account
+              #     level. If requested at the account level, Data Access Reports include all
+              #     access for all properties under that account.
+              #
+              #     To request at the property level, entity should be for example
+              #     'properties/123' if "123" is your GA4 property ID. To request at the
+              #     account level, entity should be for example 'accounts/1234' if "1234" is
+              #     your GA4 Account ID.
               #   @param dimensions [::Array<::Google::Analytics::Admin::V1alpha::AccessDimension, ::Hash>]
               #     The dimensions requested and displayed in the response. Requests are
               #     allowed up to 9 dimensions.
@@ -5911,7 +5920,8 @@ module Google
               #     Specifies how rows are ordered in the response.
               #   @param return_entity_quota [::Boolean]
               #     Toggles whether to return the current state of this Analytics Property's
-              #     quota. Quota is returned in [AccessQuota](#AccessQuota).
+              #     quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
+              #     requests, this field must be false.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Analytics::Admin::V1alpha::RunAccessReportResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -6452,8 +6462,9 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The account or property that owns the access bindings. The parent
-              #     field in the UpdateAccessBindingRequest messages must either be empty or
-              #     match this field. Formats:
+              #     of all provided AccessBinding in UpdateAccessBindingRequest messages must
+              #     match this field.
+              #     Formats:
               #     - accounts/\\{account}
               #     - properties/\\{property}
               #   @param requests [::Array<::Google::Analytics::Admin::V1alpha::UpdateAccessBindingRequest, ::Hash>]
@@ -6521,8 +6532,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The account or property that owns the access bindings. The parent
-              #     field in the DeleteAccessBindingRequest messages must either be empty or
-              #     match this field. Formats:
+              #     of all provided values for the 'names' field in DeleteAccessBindingRequest
+              #     messages must match this field. Formats:
               #     - accounts/\\{account}
               #     - properties/\\{property}
               #   @param requests [::Array<::Google::Analytics::Admin::V1alpha::DeleteAccessBindingRequest, ::Hash>]
@@ -7177,6 +7188,348 @@ module Google
               end
 
               ##
+              # Returns the enhanced measurement settings for this data stream.
+              # Note that the stream must enable enhanced measurement for these settings to
+              # take effect.
+              #
+              # @overload get_enhanced_measurement_settings(request, options = nil)
+              #   Pass arguments to `get_enhanced_measurement_settings` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_enhanced_measurement_settings(name: nil)
+              #   Pass arguments to `get_enhanced_measurement_settings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the settings to lookup.
+              #     Format:
+              #     properties/\\{property}/dataStreams/\\{data_stream}/enhancedMeasurementSettings
+              #     Example: "properties/1000/dataStreams/2000/enhancedMeasurementSettings"
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_enhanced_measurement_settings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_enhanced_measurement_settings.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_enhanced_measurement_settings.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_enhanced_measurement_settings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.get_enhanced_measurement_settings request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the enhanced measurement settings for this data stream.
+              # Note that the stream must enable enhanced measurement for these settings to
+              # take effect.
+              #
+              # @overload update_enhanced_measurement_settings(request, options = nil)
+              #   Pass arguments to `update_enhanced_measurement_settings` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_enhanced_measurement_settings(enhanced_measurement_settings: nil, update_mask: nil)
+              #   Pass arguments to `update_enhanced_measurement_settings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param enhanced_measurement_settings [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings, ::Hash]
+              #     Required. The settings to update.
+              #     The `name` field is used to identify the settings to be updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to be updated. Field names must be in snake
+              #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+              #     replace the entire entity, use one path with the string "*" to match all
+              #     fields.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def update_enhanced_measurement_settings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_enhanced_measurement_settings.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_enhanced_measurement_settings.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_enhanced_measurement_settings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.update_enhanced_measurement_settings request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a connected site tag for a Universal Analytics property. You can
+              # create a maximum of 20 connected site tags per property.
+              # Note: This API cannot be used on GA4 properties.
+              #
+              # @overload create_connected_site_tag(request, options = nil)
+              #   Pass arguments to `create_connected_site_tag` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_connected_site_tag(property: nil, connected_site_tag: nil)
+              #   Pass arguments to `create_connected_site_tag` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param property [::String]
+              #     The Universal Analytics property to create connected site tags for.
+              #     This API does not support GA4 properties.
+              #     Format: properties/\\{universalAnalyticsPropertyId}
+              #     Example: properties/1234
+              #   @param connected_site_tag [::Google::Analytics::Admin::V1alpha::ConnectedSiteTag, ::Hash]
+              #     Required. The tag to add to the Universal Analytics property
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def create_connected_site_tag request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_connected_site_tag.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_connected_site_tag.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_connected_site_tag.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.create_connected_site_tag request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a connected site tag for a Universal Analytics property.
+              # Note: this has no effect on GA4 properties.
+              #
+              # @overload delete_connected_site_tag(request, options = nil)
+              #   Pass arguments to `delete_connected_site_tag` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_connected_site_tag(property: nil, tag_id: nil)
+              #   Pass arguments to `delete_connected_site_tag` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param property [::String]
+              #     The Universal Analytics property to delete connected site tags for.
+              #     This API does not support GA4 properties.
+              #     Format: properties/\\{universalAnalyticsPropertyId}
+              #     Example: properties/1234
+              #   @param tag_id [::String]
+              #     Tag ID to forward events to. Also known as the Measurement ID, or the
+              #     "G-ID"  (For example: G-12345).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def delete_connected_site_tag request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_connected_site_tag.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_connected_site_tag.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_connected_site_tag.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.delete_connected_site_tag request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists the connected site tags for a Universal Analytics property. A maximum
+              # of 20 connected site tags will be returned. Note: this has no effect on GA4
+              # property.
+              #
+              # @overload list_connected_site_tags(request, options = nil)
+              #   Pass arguments to `list_connected_site_tags` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_connected_site_tags(property: nil)
+              #   Pass arguments to `list_connected_site_tags` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param property [::String]
+              #     The Universal Analytics property to fetch connected site tags for.
+              #     This does not work on GA4 properties. A maximum of 20 connected site tags
+              #     will be returned.
+              #     Example Format: `properties/1234`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def list_connected_site_tags request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_connected_site_tags.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_connected_site_tags.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_connected_site_tags.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.list_connected_site_tags request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the AnalyticsAdminService REST API.
               #
               # This class represents the configuration for AnalyticsAdminService REST,
@@ -7809,6 +8162,31 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_big_query_links
+                  ##
+                  # RPC-specific configuration for `get_enhanced_measurement_settings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_enhanced_measurement_settings
+                  ##
+                  # RPC-specific configuration for `update_enhanced_measurement_settings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_enhanced_measurement_settings
+                  ##
+                  # RPC-specific configuration for `create_connected_site_tag`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_connected_site_tag
+                  ##
+                  # RPC-specific configuration for `delete_connected_site_tag`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_connected_site_tag
+                  ##
+                  # RPC-specific configuration for `list_connected_site_tags`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_connected_site_tags
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -8016,6 +8394,16 @@ module Google
                     @get_big_query_link = ::Gapic::Config::Method.new get_big_query_link_config
                     list_big_query_links_config = parent_rpcs.list_big_query_links if parent_rpcs.respond_to? :list_big_query_links
                     @list_big_query_links = ::Gapic::Config::Method.new list_big_query_links_config
+                    get_enhanced_measurement_settings_config = parent_rpcs.get_enhanced_measurement_settings if parent_rpcs.respond_to? :get_enhanced_measurement_settings
+                    @get_enhanced_measurement_settings = ::Gapic::Config::Method.new get_enhanced_measurement_settings_config
+                    update_enhanced_measurement_settings_config = parent_rpcs.update_enhanced_measurement_settings if parent_rpcs.respond_to? :update_enhanced_measurement_settings
+                    @update_enhanced_measurement_settings = ::Gapic::Config::Method.new update_enhanced_measurement_settings_config
+                    create_connected_site_tag_config = parent_rpcs.create_connected_site_tag if parent_rpcs.respond_to? :create_connected_site_tag
+                    @create_connected_site_tag = ::Gapic::Config::Method.new create_connected_site_tag_config
+                    delete_connected_site_tag_config = parent_rpcs.delete_connected_site_tag if parent_rpcs.respond_to? :delete_connected_site_tag
+                    @delete_connected_site_tag = ::Gapic::Config::Method.new delete_connected_site_tag_config
+                    list_connected_site_tags_config = parent_rpcs.list_connected_site_tags if parent_rpcs.respond_to? :list_connected_site_tags
+                    @list_connected_site_tags = ::Gapic::Config::Method.new list_connected_site_tags_config
 
                     yield self if block_given?
                   end

@@ -3917,6 +3917,196 @@ module Google
               end
 
               ##
+              # Baseline implementation for the get_enhanced_measurement_settings REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+              #   A result object deserialized from the server's reply
+              def get_enhanced_measurement_settings request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_enhanced_measurement_settings_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_enhanced_measurement_settings REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+              #   A result object deserialized from the server's reply
+              def update_enhanced_measurement_settings request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_enhanced_measurement_settings_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_connected_site_tag REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse]
+              #   A result object deserialized from the server's reply
+              def create_connected_site_tag request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_connected_site_tag_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_connected_site_tag REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def delete_connected_site_tag request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_connected_site_tag_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_connected_site_tags REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse]
+              #   A result object deserialized from the server's reply
+              def list_connected_site_tags request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_connected_site_tags_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the get_account REST call
@@ -5783,6 +5973,14 @@ module Google
                                                             ["entity", %r{^properties/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/{entity}:runAccessReport",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["entity", %r{^accounts/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -6233,6 +6431,109 @@ module Google
                                                           matches: [
                                                             ["parent", %r{^properties/[^/]+/?$}, false]
                                                           ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_enhanced_measurement_settings REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_enhanced_measurement_settings_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/dataStreams/[^/]+/enhancedMeasurementSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_enhanced_measurement_settings REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_enhanced_measurement_settings_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1alpha/{enhanced_measurement_settings.name}",
+                                                          body: "enhanced_measurement_settings",
+                                                          matches: [
+                                                            ["enhanced_measurement_settings.name", %r{^properties/[^/]+/dataStreams/[^/]+/enhancedMeasurementSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_connected_site_tag REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_connected_site_tag_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/properties:createConnectedSiteTag",
+                                                          body: "*",
+                                                          matches: []
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_connected_site_tag REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_connected_site_tag_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/properties:deleteConnectedSiteTag",
+                                                          body: "*",
+                                                          matches: []
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_connected_site_tags REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_connected_site_tags_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/properties:listConnectedSiteTags",
+                                                          body: "*",
+                                                          matches: []
                                                         )
                 transcoder.transcode request_pb
               end

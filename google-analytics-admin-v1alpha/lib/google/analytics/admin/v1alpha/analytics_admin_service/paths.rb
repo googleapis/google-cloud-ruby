@@ -256,6 +256,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified EnhancedMeasurementSettings resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/dataStreams/{data_stream}/enhancedMeasurementSettings`
+            #
+            # @param property [String]
+            # @param data_stream [String]
+            #
+            # @return [::String]
+            def enhanced_measurement_settings_path property:, data_stream:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/dataStreams/#{data_stream}/enhancedMeasurementSettings"
+            end
+
+            ##
             # Create a fully-qualified ExpandedDataSet resource string.
             #
             # The resource will be in the following format:

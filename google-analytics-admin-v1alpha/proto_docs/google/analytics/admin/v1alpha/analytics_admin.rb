@@ -24,9 +24,14 @@ module Google
         # The request for a Data Access Record Report.
         # @!attribute [rw] entity
         #   @return [::String]
-        #     The Data Access Report is requested for this property.
-        #     For example if "123" is your GA4 property ID, then entity should be
-        #     "properties/123".
+        #     The Data Access Report supports requesting at the property level or account
+        #     level. If requested at the account level, Data Access Reports include all
+        #     access for all properties under that account.
+        #
+        #     To request at the property level, entity should be for example
+        #     'properties/123' if "123" is your GA4 property ID. To request at the
+        #     account level, entity should be for example 'accounts/1234' if "1234" is
+        #     your GA4 Account ID.
         # @!attribute [rw] dimensions
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessDimension>]
         #     The dimensions requested and displayed in the response. Requests are
@@ -92,7 +97,8 @@ module Google
         # @!attribute [rw] return_entity_quota
         #   @return [::Boolean]
         #     Toggles whether to return the current state of this Analytics Property's
-        #     quota. Quota is returned in [AccessQuota](#AccessQuota).
+        #     quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
+        #     requests, this field must be false.
         class RunAccessReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -124,7 +130,8 @@ module Google
         #     [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
         # @!attribute [rw] quota
         #   @return [::Google::Analytics::Admin::V1alpha::AccessQuota]
-        #     The quota state for this Analytics property including this request.
+        #     The quota state for this Analytics property including this request. This
+        #     field doesn't work with account-level requests.
         class RunAccessReportResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -211,7 +218,7 @@ module Google
         # @!attribute [rw] redirect_uri
         #   @return [::String]
         #     Redirect URI where the user will be sent after accepting Terms of Service.
-        #     Must be configured in Developers Console as a Redirect URI.
+        #     Must be configured in Cloud Console as a Redirect URI.
         class ProvisionAccountTicketRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1755,8 +1762,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The account or property that owns the access bindings. The parent
-        #     field in the UpdateAccessBindingRequest messages must either be empty or
-        #     match this field. Formats:
+        #     of all provided AccessBinding in UpdateAccessBindingRequest messages must
+        #     match this field.
+        #     Formats:
         #     - accounts/\\{account}
         #     - properties/\\{property}
         # @!attribute [rw] requests
@@ -1792,8 +1800,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The account or property that owns the access bindings. The parent
-        #     field in the DeleteAccessBindingRequest messages must either be empty or
-        #     match this field. Formats:
+        #     of all provided values for the 'names' field in DeleteAccessBindingRequest
+        #     messages must match this field. Formats:
         #     - accounts/\\{account}
         #     - properties/\\{property}
         # @!attribute [rw] requests
@@ -1975,6 +1983,93 @@ module Google
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListBigQueryLinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetEnhancedMeasurementSettings RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the settings to lookup.
+        #     Format:
+        #     properties/\\{property}/dataStreams/\\{data_stream}/enhancedMeasurementSettings
+        #     Example: "properties/1000/dataStreams/2000/enhancedMeasurementSettings"
+        class GetEnhancedMeasurementSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateEnhancedMeasurementSettings RPC.
+        # @!attribute [rw] enhanced_measurement_settings
+        #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+        #     Required. The settings to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateEnhancedMeasurementSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateConnectedSiteTag RPC.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     The Universal Analytics property to create connected site tags for.
+        #     This API does not support GA4 properties.
+        #     Format: properties/\\{universalAnalyticsPropertyId}
+        #     Example: properties/1234
+        # @!attribute [rw] connected_site_tag
+        #   @return [::Google::Analytics::Admin::V1alpha::ConnectedSiteTag]
+        #     Required. The tag to add to the Universal Analytics property
+        class CreateConnectedSiteTagRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for CreateConnectedSiteTag RPC.
+        class CreateConnectedSiteTagResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteConnectedSiteTag RPC.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     The Universal Analytics property to delete connected site tags for.
+        #     This API does not support GA4 properties.
+        #     Format: properties/\\{universalAnalyticsPropertyId}
+        #     Example: properties/1234
+        # @!attribute [rw] tag_id
+        #   @return [::String]
+        #     Tag ID to forward events to. Also known as the Measurement ID, or the
+        #     "G-ID"  (For example: G-12345).
+        class DeleteConnectedSiteTagRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListConnectedSiteTags RPC.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     The Universal Analytics property to fetch connected site tags for.
+        #     This does not work on GA4 properties. A maximum of 20 connected site tags
+        #     will be returned.
+        #     Example Format: `properties/1234`
+        class ListConnectedSiteTagsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListConnectedSiteTags RPC.
+        # @!attribute [rw] connected_site_tags
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ConnectedSiteTag>]
+        #     The site tags for the Universal Analytics property. A maximum of 20
+        #     connected site tags will be returned.
+        class ListConnectedSiteTagsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
