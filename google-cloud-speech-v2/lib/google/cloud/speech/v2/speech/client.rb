@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/speech/v2/cloud_speech_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -144,6 +145,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @speech_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Speech::V2::Speech::Stub,
                 credentials:  credentials,
@@ -159,6 +166,13 @@ module Google
             # @return [::Google::Cloud::Speech::V2::Speech::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -375,7 +389,7 @@ module Google
             ##
             # Returns the requested
             # {::Google::Cloud::Speech::V2::Recognizer Recognizer}. Fails with
-            # [NOT_FOUND][google.rpc.Code.NOT_FOUND] if the requested recognizer doesn't
+            # [NOT_FOUND][google.rpc.Code.NOT_FOUND] if the requested Recognizer doesn't
             # exist.
             #
             # @overload get_recognizer(request, options = nil)
@@ -985,7 +999,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_recognize(recognizer: nil, config: nil, config_mask: nil, files: nil)
+            # @overload batch_recognize(recognizer: nil, config: nil, config_mask: nil, files: nil, recognition_output_config: nil)
             #   Pass arguments to `batch_recognize` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1015,6 +1029,9 @@ module Google
             #     request.
             #   @param files [::Array<::Google::Cloud::Speech::V2::BatchRecognizeFileMetadata, ::Hash>]
             #     Audio files with file metadata for ASR.
+            #     The maximum number of files allowed to be specified is 5.
+            #   @param recognition_output_config [::Google::Cloud::Speech::V2::RecognitionOutputConfig, ::Hash]
+            #     Configuration options for where to output the transcripts of each file.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/speech/v2/cloud_speech_pb"
 require "google/cloud/speech/v2/speech/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -141,6 +142,13 @@ module Google
                   config.endpoint = @config.endpoint
                 end
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                  config.bindings_override = @config.bindings_override
+                end
+
                 @speech_stub = ::Google::Cloud::Speech::V2::Speech::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
@@ -150,6 +158,13 @@ module Google
               # @return [::Google::Cloud::Speech::V2::Speech::Rest::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -309,7 +324,7 @@ module Google
               ##
               # Returns the requested
               # {::Google::Cloud::Speech::V2::Recognizer Recognizer}. Fails with
-              # [NOT_FOUND][google.rpc.Code.NOT_FOUND] if the requested recognizer doesn't
+              # [NOT_FOUND][google.rpc.Code.NOT_FOUND] if the requested Recognizer doesn't
               # exist.
               #
               # @overload get_recognizer(request, options = nil)
@@ -704,7 +719,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload batch_recognize(recognizer: nil, config: nil, config_mask: nil, files: nil)
+              # @overload batch_recognize(recognizer: nil, config: nil, config_mask: nil, files: nil, recognition_output_config: nil)
               #   Pass arguments to `batch_recognize` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -734,6 +749,9 @@ module Google
               #     request.
               #   @param files [::Array<::Google::Cloud::Speech::V2::BatchRecognizeFileMetadata, ::Hash>]
               #     Audio files with file metadata for ASR.
+              #     The maximum number of files allowed to be specified is 5.
+              #   @param recognition_output_config [::Google::Cloud::Speech::V2::RecognitionOutputConfig, ::Hash]
+              #     Configuration options for where to output the transcripts of each file.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1865,6 +1883,13 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil

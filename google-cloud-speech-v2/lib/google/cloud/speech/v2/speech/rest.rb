@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/speech/v2/version"
+require "google/cloud/speech/v2/bindings_override"
 
 require "google/cloud/speech/v2/speech/credentials"
 require "google/cloud/speech/v2/speech/paths"
