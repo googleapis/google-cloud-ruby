@@ -861,6 +861,48 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # The request message for the ImportProcessorVersion method.
+        # This method requires Document AI Service Agent of the destination project in
+        # the source project's IAM with [Document AI Editor
+        # role](https://cloud.google.com/document-ai/docs/access-control/iam-roles).
+        #
+        # The destination project is specified as part of the `parent` field.
+        # The source project is specified as part of `source` field.
+        #
+        # The Service Agent for Document AI can be found in
+        # https://cloud.google.com/iam/docs/service-agents.
+        # @!attribute [rw] processor_version_source
+        #   @return [::String]
+        #     The source processor version to import from.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The destination processor name to create the processor version
+        #     in. Format:
+        #     `projects/{project}/locations/{location}/processors/{processor}`
+        class ImportProcessorVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the ImportProcessorVersion method.
+        # @!attribute [rw] processor_version
+        #   @return [::String]
+        #     The destination processor version name.
+        class ImportProcessorVersionResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The long running operation metadata for the ImportProcessorVersion
+        # method.
+        # @!attribute [rw] common_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
+        #     The basic metadata for the long running operation.
+        class ImportProcessorVersionMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

@@ -890,6 +890,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_ImportProcessorVersion_sync",
+      "title": "Snippet for the import_processor_version call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#import_processor_version. It may require modification in order to execute successfully.",
+      "file": "document_processor_service/import_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#import_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "ImportProcessorVersion",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.ImportProcessorVersion",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
