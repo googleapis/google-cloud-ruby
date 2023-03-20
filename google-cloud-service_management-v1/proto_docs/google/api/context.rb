@@ -71,7 +71,8 @@ module Google
     #   @return [::String]
     #     Selects the methods to which this rule applies.
     #
-    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax details.
+    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax
+    #     details.
     # @!attribute [rw] requested
     #   @return [::Array<::String>]
     #     A list of full type names of requested contexts.
