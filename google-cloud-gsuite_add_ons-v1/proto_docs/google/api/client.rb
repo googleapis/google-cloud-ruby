@@ -35,7 +35,9 @@ module Google
     # Details about how and where to publish client libraries.
     # @!attribute [rw] version
     #   @return [::String]
-    #     Version of the API to apply these settings to.
+    #     Version of the API to apply these settings to. This is the full protobuf
+    #     package for the API, ending in the version element.
+    #     Examples: "google.cloud.speech.v1" and "google.spanner.admin.database.v1".
     # @!attribute [rw] launch_stage
     #   @return [::Google::Api::LaunchStage]
     #     Launch stage of this version of the API.
@@ -111,6 +113,10 @@ module Google
     #     Client library settings.  If the same version string appears multiple
     #     times in this list, then the last one wins.  Settings from earlier
     #     settings with the same version string are discarded.
+    # @!attribute [rw] proto_reference_documentation_uri
+    #   @return [::String]
+    #     Optional link to proto reference documentation.  Example:
+    #     https://cloud.google.com/pubsub/lite/docs/reference/rpc
     class Publishing
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -240,8 +246,8 @@ module Google
     #     Example of a YAML configuration::
     #
     #      publishing:
-    #        method_behavior:
-    #          - selector: CreateAdDomain
+    #        method_settings:
+    #          - selector: google.cloud.speech.v2.Speech.BatchRecognize
     #            long_running:
     #              initial_poll_delay:
     #                seconds: 60 # 1 minute
