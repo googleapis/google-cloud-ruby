@@ -288,7 +288,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of project that the imported taxonomies will belong to.
+            #     Required. Resource name of project that the imported taxonomies will belong
+            #     to.
             #   @param inline_source [::Google::Cloud::DataCatalog::V1::InlineSource, ::Hash]
             #     Inline source taxonomy to import.
             #   @param cross_regional_source [::Google::Cloud::DataCatalog::V1::CrossRegionalSource, ::Hash]
@@ -382,7 +383,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the project that the exported taxonomies belong to.
+            #     Required. Resource name of the project that the exported taxonomies belong
+            #     to.
             #   @param taxonomies [::Array<::String>]
             #     Required. Resource names of the taxonomies to export.
             #   @param serialized_taxonomies [::Boolean]

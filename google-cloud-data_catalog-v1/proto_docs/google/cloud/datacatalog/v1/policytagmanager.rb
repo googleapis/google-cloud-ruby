@@ -74,11 +74,28 @@ module Google
         #     Output only. Creation and modification timestamps of this taxonomy.
         # @!attribute [rw] activated_policy_types
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::Taxonomy::PolicyType>]
-        #     Optional. A list of policy types that are activated for this taxonomy. If not set,
-        #     defaults to an empty list.
+        #     Optional. A list of policy types that are activated for this taxonomy. If
+        #     not set, defaults to an empty list.
+        # @!attribute [r] service
+        #   @return [::Google::Cloud::DataCatalog::V1::Taxonomy::Service]
+        #     Output only. Identity of the service which owns the Taxonomy. This field is
+        #     only populated when the taxonomy is created by a Google Cloud service.
+        #     Currently only 'DATAPLEX' is supported.
         class Taxonomy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The source system of the Taxonomy.
+          # @!attribute [rw] name
+          #   @return [::Google::Cloud::DataCatalog::V1::ManagingSystem]
+          #     The Google Cloud service name.
+          # @!attribute [rw] identity
+          #   @return [::String]
+          #     P4SA Identity of the service.
+          class Service
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Defines policy types where the policy tags can be used for.
           module PolicyType
@@ -196,6 +213,10 @@ module Google
         #     the first page is returned.
         #
         #     The token is returned in the response to a previous list request.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Supported field for filter is 'service' and value is 'dataplex'.
+        #     Eg: service=dataplex.
         class ListTaxonomiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

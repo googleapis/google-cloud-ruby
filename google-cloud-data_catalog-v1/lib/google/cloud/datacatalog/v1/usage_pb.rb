@@ -14,9 +14,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :total_cancellations, :float, 3
       optional :total_execution_time_for_completions_millis, :float, 4
     end
+    add_message "google.cloud.datacatalog.v1.CommonUsageStats" do
+      proto3_optional :view_count, :int64, 1
+    end
     add_message "google.cloud.datacatalog.v1.UsageSignal" do
       optional :update_time, :message, 1, "google.protobuf.Timestamp"
       map :usage_within_time_range, :string, :message, 2, "google.cloud.datacatalog.v1.UsageStats"
+      map :common_usage_within_time_range, :string, :message, 3, "google.cloud.datacatalog.v1.CommonUsageStats"
+      proto3_optional :favorite_count, :int64, 4
     end
   end
 end
@@ -26,6 +31,7 @@ module Google
     module DataCatalog
       module V1
         UsageStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.UsageStats").msgclass
+        CommonUsageStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.CommonUsageStats").msgclass
         UsageSignal = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.UsageSignal").msgclass
       end
     end

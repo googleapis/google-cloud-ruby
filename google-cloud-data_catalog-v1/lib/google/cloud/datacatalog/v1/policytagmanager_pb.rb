@@ -7,6 +7,7 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/datacatalog/v1/common_pb'
 require 'google/cloud/datacatalog/v1/timestamps_pb'
 require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
@@ -22,6 +23,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :policy_tag_count, :int32, 4
       optional :taxonomy_timestamps, :message, 5, "google.cloud.datacatalog.v1.SystemTimestamps"
       repeated :activated_policy_types, :enum, 6, "google.cloud.datacatalog.v1.Taxonomy.PolicyType"
+      optional :service, :message, 7, "google.cloud.datacatalog.v1.Taxonomy.Service"
+    end
+    add_message "google.cloud.datacatalog.v1.Taxonomy.Service" do
+      optional :name, :enum, 1, "google.cloud.datacatalog.v1.ManagingSystem"
+      optional :identity, :string, 2
     end
     add_enum "google.cloud.datacatalog.v1.Taxonomy.PolicyType" do
       value :POLICY_TYPE_UNSPECIFIED, 0
@@ -49,6 +55,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      optional :filter, :string, 4
     end
     add_message "google.cloud.datacatalog.v1.ListTaxonomiesResponse" do
       repeated :taxonomies, :message, 1, "google.cloud.datacatalog.v1.Taxonomy"
@@ -88,6 +95,7 @@ module Google
     module DataCatalog
       module V1
         Taxonomy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.Taxonomy").msgclass
+        Taxonomy::Service = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.Taxonomy.Service").msgclass
         Taxonomy::PolicyType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.Taxonomy.PolicyType").enummodule
         PolicyTag = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.PolicyTag").msgclass
         CreateTaxonomyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.CreateTaxonomyRequest").msgclass

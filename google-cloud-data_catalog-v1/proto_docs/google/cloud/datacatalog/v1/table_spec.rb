@@ -50,9 +50,9 @@ module Google
         # Normal BigQuery table specification.
         # @!attribute [r] grouped_entry
         #   @return [::String]
-        #     Output only. If the table is date-sharded, that is, it matches the `[prefix]YYYYMMDD`
-        #     name pattern, this field is the Data Catalog resource name of the
-        #     date-sharded grouped entry. For example:
+        #     Output only. If the table is date-sharded, that is, it matches the
+        #     `[prefix]YYYYMMDD` name pattern, this field is the Data Catalog resource
+        #     name of the date-sharded grouped entry. For example:
         #
         #     `projects/{PROJECT_ID}/locations/{LOCATION}/entrygroups/{ENTRY_GROUP_ID}/entries/{ENTRY_ID}`.
         #
@@ -69,8 +69,8 @@ module Google
         # (https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding).
         # @!attribute [r] dataset
         #   @return [::String]
-        #     Output only. The Data Catalog resource name of the dataset entry the current table
-        #     belongs to. For example:
+        #     Output only. The Data Catalog resource name of the dataset entry the
+        #     current table belongs to. For example:
         #
         #     `projects/{PROJECT_ID}/locations/{LOCATION}/entrygroups/{ENTRY_GROUP_ID}/entries/{ENTRY_ID}`.
         # @!attribute [r] table_prefix

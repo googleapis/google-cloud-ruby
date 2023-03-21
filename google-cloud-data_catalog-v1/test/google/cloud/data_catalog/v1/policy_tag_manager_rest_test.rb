@@ -237,6 +237,7 @@ class ::Google::Cloud::DataCatalog::V1::PolicyTagManager::Rest::ClientTest < Min
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_taxonomies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -252,27 +253,27 @@ class ::Google::Cloud::DataCatalog::V1::PolicyTagManager::Rest::ClientTest < Min
         end
 
         # Use hash object
-        client.list_taxonomies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_taxonomies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_taxonomies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_taxonomies parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_taxonomies ::Google::Cloud::DataCatalog::V1::ListTaxonomiesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_taxonomies ::Google::Cloud::DataCatalog::V1::ListTaxonomiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_taxonomies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_taxonomies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_taxonomies(::Google::Cloud::DataCatalog::V1::ListTaxonomiesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_taxonomies(::Google::Cloud::DataCatalog::V1::ListTaxonomiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

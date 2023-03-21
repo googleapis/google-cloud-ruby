@@ -53,8 +53,8 @@ module Google
         #     (`.`). Example: `column.nested_column`.
         # @!attribute [rw] fields
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DataCatalog::V1::TagField}]
-        #     Required. Maps the ID of a tag field to its value and additional information
-        #     about that field.
+        #     Required. Maps the ID of a tag field to its value and additional
+        #     information about that field.
         #
         #     Tag template defines valid field IDs. A tag
         #     must have at least 1 field and at most 500 fields.
@@ -105,8 +105,9 @@ module Google
         #     is 100 KiB.
         # @!attribute [r] order
         #   @return [::Integer]
-        #     Output only. The order of this field with respect to other fields in this tag. Can be
-        #     set by {::Google::Cloud::DataCatalog::V1::TagTemplateField#order Tag}.
+        #     Output only. The order of this field with respect to other fields in this
+        #     tag. Can be set by
+        #     {::Google::Cloud::DataCatalog::V1::TagTemplateField#order Tag}.
         #
         #     For example, a higher value can indicate a more important field.
         #     The value can be negative. Multiple fields can have the same order, and
@@ -127,8 +128,8 @@ module Google
 
         # A tag template defines a tag that can have one or more typed fields.
         #
-        # The template is used to create tags that are attached to GCP resources.
-        # [Tag template roles]
+        # The template is used to create tags that are attached to Google Cloud
+        #  resources. [Tag template roles]
         # (https://cloud.google.com/iam/docs/understanding-roles#data-catalog-roles)
         # provide permissions to create, edit, and use the template. For example,
         # see the [TagTemplate User]
@@ -185,7 +186,8 @@ module Google
         # The template for an individual field within a tag template.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource name of the tag template field in URL format. Example:
+        #     Output only. The resource name of the tag template field in URL format.
+        #     Example:
         #
         #     `projects/{PROJECT_ID}/locations/{LOCATION}/tagTemplates/{TAG_TEMPLATE}/fields/{FIELD}`
         #
@@ -251,7 +253,8 @@ module Google
 
             # @!attribute [rw] display_name
             #   @return [::String]
-            #     Required. The display name of the enum value. Must not be an empty string.
+            #     Required. The display name of the enum value. Must not be an empty
+            #     string.
             #
             #     The name must contain only Unicode letters, numbers (0-9), underscores
             #     (_), dashes (-), spaces ( ), and can't start or end with spaces. The

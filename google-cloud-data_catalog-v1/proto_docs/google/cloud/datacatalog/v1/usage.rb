@@ -48,6 +48,17 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Common statistics on the entry's usage.
+        #
+        # They can be set on any system.
+        # @!attribute [rw] view_count
+        #   @return [::Integer]
+        #     View count in source system.
+        class CommonUsageStats
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The set of all usage signals that Data Catalog stores.
         #
         # Note: Usually, these signals are updated daily. In rare cases, an update may
@@ -57,9 +68,18 @@ module Google
         #     The end timestamp of the duration of usage statistics.
         # @!attribute [r] usage_within_time_range
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DataCatalog::V1::UsageStats}]
-        #     Output only. BigQuery usage statistics over each of the predefined time ranges.
+        #     Output only. BigQuery usage statistics over each of the predefined time
+        #     ranges.
         #
         #     Supported time ranges are `{"24H", "7D", "30D"}`.
+        # @!attribute [rw] common_usage_within_time_range
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DataCatalog::V1::CommonUsageStats}]
+        #     Common usage statistics over each of the predefined time ranges.
+        #
+        #     Supported time ranges are `{"24H", "7D", "30D", "Lifetime"}`.
+        # @!attribute [rw] favorite_count
+        #   @return [::Integer]
+        #     Favorite count in the source system.
         class UsageSignal
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -69,6 +89,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::Google::Cloud::DataCatalog::V1::UsageStats]
           class UsageWithinTimeRangeEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::DataCatalog::V1::CommonUsageStats]
+          class CommonUsageWithinTimeRangeEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
