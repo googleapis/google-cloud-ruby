@@ -1696,6 +1696,73 @@ module Google
               end
 
               ##
+              # Imports a processor version from source processor version.
+              #
+              # @overload import_processor_version(request, options = nil)
+              #   Pass arguments to `import_processor_version` via a request object, either of type
+              #   {::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload import_processor_version(processor_version_source: nil, parent: nil)
+              #   Pass arguments to `import_processor_version` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param processor_version_source [::String]
+              #     The source processor version to import from.
+              #   @param parent [::String]
+              #     Required. The destination processor name to create the processor version
+              #     in. Format:
+              #     `projects/{project}/locations/{location}/processors/{processor}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def import_processor_version request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.import_processor_version.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.import_processor_version.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.import_processor_version.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @document_processor_service_stub.import_processor_version request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the DocumentProcessorService REST API.
               #
               # This class represents the configuration for DocumentProcessorService REST,
@@ -1935,6 +2002,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_evaluations
+                  ##
+                  # RPC-specific configuration for `import_processor_version`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :import_processor_version
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1982,6 +2054,8 @@ module Google
                     @get_evaluation = ::Gapic::Config::Method.new get_evaluation_config
                     list_evaluations_config = parent_rpcs.list_evaluations if parent_rpcs.respond_to? :list_evaluations
                     @list_evaluations = ::Gapic::Config::Method.new list_evaluations_config
+                    import_processor_version_config = parent_rpcs.import_processor_version if parent_rpcs.respond_to? :import_processor_version
+                    @import_processor_version = ::Gapic::Config::Method.new import_processor_version_config
 
                     yield self if block_given?
                   end

@@ -93,6 +93,8 @@ module Google
             rpc :GetEvaluation, ::Google::Cloud::DocumentAI::V1beta3::GetEvaluationRequest, ::Google::Cloud::DocumentAI::V1beta3::Evaluation
             # Retrieves a set of evaluations for a given processor version.
             rpc :ListEvaluations, ::Google::Cloud::DocumentAI::V1beta3::ListEvaluationsRequest, ::Google::Cloud::DocumentAI::V1beta3::ListEvaluationsResponse
+            # Imports a processor version from source processor version.
+            rpc :ImportProcessorVersion, ::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

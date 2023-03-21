@@ -79,6 +79,7 @@
     "snippets/document_processor_service/get_processor.rb",
     "snippets/document_processor_service/get_processor_type.rb",
     "snippets/document_processor_service/get_processor_version.rb",
+    "snippets/document_processor_service/import_processor_version.rb",
     "snippets/document_processor_service/list_evaluations.rb",
     "snippets/document_processor_service/list_processor_types.rb",
     "snippets/document_processor_service/list_processor_versions.rb",
