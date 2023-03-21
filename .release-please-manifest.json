@@ -169,7 +169,7 @@
   "google-cloud-cloud_dms-v1+FILLER": "0.0.0",
   "google-cloud-compute": "1.0.0",
   "google-cloud-compute+FILLER": "0.0.0",
-  "google-cloud-compute-v1": "2.0.0",
+  "google-cloud-compute-v1": "2.1.0",
   "google-cloud-compute-v1+FILLER": "0.0.0",
   "google-cloud-contact_center_insights": "1.2.0",
   "google-cloud-contact_center_insights+FILLER": "0.0.0",

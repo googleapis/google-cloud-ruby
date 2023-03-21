@@ -1,5 +1,16 @@
 # Release History
 
+### 2.1.0 (2023-03-21)
+
+#### Features
+
+* Add support for SimulateMaintenanceEvent ([#20917](https://github.com/googleapis/google-cloud-ruby/issues/20917)) 
+* Added support for Disks, RegionDisks 
+* Added support for field proto_reference_documentation_uri to proto reference documentation. 
+* Added support for Instances, RegionInstanceTemplates and InstanceTemplates 
+* Added support for overrides_by_request_protocol to backend.proto 
+* Added support for SERVICE_NOT_VISIBLE and GCP_SUSPENDED into error reason 
+
 ### 2.0.0 (2023-02-14)
 
 ### ⚠ BREAKING CHANGES
