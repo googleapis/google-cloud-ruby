@@ -63,6 +63,14 @@
       "component": "google-cloud-ai_platform-v1",
       "version_file": "lib/google/cloud/ai_platform/v1/version.rb"
     },
+    "google-cloud-alloy_db-v1": {
+      "component": "google-cloud-alloy_db-v1",
+      "version_file": "lib/google/cloud/alloy_db/v1/version.rb"
+    },
+    "google-cloud-alloy_db-v1beta": {
+      "component": "google-cloud-alloy_db-v1beta",
+      "version_file": "lib/google/cloud/alloy_db/v1beta/version.rb"
+    },
     "google-cloud-api_gateway": {
       "component": "google-cloud-api_gateway",
       "version_file": "lib/google/cloud/api_gateway/version.rb"
