@@ -30,18 +30,21 @@ module Google
           # @!attribute [rw] gcs_target_path
           #   @return [::String]
           #     The Cloud Storage path to write back the corresponding input files to.
+          # @!attribute [rw] name_mapping_list
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::ObjectNameMappingList]
+          #     The mapping of objects to their desired output names in list form.
           # @!attribute [rw] source_dialect
           #   @return [::Google::Cloud::Bigquery::Migration::V2::Dialect]
           #     The dialect of the input files.
           # @!attribute [rw] target_dialect
           #   @return [::Google::Cloud::Bigquery::Migration::V2::Dialect]
           #     The target dialect for the engine to translate the input to.
-          # @!attribute [rw] name_mapping_list
-          #   @return [::Google::Cloud::Bigquery::Migration::V2::ObjectNameMappingList]
-          #     The mapping of objects to their desired output names in list form.
           # @!attribute [rw] source_env
           #   @return [::Google::Cloud::Bigquery::Migration::V2::SourceEnv]
           #     The default source environment values for the translation.
+          # @!attribute [rw] request_source
+          #   @return [::String]
+          #     The indicator to show translation request initiator.
           class TranslationConfigDetails
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

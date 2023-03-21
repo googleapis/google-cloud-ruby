@@ -31,8 +31,8 @@ module Google
           #     Required. The error details for the resource.
           # @!attribute [rw] error_count
           #   @return [::Integer]
-          #     Required. How many errors there are in total for the resource. Truncation can be
-          #     indicated by having an `error_count` that is higher than the size of
+          #     Required. How many errors there are in total for the resource. Truncation
+          #     can be indicated by having an `error_count` that is higher than the size of
           #     `error_details`.
           class ResourceErrorDetail
             include ::Google::Protobuf::MessageExts
@@ -55,12 +55,12 @@ module Google
           # Holds information about where the error is located.
           # @!attribute [rw] line
           #   @return [::Integer]
-          #     Optional. If applicable, denotes the line where the error occurred. A zero value
-          #     means that there is no line information.
+          #     Optional. If applicable, denotes the line where the error occurred. A zero
+          #     value means that there is no line information.
           # @!attribute [rw] column
           #   @return [::Integer]
-          #     Optional. If applicable, denotes the column where the error occurred. A zero value
-          #     means that there is no columns information.
+          #     Optional. If applicable, denotes the column where the error occurred. A
+          #     zero value means that there is no columns information.
           class ErrorLocation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
