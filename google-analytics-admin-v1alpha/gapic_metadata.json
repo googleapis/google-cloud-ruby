@@ -519,6 +519,31 @@
               "methods": [
                 "list_big_query_links"
               ]
+            },
+            "GetEnhancedMeasurementSettings": {
+              "methods": [
+                "get_enhanced_measurement_settings"
+              ]
+            },
+            "UpdateEnhancedMeasurementSettings": {
+              "methods": [
+                "update_enhanced_measurement_settings"
+              ]
+            },
+            "CreateConnectedSiteTag": {
+              "methods": [
+                "create_connected_site_tag"
+              ]
+            },
+            "DeleteConnectedSiteTag": {
+              "methods": [
+                "delete_connected_site_tag"
+              ]
+            },
+            "ListConnectedSiteTags": {
+              "methods": [
+                "list_connected_site_tags"
+              ]
             }
           }
         }

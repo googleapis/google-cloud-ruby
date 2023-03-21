@@ -538,6 +538,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :bigquery_links, :message, 1, "google.analytics.admin.v1alpha.BigQueryLink"
       optional :next_page_token, :string, 2
     end
+    add_message "google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest" do
+      optional :enhanced_measurement_settings, :message, 1, "google.analytics.admin.v1alpha.EnhancedMeasurementSettings"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest" do
+      optional :property, :string, 1
+      optional :connected_site_tag, :message, 2, "google.analytics.admin.v1alpha.ConnectedSiteTag"
+    end
+    add_message "google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse" do
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest" do
+      optional :property, :string, 1
+      optional :tag_id, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest" do
+      optional :property, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse" do
+      repeated :connected_site_tags, :message, 1, "google.analytics.admin.v1alpha.ConnectedSiteTag"
+    end
   end
 end
 
@@ -679,6 +702,13 @@ module Google
         GetBigQueryLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetBigQueryLinkRequest").msgclass
         ListBigQueryLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListBigQueryLinksRequest").msgclass
         ListBigQueryLinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListBigQueryLinksResponse").msgclass
+        GetEnhancedMeasurementSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest").msgclass
+        UpdateEnhancedMeasurementSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest").msgclass
+        CreateConnectedSiteTagRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest").msgclass
+        CreateConnectedSiteTagResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse").msgclass
+        DeleteConnectedSiteTagRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest").msgclass
+        ListConnectedSiteTagsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest").msgclass
+        ListConnectedSiteTagsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse").msgclass
       end
     end
   end
