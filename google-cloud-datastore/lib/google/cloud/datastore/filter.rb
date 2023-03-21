@@ -79,7 +79,8 @@ module Google
         def or *args
           combine_filters composite_filter_or, args
         end
-
+        
+        # @private
         def to_grpc
           @grpc
         end

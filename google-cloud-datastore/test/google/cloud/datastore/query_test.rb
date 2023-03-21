@@ -69,6 +69,55 @@ describe Google::Cloud::Datastore::Query, :mock_datastore do
     _(Google::Cloud::Datastore::Convert.from_value(second_filter.property_filter.value)).must_equal Time.new(2014, 1, 1, 0, 0, 0, 0)
   end
 
+  it "can filter properties through Filter objects" do
+    # Construct the filter (A OR B OR C) AND D
+    # ((a = 3 OR b > 4) OR c < 10) AND d > 11
+    filter = Google::Cloud::Datastore::Filter.new("a", "=", 3)
+                .or("b", ">", 4)
+                .or(Google::Cloud::Datastore::Filter.new("c", "<", 10))
+                .and("d", ">", 11)
+
+    query.kind "Task"
+    query.where filter
+
+    grpc = query.to_grpc
+    _(grpc.filter).wont_be :nil?
+    _(grpc.filter.filter_type).must_equal :composite_filter
+    _(grpc.filter.property_filter).must_be :nil?
+    _(grpc.filter.composite_filter).wont_be :nil?
+    _(grpc.filter.composite_filter.op).must_equal :AND
+    _(grpc.filter.composite_filter.filters.count).must_equal 1
+
+    _(grpc.filter.composite_filter.filters.first.composite_filter.filters.count).must_equal 2
+    filter_4 = grpc.filter.composite_filter.filters.first.composite_filter.filters.last
+    _(filter_4.property_filter.property.name).must_equal "d"
+    _(filter_4.property_filter.op).must_equal :GREATER_THAN
+    _(Google::Cloud::Datastore::Convert.from_value(filter_4.property_filter.value)).must_equal 11
+
+    filter_123 = grpc.filter.composite_filter.filters.first.composite_filter.filters.first
+    _(filter_123.composite_filter).must_be_kind_of Google::Cloud::Datastore::V1::CompositeFilter
+    _(filter_123.composite_filter.filters.count).must_equal 2
+    
+    filter_3 = filter_123.composite_filter.filters.last
+    _(filter_3.property_filter.property.name).must_equal "c"
+    _(filter_3.property_filter.op).must_equal :LESS_THAN
+    _(Google::Cloud::Datastore::Convert.from_value(filter_3.property_filter.value)).must_equal 10
+
+    filter_12 = filter_123.composite_filter.filters.first
+    _(filter_12.composite_filter).must_be_kind_of Google::Cloud::Datastore::V1::CompositeFilter
+    _(filter_12.composite_filter.filters.count).must_equal 2
+
+    filter_2 = filter_12.composite_filter.filters.last
+    _(filter_2.property_filter.property.name).must_equal "b"
+    _(filter_2.property_filter.op).must_equal :GREATER_THAN
+    _(Google::Cloud::Datastore::Convert.from_value(filter_2.property_filter.value)).must_equal 4
+
+    filter_1 = filter_12.composite_filter.filters.first
+    _(filter_1.property_filter.property.name).must_equal "a"
+    _(filter_1.property_filter.op).must_equal :EQUAL
+    _(Google::Cloud::Datastore::Convert.from_value(filter_1.property_filter.value)).must_equal 3
+  end
+
   it "can order results" do
     query.kind "Task"
     query.order "due"
