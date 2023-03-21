@@ -211,13 +211,32 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :config, :message, 4, "google.cloud.speech.v2.RecognitionConfig"
       optional :config_mask, :message, 5, "google.protobuf.FieldMask"
       repeated :files, :message, 3, "google.cloud.speech.v2.BatchRecognizeFileMetadata"
+      optional :recognition_output_config, :message, 6, "google.cloud.speech.v2.RecognitionOutputConfig"
+    end
+    add_message "google.cloud.speech.v2.GcsOutputConfig" do
+      optional :uri, :string, 1
+    end
+    add_message "google.cloud.speech.v2.InlineOutputConfig" do
+    end
+    add_message "google.cloud.speech.v2.RecognitionOutputConfig" do
+      oneof :output do
+        optional :gcs_output_config, :message, 1, "google.cloud.speech.v2.GcsOutputConfig"
+        optional :inline_response_config, :message, 2, "google.cloud.speech.v2.InlineOutputConfig"
+      end
     end
     add_message "google.cloud.speech.v2.BatchRecognizeResponse" do
       map :results, :string, :message, 1, "google.cloud.speech.v2.BatchRecognizeFileResult"
+      optional :total_billed_duration, :message, 2, "google.protobuf.Duration"
+    end
+    add_message "google.cloud.speech.v2.BatchRecognizeResults" do
+      repeated :results, :message, 1, "google.cloud.speech.v2.SpeechRecognitionResult"
+      optional :metadata, :message, 2, "google.cloud.speech.v2.RecognitionResponseMetadata"
     end
     add_message "google.cloud.speech.v2.BatchRecognizeFileResult" do
       optional :uri, :string, 1
       optional :error, :message, 2, "google.rpc.Status"
+      optional :metadata, :message, 3, "google.cloud.speech.v2.RecognitionResponseMetadata"
+      optional :transcript, :message, 4, "google.cloud.speech.v2.BatchRecognizeResults"
     end
     add_message "google.cloud.speech.v2.BatchRecognizeTranscriptionMetadata" do
       optional :progress_percent, :int32, 1
@@ -423,7 +442,11 @@ module Google
         StreamingRecognitionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.StreamingRecognitionConfig").msgclass
         StreamingRecognizeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.StreamingRecognizeRequest").msgclass
         BatchRecognizeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.BatchRecognizeRequest").msgclass
+        GcsOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.GcsOutputConfig").msgclass
+        InlineOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.InlineOutputConfig").msgclass
+        RecognitionOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.RecognitionOutputConfig").msgclass
         BatchRecognizeResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.BatchRecognizeResponse").msgclass
+        BatchRecognizeResults = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.BatchRecognizeResults").msgclass
         BatchRecognizeFileResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.BatchRecognizeFileResult").msgclass
         BatchRecognizeTranscriptionMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.BatchRecognizeTranscriptionMetadata").msgclass
         BatchRecognizeMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.BatchRecognizeMetadata").msgclass

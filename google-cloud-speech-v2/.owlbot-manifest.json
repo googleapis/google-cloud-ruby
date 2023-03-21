@@ -14,6 +14,7 @@
     "google-cloud-speech-v2.gemspec",
     "lib/google-cloud-speech-v2.rb",
     "lib/google/cloud/speech/v2.rb",
+    "lib/google/cloud/speech/v2/bindings_override.rb",
     "lib/google/cloud/speech/v2/cloud_speech_pb.rb",
     "lib/google/cloud/speech/v2/cloud_speech_services_pb.rb",
     "lib/google/cloud/speech/v2/rest.rb",
