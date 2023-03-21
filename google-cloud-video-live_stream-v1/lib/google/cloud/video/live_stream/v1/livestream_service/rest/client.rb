@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/video/livestream/v1/service_pb"
 require "google/cloud/video/live_stream/v1/livestream_service/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -191,6 +192,13 @@ module Google
                     config.endpoint = @config.endpoint
                   end
 
+                  @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                    config.credentials = credentials
+                    config.quota_project = @quota_project_id
+                    config.endpoint = @config.endpoint
+                    config.bindings_override = @config.bindings_override
+                  end
+
                   @livestream_service_stub = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
                 end
 
@@ -200,6 +208,13 @@ module Google
                 # @return [::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Operations]
                 #
                 attr_reader :operations_client
+
+                ##
+                # Get the associated client for mix-in of the Locations.
+                #
+                # @return [Google::Cloud::Location::Locations::Rest::Client]
+                #
+                attr_reader :location_client
 
                 # Service calls
 
@@ -313,8 +328,8 @@ module Google
                 #     The maximum number of items to return. If unspecified, server
                 #     will pick an appropriate default. Server may return fewer items than
                 #     requested. A caller should only rely on response's
-                #     {::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse#next_page_token next_page_token} to
-                #     determine if there are more items left to be queried.
+                #     {::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse#next_page_token next_page_token}
+                #     to determine if there are more items left to be queried.
                 #   @param page_token [::String]
                 #     The next_page_token value returned from a previous List request, if any.
                 #   @param filter [::String]
@@ -533,14 +548,22 @@ module Google
                 #     resource by the update. You can only update the following fields:
                 #
                 #     * [`inputAttachments`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputattachment)
+                #     * [`inputConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputconfig)
                 #     * [`output`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#output)
-                #     * [`elementaryStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#ElementaryStream)
+                #     * [`elementaryStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#elementarystream)
                 #     * [`muxStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#muxstream)
-                #     * [`manifests`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#Manifest)
-                #     * [`spritesheets`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+                #     * [`manifests`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#manifest)
+                #     * [`spriteSheets`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+                #     * [`logConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#logconfig)
+                #     * [`timecodeConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#timecodeconfig)
+                #     * [`encryptions`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#encryption)
                 #
                 #     The fields specified in the update_mask are relative to the resource, not
                 #     the full request. A field will be overwritten if it is in the mask.
+                #
+                #     If the mask is not present, then each field from the list above is updated
+                #     if the field appears in the request payload. To unset a field, add the
+                #     field to the update mask and remove it from the request payload.
                 #   @param channel [::Google::Cloud::Video::LiveStream::V1::Channel, ::Hash]
                 #     Required. The channel resource to be updated.
                 #   @param request_id [::String]
@@ -867,8 +890,8 @@ module Google
                 #     The maximum number of items to return. If unspecified, server
                 #     will pick an appropriate default. Server may return fewer items than
                 #     requested. A caller should only rely on response's
-                #     {::Google::Cloud::Video::LiveStream::V1::ListInputsResponse#next_page_token next_page_token} to
-                #     determine if there are more items left to be queried.
+                #     {::Google::Cloud::Video::LiveStream::V1::ListInputsResponse#next_page_token next_page_token}
+                #     to determine if there are more items left to be queried.
                 #   @param page_token [::String]
                 #     The next_page_token value returned from a previous List request, if any.
                 #   @param filter [::String]
@@ -1086,6 +1109,10 @@ module Google
                 #
                 #     The fields specified in the update_mask are relative to the resource, not
                 #     the full request. A field will be overwritten if it is in the mask.
+                #
+                #     If the mask is not present, then each field from the list above is updated
+                #     if the field appears in the request payload. To unset a field, add the
+                #     field to the update mask and remove it from the request payload.
                 #   @param input [::Google::Cloud::Video::LiveStream::V1::Input, ::Hash]
                 #     Required. The input resource to be updated.
                 #   @param request_id [::String]
@@ -1253,8 +1280,8 @@ module Google
                 #     The maximum number of items to return. If unspecified, server
                 #     will pick an appropriate default. Server may return fewer items than
                 #     requested. A caller should only rely on response's
-                #     {::Google::Cloud::Video::LiveStream::V1::ListEventsResponse#next_page_token next_page_token} to
-                #     determine if there are more items left to be queried.
+                #     {::Google::Cloud::Video::LiveStream::V1::ListEventsResponse#next_page_token next_page_token}
+                #     to determine if there are more items left to be queried.
                 #   @param page_token [::String]
                 #     The next_page_token value returned from a previous List request, if any.
                 #   @param filter [::String]
@@ -1529,6 +1556,13 @@ module Google
                   config_attr :metadata,      nil, ::Hash, nil
                   config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                   config_attr :quota_project, nil, ::String, nil
+
+                  # @private
+                  # Overrides for http bindings for the RPCs of this service
+                  # are only used when this service is used as mixin, and only
+                  # by the host service.
+                  # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                  config_attr :bindings_override, {}, ::Hash, nil
 
                   # @private
                   def initialize parent_config = nil

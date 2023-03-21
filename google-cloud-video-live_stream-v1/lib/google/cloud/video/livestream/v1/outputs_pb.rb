@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/protobuf/duration_pb'
+require 'google/type/datetime_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/video/livestream/v1/outputs.proto", :syntax => :proto3) do
@@ -21,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :container, :string, 3
       repeated :elementary_streams, :string, 4
       optional :segment_settings, :message, 5, "google.cloud.video.livestream.v1.SegmentSettings"
+      optional :encryption_id, :string, 6
     end
     add_message "google.cloud.video.livestream.v1.Manifest" do
       optional :file_name, :string, 1
@@ -28,6 +30,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :mux_streams, :string, 3
       optional :max_segment_count, :int32, 4
       optional :segment_keep_duration, :message, 5, "google.protobuf.Duration"
+      optional :use_timecode_as_timeline, :bool, 6
     end
     add_enum "google.cloud.video.livestream.v1.Manifest.ManifestType" do
       value :MANIFEST_TYPE_UNSPECIFIED, 0
@@ -45,8 +48,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :quality, :int32, 8
     end
     add_message "google.cloud.video.livestream.v1.PreprocessingConfig" do
+      optional :audio, :message, 1, "google.cloud.video.livestream.v1.PreprocessingConfig.Audio"
       optional :crop, :message, 2, "google.cloud.video.livestream.v1.PreprocessingConfig.Crop"
       optional :pad, :message, 3, "google.cloud.video.livestream.v1.PreprocessingConfig.Pad"
+    end
+    add_message "google.cloud.video.livestream.v1.PreprocessingConfig.Audio" do
+      optional :lufs, :double, 1
     end
     add_message "google.cloud.video.livestream.v1.PreprocessingConfig.Crop" do
       optional :top_pixels, :int32, 1
@@ -98,12 +105,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :input_track, :int32, 2
       optional :input_channel, :int32, 3
       optional :output_channel, :int32, 4
+      optional :gain_db, :double, 5
     end
     add_message "google.cloud.video.livestream.v1.TextStream" do
       optional :codec, :string, 1
     end
     add_message "google.cloud.video.livestream.v1.SegmentSettings" do
       optional :segment_duration, :message, 1, "google.protobuf.Duration"
+    end
+    add_message "google.cloud.video.livestream.v1.TimecodeConfig" do
+      optional :source, :enum, 1, "google.cloud.video.livestream.v1.TimecodeConfig.TimecodeSource"
+      oneof :time_offset do
+        optional :utc_offset, :message, 2, "google.protobuf.Duration"
+        optional :time_zone, :message, 3, "google.type.TimeZone"
+      end
+    end
+    add_enum "google.cloud.video.livestream.v1.TimecodeConfig.TimecodeSource" do
+      value :TIMECODE_SOURCE_UNSPECIFIED, 0
+      value :MEDIA_TIMESTAMP, 1
+      value :EMBEDDED_TIMECODE, 2
     end
   end
 end
@@ -119,6 +139,7 @@ module Google
           Manifest::ManifestType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.Manifest.ManifestType").enummodule
           SpriteSheet = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.SpriteSheet").msgclass
           PreprocessingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.PreprocessingConfig").msgclass
+          PreprocessingConfig::Audio = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.PreprocessingConfig.Audio").msgclass
           PreprocessingConfig::Crop = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.PreprocessingConfig.Crop").msgclass
           PreprocessingConfig::Pad = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.PreprocessingConfig.Pad").msgclass
           VideoStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.VideoStream").msgclass
@@ -127,6 +148,8 @@ module Google
           AudioStream::AudioMapping = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.AudioStream.AudioMapping").msgclass
           TextStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.TextStream").msgclass
           SegmentSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.SegmentSettings").msgclass
+          TimecodeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.TimecodeConfig").msgclass
+          TimecodeConfig::TimecodeSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.livestream.v1.TimecodeConfig.TimecodeSource").enummodule
         end
       end
     end

@@ -49,7 +49,8 @@ module Google
           # @!attribute [r] uri
           #   @return [::String]
           #     Output only. URI to push the input stream to.
-          #     Its format depends on the input {::Google::Cloud::Video::LiveStream::V1::Input#type type}, for example:
+          #     Its format depends on the input
+          #     {::Google::Cloud::Video::LiveStream::V1::Input#type type}, for example:
           #
           #     *  `RTMP_PUSH`: `rtmp://1.2.3.4/live/{STREAM-ID}`
           #     *  `SRT_PUSH`: `srt://1.2.3.4:4201?streamid={STREAM-ID}`
@@ -61,8 +62,8 @@ module Google
           #     Security rule for access control.
           # @!attribute [r] input_stream_property
           #   @return [::Google::Cloud::Video::LiveStream::V1::InputStreamProperty]
-          #     Output only. The information for the input stream. This field will be present only when
-          #     this input receives the input stream.
+          #     Output only. The information for the input stream. This field will be
+          #     present only when this input receives the input stream.
           class Input
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -142,12 +143,15 @@ module Google
           #     input can be selected as the input source at one time.
           # @!attribute [r] active_input
           #   @return [::String]
-          #     Output only. The {::Google::Cloud::Video::LiveStream::V1::InputAttachment#key InputAttachment.key} that serves as the current input source. The
-          #     first input in the {::Google::Cloud::Video::LiveStream::V1::Channel#input_attachments input_attachments} is the initial input source.
+          #     Output only. The
+          #     {::Google::Cloud::Video::LiveStream::V1::InputAttachment#key InputAttachment.key}
+          #     that serves as the current input source. The first input in the
+          #     {::Google::Cloud::Video::LiveStream::V1::Channel#input_attachments input_attachments}
+          #     is the initial input source.
           # @!attribute [rw] output
           #   @return [::Google::Cloud::Video::LiveStream::V1::Channel::Output]
-          #     Required. Information about the output (that is, the Cloud Storage bucket to store
-          #     the generated live stream).
+          #     Required. Information about the output (that is, the Cloud Storage bucket
+          #     to store the generated live stream).
           # @!attribute [rw] elementary_streams
           #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::ElementaryStream>]
           #     List of elementary streams.
@@ -165,12 +169,26 @@ module Google
           #     Output only. State of the streaming operation.
           # @!attribute [r] streaming_error
           #   @return [::Google::Rpc::Status]
-          #     Output only. A description of the reason for the streaming error. This property is
-          #     always present when {::Google::Cloud::Video::LiveStream::V1::Channel#streaming_state streaming_state} is
+          #     Output only. A description of the reason for the streaming error. This
+          #     property is always present when
+          #     {::Google::Cloud::Video::LiveStream::V1::Channel#streaming_state streaming_state}
+          #     is
           #     {::Google::Cloud::Video::LiveStream::V1::Channel::StreamingState::STREAMING_ERROR STREAMING_ERROR}.
           # @!attribute [rw] log_config
           #   @return [::Google::Cloud::Video::LiveStream::V1::LogConfig]
           #     Configuration of platform logs for this channel.
+          # @!attribute [rw] timecode_config
+          #   @return [::Google::Cloud::Video::LiveStream::V1::TimecodeConfig]
+          #     Configuration of timecode for this channel.
+          # @!attribute [rw] encryptions
+          #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::Encryption>]
+          #     Encryption configurations for this channel. Each configuration has an ID
+          #     which is referred to by each MuxStream to indicate which configuration is
+          #     used for that output.
+          # @!attribute [rw] input_config
+          #   @return [::Google::Cloud::Video::LiveStream::V1::InputConfig]
+          #     The configuration for input sources defined in
+          #     {::Google::Cloud::Video::LiveStream::V1::Channel#input_attachments input_attachments}.
           class Channel
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -223,6 +241,35 @@ module Google
 
               # Channel is stopping.
               STOPPING = 8
+            end
+          end
+
+          # Configuration for the input sources of a channel.
+          # @!attribute [rw] input_switch_mode
+          #   @return [::Google::Cloud::Video::LiveStream::V1::InputConfig::InputSwitchMode]
+          #     Input switch mode. Default mode is `FAILOVER_PREFER_PRIMARY`.
+          class InputConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Input switch mode.
+            module InputSwitchMode
+              # The input switch mode is not specified.
+              INPUT_SWITCH_MODE_UNSPECIFIED = 0
+
+              # Automatic failover is enabled. The primary input stream is always
+              # preferred over its backup input streams configured using the
+              # {::Google::Cloud::Video::LiveStream::V1::InputAttachment::AutomaticFailover AutomaticFailover}
+              # field.
+              FAILOVER_PREFER_PRIMARY = 1
+
+              # Automatic failover is disabled. You must use the
+              # {::Google::Cloud::Video::LiveStream::V1::Event#input_switch inputSwitch} event
+              # to switch the active input source for the channel to stream from. When
+              # this mode is chosen, the
+              # {::Google::Cloud::Video::LiveStream::V1::InputAttachment::AutomaticFailover AutomaticFailover}
+              # field is ignored.
+              MANUAL = 3
             end
           end
 
@@ -357,8 +404,10 @@ module Google
             # Configurations to follow when automatic failover happens.
             # @!attribute [rw] input_keys
             #   @return [::Array<::String>]
-            #     The {::Google::Cloud::Video::LiveStream::V1::InputAttachment#key InputAttachment.key}s of inputs to failover to when this input is
-            #     disconnected. Currently, only up to one backup input is supported.
+            #     The
+            #     {::Google::Cloud::Video::LiveStream::V1::InputAttachment#key InputAttachment.key}s
+            #     of inputs to failover to when this input is disconnected. Currently, only
+            #     up to one backup input is supported.
             class AutomaticFailover
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -380,19 +429,37 @@ module Google
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     User-defined key/value metadata.
+          # @!attribute [rw] input_switch
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Event::InputSwitchTask]
+          #     Required. Switches to another input stream.
           # @!attribute [rw] ad_break
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::AdBreakTask]
           #     Required. Inserts a new ad opportunity.
+          # @!attribute [rw] return_to_program
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Event::ReturnToProgramTask]
+          #     Required. Stops any running ad break.
+          # @!attribute [rw] mute
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Event::MuteTask]
+          #     Required. Mutes the stream.
+          # @!attribute [rw] unmute
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Event::UnmuteTask]
+          #     Required. Unmutes the stream.
           # @!attribute [rw] execute_now
           #   @return [::Boolean]
           #     When this field is set to true, the event will be executed at the earliest
-          #     time that the server can schedule the event and {::Google::Cloud::Video::LiveStream::V1::Event#execution_time execution_time} will be
-          #     populated with the time that the server actually schedules the event.
+          #     time that the server can schedule the event and
+          #     {::Google::Cloud::Video::LiveStream::V1::Event#execution_time execution_time}
+          #     will be populated with the time that the server actually schedules the
+          #     event.
           # @!attribute [rw] execution_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     The time when the event should be executed. When {::Google::Cloud::Video::LiveStream::V1::Event#execute_now execute_now} is set to
-          #     `true`, this field should not be set in `CreateEvent` request and will be
-          #     populated with the time that the server schedules the event.
+          #     The time to execute the event. If you set
+          #     {::Google::Cloud::Video::LiveStream::V1::Event#execute_now execute_now} to
+          #     `true`, then do not set this field in the `CreateEvent` request. In
+          #     this case, the server schedules the event and populates this field. If you
+          #     set {::Google::Cloud::Video::LiveStream::V1::Event#execute_now execute_now} to
+          #     `false`, then you must set this field to at least 10 seconds in the future
+          #     or else the event can't be created.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::State]
           #     Output only. The state of the event.
@@ -404,11 +471,46 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
+            # Switches to another input stream. Automatic failover is then disabled.
+            # @!attribute [rw] input_key
+            #   @return [::String]
+            #     The
+            #     {::Google::Cloud::Video::LiveStream::V1::InputAttachment#key InputAttachment.key}
+            #     of the input to switch to.
+            class InputSwitchTask
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # Inserts a new ad opportunity.
             # @!attribute [rw] duration
             #   @return [::Google::Protobuf::Duration]
             #     Duration of an ad opportunity. Must be greater than 0.
             class AdBreakTask
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Stops any events which are currently running. This only applies to events
+            # with a duration.
+            class ReturnToProgramTask
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Mutes the stream.
+            # @!attribute [rw] duration
+            #   @return [::Google::Protobuf::Duration]
+            #     Duration for which the stream should be muted. If omitted, the stream
+            #     will be muted until an UnmuteTask event is sent.
+            class MuteTask
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Unmutes the stream. The task will fail if the stream is not
+            # currently muted.
+            class UnmuteTask
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -444,6 +546,106 @@ module Google
 
               # Event was stopped before running for its full duration.
               STOPPED = 6
+            end
+          end
+
+          # Encryption settings.
+          # @!attribute [rw] id
+          #   @return [::String]
+          #     Required. Identifier for this set of encryption options.
+          # @!attribute [rw] secret_manager_key_source
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::SecretManagerSource]
+          #     For keys stored in Google Secret Manager.
+          # @!attribute [rw] drm_systems
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::DrmSystems]
+          #     Required. Configuration for DRM systems.
+          # @!attribute [rw] aes128
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::Aes128Encryption]
+          #     Configuration for HLS AES-128 encryption.
+          # @!attribute [rw] sample_aes
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::SampleAesEncryption]
+          #     Configuration for HLS SAMPLE-AES encryption.
+          # @!attribute [rw] mpeg_cenc
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::MpegCommonEncryption]
+          #     Configuration for MPEG-Dash Common Encryption (MPEG-CENC).
+          class Encryption
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration for secrets stored in Google Secret Manager.
+            # @!attribute [rw] secret_version
+            #   @return [::String]
+            #     Required. The name of the Secret Version containing the encryption key.
+            #     `projects/{project}/secrets/{secret_id}/versions/{version_number}`
+            class SecretManagerSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Widevine configuration.
+            class Widevine
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Fairplay configuration.
+            class Fairplay
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Playready configuration.
+            class Playready
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Clearkey configuration.
+            class Clearkey
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Defines configuration for DRM systems in use. If a field is omitted,
+            # that DRM system will be considered to be disabled.
+            # @!attribute [rw] widevine
+            #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::Widevine]
+            #     Widevine configuration.
+            # @!attribute [rw] fairplay
+            #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::Fairplay]
+            #     Fairplay configuration.
+            # @!attribute [rw] playready
+            #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::Playready]
+            #     Playready configuration.
+            # @!attribute [rw] clearkey
+            #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::Clearkey]
+            #     Clearkey configuration.
+            class DrmSystems
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration for HLS AES-128 encryption.
+            class Aes128Encryption
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration for HLS SAMPLE-AES encryption.
+            class SampleAesEncryption
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration for MPEG-Dash Common Encryption (MPEG-CENC).
+            # @!attribute [rw] scheme
+            #   @return [::String]
+            #     Required. Specify the encryption scheme, supported schemes:
+            #     - `cenc` - AES-CTR subsample
+            #     - `cbcs`- AES-CBC subsample pattern
+            class MpegCommonEncryption
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
         end
