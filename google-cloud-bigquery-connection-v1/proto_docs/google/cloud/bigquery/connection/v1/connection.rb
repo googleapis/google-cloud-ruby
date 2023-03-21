@@ -134,6 +134,9 @@ module Google
           # @!attribute [rw] cloud_resource
           #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudResourceProperties]
           #     Cloud Resource properties.
+          # @!attribute [rw] spark
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::SparkProperties]
+          #     Spark properties.
           # @!attribute [r] creation_time
           #   @return [::Integer]
           #     Output only. The creation timestamp of the connection.
@@ -326,6 +329,59 @@ module Google
           #     The account ID is in the form of:
           #       <service-1234>@gcp-sa-bigquery-cloudresource.iam.gserviceaccount.com
           class CloudResourceProperties
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration of the Dataproc Metastore Service.
+          # @!attribute [rw] metastore_service
+          #   @return [::String]
+          #     Optional. Resource name of an existing Dataproc Metastore service.
+          #
+          #     Example:
+          #
+          #     * `projects/[project_id]/locations/[region]/services/[service_id]`
+          class MetastoreServiceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration of the Spark History Server.
+          # @!attribute [rw] dataproc_cluster
+          #   @return [::String]
+          #     Optional. Resource name of an existing Dataproc Cluster to act as a Spark
+          #     History Server for the connection.
+          #
+          #     Example:
+          #
+          #     * `projects/[project_id]/regions/[region]/clusters/[cluster_name]`
+          class SparkHistoryServerConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Container for connection properties to execute stored procedures for Apache
+          # Spark.
+          # @!attribute [r] service_account_id
+          #   @return [::String]
+          #     Output only. The account ID of the service created for the purpose of this
+          #     connection.
+          #
+          #     The service account does not have any permissions associated with it when
+          #     it is created. After creation, customers delegate permissions to the
+          #     service account. When the connection is used in the context of a stored
+          #     procedure for Apache Spark in BigQuery, the service account will be used to
+          #     connect to the desired resources in Google Cloud.
+          #
+          #     The account ID is in the form of:
+          #     bqcx-<projectnumber>-<uniqueid>@gcp-sa-bigquery-consp.iam.gserviceaccount.com
+          # @!attribute [rw] metastore_service_config
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::MetastoreServiceConfig]
+          #     Optional. Dataproc Metastore Service configuration for the connection.
+          # @!attribute [rw] spark_history_server_config
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::SparkHistoryServerConfig]
+          #     Optional. Spark History Server configuration for the connection.
+          class SparkProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
