@@ -1,6 +1,6 @@
 # Ruby Client for the reCAPTCHA Enterprise V1beta1 API
 
-API Client library for the reCAPTCHA Enterprise V1beta1 API
+Help protect your website from fraudulent activity, spam, and abuse without creating friction.
 
 reCAPTCHA Enterprise is a service that protects your site from spam and abuse.
 
