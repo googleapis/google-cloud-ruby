@@ -245,7 +245,7 @@ module Google
               end
 
               ##
-              # Returns the specified machine image. Gets a list of available machine images by making a list() request.
+              # Returns the specified machine image.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

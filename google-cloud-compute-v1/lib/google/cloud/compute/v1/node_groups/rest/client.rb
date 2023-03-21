@@ -101,6 +101,8 @@ module Google
 
                   default_config.rpcs.set_node_template.timeout = 600.0
 
+                  default_config.rpcs.simulate_maintenance_event.timeout = 600.0
+
                   default_config.rpcs.test_iam_permissions.timeout = 600.0
 
                   default_config
@@ -1087,6 +1089,85 @@ module Google
               end
 
               ##
+              # Simulates maintenance event on specified nodes from the node group.
+              #
+              # @overload simulate_maintenance_event(request, options = nil)
+              #   Pass arguments to `simulate_maintenance_event` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::SimulateMaintenanceEventNodeGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::SimulateMaintenanceEventNodeGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload simulate_maintenance_event(node_group: nil, node_groups_simulate_maintenance_event_request_resource: nil, project: nil, request_id: nil, zone: nil)
+              #   Pass arguments to `simulate_maintenance_event` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param node_group [::String]
+              #     Name of the NodeGroup resource whose nodes will go under maintenance simulation.
+              #   @param node_groups_simulate_maintenance_event_request_resource [::Google::Cloud::Compute::V1::NodeGroupsSimulateMaintenanceEventRequest, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def simulate_maintenance_event request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SimulateMaintenanceEventNodeGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.simulate_maintenance_event.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.simulate_maintenance_event.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.simulate_maintenance_event.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @node_groups_stub.simulate_maintenance_event request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Returns permissions that a caller has on the specified resource.
               #
               # @overload test_iam_permissions(request, options = nil)
@@ -1338,6 +1419,11 @@ module Google
                   #
                   attr_reader :set_node_template
                   ##
+                  # RPC-specific configuration for `simulate_maintenance_event`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :simulate_maintenance_event
+                  ##
                   # RPC-specific configuration for `test_iam_permissions`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1369,6 +1455,8 @@ module Google
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                     set_node_template_config = parent_rpcs.set_node_template if parent_rpcs.respond_to? :set_node_template
                     @set_node_template = ::Gapic::Config::Method.new set_node_template_config
+                    simulate_maintenance_event_config = parent_rpcs.simulate_maintenance_event if parent_rpcs.respond_to? :simulate_maintenance_event
+                    @simulate_maintenance_event = ::Gapic::Config::Method.new simulate_maintenance_event_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 

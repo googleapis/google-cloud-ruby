@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,34 +18,34 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/instance_templates/rest/service_stub"
-require "google/cloud/compute/v1/global_operations/rest"
+require "google/cloud/compute/v1/region_instance_templates/rest/service_stub"
+require "google/cloud/compute/v1/region_operations/rest"
 
 module Google
   module Cloud
     module Compute
       module V1
-        module InstanceTemplates
+        module RegionInstanceTemplates
           module Rest
             ##
-            # REST client for the InstanceTemplates service.
+            # REST client for the RegionInstanceTemplates service.
             #
-            # The InstanceTemplates API.
+            # The RegionInstanceTemplates API.
             #
             class Client
               # @private
-              attr_reader :instance_templates_stub
+              attr_reader :region_instance_templates_stub
 
               ##
-              # Configure the InstanceTemplates Client class.
+              # Configure the RegionInstanceTemplates Client class.
               #
-              # See {::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::RegionInstanceTemplates::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @example
               #
-              #   # Modify the configuration for all InstanceTemplates clients
-              #   ::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client.configure do |config|
+              #   # Modify the configuration for all RegionInstanceTemplates clients
+              #   ::Google::Cloud::Compute::V1::RegionInstanceTemplates::Rest::Client.configure do |config|
               #     config.timeout = 10.0
               #   end
               #
@@ -65,20 +65,10 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.aggregated_list.timeout = 600.0
-                  default_config.rpcs.aggregated_list.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
-                  }
-
                   default_config.rpcs.delete.timeout = 600.0
 
                   default_config.rpcs.get.timeout = 600.0
                   default_config.rpcs.get.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
-                  }
-
-                  default_config.rpcs.get_iam_policy.timeout = 600.0
-                  default_config.rpcs.get_iam_policy.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
@@ -89,10 +79,6 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.set_iam_policy.timeout = 600.0
-
-                  default_config.rpcs.test_iam_permissions.timeout = 600.0
-
                   default_config
                 end
                 yield @configure if block_given?
@@ -100,13 +86,13 @@ module Google
               end
 
               ##
-              # Configure the InstanceTemplates Client instance.
+              # Configure the RegionInstanceTemplates Client instance.
               #
               # The configuration is set to the derived mode, meaning that values can be changed,
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes
               # should be made on {Client.configure}.
               #
-              # See {::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::RegionInstanceTemplates::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @yield [config] Configure the Client client.
@@ -120,19 +106,19 @@ module Google
               end
 
               ##
-              # Create a new InstanceTemplates REST client object.
+              # Create a new RegionInstanceTemplates REST client object.
               #
               # @example
               #
               #   # Create a client using the default configuration
-              #   client = ::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client.new
+              #   client = ::Google::Cloud::Compute::V1::RegionInstanceTemplates::Rest::Client.new
               #
               #   # Create a client using a custom configuration
-              #   client = ::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::RegionInstanceTemplates::Rest::Client.new do |config|
               #     config.timeout = 10.0
               #   end
               #
-              # @yield [config] Configure the InstanceTemplates client.
+              # @yield [config] Configure the RegionInstanceTemplates client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
@@ -157,113 +143,38 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-                @global_operations = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new do |config|
+                @region_operations = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
                 end
 
-                @instance_templates_stub = ::Google::Cloud::Compute::V1::InstanceTemplates::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
+                @region_instance_templates_stub = ::Google::Cloud::Compute::V1::RegionInstanceTemplates::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
               ##
-              # Get the associated client for long-running operations via GlobalOperations.
+              # Get the associated client for long-running operations via RegionOperations.
               #
-              # @return [::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client]
+              # @return [::Google::Cloud::Compute::V1::RegionOperations::Rest::Client]
               #
-              attr_reader :global_operations
+              attr_reader :region_operations
 
               # Service calls
 
               ##
-              # Retrieves the list of all InstanceTemplates resources, regional and global, available to the specified project.
-              #
-              # @overload aggregated_list(request, options = nil)
-              #   Pass arguments to `aggregated_list` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::AggregatedListInstanceTemplatesRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::AggregatedListInstanceTemplatesRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil)
-              #   Pass arguments to `aggregated_list` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
-              #   @param include_all_scopes [::Boolean]
-              #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
-              #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-              #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-              #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-              #   @param project [::String]
-              #     Name of the project scoping this request.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::InstanceTemplatesScopedList>]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::InstanceTemplatesScopedList>]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def aggregated_list request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AggregatedListInstanceTemplatesRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.aggregated_list.metadata.to_h
-
-                # Set x-goog-api-client and x-goog-user-project headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.aggregated_list.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.aggregated_list.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @instance_templates_stub.aggregated_list request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @instance_templates_stub, :aggregated_list, "items", request, result, options
-                  yield result, operation if block_given?
-                  return result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It is not possible to delete templates that are already in use by a managed instance group.
+              # Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone.
               #
               # @overload delete(request, options = nil)
               #   Pass arguments to `delete` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::DeleteInstanceTemplateRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::DeleteRegionInstanceTemplateRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::DeleteInstanceTemplateRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::DeleteRegionInstanceTemplateRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete(instance_template: nil, project: nil, request_id: nil)
+              # @overload delete(instance_template: nil, project: nil, region: nil, request_id: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -272,6 +183,8 @@ module Google
               #     The name of the instance template to delete.
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -284,7 +197,7 @@ module Google
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteInstanceTemplateRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteRegionInstanceTemplateRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -308,12 +221,13 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instance_templates_stub.delete request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                @region_instance_templates_stub.delete request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: global_operations,
+                    client: region_operations,
                     request_values: {
-                      "project" => request.project
+                      "project" => request.project,
+                      "region" => request.region
                     },
                     options: options
                   )
@@ -329,15 +243,15 @@ module Google
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetInstanceTemplateRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetRegionInstanceTemplateRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetInstanceTemplateRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetRegionInstanceTemplateRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get(instance_template: nil, project: nil)
+              # @overload get(instance_template: nil, project: nil, region: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -346,6 +260,8 @@ module Google
               #     The name of the instance template.
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::InstanceTemplate]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -356,7 +272,7 @@ module Google
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetInstanceTemplateRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetRegionInstanceTemplateRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -380,7 +296,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instance_templates_stub.get request, options do |result, operation|
+                @region_instance_templates_stub.get request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -389,85 +305,19 @@ module Google
               end
 
               ##
-              # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-              #
-              # @overload get_iam_policy(request, options = nil)
-              #   Pass arguments to `get_iam_policy` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetIamPolicyInstanceTemplateRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::GetIamPolicyInstanceTemplateRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload get_iam_policy(options_requested_policy_version: nil, project: nil, resource: nil)
-              #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param options_requested_policy_version [::Integer]
-              #     Requested IAM Policy version.
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param resource [::String]
-              #     Name or id of the resource for this request.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Policy]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def get_iam_policy request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetIamPolicyInstanceTemplateRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.get_iam_policy.metadata.to_h
-
-                # Set x-goog-api-client and x-goog-user-project headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.get_iam_policy.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @instance_templates_stub.get_iam_policy request, options do |result, operation|
-                  yield result, operation if block_given?
-                  return result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Creates an instance template in the specified project using the data that is included in the request. If you are creating a new template to update an existing instance group, your new instance template must use the same network or, if applicable, the same subnetwork as the original template.
+              # Creates an instance template in the specified project and region using the global instance template whose URL is included in the request.
               #
               # @overload insert(request, options = nil)
               #   Pass arguments to `insert` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::InsertInstanceTemplateRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::InsertRegionInstanceTemplateRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::InsertInstanceTemplateRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::InsertRegionInstanceTemplateRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload insert(instance_template_resource: nil, project: nil, request_id: nil)
+              # @overload insert(instance_template_resource: nil, project: nil, region: nil, request_id: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -476,6 +326,8 @@ module Google
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -488,7 +340,7 @@ module Google
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertInstanceTemplateRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertRegionInstanceTemplateRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -512,12 +364,13 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instance_templates_stub.insert request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                @region_instance_templates_stub.insert request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: global_operations,
+                    client: region_operations,
                     request_values: {
-                      "project" => request.project
+                      "project" => request.project,
+                      "region" => request.region
                     },
                     options: options
                   )
@@ -529,19 +382,19 @@ module Google
               end
 
               ##
-              # Retrieves a list of instance templates that are contained within the specified project.
+              # Retrieves a list of instance templates that are contained within the specified project and region.
               #
               # @overload list(request, options = nil)
               #   Pass arguments to `list` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ListInstanceTemplatesRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::ListRegionInstanceTemplatesRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::ListInstanceTemplatesRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::ListRegionInstanceTemplatesRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil)
+              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -556,6 +409,8 @@ module Google
               #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the regions for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -568,7 +423,7 @@ module Google
               def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListInstanceTemplatesRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListRegionInstanceTemplatesRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -592,8 +447,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @instance_templates_stub.list request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @instance_templates_stub, :list, "items", request, result, options
+                @region_instance_templates_stub.list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @region_instance_templates_stub, :list, "items", request, result, options
                   yield result, operation if block_given?
                   return result
                 end
@@ -602,145 +457,13 @@ module Google
               end
 
               ##
-              # Sets the access control policy on the specified resource. Replaces any existing policy.
+              # Configuration class for the RegionInstanceTemplates REST API.
               #
-              # @overload set_iam_policy(request, options = nil)
-              #   Pass arguments to `set_iam_policy` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetIamPolicyInstanceTemplateRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SetIamPolicyInstanceTemplateRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload set_iam_policy(global_set_policy_request_resource: nil, project: nil, resource: nil)
-              #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param global_set_policy_request_resource [::Google::Cloud::Compute::V1::GlobalSetPolicyRequest, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param resource [::String]
-              #     Name or id of the resource for this request.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Policy]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def set_iam_policy request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetIamPolicyInstanceTemplateRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.set_iam_policy.metadata.to_h
-
-                # Set x-goog-api-client and x-goog-user-project headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.set_iam_policy.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @instance_templates_stub.set_iam_policy request, options do |result, operation|
-                  yield result, operation if block_given?
-                  return result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Returns permissions that a caller has on the specified resource.
-              #
-              # @overload test_iam_permissions(request, options = nil)
-              #   Pass arguments to `test_iam_permissions` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::TestIamPermissionsInstanceTemplateRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::TestIamPermissionsInstanceTemplateRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload test_iam_permissions(project: nil, resource: nil, test_permissions_request_resource: nil)
-              #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param resource [::String]
-              #     Name or id of the resource for this request.
-              #   @param test_permissions_request_resource [::Google::Cloud::Compute::V1::TestPermissionsRequest, ::Hash]
-              #     The body resource for this request
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def test_iam_permissions request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::TestIamPermissionsInstanceTemplateRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
-
-                # Set x-goog-api-client and x-goog-user-project headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.test_iam_permissions.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @instance_templates_stub.test_iam_permissions request, options do |result, operation|
-                  yield result, operation if block_given?
-                  return result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Configuration class for the InstanceTemplates REST API.
-              #
-              # This class represents the configuration for InstanceTemplates REST,
+              # This class represents the configuration for RegionInstanceTemplates REST,
               # providing control over timeouts, retry behavior, logging, transport
               # parameters, and other low-level controls. Certain parameters can also be
               # applied individually to specific RPCs. See
-              # {::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client::Configuration::Rpcs}
+              # {::Google::Cloud::Compute::V1::RegionInstanceTemplates::Rest::Client::Configuration::Rpcs}
               # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
@@ -749,17 +472,17 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # aggregated_list to 20 seconds,
+              #   # delete to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
-              #   ::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client.configure do |config|
+              #   ::Google::Cloud::Compute::V1::RegionInstanceTemplates::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.aggregated_list.timeout = 20.0
+              #     config.rpcs.delete.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
-              #   client = ::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::RegionInstanceTemplates::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.aggregated_list.timeout = 20.0
+              #     config.rpcs.delete.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
@@ -839,7 +562,7 @@ module Google
                 end
 
                 ##
-                # Configuration RPC class for the InstanceTemplates API.
+                # Configuration RPC class for the RegionInstanceTemplates API.
                 #
                 # Includes fields providing the configuration for each RPC in this service.
                 # Each configuration object is of type `Gapic::Config::Method` and includes
@@ -857,11 +580,6 @@ module Google
                 #
                 class Rpcs
                   ##
-                  # RPC-specific configuration for `aggregated_list`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :aggregated_list
-                  ##
                   # RPC-specific configuration for `delete`
                   # @return [::Gapic::Config::Method]
                   #
@@ -872,11 +590,6 @@ module Google
                   #
                   attr_reader :get
                   ##
-                  # RPC-specific configuration for `get_iam_policy`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :get_iam_policy
-                  ##
                   # RPC-specific configuration for `insert`
                   # @return [::Gapic::Config::Method]
                   #
@@ -886,35 +599,17 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list
-                  ##
-                  # RPC-specific configuration for `set_iam_policy`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :set_iam_policy
-                  ##
-                  # RPC-specific configuration for `test_iam_permissions`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :test_iam_permissions
 
                   # @private
                   def initialize parent_rpcs = nil
-                    aggregated_list_config = parent_rpcs.aggregated_list if parent_rpcs.respond_to? :aggregated_list
-                    @aggregated_list = ::Gapic::Config::Method.new aggregated_list_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
                     @delete = ::Gapic::Config::Method.new delete_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
-                    get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
-                    @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                     insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
-                    set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
-                    @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
-                    @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                     yield self if block_given?
                   end

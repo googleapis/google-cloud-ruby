@@ -245,7 +245,7 @@ module Google
               end
 
               ##
-              # Returns the specified TargetHttpsProxy resource in the specified region. Gets a list of available target HTTP proxies by making a list() request.
+              # Returns the specified TargetHttpsProxy resource in the specified region.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

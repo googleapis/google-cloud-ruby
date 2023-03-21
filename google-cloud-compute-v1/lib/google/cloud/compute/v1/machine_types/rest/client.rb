@@ -224,7 +224,7 @@ module Google
               end
 
               ##
-              # Returns the specified machine type. Gets a list of available machine types by making a list() request.
+              # Returns the specified machine type.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

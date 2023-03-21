@@ -319,7 +319,7 @@ module Google
               end
 
               ##
-              # Returns the specified TargetInstance resource. Gets a list of available target instances by making a list() request.
+              # Returns the specified TargetInstance resource.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

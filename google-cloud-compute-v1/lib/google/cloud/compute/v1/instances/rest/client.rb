@@ -155,6 +155,8 @@ module Google
 
                   default_config.rpcs.set_min_cpu_platform.timeout = 600.0
 
+                  default_config.rpcs.set_name.timeout = 600.0
+
                   default_config.rpcs.set_scheduling.timeout = 600.0
 
                   default_config.rpcs.set_service_account.timeout = 600.0
@@ -898,7 +900,7 @@ module Google
               end
 
               ##
-              # Returns the specified Instance resource. Gets a list of available instances by making a list() request.
+              # Returns the specified Instance resource.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
@@ -2527,6 +2529,85 @@ module Google
               end
 
               ##
+              # Sets name of an instance.
+              #
+              # @overload set_name(request, options = nil)
+              #   Pass arguments to `set_name` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::SetNameInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::SetNameInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload set_name(instance: nil, instances_set_name_request_resource: nil, project: nil, request_id: nil, zone: nil)
+              #   Pass arguments to `set_name` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     The instance name for this request.
+              #   @param instances_set_name_request_resource [::Google::Cloud::Compute::V1::InstancesSetNameRequest, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def set_name request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetNameInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.set_name.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.set_name.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_name.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @instances_stub.set_name request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Sets an instance's scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM host maintenance policy.
               #
               # @overload set_scheduling(request, options = nil)
@@ -3978,6 +4059,11 @@ module Google
                   #
                   attr_reader :set_min_cpu_platform
                   ##
+                  # RPC-specific configuration for `set_name`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_name
+                  ##
                   # RPC-specific configuration for `set_scheduling`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4115,6 +4201,8 @@ module Google
                     @set_metadata = ::Gapic::Config::Method.new set_metadata_config
                     set_min_cpu_platform_config = parent_rpcs.set_min_cpu_platform if parent_rpcs.respond_to? :set_min_cpu_platform
                     @set_min_cpu_platform = ::Gapic::Config::Method.new set_min_cpu_platform_config
+                    set_name_config = parent_rpcs.set_name if parent_rpcs.respond_to? :set_name
+                    @set_name = ::Gapic::Config::Method.new set_name_config
                     set_scheduling_config = parent_rpcs.set_scheduling if parent_rpcs.respond_to? :set_scheduling
                     @set_scheduling = ::Gapic::Config::Method.new set_scheduling_config
                     set_service_account_config = parent_rpcs.set_service_account if parent_rpcs.respond_to? :set_service_account

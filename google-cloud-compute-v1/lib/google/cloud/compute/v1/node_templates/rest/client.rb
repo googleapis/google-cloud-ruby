@@ -328,7 +328,7 @@ module Google
               end
 
               ##
-              # Returns the specified node template. Gets a list of available node templates by making a list() request.
+              # Returns the specified node template.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

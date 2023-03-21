@@ -418,7 +418,7 @@ module Google
               end
 
               ##
-              # Returns the specified subnetwork. Gets a list of available subnetworks list() request.
+              # Returns the specified subnetwork.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

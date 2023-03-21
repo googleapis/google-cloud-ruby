@@ -489,7 +489,7 @@ module Google
               end
 
               ##
-              # Returns the specified target pool. Gets a list of available target pools by making a list() request.
+              # Returns the specified target pool.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
