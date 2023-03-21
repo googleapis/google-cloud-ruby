@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/video/live_stream/v1/version"
+require "google/cloud/video/live_stream/v1/bindings_override"
 
 require "google/cloud/video/live_stream/v1/livestream_service/credentials"
 require "google/cloud/video/live_stream/v1/livestream_service/paths"

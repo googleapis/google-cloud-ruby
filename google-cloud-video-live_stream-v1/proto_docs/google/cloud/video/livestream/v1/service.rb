@@ -65,8 +65,8 @@ module Google
           #     The maximum number of items to return. If unspecified, server
           #     will pick an appropriate default. Server may return fewer items than
           #     requested. A caller should only rely on response's
-          #     {::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse#next_page_token next_page_token} to
-          #     determine if there are more items left to be queried.
+          #     {::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse#next_page_token next_page_token}
+          #     to determine if there are more items left to be queried.
           # @!attribute [rw] page_token
           #   @return [::String]
           #     The next_page_token value returned from a previous List request, if any.
@@ -146,14 +146,22 @@ module Google
           #     resource by the update. You can only update the following fields:
           #
           #     * [`inputAttachments`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputattachment)
+          #     * [`inputConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputconfig)
           #     * [`output`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#output)
-          #     * [`elementaryStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#ElementaryStream)
+          #     * [`elementaryStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#elementarystream)
           #     * [`muxStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#muxstream)
-          #     * [`manifests`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#Manifest)
-          #     * [`spritesheets`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+          #     * [`manifests`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#manifest)
+          #     * [`spriteSheets`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+          #     * [`logConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#logconfig)
+          #     * [`timecodeConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#timecodeconfig)
+          #     * [`encryptions`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#encryption)
           #
           #     The fields specified in the update_mask are relative to the resource, not
           #     the full request. A field will be overwritten if it is in the mask.
+          #
+          #     If the mask is not present, then each field from the list above is updated
+          #     if the field appears in the request payload. To unset a field, add the
+          #     field to the update mask and remove it from the request payload.
           # @!attribute [rw] channel
           #   @return [::Google::Cloud::Video::LiveStream::V1::Channel]
           #     Required. The channel resource to be updated.
@@ -270,8 +278,8 @@ module Google
           #     The maximum number of items to return. If unspecified, server
           #     will pick an appropriate default. Server may return fewer items than
           #     requested. A caller should only rely on response's
-          #     {::Google::Cloud::Video::LiveStream::V1::ListInputsResponse#next_page_token next_page_token} to
-          #     determine if there are more items left to be queried.
+          #     {::Google::Cloud::Video::LiveStream::V1::ListInputsResponse#next_page_token next_page_token}
+          #     to determine if there are more items left to be queried.
           # @!attribute [rw] page_token
           #   @return [::String]
           #     The next_page_token value returned from a previous List request, if any.
@@ -349,6 +357,10 @@ module Google
           #
           #     The fields specified in the update_mask are relative to the resource, not
           #     the full request. A field will be overwritten if it is in the mask.
+          #
+          #     If the mask is not present, then each field from the list above is updated
+          #     if the field appears in the request payload. To unset a field, add the
+          #     field to the update mask and remove it from the request payload.
           # @!attribute [rw] input
           #   @return [::Google::Cloud::Video::LiveStream::V1::Input]
           #     Required. The input resource to be updated.
@@ -415,8 +427,8 @@ module Google
           #     The maximum number of items to return. If unspecified, server
           #     will pick an appropriate default. Server may return fewer items than
           #     requested. A caller should only rely on response's
-          #     {::Google::Cloud::Video::LiveStream::V1::ListEventsResponse#next_page_token next_page_token} to
-          #     determine if there are more items left to be queried.
+          #     {::Google::Cloud::Video::LiveStream::V1::ListEventsResponse#next_page_token next_page_token}
+          #     to determine if there are more items left to be queried.
           # @!attribute [rw] page_token
           #   @return [::String]
           #     The next_page_token value returned from a previous List request, if any.
