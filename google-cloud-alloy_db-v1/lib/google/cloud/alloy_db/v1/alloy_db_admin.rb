@@ -26,6 +26,7 @@ require "google/cloud/alloy_db/v1/alloy_db_admin/credentials"
 require "google/cloud/alloy_db/v1/alloy_db_admin/paths"
 require "google/cloud/alloy_db/v1/alloy_db_admin/operations"
 require "google/cloud/alloy_db/v1/alloy_db_admin/client"
+require "google/cloud/alloy_db/v1/alloy_db_admin/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/alloy_db/v1/alloy_db_admin"
         #     client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/alloy_db/v1/alloy_db_admin/rest"
+        #     client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new
         #
         module AlloyDBAdmin
         end

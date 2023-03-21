@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/alloy_db/v1"
       #     client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/alloy_db/v1"
+      #     client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new
+      #
       module V1
       end
     end
