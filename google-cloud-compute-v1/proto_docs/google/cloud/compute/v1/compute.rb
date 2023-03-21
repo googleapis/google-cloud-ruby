@@ -9766,6 +9766,8 @@ module Google
 
             SEV_CAPABLE = 87_083_793
 
+            SEV_LIVE_MIGRATABLE = 392_039_820
+
             SEV_SNP_CAPABLE = 426_919
 
             UEFI_COMPATIBLE = 195_865_408
@@ -10279,12 +10281,16 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATE = 0
 
+            # Endpoint is being drained.
             DRAINING = 480_455_402
 
+            # Endpoint is healthy.
             HEALTHY = 439_801_213
 
+            # Endpoint is unhealthy.
             UNHEALTHY = 462_118_084
 
+            # Health status of the endpoint is unknown.
             UNKNOWN = 433_141_802
           end
         end
@@ -19404,6 +19410,14 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] nodes
+        #   @return [::Array<::String>]
+        #     Names of the nodes to go under maintenance simulation.
+        class NodeGroupsSimulateMaintenanceEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represent a sole-tenant Node Template resource. You can use a template to define properties for nodes in a node group. For more information, read Creating node groups and instances.
         # @!attribute [rw] accelerators
         #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorConfig>]
@@ -27379,6 +27393,27 @@ module Google
         #   @return [::String]
         #     The name of the zone for this request.
         class SimulateMaintenanceEventInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NodeGroups.SimulateMaintenanceEvent. See the method description for details.
+        # @!attribute [rw] node_group
+        #   @return [::String]
+        #     Name of the NodeGroup resource whose nodes will go under maintenance simulation.
+        # @!attribute [rw] node_groups_simulate_maintenance_event_request_resource
+        #   @return [::Google::Cloud::Compute::V1::NodeGroupsSimulateMaintenanceEventRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class SimulateMaintenanceEventNodeGroupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

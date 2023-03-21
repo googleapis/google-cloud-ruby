@@ -3303,6 +3303,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MULTI_IP_SUBNET, 151776719
       value :SECURE_BOOT, 376811194
       value :SEV_CAPABLE, 87083793
+      value :SEV_LIVE_MIGRATABLE, 392039820
       value :SEV_SNP_CAPABLE, 426919
       value :UEFI_COMPATIBLE, 195865408
       value :VIRTIO_SCSI_MULTIQUEUE, 201597069
@@ -6569,6 +6570,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.compute.v1.NodeGroupsSetNodeTemplateRequest" do
       proto3_optional :node_template, :string, 323154455
     end
+    add_message "google.cloud.compute.v1.NodeGroupsSimulateMaintenanceEventRequest" do
+      repeated :nodes, :string, 104993457
+    end
     add_message "google.cloud.compute.v1.NodeTemplate" do
       repeated :accelerators, :message, 269577064, "google.cloud.compute.v1.AcceleratorConfig"
       proto3_optional :cpu_overcommit_type, :string, 247727959
@@ -9348,6 +9352,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :project, :string, 227560217
       optional :zone, :string, 3744684
     end
+    add_message "google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest" do
+      optional :node_group, :string, 469958146
+      optional :node_groups_simulate_maintenance_event_request_resource, :message, 351468764, "google.cloud.compute.v1.NodeGroupsSimulateMaintenanceEventRequest"
+      optional :project, :string, 227560217
+      proto3_optional :request_id, :string, 37109963
+      optional :zone, :string, 3744684
+    end
     add_message "google.cloud.compute.v1.Snapshot" do
       proto3_optional :architecture, :string, 302803283
       proto3_optional :auto_created, :bool, 463922264
@@ -11842,6 +11853,7 @@ module Google
         NodeGroupsListNodes = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NodeGroupsListNodes").msgclass
         NodeGroupsScopedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NodeGroupsScopedList").msgclass
         NodeGroupsSetNodeTemplateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NodeGroupsSetNodeTemplateRequest").msgclass
+        NodeGroupsSimulateMaintenanceEventRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NodeGroupsSimulateMaintenanceEventRequest").msgclass
         NodeTemplate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NodeTemplate").msgclass
         NodeTemplate::CpuOvercommitType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NodeTemplate.CpuOvercommitType").enummodule
         NodeTemplate::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NodeTemplate.Status").enummodule
@@ -12255,6 +12267,7 @@ module Google
         ShieldedInstanceIntegrityPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ShieldedInstanceIntegrityPolicy").msgclass
         SignedUrlKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SignedUrlKey").msgclass
         SimulateMaintenanceEventInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest").msgclass
+        SimulateMaintenanceEventNodeGroupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest").msgclass
         Snapshot = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Snapshot").msgclass
         Snapshot::Architecture = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Snapshot.Architecture").enummodule
         Snapshot::SnapshotType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Snapshot.SnapshotType").enummodule
