@@ -79,6 +79,27 @@ module Google
               "projects/#{project}/locations/#{location}"
             end
 
+            ##
+            # Create a fully-qualified Snapshot resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/instances/{instance}/snapshots/{snapshot}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param instance [String]
+            # @param snapshot [String]
+            #
+            # @return [::String]
+            def snapshot_path project:, location:, instance:, snapshot:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/instances/#{instance}/snapshots/#{snapshot}"
+            end
+
             extend self
           end
         end
