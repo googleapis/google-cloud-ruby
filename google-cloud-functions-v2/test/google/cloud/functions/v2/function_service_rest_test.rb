@@ -348,6 +348,7 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    kms_key_name = "hello world"
 
     generate_upload_url_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -363,27 +364,27 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        client.generate_upload_url({ parent: parent }) do |_result, response|
+        client.generate_upload_url({ parent: parent, kms_key_name: kms_key_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_upload_url parent: parent do |_result, response|
+        client.generate_upload_url parent: parent, kms_key_name: kms_key_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_upload_url ::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent) do |_result, response|
+        client.generate_upload_url ::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_upload_url({ parent: parent }, call_options) do |_result, response|
+        client.generate_upload_url({ parent: parent, kms_key_name: kms_key_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_upload_url(::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent), call_options) do |_result, response|
+        client.generate_upload_url(::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

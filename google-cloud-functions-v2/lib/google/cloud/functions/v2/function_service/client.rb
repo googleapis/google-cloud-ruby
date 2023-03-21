@@ -294,14 +294,17 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location from which the function should be listed,
-            #     specified in the format `projects/*/locations/*`
-            #     If you want to list functions in all locations, use "-" in place of a
-            #     location. When listing functions in all locations, if one or more
-            #     location(s) are unreachable, the response will contain functions from all
-            #     reachable locations along with the names of any unreachable locations.
+            #     Required. The project and location from which the function should be
+            #     listed, specified in the format `projects/*/locations/*` If you want to
+            #     list functions in all locations, use "-" in place of a location. When
+            #     listing functions in all locations, if one or more location(s) are
+            #     unreachable, the response will contain functions from all reachable
+            #     locations along with the names of any unreachable locations.
             #   @param page_size [::Integer]
-            #     Maximum number of functions to return per call.
+            #     Maximum number of functions to return per call. The largest allowed
+            #     page_size is 1,000, if the page_size is omitted or specified as greater
+            #     than 1,000 then it will be replaced as 1,000. The size of the list
+            #     response can be less than specified when used with filters.
             #   @param page_token [::String]
             #     The value returned by the last
             #     `ListFunctionsResponse`; indicates that
@@ -405,8 +408,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location in which the function should be created, specified
-            #     in the format `projects/*/locations/*`
+            #     Required. The project and location in which the function should be created,
+            #     specified in the format `projects/*/locations/*`
             #   @param function [::Google::Cloud::Functions::V2::Function, ::Hash]
             #     Required. Function to be created.
             #   @param function_id [::String]
@@ -715,14 +718,30 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_upload_url(parent: nil)
+            # @overload generate_upload_url(parent: nil, kms_key_name: nil)
             #   Pass arguments to `generate_upload_url` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location in which the Google Cloud Storage signed URL
-            #     should be generated, specified in the format `projects/*/locations/*`.
+            #     Required. The project and location in which the Google Cloud Storage signed
+            #     URL should be generated, specified in the format `projects/*/locations/*`.
+            #   @param kms_key_name [::String]
+            #     Resource name of a KMS crypto key (managed by the user) used to
+            #     encrypt/decrypt function source code objects in intermediate Cloud Storage
+            #     buckets. When you generate an upload url and upload your source code, it
+            #     gets copied to an intermediate Cloud Storage bucket. The source code is
+            #     then copied to a versioned directory in the sources bucket in the consumer
+            #     project during the function deployment.
+            #
+            #     It must match the pattern
+            #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+            #
+            #     The Google Cloud Functions service account
+            #     (service-\\{project_number}@gcf-admin-robot.iam.gserviceaccount.com) must be
+            #     granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
+            #     (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
+            #     Key/KeyRing/Project/Organization (least access preferred).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Functions::V2::GenerateUploadUrlResponse]
@@ -811,8 +830,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of function for which source code Google Cloud Storage signed
-            #     URL should be generated.
+            #     Required. The name of function for which source code Google Cloud Storage
+            #     signed URL should be generated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Functions::V2::GenerateDownloadUrlResponse]
@@ -897,8 +916,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location from which the runtimes should be listed,
-            #     specified in the format `projects/*/locations/*`
+            #     Required. The project and location from which the runtimes should be
+            #     listed, specified in the format `projects/*/locations/*`
             #   @param filter [::String]
             #     The filter for Runtimes that match the filter expression,
             #     following the syntax outlined in https://google.aip.dev/160.
