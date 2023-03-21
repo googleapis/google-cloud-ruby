@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.4.0 (2023-03-21)
+
+#### Features
+
+* added Encryption for enabling output encryption with DRM systems 
+* added InputConfig to allow enabling/disabling automatic failover 
+* added new tasks to Event: inputSwitch, returnToProgram, mute, unmute 
+* added support for audio normalization and audio gain 
+* Added support for TimecodeConfig ([#20953](https://github.com/googleapis/google-cloud-ruby/issues/20953)) 
+#### Documentation
+
+* clarify behavior when update_mask is omitted in PATCH requests 
+
 ### 0.3.0 (2023-03-08)
 
 #### Features
