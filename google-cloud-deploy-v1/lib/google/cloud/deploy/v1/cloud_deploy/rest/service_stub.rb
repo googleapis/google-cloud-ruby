@@ -611,6 +611,82 @@ module Google
               end
 
               ##
+              # Baseline implementation for the advance_rollout REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::AdvanceRolloutRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::AdvanceRolloutResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::AdvanceRolloutResponse]
+              #   A result object deserialized from the server's reply
+              def advance_rollout request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_advance_rollout_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Deploy::V1::AdvanceRolloutResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the cancel_rollout REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::CancelRolloutRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::CancelRolloutResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::CancelRolloutResponse]
+              #   A result object deserialized from the server's reply
+              def cancel_rollout request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_cancel_rollout_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Deploy::V1::CancelRolloutResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the list_rollouts REST call
               #
               # @param request_pb [::Google::Cloud::Deploy::V1::ListRolloutsRequest]
@@ -725,6 +801,44 @@ module Google
               end
 
               ##
+              # Baseline implementation for the ignore_job REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::IgnoreJobRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::IgnoreJobResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::IgnoreJobResponse]
+              #   A result object deserialized from the server's reply
+              def ignore_job request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_ignore_job_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Deploy::V1::IgnoreJobResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the retry_job REST call
               #
               # @param request_pb [::Google::Cloud::Deploy::V1::RetryJobRequest]
@@ -833,6 +947,44 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Deploy::V1::JobRun.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the terminate_job_run REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::TerminateJobRunRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::TerminateJobRunResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::TerminateJobRunResponse]
+              #   A result object deserialized from the server's reply
+              def terminate_job_run request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_terminate_job_run_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Deploy::V1::TerminateJobRunResponse.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, operation if block_given?
                 result
@@ -1201,6 +1353,50 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the advance_rollout REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::AdvanceRolloutRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_advance_rollout_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:advance",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/releases/[^/]+/rollouts/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the cancel_rollout REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::CancelRolloutRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_cancel_rollout_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:cancel",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/releases/[^/]+/rollouts/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the list_rollouts REST call
               #
               # @param request_pb [::Google::Cloud::Deploy::V1::ListRolloutsRequest]
@@ -1265,6 +1461,28 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the ignore_job REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::IgnoreJobRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_ignore_job_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{rollout}:ignoreJob",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["rollout", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/releases/[^/]+/rollouts/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the retry_job REST call
               #
               # @param request_pb [::Google::Cloud::Deploy::V1::RetryJobRequest]
@@ -1319,6 +1537,28 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/releases/[^/]+/rollouts/[^/]+/jobRuns/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the terminate_job_run REST call
+              #
+              # @param request_pb [::Google::Cloud::Deploy::V1::TerminateJobRunRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_terminate_job_run_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:terminate",
+                                                          body: "*",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/deliveryPipelines/[^/]+/releases/[^/]+/rollouts/[^/]+/jobRuns/[^/]+/?$}, false]
                                                           ]

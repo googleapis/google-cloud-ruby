@@ -117,6 +117,10 @@ module Google
 
                   default_config.rpcs.approve_rollout.timeout = 60.0
 
+                  default_config.rpcs.advance_rollout.timeout = 60.0
+
+                  default_config.rpcs.cancel_rollout.timeout = 60.0
+
                   default_config.rpcs.list_rollouts.timeout = 60.0
                   default_config.rpcs.list_rollouts.retry_policy = {
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
@@ -129,6 +133,8 @@ module Google
 
                   default_config.rpcs.create_rollout.timeout = 60.0
 
+                  default_config.rpcs.ignore_job.timeout = 60.0
+
                   default_config.rpcs.retry_job.timeout = 60.0
 
                   default_config.rpcs.list_job_runs.timeout = 60.0
@@ -140,6 +146,8 @@ module Google
                   default_config.rpcs.get_job_run.retry_policy = {
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                   }
+
+                  default_config.rpcs.terminate_job_run.timeout = 60.0
 
                   default_config.rpcs.get_config.timeout = 60.0
                   default_config.rpcs.get_config.retry_policy = {
@@ -275,8 +283,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent, which owns this collection of pipelines. Format must be
-              #     projects/\\{project_id}/locations/\\{location_name}.
+              #     Required. The parent, which owns this collection of pipelines. Format must
+              #     be projects/\\{project_id}/locations/\\{location_name}.
               #   @param page_size [::Integer]
               #     The maximum number of pipelines to return. The service may return
               #     fewer than this value. If unspecified, at most 50 pipelines will
@@ -417,8 +425,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent collection in which the `DeliveryPipeline` should be created.
-              #     Format should be projects/\\{project_id}/locations/\\{location_name}.
+              #     Required. The parent collection in which the `DeliveryPipeline` should be
+              #     created. Format should be projects/\\{project_id}/locations/\\{location_name}.
               #   @param delivery_pipeline_id [::String]
               #     Required. ID of the `DeliveryPipeline`.
               #   @param delivery_pipeline [::Google::Cloud::Deploy::V1::DeliveryPipeline, ::Hash]
@@ -438,8 +446,8 @@ module Google
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
               #   @param validate_only [::Boolean]
-              #     Optional. If set to true, the request is validated and the user is provided with
-              #     an expected result, but no actual change is made.
+              #     Optional. If set to true, the request is validated and the user is provided
+              #     with an expected result, but no actual change is made.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -524,11 +532,11 @@ module Google
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
               #   @param allow_missing [::Boolean]
-              #     Optional. If set to true, updating a `DeliveryPipeline` that does not exist will
-              #     result in the creation of a new `DeliveryPipeline`.
+              #     Optional. If set to true, updating a `DeliveryPipeline` that does not exist
+              #     will result in the creation of a new `DeliveryPipeline`.
               #   @param validate_only [::Boolean]
-              #     Optional. If set to true, the request is validated and the user is provided with
-              #     an expected result, but no actual change is made.
+              #     Optional. If set to true, the request is validated and the user is provided
+              #     with an expected result, but no actual change is made.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -611,15 +619,15 @@ module Google
               #     Optional. If set to true, then deleting an already deleted or non-existing
               #     `DeliveryPipeline` will succeed.
               #   @param validate_only [::Boolean]
-              #     Optional. If set, validate the request and preview the review, but do not actually
-              #     post it.
+              #     Optional. If set, validate the request and preview the review, but do not
+              #     actually post it.
               #   @param force [::Boolean]
-              #     Optional. If set to true, all child resources under this pipeline will also be
-              #     deleted. Otherwise, the request will only work if the pipeline has
-              #     no child resources.
+              #     Optional. If set to true, all child resources under this pipeline will also
+              #     be deleted. Otherwise, the request will only work if the pipeline has no
+              #     child resources.
               #   @param etag [::String]
-              #     Optional. This checksum is computed by the server based on the value of other
-              #     fields, and may be sent on update and delete requests to ensure the
+              #     Optional. This checksum is computed by the server based on the value of
+              #     other fields, and may be sent on update and delete requests to ensure the
               #     client has an up-to-date value before proceeding.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
@@ -686,9 +694,10 @@ module Google
               #     Required. The parent, which owns this collection of targets. Format must be
               #     projects/\\{project_id}/locations/\\{location_name}.
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of `Target` objects to return. The service may return
-              #     fewer than this value. If unspecified, at most 50 `Target` objects will be
-              #     returned. The maximum value is 1000; values above 1000 will be set to 1000.
+              #     Optional. The maximum number of `Target` objects to return. The service may
+              #     return fewer than this value. If unspecified, at most 50 `Target` objects
+              #     will be returned. The maximum value is 1000; values above 1000 will be set
+              #     to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListTargets` call.
               #     Provide this to retrieve the subsequent page.
@@ -696,10 +705,11 @@ module Google
               #     When paginating, all other provided parameters match
               #     the call that provided the page token.
               #   @param filter [::String]
-              #     Optional. Filter targets to be returned. See https://google.aip.dev/160 for more
-              #     details.
+              #     Optional. Filter targets to be returned. See https://google.aip.dev/160 for
+              #     more details.
               #   @param order_by [::String]
-              #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+              #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+              #     more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Deploy::V1::ListTargetsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -846,8 +856,8 @@ module Google
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
               #   @param validate_only [::Boolean]
-              #     Optional. If set to true, the request is validated and the user is provided with
-              #     an expected result, but no actual change is made.
+              #     Optional. If set to true, the request is validated and the user is provided
+              #     with an expected result, but no actual change is made.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -935,8 +945,8 @@ module Google
               #     Optional. If set to true, updating a `Target` that does not exist will
               #     result in the creation of a new `Target`.
               #   @param validate_only [::Boolean]
-              #     Optional. If set to true, the request is validated and the user is provided with
-              #     an expected result, but no actual change is made.
+              #     Optional. If set to true, the request is validated and the user is provided
+              #     with an expected result, but no actual change is made.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1019,11 +1029,11 @@ module Google
               #     Optional. If set to true, then deleting an already deleted or non-existing
               #     DeliveryPipeline will succeed.
               #   @param validate_only [::Boolean]
-              #     Optional. If set, validate the request and preview the review, but do not actually
-              #     post it.
+              #     Optional. If set, validate the request and preview the review, but do not
+              #     actually post it.
               #   @param etag [::String]
-              #     Optional. This checksum is computed by the server based on the value of other
-              #     fields, and may be sent on update and delete requests to ensure the
+              #     Optional. This checksum is computed by the server based on the value of
+              #     other fields, and may be sent on update and delete requests to ensure the
               #     client has an up-to-date value before proceeding.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
@@ -1087,11 +1097,13 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The `DeliveryPipeline` which owns this collection of `Release` objects.
+              #     Required. The `DeliveryPipeline` which owns this collection of `Release`
+              #     objects.
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of `Release` objects to return. The service may return
-              #     fewer than this value. If unspecified, at most 50 `Release` objects will be
-              #     returned. The maximum value is 1000; values above 1000 will be set to 1000.
+              #     Optional. The maximum number of `Release` objects to return. The service
+              #     may return fewer than this value. If unspecified, at most 50 `Release`
+              #     objects will be returned. The maximum value is 1000; values above 1000 will
+              #     be set to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListReleases` call.
               #     Provide this to retrieve the subsequent page.
@@ -1099,10 +1111,11 @@ module Google
               #     When paginating, all other provided parameters match
               #     the call that provided the page token.
               #   @param filter [::String]
-              #     Optional. Filter releases to be returned. See https://google.aip.dev/160 for more
-              #     details.
+              #     Optional. Filter releases to be returned. See https://google.aip.dev/160
+              #     for more details.
               #   @param order_by [::String]
-              #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+              #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+              #     more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Deploy::V1::ListReleasesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1249,8 +1262,8 @@ module Google
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
               #   @param validate_only [::Boolean]
-              #     Optional. If set to true, the request is validated and the user is provided with
-              #     an expected result, but no actual change is made.
+              #     Optional. If set to true, the request is validated and the user is provided
+              #     with an expected result, but no actual change is made.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1425,6 +1438,136 @@ module Google
               end
 
               ##
+              # Advances a Rollout in a given project and location.
+              #
+              # @overload advance_rollout(request, options = nil)
+              #   Pass arguments to `advance_rollout` via a request object, either of type
+              #   {::Google::Cloud::Deploy::V1::AdvanceRolloutRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Deploy::V1::AdvanceRolloutRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload advance_rollout(name: nil, phase_id: nil)
+              #   Pass arguments to `advance_rollout` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the Rollout. Format is
+              #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
+              #     releases/\\{release}/rollouts/\\{rollout}.
+              #   @param phase_id [::String]
+              #     Required. The phase ID to advance the `Rollout` to.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::AdvanceRolloutResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::AdvanceRolloutResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def advance_rollout request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::AdvanceRolloutRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.advance_rollout.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Deploy::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.advance_rollout.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.advance_rollout.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_deploy_stub.advance_rollout request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Cancels a Rollout in a given project and location.
+              #
+              # @overload cancel_rollout(request, options = nil)
+              #   Pass arguments to `cancel_rollout` via a request object, either of type
+              #   {::Google::Cloud::Deploy::V1::CancelRolloutRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Deploy::V1::CancelRolloutRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload cancel_rollout(name: nil)
+              #   Pass arguments to `cancel_rollout` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the Rollout. Format is
+              #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
+              #     releases/\\{release}/rollouts/\\{rollout}.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::CancelRolloutResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::CancelRolloutResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def cancel_rollout request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::CancelRolloutRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.cancel_rollout.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Deploy::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.cancel_rollout.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.cancel_rollout.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_deploy_stub.cancel_rollout request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Lists Rollouts in a given project and location.
               #
               # @overload list_rollouts(request, options = nil)
@@ -1445,9 +1588,10 @@ module Google
               #   @param parent [::String]
               #     Required. The `Release` which owns this collection of `Rollout` objects.
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of `Rollout` objects to return. The service may return
-              #     fewer than this value. If unspecified, at most 50 `Rollout` objects will be
-              #     returned. The maximum value is 1000; values above 1000 will be set to 1000.
+              #     Optional. The maximum number of `Rollout` objects to return. The service
+              #     may return fewer than this value. If unspecified, at most 50 `Rollout`
+              #     objects will be returned. The maximum value is 1000; values above 1000 will
+              #     be set to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListRollouts` call.
               #     Provide this to retrieve the subsequent page.
@@ -1455,10 +1599,11 @@ module Google
               #     When paginating, all other provided parameters match
               #     the call that provided the page token.
               #   @param filter [::String]
-              #     Optional. Filter rollouts to be returned. See https://google.aip.dev/160 for more
-              #     details.
+              #     Optional. Filter rollouts to be returned. See https://google.aip.dev/160
+              #     for more details.
               #   @param order_by [::String]
-              #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+              #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+              #     more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Deploy::V1::ListRolloutsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1577,7 +1722,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_rollout(parent: nil, rollout_id: nil, rollout: nil, request_id: nil, validate_only: nil)
+              # @overload create_rollout(parent: nil, rollout_id: nil, rollout: nil, request_id: nil, validate_only: nil, starting_phase_id: nil)
               #   Pass arguments to `create_rollout` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1605,8 +1750,11 @@ module Google
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
               #   @param validate_only [::Boolean]
-              #     Optional. If set to true, the request is validated and the user is provided with
-              #     an expected result, but no actual change is made.
+              #     Optional. If set to true, the request is validated and the user is provided
+              #     with an expected result, but no actual change is made.
+              #   @param starting_phase_id [::String]
+              #     Optional. The starting phase ID for the `Rollout`. If empty the `Rollout`
+              #     will start at the first phase.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1643,6 +1791,74 @@ module Google
 
                 @cloud_deploy_stub.create_rollout request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Ignores the specified Job in a Rollout.
+              #
+              # @overload ignore_job(request, options = nil)
+              #   Pass arguments to `ignore_job` via a request object, either of type
+              #   {::Google::Cloud::Deploy::V1::IgnoreJobRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Deploy::V1::IgnoreJobRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload ignore_job(rollout: nil, phase_id: nil, job_id: nil)
+              #   Pass arguments to `ignore_job` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param rollout [::String]
+              #     Required. Name of the Rollout. Format is
+              #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
+              #     releases/\\{release}/rollouts/\\{rollout}.
+              #   @param phase_id [::String]
+              #     Required. The phase ID the Job to ignore belongs to.
+              #   @param job_id [::String]
+              #     Required. The job ID for the Job to ignore.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::IgnoreJobResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::IgnoreJobResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def ignore_job request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::IgnoreJobRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.ignore_job.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Deploy::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.ignore_job.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.ignore_job.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_deploy_stub.ignore_job request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -1739,20 +1955,22 @@ module Google
               #   @param parent [::String]
               #     Required. The `Rollout` which owns this collection of `JobRun` objects.
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of `JobRun` objects to return. The service may return
-              #     fewer than this value. If unspecified, at most 50 `JobRun` objects will be
-              #     returned. The maximum value is 1000; values above 1000 will be set to 1000.
+              #     Optional. The maximum number of `JobRun` objects to return. The service may
+              #     return fewer than this value. If unspecified, at most 50 `JobRun` objects
+              #     will be returned. The maximum value is 1000; values above 1000 will be set
+              #     to 1000.
               #   @param page_token [::String]
-              #     Optional. A page token, received from a previous `ListJobRuns` call. Provide this
-              #     to retrieve the subsequent page.
+              #     Optional. A page token, received from a previous `ListJobRuns` call.
+              #     Provide this to retrieve the subsequent page.
               #
               #     When paginating, all other provided parameters match the call that provided
               #     the page token.
               #   @param filter [::String]
-              #     Optional. Filter results to be returned. See https://google.aip.dev/160 for more
-              #     details.
+              #     Optional. Filter results to be returned. See https://google.aip.dev/160 for
+              #     more details.
               #   @param order_by [::String]
-              #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+              #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+              #     more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Deploy::V1::ListJobRunsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1851,6 +2069,70 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_deploy_stub.get_job_run request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Terminates a Job Run in a given project and location.
+              #
+              # @overload terminate_job_run(request, options = nil)
+              #   Pass arguments to `terminate_job_run` via a request object, either of type
+              #   {::Google::Cloud::Deploy::V1::TerminateJobRunRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Deploy::V1::TerminateJobRunRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload terminate_job_run(name: nil)
+              #   Pass arguments to `terminate_job_run` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the `JobRun`. Format must be
+              #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
+              #     releases/\\{release}/rollouts/\\{rollout}/jobRuns/\\{jobRun}.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::TerminateJobRunResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::TerminateJobRunResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def terminate_job_run request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::TerminateJobRunRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.terminate_job_run.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Deploy::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.terminate_job_run.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.terminate_job_run.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_deploy_stub.terminate_job_run request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -2126,6 +2408,16 @@ module Google
                   #
                   attr_reader :approve_rollout
                   ##
+                  # RPC-specific configuration for `advance_rollout`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :advance_rollout
+                  ##
+                  # RPC-specific configuration for `cancel_rollout`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :cancel_rollout
+                  ##
                   # RPC-specific configuration for `list_rollouts`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2141,6 +2433,11 @@ module Google
                   #
                   attr_reader :create_rollout
                   ##
+                  # RPC-specific configuration for `ignore_job`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :ignore_job
+                  ##
                   # RPC-specific configuration for `retry_job`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2155,6 +2452,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_job_run
+                  ##
+                  # RPC-specific configuration for `terminate_job_run`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :terminate_job_run
                   ##
                   # RPC-specific configuration for `get_config`
                   # @return [::Gapic::Config::Method]
@@ -2193,18 +2495,26 @@ module Google
                     @abandon_release = ::Gapic::Config::Method.new abandon_release_config
                     approve_rollout_config = parent_rpcs.approve_rollout if parent_rpcs.respond_to? :approve_rollout
                     @approve_rollout = ::Gapic::Config::Method.new approve_rollout_config
+                    advance_rollout_config = parent_rpcs.advance_rollout if parent_rpcs.respond_to? :advance_rollout
+                    @advance_rollout = ::Gapic::Config::Method.new advance_rollout_config
+                    cancel_rollout_config = parent_rpcs.cancel_rollout if parent_rpcs.respond_to? :cancel_rollout
+                    @cancel_rollout = ::Gapic::Config::Method.new cancel_rollout_config
                     list_rollouts_config = parent_rpcs.list_rollouts if parent_rpcs.respond_to? :list_rollouts
                     @list_rollouts = ::Gapic::Config::Method.new list_rollouts_config
                     get_rollout_config = parent_rpcs.get_rollout if parent_rpcs.respond_to? :get_rollout
                     @get_rollout = ::Gapic::Config::Method.new get_rollout_config
                     create_rollout_config = parent_rpcs.create_rollout if parent_rpcs.respond_to? :create_rollout
                     @create_rollout = ::Gapic::Config::Method.new create_rollout_config
+                    ignore_job_config = parent_rpcs.ignore_job if parent_rpcs.respond_to? :ignore_job
+                    @ignore_job = ::Gapic::Config::Method.new ignore_job_config
                     retry_job_config = parent_rpcs.retry_job if parent_rpcs.respond_to? :retry_job
                     @retry_job = ::Gapic::Config::Method.new retry_job_config
                     list_job_runs_config = parent_rpcs.list_job_runs if parent_rpcs.respond_to? :list_job_runs
                     @list_job_runs = ::Gapic::Config::Method.new list_job_runs_config
                     get_job_run_config = parent_rpcs.get_job_run if parent_rpcs.respond_to? :get_job_run
                     @get_job_run = ::Gapic::Config::Method.new get_job_run_config
+                    terminate_job_run_config = parent_rpcs.terminate_job_run if parent_rpcs.respond_to? :terminate_job_run
+                    @terminate_job_run = ::Gapic::Config::Method.new terminate_job_run_config
                     get_config_config = parent_rpcs.get_config if parent_rpcs.respond_to? :get_config
                     @get_config = ::Gapic::Config::Method.new get_config_config
 

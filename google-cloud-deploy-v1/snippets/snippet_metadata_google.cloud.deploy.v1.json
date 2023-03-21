@@ -612,6 +612,86 @@
       ]
     },
     {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_AdvanceRollout_sync",
+      "title": "Snippet for the advance_rollout call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#advance_rollout. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/advance_rollout.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "advance_rollout",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#advance_rollout",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::AdvanceRolloutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::AdvanceRolloutResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "AdvanceRollout",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.AdvanceRollout",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_CancelRollout_sync",
+      "title": "Snippet for the cancel_rollout call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#cancel_rollout. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/cancel_rollout.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_rollout",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#cancel_rollout",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::CancelRolloutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::CancelRolloutResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "CancelRollout",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.CancelRollout",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListRollouts_sync",
       "title": "Snippet for the list_rollouts call in the CloudDeploy service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#list_rollouts. It may require modification in order to execute successfully.",
@@ -732,6 +812,46 @@
       ]
     },
     {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_IgnoreJob_sync",
+      "title": "Snippet for the ignore_job call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#ignore_job. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/ignore_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "ignore_job",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#ignore_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::IgnoreJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::IgnoreJobResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "IgnoreJob",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.IgnoreJob",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "clouddeploy_v1_generated_CloudDeploy_RetryJob_sync",
       "title": "Snippet for the retry_job call in the CloudDeploy service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#retry_job. It may require modification in order to execute successfully.",
@@ -835,6 +955,46 @@
         "method": {
           "short_name": "GetJobRun",
           "full_name": "google.cloud.deploy.v1.CloudDeploy.GetJobRun",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_sync",
+      "title": "Snippet for the terminate_job_run call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#terminate_job_run. It may require modification in order to execute successfully.",
+      "file": "cloud_deploy/terminate_job_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "terminate_job_run",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#terminate_job_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::TerminateJobRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::TerminateJobRunResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "TerminateJobRun",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.TerminateJobRun",
           "service": {
             "short_name": "CloudDeploy",
             "full_name": "google.cloud.deploy.v1.CloudDeploy"

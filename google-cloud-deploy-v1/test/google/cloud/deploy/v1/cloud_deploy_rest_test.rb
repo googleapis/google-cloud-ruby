@@ -914,6 +914,115 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::ClientTest < Minitest::Tes
     end
   end
 
+  def test_advance_rollout
+    # Create test objects.
+    client_result = ::Google::Cloud::Deploy::V1::AdvanceRolloutResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    phase_id = "hello world"
+
+    advance_rollout_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::ServiceStub.stub :transcode_advance_rollout_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, advance_rollout_client_stub do
+        # Create client
+        client = ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.advance_rollout({ name: name, phase_id: phase_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.advance_rollout name: name, phase_id: phase_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.advance_rollout ::Google::Cloud::Deploy::V1::AdvanceRolloutRequest.new(name: name, phase_id: phase_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.advance_rollout({ name: name, phase_id: phase_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.advance_rollout(::Google::Cloud::Deploy::V1::AdvanceRolloutRequest.new(name: name, phase_id: phase_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, advance_rollout_client_stub.call_count
+      end
+    end
+  end
+
+  def test_cancel_rollout
+    # Create test objects.
+    client_result = ::Google::Cloud::Deploy::V1::CancelRolloutResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    cancel_rollout_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::ServiceStub.stub :transcode_cancel_rollout_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, cancel_rollout_client_stub do
+        # Create client
+        client = ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.cancel_rollout({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.cancel_rollout name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.cancel_rollout ::Google::Cloud::Deploy::V1::CancelRolloutRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.cancel_rollout({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.cancel_rollout(::Google::Cloud::Deploy::V1::CancelRolloutRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, cancel_rollout_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_rollouts
     # Create test objects.
     client_result = ::Google::Cloud::Deploy::V1::ListRolloutsResponse.new
@@ -1039,6 +1148,7 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::ClientTest < Minitest::Tes
     rollout = {}
     request_id = "hello world"
     validate_only = true
+    starting_phase_id = "hello world"
 
     create_rollout_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1054,32 +1164,88 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::ClientTest < Minitest::Tes
         end
 
         # Use hash object
-        client.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        client.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only, starting_phase_id: starting_phase_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_rollout parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only do |_result, response|
+        client.create_rollout parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only, starting_phase_id: starting_phase_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_rollout ::Google::Cloud::Deploy::V1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only) do |_result, response|
+        client.create_rollout ::Google::Cloud::Deploy::V1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only, starting_phase_id: starting_phase_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        client.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only, starting_phase_id: starting_phase_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_rollout(::Google::Cloud::Deploy::V1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        client.create_rollout(::Google::Cloud::Deploy::V1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only, starting_phase_id: starting_phase_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, create_rollout_client_stub.call_count
+      end
+    end
+  end
+
+  def test_ignore_job
+    # Create test objects.
+    client_result = ::Google::Cloud::Deploy::V1::IgnoreJobResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    rollout = "hello world"
+    phase_id = "hello world"
+    job_id = "hello world"
+
+    ignore_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::ServiceStub.stub :transcode_ignore_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, ignore_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.ignore_job({ rollout: rollout, phase_id: phase_id, job_id: job_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.ignore_job rollout: rollout, phase_id: phase_id, job_id: job_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.ignore_job ::Google::Cloud::Deploy::V1::IgnoreJobRequest.new(rollout: rollout, phase_id: phase_id, job_id: job_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.ignore_job({ rollout: rollout, phase_id: phase_id, job_id: job_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.ignore_job(::Google::Cloud::Deploy::V1::IgnoreJobRequest.new(rollout: rollout, phase_id: phase_id, job_id: job_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, ignore_job_client_stub.call_count
       end
     end
   end
@@ -1248,6 +1414,60 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::ClientTest < Minitest::Tes
 
         # Verify method calls
         assert_equal 5, get_job_run_client_stub.call_count
+      end
+    end
+  end
+
+  def test_terminate_job_run
+    # Create test objects.
+    client_result = ::Google::Cloud::Deploy::V1::TerminateJobRunResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    terminate_job_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::ServiceStub.stub :transcode_terminate_job_run_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, terminate_job_run_client_stub do
+        # Create client
+        client = ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.terminate_job_run({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.terminate_job_run name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.terminate_job_run ::Google::Cloud::Deploy::V1::TerminateJobRunRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.terminate_job_run({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.terminate_job_run(::Google::Cloud::Deploy::V1::TerminateJobRunRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, terminate_job_run_client_stub.call_count
       end
     end
   end

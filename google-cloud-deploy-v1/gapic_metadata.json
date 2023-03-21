@@ -85,6 +85,16 @@
                 "approve_rollout"
               ]
             },
+            "AdvanceRollout": {
+              "methods": [
+                "advance_rollout"
+              ]
+            },
+            "CancelRollout": {
+              "methods": [
+                "cancel_rollout"
+              ]
+            },
             "ListRollouts": {
               "methods": [
                 "list_rollouts"
@@ -100,6 +110,11 @@
                 "create_rollout"
               ]
             },
+            "IgnoreJob": {
+              "methods": [
+                "ignore_job"
+              ]
+            },
             "RetryJob": {
               "methods": [
                 "retry_job"
@@ -113,6 +128,11 @@
             "GetJobRun": {
               "methods": [
                 "get_job_run"
+              ]
+            },
+            "TerminateJobRun": {
+              "methods": [
+                "terminate_job_run"
               ]
             },
             "GetConfig": {
