@@ -1116,12 +1116,14 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     # Create request parameters for a unary method.
     name = "hello world"
     destination_id = "hello world"
+    assignment_id = "hello world"
 
     move_assignment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :move_assignment, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest, request
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["destination_id"]
+      assert_equal "hello world", request["assignment_id"]
       refute_nil options
     end
 
@@ -1132,31 +1134,31 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use hash object
-      client.move_assignment({ name: name, destination_id: destination_id }) do |response, operation|
+      client.move_assignment({ name: name, destination_id: destination_id, assignment_id: assignment_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.move_assignment name: name, destination_id: destination_id do |response, operation|
+      client.move_assignment name: name, destination_id: destination_id, assignment_id: assignment_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.move_assignment ::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new(name: name, destination_id: destination_id) do |response, operation|
+      client.move_assignment ::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new(name: name, destination_id: destination_id, assignment_id: assignment_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.move_assignment({ name: name, destination_id: destination_id }, grpc_options) do |response, operation|
+      client.move_assignment({ name: name, destination_id: destination_id, assignment_id: assignment_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.move_assignment(::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new(name: name, destination_id: destination_id), grpc_options) do |response, operation|
+      client.move_assignment(::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new(name: name, destination_id: destination_id, assignment_id: assignment_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

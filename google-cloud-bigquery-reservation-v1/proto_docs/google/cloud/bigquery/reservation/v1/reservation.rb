@@ -38,10 +38,10 @@ module Google
           #     Queries using this reservation might use more slots during runtime if
           #     ignore_idle_slots is set to false.
           #
-          #     If the new reservation's slot capacity exceeds the project's slot capacity
-          #     or if total slot capacity of the new reservation and its siblings exceeds
-          #     the project's slot capacity, the request will fail with
-          #     `google.rpc.Code.RESOURCE_EXHAUSTED`.
+          #     If total slot_capacity of the reservation and its siblings
+          #     exceeds the total slot_count of all capacity commitments, the request will
+          #     fail with `google.rpc.Code.RESOURCE_EXHAUSTED`.
+          #
           #
           #     NOTE: for reservations in US or EU multi-regions, slot capacity constraints
           #     are checked separately for default and auxiliary regions. See
@@ -52,13 +52,20 @@ module Google
           #     slots from other reservations within the same admin project. If true, a
           #     query or pipeline job using this reservation will execute with the slot
           #     capacity specified in the slot_capacity field at most.
+          # @!attribute [rw] autoscale
+          #   @return [::Google::Cloud::Bigquery::Reservation::V1::Reservation::Autoscale]
+          #     The configuration parameters for the auto scaling feature. Note this is an
+          #     alpha feature.
           # @!attribute [rw] concurrency
           #   @return [::Integer]
-          #     Maximum number of queries that are allowed to run concurrently in this
-          #     reservation. This is a soft limit due to asynchronous nature of the system
-          #     and various optimizations for small queries.
-          #     Default value is 0 which means that concurrency will be automatically set
-          #     based on the reservation size.
+          #     Job concurrency target which sets a soft upper bound on the number of jobs
+          #     that can run concurrently in this reservation. This is a soft target due to
+          #     asynchronous nature of the system and various optimizations for small
+          #     queries.
+          #     Default value is 0 which means that concurrency target will be
+          #     automatically computed by the system.
+          #     NOTE: this field is exposed as `target_job_concurrency` in the Information
+          #     Schema, DDL and BQ CLI.
           # @!attribute [r] creation_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Creation time of the reservation.
@@ -73,9 +80,25 @@ module Google
           #     If set to true, this reservation is placed in the organization's
           #     secondary region which is designated for disaster recovery purposes.
           #     If false, this reservation is placed in the organization's default region.
+          # @!attribute [rw] edition
+          #   @return [::Google::Cloud::Bigquery::Reservation::V1::Edition]
+          #     Edition of the reservation.
           class Reservation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Auto scaling settings.
+            # @!attribute [r] current_slots
+            #   @return [::Integer]
+            #     Output only. The slot capacity added to this reservation when autoscale
+            #     happens. Will be between [0, max_slots].
+            # @!attribute [rw] max_slots
+            #   @return [::Integer]
+            #     Number of slots to be scaled when needed.
+            class Autoscale
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Capacity commitment is a way to purchase compute capacity for BigQuery jobs
@@ -106,12 +129,12 @@ module Google
           #     Output only. State of the commitment.
           # @!attribute [r] commitment_start_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Output only. The start of the current commitment period. It is applicable only for
-          #     ACTIVE capacity commitments.
+          #     Output only. The start of the current commitment period. It is applicable
+          #     only for ACTIVE capacity commitments.
           # @!attribute [r] commitment_end_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Output only. The end of the current commitment period. It is applicable only for ACTIVE
-          #     capacity commitments.
+          #     Output only. The end of the current commitment period. It is applicable
+          #     only for ACTIVE capacity commitments.
           # @!attribute [r] failure_status
           #   @return [::Google::Rpc::Status]
           #     Output only. For FAILED commitment plan, provides the reason of failure.
@@ -128,6 +151,9 @@ module Google
           #     If set to true, this commitment is placed in the organization's
           #     secondary region which is designated for disaster recovery purposes.
           #     If false, this commitment is placed in the organization's default region.
+          # @!attribute [rw] edition
+          #   @return [::Google::Cloud::Bigquery::Reservation::V1::Edition]
+          #     Edition of the capacity commitment.
           class CapacityCommitment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -144,6 +170,10 @@ module Google
               # any time.
               FLEX = 3
 
+              # Same as FLEX, should only be used if flat-rate commitments are still
+              # available.
+              FLEX_FLAT_RATE = 7
+
               # Trial commitments have a committed period of 182 days after becoming
               # ACTIVE. After that, they are converted to a new commitment based on the
               # `renewal_plan`. Default `renewal_plan` for Trial commitment is Flex so
@@ -155,10 +185,31 @@ module Google
               # removed any time.
               MONTHLY = 2
 
+              # Same as MONTHLY, should only be used if flat-rate commitments are still
+              # available.
+              MONTHLY_FLAT_RATE = 8
+
               # Annual commitments have a committed period of 365 days after becoming
               # ACTIVE. After that they are converted to a new commitment based on the
               # renewal_plan.
               ANNUAL = 4
+
+              # Same as ANNUAL, should only be used if flat-rate commitments are still
+              # available.
+              ANNUAL_FLAT_RATE = 9
+
+              # 3-year commitments have a committed period of 1095(3 * 365) days after
+              # becoming ACTIVE. After that they are converted to a new commitment based
+              # on the renewal_plan.
+              THREE_YEAR = 10
+
+              # Should only be used for `renewal_plan` and is only meaningful if
+              # edition is specified to values other than EDITION_UNSPECIFIED. Otherwise
+              # CreateCapacityCommitmentRequest or UpdateCapacityCommitmentRequest will
+              # be rejected with error code `google.rpc.Code.INVALID_ARGUMENT`. If the
+              # renewal_plan is NONE, capacity commitment will be removed at the end of
+              # its commitment period.
+              NONE = 6
             end
 
             # Capacity commitment can either become ACTIVE right away or transition
@@ -180,7 +231,8 @@ module Google
             end
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_reservation ReservationService.CreateReservation}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_reservation ReservationService.CreateReservation}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. Project, location. E.g.,
@@ -198,7 +250,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_reservations ReservationService.ListReservations}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_reservations ReservationService.ListReservations}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The parent resource name containing project and location, e.g.:
@@ -214,7 +267,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_reservations ReservationService.ListReservations}.
+          # The response for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_reservations ReservationService.ListReservations}.
           # @!attribute [rw] reservations
           #   @return [::Array<::Google::Cloud::Bigquery::Reservation::V1::Reservation>]
           #     List of reservations visible to the user.
@@ -227,7 +281,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#get_reservation ReservationService.GetReservation}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#get_reservation ReservationService.GetReservation}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the reservation to retrieve. E.g.,
@@ -237,7 +292,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_reservation ReservationService.DeleteReservation}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_reservation ReservationService.DeleteReservation}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the reservation to retrieve. E.g.,
@@ -247,7 +303,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_reservation ReservationService.UpdateReservation}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_reservation ReservationService.UpdateReservation}.
           # @!attribute [rw] reservation
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Reservation]
           #     Content of the reservation to update.
@@ -259,7 +316,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_capacity_commitment ReservationService.CreateCapacityCommitment}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_capacity_commitment ReservationService.CreateCapacityCommitment}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. Resource name of the parent reservation. E.g.,
@@ -283,7 +341,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_capacity_commitments ReservationService.ListCapacityCommitments}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_capacity_commitments ReservationService.ListCapacityCommitments}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. Resource name of the parent reservation. E.g.,
@@ -299,7 +358,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_capacity_commitments ReservationService.ListCapacityCommitments}.
+          # The response for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_capacity_commitments ReservationService.ListCapacityCommitments}.
           # @!attribute [rw] capacity_commitments
           #   @return [::Array<::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment>]
           #     List of capacity commitments visible to the user.
@@ -312,7 +372,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#get_capacity_commitment ReservationService.GetCapacityCommitment}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#get_capacity_commitment ReservationService.GetCapacityCommitment}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the capacity commitment to retrieve. E.g.,
@@ -322,7 +383,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_capacity_commitment ReservationService.DeleteCapacityCommitment}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_capacity_commitment ReservationService.DeleteCapacityCommitment}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the capacity commitment to delete. E.g.,
@@ -337,7 +399,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_capacity_commitment ReservationService.UpdateCapacityCommitment}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_capacity_commitment ReservationService.UpdateCapacityCommitment}.
           # @!attribute [rw] capacity_commitment
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment]
           #     Content of the capacity commitment to update.
@@ -349,7 +412,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#split_capacity_commitment ReservationService.SplitCapacityCommitment}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#split_capacity_commitment ReservationService.SplitCapacityCommitment}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The resource name e.g.,:
@@ -362,7 +426,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#split_capacity_commitment ReservationService.SplitCapacityCommitment}.
+          # The response for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#split_capacity_commitment ReservationService.SplitCapacityCommitment}.
           # @!attribute [rw] first
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment]
           #     First capacity commitment, result of a split.
@@ -374,7 +439,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#merge_capacity_commitments ReservationService.MergeCapacityCommitments}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#merge_capacity_commitments ReservationService.MergeCapacityCommitments}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Parent resource that identifies admin project and location e.g.,
@@ -428,6 +494,9 @@ module Google
               # BigQuery ML jobs that use services external to BigQuery for model
               # training. These jobs will not utilize idle slots from other reservations.
               ML_EXTERNAL = 3
+
+              # Background jobs that BigQuery runs for the customers in the background.
+              BACKGROUND = 4
             end
 
             # Assignment will remain in PENDING state if no active capacity commitment is
@@ -446,7 +515,8 @@ module Google
             end
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_assignment ReservationService.CreateAssignment}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_assignment ReservationService.CreateAssignment}.
           # Note: "bigquery.reservationAssignments.create" permission is required on the
           # related assignee.
           # @!attribute [rw] parent
@@ -467,7 +537,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_assignments ReservationService.ListAssignments}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_assignments ReservationService.ListAssignments}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The parent resource name e.g.:
@@ -488,7 +559,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_assignments ReservationService.ListAssignments}.
+          # The response for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_assignments ReservationService.ListAssignments}.
           # @!attribute [rw] assignments
           #   @return [::Array<::Google::Cloud::Bigquery::Reservation::V1::Assignment>]
           #     List of assignments visible to the user.
@@ -501,7 +573,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_assignment ReservationService.DeleteAssignment}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_assignment ReservationService.DeleteAssignment}.
           # Note: "bigquery.reservationAssignments.delete" permission is required on the
           # related assignee.
           # @!attribute [rw] name
@@ -519,8 +592,8 @@ module Google
           # related assignee.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The resource name of the admin project(containing project and location),
-          #     e.g.:
+          #     Required. The resource name of the admin project(containing project and
+          #     location), e.g.:
           #       `projects/myproject/locations/US`.
           # @!attribute [rw] query
           #   @return [::String]
@@ -548,8 +621,8 @@ module Google
           # related assignee.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The resource name with location (project name could be the wildcard '-'),
-          #     e.g.:
+          #     Required. The resource name with location (project name could be the
+          #     wildcard '-'), e.g.:
           #       `projects/-/locations/US`.
           # @!attribute [rw] query
           #   @return [::String]
@@ -571,7 +644,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#search_assignments ReservationService.SearchAssignments}.
+          # The response for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#search_assignments ReservationService.SearchAssignments}.
           # @!attribute [rw] assignments
           #   @return [::Array<::Google::Cloud::Bigquery::Reservation::V1::Assignment>]
           #     List of assignments visible to the user.
@@ -584,7 +658,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#search_all_assignments ReservationService.SearchAllAssignments}.
+          # The response for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#search_all_assignments ReservationService.SearchAllAssignments}.
           # @!attribute [rw] assignments
           #   @return [::Array<::Google::Cloud::Bigquery::Reservation::V1::Assignment>]
           #     List of assignments visible to the user.
@@ -615,12 +690,20 @@ module Google
           #   @return [::String]
           #     The new reservation ID, e.g.:
           #       `projects/myotherproject/locations/US/reservations/team2-prod`
+          # @!attribute [rw] assignment_id
+          #   @return [::String]
+          #     The optional assignment ID. A new assignment name is generated if this
+          #     field is empty.
+          #
+          #     This field can contain only lowercase alphanumeric characters or dashes.
+          #     Max length is 64 characters.
           class MoveAssignmentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_assignment ReservationService.UpdateAssignment}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_assignment ReservationService.UpdateAssignment}.
           # @!attribute [rw] assignment
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
           #     Content of the assignment to update.
@@ -688,6 +771,23 @@ module Google
           class UpdateBiReservationRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The type of editions.
+          # Different features and behaviors are provided to different editions
+          # Capacity commitments and reservations are linked to editions.
+          module Edition
+            # Default value, which will be treated as ENTERPRISE.
+            EDITION_UNSPECIFIED = 0
+
+            # Standard edition.
+            STANDARD = 1
+
+            # Enterprise edition.
+            ENTERPRISE = 2
+
+            # Enterprise plus edition.
+            ENTERPRISE_PLUS = 3
           end
         end
       end

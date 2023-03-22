@@ -1014,6 +1014,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     # Create request parameters for a unary method.
     name = "hello world"
     destination_id = "hello world"
+    assignment_id = "hello world"
 
     move_assignment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1029,27 +1030,27 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
         end
 
         # Use hash object
-        client.move_assignment({ name: name, destination_id: destination_id }) do |_result, response|
+        client.move_assignment({ name: name, destination_id: destination_id, assignment_id: assignment_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.move_assignment name: name, destination_id: destination_id do |_result, response|
+        client.move_assignment name: name, destination_id: destination_id, assignment_id: assignment_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.move_assignment ::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new(name: name, destination_id: destination_id) do |_result, response|
+        client.move_assignment ::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new(name: name, destination_id: destination_id, assignment_id: assignment_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.move_assignment({ name: name, destination_id: destination_id }, call_options) do |_result, response|
+        client.move_assignment({ name: name, destination_id: destination_id, assignment_id: assignment_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.move_assignment(::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new(name: name, destination_id: destination_id), call_options) do |_result, response|
+        client.move_assignment(::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new(name: name, destination_id: destination_id, assignment_id: assignment_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

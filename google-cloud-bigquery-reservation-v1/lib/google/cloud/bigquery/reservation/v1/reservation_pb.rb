@@ -18,10 +18,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :slot_capacity, :int64, 2
       optional :ignore_idle_slots, :bool, 4
+      optional :autoscale, :message, 7, "google.cloud.bigquery.reservation.v1.Reservation.Autoscale"
       optional :concurrency, :int64, 16
       optional :creation_time, :message, 8, "google.protobuf.Timestamp"
       optional :update_time, :message, 9, "google.protobuf.Timestamp"
       optional :multi_region_auxiliary, :bool, 14
+      optional :edition, :enum, 17, "google.cloud.bigquery.reservation.v1.Edition"
+    end
+    add_message "google.cloud.bigquery.reservation.v1.Reservation.Autoscale" do
+      optional :current_slots, :int64, 1
+      optional :max_slots, :int64, 2
     end
     add_message "google.cloud.bigquery.reservation.v1.CapacityCommitment" do
       optional :name, :string, 1
@@ -33,13 +39,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :failure_status, :message, 7, "google.rpc.Status"
       optional :renewal_plan, :enum, 8, "google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan"
       optional :multi_region_auxiliary, :bool, 10
+      optional :edition, :enum, 12, "google.cloud.bigquery.reservation.v1.Edition"
     end
     add_enum "google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan" do
       value :COMMITMENT_PLAN_UNSPECIFIED, 0
       value :FLEX, 3
+      value :FLEX_FLAT_RATE, 7
       value :TRIAL, 5
       value :MONTHLY, 2
+      value :MONTHLY_FLAT_RATE, 8
       value :ANNUAL, 4
+      value :ANNUAL_FLAT_RATE, 9
+      value :THREE_YEAR, 10
+      value :NONE, 6
     end
     add_enum "google.cloud.bigquery.reservation.v1.CapacityCommitment.State" do
       value :STATE_UNSPECIFIED, 0
@@ -120,6 +132,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :PIPELINE, 1
       value :QUERY, 2
       value :ML_EXTERNAL, 3
+      value :BACKGROUND, 4
     end
     add_enum "google.cloud.bigquery.reservation.v1.Assignment.State" do
       value :STATE_UNSPECIFIED, 0
@@ -166,6 +179,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.bigquery.reservation.v1.MoveAssignmentRequest" do
       optional :name, :string, 1
       optional :destination_id, :string, 3
+      optional :assignment_id, :string, 5
     end
     add_message "google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest" do
       optional :assignment, :message, 1, "google.cloud.bigquery.reservation.v1.Assignment"
@@ -189,6 +203,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :bi_reservation, :message, 1, "google.cloud.bigquery.reservation.v1.BiReservation"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
+    add_enum "google.cloud.bigquery.reservation.v1.Edition" do
+      value :EDITION_UNSPECIFIED, 0
+      value :STANDARD, 1
+      value :ENTERPRISE, 2
+      value :ENTERPRISE_PLUS, 3
+    end
   end
 end
 
@@ -198,6 +218,7 @@ module Google
       module Reservation
         module V1
           Reservation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.Reservation").msgclass
+          Reservation::Autoscale = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.Reservation.Autoscale").msgclass
           CapacityCommitment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.CapacityCommitment").msgclass
           CapacityCommitment::CommitmentPlan = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan").enummodule
           CapacityCommitment::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.CapacityCommitment.State").enummodule
@@ -233,6 +254,7 @@ module Google
           BiReservation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.BiReservation").msgclass
           GetBiReservationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.GetBiReservationRequest").msgclass
           UpdateBiReservationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest").msgclass
+          Edition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.Edition").enummodule
         end
       end
     end
