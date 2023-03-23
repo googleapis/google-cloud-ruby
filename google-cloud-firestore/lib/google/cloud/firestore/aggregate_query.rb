@@ -115,6 +115,26 @@ module Google
           AggregateQuery.start query, new_aggregates, parent_path, client
         end
 
+        def add_sum aggregate_alias: nil
+          aggregate_alias ||= ALIASES[:sum]
+          new_aggregates = @aggregates.dup
+          new_aggregates << StructuredAggregationQuery::Aggregation.new(
+            sum: StructuredAggregationQuery::Aggregation::Sum.new,
+            alias: aggregate_alias
+          )
+          AggregateQuery.start query, new_aggregates, parent_path, client
+        end
+
+        def add_avg aggregate_alias: nil
+          aggregate_alias ||= ALIASES[:avg]
+          new_aggregates = @aggregates.dup
+          new_aggregates << StructuredAggregationQuery::Aggregation.new(
+            avg: StructuredAggregationQuery::Aggregation::Avg.new,
+            alias: aggregate_alias
+          )
+          AggregateQuery.start query, new_aggregates, parent_path, client
+        end
+
         ##
         # Retrieves aggregate snapshot for the query.
         #
@@ -175,6 +195,8 @@ module Google
         # @private
         ALIASES = {
           count: "count"
+          sum: "sum"
+          avg: "avg"
         }.freeze
 
         ##

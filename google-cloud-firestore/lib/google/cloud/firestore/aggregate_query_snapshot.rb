@@ -108,6 +108,9 @@ module Google
                              .result
                              .aggregate_fields
                              .to_h # convert from protobuf to ruby map
+                             # TODO: This won't work after sum/avg is released,
+                             # since they can contain decimal values.
+                             # Need to change this to account for them.
                              .transform_values { |v| v[:integer_value] }
 
           new.tap do |s|
