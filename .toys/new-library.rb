@@ -128,7 +128,7 @@ end
 def create_release_please_configs
   manifest = JSON.parse File.read manifest_name
   manifest[gem_name] = "0.0.1"
-  manifest = sort_hash add_fillers manifest
+  manifest = add_fillers(manifest).sort.to_h
   File.write manifest_name, "#{JSON.pretty_generate manifest}\n"
 
   config = JSON.parse File.read config_name
@@ -136,7 +136,7 @@ def create_release_please_configs
     "component" => gem_name,
     "version_file" => gem_version_file
   }
-  config["packages"] = sort_hash config["packages"]
+  config["packages"] = config["packages"].sort.to_h
   File.write config_name, "#{JSON.pretty_generate config}\n"
 end
 
@@ -156,14 +156,6 @@ def add_fillers manifest
     manifest["#{key}+FILLER"] = "0.0.0" unless key.end_with? "+FILLER"
   end
   manifest
-end
-
-def sort_hash original
-  result = {}
-  original.keys.sort.each do |key|
-    result[key] = original[key]
-  end
-  result
 end
 
 def test_library
