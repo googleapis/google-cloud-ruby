@@ -1,4 +1,6 @@
 {
+    "api_id": "cloudresourcemanager.googleapis.com",
+    "api_shortname": "cloudresourcemanager",
     "name": "resourcemanager",
     "language": "ruby",
     "distribution_name": "google-cloud-resource_manager",
