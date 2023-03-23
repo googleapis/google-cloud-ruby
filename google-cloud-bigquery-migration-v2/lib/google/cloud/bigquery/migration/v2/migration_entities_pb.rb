@@ -67,6 +67,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SUCCEEDED, 3
       value :FAILED, 4
       value :PAUSED, 5
+      value :PENDING_DEPENDENCY, 6
     end
   end
 end
