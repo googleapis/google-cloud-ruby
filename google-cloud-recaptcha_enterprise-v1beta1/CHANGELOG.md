@@ -1,5 +1,13 @@
 # Release History
 
+### 0.8.0 (2023-03-23)
+
+#### Features
+
+* Add support for reCAPTCHA Enterprise FraudPrevention API 
+* Add support for reCAPTCHA Enterprise TransactionData API 
+* Add support for TransactionEvent ([#20923](https://github.com/googleapis/google-cloud-ruby/issues/20923)) 
+
 ### 0.7.0 (2023-03-08)
 
 #### Features
