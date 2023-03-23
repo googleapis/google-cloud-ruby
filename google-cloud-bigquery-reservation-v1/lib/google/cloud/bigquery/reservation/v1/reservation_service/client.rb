@@ -1721,8 +1721,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The resource name of the admin project(containing project and location),
-              #     e.g.:
+              #     Required. The resource name of the admin project(containing project and
+              #     location), e.g.:
               #       `projects/myproject/locations/US`.
               #   @param query [::String]
               #     Please specify resource name as assignee in the query.
@@ -1844,8 +1844,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The resource name with location (project name could be the wildcard '-'),
-              #     e.g.:
+              #     Required. The resource name with location (project name could be the
+              #     wildcard '-'), e.g.:
               #       `projects/-/locations/US`.
               #   @param query [::String]
               #     Please specify resource name as assignee in the query.
@@ -1946,7 +1946,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload move_assignment(name: nil, destination_id: nil)
+              # @overload move_assignment(name: nil, destination_id: nil, assignment_id: nil)
               #   Pass arguments to `move_assignment` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1958,6 +1958,12 @@ module Google
               #   @param destination_id [::String]
               #     The new reservation ID, e.g.:
               #       `projects/myotherproject/locations/US/reservations/team2-prod`
+              #   @param assignment_id [::String]
+              #     The optional assignment ID. A new assignment name is generated if this
+              #     field is empty.
+              #
+              #     This field can contain only lowercase alphanumeric characters or dashes.
+              #     Max length is 64 characters.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
