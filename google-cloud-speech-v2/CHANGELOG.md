@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2023-03-23)
+
+#### Features
+
+* Add support for BatchRecognize ([#20943](https://github.com/googleapis/google-cloud-ruby/issues/20943)) 
+
 ### 0.2.0 (2023-02-23)
 
 #### Features
