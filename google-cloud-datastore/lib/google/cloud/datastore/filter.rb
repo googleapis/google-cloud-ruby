@@ -54,7 +54,7 @@ module Google
         ##
         # @private Object of type
         # Google::Cloud::Datastore::V1::Filter
-        attr_reader :grpc
+        attr_accessor :grpc
 
         ##
         # Creates a new Filter.
@@ -64,18 +64,36 @@ module Google
         #
         #   filter = Google::Cloud::Datastore::Filter.new("done", "=", "false")
         #
-        def initialize name_or_filter, operator = nil, value = nil
-          @grpc = if name_or_filter.is_a? Google::Cloud::Datastore::V1::Filter
-                    name_or_filter
-                  else
-                    create_property_filter name_or_filter, operator, value
-                  end
+        def initialize name, operator, value
+          @grpc = create_property_filter name, operator, value
         end
 
+        ##
+        # Joins two filters with an AND operator.
+        # 
+        # @overload and(name, operator, value)
+        #   Joins the filter with a property filter
+        #   @param name [String]
+        #   @param operator [String]
+        # 
+        # @overload and(filter)
+        #   Joins the filter with a Filter object
+        #   @param flter [Filter]
         def and *args
           combine_filters composite_filter_and, args
         end
 
+        ##
+        # Joins two filters with an OR operator.
+        # 
+        # @overload or(name, operator, value)
+        #   Joins the filter with a property filter
+        #   @param name [String]
+        #   @param operator [String]
+        # 
+        # @overload or(filter)
+        #   Joins the filter with a Filter object
+        #   @param flter [Filter]
         def or *args
           combine_filters composite_filter_or, args
         end
@@ -95,7 +113,9 @@ module Google
             name, operator, value = args
             composite_filter.composite_filter.filters << create_property_filter(name, operator, value)
           end
-          self.class.new composite_filter
+          self.class.new("", "", "").tap do |f|
+            f.grpc = composite_filter
+          end 
         end
 
         def composite_filter_and
