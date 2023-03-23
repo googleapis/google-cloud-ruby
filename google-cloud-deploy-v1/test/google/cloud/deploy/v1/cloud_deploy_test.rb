@@ -1051,6 +1051,124 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
     end
   end
 
+  def test_advance_rollout
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::AdvanceRolloutResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    phase_id = "hello world"
+
+    advance_rollout_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :advance_rollout, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::AdvanceRolloutRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["phase_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, advance_rollout_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.advance_rollout({ name: name, phase_id: phase_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.advance_rollout name: name, phase_id: phase_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.advance_rollout ::Google::Cloud::Deploy::V1::AdvanceRolloutRequest.new(name: name, phase_id: phase_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.advance_rollout({ name: name, phase_id: phase_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.advance_rollout(::Google::Cloud::Deploy::V1::AdvanceRolloutRequest.new(name: name, phase_id: phase_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, advance_rollout_client_stub.call_rpc_count
+    end
+  end
+
+  def test_cancel_rollout
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::CancelRolloutResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    cancel_rollout_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :cancel_rollout, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::CancelRolloutRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, cancel_rollout_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.cancel_rollout({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.cancel_rollout name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.cancel_rollout ::Google::Cloud::Deploy::V1::CancelRolloutRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.cancel_rollout({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.cancel_rollout(::Google::Cloud::Deploy::V1::CancelRolloutRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, cancel_rollout_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_rollouts
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Deploy::V1::ListRolloutsResponse.new
@@ -1193,6 +1311,7 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
     rollout = {}
     request_id = "hello world"
     validate_only = true
+    starting_phase_id = "hello world"
 
     create_rollout_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_rollout, name
@@ -1202,6 +1321,7 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Deploy::V1::Rollout), request["rollout"]
       assert_equal "hello world", request["request_id"]
       assert_equal true, request["validate_only"]
+      assert_equal "hello world", request["starting_phase_id"]
       refute_nil options
     end
 
@@ -1212,35 +1332,35 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only }) do |response, operation|
+      client.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only, starting_phase_id: starting_phase_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_rollout parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only do |response, operation|
+      client.create_rollout parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only, starting_phase_id: starting_phase_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_rollout ::Google::Cloud::Deploy::V1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only) do |response, operation|
+      client.create_rollout ::Google::Cloud::Deploy::V1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only, starting_phase_id: starting_phase_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      client.create_rollout({ parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only, starting_phase_id: starting_phase_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_rollout(::Google::Cloud::Deploy::V1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+      client.create_rollout(::Google::Cloud::Deploy::V1::CreateRolloutRequest.new(parent: parent, rollout_id: rollout_id, rollout: rollout, request_id: request_id, validate_only: validate_only, starting_phase_id: starting_phase_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1248,6 +1368,68 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, create_rollout_client_stub.call_rpc_count
+    end
+  end
+
+  def test_ignore_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::IgnoreJobResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    rollout = "hello world"
+    phase_id = "hello world"
+    job_id = "hello world"
+
+    ignore_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :ignore_job, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::IgnoreJobRequest, request
+      assert_equal "hello world", request["rollout"]
+      assert_equal "hello world", request["phase_id"]
+      assert_equal "hello world", request["job_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, ignore_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.ignore_job({ rollout: rollout, phase_id: phase_id, job_id: job_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.ignore_job rollout: rollout, phase_id: phase_id, job_id: job_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.ignore_job ::Google::Cloud::Deploy::V1::IgnoreJobRequest.new(rollout: rollout, phase_id: phase_id, job_id: job_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.ignore_job({ rollout: rollout, phase_id: phase_id, job_id: job_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.ignore_job(::Google::Cloud::Deploy::V1::IgnoreJobRequest.new(rollout: rollout, phase_id: phase_id, job_id: job_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, ignore_job_client_stub.call_rpc_count
     end
   end
 
@@ -1439,6 +1621,64 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, get_job_run_client_stub.call_rpc_count
+    end
+  end
+
+  def test_terminate_job_run
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::TerminateJobRunResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    terminate_job_run_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :terminate_job_run, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::TerminateJobRunRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, terminate_job_run_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.terminate_job_run({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.terminate_job_run name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.terminate_job_run ::Google::Cloud::Deploy::V1::TerminateJobRunRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.terminate_job_run({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.terminate_job_run(::Google::Cloud::Deploy::V1::TerminateJobRunRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, terminate_job_run_client_stub.call_rpc_count
     end
   end
 

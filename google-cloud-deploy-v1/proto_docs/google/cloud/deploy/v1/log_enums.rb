@@ -29,7 +29,7 @@ module Google
           # A Pub/Sub notification failed to be sent.
           TYPE_PUBSUB_NOTIFICATION_FAILURE = 1
 
-          # Release render status changed notification.
+          # Deprecated: This field is never used. Use release_render log type instead.
           TYPE_RENDER_STATUES_CHANGE = 2
         end
       end
