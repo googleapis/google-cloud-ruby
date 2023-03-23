@@ -1,5 +1,14 @@
 # Release History
 
+### 0.17.0 (2023-03-23)
+
+#### Features
+
+* Add account-level binding for the RunAccessReport method ([#20951](https://github.com/googleapis/google-cloud-ruby/issues/20951)) 
+* add enhanced_measurement_settings option to the ChangeHistoryResource.resource oneof field 
+* add ENHANCED_MEASUREMENT_SETTINGS option to the ChangeHistoryResourceType enum 
+* add intraday_export_enabled field to the BigQueryLink resource 
+
 ### 0.16.0 (2023-03-08)
 
 #### Features
