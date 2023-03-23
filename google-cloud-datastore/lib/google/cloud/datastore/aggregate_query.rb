@@ -120,6 +120,26 @@ module Google
           self
         end
 
+        def add_sum aggregate_alias: nil
+          aggregate_alias ||= ALIASES[:sum]
+          aggregates << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
+            sum: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Sum.new,
+            alias: aggregate_alias
+          )
+
+          self
+        end
+
+        def add_avg aggregate_alias: nil
+          aggregate_alias ||= ALIASES[:avg]
+          aggregates << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
+            avg: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Avg.new,
+            alias: aggregate_alias
+          )
+
+          self
+        end
+
         # @private
         def to_grpc
           Google::Cloud::Datastore::V1::AggregationQuery.new(
@@ -132,6 +152,8 @@ module Google
         # @private
         ALIASES = {
           count: "count"
+          sum: "sum"
+          avg: "avg"
         }.freeze
       end
     end
