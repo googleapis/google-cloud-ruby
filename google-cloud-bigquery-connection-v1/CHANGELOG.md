@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 (2023-03-23)
+
+#### Features
+
+* Add support for SparkProperties ([#20924](https://github.com/googleapis/google-cloud-ruby/issues/20924)) 
+
 ### 0.12.0 (2023-03-08)
 
 #### Features
