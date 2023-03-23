@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2023-03-23)
+
+#### Features
+
+* Added support for the RegionInstanceTemplates client ([#20916](https://github.com/googleapis/google-cloud-ruby/issues/20916)) 
+
 ### 1.0.0 (2023-02-15)
 
 ### ⚠ BREAKING CHANGES
