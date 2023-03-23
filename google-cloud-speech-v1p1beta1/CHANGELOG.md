@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.1 (2023-03-23)
+
+#### Documentation
+
+* Fix the resource name format for CreatePhraseSetRequest ([#20949](https://github.com/googleapis/google-cloud-ruby/issues/20949)) 
+
 ### 0.17.0 (2023-02-28)
 
 #### Features
