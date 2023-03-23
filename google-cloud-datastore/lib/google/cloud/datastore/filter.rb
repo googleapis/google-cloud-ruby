@@ -70,12 +70,12 @@ module Google
 
         ##
         # Joins two filters with an AND operator.
-        # 
+        #
         # @overload and(name, operator, value)
         #   Joins the filter with a property filter
         #   @param name [String]
         #   @param operator [String]
-        # 
+        #
         # @overload and(filter)
         #   Joins the filter with a Filter object
         #   @param flter [Filter]
@@ -85,19 +85,19 @@ module Google
 
         ##
         # Joins two filters with an OR operator.
-        # 
+        #
         # @overload or(name, operator, value)
         #   Joins the filter with a property filter
         #   @param name [String]
         #   @param operator [String]
-        # 
+        #
         # @overload or(filter)
         #   Joins the filter with a Filter object
         #   @param flter [Filter]
         def or *args
           combine_filters composite_filter_or, args
         end
-        
+
         # @private
         def to_grpc
           @grpc
@@ -115,7 +115,7 @@ module Google
           end
           self.class.new("", "", "").tap do |f|
             f.grpc = composite_filter
-          end 
+          end
         end
 
         def composite_filter_and
