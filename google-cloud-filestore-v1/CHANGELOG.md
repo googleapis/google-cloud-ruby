@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2023-03-23)
+
+#### Features
+
+* Add support for Snapshots ([#20941](https://github.com/googleapis/google-cloud-ruby/issues/20941)) 
+
 ### 0.3.0 (2023-03-08)
 
 #### Features
