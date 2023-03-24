@@ -28,7 +28,7 @@ describe "Table drop rows", :bigtable do
       rows = table.read_rows.to_a
       _(rows).must_be_empty
     ensure
-      table.delete
+      table&.delete
     end
   end
 
@@ -42,7 +42,7 @@ describe "Table drop rows", :bigtable do
       rows = table.read_rows.to_a
       _(rows.length).must_equal 1
     ensure
-      table.delete
+      table&.delete
     end
   end
 end
