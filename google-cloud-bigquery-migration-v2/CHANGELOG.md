@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.6.0 (2023-03-24)
+
+#### Features
+
+* Add new state in MigrationSubtask 
+* Add support for request_source field in TranslationConfigDetails ([#20986](https://github.com/googleapis/google-cloud-ruby/issues/20986)) 
+
 ### 0.5.0 (2022-08-10)
 
 #### Features
