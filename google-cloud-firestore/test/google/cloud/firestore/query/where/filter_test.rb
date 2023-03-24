@@ -27,7 +27,7 @@ describe Google::Cloud::Firestore::Query, :where, :mock_firestore do
         )
       )
     )
-    filter = Google::Cloud::Firestore::Filter.create(:foo, "=", 42)
+    filter = Google::Cloud::Firestore::Filter.new(:foo, "=", 42)
     generated_query = query.where(filter).query
     _(generated_query).must_equal expected_query
   end
@@ -57,8 +57,8 @@ describe Google::Cloud::Firestore::Query, :where, :mock_firestore do
       )
     )
 
-    filter_1 = Google::Cloud::Firestore::Filter.create(:foo, :==, 42)
-    filter_2 = Google::Cloud::Firestore::Filter.create(:bar, :==, "baz")
+    filter_1 = Google::Cloud::Firestore::Filter.new(:foo, :==, 42)
+    filter_2 = Google::Cloud::Firestore::Filter.new(:bar, :==, "baz")
     filter = filter_1.and(filter_2)
     generated_query = query.where(filter).query
     _(generated_query).must_equal expected_query
@@ -73,7 +73,7 @@ describe Google::Cloud::Firestore::Query, :where, :mock_firestore do
         )
       )
     )
-    filter = Google::Cloud::Firestore::Filter.create(:foo, :==, nil)
+    filter = Google::Cloud::Firestore::Filter.new(:foo, :==, nil)
 
     generated_query = query.where(filter).query
     _(generated_query).must_equal expected_query

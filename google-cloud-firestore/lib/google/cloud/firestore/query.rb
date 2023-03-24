@@ -216,12 +216,12 @@ module Google
         # @overload where(filter_or_field)
         #   Pass Firestore::Filter to `where` via field_or_filter argument.
         #
-        #   @param [::Google::Cloud::Firestore::Filter] filter_or_field
+        #   @param [::Google::Cloud::Firestore::Filter] filter
         #
         # @overload where(filter_or_field, operator, value)
         #   Pass arguments to `where` via positional arguments.
         #
-        #    @param [FieldPath, String, Symbol] filter_or_field A field path to filter
+        #    @param [FieldPath, String, Symbol] field A field path to filter
         #     results with.
         #
         #     If a {FieldPath} object is not provided then the field will be
@@ -290,7 +290,7 @@ module Google
           if filter_or_field.is_a? Google::Cloud::Firestore::Filter
             new_query.where = filter_or_field.filter
           else
-            new_filter = Google::Cloud::Firestore::Filter.create filter_or_field, operator, value
+            new_filter = Google::Cloud::Firestore::Filter.new filter_or_field, operator, value
             add_filters_to_query new_query, new_filter.filter
           end
 

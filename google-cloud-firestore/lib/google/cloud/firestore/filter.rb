@@ -14,76 +14,18 @@
 
 
 require "google/cloud/firestore/v1"
-require "google/cloud/firestore/document_snapshot"
-require "google/cloud/firestore/query_listener"
-require "google/cloud/firestore/convert"
-require "google/cloud/firestore/aggregate_query"
-require "json"
 
 module Google
   module Cloud
     module Firestore
+      ##
+      # Represents the filter for structured query.
+      #
       class Filter
         ##
         # @private Object of type
         # Google::Cloud::Firestore::V1::StructuredQuery::Filter
         attr_accessor :filter
-
-        ##
-        # @private Creates a new Filter.
-        def initialize filter
-          @filter = filter
-        end
-
-        ##
-        # Filters the query on a field.
-        #
-        # @param [Object] args
-        #
-        #   If a {FieldPath} object is not provided then the field will be
-        #   treated as a dotted string, meaning the string represents individual
-        #   fields joined by ".". Fields containing `~`, `*`, `/`, `[`, `]`, and
-        #   `.` cannot be in a dotted string, and should provided using a
-        #   {FieldPath} object instead.
-        # @param [String, Symbol] operator The operation to compare the field
-        #   to. Acceptable values include:
-        #
-        #   * less than: `<`, `lt`
-        #   * less than or equal: `<=`, `lte`
-        #   * greater than: `>`, `gt`
-        #   * greater than or equal: `>=`, `gte`
-        #   * equal: `=`, `==`, `eq`, `eql`, `is`
-        #   * not equal: `!=`
-        #   * in: `in`
-        #   * not in: `not-in`, `not_in`
-        #   * array contains: `array-contains`, `array_contains`
-        # @param [Object] value A value the field is compared to.
-        #
-        # @return [Google::Cloud::Firestore::Filter] New filter for the given condition
-        #
-        # @example
-        #   require "google/cloud/firestore"
-        #
-        #   firestore = Google::Cloud::Firestore.new
-        #
-        #   # Create a Filter
-        #   Google::Cloud::Firestore::Filter.create(:population, :>=, 1000000)
-        #
-        def and *args
-          if args.length == 1
-            Filter.and_all self, *args
-          else
-            Filter.and_all self, args
-          end
-        end
-
-        def or *args
-          if args.length == 1
-            Filter.or_all self, *args
-          else
-            Filter.or_all self, args
-          end
-        end
 
         ##
         # Create a Filter object.
@@ -120,16 +62,112 @@ module Google
         #   # Create a Filter
         #   Google::Cloud::Firestore::Filter.create(:population, :>=, 1000000)
         #
-        def self.create field, operator, value
-          new create_filter(field, operator, value)
+        def initialize field, operator, value
+          @filter = create_filter field, operator, value
         end
 
-        def self.and_all *args
-          new insert_in_composite_filter(composite_filter_and, args)
+        ##
+        # Joins filter using AND operator.
+        #
+        # @overload and(filter)
+        #
+        #   @param [::Google::Cloud::Firestore::Filter] filter
+        #
+        # @overload and(field, operator, value)
+        #
+        #    @param [FieldPath, String, Symbol] filter_or_field A field path to filter
+        #     results with.
+        #
+        #     If a {FieldPath} object is not provided then the field will be
+        #     treated as a dotted string, meaning the string represents individual
+        #     fields joined by ".". Fields containing `~`, `*`, `/`, `[`, `]`, and
+        #     `.` cannot be in a dotted string, and should provided using a
+        #     {FieldPath} object instead.
+        #    @param [String, Symbol] operator The operation to compare the field
+        #     to. Acceptable values include:
+        #
+        #     * less than: `<`, `lt`
+        #     * less than or equal: `<=`, `lte`
+        #     * greater than: `>`, `gt`
+        #     * greater than or equal: `>=`, `gte`
+        #     * equal: `=`, `==`, `eq`, `eql`, `is`
+        #     * not equal: `!=`
+        #     * in: `in`
+        #     * not in: `not-in`, `not_in`
+        #     * array contains: `array-contains`, `array_contains`
+        #    @param [Object] value A value the field is compared to.
+        #
+        # @return [Filter] New Filter object.
+        #
+        # @example Pass a Filter type object in argument
+        #   require "google/cloud/firestore"
+        #
+        #   filter_1 = Google::Cloud::Firestore.Firestore.new(:population, :>=, 1000000)
+        #   filter_2 = Google::Cloud::Firestore.Firestore.new("done", "=", "false")
+        #
+        #   filter = filter_1.and(filter_2)
+        #
+        # @example Pass filter conditions in the argument
+        #   require "google/cloud/firestore"
+        #
+        #   filter_1 = Google::Cloud::Firestore.Firestore.new(:population, :>=, 1000000)
+        #
+        #   filter = filter_1.and("done", "=", "false")
+        #
+        def and *args
+          join_filters composite_filter_and, args
         end
 
-        def self.or_all *args
-          new insert_in_composite_filter(composite_filter_or, args)
+        ##
+        # Joins filter using OR operator.
+        #
+        # @overload and(filter)
+        #
+        #   @param [::Google::Cloud::Firestore::Filter] filter
+        #
+        # @overload and(field, operator, value)
+        #
+        #    @param [FieldPath, String, Symbol] filter_or_field A field path to filter
+        #     results with.
+        #
+        #     If a {FieldPath} object is not provided then the field will be
+        #     treated as a dotted string, meaning the string represents individual
+        #     fields joined by ".". Fields containing `~`, `*`, `/`, `[`, `]`, and
+        #     `.` cannot be in a dotted string, and should provided using a
+        #     {FieldPath} object instead.
+        #    @param [String, Symbol] operator The operation to compare the field
+        #     to. Acceptable values include:
+        #
+        #     * less than: `<`, `lt`
+        #     * less than or equal: `<=`, `lte`
+        #     * greater than: `>`, `gt`
+        #     * greater than or equal: `>=`, `gte`
+        #     * equal: `=`, `==`, `eq`, `eql`, `is`
+        #     * not equal: `!=`
+        #     * in: `in`
+        #     * not in: `not-in`, `not_in`
+        #     * array contains: `array-contains`, `array_contains`
+        #    @param [Object] value A value the field is compared to.
+        #
+        # @return [Filter] New Filter object.
+        #
+        # @example Pass a Filter type object in argument
+        #   require "google/cloud/firestore"
+        #
+        #   filter_1 = Google::Cloud::Firestore.Firestore.new(:population, :>=, 1000000)
+        #   filter_2 = Google::Cloud::Firestore.Firestore.new("done", "=", "false")
+        #
+        #   filter = filter_1.or(filter_2)
+        #
+        # @example Pass filter conditions in the argument
+        #   require "google/cloud/firestore"
+        #
+        #   filter_1 = Google::Cloud::Firestore.Firestore.new(:population, :>=, 1000000)
+        #
+        #   filter = filter_1.or("done", "=", "false")
+        #
+        def or *args
+          join_filters composite_filter_or, args
         end
 
         ##
@@ -173,48 +211,46 @@ module Google
           :GREATER_THAN_OR_EQUAL
         ].freeze
 
-        def self.composite_filter_and
+        def composite_filter_and
           StructuredQuery::Filter.new(
             composite_filter: StructuredQuery::CompositeFilter.new(op: :AND)
           )
         end
 
-        def self.composite_filter_or
+        def composite_filter_or
           StructuredQuery::Filter.new(
             composite_filter: StructuredQuery::CompositeFilter.new(op: :OR)
           )
         end
 
-        def self.insert_in_composite_filter composite_filter, args
-          args.each do |filter|
-            case filter
-            when Google::Cloud::Firestore::Filter
-              composite_filter.composite_filter.filters << filter.filter
-            when Array
-              composite_filter.composite_filter.filters << create_filter(*filter)
-            else
-              # Raise a error for incorrect input
-              puts "Error should be raised in this case"
-            end
+        def join_filters composite_filter, sec_filter
+          composite_filter.composite_filter.filters << @filter
+          if (sec_filter.length == 1) && sec_filter[0].is_a?(Google::Cloud::Firestore::Filter)
+            composite_filter.composite_filter.filters << sec_filter[0].filter
+          else
+            composite_filter.composite_filter.filters << create_filter(*sec_filter)
           end
-          composite_filter
+          Filter.new(nil, nil, nil).tap do |f|
+            f.filter = composite_filter
+          end
         end
 
-        def self.value_nil? value
+        def value_nil? value
           [nil, :null, :nil].include? value
         end
 
-        def self.value_nan? value
+        def value_nan? value
           # Comparing NaN values raises, so check for #nan? first.
           return true if value.respond_to?(:nan?) && value.nan?
           [:nan].include? value
         end
 
-        def self.value_unary? value
+        def value_unary? value
           value_nil?(value) || value_nan?(value)
         end
 
-        def self.create_filter field, op_key, value
+        def create_filter field, op_key, value
+          return if field.nil? && op_key.nil? && value.nil?
           field = FieldPath.parse field unless field.is_a? FieldPath
           field = StructuredQuery::FieldReference.new field_path: field.formatted_string.to_s
           operator = FILTER_OPS[op_key.to_s.downcase]

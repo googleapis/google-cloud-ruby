@@ -157,7 +157,7 @@ describe "Query", :firestore_acceptance do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "bar"})
 
-    filter = Google::Cloud::Firestore::Filter.create(:foo, :!=, nil)
+    filter = Google::Cloud::Firestore::Filter.new(:foo, :!=, nil)
     result_snp = rand_query_col.where(filter).get.first
     _(result_snp).wont_be :nil?
     _(result_snp[:foo]).must_equal "bar"
@@ -168,11 +168,11 @@ describe "Query", :firestore_acceptance do
     rand_query_col.add({foo: "bar"})
     rand_query_col.add({foo: "baz"})
 
-    filter_1 = Google::Cloud::Firestore::Filter.create(:foo, :!=, nil)
-    filter_2 = Google::Cloud::Firestore::Filter.create(:foo, :==, "bar")
-    filter_3 = Google::Cloud::Firestore::Filter.create(:foo, :==, "baz")
+    filter_1 = Google::Cloud::Firestore::Filter.new(:foo, :!=, nil)
+    filter_2 = Google::Cloud::Firestore::Filter.new(:foo, :==, "bar")
+    filter_3 = Google::Cloud::Firestore::Filter.new(:foo, :==, "baz")
 
-    filter = Google::Cloud::Firestore::Filter.and_all([:foo, :==, "bar"], filter_1)
+    filter = firestore.filter(:foo, :==, "bar").and(filter_1)
     result_snp = rand_query_col.where(filter).get.first
     _(result_snp).wont_be :nil?
     _(result_snp[:foo]).must_equal "bar"
