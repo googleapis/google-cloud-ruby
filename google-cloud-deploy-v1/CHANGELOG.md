@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.6.0 (2023-03-24)
+
+#### Features
+
+* added support for RELEASE_RENDER log type and deprecated TYPE_RENDER_STATUES_CHANGE 
+* added supported for Cloud Deploy Progressive Deployment Strategy ([#20974](https://github.com/googleapis/google-cloud-ruby/issues/20974)) 
+
 ### 0.5.0 (2023-03-08)
 
 #### Features
