@@ -216,8 +216,8 @@ module Google
         #     The map's keys are property names.
         #     A property name matching regex `__.*__` is reserved.
         #     A reserved property name is forbidden in certain documented contexts.
-        #     The name must not contain more than 500 characters.
-        #     The name cannot be `""`.
+        #     The map keys, represented as UTF-8, must not exceed 1,500 bytes and cannot
+        #     be empty.
         class Entity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

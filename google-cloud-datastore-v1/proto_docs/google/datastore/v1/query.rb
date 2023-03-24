@@ -95,6 +95,11 @@ module Google
         #     The properties to make distinct. The query results will contain the first
         #     result for each distinct combination of values for the given properties
         #     (if empty, all results are returned).
+        #
+        #     Requires:
+        #
+        #     * If `order` is specified, the set of distinct on properties must appear
+        #     before the non-distinct on properties in `order`.
         # @!attribute [rw] start_cursor
         #   @return [::String]
         #     A starting point for the query results. Query cursors are
@@ -139,7 +144,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Defines a aggregation that produces a single result.
+          # Defines an aggregation that produces a single result.
           # @!attribute [rw] count
           #   @return [::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count]
           #     Count aggregator.
@@ -156,7 +161,7 @@ module Google
           #       COUNT_UP_TO(1) AS count_up_to_1,
           #       COUNT_UP_TO(2),
           #       COUNT_UP_TO(3) AS count_up_to_3,
-          #       COUNT_UP_TO(4)
+          #       COUNT(*)
           #     OVER (
           #       ...
           #     );
@@ -169,7 +174,7 @@ module Google
           #       COUNT_UP_TO(1) AS count_up_to_1,
           #       COUNT_UP_TO(2) AS property_1,
           #       COUNT_UP_TO(3) AS count_up_to_3,
-          #       COUNT_UP_TO(4) AS property_2
+          #       COUNT(*) AS property_2
           #     OVER (
           #       ...
           #     );
@@ -194,7 +199,7 @@ module Google
             #     count.
             #
             #     This provides a way to set an upper bound on the number of entities
-            #     to scan, limiting latency and cost.
+            #     to scan, limiting latency, and cost.
             #
             #     Unspecified is interpreted as no bound.
             #
