@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.1 (2023-03-24)
+
+#### Documentation
+
+* Improved  query API documentation ([#21005](https://github.com/googleapis/google-cloud-ruby/issues/21005)) 
+
 ### 0.11.0 (2023-03-08)
 
 #### Features
