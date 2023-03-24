@@ -89,8 +89,8 @@ tool "bootstrap" do
         }
       end
     end
-    config["packages"] = sort_hash config_packages
-    manifest = sort_hash add_fillers manifest
+    config["packages"] = config_packages.sort.to_h
+    manifest = add_fillers(manifest).sort.to_h
     puts "Added #{added_count} packages (#{already_present_count} already present)", :bold
 
     File.open config_name, "w" do |file|
@@ -106,14 +106,6 @@ tool "bootstrap" do
       manifest["#{key}+FILLER"] = "0.0.0" unless key.end_with? "+FILLER"
     end
     manifest
-  end
-
-  def sort_hash original
-    result = {}
-    original.keys.sort.each do |key|
-      result[key] = original[key]
-    end
-    result
   end
 
   def find_all_packages
