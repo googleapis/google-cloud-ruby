@@ -981,6 +981,27 @@ module Google
           entity
         end
 
+        ##
+        # Create a new Filter instance. This is a convenience method to make the
+        # creation of Filter objects easier.
+        #
+        # @param name [String] The property to filter by
+        # @param operator [String] The operator to filter by
+        # @param value The value to compare the property to
+        #
+        # @return [Google::Cloud::Datastore::Filter]
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   filter = datastore.filter("done", "=", false)
+        #
+        def filter name, operator, value
+          Filter.new name, operator, value
+        end
+
         protected
 
         ##

@@ -554,9 +554,9 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 4
     end
 
-    it "should fetch entities filtered by = operator" do
-      filter = Google::Cloud::Datastore::Filter.new("alive", "=", true)
+    it "should fetch entities filtered through a simple Filter object" do
       datastore = Google::Cloud::Datastore.new
+      filter = datastore.filter("alive", "=", true)
       query = datastore.query("Character").
         ancestor(book).
         where(filter)
@@ -564,12 +564,11 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 4
     end
 
-    focus;
     it "should fetch entities filtered by AND operator" do
-      filter = Google::Cloud::Datastore::Filter.new("name", "=", "Arya")
-                                               .and("alive", "=", true)
-                                               .and(Google::Cloud::Datastore::Filter.new("appearances", "=", 33))
       datastore = Google::Cloud::Datastore.new
+      filter = datastore.filter("name", "=", "Arya")
+                        .and("alive", "=", true)
+                        .and(datastore.filter("appearances", "=", 33))
       query = datastore.query("Character")
         .ancestor(book)
         .where(filter)
@@ -577,13 +576,11 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 1
     end
 
-    focus;
     it "should fetch entities filtered by OR operator" do
-      filter = Google::Cloud::Datastore::Filter.new("name", "=", "Rickard")
-                                               .or("appearances", "=", 33)
-                                               .or(Google::Cloud::Datastore::Filter.new("family", "=", "Targaryen"))
-
       datastore = Google::Cloud::Datastore.new
+      filter = datastore.filter("name", "=", "Rickard")
+                        .or("appearances", "=", 33)
+                        .or(datastore.filter("family", "=", "Targaryen"))
       query = datastore.query("Character")
         .ancestor(book)
         .where(filter)
