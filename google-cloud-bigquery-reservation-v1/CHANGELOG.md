@@ -1,5 +1,13 @@
 # Release History
 
+### 0.8.0 (2023-03-24)
+
+#### Features
+
+* Added new types of CommitmentPlan in CapacityCommitment 
+* Added support for Autoscale 
+* Added support for Edition ([#20997](https://github.com/googleapis/google-cloud-ruby/issues/20997)) 
+
 ### 0.7.0 (2023-03-08)
 
 #### Features
