@@ -511,7 +511,7 @@ module Google
           # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#search_links SearchLinks}.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The project and location you want search in.
+          #     Required. The project and location you want search in the format `projects/*/locations/*`
           # @!attribute [rw] source
           #   @return [::Google::Cloud::DataCatalog::Lineage::V1::EntityReference]
           #     Optional. Send asset information in the **source** field to retrieve all
@@ -585,7 +585,7 @@ module Google
           # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#batch_search_link_processes BatchSearchLinkProcesses}.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The project and location where you want to search.
+          #     Required. The project and location you want search in the format `projects/*/locations/*`
           # @!attribute [rw] links
           #   @return [::Array<::String>]
           #     Required. An array of links to check for their associated LineageProcesses.
