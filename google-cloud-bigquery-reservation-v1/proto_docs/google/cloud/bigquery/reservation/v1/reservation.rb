@@ -80,6 +80,9 @@ module Google
           #     If set to true, this reservation is placed in the organization's
           #     secondary region which is designated for disaster recovery purposes.
           #     If false, this reservation is placed in the organization's default region.
+          #
+          #     NOTE: this is a preview feature. Project must be allow-listed in order to
+          #     set this field.
           # @!attribute [rw] edition
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Edition]
           #     Edition of the reservation.
@@ -151,6 +154,9 @@ module Google
           #     If set to true, this commitment is placed in the organization's
           #     secondary region which is designated for disaster recovery purposes.
           #     If false, this commitment is placed in the organization's default region.
+          #
+          #     NOTE: this is a preview feature. Project must be allow-listed in order to
+          #     set this field.
           # @!attribute [rw] edition
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Edition]
           #     Edition of the capacity commitment.
