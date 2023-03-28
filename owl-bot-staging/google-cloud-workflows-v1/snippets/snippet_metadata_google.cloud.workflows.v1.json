@@ -1,0 +1,215 @@
+{
+  "client_library": {
+    "name": "google-cloud-workflows-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.workflows.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "workflows_v1_generated_Workflows_ListWorkflows_sync",
+      "title": "Snippet for the list_workflows call in the Workflows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workflows::V1::Workflows::Client#list_workflows. It may require modification in order to execute successfully.",
+      "file": "workflows/list_workflows.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workflows",
+        "full_name": "::Google::Cloud::Workflows::V1::Workflows::Client#list_workflows",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workflows::V1::ListWorkflowsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Workflows::V1::ListWorkflowsResponse",
+        "client": {
+          "short_name": "Workflows::Client",
+          "full_name": "::Google::Cloud::Workflows::V1::Workflows::Client"
+        },
+        "method": {
+          "short_name": "ListWorkflows",
+          "full_name": "google.cloud.workflows.v1.Workflows.ListWorkflows",
+          "service": {
+            "short_name": "Workflows",
+            "full_name": "google.cloud.workflows.v1.Workflows"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workflows_v1_generated_Workflows_GetWorkflow_sync",
+      "title": "Snippet for the get_workflow call in the Workflows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workflows::V1::Workflows::Client#get_workflow. It may require modification in order to execute successfully.",
+      "file": "workflows/get_workflow.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_workflow",
+        "full_name": "::Google::Cloud::Workflows::V1::Workflows::Client#get_workflow",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workflows::V1::GetWorkflowRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Workflows::V1::Workflow",
+        "client": {
+          "short_name": "Workflows::Client",
+          "full_name": "::Google::Cloud::Workflows::V1::Workflows::Client"
+        },
+        "method": {
+          "short_name": "GetWorkflow",
+          "full_name": "google.cloud.workflows.v1.Workflows.GetWorkflow",
+          "service": {
+            "short_name": "Workflows",
+            "full_name": "google.cloud.workflows.v1.Workflows"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workflows_v1_generated_Workflows_CreateWorkflow_sync",
+      "title": "Snippet for the create_workflow call in the Workflows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workflows::V1::Workflows::Client#create_workflow. It may require modification in order to execute successfully.",
+      "file": "workflows/create_workflow.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_workflow",
+        "full_name": "::Google::Cloud::Workflows::V1::Workflows::Client#create_workflow",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workflows::V1::CreateWorkflowRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workflows::Client",
+          "full_name": "::Google::Cloud::Workflows::V1::Workflows::Client"
+        },
+        "method": {
+          "short_name": "CreateWorkflow",
+          "full_name": "google.cloud.workflows.v1.Workflows.CreateWorkflow",
+          "service": {
+            "short_name": "Workflows",
+            "full_name": "google.cloud.workflows.v1.Workflows"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workflows_v1_generated_Workflows_DeleteWorkflow_sync",
+      "title": "Snippet for the delete_workflow call in the Workflows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workflows::V1::Workflows::Client#delete_workflow. It may require modification in order to execute successfully.",
+      "file": "workflows/delete_workflow.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_workflow",
+        "full_name": "::Google::Cloud::Workflows::V1::Workflows::Client#delete_workflow",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workflows::V1::DeleteWorkflowRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workflows::Client",
+          "full_name": "::Google::Cloud::Workflows::V1::Workflows::Client"
+        },
+        "method": {
+          "short_name": "DeleteWorkflow",
+          "full_name": "google.cloud.workflows.v1.Workflows.DeleteWorkflow",
+          "service": {
+            "short_name": "Workflows",
+            "full_name": "google.cloud.workflows.v1.Workflows"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workflows_v1_generated_Workflows_UpdateWorkflow_sync",
+      "title": "Snippet for the update_workflow call in the Workflows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workflows::V1::Workflows::Client#update_workflow. It may require modification in order to execute successfully.",
+      "file": "workflows/update_workflow.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_workflow",
+        "full_name": "::Google::Cloud::Workflows::V1::Workflows::Client#update_workflow",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workflows::V1::UpdateWorkflowRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workflows::Client",
+          "full_name": "::Google::Cloud::Workflows::V1::Workflows::Client"
+        },
+        "method": {
+          "short_name": "UpdateWorkflow",
+          "full_name": "google.cloud.workflows.v1.Workflows.UpdateWorkflow",
+          "service": {
+            "short_name": "Workflows",
+            "full_name": "google.cloud.workflows.v1.Workflows"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
