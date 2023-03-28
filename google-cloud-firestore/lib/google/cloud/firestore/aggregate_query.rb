@@ -86,7 +86,7 @@ module Google
         ##
         # Adds a count aggregate.
         #
-        # @param [aggregate_alias] Alias to refer to the aggregate. Optional
+        # @param aggregate_alias [String] Alias to refer to the aggregate. Optional
         #
         # @return [AggregateQuery] A new aggregate query with the added count aggregate.
         #
@@ -115,21 +115,71 @@ module Google
           AggregateQuery.start query, new_aggregates, parent_path, client
         end
 
-        def add_sum aggregate_alias: nil
+        ##
+        # Adds a sum aggregate.
+        #
+        # @param field [String] The field to sum by
+        # @param aggregate_alias [String] Alias to refer to the aggregate
+        #
+        # @return [AggregateQuery] A new aggregate query with the added sum aggregate.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   query = firestore.col "cities"
+        #
+        #   # Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #                          .add_sum("population")
+        #
+        #   aggregate_query.get do |aggregate_snapshot|
+        #     puts aggregate_snapshot.get
+        #   end
+        #
+        def add_sum field, aggregate_alias: nil
           aggregate_alias ||= ALIASES[:sum]
           new_aggregates = @aggregates.dup
           new_aggregates << StructuredAggregationQuery::Aggregation.new(
-            sum: StructuredAggregationQuery::Aggregation::Sum.new,
+            sum: StructuredAggregationQuery::Aggregation::Sum.new(
+              property: field,
+            ),
             alias: aggregate_alias
           )
           AggregateQuery.start query, new_aggregates, parent_path, client
         end
 
-        def add_avg aggregate_alias: nil
+        ##
+        # Adds an average aggregate.
+        #
+        # @param field [String] The field to apply average on
+        # @param aggregate_alias [String] Alias to refer to the aggregate
+        #
+        # @return [AggregateQuery] A new aggregate query with the added average aggregate.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   query = firestore.col "cities"
+        #
+        #   # Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #                          .add_avg("population")
+        #
+        #   aggregate_query.get do |aggregate_snapshot|
+        #     puts aggregate_snapshot.get
+        #   end
+        #
+        def add_avg field, aggregate_alias: nil
           aggregate_alias ||= ALIASES[:avg]
           new_aggregates = @aggregates.dup
           new_aggregates << StructuredAggregationQuery::Aggregation.new(
-            avg: StructuredAggregationQuery::Aggregation::Avg.new,
+            avg: StructuredAggregationQuery::Aggregation::Avg.new(
+              property: field
+            ),
             alias: aggregate_alias
           )
           AggregateQuery.start query, new_aggregates, parent_path, client
