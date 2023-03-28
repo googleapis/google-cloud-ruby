@@ -209,9 +209,57 @@ module Google
     # @!attribute [rw] common
     #   @return [::Google::Api::CommonLanguageSettings]
     #     Some settings.
+    # @!attribute [rw] renamed_services
+    #   @return [::Google::Protobuf::Map{::String => ::String}]
+    #     Map from original service names to renamed versions.
+    #     This is used when the default generated types
+    #     would cause a naming conflict. (Neither name is
+    #     fully-qualified.)
+    #     Example: Subscriber to SubscriberServiceApi.
+    # @!attribute [rw] renamed_resources
+    #   @return [::Google::Protobuf::Map{::String => ::String}]
+    #     Map from full resource types to the effective short name
+    #     for the resource. This is used when otherwise resource
+    #     named from different services would cause naming collisions.
+    #     Example entry:
+    #     "datalabeling.googleapis.com/Dataset": "DataLabelingDataset"
+    # @!attribute [rw] ignored_resources
+    #   @return [::Array<::String>]
+    #     List of full resource types to ignore during generation.
+    #     This is typically used for API-specific Location resources,
+    #     which should be handled by the generator as if they were actually
+    #     the common Location resources.
+    #     Example entry: "documentai.googleapis.com/Location"
+    # @!attribute [rw] forced_namespace_aliases
+    #   @return [::Array<::String>]
+    #     Namespaces which must be aliased in snippets due to
+    #     a known (but non-generator-predictable) naming collision
+    # @!attribute [rw] handwritten_signatures
+    #   @return [::Array<::String>]
+    #     Method signatures (in the form "service.method(signature)")
+    #     which are provided separately, so shouldn't be generated.
+    #     Snippets *calling* these methods are still generated, however.
     class DotnetSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
+
+      # @!attribute [rw] key
+      #   @return [::String]
+      # @!attribute [rw] value
+      #   @return [::String]
+      class RenamedServicesEntry
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
+
+      # @!attribute [rw] key
+      #   @return [::String]
+      # @!attribute [rw] value
+      #   @return [::String]
+      class RenamedResourcesEntry
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
     end
 
     # Settings for Ruby client libraries.
