@@ -1,0 +1,295 @@
+{
+  "client_library": {
+    "name": "google-cloud-assured_workloads-v1beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.assuredworkloads.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_CreateWorkload_sync",
+      "title": "Snippet for the create_workload call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#create_workload. It may require modification in order to execute successfully.",
+      "file": "assured_workloads_service/create_workload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_workload",
+        "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#create_workload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AssuredWorkloadsService::Client",
+          "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client"
+        },
+        "method": {
+          "short_name": "CreateWorkload",
+          "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.CreateWorkload",
+          "service": {
+            "short_name": "AssuredWorkloadsService",
+            "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_UpdateWorkload_sync",
+      "title": "Snippet for the update_workload call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#update_workload. It may require modification in order to execute successfully.",
+      "file": "assured_workloads_service/update_workload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_workload",
+        "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#update_workload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AssuredWorkloads::V1beta1::UpdateWorkloadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AssuredWorkloads::V1beta1::Workload",
+        "client": {
+          "short_name": "AssuredWorkloadsService::Client",
+          "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateWorkload",
+          "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.UpdateWorkload",
+          "service": {
+            "short_name": "AssuredWorkloadsService",
+            "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedResources_sync",
+      "title": "Snippet for the restrict_allowed_resources call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#restrict_allowed_resources. It may require modification in order to execute successfully.",
+      "file": "assured_workloads_service/restrict_allowed_resources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restrict_allowed_resources",
+        "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#restrict_allowed_resources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesResponse",
+        "client": {
+          "short_name": "AssuredWorkloadsService::Client",
+          "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client"
+        },
+        "method": {
+          "short_name": "RestrictAllowedResources",
+          "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.RestrictAllowedResources",
+          "service": {
+            "short_name": "AssuredWorkloadsService",
+            "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_DeleteWorkload_sync",
+      "title": "Snippet for the delete_workload call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#delete_workload. It may require modification in order to execute successfully.",
+      "file": "assured_workloads_service/delete_workload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_workload",
+        "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#delete_workload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AssuredWorkloadsService::Client",
+          "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteWorkload",
+          "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.DeleteWorkload",
+          "service": {
+            "short_name": "AssuredWorkloadsService",
+            "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_GetWorkload_sync",
+      "title": "Snippet for the get_workload call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#get_workload. It may require modification in order to execute successfully.",
+      "file": "assured_workloads_service/get_workload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_workload",
+        "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#get_workload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AssuredWorkloads::V1beta1::GetWorkloadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AssuredWorkloads::V1beta1::Workload",
+        "client": {
+          "short_name": "AssuredWorkloadsService::Client",
+          "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client"
+        },
+        "method": {
+          "short_name": "GetWorkload",
+          "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.GetWorkload",
+          "service": {
+            "short_name": "AssuredWorkloadsService",
+            "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_AnalyzeWorkloadMove_sync",
+      "title": "Snippet for the analyze_workload_move call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#analyze_workload_move. It may require modification in order to execute successfully.",
+      "file": "assured_workloads_service/analyze_workload_move.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "analyze_workload_move",
+        "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#analyze_workload_move",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveResponse",
+        "client": {
+          "short_name": "AssuredWorkloadsService::Client",
+          "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client"
+        },
+        "method": {
+          "short_name": "AnalyzeWorkloadMove",
+          "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.AnalyzeWorkloadMove",
+          "service": {
+            "short_name": "AssuredWorkloadsService",
+            "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_ListWorkloads_sync",
+      "title": "Snippet for the list_workloads call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#list_workloads. It may require modification in order to execute successfully.",
+      "file": "assured_workloads_service/list_workloads.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workloads",
+        "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#list_workloads",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsResponse",
+        "client": {
+          "short_name": "AssuredWorkloadsService::Client",
+          "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client"
+        },
+        "method": {
+          "short_name": "ListWorkloads",
+          "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.ListWorkloads",
+          "service": {
+            "short_name": "AssuredWorkloadsService",
+            "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

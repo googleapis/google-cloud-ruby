@@ -1,0 +1,118 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.baremetalsolution.v2",
+  "libraryPackage": "::Google::Cloud::BareMetalSolution::V2",
+  "services": {
+    "BareMetalSolution": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client",
+          "rpcs": {
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "update_instance"
+              ]
+            },
+            "ResetInstance": {
+              "methods": [
+                "reset_instance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "start_instance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stop_instance"
+              ]
+            },
+            "DetachLun": {
+              "methods": [
+                "detach_lun"
+              ]
+            },
+            "ListVolumes": {
+              "methods": [
+                "list_volumes"
+              ]
+            },
+            "GetVolume": {
+              "methods": [
+                "get_volume"
+              ]
+            },
+            "UpdateVolume": {
+              "methods": [
+                "update_volume"
+              ]
+            },
+            "ResizeVolume": {
+              "methods": [
+                "resize_volume"
+              ]
+            },
+            "ListNetworks": {
+              "methods": [
+                "list_networks"
+              ]
+            },
+            "ListNetworkUsage": {
+              "methods": [
+                "list_network_usage"
+              ]
+            },
+            "GetNetwork": {
+              "methods": [
+                "get_network"
+              ]
+            },
+            "UpdateNetwork": {
+              "methods": [
+                "update_network"
+              ]
+            },
+            "GetLun": {
+              "methods": [
+                "get_lun"
+              ]
+            },
+            "ListLuns": {
+              "methods": [
+                "list_luns"
+              ]
+            },
+            "GetNfsShare": {
+              "methods": [
+                "get_nfs_share"
+              ]
+            },
+            "ListNfsShares": {
+              "methods": [
+                "list_nfs_shares"
+              ]
+            },
+            "UpdateNfsShare": {
+              "methods": [
+                "update_nfs_share"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
