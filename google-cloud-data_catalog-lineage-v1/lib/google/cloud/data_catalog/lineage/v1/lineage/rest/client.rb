@@ -1139,7 +1139,7 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param parent [::String]
-                #     Required. The project and location you want search in.
+                #     Required. The project and location you want search in the format `projects/*/locations/*`
                 #   @param source [::Google::Cloud::DataCatalog::Lineage::V1::EntityReference, ::Hash]
                 #     Optional. Send asset information in the **source** field to retrieve all
                 #     links that lead from the specified asset to downstream assets.
@@ -1234,7 +1234,7 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param parent [::String]
-                #     Required. The project and location where you want to search.
+                #     Required. The project and location you want search in the format `projects/*/locations/*`
                 #   @param links [::Array<::String>]
                 #     Required. An array of links to check for their associated LineageProcesses.
                 #
