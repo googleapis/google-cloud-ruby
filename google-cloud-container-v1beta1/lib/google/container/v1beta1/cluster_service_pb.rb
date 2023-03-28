@@ -385,6 +385,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :node_pool_auto_config, :message, 136, "google.container.v1beta1.NodePoolAutoConfig"
       proto3_optional :protect_config, :message, 137, "google.container.v1beta1.ProtectConfig"
       optional :etag, :string, 139
+      optional :fleet, :message, 140, "google.container.v1beta1.Fleet"
     end
     add_enum "google.container.v1beta1.Cluster.Status" do
       value :STATUS_UNSPECIFIED, 0
@@ -1292,6 +1293,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SCHEDULER, 4
       value :CONTROLLER_MANAGER, 5
     end
+    add_message "google.container.v1beta1.Fleet" do
+      optional :project, :string, 1
+      optional :membership, :string, 2
+      optional :pre_registered, :bool, 3
+    end
     add_enum "google.container.v1beta1.PrivateIPv6GoogleAccess" do
       value :PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED, 0
       value :PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED, 1
@@ -1534,6 +1540,7 @@ module Google
         LoggingVariantConfig::Variant = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.LoggingVariantConfig.Variant").enummodule
         MonitoringComponentConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.MonitoringComponentConfig").msgclass
         MonitoringComponentConfig::Component = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.MonitoringComponentConfig.Component").enummodule
+        Fleet = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.Fleet").msgclass
         PrivateIPv6GoogleAccess = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.PrivateIPv6GoogleAccess").enummodule
         UpgradeResourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.UpgradeResourceType").enummodule
         NodePoolUpdateStrategy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodePoolUpdateStrategy").enummodule
