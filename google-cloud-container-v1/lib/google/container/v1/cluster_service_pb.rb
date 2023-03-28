@@ -327,6 +327,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :monitoring_config, :message, 133, "google.container.v1.MonitoringConfig"
       optional :node_pool_auto_config, :message, 136, "google.container.v1.NodePoolAutoConfig"
       optional :etag, :string, 139
+      optional :fleet, :message, 140, "google.container.v1.Fleet"
     end
     add_enum "google.container.v1.Cluster.Status" do
       value :STATUS_UNSPECIFIED, 0
@@ -1152,6 +1153,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.container.v1.ManagedPrometheusConfig" do
       optional :enabled, :bool, 1
     end
+    add_message "google.container.v1.Fleet" do
+      optional :project, :string, 1
+      optional :membership, :string, 2
+      optional :pre_registered, :bool, 3
+    end
     add_message "google.container.v1.LocalNvmeSsdBlockConfig" do
       optional :local_ssd_count, :int32, 1
     end
@@ -1378,6 +1384,7 @@ module Google
         MonitoringComponentConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MonitoringComponentConfig").msgclass
         MonitoringComponentConfig::Component = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MonitoringComponentConfig.Component").enummodule
         ManagedPrometheusConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ManagedPrometheusConfig").msgclass
+        Fleet = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.Fleet").msgclass
         LocalNvmeSsdBlockConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.LocalNvmeSsdBlockConfig").msgclass
         EphemeralStorageLocalSsdConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.EphemeralStorageLocalSsdConfig").msgclass
         PrivateIPv6GoogleAccess = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.PrivateIPv6GoogleAccess").enummodule

@@ -1463,6 +1463,9 @@ module Google
         #     This checksum is computed by the server based on the value of cluster
         #     fields, and may be sent on update requests to ensure the client has an
         #     up-to-date value before proceeding.
+        # @!attribute [rw] fleet
+        #   @return [::Google::Cloud::Container::V1::Fleet]
+        #     Fleet information for the cluster.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4175,8 +4178,9 @@ module Google
             # UNUSED denotes that this range is unclaimed by any cluster.
             UNUSED = 1
 
-            # IN_USE_SERVICE denotes that this range is claimed by a cluster for
-            # services. It cannot be used for other clusters.
+            # IN_USE_SERVICE denotes that this range is claimed by cluster(s) for
+            # services. User-managed services range can be shared between clusters
+            # within the same subnetwork.
             IN_USE_SERVICE = 2
 
             # IN_USE_SHAREABLE_POD denotes this range was created by the network admin
@@ -4583,6 +4587,26 @@ module Google
         #   @return [::Boolean]
         #     Enable Managed Collection.
         class ManagedPrometheusConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Fleet is the fleet configuration for the cluster.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     The Fleet host project(project ID or project number) where this cluster
+        #     will be registered to. This field cannot be changed after the cluster has
+        #     been registered.
+        # @!attribute [rw] membership
+        #   @return [::String]
+        #     [Output only] The full resource name of the registered fleet membership of
+        #     the cluster, in the format
+        #     `//gkehub.googleapis.com/projects/*/locations/*/memberships/*`.
+        # @!attribute [rw] pre_registered
+        #   @return [::Boolean]
+        #     [Output only] Whether the cluster has been registered through the fleet
+        #     API.
+        class Fleet
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
