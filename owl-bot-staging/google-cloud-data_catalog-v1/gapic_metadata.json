@@ -1,0 +1,286 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.datacatalog.v1",
+  "libraryPackage": "::Google::Cloud::DataCatalog::V1",
+  "services": {
+    "DataCatalog": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client",
+          "rpcs": {
+            "SearchCatalog": {
+              "methods": [
+                "search_catalog"
+              ]
+            },
+            "CreateEntryGroup": {
+              "methods": [
+                "create_entry_group"
+              ]
+            },
+            "GetEntryGroup": {
+              "methods": [
+                "get_entry_group"
+              ]
+            },
+            "UpdateEntryGroup": {
+              "methods": [
+                "update_entry_group"
+              ]
+            },
+            "DeleteEntryGroup": {
+              "methods": [
+                "delete_entry_group"
+              ]
+            },
+            "ListEntryGroups": {
+              "methods": [
+                "list_entry_groups"
+              ]
+            },
+            "CreateEntry": {
+              "methods": [
+                "create_entry"
+              ]
+            },
+            "UpdateEntry": {
+              "methods": [
+                "update_entry"
+              ]
+            },
+            "DeleteEntry": {
+              "methods": [
+                "delete_entry"
+              ]
+            },
+            "GetEntry": {
+              "methods": [
+                "get_entry"
+              ]
+            },
+            "LookupEntry": {
+              "methods": [
+                "lookup_entry"
+              ]
+            },
+            "ListEntries": {
+              "methods": [
+                "list_entries"
+              ]
+            },
+            "ModifyEntryOverview": {
+              "methods": [
+                "modify_entry_overview"
+              ]
+            },
+            "ModifyEntryContacts": {
+              "methods": [
+                "modify_entry_contacts"
+              ]
+            },
+            "CreateTagTemplate": {
+              "methods": [
+                "create_tag_template"
+              ]
+            },
+            "GetTagTemplate": {
+              "methods": [
+                "get_tag_template"
+              ]
+            },
+            "UpdateTagTemplate": {
+              "methods": [
+                "update_tag_template"
+              ]
+            },
+            "DeleteTagTemplate": {
+              "methods": [
+                "delete_tag_template"
+              ]
+            },
+            "CreateTagTemplateField": {
+              "methods": [
+                "create_tag_template_field"
+              ]
+            },
+            "UpdateTagTemplateField": {
+              "methods": [
+                "update_tag_template_field"
+              ]
+            },
+            "RenameTagTemplateField": {
+              "methods": [
+                "rename_tag_template_field"
+              ]
+            },
+            "RenameTagTemplateFieldEnumValue": {
+              "methods": [
+                "rename_tag_template_field_enum_value"
+              ]
+            },
+            "DeleteTagTemplateField": {
+              "methods": [
+                "delete_tag_template_field"
+              ]
+            },
+            "CreateTag": {
+              "methods": [
+                "create_tag"
+              ]
+            },
+            "UpdateTag": {
+              "methods": [
+                "update_tag"
+              ]
+            },
+            "DeleteTag": {
+              "methods": [
+                "delete_tag"
+              ]
+            },
+            "ListTags": {
+              "methods": [
+                "list_tags"
+              ]
+            },
+            "ReconcileTags": {
+              "methods": [
+                "reconcile_tags"
+              ]
+            },
+            "StarEntry": {
+              "methods": [
+                "star_entry"
+              ]
+            },
+            "UnstarEntry": {
+              "methods": [
+                "unstar_entry"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "ImportEntries": {
+              "methods": [
+                "import_entries"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PolicyTagManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client",
+          "rpcs": {
+            "CreateTaxonomy": {
+              "methods": [
+                "create_taxonomy"
+              ]
+            },
+            "DeleteTaxonomy": {
+              "methods": [
+                "delete_taxonomy"
+              ]
+            },
+            "UpdateTaxonomy": {
+              "methods": [
+                "update_taxonomy"
+              ]
+            },
+            "ListTaxonomies": {
+              "methods": [
+                "list_taxonomies"
+              ]
+            },
+            "GetTaxonomy": {
+              "methods": [
+                "get_taxonomy"
+              ]
+            },
+            "CreatePolicyTag": {
+              "methods": [
+                "create_policy_tag"
+              ]
+            },
+            "DeletePolicyTag": {
+              "methods": [
+                "delete_policy_tag"
+              ]
+            },
+            "UpdatePolicyTag": {
+              "methods": [
+                "update_policy_tag"
+              ]
+            },
+            "ListPolicyTags": {
+              "methods": [
+                "list_policy_tags"
+              ]
+            },
+            "GetPolicyTag": {
+              "methods": [
+                "get_policy_tag"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PolicyTagManagerSerialization": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client",
+          "rpcs": {
+            "ReplaceTaxonomy": {
+              "methods": [
+                "replace_taxonomy"
+              ]
+            },
+            "ImportTaxonomies": {
+              "methods": [
+                "import_taxonomies"
+              ]
+            },
+            "ExportTaxonomies": {
+              "methods": [
+                "export_taxonomies"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
