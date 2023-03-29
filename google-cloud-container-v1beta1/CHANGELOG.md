@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.0 (2023-03-29)
+
+#### Features
+
+* Added support for fleet registration ([#21031](https://github.com/googleapis/google-cloud-ruby/issues/21031)) 
+
 ### 0.16.3 (2023-03-08)
 
 #### Documentation
