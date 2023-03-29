@@ -120,6 +120,34 @@ module Google
         #
         #   tasks = datastore.run query
         #
+        # @example Add a composite "AND" filter:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   filter = Google::Cloud::Filter.new("done", "=", false)
+        #                                 .and("priority", ">=", 4)
+        #
+        #   query = Google::Cloud::Datastore::Query.new
+        #   query.kind("Task")
+        #        .where(filter)
+        #
+        #   tasks = datastore.run query
+        #
+        # @example Add a composite "OR" filter:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   filter = Google::Cloud::Filter.new("done", "=", false)
+        #                                 .or("priority", ">=", 4)
+        #
+        #   query = Google::Cloud::Datastore::Query.new
+        #   query.kind("Task")
+        #        .where(filter)
+        #
+        #   tasks = datastore.run query
+        #
         # @example Add an inequality filter on a **single** property only:
         #   require "google/cloud/datastore"
         #
