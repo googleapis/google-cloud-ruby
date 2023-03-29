@@ -41,9 +41,15 @@ def update_cdn_key_akamai project_id:, location:, cdn_key_id:, hostname:, akamai
     }
   }
 
-  response = client.update_cdn_key cdn_key: new_cdn_key, update_mask: update_mask
+  operation = client.update_cdn_key cdn_key: new_cdn_key, update_mask: update_mask
 
-  # Print the CDN key name.
-  puts "Updated CDN key: #{response.name}"
+  # Wait for the response
+  operation.wait_until_done!
+  if operation.response?
+    response = operation.response
+    puts "Updated CDN key: #{response.name}"
+  else
+    puts "No response received."
+  end
 end
 # [END videostitcher_update_cdn_key_akamai]

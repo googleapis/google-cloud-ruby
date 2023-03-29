@@ -30,9 +30,14 @@ def delete_slate project_id:, location:, slate_id:
   name = client.slate_path project: project_id, location: location, slate: slate_id
 
   # Delete the slate.
-  client.delete_slate name: name
+  operation = client.delete_slate name: name
 
-  # Print a success message.
-  puts "Deleted slate"
+  # Wait for the response and print a result message
+  operation.wait_until_done!
+  if operation.response?
+    puts "Deleted slate"
+  else
+    puts "No response received"
+  end
 end
 # [END videostitcher_delete_slate]

@@ -64,9 +64,15 @@ def update_cdn_key project_id:, location:, cdn_key_id:, hostname:, key_name:, pr
                   { paths: ["hostname", "google_cdn_key"] }
                 end
 
-  response = client.update_cdn_key cdn_key: new_cdn_key, update_mask: update_mask
+  operation = client.update_cdn_key cdn_key: new_cdn_key, update_mask: update_mask
 
-  # Print the CDN key name.
-  puts "Updated CDN key: #{response.name}"
+  # Wait for the response
+  operation.wait_until_done!
+  if operation.response?
+    response = operation.response
+    puts "Updated CDN key: #{response.name}"
+  else
+    puts "No response received."
+  end
 end
 # [END videostitcher_update_cdn_key]

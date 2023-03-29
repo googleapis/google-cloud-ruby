@@ -36,9 +36,15 @@ def create_slate project_id:, location:, slate_id:, slate_uri:
     uri: slate_uri
   }
 
-  response = client.create_slate parent: parent, slate_id: slate_id, slate: new_slate
+  operation = client.create_slate parent: parent, slate_id: slate_id, slate: new_slate
 
-  # Print the slate name.
-  puts "Slate: #{response.name}"
+  # Wait for the response
+  operation.wait_until_done!
+  if operation.response?
+    response = operation.response
+    p "Slate: #{response.name}"
+  else
+    puts "No response received."
+  end
 end
 # [END videostitcher_create_slate]

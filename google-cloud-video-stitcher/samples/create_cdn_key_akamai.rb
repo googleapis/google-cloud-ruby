@@ -42,9 +42,15 @@ def create_cdn_key_akamai project_id:, location:, cdn_key_id:, hostname:, akamai
     }
   }
 
-  response = client.create_cdn_key parent: parent, cdn_key: new_cdn_key, cdn_key_id: cdn_key_id
+  operation = client.create_cdn_key parent: parent, cdn_key: new_cdn_key, cdn_key_id: cdn_key_id
 
-  # Print the CDN key name.
-  puts "CDN key: #{response.name}"
+  # Wait for the response
+  operation.wait_until_done!
+  if operation.response?
+    response = operation.response
+    p "CDN key: #{response.name}"
+  else
+    puts "No response received."
+  end
 end
 # [END videostitcher_create_cdn_key_akamai]

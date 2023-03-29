@@ -30,9 +30,14 @@ def delete_cdn_key project_id:, location:, cdn_key_id:
   name = client.cdn_key_path project: project_id, location: location, cdn_key: cdn_key_id
 
   # Delete the CDN key.
-  client.delete_cdn_key name: name
+  operation = client.delete_cdn_key name: name
 
-  # Print a success message.
-  puts "Deleted CDN key"
+  # Wait for the response and print a result message
+  operation.wait_until_done!
+  if operation.response?
+    puts "Deleted CDN key"
+  else
+    puts "No response received"
+  end
 end
 # [END videostitcher_delete_cdn_key]
