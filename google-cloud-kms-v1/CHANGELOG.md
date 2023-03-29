@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.1 (2023-03-29)
+
+#### Documentation
+
+* Link to documentation describing support for other hash algorithms ([#21018](https://github.com/googleapis/google-cloud-ruby/issues/21018)) 
+
 ### 0.18.0 (2023-03-08)
 
 #### Features
