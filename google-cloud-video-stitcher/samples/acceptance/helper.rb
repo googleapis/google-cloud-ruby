@@ -22,7 +22,7 @@ require "google/cloud/video/stitcher"
 require_relative "../../../.toys/.lib/sample_loader"
 
 
-DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS = 10_800_000
+DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS = 1000 # 10_800_000
 
 class StitcherSnippetSpec < Minitest::Spec
   let(:credentials) { ENV["GOOGLE_CLOUD_CREDENTIALS"] || raise("missing GOOGLE_CLOUD_CREDENTIALS") }
@@ -101,11 +101,13 @@ class StitcherSnippetSpec < Minitest::Spec
   end
 
   let :slate do
-    client.create_slate(
+    operation = client.create_slate(
       parent: location_path,
       slate_id: slate_id,
       slate: slate_def(slate_uri)
     )
+    operation.wait_until_done!
+    operation.response
   end
 
   let :vod_session do
@@ -123,27 +125,33 @@ class StitcherSnippetSpec < Minitest::Spec
   end
 
   let :akamai_cdn_key do
-    client.create_cdn_key(
+    operation = client.create_cdn_key(
       parent: location_path,
       cdn_key_id: akamai_cdn_key_id,
       cdn_key: akamai_cdn_def(akamai_cdn_key_name, hostname, akamai_token_key)
     )
+    operation.wait_until_done!
+    operation.response
   end
 
   let :cloud_cdn_key do
-    client.create_cdn_key(
+    operation = client.create_cdn_key(
       parent: location_path,
       cdn_key_id: cloud_cdn_key_id,
       cdn_key: cloud_cdn_def(cloud_cdn_key_name, hostname, key_name, cloud_cdn_private_key)
     )
+    operation.wait_until_done!
+    operation.response
   end
 
   let :media_cdn_key do
-    client.create_cdn_key(
+    operation = client.create_cdn_key(
       parent: location_path,
       cdn_key_id: media_cdn_key_id,
       cdn_key: media_cdn_def(media_cdn_key_name, hostname, key_name, media_cdn_private_key)
     )
+    operation.wait_until_done!
+    operation.response
   end
 
   after do
@@ -202,13 +210,12 @@ class StitcherSnippetSpec < Minitest::Spec
 
   def live_session_def source_uri, ad_tag_uri, slate_id
     {
-      source_uri: source_uri,
-      ad_tag_map: {
-        default: {
-          uri: ad_tag_uri
-        }
-      },
-      default_slate_id: slate_id
+      live_config: {
+        source_uri: source_uri,
+        ad_tag_uri: ad_tag_uri,
+        ad_tracking: Google::Cloud::Video::Stitcher::V1::AdTracking::CLIENT,
+        default_slate: slate_id
+      }
     }
   end
 
@@ -232,7 +239,8 @@ class StitcherSnippetSpec < Minitest::Spec
   def vod_session_def source_uri, ad_tag_uri
     {
       source_uri: source_uri,
-      ad_tag_uri: ad_tag_uri
+      ad_tag_uri: ad_tag_uri,
+      ad_tracking: Google::Cloud::Video::Stitcher::V1::AdTracking::CLIENT
     }
   end
 

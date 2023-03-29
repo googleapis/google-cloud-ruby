@@ -40,10 +40,16 @@ def update_slate project_id:, location:, slate_id:, slate_uri:
     uri: slate_uri
   }
 
-  response = client.update_slate slate: update_slate, update_mask: update_mask
+  operation = client.update_slate slate: update_slate, update_mask: update_mask
 
-  # Print the slate name.
-  puts "Updated slate: #{response.name}"
-  puts "Updated uri: #{response.uri}"
+  # Wait for the response
+  operation.wait_until_done!
+  if operation.response?
+    response = operation.response
+    puts "Updated slate: #{response.name}"
+    puts "Updated uri: #{response.uri}"
+  else
+    puts "No response received."
+  end
 end
 # [END videostitcher_update_slate]
