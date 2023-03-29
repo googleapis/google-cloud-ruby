@@ -16,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :subject, :message, 2, "google.cloud.advisorynotifications.v1.Subject"
       repeated :messages, :message, 3, "google.cloud.advisorynotifications.v1.Message"
       optional :create_time, :message, 4, "google.protobuf.Timestamp"
+      optional :notification_type, :enum, 12, "google.cloud.advisorynotifications.v1.NotificationType"
     end
     add_message "google.cloud.advisorynotifications.v1.Text" do
       optional :en_text, :string, 1
@@ -74,6 +75,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :LOCALIZATION_STATE_PENDING, 2
       value :LOCALIZATION_STATE_COMPLETED, 3
     end
+    add_enum "google.cloud.advisorynotifications.v1.NotificationType" do
+      value :NOTIFICATION_TYPE_UNSPECIFIED, 0
+      value :NOTIFICATION_TYPE_SECURITY_PRIVACY_ADVISORY, 1
+      value :NOTIFICATION_TYPE_SENSITIVE_ACTIONS, 2
+    end
   end
 end
 
@@ -94,6 +100,7 @@ module Google
         GetNotificationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.advisorynotifications.v1.GetNotificationRequest").msgclass
         NotificationView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.advisorynotifications.v1.NotificationView").enummodule
         LocalizationState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.advisorynotifications.v1.LocalizationState").enummodule
+        NotificationType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.advisorynotifications.v1.NotificationType").enummodule
       end
     end
   end
