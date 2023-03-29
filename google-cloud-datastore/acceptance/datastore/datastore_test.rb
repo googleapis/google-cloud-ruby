@@ -557,9 +557,9 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
     it "should fetch entities filtered through a simple Filter object" do
       datastore = Google::Cloud::Datastore.new
       filter = datastore.filter("alive", "=", true)
-      query = datastore.query("Character").
-        ancestor(book).
-        where(filter)
+      query = datastore.query("Character")
+        .ancestor(book)
+        .where(filter)
       entities = datastore.run query
       _(entities.count).must_equal 4
     end
