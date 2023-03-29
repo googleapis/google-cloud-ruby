@@ -27,13 +27,14 @@ require "google/cloud/firestore/transaction"
 module Google
   module Cloud
     module Firestore
-      class BulkWriterException
+      class BulkWriterException < StandardError
         def initialize status, message, document_reference, operation_type, failed_attempts
           @status = status
           @message = message
-          @document_reference = document_reference
           @operation_type = operation_type
           @failed_attempts = failed_attempts
+          @document_reference = document_reference
+          super message
         end
       end
     end

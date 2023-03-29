@@ -19,6 +19,7 @@ require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
 require "google/cloud/firestore"
+require "google/cloud/firestore/rate_limiter"
 require "grpc"
 
 ##

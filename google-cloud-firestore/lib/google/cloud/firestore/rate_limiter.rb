@@ -27,46 +27,59 @@ require "google/cloud/firestore/transaction"
 module Google
   module Cloud
     module Firestore
-##
-# @private
-class RateLimiter
+      ##
+      # @private
+      class RateLimiter
 
-  DEFAULT_STARTING_MAXIMUM_OPS_PER_SECOND = 500
+        DEFAULT_STARTING_MAXIMUM_OPS_PER_SECOND = 500.0
+        DEFAULT_PHASE_LENGTH = 300.0
 
-  ##
-  # Initialize the object
-  def initialize
-    @start_time = Time.now
-    @last_fetched = Time.now
-    @bandwidth = 500
-  end
+        attr_reader :bandwidth
 
-  ##
-  # Increase the bandwidth as per 555 rule
-  # Updates the @bandwidth attribute.
-  #
-  # @return [nil]
-  def increase_bandwidth
-    intervals = (Time.now - @start_time) / 5
-    @bandwidth *= (1.5**intervals.floor)
-  end
+        ##
+        # Initialize the object
+        def initialize starting_ops: nil, phase_length: nil
+          @start_time = time
+          @last_fetched = time
+          @bandwidth = (starting_ops || DEFAULT_STARTING_MAXIMUM_OPS_PER_SECOND).to_f
+          @phase_length = phase_length || DEFAULT_PHASE_LENGTH
+        end
 
-  ##
-  # Wait till the number of tokens is available
-  # Assumes that the bandwidth is distributed evenly across the entire second.
-  #
-  # Example - If the limit is 500 qps, then it has been further broken down to 2e+6 nsec
-  # per query
-  #
-  # @return [nil]
-  def get_tokens size
-    available_time = @last_fetched + (size / @bandwidth)
-    waiting_time = max 0, available_time - Time.now
-    sleep waiting_time
-    @last_fetched = Time.now
-    increase_bandwidth
-  end
-end
+        ##
+        # Wait till the number of tokens is available
+        # Assumes that the bandwidth is distributed evenly across the entire second.
+        #
+        # Example - If the limit is 500 qps, then it has been further broken down to 2e+6 nsec
+        # per query
+        #
+        # @return [nil]
+        def get_tokens size
+          available_time = @last_fetched + (size / @bandwidth)
+          waiting_time = [0, available_time - time].max
+          sleep waiting_time
+          @last_fetched = time
+          increase_bandwidth
+        end
+
+        private
+
+        ##
+        # Returns time elapsed since epoch.
+        #
+        # @return [Float] Float denoting time elapsed since epoch
+        def time
+          Time.now.to_f
+        end
+
+        ##
+        # Increase the bandwidth as per 555 rule
+        #
+        # @return [nil]
+        def increase_bandwidth
+          intervals = (time - @start_time) / @phase_length
+          @bandwidth = (DEFAULT_STARTING_MAXIMUM_OPS_PER_SECOND * (1.5**intervals.floor)).to_f
+        end
+      end
     end
   end
 end

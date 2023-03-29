@@ -23,6 +23,8 @@ require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/collection_group"
 require "google/cloud/firestore/batch"
 require "google/cloud/firestore/transaction"
+require "google/cloud/firestore/bulk_writer"
+
 
 module Google
   module Cloud
@@ -666,6 +668,29 @@ module Google
             # Re-raise error.
             raise e
           end
+        end
+
+        ##
+        # Create a bulk writer to perform multiple writes that are
+        # executed parallely.
+        #
+        # @param [Integer] thread_pool_size The maximum number of threads
+        #   bulk writer can use. Default is 4. Optional.
+        #
+        # @return [Google::Cloud::Firestore::BulkWriter] Returns an object of
+        #   bulk writer.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   bw = firestore.bulk_writer
+        #
+        #   bulk_write_result = bw.create "doc_ref", {data}
+        #
+        def bulk_writer thread_pool_size: nil
+          BulkWriter.new self, @service, thread_pool_size: thread_pool_size
         end
 
         # @!endgroup

@@ -27,49 +27,53 @@ require "google/cloud/firestore/transaction"
 module Google
   module Cloud
     module Firestore
-##
-# @private
-class BulkCommitBatch
+      ##
+      # @private
+      class BulkCommitBatch
 
-  ##
-  # Initialize the object
-  def initialize service, operations
-    @service = service
-    @operations = operations
-  end
+        ##
+        # Initialize the object
+        def initialize service, operations
+          @service = service
+          @operations = operations
+        end
 
-  ##
-  # Process the result received for each operation and calls the appropriate callback.
-  # Incase of failures, adds the operation to the retry array.
-  #
-  # @return [Array<bulkWriterOperation>] failed_operations
-  def parse_results responses
-    failed_operations = []
-    responses.each_with_index do |response, idx|
-      operation = @operations[idx]
-      if response.status == "failed"
-        operations.on_failure response.status, response.value
-        failed_operations << operation
-      else
-        operations.on_success response.status, response.value
+        ##
+        # Process the result received for each operation and calls the appropriate callback.
+        # Incase of failures, adds the operation to the retry array.
+        #
+        # @return [Array<bulkWriterOperation>] failed_operations List of operations
+        #   that failed in the current batch.
+        #
+        def parse_results responses
+          failed_operations = []
+          @operations.zip(responses.write_results, responses.status) do |operation, write_result, status|
+            if status.code > 0
+              print operation, write_result, status, "\n"
+              operation.on_failure status, write_result
+              failed_operations << operation
+            else
+              operation.on_success status, write_result
+            end
+          end
+          failed_operations
+        end
+
+        ##
+        # Makes the API request with all the operations in the batch and returns the response after processing.
+        #
+        # @return [Array<bulkWriterOperation>] failed_operations List of operations
+        #   that failed in the current batch.
+        #
+        def commit
+          writes = []
+          @operations.each do |operation|
+            writes << operation.write
+          end
+          responses = @service.batch_write writes
+          parse_results responses
+        end
       end
-    end
-    failed_operations
-  end
-
-  ##
-  # Makes the API request with all the operations in the batch and returns the response after processing.
-  #
-  # @return [Array<bulkWriterOperation>] failed_operations
-  def commit
-    writes = []
-    @operations.each do |operation|
-      writes << operation
-    end
-    responses = @service.batch_write writes
-    parse_results responses
-  end
-end
     end
   end
 end
