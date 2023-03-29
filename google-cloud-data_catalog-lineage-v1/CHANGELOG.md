@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2023-03-29)
+
+#### Documentation
+
+* Include format examples for some attributes ([#21013](https://github.com/googleapis/google-cloud-ruby/issues/21013)) 
+
 ### 0.2.0 (2023-03-08)
 
 #### Features
