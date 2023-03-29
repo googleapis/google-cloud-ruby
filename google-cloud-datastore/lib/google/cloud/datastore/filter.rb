@@ -157,8 +157,10 @@ module Google
           @grpc
         end
 
-        private
+        protected
 
+        ##
+        # @private
         def combine_filters composite_filter, name_or_filter, operator, value
           composite_filter.composite_filter.filters << to_grpc
           composite_filter.composite_filter.filters << if name_or_filter.is_a? Google::Cloud::Datastore::Filter
@@ -171,18 +173,24 @@ module Google
           end
         end
 
+        ##
+        # @private
         def composite_filter_and
           Google::Cloud::Datastore::V1::Filter.new(
             composite_filter: Google::Cloud::Datastore::V1::CompositeFilter.new(op: :AND)
           )
         end
 
+        ##
+        # @private
         def composite_filter_or
           Google::Cloud::Datastore::V1::Filter.new(
             composite_filter: Google::Cloud::Datastore::V1::CompositeFilter.new(op: :OR)
           )
         end
 
+        ##
+        # @private
         def create_property_filter name, operator, value
           Google::Cloud::Datastore::V1::Filter.new(
             property_filter: Google::Cloud::Datastore::V1::PropertyFilter.new(
