@@ -89,12 +89,32 @@ module Google
         #   Joins the filter with a property filter
         #   @param name [String]
         #   @param operator [String]
+        #   @param value
         #
         # @overload and(filter)
         #   Joins the filter with a Filter object
         #   @param flter [Filter]
-        def and *args
-          combine_filters composite_filter_and, args
+        #
+        # @example Join the filter with a property filter
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   filter = Google::Cloud::Filter.new("done", "=", false)
+        #                                 .and("priority", ">=", 4)
+        #
+        # @example Join the filter with a filter object
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   filter_1 = Google::Cloud::Filter.new("done", "=", false)
+        #   filter_2 = Google::Cloud::Filter.new("priority", ">=", 4)
+        #
+        #   filter = filter_1.and(filter_2)
+        #
+        def and name_or_filter, operator = nil, value = nil
+          combine_filters composite_filter_and, name_or_filter, operator, value
         end
 
         ##
@@ -104,12 +124,32 @@ module Google
         #   Joins the filter with a property filter
         #   @param name [String]
         #   @param operator [String]
+        #   @param value
         #
         # @overload or(filter)
         #   Joins the filter with a Filter object
         #   @param flter [Filter]
-        def or *args
-          combine_filters composite_filter_or, args
+        #
+        # @example Join the filter with a property filter
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   filter = Google::Cloud::Filter.new("done", "=", false)
+        #                                 .or("priority", ">=", 4)
+        #
+        # @example Join the filter with a filter object
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   filter_1 = Google::Cloud::Filter.new("done", "=", false)
+        #   filter_2 = Google::Cloud::Filter.new("priority", ">=", 4)
+        #
+        #   filter = filter_1.or(filter_2)
+        #
+        def or name_or_filter, operator = nil, value = nil
+          combine_filters composite_filter_or, name_or_filter, operator, value
         end
 
         # @private
@@ -119,14 +159,13 @@ module Google
 
         private
 
-        def combine_filters composite_filter, args
+        def combine_filters composite_filter, name_or_filter, operator, value
           composite_filter.composite_filter.filters << to_grpc
-          if args.all? { |arg| arg.is_a? Google::Cloud::Datastore::Filter }
-            composite_filter.composite_filter.filters.concat args.map(&:to_grpc)
-          else
-            name, operator, value = args
-            composite_filter.composite_filter.filters << create_property_filter(name, operator, value)
-          end
+          composite_filter.composite_filter.filters << if name_or_filter.is_a? Google::Cloud::Datastore::Filter
+                                                         name_or_filter.to_grpc
+                                                       else
+                                                         create_property_filter name_or_filter, operator, value
+                                                       end
           self.class.new("", "", "").tap do |f|
             f.grpc = composite_filter
           end
