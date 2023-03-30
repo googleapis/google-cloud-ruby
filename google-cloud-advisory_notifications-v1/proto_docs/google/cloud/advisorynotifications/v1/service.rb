@@ -37,6 +37,9 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time the notification was created.
+        # @!attribute [rw] notification_type
+        #   @return [::Google::Cloud::AdvisoryNotifications::V1::NotificationType]
+        #     Type of notification
         class Notification
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -227,6 +230,18 @@ module Google
 
           # Localization for requested language is completed.
           LOCALIZATION_STATE_COMPLETED = 3
+        end
+
+        # Type of notification
+        module NotificationType
+          # Default type
+          NOTIFICATION_TYPE_UNSPECIFIED = 0
+
+          # Security and privacy advisory notifications
+          NOTIFICATION_TYPE_SECURITY_PRIVACY_ADVISORY = 1
+
+          # Sensitive action notifications
+          NOTIFICATION_TYPE_SENSITIVE_ACTIONS = 2
         end
       end
     end
