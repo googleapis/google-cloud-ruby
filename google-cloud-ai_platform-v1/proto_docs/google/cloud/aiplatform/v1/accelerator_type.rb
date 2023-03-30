@@ -22,7 +22,6 @@ module Google
     module AIPlatform
       module V1
         # Represents a hardware accelerator type.
-        # NEXT ID: 11.
         module AcceleratorType
           # Unspecified accelerator type, which means no accelerator.
           ACCELERATOR_TYPE_UNSPECIFIED = 0
