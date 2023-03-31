@@ -558,8 +558,8 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       datastore = Google::Cloud::Datastore.new
       filter = datastore.filter("alive", "=", true)
       query = datastore.query("Character")
-        .ancestor(book)
-        .where(filter)
+                       .ancestor(book)
+                       .where(filter)
       entities = datastore.run query
       _(entities.count).must_equal 4
     end
@@ -570,8 +570,8 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
                         .and("alive", "=", true)
                         .and(datastore.filter("appearances", "=", 33))
       query = datastore.query("Character")
-        .ancestor(book)
-        .where(filter)
+                       .ancestor(book)
+                       .where(filter)
       entities = datastore.run query
       _(entities.count).must_equal 1
     end
@@ -582,8 +582,8 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
                         .or("appearances", "=", 33)
                         .or(datastore.filter("family", "=", "Targaryen"))
       query = datastore.query("Character")
-        .ancestor(book)
-        .where(filter)
+                       .ancestor(book)
+                       .where(filter)
       entities = datastore.run query
       _(entities.count).must_equal 3
     end
