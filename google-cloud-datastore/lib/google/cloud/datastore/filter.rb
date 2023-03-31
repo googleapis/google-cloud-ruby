@@ -93,7 +93,7 @@ module Google
         #
         # @overload and(filter)
         #   Joins the filter with a Filter object
-        #   @param flter [Filter]
+        #   @param filter [Filter]
         #
         # @example Join the filter with a property filter
         #   require "google/cloud/datastore"
