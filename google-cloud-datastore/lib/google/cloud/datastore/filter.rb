@@ -161,15 +161,15 @@ module Google
 
         ##
         # @private
-        def combine_filters composite_filter, name_or_filter, operator, value
-          composite_filter.composite_filter.filters << to_grpc
-          composite_filter.composite_filter.filters << if name_or_filter.is_a? Google::Cloud::Datastore::Filter
-                                                         name_or_filter.to_grpc
-                                                       else
-                                                         create_property_filter name_or_filter, operator, value
-                                                       end
+        def combine_filters new_filter, name_or_filter, operator, value
+          new_filter.composite_filter.filters << to_grpc
+          new_filter.composite_filter.filters << if name_or_filter.is_a? Google::Cloud::Datastore::Filter
+                                                   name_or_filter.to_grpc
+                                                 else
+                                                   create_property_filter name_or_filter, operator, value
+                                                 end
           self.class.new("", "", "").tap do |f|
-            f.grpc = composite_filter
+            f.grpc = new_filter
           end
         end
 
