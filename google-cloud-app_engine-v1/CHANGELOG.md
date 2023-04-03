@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.1 (2023-04-03)
+
+#### Documentation
+
+* point to Search Console for domain ownership verification ([#21049](https://github.com/googleapis/google-cloud-ruby/issues/21049)) 
+
 ### 0.6.0 (2023-03-08)
 
 #### Features
