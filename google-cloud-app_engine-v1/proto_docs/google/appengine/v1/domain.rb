@@ -23,7 +23,7 @@ module Google
       module V1
         # A domain that a user has been authorized to administer. To authorize use
         # of a domain, verify ownership via
-        # [Webmaster Central](https://www.google.com/webmasters/verification/home).
+        # [Search Console](https://search.google.com/search-console/welcome).
         # @!attribute [rw] name
         #   @return [::String]
         #     Full path to the `AuthorizedDomain` resource in the API. Example:
