@@ -118,6 +118,15 @@ describe Google::Cloud::Datastore::Query, :mock_datastore do
     _(Google::Cloud::Datastore::Convert.from_value(filter_1.property_filter.value)).must_equal 3
   end
 
+  it "does not mutate filter objects on and() & or() methods" do
+    filter_1 = Google::Cloud::Datastore::Filter.new("a", "=", 3)
+    filter_2 = Google::Cloud::Datastore::Filter.new("b", ">", 4)
+    filter_3 = filter_1.and(filter_2)
+    filter_4 = filter_1.or(filter_2)
+    _(filter_1.to_grpc).must_equal Google::Cloud::Datastore::Filter.new("a", "=", 3).to_grpc
+    _(filter_2.to_grpc).must_equal Google::Cloud::Datastore::Filter.new("b", ">", 4).to_grpc
+  end
+
   it "can order results" do
     query.kind "Task"
     query.order "due"
