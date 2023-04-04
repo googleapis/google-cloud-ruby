@@ -161,6 +161,9 @@ module Google
 
         ##
         # @private
+        #
+        # Combines self.grpc and (name_or_filter, operator, value)
+        # into the new_filter object with the specified AND/OR operator
         def combine_filters new_filter, name_or_filter, operator, value
           new_filter.composite_filter.filters << to_grpc
           new_filter.composite_filter.filters << if name_or_filter.is_a? Google::Cloud::Datastore::Filter
@@ -168,7 +171,7 @@ module Google
                                                  else
                                                    create_property_filter name_or_filter, operator, value
                                                  end
-          self.class.new("", "", "").tap do |f|
+          dup.tap do |f|
             f.grpc = new_filter
           end
         end
