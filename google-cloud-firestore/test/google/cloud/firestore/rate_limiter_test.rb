@@ -26,7 +26,7 @@ describe Google::Cloud::Firestore::RateLimiter do
   end
 
 
-  focus; it "checks whether the bandwidth increases after phase length" do
+  it "checks whether the bandwidth increases after phase length" do
     rate_limiter = Google::Cloud::Firestore::RateLimiter.new phase_length: 2
     rate_limiter.get_tokens 500
     _(rate_limiter.bandwidth).must_equal 500

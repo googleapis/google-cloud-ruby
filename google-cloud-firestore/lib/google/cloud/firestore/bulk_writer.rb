@@ -30,6 +30,8 @@ require "algorithms"
 require "google/cloud/firestore/bulk_writer_operation"
 require "google/cloud/firestore/rate_limiter"
 require "google/cloud/firestore/bulk_commit_batch"
+require "google/cloud/firestore/bulk_writer_exception"
+
 
 
 module Google
@@ -38,32 +40,35 @@ module Google
       class BulkWriter
 
         MAX_BATCH_SIZE = 20
-        THREAD_POOL_SIZE = 2
 
         ##
         # Initialize the attributes and start the schedule_operations job
         #
-        def initialize client, service, thread_pool_size: nil
+        def initialize client, service, request_threads: nil, batch_threads: nil
           @client = client
           @service = service
           @closed = false
           @flush = false
+          @rate_limiter = RateLimiter.new
           @buffered_operations = []
-          thread_pool_size ||= THREAD_POOL_SIZE
-          @write_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: thread_pool_size,  max_queue: 0
-          @batch_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: thread_pool_size,  max_queue: 0
+          @request_threads = (request_threads || 2).to_i
+          @batch_threads = (batch_threads || 4).to_i
+          @write_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @request_threads,
+                                                                  max_queue: 0
+          @batch_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @batch_threads,
+                                                                  max_queue: @batch_threads * (@rate_limiter.bandwidth/MAX_BATCH_SIZE)
+          @schedule_thread_pool = Concurrent::ThreadPoolExecutor.new max_thread: 1, min_thread: 1
           @mutex = Mutex.new
           @retry_operations = Containers::MinHeap.new
           @pending_batch_count = 0
           @doc_refs = Set.new
-          Concurrent::Promises.future_on @write_thread_pool do
+          Concurrent::Promises.future_on @schedule_thread_pool do
             begin
               schedule_operations
-            rescue e
-              puts e
+            rescue StandardError => e
+              raise e
             end
           end
-
         end
 
         ##
@@ -114,6 +119,8 @@ module Google
           pre_add_operation doc_path
 
           write = Convert.write_for_create doc_path, data
+
+          # @service.batch_write [write]
 
           create_and_enqueue_operation write, doc_path
         end
@@ -394,11 +401,10 @@ module Google
           @mutex.synchronize { @flush = true }
           loop do
             break if operations_completed?
-            puts "Waiting"
             sleep 0.1
           end
           @mutex.synchronize do
-            @doc_refs = Set
+            @doc_refs = Set.new
             @flush = false
           end
         end
@@ -421,9 +427,10 @@ module Google
 
         ##
         # @private Checks if all the operations are completed.
-        # 
+        #
         def operations_completed?
-          @mutex.synchronize { (@retry_operations.length + @buffered_operations.length + @pending_batch_count).zero? }
+          @mutex.synchronize {
+ (@retry_operations.length + @buffered_operations.length + @batch_thread_pool.scheduled_task_count - @batch_thread_pool.completed_task_count).zero? }
         end
 
         ##
@@ -458,13 +465,14 @@ module Google
 
         ##
         # @private Adds failed operations in the retry heap.
-        # 
-        def post_commit_batch failed_operations
+        #
+        def post_commit_batch bulk_commit_batch
           @mutex.synchronize do
-            failed_operations.each do |operation|
-              @retry_operations.push operation.retry_time, operation
+            bulk_commit_batch.operations.each do |operation|
+              unless operation.completion_event.set?
+                @retry_operations.push operation.retry_time, operation
+              end
             end
-            @pending_batch_count -= 1
           end
         end
 
@@ -474,14 +482,13 @@ module Google
         #
         # @return [nil]
         def commit_batch bulk_commit_batch
-          # puts "Committing the batch"
-          Concurrent::Promises.future_on @batch_thread_pool do
+          Concurrent::Promises.future_on @batch_thread_pool, bulk_commit_batch do |batch|
             begin
-              failed_operations = bulk_commit_batch.commit
-              puts "Commited the batch"
-              post_commit_batch failed_operations
-            rescue e
-              puts e
+              batch.commit
+            rescue StandardError => e
+              puts "BulkCommitBatchError : #{e}"
+            ensure
+              post_commit_batch bulk_commit_batch
             end
           end
         end
@@ -491,28 +498,22 @@ module Google
         #
         # @return [nil]
         def schedule_operations
-          futures = []
-          rate_limiter = RateLimiter.new
           loop do
-            # futures.each { |future| puts future.reason }
             batch_size = [MAX_BATCH_SIZE, (@retry_operations.length + @buffered_operations.length)].min
-            if batch_size.zero?
+            if batch_size.zero? || @batch_thread_pool.remaining_capacity.zero?
+              # puts "Batch tasks added - #{@batch_thread_pool.scheduled_task_count} processed - #{@batch_thread_pool.completed_task_count} left - #{@batch_thread_pool.queue_length} "
+              # puts "Write tasks added - #{@write_thread_pool.scheduled_task_count} processed - #{@write_thread_pool.completed_task_count} left - #{@write_thread_pool.queue_length} "
+              # puts "Thread count - #{Thread.list.count}"
               sleep 1
               next
             end
-            print "Scheduling a batch of size - ", batch_size, " Remaining operations - ", @buffered_operations.length, "\n"
-            # puts "Waiting for tokens"
-            rate_limiter.get_tokens batch_size
-            # puts "Got the tokens"
+            @rate_limiter.get_tokens batch_size
             bulk_commit_batch = nil
             @mutex.synchronize do
               operations = dequeue_operations batch_size
-              # print "Total operations in the batch ", operations.length, "\n"
               bulk_commit_batch = BulkCommitBatch.new @service, operations
-              @pending_batch_count += 1
             end
-            # futures << commit_batch(bulk_commit_batch)
-            commit_batch(bulk_commit_batch)
+            commit_batch bulk_commit_batch
           end
         end
 
@@ -528,11 +529,9 @@ module Google
         # future batches
         def enqueue_operation operation
           @mutex.synchronize { @buffered_operations << operation }
-          # pp "Added the operation"
           future = Concurrent::Promises.future_on @write_thread_pool do
             operation.completion_event.wait
-            # raise operation.result if operation.status == "Failed"
-            # print "Completed marked"
+            raise Concurrent::Promises.rejected_future(operation.result) if operation.result.is_a?(BulkWriterException)
             operation.result
           end
           Promise::Future.new future
@@ -556,9 +555,7 @@ module Google
             break unless @retry_operations.min.retry_time <= Time.now
             operations << @retry_operations.min!
           end
-          while operations.length < size
-            operations << @buffered_operations.pop
-          end
+          operations << @buffered_operations.shift while operations.length < size
           operations
         end
 

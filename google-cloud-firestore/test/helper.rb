@@ -225,6 +225,25 @@ class MockFirestore < Minitest::Spec
   def document_path doc_id
     "projects/#{project}/databases/(default)/documents/my-collection-id/#{doc_id}"
   end
+
+  def batch_write_args writes
+    [{ database: database_path, writes: writes }, default_options]
+  end
+
+  def batch_write_pass_resp size = 20
+    Google::Cloud::Firestore::V1::BatchWriteResponse.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new]*size,
+      status: [Google::Rpc::Status.new]*size
+    )
+  end
+
+  def batch_write_fail_resp size = 20
+    Google::Cloud::Firestore::V1::BatchWriteResponse.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new]*size,
+      status: [Google::Rpc::Status.new(code: 1)]*size
+    )
+  end
+
 end
 
 class WatchFirestore < MockFirestore

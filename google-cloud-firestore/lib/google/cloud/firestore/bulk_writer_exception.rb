@@ -23,18 +23,21 @@ require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/collection_group"
 require "google/cloud/firestore/batch"
 require "google/cloud/firestore/transaction"
+require "google/cloud/errors"
 
 module Google
   module Cloud
     module Firestore
-      class BulkWriterException < StandardError
-        def initialize status, message, document_reference, operation_type, failed_attempts
-          @status = status
-          @message = message
-          @operation_type = operation_type
-          @failed_attempts = failed_attempts
-          @document_reference = document_reference
-          super message
+      class BulkWriterException
+
+        attr_reader :status
+        attr_reader :message
+        attr_reader :details
+
+        def initialize status
+          @status = status.code
+          @message = status.message
+          @details = status.details
         end
       end
     end

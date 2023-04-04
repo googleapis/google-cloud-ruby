@@ -674,8 +674,10 @@ module Google
         # Create a bulk writer to perform multiple writes that are
         # executed parallely.
         #
-        # @param [Integer] thread_pool_size The maximum number of threads
-        #   bulk writer can use. Default is 4. Optional.
+        # @param [Integer] request_threads The number of threads used for handling
+        #  requests. Default is 2. Optional.
+        # @param [Integer] batch_threads The number of threads used for processing
+        #  batches. Default is 4. Optional.
         #
         # @return [Google::Cloud::Firestore::BulkWriter] Returns an object of
         #   bulk writer.
@@ -689,8 +691,10 @@ module Google
         #
         #   bulk_write_result = bw.create "doc_ref", {data}
         #
-        def bulk_writer thread_pool_size: nil
-          BulkWriter.new self, @service, thread_pool_size: thread_pool_size
+        def bulk_writer request_threads: nil, batch_threads: nil
+          BulkWriter.new self, @service, request_threads: request_threads,
+                         batch_threads: batch_threads
+
         end
 
         # @!endgroup

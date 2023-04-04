@@ -178,13 +178,11 @@ class Service
   #
   # @return [::Google::Cloud::Firestore::V1::BatchWriteResponse]
   def batch_write writes
-    firestore.batch_write(
-      {
-        database: database_path,
-        writes: writes
-      },
-      call_options(parent: database_path)
-    )
+    batch_write_req = {
+      database: database_path,
+      writes: writes
+    }
+    firestore.batch_write batch_write_req, call_options(parent: database_path)
   end
 
   def database_path project_id: project, database_id: "(default)"

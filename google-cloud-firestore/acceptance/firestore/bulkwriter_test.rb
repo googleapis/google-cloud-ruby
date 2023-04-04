@@ -15,66 +15,153 @@
 require "firestore_helper"
 
 describe "BulkWriter", :firestore_acceptance do
-  focus; it "has set method" do
+  let(:query_count) { 5 }
+
+  it "has create method" do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
     bw = firestore.bulk_writer
 
+    doc_refs = []
     results = []
-    (1..5000).each do
-      results << bw.create(rand_tx_col.doc, { foo: "bar" })
-    end
-
-    results.each_with_index do |result, idx|
-      if result.fulfilled?
-        puts "Completed #{idx}"
-      else
-        result.wait!
-        puts "Completed #{idx}"
-      end
+    (1..query_count).each do |i|
+      doc_ref = rand_tx_col.doc
+      doc_refs << doc_ref
+      results << bw.create(doc_ref, { foo: "bar" })
     end
 
     bw.flush
     bw.close
 
+    results.each do |result|
+      _(result.fulfilled?).must_equal true
+      _(result.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
+    end
+    doc_refs.each do |doc_ref|
+      _(doc_ref.get.exists?).must_equal true
+    end
   end
 
   it "has update method" do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
-    doc_ref = rand_tx_col.doc
-    doc_ref.create foo: "bar"
-
-    resp = firestore.transaction do |tx|
-      tx.update doc_ref, { foo: "baz" }
+    doc_refs = []
+    (1..query_count).each do |i|
+      doc_ref = rand_tx_col.doc
+      doc_ref.create foo: "bar"
+      doc_refs << doc_ref
     end
 
-    _(resp).must_be :nil?
-    _(doc_ref.get[:foo]).must_equal "baz"
+    bw = firestore.bulk_writer
+    results = []
+    doc_refs.each do |doc_ref|
+      results << bw.update(doc_ref, { foo: "baz" })
+    end
+
+    bw.flush
+    bw.close
+
+    results.each do |result|
+      _(result.fulfilled?).must_equal true
+      _(result.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
+    end
+    doc_refs.each do |doc_ref|
+      _(doc_ref.get[:foo]).must_equal "baz"
+    end
   end
 
-  it "update enforces document exists" do
+  it "has set method" do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
-    doc_ref = rand_tx_col.doc
-    _(doc_ref.get).wont_be :exists?
+    doc_refs = []
+    (1..query_count).each do |i|
+      doc_ref = rand_tx_col.doc
+      doc_ref.create foo: "bar"
+      doc_refs << doc_ref
+    end
 
-    expect do
-      firestore.transaction do |tx|
-        tx.update doc_ref, { foo: "baz" }
-      end
-    end.must_raise Google::Cloud::NotFoundError
+    bw = firestore.bulk_writer
+    results = []
+    doc_refs.each do |doc_ref|
+      results << bw.set(doc_ref, { name: "New York City" })
+    end
+
+    bw.flush
+    bw.close
+
+    results.each do |result|
+      _(result.fulfilled?).must_equal true
+      _(result.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
+    end
+    doc_refs.each do |doc_ref|
+      _(doc_ref.get[:name]).must_equal "New York City"
+    end
   end
 
   it "has delete method" do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
-    doc_ref = rand_tx_col.doc
-    doc_ref.create foo: "bar"
+    doc_refs = []
+    (1..query_count).each do |i|
+      doc_ref = rand_tx_col.doc
+      doc_ref.create foo: "bar"
+      doc_refs << doc_ref
+    end
 
     bw = firestore.bulk_writer
-    result = bw.delete doc_ref
+    results = []
+    doc_refs.each do |doc_ref|
+      results << bw.delete(doc_ref)
+    end
 
-    result.wait!
+    bw.flush
+    bw.close
 
+    results.each do |result|
+      _(result.fulfilled?).must_equal true
+      _(result.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
+    end
+    doc_refs.each do |doc_ref|
+      _(doc_ref.get).wont_be :exists?
+    end
+  end
 
-    _(resp).must_be :nil?
-    _(doc_ref.get).wont_be :exists?
+  focus; it "CRUD operations" do
+    rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
+    doc_refs = []
+    (1..5).each do |i|
+      doc_refs << rand_tx_col.doc
+    end
+    bw = firestore.bulk_writer
+
+    doc_refs.each do |doc_ref|
+      bw.create doc_ref, { foo: "bar" }
+    end
+    bw.flush
+    doc_refs.each do |doc_ref|
+      _(doc_ref.get.exists?).must_equal true
+    end
+
+    doc_refs.each do |doc_ref|
+      bw.update doc_ref, { foo: "baz" }
+    end
+    bw.flush
+    doc_refs.each do |doc_ref|
+      _(doc_ref.get[:foo]).must_equal "baz"
+    end
+
+    doc_refs.each do |doc_ref|
+      bw.set doc_ref, { name: "New York City" }
+    end
+    bw.flush
+    doc_refs.each do |doc_ref|
+      _(doc_ref.get[:name]).must_equal "New York City"
+    end
+
+    doc_refs.each do |doc_ref|
+      bw.delete doc_ref
+    end
+    bw.flush
+    doc_refs.each do |doc_ref|
+      _(doc_ref.get).wont_be :exists?
+    end
+
+    bw.close
   end
 end

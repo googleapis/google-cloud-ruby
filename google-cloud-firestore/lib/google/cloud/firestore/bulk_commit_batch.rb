@@ -31,6 +31,8 @@ module Google
       # @private
       class BulkCommitBatch
 
+        attr_reader :operations
+
         ##
         # Initialize the object
         def initialize service, operations
@@ -39,38 +41,34 @@ module Google
         end
 
         ##
-        # Process the result received for each operation and calls the appropriate callback.
-        # Incase of failures, adds the operation to the retry array.
+        # Updates the operation based on the result received from the API request.
         #
-        # @return [Array<bulkWriterOperation>] failed_operations List of operations
-        #   that failed in the current batch.
+        # @param [Google::Cloud::Firestore::V1::BatchWriteResponse] responses
+        #
+        # @return [nil]
         #
         def parse_results responses
-          failed_operations = []
-          @operations.zip(responses.write_results, responses.status) do |operation, write_result, status|
-            if status.code > 0
-              print operation, write_result, status, "\n"
-              operation.on_failure status, write_result
-              failed_operations << operation
-            else
-              operation.on_success status, write_result
+          @operations.zip responses.write_results, responses.status do |operation, write_result, status|
+            begin
+              if status.code.zero?
+                operation.on_success write_result
+              else
+                operation.on_failure status
+              end
+            rescue StandardError => e
+              puts e
             end
           end
-          failed_operations
         end
 
         ##
-        # Makes the API request with all the operations in the batch and returns the response after processing.
+        # Makes the BatchWrite API request with all the operations in the batch and
+        # parses the results for each operation.
         #
-        # @return [Array<bulkWriterOperation>] failed_operations List of operations
-        #   that failed in the current batch.
+        # @return [nil]
         #
         def commit
-          writes = []
-          @operations.each do |operation|
-            writes << operation.write
-          end
-          responses = @service.batch_write writes
+          responses = @service.batch_write @operations.map(&:write)
           parse_results responses
         end
       end
