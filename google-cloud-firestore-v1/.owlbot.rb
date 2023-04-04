@@ -16,7 +16,7 @@
 # See internal issue b/274072959.
 OwlBot.modifier path: "lib/google/cloud/firestore/v1/firestore/client.rb" do |content|
   content.gsub(/metadata\[:"x-goog-request-params"\] \|\|= request_params_header/,
-               "if @config&.metadata&.key? \"google-cloud-resource-prefix\"
+               "if @config&.metadata&.key? :\"google-cloud-resource-prefix\"
                 metadata[:\"x-goog-request-params\"] ||= @config.metadata[:\"google-cloud-resource-prefix\"].split(\"/\").each_slice(2).to_h.map { |k, v| \"#\{k\}=#\{v\}\" }.join(\"&\")
               end
               metadata[:\"x-goog-request-params\"] ||= request_params_header")
