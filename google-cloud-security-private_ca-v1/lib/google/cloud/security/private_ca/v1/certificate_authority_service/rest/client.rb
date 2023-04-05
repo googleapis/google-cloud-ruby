@@ -813,7 +813,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload disable_certificate_authority(name: nil, request_id: nil)
+                # @overload disable_certificate_authority(name: nil, request_id: nil, ignore_dependent_resources: nil)
                 #   Pass arguments to `disable_certificate_authority` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -836,6 +836,11 @@ module Google
                 #
                 #     The request ID must be a valid UUID with the exception that zero UUID is
                 #     not supported (00000000-0000-0000-0000-000000000000).
+                #   @param ignore_dependent_resources [::Boolean]
+                #     Optional. This field allows this CA to be disabled even if it's being
+                #     depended on by another resource. However, doing so may result in unintended
+                #     and unrecoverable effects on any dependent resource(s) since the CA will
+                #     no longer be able to issue certificates.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1276,7 +1281,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload delete_certificate_authority(name: nil, request_id: nil, ignore_active_certificates: nil, skip_grace_period: nil)
+                # @overload delete_certificate_authority(name: nil, request_id: nil, ignore_active_certificates: nil, skip_grace_period: nil, ignore_dependent_resources: nil)
                 #   Pass arguments to `delete_certificate_authority` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1306,6 +1311,11 @@ module Google
                 #     Optional. If this flag is set, the Certificate Authority will be deleted as
                 #     soon as possible without a 30-day grace period where undeletion would have
                 #     been allowed. If you proceed, there will be no way to recover this CA.
+                #   @param ignore_dependent_resources [::Boolean]
+                #     Optional. This field allows this ca to be deleted even if it's being
+                #     depended on by another resource. However, doing so may result in unintended
+                #     and unrecoverable effects on any dependent resource(s) since the CA will
+                #     no longer be able to issue certificates.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1751,7 +1761,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload delete_ca_pool(name: nil, request_id: nil)
+                # @overload delete_ca_pool(name: nil, request_id: nil, ignore_dependent_resources: nil)
                 #   Pass arguments to `delete_ca_pool` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1774,6 +1784,11 @@ module Google
                 #
                 #     The request ID must be a valid UUID with the exception that zero UUID is
                 #     not supported (00000000-0000-0000-0000-000000000000).
+                #   @param ignore_dependent_resources [::Boolean]
+                #     Optional. This field allows this pool to be deleted even if it's being
+                #     depended on by another resource. However, doing so may result in unintended
+                #     and unrecoverable effects on any dependent resource(s) since the pool will
+                #     no longer be able to issue certificates.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]

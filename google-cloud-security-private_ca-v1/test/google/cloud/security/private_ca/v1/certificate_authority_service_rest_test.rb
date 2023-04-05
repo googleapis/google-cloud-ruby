@@ -469,6 +469,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     # Create request parameters for a unary method.
     name = "hello world"
     request_id = "hello world"
+    ignore_dependent_resources = true
 
     disable_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -484,27 +485,27 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
         end
 
         # Use hash object
-        client.disable_certificate_authority({ name: name, request_id: request_id }) do |_result, response|
+        client.disable_certificate_authority({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.disable_certificate_authority name: name, request_id: request_id do |_result, response|
+        client.disable_certificate_authority name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.disable_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id) do |_result, response|
+        client.disable_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.disable_certificate_authority({ name: name, request_id: request_id }, call_options) do |_result, response|
+        client.disable_certificate_authority({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.disable_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        client.disable_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -802,6 +803,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     request_id = "hello world"
     ignore_active_certificates = true
     skip_grace_period = true
+    ignore_dependent_resources = true
 
     delete_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -817,27 +819,27 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
         end
 
         # Use hash object
-        client.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period }) do |_result, response|
+        client.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_certificate_authority name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period do |_result, response|
+        client.delete_certificate_authority name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period) do |_result, response|
+        client.delete_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period }, call_options) do |_result, response|
+        client.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period), call_options) do |_result, response|
+        client.delete_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1138,6 +1140,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     # Create request parameters for a unary method.
     name = "hello world"
     request_id = "hello world"
+    ignore_dependent_resources = true
 
     delete_ca_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1153,27 +1156,27 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
         end
 
         # Use hash object
-        client.delete_ca_pool({ name: name, request_id: request_id }) do |_result, response|
+        client.delete_ca_pool({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_ca_pool name: name, request_id: request_id do |_result, response|
+        client.delete_ca_pool name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_ca_pool ::Google::Cloud::Security::PrivateCA::V1::DeleteCaPoolRequest.new(name: name, request_id: request_id) do |_result, response|
+        client.delete_ca_pool ::Google::Cloud::Security::PrivateCA::V1::DeleteCaPoolRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_ca_pool({ name: name, request_id: request_id }, call_options) do |_result, response|
+        client.delete_ca_pool({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_ca_pool(::Google::Cloud::Security::PrivateCA::V1::DeleteCaPoolRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        client.delete_ca_pool(::Google::Cloud::Security::PrivateCA::V1::DeleteCaPoolRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
