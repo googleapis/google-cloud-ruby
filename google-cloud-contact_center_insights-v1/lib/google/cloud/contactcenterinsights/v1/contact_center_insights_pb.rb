@@ -50,6 +50,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :conversation, :message, 2, "google.cloud.contactcenterinsights.v1.Conversation"
       optional :conversation_id, :string, 3
     end
+    add_message "google.cloud.contactcenterinsights.v1.UploadConversationRequest" do
+      optional :parent, :string, 1
+      optional :conversation, :message, 2, "google.cloud.contactcenterinsights.v1.Conversation"
+      optional :conversation_id, :string, 3
+      optional :redaction_config, :message, 4, "google.cloud.contactcenterinsights.v1.RedactionConfig"
+    end
+    add_message "google.cloud.contactcenterinsights.v1.UploadConversationMetadata" do
+      optional :create_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      optional :request, :message, 3, "google.cloud.contactcenterinsights.v1.UploadConversationRequest"
+      optional :analysis_operation, :string, 4
+      optional :applied_redaction_config, :message, 5, "google.cloud.contactcenterinsights.v1.RedactionConfig"
+    end
     add_message "google.cloud.contactcenterinsights.v1.ListConversationsRequest" do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
@@ -316,6 +329,8 @@ module Google
         CalculateStatsResponse::TimeSeries::Interval = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval").msgclass
         CreateAnalysisOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.CreateAnalysisOperationMetadata").msgclass
         CreateConversationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.CreateConversationRequest").msgclass
+        UploadConversationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.UploadConversationRequest").msgclass
+        UploadConversationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.UploadConversationMetadata").msgclass
         ListConversationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ListConversationsRequest").msgclass
         ListConversationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ListConversationsResponse").msgclass
         GetConversationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.GetConversationRequest").msgclass

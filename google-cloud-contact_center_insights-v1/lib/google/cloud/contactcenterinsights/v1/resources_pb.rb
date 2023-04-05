@@ -283,11 +283,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :conversation_ttl, :message, 5, "google.protobuf.Duration"
       map :pubsub_notification_settings, :string, :string, 6
       optional :analysis_config, :message, 7, "google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig"
+      optional :redaction_config, :message, 10, "google.cloud.contactcenterinsights.v1.RedactionConfig"
     end
     add_message "google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig" do
       optional :runtime_integration_analysis_percentage, :double, 1
       optional :upload_conversation_analysis_percentage, :double, 6
       optional :annotator_selector, :message, 5, "google.cloud.contactcenterinsights.v1.AnnotatorSelector"
+    end
+    add_message "google.cloud.contactcenterinsights.v1.RedactionConfig" do
+      optional :deidentify_template, :string, 1
+      optional :inspect_template, :string, 2
     end
     add_message "google.cloud.contactcenterinsights.v1.RuntimeAnnotation" do
       optional :annotation_id, :string, 1
@@ -433,6 +438,7 @@ module Google
         ExactMatchConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ExactMatchConfig").msgclass
         Settings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.Settings").msgclass
         Settings::AnalysisConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig").msgclass
+        RedactionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.RedactionConfig").msgclass
         RuntimeAnnotation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.RuntimeAnnotation").msgclass
         AnswerFeedback = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.AnswerFeedback").msgclass
         AnswerFeedback::CorrectnessLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.AnswerFeedback.CorrectnessLevel").enummodule

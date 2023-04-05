@@ -35,6 +35,10 @@ module Google
 
             # Creates a conversation.
             rpc :CreateConversation, ::Google::Cloud::ContactCenterInsights::V1::CreateConversationRequest, ::Google::Cloud::ContactCenterInsights::V1::Conversation
+            # Create a longrunning conversation upload operation. This method differs
+            # from CreateConversation by allowing audio transcription and optional DLP
+            # redaction.
+            rpc :UploadConversation, ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest, ::Google::Longrunning::Operation
             # Updates a conversation.
             rpc :UpdateConversation, ::Google::Cloud::ContactCenterInsights::V1::UpdateConversationRequest, ::Google::Cloud::ContactCenterInsights::V1::Conversation
             # Gets a conversation.
