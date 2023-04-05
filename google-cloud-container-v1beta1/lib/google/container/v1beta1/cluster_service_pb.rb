@@ -85,6 +85,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :pod_ipv4_cidr_block, :string, 6
       proto3_optional :enable_private_nodes, :bool, 9
       proto3_optional :network_performance_config, :message, 11, "google.container.v1beta1.NodeNetworkConfig.NetworkPerformanceConfig"
+      optional :pod_cidr_overprovision_config, :message, 13, "google.container.v1beta1.PodCIDROverprovisionConfig"
     end
     add_message "google.container.v1beta1.NodeNetworkConfig.NetworkPerformanceConfig" do
       proto3_optional :total_egress_bandwidth_tier, :enum, 1, "google.container.v1beta1.NodeNetworkConfig.NetworkPerformanceConfig.Tier"
@@ -257,6 +258,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :PROVIDER_UNSPECIFIED, 0
       value :CALICO, 1
     end
+    add_message "google.container.v1beta1.PodCIDROverprovisionConfig" do
+      optional :disable, :bool, 1
+    end
     add_message "google.container.v1beta1.IPAllocationPolicy" do
       optional :use_ip_aliases, :bool, 1
       optional :create_subnetwork, :bool, 2
@@ -274,6 +278,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :use_routes, :bool, 15
       optional :stack_type, :enum, 16, "google.container.v1beta1.IPAllocationPolicy.StackType"
       optional :ipv6_access_type, :enum, 17, "google.container.v1beta1.IPAllocationPolicy.IPv6AccessType"
+      optional :pod_cidr_overprovision_config, :message, 21, "google.container.v1beta1.PodCIDROverprovisionConfig"
       optional :subnet_ipv6_cidr_block, :string, 22
       optional :services_ipv6_cidr_block, :string, 23
     end
@@ -1380,6 +1385,7 @@ module Google
         LegacyAbac = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.LegacyAbac").msgclass
         NetworkPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NetworkPolicy").msgclass
         NetworkPolicy::Provider = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NetworkPolicy.Provider").enummodule
+        PodCIDROverprovisionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.PodCIDROverprovisionConfig").msgclass
         IPAllocationPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.IPAllocationPolicy").msgclass
         IPAllocationPolicy::StackType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.IPAllocationPolicy.StackType").enummodule
         IPAllocationPolicy::IPv6AccessType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.IPAllocationPolicy.IPv6AccessType").enummodule
