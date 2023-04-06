@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Fixes invalid request headers.
-# See internal issue b/274072959.
+# See internal issue b/277176485.
 OwlBot.modifier path: "lib/google/cloud/firestore/v1/firestore/client.rb" do |content|
   content.gsub(/metadata\[:"x-goog-request-params"\] \|\|= request_params_header/,
                "if @config&.metadata&.key? :\"google-cloud-resource-prefix\"
