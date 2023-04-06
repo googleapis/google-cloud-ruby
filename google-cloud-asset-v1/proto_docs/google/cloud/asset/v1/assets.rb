@@ -297,7 +297,7 @@ module Google
         end
 
         # A result of Resource Search, containing information of a cloud resource.
-        # Next ID: 31
+        # Next ID: 32
         # @!attribute [rw] name
         #   @return [::String]
         #     The full resource name of this resource. Example:
