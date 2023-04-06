@@ -2097,10 +2097,7 @@ module Google
             #     passed as opaque bytes.
             #   @param entity_type_specs [::Array<::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest::EntityTypeSpec, ::Hash>]
             #     Required. Specifies EntityType grouping Features to read values of and
-            #     settings. Each EntityType referenced in
-            #     [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
-            #     specifying entity IDs in the EntityType in
-            #     [BatchReadFeatureValuesRequest.request][] .
+            #     settings.
             #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Optional. Excludes Feature values with feature generation timestamp before
             #     this timestamp. If not set, retrieve oldest values kept in Feature Store.

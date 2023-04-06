@@ -23,6 +23,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :network, :string, 9
       optional :enable_private_service_connect, :bool, 10
       optional :private_service_connect_config, :message, 12, "google.cloud.aiplatform.v1.PrivateServiceConnectConfig"
+      optional :public_endpoint_enabled, :bool, 13
+      optional :public_endpoint_domain_name, :string, 14
     end
     add_message "google.cloud.aiplatform.v1.DeployedIndex" do
       optional :id, :string, 1

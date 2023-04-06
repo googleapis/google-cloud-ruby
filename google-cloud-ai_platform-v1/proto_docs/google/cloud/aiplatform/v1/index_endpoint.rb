@@ -92,6 +92,16 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#network network} and
         #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#private_service_connect_config private_service_connect_config}
         #     are mutually exclusive.
+        # @!attribute [rw] public_endpoint_enabled
+        #   @return [::Boolean]
+        #     Optional. If true, the deployed index will be accessible through public
+        #     endpoint.
+        # @!attribute [r] public_endpoint_domain_name
+        #   @return [::String]
+        #     Output only. If
+        #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#public_endpoint_enabled public_endpoint_enabled}
+        #     is true, this field will be populated with the domain name to use for this
+        #     index endpoint.
         class IndexEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -198,7 +208,7 @@ module Google
         #     the index might be deployed to any ip ranges under the provided VPC
         #     network.
         #
-        #     The value sohuld be the name of the address
+        #     The value should be the name of the address
         #     (https://cloud.google.com/compute/docs/reference/rest/v1/addresses)
         #     Example: 'vertex-ai-ip-range'.
         # @!attribute [rw] deployment_group

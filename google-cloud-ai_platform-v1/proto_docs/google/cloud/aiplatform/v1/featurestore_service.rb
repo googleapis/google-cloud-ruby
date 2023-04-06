@@ -316,10 +316,7 @@ module Google
         # @!attribute [rw] entity_type_specs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest::EntityTypeSpec>]
         #     Required. Specifies EntityType grouping Features to read values of and
-        #     settings. Each EntityType referenced in
-        #     [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
-        #     specifying entity IDs in the EntityType in
-        #     [BatchReadFeatureValuesRequest.request][] .
+        #     settings.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. Excludes Feature values with feature generation timestamp before

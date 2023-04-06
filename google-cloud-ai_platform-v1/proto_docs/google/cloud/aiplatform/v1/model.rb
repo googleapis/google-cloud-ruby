@@ -667,6 +667,11 @@ module Google
         # @!attribute [rw] source_type
         #   @return [::Google::Cloud::AIPlatform::V1::ModelSourceInfo::ModelSourceType]
         #     Type of the model source.
+        # @!attribute [rw] copy
+        #   @return [::Boolean]
+        #     If this Model is copy of another Model. If true then
+        #     {::Google::Cloud::AIPlatform::V1::ModelSourceInfo#source_type source_type}
+        #     pertains to the original.
         class ModelSourceInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -684,6 +689,9 @@ module Google
 
             # The Model is registered and sync'ed from BigQuery ML.
             BQML = 3
+
+            # The Model is saved or tuned from Model Garden.
+            MODEL_GARDEN = 4
           end
         end
       end

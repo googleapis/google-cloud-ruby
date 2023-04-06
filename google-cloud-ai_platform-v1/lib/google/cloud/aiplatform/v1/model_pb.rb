@@ -81,12 +81,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.ModelSourceInfo" do
       optional :source_type, :enum, 1, "google.cloud.aiplatform.v1.ModelSourceInfo.ModelSourceType"
+      optional :copy, :bool, 2
     end
     add_enum "google.cloud.aiplatform.v1.ModelSourceInfo.ModelSourceType" do
       value :MODEL_SOURCE_TYPE_UNSPECIFIED, 0
       value :AUTOML, 1
       value :CUSTOM, 2
       value :BQML, 3
+      value :MODEL_GARDEN, 4
     end
   end
 end
