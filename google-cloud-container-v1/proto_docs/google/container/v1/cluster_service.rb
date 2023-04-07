@@ -1181,6 +1181,12 @@ module Google
         # @!attribute [r] services_ipv6_cidr_block
         #   @return [::String]
         #     Output only. [Output only] The services IPv6 CIDR block for the cluster.
+        # @!attribute [r] additional_pod_ranges_config
+        #   @return [::Google::Cloud::Container::V1::AdditionalPodRangesConfig]
+        #     Output only. [Output only] The additional pod ranges that are added to the
+        #     cluster. These pod ranges can be used by new node pools to allocate pod IPs
+        #     automatically. Once the range is removed it will not show up in
+        #     IPAllocationPolicy.
         class IPAllocationPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1765,7 +1771,23 @@ module Google
         #     The desired stack type of the cluster.
         #     If a stack type is provided and does not match the current stack type of
         #     the cluster, update will attempt to change the stack type to the new type.
+        # @!attribute [rw] additional_pod_ranges_config
+        #   @return [::Google::Cloud::Container::V1::AdditionalPodRangesConfig]
+        #     The additional pod ranges to be added to the cluster. These pod ranges
+        #     can be used by node pools to allocate pod IPs.
+        # @!attribute [rw] removed_additional_pod_ranges_config
+        #   @return [::Google::Cloud::Container::V1::AdditionalPodRangesConfig]
+        #     The additional pod ranges that are to be removed from the cluster.
+        #     The pod ranges specified here must have been specified earlier in the
+        #     'additional_pod_ranges_config' argument.
         class ClusterUpdate
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdditionalPodRangesConfig is the configuration for additional pod secondary
+        # ranges supporting the ClusterUpdate message.
+        class AdditionalPodRangesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
