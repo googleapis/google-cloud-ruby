@@ -101,10 +101,15 @@ module Google
             # [Operation][google.longrunning.Operation]s associated with the stale
             # updates are not marked as [done][google.longrunning.Operation.done] until
             # they are obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             rpc :SetInventory, ::Google::Cloud::Retail::V2::SetInventoryRequest, ::Google::Longrunning::Operation
+            # It is recommended to use the
+            # [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories]
+            # method instead of
+            # [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces].
+            # [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories]
+            # achieves the same results but provides more fine-grained control over
+            # ingesting local inventory data.
+            #
             # Incrementally adds place IDs to
             # [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids].
             #
@@ -126,10 +131,15 @@ module Google
             # [Operation][google.longrunning.Operation]s associated with the stale
             # updates will not be marked as [done][google.longrunning.Operation.done]
             # until being obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             rpc :AddFulfillmentPlaces, ::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest, ::Google::Longrunning::Operation
+            # It is recommended to use the
+            # [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories]
+            # method instead of
+            # [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces].
+            # [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories]
+            # achieves the same results but provides more fine-grained control over
+            # ingesting local inventory data.
+            #
             # Incrementally removes place IDs from a
             # [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids].
             #
@@ -151,9 +161,6 @@ module Google
             # [Operation][google.longrunning.Operation]s associated with the stale
             # updates will not be marked as [done][google.longrunning.Operation.done]
             # until being obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             rpc :RemoveFulfillmentPlaces, ::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest, ::Google::Longrunning::Operation
             # Updates local inventory information for a
             # [Product][google.cloud.retail.v2.Product] at a list of places, while
@@ -183,9 +190,6 @@ module Google
             # [Operation][google.longrunning.Operation]s associated with the stale
             # updates will not be marked as [done][google.longrunning.Operation.done]
             # until being obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             rpc :AddLocalInventories, ::Google::Cloud::Retail::V2::AddLocalInventoriesRequest, ::Google::Longrunning::Operation
             # Remove local inventory information for a
             # [Product][google.cloud.retail.v2.Product] at a list of places at a removal
@@ -213,9 +217,6 @@ module Google
             # [Operation][google.longrunning.Operation]s associated with the stale
             # updates will not be marked as [done][google.longrunning.Operation.done]
             # until being obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             rpc :RemoveLocalInventories, ::Google::Cloud::Retail::V2::RemoveLocalInventoriesRequest, ::Google::Longrunning::Operation
           end
 

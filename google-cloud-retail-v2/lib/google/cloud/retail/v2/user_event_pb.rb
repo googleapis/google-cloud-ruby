@@ -32,6 +32,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :uri, :string, 13
       optional :referrer_uri, :string, 14
       optional :page_view_id, :string, 15
+      optional :entity, :string, 23
     end
     add_message "google.cloud.retail.v2.ProductDetail" do
       optional :product, :message, 1, "google.cloud.retail.v2.Product"

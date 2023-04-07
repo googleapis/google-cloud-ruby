@@ -137,6 +137,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SOLUTION_TYPE_RECOMMENDATION, 1
       value :SOLUTION_TYPE_SEARCH, 2
     end
+    add_enum "google.cloud.retail.v2.RecommendationsFilteringOption" do
+      value :RECOMMENDATIONS_FILTERING_OPTION_UNSPECIFIED, 0
+      value :RECOMMENDATIONS_FILTERING_DISABLED, 1
+      value :RECOMMENDATIONS_FILTERING_ENABLED, 3
+    end
     add_enum "google.cloud.retail.v2.SearchSolutionUseCase" do
       value :SEARCH_SOLUTION_USE_CASE_UNSPECIFIED, 0
       value :SEARCH_SOLUTION_USE_CASE_SEARCH, 1
@@ -174,6 +179,7 @@ module Google
         LocalInventory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.LocalInventory").msgclass
         AttributeConfigLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.AttributeConfigLevel").enummodule
         SolutionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SolutionType").enummodule
+        RecommendationsFilteringOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.RecommendationsFilteringOption").enummodule
         SearchSolutionUseCase = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchSolutionUseCase").enummodule
       end
     end

@@ -350,7 +350,7 @@ module Google
         #     it is expected to have only 1 color. May consider using single "Mixed"
         #     instead of multiple values.
         #
-        #     A maximum of 25 colors are allowed. Each value must be a UTF-8 encoded
+        #     A maximum of 75 colors are allowed. Each value must be a UTF-8 encoded
         #     string with a length limit of 128 characters. Otherwise, an
         #     INVALID_ARGUMENT error is returned.
         #
@@ -803,6 +803,20 @@ module Google
 
           # Used for Retail Search.
           SOLUTION_TYPE_SEARCH = 2
+        end
+
+        # If filtering for recommendations is enabled.
+        module RecommendationsFilteringOption
+          # Value used when unset.
+          # In this case, server behavior defaults to
+          # {::Google::Cloud::Retail::V2::RecommendationsFilteringOption::RECOMMENDATIONS_FILTERING_DISABLED RECOMMENDATIONS_FILTERING_DISABLED}.
+          RECOMMENDATIONS_FILTERING_OPTION_UNSPECIFIED = 0
+
+          # Recommendation filtering is disabled.
+          RECOMMENDATIONS_FILTERING_DISABLED = 1
+
+          # Recommendation filtering is enabled.
+          RECOMMENDATIONS_FILTERING_ENABLED = 3
         end
 
         # The use case of Cloud Retail Search.

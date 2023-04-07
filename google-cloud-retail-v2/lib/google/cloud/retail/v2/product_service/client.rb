@@ -936,9 +936,6 @@ module Google
             # updates are not marked as {::Google::Longrunning::Operation#done done} until
             # they are obsolete.
             #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
-            #
             # @overload set_inventory(request, options = nil)
             #   Pass arguments to `set_inventory` via a request object, either of type
             #   {::Google::Cloud::Retail::V2::SetInventoryRequest} or an equivalent Hash.
@@ -1106,6 +1103,14 @@ module Google
             end
 
             ##
+            # It is recommended to use the
+            # {::Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories ProductService.AddLocalInventories}
+            # method instead of
+            # {::Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places ProductService.AddFulfillmentPlaces}.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories ProductService.AddLocalInventories}
+            # achieves the same results but provides more fine-grained control over
+            # ingesting local inventory data.
+            #
             # Incrementally adds place IDs to
             # {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids Product.fulfillment_info.place_ids}.
             #
@@ -1127,9 +1132,6 @@ module Google
             # {::Google::Longrunning::Operation Operation}s associated with the stale
             # updates will not be marked as {::Google::Longrunning::Operation#done done}
             # until being obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload add_fulfillment_places(request, options = nil)
             #   Pass arguments to `add_fulfillment_places` via a request object, either of type
@@ -1276,6 +1278,14 @@ module Google
             end
 
             ##
+            # It is recommended to use the
+            # {::Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories ProductService.RemoveLocalInventories}
+            # method instead of
+            # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places ProductService.RemoveFulfillmentPlaces}.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories ProductService.RemoveLocalInventories}
+            # achieves the same results but provides more fine-grained control over
+            # ingesting local inventory data.
+            #
             # Incrementally removes place IDs from a
             # {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids Product.fulfillment_info.place_ids}.
             #
@@ -1297,9 +1307,6 @@ module Google
             # {::Google::Longrunning::Operation Operation}s associated with the stale
             # updates will not be marked as {::Google::Longrunning::Operation#done done}
             # until being obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload remove_fulfillment_places(request, options = nil)
             #   Pass arguments to `remove_fulfillment_places` via a request object, either of type
@@ -1470,9 +1477,6 @@ module Google
             # updates will not be marked as {::Google::Longrunning::Operation#done done}
             # until being obsolete.
             #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
-            #
             # @overload add_local_inventories(request, options = nil)
             #   Pass arguments to `add_local_inventories` via a request object, either of type
             #   {::Google::Cloud::Retail::V2::AddLocalInventoriesRequest} or an equivalent Hash.
@@ -1626,9 +1630,6 @@ module Google
             # {::Google::Longrunning::Operation Operation}s associated with the stale
             # updates will not be marked as {::Google::Longrunning::Operation#done done}
             # until being obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload remove_local_inventories(request, options = nil)
             #   Pass arguments to `remove_local_inventories` via a request object, either of type
