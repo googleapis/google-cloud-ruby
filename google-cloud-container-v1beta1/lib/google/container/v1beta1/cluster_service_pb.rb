@@ -281,6 +281,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :pod_cidr_overprovision_config, :message, 21, "google.container.v1beta1.PodCIDROverprovisionConfig"
       optional :subnet_ipv6_cidr_block, :string, 22
       optional :services_ipv6_cidr_block, :string, 23
+      optional :additional_pod_ranges_config, :message, 24, "google.container.v1beta1.AdditionalPodRangesConfig"
     end
     add_enum "google.container.v1beta1.IPAllocationPolicy.StackType" do
       value :STACK_TYPE_UNSPECIFIED, 0
@@ -478,6 +479,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :etag, :string, 115
       optional :desired_node_pool_logging_config, :message, 116, "google.container.v1beta1.NodePoolLoggingConfig"
       optional :desired_stack_type, :enum, 119, "google.container.v1beta1.StackType"
+      optional :additional_pod_ranges_config, :message, 120, "google.container.v1beta1.AdditionalPodRangesConfig"
+      optional :removed_additional_pod_ranges_config, :message, 121, "google.container.v1beta1.AdditionalPodRangesConfig"
+    end
+    add_message "google.container.v1beta1.AdditionalPodRangesConfig" do
     end
     add_message "google.container.v1beta1.Operation" do
       optional :name, :string, 1
@@ -1405,6 +1410,7 @@ module Google
         NodeConfigDefaults = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodeConfigDefaults").msgclass
         NodePoolAutoConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodePoolAutoConfig").msgclass
         ClusterUpdate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ClusterUpdate").msgclass
+        AdditionalPodRangesConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.AdditionalPodRangesConfig").msgclass
         Operation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.Operation").msgclass
         Operation::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.Operation.Status").enummodule
         Operation::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.Operation.Type").enummodule
