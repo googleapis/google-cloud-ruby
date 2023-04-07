@@ -15,9 +15,13 @@
 require "rake/testtask"
 require "rubocop/rake_task"
 
-Rake::TestTask.new "test" do |t|
-  # t.test_files = FileList["acceptance/*_test.rb"]
-  # t.warning = false
+## TEMPORARY: Disable video stitcher tests until the service relaunches,
+## expected mid-April 2023.
+# Rake::TestTask.new "test" do |t|
+#  t.test_files = FileList["acceptance/*_test.rb"]
+#  t.warning = false
+# end
+task :test do
 end
 
 # RuboCop::RakeTask.new
