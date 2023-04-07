@@ -16,8 +16,8 @@ require "rake/testtask"
 require "rubocop/rake_task"
 
 Rake::TestTask.new "test" do |t|
-  t.test_files = FileList["acceptance/*_test.rb"]
-  t.warning = false
+  # t.test_files = FileList["acceptance/*_test.rb"]
+  # t.warning = false
 end
 
 # RuboCop::RakeTask.new
