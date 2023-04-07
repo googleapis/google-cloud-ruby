@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.21.0 (2023-04-06)
+
+#### Features
+
+* Return copy information for a model source 
+* Support for public endpoints ([#21046](https://github.com/googleapis/google-cloud-ruby/issues/21046)) 
+* Support for the MODEL_GARDEN source 
+
 ### 0.20.0 (2023-03-03)
 
 #### Features
