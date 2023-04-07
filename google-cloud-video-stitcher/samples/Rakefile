@@ -22,6 +22,7 @@ require "rubocop/rake_task"
 #  t.warning = false
 # end
 task :test do
+  # Do nothing
 end
 
 # RuboCop::RakeTask.new
