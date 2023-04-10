@@ -89,6 +89,10 @@ module Google
         #     characters and underscores. For example, an attribute named
         #     `attributes.abc_xyz` can be indexed, but an attribute named
         #     `attributes.abc-xyz` cannot be indexed.
+        #
+        #     If the attribute key starts with `attributes.`, then the attribute is a
+        #     custom attribute. Attributes such as `brands`, `patterns`, and `title` are
+        #     built-in and called system attributes.
         # @!attribute [r] in_use
         #   @return [::Boolean]
         #     Output only. Indicates whether this attribute has been used by any
@@ -153,11 +157,14 @@ module Google
         #   @return [::Google::Cloud::Retail::V2::CatalogAttribute::ExactSearchableOption]
         #     If EXACT_SEARCHABLE_ENABLED, attribute values will be exact searchable.
         #     This property only applies to textual custom attributes and requires
-        #     indexable set to enabled to enable exact-searchable.
+        #     indexable set to enabled to enable exact-searchable. If unset, the server
+        #     behavior defaults to
+        #     {::Google::Cloud::Retail::V2::CatalogAttribute::ExactSearchableOption::EXACT_SEARCHABLE_DISABLED EXACT_SEARCHABLE_DISABLED}.
         # @!attribute [rw] retrievable_option
         #   @return [::Google::Cloud::Retail::V2::CatalogAttribute::RetrievableOption]
         #     If RETRIEVABLE_ENABLED, attribute values are retrievable in the search
-        #     results.
+        #     results. If unset, the server behavior defaults to
+        #     {::Google::Cloud::Retail::V2::CatalogAttribute::RetrievableOption::RETRIEVABLE_DISABLED RETRIEVABLE_DISABLED}.
         class CatalogAttribute
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -215,8 +222,7 @@ module Google
 
           # The status of the exact-searchable option of a catalog attribute.
           module ExactSearchableOption
-            # Value used when unset. Defaults to
-            # {::Google::Cloud::Retail::V2::CatalogAttribute::ExactSearchableOption::EXACT_SEARCHABLE_DISABLED EXACT_SEARCHABLE_DISABLED}.
+            # Value used when unset.
             EXACT_SEARCHABLE_OPTION_UNSPECIFIED = 0
 
             # Exact searchable option enabled for an attribute.
@@ -228,8 +234,7 @@ module Google
 
           # The status of the retrievable option of a catalog attribute.
           module RetrievableOption
-            # Value used when unset. Defaults to
-            # {::Google::Cloud::Retail::V2::CatalogAttribute::RetrievableOption::RETRIEVABLE_DISABLED RETRIEVABLE_DISABLED}.
+            # Value used when unset.
             RETRIEVABLE_OPTION_UNSPECIFIED = 0
 
             # Retrievable option enabled for an attribute.

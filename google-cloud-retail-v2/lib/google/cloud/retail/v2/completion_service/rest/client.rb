@@ -30,7 +30,7 @@ module Google
             ##
             # REST client for the CompletionService service.
             #
-            # Auto-completion service for retail.
+            # Autocomplete service for retail.
             #
             # This feature is only available for users who have Retail Search enabled.
             # Enable Retail Search on Cloud Console before using this feature.
@@ -186,7 +186,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload complete_query(catalog: nil, query: nil, visitor_id: nil, language_codes: nil, device_type: nil, dataset: nil, max_suggestions: nil)
+              # @overload complete_query(catalog: nil, query: nil, visitor_id: nil, language_codes: nil, device_type: nil, dataset: nil, max_suggestions: nil, entity: nil)
               #   Pass arguments to `complete_query` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -256,6 +256,13 @@ module Google
               #
               #     The maximum allowed max suggestions is 20. If it is set higher, it will be
               #     capped by 20.
+              #   @param entity [::String]
+              #     The entity for customers that may run multiple different entities, domains,
+              #     sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+              #     `google.com`, `youtube.com`, etc.
+              #     If this is set, it should be exactly matched with
+              #     {::Google::Cloud::Retail::V2::UserEvent#entity UserEvent.entity} to get
+              #     per-entity autocomplete results.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Retail::V2::CompleteQueryResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

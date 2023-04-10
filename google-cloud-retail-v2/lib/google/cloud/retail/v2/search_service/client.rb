@@ -182,7 +182,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil, labels: nil, spell_correction_spec: nil)
+            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil, labels: nil, spell_correction_spec: nil, entity: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -276,7 +276,7 @@ module Google
             #   @param facet_specs [::Array<::Google::Cloud::Retail::V2::SearchRequest::FacetSpec, ::Hash>]
             #     Facet specifications for faceted search. If empty, no facets are returned.
             #
-            #     A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
+            #     A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
             #     is returned.
             #   @param dynamic_facet_spec [::Google::Cloud::Retail::V2::SearchRequest::DynamicFacetSpec, ::Hash]
             #     Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
@@ -418,6 +418,13 @@ module Google
             #   @param spell_correction_spec [::Google::Cloud::Retail::V2::SearchRequest::SpellCorrectionSpec, ::Hash]
             #     The spell correction specification that specifies the mode under
             #     which spell correction will take effect.
+            #   @param entity [::String]
+            #     The entity for customers that may run multiple different entities, domains,
+            #     sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+            #     `google.com`, `youtube.com`, etc.
+            #     If this is set, it should be exactly matched with
+            #     {::Google::Cloud::Retail::V2::UserEvent#entity UserEvent.entity} to get search
+            #     results boosted by entity.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Retail::V2::SearchResponse::SearchResult>]

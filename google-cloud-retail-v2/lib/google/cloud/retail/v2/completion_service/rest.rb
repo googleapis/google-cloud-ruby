@@ -32,7 +32,7 @@ module Google
     module Retail
       module V2
         ##
-        # Auto-completion service for retail.
+        # Autocomplete service for retail.
         #
         # This feature is only available for users who have Retail Search enabled.
         # Enable Retail Search on Cloud Console before using this feature.

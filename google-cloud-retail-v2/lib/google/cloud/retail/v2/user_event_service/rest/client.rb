@@ -271,7 +271,7 @@ module Google
               #
               #   @param prebuilt_rule [::String]
               #     The prebuilt rule name that can convert a specific type of raw_json.
-              #     For example: "default_schema/v1.0"
+              #     For example: "ga4_bq" rule for the GA4 user event schema.
               #   @param parent [::String]
               #     Required. The parent catalog name, such as
               #     `projects/1234/locations/global/catalogs/default_catalog`.

@@ -496,12 +496,11 @@ module Google
         #   @return [::Array<::Google::Cloud::Retail::V2::LocalInventory>]
         #     Output only. A list of local inventories specific to different places.
         #
-        #     This is only available for users who have Retail Search enabled, and it can
-        #     be managed by
+        #     This field can be managed by
         #     {::Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories ProductService.AddLocalInventories}
         #     and
         #     {::Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories ProductService.RemoveLocalInventories}
-        #     APIs.
+        #     APIs if fine-grained, high-volume updates are necessary.
         class Product
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
