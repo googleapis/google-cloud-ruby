@@ -313,6 +313,12 @@ module Google
           #
           #     The request ID must be a valid UUID with the exception that zero UUID is
           #     not supported (00000000-0000-0000-0000-000000000000).
+          # @!attribute [rw] ignore_dependent_resources
+          #   @return [::Boolean]
+          #     Optional. This field allows this CA to be disabled even if it's being
+          #     depended on by another resource. However, doing so may result in unintended
+          #     and unrecoverable effects on any dependent resource(s) since the CA will
+          #     no longer be able to issue certificates.
           class DisableCertificateAuthorityRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -490,6 +496,12 @@ module Google
           #     Optional. If this flag is set, the Certificate Authority will be deleted as
           #     soon as possible without a 30-day grace period where undeletion would have
           #     been allowed. If you proceed, there will be no way to recover this CA.
+          # @!attribute [rw] ignore_dependent_resources
+          #   @return [::Boolean]
+          #     Optional. This field allows this ca to be deleted even if it's being
+          #     depended on by another resource. However, doing so may result in unintended
+          #     and unrecoverable effects on any dependent resource(s) since the CA will
+          #     no longer be able to issue certificates.
           class DeleteCertificateAuthorityRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -611,6 +623,12 @@ module Google
           #
           #     The request ID must be a valid UUID with the exception that zero UUID is
           #     not supported (00000000-0000-0000-0000-000000000000).
+          # @!attribute [rw] ignore_dependent_resources
+          #   @return [::Boolean]
+          #     Optional. This field allows this pool to be deleted even if it's being
+          #     depended on by another resource. However, doing so may result in unintended
+          #     and unrecoverable effects on any dependent resource(s) since the pool will
+          #     no longer be able to issue certificates.
           class DeleteCaPoolRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

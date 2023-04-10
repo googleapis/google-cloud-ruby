@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/security/privateca/v1/resources_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 
@@ -62,6 +63,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest" do
       optional :name, :string, 1
       optional :request_id, :string, 2
+      optional :ignore_dependent_resources, :bool, 3
     end
     add_message "google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest" do
       optional :name, :string, 1
@@ -97,6 +99,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :request_id, :string, 2
       optional :ignore_active_certificates, :bool, 4
       optional :skip_grace_period, :bool, 5
+      optional :ignore_dependent_resources, :bool, 6
     end
     add_message "google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest" do
       optional :certificate_authority, :message, 1, "google.cloud.security.privateca.v1.CertificateAuthority"
@@ -117,6 +120,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.security.privateca.v1.DeleteCaPoolRequest" do
       optional :name, :string, 1
       optional :request_id, :string, 2
+      optional :ignore_dependent_resources, :bool, 4
     end
     add_message "google.cloud.security.privateca.v1.FetchCaCertsRequest" do
       optional :ca_pool, :string, 1
