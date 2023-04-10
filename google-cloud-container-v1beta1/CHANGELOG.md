@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.0 (2023-04-10)
+
+#### Features
+
+* support AdditionalPodRangesConfig for IPAllocationPolicy 
+
 ### 0.17.0 (2023-03-29)
 
 #### Features
