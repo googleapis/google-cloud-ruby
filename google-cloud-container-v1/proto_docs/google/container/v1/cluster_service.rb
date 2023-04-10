@@ -440,6 +440,20 @@ module Google
         # @!attribute [rw] network_performance_config
         #   @return [::Google::Cloud::Container::V1::NodeNetworkConfig::NetworkPerformanceConfig]
         #     Network bandwidth tier configuration.
+        # @!attribute [rw] pod_cidr_overprovision_config
+        #   @return [::Google::Cloud::Container::V1::PodCIDROverprovisionConfig]
+        #     [PRIVATE FIELD]
+        #     Pod CIDR size overprovisioning config for the nodepool.
+        #
+        #     Pod CIDR size per node depends on max_pods_per_node. By default, the value
+        #     of max_pods_per_node is rounded off to next power of 2 and we then double
+        #     that to get the size of pod CIDR block per node.
+        #     Example: max_pods_per_node of 30 would result in 64 IPs (/26).
+        #
+        #     This config can disable the doubling of IPs (we still round off to next
+        #     power of 2)
+        #     Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
+        #     overprovisioning is disabled.
         class NodeNetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1012,6 +1026,17 @@ module Google
           end
         end
 
+        # [PRIVATE FIELD]
+        # Config for pod CIDR size overprovisioning.
+        # @!attribute [rw] disable
+        #   @return [::Boolean]
+        #     Whether Pod CIDR overprovisioning is disabled.
+        #     Note: Pod CIDR overprovisioning is enabled by default.
+        class PodCIDROverprovisionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Configuration for controlling how IPs are allocated in the cluster.
         # @!attribute [rw] use_ip_aliases
         #   @return [::Boolean]
@@ -1135,6 +1160,20 @@ module Google
         # @!attribute [rw] ipv6_access_type
         #   @return [::Google::Cloud::Container::V1::IPv6AccessType]
         #     The ipv6 access type (internal or external) when create_subnetwork is true
+        # @!attribute [rw] pod_cidr_overprovision_config
+        #   @return [::Google::Cloud::Container::V1::PodCIDROverprovisionConfig]
+        #     [PRIVATE FIELD]
+        #     Pod CIDR size overprovisioning config for the cluster.
+        #
+        #     Pod CIDR size per node depends on max_pods_per_node. By default, the value
+        #     of max_pods_per_node is doubled and then rounded off to next power of 2 to
+        #     get the size of pod CIDR block per node.
+        #     Example: max_pods_per_node of 30 would result in 64 IPs (/26).
+        #
+        #     This config can disable the doubling of IPs (we still round off to next
+        #     power of 2)
+        #     Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
+        #     overprovisioning is disabled.
         # @!attribute [r] subnet_ipv6_cidr_block
         #   @return [::String]
         #     Output only. [Output only] The subnet's IPv6 CIDR block used by nodes and
@@ -1142,6 +1181,12 @@ module Google
         # @!attribute [r] services_ipv6_cidr_block
         #   @return [::String]
         #     Output only. [Output only] The services IPv6 CIDR block for the cluster.
+        # @!attribute [r] additional_pod_ranges_config
+        #   @return [::Google::Cloud::Container::V1::AdditionalPodRangesConfig]
+        #     Output only. [Output only] The additional pod ranges that are added to the
+        #     cluster. These pod ranges can be used by new node pools to allocate pod IPs
+        #     automatically. Once the range is removed it will not show up in
+        #     IPAllocationPolicy.
         class IPAllocationPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1726,7 +1771,23 @@ module Google
         #     The desired stack type of the cluster.
         #     If a stack type is provided and does not match the current stack type of
         #     the cluster, update will attempt to change the stack type to the new type.
+        # @!attribute [rw] additional_pod_ranges_config
+        #   @return [::Google::Cloud::Container::V1::AdditionalPodRangesConfig]
+        #     The additional pod ranges to be added to the cluster. These pod ranges
+        #     can be used by node pools to allocate pod IPs.
+        # @!attribute [rw] removed_additional_pod_ranges_config
+        #   @return [::Google::Cloud::Container::V1::AdditionalPodRangesConfig]
+        #     The additional pod ranges that are to be removed from the cluster.
+        #     The pod ranges specified here must have been specified earlier in the
+        #     'additional_pod_ranges_config' argument.
         class ClusterUpdate
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdditionalPodRangesConfig is the configuration for additional pod secondary
+        # ranges supporting the ClusterUpdate message.
+        class AdditionalPodRangesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
