@@ -15,6 +15,11 @@
                 "create_conversation"
               ]
             },
+            "UploadConversation": {
+              "methods": [
+                "upload_conversation"
+              ]
+            },
             "UpdateConversation": {
               "methods": [
                 "update_conversation"

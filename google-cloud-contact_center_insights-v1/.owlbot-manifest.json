@@ -80,6 +80,7 @@
     "snippets/contact_center_insights/update_phrase_matcher.rb",
     "snippets/contact_center_insights/update_settings.rb",
     "snippets/contact_center_insights/update_view.rb",
+    "snippets/contact_center_insights/upload_conversation.rb",
     "snippets/snippet_metadata_google.cloud.contactcenterinsights.v1.json",
     "test/google/cloud/contact_center_insights/v1/contact_center_insights_operations_test.rb",
     "test/google/cloud/contact_center_insights/v1/contact_center_insights_paths_test.rb",

@@ -109,6 +109,75 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
     end
   end
 
+  def test_upload_conversation
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    conversation = {}
+    conversation_id = "hello world"
+    redaction_config = {}
+
+    upload_conversation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :upload_conversation, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::Conversation), request["conversation"]
+      assert_equal "hello world", request["conversation_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::RedactionConfig), request["redaction_config"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, upload_conversation_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.upload_conversation parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.upload_conversation ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.upload_conversation({ parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.upload_conversation(::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest.new(parent: parent, conversation: conversation, conversation_id: conversation_id, redaction_config: redaction_config), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, upload_conversation_client_stub.call_rpc_count
+    end
+  end
+
   def test_update_conversation
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::ContactCenterInsights::V1::Conversation.new

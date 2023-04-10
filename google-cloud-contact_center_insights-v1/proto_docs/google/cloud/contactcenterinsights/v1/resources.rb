@@ -983,6 +983,10 @@ module Google
         # @!attribute [rw] analysis_config
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Settings::AnalysisConfig]
         #     Default analysis settings.
+        # @!attribute [rw] redaction_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig]
+        #     Default DLP redaction resources to be applied while ingesting
+        #     conversations.
         class Settings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1013,6 +1017,22 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # DLP resources used for redaction while ingesting conversations.
+        # @!attribute [rw] deidentify_template
+        #   @return [::String]
+        #     The fully-qualified DLP deidentify template resource name.
+        #     Format:
+        #     `projects/{project}/deidentifyTemplates/{template}`
+        # @!attribute [rw] inspect_template
+        #   @return [::String]
+        #     The fully-qualified DLP inspect template resource name.
+        #     Format:
+        #     `projects/{project}/inspectTemplates/{template}`
+        class RedactionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # An annotation that was generated during the customer and agent interaction.

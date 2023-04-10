@@ -225,6 +225,83 @@ module Google
               end
 
               ##
+              # Create a longrunning conversation upload operation. This method differs
+              # from CreateConversation by allowing audio transcription and optional DLP
+              # redaction.
+              #
+              # @overload upload_conversation(request, options = nil)
+              #   Pass arguments to `upload_conversation` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload upload_conversation(parent: nil, conversation: nil, conversation_id: nil, redaction_config: nil)
+              #   Pass arguments to `upload_conversation` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the conversation.
+              #   @param conversation [::Google::Cloud::ContactCenterInsights::V1::Conversation, ::Hash]
+              #     Required. The conversation resource to create.
+              #   @param conversation_id [::String]
+              #     Optional. A unique ID for the new conversation. This ID will become the
+              #     final component of the conversation's resource name. If no ID is specified,
+              #     a server-generated ID will be used.
+              #
+              #     This value should be 4-64 characters and must match the regular
+              #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
+              #   @param redaction_config [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig, ::Hash]
+              #     Optional. DLP settings for transcript redaction. Optional, will default to
+              #     the config specified in Settings.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def upload_conversation request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.upload_conversation.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.upload_conversation.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.upload_conversation.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.upload_conversation request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Updates a conversation.
               #
               # @overload update_conversation(request, options = nil)
@@ -2708,6 +2785,11 @@ module Google
                   #
                   attr_reader :create_conversation
                   ##
+                  # RPC-specific configuration for `upload_conversation`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :upload_conversation
+                  ##
                   # RPC-specific configuration for `update_conversation`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2892,6 +2974,8 @@ module Google
                   def initialize parent_rpcs = nil
                     create_conversation_config = parent_rpcs.create_conversation if parent_rpcs.respond_to? :create_conversation
                     @create_conversation = ::Gapic::Config::Method.new create_conversation_config
+                    upload_conversation_config = parent_rpcs.upload_conversation if parent_rpcs.respond_to? :upload_conversation
+                    @upload_conversation = ::Gapic::Config::Method.new upload_conversation_config
                     update_conversation_config = parent_rpcs.update_conversation if parent_rpcs.respond_to? :update_conversation
                     @update_conversation = ::Gapic::Config::Method.new update_conversation_config
                     get_conversation_config = parent_rpcs.get_conversation if parent_rpcs.respond_to? :get_conversation

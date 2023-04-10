@@ -173,6 +173,52 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request to upload a conversation.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource of the conversation.
+        # @!attribute [rw] conversation
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation]
+        #     Required. The conversation resource to create.
+        # @!attribute [rw] conversation_id
+        #   @return [::String]
+        #     Optional. A unique ID for the new conversation. This ID will become the
+        #     final component of the conversation's resource name. If no ID is specified,
+        #     a server-generated ID will be used.
+        #
+        #     This value should be 4-64 characters and must match the regular
+        #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
+        # @!attribute [rw] redaction_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig]
+        #     Optional. DLP settings for transcript redaction. Optional, will default to
+        #     the config specified in Settings.
+        class UploadConversationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The metadata for an UploadConversation operation.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation was created.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation finished running.
+        # @!attribute [r] request
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest]
+        #     Output only. The original request.
+        # @!attribute [r] analysis_operation
+        #   @return [::String]
+        #     Output only. The operation name for a successfully created analysis
+        #     operation, if any.
+        # @!attribute [r] applied_redaction_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig]
+        #     Output only. The redaction config applied to the uploaded conversation.
+        class UploadConversationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request to list conversations.
         # @!attribute [rw] parent
         #   @return [::String]
