@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2023-04-10)
+
+#### Features
+
+* added ignore_dependent_resources to DeleteCaPoolRequest, DeleteCertificateAuthorityRequest, DisableCertificateAuthorityRequest ([#21052](https://github.com/googleapis/google-cloud-ruby/issues/21052)) 
+
 ### 0.6.0 (2023-03-08)
 
 #### Features
