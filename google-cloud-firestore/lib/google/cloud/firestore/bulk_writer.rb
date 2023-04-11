@@ -13,23 +13,12 @@
 # limitations under the License.
 
 
-require "google/cloud/firestore/v1"
-require "google/cloud/firestore/service"
-require "google/cloud/firestore/field_path"
-require "google/cloud/firestore/field_value"
-require "google/cloud/firestore/collection_reference"
-require "google/cloud/firestore/document_reference"
-require "google/cloud/firestore/document_snapshot"
-require "google/cloud/firestore/collection_group"
-require "google/cloud/firestore/batch"
-require "google/cloud/firestore/transaction"
-require "google/cloud/firestore/concurrent/promises"
-require "concurrent/atomics"
-require "concurrent"
 require "algorithms"
-require "google/cloud/firestore/bulk_writer_operation"
+require "concurrent"
 require "google/cloud/firestore/rate_limiter"
 require "google/cloud/firestore/bulk_commit_batch"
+require "google/cloud/firestore/concurrent/promises"
+require "google/cloud/firestore/bulk_writer_operation"
 require "google/cloud/firestore/bulk_writer_exception"
 require "google/cloud/firestore/bulk_writer_scheduler"
 
