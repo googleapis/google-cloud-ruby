@@ -74,7 +74,7 @@ module Google
           # @return [Future]
           # @yield [reason, *args] to the task.
           def then(*args, &task)
-            new @future.then(*args, &task)
+            Future.new @future.then(*args, &task)
           end
 
           # Chains the task to be executed synchronously on executor after it rejects. Does
@@ -84,7 +84,7 @@ module Google
           # @return [Future]
           # @yield [reason, *args] to the task.
           def rescue(*args, &task)
-            new @future.rescue(*args, &task)
+            Future.new @future.rescue(*args, &task)
           end
         end
       end
