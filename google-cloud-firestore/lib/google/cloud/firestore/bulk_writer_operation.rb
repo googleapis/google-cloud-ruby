@@ -34,7 +34,6 @@ module Google
       ##
       # @private
       class BulkWriterOperation
-
         attr_reader :retry_time
         attr_reader :result
         attr_reader :completion_event
@@ -112,7 +111,6 @@ module Google
         #   puts result.value
         #
         class WriteResult
-
           ##
           # The last update time of the document after applying the write. Set to
           # nil for a +delete+ mutation.

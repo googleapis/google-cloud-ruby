@@ -33,14 +33,13 @@ module Google
     module Firestore
       ##
       # Indicates that the an error was reported while scheduling
-      # bulkwriter operations.
+      # BulkWriter operations.
       #
       class BulkWriterSchedulerError < Google::Cloud::Error
         def initialize message
           super "BulkWriterSchedulerError : #{message}"
         end
       end
-
 
       ##
       # Indicates that the an error was reported while committing a
@@ -53,8 +52,8 @@ module Google
       end
 
       ##
-      # Indicates that the an error was reported while scheduling
-      # bulkwriter operations.
+      # Indicates that the an error was reported while parsing response for
+      # BulkWriterOperation.
       #
       class BulkWriterOperationError < Google::Cloud::Error
         def initialize message
@@ -64,5 +63,3 @@ module Google
     end
   end
 end
-
-

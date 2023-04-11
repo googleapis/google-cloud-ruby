@@ -84,7 +84,7 @@ module Google
           # @return [Future]
           # @yield [reason, *args] to the task.
           def rescue(*args, &task)
-            new @future.rescue *args, &task
+            new @future.rescue(*args, &task)
           end
         end
       end

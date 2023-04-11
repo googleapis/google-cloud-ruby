@@ -41,7 +41,6 @@ module Google
       ##
       # @private
       class BulkWriterScheduler
-
         MAX_BATCH_SIZE = 20
 
         ##
@@ -65,7 +64,7 @@ module Google
           Concurrent::Promises.future_on @batch_thread_pool do
             begin
               schedule_operations
-            rescue StandardError => e
+            rescue StandardError
               # TODO: Log the error when logging is available
               retry
             end
@@ -80,10 +79,9 @@ module Google
         # @private Checks if all the operations are completed.
         #
         def operations_remaining?
-          # pp @retry_operations.length
-          # pp @buffered_operations.length
-          # pp @pending_batch_count
-          @mutex.synchronize { (@retry_operations.length + @buffered_operations.length + @pending_batch_count).positive? }
+          @mutex.synchronize do
+            (@retry_operations.length + @buffered_operations.length + @pending_batch_count).positive?
+          end
         end
 
         ##
@@ -121,7 +119,7 @@ module Google
             Concurrent::Promises.future_on @batch_thread_pool, bulk_commit_batch do |batch|
               begin
                 batch.commit
-              rescue StandardError => e
+              rescue StandardError
                 # TODO: Log the errors while committing a batch
               ensure
                 post_commit_batch bulk_commit_batch

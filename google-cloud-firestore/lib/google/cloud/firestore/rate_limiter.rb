@@ -30,7 +30,6 @@ module Google
       ##
       # @private
       class RateLimiter
-
         DEFAULT_STARTING_MAXIMUM_OPS_PER_SECOND = 500.0
         DEFAULT_PHASE_LENGTH = 300.0
 
@@ -83,4 +82,3 @@ module Google
     end
   end
 end
-

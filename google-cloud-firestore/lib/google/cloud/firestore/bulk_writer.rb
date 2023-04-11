@@ -38,7 +38,6 @@ module Google
   module Cloud
     module Firestore
       class BulkWriter
-
         MAX_RETRY_ATTEMPTS = 15
 
         ##
@@ -398,8 +397,10 @@ module Google
         # @private Checks if all the operations are completed.
         #
         def operations_completed?
-          @mutex.synchronize {
- (@retry_operations.length + @buffered_operations.length + @batch_thread_pool.scheduled_task_count - @batch_thread_pool.completed_task_count).zero? }
+          @mutex.synchronize do
+            (@retry_operations.length + @buffered_operations.length +
+              @batch_thread_pool.scheduled_task_count - @batch_thread_pool.completed_task_count).zero?
+          end
         end
 
         ##
@@ -453,10 +454,10 @@ module Google
         def create_and_enqueue_operation write
           operation = create_operation write
           enqueue_operation operation
-          future = Concurrent::Promises.future_on @write_thread_pool, operation do |operation|
-            operation.completion_event.wait
-            raise operation.result if operation.result.is_a?(BulkWriterException)
-            operation.result
+          future = Concurrent::Promises.future_on @write_thread_pool, operation do |bulk_writer_operation|
+            bulk_writer_operation.completion_event.wait
+            raise bulk_writer_operation.result if bulk_writer_operation.result.is_a? BulkWriterException
+            bulk_writer_operation.result
           end
           Promise::Future.new future
         end

@@ -29,7 +29,6 @@ module Google
   module Cloud
     module Firestore
       class BulkWriterException < StandardError
-
         attr_reader :status
         attr_reader :message
         attr_reader :details
@@ -45,4 +44,3 @@ module Google
     end
   end
 end
-

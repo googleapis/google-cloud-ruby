@@ -31,7 +31,6 @@ module Google
       ##
       # @private
       class BulkCommitBatch
-
         attr_reader :operations
 
         ##
@@ -52,7 +51,7 @@ module Google
           @operations.zip responses.write_results, responses.status do |operation, write_result, status|
             begin
               status&.code&.zero? ? operation.on_success(write_result) : operation.on_failure(status)
-            rescue StandardError => e
+            rescue StandardError
               # TODO: Log the error while parsing response
             end
           end
@@ -76,4 +75,3 @@ module Google
     end
   end
 end
-
